@@ -7,7 +7,7 @@ Komponente primaju varijable od drugog komponenti roditelja, imaju svoje stanje,
 NextJS je tehnologija koja proširuje mogućnosti React-a. U njoj se može pisati i server-side kod. API rute, rad s bazom i svim ostalim servisima. On koristi app-router. Aplikacija u sebi sadrži "app" folder. U tom folderu se svaki podfolder tretira kao stranica u internet pregledniku. Nije potrebno koristiti react-router. 
 
 ```
-![React router primjer](https://github.com/brunobilandzic/dipl/blob/master/presentation/mediareact-router.png?raw=true)
+![React router primjer](https://github.com/brunobilandzic/dipl/blob/master/presentation/media/react-router.png?raw=true)
 ```
 
 NextJS određuje koja će se stranica generirati prema rasporedu kako je raspoređena u folder strukturi. Da bi se definirala stranica u app folderu se treba definirati folder s imenom stranice i u njemu datoteka koja se zove page.js.

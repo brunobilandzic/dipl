@@ -1,5 +1,5 @@
 "use client";
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 
 export function LoginButton() {
   return (
@@ -10,6 +10,19 @@ export function LoginButton() {
       }}
     >
       Sign In
+    </button>
+  );
+}
+
+export function LogoutButton() {
+  return (
+    <button
+      className="btn p-4 cursor-pointer bg-red-500 text-white rounded"
+      onClick={() => {
+        signOut();
+      }}
+    >
+      Sign Out
     </button>
   );
 }

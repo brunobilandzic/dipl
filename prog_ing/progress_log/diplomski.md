@@ -1,14 +1,20 @@
 # Tehnologija
 
+#### React
+
 React frontend biblioteka slu za jednostavnu izradu stabla komponenata pisanih koje imaju svoje funkcionalnosti i vraćaju JSX. jezik pruža mogućnost dodavanja JavaScript koda u html umetanjem u vitičaste zagrade.
 
 Komponente primaju varijable od drugog komponenti roditelja, imaju svoje stanje, reaktivne su na promjenu stanja, vrše API pozive prema bilo kakvim API-jima.
 
-NextJS je tehnologija koja proširuje mogućnosti React-a. U njoj se može pisati i server-side kod. API rute, rad s bazom i svim ostalim servisima. On koristi app-router. Aplikacija u sebi sadrži "app" folder. U tom folderu se svaki podfolder tretira kao stranica u internet pregledniku. Nije potrebno koristiti react-router.
+Primjer definicije client routing-a u Reactu:
 
 ![React router primjer](https://github.com/brunobilandzic/dipl/blob/master/presentation/media/react-router.png?raw=true)
 
-NextJS određuje koja će se stranica generirati prema rasporedu kako je raspoređena u folder strukturi. Da bi se definirala stranica u app folderu se treba definirati folder s imenom stranice i u njemu datoteka koja se zove page.js.
+#### NextJS
+
+NextJS je tehnologija koja proširuje mogućnosti React-a. U njoj se može pisati i server-side kod. API rute, rad s bazom i svim ostalim servisima. On koristi app-router. Aplikacija u sebi sadrži "app" folder. U tom folderu se svaki podfolder tretira kao stranica u internet pregledniku. Nije potrebno koristiti react-route
+
+NextJS ne koristi `react-router` već određuje koja će se stranica generirati prema rasporedu kako je raspoređena u folder strukturi. Da bi se definirala stranica u app folderu se treba definirati folder s imenom stranice i u njemu datoteka koja se zove page.js.
 
 ```
 app/imestranice/page.js
@@ -30,3 +36,6 @@ U nextJS postoje dva tipa komponti:
 Za izradu aplikacije FVTRACKER (fruits and vegetable tracker) koristio sam nextjs react framework. Prethodno je potrebno imati instaliran: NodeJs, npm.
 
 Uz pomoc alata npx pokrećemo naredbu create-next-app@latest fvtracker. U daljnjem izboru izradimo manualnu konfiguraciju iz izbornika sa običnim javascriptom, tailwindcss-om, app-routerom i import aliasom.
+
+
+# Autentifikacija i autorizacija

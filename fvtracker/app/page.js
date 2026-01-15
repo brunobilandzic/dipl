@@ -6,8 +6,8 @@ import { getServerSession } from "next-auth";
 export default async function Home() {
   const session = await getServerSession();
   return (
-    <div className="flex min-h-screen items-center justify-center  font-sans ">
-      <div className="">
+    <div className="flex min-h-screen items-center justify-center  font-sans p-5">
+      <div className="break-words w-1/2">
         {session ? <div>{JSON.stringify(session)}</div> : <LoginButton />}
       </div>
       <main className="flex min-h-screen gap-2 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 sm:items-start">

@@ -62,3 +62,5 @@ https://next-auth.js.org/
 https://tailwindcss.com/
 
 https://mongoosejs.com/docs/guide.html
+
+https://developers.google.com/identity/protocols/oauth2

@@ -1,9 +1,15 @@
 import Image from "next/image";
 import ThemeToggle from "../components/style/theme";
+import { LoginButton } from "@/components/auth/login/button";
+import { getServerSession } from "next-auth";
 
-export default function Home() {
+export default async function Home() {
+  const session = await getServerSession();
   return (
     <div className="flex min-h-screen items-center justify-center  font-sans ">
+      <div className="">
+        {session ? <div>{JSON.stringify(session)}</div> : <LoginButton />}
+      </div>
       <main className="flex min-h-screen gap-2 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 sm:items-start">
         <ThemeToggle />
         <Image

@@ -8,20 +8,25 @@ NextJS je tehnologija koja proširuje mogućnosti React-a. U njoj se može pisat
 
 ![React router primjer](https://github.com/brunobilandzic/dipl/blob/master/presentation/media/react-router.png?raw=true)
 
-
-
 NextJS određuje koja će se stranica generirati prema rasporedu kako je raspoređena u folder strukturi. Da bi se definirala stranica u app folderu se treba definirati folder s imenom stranice i u njemu datoteka koja se zove page.js.
 
 ```
-app/imestranice/route.js
+app/imestranice/page.js
 ```
 
-Ona treba imati defaultini export react komponente koja će se prikazati na toj stranici.
+Ona treba imati defaultini export react komponente koja će se prikazati na toj stranici. Komponenta koja se prikazuje se nalazi u folderu
+
+`fvtracker/components`
 
 NextJS ima posebno ime file-a layout.js koji će se primjeniti na page.js u svome folderu i svu djecu. U njemu se određuje raspored svih elemenata i globalni stilovi.  Stranice dublje u hijerarhiji mogu imati vlastiti layout, ali se on odnosi samo na dio koja ta stranica definira, a layout roditelj ostaje u funkciji.
+
+U nextJS postoje dva tipa komponti:
+
+* **Server side components:** Komponente koje se generiraju na serveru. Mogu pristupati svim funkcionalnostima na serveru, pozivima na bazu i slično. Server generiranu komponentu vraća klijentu.
+* **Client side components:** Komponente koje se generiraju na klijentu. One mogu koristiti sve defaultne React hookove ` useState, useEffect, useRef` te Redux state-u (state kompletne aplikacije na klijentu, kojoj mogu pristupiti i izmijeniti sve komponente) preko `react-redux i @reduxjs/toolkit ` npm paketa.
 
 #### Kreiranje aplikacije preko npx create-next-app.
 
 Za izradu aplikacije FVTRACKER (fruits and vegetable tracker) koristio sam nextjs react framework. Prethodno je potrebno imati instaliran: NodeJs, npm.
 
-Uz pomoc alata npx pokrenuo sam naredbu create-next-app@latest fvtracker. U daljnjem izboru sam izradio manualnu konfiguraciju sa običnim javascriptom, tailwindcss-om, app-routerom i import aliasom.
+Uz pomoc alata npx pokrećemo naredbu create-next-app@latest fvtracker. U daljnjem izboru izradimo manualnu konfiguraciju iz izbornika sa običnim javascriptom, tailwindcss-om, app-routerom i import aliasom.

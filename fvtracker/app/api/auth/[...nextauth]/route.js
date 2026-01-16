@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/lib/db/mongoDb";
-import { getOrSaveUser } from "./handler";
+import { handleEmail } from "./handler";
 
 export const authOptions = {
   adapter: MongoDBAdapter(clientPromise),
@@ -14,7 +14,7 @@ export const authOptions = {
   ],
   callbacks: {
     async signIn({ user }) {
-      const result = await getOrSaveUser(user.email);
+      const result = await handleEmail(user.email);
       return !!result;
     },
   },

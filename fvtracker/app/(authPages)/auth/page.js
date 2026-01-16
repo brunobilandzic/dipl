@@ -9,9 +9,10 @@ async function AuthorizePage() {
       <div>
         {session ? (
           <div>
-            <h2 className="text-2xl mb-4">
-              You are logged in as {session.user.email}
+            <h2 className="text-2xl mb-4 m-x-auto">
+              You are logged in as <div className="break-words text-wrap row">{JSON.stringify(session, null, 2)}</div>
             </h2>
+            
             <p>Welcome back! You have successfully authorized.</p>
             <LogoutButton />
           </div>

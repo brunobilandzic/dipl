@@ -10,6 +10,9 @@ const appUserSchema = {
   email: {
     type: String,
   },
+  password: {
+    type: String,
+  },
 };
 
 export const AppUser =

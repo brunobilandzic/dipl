@@ -1,8 +1,9 @@
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
+import Credentials from "next-auth/providers/credentials";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/lib/db/mongoDb";
-import { handleEmail } from "./handler";
+import { handleOAuth, authorizeCredentials } from "./handler";
 
 export const authOptions = {
   adapter: MongoDBAdapter(clientPromise),
@@ -11,10 +12,22 @@ export const authOptions = {
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
+    Credentials({
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "text", placeholder: "unesite email" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials, req) {
+        // credentials contain email and password
+        const appUser = await authorizeCredentials(credentials);
+        return appUser;
+      },
+    }),
   ],
   callbacks: {
-    async signIn({ user }) {
-      const result = await handleEmail(user.email);
+    async signIn({ email }) {
+      const result = await handleOAuth(email);
       return !!result;
     },
   },

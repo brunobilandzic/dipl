@@ -1,0 +1,23 @@
+Google OAuth – primjer sign-in flowa (DOKUMENTACIJA)
+
+user:
+- id: <user_id>
+- name: <full_name>
+- email: <email>
+- image: <profile_image_url>
+
+account:
+- provider: google
+- type: oauth
+- providerAccountId: <google_account_id>
+- access_token: <ACCESS_TOKEN_FROM_ENV>
+- expires_at: <timestamp>
+- scope: openid email profile
+
+credentials login (example):
+- email: <email>
+- password: <PASSWORD_FROM_INPUT>
+
+NAPOMENA:
+- stvarni tokeni se NIKAD ne zapisuju u file
+- koriste se isključivo preko process.env

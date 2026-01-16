@@ -27,11 +27,22 @@ export const authOptions = {
   ],
   callbacks: {
     async signIn({ user, account, profile, credentials }) {
-      const { authorize, redirectTo } = await handleOAuth(user.email);
-      if (redirectTo) {
-        return redirectTo;
-      }
+      const authorize = await handleOAuth(profile);
       return !!authorize;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (token) {
+        session.user.id = token.id;
+        session.user.email = token.email;
+      }
+      return session;
     },
   },
   session: { strategy: "jwt", maxAge: 30 * 24 * 60 * 60 },

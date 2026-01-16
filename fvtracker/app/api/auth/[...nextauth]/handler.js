@@ -2,8 +2,7 @@ import dbConnect from "@/lib/db/mongooseConnect";
 import { AppUser } from "@/models/user/AppUser";
 import bcrypt from "bcrypt";
 
-export async function handleOAuth(email, given_name, family_name) {
-  console.log("Handling OAuth for email:", email);
+export async function handleOAuth({email, given_name, family_name}) {
   await dbConnect();
   const appUser = await AppUser.findOne({ email });
   if (appUser) {
@@ -15,14 +14,14 @@ export async function handleOAuth(email, given_name, family_name) {
       surname: family_name,
       provider: "google",
     });
+
     await newUser.save();
     return true;
   }
 }
 
 export async function authorizeCredentials({ email, password }) {
-  console.log("Authorizing credentials for email:", email);
-  // compare passwords, otherwise rturn null
+  // compare passwords, otherwise return null
   await dbConnect();
   const appUser = await AppUser.findOne({ email });
 

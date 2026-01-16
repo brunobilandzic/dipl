@@ -1,6 +1,5 @@
-export const AppInput = ({
+export const AppTextInput = ({
   label,
-  type,
   name,
   value,
   onChange,
@@ -10,8 +9,8 @@ export const AppInput = ({
   return (
     <div className={``}>
       <input
-        className={`w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${className}`}
-        type={type}
+        className={`text-input`}
+        type="text"
         name={name}
         value={value}
         onChange={onChange}
@@ -21,7 +20,7 @@ export const AppInput = ({
   );
 };
 
-export const AppTextarea = ({
+export const AppTextArea = ({
   label,
   name,
   value,

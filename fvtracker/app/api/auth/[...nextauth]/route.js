@@ -26,7 +26,7 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ user, account, profile, credentials }) {
+    async signIn({ profile }) {
       const authorize = await handleOAuth(profile);
       return !!authorize;
     },

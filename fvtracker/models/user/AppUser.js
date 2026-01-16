@@ -13,6 +13,11 @@ const appUserSchema = {
   password: {
     type: String,
   },
+  provider: {
+    type: String,
+    enum: ["google", "credentials"],
+    default: "credentials",
+  },
 };
 
 export const AppUser =

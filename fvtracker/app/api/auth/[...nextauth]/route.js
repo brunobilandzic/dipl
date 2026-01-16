@@ -26,9 +26,12 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async signIn({ email }) {
-      const result = await handleOAuth(email);
-      return !!result;
+    async signIn({ user, account, profile, credentials }) {
+      const { authorize, redirectTo } = await handleOAuth(user.email);
+      if (redirectTo) {
+        return redirectTo;
+      }
+      return !!authorize;
     },
   },
   session: { strategy: "jwt", maxAge: 30 * 24 * 60 * 60 },

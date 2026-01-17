@@ -1,0 +1,109 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import styles from "@/components/form/form.module.css";
+import { AppInput } from "@/components/form/inputs";
+import { signIn } from "next-auth/react";
+
+function SignUpForm(_signUpData = null) {
+  console.log("SignUpForm props", _signUpData);
+  const [signUpData, setSignUpData] = useState(testSignUpData);
+
+  useEffect(() => {
+    if (Object.keys(_signUpData).length > 0) {
+      setSignUpData(_signUpData);
+      console.log("SignUpForm useEffect setSignUpData", _signUpData);
+    }
+  }, [_signUpData]);
+  console.log("SignUpForm render", testSignUpData);
+  const onChange = (e) => {s
+    const { name, value } = e.target;
+    setSignUpData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    signIn("credentials", {
+      ...signUpData,
+      isSignUp: true,
+    });
+  };
+
+  return (
+    <div className={`${styles.form}`}>
+      <div className={styles.head}>
+        <h2 className={styles.heading}>Sign Up</h2>
+      </div>
+      <div className={styles.body}>
+        {inputs.map((input, i) => {
+          const { name, placeholder, type } = input;
+          return (
+            <div key={i}>
+              <AppInput
+                name={name}
+                placeholder={placeholder}
+                type={type}
+                value={signUpData[name] || ""}
+                onChange={onChange}
+                label={input.label}
+              />
+            </div>
+          );
+        })}
+      </div>
+      <div className={styles.footer}>
+        <div
+          className={`global-button mt-6 w-min ${styles.submitButton}`}
+          onClick={onSubmit}
+        >
+          Registracija
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default SignUpForm;
+
+const inputs = [
+  {
+    name: "email",
+    placeholder: "Email",
+    type: "email",
+    label: "Email",
+  },
+  {
+    name: "username",
+    placeholder: "Korisničko ime",
+    type: "text",
+    label: "Korisničko ime",
+  },
+  {
+    name: "name",
+    placeholder: "Ime",
+    type: "text",
+    label: "Ime",
+  },
+  { name: "surname", placeholder: "Prezime", type: "text", label: "Prezime" },
+  {
+    name: "password",
+    type: "password",
+    label: "Lozinka",
+  },
+  {
+    name: "passwordConfirm",
+    placeholder: "Potvrdi šifru",
+    type: "password",
+    label: "Potvrdi lozinku",
+  },
+];
+
+const testSignUpData = {
+  email: "brunobilandzic98@gmail.com",
+  username: "brunobilandzic",
+  name: "Bruno",
+  surname: "Bilandžić",
+  password: "test1234",
+  passwordConfirm: "test1234",
+};

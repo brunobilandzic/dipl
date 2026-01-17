@@ -1,16 +1,21 @@
-export const AppTextInput = ({
+import styles from "./form.module.css";
+
+export const AppInput = ({
   label,
   name,
+  type = "text",
   value,
   onChange,
   placeholder,
-  className,
+  wrapStyle = "",
+  inputStyle = "",
 }) => {
   return (
-    <div className={``}>
+    <div className={`${wrapStyle}`}>
+      {label && <label className="block mb-2">{label}</label>}
       <input
-        className={`text-input`}
-        type="text"
+        className={`${styles.textInput} ${inputStyle}`}
+        type={type}
         name={name}
         value={value}
         onChange={onChange}

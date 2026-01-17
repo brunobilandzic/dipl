@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import styles from "./navbar.module.css";
+import { NavLogo, NavLinks } from "./navitems";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +20,7 @@ const Navbar = () => {
 
   return (
     <nav className={`${styles.container} `}>
-      vdsavasdvas
+      <NavLogo />
     </nav>
   );
 };

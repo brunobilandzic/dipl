@@ -1,0 +1,106 @@
+{
+  "admin": [
+    {
+      "label": "korisnici",
+      "path": "/korisnici"
+    }
+  ],
+  "generalni_menadzer": [
+    {
+      "label": "odjeli",
+      "submenu": [
+        { "label": "kultivacija", "path": "/odjeli/kultivacija" },
+        { "label": "procesuiranje", "path": "/odjeli/procesuiranje" },
+        { "label": "skladištenje", "path": "/odjeli/skladistenje" },
+        { "label": "prodaja", "path": "/odjeli/prodaja" }
+      ]
+    },
+    {
+      "label": "menadžeri",
+      "submenu": [
+        { "label": "lista", "path": "/menadzeri/lista" },
+        { "label": "postavljanje", "path": "/menadzeri/postavljanje" }
+      ]
+    },
+    {
+      "label": "radnici",
+      "path": "/radnici"
+    },
+    {
+      "label": "nabava",
+      "path": "/nabava"
+    }
+  ],
+  "menadzer_uzgoja": [
+    {
+      "label": "upravljanje poljima",
+      "path": "/upravljanje-poljima"
+    },
+    {
+      "label": "kultivacija",
+      "submenu": [
+        { "label": "sadnja", "path": "/kultivacija/sadnja" },
+        { "label": "berba", "path": "/kultivacija/berba" }
+      ]
+    },
+    {
+      "label": "radnici",
+      "path": "/radnici"
+    },
+    {
+      "label": "nabava",
+      "path": "/nabava"
+    }
+  ],
+  "menadzer_procesiranja": [
+    {
+      "label": "postrojenja",
+      "path": "/postrojenja"
+    },
+    {
+      "label": "proizvodnja",
+      "submenu": [
+        { "label": "zaprimanja", "path": "/proizvodnja/zaprimanja" },
+        { "label": "procesuirenje", "path": "/proizvodnja/procesuirenje" },
+        { "label": "slanje", "path": "/proizvodnja/slanje" }
+      ]
+    },
+    {
+      "label": "zapošljavanje",
+      "path": "/zaposljavanjе"
+    },
+    {
+      "label": "nabava",
+      "path": "/nabava"
+    }
+  ],
+  "menadzer_skladista": [
+    {
+      "label": "pregled",
+      "submenu": [
+        { "label": "stanje", "path": "/pregled/stanje" },
+        { "label": "raspored", "path": "/pregled/raspored" }
+      ]
+    },
+    {
+      "label": "zahtjevi",
+      "path": "/zahtjevi"
+    },
+    {
+      "label": "primke",
+      "path": "/primke"
+    },
+    {
+      "label": "otpremnice",
+      "path": "/otpremnice"
+    },
+    {
+      "label": "nabava",
+      "path": "/nabava"
+    },
+    {
+      "label": "zaposlenici",
+      "path": "/zaposlenici"
+    }
+  ]
+}

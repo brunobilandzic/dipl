@@ -3,7 +3,7 @@ import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/lib/db/mongoDb";
-import { handleOAuth, authorizeCredentials } from "./handler";
+import { handleOAuth, authorizeCredentials, handleCredentials } from "./handler";
 
 export const authOptions = {
   adapter: MongoDBAdapter(clientPromise),
@@ -19,16 +19,21 @@ export const authOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
-        // credentials contain email and password
-        const appUser = await authorizeCredentials(credentials);
-        return appUser;
+        console.log("Authorizing with credentials:", credentials);
+        return await handleCredentials(credentials);
       },
     }),
   ],
   callbacks: {
-    async signIn({ profile }) {
-      const authorize = await handleOAuth(profile);
-      return !!authorize;
+    async signIn({ account, profile }) {
+      if (account.provider == "google") {
+        const authorize = await handleOAuth(profile);
+        return !!authorize;
+      }
+      if (account.provider == "credentials") {
+        return true;
+      }
+      return false;
     },
     async jwt({ token, user }) {
       if (user) {

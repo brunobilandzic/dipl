@@ -1,16 +1,19 @@
 import mongoose from "mongoose";
 
 const appUserSchema = {
-  name: {
+  username: {
     type: String,
   },
-  surname: {
+  name: {
     type: String,
   },
   email: {
     type: String,
   },
   password: {
+    type: String,
+  },
+  surname: {
     type: String,
   },
   provider: {

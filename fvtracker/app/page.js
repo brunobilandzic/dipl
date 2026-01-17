@@ -1,6 +1,5 @@
 import Image from "next/image";
 import ThemeToggle from "../components/style/theme";
-import { LoginButton } from "@/components/auth/login/button";
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 

@@ -17,4 +17,6 @@ const roleRequestSchema = {
   reviewedBy: { type: mongoose.Schema.Types.ObjectId, ref: "AppUser" },
 };
 
-export default roleRequestSchema;
+export const RoleRequest =
+  mongoose.models.RoleRequest ||
+  mongoose.model("RoleRequest", new mongoose.Schema(roleRequestSchema));

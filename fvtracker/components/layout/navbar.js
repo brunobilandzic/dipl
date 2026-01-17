@@ -18,7 +18,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`${styles.container} bg-yellow-300  dark:bg-gray-600`}>
+    <nav className={`${styles.container} `}>
       vdsavasdvas
     </nav>
   );

@@ -2,10 +2,12 @@
 
 import React, { useState } from "react";
 import styles from "./navbar.module.css";
-import { NavLogo, NavLinks } from "./navitems";
+import { NavLogo, NavLinks } from "./navLinks";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const appUser = useSelector((state) => state.user.appUser);
 
   const navItems = [
     { label: "Home", href: "/" },

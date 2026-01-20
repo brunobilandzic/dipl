@@ -1,5 +1,4 @@
 import { auth } from "@/auth";
-import { SESSION_NOT_FOUND } from "@/lib/constants/errors/session";
 import dbConnect from "@/lib/db/mongooseConnect";
 import { AppUser } from "@/models/user/AppUser";
 

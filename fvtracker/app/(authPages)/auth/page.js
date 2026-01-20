@@ -1,19 +1,19 @@
 import { LoginButton, LogoutButton } from "@/components/auth/login";
 import React from "react";
-import { getServerSession } from "next-auth";
 import { SignUpButton } from "@/components/auth/signup";
+import { fetchSessionAppUser } from "@/lib/auth/user/userServer";
 
 async function AuthorizePage() {
-  const session = await getServerSession();
+  const appUser = await fetchSessionAppUser();
   return (
     <div className="h-screen flex justify-center items-center">
       <div>
-        {session ? (
+        {appUser ? (
           <div>
             <h2 className="text-2xl mb-4 m-x-auto">
               You are logged in as{" "}
               <div className="break-words text-wrap row">
-                {JSON.stringify(session, null, 2)}
+                {JSON.stringify(appUser, null, 2)}
               </div>
             </h2>
 

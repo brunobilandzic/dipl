@@ -1,17 +1,39 @@
 import mongoose from "mongoose";
 
 const managerSchema = {
-  sector: {
+  // root manager role for properties shared by all manager types
+  managerModel: {
     type: String,
+    enum: [
+      "GeneralManager",
+      "CultivationManager",
+      "ProductionManager",
+      "FinancialManager",
+      "StorageManager",
+    ],
     required: true,
-    enum: ["general", "cultivation", "production", "finance", "storage"],
-    default: "general",
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "AppUser",
+    required: true,
+  },
+  generalManager: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "GeneralManager",
+    required: true,
   },
   employees: [{ type: mongoose.Schema.Types.ObjectId, ref: "Worker" }],
+  employmantCalls: [
+    // job postings created by the manager
+    { type: mongoose.Schema.Types.ObjectId, ref: "EmploymentCall" },
+  ],
   employmentRequests: [
+    // people applying for jobs
     { type: mongoose.Schema.Types.ObjectId, ref: "EmploymentRequest" },
   ],
   orderRequests: [
+    //people placing orders to buy products
     { type: mongoose.Schema.Types.ObjectId, ref: "OrderRequest" },
   ],
 };

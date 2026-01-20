@@ -14,8 +14,8 @@ const cultivationManagerSchema = {
     { type: mongoose.Schema.Types.ObjectId, ref: "HarvestSchedule" },
   ],
   harvest: [{ type: mongoose.Schema.Types.ObjectId, ref: "Harvest" }],
-  processingBatches: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "ProcessingBatch" },
+  cultivationBatches: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "CultivationBatch" },
   ],
 };
 export const CultivationManager =

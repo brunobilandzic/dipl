@@ -14,7 +14,7 @@ const roleRequestSchema = {
   },
   requestedAt: { type: Date, default: () => new Date() },
   reviewedAt: { type: Date },
-  reviewedBy: { type: mongoose.Schema.Types.ObjectId, ref: "AppUser" },
+  reviewedBy: { type: mongoose.Schema.Types.ObjectId, ref: "GeneralManager" },
 };
 
 export const RoleRequest =

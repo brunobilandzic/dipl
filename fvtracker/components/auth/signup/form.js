@@ -16,7 +16,7 @@ function SignUpForm(_signUpData = null) {
     }
   }, [_signUpData]);
   console.log("SignUpForm render", testSignUpData);
-  const onChange = (e) => {s
+  const onChange = (e) => {
     const { name, value } = e.target;
     setSignUpData((prev) => ({ ...prev, [name]: value }));
   };

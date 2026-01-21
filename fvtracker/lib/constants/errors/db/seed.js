@@ -1,0 +1,1 @@
+export const SEED_ERROR = "Error seeding database.";

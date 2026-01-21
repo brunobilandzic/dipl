@@ -1,6 +1,6 @@
 import React from "react";
 import { FaSeedling } from "react-icons/fa";
-import Icons from "./icons";
+import SeedOptions from "./options";
 
 function SeedPageComponent() {
   return (
@@ -12,7 +12,7 @@ function SeedPageComponent() {
         </div>
       </div>
       <div className="">
-        <Icons />
+        <SeedOptions />
       </div>
     </div>
   );

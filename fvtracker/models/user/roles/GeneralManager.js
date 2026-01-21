@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 
 const generalManagerSchema = {
-  appUser: {
+  managers: [{ type: mongoose.Schema.Types.ObjectId, ref: "Manager" }],
+  menager: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "AppUser",
+    ref: "Manager",
     required: true,
   },
-  managers: [{ type: mongoose.Schema.Types.ObjectId, ref: "Manager" }],
 };
 
 export const GeneralManager =

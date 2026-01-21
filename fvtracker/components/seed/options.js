@@ -60,7 +60,9 @@ export function DeleteDB() {
   const deleteDB = async () => {
     try {
       const response = await axios.delete("/api/delete");
-      console.log(response.data);
+      const {success} = response.data
+      console.log("SUCCESS:", response.data);
+      if (success) alert("Database deleted successfully");
     } catch (error) {
       console.error("Error deleting database:", error);
       throw new Error(SEED_ERROR);

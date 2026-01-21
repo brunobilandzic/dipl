@@ -1,5 +1,69 @@
 const appUsersJsonArray = [
   {
+    username: "general.manager",
+    name: "General",
+    surname: "Manager",
+    email: "general.manager@example.com",
+    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    provider: "credentials",
+  },
+  {
+    username: "admin.admin",
+    name: "Admin",
+    surname: "Admin",
+    email: "admin@example.com",
+    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    provider: "credentials",
+  },
+  {
+    username: "cultivation.manager",
+    name: "Cultivation",
+    surname: "Manager",
+    email: "cultivation.manager@example.com",
+    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    provider: "credentials",
+  },
+  {
+    username: "financial.manager",
+    name: "Financial",
+    surname: "Manager",
+    email: "financial.manager@example.com",
+    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    provider: "credentials",
+  },
+  {
+    username: "production.manager",
+    name: "Production",
+    surname: "Manager",
+    email: "production.manager@example.com",
+    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    provider: "credentials",
+  },
+  {
+    username: "storage.manager",
+    name: "Storage",
+    surname: "Manager",
+    email: "storage.manager@example.com",
+    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    provider: "credentials",
+  },
+  {
+    username: "basic.manager",
+    name: "Basic",
+    surname: "Manager",
+    email: "basic.manager@example.com",
+    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    provider: "credentials",
+  },
+  {
+    username: "john.doe",
+    name: "John",
+    surname: "Doe",
+    email: "john.doe@example.com",
+    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    provider: "credentials",
+  },
+  {
     username: "alice.ross",
     name: "Alice",
     surname: "Ross",
@@ -161,4 +225,4 @@ const appUsersJsonArray = [
   },
 ];
 
-export default  appUsersJsonArray
+export default appUsersJsonArray;

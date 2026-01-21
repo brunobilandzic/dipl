@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import { MdAllInclusive, MdBusinessCenter } from "react-icons/md";
 
 export default function Icons() {
@@ -14,6 +15,11 @@ export default function Icons() {
     },
   };
 
+  const API = async (seedType) => {
+    const response = await axios.post("/api/seed", { seedType });
+    console.log(response.data);
+  };
+
   return (
     <>
       <div className="flex justify-center gap-6 w-2/3 mx-auto h-14 ">
@@ -22,8 +28,7 @@ export default function Icons() {
             <div
               key={key}
               className="flex flex-col gap-2 btn items-center justify-center p-2  cursor-pointer"
-              onClick={async () => {
-              }}
+              onClick={async () => API(label)}
             >
               <div className="text-3xl">{icon}</div>
               <div>{label}</div>

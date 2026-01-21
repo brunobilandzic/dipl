@@ -6,11 +6,6 @@ const productionManagerSchema = {
     ref: "Manager",
     required: true,
   },
-  generalManager: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "GeneralManager",
-    required: true,
-  },
   processingBatches: [
     // inputs to production process
     { type: mongoose.Schema.Types.ObjectId, ref: "ProcessingBatch" },

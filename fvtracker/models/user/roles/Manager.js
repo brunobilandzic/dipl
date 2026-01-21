@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const managerSchema = {
   // root manager role for properties shared by all manager types
-  managerModel: {
+  managerModelName: {
     type: String,
     enum: [
       "GeneralManager",
@@ -13,7 +13,7 @@ const managerSchema = {
     ],
     required: true,
   },
-  user: {
+  appUser: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "AppUser",
     required: true,

@@ -5,7 +5,6 @@ const generalManagerSchema = {
   menager: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Manager",
-    required: true,
   },
 };
 

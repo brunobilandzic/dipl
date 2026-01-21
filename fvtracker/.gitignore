@@ -43,3 +43,7 @@ next-env.d.ts
 /node_modules
 
 client_secret*
+
+.next
+
+.vscode

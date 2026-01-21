@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import styles from "./navbar.module.css";
-import { NavLogo, NavLinks } from "./navLinks";
+import { NavLogo } from "./navItems";
 import { useSelector } from "react-redux";
+import NavLinks from "./navLinks";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +21,10 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`${styles.container} `}>
+    <nav
+      className={`flex items-center justify-between h-16 px-4 shadow-md;
+} `}
+    >
       <NavLogo />
     </nav>
   );

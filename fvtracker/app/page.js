@@ -6,14 +6,13 @@ export default async function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center  font-sans p-5">
       <main className="flex min-h-screen gap-2 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 sm:items-start">
-        <div className="flex gap-4 w-full justify-start items-center">
+        <div className="flex gap-4 w-full justify-start items-center mb-4">
           <Link href="/auth">
             <div className="btn">Authorize</div>
           </Link>
           <Link href="/seed">
             <div className="btn">Seed Data</div>
           </Link>
-
           <div className=" btn">
             <ThemeToggle />
           </div>

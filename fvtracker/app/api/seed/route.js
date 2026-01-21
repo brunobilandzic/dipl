@@ -1,12 +1,11 @@
-import { seedManagers } from "@/lib/seed/managers";
+import { seedDocuments } from "@/lib/seed";
 
 export async function POST(req) {
   console.log("Seed route POST called");
   try {
-    const body = await req.json();
-    console.log("Request body:", body);
-    const result = await seedManagers();
-    console.log("Seeding result:", result);
+    const {seedType} = await req.json();
+    const result = await seedDocuments(seedType);
+    console.log(seedType, "Seeding result:", result?.length);
     return Response.json(
       { message: "Seeding completed successfully", result },
       {

@@ -1,13 +1,12 @@
 "use server";
-import seedAppUsers from "./users/appUsers";
+import seedUsers from "@/lib/seed/users";
 
 export async function seedDocuments(seedType) {
   console.log(`Seeding documents of type: ${seedType}`);
   switch (seedType) {
-    case "Seed App Users":
-      const appUsers = await seedAppUsers();
-      console.log("App Users seeded:", appUsers?.length);
-      return  appUsers ;
+    case "Seed Users":
+      const { appUsers, adminUserId } = await seedUsers.allUsers.seed();
+      return { appUsers, adminUserId };
     default:
       throw new Error(`Unknown seed type: ${seedType}`);
   }

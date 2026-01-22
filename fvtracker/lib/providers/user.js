@@ -20,7 +20,7 @@ function AppUserProvider({ children }) {
 
 const setAppUserFromApiRedux = async (dispatch) => {
   try {
-    const response = await axios.get("/api/auth/redux/user");
+    const response = await axios.get("/api/auth/user/redux");
     console.log("Fetched app user from API response:", response.data);
 
     const appUser = response.data.appUser;

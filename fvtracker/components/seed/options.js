@@ -1,13 +1,8 @@
 "use client";
 
-import seedAppUsers from "@/lib/seed/users/appUsers";
 import axios from "axios";
 import { FaUserPlus } from "react-icons/fa";
-import {
-  MdAllInclusive,
-  MdBusinessCenter,
-  MdDeleteForever,
-} from "react-icons/md";
+import { MdAllInclusive, MdDeleteForever } from "react-icons/md";
 
 export default function SeedOptions() {
   const _icons = {
@@ -15,13 +10,9 @@ export default function SeedOptions() {
       icon: <MdAllInclusive />,
       label: "Seed All",
     },
-    seedAppUsers: {
+    seedUsers: {
       icon: <FaUserPlus />,
-      label: "Seed App Users",
-    },
-    seedManagers: {
-      icon: <MdBusinessCenter />,
-      label: "Seed Managers",
+      label: "Seed Users",
     },
   };
 
@@ -29,6 +20,7 @@ export default function SeedOptions() {
     try {
       const response = await axios.post("/api/seed", { seedType });
       console.log(response.data);
+      alert(`${seedType} completed successfully\n${response.data.message}`);
     } catch (error) {
       console.error("Error seeding data:", error);
       throw new Error("Error seeding data");
@@ -60,7 +52,7 @@ export function DeleteDB() {
   const deleteDB = async () => {
     try {
       const response = await axios.delete("/api/delete");
-      const {success} = response.data
+      const { success } = response.data;
       console.log("SUCCESS:", response.data);
       if (success) alert("Database deleted successfully");
     } catch (error) {
@@ -69,7 +61,10 @@ export function DeleteDB() {
     }
   };
   return (
-    <button onClick={deleteDB} className="flex flex-col gap-2 btn items-center justify-center p-2  cursor-pointer">
+    <button
+      onClick={deleteDB}
+      className="flex flex-col gap-2 btn items-center justify-center p-2  cursor-pointer"
+    >
       <div className="text-3xl">
         <MdDeleteForever />
       </div>

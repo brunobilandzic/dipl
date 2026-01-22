@@ -11,7 +11,7 @@ export async function fetchSessionAppUser() {
   const appUser = await AppUser.findOne({ email });
   if (!appUser) {
     console.log("Failed to fetch app user for session with email:", email);
-    throw new Error(APP_USER_NOT_FOUND);
+    return null;
   }
   return appUser;
 }

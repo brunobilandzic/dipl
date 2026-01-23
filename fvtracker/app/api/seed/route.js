@@ -1,14 +1,14 @@
-import { seedDocuments } from "@/lib/seed";
+import seed from "@/lib/seed";
 
 export async function POST(req) {
   console.log("Seed route POST called");
   try {
     const { seedType } = await req.json();
-    const result = await seedDocuments(seedType);
-    const { appUsers, adminUserId } = result;
+    const result = await seed.handleAPIRequest(seedType);
     return Response.json(
       {
-        message: `Seeding completed successfully.\nSeeded ${appUsers.length} app users\nAdmin user ID: ${adminUserId}`,
+        message: `Seeding completed successfully for type: ${seedType}`,
+        result,
       },
       {
         status: 200,

@@ -1,24 +1,31 @@
-import usernames from "@/lib/constants/users/usernames";
+import users from "@/lib/constants/users";
 import { Admin } from "@/models/user/roles/Admin";
 import dbConnect from "@/lib/db/mongooseConnect";
-import fetch from "@/lib/db/fetch";
+import appUsersJsonArray from "../data/appUsers";
+import { AppUser } from "@/models/user/AppUser";
 
 const check = async () => {
   await dbConnect();
   const adminCount = await Admin.countDocuments();
   if (adminCount > 0) {
-    const admin = await Admin.deleteOne({ username: usernames.ADMIN });
+    await Admin.deleteOne({ username: users.roles.ADMIN.username });
     console.log(`Deleted existing admin user`);
   }
 };
 
-export const create = async () => {
+export const createAdmin = async () => {
   console.log("Creating admin user...");
   await check();
-  const appUser = await fetch.users.appUsers.getByUsername(usernames.ADMIN);
-  const adminUser = new Admin({
-    appUser: appUser._id,
+
+  const adminData = appUsersJsonArray.find((user) => user.username === "admin");
+
+  const adminAppUser = new AppUser(adminData);
+  await adminAppUser.save();
+
+  const admin = new Admin({
+    appUser: adminAppUser._id,
   });
-  await adminUser.save();
-  return adminUser;
+  await admin.save();
+
+  return admin;
 };

@@ -9,6 +9,7 @@ const storageManagerSchema = {
   storageFacility: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "StorageFacility",
+    default: null,
   },
 };
 

@@ -6,11 +6,11 @@ const financialManagerSchema = {
     ref: "Manager",
     required: true,
   },
-  orders: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order" }],
-  invoices: [{ type: mongoose.Schema.Types.ObjectId, ref: "Invoice" }],
-  payments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Payment" }],
-  customers: [{ type: mongoose.Schema.Types.ObjectId, ref: "Customer" }],
-  suppliers: [{ type: mongoose.Schema.Types.ObjectId, ref: "Supplier" }],
+  orders: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order", default: [] }],
+  invoices: [{ type: mongoose.Schema.Types.ObjectId, ref: "Invoice", default: [] }],
+  payments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Payment", default: [] }],
+  customers: [{ type: mongoose.Schema.Types.ObjectId, ref: "Customer", default: [] }],
+  suppliers: [{ type: mongoose.Schema.Types.ObjectId, ref: "Supplier", default: [] }],
 };
 
 export const FinancialManager =

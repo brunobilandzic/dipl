@@ -7,15 +7,31 @@ const cultivationManagerSchema = {
     required: true,
   },
   cultivationAreas: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "CultivationArea" },
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "CultivationArea",
+      default: [],
+    },
   ],
-  cropTypes: [{ type: mongoose.Schema.Types.ObjectId, ref: "CropType" }],
+  cropTypes: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "CropType", default: [] },
+  ],
   harvestSchedules: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "HarvestSchedule" },
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "HarvestSchedule",
+      default: [],
+    },
   ],
-  harvest: [{ type: mongoose.Schema.Types.ObjectId, ref: "Harvest" }],
+  harvest: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "Harvest", default: [] },
+  ],
   cultivationBatches: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "CultivationBatch" },
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "CultivationBatch",
+      default: [],
+    },
   ],
 };
 export const CultivationManager =

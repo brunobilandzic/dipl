@@ -23,18 +23,28 @@ const managerSchema = {
     ref: "GeneralManager",
     required: true,
   },
-  employees: [{ type: mongoose.Schema.Types.ObjectId, ref: "Worker" }],
+  employees: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "Worker", default: [] },
+  ],
   employmantCalls: [
     // job postings created by the manager
-    { type: mongoose.Schema.Types.ObjectId, ref: "EmploymentCall" },
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "EmploymentCall",
+      default: [],
+    },
   ],
   employmentRequests: [
     // people applying for jobs
-    { type: mongoose.Schema.Types.ObjectId, ref: "EmploymentRequest" },
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "EmploymentRequest",
+      default: [],
+    },
   ],
   orderRequests: [
     //people placing orders to buy products
-    { type: mongoose.Schema.Types.ObjectId, ref: "OrderRequest" },
+    { type: mongoose.Schema.Types.ObjectId, ref: "OrderRequest", default: [] },
   ],
 };
 
@@ -48,12 +58,18 @@ const generalManagerSchema = {
     ref: "Manager",
     required: true,
   },
-  menagers: [{ type: mongoose.Schema.Types.ObjectId, ref: "Manager" }],
+  menagers: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "Manager", default: [] },
+  ],
   employmentRequests: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "EmploymentRequest" },
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "EmploymentRequest",
+      default: [],
+    },
   ],
   orderRequests: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "OrderRequest" },
+    { type: mongoose.Schema.Types.ObjectId, ref: "OrderRequest", default: [] },
   ],
 };
 

@@ -4,16 +4,22 @@ import appUsersJsonArray from "@/lib/seed/data/appUsers";
 import { AppUser } from "@/models/user/AppUser";
 import dbConnect from "@/lib/db/mongooseConnect";
 import { Admin } from "@/models/user/roles/Admin";
-import { GeneralManager } from "@/models/user/roles/GeneralManager";
-import { CultivationManager } from "@/models/user/roles/CultivationManager";
-import { ProductionManager } from "@/models/user/roles/ProductionManager";
-import { StorageManager } from "@/models/user/roles/StorageManager";
-import { FinancialManager } from "@/models/user/roles/FinancialManager";
+import { GeneralManager } from "@/models/user/roles/managers/GeneralManager";
+import { CultivationManager } from "@/models/user/roles/managers/CultivationManager";
+import { ProductionManager } from "@/models/user/roles/managers/ProductionManager";
+import { StorageManager } from "@/models/user/roles/managers/StorageManager";
+import { FinancialManager } from "@/models/user/roles/managers/FinancialManager";
+import usersConstants from "@/lib/constants/users";
+import { createGeneralManager } from "@/lib/seed/users/generalManager";
+import { createManager } from "@/lib/seed/users/manager";
+import { createAdmin } from "./admin";
+import { Manager } from "@/models/user/roles/managers/Manager";
 
 const check = async () => {
   await dbConnect();
   const userCount = await AppUser.countDocuments();
   if (userCount > 0) {
+    await Manager.deleteMany({});
     await AppUser.deleteMany({});
     await Admin.deleteMany({});
     await GeneralManager.deleteMany({});
@@ -25,31 +31,82 @@ const check = async () => {
   }
 };
 
-export const seed = async () => {
+export default async () => {
   console.log("Seeding appUsers...");
   await check();
 
-  if (!appUsersJsonArray) {
-    console.log("No appUsers to seed.");
-    throw new Error(SEED_ERROR, "AppUsers data is undefined");
-  }
+  // Create admin and general manager first
+  const admin = await createAdmin();
+  const generalManager = await createGeneralManager();
 
-  const promiese = [];
+  // Now create other app users
+  const promises = [];
   for (const appUserData of appUsersJsonArray) {
-    promiese.push(create(appUserData));
+    if (!["general.manager", "admin"].includes(appUserData.username))
+      promises.push(createAppUser(appUserData, generalManager._id));
   }
-  const appUsers = await Promise.all(promiese);
 
-  if (!appUsers || appUsers.length === 0) {
+  const results = await Promise.all(promises);
+  if (!results || results.length === 0) {
     console.log("No appUsers were created.");
     throw new Error(SEED_ERROR, "No AppUsers were created");
   }
 
-  return appUsers;
+  const managersIds = results
+    .map((res) => res.managerId)
+    .filter((id) => id !== null);
+
+  GeneralManager.updateOne(
+    { _id: generalManager._id },
+    {
+      $push: {
+        managers: {
+          $each: managersIds,
+        },
+      },
+    },
+  ).exec();
+
+  console.log(
+    "General manager has",
+    managersIds.length,
+    "managers.",
+  );
+  console.log(`Seeded ${results.length} appUsers.`);
+
+  return {
+    appUsersIds: results.map((res) => res.appUserId),
+    managersIds: results.map((res) => res.managerId),
+    adminId: admin._id,
+    generalManagerId: generalManager._id,
+  };
 };
 
-export const create = async (appUserData) => {
+export const createAppUser = async (appUserData, generalManagerId) => {
   const appUser = new AppUser(appUserData);
   await appUser.save();
-  return appUser;
+  const username = appUser.username;
+
+  let manager = null;
+  if (username in usersConstants.managersMap) {
+    // now we have to crate a basic manager and specific manager
+    const managerModelName = usersConstants.managersMap[username];
+    manager = await createManager(
+      appUser._id,
+      managerModelName,
+      generalManagerId,
+    );
+    if (!manager) {
+      throw new Error(SEED_ERROR, `Manager not created for user ${username}`);
+    }
+    console.log(
+      `Created manager role ${managerModelName} for user ${username}`,
+    );
+  }
+
+  if (appUser)
+    return { appUserId: appUser._id, managerId: manager?._id || null };
+  throw new Error(SEED_ERROR, `AppUser creation failed for user ${username}`);
 };
+
+//create manager

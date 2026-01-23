@@ -1,10 +1,13 @@
 import mongoose from "mongoose";
 
 const generalManagerSchema = {
-  managers: [{ type: mongoose.Schema.Types.ObjectId, ref: "Manager" }],
-  menager: {
+  managers: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "Manager", default: [] },
+  ],
+  manager: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Manager",
+    default: null, // in seed we create and add it later...
   },
 };
 

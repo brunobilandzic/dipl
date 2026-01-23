@@ -1,6 +1,7 @@
 const appUsersJsonArray = [
   {
     username: "general.manager",
+    modelName: "GeneralManager",
     name: "General",
     surname: "Manager",
     email: "general.manager@example.com",
@@ -9,6 +10,7 @@ const appUsersJsonArray = [
   },
   {
     username: "admin.admin",
+    modelName: "Admin",
     name: "Admin",
     surname: "Admin",
     email: "admin@example.com",
@@ -17,6 +19,8 @@ const appUsersJsonArray = [
   },
   {
     username: "cultivation.manager",
+    modelName: "CultivationManager",
+    sector: "Cultivation",
     name: "Cultivation",
     surname: "Manager",
     email: "cultivation.manager@example.com",
@@ -25,6 +29,8 @@ const appUsersJsonArray = [
   },
   {
     username: "financial.manager",
+    modelName: "FinancialManager",
+    sector: "Financial",
     name: "Financial",
     surname: "Manager",
     email: "financial.manager@example.com",
@@ -33,6 +39,8 @@ const appUsersJsonArray = [
   },
   {
     username: "production.manager",
+    modelName: "ProductionManager",
+    sector: "Production",
     name: "Production",
     surname: "Manager",
     email: "production.manager@example.com",
@@ -41,6 +49,8 @@ const appUsersJsonArray = [
   },
   {
     username: "storage.manager",
+    modelName: "StorageManager",
+    sector: "Storage",
     name: "Storage",
     surname: "Manager",
     email: "storage.manager@example.com",
@@ -48,15 +58,9 @@ const appUsersJsonArray = [
     provider: "credentials",
   },
   {
-    username: "basic.manager",
-    name: "Basic",
-    surname: "Manager",
-    email: "basic.manager@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
-    provider: "credentials",
-  },
-  {
     username: "john.doe",
+    modelName: "Worker",
+    sector: "General",
     name: "John",
     surname: "Doe",
     email: "john.doe@example.com",
@@ -65,6 +69,8 @@ const appUsersJsonArray = [
   },
   {
     username: "alice.ross",
+    modelName: "Worker",
+    sector: "Storage",
     name: "Alice",
     surname: "Ross",
     email: "alice.ross@example.com",
@@ -73,6 +79,8 @@ const appUsersJsonArray = [
   },
   {
     username: "brandon.kent",
+    modelName: "Worker",
+    sector: "Financial",
     name: "Brandon",
     surname: "Kent",
     email: "brandon.kent@example.com",
@@ -81,6 +89,8 @@ const appUsersJsonArray = [
   },
   {
     username: "carla.mendez",
+    modelName: "Worker",
+    sector: "Production",
     name: "Carla",
     surname: "Mendez",
     email: "carla.mendez@example.com",
@@ -89,6 +99,8 @@ const appUsersJsonArray = [
   },
   {
     username: "david.york",
+    modelName: "Worker",
+    sector: "Cultivation",
     name: "David",
     surname: "York",
     email: "david.york@example.com",
@@ -97,6 +109,8 @@ const appUsersJsonArray = [
   },
   {
     username: "elena.pratt",
+    modelName: "Worker",
+    sector: "Storage",
     name: "Elena",
     surname: "Pratt",
     email: "elena.pratt@example.com",
@@ -105,6 +119,8 @@ const appUsersJsonArray = [
   },
   {
     username: "frank.li",
+    modelName: "Worker",
+    sector: "Financial",
     name: "Frank",
     surname: "Li",
     email: "frank.li@example.com",
@@ -113,6 +129,8 @@ const appUsersJsonArray = [
   },
   {
     username: "grace.cho",
+    modelName: "Worker",
+    sector: "Production",
     name: "Grace",
     surname: "Cho",
     email: "grace.cho@example.com",
@@ -121,6 +139,8 @@ const appUsersJsonArray = [
   },
   {
     username: "henry.tate",
+    modelName: "Worker",
+    sector: "Cultivation",
     name: "Henry",
     surname: "Tate",
     email: "henry.tate@example.com",
@@ -129,6 +149,8 @@ const appUsersJsonArray = [
   },
   {
     username: "isabel.ng",
+    modelName: "Worker",
+    sector: "Storage",
     name: "Isabel",
     surname: "Ng",
     email: "isabel.ng@example.com",
@@ -137,6 +159,8 @@ const appUsersJsonArray = [
   },
   {
     username: "jackson.boyle",
+    modelName: "Worker",
+    sector: "Financial",
     name: "Jackson",
     surname: "Boyle",
     email: "jackson.boyle@example.com",
@@ -145,6 +169,8 @@ const appUsersJsonArray = [
   },
   {
     username: "karen.moss",
+    modelName: "Worker",
+    sector: "Production",
     name: "Karen",
     surname: "Moss",
     email: "karen.moss@example.com",
@@ -153,6 +179,8 @@ const appUsersJsonArray = [
   },
   {
     username: "leo.wright",
+    modelName: "Worker",
+    sector: "Cultivation",
     name: "Leo",
     surname: "Wright",
     email: "leo.wright@example.com",
@@ -161,6 +189,8 @@ const appUsersJsonArray = [
   },
   {
     username: "mia.huang",
+    modelName: "Worker",
+    sector: "Storage",
     name: "Mia",
     surname: "Huang",
     email: "mia.huang@example.com",
@@ -169,6 +199,8 @@ const appUsersJsonArray = [
   },
   {
     username: "nathan.price",
+    modelName: "Worker",
+    sector: "Financial",
     name: "Nathan",
     surname: "Price",
     email: "nathan.price@example.com",
@@ -177,6 +209,8 @@ const appUsersJsonArray = [
   },
   {
     username: "olivia.dunn",
+    modelName: "Worker",
+    sector: "Production",
     name: "Olivia",
     surname: "Dunn",
     email: "olivia.dunn@example.com",
@@ -185,6 +219,8 @@ const appUsersJsonArray = [
   },
   {
     username: "paul.vasquez",
+    modelName: "Worker",
+    sector: "Cultivation",
     name: "Paul",
     surname: "Vasquez",
     email: "paul.vasquez@example.com",
@@ -193,6 +229,8 @@ const appUsersJsonArray = [
   },
   {
     username: "quinn.barker",
+    modelName: "Worker",
+    sector: "Storage",
     name: "Quinn",
     surname: "Barker",
     email: "quinn.barker@example.com",
@@ -201,6 +239,8 @@ const appUsersJsonArray = [
   },
   {
     username: "rachel.sims",
+    modelName: "Worker",
+    sector: "Financial",
     name: "Rachel",
     surname: "Sims",
     email: "rachel.sims@example.com",
@@ -209,6 +249,8 @@ const appUsersJsonArray = [
   },
   {
     username: "samuel.ortiz",
+    modelName: "Worker",
+    sector: "Production",
     name: "Samuel",
     surname: "Ortiz",
     email: "samuel.ortiz@example.com",
@@ -217,9 +259,61 @@ const appUsersJsonArray = [
   },
   {
     username: "tina.gibbs",
+    modelName: "Worker",
+    sector: "Cultivation",
     name: "Tina",
     surname: "Gibbs",
     email: "tina.gibbs@example.com",
+    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    provider: "credentials",
+  },
+  {
+    username: "customer.adam",
+    modelName: "Customer",
+    sector: "Financial",
+    name: "Adam",
+    surname: "Johnson",
+    email: "adam.johnson@example.com",
+    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    provider: "credentials",
+  },
+  {
+    username: "customer.bethany",
+    modelName: "Customer",
+    sector: "Financial",
+    name: "Bethany",
+    surname: "Martinez",
+    email: "bethany.martinez@example.com",
+    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    provider: "credentials",
+  },
+  {
+    username: "customer.christopher",
+    modelName: "Customer",
+    sector: "Financial",
+    name: "Christopher",
+    surname: "Anderson",
+    email: "christopher.anderson@example.com",
+    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    provider: "credentials",
+  },
+  {
+    username: "customer.diana",
+    modelName: "Customer",
+    sector: "Financial",
+    name: "Diana",
+    surname: "Taylor",
+    email: "diana.taylor@example.com",
+    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    provider: "credentials",
+  },
+  {
+    username: "customer.eric",
+    modelName: "Customer",
+    sector: "Financial",
+    name: "Eric",
+    surname: "Thompson",
+    email: "eric.thompson@example.com",
     password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
     provider: "credentials",
   },

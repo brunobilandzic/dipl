@@ -6,11 +6,13 @@ const cultivationManagerSchema = {
     ref: "Manager",
     required: true,
   },
-  field: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Field",
-    default: null,
-  },
+  fields: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Field",
+      default: null,
+    },
+  ],
 };
 export const CultivationManager =
   mongoose.models.CultivationManager ||

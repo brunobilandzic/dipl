@@ -4,16 +4,16 @@ import appUsersJsonArray from "@/lib/seed/data/appUsers";
 import { AppUser } from "@/models/user/AppUser";
 import dbConnect from "@/lib/db/mongooseConnect";
 import { Admin } from "@/models/user/Admin";
-import { GeneralManager } from "@/models/user/roles/managers/GeneralManager";
-import { CultivationManager } from "@/models/user/roles/managers/CultivationManager";
-import { ProductionManager } from "@/models/user/roles/managers/ProductionManager";
-import { StorageManager } from "@/models/user/roles/managers/StorageManager";
-import { FinancialManager } from "@/models/user/roles/managers/FinancialManager";
+import { GeneralManager } from "@/models/user/managers/GeneralManager";
+import { CultivationManager } from "@/models/user/managers/CultivationManager";
+import { ProductionManager } from "@/models/user/managers/ProductionManager";
+import { StorageManager } from "@/models/user/managers/WarehouseManager";
+import { FinancialManager } from "@/models/user/managers/FinancialManager";
 import usersConstants from "@/lib/constants/users";
 import { createGeneralManager } from "@/lib/seed/users/generalManager";
 import { createManager } from "@/lib/seed/users/manager";
 import { createAdmin } from "./admin";
-import { Manager } from "@/models/user/roles/managers/Manager";
+import { Manager } from "@/models/user/managers/Manager";
 
 const check = async () => {
   await dbConnect();

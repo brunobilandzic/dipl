@@ -1,4 +1,4 @@
-import { Manager } from "@/models/user/roles/managers/Manager.js";
+import { Manager } from "@/models/user/managers/Manager.js";
 import dbConnect from "@/lib/db/mongooseConnect";
 import mongoose from "mongoose";
 

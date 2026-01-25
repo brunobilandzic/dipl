@@ -1,4 +1,4 @@
-import seed from "@/lib/seed";
+import seed from "@/seed";
 
 export async function POST(req) {
   console.log("Seed route POST called");

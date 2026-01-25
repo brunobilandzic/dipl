@@ -11,7 +11,7 @@ const managerSchema = new Schema({
       "CultivationManager",
       "ProductionManager",
       "FinancialManager",
-      "StorageManager",
+      "WarehouseManager",
     ],
     required: true,
   },

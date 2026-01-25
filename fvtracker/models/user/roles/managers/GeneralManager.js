@@ -1,16 +1,18 @@
 import mongoose from "mongoose";
 
-const generalManagerSchema = {
+const { Schema } = mongoose;
+
+const generalManagerSchema = new Schema({
   managers: [
     { type: mongoose.Schema.Types.ObjectId, ref: "Manager", default: [] },
   ],
   manager: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Manager",
-    default: null, // in seed we create and add it later...
+    default: null,
   },
-};
+});
 
 export const GeneralManager =
   mongoose.models.GeneralManager ||
-  mongoose.model("GeneralManager", new mongoose.Schema(generalManagerSchema));
+  mongoose.model("GeneralManager", generalManagerSchema);

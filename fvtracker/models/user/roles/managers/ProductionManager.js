@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 
-const productionManagerSchema = {
+const { Schema } = mongoose;
+
+const productionManagerSchema = new Schema({
   manager: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Manager",
@@ -8,20 +10,31 @@ const productionManagerSchema = {
   },
   processingBatches: [
     // inputs to production process
-    { type: mongoose.Schema.Types.ObjectId, ref: "ProcessingBatch", default: [] },
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ProcessingBatch",
+      default: [],
+    },
   ],
   productionProducts: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "ProductionProduct", default: [] },
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ProductionProduct",
+      default: [],
+    },
   ],
   qualityControlReports: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "QualityControlReport", default: [] },
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "QualityControlReport",
+      default: [],
+    },
   ],
-  productions: [{ type: mongoose.Schema.Types.ObjectId, ref: "Production", default: [] }],
-};
+  productions: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "Production", default: [] },
+  ],
+});
 
 export const ProductionManager =
   mongoose.models.ProductionManager ||
-  mongoose.model(
-    "ProductionManager",
-    new mongoose.Schema(productionManagerSchema),
-  );
+  mongoose.model("ProductionManager", productionManagerSchema);

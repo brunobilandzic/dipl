@@ -3,7 +3,7 @@ import { SEED_ERROR } from "@/lib/constants/errors/db/seed";
 import appUsersJsonArray from "@/lib/seed/data/appUsers";
 import { AppUser } from "@/models/user/AppUser";
 import dbConnect from "@/lib/db/mongooseConnect";
-import { Admin } from "@/models/user/roles/Admin";
+import { Admin } from "@/models/user/Admin";
 import { GeneralManager } from "@/models/user/roles/managers/GeneralManager";
 import { CultivationManager } from "@/models/user/roles/managers/CultivationManager";
 import { ProductionManager } from "@/models/user/roles/managers/ProductionManager";
@@ -67,11 +67,7 @@ export default async () => {
     },
   ).exec();
 
-  console.log(
-    "General manager has",
-    managersIds.length,
-    "managers.",
-  );
+  console.log("General manager has", managersIds.length, "managers.");
   console.log(`Seeded ${results.length} appUsers.`);
 
   return {

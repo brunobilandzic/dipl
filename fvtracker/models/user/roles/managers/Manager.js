@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 
-const managerSchema = {
+const { Schema } = mongoose;
+
+const managerSchema = new Schema({
   // root manager role for properties shared by all manager types
   managerModelName: {
     type: String,
@@ -46,12 +48,11 @@ const managerSchema = {
     //people placing orders to buy products
     { type: mongoose.Schema.Types.ObjectId, ref: "OrderRequest", default: [] },
   ],
-};
+});
 
 export const Manager =
   mongoose.models.Manager ||
-  mongoose.model("Manager", new mongoose.Schema(managerSchema));
-
+  mongoose.model("Manager", managerSchema);
 const generalManagerSchema = {
   menager: {
     type: mongoose.Schema.Types.ObjectId,

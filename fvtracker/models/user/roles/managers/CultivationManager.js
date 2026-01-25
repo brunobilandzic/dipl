@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 
-const cultivationManagerSchema = {
+const { Schema } = mongoose;
+
+const cultivationManagerSchema = new Schema( {
   manager: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Manager",
@@ -13,10 +15,11 @@ const cultivationManagerSchema = {
       default: null,
     },
   ],
-};
+});
+
 export const CultivationManager =
   mongoose.models.CultivationManager ||
   mongoose.model(
     "CultivationManager",
-    new mongoose.Schema(cultivationManagerSchema),
+    cultivationManagerSchema,
   );

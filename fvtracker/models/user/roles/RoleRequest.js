@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 
-const roleRequestSchema = {
+import { Schema } from "mongoose";
+
+const roleRequestSchema = new Schema({
   appUser: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "AppUser",
@@ -15,8 +17,8 @@ const roleRequestSchema = {
   requestedAt: { type: Date, default: () => new Date() },
   reviewedAt: { type: Date },
   reviewedBy: { type: mongoose.Schema.Types.ObjectId, ref: "GeneralManager" },
-};
+});
 
 export const RoleRequest =
   mongoose.models.RoleRequest ||
-  mongoose.model("RoleRequest", new mongoose.Schema(roleRequestSchema));
+  mongoose.model("RoleRequest", roleRequestSchema);

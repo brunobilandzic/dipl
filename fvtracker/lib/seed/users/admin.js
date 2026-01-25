@@ -1,5 +1,5 @@
 import users from "@/lib/constants/users";
-import { Admin } from "@/models/user/roles/Admin";
+import { Admin } from "@/models/user/Admin";
 import dbConnect from "@/lib/db/mongooseConnect";
 import appUsersJsonArray from "../data/appUsers";
 import { AppUser } from "@/models/user/AppUser";

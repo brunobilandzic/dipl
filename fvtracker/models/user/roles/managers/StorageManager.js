@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 
-const storageManagerSchema = {
+const { Schema } = mongoose;
+
+const warehouseManagerSchema = new Schema({
   manager: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Manager",
@@ -11,8 +13,8 @@ const storageManagerSchema = {
     ref: "StorageFacility",
     default: null,
   },
-};
+});
 
-export const StorageManager =
-  mongoose.models.StorageManager ||
-  mongoose.model("StorageManager", new mongoose.Schema(storageManagerSchema));
+export const WarehouseManager =
+  mongoose.models.WarehouseManager ||
+  mongoose.model("WarehouseManager", warehouseManagerSchema);

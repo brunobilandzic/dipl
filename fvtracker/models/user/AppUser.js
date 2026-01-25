@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 
-const appUserSchema = {
+const { Schema } = mongoose;
+
+const appUserSchema = new Schema({
   username: {
     type: String,
   },
@@ -21,8 +23,7 @@ const appUserSchema = {
     enum: ["google", "credentials"],
     default: "credentials",
   },
-};
+});
 
 export const AppUser =
-  mongoose.models.AppUser ||
-  mongoose.model("AppUser", new mongoose.Schema(appUserSchema));
+  mongoose.models.AppUser || mongoose.model("AppUser", appUserSchema);

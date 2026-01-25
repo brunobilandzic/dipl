@@ -1,9 +1,10 @@
 const { default: mongoose } = require("mongoose");
 
-const adminSchema = {
+const { Schema } = mongoose;
+
+const adminSchema = new Schema({
   roleRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: "RoleRequest" }],
-};
+});
 
 export const Admin =
-  mongoose.models.Admin ||
-  mongoose.model("Admin", new mongoose.Schema(adminSchema));
+  mongoose.models.Admin || mongoose.model("Admin", adminSchema);

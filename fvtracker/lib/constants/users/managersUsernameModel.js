@@ -3,5 +3,5 @@ export default {
   "cultivation.manager": "CultivationManager",
   "financial.manager": "FinancialManager",
   "production.manager": "ProductionManager",
-  "storage.manager": "StorageManager",
+  "warehouse.manager": "WarehouseManager",
 };

@@ -1,8 +1,8 @@
 import { AppUser } from "@/models/user/AppUser";
-import { GeneralManager } from "@/models/user/roles/managers/GeneralManager.js";
+import { GeneralManager } from "@/models/user/managers/GeneralManager.js";
 import dbConnect from "@/lib/db/mongooseConnect";
-import appUsersJsonArray from "@/lib/seed/data/appUsers";
-import { Manager } from "@/models/user/roles/managers/Manager";
+import appUsersJsonArray from "@/seed/data/appUsers";
+import { Manager } from "@/models/user/managers/Manager";
 
 export const createGeneralManager = async () => {
   await dbConnect();

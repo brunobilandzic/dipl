@@ -1,34 +1,32 @@
 "use server";
 import { SEED_ERROR } from "@/lib/constants/errors/db/seed";
-import appUsersJsonArray from "@/lib/seed/data/appUsers";
+import appUsersJsonArray from "@/seed/data/appUsers";
 import { AppUser } from "@/models/user/AppUser";
 import dbConnect from "@/lib/db/mongooseConnect";
-import { Admin } from "@/models/user/roles/Admin";
-import { GeneralManager } from "@/models/user/roles/managers/GeneralManager";
-import { CultivationManager } from "@/models/user/roles/managers/CultivationManager";
-import { ProductionManager } from "@/models/user/roles/managers/ProductionManager";
-import { StorageManager } from "@/models/user/roles/managers/StorageManager";
-import { FinancialManager } from "@/models/user/roles/managers/FinancialManager";
+import { Admin } from "@/models/user/Admin";
+import { GeneralManager } from "@/models/user/managers/GeneralManager";
+import { CultivationManager } from "@/models/user/managers/CultivationManager";
+import { ProductionManager } from "@/models/user/managers/ProductionManager";
+import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
+import { FinancialManager } from "@/models/user/managers/FinancialManager";
 import usersConstants from "@/lib/constants/users";
-import { createGeneralManager } from "@/lib/seed/users/generalManager";
-import { createManager } from "@/lib/seed/users/manager";
+import { createGeneralManager } from "@/seed/users/generalManager";
+import { createManager } from "@/seed/users/manager";
 import { createAdmin } from "./admin";
-import { Manager } from "@/models/user/roles/managers/Manager";
+import { Manager } from "@/models/user/managers/Manager";
 
 const check = async () => {
   await dbConnect();
-  const userCount = await AppUser.countDocuments();
-  if (userCount > 0) {
-    await Manager.deleteMany({});
-    await AppUser.deleteMany({});
-    await Admin.deleteMany({});
-    await GeneralManager.deleteMany({});
-    await CultivationManager.deleteMany({});
-    await ProductionManager.deleteMany({});
-    await StorageManager.deleteMany({});
-    await FinancialManager.deleteMany({});
-    console.log("Deleted all users");
-  }
+
+  await Manager.deleteMany({});
+  await AppUser.deleteMany({});
+  await Admin.deleteMany({});
+  await GeneralManager.deleteMany({});
+  await CultivationManager.deleteMany({});
+  await ProductionManager.deleteMany({});
+  await WarehouseManager.deleteMany({});
+  await FinancialManager.deleteMany({});
+  console.log("Deleted all users");
 };
 
 export default async () => {
@@ -67,11 +65,7 @@ export default async () => {
     },
   ).exec();
 
-  console.log(
-    "General manager has",
-    managersIds.length,
-    "managers.",
-  );
+  console.log("General manager has", managersIds.length, "managers.");
   console.log(`Seeded ${results.length} appUsers.`);
 
   return {
@@ -88,9 +82,9 @@ export const createAppUser = async (appUserData, generalManagerId) => {
   const username = appUser.username;
 
   let manager = null;
-  if (username in usersConstants.managersMap) {
+  if (username in usersConstants.managersUsernameModel) {
     // now we have to crate a basic manager and specific manager
-    const managerModelName = usersConstants.managersMap[username];
+    const managerModelName = usersConstants.managersUsernameModel[username];
     manager = await createManager(
       appUser._id,
       managerModelName,

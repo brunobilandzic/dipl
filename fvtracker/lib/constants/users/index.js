@@ -1,5 +1,5 @@
-import managersMap from "./managersMap";
+import managersUsernameModel from "./managersUsernameModel";
 
 export default {
-  managersMap,
+  managersUsernameModel,
 };

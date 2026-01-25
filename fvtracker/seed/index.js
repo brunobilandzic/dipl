@@ -1,4 +1,4 @@
-import seedAppUsers from "@/lib/seed/users/appUsers";
+import seedAppUsers from "@/seed/users/appUsers";
 
 export default {
   handleAPIRequest,

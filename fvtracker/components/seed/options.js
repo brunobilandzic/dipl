@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import { FaUserPlus } from "react-icons/fa";
-import { MdAllInclusive, MdDeleteForever } from "react-icons/md";
+import { MdAllInclusive, MdDeleteForever, MdFoodBank } from "react-icons/md";
 
 export default function SeedOptions() {
   const _icons = {
@@ -14,6 +14,10 @@ export default function SeedOptions() {
       icon: <FaUserPlus />,
       label: "Seed Users",
     },
+    seedFields: {
+      icon: <MdFoodBank />,
+      label: "Seed Fields",
+    }
   };
 
   const API = async (seedType) => {

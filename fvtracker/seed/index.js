@@ -1,4 +1,4 @@
-import seedAppUsers from "@/seed/users/appUsers";
+import  SEED_TYPES  from "@/seed/seedTypes";
 
 export default {
   handleAPIRequest,
@@ -6,11 +6,12 @@ export default {
 
 async function handleAPIRequest(seedType) {
   switch (seedType) {
-    case "Seed Users":
-      return await seedAppUsers();
+    case SEED_TYPES.USERS:
+      return await import("./users").then((module) => module.default.all());
 
-    case "Fetch All":
-      
+    case SEED_TYPES.FIELDS:
+      return await import("./fields").then((module) => module.default.all());
+
     default:
       throw new Error(`Unknown seed type: ${seedType}`);
   }

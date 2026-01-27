@@ -1,5 +1,6 @@
 const gap = 4;
 const min_ca_dim = 4;
+const max_ca_dim = 20;
 const CELL_ACTIVE = "active";
 const CELL_INACTIVE = "inactive";
 const CELL_UNASSIGNED = "unassigned";
@@ -187,17 +188,17 @@ export const createFieldCells = async (field_width, field_length) => {
       }
 
       //determining dim_x and dim_y
-      let dim_x = Math.floor(Math.random() * (field_width - x));
+      let dim_x = Math.floor(Math.random() * (field_width - x)) + min_ca_dim;
       console.log("Determined dim_x 1:", dim_x);
-      while (x + dim_x >= field_width || dim_x < min_ca_dim) {
-        dim_x = Math.floor(Math.random() * (field_width - x));
+      while (x + dim_x >= field_width || dim_x > max_ca_dim || dim_x < min_ca_dim) {
+        dim_x = Math.floor(Math.random() * (field_width - x)) + min_ca_dim;
       }
       console.log("Determined dim_x:", dim_x);
       let y = 0;
-      let dim_y = Math.floor(Math.random() * (field_length - y));
+      let dim_y = Math.floor(Math.random() * (field_length - y)) + min_ca_dim;
         console.log("Determined dim_y 1:", dim_y);
-      while (y + dim_y >= field_length || dim_y < min_ca_dim) {
-        dim_y = Math.floor(Math.random() * (field_length - y));
+      while (y + dim_y >= field_length || dim_y > max_ca_dim || dim_y < min_ca_dim) {
+        dim_y = Math.floor(Math.random() * (field_length - y)) + min_ca_dim;
       }
       console.log("Determined dim_y:", dim_y);
       // determined

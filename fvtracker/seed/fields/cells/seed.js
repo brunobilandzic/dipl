@@ -135,19 +135,24 @@ export const createFieldCells = async (field_width, field_length) => {
               y,
               " continuing to next ca",
             );
+
             break;
           }
 
           // creatibng new ca
           let new_ca = [];
+
           let dim_x = Math.floor(Math.random() * (field_width - x));
           if (x + min_ca_dim == field_width) {
             dim_x = min_ca_dim;
           } else {
             while (
               x + dim_x >= field_width ||
-              existsInCareas(cultivationAreas, x + dim_x + gap + 1, "row") ||
-              dim_x < min_ca_dim || dim_x > max_ca_dim
+              existsInCareas(cultivationAreas, {row: x + dim_x + gap + 1, col: y}) ||
+              existsInCareas(cultivationAreas, {row: x + dim_x + gap, col: y}) ||
+              existsInCareas(cultivationAreas, {row: x + dim_x, col: y}) ||
+              dim_x < min_ca_dim ||
+              dim_x > max_ca_dim
             ) {
               dim_x = Math.floor(Math.random() * (field_width - x));
             }
@@ -168,7 +173,8 @@ export const createFieldCells = async (field_width, field_length) => {
             } else {
               while (
                 ca_max_y + gap + dim_y >= field_length ||
-                dim_y < min_ca_dim || dim_y > max_ca_dim
+                dim_y < min_ca_dim ||
+                dim_y > max_ca_dim
               ) {
                 dim_y = Math.floor(
                   Math.random() * (field_length - ca_max_y - gap),

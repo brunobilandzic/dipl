@@ -167,6 +167,7 @@ export const createFieldCells = async (field_width, field_length) => {
           }
           let dim_y;
           for (y; y + min_ca_dim <= field_length; y++) {
+            console.log(`determining dim_y at y:${y}`);
             dim_y = Math.floor(Math.random() * (field_length - y));
             if (y + min_ca_dim == field_length) {
               dim_y = min_ca_dim;
@@ -179,10 +180,9 @@ export const createFieldCells = async (field_width, field_length) => {
                   Math.random() * (field_length - ca_max_y - gap),
                 );
               }
+              break;
             }
           }
-
-          console.log(`determined dim_y:${dim_y} at y:${y}`);
 
           for (let xi = x; xi < x + dim_x; xi++) {
             for (let yi = y; yi < y + dim_y; yi++) {

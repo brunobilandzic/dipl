@@ -162,9 +162,19 @@ export const createFieldCells = async (field_width, field_length) => {
     }
 
     // beginning of field
-    cultivationAreas.push([]);
+    const firstRow = [];
     let x, y;
     while (true) {
+      const lastCa = firstRow[firstRow.length - 1]
+        ? firstRow[firstRow.length - 1]
+        : null;
+
+      if (lastCa) {
+        const max_x = max_dim(lastCa, "row");
+        x = max_x + gap;
+      } else {
+        x = 0;
+      }
       if (x + min_ca_dim >= field_width) {
         console.log("Reached field width limit, ending row creation.");
         needNewRow = true;
@@ -187,18 +197,20 @@ export const createFieldCells = async (field_width, field_length) => {
       }
       console.log("Determined dim_y:", dim_y);
 
-      /* let new_ca = [];
+      let new_ca = [];
       for (let xi = x; xi < x + dim_x; xi++) {
         for (let yi = y; yi < y + dim_y; yi++) {
           new_ca.push({ row: xi, col: yi });
         }
       }
-      cultivationAreas[cultivationAreas.length - 1].push(new_ca);
-      console.log("Created first cultivation area at x:", x, " y:", y); */
+      firstRow.push(new_ca);
+      console.log("first ca row:", firstRow);
     }
   }
+  drawGrid(field_width, field_length, cultivationAreas);
+};
 
-  /* 
+/* 
     // determine if continuing or new
     check if (x-1) on careas exists, if yes, continuuation, else new row
     const max_x = max_dim(lastCa, "row");
@@ -228,8 +240,6 @@ export const createFieldCells = async (field_width, field_length) => {
             lastCa.push({row: next_x, col: j});
         continue while loop to determine will it cnitnue or not
         */
-  drawGrid(field_width, field_length, cultivationAreas);
-};
 
 const drawGrid = (width, length, cultivationAreas) => {
   for (let y = 0; y < length; y++) {

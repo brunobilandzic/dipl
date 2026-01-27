@@ -168,7 +168,7 @@ export const createFieldCells = async (field_width, field_length) => {
       const lastCa = firstRow[firstRow.length - 1]
         ? firstRow[firstRow.length - 1]
         : null;
-       
+    console.log("first row", firstRow);
       if (lastCa && firstRow.length > 0) {
         console.log("Determining next x based on lastCa", lastCa);
         const max_x = max_dim(lastCa, "row");
@@ -193,7 +193,9 @@ export const createFieldCells = async (field_width, field_length) => {
         dim_x = Math.floor(Math.random() * (field_width - x));
       }
       console.log("Determined dim_x:", dim_x);
+      let y = 0;
       let dim_y = Math.floor(Math.random() * (field_length - y));
+        console.log("Determined dim_y 1:", dim_y);
       while (y + dim_y >= field_length || dim_y < min_ca_dim) {
         dim_y = Math.floor(Math.random() * (field_length - y));
       }

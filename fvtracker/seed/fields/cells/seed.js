@@ -77,14 +77,14 @@ export const createFieldCells = async (field_width, field_length) => {
     `Creating field cells with width: ${field_width}, length: ${field_length}`,
   );
 
-  const cultivationAreas = []
+  const cultivationAreas = [];
 
   // next x,y is 4,0
 
-  let needNewRow = false;
+  let hasLastRow = false;
 
   while (true) {
-    if (needNewRow) {
+    if (hasLastRow) {
       cultivationAreas.push([]); // new row
       const row_before = cultivationAreas[cultivationAreas.length - 2]
         ? cultivationAreas[cultivationAreas.length - 2]
@@ -165,13 +165,18 @@ export const createFieldCells = async (field_width, field_length) => {
       const lastCa = firstRow[firstRow.length - 1]
         ? firstRow[firstRow.length - 1]
         : null;
-        console.log("last ca", lastCa?.length);
+      console.log("last ca", lastCa?.length);
+
       if (lastCa && firstRow.length > 0) {
-       
+        console.log("Determining next x based on lastCa");
         const max_x = max_dim(lastCa, "row");
-         console.log("Determining next x based on lastCa", get_ca_min_max(lastCa));
+        console.log(
+          "Determining next x based on lastCa",
+          get_ca_min_max(lastCa),
+        );
         x = max_x + gap;
       } else {
+        console.log("first row empty, starting at 0,0");
         x = 0;
       }
       if (x + min_ca_dim >= field_width) {
@@ -187,27 +192,35 @@ export const createFieldCells = async (field_width, field_length) => {
       //determining dim_x and dim_y
       let dim_x = Math.floor(Math.random() * (field_width - x)) + min_ca_dim;
       console.log("Determined dim_x 1:", dim_x);
-      while (x + dim_x >= field_width || dim_x > max_ca_dim || dim_x < min_ca_dim) {
+      while (
+        x + dim_x >= field_width ||
+        dim_x > max_ca_dim ||
+        dim_x < min_ca_dim
+      ) {
         dim_x = Math.floor(Math.random() * (field_width - x)) + min_ca_dim;
       }
       console.log("Determined dim_x:", dim_x);
       let y = 0;
       let dim_y = Math.floor(Math.random() * (field_length - y)) + min_ca_dim;
-        console.log("Determined dim_y 1:", dim_y);
-      while (y + dim_y >= field_length || dim_y > max_ca_dim || dim_y < min_ca_dim) {
+      console.log("Determined dim_y 1:", dim_y);
+      while (
+        y + dim_y >= field_length ||
+        dim_y > max_ca_dim ||
+        dim_y < min_ca_dim
+      ) {
         dim_y = Math.floor(Math.random() * (field_length - y)) + min_ca_dim;
       }
       console.log("Determined dim_y:", dim_y);
       // determined
 
       let new_ca = [];
-      for (let xi = x; xi < x + dim_x; xi++) {
-        for (let yi = y; yi < y + dim_y; yi++) {
+      for (let xi = x; xi <= x + dim_x; xi++) {
+        for (let yi = y; yi <= y + dim_y; yi++) {
           new_ca.push({ row: xi, col: yi });
         }
       }
       firstRow.push(new_ca);
-      console.log("first ca row:", firstRow);
+      console.log("Created new cultivation area at x:", x, " y:", y, " dim_x:", dim_x, " dim_y:", dim_y);
     }
   }
   drawGrid(field_width, field_length, cultivationAreas);

@@ -88,6 +88,7 @@ export const createFieldCells = async (field_width, field_length) => {
     if (needNewRow) {
       cultivationAreas.push([]); // new row
       const row_before = cultivationAreas[cultivationAreas.length - 2] ? cultivationAreas[cultivationAreas.length - 2] : [];
+      if(row_before.length === 0) break; // no more rows before, ending
     
       for ((cai, ca) in row_before) {
         let lastCa=false
@@ -157,8 +158,8 @@ export const createFieldCells = async (field_width, field_length) => {
       }
     }
 
-// beginning of field
-cultivationAreas.push([]);
+    // beginning of field
+    cultivationAreas.push([]);
     let x,y
     while (true) {
         if (x + min_ca_dim >= field_width) {
@@ -191,7 +192,7 @@ cultivationAreas.push([]);
     }
   }
 
-  
+
   /* 
     // determine if continuing or new
     check if (x-1) on careas exists, if yes, continuuation, else new row

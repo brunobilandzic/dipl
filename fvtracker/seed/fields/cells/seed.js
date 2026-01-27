@@ -285,8 +285,11 @@ const drawGrid = (width, length, cultivationAreas) => {
     let rowStr = "";
     for (let x = 0; x < width; x++) {
       if (
-        existsInCareas(cultivationAreas, x, "row") &&
-        existsInCareas(cultivationAreas, y, "col")
+        cultivationAreas.some((caRow) =>
+          caRow.some((ca) =>
+            ca.some((cell) => cell.row === x && cell.col === y),
+          ),
+        )
       ) {
         rowStr += "+";
       } else {

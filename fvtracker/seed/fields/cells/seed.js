@@ -100,8 +100,7 @@ export const createFieldCells = async (field_width, field_length) => {
 
       for (let cai = 0; cai < row_before.length; cai++) {
         const ca = row_before[cai];
-        let lastCa = true;
-        if (cai === row_before.length - 1) lastCa = true; // last ca in the row, cannot continue next iteration
+        let lastCa = (cai === row_before.length - 1) // last ca in the row, cannot continue next iteration
         const { ca_max_y, ca_min_x, ca_max_x, ca_min_y } = get_ca_min_max(ca);
         if (ca_max_y + gap + min_ca_dim >= field_length) {
           console.log("ca_col too big, continuing to next");

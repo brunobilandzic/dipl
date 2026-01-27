@@ -82,40 +82,46 @@ export const createFieldCells = async (field_width, field_length) => {
 
   // next x,y is 4,0
 
-  let endOfRow = false;
+  let needNewRow = false;
 
   while (true) {
-    if (endOfRow) {
+    if (needNewRow) {
       cultivationAreas.push([]); // new row
       const row_before = cultivationAreas[cultivationAreas.length - 2];
 
       for (ca in row_before) {
-        const ca_min_x = min_dim(ca, "row");
-        const ca_max_x = max_dim(ca, "row");
-        const ca_max_y = max_dim(ca, "col");
+        const { ca_max_y, ca_min_x, ca_max_x, ca_min_y } = get_ca_min_max(ca);
         if (ca_max_y + gap + min_ca_dim >= field_length) {
           console.log("ca_col too big, continuing to next ca");
           continue;
         }
 
-        let need_new_row = false;
+        if (ca_min_x + min_ca_dim + gap >= field_width) {
+          console.log("ca_row too big, continuing to next ca");
+          continue;
+        }
 
         for (let x = ca_min_x; x + min_ca_dim < field_width; x++) {
           // finding the beginning of new ca
 
           if (existsInCareas(cultivationAreas, x + min_ca_dim + gap, "row")) {
             console.log("found existing ca at x:", x, " continuing to next ca");
-            need_new_row = true;
             break;
           }
           if (!startRandomDecision()) {
             console.log("random decision to not create new ca at x:", x);
             continue;
           }
+          // creatibng new ca
           let new_ca = [];
 
-          let dim_x;
-          while (x + dim_x + min_ca_dim >= field_width || dim_x < min_ca_dim) {
+          let dim_x = 0;
+
+          while (
+            x + dim_x + min_ca_dim >= field_width ||
+            existsInCareas(cultivationAreas, x + dim_x + gap + 1, "row") ||
+            dim_x < min_ca_dim
+          ) {
             dim_x = Math.floor(Math.random() * field_width - x - gap);
           }
           let dim_y = Mathfloor(Math.random() * field_length - ca_max_y - gap);
@@ -208,6 +214,19 @@ const min_dim = (d, dim) => {
   );
 };
 
+function get_ca_min_max() {
+  const ca_min_x = min_dim(ca, "row");
+  const ca_max_x = max_dim(ca, "row");
+  const ca_max_y = max_dim(ca, "col");
+  const ca_min_y = min_dim(ca, "col");
+  return { ca_max_y, ca_min_x, ca_max_x, ca_min_y };
+}
+
+const fieldCell = {
+  row: Number,
+  column: Number,
+  turnedOn: Boolean,
+};
 /* 
 
 row of cultivation areas along x axis

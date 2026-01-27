@@ -33,12 +33,14 @@ export const createFieldCells = async (field_width, field_length) => {
           continue;
         }
 
-        let look_new_ca = false
+        let need_new_row = false
         
         for(let x = ca_min_x; x + min_ca_dim < field_width; x++) {
-            if ( existsInCareas(cultivationAreas, x+gap+min_ca_dim, "row")) {
+            // finding the beginning of new ca
+
+            if ( existsInCareas(cultivationAreas, x+min_ca_dim+gap, "row")) {
                 console.log("found existing ca at x:", x, " continuing to next ca");
-                look_new_ca = true;
+                need_new_row = true;
                 break;
             }
             if (!startRandomDecision()) {

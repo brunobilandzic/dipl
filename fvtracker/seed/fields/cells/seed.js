@@ -84,6 +84,7 @@ export const createFieldCells = async (field_width, field_length) => {
   let hasLastRow = false;
 
   while (true) {
+    console.log("Cultivation areas has", cultivationAreas.length, "rows.", "hasLastRow:", hasLastRow    );
     if (hasLastRow) {
       cultivationAreas.push([]); // new row
       const row_before = cultivationAreas[cultivationAreas.length - 2]
@@ -175,22 +176,16 @@ export const createFieldCells = async (field_width, field_length) => {
         const lastCa = firstRow[firstRow.length - 1]
           ? firstRow[firstRow.length - 1]
           : null;
-        console.log("last ca", lastCa?.length);
 
         if (lastCa && firstRow.length > 0) {
-          console.log("Determining next x based on lastCa");
           const max_x = max_dim(lastCa, "row");
-          console.log(
-            "Determining next x based on lastCa",
-            get_ca_min_max(lastCa),
-          );
           x = max_x + gap;
         } else {
-          console.log("first row empty, starting at 0,0");
           x = 0;
         }
+
         if (x + min_ca_dim >= field_width) {
-          console.log("Reached field width limit, ending row creation.");
+          console.log("Reached field width limit, ending row creation.", x);
           break;
         }
         if (!startRandomDecision()) {
@@ -199,25 +194,23 @@ export const createFieldCells = async (field_width, field_length) => {
         }
 
         //determining dim_x and dim_y
-        let dim_x = Math.floor(Math.random() * (field_width - x)) + min_ca_dim;
-        console.log("Determined dim_x 1:", dim_x);
+        let dim_x = Math.floor(Math.random() * (field_width - x - min_ca_dim)) + min_ca_dim;
+        
         while (
           x + dim_x >= field_width ||
           dim_x > max_ca_dim ||
           dim_x < min_ca_dim
         ) {
-          dim_x = Math.floor(Math.random() * (field_width - x)) + min_ca_dim;
+          dim_x = Math.floor(Math.random() * (field_width - x - min_ca_dim)) + min_ca_dim;
         }
-        console.log("Determined dim_x:", dim_x);
         let y = 0;
-        let dim_y = Math.floor(Math.random() * (field_length - y)) + min_ca_dim;
-        console.log("Determined dim_y 1:", dim_y);
+        let dim_y = Math.floor(Math.random() * (field_length - y - min_ca_dim)) + min_ca_dim;
         while (
           y + dim_y >= field_length ||
           dim_y > max_ca_dim ||
           dim_y < min_ca_dim
         ) {
-          dim_y = Math.floor(Math.random() * (field_length - y)) + min_ca_dim;
+          dim_y = Math.floor(Math.random() * (field_length - y - min_ca_dim)) + min_ca_dim;
         }
         console.log("Determined dim_y:", dim_y);
         // determined

@@ -103,7 +103,6 @@ export const createFieldCells = async (field_width, field_length) => {
         //dont forget to look left also later
         if (ca_min_x + min_ca_dim >= field_width) {
           console.log("ca_row too big, continuing to new blank row");
-          needNewRow = true;
           break;
         }
 
@@ -122,16 +121,25 @@ export const createFieldCells = async (field_width, field_length) => {
           // creatibng new ca
           let new_ca = [];
           let dim_x = Math.floor(Math.random() * (field_width - x));
-          while (
-            x + dim_x >= field_width ||
-            existsInCareas(cultivationAreas, x + dim_x + gap + 1, "row") ||
-            dim_x < min_ca_dim
-          ) {
-            dim_x = Math.floor(Math.random() * (field_width - x));
+          if (x + min_ca_dim == field_width) {
+            dim_x = min_ca_dim;
+          } else {
+            while (
+              x + dim_x >= field_width ||
+              existsInCareas(cultivationAreas, x + dim_x + gap + 1, "row") ||
+              dim_x < min_ca_dim
+            ) {
+              dim_x = Math.floor(Math.random() * (field_width - x));
+            }
           }
-
-          for (y = ca_max_y + gap; y + min_ca_dim < field_length; y++) {
-            let dim_y = Math.floor(Math.random() * (field_length - ca_max_y));
+          let y = ca_max_y + gap;
+          if (y > field_length - min_ca_dim) {
+            console.log("y exceeded field length, continuing to next ca");
+            break;
+          }
+          let dim_y;
+          for (y; y + min_ca_dim <= field_length; y++) {
+            dim_y = Math.floor(Math.random() * (field_length - y));
             while (
               ca_max_y + gap + dim_y >= field_length ||
               dim_y < min_ca_dim
@@ -142,8 +150,8 @@ export const createFieldCells = async (field_width, field_length) => {
             }
           }
 
-          for (xi = x; xi < x + dim_x; xi++) {
-            for (yi = y; yi < y + dim_y; yi++) {
+          for (let xi = x; xi < x + dim_x; xi++) {
+            for (let yi = y; yi < y + dim_y; yi++) {
               new_ca.push({ row: xi, col: yi });
             }
           }
@@ -154,75 +162,89 @@ export const createFieldCells = async (field_width, field_length) => {
 
           cultivationAreas[cultivationAreas.length - 1].push(new_ca);
           console.log("Created new cultivation area at x:", x, " y:", y);
+          hasLastRow = true;
+          break;
         }
       }
     }
+    if (!hasLastRow) {
+      // beginning of field
+      const firstRow = [];
+      let x, y;
+      while (true) {
+        const lastCa = firstRow[firstRow.length - 1]
+          ? firstRow[firstRow.length - 1]
+          : null;
+        console.log("last ca", lastCa?.length);
 
-    // beginning of field
-    const firstRow = [];
-    let x, y;
-    while (true) {
-      const lastCa = firstRow[firstRow.length - 1]
-        ? firstRow[firstRow.length - 1]
-        : null;
-      console.log("last ca", lastCa?.length);
-
-      if (lastCa && firstRow.length > 0) {
-        console.log("Determining next x based on lastCa");
-        const max_x = max_dim(lastCa, "row");
-        console.log(
-          "Determining next x based on lastCa",
-          get_ca_min_max(lastCa),
-        );
-        x = max_x + gap;
-      } else {
-        console.log("first row empty, starting at 0,0");
-        x = 0;
-      }
-      if (x + min_ca_dim >= field_width) {
-        console.log("Reached field width limit, ending row creation.");
-        needNewRow = true;
-        break;
-      }
-      if (!startRandomDecision()) {
-        x += 1;
-        continue;
-      }
-
-      //determining dim_x and dim_y
-      let dim_x = Math.floor(Math.random() * (field_width - x)) + min_ca_dim;
-      console.log("Determined dim_x 1:", dim_x);
-      while (
-        x + dim_x >= field_width ||
-        dim_x > max_ca_dim ||
-        dim_x < min_ca_dim
-      ) {
-        dim_x = Math.floor(Math.random() * (field_width - x)) + min_ca_dim;
-      }
-      console.log("Determined dim_x:", dim_x);
-      let y = 0;
-      let dim_y = Math.floor(Math.random() * (field_length - y)) + min_ca_dim;
-      console.log("Determined dim_y 1:", dim_y);
-      while (
-        y + dim_y >= field_length ||
-        dim_y > max_ca_dim ||
-        dim_y < min_ca_dim
-      ) {
-        dim_y = Math.floor(Math.random() * (field_length - y)) + min_ca_dim;
-      }
-      console.log("Determined dim_y:", dim_y);
-      // determined
-
-      let new_ca = [];
-      for (let xi = x; xi <= x + dim_x; xi++) {
-        for (let yi = y; yi <= y + dim_y; yi++) {
-          new_ca.push({ row: xi, col: yi });
+        if (lastCa && firstRow.length > 0) {
+          console.log("Determining next x based on lastCa");
+          const max_x = max_dim(lastCa, "row");
+          console.log(
+            "Determining next x based on lastCa",
+            get_ca_min_max(lastCa),
+          );
+          x = max_x + gap;
+        } else {
+          console.log("first row empty, starting at 0,0");
+          x = 0;
         }
+        if (x + min_ca_dim >= field_width) {
+          console.log("Reached field width limit, ending row creation.");
+          break;
+        }
+        if (!startRandomDecision()) {
+          x += 1;
+          continue;
+        }
+
+        //determining dim_x and dim_y
+        let dim_x = Math.floor(Math.random() * (field_width - x)) + min_ca_dim;
+        console.log("Determined dim_x 1:", dim_x);
+        while (
+          x + dim_x >= field_width ||
+          dim_x > max_ca_dim ||
+          dim_x < min_ca_dim
+        ) {
+          dim_x = Math.floor(Math.random() * (field_width - x)) + min_ca_dim;
+        }
+        console.log("Determined dim_x:", dim_x);
+        let y = 0;
+        let dim_y = Math.floor(Math.random() * (field_length - y)) + min_ca_dim;
+        console.log("Determined dim_y 1:", dim_y);
+        while (
+          y + dim_y >= field_length ||
+          dim_y > max_ca_dim ||
+          dim_y < min_ca_dim
+        ) {
+          dim_y = Math.floor(Math.random() * (field_length - y)) + min_ca_dim;
+        }
+        console.log("Determined dim_y:", dim_y);
+        // determined
+
+        let new_ca = [];
+        for (let xi = x; xi <= x + dim_x; xi++) {
+          for (let yi = y; yi <= y + dim_y; yi++) {
+            new_ca.push({ row: xi, col: yi });
+          }
+        }
+        firstRow.push(new_ca);
+        console.log(
+          "Created new cultivation area at x:",
+          x,
+          " y:",
+          y,
+          " dim_x:",
+          dim_x,
+          " dim_y:",
+          dim_y,
+        );
       }
-      firstRow.push(new_ca);
-      console.log("Created new cultivation area at x:", x, " y:", y, " dim_x:", dim_x, " dim_y:", dim_y);
+      cultivationAreas.push(firstRow);
+      hasLastRow = true;
     }
   }
+  console.log(cultivationAreas.length, " rows of cultivation areas created.");
   drawGrid(field_width, field_length, cultivationAreas);
 };
 
@@ -258,6 +280,7 @@ export const createFieldCells = async (field_width, field_length) => {
         */
 
 const drawGrid = (width, length, cultivationAreas) => {
+  console.log("drawing grid:");
   for (let y = 0; y < length; y++) {
     let rowStr = "";
     for (let x = 0; x < width; x++) {
@@ -265,13 +288,19 @@ const drawGrid = (width, length, cultivationAreas) => {
         existsInCareas(cultivationAreas, x, "row") &&
         existsInCareas(cultivationAreas, y, "col")
       ) {
-        rowStr += "[X]";
+        rowStr += "+";
       } else {
-        rowStr += "[ ]";
+        rowStr += "-";
       }
     }
     console.log(rowStr);
   }
+  console.log("Cultivation areas has", cultivationAreas.length, "rows.");
+  cultivationAreas.forEach((caRow, rowIndex) => {
+    console.log(
+      `Cultivation Area Row ${rowIndex + 1} has ${caRow.length} cultivation areas:`,
+    );
+  });
 };
 
 const existsInCareas = (cultivationAreas, val, dim) => {

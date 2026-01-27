@@ -118,7 +118,7 @@ export const createFieldCells = async (field_width, field_length) => {
           let dim_x = 0;
 
           while (
-            x + dim_x + min_ca_dim >= field_width ||
+            x + dim_x  >= field_width ||
             existsInCareas(cultivationAreas, x + dim_x + gap + 1, "row") ||
             dim_x < min_ca_dim
           ) {

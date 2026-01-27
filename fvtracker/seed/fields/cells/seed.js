@@ -74,7 +74,7 @@ export const createFieldCells = async (field_width, field_length) => {
 
   // Random length between 5 and 15
   console.log(
-    `Creating field cells with width: ${field_width}, length: ${field_length}`,
+    `Creating field cells with width: ${field_width}, length: ${field_length}\n\n`,
   );
 
   const cultivationAreas = [];
@@ -84,15 +84,9 @@ export const createFieldCells = async (field_width, field_length) => {
   let hasLastRow = false;
 
   while (true) {
-    console.log(
-      "Cultivation areas has",
-      cultivationAreas.length,
-      "rows.",
-      "hasLastRow:",
-      hasLastRow,
-    );
+    console.log("Cultivation areas has", cultivationAreas.length, "rows.");
     if (hasLastRow) {
-        console.log("\n\nCreating new row of cultivation areas.\n\n");
+      console.log("\n\nCreating new row of cultivation areas.\n\n");
       cultivationAreas.push([]); // new row
       const row_before = cultivationAreas[cultivationAreas.length - 2]
         ? cultivationAreas[cultivationAreas.length - 2]
@@ -153,7 +147,7 @@ export const createFieldCells = async (field_width, field_length) => {
             while (
               x + dim_x >= field_width ||
               existsInCareas(cultivationAreas, x + dim_x + gap + 1, "row") ||
-              dim_x < min_ca_dim
+              dim_x < min_ca_dim || dim_x > max_ca_dim
             ) {
               dim_x = Math.floor(Math.random() * (field_width - x));
             }
@@ -174,7 +168,7 @@ export const createFieldCells = async (field_width, field_length) => {
             } else {
               while (
                 ca_max_y + gap + dim_y >= field_length ||
-                dim_y < min_ca_dim
+                dim_y < min_ca_dim || dim_y > max_ca_dim
               ) {
                 dim_y = Math.floor(
                   Math.random() * (field_length - ca_max_y - gap),
@@ -200,7 +194,6 @@ export const createFieldCells = async (field_width, field_length) => {
           break;
         }
       }
-    
     }
     if (!hasLastRow) {
       // beginning of field
@@ -288,6 +281,7 @@ export const createFieldCells = async (field_width, field_length) => {
       cultivationAreas.push(firstRow);
       hasLastRow = true;
     }
+    // drawGrid(field_width, field_length, cultivationAreas);
   }
   console.log(cultivationAreas.length, " rows of cultivation areas created.");
   drawGrid(field_width, field_length, cultivationAreas);

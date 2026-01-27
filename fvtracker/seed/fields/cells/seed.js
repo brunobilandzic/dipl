@@ -1,9 +1,17 @@
 const gap = 4;
 const min_ca_dim = 4;
+const CELL_ACTIVE = "active";
+const CELL_INACTIVE = "inactive";
+const CELL_UNASSIGNED = "unassigned";
+const CELL_PENDING = "pending";
 
 const startRandomDecision = () => Math.random() < 0.7; // 70% chance to start a new cultivation area
 
-const fieldBasicValid= (field, x, y, processedCells) => {
+const fieldBasicValid = (field, x, y, processedCells) => {
+  processedCells = processedCells.map((pc) => {
+    const { row, col } = pc;
+    return { row: row, col: col };
+  });
   if (
     { row: x, col: y } in field.cultivationAreas ||
     { row: x, col: y } in processedCells ||
@@ -14,24 +22,50 @@ const fieldBasicValid= (field, x, y, processedCells) => {
   return true;
 };
 
+const initField = () => {
+  const cultivationAreas = [];
+  for (let i = 0; i < min_ca_dim; i++) {
+    for (let j = 0; j < min_ca_dim; j++) {
+      cultivationAreas.push({ row: i, col: j, active: CELL_ACTIVE });
+    }
+  }
 
+  const field = {
+    width: 100,
+    length: 100,
+    cultivationAreas,
+  };
+  return field;
+};
 
-const foo = (field, x, y, processedCells,  start, active) => {
-  if (
-   !fieldBasicValid(field, x, y, processedCells)
-  ) {
+const foo = (field, x, y, processedCells, start, active) => {
+  console.log("Processing cell:", x, y, " start:", start, " active:", active);
+  if (!fieldBasicValid(field, x, y, processedCells)) {
     console.log("Cell already processed:", x, y);
     return;
   }
 
-  if(start || startRandomDecision()) {
-    processedCells.add({row: x, col: y, active: true});
-    const nextCell = {row: x + 1, col: y};
-    foo(field, nextCell.row, nextCell.col, processedCells, false, true);
+  if (start || startRandomDecision()) {
+    processedCells.add({ row: x, col: y, active: CELL_ACTIVE });
+    // if +min_dim isnt valid, stop
+    let notValidStart = false;
+    for (let i = 0; i < min_ca_dim; i++) {
+      if (!fieldBasicValid(field, x + i, y, processedCells)) {
+        notValidStart = true;
+        break;
+      }
+      const nextCell = { row: x + i, col: y };
+      foo(field, nextCell.row, nextCell.col, processedCells, false, true);
+    }
+    if (notValidStart) return;
+    for (let j = 0; j < min_ca_dim; j++) {
+      if (!fieldBasicValid(field, x, y + j, processedCells)) {
+        return;
+      }
+      const nextCell = { row: x, col: y + j };
+      foo(field, nextCell.row, nextCell.col, processedCells, false, true);
+    }
   }
-
-
-
 };
 
 export const createFieldCells = async (field_width, field_length) => {

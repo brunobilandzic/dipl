@@ -96,7 +96,7 @@ export const createFieldCells = async (field_width, field_length) => {
           continue;
         }
 
-        if (ca_min_x + min_ca_dim + gap >= field_width) {
+        if (ca_min_x + min_ca_dim  > field_width) {
           console.log("ca_row too big, continuing to next ca");
           continue;
         }
@@ -109,6 +109,7 @@ export const createFieldCells = async (field_width, field_length) => {
             break;
           }
           if (!startRandomDecision()) {
+            // moving to the next x
             console.log("random decision to not create new ca at x:", x);
             continue;
           }
@@ -116,6 +117,8 @@ export const createFieldCells = async (field_width, field_length) => {
           let new_ca = [];
 
           let dim_x = 0;
+
+          if(x+min_ca_dim >= field_width) break;
 
           while (
             x + dim_x  >= field_width ||

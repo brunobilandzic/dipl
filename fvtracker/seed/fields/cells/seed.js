@@ -223,7 +223,22 @@ export const createFieldCells = async (field_width, field_length) => {
             lastCa.push({row: next_x, col: j});
         continue while loop to determine will it cnitnue or not
         */
+    drawGrid(field_width, field_length, cultivationAreas);
 };
+
+const drawGrid = (width, length, cultivationAreas) => { 
+    for (let y = 0; y < length; y++) {
+        let rowStr = "";
+        for (let x = 0; x < width; x++) {
+            if(existsInCareas(cultivationAreas, x, "row") && existsInCareas(cultivationAreas, y, "col")) {
+                rowStr += "[X]";
+            } else {
+            rowStr += "[ ]";
+        }}
+        console.log(rowStr);
+    }
+
+}
 
 const existsInCareas = (cultivationAreas, val, dim) => {
   for (const caRow of cultivationAreas) {
@@ -299,3 +314,5 @@ const firstCa = [
   { row: 3, col: 2 },
   { row: 3, col: 3 },
 ];
+
+createFieldCells(100,100);

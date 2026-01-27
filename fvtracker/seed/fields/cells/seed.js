@@ -169,10 +169,11 @@ export const createFieldCells = async (field_width, field_length) => {
       const lastCa = firstRow[firstRow.length - 1]
         ? firstRow[firstRow.length - 1]
         : null;
-    console.log("first row", firstRow);
+    console.log("first row", firstRow?.length);
       if (lastCa && firstRow.length > 0) {
-        console.log("Determining next x based on lastCa", lastCa);
+       
         const max_x = max_dim(lastCa, "row");
+         console.log("Determining next x based on lastCa", get_ca_min_max(lastCa));
         x = max_x + gap;
       } else {
         x = 0;

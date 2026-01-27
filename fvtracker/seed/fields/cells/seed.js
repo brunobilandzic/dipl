@@ -77,11 +77,7 @@ export const createFieldCells = async (field_width, field_length) => {
     `Creating field cells with width: ${field_width}, length: ${field_length}`,
   );
 
-  const cultivationAreas = [
-    // rows with cultivation areas
-    // every row contains cultivation areas that are in that row
-    [[firstCa]],
-  ];
+  const cultivationAreas = []
 
   // next x,y is 4,0
 
@@ -169,7 +165,7 @@ export const createFieldCells = async (field_width, field_length) => {
       const lastCa = firstRow[firstRow.length - 1]
         ? firstRow[firstRow.length - 1]
         : null;
-    console.log("first row", firstRow?.length);
+        console.log("last ca", lastCa?.length);
       if (lastCa && firstRow.length > 0) {
        
         const max_x = max_dim(lastCa, "row");
@@ -294,7 +290,7 @@ const min_dim = (d, dim) => {
   );
 };
 
-function get_ca_min_max() {
+function get_ca_min_max(ca) {
   const ca_min_x = min_dim(ca, "row");
   const ca_max_x = max_dim(ca, "row");
   const ca_max_y = max_dim(ca, "col");

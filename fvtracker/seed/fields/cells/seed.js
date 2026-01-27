@@ -87,75 +87,111 @@ export const createFieldCells = async (field_width, field_length) => {
   while (true) {
     if (needNewRow) {
       cultivationAreas.push([]); // new row
-      const row_before = cultivationAreas[cultivationAreas.length - 2];
-
-      for (ca in row_before) {
+      const row_before = cultivationAreas[cultivationAreas.length - 2] ? cultivationAreas[cultivationAreas.length - 2] : [];
+    
+      for ((cai, ca) in row_before) {
+        let lastCa=false
+        if (cai === row_before.length - 1) lastCa = true // last ca in the row, cannot continue next iteration
         const { ca_max_y, ca_min_x, ca_max_x, ca_min_y } = get_ca_min_max(ca);
         if (ca_max_y + gap + min_ca_dim >= field_length) {
-          console.log("ca_col too big, continuing to next ca");
+          console.log("ca_col too big, continuing to next");
           continue;
         }
-
-        if (ca_min_x + min_ca_dim  > field_width) {
-          console.log("ca_row too big, continuing to next ca");
-          continue;
+//dont forget to look left also later
+        if (ca_min_x + min_ca_dim >= field_width) {
+          console.log("ca_row too big, continuing to new blank row");
+          needNewRow = true;
+          break;
         }
+        
 
-        for (let x = ca_min_x; x + min_ca_dim < field_width; x++) {
+        for (let x = ca_min_x; x + min_ca_dim <= field_width; x++) {
           // finding the beginning of new ca
-
-          if (existsInCareas(cultivationAreas, x + min_ca_dim + gap, "row")) {
-            console.log("found existing ca at x:", x, " continuing to next ca");
-            break;
-          }
           if (!startRandomDecision()) {
             // moving to the next x
             console.log("random decision to not create new ca at x:", x);
             continue;
           }
+          if (existsInCareas(cultivationAreas, x + min_ca_dim + gap, "row")) {
+            console.log("found existing ca at x:", x, " continuing to next ca");
+            break;
+          }
+
           // creatibng new ca
           let new_ca = [];
-
-          let dim_x = 0;
-
-          if(x+min_ca_dim >= field_width) break;
-
+          let dim_x = Math.floor(Math.random() * (field_width - x));
           while (
-            x + dim_x  >= field_width ||
+            x + dim_x >= field_width ||
             existsInCareas(cultivationAreas, x + dim_x + gap + 1, "row") ||
             dim_x < min_ca_dim
           ) {
-            dim_x = Math.floor(Math.random() * field_width - x - gap);
+            dim_x = Math.floor(Math.random() * (field_width - x));
           }
-          let dim_y = Mathfloor(Math.random() * field_length - ca_max_y - gap);
-          for (xi = x; xi < x + dim_x; xi++) {
-            for (yi = ca_max_y + gap; yi < ca_max_y + gap + min_ca_dim; yi++) {
-              new_ca.push({ row: xi, col: yi });
-              await proccessCell(cultivationAreas, xi, yi);
+
+          for (y = ca_max_y + gap; y + min_ca_dim < field_length; y++) {
+            let dim_y = Math.floor(Math.random() * (field_length - ca_max_y));
+            while (
+              ca_max_y + gap + dim_y >= field_length ||
+              dim_y < min_ca_dim
+            ) {
+              dim_y = Math.floor(
+                Math.random() * (field_length - ca_max_y - gap),
+              );
             }
           }
+
+          for (xi = x; xi < x + dim_x; xi++) {
+            for (yi = y; yi < y + dim_y; yi++) {
+              new_ca.push({ row: xi, col: yi });
+            }
+          }
+
+          const {ca_max_x} = get_ca_min_max(new_ca);
+          if(ca_max_x + gap + min_ca_dim >= field_width) {}
+
+          cultivationAreas[cultivationAreas.length - 1].push(new_ca);
+          console.log(
+            "Created new cultivation area at x:", x, " y:", y,
+          );
+        }
+      }
+    }
+
+// beginning of field
+cultivationAreas.push([]);
+    let x,y
+    while (true) {
+        if (x + min_ca_dim >= field_width) {
+            console.log("Reached field width limit, ending row creation.");
+            needNewRow = true;
+            break;
+        }
+        if (!startRandomDecision()) {
+            x += 1;
+            continue;
         }
 
-        if (look_new_ca) continue;
-      }
-      const new_ca_start_y = ca_max_y + gap;
-      const new_ca_start_x = min_dim(ca, "row");
-      let new_ca = [];
+        let dim_x = Math.floor(Math.random() * (field_width - x));
+        while (x + dim_x >= field_width || dim_x < min_ca_dim) {
+            dim_x = Math.floor(Math.random() * (field_width - x));
+        }
+        let dim_y = Math.floor(Math.random() * (field_length - y));
+        while (y + dim_y >= field_length || dim_y < min_ca_dim) {
+            dim_y = Math.floor(Math.random() * (field_length - y));
+        }
+
+        let new_ca = [];
+        for (let xi = x; xi < x + dim_x; xi++) {
+            for (let yi = y; yi < y + dim_y; yi++) {
+                new_ca.push({ row: xi, col: yi });
+            }
+        }
+        cultivationAreas[cultivationAreas.length - 1].push(new_ca);
+        console.log("Created first cultivation area at x:", x, " y:", y);
     }
-    endOfRow = false;
   }
 
-  const row = cultivationAreas[cultivationAreas.length - 1];
-  const lastCa = row[row.length - 1];
-
-  const max_x = max_dim(lastCa, "row");
-  if (max_x + 1 >= field_width) {
-    console.log(
-      "Reached the end of field width. Beginnig new row of cultivation areas.",
-    );
-    endOfRow = true;
-  }
-
+  
   /* 
     // determine if continuing or new
     check if (x-1) on careas exists, if yes, continuuation, else new row

@@ -92,8 +92,12 @@ export const createFieldCells = async (field_width, field_length) => {
         const ca = row_before[cai];
         // ca is cultivation area from the row before
         let lastCa = cai === row_before.length - 1; // last ca in the row, cannot continue next iteration
+        console.log(ca?.length, " cells in ca index ", cai);
 
-        const { ca_max_y, ca_min_x, ca_max_x, ca_min_y } = get_ca_min_max(ca);
+        if (ca.length <= 1) {
+          continue;
+        }
+        let { ca_max_y, ca_min_x, ca_max_x, ca_min_y } = get_ca_min_max(ca);
 
         console.log(
           `Cultivation row ${cultivationAreas.length}, ca index ${cai} : min_x=${ca_min_x}, max_x=${ca_max_x}, min_y=${ca_min_y}, max_y=${ca_max_y}`,
@@ -134,12 +138,13 @@ export const createFieldCells = async (field_width, field_length) => {
               col: begin_y,
             }) ||
             existsInCareas(cultivationAreas, {
-                row: x + min_ca_dim,
-                col: begin_y,
-              }) ||
+              row: x + min_ca_dim,
+              col: begin_y,
+            }) ||
             existsInCareas(cultivationAreas, {
-                row:x,
-                col:begin_y})
+              row: x,
+              col: begin_y,
+            })
           ) {
             continue;
           }
@@ -167,6 +172,9 @@ export const createFieldCells = async (field_width, field_length) => {
               dim_x,
               "\n",
             );
+
+            let tryCount = 0;
+
             while (
               x + dim_x >= field_width ||
               existsInCareas(cultivationAreas, {
@@ -186,6 +194,14 @@ export const createFieldCells = async (field_width, field_length) => {
             ) {
               dim_x = Math.floor(Math.random() * (field_width - x - gap));
               console.log("in dim_x while loop x=", x, "dim_x=", dim_x);
+              tryCount++;
+              if (tryCount > 30) {
+                console.log(
+                  "Too many attempts to find suitable dim_x, breaking loop. Setting x to start:",
+                );
+                x = begin_x;
+                break;
+              }
             }
           }
 
@@ -220,10 +236,25 @@ export const createFieldCells = async (field_width, field_length) => {
             }
           }
 
+          let stop = false;
           for (let xi = x; xi < x + dim_x; xi++) {
             for (let yi = y; yi < y + dim_y; yi++) {
+              if (
+                existsInCareas(cultivationAreas, { row: xi, col: yi }) ||
+                existsInCareas(cultivationAreas, { row: xi - gap, col: yi }) ||
+                existsInCareas(cultivationAreas, { row: xi + gap, col: yi }) ||
+                existsInCareas(cultivationAreas, {
+                  row: xi,
+                  col: yi - gap + 1,
+                }) ||
+                existsInCareas(cultivationAreas, { row: xi, col: yi + gap + 1 })
+              ) {
+                stop = true;
+                break;
+              }
               new_ca.push({ row: xi, col: yi });
             }
+            if (stop) break;
           }
 
           newRow.push(new_ca);
@@ -350,37 +381,6 @@ export const createFieldCells = async (field_width, field_length) => {
   drawGrid(field_width, field_length, cultivationAreas);
 };
 
-/* 
-    // determine if continuing or new
-    check if (x-1) on careas exists, if yes, continuuation, else new row
-    const max_x = max_dim(lastCa, "row");
-
-    if(continuation)
-        // adduing ca to the lastca in last row
-        const max_y = max_dim(lastCa, "col");
-
-        if(randomcacontinue)
-        
-        for (let i=0; i<width; i++)
-            next_x = max_x + i
-            if(next_x >= width) break && break row creation (someflag);
-            
-            if (randomcell)
-            if(find next_x+gap in all cultivation areas) break
-            for (let j=0; j<max_y && j<length; j++)
-                lastCa.push({row: next_x, col: j});
-            else break
-    else (not continuation)
-        // new ca in row
-        next_x = max_x + gap
-        if(next_x + gap >= width) break && break row creation (someflag);
-        let caheight = random between min_height and field_height
-        for (let x=next_x +gap; x++)
-        for (let j=0; j<caheight; j++)
-            lastCa.push({row: next_x, col: j});
-        continue while loop to determine will it cnitnue or not
-        */
-
 const drawGrid = (width, length, cultivationAreas) => {
   console.log("drawing grid:");
   for (let y = 0; y < length; y++) {
@@ -419,11 +419,6 @@ const existsInCareas = (cultivationAreas, val) => {
   return false;
 };
 
-const proccessCell = async (cultivationAreas, x, y) => {
-  // Placeholder function for processing a cell
-  // determine if cell is active and perform necessary actions
-};
-
 const max_dim = (d, dim) => {
   return d.reduce(
     (max, cell) => (cell[dim] > max ? cell[dim] : max),
@@ -446,44 +441,4 @@ function get_ca_min_max(ca) {
   return { ca_max_y, ca_min_x, ca_max_x, ca_min_y };
 }
 
-const fieldCell = {
-  row: Number,
-  column: Number,
-  turnedOn: Boolean,
-};
-/* 
-
-row of cultivation areas along x axis
-carow1 -> begin (x,y,len_x,len_y), ca2 (x,y,len_x,len_y),.... end(x,y, len_x,len_y)
-
-
-second row,.. 
-determine first element's in row before y, add gap, then continue, by chance to add, and add min_w x's, if they with gap enter another row from row before, 
-go left (before)  to the needed length, and add min_w from there
-
-determine y random, min y+min_len, if it goes over field, continue to the next element in the previous row, until all rows are filled, find cell that cell + y_len fits in the field, draw that x y square 
-carow2 -> ca21 (x,y,len_x,len_y), ca22 (x,y,len_x,len_y),....
-*/
-
-const firstCa = [
-  { row: 0, col: 0 },
-  { row: 0, col: 1 },
-  { row: 1, col: 0 },
-  { row: 1, col: 1 },
-  { row: 0, col: 2 },
-  { row: 0, col: 3 },
-  { row: 1, col: 2 },
-  { row: 1, col: 3 },
-  { row: 2, col: 0 },
-  { row: 2, col: 1 },
-  { row: 2, col: 2 },
-  { row: 2, col: 3 },
-  { row: 3, col: 0 },
-  { row: 3, col: 1 },
-  { row: 3, col: 2 },
-  { row: 3, col: 3 },
-];
-
 createFieldCells(100, 100);
-
-const a = { row: 1, col: 1 };

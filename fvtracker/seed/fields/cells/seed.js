@@ -124,7 +124,7 @@ export const createFieldCells = async (field_width, field_length) => {
           begin_x = ca_min_x;
         }
 
-        for (let x = begin_x; x + min_ca_dim <= field_width; x++) {
+        for (let x = begin_x; x + min_ca_dim <= field_width && x-min_ca_dim < ca_max_x + gap; x++) {
           if (!startRandomDecision()) {
             continue;
           }

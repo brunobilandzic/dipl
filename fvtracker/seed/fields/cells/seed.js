@@ -247,7 +247,12 @@ export const createFieldCells = async (field_width, field_length) => {
                   row: xi,
                   col: yi - gap + 1,
                 }) ||
-                existsInCareas(cultivationAreas, { row: xi, col: yi + gap + 1 })
+                existsInCareas(cultivationAreas, { row: xi, col: yi + gap + 1 }) ||
+                existInRow(newRow.flat(), { row: xi, col: yi }) ||
+                existInRow(newRow.flat(), { row: xi - gap, col: yi }) ||
+                existInRow(newRow.flat(), { row: xi + gap, col: yi }) ||
+                existInRow(newRow.flat(), { row: xi, col: yi - gap + 1 }) ||
+                existInRow(newRow.flat(), { row: xi, col: yi + gap + 1 })
               ) {
                 stop = true;
                 break;
@@ -418,6 +423,10 @@ const existsInCareas = (cultivationAreas, val) => {
   }
   return false;
 };
+
+const existInRow = (row, val) => {
+  return row.some((cell) => lodash.isEqual(cell, val));
+}
 
 const max_dim = (d, dim) => {
   return d.reduce(

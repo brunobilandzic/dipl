@@ -87,7 +87,7 @@ export const createFieldCells = async (field_width, field_length) => {
     console.log("Cultivation areas has", cultivationAreas.length, "rows.");
     if (hasLastRow) {
       console.log("\n\nCreating new row of cultivation areas.\n\n");
-      cultivationAreas.push([]); // new row
+      const newRow = []; // new row
       const row_before = cultivationAreas[cultivationAreas.length - 2]
         ? cultivationAreas[cultivationAreas.length - 2]
         : [];
@@ -115,6 +115,8 @@ export const createFieldCells = async (field_width, field_length) => {
           console.log("ca_row too big, continuing to new blank row");
           break;
         }
+
+        // found suitable ca
 
         for (let x = ca_min_x; x + min_ca_dim <= field_width; x++) {
           // finding the beginning of new ca
@@ -148,9 +150,15 @@ export const createFieldCells = async (field_width, field_length) => {
           } else {
             while (
               x + dim_x >= field_width ||
-              existsInCareas(cultivationAreas, {row: x + dim_x + gap + 1, col: y}) ||
-              existsInCareas(cultivationAreas, {row: x + dim_x + gap, col: y}) ||
-              existsInCareas(cultivationAreas, {row: x + dim_x, col: y}) ||
+              existsInCareas(cultivationAreas, {
+                row: x + dim_x + gap + 1,
+                col: y,
+              }) ||
+              existsInCareas(cultivationAreas, {
+                row: x + dim_x + gap,
+                col: y,
+              }) ||
+              existsInCareas(cultivationAreas, { row: x + dim_x, col: y }) ||
               dim_x < min_ca_dim ||
               dim_x > max_ca_dim
             ) {
@@ -194,12 +202,20 @@ export const createFieldCells = async (field_width, field_length) => {
           if (ca_max_x + gap + min_ca_dim >= field_width) {
           }
 
-          cultivationAreas[cultivationAreas.length - 1].push(new_ca);
+          newRow.push(new_ca);
           console.log("Created new cultivation area at x:", x, " y:", y);
           hasLastRow = true;
           break;
         }
       }
+      if (newRow.length === 0) {
+        console.log(
+          "No cultivation areas created in this row, ending cultivation area creation.",
+        );
+        break;
+      }
+      console.log("\n\nadding new row with", newRow.length, " cultivation areas.\n\n");
+      cultivationAreas.push(newRow);
     }
     if (!hasLastRow) {
       // beginning of field
@@ -224,6 +240,8 @@ export const createFieldCells = async (field_width, field_length) => {
             x,
             "\n\n\n",
           );
+          cultivationAreas.push(firstRow);
+          hasLastRow = true;
           break;
         }
         while (!startRandomDecision()) {

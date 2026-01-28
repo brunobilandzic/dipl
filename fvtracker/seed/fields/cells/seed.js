@@ -132,7 +132,14 @@ export const createFieldCells = async (field_width, field_length) => {
             existsInCareas(cultivationAreas, {
               row: x - gap,
               col: begin_y,
-            })
+            }) ||
+            existsInCareas(cultivationAreas, {
+                row: x + min_ca_dim,
+                col: begin_y,
+              }) ||
+            existsInCareas(cultivationAreas, {
+                row:x,
+                col:begin_y})
           ) {
             continue;
           }

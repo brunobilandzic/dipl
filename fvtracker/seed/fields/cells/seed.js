@@ -239,24 +239,7 @@ export const createFieldCells = async (field_width, field_length) => {
           let stop = false;
           for (let xi = x; xi < x + dim_x; xi++) {
             for (let yi = y; yi < y + dim_y; yi++) {
-              if (
-                existsInCareas(cultivationAreas, { row: xi, col: yi }) ||
-                existsInCareas(cultivationAreas, { row: xi - gap, col: yi }) ||
-                existsInCareas(cultivationAreas, { row: xi + gap, col: yi }) ||
-                existsInCareas(cultivationAreas, {
-                  row: xi,
-                  col: yi - gap + 1,
-                }) ||
-                existsInCareas(cultivationAreas, { row: xi, col: yi + gap + 1 }) ||
-                existInRow(newRow.flat(), { row: xi, col: yi }) ||
-                existInRow(newRow.flat(), { row: xi - gap, col: yi }) ||
-                existInRow(newRow.flat(), { row: xi + gap, col: yi }) ||
-                existInRow(newRow.flat(), { row: xi, col: yi - gap + 1 }) ||
-                existInRow(newRow.flat(), { row: xi, col: yi + gap + 1 })
-              ) {
-                stop = true;
-                break;
-              }
+             
               new_ca.push({ row: xi, col: yi });
             }
             if (stop) break;

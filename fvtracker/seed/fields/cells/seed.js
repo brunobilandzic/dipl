@@ -91,9 +91,15 @@ export const createFieldCells = async (field_width, field_length) => {
       for (let cai = 0; cai < row_before.length; cai++) {
         const ca = row_before[cai];
         // ca is cultivation area from the row before
-        let lastCa = cai === row_before.length - 1; // last ca in the row, cannot continue next iteration
+        //let lastCa = cai === row_before.length - 1; // last ca in the row, cannot continue next iteration
         console.log(ca?.length, " cells in ca index ", cai);
-
+        const lastCa = newRow.length > 1 ? newRow[newRow.length - 1] : null;
+        const {
+          ca_max_y: l_ca_max_y,
+          ca_min_x: l_ca_min_x,
+          ca_max_x: l_ca_max_x,
+          ca_min_y: l_ca_min_y,
+        } = get_ca_min_max(lastCa ? lastCa : []);
         if (ca.length <= 1) {
           continue;
         }
@@ -121,10 +127,14 @@ export const createFieldCells = async (field_width, field_length) => {
         if (cai === 0) {
           begin_x = 0;
         } else {
-          begin_x = ca_min_x;
+          begin_x = l_ca_max_x + gap;
         }
 
-        for (let x = begin_x; x + min_ca_dim <= field_width && x-min_ca_dim < ca_max_x + gap; x++) {
+        for (
+          let x = begin_x;
+          x + min_ca_dim <= field_width ;
+          x++
+        ) {
           if (!startRandomDecision()) {
             continue;
           }
@@ -195,6 +205,7 @@ export const createFieldCells = async (field_width, field_length) => {
               dim_x = Math.floor(Math.random() * (field_width - x - gap));
               console.log("in dim_x while loop x=", x, "dim_x=", dim_x);
               tryCount++;
+              console.log("tryCount for dim_x:", tryCount);
               if (tryCount > 30) {
                 console.log(
                   "Too many attempts to find suitable dim_x, breaking loop. Setting x to start:",
@@ -239,7 +250,6 @@ export const createFieldCells = async (field_width, field_length) => {
           let stop = false;
           for (let xi = x; xi < x + dim_x; xi++) {
             for (let yi = y; yi < y + dim_y; yi++) {
-             
               new_ca.push({ row: xi, col: yi });
             }
             if (stop) break;
@@ -409,7 +419,7 @@ const existsInCareas = (cultivationAreas, val) => {
 
 const existInRow = (row, val) => {
   return row.some((cell) => lodash.isEqual(cell, val));
-}
+};
 
 const max_dim = (d, dim) => {
   return d.reduce(
@@ -426,6 +436,9 @@ const min_dim = (d, dim) => {
 };
 
 function get_ca_min_max(ca) {
+  if (ca.length === 0) {
+    return { ca_max_y: 0, ca_min_x: 0, ca_max_x: 0, ca_min_y: 0 };
+  }
   const ca_min_x = min_dim(ca, "row");
   const ca_max_x = max_dim(ca, "row");
   const ca_max_y = max_dim(ca, "col");

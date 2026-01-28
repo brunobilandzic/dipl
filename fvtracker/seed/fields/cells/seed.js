@@ -92,7 +92,9 @@ export const createFieldCells = async (field_width, field_length) => {
         const ca = row_before[cai];
         // ca is cultivation area from the row before
         let lastCa = cai === row_before.length - 1; // last ca in the row, cannot continue next iteration
+
         const { ca_max_y, ca_min_x, ca_max_x, ca_min_y } = get_ca_min_max(ca);
+
         console.log(
           `Cultivation row ${cultivationAreas.length}, ca index ${cai} : min_x=${ca_min_x}, max_x=${ca_max_x}, min_y=${ca_min_y}, max_y=${ca_max_y}`,
         );
@@ -104,8 +106,7 @@ export const createFieldCells = async (field_width, field_length) => {
           continue;
         }
 
-        //dont forget to look left also later
-        if (ca_min_x + min_ca_dim >= field_width) {
+        if (ca_max_x + min_ca_dim > field_width) {
           console.log("ca_row too big, continuing to new blank row");
           break;
         }
@@ -119,13 +120,8 @@ export const createFieldCells = async (field_width, field_length) => {
           begin_x = ca_min_x;
         }
 
-        if (existsInCareas(cultivationAreas, { row: begin_x, col: begin_y }))
-          continue;
-
         for (let x = begin_x; x + min_ca_dim <= field_width; x++) {
-          // finding the beginning of new ca
           if (!startRandomDecision()) {
-            // moving to the next x
             continue;
           }
           if (

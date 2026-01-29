@@ -59,7 +59,7 @@ const furthestPoint = (field) => {
   return { row: max_row, col: max_col };
 };
 
-const checkEnd = (field) => {
+const checkFieldEnd = (field) => {
   const { f_width, f_length } = field;
   const furthest = furthestPoint(field);
   console.log("test1", f_width - gap - min_ca_dim >= furthest.row);
@@ -71,7 +71,8 @@ const checkEnd = (field) => {
 const spaceLeftRow = (field) => {
   const { f_width } = field;
   const furthest = furthestPoint(field);
-  return f_width - furthest.row;
+
+  return f_width - furthest.row ;
 };
 
 const spaceLeftColumn = (field) => {
@@ -82,8 +83,9 @@ const spaceLeftColumn = (field) => {
 
 const endOfRow = (field) => {
   const furthest = furthestPoint(field);
-  if (spaceLeftRow(field) >= min_ca_dim + gap) return true;
-  return false;
+  console.log("space left row:", spaceLeftRow(field));
+  if (spaceLeftRow(field) >= min_ca_dim + gap) return false;
+  return true;
 };
 
 const endOfColumn = (field) => {
@@ -121,23 +123,29 @@ console.log(
   fieldCultivationAreaPoints(fieldExample),
 );
 
+
+// man AI function
 const fillFieldAI = (field, isEndOfRow) => {
-  if (checkEnd(field)) {
+  if (checkFieldEnd(field)) {
     console.log("Field is completely filled.");
     return field;
   }
 
   if (endOfRow(field)) {
+    console.log("End of row reached, moving to next row.");
     return fillFieldAI(field, true);
   }
 
   const { start_row, start_col } = getStartPoint(field);
+  console.log("Starting point for new cultivation area:", start_row, start_col);
 
   let x = start_row;
   let y = start_col;
 
   for (x; x <= field.f_width - min_ca_dim; x++) {
-    for (y; y <= field.f_length - min_ca_dim; y++) {}
+    for (y; y >= 0; y--) {
+      console.log("Trying to place cultivation area at:", x, y);
+    }
   }
 
   drawGrid(field.f_width, field.f_length, field.cultivationAreas);
@@ -553,14 +561,14 @@ const existInRow = (row, val) => {
   return row.some((cell) => lodash.isEqual(cell, val));
 };
 
-const max_dim = (d, dim) => {
+function max_dim(d, dim) {
   return d.reduce(
     (max, cell) => (cell[dim] > max ? cell[dim] : max),
     d[0][dim],
   );
 };
 
-const min_dim = (d, dim) => {
+function min_dim(d, dim) {
   return d.reduce(
     (min, cell) => (cell[dim] < min ? cell[dim] : min),
     d[0][dim],

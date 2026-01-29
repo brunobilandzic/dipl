@@ -151,7 +151,7 @@ function fillFieldAI(field, isEndOfRow) {
     }
   }
 
-  drawGrid(field.f_width, field.f_length, field.cultivationAreas);
+  drawGridPlainer(field.f_width, field.f_length, field.cultivationAreas);
 }
 
 fillFieldAI(fieldExample, false);
@@ -523,6 +523,35 @@ export async function createFieldCells(field_width, field_length) {
   drawGrid(field_width, field_length, cultivationAreas);
 }
 
+function drawGridPlainer(width, length, cultivationAreas) {
+  console.log("drawing grid:");
+
+  console.log("drawing grid:");
+  for (let y = 0; y < length; y++) {
+    let rowStr = "";
+    for (let x = 0; x < width; x++) {
+      if (
+        cultivationAreas.some((ca) => {
+          return ca.some((cell) => {
+            return cell.row === x && cell.col === y;
+          });
+        })
+      ) {
+        rowStr += "+";
+      } else {
+        rowStr += "-";
+      }
+    }
+    console.log(rowStr);
+  }
+  console.log("Cultivation areas has", cultivationAreas.length, "rows.");
+  cultivationAreas.forEach(function (caRow, rowIndex) {
+    console.log(
+      `Cultivation Area Row ${rowIndex + 1} has ${caRow.length} cultivation areas:`,
+    );
+  });
+}
+
 function drawGrid(width, length, cultivationAreas) {
   console.log("drawing grid:");
   for (let y = 0; y < length; y++) {
@@ -545,7 +574,7 @@ function drawGrid(width, length, cultivationAreas) {
     console.log(rowStr);
   }
   console.log("Cultivation areas has", cultivationAreas.length, "rows.");
-  cultivationAreas.forEach(function(caRow, rowIndex) {
+  cultivationAreas.forEach(function (caRow, rowIndex) {
     console.log(
       `Cultivation Area Row ${rowIndex + 1} has ${caRow.length} cultivation areas:`,
     );

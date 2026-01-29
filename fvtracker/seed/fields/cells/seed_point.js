@@ -35,8 +35,8 @@ const fieldExample = {
 };
 
 function sum_points(field) {
-  const { f_width, f_length } = field;
-  return f_width * f_length;
+  const { width, length } = field;
+  return width * length;
 }
 
 function fieldCultivationAreaPoints(field) {
@@ -46,10 +46,15 @@ function fieldCultivationAreaPoints(field) {
 }
 
 export function satisfaction(field) {
-  const filled = fieldCultivationAreaPoints(field) / sum_points(field);
-  console.log(filled, "filled");
-  return filled >= SATISFACTORY_FILLED;
+  const cultivationAreaPoints = fieldCultivationAreaPoints(field);
+  const totalPoints = sum_points(field);
+  console.log(cultivationAreaPoints, " ca points");
+  console.log(totalPoints, " total points");
+  const filledRatio = cultivationAreaPoints / totalPoints;
+  console.log(filledRatio, " filled ratio");
+  return filledRatio >= SATISFACTORY_FILLED;
 }
+
 
 function cultivationAreaPoints(ca) {
   return ca.length;

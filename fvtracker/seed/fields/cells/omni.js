@@ -21,10 +21,10 @@ function allCoordinates(field) {
 }
 
 function randomPoint(field) {
-  const { f_width, f_length, cultivationAreas } = field;
+  const { width, length, cultivationAreas } = field;
 
-  let x = Math.floor(Math.random() * f_width) + 1;
-  let y = Math.floor(Math.random() * f_length) + 1;
+  let x = Math.floor(Math.random() * width) + 1;
+  let y = Math.floor(Math.random() * length) + 1;
   let dim_x = length_options[Math.floor(Math.random() * length_options.length)];
   let dim_y = length_options[Math.floor(Math.random() * length_options.length)];
 
@@ -69,9 +69,76 @@ function coveringArea(field, x, y, dim_x, dim_y) {
   return false;
 }
 
-function tryAI(field) {
-  const { f_width, f_length } = field;
+function createField(width, length, msWindow) {
+  const msStart = Date.now();
 
+  const field = {
+    width: width,
+    length: length,
+    cultivationAreas: [],
+  };
+
+  function tryAITime(field) {
+    const { width, length } = field;
+    if (satisfaction(field)) {
+      console.log("Field is properly seeded to the end.");
+      return field;
+    }
+
+    let { x, y, dim_x, dim_y } = randomPoint(field);
+
+    let reasonableAttempts = 0;
+    while (
+      coveringArea(field, x, y, dim_x, dim_y) ||
+      x + dim_x > width ||
+      y + dim_y > length
+    ) {
+      const loopTime = Date.now();
+      if (loopTime - msStart > msWindow) {
+        console.log("Time window exceeded, returning current field state.");
+        drawGridPlainer(field);
+        return field;
+      }
+      /*   reasonableAttempts += 1;
+    if(reasonableAttempts > 10000){
+        drawGridPlainer(field);
+        return field;
+    } */
+
+      ({ x, y, dim_x, dim_y } = randomPoint(field));
+      /*     if (reasonableAttempts > 500) {
+      console.log("Could not find a suitable position after 50 attempts.");
+      drawGridPlainer(field);
+      return field;
+    } */
+    }
+    const ca = [];
+
+    for (let xi = x; xi < x + dim_x; xi++) {
+      for (let yi = y; yi < y + dim_y; yi++) {
+        ca.push({ row: xi, col: yi });
+      }
+    }
+    field.cultivationAreas.push(ca);
+    console.log(
+      `Added cultivation area at (${x}, ${y}) with dimensions (${dim_x} x ${dim_y})`,
+    );
+    return tryAI(field);
+  }
+
+  let fieldResult = tryAITime(field);
+  const msEnd = Date.now();
+  console.log(`Field creation took ${msEnd - msStart} ms.`);
+  drawGridPlainer(fieldResult);
+  return fieldResult;
+}
+
+const time = 60 * 1000;
+
+createField(100, 100, time);
+
+function tryAITime(field, ms) {
+  const { width, length } = field;
   if (satisfaction(field)) {
     console.log("Field is properly seeded to the end.");
     return field;
@@ -82,15 +149,15 @@ function tryAI(field) {
   let reasonableAttempts = 0;
   while (
     coveringArea(field, x, y, dim_x, dim_y) ||
-    x + dim_x > f_width ||
-    y + dim_y > f_length
+    x + dim_x > width ||
+    y + dim_y > length
   ) {
     reasonableAttempts += 1;
-    if(reasonableAttempts > 10000){
-        drawGridPlainer(field);
-        return field;
+    if (reasonableAttempts > 10000) {
+      drawGridPlainer(field);
+      return field;
     }
-        
+
     ({ x, y, dim_x, dim_y } = randomPoint(field));
     /*     if (reasonableAttempts > 500) {
       console.log("Could not find a suitable position after 50 attempts.");
@@ -112,10 +179,52 @@ function tryAI(field) {
   return tryAI(field);
 }
 
-const field = tryAI(fieldExample);
+function tryAI(field) {
+  const { f_width, f_length } = field;
+  if (satisfaction(field)) {
+    console.log("Field is properly seeded to the end.");
+    return field;
+  }
+
+  let { x, y, dim_x, dim_y } = randomPoint(field);
+
+  let reasonableAttempts = 0;
+  while (
+    coveringArea(field, x, y, dim_x, dim_y) ||
+    x + dim_x > f_width ||
+    y + dim_y > f_length
+  ) {
+    reasonableAttempts += 1;
+    if (reasonableAttempts > 10000) {
+      drawGridPlainer(field);
+      return field;
+    }
+
+    ({ x, y, dim_x, dim_y } = randomPoint(field));
+    /*     if (reasonableAttempts > 500) {
+      console.log("Could not find a suitable position after 50 attempts.");
+      drawGridPlainer(field);
+      return field;
+    } */
+  }
+  const ca = [];
+
+  for (let xi = x; xi < x + dim_x; xi++) {
+    for (let yi = y; yi < y + dim_y; yi++) {
+      ca.push({ row: xi, col: yi });
+    }
+  }
+  field.cultivationAreas.push(ca);
+  console.log(
+    `Added cultivation area at (${x}, ${y}) with dimensions (${dim_x} x ${dim_y})`,
+  );
+  return tryAI(field);
+}
+
+// const field = tryAI(fieldExample);
 
 function drawGridPlainer(field) {
-  const { f_width: width, f_length: length, cultivationAreas } = field;
+  const { width, length, cultivationAreas } = field;
   console.log("drawing grid:");
 
   console.log("drawing grid:");
@@ -124,9 +233,7 @@ function drawGridPlainer(field) {
     for (let x = 0; x < width; x++) {
       if (
         cultivationAreas.some((ca) => {
-          return ca.some((cell) => {
-            return cell.row === x && cell.col === y;
-          });
+          return ca.some((point) => point.row === x && point.col === y);
         })
       ) {
         rowStr += "+";
@@ -136,10 +243,5 @@ function drawGridPlainer(field) {
     }
     console.log(rowStr);
   }
-  console.log("Cultivation areas has", cultivationAreas.length, "rows.");
-  cultivationAreas.forEach(function (caRow, rowIndex) {
-    console.log(
-      `Cultivation Area Row ${rowIndex + 1} has ${caRow.length} cultivation areas:`,
-    );
-  });
+  console.log("Cultivation areas has", cultivationAreas.length, "c.");
 }

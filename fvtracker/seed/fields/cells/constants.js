@@ -1,6 +1,6 @@
 const gap = 2;
-const min_ca_dim = 4;
-const max_ca_dim = 15;
+const min_ca_dim = 20;
+const max_ca_dim = 50;
 
 const SATISFACTORY_FILLED = 0.7;
 
@@ -50,7 +50,7 @@ const casExample = [
 const fieldExample = {
   f_width: 100,
   f_length: 100,
-  cultivationAreas: [casExample],
+  cultivationAreas: [],
 };
 
 export {

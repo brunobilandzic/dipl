@@ -86,6 +86,11 @@ function tryAI(field) {
     y + dim_y > f_length
   ) {
     reasonableAttempts += 1;
+    if(reasonableAttempts > 10000){
+        drawGridPlainer(field);
+        return field;
+    }
+        
     ({ x, y, dim_x, dim_y } = randomPoint(field));
     /*     if (reasonableAttempts > 500) {
       console.log("Could not find a suitable position after 50 attempts.");
@@ -104,7 +109,7 @@ function tryAI(field) {
   console.log(
     `Added cultivation area at (${x}, ${y}) with dimensions (${dim_x} x ${dim_y})`,
   );
-  return tryAI(field, -1);
+  return tryAI(field);
 }
 
 const field = tryAI(fieldExample);

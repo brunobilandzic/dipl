@@ -2,6 +2,8 @@ const gap = 4;
 const min_ca_dim = 4;
 const max_ca_dim = 15;
 
+const SATISFACTORY_FILLED = 0.7;
+
 const length_options = [];
 for (let i = min_ca_dim; i <= max_ca_dim; i++) {
   length_options.push(i);
@@ -58,4 +60,5 @@ export {
   max_ca_dim,
   min_ca_dim,
   gap,
+  SATISFACTORY_FILLED
 };

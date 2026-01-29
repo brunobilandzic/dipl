@@ -8,6 +8,7 @@ for (let i = min_ca_dim; i <= max_ca_dim; i++) {
 
 const FILL_LAST = "FILL_LAST";
 import lodash from "lodash";
+import { SATISFACTORY_FILLED } from "./constants.js";
 
 function startRandomDecision() {
   return Math.random() < 0.7; // 70% chance to start a new cultivation area
@@ -44,6 +45,12 @@ function fieldCultivationAreaPoints(field) {
   }, 0);
 }
 
+export function satisfaction(field) {
+  const filled = fieldCultivationAreaPoints(field) / sum_points(field);
+  console.log(filled,"filled")
+  return filled >= SATISFACTORY_FILLED;
+}
+
 function cultivationAreaPoints(ca) {
   return ca.length;
 }
@@ -67,7 +74,6 @@ function furthestPoint(field) {
 }
 
 export function checkFieldEnd(field) {
-  if (!endOfRow(field) && !endOfColumn(field)) return false;
   return false;
 }
 

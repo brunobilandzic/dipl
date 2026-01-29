@@ -6,7 +6,7 @@ import {
   min_ca_dim,
   gap,
 } from "./constants.js";
-import { checkFieldEnd } from "./seed_point.js";
+import { checkFieldEnd, satisfaction } from "./seed_point.js";
 
 function allCoordinates(field) {
   const ca_coordinates = {};
@@ -44,11 +44,7 @@ function coveringArea(field, x, y, dim_x, dim_y) {
         }
       }
     }
-    
-  }
-
-   for (let xi = x; x > x - gap; xi--) {
-    for (let yi = y; y < y + dim_y; yi++) {
+    for (let yi = y; yi > y - gap; yi--) {
       for (let ca of cultivationAreas) {
         for (let point of ca) {
           if (point.row === xi && point.col === yi) {
@@ -57,20 +53,26 @@ function coveringArea(field, x, y, dim_x, dim_y) {
         }
       }
     }
-  } 
+  }
 
+  for (let yi = y; yi < y + dim_y + gap; yi++) {
+    for (let xi = x; xi > x - gap; xi--) {
+      for (let ca of cultivationAreas) {
+        for (let point of ca) {
+          if (point.row === xi && point.col === yi) {
+            return true;
+          }
+        }
+      }
+    }
+  }
   return false;
 }
 
-function tryAI(field, can) {
-  console.log("Attempts remaining:", can);
-  const { f_width, f_length, cultivationAreas } = field;
-  if (can <= 0) {
-    console.log("Maximum attempts reached. Stopping seeding process.");
-    drawGridPlainer(field);
-    return field;
-  }
-  if (checkFieldEnd(field)) {
+function tryAI(field) {
+  const { f_width, f_length } = field;
+
+  if (satisfaction(field)) {
     console.log("Field is properly seeded to the end.");
     return field;
   }
@@ -85,12 +87,11 @@ function tryAI(field, can) {
   ) {
     reasonableAttempts += 1;
     ({ x, y, dim_x, dim_y } = randomPoint(field));
-    if (reasonableAttempts > 500) {
+    /*     if (reasonableAttempts > 500) {
       console.log("Could not find a suitable position after 50 attempts.");
       drawGridPlainer(field);
       return field;
-    }
-    console.log(reasonableAttempts);
+    } */
   }
   const ca = [];
 
@@ -103,10 +104,10 @@ function tryAI(field, can) {
   console.log(
     `Added cultivation area at (${x}, ${y}) with dimensions (${dim_x} x ${dim_y})`,
   );
-  return tryAI(field, can - 1);
+  return tryAI(field, -1);
 }
 
-const field = tryAI(fieldExample, 1000000000000);
+const field = tryAI(fieldExample);
 
 function drawGridPlainer(field) {
   const { f_width: width, f_length: length, cultivationAreas } = field;

@@ -1,9 +1,13 @@
-const gap = 2
+const gap = 2;
 const min_ca_dim = 4;
 const max_ca_dim = 20;
+const length_options = [];
+for (let i = min_ca_dim; i <= max_ca_dim; i++) {
+  length_options.push(i);
+}
 
 const FILL_LAST = "FILL_LAST";
-import lodash from "lodash";
+import lodash, { min, sample } from "lodash";
 
 function startRandomDecision() {
   return Math.random() < 0.7; // 70% chance to start a new cultivation area
@@ -145,16 +149,51 @@ function fillFieldAI(field, isEndOfRow) {
   let x = start_row;
   let y = start_col;
 
-  for (x; x <= field.f_width - min_ca_dim; x++) {
-    for (y; y >= 0; y--) {
-      console.log("Trying to place cultivation area at:", x, y);
-    }
-  }
+  const { dim_x, dim_y } = getXYDimensions(x, y, field);
 
   drawGridPlainer(field.f_width, field.f_length, field.cultivationAreas);
 }
 
+function pointFiled(field, x, y) {
+  for (const ca of field.cultivationAreas) {
+    for (const cell of ca) {
+      if (cell.row === x && cell.col === y) {
+      }
+    }
+  }
+}
 fillFieldAI(fieldExample, false);
+
+function xyPaths(x, y, dim_x, dim_y) {
+  const paths = [];
+  for (let xi = x; xi < x + dim_x; xi++) {
+    for (let yi = y; yi < y + dim_y; yi++) {
+      paths.push({ row: xi, col: yi });
+    }
+  }
+  return paths;
+}
+
+function getXYDimensions(x, y, field) {
+  const { f_width, f_length } = field;
+
+  let dim_x, dim_y;
+
+  for (y; y + min_ca_dim <= f_length; y++) {}
+
+  dim_x = Math.floor(Math.random() * (f_width - x - min_ca_dim)) + min_ca_dim;
+  while (x + dim_x >= f_width || dim_x > max_ca_dim || dim_x < min_ca_dim) {
+    dim_x = Math.floor(Math.random() * (f_width - x - min_ca_dim)) + min_ca_dim;
+  }
+
+  dim_y = Math.floor(Math.random() * (f_length - y - min_ca_dim)) + min_ca_dim;
+  while (y + dim_y >= f_length || dim_y > max_ca_dim || dim_y < min_ca_dim) {
+    dim_y =
+      Math.floor(Math.random() * (f_length - y - min_ca_dim)) + min_ca_dim;
+  }
+
+  return { dim_x, dim_y };
+}
 
 function fieldBasicValid(field, x, y, processedCells) {
   processedCells = processedCells.map(function (pc) {

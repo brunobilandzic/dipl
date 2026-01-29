@@ -3,7 +3,7 @@ const min_ca_dim = 4;
 const max_ca_dim = 20;
 
 const FILL_LAST = "FILL_LAST";
-import lodash, { min } from "lodash";
+import lodash from "lodash";
 
 const startRandomDecision = () => Math.random() < 0.7; // 70% chance to start a new cultivation area
 
@@ -55,19 +55,19 @@ const furthestPoint = (field) => {
       }
     }
   }
+  console.log("Furthest point in field:", max_row, max_col);
   return { row: max_row, col: max_col };
 };
 
 const checkEnd = (field) => {
   const { f_width, f_length } = field;
   const furthest = furthestPoint(field);
-  if (
-    f_width - gap - min_ca_dim >= furthest.row &&
-    f_length - gap - min_ca_dim >= furthest.col
-  )
-    return true;
+  console.log("test1", f_width - gap - min_ca_dim >= furthest.row);
+  console.log("test2", f_length - gap - min_ca_dim >= furthest.col);
+  if (!endOfRow(field) && !endOfColumn(field)) return false;
   return false;
 };
+
 const spaceLeftRow = (field) => {
   const { f_width } = field;
   const furthest = furthestPoint(field);
@@ -121,9 +121,14 @@ console.log(
   fieldCultivationAreaPoints(fieldExample),
 );
 
-const fillFieldAI = (field) => {
+const fillFieldAI = (field, isEndOfRow) => {
   if (checkEnd(field)) {
+    console.log("Field is completely filled.");
     return field;
+  }
+
+  if (endOfRow(field)) {
+    return fillFieldAI(field, true);
   }
 
   const { start_row, start_col } = getStartPoint(field);
@@ -132,11 +137,13 @@ const fillFieldAI = (field) => {
   let y = start_col;
 
   for (x; x <= field.f_width - min_ca_dim; x++) {
-    for (y; y <= field.f_length - min_ca_dim; y++) {
-      
-    }
+    for (y; y <= field.f_length - min_ca_dim; y++) {}
   }
+
+  drawGrid(field.f_width, field.f_length, field.cultivationAreas);
 };
+
+fillFieldAI(fieldExample, false);
 
 const fieldBasicValid = (field, x, y, processedCells) => {
   processedCells = processedCells.map((pc) => {

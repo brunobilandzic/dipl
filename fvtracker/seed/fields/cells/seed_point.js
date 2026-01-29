@@ -46,6 +46,7 @@ function fieldCultivationAreaPoints(field) {
 }
 
 export function satisfaction(field) {
+  console.log(field.cultivationAreas.length, " ca count");
   const cultivationAreaPoints = fieldCultivationAreaPoints(field);
   const totalPoints = sum_points(field);
   console.log(cultivationAreaPoints, " ca points");
@@ -130,11 +131,6 @@ function lastCultivationAreaPoints(field) {
   return get_ca_min_max(lastCA);
 }
 
-console.log("Field example total points:", sum_points(fieldExample));
-console.log(
-  "Field example cultivation area points:",
-  fieldCultivationAreaPoints(fieldExample),
-);
 
 // man AI function
 function fillFieldAI(field, isEndOfRow) {

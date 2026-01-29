@@ -32,10 +32,14 @@ function randomPoint(field) {
 }
 
 function coveringArea(field, x, y, dim_x, dim_y) {
-  const { cultivationAreas } = field;
+  const { width, length, cultivationAreas } = field;
 
-  for (let xi = x; xi < x + dim_x + gap; xi++) {
-    for (let yi = y; yi < y + dim_y + gap; yi++) {
+  if (x < 0 || y < 0 || x + dim_x > width || y + dim_y > length) {
+    return true;
+  }
+
+  for (let xi = x; xi <= x + dim_x + gap; xi++) {
+    for (let yi = y; yi <= y + dim_y + gap; yi++) {
       for (let ca of cultivationAreas) {
         for (let point of ca) {
           if (point.row === xi && point.col === yi) {
@@ -44,7 +48,7 @@ function coveringArea(field, x, y, dim_x, dim_y) {
         }
       }
     }
-    for (let yi = y; yi > y - gap; yi--) {
+    for (let yi = y; yi >= y - gap; yi--) {
       for (let ca of cultivationAreas) {
         for (let point of ca) {
           if (point.row === xi && point.col === yi) {
@@ -55,8 +59,8 @@ function coveringArea(field, x, y, dim_x, dim_y) {
     }
   }
 
-  for (let yi = y; yi < y + dim_y + gap; yi++) {
-    for (let xi = x; xi > x - gap; xi--) {
+  for (let xi = x; xi >= x - gap; xi--) {
+    for (let yi = y; yi <= y + dim_y + gap; yi++) {
       for (let ca of cultivationAreas) {
         for (let point of ca) {
           if (point.row === xi && point.col === yi) {
@@ -66,6 +70,7 @@ function coveringArea(field, x, y, dim_x, dim_y) {
       }
     }
   }
+
   return false;
 }
 
@@ -90,27 +95,22 @@ function createField(width, length, msWindow) {
     let reasonableAttempts = 0;
     while (
       coveringArea(field, x, y, dim_x, dim_y) ||
-      x + dim_x > width ||
-      y + dim_y > length
+      x + dim_x + gap > width ||
+      y + dim_y + gap > length
     ) {
       const loopTime = Date.now();
-      if (loopTime - msStart > msWindow) {
+      /*       if (loopTime - msStart > msWindow) {
         console.log("Time window exceeded, returning current field state.");
         drawGridPlainer(field);
         return field;
-      }
-      /*   reasonableAttempts += 1;
-    if(reasonableAttempts > 10000){
+      } */
+      ({ x, y, dim_x, dim_y } = randomPoint(field));
+      console.log(reasonableAttempts, " reasonable attempts");
+      reasonableAttempts += 1;
+      if (reasonableAttempts > 10000) {
         drawGridPlainer(field);
         return field;
-    } */
-
-      ({ x, y, dim_x, dim_y } = randomPoint(field));
-      /*     if (reasonableAttempts > 500) {
-      console.log("Could not find a suitable position after 50 attempts.");
-      drawGridPlainer(field);
-      return field;
-    } */
+      }
     }
     const ca = [];
 
@@ -123,7 +123,7 @@ function createField(width, length, msWindow) {
     console.log(
       `Added cultivation area at (${x}, ${y}) with dimensions (${dim_x} x ${dim_y})`,
     );
-    return tryAI(field);
+    return tryAITime(field);
   }
 
   let fieldResult = tryAITime(field);
@@ -133,9 +133,7 @@ function createField(width, length, msWindow) {
   return fieldResult;
 }
 
-const time = 60 * 1000;
-
-createField(100, 100, time);
+createField(100, 100, 5000);
 
 function tryAITime(field, ms) {
   const { width, length } = field;
@@ -225,16 +223,19 @@ function tryAI(field) {
 
 function drawGridPlainer(field) {
   const { width, length, cultivationAreas } = field;
-  console.log("drawing grid:");
+  console.log(
+    "field count:",
+    cultivationAreas.reduce((length, ca) => length + ca.length, 0),
+  );
 
   console.log("drawing grid:");
   for (let y = 0; y < length; y++) {
     let rowStr = "";
     for (let x = 0; x < width; x++) {
       if (
-        cultivationAreas.some((ca) => {
-          return ca.some((point) => point.row === x && point.col === y);
-        })
+        cultivationAreas.some((ca) =>
+          ca.some((point) => point.row === x && point.col === y),
+        )
       ) {
         rowStr += "+";
       } else {
@@ -244,4 +245,6 @@ function drawGridPlainer(field) {
     console.log(rowStr);
   }
   console.log("Cultivation areas has", cultivationAreas.length, "c.");
+  console.log("Satisfaction:", satisfaction(field));
+  console.log("CA coordinates:", allCoordinates(field));
 }

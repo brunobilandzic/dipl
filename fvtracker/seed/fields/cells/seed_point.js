@@ -5,7 +5,9 @@ const max_ca_dim = 20;
 const FILL_LAST = "FILL_LAST";
 import lodash from "lodash";
 
-const startRandomDecision = () => Math.random() < 0.7; // 70% chance to start a new cultivation area
+function startRandomDecision() {
+  return Math.random() < 0.7; // 70% chance to start a new cultivation area
+}
 
 const casExample = [
   { row: 0, col: 0 },
@@ -27,20 +29,22 @@ const fieldExample = {
   cultivationAreas: [casExample],
 };
 
-const sum_points = (field) => {
+function sum_points(field) {
   const { f_width, f_length } = field;
   return f_width * f_length;
-};
+}
 
-const fieldCultivationAreaPoints = (field) => {
-  return field.cultivationAreas.reduce((sum, ca) => {
+function fieldCultivationAreaPoints(field) {
+  return field.cultivationAreas.reduce(function (sum, ca) {
     return sum + ca.length;
   }, 0);
-};
+}
 
-const cultivationAreaPoints = (ca) => ca.length;
+function cultivationAreaPoints(ca) {
+  return ca.length;
+}
 
-const furthestPoint = (field) => {
+function furthestPoint(field) {
   const { cultivationAreas } = field;
   let max_row = 0;
   let max_col = 0;
@@ -57,55 +61,55 @@ const furthestPoint = (field) => {
   }
   console.log("Furthest point in field:", max_row, max_col);
   return { row: max_row, col: max_col };
-};
+}
 
-const checkFieldEnd = (field) => {
+function checkFieldEnd(field) {
   const { f_width, f_length } = field;
   const furthest = furthestPoint(field);
   console.log("test1", f_width - gap - min_ca_dim >= furthest.row);
   console.log("test2", f_length - gap - min_ca_dim >= furthest.col);
   if (!endOfRow(field) && !endOfColumn(field)) return false;
   return false;
-};
+}
 
-const spaceLeftRow = (field) => {
+function spaceLeftRow(field) {
   const { f_width } = field;
   const furthest = furthestPoint(field);
 
-  return f_width - furthest.row ;
-};
+  return f_width - furthest.row;
+}
 
-const spaceLeftColumn = (field) => {
+function spaceLeftColumn(field) {
   const { f_length } = field;
   const furthest = furthestPoint(field);
   return f_length - furthest.col;
-};
+}
 
-const endOfRow = (field) => {
+function endOfRow(field) {
   const furthest = furthestPoint(field);
   console.log("space left row:", spaceLeftRow(field));
   if (spaceLeftRow(field) >= min_ca_dim + gap) return false;
   return true;
-};
+}
 
-const endOfColumn = (field) => {
+function endOfColumn(field) {
   const furthest = furthestPoint(field);
   if (spaceLeftColumn(field) >= min_ca_dim + gap) return true;
   return false;
-};
+}
 
-const getLastCultivationArea = (field) => {
+function getLastCultivationArea(field) {
   const { cultivationAreas } = field;
   if (cultivationAreas.length === 0) return null;
   return cultivationAreas[cultivationAreas.length - 1];
-};
+}
 
-const getStartPoint = (field) => {
+function getStartPoint(field) {
   const { ca_max_x, ca_min_y } = lastCultivationAreaPoints(field);
   return { start_row: ca_max_x + gap, start_col: ca_min_y };
-};
+}
 
-const lastCultivationAreaPoints = (field) => {
+function lastCultivationAreaPoints(field) {
   const lastCA = getLastCultivationArea(field);
   if (!lastCA)
     return {
@@ -115,7 +119,7 @@ const lastCultivationAreaPoints = (field) => {
       ca_min_y: 0,
     };
   return get_ca_min_max(lastCA);
-};
+}
 
 console.log("Field example total points:", sum_points(fieldExample));
 console.log(
@@ -123,9 +127,8 @@ console.log(
   fieldCultivationAreaPoints(fieldExample),
 );
 
-
 // man AI function
-const fillFieldAI = (field, isEndOfRow) => {
+function fillFieldAI(field, isEndOfRow) {
   if (checkFieldEnd(field)) {
     console.log("Field is completely filled.");
     return field;
@@ -149,12 +152,12 @@ const fillFieldAI = (field, isEndOfRow) => {
   }
 
   drawGrid(field.f_width, field.f_length, field.cultivationAreas);
-};
+}
 
 fillFieldAI(fieldExample, false);
 
-const fieldBasicValid = (field, x, y, processedCells) => {
-  processedCells = processedCells.map((pc) => {
+function fieldBasicValid(field, x, y, processedCells) {
+  processedCells = processedCells.map(function (pc) {
     const { row, col } = pc;
     return { row: row, col: col };
   });
@@ -166,9 +169,9 @@ const fieldBasicValid = (field, x, y, processedCells) => {
   )
     return false;
   return true;
-};
+}
 
-const initField = () => {
+function initField() {
   const cultivationAreas = [];
   for (let i = 0; i < min_ca_dim; i++) {
     for (let j = 0; j < min_ca_dim; j++) {
@@ -182,9 +185,9 @@ const initField = () => {
     cultivationAreas,
   };
   return field;
-};
+}
 
-const foo = (field, x, y, processedCells, start, active) => {
+function foo(field, x, y, processedCells, start, active) {
   console.log("Processing cell:", x, y, " start:", start, " active:", active);
   if (!fieldBasicValid(field, x, y, processedCells)) {
     console.log("Cell already processed:", x, y);
@@ -212,14 +215,15 @@ const foo = (field, x, y, processedCells, start, active) => {
       foo(field, nextCell.row, nextCell.col, processedCells, false, true);
     }
   }
-};
+}
 
-const getRowBefore = (cultivationAreas) =>
-  cultivationAreas[cultivationAreas.length - 1]
+function getRowBefore(cultivationAreas) {
+  return cultivationAreas[cultivationAreas.length - 1]
     ? cultivationAreas[cultivationAreas.length - 1]
     : [];
+}
 
-export const createFieldCells = async (field_width, field_length) => {
+export async function createFieldCells(field_width, field_length) {
   const cultivationAreas = [];
 
   let hasLastRow = false;
@@ -517,19 +521,21 @@ export const createFieldCells = async (field_width, field_length) => {
   }
   console.log(cultivationAreas.length, " rows of cultivation areas created.");
   drawGrid(field_width, field_length, cultivationAreas);
-};
+}
 
-const drawGrid = (width, length, cultivationAreas) => {
+function drawGrid(width, length, cultivationAreas) {
   console.log("drawing grid:");
   for (let y = 0; y < length; y++) {
     let rowStr = "";
     for (let x = 0; x < width; x++) {
       if (
-        cultivationAreas.some((caRow) =>
-          caRow.some((ca) =>
-            ca.some((cell) => cell.row === x && cell.col === y),
-          ),
-        )
+        cultivationAreas.some(function (caRow) {
+          return caRow.some(function (ca) {
+            return ca.some(function (cell) {
+              return cell.row === x && cell.col === y;
+            });
+          });
+        })
       ) {
         rowStr += "+";
       } else {
@@ -539,41 +545,47 @@ const drawGrid = (width, length, cultivationAreas) => {
     console.log(rowStr);
   }
   console.log("Cultivation areas has", cultivationAreas.length, "rows.");
-  cultivationAreas.forEach((caRow, rowIndex) => {
+  cultivationAreas.forEach(function(caRow, rowIndex) {
     console.log(
       `Cultivation Area Row ${rowIndex + 1} has ${caRow.length} cultivation areas:`,
     );
   });
-};
+}
 
-const existsInCareas = (cultivationAreas, val) => {
+function existsInCareas(cultivationAreas, val) {
   for (const caRow of cultivationAreas) {
     for (const ca of caRow) {
-      if (ca.some((cell) => lodash.isEqual(cell, val))) {
+      if (
+        ca.some(function (cell) {
+          return lodash.isEqual(cell, val);
+        })
+      ) {
         return true;
       }
     }
   }
   return false;
-};
+}
 
-const existInRow = (row, val) => {
-  return row.some((cell) => lodash.isEqual(cell, val));
-};
+function existInRow(row, val) {
+  return row.some(function (cell) {
+    return lodash.isEqual(cell, val);
+  });
+}
 
 function max_dim(d, dim) {
   return d.reduce(
     (max, cell) => (cell[dim] > max ? cell[dim] : max),
     d[0][dim],
   );
-};
+}
 
 function min_dim(d, dim) {
   return d.reduce(
     (min, cell) => (cell[dim] < min ? cell[dim] : min),
     d[0][dim],
   );
-};
+}
 
 function get_ca_min_max(ca) {
   if (ca.length === 0) {

@@ -34,7 +34,7 @@ function findNextRight(field, x, y) {
 
   for (y; y <= f_height - min_ca_dim; y++) {
     let neighbour = null;
-    
+
     for (x; x <= f_width - min_ca_dim; x++) {
       if (pointExists(field, x, y)) {
         neighbour = {
@@ -47,57 +47,55 @@ function findNextRight(field, x, y) {
   }
 }
 
-function find_y (field, x, start_y) {
-    const { f_height } = field;
-    for (let y = start_y; y <= f_height; y++) {
-        if (pointExists(field, x, y)) {
-            return y;
-        } 
+function find_y(field, x, start_y) {
+  const { f_height } = field;
+  for (let y = start_y; y <= f_height; y++) {
+    if (pointExists(field, x, y)) {
+      return y;
     }
-    return null;
+  }
+  return null;
 }
 
-function find_x (field, start_x, y) {
-    const { f_width } = field;
-    for (let x = start_x; x <= f_width; x++) {
-        if (pointExists(field, x, y)) {
-            return x;
-        }
+function find_x(field, start_x, y) {
+  const { f_width } = field;
+  for (let x = start_x; x <= f_width; x++) {
+    if (pointExists(field, x, y)) {
+      return x;
     }
-    return null;
+  }
+  return null;
 }
 
 function findAllColumn(field, x, y) {
-    const occupied_ys = [];
-    const { f_height } = field;
-    for (let yi = y; yi <= f_height; yi++) {
-        if (pointExists(field, x, yi)) {
-            occupied_ys.push(yi);
-        }
+  const occupied_ys = [];
+  const { f_height } = field;
+  for (let yi = y; yi <= f_height; yi++) {
+    if (pointExists(field, x, yi)) {
+      occupied_ys.push(yi);
     }
-    return occupied_ys;
+  }
+  return occupied_ys;
 }
 
 function findAllInRow(field, x, y) {
-    const occupied_xs = [];
-    const { f_width } = field;
+  const occupied_xs = [];
+  const { f_width } = field;
 
-    for (let xi = x; xi <= f_width; xi++) {
-        if (pointExists(field, xi, y)) {
-            occupied_xs.push(xi);
-        }
+  for (let xi = x; xi <= f_width; xi++) {
+    if (pointExists(field, xi, y)) {
+      occupied_xs.push(xi);
     }
-
+  }
 }
 
 function findObjectAnd(field, min_x, y) {
-    const { f_width } = field;
+  const { f_width } = field;
 
-    for (let x = min_x; x <= f_width; x++) {
-        if (pointExists(field, x, y)) {
-
+  for (let x = min_x; x <= f_width; x++) {
+    if (pointExists(field, x, y)) {
     }
-
+  }
 }
 
 function pointExists(field, x, y) {

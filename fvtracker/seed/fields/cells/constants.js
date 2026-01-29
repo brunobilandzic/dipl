@@ -1,6 +1,6 @@
 const gap = 4;
 const min_ca_dim = 4;
-const max_ca_dim = 20;
+const max_ca_dim = 15;
 
 const length_options = [];
 for (let i = min_ca_dim; i <= max_ca_dim; i++) {
@@ -46,8 +46,8 @@ const casExample = [
 ];
 
 const fieldExample = {
-  f_width: 30,
-  f_length: 30,
+  f_width: 100,
+  f_length: 100,
   cultivationAreas: [casExample],
 };
 

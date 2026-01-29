@@ -4,6 +4,7 @@ import {
   length_options,
   max_ca_dim,
   min_ca_dim,
+  gap,
 } from "./constants.js";
 import { checkFieldEnd } from "./seed_point.js";
 
@@ -33,17 +34,31 @@ function randomPoint(field) {
 function coveringArea(field, x, y, dim_x, dim_y) {
   const { cultivationAreas } = field;
 
-  for (let ca of cultivationAreas) {
-    const ca_dimensions = get_ca_min_max(ca);
-    if (
-      x >= ca_dimensions.ca_min_x &&
-      x + dim_x <= ca_dimensions.ca_max_x &&
-      y >= ca_dimensions.ca_min_y &&
-      y + dim_y <= ca_dimensions.ca_max_y
-    ) {
-      return true;
+  for (let xi = x; xi < x + dim_x + gap; xi++) {
+    for (let yi = y; yi < y + dim_y + gap; yi++) {
+      for (let ca of cultivationAreas) {
+        for (let point of ca) {
+          if (point.row === xi && point.col === yi) {
+            return true;
+          }
+        }
+      }
     }
+    
   }
+
+   for (let xi = x; x > x - gap; xi--) {
+    for (let yi = y; y < y + dim_y; yi++) {
+      for (let ca of cultivationAreas) {
+        for (let point of ca) {
+          if (point.row === xi && point.col === yi) {
+            return true;
+          }
+        }
+      }
+    }
+  } 
+
   return false;
 }
 
@@ -61,14 +76,24 @@ function tryAI(field, can) {
   }
 
   let { x, y, dim_x, dim_y } = randomPoint(field);
+
+  let reasonableAttempts = 0;
   while (
     coveringArea(field, x, y, dim_x, dim_y) ||
     x + dim_x > f_width ||
     y + dim_y > f_length
   ) {
+    reasonableAttempts += 1;
     ({ x, y, dim_x, dim_y } = randomPoint(field));
+    if (reasonableAttempts > 500) {
+      console.log("Could not find a suitable position after 50 attempts.");
+      drawGridPlainer(field);
+      return field;
+    }
+    console.log(reasonableAttempts);
   }
   const ca = [];
+
   for (let xi = x; xi < x + dim_x; xi++) {
     for (let yi = y; yi < y + dim_y; yi++) {
       ca.push({ row: xi, col: yi });
@@ -81,7 +106,7 @@ function tryAI(field, can) {
   return tryAI(field, can - 1);
 }
 
-const field = tryAI(fieldExample, 5);
+const field = tryAI(fieldExample, 1000000000000);
 
 function drawGridPlainer(field) {
   const { f_width: width, f_length: length, cultivationAreas } = field;

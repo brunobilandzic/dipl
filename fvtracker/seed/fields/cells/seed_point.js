@@ -1,18 +1,19 @@
 const gap = 4;
 const min_ca_dim = 4;
 const max_ca_dim = 20;
-const CELL_ACTIVE = "active";
-const CELL_INACTIVE = "inactive";
-const CELL_UNASSIGNED = "unassigned";
-const CELL_PENDING = "pending";
 import lodash from "lodash";
 
 const startRandomDecision = () => Math.random() < 0.7; // 70% chance to start a new cultivation area
 
+const sum_points = (field) => {
+  const {f_width, f_length} = field;
+  return f_width * f_length;
+}
+
 const fieldBasicValid = (field, x, y, processedCells) => {
   processedCells = processedCells.map((pc) => {
     const { row, col } = pc;
-    return { row: row, col: col };
+    return { row: row, col: col }a;
   });
   if (
     { row: x, col: y } in field.cultivationAreas ||

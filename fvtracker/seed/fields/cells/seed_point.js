@@ -92,12 +92,27 @@ const endOfColumn = (field) => {
   return false;
 };
 
-
-
 const getLastCultivationArea = (field) => {
   const { cultivationAreas } = field;
   if (cultivationAreas.length === 0) return null;
   return cultivationAreas[cultivationAreas.length - 1];
+};
+
+const getStartPoint = (field) => {
+  const { ca_max_x, ca_min_y } = lastCultivationAreaPoints(field);
+  return { start_row: ca_max_x + gap, start_col: ca_min_y };
+};
+
+const lastCultivationAreaPoints = (field) => {
+  const lastCA = getLastCultivationArea(field);
+  if (!lastCA)
+    return {
+      ca_max_y: 0,
+      ca_min_x: 0,
+      ca_max_x: 0,
+      ca_min_y: 0,
+    };
+  return get_ca_min_max(lastCA);
 };
 
 console.log("Field example total points:", sum_points(fieldExample));
@@ -111,7 +126,16 @@ const fillFieldAI = (field) => {
     return field;
   }
 
-  const lastCultivationArea = getLastCultivationArea(field);
+  const { start_row, start_col } = getStartPoint(field);
+
+  let x = start_row;
+  let y = start_col;
+
+  for (x; x <= field.f_width - min_ca_dim; x++) {
+    for (y; y <= field.f_length - min_ca_dim; y++) {
+      
+    }
+  }
 };
 
 const fieldBasicValid = (field, x, y, processedCells) => {

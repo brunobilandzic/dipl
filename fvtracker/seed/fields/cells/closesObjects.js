@@ -1,9 +1,10 @@
 const gap = 2;
 const min_ca_dim = 4;
 const max_ca_dim = 20;
-const length_options = [];
+
 import lodash from "lodash";
 
+const length_options = [];
 for (let i = min_ca_dim; i <= max_ca_dim; i++) {
   length_options.push(i);
 }

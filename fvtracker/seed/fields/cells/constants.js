@@ -1,3 +1,12 @@
+const gap = 4;
+const min_ca_dim = 4;
+const max_ca_dim = 20;
+
+const length_options = [];
+for (let i = min_ca_dim; i <= max_ca_dim; i++) {
+  length_options.push(i);
+}
+
 const max_dim = (d, dim) => {
   return d.reduce(
     (max, cell) => (cell[dim] > max ? cell[dim] : max),
@@ -42,4 +51,11 @@ const fieldExample = {
   cultivationAreas: [casExample],
 };
 
-export { get_ca_min_max, fieldExample };
+export {
+  get_ca_min_max,
+  fieldExample,
+  length_options,
+  max_ca_dim,
+  min_ca_dim,
+  gap,
+};

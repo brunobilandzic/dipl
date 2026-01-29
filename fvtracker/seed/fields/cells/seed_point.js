@@ -7,7 +7,7 @@ for (let i = min_ca_dim; i <= max_ca_dim; i++) {
 }
 
 const FILL_LAST = "FILL_LAST";
-import lodash, { min, sample } from "lodash";
+import lodash from "lodash";
 
 function startRandomDecision() {
   return Math.random() < 0.7; // 70% chance to start a new cultivation area
@@ -63,15 +63,10 @@ function furthestPoint(field) {
       }
     }
   }
-  console.log("Furthest point in field:", max_row, max_col);
   return { row: max_row, col: max_col };
 }
 
-function checkFieldEnd(field) {
-  const { f_width, f_length } = field;
-  const furthest = furthestPoint(field);
-  console.log("test1", f_width - gap - min_ca_dim >= furthest.row);
-  console.log("test2", f_length - gap - min_ca_dim >= furthest.col);
+export function checkFieldEnd(field) {
   if (!endOfRow(field) && !endOfColumn(field)) return false;
   return false;
 }
@@ -91,7 +86,6 @@ function spaceLeftColumn(field) {
 
 function endOfRow(field) {
   const furthest = furthestPoint(field);
-  console.log("space left row:", spaceLeftRow(field));
   if (spaceLeftRow(field) >= min_ca_dim + gap) return false;
   return true;
 }
@@ -162,7 +156,7 @@ function pointFiled(field, x, y) {
     }
   }
 }
-fillFieldAI(fieldExample, false);
+// fillFieldAI(fieldExample, false);
 
 function xyPaths(x, y, dim_x, dim_y) {
   const paths = [];

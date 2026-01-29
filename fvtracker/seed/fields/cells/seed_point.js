@@ -3,7 +3,7 @@ const min_ca_dim = 4;
 const max_ca_dim = 20;
 
 const FILL_LAST = "FILL_LAST";
-import lodash from "lodash";
+import lodash, { min } from "lodash";
 
 const startRandomDecision = () => Math.random() < 0.7; // 70% chance to start a new cultivation area
 
@@ -12,7 +12,7 @@ const casExample = [
   { row: 0, col: 1 },
   { row: 0, col: 2 },
 
-  {row: 1, col: 0 },
+  { row: 1, col: 0 },
   { row: 1, col: 1 },
   { row: 1, col: 2 },
 
@@ -24,23 +24,21 @@ const casExample = [
 const fieldExample = {
   f_width: 30,
   f_length: 30,
-  cultivationAreas: [
-    casExample,
-  ],
+  cultivationAreas: [casExample],
 };
 
 const sum_points = (field) => {
-  const {f_width, f_length} = field;
+  const { f_width, f_length } = field;
   return f_width * f_length;
-}
+};
 
 const fieldCultivationAreaPoints = (field) => {
   return field.cultivationAreas.reduce((sum, ca) => {
     return sum + ca.length;
-  }, 0)
-}
+  }, 0);
+};
 
-const cultivationAreaPoints = (ca) => ca.length
+const cultivationAreaPoints = (ca) => ca.length;
 
 const furthestPoint = (field) => {
   const { cultivationAreas } = field;
@@ -58,34 +56,63 @@ const furthestPoint = (field) => {
     }
   }
   return { row: max_row, col: max_col };
-}
+};
 
 const checkEnd = (field) => {
   const { f_width, f_length } = field;
   const furthest = furthestPoint(field);
-  if (f_width - gap - min_ca_dim >= furthest.row && f_length - gap - min_ca_dim >= furthest.col) return true;
-  return false; 
-}
+  if (
+    f_width - gap - min_ca_dim >= furthest.row &&
+    f_length - gap - min_ca_dim >= furthest.col
+  )
+    return true;
+  return false;
+};
+const spaceLeftRow = (field) => {
+  const { f_width } = field;
+  const furthest = furthestPoint(field);
+  return f_width - furthest.row;
+};
+
+const spaceLeftColumn = (field) => {
+  const { f_length } = field;
+  const furthest = furthestPoint(field);
+  return f_length - furthest.col;
+};
+
+const endOfRow = (field) => {
+  const furthest = furthestPoint(field);
+  if (spaceLeftRow(field) >= min_ca_dim + gap) return true;
+  return false;
+};
+
+const endOfColumn = (field) => {
+  const furthest = furthestPoint(field);
+  if (spaceLeftColumn(field) >= min_ca_dim + gap) return true;
+  return false;
+};
+
+
 
 const getLastCultivationArea = (field) => {
   const { cultivationAreas } = field;
   if (cultivationAreas.length === 0) return null;
   return cultivationAreas[cultivationAreas.length - 1];
-}
+};
 
 console.log("Field example total points:", sum_points(fieldExample));
-console.log("Field example cultivation area points:", fieldCultivationAreaPoints(fieldExample));
+console.log(
+  "Field example cultivation area points:",
+  fieldCultivationAreaPoints(fieldExample),
+);
 
 const fillFieldAI = (field) => {
-  if(checkEnd(field)) {
+  if (checkEnd(field)) {
     return field;
   }
 
   const lastCultivationArea = getLastCultivationArea(field);
-
-
-
-}
+};
 
 const fieldBasicValid = (field, x, y, processedCells) => {
   processedCells = processedCells.map((pc) => {
@@ -208,11 +235,7 @@ export const createFieldCells = async (field_width, field_length) => {
           begin_x = l_ca_max_x + gap;
         }
 
-        for (
-          let x = begin_x;
-          x + min_ca_dim <= field_width ;
-          x++
-        ) {
+        for (let x = begin_x; x + min_ca_dim <= field_width; x++) {
           if (!startRandomDecision()) {
             continue;
           }

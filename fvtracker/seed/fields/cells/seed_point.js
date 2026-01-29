@@ -46,14 +46,7 @@ function fieldCultivationAreaPoints(field) {
 }
 
 export function satisfaction(field) {
-  console.log(field.cultivationAreas.length, " ca count");
-  const cultivationAreaPoints = fieldCultivationAreaPoints(field);
-  const totalPoints = sum_points(field);
-  console.log(cultivationAreaPoints, " ca points");
-  console.log(totalPoints, " total points");
-  const filledRatio = cultivationAreaPoints / totalPoints;
-  console.log(filledRatio, " filled ratio");
-  return filledRatio >= SATISFACTORY_FILLED;
+  return fieldCultivationAreaPoints(field) / sum_points(field) >= SATISFACTORY_FILLED;
 }
 
 

@@ -16,7 +16,6 @@ function allCoordinates(field) {
     ca_coordinates[`cultivation area ${i}`] = dimensions;
   }
 
-  console.log("CA coordinates:", ca_coordinates);
   return ca_coordinates;
 }
 
@@ -74,7 +73,7 @@ function coveringArea(field, x, y, dim_x, dim_y) {
   return false;
 }
 
-function createField(width, length, msWindow) {
+function createField(width, length, msWindow= 60000 * 2) {
   const msStart = Date.now();
 
   const field = {
@@ -99,18 +98,12 @@ function createField(width, length, msWindow) {
       y + dim_y + gap > length
     ) {
       const loopTime = Date.now();
-      /*       if (loopTime - msStart > msWindow) {
-        console.log("Time window exceeded, returning current field state.");
-        drawGridPlainer(field);
-        return field;
-      } */
       ({ x, y, dim_x, dim_y } = randomPoint(field));
-      console.log(reasonableAttempts, " reasonable attempts");
-      reasonableAttempts += 1;
-      if (reasonableAttempts > 10000) {
-        drawGridPlainer(field);
+      if (loopTime - msStart > msWindow) {
+        console.log("Time window exceeded, stopping field creation.", loopTime - msStart);
         return field;
       }
+
     }
     const ca = [];
 
@@ -120,22 +113,18 @@ function createField(width, length, msWindow) {
       }
     }
     field.cultivationAreas.push(ca);
-    console.log(
-      `Added cultivation area at (${x}, ${y}) with dimensions (${dim_x} x ${dim_y})`,
-    );
     return tryAITime(field);
   }
 
   let fieldResult = tryAITime(field);
   const msEnd = Date.now();
-  console.log(`Field creation took ${msEnd - msStart} ms.`);
   drawGridPlainer(fieldResult);
   return fieldResult;
 }
 
-createField(100, 100, 5000);
+createField(100, 100);
 
-function tryAITime(field, ms) {
+function trcsdacdyAITime(field, ms) {
   const { width, length } = field;
   if (satisfaction(field)) {
     console.log("Field is properly seeded to the end.");

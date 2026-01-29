@@ -1,4 +1,4 @@
-const gap = 4;
+const gap = 2;
 const min_ca_dim = 4;
 const max_ca_dim = 15;
 

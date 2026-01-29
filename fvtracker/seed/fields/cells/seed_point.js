@@ -47,7 +47,7 @@ function fieldCultivationAreaPoints(field) {
 
 export function satisfaction(field) {
   const filled = fieldCultivationAreaPoints(field) / sum_points(field);
-  console.log(filled,"filled")
+  console.log(filled, "filled");
   return filled >= SATISFACTORY_FILLED;
 }
 

@@ -1,4 +1,3 @@
-
 const max_dim = (d, dim) => {
   return d.reduce(
     (max, cell) => (cell[dim] > max ? cell[dim] : max),
@@ -12,7 +11,6 @@ const min_dim = (d, dim) => {
     d[0][dim],
   );
 };
-
 function get_ca_min_max(ca) {
   if (ca.length === 0) {
     return { ca_max_y: 0, ca_min_x: 0, ca_max_x: 0, ca_min_y: 0 };
@@ -23,7 +21,6 @@ function get_ca_min_max(ca) {
   const ca_min_y = min_dim(ca, "col");
   return { ca_max_y, ca_min_x, ca_max_x, ca_min_y };
 }
-
 
 const casExample = [
   { row: 0, col: 0 },
@@ -45,8 +42,4 @@ const fieldExample = {
   cultivationAreas: [casExample],
 };
 
-export default {
-    get_ca_min_max,
-    fieldExample,
-    
-}
+export { get_ca_min_max, fieldExample };

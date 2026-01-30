@@ -23,7 +23,7 @@ function get_ca_min_max(ca) {
   return { ca_max_y, ca_min_x, ca_max_x, ca_min_y };
 }
 
-export function drawField(field) {
+function drawField(field) {
   const { width, length, cultivationAreas } = field;
 
   analyzeField(field);
@@ -64,7 +64,7 @@ function fieldFilledRatio(field) {
   const caPoints = fieldCultivationAreaPoints(field);
   const ratio = caPoints / fieldPoints;
   console.log(
-    `Field points: ${fieldPoints}, CA points: ${caPoints}, Ratio: ${ratio}`,
+    `\n\tField points: ${fieldPoints}, CA points: ${caPoints}, Ratio: ${ratio}\n`,
   );
   return ratio;
 }

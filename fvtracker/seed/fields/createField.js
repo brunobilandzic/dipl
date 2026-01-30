@@ -66,10 +66,6 @@ async function createFieldObject(fieldParams, msWindow = 1000 * 10) {
 
   fieldParams["cultivationAreas"] = [];
 
-  for (const [key, value] of Object.entries(fieldParams)) {
-    console.log(`${key}: ${value}`);
-  }
-
   const { name, description, location, ...fieldDAO } = fieldParams;
 
   function fillField(field) {

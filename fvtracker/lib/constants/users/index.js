@@ -1,5 +1,9 @@
-import managersUsernameModel from "./managersUsernameModel";
+import {
+  usernameToModel,
+  modelToUsername,
+} from "./managersUsernameModel";
 
 export default {
-  managersUsernameModel,
+  usernameToModel,
+  modelToUsername,
 };

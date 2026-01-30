@@ -1,4 +1,4 @@
-export const userNameToModel = {
+export const usernameToModel = {
   "general.manager": "GeneralManager",
   "cultivation.manager": "CultivationManager",
   "financial.manager": "FinancialManager",
@@ -6,8 +6,8 @@ export const userNameToModel = {
   "warehouse.manager": "WarehouseManager",
 };
 
-function modelToUsername() {
-  modelToUsername = {};
+function createModelToUsername() {
+  const modelToUsername = {};
 
   for (const [username, model] of Object.entries(userNameToModel)) {
     modelToUsername[model] = username;
@@ -16,4 +16,4 @@ function modelToUsername() {
   return modelToUsername;
 }
 
-export const userModelToName = modelToUsername();
+export const modelToUsername = createModelToUsername();

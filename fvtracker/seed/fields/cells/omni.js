@@ -71,7 +71,7 @@ function notValidPoint(field, x, y, dim_x, dim_y) {
   return false;
 }
 
-async function createField(fieldParams, msWindow = 10000) {
+async function createField(fieldParams, msWindow = 1000 * 10) {
   const msStart = Date.now();
 
   const { width, length, min_ca_dim, max_ca_dim, gap } = fieldParams;
@@ -103,17 +103,21 @@ async function createField(fieldParams, msWindow = 10000) {
     ) {
       ({ x, y, dim_x, dim_y } = randomPoint(field));
       const loopTime = Date.now();
+      if((loopTime - msStart) % 10000 < 50) {
+        console.log("Trying to find valid point...", (loopTime - msStart) / 1000, "seconds elapsed.");
+        satisfaction(field);        
+      }
       if (loopTime - msStart > msWindow && field.cultivationAreas.length > 0) {
         console.log(
           "Time window exceeded, stopping field creation.",
           (loopTime - msStart) / 1000,
           "seconds",
         );
-        satisfaction(field);
+        // satisfaction(field);
         //drawGridPlainer(field);
         return field;
       }
-      reasonableAttempts += 1;
+      /* reasonableAttempts += 1;
       if (reasonableAttempts % 1000 === 0) {
         console.log(
           "Still trying to find a valid point...",
@@ -121,9 +125,9 @@ async function createField(fieldParams, msWindow = 10000) {
         );
       }
       if (reasonableAttempts > 10000) {
-        drawGridPlainer(field);
+        // drawGridPlainer(field);
         return field;
-      }
+      } */
       /* 
       
       if (loopTime - msStart > msWindow) {

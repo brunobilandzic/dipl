@@ -99,7 +99,7 @@ async function createField(fieldParams, msWindow = 1000 * 10) {
 
   function tryAITime(field) {
     const { width, length } = field;
-    /*     if (satisfaction(field)) {
+    /*     if (ratio(field) > nessary_ratio) {
       console.log("Field is properly seeded to the end.");
       return field;
     } */
@@ -115,7 +115,7 @@ async function createField(fieldParams, msWindow = 1000 * 10) {
     ) {
       ({ x, y, dim_x, dim_y } = randomPoint(field));
       const loopTime = Date.now();
-      if ((loopTime - msStart) % 10000 < 50) {
+      if ((loopTime - msStart) % 10000 < 5) {
         console.log(
           "Trying to find valid point...",
           (loopTime - msStart) / 1000,
@@ -125,12 +125,8 @@ async function createField(fieldParams, msWindow = 1000 * 10) {
       }
       if (loopTime - msStart > msWindow && field.cultivationAreas.length > 0) {
         console.log(
-          "Time window exceeded, stopping field creation.",
-          (loopTime - msStart) / 1000,
-          "seconds",
+          "Time window exceeded, stopping field creation.", msWindow /1000, "seconds."
         );
-        // satisfaction(field);
-        //drawGridPlainer(field);
         return field;
       }
       /* reasonableAttempts += 1;

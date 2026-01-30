@@ -82,9 +82,9 @@ export const createAppUser = async (appUserData, generalManagerId) => {
   const username = appUser.username;
 
   let manager = null;
-  if (username in usersConstants.managersUsernameModel) {
+  if (username in usersConstants.usernameToModel) {
     // now we have to crate a basic manager and specific manager
-    const managerModelName = usersConstants.managersUsernameModel[username];
+    const managerModelName = usersConstants.usernameToModel[username];
     manager = await createManager(
       appUser._id,
       managerModelName,

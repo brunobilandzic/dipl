@@ -9,7 +9,7 @@ export const usernameToModel = {
 function createModelToUsername() {
   const modelToUsername = {};
 
-  for (const [username, model] of Object.entries(userNameToModel)) {
+  for (const [username, model] of Object.entries(usernameToModel)) {
     modelToUsername[model] = username;
   }
 

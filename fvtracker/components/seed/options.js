@@ -16,12 +16,13 @@ export default function SeedOptions() {
     },
     seedFields: {
       icon: <MdFoodBank />,
-      label: "Seed Field",
+      label: "Create Field",
     }
   };
 
   const API = async (seedType) => {
     try {
+      console.log(`Seeding ${seedType}...`);
       const response = await axios.post("/api/seed", { seedType });
       console.log(response.data);
       alert(`${seedType} completed successfully\n${response.data.message}`);

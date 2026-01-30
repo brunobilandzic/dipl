@@ -5,6 +5,7 @@ export default {
 };
 
 async function handleAPIRequest(seedType) {
+  console.log("handling:",seedType)
   switch (seedType) {
     case SEED_TYPES.USERS:
       return await import("./users").then((module) => module.default.all());

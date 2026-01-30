@@ -1,0 +1,17 @@
+const ADMIN = "Admin";
+const GENERAL_MANAGER = "GeneralManager";
+const CULTIVATION_MANAGER = "CultivationManager";
+const FINANCIAL_MANAGER = "FinancialManager";
+const PRODUCTION_MANAGER = "ProductionManager";
+const WAREHOUSE_MANAGER = "WarehouseManager";
+const WORKER = "Worker";
+
+export {
+  ADMIN,
+  GENERAL_MANAGER,
+  CULTIVATION_MANAGER,
+  FINANCIAL_MANAGER,
+  PRODUCTION_MANAGER,
+  WAREHOUSE_MANAGER,
+  WORKER,
+};

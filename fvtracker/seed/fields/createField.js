@@ -77,6 +77,10 @@ export default async function createField(fieldParams, msWindow = 1000 * 10) {
 
   const { width, length, min_ca_dim, max_ca_dim, gap } = fieldParams;
 
+  for (const [key, value] of Object.entries(fieldParams)) {
+    console.log(`${key}: ${value}`);
+  }
+
   const field = {
     width,
     length,
@@ -119,6 +123,7 @@ export default async function createField(fieldParams, msWindow = 1000 * 10) {
           elapsed / 1000,
           "seconds.",
         );
+        drawField(field);
         return field;
       }
       /* reasonableAttempts += 1;

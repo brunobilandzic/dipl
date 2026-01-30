@@ -1,5 +1,5 @@
 import createField from "./createField";
 
 export default {
-  create: createField,
+  create: (fieldParams, msWindow) => createField(fieldParams, msWindow),
 };

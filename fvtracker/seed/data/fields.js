@@ -5,7 +5,7 @@ export const fieldParams = [
     length: 100,
     min_ca_dim: 12,
     max_ca_dim: 30,
-    gap: 6,
+    gap: 2,
   },
   {
     name: "Medium CAS",
@@ -13,7 +13,7 @@ export const fieldParams = [
     length: 500,
     min_ca_dim: 25,
     max_ca_dim: 90,
-    gap: 10,
+    gap: 4,
   },
   {
     name: "Large CAS",
@@ -21,6 +21,6 @@ export const fieldParams = [
     length: 1000,
     min_ca_dim: 50,
     max_ca_dim: 180,
-    gap: 16,
+    gap: 6,
   },
 ];

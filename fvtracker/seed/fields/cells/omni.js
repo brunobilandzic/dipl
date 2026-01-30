@@ -1,8 +1,5 @@
-import {
-  get_ca_min_max,
-  gap,
-} from "./constants.js";
-import { checkFieldEnd, satisfaction } from "./seed_point.js";
+import { fieldParams } from "../../data/fields.js";
+import { get_ca_min_max, gap, SATISFACTORY_FILLED } from "./constants.js";
 
 function allCoordinates(field) {
   const ca_coordinates = {};
@@ -31,7 +28,7 @@ function randomPoint(field) {
   return { x, y, dim_x, dim_y };
 }
 
-function notValidPoint(field, x, y, dim_x, dim_y, ) {
+function notValidPoint(field, x, y, dim_x, dim_y) {
   const { width, length, cultivationAreas } = field;
 
   if (x < 0 || y < 0 || x + dim_x > width || y + dim_y > length) {
@@ -74,39 +71,68 @@ function notValidPoint(field, x, y, dim_x, dim_y, ) {
   return false;
 }
 
-function createField(fieldParams) {
+async function createField(fieldParams, msWindow = 10000) {
   const msStart = Date.now();
 
-  const {width, length, min_ca_dim, max_ca_dim} = fieldParams;
+  const { width, length, min_ca_dim, max_ca_dim, gap } = fieldParams;
 
   const field = {
     width: width,
     length: length,
+    min_ca_dim,
+    max_ca_dim,
+    gap,
     cultivationAreas: [],
   };
 
   function tryAITime(field) {
     const { width, length } = field;
-    if (satisfaction(field)) {
+    /*     if (satisfaction(field)) {
       console.log("Field is properly seeded to the end.");
       return field;
-    }
+    } */
 
     let { x, y, dim_x, dim_y } = randomPoint(field);
 
     let reasonableAttempts = 0;
+
     while (
       notValidPoint(field, x, y, dim_x, dim_y) ||
       x + dim_x + gap > width ||
       y + dim_y + gap > length
     ) {
-      const loopTime = Date.now();
       ({ x, y, dim_x, dim_y } = randomPoint(field));
-      if (loopTime - msStart > msWindow) {
-        console.log("Time window exceeded, stopping field creation.", loopTime - msStart);
+      const loopTime = Date.now();
+      if (loopTime - msStart > msWindow && field.cultivationAreas.length > 0) {
+        console.log(
+          "Time window exceeded, stopping field creation.",
+          (loopTime - msStart) / 1000,
+          "seconds",
+        );
+        satisfaction(field);
+        //drawGridPlainer(field);
         return field;
       }
-
+      reasonableAttempts += 1;
+      if (reasonableAttempts % 1000 === 0) {
+        console.log(
+          "Still trying to find a valid point...",
+          reasonableAttempts,
+        );
+      }
+      if (reasonableAttempts > 10000) {
+        drawGridPlainer(field);
+        return field;
+      }
+      /* 
+      
+      if (loopTime - msStart > msWindow) {
+        console.log(
+          "Time window exceeded, stopping field creation.",
+          loopTime - msStart,
+        );
+        return field;
+      } */
     }
     const ca = [];
 
@@ -119,107 +145,36 @@ function createField(fieldParams) {
     return tryAITime(field);
   }
 
-  let fieldResult = tryAITime(field);
+  let fieldResult = await tryAITime(field);
   const msEnd = Date.now();
-  drawGridPlainer(fieldResult);
   return fieldResult;
 }
 
-createField(100, 100);
+async function test() {
+  const promises = [];
 
-function trcsdacdyAITime(field, ms) {
-  const { width, length } = field;
-  if (satisfaction(field)) {
-    console.log("Field is properly seeded to the end.");
-    return field;
+  for (let _fieldParams of fieldParams) {
+    promises.push(createField(_fieldParams));
   }
 
-  let { x, y, dim_x, dim_y } = randomPoint(field);
-
-  let reasonableAttempts = 0;
-  while (
-    coveringArea(field, x, y, dim_x, dim_y) ||
-    x + dim_x > width ||
-    y + dim_y > length
-  ) {
-    reasonableAttempts += 1;
-    if (reasonableAttempts > 10000) {
-      drawGridPlainer(field);
-      return field;
-    }
-
-    ({ x, y, dim_x, dim_y } = randomPoint(field));
-    /*     if (reasonableAttempts > 500) {
-      console.log("Could not find a suitable position after 50 attempts.");
-      drawGridPlainer(field);
-      return field;
-    } */
+  const fields = await Promise.all(promises);
+  for (let field of fields) {
+    satisfaction(field);
   }
-  const ca = [];
-
-  for (let xi = x; xi < x + dim_x; xi++) {
-    for (let yi = y; yi < y + dim_y; yi++) {
-      ca.push({ row: xi, col: yi });
-    }
-  }
-  field.cultivationAreas.push(ca);
-  console.log(
-    `Added cultivation area at (${x}, ${y}) with dimensions (${dim_x} x ${dim_y})`,
-  );
-  return tryAI(field);
+  console.log(`\n\nThere ara ${fields.length} fields created.`);
+  return fields;
 }
 
-function tryAI(field) {
-  const { f_width, f_length } = field;
-  if (satisfaction(field)) {
-    console.log("Field is properly seeded to the end.");
-    return field;
-  }
-
-  let { x, y, dim_x, dim_y } = randomPoint(field);
-
-  let reasonableAttempts = 0;
-  while (
-    coveringArea(field, x, y, dim_x, dim_y) ||
-    x + dim_x > f_width ||
-    y + dim_y > f_length
-  ) {
-    reasonableAttempts += 1;
-    if (reasonableAttempts > 10000) {
-      drawGridPlainer(field);
-      return field;
-    }
-
-    ({ x, y, dim_x, dim_y } = randomPoint(field));
-    /*     if (reasonableAttempts > 500) {
-      console.log("Could not find a suitable position after 50 attempts.");
-      drawGridPlainer(field);
-      return field;
-    } */
-  }
-  const ca = [];
-
-  for (let xi = x; xi < x + dim_x; xi++) {
-    for (let yi = y; yi < y + dim_y; yi++) {
-      ca.push({ row: xi, col: yi });
-    }
-  }
-  field.cultivationAreas.push(ca);
-  console.log(
-    `Added cultivation area at (${x}, ${y}) with dimensions (${dim_x} x ${dim_y})`,
-  );
-  return tryAI(field);
+async function main() {
+  const fields = await test();
 }
 
-// const field = tryAI(fieldExample);
+main();
 
 function drawGridPlainer(field) {
   const { width, length, cultivationAreas } = field;
-  console.log(
-    "field count:",
-    cultivationAreas.reduce((length, ca) => length + ca.length, 0),
-  );
 
+  analyzeField(field);
   console.log("drawing grid:");
   for (let y = 0; y < length; y++) {
     let rowStr = "";
@@ -239,4 +194,27 @@ function drawGridPlainer(field) {
   console.log("Cultivation areas has", cultivationAreas.length, "c.");
   console.log("Satisfaction:", satisfaction(field));
   console.log("CA coordinates:", allCoordinates(field));
+}
+
+function analyzeField(field) {}
+
+function sum_points(field) {
+  const { width, length } = field;
+  return width * length;
+}
+
+function fieldCultivationAreaPoints(field) {
+  return field.cultivationAreas.reduce(function (sum, ca) {
+    return sum + ca.length;
+  }, 0);
+}
+
+export function satisfaction(field) {
+  const fieldPoints = sum_points(field);
+  const caPoints = fieldCultivationAreaPoints(field);
+  const ratio = caPoints / fieldPoints;
+  console.log(
+    `Field points: ${fieldPoints}, CA points: ${caPoints}, Ratio: ${ratio}`,
+  );
+  return ratio >= SATISFACTORY_FILLED;
 }

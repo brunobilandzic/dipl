@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import cultivation from ".";
 
 const fieldSchema = new mongoose.Schema({
   name: { type: String, required: true },

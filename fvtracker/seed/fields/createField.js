@@ -112,9 +112,30 @@ async function createFieldObject(fieldParams, msWindow = 1000 * 10) {
     return fillField(field);
   }
 
-  let fieldResult = await fillField(fieldDAO);
+  let fieldDao = await fillField(fieldDAO);
 
-  Object.assign(fieldResult, { name, description, location });  return fieldResult;
+  const dimensions = {
+    width: fieldDao.width,
+    length: fieldDao.length,
+  }
+
+  const cultivationAreaDimensions = {
+    min_ca_dim: fieldDao.min_ca_dim,
+    max_ca_dim: fieldDao.max_ca_dim,
+    gap: fieldDao.gap,
+  };
+
+  return {
+    name,
+    description,
+    dimensions,
+    cultivationAreaDimensions,
+    location,
+    cultivationAreas: fieldDao.cultivationAreas,
+  };
+
+
+  
 }
 
 export default async function createField(fieldParams, msWindow) {

@@ -59,6 +59,18 @@ function fieldCultivationAreaPoints(field) {
   }, 0);
 }
 
+function allCoordinates(field) {
+  const ca_coordinates = {};
+  for (let i = 0; i < field.cultivationAreas.length; i++) {
+    const ca = field.cultivationAreas[i];
+    const dimensions = get_ca_min_max(ca);
+    ca_coordinates[`cultivation area ${i}`] = dimensions;
+  }
+
+  return ca_coordinates;
+}
+
+
 function fieldFilledRatio(field) {
   const fieldPoints = sum_points(field);
   const caPoints = fieldCultivationAreaPoints(field);

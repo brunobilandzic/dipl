@@ -26,7 +26,6 @@ function get_ca_min_max(ca) {
 function drawField(field) {
   const { width, length, cultivationAreas } = field;
 
-  analyzeField(field);
   console.log("drawing grid:");
   for (let y = 0; y < length; y++) {
     let rowStr = "";

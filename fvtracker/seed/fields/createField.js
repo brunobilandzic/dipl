@@ -1,5 +1,4 @@
-import { optimizedParams } from "../data/fields.js";
-import { drawField, fieldFilledRatio } from "./analyze.js";
+import { drawField } from "./analyze.js";
 
 function randomPoint(field) {
   const { width, length, min_ca_dim, max_ca_dim, gap } = field;

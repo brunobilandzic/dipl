@@ -13,7 +13,7 @@ async function handleAPIRequest(seedType) {
 
     case SEED_TYPES.FIELD:
       return await import("./fields").then((module) =>
-        module.default.create(optimizedParams, 10000),
+        module.default.create(optimizedParams, module.default.FIELD_TIME_WINDOW),
       );
 
     default:

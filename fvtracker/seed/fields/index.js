@@ -1,5 +1,5 @@
-import { seedFields } from "./seed";
+import createField from "./createField";
 
 export default {
-  all: seedFields,
+  create: createField,
 };

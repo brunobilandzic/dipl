@@ -12,14 +12,12 @@ async function handleAPIRequest(seedType) {
       return await import("./users").then((module) => module.default.all());
 
     case SEED_TYPES.FIELD:
-          return await import("./fields").then(async (module) =>{
-            const field =  await module.default.create(optimizedParams, module.default.FIELD_TIME_WINDOW)
-            console.log("Generated optimized field");
-              console.log(optimizedParams);
-              console.log(field)
-            return field;
-          }
-      );
+      return await import("./fields").then(async (module) => {
+        return await module.default.create(
+          optimizedParams,
+          module.default.FIELD_TIME_WINDOW,
+        );
+      });
 
     default:
       throw new Error(`Unknown seed type: ${seedType}`);

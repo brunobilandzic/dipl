@@ -26,10 +26,15 @@ export const fieldParams = [
 ];
 
 export const optimizedParams = {
-  name: "Optimized CAS",
+  name: "SEEDED FIELD",
+  description: "Field optimized for seeders testing",
   width: 100,
   length: 100,
   min_ca_dim: 15,
   max_ca_dim: 50,
   gap: 2,
+  location: {
+    latitude: 43.67028,
+    longitude: 16.70472,
+  },
 };

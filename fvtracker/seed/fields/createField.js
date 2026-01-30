@@ -1,4 +1,6 @@
+import { Field } from "@/models/sectors/cultivation/Field.js";
 import { drawField } from "./analyze.js";
+import { CultivationManager } from "@/models/user/managers/CultivationManager.js";
 
 function randomPoint(field) {
   const { width, length, min_ca_dim, max_ca_dim, gap } = field;
@@ -59,7 +61,7 @@ function notValidPoint(field, x, y, dim_x, dim_y) {
   return false;
 }
 
-export default async function createField(fieldParams, msWindow = 1000 * 10) {
+async function createFieldObject(field, msWindow = 1000 * 10) {
   /* 
   params example:
     {
@@ -74,23 +76,14 @@ export default async function createField(fieldParams, msWindow = 1000 * 10) {
 
   const msStart = Date.now();
 
-  const { width, length, min_ca_dim, max_ca_dim, gap } = fieldParams;
+  field["cultivationAreas"] = [];
 
-  for (const [key, value] of Object.entries(fieldParams)) {
+  for (const [key, value] of Object.entries(field)) {
     console.log(`${key}: ${value}`);
   }
 
-  const field = {
-    width,
-    length,
-    min_ca_dim,
-    max_ca_dim,
-    gap,
-    cultivationAreas: [],
-  };
-
-  function tryAITime(field) {
-    const { width, length } = field;
+  function fillField(field) {
+    const { width, length, gap } = field;
 
     /*     if (ratio(field) > nessary_ratio) {
       console.log("Field is properly seeded to the end.");
@@ -136,7 +129,7 @@ export default async function createField(fieldParams, msWindow = 1000 * 10) {
         // drawGridPlainer(field);
         return field;
       } */
-      /* 
+      /*
        */
     }
     const ca = [];
@@ -147,9 +140,28 @@ export default async function createField(fieldParams, msWindow = 1000 * 10) {
       }
     }
     field.cultivationAreas.push(ca);
-    return tryAITime(field);
+    return fillField(field);
   }
 
-  let fieldResult = await tryAITime(field);
+  let fieldResult = await fillField(field);
+
   return fieldResult;
+}
+
+export default async function createField(fieldParams, msWindow) {
+  const fieldObject = await createFieldObject(fieldParams, msWindow);
+  const fieldRecord = new Field(exportFieldDbData(fieldObject));
+
+  const cultivationManager = await CultivationManager.findOne({});
+  cultivationManager.fields.push(fieldRecord._id);
+  fieldRecord.manager = cultivationManager._id;
+  await cultivationManager.save();
+
+  await fieldRecord.save();
+  return fieldRecord;
+}
+
+function exportFieldDbData(field) {
+  const { cultivationAreas, ...rest } = field;
+  return rest;
 }

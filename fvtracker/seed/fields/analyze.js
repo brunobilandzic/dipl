@@ -42,8 +42,12 @@ function drawField(field) {
     }
     console.log(rowStr);
   }
-  console.log("Cultivation areas has", cultivationAreas.length, "cas");
-  fieldFilledRatio(field);  
+  console.log(
+    "\n\nCultivation areas has",
+    cultivationAreas.length,
+    "cultivation areas.",
+  );
+  fieldFilledRatio(field);
   console.log("CA coordinates:", allCoordinates(field));
 }
 
@@ -69,19 +73,14 @@ function allCoordinates(field) {
   return ca_coordinates;
 }
 
-
 function fieldFilledRatio(field) {
   const fieldPoints = sum_points(field);
   const caPoints = fieldCultivationAreaPoints(field);
   const ratio = caPoints / fieldPoints;
   console.log(
-    `\n\tField points: ${fieldPoints}, CA points: ${caPoints}, Ratio: ${ratio}\n`,
+    `Field points: ${fieldPoints}, CA points: ${caPoints}, Ratio: ${ratio}`,
   );
   return ratio;
 }
 
-export {
-    drawField,
-    get_ca_min_max,
-    fieldFilledRatio
-}
+export { drawField, get_ca_min_max, fieldFilledRatio };

@@ -73,8 +73,10 @@ function coveringArea(field, x, y, dim_x, dim_y) {
   return false;
 }
 
-function createField(width, length, msWindow= 60000 * 2) {
+function createField(fieldParams) {
   const msStart = Date.now();
+
+  const {width, length, min_ca_dim, max_ca_dim} = fieldParams;
 
   const field = {
     width: width,

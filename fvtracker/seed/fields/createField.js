@@ -1,5 +1,5 @@
-import { fieldParams } from "../../data/fields.js";
-import { get_ca_min_max, gap, SATISFACTORY_FILLED } from "./constants.js";
+import { fieldParams } from "../data/fields.js";
+import get_ca_min_max from "./analyze.js";
 
 function allCoordinates(field) {
   const ca_coordinates = {};
@@ -72,6 +72,18 @@ function notValidPoint(field, x, y, dim_x, dim_y) {
 }
 
 async function createField(fieldParams, msWindow = 1000 * 10) {
+  /* 
+  params example:
+    {
+    name: "Small CAS",
+    width: 100,
+    length: 100,
+    min_ca_dim: 12,
+    max_ca_dim: 30,
+    gap: 2,
+  }
+ */
+
   const msStart = Date.now();
 
   const { width, length, min_ca_dim, max_ca_dim, gap } = fieldParams;
@@ -103,9 +115,13 @@ async function createField(fieldParams, msWindow = 1000 * 10) {
     ) {
       ({ x, y, dim_x, dim_y } = randomPoint(field));
       const loopTime = Date.now();
-      if((loopTime - msStart) % 10000 < 50) {
-        console.log("Trying to find valid point...", (loopTime - msStart) / 1000, "seconds elapsed.");
-        satisfaction(field);        
+      if ((loopTime - msStart) % 10000 < 50) {
+        console.log(
+          "Trying to find valid point...",
+          (loopTime - msStart) / 1000,
+          "seconds elapsed.",
+        );
+        satisfaction(field);
       }
       if (loopTime - msStart > msWindow && field.cultivationAreas.length > 0) {
         console.log(

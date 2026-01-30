@@ -181,5 +181,3 @@ async function test() {
 async function main() {
   await test();
 }
-
-main();

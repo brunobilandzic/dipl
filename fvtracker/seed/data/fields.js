@@ -3,9 +3,9 @@ export const fieldParams = [
     name: "Small CAS",
     width: 100,
     length: 100,
-    min_ca_dim: 12,
-    max_ca_dim: 30,
-    gap: 2,
+    min_ca_dim: 10,
+    max_ca_dim: 50,
+    gap: 4,
   },
   {
     name: "Medium CAS",
@@ -24,3 +24,14 @@ export const fieldParams = [
     gap: 6,
   },
 ];
+
+export const optimizedParams = {
+  name: "Optimized CAS",
+  width: 200,
+  length: 200,
+  min_ca_dim: 20,
+  max_ca_dim: 80,
+  gap: 4,
+};
+
+

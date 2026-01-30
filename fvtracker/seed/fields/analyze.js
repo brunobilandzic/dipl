@@ -20,7 +20,7 @@ function get_ca_min_max(ca) {
   const ca_max_x = max_dim(ca, "row");
   const ca_max_y = max_dim(ca, "col");
   const ca_min_y = min_dim(ca, "col");
-  return { ca_max_y, ca_min_x, ca_max_x, ca_min_y };
+  return { ca_min_x, ca_max_x, ca_min_y, ca_max_y };
 }
 
 function drawField(field) {
@@ -43,7 +43,7 @@ function drawField(field) {
     console.log(rowStr);
   }
   console.log("Cultivation areas has", cultivationAreas.length, "cas");
-  console.log("Ratio:", fieldFilledRatio(field));
+  fieldFilledRatio(field);  
   console.log("CA coordinates:", allCoordinates(field));
 }
 

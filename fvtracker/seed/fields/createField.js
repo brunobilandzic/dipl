@@ -62,18 +62,6 @@ function notValidPoint(field, x, y, dim_x, dim_y) {
 }
 
 async function createFieldObject(fieldParams, msWindow = 1000 * 10) {
-  /* 
-  params example:
-    {
-    name: "Small CAS",
-    width: 100,
-    length: 100,
-    min_ca_dim: 12,
-    max_ca_dim: 30,
-    gap: 2,
-  }
- */
-
   const msStart = Date.now();
 
   fieldParams["cultivationAreas"] = [];
@@ -86,15 +74,7 @@ async function createFieldObject(fieldParams, msWindow = 1000 * 10) {
 
   function fillField(field) {
     const { width, length, gap } = field;
-
-    /*     if (ratio(field) > nessary_ratio) {
-      console.log("Field is properly seeded to the end.");
-      return field;
-    } */
-
     let { x, y, dim_x, dim_y } = randomPoint(field);
-
-    // let reasonableAttempts = 0;
 
     while (
       notValidPoint(field, x, y, dim_x, dim_y) ||
@@ -120,19 +100,6 @@ async function createFieldObject(fieldParams, msWindow = 1000 * 10) {
         drawField(field);
         return field;
       }
-      /* reasonableAttempts += 1;
-      if (reasonableAttempts % 1000 === 0) {
-        console.log(
-          "Still trying to find a valid point...",
-          reasonableAttempts,
-        );
-      }
-      if (reasonableAttempts > 10000) {
-        // drawGridPlainer(field);
-        return field;
-      } */
-      /*
-       */
     }
     const ca = [];
 

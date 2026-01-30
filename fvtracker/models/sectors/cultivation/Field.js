@@ -1,8 +1,24 @@
 import mongoose from "mongoose";
+import cultivation from ".";
 
 const fieldSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, default: "" },
+  dimensions: {
+    type: {
+      width: { type: Number, required: true }, // in number of cells
+      length: { type: Number, required: true }, // in number of cells
+    },
+    required: true,
+  },
+  cultivationAreaDimensions: {
+    type: {
+      min_ca_dim: { type: Number, required: true },
+      max_ca_dim: { type: Number, required: true },
+      gap: { type: Number, required: true }, // gap between cultivation areas in number of cells
+    },
+    required: true,
+  },
   manager: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "CultivationManager",
@@ -30,8 +46,6 @@ const fieldSchema = new mongoose.Schema({
     },
     required: true,
   },
-  width: { type: Number, required: true }, // in number of cells
-  length: { type: Number, required: true }, // in number of cells
 });
 
 const fieldGridCell = new mongoose.Schema({
@@ -65,5 +79,3 @@ export const Field =
 export const FieldGridCell =
   mongoose.models.FieldGridCell ||
   mongoose.model("FieldGridCell", fieldGridCell);
-
-

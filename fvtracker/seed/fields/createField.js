@@ -3,7 +3,7 @@ import { drawField } from "./analyze.js";
 import { CultivationManager } from "@/models/user/managers/CultivationManager.js";
 
 function randomPoint(field) {
-  const { width, length, min_ca_dim, max_ca_dim, gap } = field;
+  const { width, length, min_ca_dim, max_ca_dim } = field;
 
   const length_options = [];
   for (let i = min_ca_dim; i <= max_ca_dim; i++) {
@@ -61,7 +61,7 @@ function notValidPoint(field, x, y, dim_x, dim_y) {
   return false;
 }
 
-async function createFieldObject(field, msWindow = 1000 * 10) {
+async function createFieldObject(fieldParams, msWindow = 1000 * 10) {
   /* 
   params example:
     {
@@ -76,11 +76,13 @@ async function createFieldObject(field, msWindow = 1000 * 10) {
 
   const msStart = Date.now();
 
-  field["cultivationAreas"] = [];
+  fieldParams["cultivationAreas"] = [];
 
-  for (const [key, value] of Object.entries(field)) {
+  for (const [key, value] of Object.entries(fieldParams)) {
     console.log(`${key}: ${value}`);
   }
+
+  const { name, description, location, ...fieldDAO } = fieldParams;
 
   function fillField(field) {
     const { width, length, gap } = field;
@@ -143,9 +145,9 @@ async function createFieldObject(field, msWindow = 1000 * 10) {
     return fillField(field);
   }
 
-  let fieldResult = await fillField(field);
+  let fieldResult = await fillField(fieldDAO);
 
-  return fieldResult;
+  Object.assign(fieldResult, { name, description, location });  return fieldResult;
 }
 
 export default async function createField(fieldParams, msWindow) {

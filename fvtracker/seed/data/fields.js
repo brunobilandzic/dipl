@@ -29,7 +29,7 @@ export const optimizedParams = {
   name: "Optimized CAS",
   width: 100,
   length: 100,
-  min_ca_dim: 20,
+  min_ca_dim: 15,
   max_ca_dim: 50,
   gap: 2,
 };

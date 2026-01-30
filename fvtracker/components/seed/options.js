@@ -16,7 +16,7 @@ export default function SeedOptions() {
     },
     seedFields: {
       icon: <MdFoodBank />,
-      label: "Seed Fields",
+      label: "Seed Field",
     }
   };
 

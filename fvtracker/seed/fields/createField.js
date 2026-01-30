@@ -100,7 +100,7 @@ export default async function createField(fieldParams, msWindow = 1000 * 10) {
 
     let { x, y, dim_x, dim_y } = randomPoint(field);
 
-    let reasonableAttempts = 0;
+    // let reasonableAttempts = 0;
 
     while (
       notValidPoint(field, x, y, dim_x, dim_y) ||
@@ -138,14 +138,7 @@ export default async function createField(fieldParams, msWindow = 1000 * 10) {
         return field;
       } */
       /* 
-      
-      if (loopTime - msStart > msWindow) {
-        console.log(
-          "Time window exceeded, stopping field creation.",
-          loopTime - msStart,
-        );
-        return field;
-      } */
+       */
     }
     const ca = [];
 
@@ -160,29 +153,4 @@ export default async function createField(fieldParams, msWindow = 1000 * 10) {
 
   let fieldResult = await tryAITime(field);
   return fieldResult;
-}
-
-async function test() {
-  /* const promises = [];
-
-  for (let _fieldParams of fieldParams) {
-    promises.push(createField(_fieldParams));
-  }
-
-  const fields = await Promise.all(promises);
-  for (let field of fields) {
-    filledRatio(field);
-  }
-  console.log(`\n\nThere ara ${fields.length} fields created.`);
-  return fields; */
-
-  const field = await createField(optimizedParams, 1000 * 20);
-  console.log("\n\nOptimized field created:\n");
-  fieldFilledRatio(field);
-
-  drawField(field);
-}
-
-async function main() {
-  await test();
 }

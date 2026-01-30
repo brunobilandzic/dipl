@@ -1,9 +1,5 @@
 import {
-  fieldExample,
   get_ca_min_max,
-  length_options,
-  max_ca_dim,
-  min_ca_dim,
   gap,
 } from "./constants.js";
 import { checkFieldEnd, satisfaction } from "./seed_point.js";
@@ -20,7 +16,12 @@ function allCoordinates(field) {
 }
 
 function randomPoint(field) {
-  const { width, length, cultivationAreas } = field;
+  const { width, length, min_ca_dim, max_ca_dim, gap } = field;
+
+  const length_options = [];
+  for (let i = min_ca_dim; i <= max_ca_dim; i++) {
+    length_options.push(i);
+  }
 
   let x = Math.floor(Math.random() * width) + 1;
   let y = Math.floor(Math.random() * length) + 1;
@@ -30,7 +31,7 @@ function randomPoint(field) {
   return { x, y, dim_x, dim_y };
 }
 
-function coveringArea(field, x, y, dim_x, dim_y) {
+function notValidPoint(field, x, y, dim_x, dim_y, ) {
   const { width, length, cultivationAreas } = field;
 
   if (x < 0 || y < 0 || x + dim_x > width || y + dim_y > length) {
@@ -95,7 +96,7 @@ function createField(fieldParams) {
 
     let reasonableAttempts = 0;
     while (
-      coveringArea(field, x, y, dim_x, dim_y) ||
+      notValidPoint(field, x, y, dim_x, dim_y) ||
       x + dim_x + gap > width ||
       y + dim_y + gap > length
     ) {

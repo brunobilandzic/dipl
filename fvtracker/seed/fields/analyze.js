@@ -48,7 +48,6 @@ function drawField(field) {
     "cultivation areas.",
   );
   fieldFilledRatio(field);
-  console.log("CA coordinates:", allCoordinates(field));
 }
 
 function sum_points(field) {

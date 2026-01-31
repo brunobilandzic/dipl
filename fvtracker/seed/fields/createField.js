@@ -1,6 +1,7 @@
 import { Field } from "@/models/sectors/cultivation/Field.js";
 import { drawField } from "./analyze.js";
 import { CultivationManager } from "@/models/user/managers/CultivationManager.js";
+import { createFieldTimeMs, optimizedParams } from "../data/fields.js";
 
 function randomPoint(field) {
   const { width, length, min_ca_dim, max_ca_dim } = field;
@@ -113,7 +114,7 @@ async function createFieldObject(fieldParams, msWindow = 1000 * 10) {
   const dimensions = {
     width: fieldDao.width,
     length: fieldDao.length,
-  }
+  };
 
   const cultivationAreaDimensions = {
     min_ca_dim: fieldDao.min_ca_dim,
@@ -129,12 +130,12 @@ async function createFieldObject(fieldParams, msWindow = 1000 * 10) {
     location,
     cultivationAreas: fieldDao.cultivationAreas,
   };
-
-
-  
 }
 
-export default async function createField(fieldParams, msWindow) {
+export default async function createField(
+  fieldParams = optimizedParams,
+  msWindow = createFieldTimeMs,
+) {
   const fieldObject = await createFieldObject(fieldParams, msWindow);
   const fieldRecord = new Field(exportFieldDbData(fieldObject));
 

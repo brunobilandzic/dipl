@@ -38,3 +38,7 @@ export const optimizedParams = {
     longitude: 16.70472,
   },
 };
+
+ const createFieldTimeSeconds = 5
+
+ export const createFieldTimeMs = createFieldTimeSeconds * 1000;

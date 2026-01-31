@@ -24,8 +24,8 @@ function get_ca_min_max(ca) {
 }
 
 function drawField(field) {
-  const { width, length, cultivationAreas } = field;
-
+  let { width, length, cultivationAreas } = field;
+  cultivationAreas = cultivationAreas?.map((ca) => ca.fieldGridCells) || [];
   console.log("drawing grid:");
   for (let y = 0; y < length; y++) {
     let rowStr = "";
@@ -56,7 +56,9 @@ function sum_points(field) {
 }
 
 function fieldCultivationAreaPoints(field) {
-  return field.cultivationAreas.reduce(function (sum, ca) {
+  const cultivationAreas =
+    field.cultivationAreas?.map((ca) => ca.fieldGridCells) || [];
+  return cultivationAreas.reduce(function (sum, ca) {
     return sum + ca.length;
   }, 0);
 }

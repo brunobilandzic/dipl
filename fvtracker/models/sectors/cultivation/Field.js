@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { CultivationArea } from "./Cultivation";
 
 const fieldSchema = new mongoose.Schema({
   name: { type: String, required: true },
@@ -47,6 +48,27 @@ const fieldSchema = new mongoose.Schema({
   },
 });
 
+fieldSchema.methods.addCultivationArea = async function (cultivationArea) {
+  const { name, description, fieldGridCells } = cultivationArea;
+  const newCultivationArea = new CultivationArea({
+    name,
+    description,
+    field: this._id,
+  });
+
+  const gridCells = fieldGridCells.map((cell) => ({
+    row: cell.row,
+    column: cell.col,
+    cultivationArea: newCultivationArea._id,
+  }));
+
+  const insertedCells = await FieldGridCell.insertMany(gridCells);
+  newCultivationArea.fieldGridCells = insertedCells.map((c) => c._id);
+
+  this.cultivationAreas.push(newCultivationArea._id);
+  await newCultivationArea.save();
+};
+
 const fieldGridCell = new mongoose.Schema({
   // square cell in the field grid
   // has 1x1 size
@@ -57,11 +79,6 @@ const fieldGridCell = new mongoose.Schema({
     // cell can belong to only one cultivation area (like places where the soil is some type of soil good for some crops)
     type: mongoose.Schema.Types.ObjectId,
     ref: "CultivationArea",
-    default: null,
-  },
-  soilType: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "SoilType",
     default: null,
   },
   cultivation: {

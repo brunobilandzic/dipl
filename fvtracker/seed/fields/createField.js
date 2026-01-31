@@ -1,7 +1,15 @@
 import { Field } from "@/models/sectors/cultivation/Field.js";
 import { drawField } from "./analyze.js";
 import { CultivationManager } from "@/models/user/managers/CultivationManager.js";
-import { createFieldTimeMs, optimizedParams } from "../data/fields.js";
+import {
+  createFieldTimeMs,
+  cultivationAreaNames,
+  optimizedParams,
+  randomCultivationAreaName,
+} from "../data/fields.js";
+import dbConnect from "@/lib/db/mongooseConnect.js";
+
+await dbConnect();
 
 function randomPoint(field) {
   const { width, length, min_ca_dim, max_ca_dim } = field;
@@ -20,7 +28,8 @@ function randomPoint(field) {
 }
 
 function notValidPoint(field, x, y, dim_x, dim_y) {
-  const { width, length, cultivationAreas, gap } = field;
+  let { width, length, cultivationAreas, gap } = field;
+  cultivationAreas = cultivationAreas?.map((ca) => ca.fieldGridCells) || [];
 
   if (x < 0 || y < 0 || x + dim_x > width || y + dim_y > length) {
     return true;
@@ -79,9 +88,10 @@ async function createFieldObject(fieldParams, msWindow = 1000 * 10) {
       y + dim_y + gap > length
     ) {
       ({ x, y, dim_x, dim_y } = randomPoint(field));
+
       const loopTime = Date.now();
       const elapsed = loopTime - msStart;
-      if (elapsed % 10000 === 0) {
+      if (elapsed % 1000 === 0) {
         console.log(
           "Trying to find valid point...",
           (loopTime - msStart) / 1000,
@@ -98,14 +108,7 @@ async function createFieldObject(fieldParams, msWindow = 1000 * 10) {
         return field;
       }
     }
-    const ca = [];
-
-    for (let xi = x; xi < x + dim_x; xi++) {
-      for (let yi = y; yi < y + dim_y; yi++) {
-        ca.push({ row: xi, col: yi });
-      }
-    }
-    field.cultivationAreas.push(ca);
+    field.cultivationAreas.push(createCultivationArea(x, y, dim_x, dim_y));
     return fillField(field);
   }
 
@@ -138,7 +141,13 @@ export default async function createField(
 ) {
   const fieldObject = await createFieldObject(fieldParams, msWindow);
   const fieldRecord = new Field(exportFieldDbData(fieldObject));
-
+  const cultivationAreasPromises = fieldObject.cultivationAreas.map(
+    async (ca) => {
+      const newCultivationArea = await fieldRecord.addCultivationArea(ca);
+      return newCultivationArea;
+    },
+  );
+  await Promise.all(cultivationAreasPromises);
   const cultivationManager = await CultivationManager.findOne({});
   cultivationManager.fields.push(fieldRecord._id);
   fieldRecord.manager = cultivationManager._id;
@@ -151,4 +160,28 @@ export default async function createField(
 function exportFieldDbData(field) {
   const { cultivationAreas, ...rest } = field;
   return rest;
+}
+
+function createCultivationArea(x, y, dim_x, dim_y) {
+  const {name, description} = randomCultivationAreaName();
+  const fieldGridCells = [];
+  for (let xi = x; xi < x + dim_x; xi++) {
+    for (let yi = y; yi < y + dim_y; yi++) {
+      fieldGridCells.push({ row: xi, col: yi });
+    }
+  }
+
+  console.log(
+    "Created cultivation area:",
+    name,
+    "with",
+    fieldGridCells.length,
+    "cells.",
+  );
+
+  return {
+    name,
+    description,
+    fieldGridCells,
+  };
 }

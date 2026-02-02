@@ -538,46 +538,309 @@ export const vegatables = [
 
 export const fruits = [
   // VOĆE – glavne vrste
-  ({
+  {
     name: "Jabučasto voće",
-    description: "Voće s mesnatim plodom i sjemenom u kućici.",
+    description: "Voće s mesnatim plodom i sjemenom smještenim u kućici.",
+    cropTypes: [
+      {
+        name: "Jabuka",
+        description: "Najraširenije jabučasto voće.",
+        cropVarieties: [
+          "Idared",
+          "Golden Delicious",
+          "Granny Smith",
+          "Fuji",
+          "Gala",
+        ],
+        culinaryUse: ["Svježe", "Kolači", "Kompoti", "Sokovi"],
+        cookingNotes: "Čvrste sorte bolje za pečenje.",
+        storage: "Hladnjak ili hladna prostorija, više tjedana.",
+      },
+      {
+        name: "Kruška",
+        description: "Sočno voće mekše teksture.",
+        cropVarieties: ["Williams", "Conference", "Abate"],
+        culinaryUse: ["Svježe", "Deserti", "Kompoti"],
+        cookingNotes: "Brzo omekša pri kuhanju.",
+        storage: "Hladnjak, 1–2 tjedna.",
+      },
+      {
+        name: "Dunja",
+        description: "Tvrdo i aromatično voće.",
+        cropVarieties: ["Obična dunja"],
+        culinaryUse: ["Marmelade", "Žele", "Pečenje"],
+        cookingNotes: "Ne koristi se sirova.",
+        storage: "Hladno i suho, dugo.",
+      },
+    ],
   },
   {
     name: "Koštičavo voće",
     description: "Voće s jednom velikom košticom u sredini ploda.",
+    cropTypes: [
+      {
+        name: "Breskva",
+        description: "Sočno voće baršunaste kožice.",
+        cropVarieties: ["Žuta", "Bijela", "Nektarina"],
+        culinaryUse: ["Svježe", "Deserti", "Kompoti"],
+        cookingNotes: "Brzo se raspada kuhanjem.",
+        storage: "Hladnjak, kratko.",
+      },
+      {
+        name: "Marelica",
+        description: "Slatko-kiselo voće mekane teksture.",
+        cropVarieties: ["Mađarska", "Bergeron"],
+        culinaryUse: ["Marmelade", "Kolači"],
+        cookingNotes: "Pogodna za sušenje.",
+        storage: "Hladnjak, nekoliko dana.",
+      },
+      {
+        name: "Trešnja",
+        description: "Slatko koštičavo voće.",
+        cropVarieties: ["Slatka", "Višnja"],
+        culinaryUse: ["Svježe", "Deserti"],
+        cookingNotes: "Osjetljiva na toplinu.",
+        storage: "Hladnjak, vrlo kratko.",
+      },
+      {
+        name: "Šljiva",
+        description: "Voće pogodno za preradu.",
+        cropVarieties: ["Bistrica", "Stanley"],
+        culinaryUse: ["Svježe", "Pekmezi", "Sušenje"],
+        cookingNotes: "Dobro podnosi toplinu.",
+        storage: "Hladnjak, 1 tjedan.",
+      },
+    ],
   },
+
   {
     name: "Bobičasto voće",
-    description: "Sitno voće s mekanom kožicom i više sjemenki.",
+    description: "Sitno voće mekane kožice i više sjemenki.",
+    cropTypes: [
+      {
+        name: "Jagoda",
+        description: "Najpoznatije bobičasto voće.",
+        cropVarieties: ["Alba", "Clery", "Marmolada"],
+        culinaryUse: ["Svježe", "Deserti", "Džemovi"],
+        cookingNotes: "Ne prati prije skladištenja.",
+        storage: "Hladnjak, 1–2 dana.",
+      },
+      {
+        name: "Malina",
+        description: "Osjetljivo i aromatično voće.",
+        cropVarieties: ["Willamette", "Polka"],
+        culinaryUse: ["Svježe", "Džemovi"],
+        cookingNotes: "Brzo se raspada.",
+        storage: "Hladnjak, vrlo kratko.",
+      },
+      {
+        name: "Borovnica",
+        description: "Sitno plavo voće.",
+        cropVarieties: ["Američka", "Šumska"],
+        culinaryUse: ["Svježe", "Deserti"],
+        cookingNotes: "Dobro podnosi zamrzavanje.",
+        storage: "Hladnjak, 5–7 dana.",
+      },
+      {
+        name: "Kupina",
+        description: "Tamno bobičasto voće.",
+        cropVarieties: ["Divlja", "Uzgajana"],
+        culinaryUse: ["Svježe", "Džemovi"],
+        cookingNotes: "Intenzivna boja.",
+        storage: "Hladnjak, kratko.",
+      },
+      {
+        name: "Grožđe",
+        description:
+          "Bobičasto voće koje raste u grozdovima, koristi se svježe, sušeno i za preradu.",
+        cropVarieties: [
+          "Bijelo grožđe",
+          "Crno grožđe",
+          "Crveno grožđe",
+          "Bez sjemenki",
+        ],
+        culinaryUse: [
+          "Svježa konzumacija",
+          "Sokovi",
+          "Sušenje (grožđice)",
+          "Vino",
+        ],
+        cookingNotes:
+          "Svježe grožđe se rijetko termički obrađuje, ali je pogodno za redukcije i deserte.",
+        storage:
+          "Čuvati u hladnjaku na 0–4 °C, neoprano do upotrebe. Trajnost 5–10 dana.",
+      },
+    ],
   },
-  {
-    name: "Jezgrasto voće",
-    description: "Voće kod kojeg se konzumira jezgra ili sjemenka.",
-  },
+
   {
     name: "Agrumi",
     description: "Citrusno voće karakteristično po kiselkastom okusu i aromi.",
-  },
-  {
-    name: "Tropsko voće",
-    description: "Voće koje uspijeva u tropskim klimatskim područjima.",
+    cropTypes: [
+      {
+        name: "Naranča",
+        description: "Najčešći citrus.",
+        cropVarieties: ["Valencia", "Navel"],
+        culinaryUse: ["Svježe", "Sokovi"],
+        cookingNotes: "Sok najbolje svjež.",
+        storage: "Hladno, do 2 tjedna.",
+      },
+      {
+        name: "Limun",
+        description: "Vrlo kiseli citrus.",
+        cropVarieties: ["Eureka", "Lisbon"],
+        culinaryUse: ["Začinjavanje", "Sokovi"],
+        cookingNotes: "Kora se često koristi.",
+        storage: "Hladnjak.",
+      },
+      {
+        name: "Mandarina",
+        description: "Slatki citrus tanke kore.",
+        cropVarieties: ["Clementina", "Satsuma"],
+        culinaryUse: ["Svježe"],
+        cookingNotes: "Lako se guli.",
+        storage: "Hladnjak.",
+      },
+    ],
   },
   {
     name: "Suptropsko voće",
-    description: "Voće koje raste u suptropskim klimatskim uvjetima.",
+    description:
+      "Voće koje raste u suptropskim klimatskim uvjetima, često osjetljivo na hladnoću.",
+    cropTypes: [
+      {
+        name: "Smokva",
+        description: "Mekano i vrlo slatko voće tanke kore.",
+        cropVarieties: ["Bijela", "Crna", "Petrovača"],
+        culinaryUse: ["Svježe", "Sušenje", "Deserti"],
+        cookingNotes: "Vrlo zrele smokve koriste se odmah.",
+        storage: "Hladnjak, 1–2 dana.",
+      },
+      {
+        name: "Nar",
+        description: "Voće s jestivim sočnim sjemenkama.",
+        cropVarieties: ["Slatki", "Kiselkasti"],
+        culinaryUse: ["Svježe", "Salate", "Sokovi"],
+        cookingNotes: "Sjemenke se koriste sirove.",
+        storage: "Hladnjak, do 2 tjedna.",
+      },
+      {
+        name: "Kaki",
+        description: "Slatko voće mekane teksture kada dozrije.",
+        cropVarieties: ["Vanilija", "Hachiya"],
+        culinaryUse: ["Svježe", "Deserti"],
+        cookingNotes: "Nezreo kaki je trpak.",
+        storage: "Sobna temperatura do zrenja.",
+      },
+    ],
   },
   {
     name: "Oraškasto voće",
-    description: "Voće s tvrdim oklopom i jestivom jezgrom.",
+    description: "Voće s tvrdim oklopom i jestivom jezgrom bogatom mastima.",
+    cropTypes: [
+      {
+        name: "Orah",
+        description: "Najčešće orašasto voće u regiji.",
+        cropVarieties: ["Domaći", "Chandler"],
+        culinaryUse: ["Deserti", "Kolači", "Ulje"],
+        cookingNotes: "Lagano tostiranje pojačava aromu.",
+        storage: "Suho i hladno, mjesecima.",
+      },
+      {
+        name: "Lješnjak",
+        description: "Sitno orašasto voće slatkastog okusa.",
+        cropVarieties: ["Istarski", "Tonda Gentile"],
+        culinaryUse: ["Deserti", "Namazi"],
+        cookingNotes: "Često se koristi pržen.",
+        storage: "Suho.",
+      },
+      {
+        name: "Badem",
+        description: "Orašasti plod blagog okusa.",
+        cropVarieties: ["Slatki", "Gorki"],
+        culinaryUse: ["Svježe", "Deserti", "Mlijeko"],
+        cookingNotes: "Oguljeni bademi su blaži.",
+        storage: "Suho i hladno.",
+      },
+      {
+        name: "Pistacija",
+        description: "Zelenkasta jezgra intenzivne arome.",
+        cropVarieties: ["Slana", "Neslana"],
+        culinaryUse: ["Deserti", "Grickalice"],
+        cookingNotes: "Koristi se sirova ili pečena.",
+        storage: "Suho.",
+      },
+    ],
   },
   {
     name: "Suho voće",
-    description: "Voće koje je prirodno ili industrijski osušeno.",
+    description:
+      "Voće koje je prirodno ili industrijski osušeno radi duljeg trajanja.",
+    cropTypes: [
+      {
+        name: "Suhe smokve",
+        description: "Sušeni plod smokve visoke energetske vrijednosti.",
+        cropVarieties: ["Bijele", "Tamne"],
+        culinaryUse: ["Deserti", "Grickalice"],
+        cookingNotes: "Po potrebi namočiti.",
+        storage: "Suho i zatvoreno.",
+      },
+      {
+        name: "Grožđice",
+        description: "Sušeno grožđe.",
+        cropVarieties: ["Svijetle", "Tamne"],
+        culinaryUse: ["Kolači", "Riže", "Salate"],
+        cookingNotes: "Daju prirodnu slatkoću.",
+        storage: "Suho.",
+      },
+      {
+        name: "Suhe marelice",
+        description: "Sušene marelice bez koštice.",
+        cropVarieties: ["Prirodne", "Sulfitirane"],
+        culinaryUse: ["Deserti", "Variva"],
+        cookingNotes: "Namakanjem omekšaju.",
+        storage: "Suho.",
+      },
+    ],
   },
   {
     name: "Egzotično / rijetko voće",
     description: "Manje poznate ili rijetko uzgajane vrste voća.",
-  }),
+    cropTypes: [
+      {
+        name: "Mango",
+        description: "Tropsko voće slatke i sočne pulpe.",
+        cropVarieties: ["Kent", "Tommy Atkins"],
+        culinaryUse: ["Svježe", "Deserti", "Smoothiji"],
+        cookingNotes: "Zreo mango je mekan na dodir.",
+        storage: "Sobna temperatura do zrenja.",
+      },
+      {
+        name: "Ananas",
+        description: "Tropsko voće čvrste kore i aromatične pulpe.",
+        cropVarieties: ["Smooth Cayenne"],
+        culinaryUse: ["Svježe", "Pečenje", "Deserti"],
+        cookingNotes: "Toplina pojačava slatkoću.",
+        storage: "Sobna temperatura ili hladnjak.",
+      },
+      {
+        name: "Papaja",
+        description: "Meko tropsko voće blagog okusa.",
+        cropVarieties: ["Solo"],
+        culinaryUse: ["Svježe", "Smoothiji"],
+        cookingNotes: "Sjemenke nisu jestive.",
+        storage: "Hladnjak kad dozrije.",
+      },
+      {
+        name: "Dragon fruit",
+        description: "Egzotično voće blagog okusa i dekorativnog izgleda.",
+        cropVarieties: ["Bijela pulpa", "Crvena pulpa"],
+        culinaryUse: ["Svježe", "Deserti"],
+        cookingNotes: "Koristi se hladno.",
+        storage: "Hladnjak.",
+      },
+    ],
+  },
 ];
 
 export const mainTypes = ["Povrće", "Voće"];

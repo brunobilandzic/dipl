@@ -3,7 +3,9 @@ import {
   CropGeneralType,
   CropMainType,
   CropType,
+  CropVariety,
 } from "@/models/sectors/cultivation/Crops";
+import utils from "@/lib/utils";
 
 // Seed crop main types, general types, types, and varieties
 
@@ -15,6 +17,7 @@ export async function seedCropMainTypes() {
     cropMainTypesPromises.push(createMainType(mainTypeData));
   }
   const mainTypes = await Promise.all(cropMainTypesPromises);
+
   return mainTypes;
 }
 
@@ -49,10 +52,11 @@ async function createCropGeneralTypes(mainTypeId, generalTypesData) {
 }
 
 async function createCropGeneralType(mainTypeId, generalTypeData) {
+  const dbGeneralTypeData = utils.objects.extractDBObject(generalTypeData);
   return new Promise(async (resolve, reject) => {
     const cropGeneralType = new CropGeneralType({
       mainType: mainTypeId,
-      ...generalTypeData,
+      ...dbGeneralTypeData,
     });
 
     await cropGeneralType.save();
@@ -63,7 +67,7 @@ async function createCropGeneralType(mainTypeId, generalTypeData) {
     }
     const cropTypes = await createCropTypes(
       cropGeneralType._id,
-      generalTypeData.types,
+      generalTypeData.cropTypes,
     );
     resolve({ generalTypeId: cropGeneralType._id, cropTypes });
   });
@@ -113,7 +117,7 @@ async function createCropVarieties(cropTypeId, cropVarietiesData) {
 
 async function createCropVariety(cropTypeId, varietyName) {
   return new Promise(async (resolve, reject) => {
-    const cropVariety = new CropType.Variety({
+    const cropVariety = new CropVariety({
       cropType: cropTypeId,
       name: varietyName,
     });

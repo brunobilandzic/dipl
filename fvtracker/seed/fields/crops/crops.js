@@ -128,3 +128,21 @@ async function createCropVariety(cropTypeId, varietyName) {
     resolve(cropVariety._id);
   });
 }
+
+export function logMainTypes(mainTypes) {
+  for (const mt of mainTypes) {
+    console.log(
+      `Created main type: ${mt.mainType} with ${mt.generalTypes.length} general types`,
+    );
+    for (const gt of mt.generalTypes) {
+      console.log(
+        `  Created general type ID: ${gt.generalTypeId} with ${gt.cropTypes.length} crop types`,
+      );
+      for (const ct of gt.cropTypes) {
+        console.log(
+          `    Created crop type ID: ${ct.cropTypeId} with ${ct.cropVarieties.length} varieties`,
+        );
+      }
+    }
+  }
+}

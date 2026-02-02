@@ -43,11 +43,11 @@ export default function SeedOptions() {
           ([key, { icon, label, function: func }]) => (
             <div
               key={key}
-              className="flex flex-col gap-2 btn items-center justify-center p-2  cursor-pointer"
+              className="flex flex-col gap-2 btn items-center justify-around p-2 w-32 cursor-pointer "
               onClick={async () => API(label)}
             >
               <div className="text-3xl">{icon}</div>
-              <div>{label}</div>
+              <div className="text-sm text-wrap text-center">{label}</div>
             </div>
           ),
         )}
@@ -72,7 +72,7 @@ export function DeleteDB() {
   return (
     <button
       onClick={deleteDB}
-      className="flex flex-col gap-2 btn items-center justify-center p-2  cursor-pointer"
+      className="flex flex-col gap-2 btn items-center justify-around p-2 w-32 cursor-pointer"
     >
       <div className="text-3xl">
         <MdDeleteForever />

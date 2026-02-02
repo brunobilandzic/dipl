@@ -2,7 +2,19 @@ import mongoose from "mongoose";
 import { getDraftModeProviderForCacheScope } from "next/dist/server/app-render/work-unit-async-storage.external";
 const { Schema } = mongoose;
 
-// order is cropgeneratype -> croptype -> cropvariety
+// order is cropmaintype -> cropgeneratype -> croptype -> cropvariety
+
+const mainCropTypeSchema = new Schema({
+  name: { type: String, required: true },
+  description: { type: String, default: "" },
+  generalTypes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "CropGeneralType",
+      default: [],
+    },
+  ],
+});
 
 // crop general type (cereal, vegetable, fruit..)
 const cropGeneralTypeSchema = new Schema({
@@ -43,6 +55,10 @@ const cropVarietySchema = new Schema({
 });
 
 // model exports
+
+export const CropMainType =
+  mongoose.models.CropMainType ||
+  mongoose.model("CropMainType", mainCropTypeSchema);
 
 export const CropGeneralType =
   mongoose.models.CropGeneralType ||

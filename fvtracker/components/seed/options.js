@@ -17,7 +17,11 @@ export default function SeedOptions() {
     seedFields: {
       icon: <MdFoodBank />,
       label: "Create Field",
-    }
+    },
+    cropMainTypes: {
+      icon: <MdFoodBank />,
+      label: "Seed Crop Main Types",
+    },
   };
 
   const API = async (seedType) => {

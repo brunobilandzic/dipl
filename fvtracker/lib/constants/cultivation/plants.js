@@ -33,129 +33,127 @@ export const vegatablesGeneralCropTypes = [
           "Čuvati u hladnjaku na 0–4 °C, neopranu do upotrebe. Trajnost 3–7 dana ovisno o sorti.",
       },
 
-      [
-        {
-          name: "Špinat",
-          description:
-            "Brzorastuće lisnato povrće nježnih listova, bogato željezom, vitaminima A i C. Može se koristiti svježe ili termički obrađeno.",
-          healthBenefits:
-            "Izvor željeza, kalcija, vitamina K i antioksidanata. Sprječava anemiju i poboljšava sirenje krvi. Izvrstan za jačanje imuniteta.",
-          cropVarieties: [
-            "Obični špinat",
-            "Novozelandski špinat",
-            "Malabarski špinat",
-            "Jagodasti špinat",
-            "Perzijski špinat",
-            "Divlji špinat",
-            "Planinski špinat",
-            "Baby špinat",
-          ],
-          culinaryUse: [
-            "Svježe salate (baby listovi)",
-            "Blanširanje",
-            "Kratko pirjanje",
-            "Juhe i variva",
-            "Nadjevi, pite i umaci",
-          ],
-          cookingNotes:
-            "Kratka termička obrada čuva boju i hranjive tvari. Predugo kuhanje uzrokuje gubitak strukture i okusa.",
-          storage:
-            "Čuvati u hladnjaku na 0–4 °C, u labavo zatvorenoj ambalaži. Potrošiti unutar 2–4 dana.",
-        },
-        {
-          name: "Blitva",
-          description:
-            "Lisnato povrće s velikim listovima i mesnatim peteljkama, otporno i jednostavno za uzgoj.",
-          healthBenefits:
-            "Bogata magnezijom, željezom i vlaknima. Pomaže pri regulaciji krvnog tlaka i poboljšava probavu. Sadrži antioksidanse koji štite od bolesti.",
-          cropVarieties: [
-            "Bijela blitva",
-            "Zelena blitva",
-            "Crvena blitva",
-            "Žuta blitva",
-            "Baby blitva",
-          ],
-          culinaryUse: [
-            "Kuhanje i pirjanje",
-            "Prilozi uz ribu i krumpir",
-            "Juhe i variva",
-            "Zapečena jela",
-          ],
-          cookingNotes:
-            "Peteljke zahtijevaju dulju termičku obradu od listova. Blanširanje smanjuje gorčinu.",
-          storage:
-            "Čuvati u hladnjaku na 0–4 °C, u vlažnoj krpi ili perforiranoj vrećici. Trajnost 4–6 dana.",
-        },
-        {
-          name: "Kupusnjače (lisnate)",
-          description:
-            "Lisnate vrste iz porodice kupusnjača s čvrstim listovima i izraženim okusom, bogate vlaknima i vitaminima.",
-          healthBenefits:
-            "Izvor vitamina C i K, sadrže sulforafan koji ima protiupalnih svojstava. Sprječavaju rak i jačaju imunitet. Odličan izvor vlakana.",
-          cropVarieties: [
-            "Kelj",
-            "Raštika",
-            "Kovrčavi kelj",
-            "Kineski kupus",
-            "Pak choi",
-            "Tatsoi",
-            "Mizuna",
-          ],
-          culinaryUse: [
-            "Kuhanje i pirjanje",
-            "Pečenje u pećnici",
-            "Fermentacija",
-            "Juhe i variva",
-          ],
-          cookingNotes:
-            "Dulja obrada omekšava listove i smanjuje intenzitet okusa. Mladi listovi mogu se koristiti kraće kuhani.",
-          storage:
-            "Čuvati u hladnjaku na 0–4 °C. Veće glavice do 1–2 tjedna, manji listovi 3–5 dana.",
-        },
-        {
-          name: "Cikorijasto lisnato povrće",
-          description:
-            "Lisnato povrće iz roda Cichorium, karakteristično po gorkastom okusu i čvrstim listovima.",
-          healthBenefits:
-            "Podržava zdravlje jetre i probave. Sadrži inulina koji hranit korisne bakterije u crijevima. Sniža krvni šećer i pomaže pri mršavljenju.",
-          cropVarieties: [
-            "Radič",
-            "Cikorija",
-            "Endivija",
-            "Escarole",
-            "Puntarelle",
-          ],
-          culinaryUse: [
-            "Svježa konzumacija",
-            "Blanširanje",
-            "Pirjanje",
-            "Pečenje",
-            "Dodavanje tjestenini i rižotima",
-          ],
-          cookingNotes:
-            "Blanširanje i toplinska obrada smanjuju gorčinu. Mladi listovi su blaži i pogodni za sirovu konzumaciju.",
-          storage:
-            "Čuvati u hladnjaku na 0–4 °C, visoka vlažnost zraka (90–95 %). Trajnost 5–10 dana.",
-        },
-        {
-          name: "Divlje lisnato povrće",
-          description:
-            "Samonikle lisnate biljke tradicionalno korištene u prehrani, često jačeg okusa.",
-          healthBenefits:
-            "Bogat mineralno i vitaminima, posebno vitaminom K. Pomaže pri detoksikaciji organizma. Snažno diuretsko i desinficijuće svojstvo.",
-          cropVarieties: ["Maslačak", "Kopriva", "Šćir", "Loboda"],
-          culinaryUse: [
-            "Blanširanje",
-            "Juhe i variva",
-            "Nadjevi i pite",
-            "Mješavine s drugim povrćem",
-          ],
-          cookingNotes:
-            "Obavezno kratko blanširati radi uklanjanja gorčine ili iritirajućih tvari (npr. kopriva).",
-          storage:
-            "Najbolje koristiti svježe. Kratkoročno čuvati u hladnjaku do 2 dana.",
-        },
-      ],
+      {
+        name: "Špinat",
+        description:
+          "Brzorastuće lisnato povrće nježnih listova, bogato željezom, vitaminima A i C. Može se koristiti svježe ili termički obrađeno.",
+        healthBenefits:
+          "Izvor željeza, kalcija, vitamina K i antioksidanata. Sprječava anemiju i poboljšava sirenje krvi. Izvrstan za jačanje imuniteta.",
+        cropVarieties: [
+          "Obični špinat",
+          "Novozelandski špinat",
+          "Malabarski špinat",
+          "Jagodasti špinat",
+          "Perzijski špinat",
+          "Divlji špinat",
+          "Planinski špinat",
+          "Baby špinat",
+        ],
+        culinaryUse: [
+          "Svježe salate (baby listovi)",
+          "Blanširanje",
+          "Kratko pirjanje",
+          "Juhe i variva",
+          "Nadjevi, pite i umaci",
+        ],
+        cookingNotes:
+          "Kratka termička obrada čuva boju i hranjive tvari. Predugo kuhanje uzrokuje gubitak strukture i okusa.",
+        storage:
+          "Čuvati u hladnjaku na 0–4 °C, u labavo zatvorenoj ambalaži. Potrošiti unutar 2–4 dana.",
+      },
+      {
+        name: "Blitva",
+        description:
+          "Lisnato povrće s velikim listovima i mesnatim peteljkama, otporno i jednostavno za uzgoj.",
+        healthBenefits:
+          "Bogata magnezijom, željezom i vlaknima. Pomaže pri regulaciji krvnog tlaka i poboljšava probavu. Sadrži antioksidanse koji štite od bolesti.",
+        cropVarieties: [
+          "Bijela blitva",
+          "Zelena blitva",
+          "Crvena blitva",
+          "Žuta blitva",
+          "Baby blitva",
+        ],
+        culinaryUse: [
+          "Kuhanje i pirjanje",
+          "Prilozi uz ribu i krumpir",
+          "Juhe i variva",
+          "Zapečena jela",
+        ],
+        cookingNotes:
+          "Peteljke zahtijevaju dulju termičku obradu od listova. Blanširanje smanjuje gorčinu.",
+        storage:
+          "Čuvati u hladnjaku na 0–4 °C, u vlažnoj krpi ili perforiranoj vrećici. Trajnost 4–6 dana.",
+      },
+      {
+        name: "Kupusnjače (lisnate)",
+        description:
+          "Lisnate vrste iz porodice kupusnjača s čvrstim listovima i izraženim okusom, bogate vlaknima i vitaminima.",
+        healthBenefits:
+          "Izvor vitamina C i K, sadrže sulforafan koji ima protiupalnih svojstava. Sprječavaju rak i jačaju imunitet. Odličan izvor vlakana.",
+        cropVarieties: [
+          "Kelj",
+          "Raštika",
+          "Kovrčavi kelj",
+          "Kineski kupus",
+          "Pak choi",
+          "Tatsoi",
+          "Mizuna",
+        ],
+        culinaryUse: [
+          "Kuhanje i pirjanje",
+          "Pečenje u pećnici",
+          "Fermentacija",
+          "Juhe i variva",
+        ],
+        cookingNotes:
+          "Dulja obrada omekšava listove i smanjuje intenzitet okusa. Mladi listovi mogu se koristiti kraće kuhani.",
+        storage:
+          "Čuvati u hladnjaku na 0–4 °C. Veće glavice do 1–2 tjedna, manji listovi 3–5 dana.",
+      },
+      {
+        name: "Cikorijasto lisnato povrće",
+        description:
+          "Lisnato povrće iz roda Cichorium, karakteristično po gorkastom okusu i čvrstim listovima.",
+        healthBenefits:
+          "Podržava zdravlje jetre i probave. Sadrži inulina koji hranit korisne bakterije u crijevima. Sniža krvni šećer i pomaže pri mršavljenju.",
+        cropVarieties: [
+          "Radič",
+          "Cikorija",
+          "Endivija",
+          "Escarole",
+          "Puntarelle",
+        ],
+        culinaryUse: [
+          "Svježa konzumacija",
+          "Blanširanje",
+          "Pirjanje",
+          "Pečenje",
+          "Dodavanje tjestenini i rižotima",
+        ],
+        cookingNotes:
+          "Blanširanje i toplinska obrada smanjuju gorčinu. Mladi listovi su blaži i pogodni za sirovu konzumaciju.",
+        storage:
+          "Čuvati u hladnjaku na 0–4 °C, visoka vlažnost zraka (90–95 %). Trajnost 5–10 dana.",
+      },
+      {
+        name: "Divlje lisnato povrće",
+        description:
+          "Samonikle lisnate biljke tradicionalno korištene u prehrani, često jačeg okusa.",
+        healthBenefits:
+          "Bogat mineralno i vitaminima, posebno vitaminom K. Pomaže pri detoksikaciji organizma. Snažno diuretsko i desinficijuće svojstvo.",
+        cropVarieties: ["Maslačak", "Kopriva", "Šćir", "Loboda"],
+        culinaryUse: [
+          "Blanširanje",
+          "Juhe i variva",
+          "Nadjevi i pite",
+          "Mješavine s drugim povrćem",
+        ],
+        cookingNotes:
+          "Obavezno kratko blanširati radi uklanjanja gorčine ili iritirajućih tvari (npr. kopriva).",
+        storage:
+          "Najbolje koristiti svježe. Kratkoročno čuvati u hladnjaku do 2 dana.",
+      },
     ],
   },
   {
@@ -867,7 +865,7 @@ export const fruitsGeneralCropTypes = [
       {
         name: "Ananas",
         description: "Tropsko voće čvrste kore i aromatične pulpe.",
-        cropVarieties: ["Smooth Cayenne"],
+        cropVarieties: ["Smooth Cayenne", "Queen", "Red Spanish"],
         culinaryUse: ["Svježe", "Pečenje", "Deserti"],
         cookingNotes: "Toplina pojačava slatkoću.",
         storage: "Sobna temperatura ili hladnjak.",
@@ -875,7 +873,7 @@ export const fruitsGeneralCropTypes = [
       {
         name: "Papaja",
         description: "Meko tropsko voće blagog okusa.",
-        cropVarieties: ["Solo"],
+        cropVarieties: ["Solo", "Red Lady", "Maradol"],
         culinaryUse: ["Svježe", "Smoothiji"],
         cookingNotes: "Sjemenke nisu jestive.",
         storage: "Hladnjak kad dozrije.",

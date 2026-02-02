@@ -1,5 +1,5 @@
 // POVRĆE – glavne vrste
-export const vegatablesCropTypes = [
+export const vegatablesGeneralCropTypes = [
   {
     name: "Lisnato povrće",
     description: "Povrće kod kojeg se koristi list kao jestivi dio.",
@@ -158,7 +158,6 @@ export const vegatablesCropTypes = [
       ],
     ],
   },
-  ,
   {
     name: "Plodovito povrće",
     description:
@@ -586,7 +585,7 @@ export const vegatablesCropTypes = [
   },
 ];
 
-export const fruitsCropTypes = [
+export const fruitsGeneralCropTypes = [
   // VOĆE – glavne vrste
   {
     name: "Jabučasto voće",
@@ -896,8 +895,8 @@ export const fruitsCropTypes = [
 export const mainTypes = [{ name: "Povrće" }, { name: "Voće" }];
 
 const allCropTypes = [
-  { name: "Povrće", generalTypes: vegatablesCropTypes },
-  { name: "Voće", generalTypes: fruitsCropTypes },
+  { name: "Povrće", generalTypes: vegatablesGeneralCropTypes },
+  { name: "Voće", generalTypes: fruitsGeneralCropTypes },
 ];
 
 export default allCropTypes;

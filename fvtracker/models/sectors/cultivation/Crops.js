@@ -42,7 +42,7 @@ const cropTypeSchema = new Schema({
 const cropVarietySchema = new Schema({
   name: { type: String, required: true },
   description: { type: String, default: "" },
-  type: {
+  cropType: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "CropType",
     required: true,

@@ -8,6 +8,8 @@ export const vegatables = [
         name: "Salata",
         description:
           "Lisnato povrće iz roda Lactuca, blagoga okusa, najčešće konzumirano svježe. Za razliku od cikorijastih kultura, nema izraženu gorčinu.",
+        healthBenefits:
+          "Bogata vlaknima, vitaminima A i K, nizak sadržaj kalorija. Pomaže pri izgradnji čvrstih kostiju i poboljšanju vida.",
         cropVarieties: [
           "Iceberg",
           "Kristalka",
@@ -36,6 +38,8 @@ export const vegatables = [
           name: "Špinat",
           description:
             "Brzorastuće lisnato povrće nježnih listova, bogato željezom, vitaminima A i C. Može se koristiti svježe ili termički obrađeno.",
+          healthBenefits:
+            "Izvor željeza, kalcija, vitamina K i antioksidanata. Sprječava anemiju i poboljšava sirenje krvi. Izvrstan za jačanje imuniteta.",
           cropVarieties: [
             "Obični špinat",
             "Novozelandski špinat",
@@ -62,6 +66,8 @@ export const vegatables = [
           name: "Blitva",
           description:
             "Lisnato povrće s velikim listovima i mesnatim peteljkama, otporno i jednostavno za uzgoj.",
+          healthBenefits:
+            "Bogata magnezijom, željezom i vlaknima. Pomaže pri regulaciji krvnog tlaka i poboljšava probavu. Sadrži antioksidanse koji štite od bolesti.",
           cropVarieties: [
             "Bijela blitva",
             "Zelena blitva",
@@ -84,6 +90,8 @@ export const vegatables = [
           name: "Kupusnjače (lisnate)",
           description:
             "Lisnate vrste iz porodice kupusnjača s čvrstim listovima i izraženim okusom, bogate vlaknima i vitaminima.",
+          healthBenefits:
+            "Izvor vitamina C i K, sadrže sulforafan koji ima protiupalnih svojstava. Sprječavaju rak i jačaju imunitet. Odličan izvor vlakana.",
           cropVarieties: [
             "Kelj",
             "Raštika",
@@ -108,6 +116,8 @@ export const vegatables = [
           name: "Cikorijasto lisnato povrće",
           description:
             "Lisnato povrće iz roda Cichorium, karakteristično po gorkastom okusu i čvrstim listovima.",
+          healthBenefits:
+            "Podržava zdravlje jetre i probave. Sadrži inulina koji hranit korisne bakterije u crijevima. Sniža krvni šećer i pomaže pri mršavljenju.",
           cropVarieties: [
             "Radič",
             "Cikorija",
@@ -131,6 +141,8 @@ export const vegatables = [
           name: "Divlje lisnato povrće",
           description:
             "Samonikle lisnate biljke tradicionalno korištene u prehrani, često jačeg okusa.",
+          healthBenefits:
+            "Bogat mineralno i vitaminima, posebno vitaminom K. Pomaže pri detoksikaciji organizma. Snažno diuretsko i desinficijuće svojstvo.",
           cropVarieties: ["Maslačak", "Kopriva", "Šćir", "Loboda"],
           culinaryUse: [
             "Blanširanje",
@@ -156,6 +168,8 @@ export const vegatables = [
         name: "Rajčica",
         description:
           "Jedna od najčešće korištenih plodovitih kultura, blagog do kiselkastog okusa.",
+        healthBenefits:
+          "Bogata likopenom i витамином C, jaka antioksidacijska svojstva. Štiti od srčanih bolesti i raka. Pomaže pri izgradnji kostiju.",
         cropVarieties: [
           "Cherry rajčica",
           "Šljivar",
@@ -171,6 +185,8 @@ export const vegatables = [
       {
         name: "Paprika",
         description: "Plodovito povrće različitih oblika i stupnjeva ljutine.",
+        healthBenefits:
+          "Odličan izvor vitamina C, karotenoidâ i kapsaicina. Jača imunitet i sprječava upale. Poboljšava cirkulaciju krvi.",
         cropVarieties: ["Babura", "Roga", "Kapia", "Feferon", "Čili paprika"],
         culinaryUse: ["Svježe salate", "Pečenje", "Punjenje", "Kuhanje"],
         cookingNotes: "Pečenjem se pojačava slatkoća. Ljutina ovisi o sorti.",
@@ -179,6 +195,8 @@ export const vegatables = [
       {
         name: "Krastavac",
         description: "Osvježavajuće povrće visokog udjela vode.",
+        healthBenefits:
+          "Idealan za hidrataciju, mali sadržaj kalorija. Sadrži silicij za zdrave kožu i kosu. Pomaže pri gubitku težine.",
         cropVarieties: ["Salatni krastavac", "Kornišon", "Mini krastavac"],
         culinaryUse: ["Svježe salate", "Kiseljenje", "Hladne juhe"],
         cookingNotes: "Najčešće se koristi sirov, bez termičke obrade.",
@@ -188,6 +206,8 @@ export const vegatables = [
         name: "Tikvica",
         description:
           "Mlada plodovita kultura neutralnog okusa, vrlo prilagodljiva u kuhanju.",
+        healthBenefits:
+          "Nizak sadržaj kalorija, bogata vlaknima. Sadrži beta-karoten i vitamina C. Pomaže pri probavi i jačanju imuniteta.",
         cropVarieties: ["Zelena tikvica", "Žuta tikvica", "Okrugla tikvica"],
         culinaryUse: ["Pirjanje", "Pečenje", "Roštilj", "Juhe"],
         cookingNotes: "Brzo omekšava; kratka obrada daje najbolju teksturu.",
@@ -196,6 +216,8 @@ export const vegatables = [
       {
         name: "Patlidžan",
         description: "Plodovito povrće spužvaste strukture koje upija masnoću.",
+        healthBenefits:
+          "Sadrži nasutin koji smanjuje krvni kolesterol. Bogat antioksidansima i vlaknima. Pomaže pri kontroli težine.",
         cropVarieties: [
           "Ljubičasti patlidžan",
           "Bijeli patlidžan",
@@ -209,6 +231,8 @@ export const vegatables = [
       {
         name: "Bundeva i tikve",
         description: "Plodovito povrće s tvrdom korom i dugim rokom trajanja.",
+        healthBenefits:
+          "Bogata beta-karotenom i vitaminom C, prirodna slatkoća umjesto šećera. Pomaže pri zdravlju očiju i kostiju. Niski indeks glikemije.",
         cropVarieties: [
           "Muškatna tikva",
           "Hokkaido",
@@ -229,6 +253,8 @@ export const vegatables = [
       {
         name: "Mrkva",
         description: "Slatkast korijen bogat beta-karotenom.",
+        healthBenefits:
+          "Izvor beta-karotena koji se pretvara u vitamin A, jačanja vida. Bogata vlaknima i antioksidansima. Sprječava bolesti srca.",
         cropVarieties: ["Nantes", "Chantenay", "Imperator", "Ljubičasta mrkva"],
         culinaryUse: ["Svježe", "Juhe", "Variva", "Pečenje"],
         cookingNotes: "Kratko kuhanje čuva slatkoću.",
@@ -237,6 +263,8 @@ export const vegatables = [
       {
         name: "Cikla",
         description: "Korjenasto povrće zemljastog okusa i jake boje.",
+        healthBenefits:
+          "Bogata dušičnima koji poboljšavaju krvni tlak. Sadrži betalainâ koje su moćne antioksidanse. Pomaže pri detoksikaciji jetre.",
         cropVarieties: ["Crvena", "Zlatna", "Chioggia"],
         culinaryUse: ["Pečenje", "Kuhanje", "Salate"],
         cookingNotes: "Pečenje pojačava slatkoću.",
@@ -245,6 +273,8 @@ export const vegatables = [
       {
         name: "Rotkva",
         description: "Veliki, pikantni korijen.",
+        healthBenefits:
+          "Bogata vitaminom C i vlaknima. Jača imunitet i pomaže pri probavi. Ima blago dezinficijuća svojstva.",
         cropVarieties: ["Bijela", "Crna"],
         culinaryUse: ["Svježe", "Salate"],
         cookingNotes: "Oguliti za blaži okus.",
@@ -253,6 +283,8 @@ export const vegatables = [
       {
         name: "Rotkvica",
         description: "Mali, hrskavi korijen.",
+        healthBenefits:
+          "Bogata vitaminom C, pomaže pri jačanju imuniteta. Sadrži fito-kemikalije s protiupalnim svojstvima. Nizak sadržaj kalorija.",
         cropVarieties: ["Crvena", "Bijela", "Ljubičasta"],
         culinaryUse: ["Svježe"],
         cookingNotes: "Najbolja sirova.",
@@ -261,6 +293,8 @@ export const vegatables = [
       {
         name: "Peršin korijen",
         description: "Aromatičan korijen za temeljce.",
+        healthBenefits:
+          "Bogat vlaknima i vitaminama. Jača probavu i smanjuje nadutost. Ima diuretska svojstva.",
         cropVarieties: ["Dugi", "Kratki"],
         culinaryUse: ["Juhe", "Variva"],
         cookingNotes: "Dodaje se rano u kuhanju.",
@@ -269,6 +303,8 @@ export const vegatables = [
       {
         name: "Pastrnjak",
         description: "Slatkast korijen sličan mrkvi.",
+        healthBenefits:
+          "Bogat vlaknima i vitaminom C. Pomaže pri zdravoj probavi i održavanju razine šećera. Ima antioksidacijska svojstva.",
         cropVarieties: ["Klasični"],
         culinaryUse: ["Pečenje", "Juhe", "Pire"],
         cookingNotes: "Pečenjem postaje vrlo sladak.",
@@ -283,6 +319,8 @@ export const vegatables = [
       {
         name: "Krumpir",
         description: "Najvažnija gomoljasta kultura.",
+        healthBenefits:
+          "Bogat kalijumom i vitaminom B6. Sadrži rezistentnog škroba koji je od koristi za zdravu probavu. Bez glutena.",
         cropVarieties: ["Mladi", "Bijeli", "Crveni", "Ljubičasti"],
         culinaryUse: ["Kuhanje", "Pečenje", "Prženje", "Pire"],
         cookingNotes: "Različite sorte imaju različit udio škroba.",
@@ -291,6 +329,8 @@ export const vegatables = [
       {
         name: "Batat",
         description: "Slatki gomolj bogat vlaknima.",
+        healthBenefits:
+          "Izvor beta-karotena i manganeza. Bogat antioksidansima koji štite od bolesti. Pomaže pri regulaciji krvnog šećera.",
         cropVarieties: ["Narančasti", "Ljubičasti", "Bijeli"],
         culinaryUse: ["Pečenje", "Juhe", "Pire"],
         cookingNotes: "Ne guliti prije pečenja.",
@@ -299,6 +339,8 @@ export const vegatables = [
       {
         name: "Topinambur",
         description: "Gomolj orašastog okusa.",
+        healthBenefits:
+          "Sadrži inulina koji hranit zdrave bakterije u crijevima. Pomaže pri snižavanju krvnog šećera i kolesterola. Nizak glikemijski indeks.",
         cropVarieties: ["Klasični"],
         culinaryUse: ["Pečenje", "Juhe"],
         cookingNotes: "Kratka obrada.",
@@ -313,6 +355,8 @@ export const vegatables = [
       {
         name: "Luk",
         description: "Osnovna kuhinjska kultura.",
+        healthBenefits:
+          "Sadrži kvercetin i sulfidnih spojeva s antibakterijskim svojstvima. Pomaže pri zaštiti srca i snižavanju kolesterola. Jača imunitet.",
         cropVarieties: ["Bijeli", "Crveni", "Žuti", "Mladi"],
         culinaryUse: ["Pirjanje", "Pečenje", "Sirovo"],
         cookingNotes: "Pirjanjem postaje sladak.",
@@ -321,6 +365,8 @@ export const vegatables = [
       {
         name: "Češnjak",
         description: "Intenzivno aromatična lukovica.",
+        healthBenefits:
+          "Sadrži alicina s jakim antibakterijskim svojstvima. Pomaže pri zaštiti srca i snižavanju krvnog tlaka. Prirodan antibiotik.",
         cropVarieties: ["Bijeli", "Ljubičasti"],
         culinaryUse: ["Začinjavanje", "Ulja", "Umaci"],
         cookingNotes: "Ne prepeći.",
@@ -329,6 +375,8 @@ export const vegatables = [
       {
         name: "Poriluk",
         description: "Blaga lukovičasta kultura.",
+        healthBenefits:
+          "Bogat vlaknima i vitaminom C. Pomaže pri jačanju kostiju i imuniteta. Ima blaga diuretska svojstva.",
         cropVarieties: ["Zimski", "Ljetni"],
         culinaryUse: ["Juhe", "Pirjanje", "Pečenje"],
         cookingNotes: "Dobro oprati slojeve.",
@@ -337,6 +385,8 @@ export const vegatables = [
       {
         name: "Luk šalot",
         description: "Fini, aromatičan luk.",
+        healthBenefits:
+          "Bogat antioksidansima i flonoidima. Pomaže pri regulaciji krvnog šećera i kolesterola. Blagi antibakterijski učinak.",
         cropVarieties: ["Crveni", "Smeđi"],
         culinaryUse: ["Umaci", "Pirjanje"],
         cookingNotes: "Idealno za fine umake.",

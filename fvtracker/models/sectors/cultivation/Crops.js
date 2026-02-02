@@ -6,7 +6,6 @@ const { Schema } = mongoose;
 
 const mainCropTypeSchema = new Schema({
   name: { type: String, required: true },
-  description: { type: String, default: "" },
   generalTypes: [
     {
       type: mongoose.Schema.Types.ObjectId,

@@ -74,6 +74,7 @@ const cultivationSchema = new Schema({
     enum: ["u planiranju", "u toku", "završeno"],
     default: "u planiranju",
   },
+  createdAt: { type: Date, default: Date.now },
   startDate: { type: Date, required: true },
   endDate: { type: Date, default: null },
 });

@@ -893,4 +893,11 @@ export const fruitsCropTypes = [
   },
 ];
 
-export const mainTypes = ["Povrće", "Voće"];
+export const mainTypes = [{ name: "Povrće" }, { name: "Voće" }];
+
+const allCropTypes = [
+  { name: "Povrće", generalTypes: vegatablesCropTypes },
+  { name: "Voće", generalTypes: fruitsCropTypes },
+];
+
+export default allCropTypes;

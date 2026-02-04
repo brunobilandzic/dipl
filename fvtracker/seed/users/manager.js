@@ -1,6 +1,7 @@
 import { Manager } from "@/models/user/managers/Manager.js";
 import dbConnect from "@/lib/db/mongooseConnect";
 import mongoose from "mongoose";
+import { AppUser } from "@/models/user/AppUser";
 
 export const createManager = async (
   appUserId,
@@ -37,7 +38,10 @@ const createRootManager = async (
     managerModelName,
     generalManager: generalManagerId,
   });
-
+  const appUser = await AppUser.findById(appUserId);
+  appUser.manager = rootManager._id;
+  
+  await appUser.save();
   await rootManager.save();
   return rootManager;
 };

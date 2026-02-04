@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const appUserSchema = new Schema({
+  manager: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Manager",
+  },
   username: {
     type: String,
   },

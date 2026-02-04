@@ -171,14 +171,6 @@ function createCultivationArea(x, y, dim_x, dim_y) {
     }
   }
 
-  console.log(
-    "Created cultivation area:",
-    name,
-    "with",
-    fieldGridCells.length,
-    "cells.",
-  );
-
   return {
     name,
     description,

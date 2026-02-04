@@ -78,6 +78,5 @@ export function randomCultivationAreaName() {
     Math.floor(Math.random() * cultivationAreaNames.length),
     1,
   )[0];
-  console.log("Selected cultivation area name:", datapoint);
   return datapoint;
 }

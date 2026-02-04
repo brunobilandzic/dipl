@@ -17,7 +17,7 @@ export async function seedCropMainTypes() {
     cropMainTypesPromises.push(createMainType(mainTypeData));
   }
   const mainTypes = await Promise.all(cropMainTypesPromises);
-
+  console.log(`Created ${mainTypes.length} main crop types.`);
   return mainTypes;
 }
 
@@ -26,7 +26,6 @@ async function createMainType(mainTypeData) {
     const mainCropType = new CropMainType({
       name: mainTypeData.name,
     });
-    await mainCropType.save();
     if (!mainCropType) {
       return reject(`Failed to create main crop type: ${mainTypeData.name}`);
     }
@@ -34,7 +33,10 @@ async function createMainType(mainTypeData) {
       mainCropType._id,
       mainTypeData.generalTypes,
     );
+
     resolve({ mainType: mainCropType.name, generalTypes });
+    mainCropType.generalTypes = generalTypes.map((gt) => gt.generalTypeId);
+    await mainCropType.save();
   });
 }
 
@@ -58,8 +60,7 @@ async function createCropGeneralType(mainTypeId, generalTypeData) {
       mainType: mainTypeId,
       ...dbGeneralTypeData,
     });
-
-    await cropGeneralType.save();
+    
     if (!cropGeneralType) {
       return reject(
         `Failed to create crop general type: ${generalTypeData.name}`,

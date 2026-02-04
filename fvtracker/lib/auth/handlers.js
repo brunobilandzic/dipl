@@ -43,7 +43,11 @@ async function signUpCredentials({
     return null;
   }
   if (password !== passwordConfirm) {
-    console.log("Password and confirmation do not match", password, passwordConfirm);
+    console.log(
+      "Password and confirmation do not match",
+      password,
+      passwordConfirm,
+    );
     return null;
   }
 
@@ -63,8 +67,13 @@ async function signUpCredentials({
   return newUser;
 }
 
-async function logInCredentials({ email, password }) {
-  const appUser = await AppUser.findOne({ email });
+async function logInCredentials({ login, password }) {
+  
+  login = login.trim().toLowerCase();
+  let appUser = await AppUser.findOne({ email: login });
+  if (!appUser) {
+    appUser = await AppUser.findOne({ username: login });
+  }
   if (appUser) {
     const authorized = await bcrypt.compare(password, appUser.password);
     if (authorized) {

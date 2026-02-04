@@ -1,10 +1,10 @@
 import { LoginButton, LogoutButton } from "@/components/auth/login";
 import React from "react";
 import { SignUpButton } from "@/components/auth/signup";
-import { fetchSessionAppUser } from "@/lib/auth/user/userServer";
+import authLib from "@/lib/auth";
 
 async function AuthorizePage() {
-  const appUser = await fetchSessionAppUser();
+  const appUser = await authLib.session.fetchSessionAppUser();
   return (
     <div className="h-screen flex justify-center items-center">
       <div>

@@ -1,8 +1,12 @@
-import { handleCredentials, handleOAuth } from "./authentification/handlers";
+import { handleCredentials, handleOAuth } from "./handlers";
+import { fetchSessionAppUser } from "./fetchSessionData";
 
 export default {
   authorizationHandlers: {
     handleOAuth,
     handleCredentials,
+  },
+  session: {
+    fetchSessionAppUser,
   },
 };

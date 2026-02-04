@@ -16,7 +16,7 @@ export async function fetchSessionAppUser() {
   return appUser;
 }
 
-export async function fetchSessionEmail() {
+async function fetchSessionEmail() {
   const session = await auth();
   if (!session) {
     console.log("No session found: fetch email failed");

@@ -1,10 +1,10 @@
-import { fetchSessionAppUser } from "@/lib/auth/user/userServer";
+import authLib from "@/lib/auth";
 import { UNATHENTICATED_ACCESS } from "@/lib/constants/errors/user/appUser";
 
 export async function GET(req) {
   console.log("User redux route GET called");
   try {
-    const appUser = await fetchSessionAppUser();
+    const appUser = await authLib.session.fetchSessionAppUser();
     console.log("Fetched app user in route:", appUser);
     if (!appUser) {
       console.log("anonymous user - no appUser found in session");

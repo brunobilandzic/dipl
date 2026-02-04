@@ -60,7 +60,7 @@ async function createCropGeneralType(mainTypeId, generalTypeData) {
       mainType: mainTypeId,
       ...dbGeneralTypeData,
     });
-    
+
     if (!cropGeneralType) {
       return reject(
         `Failed to create crop general type: ${generalTypeData.name}`,
@@ -70,6 +70,8 @@ async function createCropGeneralType(mainTypeId, generalTypeData) {
       cropGeneralType._id,
       generalTypeData.cropTypes,
     );
+    cropGeneralType.cropTypes = cropTypes.map((ct) => ct.cropTypeId);
+    await cropGeneralType.save();
     resolve({ generalTypeId: cropGeneralType._id, cropTypes });
   });
 }
@@ -101,6 +103,8 @@ async function createCropType(cropGeneralTypeId, cropTypeData) {
       cropType._id,
       cropTypeData.cropVarieties,
     );
+    cropType.cropVarieties = cropVarietiesIds;
+    await cropType.save();
     resolve({ cropTypeId: cropType._id, cropVarieties: cropVarietiesIds });
   });
 }

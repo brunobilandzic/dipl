@@ -17,19 +17,26 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     Credentials({
       name: "Credentials",
       credentials: {
-        email: { label: "Email", type: "text", placeholder: "unesite email" },
+        login: {
+          label: "Email ili username",
+          type: "text",
+          placeholder: "unesite email ili username",
+        },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
         console.log("Authorizing with credentials:", credentials);
-        return await authLib.authorizationHandlers.handleCredentials(credentials);
+        return await authLib.authorizationHandlers.handleCredentials(
+          credentials,
+        );
       },
     }),
   ],
   callbacks: {
     async signIn({ account, profile }) {
       if (account.provider == "google") {
-        const authorize = await authLib.authorizationHandlers.handleOAuth(profile);
+        const authorize =
+          await authLib.authorizationHandlers.handleOAuth(profile);
         return !!authorize;
       }
       if (account.provider == "credentials") {

@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import dbConnect from "@/lib/db/mongooseConnect";
 import { AppUser } from "@/models/user/AppUser";
+import { Manager } from "@/models/user/managers/Manager";
 
 export async function fetchSessionAppUser() {
   const email = await fetchSessionEmail();
@@ -23,4 +24,22 @@ async function fetchSessionEmail() {
     return null;
   }
   return session.user.email;
+}
+
+export async function fetchManager(rootManagerId) {
+  await dbConnect();
+
+  const manager = await Manager.findById(rootManagerId);
+  if (!manager) {
+    console.log("Manager not found for ", rootManagerId);
+    return null;
+  }
+
+  const managerModelName = manager.managerModelName;
+
+  const specificManager = await mongoose.models[managerModelName].findOne({
+    manager: manager._id,
+  });
+
+  return specificManager;
 }

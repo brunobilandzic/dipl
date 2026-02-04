@@ -18,6 +18,10 @@ function AppUserProvider({ children }) {
   return children;
 }
 
+function ManagerProvider({ children }) {
+  const manager = useSelector((state) => state.user?.manager);
+}
+
 const setAppUserFromApiRedux = async (dispatch) => {
   try {
     const response = await axios.get("/api/auth/user/redux");
@@ -33,4 +37,17 @@ const setAppUserFromApiRedux = async (dispatch) => {
     console.error(error);
     throw new Error("Error fetching app user from API");
   }
+};
+
+const fetchManagerFromApiRedux = async () => {
+  try {
+    const response = await axios.get("/api/auth/user/redux", {
+      params: { includeManager: true },
+    });
+    console.log("Fetched manager from API response:", response.data.manager);
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error fetching manager from API");
+  }
+  return response.data.manager;
 };

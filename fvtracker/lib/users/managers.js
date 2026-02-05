@@ -1,6 +1,5 @@
 import Managers from "@/models/user/managers";
 const { Manager } = Managers;
-import dbConnect from "@/lib/db/mongooseConnect";
 import mongoose from "mongoose";
 
 export async function fetchManager(rootManagerId) {
@@ -9,17 +8,17 @@ export async function fetchManager(rootManagerId) {
     return null;
   }
 
-  const manager = await Manager.findById(rootManagerId);
-  if (!manager) {
+  const rootManager = await Manager.findById(rootManagerId);
+  if (!rootManager) {
     console.log("Manager not found for ", rootManagerId);
     return null;
   }
 
-  const managerModelName = manager.managerModelName;
+  const managerModelName = rootManager.managerModelName;
 
   const specificManager = await mongoose.models[managerModelName].findOne({
-    manager: manager._id,
+    manager: rootManager._id,
   });
 
-  return { manager, specificManager };
+  return { rootManager, specificManager };
 }

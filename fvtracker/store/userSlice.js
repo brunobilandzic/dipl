@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   appUser: null,
-  manager: null,
 };
 
 export const userSlice = createSlice({
@@ -13,7 +12,10 @@ export const userSlice = createSlice({
       state.appUser = action.payload.appUser;
     },
     setManager: (state, action) => {
-      state.manager = action.payload.manager;
+      console.log("Setting manager in user slice with payload:", action.payload);
+      const { rootManager, specificManager } = action.payload;
+      state.specificManager = specificManager;
+      state.rootManager = rootManager;
     },
     logOut: (state) => {
       state = initialState;

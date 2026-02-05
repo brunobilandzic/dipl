@@ -53,12 +53,12 @@ const fetchManagerFromApiRedux = async (dispatch) => {
     const response = await axios.get("/api/auth/user/redux", {
       params: { includeManager: true },
     });
-    if (!response.data.manager) {
+    if (!response.data.managerData) {
       console.log("No manager found in API response");
       return;
     }
-    dispatch(setManager({ manager: response.data.manager }));
-    console.log("Fetched manager from API response:", response.data.manager);
+    dispatch(setManager(response.data.managerData));
+    console.log("Fetched manager from API response:", response.data.managerData);
   } catch (error) {
     console.error(error);
     throw new Error("Error fetching manager from API");

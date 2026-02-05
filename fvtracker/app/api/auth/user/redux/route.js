@@ -1,10 +1,10 @@
 import authLib from "@/lib/auth";
 import { UNATHENTICATED_ACCESS } from "@/lib/constants/errors/user/appUser";
+import users from "@/lib/users";
 
 export async function GET(req) {
   console.log("User redux route GET called");
   const { searchParams } = new URL(req.url);
-  console.log("Search params:", searchParams);
   try {
     const appUser = await authLib.session.fetchSessionAppUser();
     console.log("Fetched app user in route:", appUser);
@@ -23,8 +23,7 @@ export async function GET(req) {
 
     let manager = null;
     if (searchParams.get("includeManager") === "true") {
-      manager = await authLib.session.fetchManager(appUser.manager);
-      console.log("Fetched manager in route:", manager);
+      manager = await users.managers.fetchManager(appUser.manager);
     }
 
     return Response.json(

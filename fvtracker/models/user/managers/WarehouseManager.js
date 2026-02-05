@@ -3,9 +3,9 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const warehouseManagerSchema = new Schema({
-  manager: {
+  rootManager: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Manager",
+    ref: "RootManager",
     required: true,
   },
   storageFacility: {

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const { Schema } = mongoose;
 
-const managerSchema = new Schema({
+const rootManagerSchema = new Schema({
   // root manager role for properties shared by all manager types
   managerModelName: {
     type: String,
@@ -28,7 +28,7 @@ const managerSchema = new Schema({
   employees: [
     { type: mongoose.Schema.Types.ObjectId, ref: "Worker", default: [] },
   ],
-  employmantCalls: [
+  employmentCalls: [
     // job postings created by the manager
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -51,30 +51,8 @@ const managerSchema = new Schema({
 });
 
 
-const generalManagerSchema = {
-  manager: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Manager",
-    default: null,
-  },
-  managers: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "Manager", default: [] },
-  ],
-  employmentRequests: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "EmploymentRequest",
-      default: [],
-    },
-  ],
-  orderRequests: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "OrderRequest", default: [] },
-  ],
-};
 
-export const Manager =
-  mongoose.models.Manager ||
-  mongoose.model("Manager", managerSchema);
-  export const GeneralManager =
-  mongoose.models.GeneralManager ||
-  mongoose.model("GeneralManager", new mongoose.Schema(generalManagerSchema));
+export const RootManager =
+  mongoose.models.RootManager ||
+  mongoose.model("RootManager", rootManagerSchema);
+

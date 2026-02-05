@@ -51,7 +51,7 @@ export default async () => {
 
   const managersIds = results
     .map((res) => res.managerId)
-    .filter((id) => id !== null);
+    .filter((id) => id !== null && id !== undefined);
 
   GeneralManager.updateOne(
     { _id: generalManager._id },
@@ -78,28 +78,31 @@ export default async () => {
 export const createAppUser = async (appUserData, generalManagerId) => {
   const appUser = new AppUser(appUserData);
   const username = appUser.username;
-  await appUser.save()
+  await appUser.save();
   let manager = null;
-  if (username in usersConstants.usernameToModel) {
+  if (
+    username in usersConstants.usernameToModel &&
+    username !== "general.manager" &&
+    username !== "admin.admin"
+  ) {
     // now we have to crate a basic manager and specific manager
     const managerModelName = usersConstants.usernameToModel[username];
-    manager = await createManager(
+    const { rootManager, specificManager } = await createManager(
       appUser._id,
       managerModelName,
       generalManagerId,
     );
-    if (!manager) {
+
+    if (!rootManager || !specificManager) {
       throw new Error(SEED_ERROR, `Manager not created for user ${username}`);
     }
-    appUser.manager = manager._id;
-    console.log(
-      `Created manager role ${managerModelName} for user ${username}`,
-    );
+    appUser.manager = rootManager._id;
+    await appUser.save();
+    return { appUserId: appUser._id, managerId: rootManager._id };
   }
 
   if (appUser) {
-    await appUser.save();
-    return { appUserId: appUser._id, managerId: manager?._id || null };
+    return { appUserId: appUser._id };
   }
   throw new Error(SEED_ERROR, `AppUser creation failed for user ${username}`);
 };

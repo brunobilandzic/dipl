@@ -20,12 +20,13 @@ export const createManager = async (
     managerModelName,
     generalManagerId,
   );
+  console.log(`Created root manager with id ${rootManager._id} for app user ${appUserId}`); 
   const specificManager = await crateSpecificManager(
     appUserId,
     managerModelName,
     rootManager._id,
   );
-  return specificManager;
+  return { rootManager, specificManager };
 };
 
 const createRootManager = async (
@@ -39,9 +40,11 @@ const createRootManager = async (
     generalManager: generalManagerId,
   });
   const appUser = await AppUser.findById(appUserId);
-  console.log(`Creating root manager for app user ${appUser.username} with model ${managerModelName}`);
+  console.log(
+    `Creating root manager for app user ${appUser.username} with model ${managerModelName}`,
+  );
   appUser.manager = rootManager._id;
-  
+
   await appUser.save();
   await rootManager.save();
   return rootManager;

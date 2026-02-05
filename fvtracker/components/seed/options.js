@@ -1,6 +1,7 @@
 "use client";
 
 import axios from "axios";
+import { signOut } from "next-auth/react";
 import { FaUserPlus } from "react-icons/fa";
 import { MdAllInclusive, MdDeleteForever, MdFoodBank } from "react-icons/md";
 
@@ -38,7 +39,10 @@ export default function SeedOptions() {
 
   return (
     <>
-      <div className="flex justify-center gap-6 w-2/3 mx-auto h-14 ">
+      <div
+        className="flex justify-center gap-6 w-2/3 mx-auto h-14 "
+        onClick={() => signOut()}
+      >
         {Object.entries(_icons).map(
           ([key, { icon, label, function: func }]) => (
             <div

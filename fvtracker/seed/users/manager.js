@@ -38,7 +38,9 @@ const createRootManager = async (
     managerModelName,
     generalManager: generalManagerId,
   });
+  console.log("app user id for manager creation:", appUserId);
   const appUser = await AppUser.findById(appUserId);
+  console.log(`Creating root manager for app user ${appUser.username} with model ${managerModelName}`);
   appUser.manager = rootManager._id;
   
   await appUser.save();

@@ -50,16 +50,14 @@ const managerSchema = new Schema({
   ],
 });
 
-export const Manager =
-  mongoose.models.Manager ||
-  mongoose.model("Manager", managerSchema);
+
 const generalManagerSchema = {
-  menager: {
+  manager: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Manager",
-    required: true,
+    default: null,
   },
-  menagers: [
+  managers: [
     { type: mongoose.Schema.Types.ObjectId, ref: "Manager", default: [] },
   ],
   employmentRequests: [
@@ -74,6 +72,9 @@ const generalManagerSchema = {
   ],
 };
 
-export const GeneralManager =
+export const Manager =
+  mongoose.models.Manager ||
+  mongoose.model("Manager", managerSchema);
+  export const GeneralManager =
   mongoose.models.GeneralManager ||
   mongoose.model("GeneralManager", new mongoose.Schema(generalManagerSchema));

@@ -4,7 +4,6 @@ import appUsersJsonArray from "@/seed/data/appUsers";
 import { AppUser } from "@/models/user/AppUser";
 import dbConnect from "@/lib/db/mongooseConnect";
 import { Admin } from "@/models/user/Admin";
-import { GeneralManager } from "@/models/user/managers/GeneralManager";
 import { CultivationManager } from "@/models/user/managers/CultivationManager";
 import { ProductionManager } from "@/models/user/managers/ProductionManager";
 import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
@@ -13,7 +12,7 @@ import usersConstants from "@/lib/constants/users";
 import { createGeneralManager } from "@/seed/users/generalManager";
 import { createManager } from "@/seed/users/manager";
 import { createAdmin } from "./admin";
-import { Manager } from "@/models/user/managers/Manager";
+import { Manager, GeneralManager } from "@/models/user/managers/Manager";
 
 const check = async () => {
   await dbConnect();
@@ -78,9 +77,8 @@ export default async () => {
 
 export const createAppUser = async (appUserData, generalManagerId) => {
   const appUser = new AppUser(appUserData);
-  await appUser.save();
   const username = appUser.username;
-
+  await appUser.save()
   let manager = null;
   if (username in usersConstants.usernameToModel) {
     // now we have to crate a basic manager and specific manager
@@ -93,13 +91,16 @@ export const createAppUser = async (appUserData, generalManagerId) => {
     if (!manager) {
       throw new Error(SEED_ERROR, `Manager not created for user ${username}`);
     }
+    appUser.manager = manager._id;
     console.log(
       `Created manager role ${managerModelName} for user ${username}`,
     );
   }
 
-  if (appUser)
+  if (appUser) {
+    await appUser.save();
     return { appUserId: appUser._id, managerId: manager?._id || null };
+  }
   throw new Error(SEED_ERROR, `AppUser creation failed for user ${username}`);
 };
 

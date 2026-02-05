@@ -5,7 +5,7 @@ export default {
       path: "/korisnici",
     },
   ],
-  generalManager: [
+  GeneralManager: [
     {
       label: "odjeli",
       submenu: [
@@ -31,10 +31,13 @@ export default {
       path: "/nabava",
     },
   ],
-  cultivationManager: [
+  CultivationManager: [
     {
       label: "upravljanje poljima",
-      path: "/upravljanje-poljima",
+      submenu: [
+        { label: "pregled", path: "/upravljanje-poljima/pregled" },
+        { label: "dodavanje", path: "/upravljanje-poljima/dodavanje" },
+      ],
     },
     {
       label: "kultivacija",
@@ -52,7 +55,7 @@ export default {
       path: "/nabava",
     },
   ],
-  productionManager: [
+  ProductionManager: [
     {
       label: "postrojenja",
       path: "/postrojenja",
@@ -74,7 +77,7 @@ export default {
       path: "/nabava",
     },
   ],
-  warehouseManager: [
+  WarehouseManager: [
     {
       label: "pregled",
       submenu: [
@@ -103,7 +106,7 @@ export default {
       path: "/zaposlenici",
     },
   ],
-  financeManager: [
+  FinanceManager: [
     {
       label: "narudžbe",
       path: "/narudzbe",

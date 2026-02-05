@@ -12,10 +12,14 @@ export const userSlice = createSlice({
       state.appUser = action.payload.appUser;
     },
     setManager: (state, action) => {
-      console.log("Setting manager in user slice with payload:", action.payload);
+      console.log(
+        "Setting manager in user slice with payload:",
+        action.payload,
+      );
       const { rootManager, specificManager } = action.payload;
       state.specificManager = specificManager;
       state.rootManager = rootManager;
+      state.managerModelName = rootManager.managerModelName;
     },
     logOut: (state) => {
       state = initialState;

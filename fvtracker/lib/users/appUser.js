@@ -1,11 +1,12 @@
 import dbConnect from "@/lib/db/mongooseConnect";
 import { AppUser } from "@/models/user/AppUser";
 
-export const getByUsername = async (username) => {
-  await dbConnect();
-  const appUser = await AppUser.findOne({ username });
+await dbConnect();
+
+export async function getAppUser(filter) {
+  const appUser = await AppUser.findOne(filter);
   if (!appUser) {
-    throw new Error(`AppUser with username ${username} not found`);
+    console.log("App user not found for filter:", filter);
+    throw new Error("App user not found");
   }
-  return appUser;
-};
+}

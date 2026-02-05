@@ -1,3 +1,8 @@
 import { Field } from "@/models/sectors/cultivation/Field";
+import dbConnect from "@/lib/db/mongooseConnect";
+await dbConnect();
 
-export async function fieldsList() {}
+export async function fieldsList(filter) {
+    const fields = await Field.find(filter).sort({ createdAt: -1 });
+    return fields;
+}

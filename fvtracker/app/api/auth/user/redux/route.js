@@ -21,16 +21,16 @@ export async function GET(req) {
       );
     }
 
-    let manager = null;
+    let managerData = null;
     if (searchParams.get("includeManager") === "true") {
-      manager = await users.managers.fetchManager(appUser.manager);
+      managerData = await users.managers.fetchManager(appUser.manager);
     }
 
     return Response.json(
       {
         message: "App user fetched successfully",
         appUser,
-        manager: manager ? manager : null,
+        managerData: managerData ? managerData : null,
       },
       {
         status: 200,

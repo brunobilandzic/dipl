@@ -1,5 +1,5 @@
 import { handleCredentials, handleOAuth } from "./handlers";
-import { fetchSessionAppUser } from "./fetchSessionData";
+import { fetchSessionAppUser} from "./fetchSessionData";
 
 export default {
   authorizationHandlers: {

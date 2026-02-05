@@ -29,5 +29,22 @@ const appUserSchema = new Schema({
   },
 });
 
+appUserSchema.methods.getRootManager = async function () {
+  await this.populate("rootManager");
+  return this.rootManager;
+};
+
+appUserSchema.methods.getSpecificManager = async function (managerModelName) {
+  const rootManager = await this.getRootManager();
+  if (!rootManager) {
+    return null;
+  }
+  const specificManager = await mongoose
+    .model(managerModelName)
+    .findOne({ rootManager: rootManager._id });
+    
+  return specificManager;
+};
+
 export const AppUser =
   mongoose.models.AppUser || mongoose.model("AppUser", appUserSchema);

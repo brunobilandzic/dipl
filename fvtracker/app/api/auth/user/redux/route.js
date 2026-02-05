@@ -21,13 +21,18 @@ export async function GET(req) {
       );
     }
 
+    let manager = null;
     if (searchParams.get("includeManager") === "true") {
-      const manager = await authLib.session.fetchManager(appUser.manager);
+      manager = await authLib.session.fetchManager(appUser.manager);
       console.log("Fetched manager in route:", manager);
     }
 
     return Response.json(
-      { message: "App user fetched successfully", appUser, manager: manager ? manager : null },
+      {
+        message: "App user fetched successfully",
+        appUser,
+        manager: manager ? manager : null,
+      },
       {
         status: 200,
         headers: { "Content-Type": "application/json" },

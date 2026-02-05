@@ -1,11 +1,15 @@
 "use client";
-import { logIn, logOut } from "@/store/userSlice";
+import { logIn, logOut, setManager } from "@/store/userSlice";
 import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function UserProviders({ children }) {
-  return <AppUserProvider>{children}</AppUserProvider>;
+  return (
+    <AppUserProvider>
+      <ManagerProvider>{children}</ManagerProvider>
+    </AppUserProvider>
+  );
 }
 
 function AppUserProvider({ children }) {
@@ -20,6 +24,11 @@ function AppUserProvider({ children }) {
 
 function ManagerProvider({ children }) {
   const manager = useSelector((state) => state.user?.manager);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!manager) fetchManagerFromApiRedux(dispatch);
+  }, []);
+  return children;
 }
 
 const setAppUserFromApiRedux = async (dispatch) => {
@@ -39,15 +48,19 @@ const setAppUserFromApiRedux = async (dispatch) => {
   }
 };
 
-const fetchManagerFromApiRedux = async () => {
+const fetchManagerFromApiRedux = async (dispatch) => {
   try {
     const response = await axios.get("/api/auth/user/redux", {
       params: { includeManager: true },
     });
+    if (!response.data.manager) {
+      console.log("No manager found in API response");
+      return;
+    }
+    dispatch(setManager({ manager: response.data.manager }));
     console.log("Fetched manager from API response:", response.data.manager);
   } catch (error) {
     console.error(error);
     throw new Error("Error fetching manager from API");
   }
-  return response.data.manager;
 };

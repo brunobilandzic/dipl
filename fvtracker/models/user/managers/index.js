@@ -1,4 +1,5 @@
-import { Manager, GeneralManager } from "./Manager";
+import { RootManager } from "./RootManager";
+import { GeneralManager } from "./GeneralManager";
 import { Admin } from "@/models/user/Admin";
 import { CultivationManager } from "./CultivationManager";
 import { WarehouseManager } from "./WarehouseManager";
@@ -9,7 +10,7 @@ import dbConnect from "@/lib/db/mongooseConnect";
 await dbConnect();
 
 export default {
-  Manager,
+  RootManager,
   Admin,
   CultivationManager,
   WarehouseManager,

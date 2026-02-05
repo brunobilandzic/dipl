@@ -1,4 +1,4 @@
-import { Manager } from "@/models/user/managers/Manager.js";
+import { RootManager } from "@/models/user/managers/RootManager.js";
 import dbConnect from "@/lib/db/mongooseConnect";
 import mongoose from "mongoose";
 import { AppUser } from "@/models/user/AppUser";
@@ -20,7 +20,9 @@ export const createManager = async (
     managerModelName,
     generalManagerId,
   );
-  console.log(`Created root manager with id ${rootManager._id} for app user ${appUserId}`); 
+  console.log(
+    `Created root manager with id ${rootManager._id} for app user ${appUserId}`,
+  );
   const specificManager = await crateSpecificManager(
     appUserId,
     managerModelName,
@@ -34,7 +36,7 @@ const createRootManager = async (
   managerModelName,
   generalManagerId,
 ) => {
-  const rootManager = new Manager({
+  const rootManager = new RootManager({
     appUser: appUserId,
     managerModelName,
     generalManager: generalManagerId,
@@ -57,7 +59,7 @@ const crateSpecificManager = async (
 ) => {
   const specificManager = new mongoose.models[managerModelName]({
     appUser: appUserId,
-    manager: rootManagerId,
+    rootManager: rootManagerId,
   });
   await specificManager.save();
   return specificManager;

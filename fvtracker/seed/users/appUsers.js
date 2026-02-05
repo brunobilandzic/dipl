@@ -12,12 +12,13 @@ import usersConstants from "@/lib/constants/users";
 import { createGeneralManager } from "@/seed/users/generalManager";
 import { createManager } from "@/seed/users/manager";
 import { createAdmin } from "./admin";
-import { Manager, GeneralManager } from "@/models/user/managers/Manager";
+import { RootManager } from "@/models/user/managers/RootManager";
+import { GeneralManager } from "@/models/user/managers/GeneralManager";
 
 const check = async () => {
   await dbConnect();
 
-  await Manager.deleteMany({});
+  await RootManager.deleteMany({});
   await AppUser.deleteMany({});
   await Admin.deleteMany({});
   await GeneralManager.deleteMany({});

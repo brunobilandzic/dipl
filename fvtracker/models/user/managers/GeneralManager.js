@@ -1,5 +1,6 @@
+import mongoose, { Schema } from "mongoose";
 
-const generalManagerSchema = {
+const generalManagerSchema = new Schema({
   rootManager: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "RootManager",
@@ -18,8 +19,8 @@ const generalManagerSchema = {
   orderRequests: [
     { type: mongoose.Schema.Types.ObjectId, ref: "OrderRequest", default: [] },
   ],
-};
+});
 
 export const GeneralManager =
   mongoose.models.GeneralManager ||
-  mongoose.model("GeneralManager", new mongoose.Schema(generalManagerSchema));
+  mongoose.model("GeneralManager", generalManagerSchema);

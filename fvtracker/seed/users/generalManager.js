@@ -1,7 +1,8 @@
 import { AppUser } from "@/models/user/AppUser";
 import dbConnect from "@/lib/db/mongooseConnect";
 import appUsersJsonArray from "@/seed/data/appUsers";
-import { Manager, GeneralManager } from "@/models/user/managers/Manager";
+import { GeneralManager } from "@/models/user/managers/GeneralManager";
+import { RootManager } from "@/models/user/managers/RootManager";
 
 export const createGeneralManager = async () => {
   await dbConnect();
@@ -17,14 +18,14 @@ export const createGeneralManager = async () => {
     appUser: generalManagerAppUser._id,
   });
 
-  const basicManager = new Manager({
+  const rootManager = new RootManager({
     appUser: generalManagerAppUser._id,
     managerModelName: "GeneralManager",
     generalManager: generalManager._id,
   });
-  await basicManager.save();
+  await rootManager.save();
 
-  generalManager.manager = basicManager._id;
+  generalManager.rootManager = rootManager._id;
   await generalManager.save();
 
   return generalManager;

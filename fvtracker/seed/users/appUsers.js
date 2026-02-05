@@ -86,7 +86,7 @@ export const createAppUser = async (appUserData, generalManagerId) => {
     username !== "general.manager" &&
     username !== "admin.admin"
   ) {
-    // now we have to crate a basic manager and specific manager
+    // now we have to crate a root manager and specific manager
     const managerModelName = usersConstants.usernameToModel[username];
     const { rootManager, specificManager } = await createManager(
       appUser._id,
@@ -97,7 +97,7 @@ export const createAppUser = async (appUserData, generalManagerId) => {
     if (!rootManager || !specificManager) {
       throw new Error(SEED_ERROR, `Manager not created for user ${username}`);
     }
-    appUser.manager = rootManager._id;
+    appUser.rootManager = rootManager._id;
     await appUser.save();
     return { appUserId: appUser._id, managerId: rootManager._id };
   }

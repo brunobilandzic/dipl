@@ -23,7 +23,7 @@ export async function GET(req) {
 
     let managerData = null;
     if (searchParams.get("includeManager") === "true") {
-      managerData = await users.managers.fetchManager(appUser.manager);
+      managerData = await users.managers.fetchManagerData(appUser.rootManager);
     }
 
     return Response.json(

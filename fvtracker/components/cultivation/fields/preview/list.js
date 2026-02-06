@@ -51,7 +51,7 @@ function FieldItem({ field }) {
           </div>
         </ListItemHeader>
         <ListItemBody>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="flex gap-6">
             <div>
               <div className="text-sm">
                 <div>{field.description}</div>

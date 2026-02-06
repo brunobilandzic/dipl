@@ -14,7 +14,13 @@ export default async function PregledPoljaPage() {
   if (!cultivationManager) {
     return <div>No cultivation manager found for this user.</div>;
   }
-  await cultivationManager.populate("fields");
+  await cultivationManager.populate({
+    path: "fields",
+    populate: {
+      path:"cultivationAreas",
+      populate:"fieldGridCells"
+    }
+  });
 
   return (
     <>

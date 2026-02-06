@@ -37,7 +37,7 @@ function FieldItem({ field }) {
     cultivationAreaDimensions: {
       min_ca_dim,
       max_ca_dim,
-      gap: cultivationAreasGapp,
+      gap: cultivationAreasGap,
     },
   } = field;
   return (
@@ -63,7 +63,7 @@ function FieldItem({ field }) {
                 </div>
                 <div>
                   CA Dim: {min_ca_dim}m - {max_ca_dim}m, Gap:{" "}
-                  {cultivationAreasGapp}m
+                  {cultivationAreasGap}m
                 </div>
                 <div>
                   {cultivationAreas.length} cultivation areas,{" "}
@@ -74,7 +74,7 @@ function FieldItem({ field }) {
             <div className="flex-1">
               {/* Placeholder for field grid or map */}
               <div className="w-full">
-                <FieldGrid width={width} length={length} cultitioAreas={cultivationAreas} small={true} />
+                <FieldGrid width={width} length={length} cultivationAreas={cultivationAreas} small={true} />
               </div>
             </div>
           </div>

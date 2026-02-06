@@ -1,26 +1,10 @@
 import { FieldsList } from "@/components/cultivation/fields/preview/list";
-import { fetchSessionAppUser } from "@/lib/auth/fetchSessionData";
 import clean from "@/lib/db/clean";
 import React from "react";
+import { getCultivationManager } from "@/lib/cultivation/cultivationManager";
 
 export default async function PregledPoljaPage() {
-  const appUser = await fetchSessionAppUser();
-  if (!appUser) {
-    throw new Error("No app user found for the session.");
-  }
-
-  const cultivationManager =
-    await appUser.getSpecificManager("CultivationManager");
-  if (!cultivationManager) {
-    return <div>No cultivation manager found for this user.</div>;
-  }
-  await cultivationManager.populate({
-    path: "fields",
-    populate: {
-      path:"cultivationAreas",
-      populate:"fieldGridCells"
-    }
-  });
+  const cultivationManager = await getCultivationManager();
 
   return (
     <>

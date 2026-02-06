@@ -7,6 +7,8 @@ import {
   ListItemHeader,
 } from "@/components/layout/preview/list";
 
+import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
+
 export function FieldsList({ fields }) {
   if (!fields || fields.length === 0) return <div>No fields found.</div>;
   return (
@@ -49,21 +51,31 @@ function FieldItem({ field }) {
           </div>
         </ListItemHeader>
         <ListItemBody>
-          <div className="text-sm">
-            <div>{field.description}</div>
+          <div className="grid grid-cols-2 gap-6">
             <div>
-              Dimensions: {width}m x {length}m
+              <div className="text-sm">
+                <div>{field.description}</div>
+                <div>
+                  Dimensions: {width}m x {length}m
+                </div>
+                <div>
+                  Location: {latitude.toFixed(4)}, {longitude.toFixed(4)}
+                </div>
+                <div>
+                  CA Dim: {min_ca_dim}m - {max_ca_dim}m, Gap:{" "}
+                  {cultivationAreasGapp}m
+                </div>
+                <div>
+                  {cultivationAreas.length} cultivation areas,{" "}
+                  {cultivations.length} cultivations
+                </div>
+              </div>
             </div>
-            <div>
-              Location: {latitude.toFixed(4)}, {longitude.toFixed(4)}
-            </div>
-            <div>
-              CA Dim: {min_ca_dim}m - {max_ca_dim}m, Gap: {cultivationAreasGapp}
-              m
-            </div>
-            <div>
-              {cultivationAreas.length} cultivation areas, {cultivations.length}{" "}
-              cultivations
+            <div className="flex-1">
+              {/* Placeholder for field grid or map */}
+              <div className="w-full">
+                <FieldGrid width={width} length={length} cultitioAreas={cultivationAreas} small={true} />
+              </div>
             </div>
           </div>
         </ListItemBody>

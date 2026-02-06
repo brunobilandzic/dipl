@@ -3,33 +3,53 @@
 export function FieldGrid({
   width: fieldWidth,
   length: fieldLength,
-  cultitioAreas,
+  cultivationAreas,
   small,
 }) {
   return (
     <>
-      <div className={`grid grid-cols-[repeat(100,minmax(0,1fr))] w-full`}>
-        {buildFieldCells(fieldWidth, fieldLength, small)}
+      <div
+        className={`grid grid-cols-[repeat(${fieldWidth},minmax(0,1fr))] grid-rows-[repeat(${fieldLength},minmax(0,1fr))] w-full`}
+      >
+        {buildFieldCells(cultivationAreas, fieldWidth, fieldLength, small)}
       </div>
     </>
   );
 }
 
-const FieldCell = ({ fieldWidth, fieldLength, active, small }) => {
-  return <div className={`${small && "w-1 h-1"} border `}></div>;
+const FieldCell = ({ active, small, x, y }) => {
+  if (x == 0 && y == 0) {
+    console.log("First cell:", { x, y });
+  }
+  return (
+    <div
+      className={`${small ? "w-1 h-1" : "w-2 h-2 cursor:pointer"} border ${active ? "bg-yellow-500": ""} `}
+      title={`(${x}, ${y})`}
+    ></div>
+  );
 };
 
-const buildFieldCells = (fieldWidth, fieldLength, small) => {
+const buildFieldCells = (cultivationAreas, fieldWidth, fieldLength, small) => {
+    const activeCells = cultivationAreas.reduce((_activeCells, ca) => {
+        _activeCells.push(...ca.fieldGridCells.map((cell) => `${cell.column}-${cell.row}`));
+        return _activeCells;
+    },[])
+
   const cells = [];
-  for (let i = 0; i < fieldWidth * fieldLength; i++) {
-    cells.push(
-      <FieldCell
-        key={i}
-        fieldWidth={fieldWidth}
-        fieldLength={fieldLength}
-        small={small}
-      />,
-    );
+  for (let i = 0; i < fieldWidth; i++) {
+    for (let j = 0; j < fieldLength; j++) {
+      cells.push(
+        <FieldCell
+          key={`${i}-${j}`}
+          fieldWidth={fieldWidth}
+          fieldLength={fieldLength}
+          small={small}
+          x={i}
+          y={j}
+          active = {activeCells.includes(`${i}-${j}`)}
+        />,
+      );
+    }
   }
   return cells;
 };

@@ -9,7 +9,11 @@ export function FieldGrid({
   return (
     <>
       <div
-        className={`grid grid-cols-[repeat(${fieldWidth},minmax(0,1fr))] grid-rows-[repeat(${fieldLength},minmax(0,1fr))] w-full`}
+        className={`grid  w-full`}
+        style={{
+          gridTemplateColumns: `repeat(${fieldWidth}, minmax(0, 1fr))`,
+          gridTemplateRows: `repeat(${fieldLength}, minmax(0, 1fr))`,
+        }}
       >
         {buildFieldCells(cultivationAreas, fieldWidth, fieldLength, small)}
       </div>
@@ -23,17 +27,19 @@ const FieldCell = ({ active, small, x, y }) => {
   }
   return (
     <div
-      className={`${small ? "w-1 h-1" : "w-2 h-2 cursor:pointer"} border ${active ? "bg-yellow-500": ""} `}
+      className={`${small ? "w-1 h-1" : "w-2 h-2 cursor:pointer"} border ${active ? "bg-yellow-500" : ""} `}
       title={`(${x}, ${y})`}
     ></div>
   );
 };
 
 const buildFieldCells = (cultivationAreas, fieldWidth, fieldLength, small) => {
-    const activeCells = cultivationAreas.reduce((_activeCells, ca) => {
-        _activeCells.push(...ca.fieldGridCells.map((cell) => `${cell.column}-${cell.row}`));
-        return _activeCells;
-    },[])
+  const activeCells = cultivationAreas.reduce((_activeCells, ca) => {
+    _activeCells.push(
+      ...ca.fieldGridCells.map((cell) => `${cell.column}-${cell.row}`),
+    );
+    return _activeCells;
+  }, []);
 
   const cells = [];
   for (let i = 0; i < fieldWidth; i++) {
@@ -46,7 +52,7 @@ const buildFieldCells = (cultivationAreas, fieldWidth, fieldLength, small) => {
           small={small}
           x={i}
           y={j}
-          active = {activeCells.includes(`${i}-${j}`)}
+          active={activeCells.includes(`${i}-${j}`)}
         />,
       );
     }

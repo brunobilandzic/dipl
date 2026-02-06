@@ -17,9 +17,17 @@ export function ListItem({ children }) {
 export function ListItemHeader({ children }) {
   return (
     <>
-      <div className="flex flex-row gap-2  border-b-2 mb-6 pb-1 ">
+      <div className="flex flex-row gap-2  border-b-2 mb-2 pb-1 font-bolder text-lg ">
         {children}
       </div>
+    </>
+  );
+}
+
+export function ListItemBody({ children }) {
+  return (
+    <>
+      <div className="flex flex-col gap-2">{children}</div>
     </>
   );
 }

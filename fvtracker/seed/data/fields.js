@@ -33,11 +33,78 @@ export const optimizedParams = {
   min_ca_dim: 15,
   max_ca_dim: 50,
   gap: 2,
+  cultivationAreas: [],
   location: {
     latitude: 43.67028,
     longitude: 16.70472,
   },
 };
+
+const optimizedParams2 = {
+  name: "SEEDED FIELD 2",
+  description: "Field optimized for seeders testing",
+  width: 150,
+  length: 80,
+  min_ca_dim: 20,
+  max_ca_dim: 60,
+  gap: 3,
+  cultivationAreas: [],
+  location: {
+    latitude: 43.67028,
+    longitude: 16.70472,}
+  }
+
+   const optimizedParams3 = {
+    name: "SEEDED FIELD 3",
+    description: "Field optimized for seeders testing",
+    width: 200,
+    length: 200,
+    min_ca_dim: 30,
+    max_ca_dim: 80,
+    gap: 4,
+    cultivationAreas: [],
+    location: {
+      latitude: 44.5,
+      longitude: 15.5,
+    },
+  };
+
+   const optimizedParams4 = {
+    name: "SEEDED FIELD 4",
+    description: "Field optimized for seeders testing",
+    width: 300,
+    length: 250,
+    min_ca_dim: 40,
+    max_ca_dim: 100,
+    gap: 5,
+    cultivationAreas: [],
+    location: {
+      latitude: 45.0,
+      longitude: 14.0,
+    },
+  };
+
+  export const optimizedParams5 = {
+    name: "SEEDED FIELD 5",
+    description: "Field optimized for seeders testing",
+    width: 400,
+    length: 350,
+    min_ca_dim: 50,
+    max_ca_dim: 120,
+    gap: 6,
+    cultivationAreas: [],
+    location: {
+      latitude: 43.0,
+      longitude: 17.5,
+    },
+  };
+}
+
+export const optimizedParamsArray = [
+  optimizedParams,
+  optimizedParams2
+
+]
 
 const createFieldTimeSeconds = 5;
 

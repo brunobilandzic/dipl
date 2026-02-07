@@ -1,9 +1,11 @@
 import mongoose from "mongoose";
+import utils from "@/lib/utils";
 
 const { Schema } = mongoose;
 
 const cultivationAreaSchema = new Schema({
   name: { type: String, required: true },
+  slug: { type: String, unique: true, index: true },
   description: { type: String, default: "" },
   fieldGridCells: [
     {
@@ -30,6 +32,7 @@ const cultivationAreaSchema = new Schema({
 // harvest will probably be linked to cultivation
 const cultivationSchema = new Schema({
   name: { type: String, required: true },
+  slug: { type: String, unique: true, index: true },
   description: { type: String, default: "" },
   fieldGridCells: [
     {
@@ -77,6 +80,20 @@ const cultivationSchema = new Schema({
   createdAt: { type: Date, default: Date.now },
   startDate: { type: Date, required: true },
   endDate: { type: Date, default: null },
+});
+
+cultivationAreaSchema.pre("save", function (next) {
+  if (this.isModified("name")) {
+    this.slug = utils.strings.makeUrlFriendly(this.name);
+  }
+  next();
+});
+
+cultivationSchema.pre("save", function (next) {
+  if (this.isModified("name")) {
+    this.slug = utils.strings.makeUrlFriendly(this.name);
+  }
+  next();
 });
 
 export const CultivationArea =

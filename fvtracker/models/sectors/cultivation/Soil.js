@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import utils from "@/lib/utils";
 const { Schema } = mongoose;
 
 const soilTypeSchema = new Schema({
@@ -15,6 +16,7 @@ const soilTypeSchema = new Schema({
       "muljevito",
     ],
   },
+  slug: { type: String, unique: true, index: true },
   description: { type: String, default: "" },
   goodForCrops: [
     {
@@ -23,6 +25,13 @@ const soilTypeSchema = new Schema({
       default: [],
     },
   ],
+});
+
+soilTypeSchema.pre("save", function (next) {
+  if (this.isModified("name")) {
+    this.slug = utils.strings.makeUrlFriendly(this.name);
+  }
+  next();
 });
 
 export const SoilType =

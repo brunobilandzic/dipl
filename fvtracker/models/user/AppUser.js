@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import utils from "@/lib/utils";
 
 const { Schema } = mongoose;
 
@@ -6,6 +7,7 @@ const appUserSchema = new Schema({
   rootManager: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "RootManager",
+    default: null,
   },
   username: {
     type: String,
@@ -13,6 +15,7 @@ const appUserSchema = new Schema({
   name: {
     type: String,
   },
+  slug: { type: String, unique: true, sparse: true, index: true },
   email: {
     type: String,
   },
@@ -29,6 +32,14 @@ const appUserSchema = new Schema({
   },
 });
 
+appUserSchema.pre("save", function (next) {
+  if ((this.isModified("name") || this.isModified("surname")) && this.name) {
+    const fullName = this.surname ? `${this.name} ${this.surname}` : this.name;
+    this.slug = utils.strings.makeUrlFriendly(fullName);
+  }
+  next();
+});
+
 appUserSchema.methods.getRootManager = async function () {
   await this.populate("rootManager");
   return this.rootManager;
@@ -42,7 +53,7 @@ appUserSchema.methods.getSpecificManager = async function (managerModelName) {
   const specificManager = await mongoose
     .model(managerModelName)
     .findOne({ rootManager: rootManager._id });
-    
+
   return specificManager;
 };
 

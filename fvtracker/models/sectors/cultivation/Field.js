@@ -1,8 +1,10 @@
 import mongoose from "mongoose";
 import { CultivationArea } from "./Cultivation";
+import utils from "@/lib/utils";
 
 const fieldSchema = new mongoose.Schema({
   name: { type: String, required: true },
+  slug: { type: String, unique: true, index: true },
   description: { type: String, default: "" },
   dimensions: {
     type: {
@@ -68,6 +70,13 @@ fieldSchema.methods.addCultivationArea = async function (cultivationArea) {
   this.cultivationAreas.push(newCultivationArea._id);
   await newCultivationArea.save();
 };
+
+fieldSchema.pre("save", function (next) {
+  if (this.isModified("name")) {
+    this.slug = utils.strings.makeUrlFriendly(this.name);
+  }
+  next();
+});
 
 const fieldGridCell = new mongoose.Schema({
   // square cell in the field grid

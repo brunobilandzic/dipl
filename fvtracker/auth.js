@@ -46,15 +46,19 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     },
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
+        token.appUserId = user.appUserId;
         token.email = user.email;
+        token.managerModelName = user.managerModelName;
+        token.displayName = user.displayName;
       }
       return token;
     },
     async session({ session, token }) {
       if (token) {
-        session.user.id = token.id;
+        session.user.appUserId = token.appUserId;
         session.user.email = token.email;
+        session.user.managerModelName = token.managerModelName;
+        session.user.displayName = token.displayName;
       }
       return session;
     },

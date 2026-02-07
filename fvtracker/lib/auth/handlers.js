@@ -1,14 +1,15 @@
 import dbConnect from "@/lib/db/mongooseConnect";
-import { AppUser } from "@/models/user/AppUser";
+import models from "@/models";
 import bcrypt from "bcrypt";
+
 
 export async function handleOAuth({ email, given_name, family_name }) {
   await dbConnect();
-  const appUser = await AppUser.findOne({ email });
+  const appUser = await models.user.AppUser.findOne({ email });
   if (appUser) {
     return true;
   } else {
-    const newUser = new AppUser({
+    const newUser = new models.user.AppUser({
       email,
       name: given_name,
       surname: family_name,
@@ -68,16 +69,28 @@ async function signUpCredentials({
 }
 
 async function logInCredentials({ login, password }) {
-  
   login = login.trim().toLowerCase();
-  let appUser = await AppUser.findOne({ email: login });
+  let appUser = await models.user.AppUser.findOne({ email: login }).populate("rootManager");
   if (!appUser) {
-    appUser = await AppUser.findOne({ username: login });
+    appUser = await models.user.AppUser.findOne({ username: login }).populate(
+      "rootManager",
+    );
+  }
+  if (!appUser) {
+    console.log("No user found with email or username:", login);
+    return null;
   }
   if (appUser) {
     const authorized = await bcrypt.compare(password, appUser.password);
     if (authorized) {
-      return appUser;
+      return {
+        appUserId: appUser._id.toString(),
+        email: appUser.email,
+        displayName: appUser.username || appUser.name,
+        managerModelName: appUser.rootManager
+          ? appUser.rootManager.managerModelName
+          : null,
+      };
     }
   }
   return null;

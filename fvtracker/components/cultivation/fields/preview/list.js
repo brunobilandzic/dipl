@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import {
   List,
   ListItem,
@@ -8,6 +10,7 @@ import {
 } from "@/components/layout/preview/list";
 
 import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
+import { makeUrlFriendly } from "@/lib/utils/strings";
 
 export function FieldsList({ fields }) {
   if (!fields || fields.length === 0) return <div>No fields found.</div>;
@@ -43,13 +46,17 @@ function FieldItem({ field }) {
   return (
     <>
       <div className="">
-        <ListItemHeader>
-          <div className="flex justify-between w-full">
-            <div className="flex flex-col gap-1">
-              <div className="font-bold">{field.name}</div>
+        <Link
+          href={`/upravljanje-poljima/${makeUrlFriendly(name)}`}
+        >
+          <ListItemHeader>
+            <div className="flex justify-between w-full cursor-pointer hover:bg-gray-50 hover:dark:bg-gray-500">
+              <div className="flex flex-col gap-1">
+                <div className="font-bold">{field.name}</div>
+              </div>
             </div>
-          </div>
-        </ListItemHeader>
+          </ListItemHeader>
+        </Link>
         <ListItemBody>
           <div className="flex gap-6">
             <div>
@@ -74,7 +81,12 @@ function FieldItem({ field }) {
             <div className="flex-1">
               {/* Placeholder for field grid or map */}
               <div className="w-full">
-                <FieldGrid width={width} length={length} cultivationAreas={cultivationAreas} small={true} />
+                <FieldGrid
+                  width={width}
+                  length={length}
+                  cultivationAreas={cultivationAreas}
+                  small={true}
+                />
               </div>
             </div>
           </div>

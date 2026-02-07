@@ -1,11 +1,11 @@
 const appUsersJsonArray = [
   {
-    username: "general.manager",
+    username: "gm",
     modelName: "GeneralManager",
     name: "General",
     surname: "Manager",
     email: "general.manager@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -14,47 +14,47 @@ const appUsersJsonArray = [
     name: "Admin",
     surname: "Admin",
     email: "admin@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
-    username: "cultivation.manager",
+    username: "cm",
     modelName: "CultivationManager",
     sector: "Cultivation",
     name: "Cultivation",
     surname: "Manager",
     email: "cultivation.manager@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
-    username: "financial.manager",
+    username: "fm",
     modelName: "FinancialManager",
     sector: "Financial",
     name: "Financial",
     surname: "Manager",
     email: "financial.manager@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
-    username: "production.manager",
+    username: "pm",
     modelName: "ProductionManager",
     sector: "Production",
     name: "Production",
     surname: "Manager",
     email: "production.manager@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
-    username: "warehouse.manager",
+    username: "wm",
     modelName: "WarehouseManager",
     sector: "Warehouse",
     name: "Warehouse",
     surname: "Manager",
     email: "warehouse.manager@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -64,7 +64,7 @@ const appUsersJsonArray = [
     name: "John",
     surname: "Doe",
     email: "john.doe@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -74,7 +74,7 @@ const appUsersJsonArray = [
     name: "Alice",
     surname: "Ross",
     email: "alice.ross@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -84,7 +84,7 @@ const appUsersJsonArray = [
     name: "Brandon",
     surname: "Kent",
     email: "brandon.kent@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -94,7 +94,7 @@ const appUsersJsonArray = [
     name: "Carla",
     surname: "Mendez",
     email: "carla.mendez@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -104,7 +104,7 @@ const appUsersJsonArray = [
     name: "David",
     surname: "York",
     email: "david.york@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -114,7 +114,7 @@ const appUsersJsonArray = [
     name: "Elena",
     surname: "Pratt",
     email: "elena.pratt@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -124,7 +124,7 @@ const appUsersJsonArray = [
     name: "Frank",
     surname: "Li",
     email: "frank.li@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -134,7 +134,7 @@ const appUsersJsonArray = [
     name: "Grace",
     surname: "Cho",
     email: "grace.cho@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -144,7 +144,7 @@ const appUsersJsonArray = [
     name: "Henry",
     surname: "Tate",
     email: "henry.tate@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -154,7 +154,7 @@ const appUsersJsonArray = [
     name: "Isabel",
     surname: "Ng",
     email: "isabel.ng@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -164,7 +164,7 @@ const appUsersJsonArray = [
     name: "Jackson",
     surname: "Boyle",
     email: "jackson.boyle@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -174,7 +174,7 @@ const appUsersJsonArray = [
     name: "Karen",
     surname: "Moss",
     email: "karen.moss@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -184,7 +184,7 @@ const appUsersJsonArray = [
     name: "Leo",
     surname: "Wright",
     email: "leo.wright@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -194,7 +194,7 @@ const appUsersJsonArray = [
     name: "Mia",
     surname: "Huang",
     email: "mia.huang@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -204,7 +204,7 @@ const appUsersJsonArray = [
     name: "Nathan",
     surname: "Price",
     email: "nathan.price@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -214,7 +214,7 @@ const appUsersJsonArray = [
     name: "Olivia",
     surname: "Dunn",
     email: "olivia.dunn@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -224,7 +224,7 @@ const appUsersJsonArray = [
     name: "Paul",
     surname: "Vasquez",
     email: "paul.vasquez@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -234,7 +234,7 @@ const appUsersJsonArray = [
     name: "Quinn",
     surname: "Barker",
     email: "quinn.barker@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -244,7 +244,7 @@ const appUsersJsonArray = [
     name: "Rachel",
     surname: "Sims",
     email: "rachel.sims@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -254,7 +254,7 @@ const appUsersJsonArray = [
     name: "Samuel",
     surname: "Ortiz",
     email: "samuel.ortiz@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -264,7 +264,7 @@ const appUsersJsonArray = [
     name: "Tina",
     surname: "Gibbs",
     email: "tina.gibbs@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -274,7 +274,7 @@ const appUsersJsonArray = [
     name: "Adam",
     surname: "Johnson",
     email: "adam.johnson@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -284,7 +284,7 @@ const appUsersJsonArray = [
     name: "Bethany",
     surname: "Martinez",
     email: "bethany.martinez@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -294,7 +294,7 @@ const appUsersJsonArray = [
     name: "Christopher",
     surname: "Anderson",
     email: "christopher.anderson@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -304,7 +304,7 @@ const appUsersJsonArray = [
     name: "Diana",
     surname: "Taylor",
     email: "diana.taylor@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
   {
@@ -314,7 +314,7 @@ const appUsersJsonArray = [
     name: "Eric",
     surname: "Thompson",
     email: "eric.thompson@example.com",
-    password: "$2b$10$Zbq/5.DZkV9AMnsOg8eNGOe8YFAyYhSa7lK9GuRkNI86Y7xs7.M2a",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
   },
 ];

@@ -22,9 +22,6 @@ export function FieldGrid({
 }
 
 const FieldCell = ({ active, small, x, y }) => {
-  if (x == 0 && y == 0) {
-    console.log("First cell:", { x, y });
-  }
   return (
     <div
       className={`${small ? "w-1 h-1" : "w-2 h-2 cursor:pointer"} border ${active ? "bg-yellow-500" : ""} `}

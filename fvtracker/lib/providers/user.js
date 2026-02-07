@@ -58,7 +58,6 @@ const fetchManagerFromApiRedux = async (dispatch) => {
       return;
     }
     dispatch(setManager(response.data.managerData));
-    console.log("Fetched manager from API response:", response.data.managerData);
   } catch (error) {
     console.error(error);
     throw new Error("Error fetching manager from API");

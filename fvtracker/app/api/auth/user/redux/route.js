@@ -7,7 +7,7 @@ export async function GET(req) {
   const { searchParams } = new URL(req.url);
   try {
     const appUser = await authLib.session.fetchSessionAppUser();
-    console.log("Fetched app user in route:", appUser);
+
     if (!appUser) {
       console.log("anonymous user - no appUser found in session");
       return Response.json(
@@ -20,6 +20,8 @@ export async function GET(req) {
         },
       );
     }
+
+    console.log("Fetched app user in route:", appUser.username);
 
     let managerData = null;
     if (searchParams.get("includeManager") === "true") {

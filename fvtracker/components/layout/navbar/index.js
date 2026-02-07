@@ -34,9 +34,7 @@ function NavItems() {
   const managerModelName = useSelector(
     (state) => state.user?.rootManager?.managerModelName,
   );
-  console.log("Manager model name:", managerModelName);
   const items = roleitems[managerModelName] || [];
-  console.log("Nav items:", items);
   return (
     <div className="flex gap-8 w-screen justify-center">
       {items.map((item, index) => (

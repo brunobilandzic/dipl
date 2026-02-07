@@ -1,5 +1,6 @@
 import { RootManager } from "@/models/user/managers/RootManager";
 import mongoose from "mongoose";
+import models from "@/models";
 
 export async function fetchManagerData(rootManagerId) {
   if (!rootManagerId) {

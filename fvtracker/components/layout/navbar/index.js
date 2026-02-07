@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import roleitems from "./roleitems";
-import { useSelector } from "react-redux";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 export default {
   roleitems,
@@ -15,8 +16,9 @@ export function Navbar() {
         {" "}
         <NavLogo />
       </div>
-
-      <NavItems />
+      <div className="flex gap-8 w-screen justify-center">
+        <NavItems />
+      </div>
       <div className="w-1/6"></div>
     </div>
   );
@@ -31,16 +33,29 @@ function NavLogo() {
 }
 
 function NavItems() {
-  const managerModelName = useSelector(
-    (state) => state.user?.rootManager?.managerModelName,
-  );
-  const items = roleitems[managerModelName] || [];
+  const { data: session, status } = useSession();
+  console.log("2", session);
+  const [managerModelName, setManagerModelName] = useState(null);
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    if (session) {
+      setManagerModelName(session.user?.managerModelName);
+    }
+  }, [session]);
+
+  useEffect(() => {
+    if (managerModelName) {
+      setItems(roleitems[managerModelName] || []);
+    }
+  }, [managerModelName]);
+
   return (
-    <div className="flex gap-8 w-screen justify-center">
+    <>
       {items.map((item, index) => (
         <NavItem key={index} item={item} />
       ))}
-    </div>
+    </>
   );
 }
 

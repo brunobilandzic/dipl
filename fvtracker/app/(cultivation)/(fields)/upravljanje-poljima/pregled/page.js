@@ -3,7 +3,7 @@ import clean from "@/lib/db/clean";
 import React from "react";
 import { getCultivationManager } from "@/lib/cultivation/cultivationManager";
 
-export default async function PregledPoljaPage() {
+export default async function FieldListPage() {
   const cultivationManager = await getCultivationManager();
 
   return (

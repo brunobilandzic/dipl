@@ -29,7 +29,6 @@ export function FieldsList({ fields }) {
 
 function FieldItem({ field }) {
   if (!field) return null;
-  console.log("Rendering field:", field);
   const {
     name,
     description,
@@ -43,12 +42,11 @@ function FieldItem({ field }) {
       gap: cultivationAreasGap,
     },
   } = field;
+
   return (
     <>
       <div className="">
-        <Link
-          href={`/upravljanje-poljima/${makeUrlFriendly(name)}`}
-        >
+        <Link href={`/upravljanje-poljima/${makeUrlFriendly(name)}`}>
           <ListItemHeader>
             <div className="flex justify-between w-full cursor-pointer hover:bg-gray-50 hover:dark:bg-gray-500">
               <div className="flex flex-col gap-1">
@@ -58,7 +56,7 @@ function FieldItem({ field }) {
           </ListItemHeader>
         </Link>
         <ListItemBody>
-          <div className="flex gap-6">
+          <div className="flex justify-between">
             <div>
               <div className="text-sm">
                 <div>{field.description}</div>
@@ -78,16 +76,14 @@ function FieldItem({ field }) {
                 </div>
               </div>
             </div>
-            <div className="flex-1">
+            <div className="max-w-2/3 h-fit">
               {/* Placeholder for field grid or map */}
-              <div className="w-full">
                 <FieldGrid
                   width={width}
                   length={length}
                   cultivationAreas={cultivationAreas}
                   small={true}
                 />
-              </div>
             </div>
           </div>
         </ListItemBody>

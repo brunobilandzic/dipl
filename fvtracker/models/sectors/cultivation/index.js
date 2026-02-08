@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 import { CultivationArea, Cultivation } from "./Cultivation";
-import { Field, FieldGridCell } from "./Field";
+import { Field } from "./Field";
 import { CropGeneralType, CropType, CropVariety } from "./Crops";
 import { SoilType } from "./Soil";
+import { Field } from "./Field";
 
 export default {
   CultivationArea,
   Cultivation,
   Field,
-  FieldGridCell,
   CropGeneralType,
   CropType,
   CropVariety,

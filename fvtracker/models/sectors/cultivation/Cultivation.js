@@ -7,15 +7,15 @@ const cultivationAreaSchema = new Schema({
   name: { type: String, required: true },
   slug: { type: String, unique: true, index: true },
   description: { type: String, default: "" },
-  fieldGridCells: [
-    {
-      // cultivation area consists of multiple field grid cells
-      // all must have same soil type
+  planted: {
+    type: Map,
+    of: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "FieldGridCell",
-      default: [],
+      ref: "CropVariety",
+      default: null,
     },
-  ],
+    default: () => new Map(),
+  },
   soilType:
     // cultivation area consists of only one soil type
     // this is also noted here for easier access and querying
@@ -34,29 +34,15 @@ const cultivationSchema = new Schema({
   name: { type: String, required: true },
   slug: { type: String, unique: true, index: true },
   description: { type: String, default: "" },
-  fieldGridCells: [
-    {
+  planted: {
+    type: Map,
+    of: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "FieldGridCell",
-      default: [],
+      ref: "CropVariety",
+      default: null,
     },
-  ],
-  crops: [
-    {
-      type: {
-        crop: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "CropVariety",
-          default: [],
-        },
-        cell: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "FieldGridCell",
-          default: null,
-        },
-      },
-    },
-  ],
+    default: () => new Map(),
+  },
   workHours: [
     {
       type: {

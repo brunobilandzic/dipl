@@ -51,21 +51,10 @@ const fieldSchema = new mongoose.Schema({
 });
 
 fieldSchema.methods.addCultivationArea = async function (cultivationArea) {
-  const { name, description, fieldGridCells } = cultivationArea;
   const newCultivationArea = new CultivationArea({
-    name,
-    description,
+    ...cultivationArea,
     field: this._id,
   });
-
-  const gridCells = fieldGridCells.map((cell) => ({
-    row: cell.row,
-    column: cell.col,
-    cultivationArea: newCultivationArea._id,
-  }));
-
-  const insertedCells = await FieldGridCell.insertMany(gridCells);
-  newCultivationArea.fieldGridCells = insertedCells.map((c) => c._id);
 
   this.cultivationAreas.push(newCultivationArea._id);
   await newCultivationArea.save();
@@ -77,7 +66,7 @@ fieldSchema.pre("save", function (next) {
   }
 });
 
-const fieldGridCell = new mongoose.Schema({
+/* const fieldGridCell = new mongoose.Schema({
   // square cell in the field grid
   // has 1x1 size
   row: { type: Number, required: true },
@@ -97,9 +86,10 @@ const fieldGridCell = new mongoose.Schema({
     default: null,
   },
 });
+export const FieldGridCell =
+  mongoose.models.FieldGridCell ||
+  mongoose.model("FieldGridCell", fieldGridCell); */
 
 export const Field =
   mongoose.models.Field || mongoose.model("Field", fieldSchema);
-export const FieldGridCell =
-  mongoose.models.FieldGridCell ||
-  mongoose.model("FieldGridCell", fieldGridCell);
+

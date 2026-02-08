@@ -4,24 +4,25 @@ import axios from "axios";
 import { signOut } from "next-auth/react";
 import { FaUserPlus } from "react-icons/fa";
 import { MdAllInclusive, MdDeleteForever, MdFoodBank } from "react-icons/md";
+import SEED_TYPES from "@/seed/seedTypes";
 
 export default function SeedOptions() {
   const _icons = {
     seedAll: {
       icon: <MdAllInclusive />,
-      label: "Seed All",
+      label: SEED_TYPES.ALL,
     },
     seedUsers: {
       icon: <FaUserPlus />,
-      label: "Seed Users",
+      label: SEED_TYPES.USERS,
     },
     seedFields: {
       icon: <MdFoodBank />,
-      label: "Create Field",
+      label: SEED_TYPES.FIELDS,
     },
     cropMainTypes: {
       icon: <MdFoodBank />,
-      label: "Seed Crop Main Types",
+      label: SEED_TYPES.CROP_MAIN_TYPES,
     },
   };
 

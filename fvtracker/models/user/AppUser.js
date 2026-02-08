@@ -37,7 +37,6 @@ appUserSchema.pre("save", function (next) {
     const fullName = this.surname ? `${this.name} ${this.surname}` : this.name;
     this.slug = utils.strings.makeUrlFriendly(fullName);
   }
-  next();
 });
 
 appUserSchema.methods.getRootManager = async function () {

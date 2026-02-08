@@ -34,15 +34,14 @@ function NavLogo() {
 
 function NavItems() {
   const { data: session, status } = useSession();
-  console.log("2", session);
   const [managerModelName, setManagerModelName] = useState(null);
   const [items, setItems] = useState([]);
 
   useEffect(() => {
-    if (session) {
+    if (status === "authenticated" && session.user?.managerModelName) {
       setManagerModelName(session.user?.managerModelName);
     }
-  }, [session]);
+  }, [status]);
 
   useEffect(() => {
     if (managerModelName) {

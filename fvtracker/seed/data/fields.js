@@ -44,7 +44,7 @@ export const optimizedParams = {
 const optimizedParams2 = {
   name: "SEEDED FIELD 2",
   description: "Field optimized for seeders testing",
-  width: 75,
+  width: 100,
   length: 80,
   min_ca_dim: 10,
   max_ca_dim: 60,

@@ -47,7 +47,7 @@ function drawField(field) {
     cultivationAreas.length,
     "cultivation areas.",
   );
-  fieldFilledRatio(field);
+  printFieldParams(field);
 }
 
 function sum_points(field) {
@@ -81,7 +81,7 @@ function fieldFilledRatio(field) {
   return ratio;
 }
 
-function printFieldParams(fieldParams) {
+function printFieldParams(field) {
   const {
     name,
     min_ca_dim,
@@ -90,9 +90,9 @@ function printFieldParams(fieldParams) {
     width,
     length,
     cultivationAreas,
-  } = fieldParams;
+  } = field;
   console.log(
-    `Field ${name} has dimensions ${width}x${length}, min CA dim ${min_ca_dim}, max CA dim ${max_ca_dim}, created ${cultivationAreas.length} cultivation areas and filled ratio ${ratio}.`,
+    `Field ${name} has dimensions ${width}x${length}, min CA dim ${min_ca_dim}, max CA dim ${max_ca_dim}, created ${cultivationAreas.length} cultivation areas and filled ratio ${fieldFilledRatio(field)}.`,
   );
 }
 

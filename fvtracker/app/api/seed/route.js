@@ -7,6 +7,7 @@ export async function POST(req) {
     try {
       body = await req.json();
     } catch {
+      console.log("No JSON body provided, proceeding with empty body.");
       body = {};
     }
 

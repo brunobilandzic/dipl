@@ -25,13 +25,14 @@ export const fieldParams = [
   },
 ];
 
+
 export const optimizedParams = {
   name: "SEEDED FIELD",
   description: "Field optimized for seeders testing",
   width: 100,
   length: 100,
-  min_ca_dim: 15,
-  max_ca_dim: 50,
+  min_ca_dim: 10,
+  max_ca_dim: 60,
   gap: 2,
   cultivationAreas: [],
   location: {
@@ -43,11 +44,11 @@ export const optimizedParams = {
 const optimizedParams2 = {
   name: "SEEDED FIELD 2",
   description: "Field optimized for seeders testing",
-  width: 150,
+  width: 75,
   length: 80,
-  min_ca_dim: 20,
+  min_ca_dim: 10,
   max_ca_dim: 60,
-  gap: 3,
+  gap: 2,
   cultivationAreas: [],
   location: {
     latitude: 43.67028,
@@ -58,11 +59,11 @@ const optimizedParams2 = {
 const optimizedParams3 = {
   name: "SEEDED FIELD 3",
   description: "Field optimized for seeders testing",
-  width: 200,
-  length: 200,
-  min_ca_dim: 30,
-  max_ca_dim: 80,
-  gap: 4,
+  width: 90,
+  length: 120,
+  min_ca_dim: 10,
+  max_ca_dim: 60,
+  gap: 2,
   cultivationAreas: [],
   location: {
     latitude: 44.5,
@@ -73,11 +74,11 @@ const optimizedParams3 = {
 const optimizedParams4 = {
   name: "SEEDED FIELD 4",
   description: "Field optimized for seeders testing",
-  width: 300,
-  length: 250,
-  min_ca_dim: 40,
-  max_ca_dim: 100,
-  gap: 5,
+  width: 75,
+  length: 150,
+  min_ca_dim: 10,
+  max_ca_dim: 60,
+  gap: 2,
   cultivationAreas: [],
   location: {
     latitude: 45.0,
@@ -85,28 +86,19 @@ const optimizedParams4 = {
   },
 };
 
-export const optimizedParams5 = {
-  name: "SEEDED FIELD 5",
-  description: "Field optimized for seeders testing",
-  width: 400,
-  length: 350,
-  min_ca_dim: 50,
-  max_ca_dim: 120,
-  gap: 6,
-  cultivationAreas: [],
-  location: {
-    latitude: 43.0,
-    longitude: 17.5,
-  },
-};
-
-export const optimizedParamsArray = [optimizedParams, optimizedParams2];
+export const optimizedParamsArray = [
+  optimizedParams,
+  optimizedParams2,
+  optimizedParams3,
+  optimizedParams4, 
+                   
+];
 
 const createFieldTimeSeconds = 5;
 
 export const createFieldTimeMs = createFieldTimeSeconds * 1000;
 
-const cultivationAreaNames = [
+const cultivationAreaNamesConstant = [
   {
     name: "Polje Anita",
     description: "natkriveno polje pogodno za sadanju voca",
@@ -137,6 +129,7 @@ const cultivationAreaNames = [
 ];
 
 export function randomCultivationAreaName() {
+  const cultivationAreaNames = [...cultivationAreaNamesConstant];
   const datapoint = cultivationAreaNames.splice(
     Math.floor(Math.random() * cultivationAreaNames.length),
     1,

@@ -3,6 +3,7 @@ import users from "./users";
 import fields from "./fields";
 import crops from "./fields/crops";
 import { deleteDB } from "@/lib/db/delete";
+import { createFieldTimeMs, optimizedParamsArray } from "./data/fields";
 
 export default {
   handleAPIRequest,
@@ -15,9 +16,8 @@ async function handleAPIRequest(seedType) {
       return await seedAll();
     case SEED_TYPES.USERS:
       return await users.all();
-    case SEED_TYPES.FIELD:
-      return async (optimizedParams, msWindow) =>
-        await fields.create(optimizedParams, msWindow);
+    case SEED_TYPES.FIELDS:
+      return await fields.create();
     case SEED_TYPES.CROP_MAIN_TYPES:
       return await crops.mainTypes();
 

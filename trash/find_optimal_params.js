@@ -1,5 +1,5 @@
-import { optimizedParams } from "../data/fields.js";
-import { drawField, fieldFilledRatio } from "./analyze.js";
+import { optimizedParams } from "../fvtracker/seed/data/fields.js";
+import { drawField, fieldFilledRatio } from "../fvtracker/seed/fields/analyze.js";
 
 function randomPoint(field) {
   const { width, length, min_ca_dim, max_ca_dim, gap } = field;

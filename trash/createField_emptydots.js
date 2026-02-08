@@ -1,5 +1,5 @@
 import { Field } from "@/models/sectors/cultivation/Field.js";
-import { drawField, get_ca_min_max } from "./analyze.js";
+import { drawField, get_ca_min_max } from "../fvtracker/seed/fields/analyze.js";
 import { CultivationManager } from "@/models/user/managers/CultivationManager.js";
 import { sample } from "lodash";
 

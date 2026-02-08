@@ -1,12 +1,12 @@
 import { Field } from "@/models/sectors/cultivation/Field.js";
-import { drawField } from "./analyze.js";
+import { drawField } from "../fvtracker/seed/fields/analyze.js";
 import { CultivationManager } from "@/models/user/managers/CultivationManager.js";
 import {
   createFieldTimeMs,
   cultivationAreaNames,
   optimizedParams,
   randomCultivationAreaName,
-} from "../data/fields.js";
+} from "../fvtracker/seed/data/fields.js";
 import dbConnect from "@/lib/db/mongooseConnect.js";
 
 await dbConnect();

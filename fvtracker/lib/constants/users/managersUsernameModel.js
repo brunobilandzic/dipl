@@ -1,9 +1,9 @@
 export const usernameToModel = {
-  "general.manager": "GeneralManager",
-  "cultivation.manager": "CultivationManager",
-  "financial.manager": "FinancialManager",
-  "production.manager": "ProductionManager",
-  "warehouse.manager": "WarehouseManager",
+  "gm": "GeneralManager",
+  "cm": "CultivationManager",
+  "fm": "FinancialManager",
+  "pm": "ProductionManager",
+  "wm": "WarehouseManager",
 };
 
 function createModelToUsername() {

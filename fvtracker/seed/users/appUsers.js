@@ -40,7 +40,7 @@ export default async () => {
   // Now create other app users
   const promises = [];
   for (const appUserData of appUsersJsonArray) {
-    if (!["general.manager", "admin"].includes(appUserData.username))
+    if (!["gm", "admin.admin"].includes(appUserData.username))
       promises.push(createAppUser(appUserData, generalManager._id));
   }
 
@@ -80,10 +80,10 @@ export const createAppUser = async (appUserData, generalManagerId) => {
   const appUser = new AppUser(appUserData);
   const username = appUser.username;
   await appUser.save();
-  let manager = null;
+  
   if (
     username in usersConstants.usernameToModel &&
-    username !== "general.manager" &&
+    username !== "gm" &&
     username !== "admin.admin"
   ) {
     // now we have to crate a root manager and specific manager

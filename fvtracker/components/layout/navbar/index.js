@@ -11,15 +11,16 @@ export default {
 
 export function Navbar() {
   return (
-    <div className="w-full h-16 bg-transparent flex items-center px-10 justify-center gap-4">
-      <div className="w-1/6 flex justify-center items-center">
+    <div className=" relative h-16 bg-transparent flex items-center px-10 ">
+      <div className="flex-1 flex justify-start items-center">
         {" "}
         <NavLogo />
       </div>
-      <div className="flex gap-8 w-screen justify-center">
+      <div className="absolute left-1/2 -translate-x-1/2 flex gap-8">
         <NavItems />
       </div>
-      <div className="w-1/6">
+      <div className=" flex-1 flex justify-end gap-8 ">
+    
         <Link href="/seed">test podaci</Link>
         <Link href="/auth">aautorizacija</Link>
       </div>

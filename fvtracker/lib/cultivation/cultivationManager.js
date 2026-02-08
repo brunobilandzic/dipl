@@ -17,7 +17,6 @@ export async function getCultivationManager() {
     path: "fields",
     populate: {
       path: "cultivationAreas",
-      populate: "fieldGridCells",
     },
   });
   

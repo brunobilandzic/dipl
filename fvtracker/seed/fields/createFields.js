@@ -1,15 +1,26 @@
-import { Field } from "@/models/sectors/cultivation/Field.js";
-import { drawField } from "./analyze.js";
+import { Field, FieldGridCell } from "@/models/sectors/cultivation/Field.js";
+import { drawField, fieldFilledRatio, printFieldParams } from "./analyze.js";
 import { CultivationManager } from "@/models/user/managers/CultivationManager.js";
 import {
   createFieldTimeMs,
-  cultivationAreaNames,
   optimizedParams,
+  optimizedParamsArray,
   randomCultivationAreaName,
 } from "../data/fields.js";
 import dbConnect from "@/lib/db/mongooseConnect.js";
+import { CultivationArea } from "@/models/sectors/cultivation/Cultivation.js";
 
 await dbConnect();
+
+async function deleteFieldsWithDocs() {
+  await Field.deleteMany({});
+  await CultivationArea.deleteMany({});
+  await FieldGridCell.deleteMany({});
+  await CultivationManager.updateMany({}, { $set: { fields: [] } });
+  console.log(
+    "Deleted existing fields, cultivation areas, and field grid cells.",
+  );
+}
 
 function randomPoint(field) {
   const { width, length, min_ca_dim, max_ca_dim } = field;
@@ -71,7 +82,7 @@ function notValidPoint(field, x, y, dim_x, dim_y) {
   return false;
 }
 
-async function createFieldObject(fieldParams, msWindow = 1000 * 10) {
+async function createFieldObject(fieldParams, msWindow = createFieldTimeMs) {
   const msStart = Date.now();
 
   const { name, description, location, ...fieldDAO } = fieldParams;
@@ -90,11 +101,7 @@ async function createFieldObject(fieldParams, msWindow = 1000 * 10) {
       const loopTime = Date.now();
       const elapsed = loopTime - msStart;
       if (elapsed % 1000 === 0) {
-        console.log(
-          "Trying to find valid point...",
-          (loopTime - msStart) / 1000,
-          "seconds elapsed.",
-        );
+        // 1 sec passed
       }
       if (elapsed > msWindow && field.cultivationAreas.length > 0) {
         console.log(
@@ -102,7 +109,8 @@ async function createFieldObject(fieldParams, msWindow = 1000 * 10) {
           elapsed / 1000,
           "seconds.",
         );
-        drawField(field);
+        fieldParams["ratio"] = `${fieldFilledRatio(field) * 100}%`;
+        printFieldParams(fieldParams);
         return field;
       }
     }
@@ -133,11 +141,14 @@ async function createFieldObject(fieldParams, msWindow = 1000 * 10) {
   };
 }
 
-async function createFieldsObjects(fieldParamsArray) {
+async function createFieldsObjects(
+  fieldParamsArray = optimizedParamsArray,
+  msWindow = createFieldTimeMs,
+) {
   const fieldObjects = [];
   const fieldPromises = [];
   for (let fieldParams of fieldParamsArray) {
-    fieldPromises.push(createFieldObject(fieldParams));
+    fieldPromises.push(createFieldObject(fieldParams, msWindow));
   }
   const resolvedFields = await Promise.all(fieldPromises);
   for (let field of resolvedFields) {
@@ -146,7 +157,11 @@ async function createFieldsObjects(fieldParamsArray) {
   return fieldObjects;
 }
 
-export async function createFields(fieldParamsArray, msWindow = 1000 * 10) {
+export async function createFields(
+  fieldParamsArray = optimizedParamsArray,
+  msWindow = createFieldTimeMs,
+) {
+  await deleteFieldsWithDocs();
   const fieldObjects = await createFieldsObjects(fieldParamsArray, msWindow);
   console.log(
     `Created ${fieldObjects.length} field objects. Now creating field records...`,
@@ -168,7 +183,6 @@ export async function createFields(fieldParamsArray, msWindow = 1000 * 10) {
     `${fieldRecords.map((fr) => fr.name).join(", ")} field records created successfully.`,
   );
   return fieldRecords;
-  
 }
 
 export async function createFieldRecord(fieldObject) {

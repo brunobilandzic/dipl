@@ -19,7 +19,10 @@ export function Navbar() {
       <div className="flex gap-8 w-screen justify-center">
         <NavItems />
       </div>
-      <div className="w-1/6"></div>
+      <div className="w-1/6">
+        <Link href="/seed">test podaci</Link>
+        <Link href="/auth">aautorizacija</Link>
+      </div>
     </div>
   );
 }

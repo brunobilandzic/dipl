@@ -62,28 +62,24 @@ mainCropTypeSchema.pre("save", function (next) {
   if (this.isModified("name")) {
     this.slug = utils.strings.makeUrlFriendly(this.name);
   }
-  next();
 });
 
 cropGeneralTypeSchema.pre("save", function (next) {
   if (this.isModified("name")) {
     this.slug = utils.strings.makeUrlFriendly(this.name);
   }
-  next();
 });
 
 cropTypeSchema.pre("save", function (next) {
   if (this.isModified("name")) {
     this.slug = utils.strings.makeUrlFriendly(this.name);
   }
-  next();
 });
 
 cropVarietySchema.pre("save", function (next) {
   if (this.isModified("name")) {
     this.slug = utils.strings.makeUrlFriendly(this.name);
   }
-  next();
 });
 
 // model exports

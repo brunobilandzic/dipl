@@ -86,14 +86,12 @@ cultivationAreaSchema.pre("save", function (next) {
   if (this.isModified("name")) {
     this.slug = utils.strings.makeUrlFriendly(this.name);
   }
-  next();
 });
 
 cultivationSchema.pre("save", function (next) {
   if (this.isModified("name")) {
     this.slug = utils.strings.makeUrlFriendly(this.name);
   }
-  next();
 });
 
 export const CultivationArea =

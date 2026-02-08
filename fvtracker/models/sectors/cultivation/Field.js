@@ -75,7 +75,6 @@ fieldSchema.pre("save", function (next) {
   if (this.isModified("name")) {
     this.slug = utils.strings.makeUrlFriendly(this.name);
   }
-  next();
 });
 
 const fieldGridCell = new mongoose.Schema({

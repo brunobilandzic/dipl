@@ -31,7 +31,6 @@ soilTypeSchema.pre("save", function (next) {
   if (this.isModified("name")) {
     this.slug = utils.strings.makeUrlFriendly(this.name);
   }
-  next();
 });
 
 export const SoilType =

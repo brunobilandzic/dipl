@@ -78,10 +78,30 @@ function fieldFilledRatio(field) {
   const fieldPoints = sum_points(field);
   const caPoints = fieldCultivationAreaPoints(field);
   const ratio = caPoints / fieldPoints;
-  console.log(
-    `Field points: ${fieldPoints}, CA points: ${caPoints}, Ratio: ${ratio}`,
-  );
   return ratio;
 }
 
-export { drawField, get_ca_min_max, fieldFilledRatio };
+function printFieldParams(fieldParams) {
+  const {
+    name,
+    min_ca_dim,
+    max_ca_dim,
+    ratio,
+    width,
+    length,
+    cultivationAreas,
+  } = fieldParams;
+  console.log(
+    `Field ${name} has dimensions ${width}x${length}, min CA dim ${min_ca_dim}, max CA dim ${max_ca_dim}, created ${cultivationAreas.length} cultivation areas and filled ratio ${ratio}.`,
+  );
+}
+
+export {
+  drawField,
+  get_ca_min_max,
+  fieldFilledRatio,
+  printFieldParams,
+  allCoordinates,
+  sum_points,
+  fieldCultivationAreaPoints,
+};

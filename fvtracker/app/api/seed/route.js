@@ -3,7 +3,19 @@ import seed from "@/seed";
 export async function POST(req) {
   console.log("Seed route POST called");
   try {
-    const { seedType } = await req.json();
+    let body = {};
+    try {
+      body = await req.json();
+    } catch {
+      body = {};
+    }
+
+    const { seedType } = body ?? {};
+
+    if (!seedType) {
+      return Response.json({ error: "seedType missing" }, { status: 400 });
+    }
+
     const result = await seed.handleAPIRequest(seedType);
     return Response.json(
       {

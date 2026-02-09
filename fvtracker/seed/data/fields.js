@@ -88,9 +88,6 @@ const optimizedParams4 = {
 
 export const optimizedParamsArray = [
   optimizedParams,
-  optimizedParams2,
-  optimizedParams3,
-  optimizedParams4, 
                    
 ];
 

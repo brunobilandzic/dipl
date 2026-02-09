@@ -1,15 +1,19 @@
-function max_dim(d, dim) {
-  return d.reduce(
-    (max, cell) => (cell[dim] > max ? cell[dim] : max),
-    d[0][dim],
-  );
+function max_dim(ca, dim) {
+  const plantedCells = Array.from(ca.planted || []);
+  return plantedCells.reduce((max, plantedCell) => {
+    const cellCoordinates = plantedCell[0]?.split(",").map(Number) ?? [0, 0];
+    const cellDim = cellCoordinates[dim === "row" ? 0 : 1] || 0;
+    return cellDim > max ? cellDim : max;
+  }, 0);
 }
 
-function min_dim(d, dim) {
-  return d.reduce(
-    (min, cell) => (cell[dim] < min ? cell[dim] : min),
-    d[0][dim],
-  );
+function min_dim(ca, dim) {
+  const plantedCells = Array.from(ca.planted || []);
+  return plantedCells.reduce((min, plantedCell) => {
+    const cellCoordinates = plantedCell[0]?.split(",").map(Number) ?? [0, 0];
+    const cellDim = cellCoordinates[dim === "row" ? 0 : 1] || 0;
+    return cellDim < min ? cellDim : min;
+  }, Infinity);
 }
 
 function get_ca_min_max(ca) {
@@ -57,7 +61,7 @@ function sum_points(field) {
 
 function fieldCultivationAreaPoints(field) {
   const cultivationAreas =
-    field.cultivationAreas?.map((ca) => ca.fieldGridCells) || [];
+    field.cultivationAreas?.map((ca) => ca.planted) || [];
   return cultivationAreas.reduce(function (sum, ca) {
     return sum + ca.length;
   }, 0);

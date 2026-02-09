@@ -236,7 +236,6 @@ export default async function createField(
 
 function exportFieldDbData(field) {
   const { cultivationAreas, _id, id, ...rest } = field;
-  console.log(rest);
   return rest;
 }
 

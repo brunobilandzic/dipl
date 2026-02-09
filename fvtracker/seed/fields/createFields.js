@@ -113,7 +113,7 @@ async function createFieldObject(fieldParams, msWindow = createFieldTimeMs) {
           "seconds.",
         );
         fieldParams["ratio"] = `${fieldFilledRatio(field) * 100}%`;
-        drawField(field);
+        printFieldParams(field);
         return field;
       }
     }
@@ -148,6 +148,7 @@ async function createFieldsObjects(
   fieldParamsArray = optimizedParamsArray,
   msWindow = createFieldTimeMs,
 ) {
+  await deleteFieldsWithDocs();
   const fieldObjects = [];
   const fieldPromises = [];
   for (let fieldParams of fieldParamsArray) {
@@ -213,6 +214,12 @@ export default async function createField(
 ) {
   const fieldObject = await createFieldObject(fieldParams, msWindow);
   const fieldRecord = new Field(exportFieldDbData(fieldObject));
+  const cultivationManager = await CultivationManager.findOne({});
+  cultivationManager.fields.push(fieldRecord._id);
+  await cultivationManager.save();
+  fieldRecord.manager = cultivationManager._id;
+  await fieldRecord.save();
+
   const cultivationAreasPromises = fieldObject.cultivationAreas.map(
     async (ca) => {
       const newCultivationArea = await fieldRecord.addCultivationArea(ca);
@@ -220,17 +227,14 @@ export default async function createField(
     },
   );
   await Promise.all(cultivationAreasPromises);
-  const cultivationManager = await CultivationManager.findOne({});
-  cultivationManager.fields.push(fieldRecord._id);
-  fieldRecord.manager = cultivationManager._id;
-  await cultivationManager.save();
 
   await fieldRecord.save();
   return fieldRecord;
 }
 
 function exportFieldDbData(field) {
-  const { cultivationAreas, ...rest } = field;
+  const { cultivationAreas, _id, id, ...rest } = field;
+  console.log(rest)
   return rest;
 }
 
@@ -242,15 +246,6 @@ function createCultivationArea(x, y, dim_x, dim_y) {
       plantedEmpty.set(`${xi},${yi}`, null);
     }
   }
-
-  console.log(
-    `Created cultivation area at (${x}, ${y}) with dimensions (${dim_x} x ${dim_y}).`,
-  );
-  console.log(`Cultivation area has ${plantedEmpty.size} grid cells.`);
-  console.log(
-    `Example of planted map entries:`,
-    Array.from(plantedEmpty.entries()).slice(0, 5),
-  );
 
   return {
     name,

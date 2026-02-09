@@ -32,7 +32,11 @@ function drawField(field) {
   let { width, length, cultivationAreas } = field;
   const plantedCells =
     cultivationAreas?.reduce(
-      (acc, ca) => acc.concat(Array.from(ca.planted || [])),
+      (acc, ca) => {
+        const plantedArray = Array.from(ca.planted || []);
+        const plantedCells = plantedArray.map((plantedCell) => plantedCell[0]);
+        return acc.concat(plantedCells);
+      },
       [],
     ) || [];
   console.log("drawing grid:");
@@ -41,10 +45,8 @@ function drawField(field) {
     for (let x = 0; x < width; x++) {
       if (
         plantedCells.some((plantedCell) => {
-          const cellCoordinates = plantedCell[0]?.split(",").map(Number) ?? [
-            0, 0,
-          ];
-          return cellCoordinates[0] === x && cellCoordinates[1] === y;
+          const [cellX, cellY] = plantedCell.split(",").map(Number);
+          return cellX === x && cellY === y;
         })
       ) {
         rowStr += "+";

@@ -56,8 +56,8 @@ fieldSchema.methods.addCultivationArea = async function (cultivationArea) {
     field: this._id,
   });
 
-  this.cultivationAreas.push(newCultivationArea._id);
   await newCultivationArea.save();
+  this.cultivationAreas.push(newCultivationArea._id);
 };
 
 fieldSchema.pre("save", function (next) {
@@ -66,7 +66,7 @@ fieldSchema.pre("save", function (next) {
   }
 });
 
-/* const fieldGridCell = new mongoose.Schema({
+/* const fieldGridCell = new mongoose.Schema({zapi
   // square cell in the field grid
   // has 1x1 size
   row: { type: Number, required: true },
@@ -92,4 +92,3 @@ export const FieldGridCell =
 
 export const Field =
   mongoose.models.Field || mongoose.model("Field", fieldSchema);
-

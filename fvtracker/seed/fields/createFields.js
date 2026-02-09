@@ -192,6 +192,12 @@ export async function createFields(
 
 export async function createFieldRecord(fieldObject) {
   const fieldRecord = new Field(exportFieldDbData(fieldObject));
+
+  const cultivationManager = await CultivationManager.findOne({});
+  cultivationManager.fields.push(fieldRecord._id);
+  fieldRecord.manager = cultivationManager._id;
+  await cultivationManager.save();
+  await fieldRecord.save();
   const cultivationAreasPromises = fieldObject.cultivationAreas.map(
     async (ca) => {
       const newCultivationArea = await fieldRecord.addCultivationArea(ca);
@@ -199,11 +205,6 @@ export async function createFieldRecord(fieldObject) {
     },
   );
   await Promise.all(cultivationAreasPromises);
-  const cultivationManager = await CultivationManager.findOne({});
-  cultivationManager.fields.push(fieldRecord._id);
-  fieldRecord.manager = cultivationManager._id;
-  await cultivationManager.save();
-
   await fieldRecord.save();
   return fieldRecord;
 }

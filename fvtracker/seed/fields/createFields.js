@@ -1,4 +1,4 @@
-import { Field, FieldGridCell } from "@/models/sectors/cultivation/Field.js";
+import { Field } from "@/models/sectors/cultivation/Field.js";
 import { drawField, fieldFilledRatio, printFieldParams } from "./analyze.js";
 import { CultivationManager } from "@/models/user/managers/CultivationManager.js";
 import {
@@ -233,16 +233,25 @@ function exportFieldDbData(field) {
 
 function createCultivationArea(x, y, dim_x, dim_y) {
   const { name, description } = randomCultivationAreaName();
-  const fieldGridCells = [];
+  const plantedEmpty = new Map();
   for (let xi = x; xi < x + dim_x; xi++) {
     for (let yi = y; yi < y + dim_y; yi++) {
-      fieldGridCells.push({ row: xi, col: yi });
+      plantedEmpty.set(`${xi},${yi}`, null);
     }
   }
+
+  console.log(
+    `Created cultivation area at (${x}, ${y}) with dimensions (${dim_x} x ${dim_y}).`,
+  );
+  console.log(`Cultivation area has ${plantedEmpty.size} grid cells.`);
+  console.log(
+    `Example of planted map entries:`,
+    Array.from(plantedEmpty.entries()).slice(0, 5),
+  );
 
   return {
     name,
     description,
-    fieldGridCells,
+    planted: plantedEmpty,
   };
 }

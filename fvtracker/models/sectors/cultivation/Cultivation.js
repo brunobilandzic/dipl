@@ -1,9 +1,15 @@
 import mongoose from "mongoose";
 import utils from "@/lib/utils";
+import { Field } from "./Field";
 
 const { Schema } = mongoose;
 
 const cultivationAreaSchema = new Schema({
+  field: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Field",
+    required: true,
+  },
   name: { type: String, required: true },
   slug: { type: String, unique: true, index: true },
   description: { type: String, default: "" },
@@ -31,6 +37,11 @@ const cultivationAreaSchema = new Schema({
 // also has start and end date, status so it maybe will be used for some planning and tracking... idk yet
 // harvest will probably be linked to cultivation
 const cultivationSchema = new Schema({
+  field: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Field",
+    required: true,
+  },
   name: { type: String, required: true },
   slug: { type: String, unique: true, index: true },
   description: { type: String, default: "" },
@@ -68,9 +79,28 @@ const cultivationSchema = new Schema({
   endDate: { type: Date, default: null },
 });
 
-cultivationAreaSchema.pre("save", function (next) {
-  if (this.isModified("name")) {
-    this.slug = utils.strings.makeUrlFriendly(this.name);
+cultivationAreaSchema.pre("save", async function () {
+  console.log("CA save: name=", this.name, "field=", this.field);
+  const exists = await mongoose.model("Field").exists({ _id: this.field });
+  console.log("Field exists before populate?", !!exists, this.field.toString());
+  if (this.isModified("name") || this.isModified("field")) {
+    if (!this.field) {
+      console.warn(
+        "Field reference is missing for cultivation area:",
+        this.name,
+      );
+      return;
+    }
+    console.log(this.field);
+    await this.populate({
+      path: "field",
+      select: "name",
+    });
+    console.log(this.field);
+    const fieldName = this.field?.name;
+    console.log("Field name for slug generation:", fieldName);
+
+    this.slug = utils.strings.makeUrlFriendly(`${fieldName}-${this.name}`);
   }
 });
 

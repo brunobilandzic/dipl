@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import utils from "@/lib/utils";
 import { Field } from "./Field";
+import { makeUrlFriendly } from "@/lib/utils/strings";
 
 const { Schema } = mongoose;
 
@@ -80,27 +81,9 @@ const cultivationSchema = new Schema({
 });
 
 cultivationAreaSchema.pre("save", async function () {
-  console.log("CA save: name=", this.name, "field=", this.field);
-  const exists = await mongoose.model("Field").exists({ _id: this.field });
-  console.log("Field exists before populate?", !!exists, this.field.toString());
-  if (this.isModified("name") || this.isModified("field")) {
-    if (!this.field) {
-      console.warn(
-        "Field reference is missing for cultivation area:",
-        this.name,
-      );
-      return;
-    }
-    console.log(this.field);
-    await this.populate({
-      path: "field",
-      select: "name",
-    });
-    console.log(this.field);
-    const fieldName = this.field?.name;
-    console.log("Field name for slug generation:", fieldName);
-
-    this.slug = utils.strings.makeUrlFriendly(`${fieldName}-${this.name}`);
+  if (this.isModified("name")) {
+    const field = await Field.findById(this.field);
+    this.slug = makeUrlFriendly(`${field?.name}-${this.name}`);
   }
 });
 

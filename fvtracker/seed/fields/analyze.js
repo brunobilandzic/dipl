@@ -28,16 +28,24 @@ function get_ca_min_max(ca) {
 }
 
 function drawField(field) {
+  console.log(allCoordinates(field));
   let { width, length, cultivationAreas } = field;
-  cultivationAreas = cultivationAreas?.map((ca) => ca.fieldGridCells) || [];
+  const plantedCells =
+    cultivationAreas?.reduce(
+      (acc, ca) => acc.concat(Array.from(ca.planted || [])),
+      [],
+    ) || [];
   console.log("drawing grid:");
   for (let y = 0; y < length; y++) {
     let rowStr = "";
     for (let x = 0; x < width; x++) {
       if (
-        cultivationAreas.some((ca) =>
-          ca.some((point) => point.row === x && point.col === y),
-        )
+        plantedCells.some((plantedCell) => {
+          const cellCoordinates = plantedCell[0]?.split(",").map(Number) ?? [
+            0, 0,
+          ];
+          return cellCoordinates[0] === x && cellCoordinates[1] === y;
+        })
       ) {
         rowStr += "+";
       } else {

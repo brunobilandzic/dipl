@@ -212,6 +212,7 @@ export default async function createField(
   fieldParams = optimizedParams,
   msWindow = createFieldTimeMs,
 ) {
+  await dbConnect();
   const fieldObject = await createFieldObject(fieldParams, msWindow);
   const fieldRecord = new Field(exportFieldDbData(fieldObject));
   const cultivationManager = await CultivationManager.findOne({});
@@ -234,7 +235,7 @@ export default async function createField(
 
 function exportFieldDbData(field) {
   const { cultivationAreas, _id, id, ...rest } = field;
-  console.log(rest)
+  console.log(rest);
   return rest;
 }
 

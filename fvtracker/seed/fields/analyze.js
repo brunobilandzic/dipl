@@ -96,6 +96,7 @@ function fieldFilledRatio(field) {
 }
 
 function printFieldParams(field) {
+  console.log("field params:", field);
   const {
     name,
     min_ca_dim,

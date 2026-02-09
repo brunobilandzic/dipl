@@ -113,7 +113,7 @@ async function createFieldObject(fieldParams, msWindow = createFieldTimeMs) {
           "seconds.",
         );
         fieldParams["ratio"] = `${fieldFilledRatio(field) * 100}%`;
-        printFieldParams(field);
+
         return field;
       }
     }
@@ -158,6 +158,9 @@ async function createFieldsObjects(
   const resolvedFields = await Promise.all(fieldPromises);
   for (let field of resolvedFields) {
     fieldObjects.push(field);
+  }
+  for (let field of fieldObjects) {
+    printFieldParams(field);
   }
   return fieldObjects;
 }

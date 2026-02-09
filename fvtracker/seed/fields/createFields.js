@@ -15,7 +15,6 @@ await dbConnect();
 async function deleteFieldsWithDocs() {
   await Field.deleteMany({});
   await CultivationArea.deleteMany({});
-  await FieldGridCell.deleteMany({});
   await CultivationManager.updateMany({}, { $set: { fields: [] } });
   console.log(
     "Deleted existing fields, cultivation areas, and field grid cells.",
@@ -40,7 +39,17 @@ function randomPoint(field) {
 
 function notValidPoint(field, x, y, dim_x, dim_y) {
   let { width, length, cultivationAreas, gap } = field;
-  cultivationAreas = cultivationAreas?.map((ca) => ca.fieldGridCells) || [];
+  const plantedCells =
+    cultivationAreas
+      ?.map((ca) => ca.planted)
+      ?.reduce((acc, planted) => {
+        if (planted) {
+          for (let entry of planted.entries()) {
+            acc.push(entry);
+          }
+        }
+        return acc;
+      }, []) || [];
 
   if (x < 0 || y < 0 || x + dim_x > width || y + dim_y > length) {
     return true;
@@ -48,20 +57,16 @@ function notValidPoint(field, x, y, dim_x, dim_y) {
 
   for (let xi = x; xi <= x + dim_x + gap; xi++) {
     for (let yi = y; yi <= y + dim_y + gap; yi++) {
-      for (let ca of cultivationAreas) {
-        for (let point of ca) {
-          if (point.row === xi && point.col === yi) {
-            return true;
-          }
+      for (let plantedCell of plantedCells) {
+        if (plantedCell[0] === `${xi},${yi}`) {
+          return true;
         }
       }
     }
     for (let yi = y; yi >= y - gap; yi--) {
-      for (let ca of cultivationAreas) {
-        for (let point of ca) {
-          if (point.row === xi && point.col === yi) {
-            return true;
-          }
+      for (let plantedCell of plantedCells) {
+        if (plantedCell[0] === `${xi},${yi}`) {
+          return true;
         }
       }
     }
@@ -69,11 +74,9 @@ function notValidPoint(field, x, y, dim_x, dim_y) {
 
   for (let xi = x; xi >= x - gap; xi--) {
     for (let yi = y; yi <= y + dim_y + gap; yi++) {
-      for (let ca of cultivationAreas) {
-        for (let point of ca) {
-          if (point.row === xi && point.col === yi) {
-            return true;
-          }
+      for (let plantedCell of plantedCells) {
+        if (plantedCell[0] === `${xi},${yi}`) {
+          return true;
         }
       }
     }

@@ -11,6 +11,12 @@ const cultivationAreaSchema = new Schema({
     ref: "Field",
     required: true,
   },
+  cultivations: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Cultivation",
+    },
+  ],
   name: { type: String, required: true },
   slug: { type: String, unique: true, index: true },
   description: { type: String, default: "" },
@@ -41,6 +47,11 @@ const cultivationSchema = new Schema({
   field: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Field",
+    required: true,
+  },
+  cultivationArea: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "CultivationArea",
     required: true,
   },
   name: { type: String, required: true },

@@ -6,7 +6,6 @@ export function FieldGrid({
   cultivationAreas,
   small,
 }) {
-  console.log("cas", cultivationAreas);
   return (
     <>
       <div
@@ -32,14 +31,15 @@ const FieldCell = ({ active, small, x, y }) => {
 };
 
 const buildFieldCells = (cultivationAreas, fieldWidth, fieldLength, small) => {
-  const activeCells = cultivationAreas.reduce((_activeCells, ca) => {
-    _activeCells.push(
-      ...ca.fieldGridCells.map((cell) => `${cell.column}-${cell.row}`),                 
-    );
-    return _activeCells;
-  }, []);
+  const plantedCellsMapsArray = cultivationAreas?.map((ca) => ca.planted);
+  const plantedCells =
+    plantedCellsMapsArray?.reduce((acc, plantedMap) => {
+      return acc.concat(Object.keys(plantedMap));
+    }, []) || [];
 
-  const cells = [];
+
+    let cells = [];
+
   for (let i = 0; i < fieldLength; i++) {
     for (let j = 0; j < fieldWidth; j++) {
       cells.push(
@@ -50,7 +50,7 @@ const buildFieldCells = (cultivationAreas, fieldWidth, fieldLength, small) => {
           small={small}
           x={i}
           y={j}
-          active={activeCells.includes(`${i}-${j}`)}
+          active={plantedCells.includes(`${i},${j}`)}
         />,
       );
     }

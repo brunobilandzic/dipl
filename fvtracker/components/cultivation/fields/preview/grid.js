@@ -5,11 +5,13 @@ export function FieldGrid({
   length: fieldLength,
   cultivationAreas,
   small,
+  editable,
+  selectedCultivationArea,
 }) {
-  return (
-    <>
+  if (small)
+    return (
       <div
-        className={`grid justify-start items-start ${small ? "" : "gap-1"}`}
+        className={`grid justify-start items-start`}
         style={{
           gridTemplateColumns: `repeat(${fieldWidth}, minmax(0, 1fr))`,
           gridTemplateRows: `repeat(${fieldLength}, minmax(0, 1fr))`,
@@ -17,8 +19,9 @@ export function FieldGrid({
       >
         {buildFieldCells(cultivationAreas, fieldWidth, fieldLength, small)}
       </div>
-    </>
-  );
+    );
+
+  return <>{}</>;
 }
 
 const FieldCell = ({ active, small, x, y, fieldWidth, fieldLength }) => {

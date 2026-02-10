@@ -201,8 +201,10 @@ export async function createFieldRecord(fieldObject) {
   fieldRecord.manager = cultivationManager._id;
   await cultivationManager.save();
   await fieldRecord.save();
+
   const cultivationAreasPromises = fieldObject.cultivationAreas.map(
     async (ca) => {
+      console.log("Creating cultivation area", ca.name, "for field", fieldRecord.name);
       const newCultivationArea = await fieldRecord.addCultivationArea(ca);
       return newCultivationArea;
     },

@@ -9,7 +9,7 @@ export function FieldGrid({
   return (
     <>
       <div
-        className={`grid`}
+        className={`grid justify-start items-start ${small ? "gap-0.5" : "gap-1"}`}
         style={{
           gridTemplateColumns: `repeat(${fieldWidth}, minmax(0, 1fr))`,
           gridTemplateRows: `repeat(${fieldLength}, minmax(0, 1fr))`,
@@ -21,10 +21,10 @@ export function FieldGrid({
   );
 }
 
-const FieldCell = ({ active, small, x, y }) => {
+const FieldCell = ({ active, small, x, y, fieldWidth, fieldLength }) => {
   return (
     <div
-      className={`${small ? "w-1 h-1" : "w-2 h-2 cursor-pointer"} border ${active ? "bg-yellow-500" : ""} `}
+      className={`${small ? "w-1 h-1" : `w-3 h-3 cursor-pointer `} border ${active ? "bg-yellow-500" : ""} `}
       title={`(${x}, ${y})`}
     ></div>
   );
@@ -37,8 +37,7 @@ const buildFieldCells = (cultivationAreas, fieldWidth, fieldLength, small) => {
       return acc.concat(Object.keys(plantedMap));
     }, []) || [];
 
-
-    let cells = [];
+  let cells = [];
 
   for (let i = 0; i < fieldLength; i++) {
     for (let j = 0; j < fieldWidth; j++) {

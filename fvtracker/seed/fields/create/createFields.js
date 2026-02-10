@@ -9,17 +9,9 @@ import {
 } from "../../data/fields.js";
 import dbConnect from "@/lib/db/mongooseConnect.js";
 import { CultivationArea } from "@/models/sectors/cultivation/Cultivation.js";
+import { deleteFieldsWithDocs } from "@/lib/db/delete.js";
 
 await dbConnect();
-
-async function deleteFieldsWithDocs() {
-  await Field.deleteMany({});
-  await CultivationArea.deleteMany({});
-  await CultivationManager.updateMany({}, { $set: { fields: [] } });
-  console.log(
-    "Deleted existing fields, cultivation areas, and field grid cells.",
-  );
-}
 
 async function createFieldObject(fieldParams, msWindow = createFieldTimeMs) {
   const msStart = Date.now();

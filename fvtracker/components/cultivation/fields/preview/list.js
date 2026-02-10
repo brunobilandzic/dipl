@@ -77,7 +77,7 @@ function FieldItem({ field }) {
                 </div>
               </div>
             </div>
-            <div className="max-w-2/3 h-fit">
+            <div className="">
               {/* Placeholder for field grid or map */}
                 <FieldGrid
                   width={width}

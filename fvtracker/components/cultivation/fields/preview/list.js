@@ -14,6 +14,7 @@ import { makeUrlFriendly } from "@/lib/utils/strings";
 
 export function FieldsList({ fields }) {
   if (!fields || fields.length === 0) return <div>No fields found.</div>;
+  console.log("cas", fields[0]?.cultivationAreas);
   return (
     <>
       <List>

@@ -7,7 +7,6 @@ const { Schema } = mongoose;
 
 const mainCropTypeSchema = new Schema({
   name: { type: String, required: true },
-  slug: { type: String, unique: true, index: true },
   generalTypes: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -20,7 +19,6 @@ const mainCropTypeSchema = new Schema({
 // crop general type (cereal, vegetable, fruit..)
 const cropGeneralTypeSchema = new Schema({
   name: { type: String, required: true },
-  slug: { type: String, unique: true, index: true },
   description: { type: String, default: "" },
   cropTypes: [
     { type: mongoose.Schema.Types.ObjectId, ref: "CropType", default: [] },
@@ -30,7 +28,6 @@ const cropGeneralTypeSchema = new Schema({
 // crop type // e.g tomato, eggplant...
 const cropTypeSchema = new Schema({
   name: { type: String, required: true },
-  slug: { type: String, unique: true, index: true },
   description: { type: String, default: "" },
   generalType: {
     type: mongoose.Schema.Types.ObjectId,
@@ -45,7 +42,6 @@ const cropTypeSchema = new Schema({
 // crop variety e.g cherry tomato, beefsteak tomato...
 const cropVarietySchema = new Schema({
   name: { type: String, required: true },
-  slug: { type: String, unique: true, index: true },
   description: { type: String, default: "" },
   cropType: {
     type: mongoose.Schema.Types.ObjectId,
@@ -56,30 +52,6 @@ const cropVarietySchema = new Schema({
     { type: mongoose.Schema.Types.ObjectId, ref: "SoilType", default: [] },
   ],
   classification: { type: String, enum: ["A", "B", "C"] },
-});
-
-mainCropTypeSchema.pre("save", function (next) {
-  if (this.isModified("name")) {
-    this.slug = utils.strings.makeUrlFriendly(this.name);
-  }
-});
-
-cropGeneralTypeSchema.pre("save", function (next) {
-  if (this.isModified("name")) {
-    this.slug = utils.strings.makeUrlFriendly(this.name);
-  }
-});
-
-cropTypeSchema.pre("save", function (next) {
-  if (this.isModified("name")) {
-    this.slug = utils.strings.makeUrlFriendly(this.name);
-  }
-});
-
-cropVarietySchema.pre("save", function (next) {
-  if (this.isModified("name")) {
-    this.slug = utils.strings.makeUrlFriendly(this.name);
-  }
 });
 
 // model exports

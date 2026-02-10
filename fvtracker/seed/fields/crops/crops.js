@@ -6,12 +6,14 @@ import {
   CropVariety,
 } from "@/models/sectors/cultivation/Crops";
 import utils from "@/lib/utils";
+import { deleteCrops } from "@/lib/db/delete";
 
 // Seed crop main types, general types, types, and varieties
 
 // main types
 
 export async function seedCropMainTypes() {
+  await deleteCrops();
   const cropMainTypesPromises = [];
   for (const [key, mainTypeData] of allCropTypes.entries()) {
     cropMainTypesPromises.push(createMainType(mainTypeData));
@@ -35,9 +37,10 @@ async function createMainType(mainTypeData) {
       mainTypeData.generalTypes,
     );
 
-    resolve({ mainType: mainCropType.name, generalTypes });
     mainCropType.generalTypes = generalTypes.map((gt) => gt.generalTypeId);
     await mainCropType.save();
+
+    resolve({ mainType: mainCropType.name, generalTypes });
   });
 }
 
@@ -67,16 +70,15 @@ async function createCropGeneralType(mainTypeId, generalTypeData) {
         `Failed to create crop general type: ${generalTypeData.name}`,
       );
     }
-    const mainCropType = await CropMainType.findById(mainTypeId);
-    mainCropType.generalTypes.push(cropGeneralType._id);
-    await mainCropType.save();
 
     const cropTypes = await createCropTypes(
       cropGeneralType._id,
       generalTypeData.cropTypes,
     );
+
     cropGeneralType.cropTypes = cropTypes.map((ct) => ct.cropTypeId);
     await cropGeneralType.save();
+
     resolve({ generalTypeId: cropGeneralType._id, cropTypes });
   });
 }
@@ -94,25 +96,26 @@ async function createCropTypes(cropGeneralTypeId, cropTypesData) {
 
 async function createCropType(cropGeneralTypeId, cropTypeData) {
   return new Promise(async (resolve, reject) => {
+    const dbCropTypeData = utils.objects.extractDBObject(cropTypeData);
     const cropType = new CropType({
       generalType: cropGeneralTypeId,
-      ...cropTypeData,
+      ...dbCropTypeData,
     });
 
-    await cropType.save();
     if (!cropType) {
       return reject(`Failed to create crop type: ${cropTypeData.name}`);
     }
-
-    const generalCropType = await CropGeneralType.findById(cropGeneralTypeId);
-    generalCropType.cropTypes.push(cropType._id);
-    await generalCropType.save();
 
     const cropVarietiesIds = await createCropVarieties(
       cropType._id,
       cropTypeData.cropVarieties,
     );
-    cropType.cropVarieties = cropVarietiesIds;
+
+    console.log(
+      `Created crop type: ${cropType.name} with ${cropVarietiesIds} varieties`,
+    );
+
+    cropType.cropVarieties.push(...cropVarietiesIds);
     await cropType.save();
 
     resolve({ cropTypeId: cropType._id, cropVarieties: cropVarietiesIds });
@@ -136,9 +139,6 @@ async function createCropVariety(cropTypeId, varietyName) {
       cropType: cropTypeId,
       name: varietyName,
     });
-    const cropType = await CropType.findById(cropTypeId);
-    cropType.cropVarieties.push(cropVariety._id);
-    await cropType.save();
 
     await cropVariety.save();
     if (!cropVariety) {

@@ -41,7 +41,6 @@ async function createFieldObject(fieldParams, msWindow = createFieldTimeMs) {
           elapsed / 1000,
           "seconds.",
         );
-        fieldParams["ratio"] = `${fieldFilledRatio(field) * 100}%`;
 
         return field;
       }

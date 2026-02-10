@@ -31,14 +31,11 @@ function drawField(field) {
   console.log(allCoordinates(field));
   let { width, length, cultivationAreas } = field;
   const plantedCells =
-    cultivationAreas?.reduce(
-      (acc, ca) => {
-        const plantedArray = Array.from(ca.planted || []);
-        const plantedCells = plantedArray.map((plantedCell) => plantedCell[0]);
-        return acc.concat(plantedCells);
-      },
-      [],
-    ) || [];
+    cultivationAreas?.reduce((acc, ca) => {
+      const plantedArray = Array.from(ca.planted || []);
+      const plantedCells = plantedArray.map((plantedCell) => plantedCell[0]);
+      return acc.concat(plantedCells);
+    }, []) || [];
   console.log("drawing grid:");
   for (let y = 0; y < length; y++) {
     let rowStr = "";
@@ -64,16 +61,15 @@ function drawField(field) {
   printFieldParams(field);
 }
 
-function sum_points(field) {
-  const { width, length } = field;
+function sum_points({ width, length }) {
   return width * length;
 }
 
 function fieldCultivationAreaPoints(field) {
-  const cultivationAreas =
+  const plantedCellsMapArray =
     field.cultivationAreas?.map((ca) => ca.planted) || [];
-  return cultivationAreas.reduce(function (sum, ca) {
-    return sum + ca.length;
+  return plantedCellsMapArray.reduce(function (sum, plantedCellsMap) {
+    return sum + Array.from(plantedCellsMap || []).length;
   }, 0);
 }
 
@@ -89,7 +85,7 @@ function allCoordinates(field) {
 }
 
 function fieldFilledRatio(field) {
-  const fieldPoints = sum_points(field);
+  const fieldPoints = sum_points(field.dimensions);
   const caPoints = fieldCultivationAreaPoints(field);
   const ratio = caPoints / fieldPoints;
   return ratio;
@@ -99,11 +95,9 @@ function printFieldParams(field) {
   console.log("field params:", field);
   const {
     name,
-    min_ca_dim,
-    max_ca_dim,
     ratio,
-    width,
-    length,
+    dimensions: { width, length },
+    cultivationAreaDimensions: { min_ca_dim, max_ca_dim, gap },
     cultivationAreas,
   } = field;
   console.log(

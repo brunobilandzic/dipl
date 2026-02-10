@@ -41,12 +41,13 @@ function FieldItem({ field }) {
       max_ca_dim,
       gap: cultivationAreasGap,
     },
+    slug
   } = field;
 
   return (
     <>
       <div className="">
-        <Link href={`/upravljanje-poljima/${makeUrlFriendly(name)}`}>
+        <Link href={`/upravljanje-poljima/${slug}`}>
           <ListItemHeader>
             <div className="flex justify-between w-full cursor-pointer hover:bg-gray-50 hover:dark:bg-gray-500">
               <div className="flex flex-col gap-1">

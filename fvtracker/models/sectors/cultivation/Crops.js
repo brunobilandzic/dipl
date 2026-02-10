@@ -1,6 +1,4 @@
 import mongoose from "mongoose";
-import { getDraftModeProviderForCacheScope } from "next/dist/server/app-render/work-unit-async-storage.external";
-import utils from "@/lib/utils";
 const { Schema } = mongoose;
 
 // order is cropmaintype -> cropgeneratype -> croptype -> cropvariety
@@ -34,7 +32,7 @@ const cropTypeSchema = new Schema({
     ref: "CropGeneralType",
     required: true,
   },
-  varieties: [
+  cropVarieties: [
     { type: mongoose.Schema.Types.ObjectId, ref: "CropVariety", default: [] },
   ],
 });

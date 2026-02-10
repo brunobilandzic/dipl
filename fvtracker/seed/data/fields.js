@@ -95,41 +95,26 @@ const createFieldTimeSeconds = 5;
 
 export const createFieldTimeMs = createFieldTimeSeconds * 1000;
 
-const cultivationAreaNamesConstant = [
-  {
-    name: "Polje Anita",
-    description: "natkriveno polje pogodno za sadanju voca",
-  },
-  { name: "Polje Marko", description: "otvoreno polje idealno za povrće" },
-  { name: "Polje Ivana", description: "sunčano polje za cvijeće" },
-  { name: "Polje Jure", description: "plodno polje za žitarice" },
-  { name: "Polje Lucija", description: "vlažno polje za jagode" },
-  { name: "Polje Petar", description: "pješčano polje za lavandu" },
-  { name: "Polje Ana", description: "stjenovito polje za masline" },
-  { name: "Polje Tomislav", description: "hladno polje za kupus" },
-  { name: "Polje Dora", description: "toplo polje za rajčice" },
-  { name: "Polje Luka", description: "plodno polje za krumpir" },
-  { name: "Polje Nika", description: "sunčano polje za bundeve" },
-  { name: "Polje Ivan", description: "vlažno polje za salatu" },
-  { name: "Polje Zora", description: "stjenovito polje za začinsko bilje" },
-  { name: "Polje Marko", description: "otvoreno polje za grah" },
-  { name: "Polje Toni", description: "hladno polje za mrkvu" },
-  { name: "Polje Milena", description: "sunčano polje za papriku" },
-  { name: "Polje Luka", description: "plodno polje za krastavce" },
-  {
-    name: "Polje Anita",
-    description: "natkriveno polje pogodno za sadanju voća",
-  },
-  { name: "Polje Jela", description: "vlažno polje za borovnice" },
-  { name: "Polje Zlatko", description: "pješčano polje za smokve" },
-  { name: "Polje Dino", description: "plodno polje za jagode" },
+export const cultivationAreaNamesConstant = [
+    {
+      name: "Polje Anita",
+      description: "natkriveno polje pogodno za sadanju voca",
+    },
+    { name: "Polje Marko", description: "otvoreno polje idealno za povrće" },
+    { name: "Polje Ivana", description: "sunčano polje za cvijeće" },
+    { name: "Polje Jure", description: "plodno polje za žitarice" },
+    { name: "Polje Lucija", description: "vlažno polje za jagode" },
+    { name: "Polje Petar", description: "pješčano polje za lavandu" },
+    { name: "Polje Ana", description: "stjenovito polje za masline" },
+    { name: "Polje Tomislav", description: "hladno polje za kupus" },
+    { name: "Polje Dora", description: "toplo polje za rajčice" },
+    { name: "Polje Luka", description: "plodno polje za krumpir" },
+    { name: "Polje Nika", description: "sunčano polje za bundeve" },
+    { name: "Polje Ivan", description: "vlažno polje za salatu" },
+    { name: "Polje Zora", description: "stjenovito polje za začinsko bilje" },
+    { name: "Polje Toni", description: "hladno polje za mrkvu" },
+    { name: "Polje Milena", description: "sunčano polje za papriku" },
+    { name: "Polje Jela", description: "vlažno polje za borovnice" },
+    { name: "Polje Zlatko", description: "pješčano polje za smokve" },
+    { name: "Polje Dino", description: "plodno polje za jagode" },
 ];
-
-export function randomCultivationAreaName() {
-  const cultivationAreaNames = [...cultivationAreaNamesConstant];
-  const datapoint = cultivationAreaNames.splice(
-    Math.floor(Math.random() * cultivationAreaNames.length),
-    1,
-  )[0];
-  return datapoint;
-}

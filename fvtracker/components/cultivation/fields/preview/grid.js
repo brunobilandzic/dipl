@@ -23,7 +23,19 @@ export function FieldGrid({
       </div>
     );
 
-  return <>{}</>;
+  return (
+    <>
+      <div
+        className={`grid justify-start items-start`}
+        style={{
+          gridTemplateColumns: `repeat(${fieldWidth}, minmax(0, 1fr))`,
+          gridTemplateRows: `repeat(${fieldLength}, minmax(0, 1fr))`,
+        }}
+      >
+        {buildFieldCells(cultivationAreas, fieldWidth, fieldLength, small)}
+      </div>
+    </>
+  );
 }
 
 const FieldCell = ({ active, small, x, y, fieldWidth, fieldLength }) => {
@@ -36,7 +48,8 @@ const FieldCell = ({ active, small, x, y, fieldWidth, fieldLength }) => {
 };
 
 const buildFieldCells = (cultivationAreas, fieldWidth, fieldLength, small) => {
-  const plantedCells = utils.cultivation.cultivationAreas.getCASCells(cultivationAreas);
+  const plantedCells =
+    utils.cultivation.cultivationAreas.getCASCells(cultivationAreas);
 
   console.log("Planted cells:", plantedCells.slice(0, 10)); // Log first 10 for brevity
 

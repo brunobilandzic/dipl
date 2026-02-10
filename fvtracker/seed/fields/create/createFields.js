@@ -54,7 +54,6 @@ async function createFieldObject(fieldParams, msWindow = createFieldTimeMs) {
         randomCultivationAreaName(_cultivationAreaNamesConstant),
       ),
     );
-    console.log(_cultivationAreaNamesConstant.length);
     return fillField(field);
   }
 

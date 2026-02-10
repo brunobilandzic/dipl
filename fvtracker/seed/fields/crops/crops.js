@@ -111,10 +111,6 @@ async function createCropType(cropGeneralTypeId, cropTypeData) {
       cropTypeData.cropVarieties,
     );
 
-    console.log(
-      `Created crop type: ${cropType.name} with ${cropVarietiesIds} varieties`,
-    );
-
     cropType.cropVarieties.push(...cropVarietiesIds);
     await cropType.save();
 

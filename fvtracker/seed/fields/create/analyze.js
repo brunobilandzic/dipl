@@ -92,13 +92,18 @@ function fieldFilledRatio(field) {
 }
 
 function printFieldParams(field) {
-  console.log("field params:", field);
+  const { cultivationAreas, ...loggableField } = field;
+  console.log(
+    "field params:",
+    loggableField,
+    "\ncultivationAreas count:",
+    cultivationAreas.length,
+  );
   const {
     name,
     ratio,
     dimensions: { width, length },
     cultivationAreaDimensions: { min_ca_dim, max_ca_dim, gap },
-    cultivationAreas,
   } = field;
   console.log(
     `Field ${name} has dimensions ${width}x${length}, min CA dim ${min_ca_dim}, max CA dim ${max_ca_dim}, created ${cultivationAreas.length} cultivation areas and filled ratio ${fieldFilledRatio(field)}.`,

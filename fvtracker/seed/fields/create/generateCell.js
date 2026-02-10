@@ -1,4 +1,4 @@
-function randomPoint(field) {
+export function randomPoint(field) {
   const { width, length, min_ca_dim, max_ca_dim } = field;
 
   const length_options = [];
@@ -14,7 +14,7 @@ function randomPoint(field) {
   return { x, y, dim_x, dim_y };
 }
 
-function notValidPoint(field, x, y, dim_x, dim_y) {
+export function notValidPoint(field, x, y, dim_x, dim_y) {
   let { width, length, cultivationAreas, gap } = field;
   const plantedCells =
     cultivationAreas

@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { FieldGrid } from "./preview/grid";
 
 export default function FieldPageComponent({ field }) {
@@ -16,21 +19,31 @@ export default function FieldPageComponent({ field }) {
     slug,
   } = field;
 
+  const [editCultivationAreas, setEditCultivationAreas] = useState(false);
+
   return (
     <>
       <div className="w-full grid grid-cols-1 gap-4">
         <div className="text-3xl font-bold">{name}</div>
         <div className="italic">{description}</div>
-        <div>
-          {
-            <FieldGrid
-              width={width}
-              length={length}
-                cultivationAreas={cultivationAreas}
-              
-            />
-          }
+        <div className="flex flex-col gap-4">
+          {/* <FieldGrid
+            width={width}
+            length={length}
+            cultivationAreas={cultivationAreas}
+          /> */}
+          <div className="h-52 w-full bg-yellow-200"></div>
+          <div
+            className=" btn cursor-pointer"
+            onClick={() => setEditCultivationAreas((prev) => !prev)}
+          >
+            {editCultivationAreas
+              ? "Submit cultivation areas"
+              : "Edit cultivation areas"}
+          </div>
+          
         </div>
+        <div></div>
       </div>
     </>
   );

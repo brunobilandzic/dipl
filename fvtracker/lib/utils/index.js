@@ -1,5 +1,6 @@
 import { extractDBObject } from "./objects";
 import { makeUrlFriendly } from "./strings";
+import { getCASCells } from "./cultivationAreas";
 
 export default {
   objects: {
@@ -7,5 +8,10 @@ export default {
   },
   strings: {
     makeUrlFriendly,
+  },
+  cultivation: {
+    cultivationAreas: {
+      getCASCells,
+    },
   },
 };

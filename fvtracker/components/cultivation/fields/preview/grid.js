@@ -1,5 +1,7 @@
 "use client";
 
+import utils from "@/lib/utils";
+
 export function FieldGrid({
   width: fieldWidth,
   length: fieldLength,
@@ -34,11 +36,9 @@ const FieldCell = ({ active, small, x, y, fieldWidth, fieldLength }) => {
 };
 
 const buildFieldCells = (cultivationAreas, fieldWidth, fieldLength, small) => {
-  const plantedCellsMapsArray = cultivationAreas?.map((ca) => ca.planted);
-  const plantedCells =
-    plantedCellsMapsArray?.reduce((acc, plantedMap) => {
-      return acc.concat(Object.keys(plantedMap));
-    }, []) || [];
+  const plantedCells = utils.cultivation.cultivationAreas.getCASCells(cultivationAreas);
+
+  console.log("Planted cells:", plantedCells.slice(0, 10)); // Log first 10 for brevity
 
   let cells = [];
 

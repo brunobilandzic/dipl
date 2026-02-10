@@ -1,3 +1,5 @@
+import { getCASCells } from "@/lib/utils/cultivationAreas";
+
 export function randomPoint(field) {
   const { width, length, min_ca_dim, max_ca_dim } = field;
 
@@ -16,18 +18,7 @@ export function randomPoint(field) {
 
 export function notValidPoint(field, x, y, dim_x, dim_y) {
   let { width, length, cultivationAreas, gap } = field;
-  const plantedCells =
-    cultivationAreas
-      ?.map((ca) => ca.planted)
-      ?.reduce((acc, planted) => {
-        if (planted) {
-          for (let entry of planted.entries()) {
-            acc.push(entry);
-          }
-        }
-        return acc;
-      }, []) || [];
-
+  const plantedCells = getCASCells(cultivationAreas);; // Log first 10 for brevity
   if (x < 0 || y < 0 || x + dim_x > width || y + dim_y > length) {
     return true;
   }
@@ -35,14 +26,14 @@ export function notValidPoint(field, x, y, dim_x, dim_y) {
   for (let xi = x; xi <= x + dim_x + gap; xi++) {
     for (let yi = y; yi <= y + dim_y + gap; yi++) {
       for (let plantedCell of plantedCells) {
-        if (plantedCell[0] === `${xi},${yi}`) {
+        if (plantedCell === `${xi},${yi}`) {
           return true;
         }
       }
     }
     for (let yi = y; yi >= y - gap; yi--) {
       for (let plantedCell of plantedCells) {
-        if (plantedCell[0] === `${xi},${yi}`) {
+        if (plantedCell === `${xi},${yi}`) {
           return true;
         }
       }
@@ -52,7 +43,7 @@ export function notValidPoint(field, x, y, dim_x, dim_y) {
   for (let xi = x; xi >= x - gap; xi--) {
     for (let yi = y; yi <= y + dim_y + gap; yi++) {
       for (let plantedCell of plantedCells) {
-        if (plantedCell[0] === `${xi},${yi}`) {
+        if (plantedCell === `${xi},${yi}`) {
           return true;
         }
       }

@@ -7,9 +7,6 @@ export async function getCultivationManager() {
       if (!appUser) {
         throw new Error("No app user found for the session.");
       }
-  const cacheFunction = unstable_cache(
-    async () => {
-     console.log("[CM] CACHE MISS -> doing DB query");
       const cultivationManager =
         await appUser.getSpecificManager("CultivationManager");
       if (!cultivationManager) {
@@ -23,9 +20,5 @@ export async function getCultivationManager() {
       });
 
       return cultivationManager;
-    },
-    ["CultivationManager"],
-    { tags: ["cm"] },
-  );
-  return await cacheFunction();
+
 }

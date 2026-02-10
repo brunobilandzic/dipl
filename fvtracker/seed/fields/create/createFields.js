@@ -10,6 +10,7 @@ import {
 import dbConnect from "@/lib/db/mongooseConnect.js";
 import { CultivationArea } from "@/models/sectors/cultivation/Cultivation.js";
 import { deleteFieldsWithDocs } from "@/lib/db/delete.js";
+import { randomPoint, notValidPoint } from "./utils.js";
 
 await dbConnect();
 

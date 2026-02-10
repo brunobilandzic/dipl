@@ -20,4 +20,4 @@ const fieldSlice = createSlice({
 });
 
 export const { setFields, setFieldInitialState } = fieldSlice.actions;
-export default fieldSlice.reduc;
+export default fieldSlice.reducer;

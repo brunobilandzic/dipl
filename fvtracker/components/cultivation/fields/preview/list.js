@@ -41,7 +41,7 @@ function FieldItem({ field }) {
       max_ca_dim,
       gap: cultivationAreasGap,
     },
-    slug
+    slug,
   } = field;
 
   return (
@@ -79,12 +79,12 @@ function FieldItem({ field }) {
             </div>
             <div className="">
               {/* Placeholder for field grid or map */}
-                <FieldGrid
-                  width={width}
-                  length={length}
-                  cultivationAreas={cultivationAreas}
-                  small={true}
-                />
+              <FieldGrid
+                width={width}
+                length={length}
+                cultivationAreas={cultivationAreas}
+                small={true}
+              />
             </div>
           </div>
         </ListItemBody>

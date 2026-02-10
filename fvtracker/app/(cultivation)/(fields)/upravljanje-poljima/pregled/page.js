@@ -5,7 +5,7 @@ import { getCultivationManager } from "@/lib/cultivation/cultivationManager";
 
 export default async function FieldListPage() {
   const cultivationManager = await getCultivationManager();
-
+  
   return (
     <>
       {/*  {JSON.stringify(cultivationManager)} */}

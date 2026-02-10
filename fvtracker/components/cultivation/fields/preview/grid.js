@@ -6,6 +6,7 @@ export function FieldGrid({
   cultivationAreas,
   small,
 }) {
+  console.log("cas", cultivationAreas);
   return (
     <>
       <div

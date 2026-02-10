@@ -9,7 +9,7 @@ export function FieldGrid({
   return (
     <>
       <div
-        className={`grid justify-start items-start ${small ? "gap-0.5" : "gap-1"}`}
+        className={`grid justify-start items-start ${small ? "" : "gap-1"}`}
         style={{
           gridTemplateColumns: `repeat(${fieldWidth}, minmax(0, 1fr))`,
           gridTemplateRows: `repeat(${fieldLength}, minmax(0, 1fr))`,

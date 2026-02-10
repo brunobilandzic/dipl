@@ -8,9 +8,8 @@ import {
   optimizedParamsArray,
 } from "../../data/fields.js";
 import dbConnect from "@/lib/db/mongooseConnect.js";
-import { CultivationArea } from "@/models/sectors/cultivation/Cultivation.js";
 import { deleteFieldsWithDocs } from "@/lib/db/delete.js";
-import { randomPoint, notValidPoint } from "./utils.js";
+import { randomPoint, notValidPoint } from "./generateCell.js";
 
 await dbConnect();
 

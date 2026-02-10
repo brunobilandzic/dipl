@@ -18,6 +18,7 @@ export async function seedCropMainTypes() {
   }
   const mainTypes = await Promise.all(cropMainTypesPromises);
   console.log(`Created ${mainTypes.length} main crop types.`);
+  logMainTypes(mainTypes);
   return mainTypes;
 }
 
@@ -66,6 +67,10 @@ async function createCropGeneralType(mainTypeId, generalTypeData) {
         `Failed to create crop general type: ${generalTypeData.name}`,
       );
     }
+    const mainCropType = await CropMainType.findById(mainTypeId);
+    mainCropType.generalTypes.push(cropGeneralType._id);
+    await mainCropType.save();
+
     const cropTypes = await createCropTypes(
       cropGeneralType._id,
       generalTypeData.cropTypes,
@@ -99,12 +104,17 @@ async function createCropType(cropGeneralTypeId, cropTypeData) {
       return reject(`Failed to create crop type: ${cropTypeData.name}`);
     }
 
+    const generalCropType = await CropGeneralType.findById(cropGeneralTypeId);
+    generalCropType.cropTypes.push(cropType._id);
+    await generalCropType.save();
+
     const cropVarietiesIds = await createCropVarieties(
       cropType._id,
       cropTypeData.cropVarieties,
     );
     cropType.cropVarieties = cropVarietiesIds;
     await cropType.save();
+
     resolve({ cropTypeId: cropType._id, cropVarieties: cropVarietiesIds });
   });
 }
@@ -126,6 +136,10 @@ async function createCropVariety(cropTypeId, varietyName) {
       cropType: cropTypeId,
       name: varietyName,
     });
+    const cropType = await CropType.findById(cropTypeId);
+    cropType.cropVarieties.push(cropVariety._id);
+    await cropType.save();
+
     await cropVariety.save();
     if (!cropVariety) {
       return reject(`Failed to create crop variety: ${varietyName}`);

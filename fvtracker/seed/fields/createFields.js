@@ -3,9 +3,9 @@ import { drawField, fieldFilledRatio, printFieldParams } from "./analyze.js";
 import { CultivationManager } from "@/models/user/managers/CultivationManager.js";
 import {
   createFieldTimeMs,
+  cultivationAreaNamesConstant,
   optimizedParams,
   optimizedParamsArray,
-  randomCultivationAreaName,
 } from "../data/fields.js";
 import dbConnect from "@/lib/db/mongooseConnect.js";
 import { CultivationArea } from "@/models/sectors/cultivation/Cultivation.js";
@@ -89,6 +89,7 @@ async function createFieldObject(fieldParams, msWindow = createFieldTimeMs) {
   const msStart = Date.now();
 
   const { name, description, location, ...fieldDAO } = fieldParams;
+  const _cultivationAreaNamesConstant = [...cultivationAreaNamesConstant];
 
   function fillField(field) {
     const { width, length, gap } = field;
@@ -117,7 +118,16 @@ async function createFieldObject(fieldParams, msWindow = createFieldTimeMs) {
         return field;
       }
     }
-    field.cultivationAreas.push(createCultivationArea(x, y, dim_x, dim_y));
+    field.cultivationAreas.push(
+      createCultivationArea(
+        x,
+        y,
+        dim_x,
+        dim_y,
+        randomCultivationAreaName(_cultivationAreaNamesConstant),
+      ),
+    );
+    console.log(_cultivationAreaNamesConstant.length);
     return fillField(field);
   }
 
@@ -204,7 +214,6 @@ export async function createFieldRecord(fieldObject) {
 
   const cultivationAreasPromises = fieldObject.cultivationAreas.map(
     async (ca) => {
-      console.log("Creating cultivation area", ca.name, "for field", fieldRecord.name);
       const newCultivationArea = await fieldRecord.addCultivationArea(ca);
       return newCultivationArea;
     },
@@ -244,8 +253,7 @@ function exportFieldDbData(field) {
   return rest;
 }
 
-function createCultivationArea(x, y, dim_x, dim_y) {
-  const { name, description } = randomCultivationAreaName();
+function createCultivationArea(x, y, dim_x, dim_y, { name, description }) {
   const plantedEmpty = new Map();
   for (let xi = x; xi < x + dim_x; xi++) {
     for (let yi = y; yi < y + dim_y; yi++) {
@@ -258,4 +266,12 @@ function createCultivationArea(x, y, dim_x, dim_y) {
     description,
     planted: plantedEmpty,
   };
+}
+
+function randomCultivationAreaName(cultivationAreaNames) {
+  const datapoint = cultivationAreaNames.splice(
+    Math.floor(Math.random() * cultivationAreaNames.length),
+    1,
+  )[0];
+  return datapoint;
 }

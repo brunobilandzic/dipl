@@ -9,7 +9,7 @@ export async function getCultivationManager() {
       }
   const cacheFunction = unstable_cache(
     async () => {
-     
+     console.log("[CM] CACHE MISS -> doing DB query");
       const cultivationManager =
         await appUser.getSpecificManager("CultivationManager");
       if (!cultivationManager) {

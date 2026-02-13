@@ -10,7 +10,7 @@ export function FieldGrid({
   length: fieldLength,
   cultivationAreas,
   small,
-  CAPlantedCells,
+  plantedCells,
   handleCellClick,
   selectedCultivationArea,
 }) {
@@ -30,7 +30,6 @@ export function FieldGrid({
 
   return (
     <>
-      <div>{selectedCultivationArea?.name}</div>
       <div
         className={`grid justify-start items-start`}
         style={{
@@ -44,8 +43,8 @@ export function FieldGrid({
           fieldLength={fieldLength}
           small={small}
           handleCellClick={handleCellClick}
-          CAPlantedCells={CAPlantedCells}
-          selectedCultivationAreaName={selectedCultivationArea?.name}
+          plantedCells={plantedCells}
+          selectedCultivationArea={selectedCultivationArea}
         />
       </div>
     </>
@@ -61,15 +60,15 @@ const FieldCell = ({
   selected,
   setSelectedCell,
 }) => {
+  
   const cellClass = classNames(
-    small ? "w-1 h-1" : "w-3 h-3 cursor-pointer",
-    selected ? `bg-green-500` : active ? `bg-yellow-500` : "",
-    "border",
-  );
+  small ? "w-1 h-1" : "w-3 h-3 cursor-pointer",
+  selected ? `bg-green-500` : active ? `bg-yellow-500` : "",
+  "border",
+);
 
   return (
-    <div
-      className={cellClass}
+    <div      className={cellClass}
       title={`(${x}, ${y})`}
       onClick={() => {
         handleCellClick({ x, y });
@@ -84,15 +83,11 @@ const FieldCells = ({
   fieldLength,
   small,
   handleCellClick,
-  CAPlantedCells,
-  selectedCultivationAreaName,
+  plantedCells,
+  selectedCultivationArea,
 }) => {
   const [selectedCell, setSelectedCell] = useState(null);
   let cells = [];
-  let plantedCells = [];
-  for (const [key, value] of Object.entries(CAPlantedCells)) {
-    plantedCells = plantedCells.concat(value);
-  }
 
   for (let x = 0; x < fieldLength; x++) {
     for (let y = 0; y < fieldWidth; y++) {
@@ -107,9 +102,7 @@ const FieldCells = ({
           setSelectedCell={setSelectedCell}
           active={plantedCells.includes(`${x},${y}`)}
           handleCellClick={handleCellClick}
-          selected={CAPlantedCells[selectedCultivationAreaName]?.includes(
-            `${x},${y}`,
-          )}
+          selected={selectedCultivationArea?.planted.includes(`${x},${y}`)}
         />,
       );
     }

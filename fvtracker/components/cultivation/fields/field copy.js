@@ -38,11 +38,9 @@ export default function FieldPageComponentCopy({ field }) {
 
 function FieldEditCASPanel({ width, length, cultivationAreas }) {
   const [editCultivationAreas, setEditCultivationAreas] = useState(false);
-  const [CAPlantedCells, setCAPlantedCells] = useState(
+  const [plantedCells, setPlantedCells] = useState(
     cultivationAreas
-      ? utils.cultivation.cultivationAreas.mapCANamesToPlantedCells(
-          cultivationAreas,
-        )
+      ? utils.cultivation.cultivationAreas.getCASCells(cultivationAreas)
       : [],
   );
   const [clickedCell, setClickedCell] = useState(null);
@@ -59,18 +57,24 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
     });
   };
 
-  const handleCellClick = ({ x, y }) => {
+  const handleCellClick = ({x, y}) => {
     const coordinates = `${x},${y}`;
-    for (const [key, value] of Object.entries(CAPlantedCells)) {
-      if (value.includes(coordinates)) {
-        setSelectedCultivationArea(
-          cultivationAreas.find((ca) => ca.name === key),
-        );
-        return;
-      } else {
-      }
+    
+    if (
+      utils.cultivation.cultivationAreas
+        .getCASCells(cultivationAreas)
+        .includes(coordinates)
+    ) {
+      const ca = utils.cultivation.cultivationAreas.getCAForCell(
+        cultivationAreas,
+        x,
+        y,
+      );
+      setSelectedCultivationArea({name: ca.name, planted: utils.cultivation.cultivationAreas.getCASCells([ca])});
+      console.log("selected", ca?.name);
+    } else {
+      console.log("empty cell clicked");
     }
-    console.log("cell not planted, proceeding");
   };
 
   return (
@@ -86,10 +90,9 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
             cultivationAreas={cultivationAreas}
             clickedCell={editCultivationAreas ? clickedCell : null}
             setClickedCell={editCultivationAreas ? setClickedCell : null}
-            CAPlantedCells={CAPlantedCells}
+            plantedCells={plantedCells}
             handleCellClick={handleCellClick}
             selectedCultivationArea={selectedCultivationArea}
-            
           />
         </div>
         <div

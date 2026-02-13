@@ -48,18 +48,33 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
   const [newCACoordinates, setNewCACoordinates] = useState({});
   const [isBeginSelected, setIsBeginSelected] = useState(false);
 
-  const onBeginCoordinates = (x, y) => {
+  const onBeginCoordinates = (beginX, beginY) => {
     setIsBeginSelected(true);
     setNewCACoordinates({
       ...newCACoordinates,
-      begin: { x, y },
-      planted: [`${x},${y}`],
+      begin: { x: beginX, y: beginY },
+      planted: [`${beginX},${beginY}`],
     });
   };
 
-  const handleCellClick = ({x, y}) => {
+  const onEndCoordinates = (endX, endY) => {
+    if (!newCACoordinates.begin) {
+      console.error("Begin coordinates not set");
+      return;
+    }
+    const {x: beginX, y: beginY} = newCACoordinates.begin;
+    const newPlantedCells = utils.cultivation.cultivationAreas.getCellsInRect(
+      beginX,
+      beginY,
+      endX,
+      endY,
+    );
+
+  }
+
+  const handleCellClick = ({ x, y }) => {
     const coordinates = `${x},${y}`;
-    
+
     if (
       utils.cultivation.cultivationAreas
         .getCASCells(cultivationAreas)
@@ -70,17 +85,21 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
         x,
         y,
       );
-      setSelectedCultivationArea({name: ca.name, planted: utils.cultivation.cultivationAreas.getCASCells([ca])});
+      setSelectedCultivationArea({
+        name: ca.name,
+        planted: utils.cultivation.cultivationAreas.getCASCells([ca]),
+      });
+      setIsBeginSelected(false);
       console.log("selected", ca?.name);
     } else {
-      console.log("empty cell clicked, beginning cultivation area creation", coordinates);
+      console.log(
+        "empty cell clicked, beginning cultivation area creation",
+        coordinates,
+      );
       if (!isBeginSelected) {
         onBeginCoordinates(x, y);
       } else {
-        setNewCACoordinates({
-          ...newCACoordinates,
-          planted: [...(newCACoordinates.planted || []), coordinates],
-        });
+        onEndCoordinates(x, y);
       }
     }
   };

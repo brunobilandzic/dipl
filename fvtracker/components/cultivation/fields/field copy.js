@@ -63,6 +63,8 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
 
     const coordinates = `${x},${y}`;
 
+    console.log("Cell clicked at:", coordinates);
+
     if (
       utils.cultivation.cultivationAreas
         .getCASCells(cultivationAreas)

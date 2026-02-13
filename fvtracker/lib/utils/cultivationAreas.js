@@ -13,7 +13,7 @@ export function getCASCells(cultivationAreas) {
 }
 
 export const CAIncludesCell = (cultivationArea, x, y) => {
-  console.log("checking includes z", cultivationArea?.name, x, y)
+  console.log("checking includes z", cultivationArea?.name, x, y);
   const plantedCells = getCASCells([cultivationArea]);
   return plantedCells.includes(`${x},${y}`);
 };
@@ -23,4 +23,13 @@ export const getCAForCell = (cultivationAreas, x, y) => {
   return cultivationAreas.find((ca) =>
     getCASCells([ca]).some((cell) => cell === coordinates),
   );
+};
+
+export const mapCANamesToPlantedCells = (cultivationAreas) => {
+  const mapping = {};
+  cultivationAreas.forEach((ca) => {
+    const plantedCells = getCASCells([ca]);
+    mapping[ca.name] = plantedCells;
+  });
+  return mapping;
 };

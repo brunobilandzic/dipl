@@ -1,6 +1,11 @@
 import { extractDBObject } from "./objects";
 import { makeUrlFriendly } from "./strings";
-import { getCASCells, CAIncludesCell, getCAForCell } from "./cultivationAreas";
+import {
+  getCASCells,
+  CAIncludesCell,
+  getCAForCell,
+  mapCANamesToPlantedCells,
+} from "./cultivationAreas";
 
 export default {
   objects: {
@@ -14,6 +19,7 @@ export default {
       getCASCells,
       CAIncludesCell,
       getCAForCell,
+      mapCANamesToPlantedCells,
     },
   },
 };

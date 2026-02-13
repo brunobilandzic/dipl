@@ -60,12 +60,22 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
   };
 
   const handleCellClick = (x, y) => {
-    if (!editCultivationAreas) return;
 
     const coordinates = `${x},${y}`;
 
-    if (plantedCells.some((cell) => cell === coordinates)) {
-      console.log("ca clicked");
+    if (
+      utils.cultivation.cultivationAreas
+        .getCASCells(cultivationAreas)
+        .includes(coordinates)
+    ) {
+      console.log("planted cell clicked");
+      const ca = utils.cultivation.cultivationAreas.getCAForCell(
+        cultivationAreas,
+        x,
+        y,
+      );
+      setSelectedCultivationArea(ca);
+      console.log("selected", ca?.name);
     } else {
       console.log("empty cell clicked");
     }
@@ -86,6 +96,7 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
             setClickedCell={editCultivationAreas ? setClickedCell : null}
             plantedCells={plantedCells}
             handleCellClick={handleCellClick}
+            selectedCultivationArea={selectedCultivationArea}
           />
         </div>
         <div

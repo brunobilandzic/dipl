@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { FieldGrid } from "./preview/grid";
+import utils from "@/lib/utils";
 
-export default function FieldPageComponent({ field }) {
+export default function FieldPageComponentCopy({ field }) {
   const {
     name,
     description,
@@ -18,7 +19,6 @@ export default function FieldPageComponent({ field }) {
     },
     slug,
   } = field;
-  const [editCultivationAreas, setEditCultivationAreas] = useState(false);
 
   return (
     <>
@@ -26,8 +26,6 @@ export default function FieldPageComponent({ field }) {
         <div className="text-3xl font-bold">{name}</div>
         <div className="italic">{description}</div>
         <FieldEditCASPanel
-          setEditCultivationAreas={setEditCultivationAreas}
-          editCultivationAreas={editCultivationAreas}
           width={width}
           length={length}
           cultivationAreas={cultivationAreas}
@@ -38,31 +36,72 @@ export default function FieldPageComponent({ field }) {
   );
 }
 
-function FieldEditCASPanel({
-  setEditCultivationAreas: setEdit,
-  editCultivationAreas: edit,
-  width,
-  length,
-  cultivationAreas,
-}) {
+function FieldEditCASPanel({ width, length, cultivationAreas }) {
+  const [editCultivationAreas, setEditCultivationAreas] = useState(false);
+  const [plantedCells, setPlantedCells] = useState(
+    cultivationAreas
+      ? utils.cultivation.cultivationAreas.getCASCells(cultivationAreas)
+      : [],
+  );
+  const [clickedCell, setClickedCell] = useState(null);
   const [selectedCultivationArea, setSelectedCultivationArea] = useState(null);
+  const [newCACoordinates, setNewCACoordinates] = useState({});
+  const [isBeginSelected, setIsBeginSelected] = useState(false);
+
+  const onBeginCoordinates = (x, y) => {
+    setIsBeginSelected(true);
+    console.log("begin", x, y);
+    setNewCACoordinates({
+      ...newCACoordinates,
+      begin: { x, y },
+    });
+  };
+
+  const handleCellClick = ({x, y}) => {
+    const coordinates = `${x},${y}`;
+    
+    if (
+      utils.cultivation.cultivationAreas
+        .getCASCells(cultivationAreas)
+        .includes(coordinates)
+    ) {
+      const ca = utils.cultivation.cultivationAreas.getCAForCell(
+        cultivationAreas,
+        x,
+        y,
+      );
+      setSelectedCultivationArea({name: ca.name, planted: utils.cultivation.cultivationAreas.getCASCells([ca])});
+      console.log("selected", ca?.name);
+    } else {
+      console.log("empty cell clicked");
+    }
+  };
 
   return (
     <>
       <div className="flex flex-col gap-4">
-        {cultivationAreas.length }
+        {JSON.stringify(
+          `${newCACoordinates.begin ? `Begin: (${newCACoordinates.begin.x}, ${newCACoordinates.begin.y})` : "No begin selected"}`,
+        )}
         <div>
           <FieldGrid
             width={width}
             length={length}
             cultivationAreas={cultivationAreas}
+            clickedCell={editCultivationAreas ? clickedCell : null}
+            setClickedCell={editCultivationAreas ? setClickedCell : null}
+            plantedCells={plantedCells}
+            handleCellClick={handleCellClick}
+            selectedCultivationArea={selectedCultivationArea}
           />
         </div>
         <div
           className=" btn cursor-pointer"
-          onClick={() => setEdit((prev) => !prev)}
+          onClick={() => setEditCultivationAreas((prev) => !prev)}
         >
-          {edit ? "Submit cultivation areas" : "Edit cultivation areas"}
+          {editCultivationAreas
+            ? "Submit cultivation areas"
+            : "Edit cultivation areas"}
         </div>
       </div>
     </>

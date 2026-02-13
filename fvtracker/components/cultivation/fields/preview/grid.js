@@ -1,16 +1,20 @@
 "use client";
 
+import constants from "@/lib/constants";
 import utils from "@/lib/utils";
+import { useEffect, useState } from "react";
+import classNames from "classnames";
 
 export function FieldGrid({
   width: fieldWidth,
   length: fieldLength,
   cultivationAreas,
   small,
-  editable,
+  plantedCells,
+  handleCellClick,
   selectedCultivationArea,
 }) {
-  if (small)
+  if (small) {
     return (
       <div
         className={`grid justify-start items-start`}
@@ -19,9 +23,16 @@ export function FieldGrid({
           gridTemplateRows: `repeat(${fieldLength}, minmax(0, 1fr))`,
         }}
       >
-        {buildFieldCells(cultivationAreas, fieldWidth, fieldLength, small)}
+        <FieldCells
+          cultivationAreas={cultivationAreas}
+          fieldWidth={fieldWidth}
+          fieldLength={fieldLength}
+          small={small}
+          plantedCells={plantedCells}
+        />
       </div>
     );
+  }
 
   return (
     <>
@@ -32,40 +43,72 @@ export function FieldGrid({
           gridTemplateRows: `repeat(${fieldLength}, minmax(0, 1fr))`,
         }}
       >
-        {buildFieldCells(cultivationAreas, fieldWidth, fieldLength, small)}
+        <FieldCells
+          cultivationAreas={cultivationAreas}
+          fieldWidth={fieldWidth}
+          fieldLength={fieldLength}
+          small={small}
+          handleCellClick={handleCellClick}
+          plantedCells={plantedCells}
+          selectedCultivationArea={selectedCultivationArea}
+        />
       </div>
     </>
   );
 }
 
-const FieldCell = ({ active, small, x, y, fieldWidth, fieldLength }) => {
+const FieldCell = ({
+  active,
+  small,
+  x,
+  y,
+  handleCellClick,
+  selected,
+  setSelectedCell,
+}) => {
+  const cellClass = classNames(
+    small ? "w-1 h-1" : "w-3 h-3 cursor-pointer",
+    selected ? `bg-green-500` : active ? `bg-yellow-500` : "",
+    "border",
+  );
+
   return (
     <div
-      className={`${small ? "w-1 h-1" : `w-3 h-3 cursor-pointer `} border ${active ? "bg-yellow-500" : ""} `}
+      className={cellClass}
       title={`(${x}, ${y})`}
+      onClick={() => {
+        handleCellClick ? handleCellClick({ x, y }) : null;
+      }}
     ></div>
   );
 };
 
-const buildFieldCells = (cultivationAreas, fieldWidth, fieldLength, small) => {
-  const plantedCells =
-    utils.cultivation.cultivationAreas.getCASCells(cultivationAreas);
-
-  console.log("Planted cells:", plantedCells.slice(0, 10)); // Log first 10 for brevity
-
+const FieldCells = ({
+  cultivationAreas,
+  fieldWidth,
+  fieldLength,
+  small,
+  handleCellClick,
+  plantedCells,
+  selectedCultivationArea,
+}) => {
+  const [selectedCell, setSelectedCell] = useState(null);
   let cells = [];
 
-  for (let i = 0; i < fieldLength; i++) {
-    for (let j = 0; j < fieldWidth; j++) {
+  for (let x = 0; x < fieldLength; x++) {
+    for (let y = 0; y < fieldWidth; y++) {
       cells.push(
         <FieldCell
-          key={`${i}-${j}`}
+          key={`${x}-${y}`}
           fieldWidth={fieldWidth}
           fieldLength={fieldLength}
           small={small}
-          x={i}
-          y={j}
-          active={plantedCells.includes(`${i},${j}`)}
+          x={x}
+          y={y}
+          setSelectedCell={setSelectedCell}
+          active={plantedCells.includes(`${x},${y}`)}
+          handleCellClick={handleCellClick}
+          selected={selectedCultivationArea?.planted.includes(`${x},${y}`)}
         />,
       );
     }

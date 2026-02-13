@@ -12,7 +12,7 @@ import {
 
 import utils from "@/lib/utils";
 
-import { FieldGrid } from "@/components/cultivation/fields/preview/grid copy";
+import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
 
 export function FieldsList({ fields }) {
   if (!fields || fields.length === 0) return <div>No fields found.</div>;

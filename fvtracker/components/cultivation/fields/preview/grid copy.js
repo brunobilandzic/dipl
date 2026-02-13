@@ -10,7 +10,7 @@ export function FieldGrid({
   plantedCells,
   handleCellClick,
 }) {
-  console.log("Planted cells in FieldGrid:", plantedCells); // Log first 10 for brevity
+  console.log("FieldGrid Called") // Log first 10 for brevity
   if (small) {
     console.log(
       "Rendering small grid with width:",
@@ -30,7 +30,7 @@ export function FieldGrid({
       </div>
     );
   }
-  console.log("rednering planted", plantedCells.length);
+  
   return (
     <>
       <div
@@ -40,14 +40,14 @@ export function FieldGrid({
           gridTemplateRows: `repeat(${fieldLength}, minmax(0, 1fr))`,
         }}
       >
-        {buildFieldCells(
-          (cultivationAreas = cultivationAreas),
-          (fieldWidth = fieldWidth),
-          (fieldLength = fieldLength),
-          (small = small),
-          (plantedCells = plantedCells),
-          (handleCellClick = handleCellClick),
-        )}
+        {buildFieldCells({
+          cultivationAreas,
+          fieldWidth,
+          fieldLength,
+          small,
+          handleCellClick,
+          plantedCells,
+        })}
       </div>
     </>
   );
@@ -63,14 +63,14 @@ const FieldCell = ({ active, small, x, y, handleCellClick }) => {
   );
 };
 
-const buildFieldCells = (
+const buildFieldCells = ({
   cultivationAreas,
   fieldWidth,
   fieldLength,
   small,
   handleCellClick,
   plantedCells,
-) => {
+}) => {
   console.log("Planted cells:", plantedCells); // Log first 10 for brevity
 
   let cells = [];

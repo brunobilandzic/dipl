@@ -41,7 +41,6 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
   const [plantedCells, setPlantedCells] = useState(
     cultivationAreas ? utils.cultivation.cultivationAreas.getCASCells(cultivationAreas) : [],
   );
-  console.log(plantedCells.length, "plantedCells");
   const [clickedCell, setClickedCell] = useState(null);
 
   const [selectedCultivationArea, setSelectedCultivationArea] = useState(null);

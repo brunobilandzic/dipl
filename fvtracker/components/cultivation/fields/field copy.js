@@ -100,6 +100,7 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
         "empty cell clicked, beginning cultivation area creation",
         coordinates,
       );
+      setSelectedCultivationArea(null);
       if (!isBeginSelected) {
         onBeginCoordinates(x, y);
       } else {

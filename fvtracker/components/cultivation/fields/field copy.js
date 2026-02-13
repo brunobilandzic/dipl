@@ -53,6 +53,7 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
     setNewCACoordinates({
       ...newCACoordinates,
       begin: { x, y },
+      planted: [`${x},${y}`],
     });
   };
 
@@ -73,7 +74,14 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
       console.log("selected", ca?.name);
     } else {
       console.log("empty cell clicked, beginning cultivation area creation", coordinates);
-      onBeginCoordinates(x, y);
+      if (!isBeginSelected) {
+        onBeginCoordinates(x, y);
+      } else {
+        setNewCACoordinates({
+          ...newCACoordinates,
+          planted: [...(newCACoordinates.planted || []), coordinates],
+        });
+      }
     }
   };
 

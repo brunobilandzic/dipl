@@ -114,7 +114,7 @@ const FieldCells = ({
           setSelectedCell={setSelectedCell}
           active={plantedCells.includes(`${x},${y}`)}
           handleCellClick={handleCellClick}
-          selected={selectedCultivationArea?.planted.includes(`${x},${y}`)}
+          selected={selectedCultivationArea?.planted.includes(`${x},${y}`) || (newCACoordinates.planted?.includes(`${x},${y}`) && isBeginSelected)}
         />,
       );
     }

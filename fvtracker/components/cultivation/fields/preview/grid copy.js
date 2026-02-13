@@ -15,6 +15,8 @@ export function FieldGrid({
   selectedCultivationArea,
   newCACoordinates,
   isBeginSelected,
+  setNewCACoordinates,
+  onRightClick,
 }) {
   if (small) {
     return (
@@ -43,6 +45,10 @@ export function FieldGrid({
         style={{
           gridTemplateColumns: `repeat(${fieldWidth}, minmax(0, 1fr))`,
           gridTemplateRows: `repeat(${fieldLength}, minmax(0, 1fr))`,
+        }}
+        onContextMenu={(e) => {
+          e.preventDefault();
+          onRightClick();
         }}
       >
         <FieldCells
@@ -114,7 +120,10 @@ const FieldCells = ({
           setSelectedCell={setSelectedCell}
           active={plantedCells.includes(`${x},${y}`)}
           handleCellClick={handleCellClick}
-          selected={selectedCultivationArea?.planted.includes(`${x},${y}`) || (newCACoordinates.planted?.includes(`${x},${y}`) && isBeginSelected)}
+          selected={
+            selectedCultivationArea?.planted.includes(`${x},${y}`) ||
+            (newCACoordinates.planted?.includes(`${x},${y}`) && isBeginSelected)
+          }
         />,
       );
     }

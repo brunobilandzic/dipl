@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FieldGrid } from "./preview/grid copy";
 import utils from "@/lib/utils";
 
@@ -109,6 +109,16 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
     }
   };
 
+  const onRightClick = () => {
+    console.log("right click, resetting cultivation area creation");
+    setNewCACoordinates({});
+    setIsBeginSelected(false);
+  };
+
+  useEffect(() => {
+    console.log("newCACoordinates changed", newCACoordinates);
+  }, [newCACoordinates]); 
+
   return (
     <>
       <div className="flex flex-col gap-4">
@@ -127,6 +137,8 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
             selectedCultivationArea={selectedCultivationArea}
             newCACoordinates={newCACoordinates}
             isBeginSelected={isBeginSelected}
+            setNewCACoordinates={setNewCACoordinates}
+            onRightClick={onRightClick}
           />
         </div>
         <div

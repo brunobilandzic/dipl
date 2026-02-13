@@ -3,6 +3,7 @@
 import constants from "@/lib/constants";
 import utils from "@/lib/utils";
 import { useEffect, useState } from "react";
+import classNames from "classnames";
 
 export function FieldGrid({
   width: fieldWidth,
@@ -14,6 +15,10 @@ export function FieldGrid({
   selectedCultivationArea,
 }) {
   console.log("SCA", selectedCultivationArea?.name);
+  console.log(
+    "constants colors:",
+    constants.cultivation.colors.selectedCABackGround,
+  );
 
   if (small) {
     console.log(
@@ -58,13 +63,27 @@ export function FieldGrid({
   );
 }
 
-const FieldCell = ({ active, small, x, y, handleCellClick, selected, setSelectedCell }) => {
+const FieldCell = ({
+  active,
+  small,
+  x,
+  y,
+  handleCellClick,
+  selected,
+  setSelectedCell,
+}) => {
+ 
+  const cellClass = classNames(
+  small ? "w-1 h-1" : "w-3 h-3 cursor-pointer",
+  selected ? `bg-green-500` : active ? `bg-yellow-500` : "",
+  "border",
+);
+
   return (
-    <div
-      className={`${small ? "w-1 h-1" : `w-3 h-3 cursor-pointer `} border ${active ? "bg-yellow-500" : ""} ${selected ? `bg-green-200` : ""}`}
+    <div      className={cellClass}
       title={`(${x}, ${y})`}
       onClick={() => {
-       handleCellClick({ x, y });
+        handleCellClick({ x, y });
       }}
     ></div>
   );

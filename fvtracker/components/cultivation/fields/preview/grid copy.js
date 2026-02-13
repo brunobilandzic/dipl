@@ -2,7 +2,7 @@
 
 import constants from "@/lib/constants";
 import utils from "@/lib/utils";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export function FieldGrid({
   width: fieldWidth,
@@ -14,7 +14,7 @@ export function FieldGrid({
   selectedCultivationArea,
 }) {
   console.log("SCA", selectedCultivationArea?.name);
-  console.log("FieldGrid Called"); // Log first 10 for brevity
+
   if (small) {
     console.log(
       "Rendering small grid with width:",
@@ -30,7 +30,7 @@ export function FieldGrid({
           gridTemplateRows: `repeat(${fieldLength}, minmax(0, 1fr))`,
         }}
       >
-        {buildFieldCells(cultivationAreas, fieldWidth, fieldLength, small)}
+        {"grid iz liste.."}
       </div>
     );
   }
@@ -44,34 +44,33 @@ export function FieldGrid({
           gridTemplateRows: `repeat(${fieldLength}, minmax(0, 1fr))`,
         }}
       >
-        {buildFieldCells({
-          cultivationAreas,
-          fieldWidth,
-          fieldLength,
-          small,
-          handleCellClick,
-          plantedCells,
-          selectedCultivationArea,
-        })}
+        <FieldCells
+          cultivationAreas={cultivationAreas}
+          fieldWidth={fieldWidth}
+          fieldLength={fieldLength}
+          small={small}
+          handleCellClick={handleCellClick}
+          plantedCells={plantedCells}
+          selectedCultivationArea={selectedCultivationArea}
+        />
       </div>
     </>
   );
 }
 
-const FieldCell = ({ active, small, x, y, handleCellClick, selected }) => {
+const FieldCell = ({ active, small, x, y, handleCellClick, selected, setSelectedCell }) => {
   return (
     <div
       className={`${small ? "w-1 h-1" : `w-3 h-3 cursor-pointer `} border ${active ? "bg-yellow-500" : ""} ${selected ? `bg-green-200` : ""}`}
       title={`(${x}, ${y})`}
       onClick={() => {
-        console.log("Cell clicked at:", `${x},${y}`);
-        handleCellClick(x, y);
+       handleCellClick({ x, y });
       }}
     ></div>
   );
 };
 
-const buildFieldCells = ({
+const FieldCells = ({
   cultivationAreas,
   fieldWidth,
   fieldLength,
@@ -80,26 +79,20 @@ const buildFieldCells = ({
   plantedCells,
   selectedCultivationArea,
 }) => {
+  const [selectedCell, setSelectedCell] = useState(null);
   let cells = [];
 
   useEffect(() => {
+    console.log(
+      "includes",
 
-   /*  console.log(
-    "includes",
+      selectedCultivationArea
+        ? selectedCultivationArea.planted.includes(`11,26`)
+        : "no SCA",
+    );
 
-    selectedCultivationArea
-      ? utils.cultivation.cultivationAreas.CAIncludesCell(
-          selectedCultivationArea,
-          5,
-          5,
-        )
-      : "no SCA",
-  );
- */
-
-console.log("selected planted:",selectedCultivationArea?.planted)
+    console.log("selected planted:", selectedCultivationArea?.planted);
   }, [selectedCultivationArea]);
-  
 
   for (let x = 0; x < fieldLength; x++) {
     for (let y = 0; y < fieldWidth; y++) {
@@ -111,9 +104,10 @@ console.log("selected planted:",selectedCultivationArea?.planted)
           small={small}
           x={x}
           y={y}
+          setSelectedCell={setSelectedCell}
           active={plantedCells.includes(`${x},${y}`)}
           handleCellClick={handleCellClick}
-          selected={false}
+          selected={selectedCultivationArea?.planted.includes(`${x},${y}`)}
         />,
       );
     }

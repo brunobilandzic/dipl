@@ -59,7 +59,7 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
     });
   };
 
-  const handleCellClick = (x, y) => {
+  const handleCellClick = ({x, y}) => {
 
     const coordinates = `${x},${y}`;
 

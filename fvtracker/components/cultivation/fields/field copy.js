@@ -76,7 +76,7 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
         x,
         y,
       );
-      setSelectedCultivationArea(ca);
+      setSelectedCultivationArea({name: ca.name, planted: utils.cultivation.cultivationAreas.getCASCells([ca])});
       console.log("selected", ca?.name);
     } else {
       console.log("empty cell clicked");

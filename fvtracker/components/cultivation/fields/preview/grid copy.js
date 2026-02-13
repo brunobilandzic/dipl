@@ -84,7 +84,7 @@ const buildFieldCells = ({
 
   useEffect(() => {
 
-    console.log(
+   /*  console.log(
     "includes",
 
     selectedCultivationArea
@@ -95,7 +95,9 @@ const buildFieldCells = ({
         )
       : "no SCA",
   );
+ */
 
+console.log("selected planted:",selectedCultivationArea?.planted)
   }, [selectedCultivationArea]);
   
 

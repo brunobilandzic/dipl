@@ -54,11 +54,14 @@ export function FieldGrid({
 }
 
 const FieldCell = ({ active, small, x, y, handleCellClick }) => {
+
   return (
     <div
       className={`${small ? "w-1 h-1" : `w-3 h-3 cursor-pointer `} border ${active ? "bg-yellow-500" : ""} `}
       title={`(${x}, ${y})`}
-      onClick={() => handleCellClick && handleCellClick(x, y)}
+      onClick={() => {
+        console.log("Cell clicked at:", x, y);
+        handleCellClick && handleCellClick(x, y)}}
     ></div>
   );
 };

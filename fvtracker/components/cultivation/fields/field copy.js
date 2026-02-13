@@ -39,7 +39,9 @@ export default function FieldPageComponentCopy({ field }) {
 function FieldEditCASPanel({ width, length, cultivationAreas }) {
   const [editCultivationAreas, setEditCultivationAreas] = useState(false);
   const [plantedCells, setPlantedCells] = useState(
-    cultivationAreas ? utils.cultivation.cultivationAreas.getCASCells(cultivationAreas) : [],
+    cultivationAreas
+      ? utils.cultivation.cultivationAreas.getCASCells(cultivationAreas)
+      : [],
   );
   const [clickedCell, setClickedCell] = useState(null);
 
@@ -60,9 +62,14 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
   const handleCellClick = (x, y) => {
     if (!editCultivationAreas) return;
 
-    console.log("Clicked cell:", x, y);
+    const coordinates = `${x},${y}`;
 
-  } 
+    if (plantedCells.some((cell) => cell === coordinates)) {
+      console.log("ca clicked");
+    } else {
+      console.log("empty cell clicked");
+    }
+  };
 
   return (
     <>

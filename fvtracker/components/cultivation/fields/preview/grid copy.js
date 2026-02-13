@@ -13,6 +13,8 @@ export function FieldGrid({
   plantedCells,
   handleCellClick,
   selectedCultivationArea,
+  newCACoordinates,
+  isBeginSelected,
 }) {
   if (small) {
     return (
@@ -51,6 +53,8 @@ export function FieldGrid({
           handleCellClick={handleCellClick}
           plantedCells={plantedCells}
           selectedCultivationArea={selectedCultivationArea}
+          newCACoordinates={newCACoordinates}
+          isBeginSelected={isBeginSelected}
         />
       </div>
     </>
@@ -91,6 +95,8 @@ const FieldCells = ({
   handleCellClick,
   plantedCells,
   selectedCultivationArea,
+  newCACoordinates,
+  isBeginSelected,
 }) => {
   const [selectedCell, setSelectedCell] = useState(null);
   let cells = [];

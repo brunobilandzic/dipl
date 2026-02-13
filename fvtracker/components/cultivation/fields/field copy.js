@@ -50,7 +50,6 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
 
   const onBeginCoordinates = (x, y) => {
     setIsBeginSelected(true);
-    console.log("begin", x, y);
     setNewCACoordinates({
       ...newCACoordinates,
       begin: { x, y },
@@ -73,7 +72,8 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
       setSelectedCultivationArea({name: ca.name, planted: utils.cultivation.cultivationAreas.getCASCells([ca])});
       console.log("selected", ca?.name);
     } else {
-      console.log("empty cell clicked");
+      console.log("empty cell clicked, beginning cultivation area creation", coordinates);
+      onBeginCoordinates(x, y);
     }
   };
 
@@ -93,6 +93,8 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
             plantedCells={plantedCells}
             handleCellClick={handleCellClick}
             selectedCultivationArea={selectedCultivationArea}
+            newCACoordinates={newCACoordinates}
+            isBeginSelected={isBeginSelected}
           />
         </div>
         <div

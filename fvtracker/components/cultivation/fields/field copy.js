@@ -69,7 +69,11 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
       endX,
       endY,
     );
-
+    setNewCACoordinates({
+      ...newCACoordinates,
+      end: { x: endX, y: endY },
+      planted: newPlantedCells,
+    });
   }
 
   const handleCellClick = ({ x, y }) => {

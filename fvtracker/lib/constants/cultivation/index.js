@@ -1,7 +1,7 @@
-import selectedCABackGround from "./colors";
+import colors from "./colors";
 
 export default {
   colors: {
-    selectedCABackGround,
+    selectedCABackGround: colors.selectedCABackGround,
   },
 };

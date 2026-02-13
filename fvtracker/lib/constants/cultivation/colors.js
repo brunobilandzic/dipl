@@ -1,3 +1,4 @@
 export default {
-    selectedCABackGround: "bg-red-700"
-}
+    selectedCABackGround: "red-700",
+    activeCABackGround: "yellow-500",
+}   

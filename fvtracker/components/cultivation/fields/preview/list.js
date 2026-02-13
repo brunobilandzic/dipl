@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 
 import {
   List,
@@ -9,8 +10,9 @@ import {
   ListItemHeader,
 } from "@/components/layout/preview/list";
 
-import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
-import { makeUrlFriendly } from "@/lib/utils/strings";
+import utils from "@/lib/utils";
+
+import { FieldGrid } from "@/components/cultivation/fields/preview/grid copy";
 
 export function FieldsList({ fields }) {
   if (!fields || fields.length === 0) return <div>No fields found.</div>;
@@ -43,6 +45,12 @@ function FieldItem({ field }) {
     },
     slug,
   } = field;
+
+  const [plantedCells, setPlantedCells] = useState(
+    cultivationAreas
+      ? utils.cultivation.cultivationAreas.getCASCells(cultivationAreas)
+      : [],
+  );
 
   return (
     <>
@@ -84,6 +92,7 @@ function FieldItem({ field }) {
                 length={length}
                 cultivationAreas={cultivationAreas}
                 small={true}
+                plantedCells={plantedCells}
               />
             </div>
           </div>

@@ -23,7 +23,13 @@ export function FieldGrid({
           gridTemplateRows: `repeat(${fieldLength}, minmax(0, 1fr))`,
         }}
       >
-        {"grid iz liste.."}
+        <FieldCells
+          cultivationAreas={cultivationAreas}
+          fieldWidth={fieldWidth}
+          fieldLength={fieldLength}
+          small={small}
+          plantedCells={plantedCells}
+        />
       </div>
     );
   }
@@ -60,18 +66,18 @@ const FieldCell = ({
   selected,
   setSelectedCell,
 }) => {
-  
   const cellClass = classNames(
-  small ? "w-1 h-1" : "w-3 h-3 cursor-pointer",
-  selected ? `bg-green-500` : active ? `bg-yellow-500` : "",
-  "border",
-);
+    small ? "w-1 h-1" : "w-3 h-3 cursor-pointer",
+    selected ? `bg-green-500` : active ? `bg-yellow-500` : "",
+    "border",
+  );
 
   return (
-    <div      className={cellClass}
+    <div
+      className={cellClass}
       title={`(${x}, ${y})`}
       onClick={() => {
-        handleCellClick({ x, y });
+        handleCellClick ? handleCellClick({ x, y }) : null;
       }}
     ></div>
   );

@@ -1,8 +1,9 @@
 import models from "@/models";
 import { fetchSessionAppUser } from "@/lib/auth/fetchSessionData";
-import { unstable_cache } from "next/cache";
+import dbConnect from "../db/mongooseConnect";
 
 export async function getCultivationManager() {
+  await dbConnect();
    const appUser = await fetchSessionAppUser();
       if (!appUser) {
         throw new Error("No app user found for the session.");

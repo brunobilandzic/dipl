@@ -60,7 +60,7 @@ const FieldCell = ({
   selected,
   setSelectedCell,
 }) => {
- 
+  
   const cellClass = classNames(
   small ? "w-1 h-1" : "w-3 h-3 cursor-pointer",
   selected ? `bg-green-500` : active ? `bg-yellow-500` : "",

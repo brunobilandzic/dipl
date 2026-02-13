@@ -44,10 +44,8 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
       : [],
   );
   const [clickedCell, setClickedCell] = useState(null);
-
   const [selectedCultivationArea, setSelectedCultivationArea] = useState(null);
   const [newCACoordinates, setNewCACoordinates] = useState({});
-
   const [isBeginSelected, setIsBeginSelected] = useState(false);
 
   const onBeginCoordinates = (x, y) => {
@@ -60,11 +58,8 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
   };
 
   const handleCellClick = ({x, y}) => {
-
     const coordinates = `${x},${y}`;
-
-    console.log("Cell clicked at:", coordinates);
-
+    
     if (
       utils.cultivation.cultivationAreas
         .getCASCells(cultivationAreas)

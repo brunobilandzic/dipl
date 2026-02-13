@@ -70,7 +70,6 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
         .getCASCells(cultivationAreas)
         .includes(coordinates)
     ) {
-      console.log("planted cell clicked");
       const ca = utils.cultivation.cultivationAreas.getCAForCell(
         cultivationAreas,
         x,

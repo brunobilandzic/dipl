@@ -14,19 +14,7 @@ export function FieldGrid({
   handleCellClick,
   selectedCultivationArea,
 }) {
-  console.log("SCA", selectedCultivationArea?.name);
-  console.log(
-    "constants colors:",
-    constants.cultivation.colors.selectedCABackGround,
-  );
-
   if (small) {
-    console.log(
-      "Rendering small grid with width:",
-      fieldWidth,
-      "and length:",
-      fieldLength,
-    );
     return (
       <div
         className={`grid justify-start items-start`}
@@ -100,18 +88,6 @@ const FieldCells = ({
 }) => {
   const [selectedCell, setSelectedCell] = useState(null);
   let cells = [];
-
-  useEffect(() => {
-    console.log(
-      "includes",
-
-      selectedCultivationArea
-        ? selectedCultivationArea.planted.includes(`11,26`)
-        : "no SCA",
-    );
-
-    console.log("selected planted:", selectedCultivationArea?.planted);
-  }, [selectedCultivationArea]);
 
   for (let x = 0; x < fieldLength; x++) {
     for (let y = 0; y < fieldWidth; y++) {

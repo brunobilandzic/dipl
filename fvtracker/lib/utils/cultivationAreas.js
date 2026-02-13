@@ -13,6 +13,7 @@ export function getCASCells(cultivationAreas) {
 }
 
 export const CAIncludesCell = (cultivationArea, x, y) => {
+  console.log("checking includes z", cultivationArea?.name, x, y)
   const plantedCells = getCASCells([cultivationArea]);
   return plantedCells.includes(`${x},${y}`);
 };

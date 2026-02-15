@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { FieldGrid } from "./preview/grid";
 import utils from "@/lib/utils";
 
-export default function FieldPageComponentCopy({ field }) {
+export default function FieldPageComponent({ field }) {
   const {
     name,
     description,

@@ -1,5 +1,4 @@
 import FieldPageComponent from "@/components/cultivation/fields/field";
-import FieldPageComponentCopy from "@/components/cultivation/fields/field";
 import { fetchFieldBySlug } from "@/lib/cultivation/fields";
 import clean from "@/lib/db/clean";
 import React from "react";
@@ -14,7 +13,7 @@ export default async function FieldPage({ params }) {
 
   return (
     <>
-      <FieldPageComponentCopy field={clean(field)} />
+      <FieldPageComponent slug={slug} />
     </>
   );
 }

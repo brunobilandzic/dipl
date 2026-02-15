@@ -14,6 +14,7 @@ export async function handleOAuth({ email, given_name, family_name }) {
       name: given_name,
       surname: family_name,
       provider: "google",
+      username: email.split("@")[0],
     });
 
     await newUser.save();

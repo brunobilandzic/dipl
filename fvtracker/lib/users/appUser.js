@@ -9,4 +9,5 @@ export async function getAppUser(filter) {
     console.log("App user not found for filter:", filter);
     throw new Error("App user not found");
   }
+  return appUser;
 }

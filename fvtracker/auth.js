@@ -4,6 +4,7 @@ import Credentials from "next-auth/providers/credentials";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/lib/db/mongoDb";
 import authLib from "@/lib/auth";
+import users from "./lib/users";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: MongoDBAdapter(clientPromise),
@@ -44,12 +45,26 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
       return false;
     },
-    async jwt({ token, user }) {
+    async jwt({ token, user, account, profile }) {
+      console.log("jwt user:", user);
       if (user) {
         token.appUserId = user.appUserId;
         token.email = user.email;
         token.managerModelName = user.managerModelName;
         token.displayName = user.displayName;
+      }
+
+      if (account && account.provider === "google") {
+        const email = token.email ?? profile?.email;
+        const appUser = await users.getAppUser({ email });
+        if (appUser) {
+          await appUser.populate("rootManager");
+          token.appUserId = appUser._id.toString();
+          token.managerModelName = appUser.rootManager
+            ? appUser.rootManager.managerModelName
+            : null;
+          token.displayName = appUser.username || appUser.name;
+        }
       }
       return token;
     },

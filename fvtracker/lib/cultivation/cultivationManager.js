@@ -2,7 +2,7 @@ import models from "@/models";
 import { fetchSessionAppUser } from "@/lib/auth/fetchSessionData";
 import dbConnect from "../db/mongooseConnect";
 
-export async function getCultivationManager() {
+export async function fetchCultivationManager() {
   await dbConnect();
    const appUser = await fetchSessionAppUser();
       if (!appUser) {
@@ -11,8 +11,9 @@ export async function getCultivationManager() {
       const cultivationManager =
         await appUser.getSpecificManager("CultivationManager");
       if (!cultivationManager) {
-        return <div>No cultivation manager found for this user.</div>;
+        throw new Error("Cultivation Manager not found for the app user.");
       }
+      
       await cultivationManager.populate({
         path: "fields",
         populate: {

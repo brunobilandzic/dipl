@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   List,
@@ -13,9 +13,32 @@ import {
 import utils from "@/lib/utils";
 
 import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import { setFields } from "@/store/cultivation/fieldSlice";
 
-export function FieldsList({ fields }) {
-  if (!fields || fields.length === 0) return <div>No fields found.</div>;
+export function FieldsList({}) {
+  const fields = useSelector((state) => state.fields.fields);
+
+  useEffect(() => {
+    if (fields && fields.length > 0) return;
+
+    (async () => {
+      try {
+        const res = await axios.get("/api/cultivation/fields");
+
+        if (res.data && res.data.fields) {
+          dispatch(setFields(res.data.fields));
+        }
+      } catch (error) {
+        console.log("Error fetching fields:", error);
+        const errorMessage =
+          error.response?.data?.message || error.message || "Unknown error";
+        alert(`Error fetching fields: ${errorMessage}`);
+      }
+    })();
+  }, []);
+
   return (
     <>
       <List>

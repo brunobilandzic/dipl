@@ -24,3 +24,14 @@ async function fetchSessionEmail() {
   return session.user.email;
 }
 
+export async function fetchSessionSpecificManager(managerModelName) {
+  const appUser = await fetchSessionAppUser();
+  if (!appUser) {
+    return null;
+  }
+
+  const specificManager = await mongoose.models[managerModelName].findOne({
+    rootManager: appUser.rootManager,
+  });
+  return specificManager;
+}

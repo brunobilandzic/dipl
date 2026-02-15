@@ -4,6 +4,8 @@ import constants from "@/lib/constants";
 import utils from "@/lib/utils";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
+import { useDispatch } from "react-redux";
+import { setLoading } from "@/store/loading";
 
 export function FieldGrid({
   width: fieldWidth,
@@ -115,17 +117,21 @@ const FieldCell = ({
   handleEmptyClick,
   handleActiveClick,
 }) => {
+  const dispatch = useDispatch(); 
   const cellClass = classNames(
     small ? "w-1 h-1" : "w-3 h-3 cursor-pointer",
     selected ? `bg-green-500` : active ? `bg-yellow-500` : "",
     "border",
   );
   const handleClick = (e) => {
+    dispatch(setLoading(true));
     if (!active) {
       handleEmptyClick(x, y);
+      dispatch(setLoading(false));
       return;
     }
     handleActiveClick({ x, y });
+    dispatch(setLoading(false));
   };
   return (
     <div

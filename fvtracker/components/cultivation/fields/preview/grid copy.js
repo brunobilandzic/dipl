@@ -18,6 +18,7 @@ export function FieldGrid({
   setNewCACoordinates,
   onRightClick,
 }) {
+  console.log(onRightClick)
   if (small) {
     return (
       <div
@@ -46,10 +47,6 @@ export function FieldGrid({
           gridTemplateColumns: `repeat(${fieldWidth}, minmax(0, 1fr))`,
           gridTemplateRows: `repeat(${fieldLength}, minmax(0, 1fr))`,
         }}
-        onContextMenu={(e) => {
-          e.preventDefault();
-          onRightClick();
-        }}
       >
         <FieldCells
           cultivationAreas={cultivationAreas}
@@ -61,6 +58,7 @@ export function FieldGrid({
           selectedCultivationArea={selectedCultivationArea}
           newCACoordinates={newCACoordinates}
           isBeginSelected={isBeginSelected}
+          onRightClick={onRightClick}
         />
       </div>
     </>
@@ -74,7 +72,7 @@ const FieldCell = ({
   y,
   handleCellClick,
   selected,
-  setSelectedCell,
+  onRightClick,
 }) => {
   const cellClass = classNames(
     small ? "w-1 h-1" : "w-3 h-3 cursor-pointer",
@@ -88,6 +86,11 @@ const FieldCell = ({
       title={`(${x}, ${y})`}
       onClick={() => {
         handleCellClick ? handleCellClick({ x, y }) : null;
+      }}
+      onContextMenu={(e) => {
+        console.log(onRightClick)
+        e.preventDefault();
+        onRightClick();
       }}
     ></div>
   );
@@ -103,6 +106,7 @@ const FieldCells = ({
   selectedCultivationArea,
   newCACoordinates,
   isBeginSelected,
+  onRightClick
 }) => {
   const [selectedCell, setSelectedCell] = useState(null);
   let cells = [];
@@ -124,6 +128,7 @@ const FieldCells = ({
             selectedCultivationArea?.planted.includes(`${x},${y}`) ||
             (newCACoordinates.planted?.includes(`${x},${y}`) && isBeginSelected)
           }
+          onRightClick={onRightClick}
         />,
       );
     }

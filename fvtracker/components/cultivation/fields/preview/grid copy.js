@@ -65,36 +65,7 @@ export function FieldGrid({
   );
 }
 
-const FieldCell = ({
-  active,
-  small,
-  x,
-  y,
-  handleCellClick,
-  selected,
-  onRightClick,
-}) => {
-  const cellClass = classNames(
-    small ? "w-1 h-1" : "w-3 h-3 cursor-pointer",
-    selected ? `bg-green-500` : active ? `bg-yellow-500` : "",
-    "border",
-  );
 
-  return (
-    <div
-      className={cellClass}
-      title={`(${x}, ${y})`}
-      onClick={() => {
-        handleCellClick ? handleCellClick({ x, y }) : null;
-      }}
-      onContextMenu={(e) => {
-        console.log(onRightClick)
-        e.preventDefault();
-        onRightClick();
-      }}
-    ></div>
-  );
-};
 
 const FieldCells = ({
   cultivationAreas,
@@ -134,4 +105,36 @@ const FieldCells = ({
     }
   }
   return cells;
+};
+
+
+const FieldCell = ({
+  active,
+  small,
+  x,
+  y,
+  handleCellClick,
+  selected,
+  onRightClick,
+}) => {
+  const cellClass = classNames(
+    small ? "w-1 h-1" : "w-3 h-3 cursor-pointer",
+    selected ? `bg-green-500` : active ? `bg-yellow-500` : "",
+    "border",
+  );
+
+  return (
+    <div
+      className={cellClass}
+      title={`(${x}, ${y})`}
+      onClick={() => {
+        handleCellClick ? handleCellClick({ x, y }) : null;
+      }}
+      onContextMenu={(e) => {
+        console.log(onRightClick)
+        e.preventDefault();
+        onRightClick();
+      }}
+    ></div>
+  );
 };

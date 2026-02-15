@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import classNames from "classnames";
 import { useDispatch } from "react-redux";
 import { setLoading } from "@/store/loading";
+import dimensionError from "@/lib/constants/errors/cultivation/dimensions";
 
 export function FieldGrid({
   width: fieldWidth,
@@ -16,7 +17,6 @@ export function FieldGrid({
   selectedCultivationArea,
   newCACoordinates,
   isBeginSelected,
-  setNewCACoordinates,
   onRightClick,
   handleEmptyClick,
   handleActiveClick,
@@ -36,7 +36,6 @@ export function FieldGrid({
           fieldLength={fieldLength}
           small={small}
           plantedCells={plantedCells}
-          handleActiveClick={handleActiveClick}
         />
       </div>
     );
@@ -81,7 +80,6 @@ const FieldCells = ({
   handleEmptyClick,
   handleActiveClick,
 }) => {
-  const [selectedCell, setSelectedCell] = useState(null);
   let cells = [];
 
   for (let x = 0; x < fieldLength; x++) {
@@ -100,6 +98,7 @@ const FieldCells = ({
           onRightClick={onRightClick}
           handleEmptyClick={handleEmptyClick}
           handleActiveClick={handleActiveClick}
+          isBeginSelected={isBeginSelected}
         />,
       );
     }
@@ -115,9 +114,9 @@ const FieldCell = ({
   selected,
   onRightClick,
   handleEmptyClick,
-  handleActiveClick,
+  isBeginSelected,
 }) => {
-  const dispatch = useDispatch(); 
+  const dispatch = useDispatch();
   const cellClass = classNames(
     small ? "w-1 h-1" : "w-3 h-3 cursor-pointer",
     selected ? `bg-green-500` : active ? `bg-yellow-500` : "",
@@ -130,19 +129,22 @@ const FieldCell = ({
       dispatch(setLoading(false));
       return;
     }
-    handleActiveClick({ x, y });
-    dispatch(setLoading(false));
+    if (isBeginSelected) {
+      alert(dimensionError.CULTIVATION_AREA_OVERLAP);
+      dispatch(setLoading(false));
+      return;
+    }
+  }
+    return (
+      <div
+        className={cellClass}
+        title={`(${x}, ${y})`}
+        onClick={handleClick}
+        onContextMenu={(e) => {
+          console.log(onRightClick);
+          e.preventDefault();
+          onRightClick();
+        }}
+      ></div>
+    );
   };
-  return (
-    <div
-      className={cellClass}
-      title={`(${x}, ${y})`}
-      onClick={handleClick}
-      onContextMenu={(e) => {
-        console.log(onRightClick);
-        e.preventDefault();
-        onRightClick();
-      }}
-    ></div>
-  );
-};

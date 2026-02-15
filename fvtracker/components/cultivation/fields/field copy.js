@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { FieldGrid } from "./preview/grid copy";
 import utils from "@/lib/utils";
+import { useSelector } from "react-redux";
+import { Loading } from "@/components/layout/loading";
 
 export default function FieldPageComponentCopy({ field }) {
   const {
@@ -49,6 +51,7 @@ function FieldEditCASPanel({
   const [selectedCultivationArea, setSelectedCultivationArea] = useState(null);
   const [newCACoordinates, setNewCACoordinates] = useState({});
   const [isBeginSelected, setIsBeginSelected] = useState(false);
+  const isLoading = useSelector((state) => state.loading.isLoading);
 
   const onBeginCoordinates = (beginX, beginY) => {
     setIsBeginSelected(true);
@@ -97,16 +100,16 @@ function FieldEditCASPanel({
   };
 
   const handleActiveClick = ({ x, y }) => {
-      const ca = utils.cultivation.cultivationAreas.getCAForCell(
-        cultivationAreas,
-        x,
-        y,
-      );
-      setSelectedCultivationArea({
-        name: ca.name,
-        planted: utils.cultivation.cultivationAreas.getCASCells([ca]),
-      });
-      resetSelection();
+    const ca = utils.cultivation.cultivationAreas.getCAForCell(
+      cultivationAreas,
+      x,
+      y,
+    );
+    setSelectedCultivationArea({
+      name: ca.name,
+      planted: utils.cultivation.cultivationAreas.getCASCells([ca]),
+    });
+    resetSelection();
   };
 
   const onRightClick = () => {
@@ -131,8 +134,11 @@ function FieldEditCASPanel({
         {JSON.stringify(
           `${newCACoordinates.begin ? `Begin: (${newCACoordinates.begin.x}, ${newCACoordinates.begin.y})` : "No begin selected"}`,
         )}
-        <div>
-          <FieldGrid
+        <div style={{
+          width: "full",
+          aspectRatio: `${width} / ${length}`,
+        }}>
+          {isLoading ? <Loading /> : <FieldGrid
             width={width}
             length={length}
             cultivationAreas={cultivationAreas}
@@ -146,7 +152,7 @@ function FieldEditCASPanel({
             onRightClick={onRightClick}
             handleActiveClick={handleActiveClick}
             handleEmptyClick={handleEmptyClick}
-          />
+          />}
         </div>
         <div
           className=" btn cursor-pointer"

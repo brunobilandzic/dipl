@@ -114,6 +114,7 @@ const FieldCell = ({
   selected,
   onRightClick,
   handleEmptyClick,
+  handleActiveClick,
   isBeginSelected,
 }) => {
   const dispatch = useDispatch();
@@ -134,6 +135,8 @@ const FieldCell = ({
       dispatch(setLoading(false));
       return;
     }
+    handleActiveClick(x, y);
+    dispatch(setLoading(false));
   }
     return (
       <div

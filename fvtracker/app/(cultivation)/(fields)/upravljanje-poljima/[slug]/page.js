@@ -1,5 +1,5 @@
 import FieldPageComponent from "@/components/cultivation/fields/field";
-import FieldPageComponentCopy from "@/components/cultivation/fields/field copy";
+import FieldPageComponentCopy from "@/components/cultivation/fields/field";
 import { fetchFieldBySlug } from "@/lib/cultivation/fields";
 import clean from "@/lib/db/clean";
 import React from "react";

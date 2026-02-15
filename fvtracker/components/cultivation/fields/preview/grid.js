@@ -1,9 +1,8 @@
 "use client";
 
-import constants from "@/lib/constants";
-import utils from "@/lib/utils";
-import { useEffect, useState } from "react";
 import classNames from "classnames";
+import { useDispatch } from "react-redux";
+import dimensionError from "@/lib/constants/errors/cultivation/dimensions";
 
 export function FieldGrid({
   width: fieldWidth,
@@ -11,8 +10,12 @@ export function FieldGrid({
   cultivationAreas,
   small,
   plantedCells,
-  handleCellClick,
   selectedCultivationArea,
+  newCACoordinates,
+  isBeginSelected,
+  onRightClick,
+  handleEmptyClick,
+  handleActiveClick,
 }) {
   if (small) {
     return (
@@ -48,51 +51,31 @@ export function FieldGrid({
           fieldWidth={fieldWidth}
           fieldLength={fieldLength}
           small={small}
-          handleCellClick={handleCellClick}
           plantedCells={plantedCells}
           selectedCultivationArea={selectedCultivationArea}
+          newCACoordinates={newCACoordinates}
+          isBeginSelected={isBeginSelected}
+          onRightClick={onRightClick}
+          handleEmptyClick={handleEmptyClick}
+          handleActiveClick={handleActiveClick}
         />
       </div>
     </>
   );
 }
 
-const FieldCell = ({
-  active,
-  small,
-  x,
-  y,
-  handleCellClick,
-  selected,
-  setSelectedCell,
-}) => {
-  const cellClass = classNames(
-    small ? "w-1 h-1" : "w-3 h-3 cursor-pointer",
-    selected ? `bg-green-500` : active ? `bg-yellow-500` : "",
-    "border",
-  );
-
-  return (
-    <div
-      className={cellClass}
-      title={`(${x}, ${y})`}
-      onClick={() => {
-        handleCellClick ? handleCellClick({ x, y }) : null;
-      }}
-    ></div>
-  );
-};
-
 const FieldCells = ({
-  cultivationAreas,
   fieldWidth,
   fieldLength,
   small,
-  handleCellClick,
   plantedCells,
   selectedCultivationArea,
+  newCACoordinates,
+  isBeginSelected,
+  onRightClick,
+  handleEmptyClick,
+  handleActiveClick,
 }) => {
-  const [selectedCell, setSelectedCell] = useState(null);
   let cells = [];
 
   for (let x = 0; x < fieldLength; x++) {
@@ -100,18 +83,63 @@ const FieldCells = ({
       cells.push(
         <FieldCell
           key={`${x}-${y}`}
-          fieldWidth={fieldWidth}
-          fieldLength={fieldLength}
           small={small}
           x={x}
           y={y}
-          setSelectedCell={setSelectedCell}
           active={plantedCells.includes(`${x},${y}`)}
-          handleCellClick={handleCellClick}
-          selected={selectedCultivationArea?.planted.includes(`${x},${y}`)}
+          selected={
+            selectedCultivationArea?.planted?.includes(`${x},${y}`) ||
+            (newCACoordinates.planted?.includes(`${x},${y}`) && isBeginSelected)
+          }
+          onRightClick={onRightClick}
+          handleEmptyClick={handleEmptyClick}
+          handleActiveClick={handleActiveClick}
+          isBeginSelected={isBeginSelected}
         />,
       );
     }
   }
   return cells;
 };
+
+const FieldCell = ({
+  active,
+  small,
+  x,
+  y,
+  selected,
+  onRightClick,
+  handleEmptyClick,
+  handleActiveClick,
+  isBeginSelected,
+}) => {
+  const dispatch = useDispatch();
+  const cellClass = classNames(
+    small ? "w-1 h-1" : "w-3 h-3 cursor-pointer",
+    selected ? `bg-green-500` : active ? `bg-yellow-500` : "",
+    "border",
+  );
+  const handleClick = (e) => {
+    if (!active) {
+      handleEmptyClick(x, y);
+      return;
+    }
+    if (isBeginSelected) {
+      alert(dimensionError.CULTIVATION_AREA_OVERLAP);
+      return;
+    }
+    handleActiveClick(x, y);
+  }
+    return (
+      <div
+        className={cellClass}
+        title={`(${x}, ${y})`}
+        onClick={handleClick}
+        onContextMenu={(e) => {
+          console.log(onRightClick);
+          e.preventDefault();
+          onRightClick();
+        }}
+      ></div>
+    );
+  };

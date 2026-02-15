@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FieldGrid } from "./preview/grid";
 import utils from "@/lib/utils";
 
@@ -12,11 +12,7 @@ export default function FieldPageComponentCopy({ field }) {
     location: { latitude, longitude },
     cultivationAreas,
     cultivations,
-    cultivationAreaDimensions: {
-      min_ca_dim,
-      max_ca_dim,
-      gap: cultivationAreasGap,
-    },
+    cultivationAreaDimensions,
     slug,
   } = field;
 
@@ -29,6 +25,7 @@ export default function FieldPageComponentCopy({ field }) {
           width={width}
           length={length}
           cultivationAreas={cultivationAreas}
+          cultivationAreaDimensions={cultivationAreaDimensions}
         />
         <div></div>
       </div>
@@ -36,7 +33,12 @@ export default function FieldPageComponentCopy({ field }) {
   );
 }
 
-function FieldEditCASPanel({ width, length, cultivationAreas }) {
+function FieldEditCASPanel({
+  width,
+  length,
+  cultivationAreas,
+  cultivationAreaDimensions,
+}) {
   const [editCultivationAreas, setEditCultivationAreas] = useState(false);
   const [plantedCells, setPlantedCells] = useState(
     cultivationAreas
@@ -48,33 +50,78 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
   const [newCACoordinates, setNewCACoordinates] = useState({});
   const [isBeginSelected, setIsBeginSelected] = useState(false);
 
-  const onBeginCoordinates = (x, y) => {
+  const onBeginCoordinates = (beginX, beginY) => {
     setIsBeginSelected(true);
-    console.log("begin", x, y);
+    setSelectedCultivationArea(null);
     setNewCACoordinates({
       ...newCACoordinates,
-      begin: { x, y },
+      begin: { x: beginX, y: beginY },
+      planted: [`${beginX},${beginY}`],
     });
   };
 
-  const handleCellClick = ({x, y}) => {
-    const coordinates = `${x},${y}`;
-    
-    if (
-      utils.cultivation.cultivationAreas
-        .getCASCells(cultivationAreas)
-        .includes(coordinates)
-    ) {
-      const ca = utils.cultivation.cultivationAreas.getCAForCell(
-        cultivationAreas,
-        x,
-        y,
-      );
-      setSelectedCultivationArea({name: ca.name, planted: utils.cultivation.cultivationAreas.getCASCells([ca])});
-      console.log("selected", ca?.name);
-    } else {
-      console.log("empty cell clicked");
+  const onEndCoordinates = (endX, endY) => {
+    if (!newCACoordinates.begin) {
+      console.error("Begin coordinates not set");
+      return;
     }
+    const { x: beginX, y: beginY } = newCACoordinates.begin;
+    const { error, planted } =
+      utils.cultivation.cultivationAreas.getCellsInRect(
+        beginX,
+        beginY,
+        endX,
+        endY,
+        cultivationAreaDimensions,
+      );
+
+    if (error) {
+      alert(error);
+      return;
+    }
+
+    setNewCACoordinates({
+      ...newCACoordinates,
+      end: { x: endX, y: endY },
+      planted,
+    });
+  };
+
+  const handleEmptyClick = (x, y) => {
+    if (!isBeginSelected) {
+      console.log("setting begin coordinates");
+      onBeginCoordinates(x, y);
+    } else {
+      console.log("setting end coordinates");
+      onEndCoordinates(x, y);
+    }
+  };
+
+  const handleActiveClick = (x, y) => {
+    const ca = utils.cultivation.cultivationAreas.getCAForCell(
+      cultivationAreas,
+      x,
+      y,
+    );
+    setSelectedCultivationArea({
+      name: ca.name,
+      planted: utils.cultivation.cultivationAreas.getCASCells([ca]),
+    });
+    resetSelection();
+  };
+
+  const onRightClick = () => {
+    resetSelection();
+  };
+
+  useEffect(() => {
+    console.log("newCACoordinates changed", newCACoordinates);
+  }, [newCACoordinates]);
+
+  const resetSelection = () => {
+    console.log("resetiing cac");
+    setNewCACoordinates({});
+    setIsBeginSelected(false);
   };
 
   return (
@@ -83,7 +130,12 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
         {JSON.stringify(
           `${newCACoordinates.begin ? `Begin: (${newCACoordinates.begin.x}, ${newCACoordinates.begin.y})` : "No begin selected"}`,
         )}
-        <div>
+        <div
+          style={{
+            width: "full",
+            aspectRatio: `${width} / ${length}`,
+          }}
+        >
           <FieldGrid
             width={width}
             length={length}
@@ -91,8 +143,13 @@ function FieldEditCASPanel({ width, length, cultivationAreas }) {
             clickedCell={editCultivationAreas ? clickedCell : null}
             setClickedCell={editCultivationAreas ? setClickedCell : null}
             plantedCells={plantedCells}
-            handleCellClick={handleCellClick}
             selectedCultivationArea={selectedCultivationArea}
+            newCACoordinates={newCACoordinates}
+            isBeginSelected={isBeginSelected}
+            setNewCACoordinates={setNewCACoordinates}
+            onRightClick={onRightClick}
+            handleActiveClick={handleActiveClick}
+            handleEmptyClick={handleEmptyClick}
           />
         </div>
         <div

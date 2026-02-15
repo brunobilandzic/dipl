@@ -1,3 +1,5 @@
+import dimensionError from "../constants/errors/cultivation/dimensions";
+
 export function getCASCells(cultivationAreas) {
   const plantedMaps = cultivationAreas.map((ca) => ca.planted);
 
@@ -25,8 +27,28 @@ export const getCAForCell = (cultivationAreas, x, y) => {
   );
 };
 
-export const getCellsInRect = (beginX, beginY, endX, endY) => {
-  const cells = [];
+export const getCellsInRect = (
+  beginX,
+  beginY,
+  endX,
+  endY,
+  cultivationAreaDimensons,
+) => {
+  const valid = checkRectValidDimensions({
+    beginX,
+    beginY,
+    endX,
+    endY,
+    cultivationAreaDimensons,
+  });
+  if (!valid) {
+    return {
+      error: dimensionError.CULTIVATION_AREA_DIMENSIONS(
+        cultivationAreaDimensons,
+      ),
+    };
+  }
+  const planted = [];
   const xStart = Math.min(beginX, endX);
   const xEnd = Math.max(beginX, endX);
   const yStart = Math.min(beginY, endY);
@@ -34,9 +56,32 @@ export const getCellsInRect = (beginX, beginY, endX, endY) => {
 
   for (let x = xStart; x <= xEnd; x++) {
     for (let y = yStart; y <= yEnd; y++) {
-      cells.push(`${x},${y}`);
+      planted.push(`${x},${y}`);
     }
   }
 
-  return cells;
+  return {
+    error: null,
+    planted
+  };
+};
+
+export const checkRectValidDimensions = ({
+  beginX,
+  beginY,
+  endX,
+  endY,
+  cultivationAreaDimensons,
+}) => {
+  const { min_ca_dim, max_ca_dim } = cultivationAreaDimensons;
+  const width = Math.abs(endX - beginX) + 1;
+  const height = Math.abs(endY - beginY) + 1;
+  return (
+    width > 0 &&
+    height > 0 &&
+    width >= min_ca_dim &&
+    height >= min_ca_dim &&
+    width <= max_ca_dim &&
+    height <= max_ca_dim
+  );
 };

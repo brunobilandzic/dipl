@@ -97,9 +97,6 @@ function FieldEditCASPanel({
   };
 
   const handleActiveClick = ({ x, y }) => {
-    const coordinates = `${x},${y}`;
-
-
       const ca = utils.cultivation.cultivationAreas.getCAForCell(
         cultivationAreas,
         x,

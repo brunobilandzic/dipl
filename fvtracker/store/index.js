@@ -7,6 +7,7 @@ export default configureStore({
     user: userReducer,
     cultivation: {
       field: fieldReducer
-    }
+    },
+    error: errorReducer,
   },
 });

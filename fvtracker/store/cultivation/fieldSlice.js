@@ -2,16 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   fields: [],
-  loaded: false,
 };
 
 const fieldSlice = createSlice({
-  name: "field",
+  name: "fields",
   initialState: initialState,
   reducers: {
     setFields: (state, action) => {
       state.fields = action.payload;
-      state.loaded = true;
     },
     setFieldInitialState: (state) => {
       state = initialState;

@@ -2,15 +2,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./userSlice";
 import fieldReducer from "./cultivation/fieldSlice";
 import errorReducer from "./error";
-import loadingReducer from "./loading"
+import loadingReducer from "./loading";
 
 export default configureStore({
   reducer: {
     user: userReducer,
-    cultivation: {
-      field: fieldReducer
-    },
+    fields: fieldReducer,
     error: errorReducer,
-    loading: loadingReducer
+    loading: loadingReducer,
   },
 });

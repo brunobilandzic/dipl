@@ -99,7 +99,7 @@ function FieldEditCASPanel({
     }
   };
 
-  const handleActiveClick = ({ x, y }) => {
+  const handleActiveClick = (x, y) => {
     const ca = utils.cultivation.cultivationAreas.getCAForCell(
       cultivationAreas,
       x,

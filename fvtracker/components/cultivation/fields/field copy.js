@@ -3,8 +3,6 @@
 import { useEffect, useState } from "react";
 import { FieldGrid } from "./preview/grid copy";
 import utils from "@/lib/utils";
-import { useSelector } from "react-redux";
-import { Loading } from "@/components/layout/loading";
 
 export default function FieldPageComponentCopy({ field }) {
   const {
@@ -51,10 +49,10 @@ function FieldEditCASPanel({
   const [selectedCultivationArea, setSelectedCultivationArea] = useState(null);
   const [newCACoordinates, setNewCACoordinates] = useState({});
   const [isBeginSelected, setIsBeginSelected] = useState(false);
-  const isLoading = useSelector((state) => state.loading.isLoading);
 
   const onBeginCoordinates = (beginX, beginY) => {
     setIsBeginSelected(true);
+    setSelectedCultivationArea(null);
     setNewCACoordinates({
       ...newCACoordinates,
       begin: { x: beginX, y: beginY },
@@ -113,7 +111,6 @@ function FieldEditCASPanel({
   };
 
   const onRightClick = () => {
-    console.log("right click, resetting cultivation area creation");
     resetSelection();
   };
 
@@ -130,15 +127,16 @@ function FieldEditCASPanel({
   return (
     <>
       <div className="flex flex-col gap-4">
-        {JSON.stringify(newCACoordinates)}
         {JSON.stringify(
           `${newCACoordinates.begin ? `Begin: (${newCACoordinates.begin.x}, ${newCACoordinates.begin.y})` : "No begin selected"}`,
         )}
-        <div style={{
-          width: "full",
-          aspectRatio: `${width} / ${length}`,
-        }}>
-          {isLoading ? <Loading /> : <FieldGrid
+        <div
+          style={{
+            width: "full",
+            aspectRatio: `${width} / ${length}`,
+          }}
+        >
+          <FieldGrid
             width={width}
             length={length}
             cultivationAreas={cultivationAreas}
@@ -152,7 +150,7 @@ function FieldEditCASPanel({
             onRightClick={onRightClick}
             handleActiveClick={handleActiveClick}
             handleEmptyClick={handleEmptyClick}
-          />}
+          />
         </div>
         <div
           className=" btn cursor-pointer"

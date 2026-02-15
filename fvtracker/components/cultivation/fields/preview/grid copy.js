@@ -1,11 +1,7 @@
 "use client";
 
-import constants from "@/lib/constants";
-import utils from "@/lib/utils";
-import { useEffect, useState } from "react";
 import classNames from "classnames";
 import { useDispatch } from "react-redux";
-import { setLoading } from "@/store/loading";
 import dimensionError from "@/lib/constants/errors/cultivation/dimensions";
 
 export function FieldGrid({
@@ -124,19 +120,15 @@ const FieldCell = ({
     "border",
   );
   const handleClick = (e) => {
-    dispatch(setLoading(true));
     if (!active) {
       handleEmptyClick(x, y);
-      dispatch(setLoading(false));
       return;
     }
     if (isBeginSelected) {
       alert(dimensionError.CULTIVATION_AREA_OVERLAP);
-      dispatch(setLoading(false));
       return;
     }
     handleActiveClick(x, y);
-    dispatch(setLoading(false));
   }
     return (
       <div

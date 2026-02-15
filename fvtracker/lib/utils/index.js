@@ -1,6 +1,11 @@
 import { extractDBObject } from "./objects";
 import { makeUrlFriendly } from "./strings";
-import { getCASCells, CAIncludesCell, getCAForCell, getCellsInRect } from "./cultivationAreas";
+import {
+  getCASCells,
+  CAIncludesCell,
+  getCAForCell,
+  getCellsInRect,
+} from "./cultivationAreas";
 
 export default {
   objects: {
@@ -18,3 +23,5 @@ export default {
     },
   },
 };
+
+export const nextFrame = () => new Promise((res) => requestAnimationFrame(res));

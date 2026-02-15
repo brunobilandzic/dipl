@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
       >
         <Providers>
           <Navbar />
-          <div className="w-2/3 mx-auto pt-10">{children} </div>
+          <div className="w-2/3 mx-auto py-10">{children} </div>
         </Providers>
       </body>
     </html>

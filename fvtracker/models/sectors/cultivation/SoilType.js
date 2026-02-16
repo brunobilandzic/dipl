@@ -5,23 +5,15 @@ const { Schema } = mongoose;
 const soilTypeSchema = new Schema({
   name: {
     type: String,
-    enum: [
-      "pjeskovito",
-      "ilovasto",
-      "glinasto",
-      "crnica",
-      "crvenica",
-      "vapnenačko",
-      "šljunkovito",
-      "muljevito",
-    ],
+    required: true,
+    default: "Neodređena vrsta tla",
   },
   slug: { type: String, unique: true, index: true },
   description: { type: String, default: "" },
-  goodForCrops: [
+  goodForCropGeneralTypes: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "CropVariety",
+      ref: "CropGeneralType",
       default: [],
     },
   ],

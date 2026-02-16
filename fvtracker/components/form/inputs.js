@@ -9,6 +9,8 @@ export const AppInput = ({
   placeholder,
   wrapStyle = "",
   inputStyle = "",
+  min,
+  max
 }) => {
   return (
     <div className={`${wrapStyle}`}>
@@ -20,6 +22,8 @@ export const AppInput = ({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        min={min}
+        max={max}
       />
     </div>
   );

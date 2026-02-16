@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FieldGrid } from "./preview/grid";
+import { FieldGrid } from "../preview/grid";
 import utils from "@/lib/utils";
 import { useDispatch, useSelector } from "react-redux";
 import { handleApiError } from "@/lib/constants/errors/client/api";
 import axios from "axios";
 import { Loading } from "@/components/layout/loading";
 import { selectField } from "@/store/cultivation";
+import { FieldEditDashboard } from "./edit";
 
 export default function FieldPageComponent({ slug }) {
   const selectedField = useSelector((state) => state.cultivation.selectedField);
@@ -194,13 +195,8 @@ function FieldEditCASPanel({
             handleEmptyClick={handleEmptyClick}
           />
         </div>
-        <div
-          className=" btn cursor-pointer"
-          onClick={() => setEditCultivationAreas((prev) => !prev)}
-        >
-          {editCultivationAreas
-            ? "Submit cultivation areas"
-            : "Edit cultivation areas"}
+        <div className=" ">
+          <FieldEditDashboard newCACoordinates={newCACoordinates} />
         </div>
       </div>
     </>

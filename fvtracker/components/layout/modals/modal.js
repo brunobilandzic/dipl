@@ -29,7 +29,7 @@ function Backdrop({ onCancel }) {
 
 function ModalHeader({ title, onCancel }) {
   return (
-    <div className="flex justify-between items-center mb-4">
+    <div className="flex justify-between items-center mb-4 pb-4 border-b border-gray-300">
       <div className="text-xl font-bold">{title}</div>
       <div onClick={onCancel} className="text-xl cursor-pointer">
         <MdOutlineClose />
@@ -39,5 +39,5 @@ function ModalHeader({ title, onCancel }) {
 }
 
 export function ModalFooter({ children }) {
-  return <div className="flex justify-end gap-4 mt-4">{children}</div>;
+  return <div className="flex justify-end gap-4 mt-4 border-t border-gray-300 pt-4">{children}</div>;
 }

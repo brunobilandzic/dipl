@@ -116,6 +116,7 @@ function FieldEditCASPanel({
         endX,
         endY,
         cultivationAreaDimensions,
+        cultivationAreas,
       );
 
     if (error) {
@@ -197,7 +198,10 @@ function FieldEditCASPanel({
           />
         </div>
         <div className=" ">
-          <FieldEditDashboard newCACoordinates={newCACoordinates} cultivationAreaDimensions={cultivationAreaDimensions}/>
+          <FieldEditDashboard
+            newCACoordinates={newCACoordinates}
+            cultivationAreaDimensions={cultivationAreaDimensions}
+          />
         </div>
       </div>
     </>

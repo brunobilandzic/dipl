@@ -33,6 +33,7 @@ export const getCellsInRect = (
   endX,
   endY,
   cultivationAreaDimensons,
+  cultivationAreas,
 ) => {
   const valid = checkRectValidDimensions({
     beginX,
@@ -46,6 +47,18 @@ export const getCellsInRect = (
       error: dimensionError.CULTIVATION_AREA_DIMENSIONS(
         cultivationAreaDimensons,
       ),
+    };
+  }
+  const overlaps = overlapsExistingCA(
+    cultivationAreas,
+    beginX,
+    beginY,
+    endX,
+    endY,
+  );
+  if (overlaps) {
+    return {
+      error: dimensionError.CULTIVATION_AREA_OVERLAP,
     };
   }
   const planted = [];
@@ -98,4 +111,22 @@ export function getDimensionsForNewCA(beginX, beginY, endX, endY) {
     width: xEnd - xStart + 1,
     length: yEnd - yStart + 1,
   };
+}
+
+export function overlapsExistingCA(
+  cultivationAreas,
+  beginX,
+  beginY,
+  endX,
+  endY,
+) {
+  const plantedCells = getCASCells(cultivationAreas);
+  for (let x = Math.min(beginX, endX); x <= Math.max(beginX, endX); x++) {
+    for (let y = Math.min(beginY, endY); y <= Math.max(beginY, endY); y++) {
+      if (plantedCells.includes(`${x},${y}`)) {
+        return true;
+      }
+    }
+  }
+  return false;
 }

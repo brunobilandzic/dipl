@@ -15,7 +15,7 @@ import utils from "@/lib/utils";
 import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { setFields } from "@/store/cultivation/fieldSlice";
+import { setFields } from "@/store/cultivation";
 
 export function FieldsList({}) {
   const fields = useSelector((state) => state.fields.fields);

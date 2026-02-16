@@ -34,12 +34,22 @@ function CreateField({ newCACoordinates }) {
     console.log("createForm\n", createForm);
   }, [createForm]);
 
-  function onAdd() {}
+  function onAdd() {
+    setCreateForm({
+      ...createForm,
+      isOpen: true,
+    });
+  }
   return (
     <>
-      <Modals.FormModal isOpen={true} onClose={() => {setCreateForm({ ...createForm, isOpen: false })}} title="Create Cultivation Area">
-
-      </Modals.FormModal>
+      <Modals.FormModal
+        isOpen={createForm.isOpen}
+        onCancel={() => {
+          console.log("closing modal");
+          setCreateForm({ ...createForm, isOpen: false });
+        }}
+        title="Create Cultivation Area"
+      ></Modals.FormModal>
       <div
         onClick={onAdd}
         className="flex flex-col justify-center items-center gap-4 cursor-pointer"

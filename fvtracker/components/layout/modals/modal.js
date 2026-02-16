@@ -1,4 +1,3 @@
-import { FaXing } from "react-icons/fa";
 import { MdOutlineClose } from "react-icons/md";
 
 export default function Modal({ isOpen, onCancel, children, title }) {

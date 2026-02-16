@@ -16,19 +16,36 @@ function CreateField({ newCACoordinates }) {
     isOpen: false,
     name: "",
     description: "",
-    dimensions:
-      newCACoordinates?.planted?.length > 0
-        ? utils.cultivation.cultivationAreas.getDimensionsForNewCA(
-            newCACoordinates.beginX,
-            newCACoordinates.beginY,
-            newCACoordinates.endX,
-            newCACoordinates.endY,
-          )
-        : {
-            width: "",
-            length: "",
-          },
+    dimensions: {
+      width: "",
+      length: "",
+    },
   });
+
+  const updateDimensions = (beginX, beginY, endX, endY) => {
+    const dimensions = utils.cultivation.cultivationAreas.getDimensionsForNewCA(
+      beginX,
+      beginY,
+      endX,
+      endY,
+    );
+    console.log("dimensions\n", dimensions);
+    setCreateForm({
+      ...createForm,
+      dimensions,
+    });
+  };
+
+  useEffect(() => {
+    if (newCACoordinates?.planted?.length > 0) {
+      updateDimensions(
+        newCACoordinates.begin.x,
+        newCACoordinates.begin.y,
+        newCACoordinates.end.x,
+        newCACoordinates.end.y,
+      );
+    }
+  }, [newCACoordinates?.end]);
 
   useEffect(() => {
     console.log("createForm\n", createForm);

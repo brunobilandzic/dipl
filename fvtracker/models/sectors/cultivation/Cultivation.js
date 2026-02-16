@@ -15,9 +15,10 @@ const cultivationAreaSchema = new Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Cultivation",
+      default: [],
     },
   ],
-  name: { type: String, required: true },
+  name: { type: String, required: true, default: "Područje za sadnju" },
   slug: { type: String, unique: true, index: true },
   description: { type: String, default: "" },
   planted: {

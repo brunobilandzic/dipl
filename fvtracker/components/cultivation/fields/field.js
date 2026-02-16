@@ -11,12 +11,19 @@ import { selectField } from "@/store/cultivation";
 
 export default function FieldPageComponent({ slug }) {
   const selectedField = useSelector((state) => state.cultivation.selectedField);
+  const fields = useSelector((state) => state.cultivation.fields);
   const [field, setField] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (selectedField && selectedField.slug === slug) {
       setField(selectedField);
+    } else if (fields && fields.length > 0) {
+      const foundField = fields.find((f) => f.slug === slug);
+      if (foundField) {
+        setField(foundField);
+        dispatch(selectField(foundField));
+      }
     } else {
       (async () => {
         const res = await axios(`/api/cultivation/fields`, {
@@ -32,10 +39,14 @@ export default function FieldPageComponent({ slug }) {
         handleApiError(error);
       });
     }
-  }, [slug, selectedField]);
+  }, [slug]);
 
-
-  if (!field) return <div className="w-screen h-screen flex items-center justify-center"><Loading /></div>;
+  if (!field)
+    return (
+      <div className="w-full h-screen flex items-center justify-center">
+        <Loading />
+      </div>
+    );
 
   const {
     name,

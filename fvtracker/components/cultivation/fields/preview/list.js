@@ -13,12 +13,13 @@ import {
 import utils from "@/lib/utils";
 
 import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setFields } from "@/store/cultivation/fieldSlice";
 
 export function FieldsList({}) {
   const fields = useSelector((state) => state.fields.fields);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (fields && fields.length > 0) return;
@@ -27,8 +28,8 @@ export function FieldsList({}) {
       try {
         const res = await axios.get("/api/cultivation/fields");
 
-        if (res.data && res.data.fields) {
-          dispatch(setFields(res.data.fields));
+        if (res.data ) {
+          dispatch(setFields(res.data));
         }
       } catch (error) {
         console.log("Error fetching fields:", error);
@@ -37,7 +38,7 @@ export function FieldsList({}) {
         alert(`Error fetching fields: ${errorMessage}`);
       }
     })();
-  }, []);
+  }, [fields]);
 
   return (
     <>

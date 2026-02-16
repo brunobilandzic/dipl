@@ -79,7 +79,7 @@ function CreateField({ newCACoordinates, cultivationAreaDimensions }) {
           console.log("closing modal");
           setCreateForm({ ...createForm, isOpen: false });
         }}
-        title="Create Cultivation Area"
+        title="Napravi novo područje"
       >
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">

@@ -37,3 +37,7 @@ function ModalHeader({ title, onCancel }) {
     </div>
   );
 }
+
+export function ModalFooter({ children }) {
+  return <div className="flex justify-end gap-4 mt-4">{children}</div>;
+}

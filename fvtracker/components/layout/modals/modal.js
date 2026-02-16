@@ -1,4 +1,4 @@
-export default function Modal({ isOpen, onCancel, children }) {
+export default function Modal({ isOpen, onCancel, children, title }) {
   return (
     <>
       {isOpen && (

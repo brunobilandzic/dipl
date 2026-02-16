@@ -14,8 +14,11 @@ const cultivationSlice = createSlice({
     setInitialState: (state) => {
       state = initialState;
     },
+    selectField: (state, action) => {
+      state.selectedField = action.payload;
+    }
   },
 });
 
-export const { setFields, setInitialState } = cultivationSlice.actions;
+export const { setFields, setInitialState, selectField } = cultivationSlice.actions;
 export default cultivationSlice.reducer;

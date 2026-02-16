@@ -62,7 +62,7 @@ export const getCellsInRect = (
 
   return {
     error: null,
-    planted
+    planted,
   };
 };
 
@@ -74,14 +74,24 @@ export const checkRectValidDimensions = ({
   cultivationAreaDimensons,
 }) => {
   const { min_ca_dim, max_ca_dim } = cultivationAreaDimensons;
-  const width = Math.abs(endX - beginX) + 1;
-  const height = Math.abs(endY - beginY) + 1;
+  const { width, length } = getDimensionsForNewCA(beginX, beginY, endX, endY);
   return (
     width > 0 &&
-    height > 0 &&
+    length > 0 &&
     width >= min_ca_dim &&
-    height >= min_ca_dim &&
+    length >= min_ca_dim &&
     width <= max_ca_dim &&
-    height <= max_ca_dim
+    length <= max_ca_dim
   );
 };
+
+export function getDimensionsForNewCA(beginX, beginY, endX, endY) {
+  const xStart = Math.min(beginX, endX);
+  const xEnd = Math.max(beginX, endX);
+  const yStart = Math.min(beginY, endY);
+  const yEnd = Math.max(beginY, endY);
+  return {
+    width: xEnd - xStart + 1,
+    length: yEnd - yStart + 1,
+  };
+}

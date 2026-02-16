@@ -1,6 +1,8 @@
 import { auth } from "@/auth";
 import dbConnect from "@/lib/db/mongooseConnect";
 import { AppUser } from "@/models/user/AppUser";
+import mongoose from "mongoose";
+
 export async function fetchSessionAppUser() {
   const email = await fetchSessionEmail();
   if (!email) {

@@ -3,8 +3,40 @@
 import { useEffect, useState } from "react";
 import { FieldGrid } from "./preview/grid";
 import utils from "@/lib/utils";
+import { useDispatch, useSelector } from "react-redux";
+import { handleApiError } from "@/lib/constants/errors/client/api";
+import axios from "axios";
+import { Loading } from "@/components/layout/loading";
+import { selectField } from "@/store/cultivation";
 
-export default function FieldPageComponent({ field }) {
+export default function FieldPageComponent({ slug }) {
+  const selectedField = useSelector((state) => state.cultivation.selectedField);
+  const [field, setField] = useState(null);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (selectedField && selectedField.slug === slug) {
+      setField(selectedField);
+    } else {
+      (async () => {
+        const res = await axios(`/api/cultivation/fields`, {
+          params: { slug },
+        });
+        if (res.data && res.data.field) {
+          setField(res.data.field);
+          dispatch(selectField(res.data.field));
+        } else {
+          throw new Error("Field not found");
+        }
+      })().catch((error) => {
+        handleApiError(error);
+      });
+    }
+  }, [slug, selectedField]);
+
+
+  if (!field) return <div className="w-screen h-screen flex items-center justify-center"><Loading /></div>;
+
   const {
     name,
     description,
@@ -13,7 +45,6 @@ export default function FieldPageComponent({ field }) {
     cultivationAreas,
     cultivations,
     cultivationAreaDimensions,
-    slug,
   } = field;
 
   return (

@@ -18,7 +18,7 @@ import axios from "axios";
 import { setFields } from "@/store/cultivation";
 
 export function FieldsList({}) {
-  const fields = useSelector((state) => state.fields.fields);
+  const fields = useSelector((state) => state.cultivation.fields);
   const dispatch = useDispatch();
 
   useEffect(() => {

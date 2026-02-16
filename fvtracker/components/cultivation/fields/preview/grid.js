@@ -87,9 +87,9 @@ const FieldCells = ({
           x={x}
           y={y}
           active={plantedCells.includes(`${x},${y}`)}
-          selected={
-            selectedCultivationArea?.planted?.includes(`${x},${y}`) ||
-            (newCACoordinates.planted?.includes(`${x},${y}`) && isBeginSelected)
+          selected={!small && 
+            (selectedCultivationArea?.planted?.includes(`${x},${y}`) ||
+            (newCACoordinates.planted?.includes(`${x},${y}`) && isBeginSelected))
           }
           onRightClick={onRightClick}
           handleEmptyClick={handleEmptyClick}

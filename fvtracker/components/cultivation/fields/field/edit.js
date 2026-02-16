@@ -2,16 +2,23 @@ import { FaPlus } from "react-icons/fa";
 import utils from "@/lib/utils";
 import { useEffect, useState } from "react";
 import Modals from "@/components/layout/modals";
+import { AppInput, AppTextArea } from "@/components/form/inputs";
 
-export function FieldEditDashboard({ newCACoordinates }) {
+export function FieldEditDashboard({
+  newCACoordinates,
+  cultivationAreaDimensions,
+}) {
   return (
     <div className="w-full flex justify-center items-center">
-      <CreateField newCACoordinates={newCACoordinates} />
+      <CreateField
+        newCACoordinates={newCACoordinates}
+        cultivationAreaDimensions={cultivationAreaDimensions}
+      />
     </div>
   );
 }
 
-function CreateField({ newCACoordinates }) {
+function CreateField({ newCACoordinates, cultivationAreaDimensions }) {
   const [createForm, setCreateForm] = useState({
     isOpen: false,
     name: "",
@@ -51,6 +58,13 @@ function CreateField({ newCACoordinates }) {
     console.log("createForm\n", createForm);
   }, [createForm]);
 
+  const onFormChange = (field, value) => {
+    setCreateForm({
+      ...createForm,
+      [field]: value,
+    });
+  };
+
   function onAdd() {
     setCreateForm({
       ...createForm,
@@ -66,7 +80,37 @@ function CreateField({ newCACoordinates }) {
           setCreateForm({ ...createForm, isOpen: false });
         }}
         title="Create Cultivation Area"
-      ></Modals.FormModal>
+      >
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
+            <label>Ime</label>
+            <AppInput
+              type="text"
+              value={createForm.name}
+              onChange={(e) => onFormChange("name", e.target.value)}
+            />
+          </div>
+          <div className="flex flex-col gap-2">
+            <label>Opis</label>
+            <AppTextArea
+              value={createForm.description}
+              onChange={(e) => onFormChange("description", e.target.value)}
+            />
+          </div>
+          <div className="">
+            <div className="grid grid-cols-2 grid-rows-2 w-fit gap-2">
+              <div className="font-bold">Duljina</div>
+              <div className="font-bold">Širina</div>
+              <div className="">
+                {newCACoordinates?.dimensions?.length || 0}
+              </div>
+              <div className="">
+                {newCACoordinates?.dimensions?.width || 0}
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modals.FormModal>
       <div
         onClick={onAdd}
         className="flex flex-col justify-center items-center gap-4 cursor-pointer"

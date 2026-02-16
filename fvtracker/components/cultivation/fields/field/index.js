@@ -109,7 +109,7 @@ function FieldEditCASPanel({
       return;
     }
     const { x: beginX, y: beginY } = newCACoordinates.begin;
-    const { error, planted } =
+    const { error, planted, dimensions } =
       utils.cultivation.cultivationAreas.getCellsInRect(
         beginX,
         beginY,
@@ -127,6 +127,7 @@ function FieldEditCASPanel({
       ...newCACoordinates,
       end: { x: endX, y: endY },
       planted,
+      dimensions,
     });
   };
 
@@ -196,7 +197,7 @@ function FieldEditCASPanel({
           />
         </div>
         <div className=" ">
-          <FieldEditDashboard newCACoordinates={newCACoordinates} />
+          <FieldEditDashboard newCACoordinates={newCACoordinates} cultivationAreaDimensions={cultivationAreaDimensions}/>
         </div>
       </div>
     </>

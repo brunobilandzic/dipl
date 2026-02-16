@@ -63,6 +63,10 @@ export const getCellsInRect = (
   return {
     error: null,
     planted,
+    dimensions: {
+      width: xEnd - xStart + 1,
+      length: yEnd - yStart + 1,
+    },
   };
 };
 

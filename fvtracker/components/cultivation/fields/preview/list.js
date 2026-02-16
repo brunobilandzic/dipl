@@ -27,9 +27,8 @@ export function FieldsList({}) {
     (async () => {
       try {
         const res = await axios.get("/api/cultivation/fields");
-
-        if (res.data ) {
-          dispatch(setFields(res.data));
+        if (res.data && res.data.fields) {
+          dispatch(setFields(res.data.fields));
         }
       } catch (error) {
         console.log("Error fetching fields:", error);

@@ -19,6 +19,14 @@ export async function GET(request) {
         return Response.json({ message: "Field not found" }, { status: 404 });
       }
       return Response.json({ field }, { status: 200 });
+    } else {
+      return Response.json(
+        { fields: cultivationManager.fields },
+        { status: 200 },
+      );
     }
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+    return Response.json({ message: "Internal server error" }, { status: 500 });
+  }
 }

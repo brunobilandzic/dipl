@@ -11,6 +11,10 @@ const fieldSlice = createSlice({
     setFields: (state, action) => {
       state.fields = action.payload;
     },
+    selectField: (state, action) => {
+      const slug = action.payload;
+      state.selectedField = state.fields.find((field) => field.slug === slug);
+    },
     setFieldInitialState: (state) => {
       state = initialState;
     },

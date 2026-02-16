@@ -3,6 +3,7 @@ import userReducer from "./userSlice";
 import fieldReducer from "./cultivation/fieldSlice";
 import errorReducer from "./error";
 import loadingReducer from "./loading";
+import cultivationReducer from "./cultivation";
 
 export default configureStore({
   reducer: {
@@ -10,5 +11,6 @@ export default configureStore({
     fields: fieldReducer,
     error: errorReducer,
     loading: loadingReducer,
+    cultivation: cultivationReducer
   },
 });

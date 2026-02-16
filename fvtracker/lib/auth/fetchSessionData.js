@@ -6,13 +6,15 @@ import mongoose from "mongoose";
 export async function fetchSessionAppUser() {
   const email = await fetchSessionEmail();
   if (!email) {
-    return null;
+    throw new Error("No email found in session: cannot fetch app user");
   }
   await dbConnect();
   const appUser = await AppUser.findOne({ email });
   if (!appUser) {
     console.log("Failed to fetch app user for session with email:", email);
-    return null;
+    throw new Error(
+      "Failed to fetch app user for session with email: " + email,
+    );
   }
   return appUser;
 }
@@ -20,20 +22,21 @@ export async function fetchSessionAppUser() {
 async function fetchSessionEmail() {
   const session = await auth();
   if (!session) {
-    console.log("No session found: fetch email failed");
-    return null;
+    throw new Error("No session found: fetch email failed");
   }
   return session.user.email;
 }
 
 export async function fetchSessionSpecificManager(managerModelName) {
   const appUser = await fetchSessionAppUser();
-  if (!appUser) {
-    return null;
-  }
-
   const specificManager = await mongoose.models[managerModelName].findOne({
     rootManager: appUser.rootManager,
   });
+  if (!specificManager) {
+    throw new Error(
+      `No ${managerModelName} found for session user with email: ${appUser.email}`,
+    );
+  }
+
   return specificManager;
 }

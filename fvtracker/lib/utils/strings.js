@@ -14,3 +14,6 @@ export function makeUrlFriendly(str) {
         .replace(/-+/g, '-');
 }
 
+
+
+export const dimensionsString = ({width, length}) => `${width}x${length}`;

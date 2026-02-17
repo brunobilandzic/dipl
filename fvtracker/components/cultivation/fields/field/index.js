@@ -59,12 +59,15 @@ export default function FieldPageComponent({ slug }) {
     cultivationAreaDimensions,
   } = field;
 
+  const fieldId = field._id.toString();
+
   return (
     <>
       <div className="w-full grid grid-cols-1 gap-4">
         <div className="text-3xl font-bold">{name}</div>
         <div className="italic">{description}</div>
         <FieldEditCASPanel
+        fieldId={fieldId}
           width={width}
           length={length}
           cultivationAreas={cultivationAreas}
@@ -81,6 +84,7 @@ function FieldEditCASPanel({
   length,
   cultivationAreas,
   cultivationAreaDimensions,
+  fieldId
 }) {
   const [editCultivationAreas, setEditCultivationAreas] = useState(false);
   const [plantedCells, setPlantedCells] = useState(
@@ -194,6 +198,7 @@ function FieldEditCASPanel({
         </div>
         <div className=" ">
          <FieldEditDashboard
+         fieldId={fieldId}
             getNewCOCoordinates={getNewCOCoordinates}
             cultivationAreaDimensions={cultivationAreaDimensions}
           />

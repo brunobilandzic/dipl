@@ -8,6 +8,7 @@ import { handleApiError } from "@/lib/constants/errors/client/api";
 export function FieldEditDashboard({
   getNewCOCoordinates,
   cultivationAreaDimensions,
+  fieldId
 }) {
   return (
     <div className="w-full flex justify-center items-center">
@@ -15,11 +16,11 @@ export function FieldEditDashboard({
         getNewCOCoordinates={getNewCOCoordinates}
         cultivationAreaDimensions={cultivationAreaDimensions}
       />
-    </div>
-  );
+      </div>
+    );
 }
 
-function CreateField({ getNewCOCoordinates, cultivationAreaDimensions }) {
+function CreateField({ getNewCOCoordinates, cultivationAreaDimensions, fieldId }) {
   const initialnewCADetails = {
     name: "",
     description: "",

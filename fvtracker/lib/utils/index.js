@@ -5,7 +5,9 @@ import {
   CAIncludesCell,
   getCAForCell,
   getCellsInRect,
-  getDimensionsForNewCA
+  getDimensionsForNewCA,
+  getDimensionsFromPlanted,
+  plantedArrayToMap
 } from "./cultivationAreas";
 
 export default {
@@ -21,7 +23,9 @@ export default {
       CAIncludesCell,
       getCAForCell,
       getCellsInRect,
-      getDimensionsForNewCA
+      getDimensionsForNewCA,
+      getDimensionsFromPlanted,
+      plantedArrayToMap
     },
   },
 };

@@ -21,7 +21,6 @@ export function FieldEditDashboard({
 
 function CreateField({ getNewCOCoordinates, cultivationAreaDimensions }) {
   const initialnewCADetails = {
-    isOpen: false,
     name: "",
     description: "",
     dimensions: {
@@ -30,6 +29,7 @@ function CreateField({ getNewCOCoordinates, cultivationAreaDimensions }) {
     },
   };
 
+  const [isOpen, setIsOpen] = useState(false);
   const [newCADetails, setnewCADetails] = useState(initialnewCADetails);
   const [newCACoordinates, setNewCACoordinates] = useState(null);
 
@@ -65,10 +65,7 @@ function CreateField({ getNewCOCoordinates, cultivationAreaDimensions }) {
   };
 
   function onAdd() {
-    setnewCADetails((prev) => ({
-      ...prev,
-      isOpen: !prev.isOpen,
-    }));
+    setIsOpen(true);
     setNewCACoordinates(getNewCOCoordinates());
   }
 
@@ -89,13 +86,13 @@ function CreateField({ getNewCOCoordinates, cultivationAreaDimensions }) {
   }
 
   const onCancel = () => {
-    setnewCADetails(initialnewCADetails);
+    setIsOpen(false);
   };
 
   return (
     <>
       <Modals.FormModal
-        isOpen={newCADetails.isOpen}
+        isOpen={isOpen}
         onCancel={onCancel}
         title="Napravi novo područje"
         onSubmit={onSubmit}

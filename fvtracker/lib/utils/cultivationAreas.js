@@ -113,6 +113,14 @@ export function getDimensionsForNewCA(beginX, beginY, endX, endY) {
   };
 }
 
+export function getDimensionsFromPlanted(planted) {
+  const plantedCells = []
+  for(let entry of planted.entries()) {
+    plantedCells.push(entry)
+  }
+  console.log("plantedCells", plantedCells)
+}
+
 export function overlapsExistingCA(
   cultivationAreas,
   beginX,

@@ -3,6 +3,7 @@ import utils from "@/lib/utils";
 import { useEffect, useState } from "react";
 import Modals from "@/components/layout/modals";
 import { AppInput, AppTextArea } from "@/components/form/inputs";
+import { handleApiError } from "@/lib/constants/errors/client/api";
 
 export function FieldEditDashboard({
   getNewCOCoordinates,
@@ -45,7 +46,7 @@ function CreateField({ getNewCOCoordinates, cultivationAreaDimensions }) {
     });
   };
 
-   useEffect(() => {
+  useEffect(() => {
     if (newCACoordinates?.planted?.length > 0) {
       updateDimensions(
         newCACoordinates.begin.x,
@@ -54,7 +55,7 @@ function CreateField({ getNewCOCoordinates, cultivationAreaDimensions }) {
         newCACoordinates.end.y,
       );
     }
-  }, [newCACoordinates]); 
+  }, [newCACoordinates]);
 
   const onFormChange = (field, value) => {
     setCreateForm({
@@ -76,6 +77,14 @@ function CreateField({ getNewCOCoordinates, cultivationAreaDimensions }) {
       alert("Niste odabrali područje za sadnju");
       setCreateForm(initialCreateForm);
       return;
+    }
+
+    try {
+    } catch (error) {
+      handleApiError({
+        ...error,
+        generalMessage: "Greška prilikom kreiranja polja",
+      });
     }
   }
 

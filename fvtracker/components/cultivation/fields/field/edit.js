@@ -46,11 +46,7 @@ function CreateField({ getNewCOCoordinates, cultivationAreaDimensions }) {
     });
   };
 
-  useEffect(() => {
-    console.log("new cac coord: \n", newCACoordinates);
-  }, [newCACoordinates, createForm?.isOpen]);
-
-  /* useEffect(() => {
+   useEffect(() => {
     if (newCACoordinates?.planted?.length > 0) {
       updateDimensions(
         newCACoordinates.begin.x,
@@ -59,7 +55,7 @@ function CreateField({ getNewCOCoordinates, cultivationAreaDimensions }) {
         newCACoordinates.end.y,
       );
     }
-  }, []); */
+  }, [newCACoordinates]); 
 
   const onFormChange = (field, value) => {
     setCreateForm({
@@ -112,7 +108,7 @@ function CreateField({ getNewCOCoordinates, cultivationAreaDimensions }) {
               onChange={(e) => onFormChange("description", e.target.value)}
             />
           </div>
-          {/* <div className="">
+          <div className="">
             <div className="grid grid-cols-2 grid-rows-2 w-fit gap-2">
               <div className="font-bold">Duljina</div>
               <div className="font-bold">Širina</div>
@@ -121,7 +117,7 @@ function CreateField({ getNewCOCoordinates, cultivationAreaDimensions }) {
               </div>
               <div className="">{newCACoordinates?.dimensions?.width || 0}</div>
             </div>
-          </div> */}
+          </div>
         </div>
       </Modals.FormModal>
       <div

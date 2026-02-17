@@ -115,7 +115,7 @@ export function getDimensionsForNewCA(beginX, beginY, endX, endY) {
 
 export function getDimensionsFromPlanted(planted) {
   const plantedCells = extractPlantedCells(planted);
-  const {xValues,yValues} = getValuesFromPlanted(plantedCells);
+  const { xValues, yValues } = getValuesFromPlanted(plantedCells);
   const width = Math.max(...xValues) - Math.min(...xValues) + 1;
   const length = Math.max(...yValues) - Math.min(...yValues) + 1;
   return { width, length };
@@ -130,10 +130,10 @@ function extractPlantedCells(planted) {
 }
 
 const getValuesFromPlanted = (plantedCells) => {
- const xValues = plantedCells.map((cell) => parseInt(cell.split(",")[0]));
+  const xValues = plantedCells.map((cell) => parseInt(cell.split(",")[0]));
   const yValues = plantedCells.map((cell) => parseInt(cell.split(",")[1]));
-  return {xValues, yValues};
-}
+  return { xValues, yValues };
+};
 
 export function overlapsExistingCA(
   cultivationAreas,
@@ -153,9 +153,22 @@ export function overlapsExistingCA(
   return false;
 }
 
-
 export function plantedArrayToMap(planted) {
-  const plantedMap = new Map()
-  planted.map(pl => plantedMap.set(pl, null));
+  const plantedMap = new Map();
+  planted.map((pl) => plantedMap.set(pl, null));
   return plantedMap;
+}
+
+export function prepareCulitvationArea({
+  fieldId,
+  newCADetails,
+  newCACoordinates,
+}) {
+  const cultivationArea = {
+    fieldId,
+    ...newCADetails,
+    planted: plantedArrayToMap(newCACoordinates.planted),
+  };
+
+  return cultivationArea;
 }

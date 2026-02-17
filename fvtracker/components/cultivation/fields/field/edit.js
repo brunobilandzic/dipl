@@ -15,6 +15,7 @@ export function FieldEditDashboard({
       <CreateNewField
         getNewCOCoordinates={getNewCOCoordinates}
         cultivationAreaDimensions={cultivationAreaDimensions}
+        fieldId={fieldId}
       />
       </div>
     );
@@ -75,8 +76,15 @@ function CreateNewField({ getNewCOCoordinates, cultivationAreaDimensions, fieldI
       alert("Niste odabrali područje za sadnju");
       return;
     }
-    const cultivationArea = utils.
     try {
+      console.log(fieldId)
+      const cultivationArea = utils.cultivation.cultivationAreas.prepareCulitvationArea({
+        fieldId,
+        newCADetails,
+        newCACoordinates,
+      });
+
+     console.log("Prepared cultivation area:", cultivationArea);
     } catch (error) {
       handleApiError({
         ...error,

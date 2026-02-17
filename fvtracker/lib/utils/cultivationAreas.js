@@ -130,8 +130,8 @@ function extractPlantedCells(planted) {
 }
 
 const getValuesFromPlanted = (plantedCells) => {
-  const xValues = plantedCells.map((cell) => parseInt(cell.split(",")[0]));
-  const yValues = plantedCells.map((cell) => parseInt(cell.split(",")[1]));
+  const xValues = plantedCells.map((cell) => parseInt(cell[0].split(",")[0]));
+  const yValues = plantedCells.map((cell) => parseInt(cell[0].split(",")[1]));
   return { xValues, yValues };
 };
 
@@ -159,15 +159,10 @@ export function plantedArrayToMap(planted) {
   return plantedMap;
 }
 
-export function prepareCulitvationArea({
-  fieldId,
-  newCADetails,
-  newCACoordinates,
-}) {
+export function prepareCulitvationArea({ newCADetails, newCACoordinates }) {
   const cultivationArea = {
-    fieldId,
     ...newCADetails,
-    planted: plantedArrayToMap(newCACoordinates.planted),
+    planted: newCACoordinates.planted,
   };
 
   return cultivationArea;

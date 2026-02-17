@@ -19,7 +19,7 @@ export function FieldEditDashboard({
 }
 
 function CreateField({ newCACoordinates, cultivationAreaDimensions }) {
-  const [createForm, setCreateForm] = useState({
+  const initialCreateForm = {
     isOpen: false,
     name: "",
     description: "",
@@ -27,7 +27,8 @@ function CreateField({ newCACoordinates, cultivationAreaDimensions }) {
       width: "",
       length: "",
     },
-  });
+  }
+  const [createForm, setCreateForm] = useState(initialCreateForm);
 
   const updateDimensions = (beginX, beginY, endX, endY) => {
     const dimensions = utils.cultivation.cultivationAreas.getDimensionsForNewCA(
@@ -52,11 +53,7 @@ function CreateField({ newCACoordinates, cultivationAreaDimensions }) {
         newCACoordinates.end.y,
       );
     }
-  }, [newCACoordinates?.end]);
-
-  useEffect(() => {
-    console.log("createForm\n", createForm);
-  }, [createForm]);
+  }, []);
 
   const onFormChange = (field, value) => {
     setCreateForm({
@@ -71,6 +68,16 @@ function CreateField({ newCACoordinates, cultivationAreaDimensions }) {
       isOpen: true,
     });
   }
+
+  function onSubmit(){
+    if(newCACoordinates?.planted?.length <= 0) {
+      alert("Niste odabrali područje za sadnju");
+      setCreateForm(initialCreateForm);
+      return;
+    }
+    
+  }
+
   return (
     <>
       <Modals.FormModal
@@ -80,6 +87,10 @@ function CreateField({ newCACoordinates, cultivationAreaDimensions }) {
           setCreateForm({ ...createForm, isOpen: false });
         }}
         title="Napravi novo područje"
+        onSubmit={() => {
+          console.log("submiting form with data\n", createForm);
+          console.log("newCACoordinates\n", newCACoordinates);
+        }}
       >
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">

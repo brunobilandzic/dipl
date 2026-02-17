@@ -114,11 +114,25 @@ export function getDimensionsForNewCA(beginX, beginY, endX, endY) {
 }
 
 export function getDimensionsFromPlanted(planted) {
-  const plantedCells = []
-  for(let entry of planted.entries()) {
-    plantedCells.push(entry)
+  const plantedCells = extractPlantedCells(planted);
+  const {xValues,yValues} = getValuesFromPlanted(plantedCells);
+  const width = Math.max(...xValues) - Math.min(...xValues) + 1;
+  const length = Math.max(...yValues) - Math.min(...yValues) + 1;
+  return { width, length };
+}
+
+function extractPlantedCells(planted) {
+  const plantedCells = [];
+  for (let entry of planted.entries()) {
+    plantedCells.push(entry);
   }
-  console.log("plantedCells", plantedCells)
+  return plantedCells;
+}
+
+const getValuesFromPlanted = (plantedCells) => {
+ const xValues = plantedCells.map((cell) => parseInt(cell.split(",")[0]));
+  const yValues = plantedCells.map((cell) => parseInt(cell.split(",")[1]));
+  return {xValues, yValues};
 }
 
 export function overlapsExistingCA(
@@ -137,4 +151,10 @@ export function overlapsExistingCA(
     }
   }
   return false;
+}
+
+
+export function plantedArrayToMap(planted) {
+  const plantedMap = new Map()
+  planted.map(pl => plantedMap.set)
 }

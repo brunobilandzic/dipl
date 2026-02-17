@@ -4,11 +4,12 @@ import { useEffect, useState } from "react";
 import Modals from "@/components/layout/modals";
 import { AppInput, AppTextArea } from "@/components/form/inputs";
 import { handleApiError } from "@/lib/constants/errors/client/api";
+import api from "@/lib/api";
 
 export function FieldEditDashboard({
   getNewCOCoordinates,
   cultivationAreaDimensions,
-  fieldId
+  fieldId,
 }) {
   return (
     <div className="w-full flex justify-center items-center">
@@ -17,12 +18,17 @@ export function FieldEditDashboard({
         cultivationAreaDimensions={cultivationAreaDimensions}
         fieldId={fieldId}
       />
-      </div>
-    );
+    </div>
+  );
 }
 
-function CreateNewField({ getNewCOCoordinates, cultivationAreaDimensions, fieldId }) {
+function CreateNewField({
+  getNewCOCoordinates,
+  cultivationAreaDimensions,
+  fieldId,
+}) {
   const initialnewCADetails = {
+    field: fieldId,
     name: "",
     description: "",
     dimensions: {
@@ -71,21 +77,36 @@ function CreateNewField({ getNewCOCoordinates, cultivationAreaDimensions, fieldI
     setNewCACoordinates(getNewCOCoordinates());
   }
 
-  function onSubmit() {
+  async function onSubmit() {
     if (!newCACoordinates?.planted?.length > 0) {
       alert("Niste odabrali područje za sadnju");
       return;
     }
     try {
-      console.log(fieldId)
-      const cultivationArea = utils.cultivation.cultivationAreas.prepareCulitvationArea({
-        fieldId,
-        newCADetails,
-        newCACoordinates,
-      });
+      const cultivationArea =
+        utils.cultivation.cultivationAreas.prepareCulitvationArea({
+          newCADetails,
+          newCACoordinates,
+        });
 
-     console.log("Prepared cultivation area:", cultivationArea);
+      if (
+        cultivationArea.planted.size === 0 ||
+        !cultivationArea.dimensions.width ||
+        !cultivationArea.dimensions.length
+      ) {
+        alert("Područje za sadnju nije ispravno definirano");
+        return;
+      }
+      const res = await api.post(
+        "/cultivation/cultivation-area",
+        cultivationArea,
+      );
+      const { newCultivationArea } = res.data;
+      alert(
+        `Uspješno kreirano područje: ${newCultivationArea?.name} dimenzija ${utils.strings.dimensionsString(newCultivationArea.dimensions)} sa ${Object.keys(newCultivationArea.planted).length} ćelija.`,
+      );
     } catch (error) {
+      console.log("api error", error);
       handleApiError({
         ...error,
         generalMessage: "Greška prilikom kreiranja polja",

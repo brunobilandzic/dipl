@@ -30,6 +30,13 @@ const cultivationAreaSchema = new Schema({
     },
     default: () => new Map(),
   },
+  dimensions: {
+    type: {
+      width: { type: Number, required: true },
+      length: { type: Number, required: true },
+    },
+    default: { width: 0, length: 0 },
+  },
   soilType:
     // cultivation area consists of only one soil type
     // this is also noted here for easier access and querying
@@ -96,6 +103,11 @@ cultivationAreaSchema.pre("save", async function () {
   if (this.isModified("name")) {
     const field = await Field.findById(this.field);
     this.slug = makeUrlFriendly(`${field?.name}-${this.name}`);
+  }
+  if (this.isModified("planted")) {
+    const dimensions =
+      utils.cultivation.cultivationAreas.getDimensionsFromPlanted(this.planted);
+    this.dimensions = dimensions;
   }
 });
 

@@ -20,7 +20,7 @@ export function FieldEditDashboard({
 }
 
 function CreateField({ getNewCOCoordinates, cultivationAreaDimensions }) {
-  const initialCreateForm = {
+  const initialnewCADetails = {
     isOpen: false,
     name: "",
     description: "",
@@ -30,7 +30,7 @@ function CreateField({ getNewCOCoordinates, cultivationAreaDimensions }) {
     },
   };
 
-  const [createForm, setCreateForm] = useState(initialCreateForm);
+  const [newCADetails, setnewCADetails] = useState(initialnewCADetails);
   const [newCACoordinates, setNewCACoordinates] = useState(null);
 
   const updateDimensions = (beginX, beginY, endX, endY) => {
@@ -40,8 +40,8 @@ function CreateField({ getNewCOCoordinates, cultivationAreaDimensions }) {
       endX,
       endY,
     );
-    setCreateForm({
-      ...createForm,
+    setnewCADetails({
+      ...newCADetails,
       dimensions,
     });
   };
@@ -58,14 +58,14 @@ function CreateField({ getNewCOCoordinates, cultivationAreaDimensions }) {
   }, [newCACoordinates]);
 
   const onFormChange = (field, value) => {
-    setCreateForm({
-      ...createForm,
+    setnewCADetails({
+      ...newCADetails,
       [field]: value,
     });
   };
 
   function onAdd() {
-    setCreateForm((prev) => ({
+    setnewCADetails((prev) => ({
       ...prev,
       isOpen: !prev.isOpen,
     }));
@@ -75,7 +75,7 @@ function CreateField({ getNewCOCoordinates, cultivationAreaDimensions }) {
   function onSubmit() {
     if (!newCACoordinates?.planted?.length > 0) {
       alert("Niste odabrali područje za sadnju");
-      setCreateForm(initialCreateForm);
+      setnewCADetails(initialnewCADetails);
       return;
     }
 
@@ -89,13 +89,13 @@ function CreateField({ getNewCOCoordinates, cultivationAreaDimensions }) {
   }
 
   const onCancel = () => {
-    setCreateForm((prev) => ({ ...prev, isOpen: false }));
+    setnewCADetails(initialnewCADetails);
   };
 
   return (
     <>
       <Modals.FormModal
-        isOpen={createForm.isOpen}
+        isOpen={newCADetails.isOpen}
         onCancel={onCancel}
         title="Napravi novo područje"
         onSubmit={onSubmit}
@@ -105,14 +105,14 @@ function CreateField({ getNewCOCoordinates, cultivationAreaDimensions }) {
             <label>Ime</label>
             <AppInput
               type="text"
-              value={createForm.name}
+              value={newCADetails.name}
               onChange={(e) => onFormChange("name", e.target.value)}
             />
           </div>
           <div className="flex flex-col gap-2">
             <label>Opis</label>
             <AppTextArea
-              value={createForm.description}
+              value={newCADetails.description}
               onChange={(e) => onFormChange("description", e.target.value)}
             />
           </div>

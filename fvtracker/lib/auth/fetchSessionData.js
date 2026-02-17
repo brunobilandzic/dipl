@@ -1,5 +1,4 @@
 import { auth } from "@/auth";
-import dbConnect from "@/lib/db/mongooseConnect";
 import { AppUser } from "@/models/user/AppUser";
 import mongoose from "mongoose";
 
@@ -8,7 +7,6 @@ export async function fetchSessionAppUser() {
   if (!email) {
     throw new Error("No email found in session: cannot fetch app user");
   }
-  await dbConnect();
   const appUser = await AppUser.findOne({ email });
   if (!appUser) {
     console.log("Failed to fetch app user for session with email:", email);

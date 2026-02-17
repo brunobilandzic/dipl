@@ -1,5 +1,5 @@
 import { extractDBObject } from "./objects";
-import { makeUrlFriendly } from "./strings";
+import { makeUrlFriendly, dimensionsString  } from "./strings";
 import {
   getCASCells,
   CAIncludesCell,
@@ -7,7 +7,8 @@ import {
   getCellsInRect,
   getDimensionsForNewCA,
   getDimensionsFromPlanted,
-  plantedArrayToMap
+  plantedArrayToMap,
+  prepareCulitvationArea
 } from "./cultivationAreas";
 
 export default {
@@ -16,6 +17,7 @@ export default {
   },
   strings: {
     makeUrlFriendly,
+    dimensionsString
   },
   cultivation: {
     cultivationAreas: {
@@ -25,7 +27,8 @@ export default {
       getCellsInRect,
       getDimensionsForNewCA,
       getDimensionsFromPlanted,
-      plantedArrayToMap
+      plantedArrayToMap,
+      prepareCulitvationArea
     },
   },
 };

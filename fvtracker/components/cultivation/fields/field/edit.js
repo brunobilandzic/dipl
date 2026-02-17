@@ -39,7 +39,6 @@ function CreateField({ getNewCOCoordinates, cultivationAreaDimensions }) {
       endX,
       endY,
     );
-    console.log("dimensions\n", dimensions);
     setCreateForm({
       ...createForm,
       dimensions,

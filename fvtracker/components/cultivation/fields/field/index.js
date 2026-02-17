@@ -105,7 +105,7 @@ function FieldEditCASPanel({
 
   const onEndCoordinates = (endX, endY) => {
     if (!newCACoordinates.begin) {
-      console.error("Begin coordinates not set");
+      alert("Begin coordinates not set");
       return;
     }
     const { x: beginX, y: beginY } = newCACoordinates.begin;
@@ -134,10 +134,8 @@ function FieldEditCASPanel({
 
   const handleEmptyClick = (x, y) => {
     if (!isBeginSelected) {
-      console.log("setting begin coordinates");
       onBeginCoordinates(x, y);
     } else {
-      console.log("setting end coordinates");
       onEndCoordinates(x, y);
     }
   };
@@ -159,12 +157,7 @@ function FieldEditCASPanel({
     resetSelection();
   };
 
-  useEffect(() => {
-    console.log("newCACoordinates changed", newCACoordinates);
-  }, [newCACoordinates]);
-
   const resetSelection = () => {
-    console.log("resetiing cac");
     setNewCACoordinates({});
     setIsBeginSelected(false);
   };

@@ -169,6 +169,8 @@ function FieldEditCASPanel({
     setIsBeginSelected(false);
   };
 
+  const getNewCOCoordinates = () => newCACoordinates
+
   return (
     <>
       <div className="flex flex-col gap-4">
@@ -198,8 +200,8 @@ function FieldEditCASPanel({
           />
         </div>
         <div className=" ">
-          <FieldEditDashboard
-            newCACoordinates={newCACoordinates}
+         <FieldEditDashboard
+            getNewCOCoordinates={getNewCOCoordinates}
             cultivationAreaDimensions={cultivationAreaDimensions}
           />
         </div>

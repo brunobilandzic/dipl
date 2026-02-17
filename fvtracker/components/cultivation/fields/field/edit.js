@@ -5,20 +5,20 @@ import Modals from "@/components/layout/modals";
 import { AppInput, AppTextArea } from "@/components/form/inputs";
 
 export function FieldEditDashboard({
-  newCACoordinates,
+  getNewCOCoordinates,
   cultivationAreaDimensions,
 }) {
   return (
     <div className="w-full flex justify-center items-center">
       <CreateField
-        newCACoordinates={newCACoordinates}
+        getNewCOCoordinates={getNewCOCoordinates}
         cultivationAreaDimensions={cultivationAreaDimensions}
       />
     </div>
   );
 }
 
-function CreateField({ newCACoordinates, cultivationAreaDimensions }) {
+function CreateField({ getNewCOCoordinates, cultivationAreaDimensions }) {
   const initialCreateForm = {
     isOpen: false,
     name: "",
@@ -27,8 +27,10 @@ function CreateField({ newCACoordinates, cultivationAreaDimensions }) {
       width: "",
       length: "",
     },
-  }
+  };
+
   const [createForm, setCreateForm] = useState(initialCreateForm);
+  const [newCACoordinates, setNewCACoordinates] = useState(null);
 
   const updateDimensions = (beginX, beginY, endX, endY) => {
     const dimensions = utils.cultivation.cultivationAreas.getDimensionsForNewCA(
@@ -45,6 +47,10 @@ function CreateField({ newCACoordinates, cultivationAreaDimensions }) {
   };
 
   useEffect(() => {
+    console.log("new cac coord: \n", newCACoordinates);
+  }, [newCACoordinates, createForm?.isOpen]);
+
+  /* useEffect(() => {
     if (newCACoordinates?.planted?.length > 0) {
       updateDimensions(
         newCACoordinates.begin.x,
@@ -53,7 +59,7 @@ function CreateField({ newCACoordinates, cultivationAreaDimensions }) {
         newCACoordinates.end.y,
       );
     }
-  }, []);
+  }, []); */
 
   const onFormChange = (field, value) => {
     setCreateForm({
@@ -63,29 +69,30 @@ function CreateField({ newCACoordinates, cultivationAreaDimensions }) {
   };
 
   function onAdd() {
-    setCreateForm({
-      ...createForm,
-      isOpen: true,
-    });
+    setCreateForm((prev) => ({
+      ...prev,
+      isOpen: !prev.isOpen,
+    }));
+    setNewCACoordinates(getNewCOCoordinates());
   }
 
-  function onSubmit(){
-    if(!newCACoordinates?.planted?.length > 0) {
+  function onSubmit() {
+    if (!newCACoordinates?.planted?.length > 0) {
       alert("Niste odabrali područje za sadnju");
       setCreateForm(initialCreateForm);
       return;
     }
-    
   }
+
+  const onCancel = () => {
+    setCreateForm((prev) => ({ ...prev, isOpen: false }));
+  };
 
   return (
     <>
       <Modals.FormModal
         isOpen={createForm.isOpen}
-        onCancel={() => {
-          console.log("closing modal");
-          setCreateForm({ ...createForm, isOpen: false });
-        }}
+        onCancel={onCancel}
         title="Napravi novo područje"
         onSubmit={onSubmit}
       >
@@ -105,18 +112,16 @@ function CreateField({ newCACoordinates, cultivationAreaDimensions }) {
               onChange={(e) => onFormChange("description", e.target.value)}
             />
           </div>
-          <div className="">
+          {/* <div className="">
             <div className="grid grid-cols-2 grid-rows-2 w-fit gap-2">
               <div className="font-bold">Duljina</div>
               <div className="font-bold">Širina</div>
               <div className="">
                 {newCACoordinates?.dimensions?.length || 0}
               </div>
-              <div className="">
-                {newCACoordinates?.dimensions?.width || 0}
-              </div>
+              <div className="">{newCACoordinates?.dimensions?.width || 0}</div>
             </div>
-          </div>
+          </div> */}
         </div>
       </Modals.FormModal>
       <div

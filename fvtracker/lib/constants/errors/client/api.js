@@ -1,8 +1,11 @@
 export const handleApiError = (error) => {
+  console.error("API Error:", error);
   const errorMessage =
     error.response?.data?.message ||
+    error.response?.data?.error ||
     error.message ||
-    error.generalMessage ||
+    error.name ||
     "Nepoznata greška";
-  alert(errorMessage);
+
+  alert(`${error.generalMessage}: ${errorMessage}`);
 };

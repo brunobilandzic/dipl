@@ -7,7 +7,7 @@ export async function POST(request) {
     const cultivationManager =
       await auth.session.fetchSessionSpecificManager("CultivationManager");
     const body = await request.json();
-    const properties = getPropertiesForNewCA(body);
+    const properties = transformBody(body);
     if (!cultivationManager.fields?.some((fid) => fid === properties.fieldId)) {
       throw new Error(
         "Field with the provided ID does not belong to the user's cultivation manager.",
@@ -24,7 +24,7 @@ export async function POST(request) {
   }
 }
 
-function getPropertiesForNewCA(body) {
+function transformBody(body) {
   const { fieldId, name, description, planted } = body;
   return { fieldId, name, description, planted };
 }

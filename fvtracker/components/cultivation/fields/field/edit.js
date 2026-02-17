@@ -70,7 +70,7 @@ function CreateField({ newCACoordinates, cultivationAreaDimensions }) {
   }
 
   function onSubmit(){
-    if(newCACoordinates?.planted?.length <= 0) {
+    if(!newCACoordinates?.planted?.length > 0) {
       alert("Niste odabrali područje za sadnju");
       setCreateForm(initialCreateForm);
       return;
@@ -87,10 +87,7 @@ function CreateField({ newCACoordinates, cultivationAreaDimensions }) {
           setCreateForm({ ...createForm, isOpen: false });
         }}
         title="Napravi novo područje"
-        onSubmit={() => {
-          console.log("submiting form with data\n", createForm);
-          console.log("newCACoordinates\n", newCACoordinates);
-        }}
+        onSubmit={onSubmit}
       >
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">

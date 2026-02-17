@@ -73,10 +73,9 @@ function CreateNewField({ getNewCOCoordinates, cultivationAreaDimensions, fieldI
   function onSubmit() {
     if (!newCACoordinates?.planted?.length > 0) {
       alert("Niste odabrali područje za sadnju");
-      setnewCADetails(initialnewCADetails);
       return;
     }
-
+    const cultivationArea = utils.
     try {
     } catch (error) {
       handleApiError({

@@ -1,19 +1,18 @@
 .btn {
-  @apply text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors duration-200 w-fit min-w-40 text-center cursor-pointer;
+  @apply text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors duration-200 w-fit min-w-40 text-center cursor-pointer hover:outline outline-2 outline-gray-300;
 }
 
 .submitButton {
-  @apply  bg-blue-600  hover:bg-blue-700;
+  @apply bg-green-600  hover:bg-green-700 outline-green-300;
 }
 
 .cancelButton {
-  @apply p-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition cursor-pointer;
-}             
+  @apply p-2 bg-red-600  rounded-md hover:bg-red-700 outline-red-300;
+}
 
 .btnXl {
   @apply px-8 py-6 text-xl;
 }
-
 
 .btnLg {
   @apply px-6 py-3 text-lg;

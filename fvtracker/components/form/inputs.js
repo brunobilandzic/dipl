@@ -38,7 +38,7 @@ export const AppTextArea = ({
   className,
 }) => {
   return (
-    <div className={``}>
+    <div className={`inputRow`}>
       <label className="label">{label}</label>
       <textarea
         className={`textarea`}
@@ -46,6 +46,7 @@ export const AppTextArea = ({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
+        rows={5}
       />
     </div>
   );

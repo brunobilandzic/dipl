@@ -1,4 +1,4 @@
-import { extractDBObject } from "./objects";
+import { extractDBObject, checkEmpty } from "./objects";
 import { makeUrlFriendly, dimensionsString  } from "./strings";
 import {
   getCASCells,
@@ -15,6 +15,7 @@ import { numberInRange } from "./formValidation";
 export default {
   objects: {
     extractDBObject,
+    checkEmpty
   },
   strings: {
     makeUrlFriendly,

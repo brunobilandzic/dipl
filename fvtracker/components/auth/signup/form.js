@@ -31,7 +31,7 @@ function SignUpForm(_signUpData = null) {
   };
 
   return (
-    <div className={`${styles.form}`}>
+    <div className={`form`}>
       <div className={styles.head}>
         <h2 className={styles.heading}>Sign Up</h2>
       </div>
@@ -52,9 +52,9 @@ function SignUpForm(_signUpData = null) {
           );
         })}
       </div>
-      <div className={styles.footer}>
+      <div className={`${styles.footer}       flex justify-center`}>
         <div
-          className={`global-button mt-6 w-min ${styles.submitButton}`}
+          className={`btn submitButton btnLg`}
           onClick={onSubmit}
         >
           Registracija

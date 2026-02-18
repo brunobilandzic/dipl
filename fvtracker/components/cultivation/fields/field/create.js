@@ -11,21 +11,30 @@ import api from "@/lib/api";
 import { handleApiError } from "@/lib/constants/errors/client/api";
 
 export function CreateFieldPageComponent() {
+  const testFieldData = {
+    name: "Test Field",
+    description: "This is a test field",
+    length: 50,
+    width: 50,
+    location: {
+      longitude: 16.70472,
+      latitude: 43.67028,
+    },
+  };
   const { data: session, status } = useSession();
   const managerModelName = useSelector(
     (state) => state.user.session?.managerModelName,
   );
-  const [fieldData, setFieldData] = useState({
-    name: "",
-    length: "",
-    width: "",
-    location: "",
-  });
+  const [fieldData, setFieldData] = useState(testFieldData);
 
   const onChange = (e) => {
     const { name, value } = e.target;
     if (name === "length" || name === "width") {
-      if (!utils.formValidation.numberInRange(value, 0, e.target.max)) {
+      if (
+        !utils.formValidation.numbersInRanges([
+          { value, min: 0, max: e.target.max },
+        ])
+      ) {
         alert(
           `Vrijednost mora biti između ${cultivationConstants.field.fieldDimensions.MIN_FIELD_DIMENSION} i ${e.target.max}`,
         );
@@ -43,38 +52,42 @@ export function CreateFieldPageComponent() {
     }));
   };
 
-  const onSubmit = () => {
+  const checkConditions = () => {
     if (utils.objects.checkEmpty(fieldData)) {
       alert("Sva polja su obavezna");
-      return;
+      return false;
     }
-    if (
-      !utils.formValidation.numberInRange(
-        fieldData.length,
-        cultivationConstants.field.fieldDimensions.MIN_FIELD_DIMENSION,
-        cultivationConstants.field.fieldDimensions.MAX_FIELD_DIMENSION,
-      )
-    ) {
+
+    if (!utils.formValidation.numbersInRanges(prepareRanges())) {
       alert(
-        `Dužina mora biti između ${cultivationConstants.field.fieldDimensions.MIN_FIELD_DIMENSION} i ${cultivationConstants.field.fieldDimensions.MAX_FIELD_DIMENSION}`,
+        `Dužina i širina polja moraju biti između ${cultivationConstants.field.fieldDimensions.MIN_FIELD_DIMENSION} i ${cultivationConstants.field.fieldDimensions.MAX_FIELD_DIMENSION}`,
       );
-      return;
+      return false;
     }
-    if (
-      !utils.formValidation.numberInRange(
-        fieldData.width,
-        cultivationConstants.field.fieldDimensions.MIN_FIELD_DIMENSION,
-        cultivationConstants.field.fieldDimensions.MAX_FIELD_DIMENSION,
-      )
-    ) {
-      alert(
-        `Širina mora biti između ${cultivationConstants.field.fieldDimensions.MIN_FIELD_DIMENSION} i ${cultivationConstants.field.fieldDimensions.MAX_FIELD_DIMENSION}`,
-      );
-      return;
-    }
+
+    return true;
+  };
+
+  const prepareRanges = () => [
+    {
+      value: fieldData.length,
+      min: cultivationConstants.field.fieldDimensions.MIN_FIELD_DIMENSION,
+      max: cultivationConstants.field.fieldDimensions.MAX_FIELD_DIMENSION,
+    },
+    {
+      value: fieldData.width,
+      min: cultivationConstants.field.fieldDimensions.MIN_FIELD_DIMENSION,
+      max: cultivationConstants.field.fieldDimensions.MAX_FIELD_DIMENSION,
+    },
+  ];
+
+  const onSubmit = async () => {
+    if (!checkConditions()) return;
+
     try {
-      const res = api.post("/cultivation/field", fieldData);
-      console.log(res);
+      console.log("Submitting field data:", fieldData);
+      const res = await api.post("/cultivation/field", fieldData);
+      console.log("res",res);
     } catch (err) {
       handleApiError({
         ...err,
@@ -90,6 +103,7 @@ export function CreateFieldPageComponent() {
           if (input.type === "text" || input.type === "number") {
             return (
               <AppInput
+                value={fieldData[input.name]}
                 key={input.name}
                 label={input.label}
                 name={input.name}
@@ -103,6 +117,7 @@ export function CreateFieldPageComponent() {
           } else if (input.type === "textarea") {
             return (
               <AppTextArea
+              value={fieldData[input.name]}
                 key={input.name}
                 label={input.label}
                 name={input.name}

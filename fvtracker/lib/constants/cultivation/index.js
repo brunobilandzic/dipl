@@ -5,5 +5,8 @@ export default {
   colors: {
     selectedCABackGround: colors.selectedCABackGround,
   },
-  field: { fieldDimensions, formInputs },
+  field: {
+    fieldDimensions,
+    formInputs,
+  },
 };

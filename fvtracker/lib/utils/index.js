@@ -10,7 +10,7 @@ import {
   plantedArrayToMap,
   prepareCulitvationArea
 } from "./cultivationAreas";
-import { numberInRange } from "./formValidation";
+import { numbersInRanges } from "./formValidation";
 
 export default {
   objects: {
@@ -34,7 +34,7 @@ export default {
     },
   },
   formValidation: {
-    numberInRange,
+    numbersInRanges
   },
 };
 

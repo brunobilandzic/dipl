@@ -13,7 +13,7 @@ export const AppInput = ({
   max
 }) => {
   return (
-    <div className={`${wrapStyle}`}>
+    <div className={`${wrapStyle} mb-4`}>
       {label && <label className="block mb-2">{label}</label>}
       <input
         className={`${styles.textInput} ${inputStyle}`}

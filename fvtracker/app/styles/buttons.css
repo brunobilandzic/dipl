@@ -1,0 +1,7 @@
+.submitButton {
+  @apply p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition cursor-pointer;
+}
+
+.cancelButton {
+  @apply p-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition cursor-pointer;
+}             

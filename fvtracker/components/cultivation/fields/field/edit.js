@@ -5,6 +5,7 @@ import Modals from "@/components/layout/modals";
 import { AppInput, AppTextArea } from "@/components/form/inputs";
 import { handleApiError } from "@/lib/constants/errors/client/api";
 import api from "@/lib/api";
+import styles from "@/components/form/form.module.css";
 
 export function FieldEditDashboard({
   getNewCOCoordinates,
@@ -126,24 +127,23 @@ function CreateNewField({
         title="Napravi novo područje"
         onSubmit={onSubmit}
       >
-        <div className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <label>Ime</label>
+        <div className={`form`}>
+          <div className={``}>
             <AppInput
               type="text"
+              label="Ime"
               value={newCADetails.name}
               onChange={(e) => onFormChange("name", e.target.value)}
             />
           </div>
-          <div className="flex flex-col gap-2">
-            <label>Opis</label>
+          <div className={` `}>
             <AppTextArea
+              label="opis"
               value={newCADetails.description}
               onChange={(e) => onFormChange("description", e.target.value)}
             />
           </div>
-          <div className="">
-            <div className="grid grid-cols-2 grid-rows-2 w-fit gap-2">
+            <div className={`${styles.info} grid grid-cols-2 grid-rows-2 w-fit gap-2 mt-6`}>
               <div className="font-bold">Duljina</div>
               <div className="font-bold">Širina</div>
               <div className="">
@@ -151,7 +151,6 @@ function CreateNewField({
               </div>
               <div className="">{newCACoordinates?.dimensions?.width || 0}</div>
             </div>
-          </div>
         </div>
       </Modals.FormModal>
       <div

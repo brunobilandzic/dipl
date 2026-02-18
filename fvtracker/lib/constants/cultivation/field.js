@@ -3,7 +3,6 @@ export const fieldDimensions = {
   MAX_FIELD_DIMENSION: 200,
 };
 
-
 export const formInputs = [
   {
     label: "Ime parcele",
@@ -14,7 +13,21 @@ export const formInputs = [
   {
     label: "Opis parcele",
     name: "description",
-    type: "text",
+    type: "textarea",
     placeholder: "Unesi opis parcele",
+  },
+  {
+    label: `Širina (m) ${fieldDimensions.MIN_FIELD_DIMENSION} - ${fieldDimensions.MAX_FIELD_DIMENSION}`,
+    name: "width",
+    type: "number",
+    min: fieldDimensions.MIN_FIELD_DIMENSION,
+    max: fieldDimensions.MAX_FIELD_DIMENSION,
+  },
+  {
+    label: `Dužina (m) ${fieldDimensions.MIN_FIELD_DIMENSION} - ${fieldDimensions.MAX_FIELD_DIMENSION}`,
+    name: "length",
+    type: "number",
+    min: fieldDimensions.MIN_FIELD_DIMENSION,
+    max: fieldDimensions.MAX_FIELD_DIMENSION,
   },
 ];

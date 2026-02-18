@@ -14,3 +14,7 @@
 .footer {
   @apply mt-6 w-full flex;
 }
+
+.info {
+  @apply text-sm;
+}

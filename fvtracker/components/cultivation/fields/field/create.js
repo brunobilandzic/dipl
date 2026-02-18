@@ -77,7 +77,9 @@ export function CreateFieldPageComponent() {
             );
           }
         })}
-        <div className={`${styles.footer}`}></div>
+        <div className={`${styles.footer}`}>
+          <div className="btn submitButton">Kreiraj parcelu</div>
+        </div>
       </div>
     </>
   );

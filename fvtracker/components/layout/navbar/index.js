@@ -4,6 +4,8 @@ import Link from "next/link";
 import roleitems from "./roleitems";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { login } from "@/store/userSlice";
 
 export default {
   roleitems,
@@ -20,7 +22,6 @@ export function Navbar() {
         <NavItems />
       </div>
       <div className=" flex-1 flex justify-end gap-8 ">
-    
         <Link href="/seed">test podaci</Link>
         <Link href="/auth">aautorizacija</Link>
       </div>
@@ -40,10 +41,12 @@ function NavItems() {
   const { data: session, status } = useSession();
   const [managerModelName, setManagerModelName] = useState(null);
   const [items, setItems] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (status === "authenticated" && session.user?.managerModelName) {
       setManagerModelName(session.user?.managerModelName);
+      dispatch(login(session.user));
     }
   }, [status]);
 

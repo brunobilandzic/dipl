@@ -1,9 +1,9 @@
 import colors from "./colors";
-import { fieldDimensions } from "./field";
+import { fieldDimensions, formInputs } from "./field";
 
 export default {
   colors: {
     selectedCABackGround: colors.selectedCABackGround,
   },
-  field: { fieldDimensions },
+  field: { fieldDimensions, formInputs },
 };

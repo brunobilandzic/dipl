@@ -39,6 +39,7 @@ export const AppTextArea = ({
 }) => {
   return (
     <div className={``}>
+      <label className="label">{label}</label>
       <textarea
         className={`textarea`}
         name={name}

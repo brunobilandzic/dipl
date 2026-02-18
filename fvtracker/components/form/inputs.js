@@ -13,10 +13,10 @@ export const AppInput = ({
   max
 }) => {
   return (
-    <div className={`${wrapStyle} mb-4`}>
-      {label && <label className="block mb-2">{label}</label>}
+    <div className={`inputRow`}>
+      {label && <label className="label">{label}</label>}
       <input
-        className={`${styles.textInput} ${inputStyle}`}
+        className={`inputText`}
         type={type}
         name={name}
         value={value}
@@ -40,7 +40,7 @@ export const AppTextArea = ({
   return (
     <div className={``}>
       <textarea
-        className={`w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${className}`}
+        className={`textarea`}
         name={name}
         value={value}
         onChange={onChange}

@@ -10,4 +10,6 @@
   @apply w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500;
 }
 
-
+.inputRow {
+  @apply flex flex-col gap-2 mb-6;
+}

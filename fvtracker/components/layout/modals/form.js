@@ -1,4 +1,5 @@
 import Modal, { ModalFooter } from "./modal";
+import styles from "@/components/form/form.module.css";
 
 export function FormModal({ isOpen, onCancel, onSubmit, title, children }) {
   return (
@@ -15,13 +16,13 @@ function FormModalFooter({ onCancel, onSubmit }) {
     <ModalFooter>
       <div
         onClick={onCancel}
-        className="px-4 py-2 bg-gray-300 rounded cursor-pointer"
+        className="btn cancelButton"
       >
         Cancel
       </div>
       <div
         onClick={onSubmit}
-        className="px-4 py-2 bg-blue-500 text-white rounded cursor-pointer"
+        className={`btn submitButton`}
       >
         Submit
       </div>

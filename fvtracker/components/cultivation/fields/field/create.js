@@ -7,9 +7,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 export function CreateFieldPageComponent() {
-  useEffect(() => {
-    console.log("c", JSON.stringify(cultivationConstants));
-  }, []);
+
   const { data: session, status } = useSession();
   const managerModelName = useSelector(
     (state) => state.user.session?.managerModelName,
@@ -34,11 +32,6 @@ export function CreateFieldPageComponent() {
 
   return (
     <>
-      <div>status: {status}</div>
-      {JSON.stringify(cultivationConstants)}
-      <div>{JSON.stringify(session)}</div>
-      <div>{JSON.stringify(managerModelName)}</div>
-      <div className="mt-2">
         <div className="form">
           {cultivationConstants.field?.formInputs.map((input) => (
             <AppInput
@@ -51,7 +44,6 @@ export function CreateFieldPageComponent() {
             />
           ))}
         </div>
-      </div>
     </>
   );
 }

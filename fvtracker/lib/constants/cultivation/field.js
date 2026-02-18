@@ -14,7 +14,7 @@ export const fieldDimensions = {
   min,
   max);
 
-export const formInputs = (onChange) => [
+export const formInputs = [
   {
     label: "Ime parcele",
     name: "name",

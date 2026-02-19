@@ -3,8 +3,8 @@ import { createCultivationArea } from "./cultivationArea";
 
 export default {
   fields: {
-    fieldsList,
-    fetchFieldBySlug,
+    list: fieldsList,
+    findBySlug: fetchFieldBySlug,
     create: createField,
   },
   cultivationManager: {},

@@ -1,5 +1,10 @@
 import { extractDBObject, checkEmpty } from "./objects";
-import { makeUrlFriendly, dimensionsString, alphanumericOnly } from "./strings";
+import {
+  makeUrlFriendly,
+  dimensionsString,
+  alphanumericOnly,
+  sanitize,
+} from "./strings";
 import {
   getCASCells,
   CAIncludesCell,
@@ -21,6 +26,7 @@ export default {
     makeUrlFriendly,
     dimensionsString,
     alphanumericOnly,
+    sanitize,
   },
   cultivation: {
     cultivationAreas: {

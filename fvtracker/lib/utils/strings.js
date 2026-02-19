@@ -16,4 +16,9 @@ export function makeUrlFriendly(str) {
 
 export const alphanumericOnly = (str) => str.replace(/[^a-zA-Z0-9]/g, '');
 
+export const sanitize = (str) => {
+    console.log("Sanitizing string:", str);
+    return alphanumericOnly(str.toLowerCase());
+}
+
 export const dimensionsString = ({width, length}) => `${width}x${length}`;

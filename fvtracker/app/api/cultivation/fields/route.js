@@ -2,9 +2,9 @@ import dbConnect from "@/lib/db/mongooseConnect";
 import auth from "@/lib/auth";
 
 export async function GET(request) {
-  const { searchParams } = new URL(request.url);
-  const slug = searchParams.get("slug");
   try {
+    const { searchParams } = new URL(request.url);
+    const slug = searchParams.get("slug");
     await dbConnect();
     const cultivationManager =
       await auth.session.fetchSessionSpecificManager("CultivationManager");

@@ -68,6 +68,8 @@ export default function FieldPageComponent({ slug }) {
         <div className="italic">{description}</div>
         <FieldEditCASPanel
           fieldId={fieldId}
+          field={field}
+          setField={setField}
           width={width}
           length={length}
           cultivationAreas={cultivationAreas}
@@ -82,9 +84,11 @@ export default function FieldPageComponent({ slug }) {
 function FieldEditCASPanel({
   width,
   length,
+  field,
   cultivationAreas,
   cultivationAreaDimensions,
   fieldId,
+  setField,
 }) {
   const [editCultivationAreas, setEditCultivationAreas] = useState(false);
   const [plantedCells, setPlantedCells] = useState(

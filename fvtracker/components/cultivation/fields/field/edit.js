@@ -40,6 +40,7 @@ function CreateNewCA({
   setField,
   setPlantedCells,
   fieldId,
+  setIsBeginSelected
 }) {
   const initialnewCADetails = {
     field: fieldId,
@@ -123,6 +124,7 @@ function CreateNewCA({
       setnewCADetails(initialnewCADetails);
       emptyCACoordinates();
       dispatch(createCultivationArea(newCultivationArea));
+      setIsBeginSelected(false);
     } catch (error) {
       console.log("api error", error);
       handleApiError({

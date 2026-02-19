@@ -6,6 +6,8 @@ import { AppInput, AppTextArea } from "@/components/form/inputs";
 import { handleApiError } from "@/lib/constants/errors/client/api";
 import api from "@/lib/api";
 import styles from "@/components/form/form.module.css";
+import { useDispatch } from "react-redux";
+import { createCultivationArea } from "@/store/cultivation/";
 
 export function FieldEditDashboard({
   getNewCOCoordinates,
@@ -37,7 +39,7 @@ function CreateNewField({
       length: "",
     },
   };
-
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [newCADetails, setnewCADetails] = useState(initialnewCADetails);
   const [newCACoordinates, setNewCACoordinates] = useState(null);
@@ -106,6 +108,11 @@ function CreateNewField({
       alert(
         `Uspješno kreirano područje: ${newCultivationArea?.name} dimenzija ${utils.strings.dimensionsString(newCultivationArea.dimensions)} sa ${Object.keys(newCultivationArea.planted).length} ćelija.`,
       );
+      setIsOpen(false);
+      setnewCADetails(initialnewCADetails);
+      emptyCOCoordinates();
+
+      dispatch(createCultivationArea(newCultivationArea));
     } catch (error) {
       console.log("api error", error);
       handleApiError({

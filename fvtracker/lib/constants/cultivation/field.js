@@ -3,6 +3,22 @@ export const fieldDimensions = {
   MAX_FIELD_DIMENSION: 200,
 };
 
+export const cultivationAreaDimensions = {
+  MIN_CA_DIMENSION: 10,
+  MAX_CA_DIMENSION: 1000,
+};
+
+export const locationRanges = {
+  LATITUDE: {
+    min: -90,
+    max: 90,
+  },
+  LONGITUDE: {
+    min: -180,
+    max: 180,
+  },
+};
+
 export const formInputs = [
   {
     label: "Ime parcele",
@@ -40,15 +56,15 @@ export const locationInputs = {
     label: "Geografska dužina",
     name: "longitude",
     type: "number",
-    min: -180,
-    max: 180,
+    min: locationRanges.LONGITUDE.min,
+    max: locationRanges.LONGITUDE.max   ,
   },
   latitude: {
     label: "Geografska širina",
     name: "latitude",
     type: "number",
-    min: -90,
-    max: 90,
+    min: locationRanges.LATITUDE.min,
+    max: locationRanges.LATITUDE.max,
   },
 };
 
@@ -57,15 +73,15 @@ export const cultivationAreaDimensionsInputs = {
     label: "Minimalna dimenzija područja za sadnju (m)",
     name: "min_ca_dim",
     type: "number",
-    min: 1,
-    max: 100,
+    min: cultivationAreaDimensions.MIN_CA_DIMENSION,
+    max: cultivationAreaDimensions.MAX_CA_DIMENSION,
   },
   max_ca_dim: {
     label: "Maksimalna dimenzija područja za sadnju (m)",
     name: "max_ca_dim",
     type: "number",
-    min: 1,
-    max: 100,
+    min: cultivationAreaDimensions.MIN_CA_DIMENSION,
+    max: cultivationAreaDimensions.MAX_CA_DIMENSION,
   },
   gap: {
     label: `Rastojanje između područja (m)`,

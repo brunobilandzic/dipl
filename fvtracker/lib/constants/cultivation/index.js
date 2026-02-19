@@ -1,5 +1,13 @@
 import colors from "./colors";
-import { fieldDimensions, formInputs, locationInputs, cultivationAreaDimensionsInputs, dimensionsInputs } from "./field";
+import {
+  fieldDimensions,
+  formInputs,
+  locationInputs,
+  cultivationAreaDimensionsInputs,
+  dimensionsInputs,
+  cultivationAreaDimensions,
+  locationRanges,
+} from "./field";
 
 export default {
   colors: {
@@ -10,6 +18,8 @@ export default {
     formInputs,
     locationInputs,
     cultivationAreaDimensionsInputs,
-    dimensionsInputs
+    dimensionsInputs,
+    cultivationAreaDimensions,
+    locationRanges,
   },
 };

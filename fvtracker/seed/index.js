@@ -3,7 +3,6 @@ import users from "./users";
 import fields from "./cultivation/fields";
 import crops from "./cultivation/fields/crops";
 import { deleteDB } from "@/lib/db/delete";
-import { createFieldTimeMs, optimizedParamsArray } from "./data/fields";
 
 export default {
   handleAPIRequest,

@@ -6,7 +6,7 @@ export default function Modal({ isOpen, onCancel, children, title }) {
       {isOpen && (
         <>
           <Backdrop onCancel={onCancel} />
-          <div className="fixed top-1/2 left-1/2 z-30 w-[90%] md:w-[50%] bg-[var(--foreground)] text-[var(--background)] rounded-lg p-4 transform -translate-x-1/2 -translate-y-1/2">
+          <div className="fixed rounded-lg p-4   bg-[var(--foreground)] text-[var(--background)]  z-30 top-5 w-full flex flex-col max-w-xl ">
             <ModalHeader title={title} onCancel={onCancel} />
             {children}
           </div>

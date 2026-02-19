@@ -14,6 +14,9 @@ export function FieldEditDashboard({
   emptyCACoordinates,
   cultivationAreaDimensions,
   fieldId,
+  setField,
+  setPlantedCells,
+  setIsBeginSelected
 }) {
   return (
     <div className="w-full flex justify-center items-center">
@@ -22,6 +25,9 @@ export function FieldEditDashboard({
         cultivationAreaDimensions={cultivationAreaDimensions}
         fieldId={fieldId}
         emptyCACoordinates={emptyCACoordinates}
+        setField={setField}
+        setPlantedCells={setPlantedCells} 
+        setIsBeginSelected={setIsBeginSelected}
       />
     </div>
   );
@@ -31,6 +37,8 @@ function CreateNewField({
   getNewCOCoordinates,
   emptyCACoordinates,
   cultivationAreaDimensions,
+  setField,
+  setPlantedCells,
   fieldId,
 }) {
   const initialnewCADetails = {

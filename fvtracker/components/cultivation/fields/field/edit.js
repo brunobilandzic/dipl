@@ -20,7 +20,7 @@ export function FieldEditDashboard({
 }) {
   return (
     <div className="w-full flex justify-center items-center">
-      <CreateNewField
+      <CreateNewCA
         getNewCOCoordinates={getNewCOCoordinates}
         cultivationAreaDimensions={cultivationAreaDimensions}
         fieldId={fieldId}
@@ -33,7 +33,7 @@ export function FieldEditDashboard({
   );
 }
 
-function CreateNewField({
+function CreateNewCA({
   getNewCOCoordinates,
   emptyCACoordinates,
   cultivationAreaDimensions,

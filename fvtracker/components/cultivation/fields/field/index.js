@@ -199,14 +199,18 @@ function FieldEditCASPanel({
             onRightClick={onRightClick}
             handleActiveClick={handleActiveClick}
             handleEmptyClick={handleEmptyClick}
+            field={field}
           />
         </div>
         <div className=" ">
           <FieldEditDashboard
-            fieldId={fieldId}
+            setIsBeginSelected={setIsBeginSelected}
+            setField={setField}
+            setPlantedCells={setPlantedCells}
             getNewCOCoordinates={getNewCOCoordinates}
             emptyCACoordinates={emptyCACoordinates}
             cultivationAreaDimensions={cultivationAreaDimensions}
+            fieldId={fieldId}
           />
         </div>
       </div>

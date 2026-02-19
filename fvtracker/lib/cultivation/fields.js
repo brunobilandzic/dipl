@@ -1,6 +1,6 @@
 import { Field } from "@/models/sectors/cultivation/Field";
-import dbConnect from "@/lib/db/mongooseConnect";
-await dbConnect();
+import auth from "@/lib/auth";
+import utils from "@/lib/utils";
 
 export async function fieldsList(filter) {
   const fields = await Field.find(filter).sort({ createdAt: -1 });
@@ -16,4 +16,28 @@ export async function fetchFieldBySlug(slug) {
     throw new Error("Field not found");
   }
   return field;
+}
+
+export async function createField(body) {
+  console.log("Creating field with data:", body);
+
+  const cultivationManager =
+    await auth.session.fetchSessionSpecificManager("CultivationManager");
+
+  await cultivationManager.populate("fields");
+  checkFieldNameUnique(
+    cultivationManager.fields?.map((f) => f.name),
+    body.name,
+  );
+
+  return "field";
+}
+
+function checkFieldNameUnique(fieldNames, name) {
+  const { sanitize } = utils.strings;
+  const sanitizedName = sanitize(name);
+
+  if (fieldNames.some((f) => sanitize(f) === sanitizedName)) {
+    throw new Error("Field name must be unique");
+  }
 }

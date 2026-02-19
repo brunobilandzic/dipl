@@ -4,4 +4,5 @@ export default {
   FIELDS: "Create Fields",
   ALL: "Seed All",
   CROP_MAIN_TYPES: "Seed Crop Main Types",
+  CULTIVATIONS: "Seed Cultivations",
 };

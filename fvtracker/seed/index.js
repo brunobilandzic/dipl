@@ -3,6 +3,7 @@ import users from "./users";
 import fields from "./cultivation/fields";
 import crops from "./cultivation/crops";
 import { deleteDB } from "@/lib/db/delete";
+import cultivations from "./cultivation/cultivations"
 
 export default {
   handleAPIRequest,
@@ -19,6 +20,8 @@ async function handleAPIRequest(seedType) {
       return await fields.create();
     case SEED_TYPES.CROP_MAIN_TYPES:
       return await crops.mainTypes();
+    case SEED_TYPES.CULTIVATIONS:
+      return await cultivations.create();
 
     default:
       throw new Error(`Unknown seed type: ${seedType}`);
@@ -30,4 +33,5 @@ async function seedAll() {
   await users.all();
   await fields.create();
   await crops.mainTypes();
+  await cultivations.create();
 }

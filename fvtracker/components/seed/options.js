@@ -23,6 +23,10 @@ export default function SeedOptions() {
       icon: <MdFoodBank />,
       label: SEED_TYPES.CROP_MAIN_TYPES,
     },
+    cultivations: {
+      icon: <MdFoodBank />,
+      label: SEED_TYPES.CULTIVATIONS,
+    }
   };
 
   const API = async (seedType) => {

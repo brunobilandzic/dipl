@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {};
+const initialState = {
+  session: null,
+};
 
 export const userSlice = createSlice({
   name: "user",
@@ -10,7 +12,7 @@ export const userSlice = createSlice({
       state.session = action.payload;
     },
 
-    logOut: (state) => {},
+    logOut: () => ({...initialState}),
   },
 });
 

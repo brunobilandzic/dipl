@@ -1,5 +1,6 @@
 import dbConnect from "@/lib/db/mongooseConnect";
 import auth from "@/lib/auth";
+import cultivation from "@/lib/cultivation";
 
 export async function GET(request) {
   try {
@@ -13,7 +14,7 @@ export async function GET(request) {
       populate: { path: "cultivationAreas" },
     });
 
-    if (slug) {
+    if (slug) {      
       const field = cultivationManager.fields.find((f) => f.slug === slug);
       if (!field) {
         return Response.json({ message: "Field not found" }, { status: 404 });
@@ -25,6 +26,18 @@ export async function GET(request) {
         { status: 200 },
       );
     }
+  } catch (error) {
+    console.error(error);
+    return Response.json({ error: error.message }, { status: 500 });
+  }
+}
+
+export async function POST(request) {
+  try {
+    await dbConnect();
+    const body = await request.json();
+    const field = await cultivation.fields.create(body);
+    return Response.json({ field }, { status: 201 });
   } catch (error) {
     console.error(error);
     return Response.json({ error: error.message }, { status: 500 });

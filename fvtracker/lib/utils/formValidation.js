@@ -9,12 +9,15 @@ const numberInRange = (value, min, max) => {
   return valid;
 };
 
-export const numbersInRanges = (conditions) => {
-  for (let condition of conditions) {
-    const { value, min, max } = condition;
+export const numbersInRanges = (checks) => {
+  for (let check of checks) {
+    const { name, value, min, max } = check;
     if (!numberInRange(value, min, max)) {
-      return false;
+      return {
+        valid: false,
+        message: `${name} mora biti između ${min} i ${max}`,
+      };
     }
   }
-  return true;
+  return { valid: true };
 };

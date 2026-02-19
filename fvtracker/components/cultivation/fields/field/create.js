@@ -47,23 +47,7 @@ export function CreateFieldPageComponent() {
 
   const onChange = (e) => {
     const { name, value } = e.target;
-    if (name === "length" || name === "width") {
-      if (
-        !utils.formValidation.numbersInRanges([
-          { value, min: 0, max: e.target.max },
-        ])
-      ) {
-        alert(
-          `Vrijednost mora biti između ${cultivationConstants.field.fieldDimensions.MIN_FIELD_DIMENSION} i ${e.target.max}`,
-        );
-        setFieldData((prev) => ({
-          ...prev,
-          [name]: 0,
-        }));
-        e.target.value = "";
-        return;
-      }
-    }
+
     setFieldData((prev) => ({
       ...prev,
       [name]: value,
@@ -72,6 +56,33 @@ export function CreateFieldPageComponent() {
 
   const onObjectChange = (objectName) => (e) => {
     const { name, value } = e.target;
+    if (
+      objectName === "dimensions" ||
+      objectName === "location" ||
+      objectName === "cultivationAreaDimensions"
+    ) {
+      const valid = utils.formValidation.numbersInRanges([
+        {
+          name: e.target.dataset?.label,
+          value,
+          min: 0,
+          max: e.target.max,
+        },
+      ]);
+
+      if (!valid.valid)  {
+        alert(valid.message);
+        setFieldData((prev) => ({
+          ...prev,
+          [objectName]: {
+            ...prev[objectName],
+            [name]: 0,
+          },
+        }));
+        e.target.value = "";
+        return;
+      }
+    }
     setFieldData((prev) => ({
       ...prev,
       [objectName]: {

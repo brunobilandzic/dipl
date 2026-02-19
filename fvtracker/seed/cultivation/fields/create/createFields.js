@@ -6,7 +6,7 @@ import {
   cultivationAreaNamesConstant,
   optimizedParams,
   optimizedParamsArray,
-} from "../../data/fields.js";
+} from "../../../data/fields.js";
 import dbConnect from "@/lib/db/mongooseConnect.js";
 import { deleteFieldsWithDocs } from "@/lib/db/delete.js";
 import { randomPoint, notValidPoint } from "./generateCell.js";

@@ -1,4 +1,4 @@
-import { createFieldTimeMs, optimizedParamsArray } from "../data/fields";
+import { createFieldTimeMs, optimizedParamsArray } from "@/seed/data/fields";
 import { createFields } from "./create/createFields";
 
 export default {

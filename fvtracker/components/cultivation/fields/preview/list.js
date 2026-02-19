@@ -16,7 +16,7 @@ import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { setFields } from "@/store/cultivation";
-import { fieldCultivationAreaPoints } from "@/seed/fields/create/analyze";
+import { fieldCultivationAreaPoints } from "@/seed/cultivation/fields/create/analyze";
 import { Loading } from "@/components/layout/loading";
 import { useRouter } from "next/navigation";
 

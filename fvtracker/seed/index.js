@@ -1,7 +1,7 @@
 import SEED_TYPES from "@/seed/seedTypes";
 import users from "./users";
-import fields from "./fields";
-import crops from "./fields/crops";
+import fields from "./cultivation/fields";
+import crops from "./cultivation/fields/crops";
 import { deleteDB } from "@/lib/db/delete";
 import { createFieldTimeMs, optimizedParamsArray } from "./data/fields";
 

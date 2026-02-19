@@ -1,14 +1,13 @@
-import cultivation from "@/models/sectors/cultivation";
-import { fieldsList, fetchFieldBySlug } from "./fields";
+import { fieldsList, fetchFieldBySlug, createField } from "./fields";
 import { createCultivationArea } from "./cultivationArea";
 
 export default {
   fields: {
     fieldsList,
     fetchFieldBySlug,
+    create: createField,
   },
-  cultivationManager: {
-  },
+  cultivationManager: {},
   cultivationArea: {
     create: createCultivationArea,
   },

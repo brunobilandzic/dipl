@@ -30,7 +30,14 @@ export async function createField(body) {
     body.name,
   );
 
-  return "field";
+  const field = await createFieldRecord({
+    manager: cultivationManager._id,
+    ...body
+  });
+  cultivationManager.fields.push(field);
+  await cultivationManager.save();
+
+  return field;
 }
 
 function checkFieldNameUnique(fieldNames, name) {
@@ -40,4 +47,10 @@ function checkFieldNameUnique(fieldNames, name) {
   if (fieldNames.some((f) => sanitize(f) === sanitizedName)) {
     throw new Error("Field name must be unique");
   }
+}
+
+async function createFieldRecord(properties) {
+  const newField = new Field(properties);
+  await newField.save();
+  return newField;
 }

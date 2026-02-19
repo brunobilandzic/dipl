@@ -16,7 +16,7 @@ export function FieldEditDashboard({
   fieldId,
   setField,
   setPlantedCells,
-  setIsBeginSelected
+  setIsBeginSelected,
 }) {
   return (
     <div className="w-full flex justify-center items-center">
@@ -26,7 +26,7 @@ export function FieldEditDashboard({
         fieldId={fieldId}
         emptyCACoordinates={emptyCACoordinates}
         setField={setField}
-        setPlantedCells={setPlantedCells} 
+        setPlantedCells={setPlantedCells}
         setIsBeginSelected={setIsBeginSelected}
       />
     </div>
@@ -40,7 +40,7 @@ function CreateNewCA({
   setField,
   setPlantedCells,
   fieldId,
-  setIsBeginSelected
+  setIsBeginSelected,
 }) {
   const initialnewCADetails = {
     field: fieldId,
@@ -120,6 +120,7 @@ function CreateNewCA({
       alert(
         `Uspješno kreirano područje: ${newCultivationArea?.name} dimenzija ${utils.strings.dimensionsString(newCultivationArea.dimensions)} sa ${Object.keys(newCultivationArea.planted).length} ćelija.`,
       );
+      setIsBeginSelected(false);
       setIsOpen(false);
       setnewCADetails(initialnewCADetails);
       emptyCACoordinates();
@@ -132,7 +133,6 @@ function CreateNewCA({
         ...prevPlantedCells,
         ...utils.cultivation.cultivationAreas.getCASCells([newCultivationArea]),
       ]);
-      setIsBeginSelected(false);
     } catch (error) {
       console.log("api error", error);
       handleApiError({
@@ -178,7 +178,7 @@ function CreateNewCA({
             <div className="">{newCACoordinates?.dimensions?.length || 0}</div>
             <div className="">{newCACoordinates?.dimensions?.width || 0}</div>
           </div>*/}
-        </div> 
+        </div>
       </Modals.FormModal>
       <div
         onClick={onAdd}

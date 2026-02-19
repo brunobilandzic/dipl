@@ -67,7 +67,7 @@ export default function FieldPageComponent({ slug }) {
         <div className="text-3xl font-bold">{name}</div>
         <div className="italic">{description}</div>
         <FieldEditCASPanel
-        fieldId={fieldId}
+          fieldId={fieldId}
           width={width}
           length={length}
           cultivationAreas={cultivationAreas}
@@ -84,7 +84,7 @@ function FieldEditCASPanel({
   length,
   cultivationAreas,
   cultivationAreaDimensions,
-  fieldId
+  fieldId,
 }) {
   const [editCultivationAreas, setEditCultivationAreas] = useState(false);
   const [plantedCells, setPlantedCells] = useState(
@@ -166,7 +166,8 @@ function FieldEditCASPanel({
     setIsBeginSelected(false);
   };
 
-  const getNewCOCoordinates = () => newCACoordinates
+  const getNewCOCoordinates = () => newCACoordinates;
+  const emptyCACoordinates = () => setNewCACoordinates({});
 
   return (
     <>
@@ -197,9 +198,10 @@ function FieldEditCASPanel({
           />
         </div>
         <div className=" ">
-         <FieldEditDashboard
-         fieldId={fieldId}
+          <FieldEditDashboard
+            fieldId={fieldId}
             getNewCOCoordinates={getNewCOCoordinates}
+            emptyCACoordinates={emptyCACoordinates}
             cultivationAreaDimensions={cultivationAreaDimensions}
           />
         </div>

@@ -11,6 +11,7 @@ import { createCultivationArea } from "@/store/cultivation/";
 
 export function FieldEditDashboard({
   getNewCOCoordinates,
+  emptyCACoordinates,
   cultivationAreaDimensions,
   fieldId,
 }) {
@@ -20,6 +21,7 @@ export function FieldEditDashboard({
         getNewCOCoordinates={getNewCOCoordinates}
         cultivationAreaDimensions={cultivationAreaDimensions}
         fieldId={fieldId}
+        emptyCACoordinates={emptyCACoordinates}
       />
     </div>
   );
@@ -27,6 +29,7 @@ export function FieldEditDashboard({
 
 function CreateNewField({
   getNewCOCoordinates,
+  emptyCACoordinates,
   cultivationAreaDimensions,
   fieldId,
 }) {
@@ -110,8 +113,7 @@ function CreateNewField({
       );
       setIsOpen(false);
       setnewCADetails(initialnewCADetails);
-      emptyCOCoordinates();
-
+      emptyCACoordinates();
       dispatch(createCultivationArea(newCultivationArea));
     } catch (error) {
       console.log("api error", error);

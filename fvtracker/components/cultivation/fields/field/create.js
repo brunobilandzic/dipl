@@ -15,8 +15,10 @@ export function CreateFieldPageComponent() {
   const testFieldData = {
     name: "Test Field",
     description: "This is a test field",
-    length: 50,
-    width: 50,
+    dimensions: {
+      width: 50,
+      length: 50,
+    },
     location: {
       longitude: 16.70472,
       latitude: 43.67028,

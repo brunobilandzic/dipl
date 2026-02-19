@@ -9,6 +9,7 @@ import styles from "@/components/form/form.module.css";
 import utils from "@/lib/utils";
 import api from "@/lib/api";
 import { handleApiError } from "@/lib/constants/errors/client/api";
+import { Loading } from "@/components/layout/loading";
 
 export function CreateFieldPageComponent() {
   const testFieldData = {
@@ -19,6 +20,11 @@ export function CreateFieldPageComponent() {
     location: {
       longitude: 16.70472,
       latitude: 43.67028,
+    },
+    cultivationAreaDimensions: {
+      min_ca_dim: 10,
+      max_ca_dim: 30,
+      gap: 2,
     },
   };
   const { data: session, status } = useSession();
@@ -87,7 +93,7 @@ export function CreateFieldPageComponent() {
     try {
       console.log("Submitting field data:", fieldData);
       const res = await api.post("/cultivation/fields", fieldData);
-      console.log("res",res);
+      console.log("res", res);
     } catch (err) {
       handleApiError({
         ...err,
@@ -95,6 +101,14 @@ export function CreateFieldPageComponent() {
       });
     }
   };
+
+  if (status === "loading" || !managerModelName || !session) {
+    return <Loading />;
+  }
+
+  if (managerModelName !== "CultivationManager") {
+    throw new Error("Unauthorized");
+  }
 
   return (
     <>
@@ -117,7 +131,7 @@ export function CreateFieldPageComponent() {
           } else if (input.type === "textarea") {
             return (
               <AppTextArea
-              value={fieldData[input.name]}
+                value={fieldData[input.name]}
                 key={input.name}
                 label={input.label}
                 name={input.name}
@@ -128,6 +142,19 @@ export function CreateFieldPageComponent() {
             );
           }
         })}
+        {cultivationConstants.field?.locationInputs.map((input) => (
+          <AppInput
+            value={fieldData.location[input.name]}
+            key={input.name}
+            label={input.label}
+            name={input.name}
+            type={input.type}
+            placeholder={input.placeholder}
+            onChange={() => {}}
+            min={input.min}
+            max={input.max}
+          />
+        ))}
         <div className={`${styles.footer}`}>
           <div onClick={onSubmit} className="btn submitButton">
             Kreiraj parcelu

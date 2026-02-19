@@ -31,3 +31,20 @@ export const formInputs = [
     max: fieldDimensions.MAX_FIELD_DIMENSION,
   },
 ];
+
+export const locationInputs = [
+  {
+    label: "Geografska dužina",
+    name: "longitude",
+    type: "number",
+    min: -180,
+    max: 180,
+  },
+  {
+    label: "Geografska širina",
+    name: "latitude",
+    type: "number",
+    min: -90,
+    max: 90,
+  },
+];

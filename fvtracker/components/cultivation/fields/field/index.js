@@ -141,6 +141,13 @@ function FieldEditCASPanel({
   };
 
   const handleEmptyClick = (x, y) => {
+    if(!utils.cultivation.cultivationAreas.checkValidCell({
+      x,y,plantedCells, gap: cultivationAreaDimensions.gap
+    }))
+    {
+      alert("Invalid cell selection");
+      return;
+    }
     if (!isBeginSelected) {
       onBeginCoordinates(x, y);
     } else {

@@ -83,7 +83,22 @@ export const getCellsInRect = (
   };
 };
 
-export const checkRectValidDimensions = ({
+export const checkValidCell = ({ x, y, gap, plantedCells }) => {
+  const adjacentCells = [
+    `${x - gap - 1},${y}`,
+    `${x + gap + 1},${y}`,
+    `${x},${y - gap - 1}`,
+    `${x},${y + gap + 1}`,
+    `${x - gap - 1},${y - gap - 1}`,
+    `${x - gap - 1},${y + gap + 1}`,
+    `${x + gap + 1},${y - gap - 1}`,
+    `${x + gap + 1},${y + gap + 1}`,
+  ];
+
+  return !adjacentCells.some((cell) => plantedCells.includes(cell));
+};
+
+const checkRectValidDimensions = ({
   beginX,
   beginY,
   endX,

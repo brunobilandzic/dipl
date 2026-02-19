@@ -18,6 +18,7 @@ import axios from "axios";
 import { setFields } from "@/store/cultivation";
 import { fieldCultivationAreaPoints } from "@/seed/fields/create/analyze";
 import { Loading } from "@/components/layout/loading";
+import { useRouter } from "next/navigation";
 
 export function FieldsList({}) {
   const fields = useSelector((state) => state.cultivation.fields);
@@ -42,11 +43,11 @@ export function FieldsList({}) {
   }, [fields]);
 
   if (!fields || fields.length === 0)
-      return (
-        <div className="w-full h-screen flex items-center justify-center">
-          <Loading />
-        </div>
-      );
+    return (
+      <div className="w-full h-screen flex items-center justify-center">
+        <Loading />
+      </div>
+    );
 
   return (
     <>
@@ -62,6 +63,7 @@ export function FieldsList({}) {
 }
 
 function FieldItem({ field }) {
+  const router = useRouter();
   if (!field) return null;
   const {
     name,
@@ -117,8 +119,15 @@ function FieldItem({ field }) {
                 </div>
               </div>
             </div>
-            <div className="">
-              {/* Placeholder for field grid or map */}
+            {/* Placeholder for field grid or map */}
+            <div
+              className="cursor-pointer"
+              onClickCapture={(e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                router.push(`/upravljanje-poljima/${slug}`);
+              }}
+            >
               <FieldGrid
                 width={width}
                 length={length}

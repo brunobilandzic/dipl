@@ -24,6 +24,7 @@ export const AppInput = ({
         placeholder={placeholder}
         min={min}
         max={max}
+        data-label={label}
       />
     </div>
   );

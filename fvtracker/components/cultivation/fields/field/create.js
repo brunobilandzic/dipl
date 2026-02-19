@@ -86,7 +86,7 @@ export function CreateFieldPageComponent() {
 
     try {
       console.log("Submitting field data:", fieldData);
-      const res = await api.post("/cultivation/field", fieldData);
+      const res = await api.post("/cultivation/fields", fieldData);
       console.log("res",res);
     } catch (err) {
       handleApiError({

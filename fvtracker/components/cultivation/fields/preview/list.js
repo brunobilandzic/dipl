@@ -142,7 +142,3 @@ function FieldItem({ field }) {
     </>
   );
 }
-
-function FieldContainer({ children }) {
-  return <></>;
-}

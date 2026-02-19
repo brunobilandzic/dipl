@@ -14,6 +14,6 @@ export function makeUrlFriendly(str) {
         .replace(/-+/g, '-');
 }
 
-
+export const alphanumericOnly = (str) => str.replace(/[^a-zA-Z0-9]/g, '');
 
 export const dimensionsString = ({width, length}) => `${width}x${length}`;

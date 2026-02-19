@@ -1,5 +1,5 @@
 import { extractDBObject, checkEmpty } from "./objects";
-import { makeUrlFriendly, dimensionsString  } from "./strings";
+import { makeUrlFriendly, dimensionsString, alphanumericOnly } from "./strings";
 import {
   getCASCells,
   CAIncludesCell,
@@ -8,18 +8,19 @@ import {
   getDimensionsForNewCA,
   getDimensionsFromPlanted,
   plantedArrayToMap,
-  prepareCulitvationArea
+  prepareCulitvationArea,
 } from "./cultivationAreas";
 import { numbersInRanges } from "./formValidation";
 
 export default {
   objects: {
     extractDBObject,
-    checkEmpty
+    checkEmpty,
   },
   strings: {
     makeUrlFriendly,
-    dimensionsString
+    dimensionsString,
+    alphanumericOnly,
   },
   cultivation: {
     cultivationAreas: {
@@ -30,11 +31,11 @@ export default {
       getDimensionsForNewCA,
       getDimensionsFromPlanted,
       plantedArrayToMap,
-      prepareCulitvationArea
+      prepareCulitvationArea,
     },
   },
   formValidation: {
-    numbersInRanges
+    numbersInRanges,
   },
 };
 

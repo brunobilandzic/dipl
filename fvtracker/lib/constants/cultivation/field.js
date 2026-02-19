@@ -16,21 +16,24 @@ export const formInputs = [
     type: "textarea",
     placeholder: "Unesi opis parcele",
   },
-  {
+];
+
+export const dimensionsInputs = {
+  width: {
     label: `Širina (m) ${fieldDimensions.MIN_FIELD_DIMENSION} - ${fieldDimensions.MAX_FIELD_DIMENSION}`,
     name: "width",
     type: "number",
     min: fieldDimensions.MIN_FIELD_DIMENSION,
     max: fieldDimensions.MAX_FIELD_DIMENSION,
   },
-  {
+  length: {
     label: `Dužina (m) ${fieldDimensions.MIN_FIELD_DIMENSION} - ${fieldDimensions.MAX_FIELD_DIMENSION}`,
     name: "length",
     type: "number",
     min: fieldDimensions.MIN_FIELD_DIMENSION,
     max: fieldDimensions.MAX_FIELD_DIMENSION,
   },
-];
+};
 
 export const locationInputs = {
   longitude: {

@@ -68,6 +68,17 @@ export function CreateFieldPageComponent() {
     }));
   };
 
+  const onObjectChange = (objectName) => (e) => {
+    const { name, value } = e.target;
+    setFieldData((prev) => ({
+      ...prev,
+      [objectName]: {
+        ...prev[objectName],
+        [name]: value,
+      },
+    }));
+  };
+
   const checkConditions = () => {
     if (utils.objects.checkEmpty(fieldData)) {
       alert("Sva polja su obavezna");
@@ -144,19 +155,32 @@ export function CreateFieldPageComponent() {
             );
           }
         })}
-        {cultivationConstants.field?.locationInputs.map((input) => (
+        {Object.entries(cultivationConstants.field?.locationInputs).map(
+          ([key, input]) => (
+            <AppInput
+              value={fieldData.location[key]}
+              key={input.name}
+              label={input.label}
+              name={input.name}
+              type={input.type}
+              placeholder={input.placeholder}
+              onChange={onObjectChange("location")}
+            />
+          ),
+        )}
+        {/* {cultivationConstants.field?.cultivationAreaDimensionInputs.map((input) => (
           <AppInput
-            value={fieldData.location[input.name]}
+            value={fieldData.cultivationAreaDimensions[input.name]}
             key={input.name}
             label={input.label}
             name={input.name}
             type={input.type}
             placeholder={input.placeholder}
-            onChange={() => {}}
+            onChange={null}
             min={input.min}
             max={input.max}
           />
-        ))}
+        ))} */}
         <div className={`${styles.footer}`}>
           <div onClick={onSubmit} className="btn submitButton">
             Kreiraj parcelu

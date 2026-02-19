@@ -12,6 +12,19 @@ import { handleApiError } from "@/lib/constants/errors/client/api";
 import { Loading } from "@/components/layout/loading";
 
 export function CreateFieldPageComponent() {
+  const { data: session, status } = useSession();
+  const managerModelName = useSelector(
+    (state) => state.user.session?.managerModelName,
+  );
+
+  if (status === "loading" || !managerModelName || !session) {
+    return <Loading />;
+  }
+
+  if (managerModelName !== "CultivationManager") {
+    throw new Error("Unauthorized");
+  }
+
   const testFieldData = {
     name: "Test Field",
     description: "This is a test field",
@@ -27,10 +40,7 @@ export function CreateFieldPageComponent() {
       gap: 2,
     },
   };
-  const { data: session, status } = useSession();
-  const managerModelName = useSelector(
-    (state) => state.user.session?.managerModelName,
-  );
+
   const [fieldData, setFieldData] = useState(testFieldData);
 
   const onChange = (e) => {
@@ -101,14 +111,6 @@ export function CreateFieldPageComponent() {
       });
     }
   };
-
-  if (status === "loading" || !managerModelName || !session) {
-    return <Loading />;
-  }
-
-  if (managerModelName !== "CultivationManager") {
-    throw new Error("Unauthorized");
-  }
 
   return (
     <>

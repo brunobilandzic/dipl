@@ -17,7 +17,7 @@ const cultivationSlice = createSlice({
     selectField: (state, action) => {
       state.selectedField = action.payload;
     },
-    emptyCultivation: () = ({...initialState}),
+    emptyCultivation: () => ({...initialState}),
   },
 });
 

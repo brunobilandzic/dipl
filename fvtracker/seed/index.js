@@ -1,7 +1,7 @@
 import SEED_TYPES from "@/seed/seedTypes";
 import users from "./users";
 import fields from "./cultivation/fields";
-import crops from "./cultivation/fields/crops";
+import crops from "./cultivation/crops";
 import { deleteDB } from "@/lib/db/delete";
 
 export default {

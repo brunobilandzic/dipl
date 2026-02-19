@@ -110,14 +110,50 @@ export function CreateFieldPageComponent() {
 
   const prepareRanges = () => [
     {
-      value: fieldData.length,
+      name: "Dužina polja",
+      value: fieldData.dimensions.length,
       min: cultivationConstants.field.fieldDimensions.MIN_FIELD_DIMENSION,
       max: cultivationConstants.field.fieldDimensions.MAX_FIELD_DIMENSION,
     },
     {
-      value: fieldData.width,
+      name: "Širina polja",
+      value: fieldData.dimensions.width,
       min: cultivationConstants.field.fieldDimensions.MIN_FIELD_DIMENSION,
       max: cultivationConstants.field.fieldDimensions.MAX_FIELD_DIMENSION,
+    },
+    {
+      name: "Minimalna dimenzija područja za sadnju",
+      value: fieldData.cultivationAreaDimensions.min_ca_dim,
+      min: cultivationConstants.field.cultivationAreaDimensions
+        .MIN_CA_DIMENSION,
+      max: cultivationConstants.field.cultivationAreaDimensions
+        .MAX_CA_DIMENSION,
+    },
+    {
+      name: "Maksimalna dimenzija područja za sadnju",
+      value: fieldData.cultivationAreaDimensions.max_ca_dim,
+      min: cultivationConstants.field.cultivationAreaDimensions
+        .MIN_CA_DIMENSION,
+      max: cultivationConstants.field.cultivationAreaDimensions
+        .MAX_CA_DIMENSION,
+    },
+    {
+      name: "Rastojanje između područja",
+      value: fieldData.cultivationAreaDimensions.gap,
+      min: cultivationConstants.field.cultivationAreaDimensions.MIN_GAP,
+      max: cultivationConstants.field.cultivationAreaDimensions.MAX_GAP,
+    },
+    {
+      name: "Geografska širina",
+      value: fieldData.location.latitude,
+      min: cultivationConstants.field.locationRanges.LATITUDE.min,
+      max: cultivationConstants.field.locationRanges.LATITUDE.max,
+    },
+    {
+      name: "Geografska dužina",
+      value: fieldData.location.longitude,
+      min: cultivationConstants.field.locationRanges.LONGITUDE.min,
+      max: cultivationConstants.field.locationRanges.LONGITUDE.max,
     },
   ];
 
@@ -168,6 +204,23 @@ export function CreateFieldPageComponent() {
             );
           }
         })}
+
+        {Object.entries(cultivationConstants.field?.dimensionsInputs).map(
+          ([key, input]) => (
+            <AppInput
+              value={fieldData.dimensions[key]}
+              key={input.name}
+              label={input.label}
+              name={input.name}
+              type={input.type}
+              placeholder={input.placeholder}
+              onChange={onObjectChange("dimensions")}
+              min={input.min}
+              max={input.max}
+            />
+          ),
+        )}
+
         {Object.entries(cultivationConstants.field?.locationInputs).map(
           ([key, input]) => (
             <AppInput
@@ -178,22 +231,26 @@ export function CreateFieldPageComponent() {
               type={input.type}
               placeholder={input.placeholder}
               onChange={onObjectChange("location")}
+              min={input.min}
+              max={input.max}
             />
           ),
         )}
-        {/* {cultivationConstants.field?.cultivationAreaDimensionInputs.map((input) => (
+        {Object.entries(
+          cultivationConstants.field?.cultivationAreaDimensionsInputs,
+        ).map(([key, input]) => (
           <AppInput
-            value={fieldData.cultivationAreaDimensions[input.name]}
+            value={fieldData.cultivationAreaDimensions[key]}
             key={input.name}
             label={input.label}
             name={input.name}
             type={input.type}
             placeholder={input.placeholder}
-            onChange={null}
+            onChange={onObjectChange("cultivationAreaDimensions")}
             min={input.min}
             max={input.max}
           />
-        ))} */}
+        ))}
         <div className={`${styles.footer}`}>
           <div onClick={onSubmit} className="btn submitButton">
             Kreiraj parcelu

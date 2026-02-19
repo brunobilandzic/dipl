@@ -124,6 +124,14 @@ function CreateNewCA({
       setnewCADetails(initialnewCADetails);
       emptyCACoordinates();
       dispatch(createCultivationArea(newCultivationArea));
+      setField((prevField) => ({
+        ...prevField,
+        cultivationAreas: [...prevField.cultivationAreas, newCultivationArea],
+      }));
+      setPlantedCells((prevPlantedCells) => [
+        ...prevPlantedCells,
+        ...utils.cultivation.cultivationAreas.getCASCells([newCultivationArea]),
+      ]);
       setIsBeginSelected(false);
     } catch (error) {
       console.log("api error", error);
@@ -162,15 +170,15 @@ function CreateNewCA({
               onChange={(e) => onFormChange("description", e.target.value)}
             />
           </div>
-            <div className={`${styles.info} grid grid-cols-2 grid-rows-2 w-fit gap-2 mt-6`}>
-              <div className="font-bold">Duljina</div>
-              <div className="font-bold">Širina</div>
-              <div className="">
-                {newCACoordinates?.dimensions?.length || 0}
-              </div>
-              <div className="">{newCACoordinates?.dimensions?.width || 0}</div>
-            </div>
-        </div>
+          {/* <div
+            className={`${styles.info} grid grid-cols-2 grid-rows-2 w-fit gap-2 mt-6`}
+          >
+            <div className="font-bold">Duljina</div>
+            <div className="font-bold">Širina</div>
+            <div className="">{newCACoordinates?.dimensions?.length || 0}</div>
+            <div className="">{newCACoordinates?.dimensions?.width || 0}</div>
+          </div>*/}
+        </div> 
       </Modals.FormModal>
       <div
         onClick={onAdd}

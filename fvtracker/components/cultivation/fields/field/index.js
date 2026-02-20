@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { FieldGrid } from "../preview/grid";
 import utils from "@/lib/utils";
 import { useDispatch, useSelector } from "react-redux";
@@ -91,11 +91,16 @@ function FieldEditCASPanel({
   setField,
 }) {
   const [editCultivationAreas, setEditCultivationAreas] = useState(false);
-  const [plantedCells, setPlantedCells] = useState(
+  const plantedCells = useMemo(() => {
+    return cultivationAreas     ? utils.cultivation.cultivationAreas.getCASCells(cultivationAreas)
+      : [];
+   }, [cultivationAreas]);
+   
+/*   const [plantedCells, setPlantedCells] = useState(
     cultivationAreas
       ? utils.cultivation.cultivationAreas.getCASCells(cultivationAreas)
       : [],
-  );
+  ); */
   const [clickedCell, setClickedCell] = useState(null);
   const [selectedCultivationArea, setSelectedCultivationArea] = useState(null);
   const [newCACoordinates, setNewCACoordinates] = useState({});
@@ -231,7 +236,7 @@ function FieldEditCASPanel({
           <FieldEditDashboard
             setIsBeginSelected={setIsBeginSelected}
             setField={setField}
-            setPlantedCells={setPlantedCells}
+          /*   setPlantedCells={setPlantedCells} */
             getNewCOCoordinates={getNewCOCoordinates}
             emptyCACoordinates={emptyCACoordinates}
             cultivationAreaDimensions={cultivationAreaDimensions}

@@ -13,7 +13,7 @@ function CreateCA({
   emptyCACoordinates,
   cultivationAreaDimensions,
   setField,
-  setPlantedCells,
+ /*  setPlantedCells, */
   fieldId,
   setIsBeginSelected,
 }) {
@@ -104,10 +104,10 @@ function CreateCA({
         ...prevField,
         cultivationAreas: [...prevField.cultivationAreas, newCultivationArea],
       }));
-      setPlantedCells((prevPlantedCells) => [
+    /*   setPlantedCells((prevPlantedCells) => [
         ...prevPlantedCells,
         ...utils.cultivation.cultivationAreas.getCASCells([newCultivationArea]),
-      ]);
+      ]); */
     } catch (error) {
       console.log("api error", error);
       handleApiError({

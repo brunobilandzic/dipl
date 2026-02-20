@@ -7,7 +7,7 @@ export function FieldEditDashboard({
   cultivationAreaDimensions,
   fieldId,
   setField,
-  setPlantedCells,
+  /* setPlantedCells, */
   setIsBeginSelected,
   selectedCultivationArea,
   setSelectedCultivationArea,
@@ -21,7 +21,7 @@ export function FieldEditDashboard({
           fieldId={fieldId}
           emptyCACoordinates={emptyCACoordinates}
           setField={setField}
-          setPlantedCells={setPlantedCells}
+         /*  setPlantedCells={setPlantedCells} */
           setIsBeginSelected={setIsBeginSelected}
         />
       </DashboardItem>

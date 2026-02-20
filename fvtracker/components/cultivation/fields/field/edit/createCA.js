@@ -7,6 +7,7 @@ import { handleApiError } from "@/lib/constants/errors/client/api";
 import api from "@/lib/api";
 import { useDispatch } from "react-redux";
 import { createCultivationArea } from "@/store/cultivation/";
+import styles from "@/components/form/form.module.css";
 
 function CreateCA({
   getNewCOCoordinates,
@@ -140,14 +141,14 @@ function CreateCA({
               onChange={(e) => onFormChange("description", e.target.value)}
             />
           </div>
-          {/* <div
+          <div
             className={`${styles.info} grid grid-cols-2 grid-rows-2 w-fit gap-2 mt-6`}
           >
             <div className="font-bold">Duljina</div>
             <div className="font-bold">Širina</div>
             <div className="">{newCACoordinates?.dimensions?.length || 0}</div>
             <div className="">{newCACoordinates?.dimensions?.width || 0}</div>
-          </div>*/}
+          </div>
         </div>
       </Modals.FormModal>
       <div

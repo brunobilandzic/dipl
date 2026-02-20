@@ -43,6 +43,11 @@ export const EditCA = ({
     }
   };
 
+  const onSubmit = () => {
+    console.log("Submitting form data:", formData);
+    setSelectedCultivationArea(null);
+  };
+
   return (
     <>
       {selectedCultivationArea ? (
@@ -51,6 +56,7 @@ export const EditCA = ({
           isOpen={!!selectedCultivationArea}
           title="Edit Cultivation Area"
           onClose={() => setSelectedCultivationArea(null)}
+          onSubmit={onSubmit}
         >
           <div className="form">
             <div className="">

@@ -184,7 +184,7 @@ function FieldEditCASPanel({
 
   return (
     <>
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col justify-start gap-6">
         {JSON.stringify(
           `${newCACoordinates.begin ? `Begin: (${newCACoordinates.begin.x}, ${newCACoordinates.begin.y})` : "No begin selected"}`,
         )}
@@ -222,7 +222,7 @@ function FieldEditCASPanel({
           <FieldEditDashboard
             setIsBeginSelected={setIsBeginSelected}
             setField={setField}
-            setPlantedCells={setPlantedCells}
+            setPlantedCells={setPlantedCells}qu
             getNewCOCoordinates={getNewCOCoordinates}
             emptyCACoordinates={emptyCACoordinates}
             cultivationAreaDimensions={cultivationAreaDimensions}

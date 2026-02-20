@@ -102,7 +102,6 @@ function FieldEditCASPanel({
   const [isBeginSelected, setIsBeginSelected] = useState(false);
 
   const onBeginCoordinates = (beginX, beginY) => {
-    console.log("begin", beginX, beginY);
     setIsBeginSelected(true);
     setSelectedCultivationArea(null);
     setNewCACoordinates((prev) => ({

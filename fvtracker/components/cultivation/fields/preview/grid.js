@@ -120,10 +120,7 @@ const FieldCell = ({
   handleActiveClick,
   isBeginSelected,
 }) => {
-  if( ["1,1", "1,2"].includes(`${x},${y}`)){
-    console.log(`cell ${x},${y} - active: ${active}, selected: ${selected}`);
-  }
-  const dispatch = useDispatch();
+
   const cellClass = classNames(
     small ? "w-1 h-1" : "w-3 h-3 cursor-pointer",
     selected ? `bg-green-500` : active ? `bg-yellow-500` : "",

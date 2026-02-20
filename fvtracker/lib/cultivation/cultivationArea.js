@@ -43,13 +43,12 @@ async function createCultivationAreaRecord(properties) {
 
 export async function updateCultivationArea(body) {
   const cultivationArea = await CultivationArea.findById(body.id);
-  console.log("found cultivation area: \n", cultivationArea);
   if (!cultivationArea) {
     throw new Error("Cultivation area not found with the provided ID.");
   }
-  const updatedProperties = transformBody(body);
+
   const updated = Object.assign(cultivationArea, body);
-  console.log("updated cultivation area: \n", updated); 
+
   await updated.save();
   return updated;
 }

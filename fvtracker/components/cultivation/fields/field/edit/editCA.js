@@ -1,17 +1,24 @@
-import React from "react";
+import React, {useEffect} from "react";
+import Modals from "@/components/layout/modals";
 
-export const EditCA = (
-    {
-        selectedCultivationArea,
-        setSelectedCultivationArea,
-    }
-) => {
+export const EditCA = ({
+  selectedCultivationArea,
+  setSelectedCultivationArea,
+}) => {
+  
   return (
     <>
-      <div className="flex flex-col gap-4">
-        <div>EditCA</div>
-        <div>EditCA</div>
-      </div>
+      {selectedCultivationArea ? (
+        <Modals.FormModal
+        onCancel={() => setSelectedCultivationArea(null)}
+        isOpen={!!selectedCultivationArea}
+          title="Edit Cultivation Area"
+          onClose={() => setSelectedCultivationArea(null)}
+        >
+          {" "}
+          <div>modal</div>{" "}
+        </Modals.FormModal>
+      ) : null}
     </>
   );
 };

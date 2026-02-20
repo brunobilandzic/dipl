@@ -185,7 +185,7 @@ function FieldEditCASPanel({
 
   const getNewCOCoordinates = () => newCACoordinates;
   const emptyCACoordinates = () => setNewCACoordinates({});
-
+  
   return (
     <>
       <div className="flex flex-col justify-start gap-6">
@@ -198,6 +198,8 @@ function FieldEditCASPanel({
         )}
         <br />
         {JSON.stringify(`selected: ${newCACoordinates?.planted || "None"}`)}
+        <br/>
+        {JSON.stringify(`Selected CA: ${selectedCultivationArea ? selectedCultivationArea.name : "None"}    `)}
         <div
           style={{
             width: "full",

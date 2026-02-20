@@ -30,6 +30,22 @@ const cultivationSlice = createSlice({
         return field;
       })
     },
+    deleteCultivationArea: (state, action) => {
+      console.log("redux state deleting ca", action.payload);
+      const id  = action.payload;
+      state.selectedField.cultivationAreas = state.selectedField.cultivationAreas.filter(
+        (ca) => ca._id.toString() !== id
+      );
+      state.fields = state.fields?.map((field) => {
+        if (field._id === state.selectedField._id) {
+          return {
+            ...field,
+            cultivationAreas: field.cultivationAreas.filter((ca) => ca._id.toString() !== id),
+          };
+        }
+        return field;
+      });
+    },
   },
 });
 

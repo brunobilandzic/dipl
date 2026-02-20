@@ -74,8 +74,6 @@ export default function FieldPageComponent({ slug }) {
           length={length}
           cultivationAreas={cultivationAreas}
           cultivationAreaDimensions={cultivationAreaDimensions}
-          selectedCultivationArea={selectedCultivationArea}
-          setSelectedCultivationArea={setSelectedCultivationArea}
         />
         <div></div>
       </div>

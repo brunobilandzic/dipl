@@ -67,15 +67,20 @@ export const EditCA = ({
     }
   };
 
+  const onDelete = async () => {
+    console.log("deleting ca")
+  }
+
   return (
     <>
       {selectedCultivationArea ? (
-        <Modals.FormModal
+        <Modals.UpdateModal
           onCancel={() => setSelectedCultivationArea(null)}
           isOpen={!!selectedCultivationArea}
           title="Edit Cultivation Area"
           onClose={() => setSelectedCultivationArea(null)}
           onSubmit={onSubmit}
+          onDelete={onDelete}
         >
           <div className="form">
             <div className="">
@@ -109,7 +114,7 @@ export const EditCA = ({
               />
             </div>
           </div>
-        </Modals.FormModal>
+        </Modals.UpdateModal>
       ) : null}
     </>
   );

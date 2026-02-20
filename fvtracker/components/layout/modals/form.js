@@ -14,18 +14,37 @@ export function FormModal({ isOpen, onCancel, onSubmit, title, children }) {
 function FormModalFooter({ onCancel, onSubmit }) {
   return (
     <ModalFooter>
-      <div
-        onClick={onCancel}
-        className="btn cancelButton"
-      >
+      <div onClick={onCancel} className="btn cancelButton">
         Cancel
       </div>
-      <div
-        onClick={onSubmit}
-        className={`btn submitButton`}
-      >
+      <div onClick={onSubmit} className={`btn submitButton`}>
         Submit
       </div>
     </ModalFooter>
+  );
+}
+
+export function UpdateModal({
+  onDelete,
+  title,
+  isOpen,
+  onCancel,
+  onSubmit,
+  children,
+}) {
+  return (
+    <FormModal
+      isOpen={isOpen}
+      onCancel={onCancel}
+      title={title}
+      onSubmit={onSubmit}
+    >
+      <div className="flex items-center justify-end w-full pr-4 ">
+        <div onClick={onDelete} className={`btn cancelButton btnSm `}>
+          Delete
+        </div>
+      </div>
+      {children}
+    </FormModal>
   );
 }

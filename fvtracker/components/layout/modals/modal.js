@@ -6,9 +6,11 @@ export default function Modal({ isOpen, onCancel, children, title }) {
       {isOpen && (
         <>
           <Backdrop onCancel={onCancel} />
-          <div className="fixed rounded-lg p-4   bg-[var(--foreground)] text-[var(--background)]  z-30 top-5 w-full flex flex-col max-w-xl ">
-            <ModalHeader title={title} onCancel={onCancel} />
-            {children}
+          <div className="fixed inset-0 z-30 grid place-items-center p-4">
+            <div className="absolute rounded-lg p-4   bg-[var(--foreground)] text-[var(--background)]  z-30  w-screen flex flex-col max-w-xl left-1/2 -translate-x-1/2">
+              <ModalHeader title={title} onCancel={onCancel} />
+              {children}
+            </div>
           </div>
         </>
       )}
@@ -39,5 +41,9 @@ function ModalHeader({ title, onCancel }) {
 }
 
 export function ModalFooter({ children }) {
-  return <div className="flex justify-end gap-4 mt-4 border-t border-gray-300 pt-4">{children}</div>;
+  return (
+    <div className="flex justify-end gap-4 mt-4 border-t border-gray-300 pt-4">
+      {children}
+    </div>
+  );
 }

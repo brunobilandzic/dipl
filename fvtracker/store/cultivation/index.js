@@ -55,5 +55,6 @@ export const {
   selectField,
   emptyCultivation,
   createCultivationArea,
+  deleteCultivationArea,
 } = cultivationSlice.actions;
 export default cultivationSlice.reducer;

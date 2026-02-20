@@ -164,6 +164,8 @@ function FieldEditCASPanel({
     setSelectedCultivationArea({
       name: ca.name,
       planted: utils.cultivation.cultivationAreas.getCASCells([ca]),
+      dimensions: ca.dimensions,
+      editCAOpen: true,
     });
     resetSelection();
   };
@@ -185,6 +187,10 @@ function FieldEditCASPanel({
       <div className="flex flex-col gap-4">
         {JSON.stringify(
           `${newCACoordinates.begin ? `Begin: (${newCACoordinates.begin.x}, ${newCACoordinates.begin.y})` : "No begin selected"}`,
+        )}
+        <br/>
+        {JSON.stringify(
+          `${newCACoordinates.end ? `End: (${newCACoordinates.end.x}, ${newCACoordinates.end.y})` : "No end selected"}`,
         )}
         <div
           style={{

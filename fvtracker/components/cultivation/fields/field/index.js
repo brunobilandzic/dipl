@@ -74,6 +74,8 @@ export default function FieldPageComponent({ slug }) {
           length={length}
           cultivationAreas={cultivationAreas}
           cultivationAreaDimensions={cultivationAreaDimensions}
+          selectedCultivationArea={selectedCultivationArea}
+          setSelectedCultivationArea={setSelectedCultivationArea}
         />
         <div></div>
       </div>
@@ -141,10 +143,14 @@ function FieldEditCASPanel({
   };
 
   const handleEmptyClick = (x, y) => {
-    if(!utils.cultivation.cultivationAreas.checkValidCell({
-      x,y,plantedCells, gap: cultivationAreaDimensions.gap
-    }))
-    {
+    if (
+      !utils.cultivation.cultivationAreas.checkValidCell({
+        x,
+        y,
+        plantedCells,
+        gap: cultivationAreaDimensions.gap,
+      })
+    ) {
       alert("Invalid cell selection");
       return;
     }
@@ -188,13 +194,12 @@ function FieldEditCASPanel({
         {JSON.stringify(
           `${newCACoordinates.begin ? `Begin: (${newCACoordinates.begin.x}, ${newCACoordinates.begin.y})` : "No begin selected"}`,
         )}
-        <br/>
+        <br />
         {JSON.stringify(
           `${newCACoordinates.end ? `End: (${newCACoordinates.end.x}, ${newCACoordinates.end.y})` : "No end selected"}`,
         )}
-        <br/>
-        {JSON.stringify(
-          `selected: ${newCACoordinates?.planted || "None"}`        )}
+        <br />
+        {JSON.stringify(`selected: ${newCACoordinates?.planted || "None"}`)}
         <div
           style={{
             width: "full",
@@ -222,11 +227,13 @@ function FieldEditCASPanel({
           <FieldEditDashboard
             setIsBeginSelected={setIsBeginSelected}
             setField={setField}
-            setPlantedCells={setPlantedCells}qu
+            setPlantedCells={setPlantedCells}
             getNewCOCoordinates={getNewCOCoordinates}
             emptyCACoordinates={emptyCACoordinates}
             cultivationAreaDimensions={cultivationAreaDimensions}
             fieldId={fieldId}
+            selectedCultivationArea={selectedCultivationArea}
+            setSelectedCultivationArea={setSelectedCultivationArea}
           />
         </div>
       </div>

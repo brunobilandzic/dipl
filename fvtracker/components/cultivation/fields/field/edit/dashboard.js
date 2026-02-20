@@ -9,6 +9,8 @@ export function FieldEditDashboard({
   setField,
   setPlantedCells,
   setIsBeginSelected,
+  selectedCultivationArea,
+  setSelectedCultivationArea,
 }) {
   return (
     <div className="w-full flex justify-center items-center gap-4">
@@ -24,12 +26,19 @@ export function FieldEditDashboard({
         />
       </DashboardItem>
       <DashboardItem>
-        <EditCA />
+        <EditCA
+          selectedCultivationArea={selectedCultivationArea}
+          setSelectedCultivationArea={setSelectedCultivationArea}
+        />
       </DashboardItem>
     </div>
   );
 }
 
 function DashboardItem({ children }) {
-  return <div className="flex flex-col gap-4 align-middle justify-center relative">{children}</div>;
+  return (
+    <div className="flex flex-col gap-4 align-middle justify-center relative">
+      {children}
+    </div>
+  );
 }

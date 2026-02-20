@@ -8,7 +8,7 @@ import { handleApiError } from "@/lib/constants/errors/client/api";
 import axios from "axios";
 import { Loading } from "@/components/layout/loading";
 import { selectField } from "@/store/cultivation";
-import { FieldEditDashboard } from "./edit";
+import { FieldEditDashboard } from "./edit/dashboard";
 
 export default function FieldPageComponent({ slug }) {
   const selectedField = useSelector((state) => state.cultivation.selectedField);

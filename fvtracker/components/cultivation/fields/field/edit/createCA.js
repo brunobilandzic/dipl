@@ -5,35 +5,10 @@ import Modals from "@/components/layout/modals";
 import { AppInput, AppTextArea } from "@/components/form/inputs";
 import { handleApiError } from "@/lib/constants/errors/client/api";
 import api from "@/lib/api";
-import styles from "@/components/form/form.module.css";
 import { useDispatch } from "react-redux";
 import { createCultivationArea } from "@/store/cultivation/";
 
-export function FieldEditDashboard({
-  getNewCOCoordinates,
-  emptyCACoordinates,
-  cultivationAreaDimensions,
-  fieldId,
-  setField,
-  setPlantedCells,
-  setIsBeginSelected,
-}) {
-  return (
-    <div className="w-full flex justify-center items-center">
-      <CreateNewCA
-        getNewCOCoordinates={getNewCOCoordinates}
-        cultivationAreaDimensions={cultivationAreaDimensions}
-        fieldId={fieldId}
-        emptyCACoordinates={emptyCACoordinates}
-        setField={setField}
-        setPlantedCells={setPlantedCells}
-        setIsBeginSelected={setIsBeginSelected}
-      />
-    </div>
-  );
-}
-
-function CreateNewCA({
+function CreateCA({
   getNewCOCoordinates,
   emptyCACoordinates,
   cultivationAreaDimensions,
@@ -190,3 +165,5 @@ function CreateNewCA({
     </>
   );
 }
+
+export default CreateCA;

@@ -82,7 +82,7 @@ export const EditCA = ({
               <AppInput
                 label="Ime"
                 name="name"
-                value={formData?.name || ""}
+                value={formData?.name ?? ""}
                 onChange={onChange}
               />
             </div>
@@ -90,7 +90,7 @@ export const EditCA = ({
               <AppInput
                 label="Opis"
                 name="description"
-                value={formData.description || ""}
+                value={formData.description ?? ""}
                 onChange={onChange}
               />
             </div>
@@ -98,13 +98,13 @@ export const EditCA = ({
               <AppInput
                 label="Širina (m)"
                 name="width"
-                value={formData.dimensions?.width}
+                value={formData.dimensions?.width ?? ""}
                 onChange={onChange}
               />
               <AppInput
                 label="Dužina (m)"
                 name="length"
-                value={formData.dimensions?.length}
+                value={formData.dimensions?.length ?? ""}
                 onChange={onChange}
               />
             </div>

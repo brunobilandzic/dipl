@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Modals from "@/components/layout/modals";
 import { AppInput } from "@/components/form/inputs";
 import axios from "axios";
-import { handleApiError } from "@/lib/constants/errors/client/api";
+import handleError from "@/lib/constants/errors/client/handleError";
 
 export const EditCA = ({
   selectedCultivationArea,
@@ -54,16 +54,7 @@ export const EditCA = ({
       );
       console.log(res);
     } catch (error) {
-      if (error.name === "AxiosError") {
-        handleApiError({
-          ...error,
-          generalMessage:
-            "Failed to update cultivation area. Please try again.",
-        });
-      } else {
-        console.error("Unexpected error:", error);
-        alert("An unexpected error occurred. Please try again.");
-      }
+      handleError(error);
     }
   };
 

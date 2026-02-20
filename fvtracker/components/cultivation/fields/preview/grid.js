@@ -77,7 +77,12 @@ const FieldCells = ({
   handleActiveClick,
 }) => {
   let cells = [];
-
+  console.log(
+    selectedCultivationArea?.planted?.includes(`1,1`),
+    selectedCultivationArea?.planted?.includes(`1,2`),
+    newCACoordinates.planted?.includes(`1,1`) && isBeginSelected,
+    newCACoordinates.planted?.includes(`1,2`) && isBeginSelected,
+  );
   for (let x = 0; x < fieldLength; x++) {
     for (let y = 0; y < fieldWidth; y++) {
       cells.push(
@@ -87,9 +92,11 @@ const FieldCells = ({
           x={x}
           y={y}
           active={plantedCells.includes(`${x},${y}`)}
-          selected={!small && 
+          selected={
+            !small &&
             (selectedCultivationArea?.planted?.includes(`${x},${y}`) ||
-            (newCACoordinates.planted?.includes(`${x},${y}`) && isBeginSelected))
+              (newCACoordinates.planted?.includes(`${x},${y}`) &&
+                isBeginSelected))
           }
           onRightClick={onRightClick}
           handleEmptyClick={handleEmptyClick}
@@ -113,6 +120,9 @@ const FieldCell = ({
   handleActiveClick,
   isBeginSelected,
 }) => {
+  if( ["1,1", "1,2"].includes(`${x},${y}`)){
+    console.log(`cell ${x},${y} - active: ${active}, selected: ${selected}`);
+  }
   const dispatch = useDispatch();
   const cellClass = classNames(
     small ? "w-1 h-1" : "w-3 h-3 cursor-pointer",
@@ -129,17 +139,17 @@ const FieldCell = ({
       return;
     }
     handleActiveClick(x, y);
-  }
-    return (
-      <div
-        className={cellClass}
-        title={`(${x}, ${y})`}
-        onClick={handleClick}
-        onContextMenu={(e) => {
-          console.log(onRightClick);
-          e.preventDefault();
-          onRightClick();
-        }}
-      ></div>
-    );
   };
+  return (
+    <div
+      className={cellClass}
+      title={`(${x}, ${y})`}
+      onClick={handleClick}
+      onContextMenu={(e) => {
+        console.log(onRightClick);
+        e.preventDefault();
+        onRightClick();
+      }}
+    ></div>
+  );
+};

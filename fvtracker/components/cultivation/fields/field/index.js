@@ -102,13 +102,14 @@ function FieldEditCASPanel({
   const [isBeginSelected, setIsBeginSelected] = useState(false);
 
   const onBeginCoordinates = (beginX, beginY) => {
+    console.log("begin", beginX, beginY);
     setIsBeginSelected(true);
     setSelectedCultivationArea(null);
-    setNewCACoordinates({
-      ...newCACoordinates,
+    setNewCACoordinates((prev) => ({
+      ...prev,
       begin: { x: beginX, y: beginY },
       planted: [`${beginX},${beginY}`],
-    });
+    }));
   };
 
   const onEndCoordinates = (endX, endY) => {
@@ -192,6 +193,9 @@ function FieldEditCASPanel({
         {JSON.stringify(
           `${newCACoordinates.end ? `End: (${newCACoordinates.end.x}, ${newCACoordinates.end.y})` : "No end selected"}`,
         )}
+        <br/>
+        {JSON.stringify(
+          `selected: ${newCACoordinates?.planted || "None"}`        )}
         <div
           style={{
             width: "full",

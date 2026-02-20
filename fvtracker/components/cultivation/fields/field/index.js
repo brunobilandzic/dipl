@@ -141,15 +141,14 @@ function FieldEditCASPanel({
   };
 
   const handleEmptyClick = (x, y) => {
-    if (
-      !utils.cultivation.cultivationAreas.checkValidCell({
-        x,
-        y,
-        plantedCells,
-        gap: cultivationAreaDimensions.gap,
-      })
-    ) {
-      alert("Invalid cell selection");
+    const { error } = utils.cultivation.cultivationAreas.checkValidCell({
+      x,
+      y,
+      gap: cultivationAreaDimensions.gap,
+      plantedCells,
+    });
+    if (error) {
+      alert(error);
       return;
     }
     if (!isBeginSelected) {

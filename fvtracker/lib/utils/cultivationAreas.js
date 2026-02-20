@@ -95,7 +95,11 @@ export const checkValidCell = ({ x, y, gap, plantedCells }) => {
     `${x + gap + 1},${y + gap + 1}`,
   ];
 
-  return !adjacentCells.some((cell) => plantedCells.includes(cell));
+  if (adjacentCells.some((cell) => plantedCells.includes(cell))) {
+    return { error: dimensionError.CULTIVATION_AREA_GAP(gap) };
+  }
+  return { error: null };
+};
 };
 
 const checkRectValidDimensions = ({

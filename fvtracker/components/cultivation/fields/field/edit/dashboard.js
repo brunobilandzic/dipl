@@ -1,4 +1,5 @@
 import CreateCA from "./createCA";
+import { EditCA } from "./editCA";
 
 export function FieldEditDashboard({
   getNewCOCoordinates,
@@ -10,7 +11,7 @@ export function FieldEditDashboard({
   setIsBeginSelected,
 }) {
   return (
-    <div className="w-full flex justify-center items-center">
+    <div className="w-full flex justify-center items-center gap-4">
       <CreateCA
         getNewCOCoordinates={getNewCOCoordinates}
         cultivationAreaDimensions={cultivationAreaDimensions}
@@ -20,6 +21,7 @@ export function FieldEditDashboard({
         setPlantedCells={setPlantedCells}
         setIsBeginSelected={setIsBeginSelected}
       />
+      <EditCA />
     </div>
   );
 }

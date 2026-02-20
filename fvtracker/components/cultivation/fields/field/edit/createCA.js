@@ -159,7 +159,7 @@ function CreateCA({
         onClick={onAdd}
         className="flex flex-col justify-center items-center gap-4 cursor-pointer"
       >
-        <FaPlus className="text-4xl" />
+        <div><FaPlus className="text-4xl" /></div>
         <div className="text-sm">Add Cultivation Area</div>
       </div>
     </>

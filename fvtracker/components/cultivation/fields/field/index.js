@@ -204,19 +204,6 @@ function FieldEditCASPanel({
   return (
     <>
       <div className="flex flex-col justify-start gap-6">
-        {JSON.stringify(
-          `${newCACoordinates.begin ? `Begin: (${newCACoordinates.begin.x}, ${newCACoordinates.begin.y})` : "No begin selected"}`,
-        )}
-        <br />
-        {JSON.stringify(
-          `${newCACoordinates.end ? `End: (${newCACoordinates.end.x}, ${newCACoordinates.end.y})` : "No end selected"}`,
-        )}
-        <br />
-        {JSON.stringify(`selected: ${newCACoordinates?.planted || "None"}`)}
-        <br />
-        {JSON.stringify(
-          `Selected CA: ${selectedCultivationArea ? selectedCultivationArea.name : "None"}    `,
-        )}
         <div
           style={{
             width: "full",

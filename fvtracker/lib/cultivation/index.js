@@ -1,5 +1,9 @@
 import { fieldsList, fetchFieldBySlug, createField } from "./fields";
-import { createCultivationArea, updateCultivationArea } from "./cultivationArea";
+import {
+  createCultivationArea,
+  deleteCultivationArea,
+  updateCultivationArea,
+} from "./cultivationArea";
 
 export default {
   fields: {
@@ -11,5 +15,6 @@ export default {
   cultivationArea: {
     create: createCultivationArea,
     update: updateCultivationArea,
+    delete: deleteCultivationArea,
   },
 };

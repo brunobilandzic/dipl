@@ -59,8 +59,18 @@ export const EditCA = ({
   };
 
   const onDelete = async () => {
-    console.log("deleting ca")
-  }
+    if (!confirm("Are you sure you want to delete this cultivation area?")) {
+      return;
+    }
+    try {
+       await axios.delete(`/api/cultivation/cultivation-area`, {
+        data: { id: formData.id },
+      });
+      setSelectedCultivationArea(null);
+    } catch (error) {
+      handleError(error);
+    }
+  };
 
   return (
     <>

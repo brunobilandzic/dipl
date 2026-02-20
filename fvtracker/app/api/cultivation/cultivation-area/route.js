@@ -37,3 +37,22 @@ export async function PUT(request) {
     );
   }
 }
+
+export async function DELETE(request) {
+  try {
+    await dbConnect();
+
+    const body = await request.json();
+    const { id } = body;
+    await cultivation.cultivationArea.delete(id);
+    return Response.json({ success: true }, { status: 200 });
+  } catch (error) {
+    console.error(error);
+    return Response.json(
+      {
+        error: error.message,
+      },
+      { status: 500 },
+    );
+  }
+}

@@ -52,3 +52,7 @@ export async function updateCultivationArea(body) {
   await updated.save();
   return updated;
 }
+
+export async function deleteCultivationArea(id) {
+  await CultivationArea.findByIdAndDelete(id);
+}

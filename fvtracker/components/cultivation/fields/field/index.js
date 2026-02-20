@@ -40,7 +40,7 @@ export default function FieldPageComponent({ slug }) {
         handleApiError(error);
       });
     }
-  }, [slug]);
+  }, [slug, selectedField, fields]);
 
   if (!field)
     return (

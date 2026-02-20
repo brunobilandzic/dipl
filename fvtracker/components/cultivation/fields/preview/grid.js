@@ -77,12 +77,6 @@ const FieldCells = ({
   handleActiveClick,
 }) => {
   let cells = [];
-  console.log(
-    selectedCultivationArea?.planted?.includes(`1,1`),
-    selectedCultivationArea?.planted?.includes(`1,2`),
-    newCACoordinates.planted?.includes(`1,1`) && isBeginSelected,
-    newCACoordinates.planted?.includes(`1,2`) && isBeginSelected,
-  );
   for (let x = 0; x < fieldLength; x++) {
     for (let y = 0; y < fieldWidth; y++) {
       cells.push(

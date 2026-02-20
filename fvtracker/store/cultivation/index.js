@@ -19,8 +19,8 @@ const cultivationSlice = createSlice({
     },
     emptyCultivation: () => ({ ...initialState }),
     createCultivationArea: (state, action) => {
-      state.selectedField.cultivationAreas.push(action.payload);
-      state.fields = state.fields.map((field) => {
+      state.selectedField?.cultivationAreas.push(action.payload);
+      state.fields = state.fields?.map((field) => {
         if (field._id === action.payload.field) {
           return {
             ...field,

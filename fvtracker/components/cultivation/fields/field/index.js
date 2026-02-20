@@ -95,12 +95,6 @@ function FieldEditCASPanel({
     return cultivationAreas     ? utils.cultivation.cultivationAreas.getCASCells(cultivationAreas)
       : [];
    }, [cultivationAreas]);
-   
-/*   const [plantedCells, setPlantedCells] = useState(
-    cultivationAreas
-      ? utils.cultivation.cultivationAreas.getCASCells(cultivationAreas)
-      : [],
-  ); */
   const [clickedCell, setClickedCell] = useState(null);
   const [selectedCultivationArea, setSelectedCultivationArea] = useState(null);
   const [newCACoordinates, setNewCACoordinates] = useState({});
@@ -236,7 +230,6 @@ function FieldEditCASPanel({
           <FieldEditDashboard
             setIsBeginSelected={setIsBeginSelected}
             setField={setField}
-          /*   setPlantedCells={setPlantedCells} */
             getNewCOCoordinates={getNewCOCoordinates}
             emptyCACoordinates={emptyCACoordinates}
             cultivationAreaDimensions={cultivationAreaDimensions}

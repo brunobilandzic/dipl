@@ -1,8 +1,10 @@
+import dbConnect from "@/lib/db/mongooseConnect";
 import seed from "@/seed";
 
 export async function POST(req) {
   console.log("Seed route POST called");
   try {
+    await dbConnect();
     let body = {};
     try {
       body = await req.json();

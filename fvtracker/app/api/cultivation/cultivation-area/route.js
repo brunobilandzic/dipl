@@ -19,4 +19,21 @@ export async function POST(request) {
   }
 }
 
-
+export async function PUT(request) {
+  try {
+    await dbConnect();
+    const body = await request.json();
+    console.log("updating: \n", body);
+    const updatedCultivationArea =
+      await cultivation.cultivationArea.update(body);
+    return Response.json({ updatedCultivationArea }, { status: 200 });
+  } catch (error) {
+    console.error(error);
+    return Response.json(
+      {
+        error: error.message,
+      },
+      { status: 500 },
+    );
+  }
+}

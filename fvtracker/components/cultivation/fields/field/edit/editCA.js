@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Modals from "@/components/layout/modals";
 import { AppInput } from "@/components/form/inputs";
+import axios from "axios";
+import { handleApiError } from "@/lib/constants/errors/client/api";
 
 export const EditCA = ({
   selectedCultivationArea,
@@ -10,11 +12,12 @@ export const EditCA = ({
     console.log("selectedCultivationArea in editCA", selectedCultivationArea);
   }, [selectedCultivationArea]);
 
-  const [formData, setFormData] = useState(null);
+  const [formData, setFormData] = useState({});
 
   useEffect(() => {
     if (selectedCultivationArea) {
       setFormData({
+        id: selectedCultivationArea.id,
         name: selectedCultivationArea?.name || "",
         description: selectedCultivationArea?.description || "",
         dimensions: selectedCultivationArea?.dimensions || {
@@ -43,9 +46,25 @@ export const EditCA = ({
     }
   };
 
-  const onSubmit = () => {
-    console.log("Submitting form data:", formData);
-    setSelectedCultivationArea(null);
+  const onSubmit = async () => {
+    try {
+      const res = await axios.put(
+        `/api/cultivation/cultivation-area`,
+        formData,
+      );
+      console.log(res);
+    } catch (error) {
+      if (error.name === "AxiosError") {
+        handleApiError({
+          ...error,
+          generalMessage:
+            "Failed to update cultivation area. Please try again.",
+        });
+      } else {
+        console.error("Unexpected error:", error);
+        alert("An unexpected error occurred. Please try again.");
+      }
+    }
   };
 
   return (
@@ -71,7 +90,7 @@ export const EditCA = ({
               <AppInput
                 label="Opis"
                 name="description"
-                value={formData?.description || ""}
+                value={formData.description || ""}
                 onChange={onChange}
               />
             </div>
@@ -79,13 +98,13 @@ export const EditCA = ({
               <AppInput
                 label="Širina (m)"
                 name="width"
-                value={formData?.dimensions.width}
+                value={formData.dimensions?.width}
                 onChange={onChange}
               />
               <AppInput
                 label="Dužina (m)"
                 name="length"
-                value={formData?.dimensions.length}
+                value={formData.dimensions?.length}
                 onChange={onChange}
               />
             </div>

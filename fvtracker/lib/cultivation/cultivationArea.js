@@ -19,7 +19,7 @@ export async function createCultivationArea(body) {
   }
 
   const newCultivationArea = await createCultivationAreaRecord(properties);
-  return newCultivationArea;                                        
+  return newCultivationArea;
 }
 
 function transformBody(body) {
@@ -39,4 +39,13 @@ async function createCultivationAreaRecord(properties) {
   await field.save();
   await newCultivationArea.save();
   return newCultivationArea;
+}
+
+export async function updateCultivationArea(body) {
+  const cultivationArea = await CultivationArea.findById(body.id);
+  if (!cultivationArea) {
+    throw new Error("Cultivation area not found with the provided ID.");
+  }
+  console.log("found cultivation area: \n", cultivationArea);
+  return cultivationArea
 }

@@ -6,6 +6,7 @@ import { AppInput } from "@/components/form/inputs";
 import axios from "axios";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { deleteCultivationArea } from "@/store/cultivation";
+import { useDispatch } from "react-redux";
 
 export const EditCA = ({
   selectedCultivationArea,

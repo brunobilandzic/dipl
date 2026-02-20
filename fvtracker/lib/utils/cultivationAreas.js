@@ -100,6 +100,28 @@ export const checkValidCell = ({ x, y, gap, plantedCells }) => {
   }
   return { error: null };
 };
+
+export const checkValidSelection = ({
+  beginX,
+  beginY,
+  endX,
+  endY,
+  gap,
+  plantedCells,
+}) => {
+  const xStart = Math.min(beginX, endX);
+  const yStart = Math.min(beginY, endY);
+  const xEnd = Math.max(beginX, endX);
+  const yEnd = Math.max(beginY, endY);
+
+  for (let x = xStart; x <= xEnd; x++) {
+    for (let y = yStart; y <= yEnd; y++) {
+      if (!checkValidCell({ x, y, gap, plantedCells })) {
+        return {error: dimensionError.CULTIVATION_AREA_GAP(gap)};
+      }
+    }
+  }
+  return {error: null};
 };
 
 const checkRectValidDimensions = ({

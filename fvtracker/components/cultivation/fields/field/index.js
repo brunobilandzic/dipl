@@ -132,6 +132,20 @@ function FieldEditCASPanel({
       return;
     }
 
+    const { error: selectionError } = utils.cultivation.cultivationAreas.checkValidSelection({
+      beginX,
+      beginY,
+      endX,
+      endY,
+      gap: cultivationAreaDimensions.gap,
+      plantedCells,
+    });
+
+    if (selectionError) {
+      alert(selectionError);
+      return;
+    }
+
     setNewCACoordinates({
       ...newCACoordinates,
       end: { x: endX, y: endY },

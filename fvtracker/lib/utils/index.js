@@ -14,7 +14,8 @@ import {
   getDimensionsFromPlanted,
   plantedArrayToMap,
   prepareCulitvationArea,
-  checkValidCell
+  checkValidCell,
+  checkValidSelection
 } from "./cultivationAreas";
 import { numbersInRanges } from "./formValidation";
 
@@ -40,6 +41,7 @@ export default {
       plantedArrayToMap,
       prepareCulitvationArea,
       checkValidCell, 
+      checkValidSelection
     },
   },
   formValidation: {

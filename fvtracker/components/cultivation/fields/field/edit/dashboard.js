@@ -12,18 +12,24 @@ export function FieldEditDashboard({
 }) {
   return (
     <div className="w-full flex justify-center items-center gap-4">
-      <CreateCA
-        getNewCOCoordinates={getNewCOCoordinates}
-        cultivationAreaDimensions={cultivationAreaDimensions}
-        fieldId={fieldId}
-        emptyCACoordinates={emptyCACoordinates}
-        setField={setField}
-        setPlantedCells={setPlantedCells}
-        setIsBeginSelected={setIsBeginSelected}
-      />
-      <EditCA />
+      <DashboardItem>
+        <CreateCA
+          getNewCOCoordinates={getNewCOCoordinates}
+          cultivationAreaDimensions={cultivationAreaDimensions}
+          fieldId={fieldId}
+          emptyCACoordinates={emptyCACoordinates}
+          setField={setField}
+          setPlantedCells={setPlantedCells}
+          setIsBeginSelected={setIsBeginSelected}
+        />
+      </DashboardItem>
+      <DashboardItem>
+        <EditCA />
+      </DashboardItem>
     </div>
   );
 }
 
-
+function DashboardItem({ children }) {
+  return <div className="flex flex-col gap-4 align-middle justify-center relative">{children}</div>;
+}

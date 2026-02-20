@@ -170,7 +170,7 @@ export function overlapsExistingCA(
 
 export function plantedArrayToMap(planted) {
   const plantedMap = new Map();
-  planted.map((pl) => plantedMap.set(pl, null));
+  planted?.map((pl) => plantedMap.set(pl, null));
   return plantedMap;
 }
 

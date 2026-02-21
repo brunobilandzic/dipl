@@ -58,8 +58,8 @@ export async function deleteCultivationArea(id) {
 }
 
 export const getCultivationArea = async (id) => {
-  const cultivationArea = await CultivationArea.findById(id)
-  if(!cultivationArea) {
+  const cultivationArea = await CultivationArea.findById(id);
+  if (!cultivationArea) {
     throw new Error("Cultivation area not found with the provided ID.");
   }
   return cultivationArea;

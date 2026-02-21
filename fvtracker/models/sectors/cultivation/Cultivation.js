@@ -5,6 +5,36 @@ import { makeUrlFriendly } from "@/lib/utils/strings";
 
 const { Schema } = mongoose;
 
+const plantedCropVarietySchema = {
+  cropVariety: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "CropVariety",
+    default: null,
+  },
+  cellCoords: {
+    type: String,
+    default: null,
+    validate: (coords) => {
+      if (coords && !/^[\d]+,[\d]+$/.test(coords)) {
+        throw new Error(
+          "Invalid cell coordinates format. Expected format: 'x,y'",
+        );
+      }
+    },
+  },
+  fieldCoords: {
+    type: String,
+    default: null,
+    validate: (coords) => {
+      if (coords && !/^[\d]+,[\d]+$/.test(coords)) {
+        throw new Error(
+          "Invalid field coordinates format. Expected format: 'x,y'",
+        );
+      }
+    },
+  },
+};
+
 const cultivationAreaSchema = new Schema({
   field: {
     type: mongoose.Schema.Types.ObjectId,
@@ -23,11 +53,7 @@ const cultivationAreaSchema = new Schema({
   description: { type: String, default: "" },
   planted: {
     type: Map,
-    of: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "CropVariety",
-      default: null,
-    },
+    of: plantedCropVarietySchema,
     default: () => new Map(),
   },
   dimensions: {
@@ -67,11 +93,7 @@ const cultivationSchema = new Schema({
   description: { type: String, default: "" },
   planted: {
     type: Map,
-    of: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "CropVariety",
-      default: null,
-    },
+    of: plantedCropVarietySchema,
     default: () => new Map(),
   },
   workHours: [
@@ -124,3 +146,5 @@ export const CultivationArea =
 export const Cultivation =
   mongoose.models.Cultivation ||
   mongoose.model("Cultivation", cultivationSchema);
+
+

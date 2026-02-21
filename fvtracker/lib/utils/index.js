@@ -18,6 +18,7 @@ import {
   checkValidSelection
 } from "./cultivationAreas";
 import { numbersInRanges } from "./formValidation";
+import { getCropDimensions } from "./crops";
 
 export default {
   objects: {
@@ -47,6 +48,9 @@ export default {
   formValidation: {
     numbersInRanges,
   },
+  crops: {
+    dimensions: getCropDimensions
+  }
 };
 
 export const nextFrame = () => new Promise((res) => requestAnimationFrame(res));

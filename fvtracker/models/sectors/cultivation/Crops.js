@@ -52,7 +52,7 @@ const cropVarietySchema = new Schema({
   classification: { type: String, enum: ["A", "B", "C"] },
   plant: [
     {
-      area: {
+      cultivationArea: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "CultivationArea",
         default: [],
@@ -62,7 +62,7 @@ const cropVarietySchema = new Schema({
         x: Number,
         y: Number,
       },
-      caCoords: {
+      cellCoords: {
         x: Number,
         y: Number,
       },

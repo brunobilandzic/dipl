@@ -50,6 +50,7 @@ const cropVarietySchema = new Schema({
     { type: mongoose.Schema.Types.ObjectId, ref: "SoilType", default: [] },
   ],
   classification: { type: String, enum: ["A", "B", "C"] },
+  cultivationArea: { type: mongoose.Schema.Types.ObjectId, ref: "CultivationArea" },
 });
 
 // model exports

@@ -1,7 +1,7 @@
 import cultivation from "@/lib/cultivation";
 
 export async function createCultivations() {
-  const { fields, cropData } = await getFieldAndCropData();
+  const { fields, cropData } = await cultivation.crops.fieldCropData();
 
   console.log(`\nSeeding cultivations for ${fields.length} fields...`);
 
@@ -20,11 +20,11 @@ export async function createCultivations() {
   }
 }
 
-async function getFieldAndCropData() {
-  const fields = await cultivation.fields.list();
-  fields.forEach(async (field) => {
-    await field.populate({path: "cultivationAreas"});
-  });
-  const cropData = await cultivation.crops.data();
-  return { fields, cropData };
+
+function getCultivationDimensions(cultivationArea, planted) {
+  const { length, width } = cultivationArea;
+  const plantedEmpty = Object.keys(planted).reduce((acc, key) => {
+    if (planted[key] === null) acc += 1;
+    return acc;
+  }, 0);
 }

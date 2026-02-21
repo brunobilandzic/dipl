@@ -20,5 +20,15 @@ export default {
   },
   crops: {
     data: cropsData,
+    fieldCropData: getFieldAndCropData,
   },
 };
+
+async function getFieldAndCropData() {
+  const fields = await fieldsList();
+  fields.forEach(async (field) => {
+    await field.populate({ path: "cultivationAreas" });
+  });
+  const cropData = await cropsData();
+  return { fields, cropData };
+}

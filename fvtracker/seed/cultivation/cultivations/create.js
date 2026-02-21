@@ -14,12 +14,19 @@ export async function createCultivations() {
     console.log(`Creating cultivation area for field: ${field.name}`);
 
     for (const cultivationArea of field.cultivationAreas) {
-      console.log(`Processing cultivation area: ${cultivationArea.name}`);
+      const { width, length } =
+        utils.cultivation.cultivationAreas.getDimensionsFromPlanted(
+          cultivationArea.planted,
+        );
+      console.log(
+        `Cultivation area dimensions - Width: ${width}, Length: ${length}`,
+      );
       const planted = cultivationArea.planted;
-      utils.crops.dimensions(cultivationArea);
+      utils.crops.dimensions({
+        planted: cultivationArea.planted,
+        width,
+        length,
+      });
     }
   }
 }
-
-
-

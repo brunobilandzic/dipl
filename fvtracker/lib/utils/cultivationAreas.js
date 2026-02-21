@@ -117,11 +117,11 @@ export const checkValidSelection = ({
   for (let x = xStart; x <= xEnd; x++) {
     for (let y = yStart; y <= yEnd; y++) {
       if (!checkValidCell({ x, y, gap, plantedCells })) {
-        return {error: dimensionError.CULTIVATION_AREA_GAP(gap)};
+        return { error: dimensionError.CULTIVATION_AREA_GAP(gap) };
       }
     }
   }
-  return {error: null};
+  return { error: null };
 };
 
 const checkRectValidDimensions = ({
@@ -132,7 +132,7 @@ const checkRectValidDimensions = ({
   cultivationAreaDimensons,
 }) => {
   const { min_ca_dim, max_ca_dim } = cultivationAreaDimensons;
-  const { width, length } = getDimensionsForNewCA(beginX, beginY, endX, endY);
+  const { width, length } = getDimensionsCA(beginX, beginY, endX, endY);
   return (
     width > 0 &&
     length > 0 &&
@@ -143,7 +143,7 @@ const checkRectValidDimensions = ({
   );
 };
 
-export function getDimensionsForNewCA(beginX, beginY, endX, endY) {
+export function getDimensionsCA(beginX, beginY, endX, endY) {
   const xStart = Math.min(beginX, endX);
   const xEnd = Math.max(beginX, endX);
   const yStart = Math.min(beginY, endY);

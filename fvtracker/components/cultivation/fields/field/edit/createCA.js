@@ -32,7 +32,7 @@ function CreateCA({
   const [newCACoordinates, setNewCACoordinates] = useState(null);
 
   const updateDimensions = (beginX, beginY, endX, endY) => {
-    const dimensions = utils.cultivation.cultivationAreas.getDimensionsForNewCA(
+    const dimensions = utils.cultivation.cultivationAreas.getDimensionsCA(
       beginX,
       beginY,
       endX,

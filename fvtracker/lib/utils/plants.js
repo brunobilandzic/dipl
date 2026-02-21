@@ -1,9 +1,8 @@
-import { extractPlantedCells } from "./cultivationAreas.js";
+import { extractPlantedCells, getMinValuesFromPlanted } from "./cultivationAreas.js";
 
 export function getCropDimensions({ planted, width, length }) {
   const emptySlots = [];
   const plantedCells = extractPlantedCells(planted);
-    console.log("pc:", plantedCells.length)
 
   for (const [slot, cropVarietyId] of planted) {
     if (!cropVarietyId) {
@@ -25,4 +24,13 @@ export function getCropDimensions({ planted, width, length }) {
       planted,
     );
   });
+}
+
+export function cultivationAreaMapCoords({ planted, cellCoords }) {
+  const plantedCells = extractPlantedCells(planted);
+
+  const [x, y] = cellCoords.split(",").map(Number);
+  const { minX, minY } = getMinValuesFromPlanted(plantedCells);
+
+  return `${minX + x},${minY + y}`;
 }

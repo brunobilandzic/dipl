@@ -84,16 +84,7 @@ export const getCellsInRect = (
 };
 
 export const checkValidCell = ({ x, y, gap, plantedCells }) => {
-  const adjacentCells = [
-    `${x - gap - 1},${y}`,
-    `${x + gap + 1},${y}`,
-    `${x},${y - gap - 1}`,
-    `${x},${y + gap + 1}`,
-    `${x - gap - 1},${y - gap - 1}`,
-    `${x - gap - 1},${y + gap + 1}`,
-    `${x + gap + 1},${y - gap - 1}`,
-    `${x + gap + 1},${y + gap + 1}`,
-  ];
+  const adjacentCells = adjacentCellsGap({ x, y, gap, plantedCells });
 
   if (adjacentCells.some((cell) => plantedCells.includes(cell))) {
     return { error: dimensionError.CULTIVATION_AREA_GAP(gap) };
@@ -209,8 +200,7 @@ export function prepareCulitvationArea({ newCADetails, newCACoordinates }) {
   return cultivationArea;
 }
 
-
-export function adjacentCells ({x,y}) {
+export function adjacentCells({ x, y, plantedCells }) {
   const adjacentCells = [
     `${x - 1},${y - 1}`,
     `${x},${y - 1}`,
@@ -221,5 +211,20 @@ export function adjacentCells ({x,y}) {
     `${x},${y + 1}`,
   ];
 
-  return adjacentCells;
+  return adjacentCells.filter((cell) => plantedCells.includes(cell));
+}
+
+export function adjacentCellsGap({ x, y, gap, plantedCells }) {
+  const adjacentCellsGap = [
+    `${x - gap - 1},${y}`,
+    `${x + gap + 1},${y}`,
+    `${x},${y - gap - 1}`,
+    `${x},${y + gap + 1}`,
+    `${x - gap - 1},${y - gap - 1}`,
+    `${x - gap - 1},${y + gap + 1}`,
+    `${x + gap + 1},${y - gap - 1}`,
+    `${x + gap + 1},${y + gap + 1}`,
+  ];
+
+  return adjacentCellsGap;
 }

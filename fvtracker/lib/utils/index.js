@@ -16,7 +16,8 @@ import {
   prepareCulitvationArea,
   checkValidCell,
   checkValidSelection,
-  adjacentCells
+  adjacentCells,
+  adjacentCellsGap
 } from "./cultivationAreas";
 import { numbersInRanges } from "./formValidation";
 import { getCropDimensions } from "./crops";
@@ -44,7 +45,8 @@ export default {
       prepareCulitvationArea,
       checkValidCell, 
       checkValidSelection,
-      adjacentCells
+      adjacentCells,
+      adjacentCellsGap
     },
   },
   formValidation: {

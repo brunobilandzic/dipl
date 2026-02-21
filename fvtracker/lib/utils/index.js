@@ -21,7 +21,7 @@ import {
   extractPlantedCells
 } from "./cultivationAreas";
 import { numbersInRanges } from "./formValidation";
-import { getCropDimensions } from "./crops";
+import { getCropDimensions } from "./plants";
 
 export default {
   objects: {

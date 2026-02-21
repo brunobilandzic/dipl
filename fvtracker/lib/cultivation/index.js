@@ -3,8 +3,9 @@ import {
   createCultivationArea,
   deleteCultivationArea,
   updateCultivationArea,
+  getCultivationArea
 } from "./cultivationArea";
-import { cropsData } from "./plant";
+import { cropsData, getCropVarietyById } from "./plant";
 
 export default {
   fields: {
@@ -17,6 +18,7 @@ export default {
     create: createCultivationArea,
     update: updateCultivationArea,
     delete: deleteCultivationArea,
+    get: getCultivationArea,
   },
   crops: {
     data: cropsData,

@@ -50,11 +50,23 @@ const cropVarietySchema = new Schema({
     { type: mongoose.Schema.Types.ObjectId, ref: "SoilType", default: [] },
   ],
   classification: { type: String, enum: ["A", "B", "C"] },
-  cultivationAreas: [
+  plant: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "CultivationArea",
-      default: [],
+      area: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "CultivationArea",
+        default: [],
+      },
+      plantedAt: { type: Date, default: Date.now },
+      fieldCoords: {
+        x: Number,
+        y: Number,
+      },
+      caCoords: {
+        x: Number,
+        y: Number,
+      },
+      harvestedAt: Date,
     },
   ],
 });

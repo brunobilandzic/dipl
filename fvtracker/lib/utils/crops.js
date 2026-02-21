@@ -1,7 +1,14 @@
-export function getCropDimensions(cultivationArea, planted) {
-  const { length, width } = cultivationArea;
-  const plantedEmpty = Object.keys(planted).reduce((acc, key) => {
-    if (planted[key] === null) acc += 1;
-    return acc;
-  }, 0);
+export function getCropDimensions({
+  planted
+}) {
+
+  const emptySlots = [];
+
+  for (const [slot, cropVarietyId] of planted) {
+    if (!cropVarietyId) {
+      emptySlots.push(slot);
+    }
+  }
+
+  console.log(`There are ${emptySlots.length} empty slots in the cultivation area.`);
 }

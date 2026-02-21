@@ -11,5 +11,18 @@ export function getCropDimensions({ planted, width, length }) {
     }
   }
 
-  console.log(`There are ${emptySlots.length} empty slots in the cultivation area.`);
+  console.log(
+    `There are ${emptySlots.length} empty slots in the cultivation area.`,
+  );
+
+  const emptyDimensions = [];
+
+  emptySlots.map((slot) => {
+    const [x, y] = slot.split(",").map(Number);
+    const adjacentCells = utils.cultivation.cultivationAreas.getAdjacentCells(
+      x,
+      y,
+      planted,
+    );
+  });
 }

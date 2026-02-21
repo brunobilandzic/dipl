@@ -56,9 +56,16 @@ export async function plantCropVariety({
     cellCoords,
   });
 
-  cultivationArea.planted.set(fieldCoords, cropVarietyId);
+  cultivationArea.planted.set(fieldCoords, {
+    cropVariety: cropVariety._id,
+    plantedAt: new Date(),
+  });
 
-  cropVariety.cultivationAreas.push(cultivationAreaId);
+  cropVariety.cultivationAreas.push({
+    cultivationArea: cultivationAreaId,
+    cellCoords,
+    fieldCoords,
+  });
   await cropVariety.save();
   await cultivationArea.save();
 
@@ -70,3 +77,5 @@ export async function plantCropVariety({
     message: `Planted ${cropVariety.name} in cultivation area ${cultivationArea.name} at cell ${cellCoords}, field cell ${fieldCoords}.`,
   };
 }
+
+

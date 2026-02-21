@@ -153,7 +153,7 @@ export function getDimensionsFromPlanted(planted) {
   return { width, length };
 }
 
-function extractPlantedCells(planted) {
+export function extractPlantedCells(planted) {
   const plantedCells = [];
   for (let entry of planted.entries()) {
     plantedCells.push(entry);

@@ -58,9 +58,23 @@ export async function deleteCultivationArea(id) {
 }
 
 export const getCultivationArea = async (id) => {
-  const cultivationArea = await CultivationArea.findById(id);
-  if (!cultivationArea) {
+  const cultivationManager = await auth.session.fetchSessionSpecificManager("CultivationManager");
+  await cultivationManager.populate({
+    path: "fields",
+    populate: {
+      path: "cultivationAreas",
+      match: { _id: id },
+    },
+  });
+  
+  const cultivationArea = cultivationManager.fields.reduce((found, field) => {
+    if (found) return found;
+    return field.cultivationAreas.find((area) => area._id.toString() === id);
+  }, null);
+
+  if(!cultivationArea) {
     throw new Error("Cultivation area not found with the provided ID.");
   }
+
   return cultivationArea;
 };

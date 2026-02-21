@@ -1,6 +1,21 @@
 import dbConnect from "@/lib/db/mongooseConnect";
 import cultivation from "@/lib/cultivation";
 
+export async function GET(request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id");
+    await dbConnect();
+    if (id) {
+      const cultivationArea = await cultivation.cultivationArea.get(id);
+      return Response.json({ cultivationArea }, { status: 200 });
+    }
+  } catch (error) {
+    console.error(error);
+    return Response.json({ error: error.message }, { status: 500 });
+  }
+}
+
 export async function POST(request) {
   try {
     await dbConnect();

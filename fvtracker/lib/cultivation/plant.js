@@ -1,5 +1,6 @@
 import { CropMainType, CropVariety } from "@/models/sectors/cultivation/Crops";
 import { getCultivationArea } from "./cultivationArea";
+import utils from "@/lib/utils";
 
 export async function cropsData() {
   const cropMainTypes = await CropMainType.find().populate({
@@ -50,6 +51,22 @@ export async function plantCropVariety({
   const cultivationArea = await getCultivationArea(cultivationAreaId);
   const cropVariety = await getCropVarietyById(cropVarietyId);
 
-  cultivationArea.planted.set(cellCoords, cropVarietyId);
+  const fieldCoords = utils.crops.mapCords({
+    planted: cultivationArea.planted,
+    cellCoords,
+  });
+
+  cultivationArea.planted.set(fieldCoords, cropVarietyId);
+
+  cropVariety.cultivationAreas.push(cultivationAreaId);
+  await cropVariety.save();
   await cultivationArea.save();
+
+  return {
+    success: true,
+    cropVariety,
+    cultivationArea,
+    fieldCoords,
+    message: `Planted ${cropVariety.name} in cultivation area ${cultivationArea.name} at cell ${cellCoords}, field cell ${fieldCoords}.`,
+  };
 }

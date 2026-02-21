@@ -6,8 +6,17 @@ export async function POST(request) {
     await dbConnect();
     const body = await request.json();
     const { cultivationAreaId, cropVarietyId, cellCoords } = body;
-    console.log(body);
-    return Response.json({ success: true }, { status: 200 });
+    const { success, message, cropVariety, fieldCoords, cultivationArea } =
+      await cultivation.crops.plant({
+        cultivationAreaId,
+        cropVarietyId,
+        cellCoords,
+      });
+
+    return Response.json(
+      { success, message, cropVariety, fieldCoords, cultivationArea },
+      { status: 200 },
+    );
   } catch (error) {
     console.error(error);
     return Response.json({ error: error.message }, { status: 500 });
@@ -27,7 +36,7 @@ export async function GET(request) {
 
     const cropsData = await cultivation.crops.data();
 
-    return Response.json({cropsData}, { status: 200 });
+    return Response.json({ cropsData }, { status: 200 });
   } catch (error) {
     console.error(error);
     return Response.json({ error: error.message }, { status: 500 });

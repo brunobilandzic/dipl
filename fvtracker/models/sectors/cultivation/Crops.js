@@ -66,7 +66,7 @@ const cropVarietySchema = new Schema({
         x: Number,
         y: Number,
       },
-      harvestedAt: Date,
+      harvestedAt: {type: Date, default: null},
     },
   ],
 });

@@ -21,6 +21,7 @@ export default {
   crops: {
     data: cropsData,
     fieldCropData: getFieldAndCropData,
+    cropVariety: getCropVarietyById,
   },
 };
 

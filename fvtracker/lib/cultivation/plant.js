@@ -32,3 +32,10 @@ export async function cropsData() {
 
   return cropData;
 }
+export async function getCropVarietyById(id) {
+  const cropVariety = await CropVariety.findById(id);
+  if (!cropVariety) {
+    throw new Error("Crop variety not found with the provided ID.");
+  }
+  return cropVariety;
+}

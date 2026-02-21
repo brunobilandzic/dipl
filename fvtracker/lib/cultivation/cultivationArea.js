@@ -63,4 +63,4 @@ export const getCultivationArea = async (id) => {
     throw new Error("Cultivation area not found with the provided ID.");
   }
   return cultivationArea;
-}
+};

@@ -18,10 +18,11 @@ import {
   checkValidSelection,
   adjacentCells,
   adjacentCellsGap,
-  extractPlantedCells
+  extractPlantedCells,
+  getMinValuesFromPlanted,
 } from "./cultivationAreas";
 import { numbersInRanges } from "./formValidation";
-import { getCropDimensions } from "./plants";
+import { getCropDimensions, cultivationAreaMapCoords } from "./plants";
 
 export default {
   objects: {
@@ -44,19 +45,20 @@ export default {
       getDimensionsFromPlanted,
       plantedArrayToMap,
       prepareCulitvationArea,
-      checkValidCell, 
+      checkValidCell,
       checkValidSelection,
       adjacentCells,
       adjacentCellsGap,
-
+      getMinValuesFromPlanted,
     },
   },
   formValidation: {
     numbersInRanges,
   },
   crops: {
-    dimensions: getCropDimensions
-  }
+    dimensions: getCropDimensions,
+    mapCords: cultivationAreaMapCoords,
+  },
 };
 
 export const nextFrame = () => new Promise((res) => requestAnimationFrame(res));

@@ -167,6 +167,14 @@ const getValuesFromPlanted = (plantedCells) => {
   return { xValues, yValues };
 };
 
+export const getMinValuesFromPlanted = (plantedCells) => {
+  const { xValues, yValues } = getValuesFromPlanted(plantedCells);
+  return {
+    minX: Math.min(...xValues),
+    minY: Math.min(...yValues),
+  };
+};
+
 export function overlapsExistingCA(
   cultivationAreas,
   beginX,
@@ -228,3 +236,4 @@ export function adjacentCellsGap({ x, y, gap, plantedCells }) {
 
   return adjacentCellsGap;
 }
+

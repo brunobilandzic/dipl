@@ -5,7 +5,7 @@ const numberInRange = (value, min, max) => {
     return false;
   }
   const valid = numberValue >= min && numberValue <= max;
-  console.log("Valid:", valid);
+  
   return valid;
 };
 

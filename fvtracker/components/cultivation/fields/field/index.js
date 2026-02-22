@@ -206,8 +206,9 @@ function FieldEditCASPanel({
         <div
           style={{
             width: "full",
-            aspectRatio: `${width} / ${length}`,
+            aspectRatio: ``,
           }}
+          className=""
         >
           <FieldGrid
             width={width}

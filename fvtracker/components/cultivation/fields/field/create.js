@@ -70,13 +70,23 @@ export function CreateFieldPageComponent() {
         },
       ]);
 
-      if (!valid.valid)  {
+      if (!valid.valid) {
+        if (value === "" || value === "0" || value === 0) {
+          setFieldData((prev) => ({
+            ...prev,
+            [objectName]: {
+              ...prev[objectName],
+              [name]: value,
+            },
+          }));
+          return;
+        }
         alert(valid.message);
         setFieldData((prev) => ({
           ...prev,
           [objectName]: {
             ...prev[objectName],
-            [name]: 0,
+            [name]: prev[objectName][name],
           },
         }));
         e.target.value = "";
@@ -164,6 +174,7 @@ export function CreateFieldPageComponent() {
       console.log("Submitting field data:", fieldData);
       const res = await api.post("/cultivation/fields", fieldData);
       console.log("res", res);
+      alert("Parcela uspješno kreirana");
     } catch (err) {
       handleApiError({
         ...err,

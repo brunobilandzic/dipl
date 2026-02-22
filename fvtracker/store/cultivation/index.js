@@ -17,6 +17,9 @@ const cultivationSlice = createSlice({
     selectField: (state, action) => {
       state.selectedField = action.payload;
     },
+    addField: (state, action) => {
+      state.fields.push(action.payload);
+    },
     emptyCultivation: () => ({ ...initialState }),
     createCultivationArea: (state, action) => {
       state.selectedField?.cultivationAreas.push(action.payload);
@@ -53,6 +56,7 @@ export const {
   setFields,
   setInitialState,
   selectField,
+  addField,
   emptyCultivation,
   createCultivationArea,
   deleteCultivationArea,

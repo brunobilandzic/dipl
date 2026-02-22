@@ -4,12 +4,14 @@ import { AppInput, AppTextArea } from "@/components/form/inputs";
 import cultivationConstants from "@/lib/constants/cultivation";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styles from "@/components/form/form.module.css";
 import utils from "@/lib/utils";
 import api from "@/lib/api";
 import { handleApiError } from "@/lib/constants/errors/client/api";
 import { Loading } from "@/components/layout/loading";
+import { selectField, addField } from "@/store/cultivation";
+import { useRouter } from "next/navigation";
 
 export function CreateFieldPageComponent() {
   const testFieldData = {
@@ -31,7 +33,8 @@ export function CreateFieldPageComponent() {
   };
 
   const [fieldData, setFieldData] = useState(testFieldData);
-
+  const router = useRouter();
+  const dispatch = useDispatch();
   const { data: session, status } = useSession();
   const managerModelName = useSelector(
     (state) => state.user.session?.managerModelName,
@@ -171,11 +174,13 @@ export function CreateFieldPageComponent() {
     if (!checkConditions()) return;
 
     try {
-      console.log("Submitting field data:", fieldData);
       const res = await api.post("/cultivation/fields", fieldData);
-      console.log("res", res);
       alert("Parcela uspješno kreirana");
+      dispatch(addField(res.data.field));
+      dispatch(selectField(res.data.field));
+      router.push(`/upravljanje-poljima/${res.data.field.slug}`);
     } catch (err) {
+      console.log(err);
       handleApiError({
         ...err,
         generalMessage: "Greška prilikom kreiranja parcele",

@@ -9,6 +9,7 @@ import axios from "axios";
 import { Loading } from "@/components/layout/loading";
 import { selectField } from "@/store/cultivation";
 import { FieldEditDashboard } from "./edit/dashboard";
+import { useRouter } from "next/navigation";
 
 export default function FieldPageComponent({ slug }) {
   const selectedField = useSelector((state) => state.cultivation.selectedField);
@@ -92,13 +93,15 @@ function FieldEditCASPanel({
 }) {
   const [editCultivationAreas, setEditCultivationAreas] = useState(false);
   const plantedCells = useMemo(() => {
-    return cultivationAreas     ? utils.cultivation.cultivationAreas.getCASCells(cultivationAreas)
+    return cultivationAreas
+      ? utils.cultivation.cultivationAreas.getCASCells(cultivationAreas)
       : [];
-   }, [cultivationAreas]);
+  }, [cultivationAreas]);
   const [clickedCell, setClickedCell] = useState(null);
   const [selectedCultivationArea, setSelectedCultivationArea] = useState(null);
   const [newCACoordinates, setNewCACoordinates] = useState({});
   const [isBeginSelected, setIsBeginSelected] = useState(false);
+  const router = useRouter();
 
   const onBeginCoordinates = (beginX, beginY) => {
     setIsBeginSelected(true);
@@ -131,14 +134,15 @@ function FieldEditCASPanel({
       return;
     }
 
-    const { error: selectionError } = utils.cultivation.cultivationAreas.checkValidSelection({
-      beginX,
-      beginY,
-      endX,
-      endY,
-      gap: cultivationAreaDimensions.gap,
-      plantedCells,
-    });
+    const { error: selectionError } =
+      utils.cultivation.cultivationAreas.checkValidSelection({
+        beginX,
+        beginY,
+        endX,
+        endY,
+        gap: cultivationAreaDimensions.gap,
+        plantedCells,
+      });
 
     if (selectionError) {
       alert(selectionError);
@@ -177,13 +181,14 @@ function FieldEditCASPanel({
       x,
       y,
     );
-    setSelectedCultivationArea({
+    router.push(`/upravljanje-poljima/${field.slug}/ca/${ca.slug}`);
+    /* setSelectedCultivationArea({
       name: ca.name,
       planted: utils.cultivation.cultivationAreas.getCASCells([ca]),
       dimensions: ca.dimensions,
       description: ca.description,
       id: ca._id,
-    });
+    }); */
 
     resetSelection();
   };

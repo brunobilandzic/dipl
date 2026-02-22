@@ -1,7 +1,6 @@
 "use client";
 
 import classNames from "classnames";
-import { useDispatch } from "react-redux";
 import dimensionError from "@/lib/constants/errors/cultivation/dimensions";
 
 export function FieldGrid({
@@ -137,7 +136,6 @@ const FieldCell = ({
       title={`(${x}, ${y})`}
       onClick={handleClick}
       onContextMenu={(e) => {
-        console.log(onRightClick);
         e.preventDefault();
         onRightClick();
       }}

@@ -15,7 +15,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   }, [selectedField, caSlug, fields]);
 
   useEffect(() => {
-    const fillCultivationArea = async () => {
+    const fillSelectedField = async () => {
       if (!selectedField && fields && fields.length > 0) {
         try {
           console.log(
@@ -53,7 +53,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
         }
       }
     };
-    fillCultivationArea();
+    fillSelectedField();
   }, [fieldSlug, caSlug, selectedField]);
 
   return (

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectField, setFields } from "@/store/cultivation";
 import handleError from "@/lib/constants/errors/client/handleError";
 import api from "@/lib/api";
+import { Loading } from "@/components/layout/loading";
 
 export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const selectedField = useSelector((state) => state.cultivation.selectedField);
@@ -62,6 +63,13 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     };
     fillSelectedField();
   }, [fieldSlug, caSlug, selectedField]);
+
+    if (!cultivationArea)
+      return (
+        <div className="w-full h-screen flex items-center justify-center">
+          <Loading />
+        </div>
+      );
 
   return (
     <>

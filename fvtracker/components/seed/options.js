@@ -20,27 +20,27 @@ export default function SeedOptions() {
 
   const options = [
     {
-      label: "seedAll",
+      label: "Seed All",
       icon: <MdAllInclusive />,
       type: SEED_TYPES.ALL,
     },
     {
-      label: "seedUsers",
+      label: "Seed Users",
       icon: <FaUserPlus />,
       type: SEED_TYPES.USERS,
     },
     {
-      label: "seedFields",
+      label: "Seed Fields",
       icon: <MdFoodBank />,
       type: SEED_TYPES.FIELDS,
     },
     {
-      label: "cropMainTypes",
+      label: "Seed Crops",
       icon: <MdFoodBank />,
       type: SEED_TYPES.CROP_MAIN_TYPES,
     },
     {
-      label: "cultivations",
+      label: "Seed Cultivations",
       icon: <MdFoodBank />,
       type: SEED_TYPES.CULTIVATIONS,
     },

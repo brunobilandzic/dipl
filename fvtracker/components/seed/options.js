@@ -6,28 +6,33 @@ import { MdAllInclusive, MdDeleteForever, MdFoodBank } from "react-icons/md";
 import SEED_TYPES from "@/seed/seedTypes";
 
 export default function SeedOptions() {
-  const _icons = {
-    seedAll: {
+  const _icons = [
+    {
+      name: "seedAll",
       icon: <MdAllInclusive />,
-      label: SEED_TYPES.ALL,
+      type: SEED_TYPES.ALL,
     },
-    seedUsers: {
+    {
+      name: "seedUsers",
       icon: <FaUserPlus />,
-      label: SEED_TYPES.USERS,
+      type: SEED_TYPES.USERS,
     },
-    seedFields: {
+    {
+      name: "seedFields",
       icon: <MdFoodBank />,
-      label: SEED_TYPES.FIELDS,
+      type: SEED_TYPES.FIELDS,
     },
-    cropMainTypes: {
+    {
+      name: "cropMainTypes",
       icon: <MdFoodBank />,
-      label: SEED_TYPES.CROP_MAIN_TYPES,
+      type: SEED_TYPES.CROP_MAIN_TYPES,
     },
-    cultivations: {
+    {
+      name: "cultivations",
       icon: <MdFoodBank />,
-      label: SEED_TYPES.CULTIVATIONS,
-    }
-  };
+      type: SEED_TYPES.CULTIVATIONS,
+    },
+  ];
 
   const API = async (seedType) => {
     try {
@@ -43,10 +48,8 @@ export default function SeedOptions() {
 
   return (
     <>
-      <div
-        className="flex justify-center items-stretch gap-6 w-2/3 mx-auto h-fit  "
-      >
-        {Object.entries(_icons).map(
+      <div className="flex justify-center items-stretch gap-6 w-2/3 mx-auto h-fit  ">
+       {/*  {Object.entries(_icons).map(
           ([key, { icon, label, function: func }]) => (
             <div
               key={key}
@@ -57,7 +60,7 @@ export default function SeedOptions() {
               <div className="text-sm text-wrap text-center">{label}</div>
             </div>
           ),
-        )}
+        )} */}
         <DeleteDB />
       </div>
     </>

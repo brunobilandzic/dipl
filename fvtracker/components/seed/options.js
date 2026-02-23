@@ -44,13 +44,13 @@ export default function SeedOptions() {
   return (
     <>
       <div
-        className="flex justify-center gap-6 w-2/3 mx-auto h-14 "
+        className="flex justify-center items-stretch gap-6 w-2/3 mx-auto h-fit  "
       >
         {Object.entries(_icons).map(
           ([key, { icon, label, function: func }]) => (
             <div
               key={key}
-              className="flex flex-col gap-2 btn items-center justify-around p-2 w-32 cursor-pointer "
+              className="flex flex-col gap-2 btn items-center justify-around p-2 w-32  cursor-pointer "
               onClick={async () => API(label)}
             >
               <div className="text-3xl">{icon}</div>

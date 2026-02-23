@@ -65,6 +65,16 @@ export default function SeedOptions() {
     }
   };
 
+  const mapOption = (option) => {
+    const { label, icon, type, onClick } = option;
+
+    return {
+      label,
+      icon,
+      onClick: onClick ? onClick : async () => API(type),
+    };
+  };
+
   return (
     <>
       <div className="flex justify-center items-stretch gap-6 w-2/3 mx-auto h-fit  ">

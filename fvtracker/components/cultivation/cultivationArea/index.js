@@ -9,7 +9,7 @@ import handleError from "@/lib/constants/errors/client/handleError";
 export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const selectedField = useSelector((state) => state.cultivation.selectedField);
   const fields = useSelector((state) => state.cultivation.fields);
-
+  const dispatch = useDispatch();
   const cultivationArea = useMemo(() => {
     return selectedField?.cultivationAreas?.find((ca) => ca.slug === caSlug);
   }, [selectedField, caSlug, fields]);

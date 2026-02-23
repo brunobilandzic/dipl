@@ -78,7 +78,7 @@ export default function SeedOptions() {
 
   return (
     <>
-      <div className="flex justify-center items-stretch gap-6 w-2/3 mx-auto h-fit  ">
+      <div className="">
         <OptionButtons options={options.map(mapOption)} />
       </div>
     </>

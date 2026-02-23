@@ -21,32 +21,32 @@ export default function SeedOptions() {
 
   const options = [
     {
-      label: "Seed All",
+      label: "All",
       icon: <MdAllInclusive />,
       type: SEED_TYPES.ALL,
     },
     {
-      label: "Seed Users",
+      label: "Users",
       icon: <FaUserPlus />,
       type: SEED_TYPES.USERS,
     },
     {
-      label: "Seed Fields",
+      label: "Fields",
       icon: <MdFoodBank />,
       type: SEED_TYPES.FIELDS,
     },
     {
-      label: "Seed Crops",
+      label: "Crops",
       icon: <MdFoodBank />,
       type: SEED_TYPES.CROP_MAIN_TYPES,
     },
     {
-      label: "Seed Cultivations",
+      label: "Cultivations",
       icon: <MdFoodBank />,
       type: SEED_TYPES.CULTIVATIONS,
     },
     {
-      label: "Delete DB",
+      label: "DeleteDB",
       icon: <MdDeleteForever />,
       onClick: deleteDB,
     },

@@ -68,7 +68,7 @@ export default function SeedOptions() {
   return (
     <>
       <div className="flex justify-center items-stretch gap-6 w-2/3 mx-auto h-fit  ">
-       {/*  {Object.entries(_icons).map(
+        {/*  {Object.entries(_icons).map(
           ([key, { icon, label, function: func }]) => (
             <div
               key={key}
@@ -79,8 +79,9 @@ export default function SeedOptions() {
               <div className="text-sm text-wrap text-center">{label}</div>
             </div>
           ),
-        )} */}
+        )} 
         <DeleteDB />
+        */}
       </div>
     </>
   );

@@ -4,7 +4,7 @@ export function OptionButtons({ options, row = true }) {
   return (
     <>
       <div
-        className={`flex ${row ? "flex-row w-2/3 mx-auto h-fit" : "flex-col"} justify-center items-stretch gap-2 md:gap-4   `}
+        className={`flex ${row ? "flex-row w-2/3 mx-auto h-fit" : "flex-col"} justify-center items-stretch gap-2`}
       >
         {options.map((option, index) => (
           <OptionButton key={uuid()} option={option} />
@@ -20,7 +20,7 @@ export const OptionButton = ({ option }) => {
     <>
       <div
         onClick={onClick}
-        className="flex flex-col gap-2 items-center justify-center cursor-pointer"
+        className="flex flex-col gap-2 items-center justify-center cursor-pointer min-w-12 overflow-visible  md:gap-4 btn w-24"
       >
         <div className="text-3xl">{icon}</div>
         <div className="text-sm text-wrap text-center">{label}</div>

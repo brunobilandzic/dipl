@@ -64,12 +64,12 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     fillSelectedField();
   }, [fieldSlug, caSlug, selectedField]);
 
-    if (!cultivationArea)
-      return (
-        <div className="w-full h-screen flex items-center justify-center">
-          <Loading />
-        </div>
-      );
+  if (!cultivationArea)
+    return (
+      <div className="w-full h-screen flex items-center justify-center">
+        <Loading />
+      </div>
+    );
 
   return (
     <>

@@ -6,7 +6,19 @@ import { MdAllInclusive, MdDeleteForever, MdFoodBank } from "react-icons/md";
 import SEED_TYPES from "@/seed/seedTypes";
 
 export default function SeedOptions() {
-  const _icons = [
+  const deleteDB = async () => {
+    try {
+      const response = await axios.delete("/api/delete");
+      const { success } = response.data;
+      console.log("SUCCESS:", response.data);
+      if (success) alert("Database deleted successfully");
+    } catch (error) {
+      console.error("Error deleting database:", error);
+      throw new Error(SEED_ERROR);
+    }
+  };
+
+  const options = [
     {
       label: "seedAll",
       icon: <MdAllInclusive />,
@@ -31,6 +43,11 @@ export default function SeedOptions() {
       label: "cultivations",
       icon: <MdFoodBank />,
       type: SEED_TYPES.CULTIVATIONS,
+    },
+    {
+      label: "Delete DB",
+      icon: <MdDeleteForever />,
+      onClick: deleteDB,
     },
   ];
 
@@ -69,7 +86,7 @@ export default function SeedOptions() {
   );
 }
 
-export function DeleteDB() {
+/* export function DeleteDB() {
   const deleteDB = async () => {
     try {
       const response = await axios.delete("/api/delete");
@@ -93,3 +110,4 @@ export function DeleteDB() {
     </button>
   );
 }
+ */

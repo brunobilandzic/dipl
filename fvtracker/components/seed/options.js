@@ -37,8 +37,10 @@ export default function SeedOptions() {
   const API = async (seedType) => {
     try {
       console.log(`Seeding ${seedType}...`);
+
       const response = await axios.post("/api/seed", { seedType });
       console.log(response.data);
+      
       alert(`${seedType} completed successfully\n${response.data.message}`);
     } catch (error) {
       console.error("Error seeding data:", error);

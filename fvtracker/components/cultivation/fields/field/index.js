@@ -97,7 +97,6 @@ function FieldEditCASPanel({
       ? utils.cultivation.cultivationAreas.getCASCells(cultivationAreas)
       : [];
   }, [cultivationAreas]);
-  const [clickedCell, setClickedCell] = useState(null);
   const [selectedCultivationArea, setSelectedCultivationArea] = useState(null);
   const [newCACoordinates, setNewCACoordinates] = useState({});
   const [isBeginSelected, setIsBeginSelected] = useState(false);
@@ -219,7 +218,6 @@ function FieldEditCASPanel({
             width={width}
             length={length}
             cultivationAreas={cultivationAreas}
-            clickedCell={editCultivationAreas ? clickedCell : null}
             setClickedCell={editCultivationAreas ? setClickedCell : null}
             plantedCells={plantedCells}
             selectedCultivationArea={selectedCultivationArea}

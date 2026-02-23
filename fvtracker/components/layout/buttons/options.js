@@ -13,7 +13,7 @@ export function OptionButtons({ options, row = true }) {
 }
 
 export const OptionButton = ({ option }) => {
-  const { name, onClick, icon } = option;
+  const { label, onClick, icon } = option;
   return (
     <>
       <div
@@ -21,7 +21,7 @@ export const OptionButton = ({ option }) => {
         className="flex flex-col gap-2 items-center justify-center cursor-pointer"
       >
         <div className="text-3xl">{icon}</div>
-        <div className="text-sm text-wrap text-center">{name}</div>
+        <div className="text-sm text-wrap text-center">{label}</div>
       </div>
     </>
   );

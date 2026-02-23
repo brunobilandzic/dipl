@@ -5,7 +5,7 @@ import { MdArrowLeft } from "react-icons/md";
 export default function CAOptions({ onBack }) {
   const options = [
     {
-      name: "Back to field",
+      label: "Back to field",
       onClick: () => {
         console.log("back to field");
       },

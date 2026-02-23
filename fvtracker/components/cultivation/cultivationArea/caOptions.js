@@ -15,7 +15,7 @@ export default function CAOptions({ onBack }) {
 
   return (
     <>
-        <OptionButtons options={options} row={false} />
+        <OptionButtons options={options} row={false} small={true}/>
     </>
   );
 }

@@ -15,9 +15,7 @@ export default function CAOptions({ onBack }) {
 
   return (
     <>
-      <div className="col-start-4 col-end-5">
         <OptionButtons options={options} row={false} />
-      </div>
     </>
   );
 }

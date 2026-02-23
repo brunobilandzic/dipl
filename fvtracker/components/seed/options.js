@@ -8,27 +8,27 @@ import SEED_TYPES from "@/seed/seedTypes";
 export default function SeedOptions() {
   const _icons = [
     {
-      name: "seedAll",
+      label: "seedAll",
       icon: <MdAllInclusive />,
       type: SEED_TYPES.ALL,
     },
     {
-      name: "seedUsers",
+      label: "seedUsers",
       icon: <FaUserPlus />,
       type: SEED_TYPES.USERS,
     },
     {
-      name: "seedFields",
+      label: "seedFields",
       icon: <MdFoodBank />,
       type: SEED_TYPES.FIELDS,
     },
     {
-      name: "cropMainTypes",
+      label: "cropMainTypes",
       icon: <MdFoodBank />,
       type: SEED_TYPES.CROP_MAIN_TYPES,
     },
     {
-      name: "cultivations",
+      label: "cultivations",
       icon: <MdFoodBank />,
       type: SEED_TYPES.CULTIVATIONS,
     },
@@ -40,7 +40,7 @@ export default function SeedOptions() {
 
       const response = await axios.post("/api/seed", { seedType });
       console.log(response.data);
-      
+
       alert(`${seedType} completed successfully\n${response.data.message}`);
     } catch (error) {
       console.error("Error seeding data:", error);

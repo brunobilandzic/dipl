@@ -51,7 +51,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
               slug: fieldSlug,
             },
           });
-          dispatch(selectField(res.field));
+          dispatch(selectField(res.data.field));
         } catch (error) {
           handleError({
             ...error,

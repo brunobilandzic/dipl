@@ -9,6 +9,13 @@ export default function handleError(error) {
     });
   } else {
     console.error("Unexpected error:", error);
-    alert("An unexpected error occurred. Please try again.");
+    const errorMessage =
+      error.response?.data?.message ||
+      error.response?.data?.error ||
+      error.message ||
+      error.name ||
+      "Nepoznata greška";
+
+    alert(`${error.generalMessage}: ${errorMessage}`);
   }
 }

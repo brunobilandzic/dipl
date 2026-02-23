@@ -5,6 +5,7 @@ import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectField, setFields } from "@/store/cultivation";
 import handleError from "@/lib/constants/errors/client/handleError";
+import api from "@/lib/api";
 
 export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const selectedField = useSelector((state) => state.cultivation.selectedField);

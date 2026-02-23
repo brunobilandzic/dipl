@@ -1,9 +1,19 @@
-export function OptionButtons({ options }) {
-  return <></>;
+export function OptionButtons({ options, row = true }) {
+  return (
+    <>
+      <div
+        className={`flex ${row ? "flex-row w-2/3 mx-auto h-fit" : "flex-col"} justify-center items-stretch gap-2 md:gap-4   `}
+      >
+        {options.map((option, index) => (
+          <OptionButton key={index} option={option} />
+        ))}
+      </div>
+    </>
+  );
 }
 
-export const OptionButton = ({ action }) => {
-  const { name, onClick, icon } = action;
+export const OptionButton = ({ option }) => {
+  const { name, onClick, icon } = option;
   return (
     <>
       <div

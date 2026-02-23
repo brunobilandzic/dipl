@@ -34,11 +34,27 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
             generalMessage: "Failed to load cultivation area",
           });
         }
+        if (!selectedField) {
+          console.log("selected field is null, fetching field...");
+          try {
+            const res = await fetch(`/api/cultivation/fields`, {
+              params: {
+                slug: fieldSlug,
+              },
+            });
+            dispatch(selectField(res.field));
+            ret;
+          } catch (error) {
+            handleError({
+              ...error,
+              generalMessage: "Failed to load field from server",
+            });
+          }
         }
       }
     };
     fillCultivationArea();
-  });
+  }, [fieldSlug, caSlug, selectedField]);
 
   return (
     <>

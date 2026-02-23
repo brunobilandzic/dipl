@@ -16,7 +16,14 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
 
   useEffect(() => {
     const fillSelectedField = async () => {
+      console.log("in fillSelectedField", {
+        fieldSlug,
+        caSlug,
+        selectedField,
+        fields,
+      });
       if (!selectedField && fields && fields.length > 0) {
+        console.log(!selectedField)
         try {
           console.log(
             "slected field is null, but fields are in store, finding field...",
@@ -34,6 +41,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
             generalMessage: "Failed to load cultivation area",
           });
         }
+        console.log("selected field is null, fetching field...");
         if (!selectedField) {
           console.log("selected field is null, fetching field...");
           try {

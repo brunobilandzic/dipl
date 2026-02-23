@@ -1,3 +1,5 @@
+import { v4 as uuid } from "uuid";
+
 export function OptionButtons({ options, row = true }) {
   return (
     <>
@@ -5,7 +7,7 @@ export function OptionButtons({ options, row = true }) {
         className={`flex ${row ? "flex-row w-2/3 mx-auto h-fit" : "flex-col"} justify-center items-stretch gap-2 md:gap-4   `}
       >
         {options.map((option, index) => (
-          <OptionButton key={index} option={option} />
+          <OptionButton key={uuid()} option={option} />
         ))}
       </div>
     </>

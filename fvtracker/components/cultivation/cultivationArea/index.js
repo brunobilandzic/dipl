@@ -24,7 +24,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
         fields,
       });
       if (!selectedField && fields && fields.length > 0) {
-        console.log(!selectedField)
         try {
           console.log(
             "slected field is null, but fields are in store, finding field...",
@@ -43,22 +42,21 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
           });
         }
         console.log("selected field is null, fetching field...");
-        if (!selectedField) {
-          console.log("selected field is null, fetching field...");
-          try {
-            const res = await fetch(`/api/cultivation/fields`, {
-              params: {
-                slug: fieldSlug,
-              },
-            });
-            dispatch(selectField(res.field));
-            ret;
-          } catch (error) {
-            handleError({
-              ...error,
-              generalMessage: "Failed to load field from server",
-            });
-          }
+      }
+      if (!selectedField) {
+        console.log("selected field is null, fetching field...");
+        try {
+          const res = await api.get(`/cultivation/fields`, {
+            params: {
+              slug: fieldSlug,
+            },
+          });
+          dispatch(selectField(res.field));
+        } catch (error) {
+          handleError({
+            ...error,
+            generalMessage: "Failed to load field from server",
+          });
         }
       }
     };

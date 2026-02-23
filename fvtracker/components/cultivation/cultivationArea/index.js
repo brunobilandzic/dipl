@@ -8,6 +8,7 @@ import handleError from "@/lib/constants/errors/client/handleError";
 import api from "@/lib/api";
 import { Loading } from "@/components/layout/loading";
 import CAOptions from "./caOptions";
+import { FieldGrid } from "../fields/preview/grid";
 
 export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const selectedField = useSelector((state) => state.cultivation.selectedField);
@@ -71,12 +72,18 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
         <Loading />
       </div>
     );
+    console.log(cultivationArea);
 
+    const {
+      width,
+      length,
+    } = cultivationArea.dimensions;
+    
   return (
     <>
       <div className="grid grid-cols-6">
         <div className="col-start-1 col-end-6 h-screen flex flex-col items-center justify-center">
-          blbla
+         <FieldGrid width={width} length={length} />
         </div>
         <div className="col-start-6 col-end-7  h-screen flex flex-col items-center justify-center">
           <CAOptions />

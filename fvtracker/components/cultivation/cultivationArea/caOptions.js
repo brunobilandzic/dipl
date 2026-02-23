@@ -1,13 +1,20 @@
+import { OptionButtons } from "@/components/layout/buttons/options";
 import { MdArrowLeft } from "react-icons/md";
 
-export const actions = [
-  {
-    name: "Back to field",
-    onClick: () => {
-      console.log("back to field");
+export default function CAOptions({ onBack }) {
+  const options = [
+    {
+      name: "Back to field",
+      onClick: () => {
+        console.log("back to field");
+      },
+      icon: <MdArrowLeft />,
     },
-    icon: <MdArrowLeft />,
-  },
-];
+  ];
 
-
+  return (
+    <div className="p-4">
+      <OptionButtons actions={actions} />
+    </div>
+  );
+}

@@ -73,8 +73,14 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
 
   return (
     <>
-      ca page
-      <div className="">{JSON.stringify(cultivationArea, null, 2)}</div>
+      <div className="grid grid-cols-6">
+        <div className="col-start-1 col-end-6 h-screen flex flex-col items-center justify-center">
+          blbla
+          </div>
+          <div className="col-start-6 col-end-7  h-screen flex flex-col items-center justify-center">
+            options
+          </div>
+      </div>
     </>
   );
 }

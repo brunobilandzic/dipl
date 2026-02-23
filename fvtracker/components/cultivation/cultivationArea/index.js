@@ -7,6 +7,7 @@ import { selectField, setFields } from "@/store/cultivation";
 import handleError from "@/lib/constants/errors/client/handleError";
 import api from "@/lib/api";
 import { Loading } from "@/components/layout/loading";
+import CAOptions from "./caOptions";
 
 export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const selectedField = useSelector((state) => state.cultivation.selectedField);
@@ -76,10 +77,10 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       <div className="grid grid-cols-6">
         <div className="col-start-1 col-end-6 h-screen flex flex-col items-center justify-center">
           blbla
-          </div>
-          <div className="col-start-6 col-end-7  h-screen flex flex-col items-center justify-center">
-            options
-          </div>
+        </div>
+        <div className="col-start-6 col-end-7  h-screen flex flex-col items-center justify-center">
+          <CAOptions />
+        </div>
       </div>
     </>
   );

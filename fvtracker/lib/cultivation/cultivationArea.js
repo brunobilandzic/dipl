@@ -67,13 +67,13 @@ export const getCultivationArea = async (id) => {
       match: { _id: id },
     },
   });
-  
+
   const cultivationArea = cultivationManager.fields.reduce((found, field) => {
     if (found) return found;
     return field.cultivationAreas.find((area) => area._id.toString() === id);
   }, null);
 
-  if(!cultivationArea) {
+  if (!cultivationArea) {
     throw new Error("Cultivation area not found with the provided ID.");
   }
 

@@ -45,6 +45,7 @@ export function FieldGrid({
         style={{
           gridTemplateColumns: `repeat(${fieldWidth}, minmax(0, 1fr))`,
           gridTemplateRows: `repeat(${fieldLength}, minmax(0, 1fr))`,
+          aspectRatio: `${fieldWidth} / ${fieldLength}`,
         }}
       >
         <FieldCells
@@ -123,6 +124,7 @@ const FieldCell = ({
     small ? "w-1 h-1" : enlarged ? "w-6 h-6" : "w-3 h-3",
     selected ? `bg-green-500` : active ? `bg-yellow-500` : "",
     "border",
+    !small && "cursor-pointer",
   );
   const handleClick = (e) => {
     if (!active) {

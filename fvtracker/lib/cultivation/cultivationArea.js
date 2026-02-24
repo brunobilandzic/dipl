@@ -23,8 +23,8 @@ export async function createCultivationArea(body) {
 }
 
 function transformBody(body) {
-  const { field, name, description } = body;
-  const planted = plantedArrayToMap(body.planted);
+  const { field, name, description, planted } = body;
+  // const planted = plantedArrayToMap(body.planted);
   return { field, name, description, planted };
 }
 

@@ -142,8 +142,7 @@ export function getDimensionsCA(beginX, beginY, endX, endY) {
   };
 }
 
-export function getDimensionsFromPlanted(planted) {
-  const plantedCells = extractPlantedCells(planted);
+export function getDimensionsFromPlanted(plantedCells) {
   const { xValues, yValues } = getValuesFromPlanted(plantedCells);
   const width = Math.max(...xValues) - Math.min(...xValues) + 1;
   const length = Math.max(...yValues) - Math.min(...yValues) + 1;

@@ -80,12 +80,18 @@ function FieldItem({ field }) {
     slug,
   } = field;
 
+  console.log("ca number of areas", cultivationAreas.length);
+
   const [plantedCells, setPlantedCells] = useState(
     cultivationAreas
       ? utils.cultivation.cultivationAreas.getCASCells(cultivationAreas)
       : [],
   );
 
+  useEffect(() => {
+    console.log("first 5 cells", plantedCells?.slice(0,5));
+  }, [plantedCells]);
+  
   return (
     <>
       <div className="">

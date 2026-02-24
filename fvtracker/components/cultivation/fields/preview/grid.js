@@ -123,8 +123,7 @@ const FieldCell = ({
   const cellClass = classNames(
     small ? "w-1 h-1" : enlarged ? "w-6 h-6" : "w-3 h-3",
     selected ? `bg-green-500` : active ? `bg-yellow-500` : "",
-    "border",
-    !small && "cursor-pointer",
+    "border cursor-pointer",
   );
   const handleClick = (e) => {
     if (!active) {

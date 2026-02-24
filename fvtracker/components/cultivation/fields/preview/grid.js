@@ -81,8 +81,8 @@ const FieldCells = ({
   enlarged,
 }) => {
   let cells = [];
-  for (let x = 0; x < fieldLength; x++) {
-    for (let y = 0; y < fieldWidth; y++) {
+for (let y = 0; y < fieldLength; y++) {
+    for (let x = 0; x < fieldWidth; x++) {
       cells.push(
         <FieldCell
           key={`${x}-${y}`}

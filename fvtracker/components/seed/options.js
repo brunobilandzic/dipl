@@ -79,7 +79,7 @@ export default function SeedOptions() {
   return (
     <>
       <div className="">
-        <OptionButtons options={options.map(mapOption)} />
+        <OptionButtons options={options.map(mapOption)} center={true}/>
       </div>
     </>
   );

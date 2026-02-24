@@ -1,5 +1,5 @@
 import buttons from "@/components/layout/buttons";
-const { OptionButtons, OptionButton } = buttons.options;
+const { OptionButtons } = buttons.options;
 import { MdArrowLeft } from "react-icons/md";
 
 export default function CAOptions({ onBack }) {

@@ -58,7 +58,8 @@ export async function deleteCultivationArea(id) {
 }
 
 export const getCultivationArea = async (id) => {
-  const cultivationManager = await auth.session.fetchSessionSpecificManager("CultivationManager");
+  const cultivationManager =
+    await auth.session.fetchSessionSpecificManager("CultivationManager");
   await cultivationManager.populate({
     path: "fields",
     populate: {

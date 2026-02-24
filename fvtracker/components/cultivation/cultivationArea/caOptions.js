@@ -6,16 +6,14 @@ export default function CAOptions({ onBack }) {
   const options = [
     {
       label: "Back to field",
-      onClick: () => {
-        console.log("back to field");
-      },
+      onClick: onBack,
       icon: <MdArrowLeft />,
     },
   ];
 
   return (
     <>
-        <OptionButtons options={options} row={false} small={true}/>
+      <OptionButtons options={options} row={false} small={true} />
     </>
   );
 }

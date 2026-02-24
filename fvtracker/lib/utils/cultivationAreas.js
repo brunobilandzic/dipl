@@ -232,4 +232,3 @@ export function adjacentCellsGap({ x, y, gap, plantedCells }) {
 
   return adjacentCellsGap;
 }
-

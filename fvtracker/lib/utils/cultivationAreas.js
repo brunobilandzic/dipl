@@ -1,13 +1,10 @@
 import dimensionError from "../constants/errors/cultivation/dimensions";
 
 export function getCASCells(cultivationAreas) {
-  const plantedMaps = cultivationAreas.map((ca) => ca.planted);
+  const allPlanted = cultivationAreas.map((ca) => ca.planted);
 
-  const plantedCells = plantedMaps.reduce((acc, map) => {
-    acc =
-      map instanceof Map
-        ? acc.concat(Array.from(map))
-        : acc.concat(Object.keys(map));
+  const plantedCells = allPlanted.reduce((acc, planted) => {
+    acc = acc.concat(planted);
     return acc;
   }, []);
 

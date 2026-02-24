@@ -52,16 +52,13 @@ const cultivationAreaSchema = new Schema({
   slug: { type: String, unique: true, index: true },
   description: { type: String, default: "" },
   planted: {
-    type: Map,
-    of: plantedCropVarietySchema,
-    default: () => new Map(),
-  },
-  dimensions: {
-    type: {
-      width: { type: Number, required: true },
-      length: { type: Number, required: true },
+    type: [String],
+    default: [],
+    validate: {
+      validator: (arr) =>
+        Array.isArray(arr) && arr.every((coord) => /^\d+,\d+$/.test(coord)),
+      message: 'Invalid coord format, expected "number,number"',
     },
-    default: { width: 0, length: 0 },
   },
   soilType:
     // cultivation area consists of only one soil type
@@ -146,5 +143,3 @@ export const CultivationArea =
 export const Cultivation =
   mongoose.models.Cultivation ||
   mongoose.model("Cultivation", cultivationSchema);
-
-

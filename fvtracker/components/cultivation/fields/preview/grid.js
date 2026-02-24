@@ -15,6 +15,7 @@ export function FieldGrid({
   onRightClick,
   handleEmptyClick,
   handleActiveClick,
+  enlarged,
 }) {
   if (small) {
     return (
@@ -31,6 +32,7 @@ export function FieldGrid({
           fieldLength={fieldLength}
           small={small}
           plantedCells={plantedCells}
+          enlarged={enlarged}
         />
       </div>
     );
@@ -57,6 +59,7 @@ export function FieldGrid({
           onRightClick={onRightClick}
           handleEmptyClick={handleEmptyClick}
           handleActiveClick={handleActiveClick}
+          enlarged={enlarged}
         />
       </div>
     </>
@@ -74,6 +77,7 @@ const FieldCells = ({
   onRightClick,
   handleEmptyClick,
   handleActiveClick,
+  enlarged,
 }) => {
   let cells = [];
   for (let x = 0; x < fieldLength; x++) {
@@ -95,6 +99,7 @@ const FieldCells = ({
           handleEmptyClick={handleEmptyClick}
           handleActiveClick={handleActiveClick}
           isBeginSelected={isBeginSelected}
+          enlarged={enlarged}
         />,
       );
     }
@@ -112,10 +117,10 @@ const FieldCell = ({
   handleEmptyClick,
   handleActiveClick,
   isBeginSelected,
+  enlarged,
 }) => {
-
   const cellClass = classNames(
-    small ? "w-1 h-1" : "w-3 h-3 cursor-pointer",
+    small ? "w-1 h-1" : enlarged ? "w-6 h-6" : "w-3 h-3",
     selected ? `bg-green-500` : active ? `bg-yellow-500` : "",
     "border",
   );

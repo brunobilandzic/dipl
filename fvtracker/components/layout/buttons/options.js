@@ -20,7 +20,7 @@ export const OptionButton = ({ option, small }) => {
     <>
       <div
         onClick={onClick}
-        className={`flex flex-col gap-2 items-center justify-center cursor-pointer min-w-12 overflow-visible  md:gap-4 btn ${small ? "w-16 h-16 btnSm text-red-500" : ""}`}
+        className={`flex flex-col gap-2 items-center justify-center cursor-pointer min-w-12 overflow-visible  md:gap-4 btn ${small ? "w-16 h-16 btnSm" : ""}`}
       >
         <div className="text-3xl">{icon}</div>
         <div className="text-sm text-wrap text-center">{label}</div>

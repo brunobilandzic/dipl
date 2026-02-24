@@ -7,7 +7,6 @@ export async function createCultivationArea(body) {
   const cultivationManager =
     await auth.session.fetchSessionSpecificManager("CultivationManager");
 
-  const properties = transformBody(body);
   if (
     !cultivationManager.fields?.some(
       (fid) => fid?.toString() === properties.field,

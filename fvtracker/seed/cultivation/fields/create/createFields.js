@@ -180,10 +180,10 @@ function exportFieldDbData(field) {
 }
 
 function createCultivationArea(x, y, dim_x, dim_y, { name, description }) {
-  const plantedEmpty = new Map();
+  const plantedEmpty = [];
   for (let xi = x; xi < x + dim_x; xi++) {
     for (let yi = y; yi < y + dim_y; yi++) {
-      plantedEmpty.set(`${xi},${yi}`, null);
+      plantedEmpty.push(`${xi},${yi}`);
     }
   }
 

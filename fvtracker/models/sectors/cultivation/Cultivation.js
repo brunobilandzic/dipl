@@ -51,6 +51,12 @@ const cultivationAreaSchema = new Schema({
   name: { type: String, required: true, default: "Područje za sadnju" },
   slug: { type: String, unique: true, index: true },
   description: { type: String, default: "" },
+  dimensions: {
+    type: {
+      width: { type: Number, required: true, default: 0 },
+      length: { type: Number, required: true, default: 0 },
+    },
+  },
   planted: {
     type: [String],
     default: [],

@@ -20,7 +20,7 @@ import {
   adjacentCellsGap,
   extractPlantedCells,
   getMinValuesFromPlanted,
-} from "./cultivationAreas";
+} from "./cultivationAreas copy";
 import { numbersInRanges } from "./formValidation";
 import { getCropDimensions, cultivationAreaMapCoords } from "./plants";
 

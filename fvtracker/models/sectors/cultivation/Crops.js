@@ -3,7 +3,6 @@ const { Schema } = mongoose;
 
 // order is cropmaintype -> cropgeneratype -> croptype -> cropvariety
 
-
 const plantedAtCASchema = new Schema({
   cultivationArea: {
     type: mongoose.Schema.Types.ObjectId,
@@ -36,7 +35,6 @@ const plantedAtCASchema = new Schema({
   },
 });
 
-
 const mainCropTypeSchema = new Schema({
   name: { type: String, required: true },
   generalTypes: [
@@ -61,6 +59,35 @@ const cropGeneralTypeSchema = new Schema({
 const cropTypeSchema = new Schema({
   name: { type: String, required: true },
   description: { type: String, default: "" },
+  color: {
+    type: String,
+    required: true,
+    enum: [
+      "slate",
+      "gray",
+      "zinc",
+      "neutral",
+      "stone",
+      "red",
+      "orange",
+      "amber",
+      "yellow",
+      "lime",
+      "green",
+      "emerald",
+      "teal",
+      "cyan",
+      "sky",
+      "blue",
+      "indigo",
+      "violet",
+      "purple",
+      "fuchsia",
+      "pink",
+      "rose",
+    ],
+    defailt: "green",
+  },
   generalType: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "CropGeneralType",
@@ -75,6 +102,11 @@ const cropTypeSchema = new Schema({
 const cropVarietySchema = new Schema({
   name: { type: String, required: true },
   description: { type: String, default: "" },
+  shade: {
+    type: Number,
+    enum: ["50, 100, 200, 300, 400, 500, 600, 700, 800, 900"],
+    default: "500",
+  },
   cropType: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "CropType",
@@ -103,4 +135,3 @@ export const CropType =
 export const CropVariety =
   mongoose.models.CropVariety ||
   mongoose.model("CropVariety", cropVarietySchema);
-

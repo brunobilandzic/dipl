@@ -11,7 +11,7 @@ const plantedCropVarietySchema = {
     ref: "CropVariety",
     default: null,
   },
-  cellCoords: {
+  relativeCoords: {
     type: String,
     default: null,
     validate: (coords) => {

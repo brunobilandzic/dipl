@@ -33,6 +33,8 @@ const plantedCropVarietySchema = {
       }
     },
   },
+  plantedAt: { type: Date, default: Date.now },
+  harvestedAt: { type: Date, default: null },
 };
 
 const cultivationAreaSchema = new Schema({

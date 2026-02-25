@@ -108,6 +108,43 @@ const cropVarietySchema = new Schema({
   ],
 });
 
+const plantedCropVarietySchema = {
+  cropVariety: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "CropVariety",
+    required: true,
+  },
+  cultivation: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Cultivation",
+    required: true,
+  },
+  relativeCoords: {
+    type: String,
+    default: null,
+    validate: (coords) => {
+      if (coords && !utils.strings.testCoordinates(coords)) {
+        throw new Error(
+          "Invalid cell coordinates format. Expected format: 'x,y'",
+        );
+      }
+    },
+  },
+  fieldCoords: {
+    type: String,
+    default: null,
+    validate: (coords) => {
+      if (coords && !utils.strings.testCoordinates(coords)) {
+        throw new Error(
+          "Invalid field coordinates format. Expected format: 'x,y'",
+        );
+      }
+    },
+  },
+  plantedAt: { type: Date, default: Date.now },
+  harvestedAt: { type: Date, default: null },
+};
+
 // model exports
 
 export const CropMainType =
@@ -124,3 +161,7 @@ export const CropType =
 export const CropVariety =
   mongoose.models.CropVariety ||
   mongoose.model("CropVariety", cropVarietySchema);
+
+export const PlantedCropVariety =
+  mongoose.models.PlantedCropVariety ||
+  mongoose.model("PlantedCropVariety", plantedCropVarietySchema);

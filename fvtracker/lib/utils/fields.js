@@ -1,4 +1,4 @@
 export const extractCoords = (cell) => {
-  const [x, y] = cell.split(",").map(Number);
-  return { x, y };
+  const [width, length] = cell.split(",").map(Number);
+  return { width, length };
 };

@@ -1,33 +1,39 @@
-import cultivation from "@/lib/cultivation";
-import utils from "@/lib/utils";
+import { numberOfCultivations } from "@/seed/data/cultivations.js";
+import { getMinValuesFromPlanted } from "./cultivationAreas.js";
+import { extractCoords } from "./fields.js";
 
-export async function createCultivations() {
-  const { fields, cropData } = await cultivation.crops.fieldCropData();
+export function createCultivations({ planted, plantedCropVarieties }) {
+  // create cultivations in ca
+  const { width, length } = getDimensionsFromPlanted(planted);
 
-  console.log(`\nSeeding cultivations for ${fields.length} fields...`);
+  const cultNum = numberOfCultivations({width, length});
 
-  // Here you would implement the logic to create cultivation areas based on the fields and crop data.
-  // This is a placeholder to indicate where that logic would go.
-  console.log("Creating cultivation areas...\n");
+  console.log("createing", cultNum, "cultivations")
+}
 
-  for (const field of fields) {
-    console.log(`Creating cultivation area for field: ${field.name}`);
+export function relativeToFieldCoords({ planted, cellCoords }) {
+  const { width, length } = extractCoords(cellCoords);
+  const { minX, minY } = getMinValuesFromPlanted(planted);
 
-    for (const cultivationArea of field.cultivationAreas) {
-      const planted = cultivationArea.planted;
-      const { width, length } =
-        utils.cultivation.cultivationAreas.getDimensionsFromPlanted(
-          planted,
-        );
-      console.log(
-        `Cultivation area dimensions - Width: ${width}, Length: ${length}`,
+  return `${minX + width},${minY + length}`;
+}
+
+function checkDimension({ start, end, plantedCropVarieties }) {
+  for (let y = start.length; y <= end.length; y++) {
+    for (let x = start.width; x <= end.width; x++) {
+      const variety = plantedCropVarieties.find(
+        (variety) =>
+          variety.relativeCoords === `${x},${y}` &&
+          !variety.harvestedAt &&
+          variety.plantedAt,
       );
-
-      utils.crops.dimensions({
-        planted,
-        width,
-        length,
-      });
+      if (variety) {
+        return {
+          filled: true,
+          variety,
+        };
+      }
     }
   }
+  return null;
 }

@@ -41,10 +41,7 @@ function drawField(field) {
     let rowStr = "";
     for (let x = 0; x < width; x++) {
       if (
-        plantedCells.some((plantedCell) => {
-          const [cellX, cellY] = plantedCell.split(",").map(Number);
-          return cellX === x && cellY === y;
-        })
+        plantedCells.some((plantedCell) => plantedCell === `${x},${y}`)
       ) {
         rowStr += "+";
       } else {

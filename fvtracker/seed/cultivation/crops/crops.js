@@ -122,23 +122,23 @@ async function createCropType(cropGeneralTypeId, cropTypeData) {
 
 async function createCropVarieties(cropTypeId, cropVarietiesData) {
   const cropVarietiesPromises = [];
-  for (const varietyName of cropVarietiesData) {
-    cropVarietiesPromises.push(createCropVariety(cropTypeId, varietyName));
+  for (const variety of cropVarietiesData) {
+    cropVarietiesPromises.push(createCropVariety(cropTypeId, variety));
   }
   const cropVarietiesIds = await Promise.all(cropVarietiesPromises);
   return cropVarietiesIds;
 }
 
-async function createCropVariety(cropTypeId, varietyName) {
+async function createCropVariety(cropTypeId, variety) {
   return new Promise(async (resolve, reject) => {
     const cropVariety = new CropVariety({
       cropType: cropTypeId,
-      name: varietyName,
+      ...variety,
     });
 
     await cropVariety.save();
     if (!cropVariety) {
-      return reject(`Failed to create crop variety: ${varietyName}`);
+      return reject(`Failed to create crop variety: ${variety.name}`);
     }
     resolve(cropVariety._id);
   });

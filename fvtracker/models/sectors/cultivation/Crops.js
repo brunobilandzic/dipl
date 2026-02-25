@@ -123,7 +123,7 @@ const plantedCropVarietySchema = {
       }
     },
   },
-  plantedAt: { type: Date, default: Date.now },
+  plantedAt: { type: Date, default: null },
   harvestedAt: { type: Date, default: null },
 };
 

@@ -1,4 +1,4 @@
-import { extractPlantedCells, getMinValuesFromPlanted } from "./cultivationAreas.js";
+import {  getMinValuesFromPlanted } from "./cultivationAreas.js";
 
 export function relativeToFieldCoords({ planted, cellCoords }) {
 

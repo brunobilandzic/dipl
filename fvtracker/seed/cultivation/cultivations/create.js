@@ -1,6 +1,5 @@
 import { numberOfCultivations } from "@/seed/data/cultivations.js";
-import { getMinValuesFromPlanted } from "./cultivationAreas.js";
-import { extractCoords } from "./fields.js";
+
 
 export function createCultivations({ planted, plantedCropVarieties }) {
   // create cultivations in ca
@@ -11,12 +10,7 @@ export function createCultivations({ planted, plantedCropVarieties }) {
   console.log("createing", cultNum, "cultivations")
 }
 
-export function relativeToFieldCoords({ planted, cellCoords }) {
-  const { width, length } = extractCoords(cellCoords);
-  const { minX, minY } = getMinValuesFromPlanted(planted);
 
-  return `${minX + width},${minY + length}`;
-}
 
 function checkDimension({ start, end, plantedCropVarieties }) {
   for (let y = start.length; y <= end.length; y++) {

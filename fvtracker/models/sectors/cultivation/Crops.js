@@ -81,28 +81,10 @@ const cropVarietySchema = new Schema({
     ref: "CropType",
     required: true,
   },
-  planted: [
+  plantedCropVarieties: [
     {
-      type: {
-        fieldCoordinates: {
-          type: String,
-          validate: (coords) =>
-            !utils.strings.testCoordinates(coords)
-              ? new Error("Invalid coordinates format")
-              : true,
-        },
-        relativeCoordinates: {
-          type: String,
-          validate: (coords) =>
-            !utils.strings.testCoordinates(coords)
-              ? new Error("Invalid coordinates format")
-              : true,
-        },
-        cultivationArea: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "CultivationArea",
-        },
-      },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "PlantedCropVariety",
       default: [],
     },
   ],

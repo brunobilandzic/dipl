@@ -52,11 +52,11 @@ const cultivationSchema = new Schema({
   name: { type: String, required: true },
   slug: { type: String, unique: true, index: true },
   description: { type: String, default: "" },
-  planted: {
-    type: Map,
-    of: plantedCropVarietySchema,
-    default: () => new Map(),
-  },
+  plantedCropVarieties: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "PlantedCropVariety",
+    default: [],
+  }],
   workHours: [
     {
       type: {

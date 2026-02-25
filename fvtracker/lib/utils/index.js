@@ -4,6 +4,7 @@ import {
   dimensionsString,
   alphanumericOnly,
   sanitize,
+
 } from "./strings";
 import {
   getCASCells,
@@ -34,6 +35,7 @@ export default {
     dimensionsString,
     alphanumericOnly,
     sanitize,
+    testCoordinates
   },
   cultivation: {
     cultivationAreas: {

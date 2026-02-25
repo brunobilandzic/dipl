@@ -54,8 +54,7 @@ export default {
       adjacentCellsGap,
       getMinValuesFromPlanted,
     },
-    crops: {
-      cultivationDimensions: getCultivationDimensions,
+    plants: {
       relativeToFieldCoords,
     },
     fields: {

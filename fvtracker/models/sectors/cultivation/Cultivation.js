@@ -33,7 +33,8 @@ const cultivationAreaSchema = new Schema({
     default: [],
     validate: {
       validator: (arr) =>
-        Array.isArray(arr) && arr.every((coord) => utils.strings.testCoordinates(coord)),
+        Array.isArray(arr) &&
+        arr.every((coord) => utils.strings.testCoordinates(coord)),
       message: 'Invalid coord format, expected "number,number"',
     },
   },
@@ -70,7 +71,7 @@ const cultivationSchema = new Schema({
         // needs functionality to calculate total hours from begin and end date time
         // and calculate payroll based on worker pay rate
       },
-      default:null
+      default:[]
     },
   ],
   status: {

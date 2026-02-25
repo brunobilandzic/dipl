@@ -66,14 +66,6 @@ const cultivationAreaSchema = new Schema({
       message: 'Invalid coord format, expected "number,number"',
     },
   },
-  soilType:
-    // cultivation area consists of only one soil type
-    // this is also noted here for easier access and querying
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "SoilType",
-      default: null,
-    },
 });
 
 // what the is seeded on the field grid cells

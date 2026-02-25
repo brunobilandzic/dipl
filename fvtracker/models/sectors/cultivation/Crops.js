@@ -1,10 +1,8 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
-import utils from "@/lib/utils"
+import utils from "@/lib/utils";
 
 // order is cropmaintype -> cropgeneratype -> croptype -> cropvariety
-
-
 
 const mainCropTypeSchema = new Schema({
   name: { type: String, required: true },
@@ -83,12 +81,31 @@ const cropVarietySchema = new Schema({
     ref: "CropType",
     required: true,
   },
-  soilTypes: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "SoilType", default: [] },
+  planted: [
+    {
+      type: {
+        fieldCoordinates: {
+          type: String,
+          validate: (coords) =>
+            !utils.strings.testCoordinates(coords)
+              ? new Error("Invalid coordinates format")
+              : true,
+        },
+        relativeCoordinates: {
+          type: String,
+          validate: (coords) =>
+            !utils.strings.testCoordinates(coords)
+              ? new Error("Invalid coordinates format")
+              : true,
+        },
+        cultivationArea: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "CultivationArea",
+        },
+      },
+      default: [],
+    },
   ],
-  planted: [{ type: {
-  fieldCoordinates: {type: string, validate: (coords) => !util }
-  }, default: [] }],
 });
 
 // model exports

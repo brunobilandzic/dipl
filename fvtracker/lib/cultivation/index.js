@@ -20,7 +20,7 @@ export default {
     delete: deleteCultivationArea,
     get: getCultivationArea,
   },
-  crops: {
+  plants: {
     data: cropsData,
     fieldCropData: getFieldAndCropData,
     cropVariety: getCropVarietyById,

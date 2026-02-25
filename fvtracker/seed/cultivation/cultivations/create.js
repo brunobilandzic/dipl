@@ -1,10 +1,10 @@
 import { numberOfCultivations } from "@/seed/data/cultivations.js";
 
 
-export function createCultivations({ planted, plantedCropVarieties }) {
+export async function createCultivations({ planted, plantedCropVarieties }) {
   // create cultivations in ca
   const { width, length } = getDimensionsFromPlanted(planted);
-
+  const { fields, cropData } = await cultivation.plants.fieldCropData();
   const cultNum = numberOfCultivations({width, length});
 
   console.log("createing", cultNum, "cultivations")

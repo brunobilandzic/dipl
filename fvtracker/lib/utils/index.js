@@ -4,8 +4,7 @@ import {
   dimensionsString,
   alphanumericOnly,
   sanitize,
-  testCoordinates
-
+  testCoordinates,
 } from "./strings";
 import {
   getCASCells,
@@ -24,7 +23,8 @@ import {
   getMinValuesFromPlanted,
 } from "./cultivationAreas";
 import { numbersInRanges } from "./formValidation";
-import { getCropDimensions, cultivationAreaMapCoords } from "./plants";
+import { getCultivationDimensions, relativeToFieldCoords } from "./plants";
+import { extractCoords } from "./fields";
 
 export default {
   objects: {
@@ -36,7 +36,7 @@ export default {
     dimensionsString,
     alphanumericOnly,
     sanitize,
-    testCoordinates
+    testCoordinates,
   },
   cultivation: {
     cultivationAreas: {
@@ -54,13 +54,16 @@ export default {
       adjacentCellsGap,
       getMinValuesFromPlanted,
     },
+    crops: {
+      cultivationDimensions: getCultivationDimensions,
+      relativeToFieldCoords,
+    },
+    fields: {
+      extractCoords,
+    },
   },
   formValidation: {
     numbersInRanges,
-  },
-  crops: {
-    dimensions: getCropDimensions,
-    mapCords: cultivationAreaMapCoords,
   },
 };
 

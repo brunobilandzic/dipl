@@ -96,7 +96,7 @@ async function createFieldsObjects(
     fieldObjects.push(field);
   }
   for (let field of fieldObjects) {
-    printFieldParams(field);
+    drawField(field);
   }
   return fieldObjects;
 }

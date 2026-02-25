@@ -29,7 +29,8 @@ function get_ca_min_max(planted) {
 
 function drawField(field) {
   console.log(allCoordinates(field));
-  let { width, length, cultivationAreas } = field;
+  let { dimensions, cultivationAreas } = field;
+  const { width, length } = dimensions;
   const plantedCells =
     cultivationAreas?.reduce((acc, ca) => {
       const plantedArray = Array.from(ca.planted || []);

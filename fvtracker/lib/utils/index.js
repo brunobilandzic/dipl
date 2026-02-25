@@ -4,6 +4,7 @@ import {
   dimensionsString,
   alphanumericOnly,
   sanitize,
+  testCoordinates
 
 } from "./strings";
 import {

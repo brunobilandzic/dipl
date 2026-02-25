@@ -5,37 +5,6 @@ import { makeUrlFriendly } from "@/lib/utils/strings";
 
 const { Schema } = mongoose;
 
-const plantedCropVarietySchema = {
-  cropVariety: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "CropVariety",
-    default: null,
-  },
-  relativeCoords: {
-    type: String,
-    default: null,
-    validate: (coords) => {
-      if (coords && !utils.strings.testCoordinates(coords)) {
-        throw new Error(
-          "Invalid cell coordinates format. Expected format: 'x,y'",
-        );
-      }
-    },
-  },
-  fieldCoords: {
-    type: String,
-    default: null,
-    validate: (coords) => {
-      if (coords && !utils.strings.testCoordinates(coords)) {
-        throw new Error(
-          "Invalid field coordinates format. Expected format: 'x,y'",
-        );
-      }
-    },
-  },
-  plantedAt: { type: Date, default: Date.now },
-  harvestedAt: { type: Date, default: null },
-};
 
 const cultivationAreaSchema = new Schema({
   field: {

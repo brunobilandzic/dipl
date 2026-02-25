@@ -33,9 +33,7 @@ function drawField(field) {
   const { width, length } = dimensions;
   const plantedCells =
     cultivationAreas?.reduce((acc, ca) => {
-      const plantedArray = Array.from(ca.planted || []);
-      const plantedCells = plantedArray.map((plantedCell) => plantedCell[0]);
-      return acc.concat(plantedCells);
+      return acc.concat(ca.planted);
     }, []) || [];
   console.log("drawing grid:");
   for (let y = 0; y < length; y++) {

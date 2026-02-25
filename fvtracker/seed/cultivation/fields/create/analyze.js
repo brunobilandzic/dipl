@@ -1,29 +1,29 @@
-function max_dim(ca, dim) {
-  const plantedCells = Array.from(ca.planted || []);
-  return plantedCells.reduce((max, plantedCell) => {
-    const cellCoordinates = plantedCell[0]?.split(",").map(Number) ?? [0, 0];
-    const cellDim = cellCoordinates[dim === "row" ? 0 : 1] || 0;
+import { extractCoords } from "@/lib/utils/fields";
+
+function max_dim(planted, dim) {
+  return planted.reduce((max, cell) => {
+    const cellCoordinates = extractCoords(cell);
+    const cellDim = cellCoordinates[dim === "width" ? "width" : "length"] || 0;
     return cellDim > max ? cellDim : max;
   }, 0);
 }
 
-function min_dim(ca, dim) {
-  const plantedCells = Array.from(ca.planted || []);
-  return plantedCells.reduce((min, plantedCell) => {
-    const cellCoordinates = plantedCell[0]?.split(",").map(Number) ?? [0, 0];
-    const cellDim = cellCoordinates[dim === "row" ? 0 : 1] || 0;
+function min_dim(planted, dim) {
+  return planted.reduce((min, cell) => {
+    const cellCoordinates = extractCoords(cell);
+    const cellDim = cellCoordinates[dim === "width" ? "width" : "length"] || 0;
     return cellDim < min ? cellDim : min;
   }, Infinity);
 }
 
-function get_ca_min_max(ca) {
-  if (ca.length === 0) {
+function get_ca_min_max(planted) {
+  if (planted.length === 0) {
     return { ca_max_y: 0, ca_min_x: 0, ca_max_x: 0, ca_min_y: 0 };
   }
-  const ca_min_x = min_dim(ca, "row");
-  const ca_max_x = max_dim(ca, "row");
-  const ca_max_y = max_dim(ca, "col");
-  const ca_min_y = min_dim(ca, "col");
+  const ca_min_x = min_dim(planted, "width");
+  const ca_max_x = max_dim(planted, "width");
+  const ca_max_y = max_dim(planted, "length");
+  const ca_min_y = min_dim(planted, "length");
   return { ca_min_x, ca_max_x, ca_min_y, ca_max_y };
 }
 
@@ -77,7 +77,7 @@ function allCoordinates(field) {
   const ca_coordinates = {};
   for (let i = 0; i < field.cultivationAreas.length; i++) {
     const ca = field.cultivationAreas[i];
-    const dimensions = get_ca_min_max(ca);
+    const dimensions = get_ca_min_max(ca.planted);
     ca_coordinates[`cultivation area ${i}`] = dimensions;
   }
 

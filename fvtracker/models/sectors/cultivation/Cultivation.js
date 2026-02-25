@@ -70,6 +70,7 @@ const cultivationSchema = new Schema({
         // needs functionality to calculate total hours from begin and end date time
         // and calculate payroll based on worker pay rate
       },
+      default:null
     },
   ],
   status: {

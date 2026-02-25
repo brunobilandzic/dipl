@@ -125,6 +125,7 @@ const plantedCropVarietySchema = new Schema({
   },
   plantedAt: { type: Date, default: null },
   harvestedAt: { type: Date, default: null },
+  //harvest..
 });
 
 // model exports

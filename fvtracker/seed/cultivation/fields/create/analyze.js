@@ -53,11 +53,7 @@ function drawField(field) {
     }
     console.log(rowStr);
   }
-  console.log(
-    "\n\nCultivation areas has",
-    cultivationAreas.length,
-    "cultivation areas.",
-  );
+  console.log("\n\nField has", cultivationAreas.length, "cultivation areas.");
   printFieldParams(field);
 }
 

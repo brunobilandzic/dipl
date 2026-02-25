@@ -15,7 +15,7 @@ const plantedCropVarietySchema = {
     type: String,
     default: null,
     validate: (coords) => {
-      if (coords && !/^[\d]+,[\d]+$/.test(coords)) {
+      if (coords && !utils.strings.testCoordinates(coords)) {
         throw new Error(
           "Invalid cell coordinates format. Expected format: 'x,y'",
         );
@@ -26,7 +26,7 @@ const plantedCropVarietySchema = {
     type: String,
     default: null,
     validate: (coords) => {
-      if (coords && !/^[\d]+,[\d]+$/.test(coords)) {
+      if (coords && !utils.strings.testCoordinates(coords)) {
         throw new Error(
           "Invalid field coordinates format. Expected format: 'x,y'",
         );
@@ -62,7 +62,7 @@ const cultivationAreaSchema = new Schema({
     default: [],
     validate: {
       validator: (arr) =>
-        Array.isArray(arr) && arr.every((coord) => /^\d+,\d+$/.test(coord)),
+        Array.isArray(arr) && arr.every((coord) => utils.strings.testCoordinates(coord)),
       message: 'Invalid coord format, expected "number,number"',
     },
   },

@@ -1,4 +1,5 @@
 import dimensionError from "../constants/errors/cultivation/dimensions";
+import { extractCoords } from "./fields";
 
 export function getCASCells(cultivationAreas) {
   const allPlanted = cultivationAreas.map((ca) => ca.planted);
@@ -158,8 +159,8 @@ export function extractPlantedCells(planted) {
 }
 
 const getValuesFromPlanted = (plantedCells) => {
-  const xValues = plantedCells.map((cell) => parseInt(cell.split(",")[0]));
-  const yValues = plantedCells.map((cell) => parseInt(cell.split(",")[1]));
+  const xValues = plantedCells.map((cell) => parseInt(extractCoords(cell).x));
+  const yValues = plantedCells.map((cell) => parseInt(extractCoords(cell).y));
   return { xValues, yValues };
 };
 

@@ -104,8 +104,8 @@ const cropVarietySchema = new Schema({
   description: { type: String, default: "" },
   shade: {
     type: Number,
-    enum: ["50, 100, 200, 300, 400, 500, 600, 700, 800, 900"],
-    default: "500",
+    enum: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900],
+    default: 500,
   },
   cropType: {
     type: mongoose.Schema.Types.ObjectId,

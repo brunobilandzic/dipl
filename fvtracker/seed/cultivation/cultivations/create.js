@@ -14,16 +14,17 @@ export async function createCultivations() {
     console.log(`Creating cultivation area for field: ${field.name}`);
 
     for (const cultivationArea of field.cultivationAreas) {
+      const planted = cultivationArea.planted;
       const { width, length } =
         utils.cultivation.cultivationAreas.getDimensionsFromPlanted(
-          cultivationArea.planted,
+          planted,
         );
       console.log(
         `Cultivation area dimensions - Width: ${width}, Length: ${length}`,
       );
-      const planted = cultivationArea.planted;
+
       utils.crops.dimensions({
-        planted: cultivationArea.planted,
+        planted,
         width,
         length,
       });

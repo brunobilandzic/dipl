@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import { CultivationArea, Cultivation } from "./Cultivation";
 import { Field } from "./Field";
 import { CropGeneralType, CropType, CropVariety } from "./Crops";
-import { SoilType } from "./SoilType";
 
 export default {
   CultivationArea,
@@ -11,5 +10,4 @@ export default {
   CropGeneralType,
   CropType,
   CropVariety,
-  SoilType,
 };

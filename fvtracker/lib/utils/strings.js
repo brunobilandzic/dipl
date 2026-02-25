@@ -23,4 +23,4 @@ export const sanitize = (str) => {
 
 export const dimensionsString = ({width, length}) => `${width}x${length}`;
 
-export const testCoordinates = (coordinates) => return `\`
+export const testCoordinates = (coordinates) => /^[\d]+,[\d]+$/.test(coordinates);

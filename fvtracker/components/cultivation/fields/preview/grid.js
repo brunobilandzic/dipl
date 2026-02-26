@@ -6,7 +6,6 @@ import dimensionError from "@/lib/constants/errors/cultivation/dimensions";
 export function FieldGrid({
   width: fieldWidth,
   length: fieldLength,
-  cultivationAreas,
   small,
   plantedCells,
   selectedCultivationArea,
@@ -27,7 +26,6 @@ export function FieldGrid({
         }}
       >
         <FieldCells
-          cultivationAreas={cultivationAreas}
           fieldWidth={fieldWidth}
           fieldLength={fieldLength}
           small={small}

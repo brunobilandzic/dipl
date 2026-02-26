@@ -9,7 +9,7 @@ export async function createCultivationArea(body) {
 
   if (
     !cultivationManager.fields?.some(
-      (fid) => fid?.toString() === properties.field,
+      (fid) => fid?.toString() === body.field,
     )
   ) {
     throw new Error(
@@ -17,7 +17,7 @@ export async function createCultivationArea(body) {
     );
   }
 
-  const newCultivationArea = await createCultivationAreaRecord(properties);
+  const newCultivationArea = await createCultivationAreaRecord(body);
   return newCultivationArea;
 }
 

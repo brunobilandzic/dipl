@@ -30,7 +30,7 @@ export const getCellsInRect = (
   beginY,
   endX,
   endY,
-  cultivationAreaDimensons,
+  cultivationAreaDimensions,
   cultivationAreas,
 ) => {
   const valid = checkRectValidDimensions({
@@ -118,9 +118,9 @@ const checkRectValidDimensions = ({
   beginY,
   endX,
   endY,
-  cultivationAreaDimensons,
+  cultivationAreaDimensions,
 }) => {
-  const { min_ca_dim, max_ca_dim } = cultivationAreaDimensons;
+  const { min_ca_dim, max_ca_dim } = cultivationAreaDimensions;
   const { width, length } = getDimensionsCA(beginX, beginY, endX, endY);
   return (
     width > 0 &&

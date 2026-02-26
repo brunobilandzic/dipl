@@ -55,8 +55,8 @@ const cultivationSlice = createSlice({
       });
     },
     setCrops: (state, action) => {
-      state.crops = action.payload
-    }
+      state.crops = action.payload;
+    },
   },
 });
 
@@ -68,7 +68,7 @@ export const {
   emptyCultivation,
   createCultivationArea,
   deleteCultivationArea,
-  setCrops
+  setCrops,
 } = cultivationSlice.actions;
 
 export default cultivationSlice.reducer;

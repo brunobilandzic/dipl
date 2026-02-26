@@ -11,10 +11,19 @@ export async function GET(request) {
       await auth.session.fetchSessionSpecificManager("CultivationManager");
     await cultivationManager.populate({
       path: "fields",
-      populate: { path: "cultivationAreas" },
+      populate: {
+        path: "cultivationAreas",
+        populate: {
+          path: "cultivations",
+          populate: {
+            path: "plantedCropvarieties",
+            populate: { path: "cropVariety", populate: { path: "cropType" } },
+          },
+        },
+      },
     });
 
-    if (slug) {      
+    if (slug) {
       const field = cultivationManager.fields.find((f) => f.slug === slug);
       if (!field) {
         return Response.json({ message: "Field not found" }, { status: 404 });

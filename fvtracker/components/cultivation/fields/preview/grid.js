@@ -15,6 +15,8 @@ export function FieldGrid({
   handleEmptyClick,
   handleActiveClick,
   enlarged,
+  newCUCoordinates,
+  cultivatedCells
 }) {
   if (small) {
     return (
@@ -47,7 +49,6 @@ export function FieldGrid({
         }}
       >
         <FieldCells
-          cultivationAreas={cultivationAreas}
           fieldWidth={fieldWidth}
           fieldLength={fieldLength}
           small={small}
@@ -59,6 +60,8 @@ export function FieldGrid({
           handleEmptyClick={handleEmptyClick}
           handleActiveClick={handleActiveClick}
           enlarged={enlarged}
+          cultivatedCells={cultivatedCells}
+          newCUCoordinateds={newCUCoordinates}
         />
       </div>
     </>
@@ -77,6 +80,8 @@ const FieldCells = ({
   handleEmptyClick,
   handleActiveClick,
   enlarged,
+  cultivatedCells,
+  newCUCoordinates
 }) => {
   let cells = [];
 for (let y = 0; y < fieldLength; y++) {
@@ -92,7 +97,8 @@ for (let y = 0; y < fieldLength; y++) {
             !small &&
             (selectedCultivationArea?.planted?.includes(`${x},${y}`) ||
               (newCACoordinates?.planted?.includes(`${x},${y}`) &&
-                isBeginSelected))
+                isBeginSelected)) || 
+              (cultivatedCells?.includes(`${x},${y}`))  
           }
           onRightClick={onRightClick}
           handleEmptyClick={handleEmptyClick}

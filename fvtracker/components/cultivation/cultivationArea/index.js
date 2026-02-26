@@ -10,6 +10,7 @@ import CAOptions from "./caOptions";
 import { FieldGrid } from "../fields/preview/grid";
 import { useRouter } from "next/navigation";
 import utils from "@/lib/utils";
+import Modals from "@/components/layout/modals"
 
 export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const dispatch = useDispatch();
@@ -17,8 +18,9 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
 
   const selectedField = useSelector((state) => state.cultivation.selectedField);
   const fields = useSelector((state) => state.cultivation.fields);
-
+  const [cultivationOpen, setCultivationOpen] = useState(false)
   const [newCUCoordinates, setNewCUCoordinates] = useState({});
+
 
   useEffect(() => {
     console.log("new cuc coordinates:", newCUCoordinates);
@@ -142,9 +144,11 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
             enlarged={true}
           />
         </div>
-        <div className="col-start-6 col-end-7  h-screen flex flex-col items-center ">
-          <CAOptions onBack={onBack} />
+        <div className="col-start-6 col-end-7  h-screen flex flex-col  items-center ">
+          <CAOptions onBack={onBack}  onCultivate={() => setCultivationOpen(true)} />
         </div>
+        <Modals.FormModal title="Cultivate cells"  isOpen={cultivationOpen} onCancel={() => setCultivationOpen(false)} />
+      
       </div>
     </>
   );

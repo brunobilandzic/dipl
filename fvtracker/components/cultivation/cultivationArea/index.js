@@ -9,6 +9,7 @@ import { Loading } from "@/components/layout/loading";
 import CAOptions from "./caOptions";
 import { FieldGrid } from "../fields/preview/grid";
 import { useRouter } from "next/navigation";
+import utils from "@/lib/utils";
 
 export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const dispatch = useDispatch();
@@ -98,6 +99,18 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   };
 
   const onEndCoordinates = (x,y) => {
+    setNewCUCoordinates((prev) => ({
+      ...prev,
+      end: { x, y },
+      cultivated: utils.cultivation.cultivationAreas.getCellsInRect({
+        beginX: prev.begin.x,
+        beginY: prev.begin.y,
+        endX: x,
+        endY: y,
+        cultivationAreaDimensions,
+      }).planted,
+
+    }));
     
   }
     

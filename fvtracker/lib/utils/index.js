@@ -25,6 +25,7 @@ import {
 import { numbersInRanges } from "./formValidation";
 import { getCultivationDimensions, relativeToFieldCoords } from "./plants";
 import { extractCoords } from "./fields";
+import { getCUSCells } from "./cultivation";
 
 export default {
   objects: {
@@ -60,6 +61,7 @@ export default {
     fields: {
       extractCoords,
     },
+    cultivations: { getCUSCells },
   },
   formValidation: {
     numbersInRanges,

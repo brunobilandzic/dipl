@@ -138,7 +138,13 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     <>
       <div className="grid grid-cols-6">
         <div className="col-start-1 col-end-6 h-screen flex flex-col ">
-          <FieldGrid width={width} length={length} enlarged={true} />
+          <FieldGrid
+            handleEmptyClick={handleEmptyClick}
+            newCUCoordinates={newCUCoordinates}
+            width={width}
+            length={length}
+            enlarged={true}
+          />
         </div>
         <div className="col-start-6 col-end-7  h-screen flex flex-col items-center ">
           <CAOptions onBack={onBack} />

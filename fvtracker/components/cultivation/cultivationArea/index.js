@@ -19,11 +19,24 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const fields = useSelector((state) => state.cultivation.fields);
 
   const [newCUCoordinates, setNewCUCoordinates] = useState({});
+
+  useEffect(() => {
+    console.log("new cuc coordinates:", newCUCoordinates);
+  }, [newCUCoordinates]);
+
   const [isBeginSelected, setIsBeginSelected] = useState(false);
+
+  useEffect(() => {
+    console.log("isBeginSelected changed:", isBeginSelected);
+  }, [isBeginSelected]);
 
   const cultivationArea = useMemo(() => {
     return selectedField?.cultivationAreas?.find((ca) => ca.slug === caSlug);
   }, [selectedField, caSlug, fields]);
+
+  useEffect(() => {
+    console.log("cultivationArea changed:", cultivationArea);
+  }, [cultivationArea]);
 
   const cultvations = useMemo(() => {
     return cultivationArea?.cultivations || [];

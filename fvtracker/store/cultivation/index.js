@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   fields: [],
-  selectedField:null,
+  selectedField: null,
+  crops: null,
 };
 
 const cultivationSlice = createSlice({
@@ -32,24 +33,30 @@ const cultivationSlice = createSlice({
           };
         }
         return field;
-      })
+      });
     },
     deleteCultivationArea: (state, action) => {
       console.log("redux state deleting ca", action.payload);
-      const id  = action.payload;
-      state.selectedField.cultivationAreas = state.selectedField.cultivationAreas.filter(
-        (ca) => ca._id.toString() !== id
-      );
+      const id = action.payload;
+      state.selectedField.cultivationAreas =
+        state.selectedField.cultivationAreas.filter(
+          (ca) => ca._id.toString() !== id,
+        );
       state.fields = state.fields?.map((field) => {
         if (field._id === state.selectedField._id) {
           return {
             ...field,
-            cultivationAreas: field.cultivationAreas.filter((ca) => ca._id.toString() !== id),
+            cultivationAreas: field.cultivationAreas.filter(
+              (ca) => ca._id.toString() !== id,
+            ),
           };
         }
         return field;
       });
     },
+    setCrops: (state, action) => {
+      state.crops = action.payload
+    }
   },
 });
 
@@ -61,5 +68,7 @@ export const {
   emptyCultivation,
   createCultivationArea,
   deleteCultivationArea,
+  setCrops
 } = cultivationSlice.actions;
+
 export default cultivationSlice.reducer;

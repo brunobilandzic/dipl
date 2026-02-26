@@ -1,5 +1,6 @@
 import dimensionError from "../constants/errors/cultivation/dimensions";
 import { extractCoords } from "./fields";
+import { getCUSCells } from "./cultivation";
 
 export function getCASCells(cultivationAreas) {
   const allPlanted = cultivationAreas.map((ca) => ca.planted);

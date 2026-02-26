@@ -77,6 +77,28 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     fillSelectedField();
   }, [fieldSlug, caSlug, selectedField]);
 
+  const handleEmptyClick = (x, y) => {     
+      if (!isBeginSelected) {
+        onBeginCoordinates(x, y);
+      } else {
+        onEndCoordinates(x, y);
+      }
+    };
+
+    const onBeginCoordinates = (x,y) => {
+    setIsBeginSelected(true);
+    setNewCUCoordinates((prev) => ({
+      ...prev,
+      begin: { x, y },
+      cultivated: [`${x},${y}`],
+    }));
+  };
+
+  const onEndCoordinates = (x,y) => {
+    
+  }
+    
+
   if (!cultivationArea)
     return (
       <div className="w-full h-screen flex items-center justify-center">

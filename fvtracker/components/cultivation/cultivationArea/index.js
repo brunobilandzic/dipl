@@ -88,15 +88,15 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     fillSelectedField();
   }, [fieldSlug, caSlug, selectedField]);
 
-  const handleEmptyClick = (x, y) => {     
-      if (!isBeginSelected) {
-        onBeginCoordinates(x, y);
-      } else {
-        onEndCoordinates(x, y);
-      }
-    };
+  const handleEmptyClick = (x, y) => {
+    if (!isBeginSelected) {
+      onBeginCoordinates(x, y);
+    } else {
+      onEndCoordinates(x, y);
+    }
+  };
 
-    const onBeginCoordinates = (x,y) => {
+  const onBeginCoordinates = (x, y) => {
     setIsBeginSelected(true);
     setNewCUCoordinates((prev) => ({
       ...prev,
@@ -105,7 +105,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     }));
   };
 
-  const onEndCoordinates = (x,y) => {
+  const onEndCoordinates = (x, y) => {
     setNewCUCoordinates((prev) => ({
       ...prev,
       end: { x, y },
@@ -116,11 +116,8 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
         endY: y,
         cultivations: cultvations,
       }).planted,
-
     }));
-    
-  }
-    
+  };
 
   if (!cultivationArea)
     return (
@@ -128,7 +125,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
         <Loading />
       </div>
     );
-  console.log(cultivationArea);
 
   const onBack = () => router.push(`/upravljanje-poljima/${fieldSlug}`);
 

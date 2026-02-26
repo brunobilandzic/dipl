@@ -11,6 +11,9 @@ import { FieldGrid } from "../fields/preview/grid";
 import { useRouter } from "next/navigation";
 
 export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const selectedField = useSelector((state) => state.cultivation.selectedField);
   const fields = useSelector((state) => state.cultivation.fields);
 

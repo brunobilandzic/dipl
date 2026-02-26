@@ -12,7 +12,6 @@ import styles from "@/components/form/form.module.css";
 function CreateCA({
   getNewCOCoordinates,
   emptyCACoordinates,
-  cultivationAreaDimensions,
   setField,
   fieldId,
   setIsBeginSelected,

@@ -32,6 +32,7 @@ export const getCellsInRect = ({
   endY,
   cultivationAreaDimensions,
   cultivationAreas,
+  cultivations,
 }) => {
   if (cultivationAreaDimensions) {
     const valid = checkRectValidDimensions({

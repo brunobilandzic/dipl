@@ -5,13 +5,16 @@ import { ThemeProvider } from "next-themes";
 import { Provider as ReduxProvider } from "react-redux";
 import store from "@/store";
 import UserProviders from "@/lib/providers/user";
+import CustomProviders from "@/lib/providers/custom";
 
 export default function Providers({ children }) {
   return (
     <SessionProvider>
       <ReduxProvider store={store}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <UserProviders>{children}</UserProviders>
+          <UserProviders>
+            <CustomProviders>{children}</CustomProviders>
+          </UserProviders>
         </ThemeProvider>
       </ReduxProvider>
     </SessionProvider>

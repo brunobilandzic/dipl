@@ -114,7 +114,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
         beginY: prev.begin.y,
         endX: x,
         endY: y,
-        cultivationAreaDimensions,
+        cultivations: cultvations,
       }).planted,
 
     }));

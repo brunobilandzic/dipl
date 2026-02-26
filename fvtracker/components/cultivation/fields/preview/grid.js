@@ -16,7 +16,7 @@ export function FieldGrid({
   handleActiveClick,
   enlarged,
   newCUCoordinates,
-  cultivatedCells
+  cultivatedCells,
 }) {
   if (small) {
     return (
@@ -81,7 +81,7 @@ const FieldCells = ({
   handleActiveClick,
   enlarged,
   cultivatedCells,
-  newCUCoordinates
+  newCUCoordinates,
 }) => {
   let cells = [];
 

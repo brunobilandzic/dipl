@@ -4,7 +4,7 @@ export function OptionButtons({ options, row = true, small, center }) {
   return (
     <>
       <div
-        className={`flex ${row ? "flex-row w-2/3 mx-auto h-fit items-stretch" : "flex-col"} ${center ? "justify-center" : ""} gap-2 items-stretch`}
+        className={`flex ${row ? "flex-row w-2/3 mx-auto h-fit items-stretch" : "flex-col"} ${center ? "justify-center" : ""} gap-2 md:gap-8 items-stretch`}
       >
         {options.map((option, index) => (
           <OptionButton row={row} key={uuid()} option={option} small={small} />

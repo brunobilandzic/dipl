@@ -48,12 +48,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
 
   useEffect(() => {
     const fillSelectedField = async () => {
-      console.log("in fillSelectedField", {
-        fieldSlug,
-        caSlug,
-        selectedField,
-        fields,
-      });
       if (!selectedField && fields && fields.length > 0) {
         try {
           console.log(

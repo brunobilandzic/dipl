@@ -221,14 +221,14 @@ export function adjacentCells({ x, y, plantedCells }) {
 
 export function adjacentCellsGap({ x, y, gap, plantedCells }) {
   const adjacentCellsGap = [
-    `${x - gap - 1},${y}`,
-    `${x + gap + 1},${y}`,
-    `${x},${y - gap - 1}`,
-    `${x},${y + gap + 1}`,
-    `${x - gap - 1},${y - gap - 1}`,
-    `${x - gap - 1},${y + gap + 1}`,
-    `${x + gap + 1},${y - gap - 1}`,
-    `${x + gap + 1},${y + gap + 1}`,
+    `${x - gap},${y}`,
+    `${x},${y - gap}`,
+    `${x + gap},${y}`,
+    `${x},${y + gap}`,
+    `${x - gap},${y - gap}`,
+    `${x - gap},${y + gap}`,
+    `${x + gap},${y - gap}`,
+    `${x + gap},${y + gap}`,
   ];
 
   return adjacentCellsGap;

@@ -34,9 +34,9 @@ export async function GET(request) {
       return Response.json({ cropVariety }, { status: 200 });
     }
 
-    const cropsData = await cultivation.crops.data();
+    const cropsData = await cultivation.plants.data();
 
-    return Response.json({ cropsData }, { status: 200 });
+    return Response.json({ ...cropsData }, { status: 200 });
   } catch (error) {
     console.error(error);
     return Response.json({ error: error.message }, { status: 500 });

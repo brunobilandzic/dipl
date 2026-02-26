@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import handleError from "../constants/errors/client/handleError";
 import {setCrops} from "@/store/cultivation"
@@ -9,6 +9,7 @@ export default function CustomProviders({ children }) {
 }
 
 const CropsProvider = ({ children }) => {
+  const dispatch = useDispatch();
   const crops = useSelector((state) => state.cultivation.crops);
   useEffect(() => {
     console.log("Crops in provider:", crops);
@@ -16,10 +17,11 @@ const CropsProvider = ({ children }) => {
       const fetchCrops = async () => {
         console.log("Fetching crops from API...");
         try {
-          const res = await api.get("/crops");
+          const res = await api.get("/cultivation/plant");
           console.log("Fetched crops from API:", res);
           dispatch(setCrops(res.data));
         } catch (error) {
+          console.error(error)
           handleError({
             ...error,
             generalMessage:

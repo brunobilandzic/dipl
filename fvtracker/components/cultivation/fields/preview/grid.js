@@ -61,7 +61,7 @@ export function FieldGrid({
           handleActiveClick={handleActiveClick}
           enlarged={enlarged}
           cultivatedCells={cultivatedCells}
-          newCUCoordinateds={newCUCoordinates}
+          newCUCoordinates={newCUCoordinates}
         />
       </div>
     </>

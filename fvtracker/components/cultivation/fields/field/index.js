@@ -217,8 +217,6 @@ function FieldEditCASPanel({
           <FieldGrid
             width={width}
             length={length}
-            cultivationAreas={cultivationAreas}
-            setClickedCell={editCultivationAreas ? setClickedCell : null}
             plantedCells={plantedCells}
             selectedCultivationArea={selectedCultivationArea}
             newCACoordinates={newCACoordinates}

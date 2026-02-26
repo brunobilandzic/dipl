@@ -20,6 +20,14 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     return selectedField?.cultivationAreas?.find((ca) => ca.slug === caSlug);
   }, [selectedField, caSlug, fields]);
 
+  const cultvations = useMemo(() => {
+    return cultivationArea?.cultivations || [];
+  }, [cultivationArea]);
+
+  useEffect(() => {
+    console.log("cultivations:", cultvations);
+  }, [cultvations]);
+
   useEffect(() => {
     const fillSelectedField = async () => {
       console.log("in fillSelectedField", {

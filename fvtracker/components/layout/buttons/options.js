@@ -4,23 +4,23 @@ export function OptionButtons({ options, row = true, small, center }) {
   return (
     <>
       <div
-        className={`flex ${row ? "flex-row w-2/3 mx-auto h-fit items-stretch" : "flex-col"} ${center ? "justify-center" : ""} gap-2`}
+        className={`flex ${row ? "flex-row w-2/3 mx-auto h-fit items-stretch" : "flex-col"} ${center ? "justify-center" : ""} gap-2 items-stretch`}
       >
         {options.map((option, index) => (
-          <OptionButton key={uuid()} option={option} small={small} />
+          <OptionButton row={row} key={uuid()} option={option} small={small} />
         ))}
       </div>
     </>
   );
 }
 
-export const OptionButton = ({ option, small }) => {
+export const OptionButton = ({ option, small, row }) => {
   const { label, onClick, icon } = option;
   return (
     <>
       <div
         onClick={onClick}
-        className={`flex flex-col gap-2 items-center justify-center cursor-pointer min-w-12 overflow-visible  md:gap-4 btn ${small ? "w-16 h-16 btnSm" : ""}`}
+        className={`flex flex-col gap-2 items-center justify-center min-w-12 overflow-visible  md:gap-4 btn  ${small ? "w-16 h-16 btnSm" : ""} ${row? "" : "w-full"}`}
       >
         <div className="text-3xl">{icon}</div>
         <div className="text-sm text-wrap text-center">{label}</div>

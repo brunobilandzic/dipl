@@ -1,3 +1,6 @@
+import { getMinValuesFromPlanted } from "./cultivationAreas.js";
+import { extractCoords } from "./fields.js";
+
 export function getCUSCells(cultivations) {
     const cells = [];
 
@@ -10,4 +13,13 @@ export function getCUSCells(cultivations) {
     });
 
     return cells;
+}
+
+
+
+export function relativeToFieldCoords({ planted, cellCoords }) {
+  const { width, length } = extractCoords(cellCoords);
+  const { minX, minY } = getMinValuesFromPlanted(planted);
+
+  return `${minX + width},${minY + length}`;
 }

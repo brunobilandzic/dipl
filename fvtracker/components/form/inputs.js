@@ -10,7 +10,7 @@ export const AppInput = ({
   wrapStyle = "",
   inputStyle = "",
   min,
-  max
+  max,
 }) => {
   return (
     <div className={`inputRow`}>
@@ -49,6 +49,21 @@ export const AppTextArea = ({
         placeholder={placeholder}
         rows={5}
       />
+    </div>
+  );
+};
+
+export const AppSelect = ({ options, label, onChange }) => {
+  return (
+    <div className={`inputRow`}>
+      <label className="label">{label}</label>
+      <select className={`inputText`} onChange={onChange} defaultValue="">
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
     </div>
   );
 };

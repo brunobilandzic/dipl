@@ -55,11 +55,14 @@ export const getCellsInRect = ({
   } else {
     plantedCells = getCUSCells(cultivations);
   }
+
+  const overlaps = overlapsExistingCA(plantedCells, beginX, beginY, endX, endY);
   if (overlaps) {
     return {
       error: dimensionError.CULTIVATION_AREA_OVERLAP,
     };
   }
+
   const planted = [];
   const xStart = Math.min(beginX, endX);
   const xEnd = Math.max(beginX, endX);
@@ -173,14 +176,7 @@ export const getMinValuesFromPlanted = (plantedCells) => {
   };
 };
 
-export function overlapsExistingCA(
-  cultivationAreas,
-  beginX,
-  beginY,
-  endX,
-  endY,
-) {
-  const plantedCells = getCASCells(cultivationAreas);
+export function overlapsExistingCA(plantedCells, beginX, beginY, endX, endY) {
   for (let x = Math.min(beginX, endX); x <= Math.max(beginX, endX); x++) {
     for (let y = Math.min(beginY, endY); y <= Math.max(beginY, endY); y++) {
       if (plantedCells.includes(`${x},${y}`)) {

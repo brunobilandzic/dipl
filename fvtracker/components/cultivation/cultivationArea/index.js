@@ -1,7 +1,6 @@
 "use client";
 
-import { handleApiError } from "@/lib/constants/errors/client/api";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectField, setFields } from "@/store/cultivation";
 import handleError from "@/lib/constants/errors/client/handleError";
@@ -14,8 +13,10 @@ import { useRouter } from "next/navigation";
 export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const selectedField = useSelector((state) => state.cultivation.selectedField);
   const fields = useSelector((state) => state.cultivation.fields);
-  const dispatch = useDispatch();
-  const router = useRouter()
+
+  const [newCUCoordinates, setNewCUCoordinates] = useState({});
+  const [isBeginSelected, setIsBeginSelected] = useState(false);
+
   const cultivationArea = useMemo(() => {
     return selectedField?.cultivationAreas?.find((ca) => ca.slug === caSlug);
   }, [selectedField, caSlug, fields]);

@@ -84,7 +84,19 @@ const FieldCells = ({
   newCUCoordinates
 }) => {
   let cells = [];
-for (let y = 0; y < fieldLength; y++) {
+
+  const isSelected = (x, y) => {
+    const coord = `${x},${y}`;
+    if (small) return false;
+    return (
+      selectedCultivationArea?.planted?.includes(coord) ||
+      (newCACoordinates?.planted?.includes(coord) && isBeginSelected) ||
+      newCUCoordinates?.potentialCUCells?.includes(coord) ||
+      cultivatedCells?.includes(coord)
+    );
+  };
+
+  for (let y = 0; y < fieldLength; y++) {
     for (let x = 0; x < fieldWidth; x++) {
       cells.push(
         <FieldCell
@@ -93,13 +105,7 @@ for (let y = 0; y < fieldLength; y++) {
           x={x}
           y={y}
           active={plantedCells?.includes(`${x},${y}`)}
-          selected={
-            !small &&
-            (selectedCultivationArea?.planted?.includes(`${x},${y}`) ||
-              (newCACoordinates?.planted?.includes(`${x},${y}`) &&
-                isBeginSelected)) || 
-              (cultivatedCells?.includes(`${x},${y}`))  
-          }
+          selected={isSelected(x, y)}
           onRightClick={onRightClick}
           handleEmptyClick={handleEmptyClick}
           handleActiveClick={handleActiveClick}

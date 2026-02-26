@@ -119,14 +119,14 @@ function FieldEditCASPanel({
     }
     const { x: beginX, y: beginY } = newCACoordinates.begin;
     const { error, planted, dimensions } =
-      utils.cultivation.cultivationAreas.getCellsInRect(
+      utils.cultivation.cultivationAreas.getCellsInRect({
         beginX,
         beginY,
         endX,
         endY,
         cultivationAreaDimensions,
         cultivationAreas,
-      );
+      });
 
     if (error) {
       alert(error);

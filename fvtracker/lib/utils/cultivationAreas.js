@@ -25,27 +25,14 @@ export const getCAForCell = (cultivationAreas, x, y) => {
   );
 };
 
-export const getCellsInRect = (
+export const getCellsInRect = ({
   beginX,
   beginY,
   endX,
   endY,
   cultivationAreaDimensions,
   cultivationAreas,
-) => {
-  const valid = checkRectValidDimensions({
-    beginX,
-    beginY,
-    endX,
-    endY,
-    cultivationAreaDimensons,
-  });
-  if (!valid) {
-    return {
-      error: dimensionError.CULTIVATION_AREA_DIMENSIONS(
-        cultivationAreaDimensons,
-      ),
-    };
+}) => {
   }
   const overlaps = overlapsExistingCA(
     cultivationAreas,

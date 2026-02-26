@@ -94,7 +94,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     setNewCUCoordinates((prev) => ({
       ...prev,
       begin: { x, y },
-      cultivated: [`${x},${y}`],
+      potentialCUCells: [`${x},${y}`],
     }));
   };
 
@@ -102,7 +102,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     setNewCUCoordinates((prev) => ({
       ...prev,
       end: { x, y },
-      cultivated: utils.cultivation.cultivationAreas.getCellsInRect({
+      potentialCUCells: utils.cultivation.cultivationAreas.getCellsInRect({
         beginX: prev.begin.x,
         beginY: prev.begin.y,
         endX: x,

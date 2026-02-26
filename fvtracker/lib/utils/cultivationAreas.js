@@ -33,6 +33,21 @@ export const getCellsInRect = ({
   cultivationAreaDimensions,
   cultivationAreas,
 }) => {
+  if (cultivationAreaDimensions) {
+    const valid = checkRectValidDimensions({
+      beginX,
+      beginY,
+      endX,
+      endY,
+      cultivationAreaDimensions,
+    });
+    if (!valid) {
+      return {
+        error: dimensionError.CULTIVATION_AREA_DIMENSIONS(
+          cultivationAreaDimensions,
+        ),
+      };
+    }
   }
   const overlaps = overlapsExistingCA(
     cultivationAreas,

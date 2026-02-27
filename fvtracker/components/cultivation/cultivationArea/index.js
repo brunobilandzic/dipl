@@ -130,16 +130,17 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   };
 
   const onEndCoordinates = (x, y) => {
+    const potentialCUCells = utils.cultivation.cultivationAreas.getCellsInRect({
+      beginX: newCUCoordinates.begin.x,
+      beginY: newCUCoordinates.begin.y,
+      endX: x,
+      endY: y,
+      cultivations: cultvations,
+    }).planted;
     setNewCUCoordinates((prev) => ({
       ...prev,
       end: { x, y },
-      potentialCUCells: utils.cultivation.cultivationAreas.getCellsInRect({
-        beginX: prev.begin.x,
-        beginY: prev.begin.y,
-        endX: x,
-        endY: y,
-        cultivations: cultvations,
-      }).planted,
+      potentialCUCells: potentialCUCells,
     }));
   };
 

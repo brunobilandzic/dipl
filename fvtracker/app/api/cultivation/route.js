@@ -10,6 +10,9 @@ export async function POST(request) {
     if (!body?.newCUDetails)
       throw new Error("Missing cultivation details in request body");
    
+    const newCultivation = await cultivation.cultivations.create(
+      body.newCUDetails,
+    );
 
     console.log(newCultivation);
 

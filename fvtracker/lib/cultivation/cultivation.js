@@ -1,9 +1,4 @@
-import Cultivation from "@/models/sectors/cultivation/Cultivation";
-import CultivationArea from "@/models/sectors/cultivation/CultivationArea";
-import utils from "@/utils";
-import mongoose from "mongoose";
-
-async function createCultivation({ cultivation }) {
+export async function createCultivation( cultivation ) {
   const {
     cultivationArea: caId,
     name,

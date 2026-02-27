@@ -24,7 +24,14 @@ import {
 } from "./cultivationAreas";
 import { numbersInRanges } from "./formValidation";
 import { extractCoords } from "./fields";
-import { getCUSCells, relativeToFieldCoords, prepareCultivationData, mapCells } from "./cultivation";
+import {
+  getCUSCells,
+  relativeToFieldCoords,
+  prepareCultivationData,
+  mapCells,
+  getPlCvs,
+} from "./cultivation";
+import { plCvColor } from "./display";
 
 export default {
   objects: {
@@ -58,10 +65,19 @@ export default {
     fields: {
       extractCoords,
     },
-    cultivations: { getCUSCells, relativeToFieldCoords, prepareCultivationData, mapCells },
+    cultivations: {
+      getCUSCells,
+      getPlCvs,
+      relativeToFieldCoords,
+      prepareCultivationData,
+      mapCells,
+    },
   },
   formValidation: {
     numbersInRanges,
+  },
+  display: {
+    plCvColor,
   },
 };
 

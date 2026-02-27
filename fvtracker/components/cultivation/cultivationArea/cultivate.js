@@ -26,7 +26,7 @@ export function Cultivate({
       >
         <div className="mb-4 text-sm text-gray-500">
           field cells:{" "}
-          {newCUDetails?.fieldCells?.map((cell) => cell).join(" | ")}
+          {newCUDetails?.cuCells?.map((cell) => cell.fieldCoords).join(" | ")}
         </div>
 
         <div className={`form`}>

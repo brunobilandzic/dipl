@@ -2,6 +2,7 @@
 
 import classNames from "classnames";
 import dimensionError from "@/lib/constants/errors/cultivation/dimensions";
+import utils from "@/lib/utils";
 
 export function FieldGrid({
   width: fieldWidth,
@@ -101,10 +102,18 @@ const FieldCells = ({
 
   for (let y = 0; y < fieldLength; y++) {
     for (let x = 0; x < fieldWidth; x++) {
+      let color = "";
+      if (cultivationCells) {
+        color = utils.display.plCvColor({
+          plCvs: cultivationCells,
+          cell: `${x},${y}`,
+        });
+      }
       cells.push(
         <FieldCell
           key={`${x}-${y}`}
           small={small}
+          color={color}
           x={x}
           y={y}
           active={plantedCells?.includes(`${x},${y}`)}
@@ -127,6 +136,7 @@ const FieldCell = ({
   x,
   y,
   selected,
+  color,
   onRightClick,
   handleEmptyClick,
   handleActiveClick,
@@ -137,6 +147,7 @@ const FieldCell = ({
     small ? "w-1 h-1" : enlarged ? "w-6 h-6" : "w-3 h-3",
     selected ? `bg-green-500` : active ? `bg-yellow-500` : "",
     "border cursor-pointer",
+    color,
   );
   const handleClick = (e) => {
     if (!active) {

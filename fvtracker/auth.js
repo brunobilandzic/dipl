@@ -3,7 +3,7 @@ import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "@/lib/db/mongoDb";
-import authLib from "@/lib/auth";
+import { handleOAuth, handleCredentials } from "@/lib/auth/handlers";
 import users from "./lib/users";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
@@ -27,17 +27,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
       async authorize(credentials, req) {
         console.log("Authorizing with credentials:", credentials);
-        return await authLib.authorizationHandlers.handleCredentials(
-          credentials,
-        );
+        return await handleCredentials(credentials);
       },
     }),
   ],
   callbacks: {
     async signIn({ account, profile }) {
       if (account.provider == "google") {
-        const authorize =
-          await authLib.authorizationHandlers.handleOAuth(profile);
+        const authorize = await handleOAuth(profile);
         return !!authorize;
       }
       if (account.provider == "credentials") {

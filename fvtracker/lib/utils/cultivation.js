@@ -34,3 +34,14 @@ export const mapCells = ({ planted, cellCoords }) => {
     };
   });
 };
+
+export const prepareCultivationData = (newCultivation) => {
+  const cultivationData = {
+    cultivationAreaId: newCultivation.cultivationAreaId,
+    name: newCultivation.name,
+    description: newCultivation.description,
+    relativeCoords: newCultivation.potentialCUCells,
+    cropVarietyId: newCultivation.cropVarietyId,
+  };
+  return cultivationData;
+};

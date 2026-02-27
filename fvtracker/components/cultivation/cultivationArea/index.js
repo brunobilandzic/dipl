@@ -145,6 +145,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       end: { x, y },
       potentialCUCells,
       fieldCells,
+      dimensions: getDimensions(),
     }));
   };
 

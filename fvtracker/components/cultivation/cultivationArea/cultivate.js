@@ -8,7 +8,6 @@ export function Cultivate({
   onSubmit,
   newCUDetails,
   setNewCUDetails,
-  dimensions,
 }) {
   const onFormChange = (field, value) => {
     setNewCUDetails({
@@ -51,8 +50,8 @@ export function Cultivate({
           >
             <div className="font-bold">Duljina</div>
             <div className="font-bold">Širina</div>
-            <div className="">{dimensions?.length || 0}</div>
-            <div className="">{dimensions?.width || 0}</div>
+            <div className="">{newCUDetails?.dimensions?.length || 0}</div>
+            <div className="">{newCUDetails?.dimensions?.width || 0}</div>
           </div>
         </div>
       </Modals.FormModal>

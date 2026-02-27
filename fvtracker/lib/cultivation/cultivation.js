@@ -2,7 +2,7 @@ import { Cultivation } from "@/models/sectors/cultivation/Cultivation";
 import { CultivationArea } from "@/models/sectors/cultivation/Cultivation";
 import utils from "@/lib/utils";
 
-export async function createCultivation( cultivation ) {
+export async function createCultivation(cultivation) {
   console.log("Creating cultivation with data:", cultivation);
 
   const {
@@ -33,3 +33,7 @@ export async function createCultivation( cultivation ) {
 
   return newCultivation;
 }
+
+async function handleCells(cuCells) {}
+
+async function createCellPromise(cuCell) {}

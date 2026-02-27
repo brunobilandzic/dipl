@@ -18,7 +18,7 @@ export async function createCultivation( cultivation ) {
   } = cultivation;
 
   const newCultivation = new Cultivation({
-    cultivationArea: caId,
+    cultivationArea: cultivationAreaId,
     name,
     description,
   });

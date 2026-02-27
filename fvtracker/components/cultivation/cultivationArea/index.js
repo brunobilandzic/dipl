@@ -32,6 +32,12 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
 
   useEffect(() => {
     console.log("cultivationArea changed:", cultivationArea);
+    if (cultivationArea?._id) {
+      setNewCUDetails((prev) => ({
+        ...prev,
+        cultivationAreaId: cultivationArea._id,
+      }));
+    }
   }, [cultivationArea]);
 
   const initialNewCUDetails = {

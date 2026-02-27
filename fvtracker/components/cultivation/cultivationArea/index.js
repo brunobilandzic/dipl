@@ -11,6 +11,7 @@ import { FieldGrid } from "../fields/preview/grid";
 import { useRouter } from "next/navigation";
 import utils from "@/lib/utils";
 import Modals from "@/components/layout/modals";
+import { Cultivate } from "./cultivate";
 
 export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const dispatch = useDispatch();
@@ -149,11 +150,14 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
             onCultivate={() => setCultivationOpen(true)}
           />
         </div>
-        <Modals.FormModal
-          title="Cultivate cells"
-          isOpen={cultivationOpen}
-          onCancel={() => setCultivationOpen(false)}
-        ></Modals.FormModal>
+        <Cultivate
+          cultivationAreaId={cultivationArea.id}
+          cultivations={cultvations}
+          cultivationOpen={cultivationOpen}
+          setCultivationOpen={setCultivationOpen}
+          newCUDetails={newCUDetails}
+          setNewCUDetails={setNewCUDetails}
+        />
       </div>
     </>
   );

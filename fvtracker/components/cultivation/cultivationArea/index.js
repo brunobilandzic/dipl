@@ -134,18 +134,22 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       cultivations: cultvations,
     }).planted;
 
-    const fieldCells = potentialCUCells.map((cell) => {
-      return utils.cultivation.cultivations.relativeToFieldCoords({
+    const cuCells = potentialCUCells.map((cell) => {
+      const fieldCell = utils.cultivation.cultivations.relativeToFieldCoords({
         planted: cultivationArea.planted,
         cellCoords: cell,
       });
+      return {
+        relativeCoords: cell,
+        fieldCoords: fieldCell,
+      };
     });
 
     setNewCUDetails((prev) => ({
       ...prev,
       end: { x, y },
       potentialCUCells,
-      fieldCells,
+      cuCells,
       dimensions: getDimensions(),
     }));
   };
@@ -157,7 +161,8 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       begin: null,
       end: null,
       potentialCUCells: [],
-      fieldCells: [],
+      cuCells: [],
+      dimensions: { width: 0, length: 0 },
     }));
   };
 

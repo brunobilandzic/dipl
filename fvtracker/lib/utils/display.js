@@ -7,5 +7,5 @@ export const plCvColor = ({ plCvs, cell }) => {
   if (color && shade) {
     return `bg-${color}-${shade}`;
   }
-  return "bg-green-500";
+  return "bg-green-700";
 };

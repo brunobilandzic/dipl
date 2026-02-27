@@ -181,6 +181,12 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       </div>
     );
 
+  const onSubmitCultivation = () => {
+    console.log("Submitting cultivation with details:", newCUDetails);
+    setCultivationOpen(false);
+    setNewCUDetails(initialNewCUDetails);
+  };
+
   const onBack = () => router.push(`/upravljanje-poljima/${fieldSlug}`);
 
   const { width, length } = cultivationArea.dimensions;
@@ -211,7 +217,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
           setCultivationOpen={setCultivationOpen}
           newCUDetails={newCUDetails}
           setNewCUDetails={setNewCUDetails}
-          dimensions={getDimensions()}
+          onSubmit={onSubmitCultivation}
         />
       </div>
     </>

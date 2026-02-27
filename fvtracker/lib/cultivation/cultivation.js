@@ -45,6 +45,11 @@ export async function createCultivation(cultivation) {
   await cuArea.save();
   await newCultivation.save();
 
+  await newCultivation.populate({
+    path: "plantedCropVarieties",
+    populate: { path: "cropVariety", populate: { path: "cropType" } },
+  });
+
   return newCultivation;
 }
 
@@ -52,7 +57,7 @@ async function createPlantedCropVarietiesCells({
   relativeCoords,
   cropVarietyId,
   planted,
-  cultivationId
+  cultivationId,
 }) {
   const plantedCropVarieties = [];
   for (const relativeCoord of relativeCoords) {
@@ -67,7 +72,12 @@ async function createPlantedCropVarietiesCells({
   return plantedCropVarieties;
 }
 
-async function createCellPromise({ relativeCoord, cropVarietyId, planted, cultivationId }) {
+async function createCellPromise({
+  relativeCoord,
+  cropVarietyId,
+  planted,
+  cultivationId,
+}) {
   const fieldCoords = utils.cultivation.cultivations.relativeToFieldCoords({
     planted,
     cellCoords: relativeCoord,

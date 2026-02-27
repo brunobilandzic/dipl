@@ -1,4 +1,5 @@
 import { getDimensionsFromPlanted } from "@/lib/utils/cultivationAreas";
+import { CropVariety } from "@/models/sectors/cultivation/Crops";
 
 export async function createCultivation({ cultivationArea }) {
     const variety = await chooseRandomCropVariety();

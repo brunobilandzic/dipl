@@ -149,7 +149,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     const width = Math.abs(newCUCoordinates.end.x - newCUCoordinates.begin.x) + 1;
     const length = Math.abs(newCUCoordinates.end.y - newCUCoordinates.begin.y) + 1;
     return { width, length };
-  }           
+  };
 
   if (!cultivationArea)
     return (

@@ -198,6 +198,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
 
   return (
     <>
+      {JSON.stringify(newCUDetails, null, 2)}
       <div className="grid grid-cols-6">
         <div className="col-start-1 col-end-6 h-screen flex flex-col ">
           <FieldGrid

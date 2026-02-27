@@ -192,8 +192,20 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       </div>
     );
 
-  const onSubmitCultivation = () => {
+  const onSubmitCultivation = async () => {
     console.log("Submitting cultivation with details:", newCUDetails);
+    try {
+      const res = await api.post(`/cultivation`, {newCUDetails});
+      console.log("Cultivation created successfully:", res.data);
+      // Optionally, you can update the local state or refetch the cultivation area to reflect the new cultivation
+    } catch (error) {
+      console.error("Error submitting cultivation:", error);
+      handleError({
+        ...error,
+        generalMessage: "Failed to create cultivation",
+      });
+      return;
+    }
     setCultivationOpen(false);
     setNewCUDetails(initialNewCUDetails);
   };

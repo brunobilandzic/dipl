@@ -4,9 +4,10 @@ import utils from "@/lib/utils";
 
 export async function createCultivation( cultivation ) {
   const {
-    cultivationArea: caId,
+    cultivationAreaId,
     name,
     description,
+    cuCells,
     plantedCropVarieties,
     workHours,
     status,

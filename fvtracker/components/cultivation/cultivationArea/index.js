@@ -57,12 +57,12 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   }, [cultivationArea]);
 
   const getActiveCells = () => {
-    if (!cultvations) return [];
-    if (cultvations.length === 0) return [];
+    if (!cultivationArea) return [];
+    if (!cultivationArea.cultivations || cultivationArea.cultivations.length === 0) return [];
 
     const activeCells = [];
 
-    cultvations.map((cult) => {
+    cultivationArea.cultivations.map((cult) => {
       cult.plantedCropVarieties.map((variety) => {
         activeCells.push(variety.relativeCoords);
       });
@@ -77,16 +77,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     setActiveCells(activeCells);
   }, [cultvations]);
 
-  useEffect(() => {
-    console.log("cultivations:", cultvations);
-  }, [cultvations]);
-
-  useEffect(() => {
-    setNewCUDetails((prev) => ({
-      ...prev,
-      cultivations: cultvations,
-    }));
-  }, [cultvations]);
 
   useEffect(() => {
     const fillSelectedField = async () => {
@@ -154,7 +144,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       beginY: newCUDetails.begin.y,
       endX: x,
       endY: y,
-      cultivations: cultvations,
+      cultivations: cultivationArea.cultivations,
     }).planted;
 
     setNewCUDetails((prev) => ({
@@ -223,6 +213,8 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   return (
     <>
       {JSON.stringify(newCUDetails, null, 2)}
+      <br/>
+      {JSON.stringify(cultivationArea.cultivations, null, 2)}
       <div className="grid grid-cols-6">
         <div className="col-start-1 col-end-6 h-screen flex flex-col ">
           <FieldGrid
@@ -232,6 +224,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
             length={length}
             enlarged={true}
             onRightClick={onRightClick}
+
           />
         </div>
         <div className="col-start-6 col-end-7  h-screen flex flex-col  items-center ">
@@ -242,7 +235,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
         </div>
         <Cultivate
           cultivationAreaId={cultivationArea.id}
-          cultivations={cultvations}
           cultivationOpen={cultivationOpen}
           setCultivationOpen={setCultivationOpen}
           newCUDetails={newCUDetails}

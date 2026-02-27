@@ -4,8 +4,6 @@ import styles from "@/components/form/form.module.css";
 
 
 export function Cultivate({
-  cultivationAreaId,
-  cultivations,
   cultivationOpen,
   setCultivationOpen,
   onSubmit,

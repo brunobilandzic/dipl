@@ -19,11 +19,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const selectedField = useSelector((state) => state.cultivation.selectedField);
   const fields = useSelector((state) => state.cultivation.fields);
   const [cultivationOpen, setCultivationOpen] = useState(false);
-  const [newCUCoordinates, setNewCUCoordinates] = useState({});
-
-  useEffect(() => {
-    console.log("new cuc coordinates:", newCUCoordinates);
-  }, [newCUCoordinates]);
 
   const [isBeginSelected, setIsBeginSelected] = useState(false);
 
@@ -122,7 +117,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
 
   const onBeginCoordinates = (x, y) => {
     setIsBeginSelected(true);
-    setNewCUCoordinates((prev) => ({
+    setNewCUDetails((prev) => ({
       ...prev,
       begin: { x, y },
       potentialCUCells: [`${x},${y}`],
@@ -131,8 +126,8 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
 
   const onEndCoordinates = (x, y) => {
     const potentialCUCells = utils.cultivation.cultivationAreas.getCellsInRect({
-      beginX: newCUCoordinates.begin.x,
-      beginY: newCUCoordinates.begin.y,
+      beginX: newCUDetails.begin.x,
+      beginY: newCUDetails.begin.y,
       endX: x,
       endY: y,
       cultivations: cultvations,
@@ -145,9 +140,15 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   };
 
   const getDimensions = () => {
-    if (!newCUCoordinates.begin || !newCUCoordinates.end || !newCUCoordinates.potentialCUCells || newCUCoordinates.potentialCUCells.length === 0) return { width: 0, length: 0 };
-    const width = Math.abs(newCUCoordinates.end.x - newCUCoordinates.begin.x) + 1;
-    const length = Math.abs(newCUCoordinates.end.y - newCUCoordinates.begin.y) + 1;
+    if (
+      !newCUDetails.begin ||
+      !newCUDetails.end ||
+      !newCUDetails.potentialCUCells ||
+      newCUDetails.potentialCUCells.length === 0
+    )
+      return { width: 0, length: 0 };
+    const width = Math.abs(newCUDetails.end.x - newCUDetails.begin.x) + 1;
+    const length = Math.abs(newCUDetails.end.y - newCUDetails.begin.y) + 1;
     return { width, length };
   };
 
@@ -168,7 +169,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
         <div className="col-start-1 col-end-6 h-screen flex flex-col ">
           <FieldGrid
             handleEmptyClick={handleEmptyClick}
-            newCUCoordinates={newCUCoordinates}
+            potentialCUCells={newCUDetails.potentialCUCells}
             width={width}
             length={length}
             enlarged={true}

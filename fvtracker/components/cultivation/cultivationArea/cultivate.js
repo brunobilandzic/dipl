@@ -25,6 +25,11 @@ export function Cultivate({
         title="Napravi novo područje"
         onSubmit={onSubmit}
       >
+        <div className="mb-4 text-sm text-gray-500">
+          field cells:{" "}
+          {newCUDetails?.fieldCells?.map((cell) => cell).join(" | ")}
+        </div>
+
         <div className={`form`}>
           <div className={``}>
             <AppInput

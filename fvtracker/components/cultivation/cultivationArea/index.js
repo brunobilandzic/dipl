@@ -22,10 +22,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const [activeCells, setActiveCells] = useState([]);
   const [isBeginSelected, setIsBeginSelected] = useState(false);
 
-  useEffect(() => {
-    console.log("isBeginSelected changed:", isBeginSelected);
-  }, [isBeginSelected]);
-
   const cultivationArea = useMemo(() => {
     return selectedField?.cultivationAreas?.find((ca) => ca.slug === caSlug);
   }, [selectedField, caSlug, fields]);

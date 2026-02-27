@@ -25,13 +25,13 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     return selectedField?.cultivationAreas?.find((ca) => ca.slug === caSlug);
   }, [selectedField, caSlug, fields]);
 
-  const plantedCells = useMemo(() => {
+  const cultivationCells = useMemo(() => {
     if (!cultivationArea) return [];
-    const cells = utils.cultivation.cultivations.getCUSCells(
+    const plcvs = utils.cultivation.cultivations.getPlCvs(
       cultivationArea.cultivations,
     );
-    console.log("Planted cells for cultivation area:", cells);
-    return cells;
+    console.log("Planted cells for cultivation area:", plcvs);
+    return plcvs;
   }, [cultivationArea]);
 
   useEffect(() => {

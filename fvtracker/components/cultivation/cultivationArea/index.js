@@ -35,7 +35,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   }, [cultivationArea]);
 
   const initialNewCUDetails = {
-    cultivationAreaId: cultivationArea?.id || null,
+    cultivationAreaId: cultivationArea?._id || null,
     name: "",
     description: "",
     dimensions: {

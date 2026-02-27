@@ -15,6 +15,20 @@ export function getCUSCells(cultivations) {
   return cells;
 }
 
+export function getPlCvs(cultivations) {
+  const plCvs = [];
+
+  cultivations.forEach((cultivation) => {
+    cultivation.plantedCropVarieties.forEach((pcv) => {
+      if (pcv.relativeCoords) {
+        plCvs.push(pcv);
+      } 
+    });
+  });
+
+  return plCvs;
+}
+
 export function relativeToFieldCoords({ planted, cellCoords }) {
   const { width, length } = extractCoords(cellCoords);
   const { minX, minY } = getMinValuesFromPlanted(planted);

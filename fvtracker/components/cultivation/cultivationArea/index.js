@@ -10,7 +10,6 @@ import CAOptions from "./caOptions";
 import { FieldGrid } from "../fields/preview/grid";
 import { useRouter } from "next/navigation";
 import utils from "@/lib/utils";
-import Modals from "@/components/layout/modals";
 import { Cultivate } from "./cultivate";
 
 export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {

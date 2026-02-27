@@ -19,7 +19,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const selectedField = useSelector((state) => state.cultivation.selectedField);
   const fields = useSelector((state) => state.cultivation.fields);
   const [cultivationOpen, setCultivationOpen] = useState(false);
-  const [activeCells, setActiveCells] = useState([]);
   const [isBeginSelected, setIsBeginSelected] = useState(false);
 
   const cultivationArea = useMemo(() => {
@@ -213,7 +212,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   return (
     <>
       {JSON.stringify(newCUDetails, null, 2)}
-      <br/>
+      <br />
       {JSON.stringify(cultivationArea.cultivations, null, 2)}
       <div className="grid grid-cols-6">
         <div className="col-start-1 col-end-6 h-screen flex flex-col ">

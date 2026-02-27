@@ -3,6 +3,8 @@ import { CultivationArea } from "@/models/sectors/cultivation/Cultivation";
 import utils from "@/lib/utils";
 
 export async function createCultivation( cultivation ) {
+  console.log("Creating cultivation with data:", cultivation);
+
   const {
     cultivationAreaId,
     name,

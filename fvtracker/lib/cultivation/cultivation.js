@@ -4,6 +4,7 @@ import {
 } from "@/models/sectors/cultivation/Cultivation";
 import { PlantedCropVariety } from "@/models/sectors/cultivation/Crops";
 import utils from "@/lib/utils";
+import { getCropVarietyById } from "./plant";
 
 export async function createCultivation(cultivation) {
   console.log("Creating cultivation with data:", cultivation);

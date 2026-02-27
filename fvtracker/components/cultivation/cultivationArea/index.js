@@ -173,19 +173,13 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     return { width, length };
   };
 
-  if (!cultivationArea)
-    return (
-      <div className="w-full h-screen flex items-center justify-center">
-        <Loading />
-      </div>
-    );
-
   const onSubmitCultivation = async () => {
     console.log("Submitting cultivation with details:", newCUDetails);
     try {
-      const data = utils.cultivation.cultivations.prepareCultivationData(newCUDetails);
+      const data =
+        utils.cultivation.cultivations.prepareCultivationData(newCUDetails);
       console.log("Submitting cultivation with data:", data);
-      const res = await api.post(`/cultivation`, {data});
+      const res = await api.post(`/cultivation`, { data });
       console.log("Cultivation created successfully:", res.data);
     } catch (error) {
       console.error("Error submitting cultivation:", error);

@@ -7,9 +7,9 @@ export async function POST(request) {
     await dbConnect();
     await auth.session.fetchSessionSpecificManager("CultivationManager");
     const body = await request.json();
-
-    const newCultivation =
-      await cultivation.cultivation.createCultivation(body);
+    if (!body?.newCUDetails)
+      throw new Error("Missing cultivation details in request body");
+   
 
     console.log(newCultivation);
 

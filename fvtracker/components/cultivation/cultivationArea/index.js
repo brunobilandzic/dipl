@@ -201,6 +201,13 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
 
   const onBack = () => router.push(`/upravljanje-poljima/${fieldSlug}`);
 
+  if (!cultivationArea)
+    return (
+      <div className="w-full h-screen flex items-center justify-center">
+        <Loading />
+      </div>
+    );
+
   const { width, length } = cultivationArea.dimensions;
 
   return (

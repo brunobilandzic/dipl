@@ -205,6 +205,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
             length={length}
             enlarged={true}
             onRightClick={onRightClick}
+            cultivationCells={cultivationCells}
           />
         </div>
         <div className="col-start-6 col-end-7  h-screen flex flex-col  items-center ">

@@ -17,6 +17,7 @@ export function FieldGrid({
   enlarged,
   potentialCUCells,
   cultivatedCells,
+  cultivationCells,
 }) {
   if (small) {
     return (
@@ -62,6 +63,7 @@ export function FieldGrid({
           enlarged={enlarged}
           cultivatedCells={cultivatedCells}
           potentialCUCells={potentialCUCells}
+          cultivationCells={cultivationCells}
         />
       </div>
     </>
@@ -82,6 +84,7 @@ const FieldCells = ({
   enlarged,
   cultivatedCells,
   potentialCUCells,
+  cultivationCells,
 }) => {
   let cells = [];
 

@@ -24,7 +24,7 @@ import {
 } from "./cultivationAreas";
 import { numbersInRanges } from "./formValidation";
 import { extractCoords } from "./fields";
-import { getCUSCells, relativeToFieldCoords } from "./cultivation";
+import { getCUSCells, relativeToFieldCoords, prepareCultivationData } from "./cultivation";
 
 export default {
   objects: {
@@ -53,11 +53,12 @@ export default {
       adjacentCells,
       adjacentCellsGap,
       getMinValuesFromPlanted,
+      extractPlantedCells,
     },
     fields: {
       extractCoords,
     },
-    cultivations: { getCUSCells, relativeToFieldCoords     },
+    cultivations: { getCUSCells, relativeToFieldCoords, prepareCultivationData },
   },
   formValidation: {
     numbersInRanges,

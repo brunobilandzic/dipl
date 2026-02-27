@@ -163,8 +163,8 @@ export function extractPlantedCells(planted) {
 }
 
 const getValuesFromPlanted = (plantedCells) => {
-  const xValues = plantedCells.map((cell) => parseInt(extractCoords(cell).x));
-  const yValues = plantedCells.map((cell) => parseInt(extractCoords(cell).y));
+  const xValues = plantedCells.map((cell) => parseInt(extractCoords(cell).width));
+  const yValues = plantedCells.map((cell) => parseInt(extractCoords(cell).length));
   return { xValues, yValues };
 };
 

@@ -1,5 +1,8 @@
-import { Cultivation } from "@/models/sectors/cultivation/Cultivation";
-import { CultivationArea } from "@/models/sectors/cultivation/Cultivation";
+import {
+  Cultivation,
+  CultivationArea,
+} from "@/models/sectors/cultivation/Cultivation";
+import { PlantedCropVariety } from "@/models/sectors/cultivation/Crops";
 import utils from "@/lib/utils";
 
 export async function createCultivation(cultivation) {

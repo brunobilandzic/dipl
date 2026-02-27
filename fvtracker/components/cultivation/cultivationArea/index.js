@@ -19,7 +19,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const selectedField = useSelector((state) => state.cultivation.selectedField);
   const fields = useSelector((state) => state.cultivation.fields);
   const [cultivationOpen, setCultivationOpen] = useState(false);
-
+  const [activeCells, setActiveCells] = useState([]);
   const [isBeginSelected, setIsBeginSelected] = useState(false);
 
   useEffect(() => {
@@ -59,6 +59,27 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const cultvations = useMemo(() => {
     return cultivationArea?.cultivations || [];
   }, [cultivationArea]);
+
+  const getActiveCells = () => {
+    if (!cultvations) return [];
+    if (cultvations.length === 0) return [];
+
+    const activeCells = [];
+
+    cultvations.map((cult) => {
+      cult.plantedCropVarieties.map((variety) => {
+        activeCells.push(variety.relativeCoords);
+      });
+    });
+    console.log("Active cells:", activeCells);
+    return activeCells;
+  };
+
+  useEffect(() => {
+    const activeCells = getActiveCells();
+    console.log("Updating potentialCUCells with active cells:", activeCells);
+    setActiveCells(activeCells);
+  }, [cultvations]);
 
   useEffect(() => {
     console.log("cultivations:", cultvations);
@@ -139,7 +160,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       endY: y,
       cultivations: cultvations,
     }).planted;
-
 
     setNewCUDetails((prev) => ({
       ...prev,

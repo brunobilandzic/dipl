@@ -55,7 +55,6 @@ export const getCellsInRect = ({
   } else {
     plantedCells = getCUSCells(cultivations);
   }
-
   const overlaps = overlapsExistingCA(plantedCells, beginX, beginY, endX, endY);
   if (overlaps) {
     return {
@@ -68,7 +67,6 @@ export const getCellsInRect = ({
   const xEnd = Math.max(beginX, endX);
   const yStart = Math.min(beginY, endY);
   const yEnd = Math.max(beginY, endY);
-
   for (let x = xStart; x <= xEnd; x++) {
     for (let y = yStart; y <= yEnd; y++) {
       planted.push(`${x},${y}`);

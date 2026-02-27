@@ -23,7 +23,7 @@ export async function createCultivation( cultivation ) {
     description,
   });
 
-  const cuArea = await CultivationArea.findById(caId);
+  const cuArea = await CultivationArea.findById(cultivationAreaId);
   if (!cuArea) {
     throw new Error("Cultivation area not found");
   }

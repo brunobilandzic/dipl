@@ -132,9 +132,22 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       endY: y,
       cultivations: cultvations,
     }).planted;
-    setNewCUCoordinates((prev) => ({
+
+    const fieldCells = potentialCUCells.map((cell) => {
+      return utils.cultivation.cultivations.relativeToFieldCoords({
+        planted: cultivationArea.planted,
+        cellCoords: cell,
+      });
+    });
+
+    setNewCUDetails((prev) => ({
       ...prev,
       end: { x, y },
+      potentialCUCells,
+      fieldCells,
+    }));
+  };
+
   const onRightClick = () => {
     setIsBeginSelected(false);
     setNewCUDetails((prev) => ({

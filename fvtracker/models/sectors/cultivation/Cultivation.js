@@ -80,7 +80,7 @@ const cultivationSchema = new Schema({
     default: "u planiranju",
   },
   createdAt: { type: Date, default: Date.now },
-  startDate: { type: Date, required: true },
+  startDate: { type: Date },
   endDate: { type: Date, default: null },
 });
 

@@ -187,6 +187,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     try {
       const data = utils.cultivation.cultivations.prepareCultivationData(newCUDetails);
       console.log("Submitting cultivation with data:", data);
+      const res = await api.post(`/cultivation`, {data});
       console.log("Cultivation created successfully:", res.data);
       // Optionally, you can update the local state or refetch the cultivation area to reflect the new cultivation
     } catch (error) {

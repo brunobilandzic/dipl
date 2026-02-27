@@ -135,7 +135,14 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     setNewCUCoordinates((prev) => ({
       ...prev,
       end: { x, y },
-      potentialCUCells: potentialCUCells,
+  const onRightClick = () => {
+    setIsBeginSelected(false);
+    setNewCUDetails((prev) => ({
+      ...prev,
+      begin: null,
+      end: null,
+      potentialCUCells: [],
+      fieldCells: [],
     }));
   };
 
@@ -173,6 +180,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
             width={width}
             length={length}
             enlarged={true}
+            onRightClick={onRightClick}
           />
         </div>
         <div className="col-start-6 col-end-7  h-screen flex flex-col  items-center ">

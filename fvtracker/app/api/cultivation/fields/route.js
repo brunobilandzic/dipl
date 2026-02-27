@@ -16,7 +16,7 @@ export async function GET(request) {
         populate: {
           path: "cultivations",
           populate: {
-            path: "plantedCropvarieties",
+            path: "plantedCropVarieties",
             populate: { path: "cropVariety", populate: { path: "cropType" } },
           },
         },

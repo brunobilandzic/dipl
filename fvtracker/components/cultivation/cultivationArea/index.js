@@ -140,16 +140,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       cultivations: cultvations,
     }).planted;
 
-    const cuCells = potentialCUCells.map((cell) => {
-      const fieldCell = utils.cultivation.cultivations.relativeToFieldCoords({
-        planted: cultivationArea.planted,
-        cellCoords: cell,
-      });
-      return {
-        relativeCoords: cell,
-        fieldCoords: fieldCell,
-      };
-    });
 
     setNewCUDetails((prev) => ({
       ...prev,

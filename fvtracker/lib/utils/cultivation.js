@@ -21,3 +21,16 @@ export function relativeToFieldCoords({ planted, cellCoords }) {
 
   return `${minX + width},${minY + length}`;
 }
+
+export const mapCells = ({ planted, cellCoords }) => {
+  return cellCoords.map((cell) => {
+    const fieldCell = utils.cultivation.cultivations.relativeToFieldCoords({
+      planted: planted,
+      cellCoords: cell,
+    });
+    return {
+      relativeCoords: cell,
+      fieldCoords: fieldCell,
+    };
+  });
+};

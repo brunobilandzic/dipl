@@ -125,7 +125,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   };
 
   const onEndCoordinates = (x, y) => {
-    if(!newCUDetails.begin) return;
+    if (!newCUDetails.begin) return;
     const potentialCUCells = utils.cultivation.cultivationAreas.getCellsInRect({
       beginX: newCUDetails.begin.x,
       beginY: newCUDetails.begin.y,

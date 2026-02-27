@@ -6,6 +6,7 @@ import {
   getCultivationArea
 } from "./cultivationArea";
 import { cropsData, getCropVarietyById, plantCropVariety } from "./plant";
+import { createCultivation } from "./cultivation";
 
 export default {
   fields: {
@@ -26,6 +27,9 @@ export default {
     cropVariety: getCropVarietyById,
     plant: plantCropVariety,
   },
+  cultivations: {
+    create: createCultivation,
+  }
 };
 
 async function getFieldAndCropData() {

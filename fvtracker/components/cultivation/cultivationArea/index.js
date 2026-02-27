@@ -25,8 +25,16 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     return selectedField?.cultivationAreas?.find((ca) => ca.slug === caSlug);
   }, [selectedField, caSlug, fields]);
 
+  const plantedCells = useMemo(() => {
+    if (!cultivationArea) return [];
+    const cells = utils.cultivation.cultivations.getCUSCells(
+      cultivationArea.cultivations,
+    );
+    console.log("Planted cells for cultivation area:", cells);
+    return cells;
+  }, [cultivationArea]);
+
   useEffect(() => {
-    console.log("cultivationArea changed:", cultivationArea);
     if (cultivationArea?._id) {
       setNewCUDetails((prev) => ({
         ...prev,
@@ -50,32 +58,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   useEffect(() => {
     console.log("newCUDetails changed:", newCUDetails);
   }, [newCUDetails]);
-
-  const cultvations = useMemo(() => {
-    return cultivationArea?.cultivations || [];
-  }, [cultivationArea]);
-
-  const getActiveCells = () => {
-    if (!cultivationArea) return [];
-    if (!cultivationArea.cultivations || cultivationArea.cultivations.length === 0) return [];
-
-    const activeCells = [];
-
-    cultivationArea.cultivations.map((cult) => {
-      cult.plantedCropVarieties.map((variety) => {
-        activeCells.push(variety.relativeCoords);
-      });
-    });
-    console.log("Active cells:", activeCells);
-    return activeCells;
-  };
-
-  useEffect(() => {
-    const activeCells = getActiveCells();
-    console.log("Updating potentialCUCells with active cells:", activeCells);
-    setActiveCells(activeCells);
-  }, [cultvations]);
-
 
   useEffect(() => {
     const fillSelectedField = async () => {
@@ -223,7 +205,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
             length={length}
             enlarged={true}
             onRightClick={onRightClick}
-
           />
         </div>
         <div className="col-start-6 col-end-7  h-screen flex flex-col  items-center ">

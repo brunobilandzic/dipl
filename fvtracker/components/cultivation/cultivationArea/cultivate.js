@@ -2,16 +2,15 @@ import Modals from "@/components/layout/modals";
 import { AppInput, AppTextArea } from "@/components/form/inputs";
 import styles from "@/components/form/form.module.css";
 
-
 export function Cultivate({
   cultivationOpen,
   setCultivationOpen,
   onSubmit,
   newCUDetails,
   setNewCUDetails,
+  dimensions,
 }) {
-
-    const onFormChange = (field, value) => {
+  const onFormChange = (field, value) => {
     setNewCUDetails({
       ...newCUDetails,
       [field]: value,
@@ -47,8 +46,8 @@ export function Cultivate({
           >
             <div className="font-bold">Duljina</div>
             <div className="font-bold">Širina</div>
-            <div className="">{newCUDetails?.dimensions?.length || 0}</div>
-            <div className="">{newCUDetails?.dimensions?.width || 0}</div>
+            <div className="">{dimensions?.length || 0}</div>
+            <div className="">{dimensions?.width || 0}</div>
           </div>
         </div>
       </Modals.FormModal>

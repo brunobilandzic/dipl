@@ -143,6 +143,13 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     }));
   };
 
+  const getDimensions = () => {
+    if (!newCUCoordinates.begin || !newCUCoordinates.end || !newCUCoordinates.potentialCUCells || newCUCoordinates.potentialCUCells.length === 0) return { width: 0, length: 0 };
+    const width = Math.abs(newCUCoordinates.end.x - newCUCoordinates.begin.x) + 1;
+    const length = Math.abs(newCUCoordinates.end.y - newCUCoordinates.begin.y) + 1;
+    return { width, length };
+  }           
+
   if (!cultivationArea)
     return (
       <div className="w-full h-screen flex items-center justify-center">
@@ -179,6 +186,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
           setCultivationOpen={setCultivationOpen}
           newCUDetails={newCUDetails}
           setNewCUDetails={setNewCUDetails}
+          dimensions={getDimensions()}
         />
       </div>
     </>

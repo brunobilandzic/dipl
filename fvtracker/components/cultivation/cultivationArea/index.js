@@ -39,12 +39,35 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     console.log("cultivationArea changed:", cultivationArea);
   }, [cultivationArea]);
 
+  const initialNewCUDetails = {
+    cultivationAreaId: cultivationArea?.id || null,
+    name: "",
+    description: "",
+    dimensions: {
+      width: "",
+      length: "",
+    },
+  };
+
+  const [newCUDetails, setNewCUDetails] = useState(initialNewCUDetails);
+
+  useEffect(() => {
+    console.log("newCUDetails changed:", newCUDetails);
+  }, [newCUDetails]);
+
   const cultvations = useMemo(() => {
     return cultivationArea?.cultivations || [];
   }, [cultivationArea]);
 
   useEffect(() => {
     console.log("cultivations:", cultvations);
+  }, [cultvations]);
+
+  useEffect(() => {
+    setNewCUDetails((prev) => ({
+      ...prev,
+      cultivations: cultvations,
+    }));
   }, [cultvations]);
 
   useEffect(() => {

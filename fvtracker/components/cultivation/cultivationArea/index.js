@@ -120,12 +120,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   };
 
   const onEndCoordinates = (x, y) => {
-    if (!newCUDetails.begin) {
-      console.log("Cannot set end coordinates, begin coordinates not set.", {
-        newCUDetails,
-      });
-      return;
-    }
+    if (!newCUDetails.begin) return
     const potentialCUCells = utils.cultivation.cultivationAreas.getCellsInRect({
       beginX: newCUDetails.begin.x,
       beginY: newCUDetails.begin.y,
@@ -154,13 +149,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   };
 
   const getDimensions = ({ beginX, beginY, endX, endY, potentialCUCells }) => {
-    console.log("Calculating dimensions with newCUDetails:", !!newCUDetails, {
-      beginX,
-      beginY,
-      endX,
-      endY,
-      potentialCUCells,
-    });
     if (
       !beginX ||
       !beginY ||
@@ -168,10 +156,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       !endY ||
       !potentialCUCells ||
       potentialCUCells.length === 0
-    ) {
-      console.log("Cannot calculate dimensions, missing data.");
-      return { width: 0, length: 0 };
-    }
+    ) return { width: "N/A", length: "N/A" };
     const width = Math.abs(endX - beginX) + 1;
     const length = Math.abs(endY - beginY) + 1;
     console.log("Calculated dimensions:", { width, length });

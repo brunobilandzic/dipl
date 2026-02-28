@@ -70,6 +70,12 @@ async function addPlCvs({
   relativeCoords,
   cropVarietyId,
 }) {
+  console.log("Adding planted crop varieties to existing cultivation:", {
+    existingCulName,
+    cuAreaId: cuArea._id,
+    relativeCoordsLength: relativeCoords.length,
+    cropVarietyId,
+  });
   const existingCul = await getCultivationByProperty({
     cultivationArea: cuArea,
     property: "name",

@@ -36,14 +36,15 @@ export function Cultivate({
             {existingCultivations && existingCultivations.length > 0 ? (
               <AppSelect
                 label={culConstants.names.CHOOSE_CULTIVATION}
-                onChange={(e) => onFormChange("addToCulName", e.target.value)}
-                options= {existingCultivations.map((cul) => ({
+                onChange={(e) =>
+                  onFormChange("existingCulName", e.target.value)
+                }
+                options={existingCultivations.map((cul) => ({
                   label: cul.name,
                   value: cul.name,
                 }))}
                 defaultValue={culConstants.names.NEW_CULTIVATION}
-              >
-              </AppSelect>
+              ></AppSelect>
             ) : null}
           </div>
           <div className={``}>

@@ -15,6 +15,7 @@ export async function createCultivation(cultivation) {
     description,
     relativeCoords,
     cropVarietyId,
+    existingCulName,
     workHours,
     status,
     startDate,

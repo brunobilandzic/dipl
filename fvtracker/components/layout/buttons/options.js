@@ -7,7 +7,13 @@ export function OptionButtons({ options, row = true, small, center }) {
         className={`flex ${row ? "flex-row w-2/3 mx-auto h-fit items-stretch" : "flex-col"} ${center ? "justify-center" : ""} gap-2 md:gap-8 items-stretch`}
       >
         {options.map((option, index) => (
-          <OptionButton row={row} key={uuid()} option={option} small={small} />
+          <OptionButton
+            disabled={option.disabled}
+            row={row}
+            key={uuid()}
+            option={option}
+            small={small}
+          />
         ))}
       </div>
     </>
@@ -15,12 +21,12 @@ export function OptionButtons({ options, row = true, small, center }) {
 }
 
 export const OptionButton = ({ option, small, row }) => {
-  const { label, onClick, icon } = option;
+  const { label, onClick, icon, disabled } = option;
   return (
     <>
       <div
-        onClick={onClick}
-        className={`flex flex-col gap-2 items-center justify-center min-w-12 overflow-visible  md:gap-4 btn w-full ${small ? "w-16 h-16 btnSm" : ""} ${row? "" : "w-full"}`}
+        onClick={disabled ? undefined : onClick}
+        className={`flex flex-col gap-2 items-center justify-center min-w-12 overflow-visible  md:gap-4 btn w-full ${small ? "w-16 h-16 btnSm" : ""} ${row ? "" : "w-full"} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
       >
         <div className="text-3xl">{icon}</div>
         <div className="text-sm text-wrap text-center">{label}</div>

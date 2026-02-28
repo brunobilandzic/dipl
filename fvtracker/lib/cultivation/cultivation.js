@@ -102,17 +102,14 @@ async function createCellPromise({
   return plantedCropVariety;
 }
 
-export async function getCultivationByProperty({cultivationManager, property, value}) {
-  await cultivationManager.populate({
-    path: "fields.cultivationAreas.cultivations",
+export async function getCultivationByProperty({cultivationArea, property, value}) {
+  await cultivationArea.populate({
+    path: "cultivations",
     populate: {
       path: "plantedCropVarieties",
       populate: { path: "cropVariety", populate: { path: "cropType" } },
     },
   });
 
-  return cultivationManager.fields
-    .flatMap((field) => field.cultivationAreas)
-    .flatMap((ca) => ca.cultivations)
-    .find((cul) => cul[property] === value);
+  return cultivationArea.cultivations.find((cul) => cul[property] === value);
 }

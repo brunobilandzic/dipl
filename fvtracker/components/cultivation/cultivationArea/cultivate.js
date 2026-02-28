@@ -1,6 +1,7 @@
 import Modals from "@/components/layout/modals";
-import { AppInput, AppTextArea } from "@/components/form/inputs";
+import { AppInput, AppSelect, AppTextArea } from "@/components/form/inputs";
 import styles from "@/components/form/form.module.css";
+import culConstants from "@/lib/constants/cultivation";
 
 export function Cultivate({
   cultivationOpen,
@@ -8,6 +9,7 @@ export function Cultivate({
   onSubmit,
   newCUDetails,
   setNewCUDetails,
+  existingCultivations,
 }) {
   const onFormChange = (field, value) => {
     setNewCUDetails({
@@ -30,6 +32,20 @@ export function Cultivate({
         </div>
 
         <div className={`form`}>
+          <div className={``}>
+            {existingCultivations && existingCultivations.length > 0 ? (
+              <AppSelect
+                label={culConstants.names.CHOOSE_CULTIVATION}
+                onChange={(e) => onFormChange("addToCulName", e.target.value)}
+                options= {existingCultivations.map((cul) => ({
+                  label: cul.name,
+                  value: cul.name,
+                }))}
+                defaultValue={culConstants.names.NEW_CULTIVATION}
+              >
+              </AppSelect>
+            ) : null}
+          </div>
           <div className={``}>
             <AppInput
               type="text"

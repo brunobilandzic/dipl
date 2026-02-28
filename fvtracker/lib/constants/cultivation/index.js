@@ -22,4 +22,8 @@ export default {
     cultivationAreaDimensions,
     locationRanges,
   },
+  names: {
+    NEW_CULTIVATION: "Napravi novu kultivaciju",
+    CHOOSE_CULTIVATION: "Odaberi kultivaciju",
+  },
 };

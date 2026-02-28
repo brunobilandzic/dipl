@@ -22,16 +22,26 @@ export async function createCultivation(cultivation) {
     endDate,
   } = cultivation;
 
+  const cuArea = await CultivationArea.findById(cultivationAreaId);
+  if (!cuArea) {
+    throw new Error("Cultivation area not found");
+  }
+
+  if (existingCulName) {
+    const existingCul = addPlCvs({
+      existingCulName,
+      cuArea,
+      relativeCoords,
+      cropVarietyId,
+    });
+    return existingCul;
+  }
+
   const newCultivation = new Cultivation({
     cultivationArea: cultivationAreaId,
     name,
     description,
   });
-
-  const cuArea = await CultivationArea.findById(cultivationAreaId);
-  if (!cuArea) {
-    throw new Error("Cultivation area not found");
-  }
 
   const plantedCropVarieties = await createPlantedCropVarietiesCells({
     relativeCoords,
@@ -52,6 +62,39 @@ export async function createCultivation(cultivation) {
   });
 
   return newCultivation;
+}
+
+async function addPlCvs({
+  existingCulName,
+  cuArea,
+  relativeCoords,
+  cropVarietyId,
+}) {
+  const existingCul = await getCultivationByProperty({
+    cultivationArea: cuArea,
+    property: "name",
+    value: existingCulName,
+  });
+  if (!existingCul) {
+    throw new Error("Cultivation to be added to not found");
+  }
+  const plantedCropVarieties = await createPlantedCropVarietiesCells({
+    relativeCoords,
+    cropVarietyId,
+    planted: cuArea.planted,
+    cultivationId: existingCul._id.toString(),
+  });
+
+  existingCul.plantedCropVarieties.push(
+    ...plantedCropVarieties.map((p) => p._id),
+  );
+  await existingCul.save();
+
+  await existingCul.populate({
+    path: "plantedCropVarieties",
+    populate: { path: "cropVariety", populate: { path: "cropType" } },
+  });
+  return existingCul;
 }
 
 async function createPlantedCropVarietiesCells({
@@ -103,7 +146,11 @@ async function createCellPromise({
   return plantedCropVariety;
 }
 
-export async function getCultivationByProperty({cultivationArea, property, value}) {
+export async function getCultivationByProperty({
+  cultivationArea,
+  property,
+  value,
+}) {
   await cultivationArea.populate({
     path: "cultivations",
     populate: {

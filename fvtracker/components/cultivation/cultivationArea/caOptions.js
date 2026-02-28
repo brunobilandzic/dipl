@@ -2,7 +2,7 @@ import buttons from "@/components/layout/buttons";
 const { OptionButtons } = buttons.options;
 import { MdArrowLeft, MdOutlineViewColumn } from "react-icons/md";
 
-export default function CAOptions({ onBack, onCultivate }) {
+export default function CAOptions({ onBack, onCultivate, disabled }) {
   const options = [
     {
       label: "Back to field",
@@ -12,7 +12,8 @@ export default function CAOptions({ onBack, onCultivate }) {
     {
       label: "Cultivate Cells",
       onClick: onCultivate,
-      icon: <MdOutlineViewColumn /> ,
+      icon: <MdOutlineViewColumn />,
+      disabled: disabled,
     },
   ];
 

@@ -212,6 +212,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
           <CAOptions
             onBack={onBack}
             onCultivate={() => setCultivationOpen(true)}
+            disabled={!newCUDetails.potentialCUCells || newCUDetails.potentialCUCells.length === 0}
           />
         </div>
         <Cultivate

@@ -56,7 +56,7 @@ export const prepareCultivationData = (newCultivation) => {
     description: newCultivation.description,
     relativeCoords: newCultivation.potentialCUCells,
     cropVarietyId: newCultivation.cropVarietyId,
-    existingCulName = newCultivation.existingCulName
+    existingCulName: newCultivation.existingCulName
   };
   return cultivationData;
 };

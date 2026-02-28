@@ -47,14 +47,16 @@ export function Cultivate({
               ></AppSelect>
             ) : null}
           </div>
-          <div className={``}>
-            <AppInput
-              type="text"
-              label="Ime"
-              value={newCUDetails.name}
-              onChange={(e) => onFormChange("name", e.target.value)}
+          {!newCUDetails.existingCulName || newCUDetails.existingCulName === culConstants.names.NEW_CULTIVATION ? (
+            <>
+            <div className={``}>
+              <AppInput
+                type="text"
+                label="Ime"
+                value={newCUDetails.name}
+                onChange={(e) => onFormChange("name", e.target.value)}
             />
-          </div>
+            </div>
           <div className={` `}>
             <AppTextArea
               label="opis"
@@ -70,6 +72,7 @@ export function Cultivate({
             <div className="">{newCUDetails?.dimensions?.length || 1}</div>
             <div className="">{newCUDetails?.dimensions?.width || 1}</div>
           </div>
+        </>): null}
         </div>
       </Modals.FormModal>
     </>

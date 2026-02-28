@@ -62,9 +62,7 @@ export const AppSelect = ({ options, label, onChange, defaultValue }) => {
         onChange={onChange}
         defaultValue={defaultValue}
       >
-        <option value="default" >
-          {defaultValue}
-        </option>
+        <option value={defaultValue}>{defaultValue}</option>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}

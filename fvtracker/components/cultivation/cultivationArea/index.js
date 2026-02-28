@@ -30,7 +30,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     const plcvs = utils.cultivation.cultivations.getPlCvs(
       cultivationArea.cultivations,
     );
-    console.log("Planted cells for cultivation area:", plcvs);
     return plcvs;
   }, [cultivationArea]);
 
@@ -128,7 +127,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       endY: y,
       cultivations: cultivationArea.cultivations,
     }).planted;
-    console.log("setting end.", { x, y, potentialCUCells });
+
     setNewCUDetails((prev) => ({
       ...prev,
       end: { x, y },
@@ -198,7 +197,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     <>
       {JSON.stringify(newCUDetails, null, 2)}
       <br />
-      {JSON.stringify(cultivationArea.cultivations, null, 2)}
+      {/* {JSON.stringify(cultivationArea.cultivations, null, 2)} */}
       <div className="grid grid-cols-6">
         <div className="col-start-1 col-end-6 h-screen flex flex-col ">
           <FieldGrid

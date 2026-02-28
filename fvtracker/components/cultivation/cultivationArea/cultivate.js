@@ -50,8 +50,8 @@ export function Cultivate({
           >
             <div className="font-bold">Duljina</div>
             <div className="font-bold">Širina</div>
-            <div className="">{newCUDetails?.dimensions?.length || 0}</div>
-            <div className="">{newCUDetails?.dimensions?.width || 0}</div>
+            <div className="">{newCUDetails?.dimensions?.length || 1}</div>
+            <div className="">{newCUDetails?.dimensions?.width || 1}</div>
           </div>
         </div>
       </Modals.FormModal>

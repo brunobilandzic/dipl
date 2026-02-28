@@ -150,7 +150,7 @@ const FieldCell = ({
     color,
   );
   const handleClick = (e) => {
-    if (!active) {
+    if (!active && color === "") {
       handleEmptyClick(x, y);
       return;
     }

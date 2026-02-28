@@ -120,7 +120,12 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   };
 
   const onEndCoordinates = (x, y) => {
-    if (!newCUDetails.begin) return;
+    if (!newCUDetails.begin) {
+      console.log("Cannot set end coordinates, begin coordinates not set.", {
+        newCUDetails,
+      });
+      return;
+    }
     const potentialCUCells = utils.cultivation.cultivationAreas.getCellsInRect({
       beginX: newCUDetails.begin.x,
       beginY: newCUDetails.begin.y,
@@ -128,36 +133,48 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       endY: y,
       cultivations: cultivationArea.cultivations,
     }).planted;
-
+    console.log("setting end.", { x, y, potentialCUCells });
     setNewCUDetails((prev) => ({
       ...prev,
       end: { x, y },
       potentialCUCells,
-      dimensions: getDimensions(),
+      dimensions: getDimensions({
+        beginX: newCUDetails.begin.x,
+        beginY: newCUDetails.begin.y,
+        endX: x,
+        endY: y,
+        potentialCUCells,
+      }),
     }));
   };
 
   const onRightClick = () => {
     setIsBeginSelected(false);
-    setNewCUDetails((prev) => ({
-      ...prev,
-      begin: null,
-      end: null,
-      potentialCUCells: [],
-      dimensions: { width: 0, length: 0 },
-    }));
+    setNewCUDetails(initialNewCUDetails);
   };
 
-  const getDimensions = () => {
+  const getDimensions = ({ beginX, beginY, endX, endY, potentialCUCells }) => {
+    console.log("Calculating dimensions with newCUDetails:", !!newCUDetails, {
+      beginX,
+      beginY,
+      endX,
+      endY,
+      potentialCUCells,
+    });
     if (
-      !newCUDetails.begin ||
-      !newCUDetails.end ||
-      !newCUDetails.potentialCUCells ||
-      newCUDetails.potentialCUCells.length === 0
-    )
+      !beginX ||
+      !beginY ||
+      !endX ||
+      !endY ||
+      !potentialCUCells ||
+      potentialCUCells.length === 0
+    ) {
+      console.log("Cannot calculate dimensions, missing data.");
       return { width: 0, length: 0 };
-    const width = Math.abs(newCUDetails.end.x - newCUDetails.begin.x) + 1;
-    const length = Math.abs(newCUDetails.end.y - newCUDetails.begin.y) + 1;
+    }
+    const width = Math.abs(endX - beginX) + 1;
+    const length = Math.abs(endY - beginY) + 1;
+    console.log("Calculated dimensions:", { width, length });
     return { width, length };
   };
 

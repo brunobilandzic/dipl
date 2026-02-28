@@ -6,7 +6,7 @@ import {
   getCultivationArea
 } from "./cultivationArea";
 import { cropsData, getCropVarietyById, plantCropVariety } from "./plant";
-import { createCultivation } from "./cultivation";
+import { createCultivation, getCultivationByProperty } from "./cultivation";
 
 export default {
   fields: {
@@ -29,6 +29,7 @@ export default {
   },
   cultivations: {
     create: createCultivation,
+    getByProperty: getCultivationByProperty,
   }
 };
 

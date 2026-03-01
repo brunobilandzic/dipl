@@ -145,21 +145,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     setNewCUDetails(initialNewCUDetails);
   };
 
-  const getDimensions = ({ beginX, beginY, endX, endY, potentialCUCells }) => {
-    if (
-      !beginX ||
-      !beginY ||
-      !endX ||
-      !endY ||
-      !potentialCUCells ||
-      potentialCUCells.length === 0
-    ) return { width: "N/A", length: "N/A" };
-    const width = Math.abs(endX - beginX) + 1;
-    const length = Math.abs(endY - beginY) + 1;
-    console.log("Calculated dimensions:", { width, length });
-    return { width, length };
-  };
-
   const onSubmitCultivation = async () => {
     console.log("Submitting cultivation with details:", newCUDetails);
     try {

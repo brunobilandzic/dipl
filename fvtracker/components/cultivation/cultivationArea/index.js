@@ -147,6 +147,10 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     setNewCUDetails(initialNewCUDetails);
   };
 
+  const onCultivationClick = () => {
+    setCultivationMenuOpen(true);
+  };
+
   const onSubmitCultivation = async () => {
     console.log("Submitting cultivation with details:", newCUDetails);
     try {
@@ -193,6 +197,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
             enlarged={true}
             onRightClick={onRightClick}
             cultivationCells={cultivationCells}
+            handleActiveClick={onCultivationClick}
           />
         </div>
         <div className="col-start-6 col-end-7  h-screen flex flex-col  items-center ">

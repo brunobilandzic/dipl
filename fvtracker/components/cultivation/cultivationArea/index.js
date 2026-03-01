@@ -219,7 +219,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
           onSubmit={onSubmitCultivation}
           existingCultivations={cultivationArea.cultivations}
         />
-        <CultivationMenu isOpen={cultivationMenuOpen} choices={[]} />
+        <CultivationMenu isOpen={cultivationMenuOpen} choices={[]} onCancel={() => setCultivationMenuOpen(false)}/>
       </div>
     </>
   );

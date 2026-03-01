@@ -4,6 +4,7 @@ const initialState = {
   fields: [],
   selectedField: null,
   crops: null,
+  selectedCultivationArea: null,
 };
 
 const cultivationSlice = createSlice({
@@ -57,9 +58,12 @@ const cultivationSlice = createSlice({
     setCrops: (state, action) => {
       state.crops = action.payload;
     },
+    selectCultivationArea: (state, action) => {
+      state.selectedCultivationArea = action.payload;
+    }
   },
 });
-
+  
 export const {
   setFields,
   setInitialState,
@@ -69,6 +73,7 @@ export const {
   createCultivationArea,
   deleteCultivationArea,
   setCrops,
+  selectCultivationArea,
 } = cultivationSlice.actions;
 
 export default cultivationSlice.reducer;

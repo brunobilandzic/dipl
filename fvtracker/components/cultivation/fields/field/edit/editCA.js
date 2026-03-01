@@ -36,6 +36,7 @@ export const EditCA = ({
   const onChange = (e) => {
     const { name, value } = e.target;
     if (name === "width" || name === "length") {
+      // check if overlaps existing CAs
       setFormData((prev) => ({
         ...prev,
         dimensions: {

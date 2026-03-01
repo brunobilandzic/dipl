@@ -119,26 +119,20 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   };
 
   const onEndCoordinates = (x, y) => {
-    if (!newCUDetails.begin) return
+    if (!newCUDetails.begin) return;
     const potentialCUCells = utils.cultivation.cultivationAreas.getCellsInRect({
       beginX: newCUDetails.begin.x,
       beginY: newCUDetails.begin.y,
       endX: x,
       endY: y,
       cultivations: cultivationArea.cultivations,
-    }).planted;
+    });
 
     setNewCUDetails((prev) => ({
       ...prev,
       end: { x, y },
-      potentialCUCells,
-      dimensions: getDimensions({
-        beginX: newCUDetails.begin.x,
-        beginY: newCUDetails.begin.y,
-        endX: x,
-        endY: y,
-        potentialCUCells,
-      }),
+      potentialCUCells: potentialCUCells.planted,
+      dimensions: potentialCUCells.dimensions,
     }));
   };
 

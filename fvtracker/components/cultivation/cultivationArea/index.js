@@ -128,6 +128,10 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       cultivations: cultivationArea.cultivations,
     });
 
+    if (potentialCUCells.error) {
+      alert(potentialCUCells.error);
+      return;
+    }
     setNewCUDetails((prev) => ({
       ...prev,
       end: { x, y },

@@ -57,9 +57,11 @@ export const getCellsInRect = ({
   }
   const overlaps = overlapsExistingCA(plantedCells, beginX, beginY, endX, endY);
   if (overlaps) {
-    return {
-      error: dimensionError.CULTIVATION_AREA_OVERLAP,
-    };
+    if (cultivationAreaDimensions) {
+      return { error: dimensionError.CULTIVATION_AREA_OVERLAP };
+    } else {
+      return { error: dimensionError.CULTIVATION_OVERLAP };
+    }
   }
 
   const planted = [];

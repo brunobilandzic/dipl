@@ -11,6 +11,7 @@ import { FieldGrid } from "../fields/preview/grid";
 import { useRouter } from "next/navigation";
 import utils from "@/lib/utils";
 import { Cultivate } from "./cultivate";
+import { CultivationMenu } from "./cultivationMenu";
 
 export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const selectedField = useSelector((state) => state.cultivation.selectedField);
   const fields = useSelector((state) => state.cultivation.fields);
   const [cultivationOpen, setCultivationOpen] = useState(false);
+  const [cultivationMenuOpen, setCultivationMenuOpen] = useState(false);
   const [isBeginSelected, setIsBeginSelected] = useState(false);
 
   const cultivationArea = useMemo(() => {
@@ -212,6 +214,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
           onSubmit={onSubmitCultivation}
           existingCultivations={cultivationArea.cultivations}
         />
+        <CultivationMenu isOpen={cultivationMenuOpen} choices={[]} />
       </div>
     </>
   );

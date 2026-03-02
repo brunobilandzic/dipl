@@ -36,6 +36,24 @@ const cultivationSlice = createSlice({
         return field;
       });
     },
+    updateCultivationArea: (state, action) => {
+      const updatedCA = action.payload;
+      state.selectedField.cultivationAreas =
+        state.selectedField.cultivationAreas.map((ca) =>
+          ca._id === updatedCA._id ? updatedCA : ca,
+        );
+      state.fields = state.fields?.map((field) => {
+        if (field._id === state.selectedField._id) {
+          return {
+            ...field,
+            cultivationAreas: field.cultivationAreas.map((ca) =>
+              ca._id === updatedCA._id ? updatedCA : ca,
+            ),
+          };
+        }
+        return field;
+      });
+    },
     deleteCultivationArea: (state, action) => {
       console.log("redux state deleting ca", action.payload);
       const id = action.payload;
@@ -60,10 +78,10 @@ const cultivationSlice = createSlice({
     },
     selectCultivationArea: (state, action) => {
       state.selectedCultivationArea = action.payload;
-    }
+    },
   },
 });
-  
+
 export const {
   setFields,
   setInitialState,
@@ -74,6 +92,7 @@ export const {
   deleteCultivationArea,
   setCrops,
   selectCultivationArea,
+  updateCultivationArea
 } = cultivationSlice.actions;
 
 export default cultivationSlice.reducer;

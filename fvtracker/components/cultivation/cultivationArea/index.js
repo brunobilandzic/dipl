@@ -149,7 +149,10 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
 
   const onCultivationClick = (x, y) => {
     const cellCoords = `${x},${y}`;
-    const cultivation = utils.cultivation.cultivations.getCUForCell(cultivationArea.cultivations, cellCoords);
+    const cultivation = utils.cultivation.cultivations.getCUForCell(
+      cultivationArea.cultivations,
+      cellCoords,
+    );
     if (cultivation) {
       console.log("Cultivation clicked:", cultivation);
       setCultivationMenuOpen(true);
@@ -226,7 +229,11 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
           onSubmit={onSubmitCultivation}
           existingCultivations={cultivationArea.cultivations}
         />
-        <CultivationMenu isOpen={cultivationMenuOpen} choices={[]} onCancel={() => setCultivationMenuOpen(false)}/>
+        <CultivationMenu
+          isOpen={cultivationMenuOpen}
+          choices={[]}
+          onCancel={() => setCultivationMenuOpen(false)}
+        />
       </div>
     </>
   );

@@ -245,3 +245,9 @@ function FieldEditCASPanel({
     </>
   );
 }
+
+const initialCAMenuState = {
+  isOpen: false,
+  cultivationArea: null,
+  mode: null,
+};

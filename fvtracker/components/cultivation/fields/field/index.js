@@ -98,14 +98,13 @@ function FieldEditCASPanel({
       ? utils.cultivation.cultivationAreas.getCASCells(cultivationAreas)
       : [];
   }, [cultivationAreas]);
-  const [selectedCultivationArea, setSelectedCultivationArea] = useState(null);
   const [newCACoordinates, setNewCACoordinates] = useState({});
   const [isBeginSelected, setIsBeginSelected] = useState(false);
   const router = useRouter();
 
   const onBeginCoordinates = (beginX, beginY) => {
     setIsBeginSelected(true);
-    setSelectedCultivationArea(null);
+    setCultivationAreaMenu(initialCAMenuState);
     setNewCACoordinates((prev) => ({
       ...prev,
       begin: { x: beginX, y: beginY },
@@ -181,16 +180,12 @@ function FieldEditCASPanel({
       x,
       y,
     );
-    router.push(`/upravljanje-poljima/${field.slug}/ca/${ca.slug}`);
-    /* setSelectedCultivationArea({
-      name: ca.name,
-      planted: utils.cultivation.cultivationAreas.getCASCells([ca]),
-      dimensions: ca.dimensions,
-      description: ca.description,
-      id: ca._id,
-    }); */
+    /*     router.push(`/upravljanje-poljima/${field.slug}/ca/${ca.slug}`); */
 
-    resetSelection();
+    setCultivationAreaMenu({
+      isOpen: true,
+      cultivationArea: ca,
+    });
   };
 
   const onRightClick = () => {
@@ -219,7 +214,11 @@ function FieldEditCASPanel({
             width={width}
             length={length}
             plantedCells={plantedCells}
-            selectedCultivationArea={selectedCultivationArea}
+            selectedCultivationArea={
+              cultivationAreaMenu.isOpen
+                ? cultivationAreaMenu.cultivationArea
+                : null
+            }
             newCACoordinates={newCACoordinates}
             isBeginSelected={isBeginSelected}
             setNewCACoordinates={setNewCACoordinates}
@@ -237,8 +236,8 @@ function FieldEditCASPanel({
             emptyCACoordinates={emptyCACoordinates}
             cultivationAreaDimensions={cultivationAreaDimensions}
             fieldId={fieldId}
-            selectedCultivationArea={selectedCultivationArea}
-            setSelectedCultivationArea={setSelectedCultivationArea}
+            cultivationAreaMenu={cultivationAreaMenu}            
+            setCultivationAreaMenu={setCultivationAreaMenu}
           />
         </div>
       </div>

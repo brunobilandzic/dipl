@@ -132,20 +132,6 @@ export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
                 onChange={onChange}
               />
             </div>
-            <div className="flex gap-4">
-              <AppInput
-                label="Širina (m)"
-                name="width"
-                value={formData.dimensions?.width ?? ""}
-                onChange={onChange}
-              />
-              <AppInput
-                label="Dužina (m)"
-                name="length"
-                value={formData.dimensions?.length ?? ""}
-                onChange={onChange}
-              />
-            </div>
           </div>
         </Modals.UpdateModal>
       ) : null}

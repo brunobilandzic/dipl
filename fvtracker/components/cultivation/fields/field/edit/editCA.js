@@ -7,6 +7,8 @@ import axios from "axios";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { deleteCultivationArea } from "@/store/cultivation";
 import { useDispatch } from "react-redux";
+import { updateCultivationArea } from "@/store/cultivation";
+import { initialCAMenuState } from "../index";
 
 export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
   const dispatch = useDispatch();
@@ -59,6 +61,7 @@ export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
         formData,
       );
       console.log(res);
+      setCultivationAreaMenu(initialCAMenuState);
     } catch (error) {
       handleError(error);
     }

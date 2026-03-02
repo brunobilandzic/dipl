@@ -236,7 +236,7 @@ function FieldEditCASPanel({
             emptyCACoordinates={emptyCACoordinates}
             cultivationAreaDimensions={cultivationAreaDimensions}
             fieldId={fieldId}
-            cultivationAreaMenu={cultivationAreaMenu}            
+            cultivationAreaMenu={cultivationAreaMenu}
             setCultivationAreaMenu={setCultivationAreaMenu}
           />
         </div>
@@ -245,7 +245,7 @@ function FieldEditCASPanel({
   );
 }
 
-const initialCAMenuState = {
+export const initialCAMenuState = {
   isOpen: false,
   cultivationArea: null,
   mode: null,

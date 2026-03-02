@@ -84,7 +84,7 @@ export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
     }
   };
 
-   const menuOptions = [
+  const menuOptions = [
     {
       label: "Edit",
       onClick: () =>
@@ -93,7 +93,7 @@ export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
           isOpen: true,
           mode: "EDIT",
         })),
-        className: "btn w-full",
+      className: "btn w-full bg-blue-500 hover:bg-blue-600 text-white",
     },
     {
       label: "Delete",

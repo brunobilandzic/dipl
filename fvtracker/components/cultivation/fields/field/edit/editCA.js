@@ -61,6 +61,7 @@ export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
         formData,
       );
       console.log(res);
+      alert("Cultivation area updated successfully");
       setCultivationAreaMenu(initialCAMenuState);
       dispatch(updateCultivationArea(res.data.updatedCultivationArea));
     } catch (error) {

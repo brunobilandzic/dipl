@@ -30,6 +30,7 @@ import {
   prepareCultivationData,
   mapCells,
   getPlCvs,
+  getCUForCell,
 } from "./cultivation";
 import { plCvColor } from "./display";
 
@@ -71,6 +72,7 @@ export default {
       relativeToFieldCoords,
       prepareCultivationData,
       mapCells,
+      getCUForCell
     },
   },
   formValidation: {

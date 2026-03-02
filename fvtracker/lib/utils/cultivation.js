@@ -60,3 +60,14 @@ export const prepareCultivationData = (newCultivation) => {
   };
   return cultivationData;
 };
+
+export function getCUForCell(cultivations, cellCoords) {
+  for (const cultivation of cultivations) {
+    for (const pcv of cultivation.plantedCropVarieties) {
+      if (pcv.relativeCoords === cellCoords) {
+        return cultivation;
+      }
+    }
+  }
+  return null;
+}

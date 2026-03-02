@@ -26,4 +26,8 @@ export default {
     NEW_CULTIVATION: "Napravi novu kultivaciju",
     CHOOSE_CULTIVATION: "Odaberi kultivaciju",
   },
+  menuModes: {
+    EDIT: "EDIT",
+    EDIT_CULTVATIONS: "EDIT_CULTIVATIONS",
+  }
 };

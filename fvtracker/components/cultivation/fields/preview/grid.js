@@ -92,7 +92,7 @@ const FieldCells = ({
     return (
       selectedCultivationArea?.planted?.includes(coord) ||
       (newCACoordinates?.planted?.includes(coord) && isBeginSelected) ||
-      potentialCUCells?.includes(coord) 
+      potentialCUCells?.includes(coord)
     );
   };
 
@@ -161,6 +161,10 @@ const FieldCell = ({
     }
     if (isBeginSelected) {
       alert(dimensionError.CULTIVATION_AREA_OVERLAP);
+      return;
+    }
+    if(cultivationName) {
+      alert(`This cell is part of cultivation: ${cultivationName}`);
       return;
     }
     handleActiveClick(x, y);

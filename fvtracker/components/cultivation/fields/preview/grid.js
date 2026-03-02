@@ -119,6 +119,14 @@ const FieldCells = ({
           handleActiveClick={handleActiveClick}
           isBeginSelected={isBeginSelected}
           enlarged={enlarged}
+          cultivationName={
+            cultivationCells
+              ? utils.cultivation.cultivations.getCultivationNameForCell({
+                  cultivationCells,
+                  cell: `${x},${y}`,
+                })
+              : null
+          }
         />,
       );
     }
@@ -138,6 +146,7 @@ const FieldCell = ({
   handleActiveClick,
   isBeginSelected,
   enlarged,
+  cultivationName
 }) => {
   const cellClass = classNames(
     small ? "w-1 h-1" : enlarged ? "w-6 h-6" : "w-3 h-3",

@@ -62,6 +62,7 @@ export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
       );
       console.log(res);
       setCultivationAreaMenu(initialCAMenuState);
+      dispatch(updateCultivationArea(res.data.updatedCultivationArea));
     } catch (error) {
       handleError(error);
     }

@@ -21,8 +21,8 @@ export function getPlCvs(cultivations) {
   cultivations.forEach((cultivation) => {
     cultivation.plantedCropVarieties.forEach((pcv) => {
       if (pcv.relativeCoords) {
-        plCvs.push(pcv);
-      } 
+        plCvs.push({ ...pcv, cultivationName: cultivation.name });
+      }
     });
   });
 
@@ -56,7 +56,7 @@ export const prepareCultivationData = (newCultivation) => {
     description: newCultivation.description,
     relativeCoords: newCultivation.potentialCUCells,
     cropVarietyId: newCultivation.cropVarietyId,
-    existingCulName: newCultivation.existingCulName
+    existingCulName: newCultivation.existingCulName,
   };
   return cultivationData;
 };
@@ -70,4 +70,11 @@ export function getCUForCell(cultivations, cellCoords) {
     }
   }
   return null;
+}
+
+export function getCultivationNameForCell({ cultivationCells, cell }) {
+  const cultivationCell = cultivationCells.find(
+    (cc) => cc.relativeCoords === cell,
+  );
+  return cultivationCell ? cultivationCell.cultivationName : null;
 }

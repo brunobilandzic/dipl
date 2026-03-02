@@ -13,13 +13,19 @@ export async function GET(request) {
       path: "fields",
       populate: {
         path: "cultivationAreas",
-        populate: {
-          path: "cultivations",
-          populate: {
-            path: "plantedCropVarieties",
-            populate: { path: "cropVariety", populate: { path: "cropType" } },
+        populate: [
+          {
+            path: "cultivations",
+            populate: {
+              path: "plantedCropVarieties",
+              populate: {
+                path: "cropVariety",
+                populate: { path: "cropType" },
+              },
+            },
           },
-        },
+          { path: "field", select: "slug" },
+        ],
       },
     });
 

@@ -37,21 +37,11 @@ export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
 
   const onChange = (e) => {
     const { name, value } = e.target;
-    if (name === "width" || name === "length") {
-      // check if overlaps existing CAs
-      setFormData((prev) => ({
-        ...prev,
-        dimensions: {
-          ...prev.dimensions,
-          [name]: value,
-        },
-      }));
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
+
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const onSubmit = async () => {

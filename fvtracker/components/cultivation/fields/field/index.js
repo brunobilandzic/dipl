@@ -91,7 +91,8 @@ function FieldEditCASPanel({
   fieldId,
   setField,
 }) {
-  const [editCultivationAreas, setEditCultivationAreas] = useState(false);
+  const [cultivationAreaMenu, setCultivationAreaMenu] =
+    useState(initialCAMenuState);
   const plantedCells = useMemo(() => {
     return cultivationAreas
       ? utils.cultivation.cultivationAreas.getCASCells(cultivationAreas)

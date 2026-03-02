@@ -85,7 +85,7 @@ const FieldCells = ({
   cultivationCells,
 }) => {
   let cells = [];
-  console.log("cul cells", cultivationCells);
+
   const isSelected = (x, y) => {
     const coord = `${x},${y}`;
     if (small) return false;

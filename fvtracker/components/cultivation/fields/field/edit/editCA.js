@@ -9,9 +9,11 @@ import { deleteCultivationArea } from "@/store/cultivation";
 import { useDispatch } from "react-redux";
 import { updateCultivationArea } from "@/store/cultivation";
 import { initialCAMenuState } from "../index";
+import { useRouter } from "next/navigation";
 
 export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
   const dispatch = useDispatch();
+  const router = useRouter();
   useEffect(() => {
     console.log(
       "selectedCultivationArea in editCA",
@@ -84,6 +86,12 @@ export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
           mode: "EDIT",
         })),
       className: "btn w-full bg-blue-500 hover:bg-blue-600 text-white",
+    },
+    {
+      label: "Cultivate",
+      onClick: () =>
+        router.push(`/upravljanje-poljima/${cultivationAreaMenu?.cultivationArea?.field?.slug}/ca/${cultivationAreaMenu?.cultivationArea?.slug}`),
+      className: "btn w-full bg-green-500 hover:bg-green-600 text-white",
     },
     {
       label: "Delete",

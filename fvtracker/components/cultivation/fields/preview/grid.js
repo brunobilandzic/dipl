@@ -168,7 +168,7 @@ const FieldCell = ({
   return (
     <div
       className={cellClass}
-      title={`(${x}, ${y})`}
+      title={cultivationName ?`(${x}, ${y}) - ${cultivationName}` : `(${x}, ${y})`}
       onClick={handleClick}
       onContextMenu={(e) => {
         e.preventDefault();

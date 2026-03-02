@@ -147,8 +147,15 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     setNewCUDetails(initialNewCUDetails);
   };
 
-  const onCultivationClick = () => {
-    setCultivationMenuOpen(true);
+  const onCultivationClick = (x, y) => {
+    const cellCoords = `${x},${y}`;
+    const cultivation = utils.cultivation.cultivations.getCUForCell(cultivationArea.cultivations, cellCoords);
+    if (cultivation) {
+      console.log("Cultivation clicked:", cultivation);
+      setCultivationMenuOpen(true);
+    } else {
+      console.log("No cultivation found for cell:", cellCoords);
+    }
   };
 
   const onSubmitCultivation = async () => {

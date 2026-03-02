@@ -9,8 +9,8 @@ export function FieldEditDashboard({
   setField,
   /* setPlantedCells, */
   setIsBeginSelected,
-  selectedCultivationArea,
-  setSelectedCultivationArea,
+  cultivationAreaMenu,
+  setCultivationAreaMenu,
 }) {
   return (
     <div className="w-full flex justify-center items-center gap-4">
@@ -27,8 +27,9 @@ export function FieldEditDashboard({
       </DashboardItem>
       <DashboardItem>
         <EditCA
-          selectedCultivationArea={selectedCultivationArea}
-          setSelectedCultivationArea={setSelectedCultivationArea}
+          cultivationAreaMenu={cultivationAreaMenu}
+          setCultivationAreaMenu={setCultivationAreaMenu}
+         /*  setPlantedCells={setPlantedCells} */
         />
       </DashboardItem>
     </div>

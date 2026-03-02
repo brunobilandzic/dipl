@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useEffect, useState } from "react";
 import Modals from "@/components/layout/modals";
@@ -8,30 +8,30 @@ import handleError from "@/lib/constants/errors/client/handleError";
 import { deleteCultivationArea } from "@/store/cultivation";
 import { useDispatch } from "react-redux";
 
-export const EditCA = ({
-  selectedCultivationArea,
-  setSelectedCultivationArea,
-}) => {
+export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("selectedCultivationArea in editCA", selectedCultivationArea);
-  }, [selectedCultivationArea]);
+    console.log(
+      "selectedCultivationArea in editCA",
+      cultivationAreaMenu?.cultivationArea,
+    );
+  }, [cultivationAreaMenu]);
 
   const [formData, setFormData] = useState({});
 
   useEffect(() => {
-    if (selectedCultivationArea) {
+    if (cultivationAreaMenu?.cultivationArea) {
       setFormData({
-        id: selectedCultivationArea.id,
-        name: selectedCultivationArea?.name || "",
-        description: selectedCultivationArea?.description || "",
-        dimensions: selectedCultivationArea?.dimensions || {
-          width: selectedCultivationArea?.dimensions?.width || 0,
-          length: selectedCultivationArea?.dimensions?.length || 0,
+        id: cultivationAreaMenu.cultivationArea._id,
+        name: cultivationAreaMenu.cultivationArea.name || "",
+        description: cultivationAreaMenu.cultivationArea.description || "",
+        dimensions: cultivationAreaMenu.cultivationArea.dimensions || {
+          width: 0,
+          length: 0,
         },
       });
     }
-  }, [selectedCultivationArea]);
+  }, [cultivationAreaMenu?.cultivationArea]);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -73,20 +73,50 @@ export const EditCA = ({
         data: { id: formData.id },
       });
       dispatch(deleteCultivationArea(formData.id));
-      setSelectedCultivationArea(null);
+      setCultivationAreaMenu(initialCAMenuState);
     } catch (error) {
       handleError(error);
     }
   };
 
+   const menuOptions = [
+    {
+      label: "Edit",
+      onClick: () =>
+        setCultivationAreaMenu((prev) => ({
+          ...prev,
+          isOpen: true,
+          mode: "EDIT",
+        })),
+        className: "btn w-full",
+    },
+    {
+      label: "Delete",
+      onClick: onDelete,
+      className: "btn cancelButton w-full",
+    },
+  ];
+
+  useEffect(() => {
+    console.log("cultivationAreaMenu in EditCA", cultivationAreaMenu);
+  }, [cultivationAreaMenu]);
+
   return (
     <>
-      {selectedCultivationArea ? (
+      {cultivationAreaMenu?.isOpen ? (
+        <Modals.MenuModal
+          options={menuOptions}
+          title="Cultivation Area Menu"
+          onCancel={() => setCultivationAreaMenu(initialCAMenuState)}
+          isOpen={cultivationAreaMenu?.isOpen}
+        />
+      ) : null}
+      {cultivationAreaMenu?.mode === "EDIT" ? (
         <Modals.UpdateModal
-          onCancel={() => setSelectedCultivationArea(null)}
-          isOpen={!!selectedCultivationArea}
+          onCancel={() => setCultivationAreaMenu(initialCAMenuState)}
+          isOpen={cultivationAreaMenu?.isOpen}
           title="Edit Cultivation Area"
-          onClose={() => setSelectedCultivationArea(null)}
+          onClose={() => setCultivationAreaMenu(initialCAMenuState)}
           onSubmit={onSubmit}
           onDelete={onDelete}
         >

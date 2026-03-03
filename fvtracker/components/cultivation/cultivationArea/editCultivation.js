@@ -4,7 +4,10 @@ import { useDispatch } from "react-redux";
 import { AppInput } from "@/components/form/inputs";
 import axios from "axios";
 import handleError from "@/lib/constants/errors/client/handleError";
-import { updateCultivationArea, deleteCultivationArea } from "@/store/cultivation";
+import {
+  updateCultivationArea,
+  deleteCultivationArea,
+} from "@/store/cultivation";
 
 export function EditCultivation({ isOpen, onCancel, cultivationData }) {
   const [formData, setFormData] = useState({});
@@ -24,25 +27,26 @@ export function EditCultivation({ isOpen, onCancel, cultivationData }) {
   };
 
   const onSubmit = async () => {
-    console.log("Submitting cultivation area edit with data:", prepareUpdateData(formData));
+    console.log(
+      "Submitting cultivation area edit with data:",
+      prepareUpdateData(formData),
+    );
 
-    /* try {
+    try {
       const res = await axios.put(
         `/api/cultivation/cultivation-area`,
-        formData,
+        prepareUpdateData(formData),
       );
-      console.log(res);
-      alert("Cultivation area updated successfully");
-      setCultivationAreaMenu(initialCAMenuState);
-      dispatch(updateCultivationArea(res.data.updatedCultivationArea));
+      onCancel();
+      alert("Cultivation updated successfully");
     } catch (error) {
       handleError(error);
-    } */
+    }
   };
 
   const onDelete = async () => {
     console.log("Deleting cultivation area with id:", formData._id);
-/*     if (!confirm("Are you sure you want to delete this cultivation area?")) {
+    /*     if (!confirm("Are you sure you want to delete this cultivation area?")) {
       return;
     }
     try {
@@ -84,11 +88,11 @@ export function EditCultivation({ isOpen, onCancel, cultivationData }) {
       </div>
     </Modals.UpdateModal>
   );
-}   
+}
 
 const prepareUpdateData = (formData) => {
   return {
     ...formData,
     cultivationId: formData._id,
-  }
+  };
 };

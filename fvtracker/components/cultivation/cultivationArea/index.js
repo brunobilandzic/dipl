@@ -19,7 +19,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
 
   const selectedField = useSelector((state) => state.cultivation.selectedField);
   const fields = useSelector((state) => state.cultivation.fields);
-  const [cultivationOpen, setCultivationOpen] = useState(false);
+  const [createCultivationOpen, setCreateCultivationOpen] = useState(false);
   const [cultivationMenuOpen, setCultivationMenuOpen] = useState(false);
   const [isBeginSelected, setIsBeginSelected] = useState(false);
 
@@ -177,7 +177,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       });
       return;
     }
-    setCultivationOpen(false);
+    setCreateCultivationOpen(false);
     setNewCUDetails(initialNewCUDetails);
   };
 
@@ -213,7 +213,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
         <div className="col-start-6 col-end-7  h-screen flex flex-col  items-center ">
           <CAOptions
             onBack={onBack}
-            onCultivate={() => setCultivationOpen(true)}
+            onCultivate={() => setCreateCultivationOpen(true)}
             disabled={
               !newCUDetails.potentialCUCells ||
               newCUDetails.potentialCUCells.length === 0

@@ -10,7 +10,7 @@ import CAOptions from "./caOptions";
 import { FieldGrid } from "../fields/preview/grid";
 import { useRouter } from "next/navigation";
 import utils from "@/lib/utils";
-import { Cultivate } from "./cultivate";
+import { CreateCultivation } from "./createCultivation";
 import { CultivationMenu } from "./cultivationMenu";
 
 export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
@@ -220,7 +220,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
             }
           />
         </div>
-        <Cultivate
+        <CreateCultivation
           cultivationAreaId={cultivationArea.id}
           cultivationOpen={cultivationOpen}
           setCultivationOpen={setCultivationOpen}

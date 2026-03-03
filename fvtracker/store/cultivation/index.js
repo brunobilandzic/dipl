@@ -155,8 +155,9 @@ export const {
   setCrops,
   selectCultivationArea,
   updateCultivationArea,
+  createCultivation,
   updateCultivation,
-  
+  deleteCultivation,
 } = cultivationSlice.actions;
 
 export default cultivationSlice.reducer;

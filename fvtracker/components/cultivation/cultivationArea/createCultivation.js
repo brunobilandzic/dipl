@@ -4,8 +4,8 @@ import styles from "@/components/form/form.module.css";
 import culConstants from "@/lib/constants/cultivation";
 
 export function CreateCultivation({
-  cultivationOpen,
-  setCultivationOpen,
+  isOpen,
+  onCancel,
   onSubmit,
   newCUDetails,
   setNewCUDetails,
@@ -21,8 +21,8 @@ export function CreateCultivation({
   return (
     <>
       <Modals.FormModal
-        isOpen={cultivationOpen}
-        onCancel={() => setCultivationOpen(false)}
+        isOpen={isOpen}
+        onCancel={onCancel}
         title="Napravi novo područje"
         onSubmit={onSubmit}
       >

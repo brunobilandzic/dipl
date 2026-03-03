@@ -47,6 +47,8 @@ const updateCultivation = async (body) => {
 
   const updated = Object.assign(cultivation, body);
 
+  await updated.populate("plantedCropVarieties");
+
   await updated.save();
   return updated;
 };

@@ -2,6 +2,7 @@ import models from "@/models";
 import { plantedArrayToMap } from "@/lib/utils/cultivationAreas";
 const { CultivationArea, Field } = models.sectors.cultivation;
 import auth from "@/lib/auth";
+import { Cultivation } from "@/models/sectors/cultivation/Cultivation";
 
 export async function createCultivationArea(body) {
   const cultivationManager =
@@ -39,7 +40,15 @@ async function createCultivationAreaRecord(properties) {
 }
 
 const updateCultivation = async (body) => {
-  //todo
+  const cultivation = await Cultivation.findById(body.cultivationId);
+  if (!cultivation) {
+    throw new Error("Cultivation not found with the provided ID."); 
+  }
+
+  const updated = Object.assign(cultivation, body);
+
+  await updated.save();
+  return updated;
 };
 
 export async function updateCultivationArea(body) {

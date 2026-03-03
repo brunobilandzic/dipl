@@ -71,7 +71,6 @@ function FieldItem({ field }) {
     dimensions: { width, length },
     location: { latitude, longitude },
     cultivationAreas,
-    cultivations,
     cultivationAreaDimensions: {
       min_ca_dim,
       max_ca_dim,
@@ -80,18 +79,12 @@ function FieldItem({ field }) {
     slug,
   } = field;
 
-  console.log("ca number of areas", cultivationAreas.length);
-
   const [plantedCells, setPlantedCells] = useState(
     cultivationAreas
       ? utils.cultivation.cultivationAreas.getCASCells(cultivationAreas)
       : [],
   );
 
-  useEffect(() => {
-    console.log("first 5 cells", plantedCells?.slice(0,5));
-  }, [plantedCells]);
-  
   return (
     <>
       <div className="">
@@ -121,7 +114,13 @@ function FieldItem({ field }) {
                 </div>
                 <div>
                   {cultivationAreas.length} cultivation areas,{" "}
-                  {cultivations.length} cultivations
+                  {
+                    cultivationAreas.reduce(
+                      (cus, ca) => cus.concat(ca.cultivations),
+                      [],
+                    ).length
+                  }{" "}
+                  cultivations
                 </div>
               </div>
             </div>

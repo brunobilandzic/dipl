@@ -112,9 +112,35 @@ const cultivationSlice = createSlice({
       }));
     },
     updateCultivation: (state, action) => {
-        const updatedCultivation = action.payload;
-        console.log("Updating cultivation in state with data:", updatedCultivation);
-    }
+      const updatedCultivation = action.payload;
+      const cultivationId = updatedCultivation?._id;
+      console.log("redux state updating cultivation", updatedCultivation);
+      if (!cultivationId) return;
+
+      if (state.selectedField?.cultivationAreas) {
+        state.selectedField.cultivationAreas =
+          state.selectedField.cultivationAreas.map((ca) => ({
+            ...ca,
+            cultivations: (ca.cultivations || []).map((cultivation) =>
+              cultivation._id?.toString() === cultivationId?.toString()
+                ? updatedCultivation
+                : cultivation,
+            ),
+          }));
+      }
+
+      state.fields = state.fields?.map((field) => ({
+        ...field,
+        cultivationAreas: (field.cultivationAreas || []).map((ca) => ({
+          ...ca,
+          cultivations: (ca.cultivations || []).map((cultivation) =>
+            cultivation._id?.toString() === cultivationId?.toString()
+              ? updatedCultivation
+              : cultivation,
+          ),
+        })),
+      }));
+    },
   },
 });
 

@@ -173,7 +173,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     );
     if (cultivation) {
       setSelectedCultivation(cultivation);
-      setCultivationMenuOpen(true);
     } else {
       console.log("No cultivation found for cell:", cellCoords);
     }

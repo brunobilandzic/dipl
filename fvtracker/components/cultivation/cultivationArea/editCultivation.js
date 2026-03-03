@@ -5,8 +5,8 @@ import { AppInput } from "@/components/form/inputs";
 import axios from "axios";
 import handleError from "@/lib/constants/errors/client/handleError";
 import {
-  updateCultivationArea,
-  deleteCultivationArea,
+  updateCultivation,
+  deleteCultivation,
 } from "@/store/cultivation";
 
 export function EditCultivation({ isOpen, onCancel, cultivationData }) {

@@ -19,9 +19,11 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
 
   const selectedField = useSelector((state) => state.cultivation.selectedField);
   const fields = useSelector((state) => state.cultivation.fields);
+
   const [createCultivationOpen, setCreateCultivationOpen] = useState(false);
   const [cultivationMenuOpen, setCultivationMenuOpen] = useState(false);
   const [isBeginSelected, setIsBeginSelected] = useState(false);
+  const [selectedCultivationName, setSelectedCultivationName] = useState(null);
 
   const cultivationArea = useMemo(() => {
     return selectedField?.cultivationAreas?.find((ca) => ca.slug === caSlug);

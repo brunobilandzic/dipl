@@ -27,6 +27,7 @@ export default {
     CHOOSE_CULTIVATION: "Odaberi kultivaciju",
     CULTIVATE_CELLS: "Kultiviraj ćelije",
     MANAGE_SEEDING: "Upravljaj sadnjom",
+    EDIT_INFO: "Uredi informacije",
   },
   menuModes: {
     EDIT: "EDIT",

@@ -169,6 +169,10 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   };
 
   const onCultivationClick = (x, y) => {
+    if(isBeginSelected) {
+      alert("Nemoguće napraviti kultivaciju gdje već postoji")
+      return;
+    }
     const cellCoords = `${x},${y}`;
     const cultivation = utils.cultivation.cultivations.getCUForCell(
       cultivationArea.cultivations,

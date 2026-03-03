@@ -164,6 +164,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
 
   const onRightClick = () => {
     setIsBeginSelected(false);
+    setSelectedCultivation(null);
     setNewCUDetails(initialNewCUDetails);
   };
 

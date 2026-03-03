@@ -16,6 +16,9 @@ export default function CAOptions({ onBack, onCultivate, disabled }) {
       icon: <MdOutlineViewColumn />,
       disabled: disabled?.includes(cultivation.menuModes.CULTIVATE_CELLS),
     },
+    {
+      label: cultivation.names.MANAGE_SEEDING,
+    }
   ];
 
   return (

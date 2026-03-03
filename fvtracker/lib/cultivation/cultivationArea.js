@@ -8,9 +8,7 @@ export async function createCultivationArea(body) {
     await auth.session.fetchSessionSpecificManager("CultivationManager");
 
   if (
-    !cultivationManager.fields?.some(
-      (fid) => fid?.toString() === body.field,
-    )
+    !cultivationManager.fields?.some((fid) => fid?.toString() === body.field)
   ) {
     throw new Error(
       "Field with the provided ID does not belong to the user's cultivation manager.",
@@ -40,7 +38,15 @@ async function createCultivationAreaRecord(properties) {
   return newCultivationArea;
 }
 
+const updateCultivation = async (body) => {
+  //todo
+};
+
 export async function updateCultivationArea(body) {
+  if (body.cultivationId) {
+    const cutivation = await updateCultivation(body);
+    return cutivation;
+  }
   const cultivationArea = await CultivationArea.findById(body.id);
   if (!cultivationArea) {
     throw new Error("Cultivation area not found with the provided ID.");

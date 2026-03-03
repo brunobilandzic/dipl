@@ -24,7 +24,8 @@ export function EditCultivation({ isOpen, onCancel, cultivationData }) {
   };
 
   const onSubmit = async () => {
-    console.log("Submitting cultivation area edit with data:", formData);
+    console.log("Submitting cultivation area edit with data:", prepareUpdateData(formData));
+
     /* try {
       const res = await axios.put(
         `/api/cultivation/cultivation-area`,
@@ -40,7 +41,8 @@ export function EditCultivation({ isOpen, onCancel, cultivationData }) {
   };
 
   const onDelete = async () => {
-    if (!confirm("Are you sure you want to delete this cultivation area?")) {
+    console.log("Deleting cultivation area with id:", formData._id);
+/*     if (!confirm("Are you sure you want to delete this cultivation area?")) {
       return;
     }
     try {
@@ -51,7 +53,7 @@ export function EditCultivation({ isOpen, onCancel, cultivationData }) {
       setCultivationAreaMenu(initialCAMenuState);
     } catch (error) {
       handleError(error);
-    }
+    } */
   };
 
   return (
@@ -82,4 +84,11 @@ export function EditCultivation({ isOpen, onCancel, cultivationData }) {
       </div>
     </Modals.UpdateModal>
   );
-}
+}   
+
+const prepareUpdateData = (formData) => {
+  return {
+    ...formData,
+    cultivationId: formData._id,
+  }
+};

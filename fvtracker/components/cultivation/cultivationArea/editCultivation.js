@@ -1,5 +1,10 @@
 import Modals from "@/components/layout/modals";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { AppInput } from "@/components/form/inputs";
+import axios from "axios";
+import handleError from "@/lib/constants/errors/client/handleError";
+import { updateCultivationArea, deleteCultivationArea } from "@/store/cultivation";
 
 export function EditCultivation({ isOpen, onCancel, cultivationData }) {
   const [formData, setFormData] = useState({});
@@ -19,7 +24,8 @@ export function EditCultivation({ isOpen, onCancel, cultivationData }) {
   };
 
   const onSubmit = async () => {
-    try {
+    console.log("Submitting cultivation area edit with data:", formData);
+    /* try {
       const res = await axios.put(
         `/api/cultivation/cultivation-area`,
         formData,
@@ -30,7 +36,7 @@ export function EditCultivation({ isOpen, onCancel, cultivationData }) {
       dispatch(updateCultivationArea(res.data.updatedCultivationArea));
     } catch (error) {
       handleError(error);
-    }
+    } */
   };
 
   const onDelete = async () => {

@@ -1,9 +1,14 @@
 import buttons from "@/components/layout/buttons";
 import cultivation from "@/lib/constants/cultivation";
 const { OptionButtons } = buttons.options;
-import { MdAdUnits, MdArrowLeft, MdInfoOutline, MdOutlineViewColumn } from "react-icons/md";
+import {
+  MdAdUnits,
+  MdArrowLeft,
+  MdInfoOutline,
+  MdOutlineViewColumn,
+} from "react-icons/md";
 
-export default function CAOptions({ onBack, onCultivate, disabled }) {
+export default function CAOptions({ onBack, onCultivate, disabled, onEdit }) {
   console.log(disabled);
   const options = [
     {
@@ -19,9 +24,7 @@ export default function CAOptions({ onBack, onCultivate, disabled }) {
     },
     {
       label: cultivation.names.EDIT_INFO,
-      onClick: () => {
-        console.log("edit cultivation info");
-      }, // TODO
+      onClick: onEdit, // TODO
       icon: <MdInfoOutline />,
       disabled: disabled?.includes(cultivation.names.EDIT_INFO),
     },

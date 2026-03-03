@@ -13,6 +13,7 @@ import utils from "@/lib/utils";
 import { CreateCultivation } from "./createCultivation";
 import { CultivationMenu } from "./cultivationMenu";
 import cultivation from "@/lib/constants/cultivation";
+import { EditCultivation } from "./editCultivation";
 
 export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const [isBeginSelected, setIsBeginSelected] = useState(false);
   const [selectedCultivation, setSelectedCultivation] = useState(null);
   const [disabledOptions, setDisabledOptions] = useState([]);
+  const [editCultivationOpen, setEditCultivationOpen] = useState(false);
 
   const cultivationArea = useMemo(() => {
     return selectedField?.cultivationAreas?.find((ca) => ca.slug === caSlug);
@@ -109,12 +111,13 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
 
   useEffect(() => {
     const disabled = [];
-    if (!newCUDetails.potentialCUCells || newCUDetails.potentialCUCells.length === 0) {
-      console.log("Disabling cultivate cells option because no potential cultivation cells are selected");
+    if (
+      !newCUDetails.potentialCUCells ||
+      newCUDetails.potentialCUCells.length === 0
+    ) {
       disabled.push(cultivation.names.CULTIVATE_CELLS);
     }
     if (!selectedCultivation) {
-      console.log("Disabling manage seeding option because no cultivation is selected");
       disabled.push(cultivation.names.MANAGE_SEEDING);
       disabled.push(cultivation.names.EDIT_INFO);
     }
@@ -238,6 +241,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
           <CAOptions
             onBack={onBack}
             onCultivate={() => setCreateCultivationOpen(true)}
+            onEdit={() => setEditCultivationOpen(true)}
             disabled={disabledOptions}
           />
         </div>
@@ -254,6 +258,11 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
           isOpen={cultivationMenuOpen}
           choices={[]}
           onCancel={() => setCultivationMenuOpen(false)}
+        />
+        <EditCultivation
+          isOpen={editCultivationOpen}
+          onCancel={() => setEditCultivationOpen(false)}
+          cultivationData={selectedCultivation}
         />
       </div>
     </>

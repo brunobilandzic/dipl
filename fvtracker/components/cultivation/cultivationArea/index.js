@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import utils from "@/lib/utils";
 import { CreateCultivation } from "./createCultivation";
 import { CultivationMenu } from "./cultivationMenu";
+import cultivation from "@/lib/constants/cultivation";
 
 export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const dispatch = useDispatch();
@@ -194,6 +195,14 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
 
   const { width, length } = cultivationArea.dimensions;
 
+  const calculateDisabled = () => {
+    const disabled = []
+    if (!newCUDetails.potentialCUCells || newCUDetails.potentialCUCells.length === 0) {
+      disabled.push(cultivation.menuModes.CULTIVATE_CELLS);
+    }
+    return disabled;
+  }
+
   return (
     <>
       {JSON.stringify(newCUDetails, null, 2)}
@@ -216,10 +225,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
           <CAOptions
             onBack={onBack}
             onCultivate={() => setCreateCultivationOpen(true)}
-            disabled={
-              !newCUDetails.potentialCUCells ||
-              newCUDetails.potentialCUCells.length === 0
-            }
+            disabled={calculateDisabled()}
           />
         </div>
         <CreateCultivation

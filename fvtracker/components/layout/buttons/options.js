@@ -22,6 +22,7 @@ export function OptionButtons({ options, row = true, small, center }) {
 
 export const OptionButton = ({ option, small, row }) => {
   const { label, onClick, icon, disabled } = option;
+  if (disabled) return null;
   return (
     <>
       <div

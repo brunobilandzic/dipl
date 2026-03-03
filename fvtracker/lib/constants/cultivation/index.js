@@ -25,6 +25,8 @@ export default {
   names: {
     NEW_CULTIVATION: "Napravi novu kultivaciju",
     CHOOSE_CULTIVATION: "Odaberi kultivaciju",
+    CULTIVATE_CELLS: "Kultiviraj ćelije",
+    UPRAVALJ_SADNJOM: "Upravljaj sadnjom",
   },
   menuModes: {
     EDIT: "EDIT",

@@ -10,6 +10,7 @@ import {
 } from "@/store/cultivation";
 
 export function EditCultivation({ isOpen, onCancel, cultivationData }) {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({});
   useEffect(() => {
     if (cultivationData) {
@@ -37,6 +38,8 @@ export function EditCultivation({ isOpen, onCancel, cultivationData }) {
         `/api/cultivation/cultivation-area`,
         prepareUpdateData(formData),
       );
+      console.log("Cultivation updated successfully:", res.data);
+      dispatch(updateCultivation(res.data.updatedCultivation));
       onCancel();
       alert("Cultivation updated successfully  - " + res.data.updatedCultivation.name);
     } catch (error) {

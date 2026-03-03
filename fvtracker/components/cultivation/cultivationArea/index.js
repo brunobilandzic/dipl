@@ -132,6 +132,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
 
   const onBeginCoordinates = (x, y) => {
     setIsBeginSelected(true);
+    setSelectedCultivation(null);
     setNewCUDetails((prev) => ({
       ...prev,
       begin: { x, y },

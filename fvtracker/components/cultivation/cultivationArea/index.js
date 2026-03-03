@@ -197,6 +197,8 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       const res = await api.post(`/cultivation`, { data });
       console.log("Cultivation created successfully:", res.data);
       dispatch(createCultivation(res.data.newCultivation));
+      setSelectedCultivation(res.data.newCultivation);
+      setIsBeginSelected(false);
     } catch (error) {
       console.error("Error submitting cultivation:", error);
       handleError({

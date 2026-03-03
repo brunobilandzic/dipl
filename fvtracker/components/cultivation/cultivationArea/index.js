@@ -222,8 +222,8 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
         </div>
         <CreateCultivation
           cultivationAreaId={cultivationArea.id}
-          cultivationOpen={cultivationOpen}
-          setCultivationOpen={setCultivationOpen}
+          isOpen={createCultivationOpen}
+          onCancel={() => setCreateCultivationOpen(false)}
           newCUDetails={newCUDetails}
           setNewCUDetails={setNewCUDetails}
           onSubmit={onSubmitCultivation}

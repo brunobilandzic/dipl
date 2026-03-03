@@ -38,7 +38,7 @@ export function EditCultivation({ isOpen, onCancel, cultivationData }) {
         prepareUpdateData(formData),
       );
       onCancel();
-      alert("Cultivation updated successfully");
+      alert("Cultivation updated successfully  - " + res.data.name);
     } catch (error) {
       handleError(error);
     }

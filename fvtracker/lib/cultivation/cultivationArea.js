@@ -42,7 +42,7 @@ async function createCultivationAreaRecord(properties) {
 const updateCultivation = async (body) => {
   const cultivation = await Cultivation.findById(body.cultivationId);
   if (!cultivation) {
-    throw new Error("Cultivation not found with the provided ID."); 
+    throw new Error("Cultivation not found with the provided ID.");
   }
 
   const updated = Object.assign(cultivation, body);
@@ -54,6 +54,7 @@ const updateCultivation = async (body) => {
 export async function updateCultivationArea(body) {
   if (body.cultivationId) {
     const cutivation = await updateCultivation(body);
+    console.log("Cultivation updated successfully:", cutivation.name);
     return cutivation;
   }
   const cultivationArea = await CultivationArea.findById(body.id);

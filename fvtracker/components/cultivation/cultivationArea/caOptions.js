@@ -4,6 +4,7 @@ const { OptionButtons } = buttons.options;
 import { MdAdUnits, MdArrowLeft, MdOutlineViewColumn } from "react-icons/md";
 
 export default function CAOptions({ onBack, onCultivate, disabled }) {
+  console.log(disabled)
   const options = [
     {
       label: "Back to field",

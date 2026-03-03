@@ -24,7 +24,8 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const [createCultivationOpen, setCreateCultivationOpen] = useState(false);
   const [cultivationMenuOpen, setCultivationMenuOpen] = useState(false);
   const [isBeginSelected, setIsBeginSelected] = useState(false);
-  const [selectedCultivationName, setSelectedCultivationName] = useState(null);
+  const [selectedCultivation, setSelectedCultivation] = useState(null);
+  const [disabledOptions, setDisabledOptions] = useState([]);
 
   const cultivationArea = useMemo(() => {
     return selectedField?.cultivationAreas?.find((ca) => ca.slug === caSlug);
@@ -106,6 +107,20 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     fillSelectedField();
   }, [fieldSlug, caSlug, selectedField]);
 
+  useEffect(() => {
+    const disabled = [];
+    if (!newCUDetails.potentialCUCells || newCUDetails.potentialCUCells.length === 0) {
+      console.log("Disabling cultivate cells option because no potential cultivation cells are selected");
+      disabled.push(cultivation.menuModes.CULTIVATE_CELLS);
+    }
+    if (!selectedCultivation) {
+      console.log("Disabling manage seeding option because no cultivation is selected");
+      disabled.push(cultivation.menuModes.MANAGE_SEEDING);
+    }
+    console.log("Setting disabled options:", disabled);
+    setDisabledOptions(disabled);
+  }, [newCUDetails, selectedCultivation]);
+
   const handleEmptyClick = (x, y) => {
     if (!isBeginSelected) {
       onBeginCoordinates(x, y);
@@ -157,7 +172,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       cellCoords,
     );
     if (cultivation) {
-      console.log("Cultivation clicked:", cultivation);
+      setSelectedCultivation(cultivation);
       setCultivationMenuOpen(true);
     } else {
       console.log("No cultivation found for cell:", cellCoords);
@@ -195,14 +210,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
 
   const { width, length } = cultivationArea.dimensions;
 
-  const calculateDisabled = () => {
-    const disabled = []
-    if (!newCUDetails.potentialCUCells || newCUDetails.potentialCUCells.length === 0) {
-      disabled.push(cultivation.menuModes.CULTIVATE_CELLS);
-    }
-    return disabled;
-  }
-
   return (
     <>
       {JSON.stringify(newCUDetails, null, 2)}
@@ -225,7 +232,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
           <CAOptions
             onBack={onBack}
             onCultivate={() => setCreateCultivationOpen(true)}
-            disabled={calculateDisabled()}
+            disabled={disabledOptions}
           />
         </div>
         <CreateCultivation

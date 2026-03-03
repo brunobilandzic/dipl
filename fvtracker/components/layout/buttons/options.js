@@ -26,8 +26,7 @@ export const OptionButton = ({ option, small, row }) => {
   return (
     <>
       <div
-        onClick={disabled ? undefined : onClick}
-        className={`flex flex-col gap-2 items-center justify-center min-w-12 overflow-visible  md:gap-4 btn w-full ${small ? "w-16 h-16 btnSm" : ""} ${row ? "" : "w-full"} ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
+        className={`flex flex-col gap-2 items-center justify-center min-w-12 overflow-visible  md:gap-4 btn w-full ${small ? "w-16 h-16 btnSm" : ""} ${row ? "" : "w-full"}`}
       >
         <div className="text-3xl">{icon}</div>
         <div className="text-sm text-wrap text-center">{label}</div>

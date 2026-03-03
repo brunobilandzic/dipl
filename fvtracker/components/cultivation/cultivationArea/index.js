@@ -116,6 +116,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     if (!selectedCultivation) {
       console.log("Disabling manage seeding option because no cultivation is selected");
       disabled.push(cultivation.names.MANAGE_SEEDING);
+      disabled.push(cultivation.names.EDIT_INFO);
     }
     console.log("Setting disabled options:", disabled);
     setDisabledOptions(disabled);

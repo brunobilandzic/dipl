@@ -1,7 +1,7 @@
 import buttons from "@/components/layout/buttons";
 import cultivation from "@/lib/constants/cultivation";
 const { OptionButtons } = buttons.options;
-import { MdArrowLeft, MdOutlineViewColumn } from "react-icons/md";
+import { MdAdUnits, MdArrowLeft, MdOutlineViewColumn } from "react-icons/md";
 
 export default function CAOptions({ onBack, onCultivate, disabled }) {
   const options = [
@@ -18,7 +18,12 @@ export default function CAOptions({ onBack, onCultivate, disabled }) {
     },
     {
       label: cultivation.names.MANAGE_SEEDING,
-    }
+      onClick: () => {
+        console.log("manage seeding");
+      }, // TODO
+      icon: <MdAdUnits />,
+      disabled: disabled?.includes(cultivation.menuModes.MANAGE_SEEDING),
+    },
   ];
 
   return (

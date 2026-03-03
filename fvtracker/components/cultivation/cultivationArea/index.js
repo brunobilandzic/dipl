@@ -111,11 +111,11 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     const disabled = [];
     if (!newCUDetails.potentialCUCells || newCUDetails.potentialCUCells.length === 0) {
       console.log("Disabling cultivate cells option because no potential cultivation cells are selected");
-      disabled.push(cultivation.menuModes.CULTIVATE_CELLS);
+      disabled.push(cultivation.names.CULTIVATE_CELLS);
     }
     if (!selectedCultivation) {
       console.log("Disabling manage seeding option because no cultivation is selected");
-      disabled.push(cultivation.menuModes.MANAGE_SEEDING);
+      disabled.push(cultivation.names.MANAGE_SEEDING);
     }
     console.log("Setting disabled options:", disabled);
     setDisabledOptions(disabled);

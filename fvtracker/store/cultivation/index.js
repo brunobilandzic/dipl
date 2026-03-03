@@ -79,6 +79,10 @@ const cultivationSlice = createSlice({
     selectCultivationArea: (state, action) => {
       state.selectedCultivationArea = action.payload;
     },
+    updateCultivation: (state, action) => {
+        const updatedCultivation = action.payload;
+        console.log("Updating cultivation in state with data:", updatedCultivation);
+    }
   },
 });
 
@@ -92,7 +96,9 @@ export const {
   deleteCultivationArea,
   setCrops,
   selectCultivationArea,
-  updateCultivationArea
+  updateCultivationArea,
+  updateCultivation,
+  
 } = cultivationSlice.actions;
 
 export default cultivationSlice.reducer;

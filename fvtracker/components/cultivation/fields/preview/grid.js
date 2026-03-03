@@ -164,7 +164,7 @@ const FieldCell = ({
       return;
     }
     if(cultivationName) {
-      alert(`This cell is part of cultivation: ${cultivationName}`);
+      handleActiveClick(x, y, cultivationName);
       return;
     }
     handleActiveClick(x, y);

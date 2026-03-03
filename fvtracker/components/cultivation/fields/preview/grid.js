@@ -18,6 +18,7 @@ export function FieldGrid({
   enlarged,
   potentialCUCells,
   cultivationCells,
+  selectedCultivationName
 }) {
   if (small) {
     return (
@@ -63,6 +64,7 @@ export function FieldGrid({
           enlarged={enlarged}
           potentialCUCells={potentialCUCells}
           cultivationCells={cultivationCells}
+          selectedCultivationName={selectedCultivationName}
         />
       </div>
     </>
@@ -83,6 +85,7 @@ const FieldCells = ({
   enlarged,
   potentialCUCells,
   cultivationCells,
+  selectedCultivationName
 }) => {
   let cells = [];
 
@@ -127,6 +130,7 @@ const FieldCells = ({
                 })
               : null
           }
+          selectedCultivationName={selectedCultivationName}
         />,
       );
     }
@@ -146,13 +150,15 @@ const FieldCell = ({
   handleActiveClick,
   isBeginSelected,
   enlarged,
-  cultivationName
+  cultivationName,
+  selectedCultivationName
 }) => {
   const cellClass = classNames(
     small ? "w-1 h-1" : enlarged ? "w-6 h-6" : "w-3 h-3",
     selected ? `bg-green-500` : active ? `bg-yellow-500` : "",
     "border cursor-pointer",
     color,
+    cultivationName === selectedCultivationName ? "ring-2 ring-blue-500" : "",
   );
   const handleClick = (e) => {
     if (!active && color === "") {

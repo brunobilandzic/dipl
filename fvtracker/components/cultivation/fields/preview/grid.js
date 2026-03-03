@@ -163,10 +163,7 @@ const FieldCell = ({
       alert(dimensionError.CULTIVATION_AREA_OVERLAP);
       return;
     }
-    if(cultivationName) {
-      handleActiveClick(x, y, cultivationName);
-      return;
-    }
+    
     handleActiveClick(x, y);
   };
   return (

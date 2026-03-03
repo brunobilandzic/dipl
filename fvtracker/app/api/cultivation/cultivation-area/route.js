@@ -1,5 +1,6 @@
 import dbConnect from "@/lib/db/mongooseConnect";
 import cultivation from "@/lib/cultivation";
+import { Cultivation } from "@/models/sectors/cultivation/Cultivation";
 
 export async function GET(request) {
   try {
@@ -39,9 +40,13 @@ export async function PUT(request) {
     await dbConnect();
     const body = await request.json();
     console.log("updating: \n", body);
-    const updatedCultivationArea =
-      await cultivation.cultivationArea.update(body);
-    return Response.json({ updatedCultivationArea }, { status: 200 });
+    const updated = await cultivation.cultivationArea.update(body);
+
+    if (updated instanceof Cultivation) {
+      console.log("Cultivation updated successfully:", updated.name);
+      return Response.json({ updatedCultivation: updated }, { status: 200 });
+    }
+    return Response.json({ updatedCultivationArea: updated }, { status: 200 });
   } catch (error) {
     console.error(error);
     return Response.json(

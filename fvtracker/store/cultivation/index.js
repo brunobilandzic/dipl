@@ -79,6 +79,38 @@ const cultivationSlice = createSlice({
     selectCultivationArea: (state, action) => {
       state.selectedCultivationArea = action.payload;
     },
+    createCultivation: (state, action) => {
+      const newCultivation = action.payload;
+      const cultivationAreaId = newCultivation?.cultivationArea;
+
+      if (!cultivationAreaId) return;
+
+      if (state.selectedField?.cultivationAreas) {
+        state.selectedField.cultivationAreas =
+          state.selectedField.cultivationAreas.map((ca) => {
+            if (ca._id?.toString() === cultivationAreaId?.toString()) {
+              return {
+                ...ca,
+                cultivations: [...(ca.cultivations || []), newCultivation],
+              };
+            }
+            return ca;
+          });
+      }
+
+      state.fields = state.fields?.map((field) => ({
+        ...field,
+        cultivationAreas: (field.cultivationAreas || []).map((ca) => {
+          if (ca._id?.toString() === cultivationAreaId?.toString()) {
+            return {
+              ...ca,
+              cultivations: [...(ca.cultivations || []), newCultivation],
+            };
+          }
+          return ca;
+        }),
+      }));
+    },
     updateCultivation: (state, action) => {
         const updatedCultivation = action.payload;
         console.log("Updating cultivation in state with data:", updatedCultivation);

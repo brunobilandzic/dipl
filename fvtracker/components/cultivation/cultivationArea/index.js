@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectField, setFields } from "@/store/cultivation";
+import { createCultivation, selectField, setFields } from "@/store/cultivation";
 import handleError from "@/lib/constants/errors/client/handleError";
 import api from "@/lib/api";
 import { Loading } from "@/components/layout/loading";
@@ -196,6 +196,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       console.log("Submitting cultivation with data:", data);
       const res = await api.post(`/cultivation`, { data });
       console.log("Cultivation created successfully:", res.data);
+      dispatch(createCultivation(res.data.newCultivation));
     } catch (error) {
       console.error("Error submitting cultivation:", error);
       handleError({

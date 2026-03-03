@@ -1,7 +1,7 @@
 import buttons from "@/components/layout/buttons";
 import cultivation from "@/lib/constants/cultivation";
 const { OptionButtons } = buttons.options;
-import { MdAdUnits, MdArrowLeft, MdInfo, MdInfoOutline, MdOutlineViewColumn } from "react-icons/md";
+import { MdAdUnits, MdArrowLeft, MdInfoOutline, MdOutlineViewColumn } from "react-icons/md";
 
 export default function CAOptions({ onBack, onCultivate, disabled }) {
   console.log(disabled);

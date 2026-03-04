@@ -4,7 +4,9 @@ const { OptionButtons } = buttons.options;
 import {
   MdAdUnits,
   MdArrowLeft,
+  MdDeleteOutline,
   MdInfoOutline,
+  MdOutlineDeleteForever,
   MdOutlineViewColumn,
 } from "react-icons/md";
 
@@ -34,6 +36,14 @@ export default function CAOptions({ onBack, onCultivate, disabled, onEdit }) {
       }, // TODO
       icon: <MdAdUnits />,
       disabled: disabled?.includes(cultivation.names.MANAGE_SEEDING),
+    },
+    {
+      label: cultivation.names.DELETE_CULTIVATION,
+      onClick: () => {
+        console.log("delete cultivation");
+      }, // TODO
+      icon: <MdOutlineDeleteForever />,
+      disabled: disabled?.includes(cultivation.names.DELETE_CULTIVATION),
     },
   ];
 

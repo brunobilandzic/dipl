@@ -18,7 +18,7 @@ export function FieldGrid({
   enlarged,
   potentialCUCells,
   cultivationCells,
-  selectedCultivationName
+  selectedCultivationName,
 }) {
   if (small) {
     return (
@@ -85,13 +85,13 @@ const FieldCells = ({
   enlarged,
   potentialCUCells,
   cultivationCells,
-  selectedCultivationName
+  selectedCultivationName,
 }) => {
   let cells = [];
 
   const isSelected = (x, y) => {
-    const coord = `${x},${y}`;
     if (small) return false;
+    const coord = `${x},${y}`;
     return (
       selectedCultivationArea?.planted?.includes(coord) ||
       (newCACoordinates?.planted?.includes(coord) && isBeginSelected) ||
@@ -151,7 +151,7 @@ const FieldCell = ({
   isBeginSelected,
   enlarged,
   cultivationName,
-  selectedCultivationName
+  selectedCultivationName,
 }) => {
   const cellClass = classNames(
     small ? "w-1 h-1" : enlarged ? "w-6 h-6" : "w-3 h-3",
@@ -169,13 +169,15 @@ const FieldCell = ({
       alert(dimensionError.CULTIVATION_AREA_OVERLAP);
       return;
     }
-    
+
     handleActiveClick(x, y);
   };
   return (
     <div
       className={cellClass}
-      title={cultivationName ?`(${x}, ${y}) - ${cultivationName}` : `(${x}, ${y})`}
+      title={
+        cultivationName ? `(${x}, ${y}) - ${cultivationName}` : `(${x}, ${y})`
+      }
       onClick={handleClick}
       onContextMenu={(e) => {
         e.preventDefault();

@@ -228,7 +228,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       return;
 
     try {
-      await api.delete(`/cultivation`, { id: selectedCultivation._id });
+      await api.delete(`/cultivation`, { data: { id: selectedCultivation._id } });
       dispatch(deleteCultivation(selectedCultivation._id));
       setSelectedCultivation(null);
       alert("Cultivation deleted successfully");

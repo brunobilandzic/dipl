@@ -9,7 +9,6 @@ import {
 } from "react-icons/md";
 
 export default function CAOptions({ onBack, onCultivate, disabled, onEdit }) {
-  console.log(disabled);
   const options = [
     {
       label: "Back to field",

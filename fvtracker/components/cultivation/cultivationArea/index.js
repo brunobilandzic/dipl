@@ -121,7 +121,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       disabled.push(cultivation.names.MANAGE_SEEDING);
       disabled.push(cultivation.names.EDIT_INFO);
     }
-    console.log("Setting disabled options:", disabled);
     setDisabledOptions(disabled);
   }, [newCUDetails, selectedCultivation]);
 

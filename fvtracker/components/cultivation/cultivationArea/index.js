@@ -6,7 +6,6 @@ import {
   createCultivation,
   deleteCultivation,
   selectField,
-  setFields,
 } from "@/store/cultivation";
 import handleError from "@/lib/constants/errors/client/handleError";
 import api from "@/lib/api";
@@ -67,10 +66,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   };
 
   const [newCUDetails, setNewCUDetails] = useState(initialNewCUDetails);
-
-  useEffect(() => {
-    console.log("newCUDetails changed:", newCUDetails);
-  }, [newCUDetails]);
 
   useEffect(() => {
     const fillSelectedField = async () => {

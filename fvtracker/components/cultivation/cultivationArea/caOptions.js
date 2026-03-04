@@ -10,7 +10,7 @@ import {
   MdOutlineViewColumn,
 } from "react-icons/md";
 
-export default function CAOptions({ onBack, onCultivate, disabled, onEdit }) {
+export default function CAOptions({ onBack, onCultivate, disabled, onEdit, onDelete }) {
   const options = [
     {
       label: "Back to field",
@@ -39,9 +39,7 @@ export default function CAOptions({ onBack, onCultivate, disabled, onEdit }) {
     },
     {
       label: cultivation.names.DELETE_CULTIVATION,
-      onClick: () => {
-        console.log("delete cultivation");
-      }, // TODO
+      onClick: onDelete,
       icon: <MdOutlineDeleteForever />,
       disabled: disabled?.includes(cultivation.names.DELETE_CULTIVATION),
     },

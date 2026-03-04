@@ -34,3 +34,20 @@ export async function PUT(request) {
     return Response.json({ error: error.message }, { status: 500 });
   }
 }
+
+export async function DELETE(request) {
+  try {
+    await dbConnect();
+    await auth.session.fetchSessionSpecificManager("CultivationManager");
+    const body = await request.json();
+    if (!body?.id)
+      throw new Error("Missing cultivation id in request body");
+    const deletedCultivation = await cultivation.cultivations.delete(
+      body.id,
+    );
+    return Response.json({ deletedCultivation }, { status: 200 });
+  } catch (error) {
+    console.error(error);
+    return Response.json({ error: error.message }, { status: 500 });
+  }
+}

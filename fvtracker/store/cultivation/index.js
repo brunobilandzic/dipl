@@ -141,6 +141,33 @@ const cultivationSlice = createSlice({
         })),
       }));
     },
+    deleteCultivation: (state, action) => {
+      const cultivationId = action.payload;
+
+      if (!cultivationId) return;
+
+      if (state.selectedField?.cultivationAreas) {
+        state.selectedField.cultivationAreas =
+          state.selectedField.cultivationAreas.map((ca) => ({
+            ...ca,
+            cultivations: (ca.cultivations || []).filter(
+              (cultivation) =>
+                cultivation._id?.toString() !== cultivationId?.toString(),
+            ),
+          }));
+      }
+
+      state.fields = state.fields?.map((field) => ({
+        ...field,
+        cultivationAreas: (field.cultivationAreas || []).map((ca) => ({
+          ...ca,
+          cultivations: (ca.cultivations || []).filter(
+            (cultivation) =>
+              cultivation._id?.toString() !== cultivationId?.toString(),
+          ),
+        })),
+      }));
+    },
   },
 });
 

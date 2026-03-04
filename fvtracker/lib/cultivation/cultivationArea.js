@@ -54,7 +54,7 @@ export async function updateCultivationArea(body) {
 }
 
 export async function deleteCultivationArea(id) {
-  await CultivationArea.findByIdAndDelete(id);
+  return await CultivationArea.findByIdAndDelete(id);
 }
 
 export const getCultivationArea = async (id) => {

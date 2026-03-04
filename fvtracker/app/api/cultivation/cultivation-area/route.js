@@ -58,7 +58,10 @@ export async function DELETE(request) {
 
     const body = await request.json();
     const { id } = body;
-    await cultivation.cultivationArea.delete(id);
+    const deleted = await cultivation.cultivationArea.delete(id);
+    if (!deleted) {
+      return Response.json({ error: "Not found" }, { status: 404 });
+    }
     return Response.json({ success: true }, { status: 200 });
   } catch (error) {
     console.error(error);

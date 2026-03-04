@@ -39,26 +39,9 @@ async function createCultivationAreaRecord(properties) {
   return newCultivationArea;
 }
 
-const updateCultivation = async (body) => {
-  const cultivation = await Cultivation.findById(body.cultivationId);
-  if (!cultivation) {
-    throw new Error("Cultivation not found with the provided ID.");
-  }
 
-  const updated = Object.assign(cultivation, body);
-
-  await updated.populate("plantedCropVarieties");
-
-  await updated.save();
-  return updated;
-};
 
 export async function updateCultivationArea(body) {
-  if (body.cultivationId) {
-    const cutivation = await updateCultivation(body);
-    console.log("Cultivation updated successfully:", cutivation.name);
-    return cutivation;
-  }
   const cultivationArea = await CultivationArea.findById(body.id);
   if (!cultivationArea) {
     throw new Error("Cultivation area not found with the provided ID.");

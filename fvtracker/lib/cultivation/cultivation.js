@@ -167,3 +167,17 @@ export async function getCultivationByProperty({
 
   return cultivationArea.cultivations.find((cul) => cul[property] === value);
 }
+
+export const updateCultivation = async (body) => {
+  const cultivation = await Cultivation.findById(body._id);
+  if (!cultivation) {
+    throw new Error("Cultivation not found with the provided ID.");
+  }
+
+  const updated = Object.assign(cultivation, body);
+
+  await updated.populate("plantedCropVarieties");
+
+  await updated.save();
+  return updated;
+};

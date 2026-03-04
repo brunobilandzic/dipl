@@ -78,3 +78,9 @@ export function getCultivationNameForCell({ cultivationCells, cell }) {
   );
   return cultivationCell ? cultivationCell.cultivationName : null;
 }
+
+export const getCASCultivations = (cultivationAreas) => {
+  return cultivationAreas.reduce((acc, ca) => {
+    return acc.concat(ca.cultivations);
+  }, []);
+};

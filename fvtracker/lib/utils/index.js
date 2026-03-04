@@ -32,6 +32,7 @@ import {
   getPlCvs,
   getCUForCell,
   getCultivationNameForCell,
+  getCASCultivations,
 } from "./cultivation";
 import { plCvColor } from "./display";
 
@@ -75,6 +76,7 @@ export default {
       mapCells,
       getCUForCell,
       getCultivationNameForCell,
+      getCASCultivations,
     },
   },
   formValidation: {

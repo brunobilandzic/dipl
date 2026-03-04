@@ -183,5 +183,5 @@ export const updateCultivation = async (body) => {
 };
 
 export async function deleteCultivation(id) {
-  await Cultivation.findByIdAndDelete(id);
+  return await Cultivation.findByIdAndDelete(id);
 }

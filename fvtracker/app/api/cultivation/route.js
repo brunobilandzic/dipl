@@ -9,9 +9,7 @@ export async function POST(request) {
     const body = await request.json();
     if (!body?.data)
       throw new Error("Missing cultivation details in request body");
-    const newCultivation = await cultivation.cultivations.create(
-      body.data,
-    );
+    const newCultivation = await cultivation.cultivations.create(body.data);
 
     console.log(newCultivation);
 
@@ -40,12 +38,11 @@ export async function DELETE(request) {
     await dbConnect();
     await auth.session.fetchSessionSpecificManager("CultivationManager");
     const body = await request.json();
-    if (!body?.id)
-      throw new Error("Missing cultivation id in request body");
-    const deletedCultivation = await cultivation.cultivations.delete(
-      body.id,
-    );
-    return Response.json({ deletedCultivation }, { status: 200 });
+    const deleted = await cultivation.cultivations.delete(body.id);
+    if (!deleted) {
+      return Response.json({ error: "Not found" }, { status: 404 });
+    }
+    return Response.json({ success: true }, { status: 200 });
   } catch (error) {
     console.error(error);
     return Response.json({ error: error.message }, { status: 500 });

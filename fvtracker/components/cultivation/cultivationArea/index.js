@@ -2,7 +2,12 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createCultivation, selectField, setFields } from "@/store/cultivation";
+import {
+  createCultivation,
+  deleteCultivation,
+  selectField,
+  setFields,
+} from "@/store/cultivation";
 import handleError from "@/lib/constants/errors/client/handleError";
 import api from "@/lib/api";
 import { Loading } from "@/components/layout/loading";
@@ -222,6 +227,25 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
 
   const { width, length } = cultivationArea.dimensions;
 
+  const onDeleteCultivation = async () => {
+    if (!selectedCultivation) return;
+    if (!confirm("Jeste li sigurni da želite obrisati ovu kultivaciju?"))
+      return;
+
+    try {
+      await api.delete(`/cultivation`, { id: selectedCultivation._id });
+      dispatch(deleteCultivation(selectedCultivation._id));
+      setSelectedCultivation(null);
+      alert("Cultivation deleted successfully");
+    } catch (error) {
+      console.error("Error deleting cultivation:", error);
+      handleError({
+        ...error,
+        generalMessage: "Failed to delete cultivation",
+      });
+    }
+  };
+
   return (
     <>
       {JSON.stringify(newCUDetails, null, 2)}
@@ -247,6 +271,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
             onCultivate={() => setCreateCultivationOpen(true)}
             onEdit={() => setEditCultivationOpen(true)}
             disabled={disabledOptions}
+            onDelete={onDeleteCultivation}
           />
         </div>
         <CreateCultivation

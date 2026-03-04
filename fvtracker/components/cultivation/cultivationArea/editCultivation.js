@@ -8,6 +8,7 @@ import {
   updateCultivation,
   deleteCultivation,
 } from "@/store/cultivation";
+import api from "@/lib/api";
 
 export function EditCultivation({ isOpen, onCancel, cultivationData }) {
   const dispatch = useDispatch();
@@ -29,14 +30,14 @@ export function EditCultivation({ isOpen, onCancel, cultivationData }) {
 
   const onSubmit = async () => {
     console.log(
-      "Submitting cultivation area edit with data:",
-      prepareUpdateData(formData),
+      "Submitting cultivation edit with data:",
+      formData,
     );
 
     try {
-      const res = await axios.put(
-        `/api/cultivation/cultivation-area`,
-        prepareUpdateData(formData),
+      const res = await api.put(
+        `/cultivation`,
+        formData,
       );
       console.log("Cultivation updated successfully:", res.data);
       dispatch(updateCultivation(res.data.updatedCultivation));
@@ -92,10 +93,3 @@ export function EditCultivation({ isOpen, onCancel, cultivationData }) {
     </Modals.UpdateModal>
   );
 }
-
-const prepareUpdateData = (formData) => {
-  return {
-    ...formData,
-    cultivationId: formData._id,
-  };
-};

@@ -57,12 +57,8 @@ export async function DELETE(request) {
     await dbConnect();
 
     const body = await request.json();
-    const { id, deleteCultivation } = body;
-    if(deleteCultivation) {
-      console.log("Deleting cultivation with id:", deleteCultivation);
-      return Response.json({ success: true }, { status: 200 });
-    }
-    await cultivation.cultivationArea.delete(id, deleteCultivation);
+    const { id } = body;
+    await cultivation.cultivationArea.delete(id);
     return Response.json({ success: true }, { status: 200 });
   } catch (error) {
     console.error(error);

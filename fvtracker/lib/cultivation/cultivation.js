@@ -181,3 +181,7 @@ export const updateCultivation = async (body) => {
   await updated.save();
   return updated;
 };
+
+export async function deleteCultivation(id) {
+  await Cultivation.findByIdAndDelete(id);
+}

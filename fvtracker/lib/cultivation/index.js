@@ -3,10 +3,15 @@ import {
   createCultivationArea,
   deleteCultivationArea,
   updateCultivationArea,
-  getCultivationArea
+  getCultivationArea,
 } from "./cultivationArea";
 import { cropsData, getCropVarietyById, plantCropVariety } from "./plant";
-import { createCultivation, getCultivationByProperty, updateCultivation} from "./cultivation";
+import {
+  createCultivation,
+  getCultivationByProperty,
+  updateCultivation,
+  deleteCultivation,
+} from "./cultivation";
 
 export default {
   fields: {
@@ -31,7 +36,8 @@ export default {
     create: createCultivation,
     getByProperty: getCultivationByProperty,
     update: updateCultivation,
-  }
+    delete: deleteCultivation,
+  },
 };
 
 async function getFieldAndCropData() {

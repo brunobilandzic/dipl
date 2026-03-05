@@ -107,7 +107,7 @@ const FieldCells = ({
   for (let y = 0; y < fieldLength; y++) {
     for (let x = 0; x < fieldWidth; x++) {
       let color = "";
-      if (cultivationCells) {
+      if (cultivationCells?.length > 0) {
         color = utils.display.plCvColor({
           plCvs: cultivationCells,
           cell: `${x},${y}`,
@@ -129,7 +129,7 @@ const FieldCells = ({
           isBeginSelected={isBeginSelected}
           enlarged={enlarged}
           cultivationName={
-            cultivationCells
+            cultivationCells?.length > 0
               ? utils.cultivation.cultivations.getCultivationNameForCell({
                   cultivationCells,
                   cell: `${x},${y}`,
@@ -160,13 +160,14 @@ const FieldCell = ({
   cultivationName,
   selectedCultivationName,
 }) => {
+  const bgClass = selected ? "bg-green-500" : (color || (active ? "bg-yellow-500" : ""));
   const cellClass = classNames(
     small ? "w-1 h-1" : enlarged ? "w-6 h-6" : "w-3 h-3",
-    selected ? `bg-green-500` : active ? `bg-yellow-500` : "",
     "border cursor-pointer",
-    color,
+    bgClass,
     cultivationName === selectedCultivationName ? "ring-2 ring-blue-500" : "",
   );
+  
   const handleClick = (e) => {
     if (!active && color === "") {
       handleEmptyClick(x, y);

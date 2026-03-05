@@ -109,10 +109,6 @@ function FieldEditCASPanel({
     return plcvs;
   }, [field]);
 
-  useEffect(() => {
-    console.log("cucs", cultivationCells);
-  }, [cultivationCells]);
-
   const onBeginCoordinates = (beginX, beginY) => {
     setIsBeginSelected(true);
     setCultivationAreaMenu(initialCAMenuState);

@@ -199,6 +199,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       dispatch(createCultivation(res.data.newCultivation));
       setSelectedCultivation(res.data.newCultivation);
       setIsBeginSelected(false);
+      alert("Cultivation created successfully");
     } catch (error) {
       console.error("Error submitting cultivation:", error);
       handleError({

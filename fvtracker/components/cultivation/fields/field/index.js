@@ -238,6 +238,7 @@ function FieldEditCASPanel({
             handleEmptyClick={handleEmptyClick}
             field={field}
             cultivationCells={cultivationCells}
+            cuCellsFieldCoords={true}
           />
         </div>
         <div className=" ">

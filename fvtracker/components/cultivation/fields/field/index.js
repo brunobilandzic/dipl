@@ -102,6 +102,17 @@ function FieldEditCASPanel({
   const [isBeginSelected, setIsBeginSelected] = useState(false);
   const router = useRouter();
 
+  const cultivationCells = useMemo(() => {
+    if (!cultivationAreas) return [];
+    const cultivations = utils.cultivation.cultivations.getCASCultivations(cultivationAreas);
+    const plcvs = utils.cultivation.cultivations.getPlCvs(cultivations);
+    return plcvs;
+  }, [field]);
+
+  useEffect(() => {
+    console.log("cucs", cultivationCells);
+  }, [cultivationCells]);
+
   const onBeginCoordinates = (beginX, beginY) => {
     setIsBeginSelected(true);
     setCultivationAreaMenu(initialCAMenuState);
@@ -226,6 +237,7 @@ function FieldEditCASPanel({
             handleActiveClick={handleActiveClick}
             handleEmptyClick={handleEmptyClick}
             field={field}
+            cultivationCells={cultivationCells}
           />
         </div>
         <div className=" ">

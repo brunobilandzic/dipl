@@ -15,7 +15,6 @@ import { FieldGrid } from "../fields/preview/grid";
 import { useRouter } from "next/navigation";
 import utils from "@/lib/utils";
 import { CreateCultivation } from "./createCultivation";
-import { CultivationMenu } from "./cultivationMenu";
 import cultivation from "@/lib/constants/cultivation";
 import { EditCultivation } from "./editCultivation";
 
@@ -27,7 +26,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const fields = useSelector((state) => state.cultivation.fields);
 
   const [createCultivationOpen, setCreateCultivationOpen] = useState(false);
-  const [cultivationMenuOpen, setCultivationMenuOpen] = useState(false);
   const [isBeginSelected, setIsBeginSelected] = useState(false);
   const [selectedCultivation, setSelectedCultivation] = useState(null);
   const [disabledOptions, setDisabledOptions] = useState([]);
@@ -278,11 +276,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
           setNewCUDetails={setNewCUDetails}
           onSubmit={onSubmitCultivation}
           existingCultivations={cultivationArea.cultivations}
-        />
-        <CultivationMenu
-          isOpen={cultivationMenuOpen}
-          choices={[]}
-          onCancel={() => setCultivationMenuOpen(false)}
         />
         <EditCultivation
           isOpen={editCultivationOpen}

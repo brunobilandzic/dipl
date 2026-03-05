@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import {
   List,
@@ -79,6 +79,14 @@ function FieldItem({ field }) {
     slug,
   } = field;
 
+  const cultivationCells = useMemo(() => {
+    if (!cultivationAreas) return [];
+    const cultivations =
+      utils.cultivation.cultivations.getCASCultivations(cultivationAreas);
+    const plcvs = utils.cultivation.cultivations.getPlCvs(cultivations);
+    return plcvs;
+  }, [field]);
+
   const [plantedCells, setPlantedCells] = useState(
     cultivationAreas
       ? utils.cultivation.cultivationAreas.getCASCells(cultivationAreas)
@@ -139,6 +147,8 @@ function FieldItem({ field }) {
                 cultivationAreas={cultivationAreas}
                 small={true}
                 plantedCells={plantedCells}
+                cultivationCells={cultivationCells}
+                cuCellsFieldCoords={true}
               />
             </div>
           </div>

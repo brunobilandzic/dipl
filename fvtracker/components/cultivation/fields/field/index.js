@@ -100,7 +100,6 @@ function FieldEditCASPanel({
   }, [cultivationAreas]);
   const [newCACoordinates, setNewCACoordinates] = useState({});
   const [isBeginSelected, setIsBeginSelected] = useState(false);
-  const router = useRouter();
 
   const cultivationCells = useMemo(() => {
     if (!cultivationAreas) return [];

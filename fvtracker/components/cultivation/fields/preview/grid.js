@@ -67,6 +67,7 @@ export function FieldGrid({
           enlarged={enlarged}
           potentialCUCells={potentialCUCells}
           cultivationCells={cultivationCells}
+          cuCellsFieldCoords={cuCellsFieldCoords}
           selectedCultivationName={selectedCultivationName}
         />
       </div>
@@ -89,6 +90,7 @@ const FieldCells = ({
   potentialCUCells,
   cultivationCells,
   selectedCultivationName,
+  cuCellsFieldCoords,
 }) => {
   let cells = [];
 
@@ -109,6 +111,7 @@ const FieldCells = ({
         color = utils.display.plCvColor({
           plCvs: cultivationCells,
           cell: `${x},${y}`,
+          fieldView: cuCellsFieldCoords,
         });
       }
       cells.push(
@@ -130,6 +133,7 @@ const FieldCells = ({
               ? utils.cultivation.cultivations.getCultivationNameForCell({
                   cultivationCells,
                   cell: `${x},${y}`,
+                  fieldView: cuCellsFieldCoords,
                 })
               : null
           }

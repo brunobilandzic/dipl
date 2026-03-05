@@ -36,6 +36,8 @@ export function FieldGrid({
           small={small}
           plantedCells={plantedCells}
           enlarged={enlarged}
+          cuCellsFieldCoords={cuCellsFieldCoords}
+          cultivationCells={cultivationCells}
         />
       </div>
     );

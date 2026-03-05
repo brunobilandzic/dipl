@@ -19,6 +19,7 @@ export function FieldGrid({
   potentialCUCells,
   cultivationCells,
   selectedCultivationName,
+  cuCellsFieldCoords = false,
 }) {
   if (small) {
     return (

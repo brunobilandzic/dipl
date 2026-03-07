@@ -1,5 +1,6 @@
 "use client";
 
+import Modal, { ModalFooter } from "./modal";
   console.log("isopnen:", isOpen);
   console.log("cultivation:", cultivation);
         <div className="flex flex-col gap-2">

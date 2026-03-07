@@ -34,7 +34,7 @@ import {
   getCultivationNameForCell,
   getCASCultivations,
 } from "./cultivation";
-import { plCvColor } from "./display";
+import { plCvColor, showDate } from "./display";
 
 export default {
   objects: {
@@ -84,6 +84,7 @@ export default {
   },
   display: {
     plCvColor,
+    showDate,
   },
 };
 

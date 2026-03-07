@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 export const plCvColor = ({ plCvs, cell, fieldView }) => {
   const plCv = plCvs.find((plCv) => {
     if (fieldView) {
@@ -14,4 +16,10 @@ export const plCvColor = ({ plCvs, cell, fieldView }) => {
     return `bg-${color}-${shade}`;
   }
   return "bg-green-700";
+};
+
+export const showDate = (date) => {
+  console.log("showDate called with:", date);
+  if (!date) return "N/A";
+  return format(new Date(date), "PPP");
 };

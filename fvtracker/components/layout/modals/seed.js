@@ -23,6 +23,7 @@ export const SeedingModal = ({
           Created at: {showDate(cultivation?.createdAt)} <br />
         </div>
       </div>
+      <div className="mt-4 p-4">
       <div>
         <dic>
           <FieldGrid width={caDims.width} length={caDims.length} />

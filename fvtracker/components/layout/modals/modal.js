@@ -32,7 +32,7 @@ function Backdrop({ onCancel }) {
 
 function ModalHeader({ title, onCancel }) {
   return (
-    <div className="flex justify-between items-center mb-4 pb-4 border-b border-gray-300">
+    <div className="flex justify-between items-center mb-4 p-4 border-b border-gray-300">
       <div className="text-xl font-bold">{title}</div>
       <div onClick={onCancel} className="text-xl cursor-pointer">
         <MdOutlineClose />

@@ -30,7 +30,9 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const [selectedCultivation, setSelectedCultivation] = useState(null);
   const [disabledOptions, setDisabledOptions] = useState([]);
   const [editCultivationOpen, setEditCultivationOpen] = useState(false);
-  const [plantCultivation, setPlantCultivation] = useState(initialPlantCultivationinitialPlantCultivation);
+  const [plantCultivation, setPlantCultivation] = useState(
+    initialPlantCultivation,
+  );
 
   const cultivationArea = useMemo(() => {
     return selectedField?.cultivationAreas?.find((ca) => ca.slug === caSlug);
@@ -288,9 +290,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   );
 }
 
-
 const initialPlantCultivation = {
   isOpen: false,
-  cultivationId: null,
-  plant: null,
+  cultivation: null,
 };

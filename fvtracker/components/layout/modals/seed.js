@@ -25,9 +25,8 @@ export const SeedingModal = ({
       </div>
       <div className="mt-4 p-4">
       <div>
-        <dic>
-          <FieldGrid width={caDims.width} length={caDims.length} />
-        </dic>
+          <FieldGrid width={caDims.width} length={caDims.length} invertColor={true} />
+        </div>
       </div>
       <ModalFooter>
         <div className={`btn submitButton`}>Submit</div>

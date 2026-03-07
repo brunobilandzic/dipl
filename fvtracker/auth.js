@@ -33,11 +33,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   ],
   callbacks: {
     async signIn({ account, profile }) {
-      if (account.provider == "google") {
+      if (account?.provider == "google") {
         const authorize = await handleOAuth(profile);
         return !!authorize;
       }
-      if (account.provider == "credentials") {
+      if (account?.provider == "credentials") {
         return true;
       }
       return false;
@@ -66,6 +66,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return token;
     },
     async session({ session, token }) {
+      console.log("Session callback - session:", session, "token:", token);
       if (token) {
         session.user.appUserId = token.appUserId;
         session.user.email = token.email;

@@ -4,7 +4,7 @@ import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
 import Modal, { ModalFooter } from "./modal";
 import { showDate } from "@/lib/utils/display";
 
-export const SeedingModal = ({ isOpen, onCancel, cultivation, crops }) => {
+export const SeedingModal = ({ isOpen, onCancel, cultivation, crops, caDims }) => {
   console.log("isopnen:", isOpen);
   console.log("cultivation:", cultivation);
   return (

@@ -20,6 +20,7 @@ export function FieldGrid({
   cultivationCells,
   selectedCultivationName,
   cuCellsFieldCoords = false,
+  invertColor = false,
 }) {
   if (small) {
     return (
@@ -38,6 +39,7 @@ export function FieldGrid({
           enlarged={enlarged}
           cuCellsFieldCoords={cuCellsFieldCoords}
           cultivationCells={cultivationCells}
+          invertColor={invertColor}
         />
       </div>
     );
@@ -69,6 +71,7 @@ export function FieldGrid({
           cultivationCells={cultivationCells}
           cuCellsFieldCoords={cuCellsFieldCoords}
           selectedCultivationName={selectedCultivationName}
+          invertColor={invertColor}
         />
       </div>
     </>
@@ -91,6 +94,7 @@ const FieldCells = ({
   cultivationCells,
   selectedCultivationName,
   cuCellsFieldCoords,
+  invertColor,
 }) => {
   let cells = [];
 
@@ -138,6 +142,7 @@ const FieldCells = ({
               : null
           }
           selectedCultivationName={selectedCultivationName}
+          invertColor={invertColor}
         />,
       );
     }
@@ -159,15 +164,19 @@ const FieldCell = ({
   enlarged,
   cultivationName,
   selectedCultivationName,
+  invertColor,
 }) => {
-  const bgClass = selected ? "bg-green-500" : (color || (active ? "bg-yellow-500" : ""));
+  const bgClass = selected
+    ? "bg-green-500"
+    : color || (active ? "bg-yellow-500" : "");
   const cellClass = classNames(
     small ? "w-1 h-1" : enlarged ? "w-6 h-6" : "w-3 h-3",
     "border cursor-pointer",
+    invertColor ? "border border-[var(--background)]" : "",
     bgClass,
     cultivationName === selectedCultivationName ? "ring-2 ring-blue-500" : "",
   );
-  
+
   const handleClick = (e) => {
     if (!active && color === "") {
       handleEmptyClick(x, y);

@@ -217,7 +217,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   useEffect(() => {
     console.log("plantCultivation state changed:", plantCultivation);
   }, [plantCultivation]);
-  
+
   const onBack = () => router.push(`/upravljanje-poljima/${fieldSlug}`);
 
   if (!cultivationArea)
@@ -235,7 +235,9 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       return;
 
     try {
-      await api.delete(`/cultivation`, { data: { id: selectedCultivation._id } });
+      await api.delete(`/cultivation`, {
+        data: { id: selectedCultivation._id },
+      });
       dispatch(deleteCultivation(selectedCultivation._id));
       setSelectedCultivation(null);
       alert("Cultivation deleted successfully");

@@ -1,5 +1,6 @@
 "use client";
 
+import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
 import Modal, { ModalFooter } from "./modal";
 
 export const SeedingModal = ({ isOpen, onCancel, cultivation, crops }) => {
@@ -14,6 +15,17 @@ export const SeedingModal = ({ isOpen, onCancel, cultivation, crops }) => {
         <div>
     {cultivation?.description}
         </div>
+      </div>
+<div>
+        <dic>
+            <FieldGrid 
+            width={caDims.width}
+            length={caDims.length}
+
+            
+            />
+                
+        </dic>
       </div>
       <ModalFooter>
         <div className={`btn submitButton`}>Submit</div>

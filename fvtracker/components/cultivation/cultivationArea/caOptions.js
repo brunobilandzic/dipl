@@ -10,7 +10,7 @@ import {
   MdOutlineViewColumn,
 } from "react-icons/md";
 
-export default function CAOptions({ onBack, onCultivate, disabled, onEdit, onDelete }) {
+export default function CAOptions({ onBack, onCultivate, disabled, onEdit, onDelete, onPlant }) {
   const options = [
     {
       label: "Back to field",
@@ -31,9 +31,7 @@ export default function CAOptions({ onBack, onCultivate, disabled, onEdit, onDel
     },
     {
       label: cultivation.names.MANAGE_SEEDING,
-      onClick: () => {
-        console.log("manage seeding");
-      }, // TODO
+      onClick: onPlant,
       icon: <MdAdUnits />,
       disabled: disabled?.includes(cultivation.names.MANAGE_SEEDING),
     },

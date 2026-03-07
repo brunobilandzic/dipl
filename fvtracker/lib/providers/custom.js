@@ -11,8 +11,11 @@ export default function CustomProviders({ children }) {
 const CropsProvider = ({ children }) => {
   const dispatch = useDispatch();
   const crops = useSelector((state) => state.cultivation.crops);
+  const user = useSelector((state) => state.user.session);
   useEffect(() => {
-    console.log("Crops in provider:", crops);
+    console.log("user", user);
+    console.log("CropsProvider useEffect triggered. Current crops:", crops, "Current user:", user);
+    if(!user) return;
     if (!crops) {
       const fetchCrops = async () => {
         console.log("Fetching crops from API...");
@@ -31,7 +34,7 @@ const CropsProvider = ({ children }) => {
       };
       fetchCrops();
     }
-  }, [crops]);
+  }, [crops, user]);
 
   return children;
 };

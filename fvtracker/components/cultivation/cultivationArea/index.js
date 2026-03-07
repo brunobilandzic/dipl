@@ -306,7 +306,12 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
           onCancel={() => setPlantCultivation(initialPlantCultivation)}
           cultivation={selectedCultivation}
           caDims={{ width, length }}
-          cultivationCells={cultivationCells}
+          cultivationCells={utils.cultivation.cultivations.filterCutivationCells(
+            {
+              cultivationCells,
+              cultivationId: selectedCultivation?._id,
+            },
+          )}
         />
       </div>
     </>

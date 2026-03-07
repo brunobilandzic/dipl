@@ -213,6 +213,10 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     setNewCUDetails(initialNewCUDetails);
   };
 
+  useEffect(() => {
+    console.log("plantCultivation state changed:", plantCultivation);
+  }, [plantCultivation]);
+  
   const onBack = () => router.push(`/upravljanje-poljima/${fieldSlug}`);
 
   if (!cultivationArea)

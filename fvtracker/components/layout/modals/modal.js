@@ -7,9 +7,10 @@ export default function Modal({ isOpen, onCancel, children, title }) {
         <>
           <Backdrop onCancel={onCancel} />
           <div className="fixed inset-0 z-30 grid place-items-center p-4">
-            <div className="absolute rounded-lg p-4   bg-[var(--foreground)] text-[var(--background)]  z-30  w-screen flex flex-col max-w-xl left-1/2 -translate-x-1/2">
+            <div className="w-full max-w-xl max-h-[80vh] rounded-lg bg-[var(--foreground)] text-[var(--background)] flex flex-col overflow-hidden">
               <ModalHeader title={title} onCancel={onCancel} />
-              {children}
+
+              <div className="flex-1 overflow-y-auto p-4">{children}</div>
             </div>
           </div>
         </>

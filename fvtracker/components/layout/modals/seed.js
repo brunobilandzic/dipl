@@ -7,6 +7,7 @@ import { showDate } from "@/lib/utils/display";
 export const SeedingModal = ({ isOpen, onCancel, cultivation, crops, caDims }) => {
   console.log("isopnen:", isOpen);
   console.log("cultivation:", cultivation);
+  if (!cultivation || !isOpen) return null;
   return (
     <Modal title="Seeding Modal" isOpen={isOpen} onCancel={onCancel}>
       <div className="flex flex-col gap-2">
@@ -16,13 +17,11 @@ export const SeedingModal = ({ isOpen, onCancel, cultivation, crops, caDims }) =
           Created at: {showDate(cultivation?.createdAt)} <br />
         </div>
       </div>
-<div>
+      <div>
         <dic>
             <FieldGrid 
             width={caDims.width}
-            length={caDims.length}
-
-            
+            length={caDims.length} 
             />
                 
         </dic>

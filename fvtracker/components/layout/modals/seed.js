@@ -1,4 +1,4 @@
-import Modal from "./modal"
+"use client";
 
   console.log("isopnen:", isOpen);
   console.log("cultivation:", cultivation);

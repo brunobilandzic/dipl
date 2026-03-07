@@ -10,6 +10,7 @@ export const SeedingModal = ({
   cultivation,
   crops,
   caDims,
+  cultivationCells,
 }) => {
   console.log("isopnen:", isOpen);
   console.log("cultivation:", cultivation);
@@ -24,7 +25,7 @@ export const SeedingModal = ({
         </div>
       </div>
       <div className="mt-4 p-4">
-      <div>
+        <div>
           <FieldGrid width={caDims.width} length={caDims.length} invertColor={true} />
         </div>
       </div>

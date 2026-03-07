@@ -14,6 +14,7 @@ export const SeedingModal = ({
 }) => {
   console.log("isopnen:", isOpen);
   console.log("cultivation:", cultivation);
+  console.log("ccells:", cultivationCells);
   if (!cultivation || !isOpen) return null;
   return (
     <Modal title="Seeding Modal" isOpen={isOpen} onCancel={onCancel}>

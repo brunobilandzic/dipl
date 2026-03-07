@@ -13,12 +13,9 @@ const CropsProvider = ({ children }) => {
   const crops = useSelector((state) => state.cultivation.crops);
   const user = useSelector((state) => state.user.session);
   useEffect(() => {
-    console.log("user", user);
-    console.log("CropsProvider useEffect triggered. Current crops:", crops, "Current user:", user);
     if(!user) return;
     if (!crops) {
       const fetchCrops = async () => {
-        console.log("Fetching crops from API...");
         try {
           const res = await api.get("/cultivation/plant");
           console.log("Fetched crops from API:", res);

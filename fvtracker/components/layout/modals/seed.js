@@ -23,12 +23,19 @@ export const SeedingModal = ({
 
   const handleClick = (x, y) => {
     if (isBeginSelected) {
+      // End selection logic
+    } else {
+      setIsBeginSelected(true);
+      setSelected([{ x, y }]);
+    }
+  };
+
   const reset = () => {
     setSelected([]);
     setIsBeginSelected(false);
     setDragEvent(null);
   };
-  
+
   return (
     <Modal title="Seeding Modal" isOpen={isOpen} onCancel={onCancel}>
       <div className="flex flex-col gap-2">

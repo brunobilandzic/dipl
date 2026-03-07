@@ -26,7 +26,12 @@ export const SeedingModal = ({
       </div>
       <div className="mt-4 p-4">
         <div>
-          <FieldGrid width={caDims.width} length={caDims.length} invertColor={true} />
+          <FieldGrid
+            width={caDims.width}
+            length={caDims.length}
+            invertColor={true}
+            cultivationCells={cultivationCells}
+          />
         </div>
       </div>
       <ModalFooter>

@@ -3,6 +3,7 @@
 import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
 import Modal, { ModalFooter } from "./modal";
 import { showDate } from "@/lib/utils/display";
+import { useState } from "react";
 
 export const SeedingModal = ({
   isOpen,
@@ -16,7 +17,12 @@ export const SeedingModal = ({
   console.log("cultivation:", cultivation);
   console.log("ccells:", cultivationCells);
   if (!cultivation || !isOpen) return null;
-  const [dragEvent, setDragEvent] = useStaet(null);
+  const [dragEvent, setDragEvent] = useState(null);
+  const [selected, setSelected] = useState([]);
+  const [isBeginSelected, setIsBeginSelected] = useState(false);
+
+  const handleClick = (x, y) => {
+    if (isBeginSelected) {
   
   return (
     <Modal title="Seeding Modal" isOpen={isOpen} onCancel={onCancel}>

@@ -33,6 +33,7 @@ import {
   getCUForCell,
   getCultivationNameForCell,
   getCASCultivations,
+  filterCutivationCells
 } from "./cultivation";
 import { plCvColor, showDate } from "./display";
 
@@ -77,6 +78,7 @@ export default {
       getCUForCell,
       getCultivationNameForCell,
       getCASCultivations,
+      filterCutivationCells
     },
   },
   formValidation: {

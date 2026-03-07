@@ -84,3 +84,7 @@ export const getCASCultivations = (cultivationAreas) => {
     return acc.concat(ca.cultivations);
   }, []);
 };
+
+export const filterCutivationCells = ({ cultivationCells, cultivationId }) => {
+  return cultivationCells.filter((cc) => cc.cultivation === cultivationId);
+};

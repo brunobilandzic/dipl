@@ -23,6 +23,11 @@ export const SeedingModal = ({
 
   const handleClick = (x, y) => {
     if (isBeginSelected) {
+  const reset = () => {
+    setSelected([]);
+    setIsBeginSelected(false);
+    setDragEvent(null);
+  };
   
   return (
     <Modal title="Seeding Modal" isOpen={isOpen} onCancel={onCancel}>
@@ -40,6 +45,7 @@ export const SeedingModal = ({
             length={caDims.length}
             invertColor={true}
             cultivationCells={cultivationCells}
+            onRightClick={reset}
           />
         </div>
       </div>

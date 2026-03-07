@@ -2,6 +2,7 @@
 
 import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
 import Modal, { ModalFooter } from "./modal";
+import { showDate } from "@/lib/utils/display";
 
 export const SeedingModal = ({ isOpen, onCancel, cultivation, crops }) => {
   console.log("isopnen:", isOpen);
@@ -9,11 +10,10 @@ export const SeedingModal = ({ isOpen, onCancel, cultivation, crops }) => {
   return (
     <Modal title="Seeding Modal" isOpen={isOpen} onCancel={onCancel}>
       <div className="flex flex-col gap-2">
-        <div className="font-bold text-xl">
-          {cultivation?.name || "N/A"}
-        </div>
-        <div>
-    {cultivation?.description}
+        <div className="font-bold text-xl">{cultivation?.name || "N/A"}</div>
+        <div>{cultivation?.description}</div>
+        <div className="text-sm text-gray-500">
+          Created at: {showDate(cultivation?.createdAt)} <br />
         </div>
       </div>
 <div>

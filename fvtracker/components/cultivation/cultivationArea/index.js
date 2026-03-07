@@ -243,6 +243,14 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     }
   };
 
+  const onPlant = () => {
+    if (!selectedCultivation) return;
+    setPlantCultivation({
+      isOpen: true,
+      cultivation: selectedCultivation,
+    });
+  };
+
   return (
     <>
       {JSON.stringify(newCUDetails, null, 2)}
@@ -269,6 +277,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
             onEdit={() => setEditCultivationOpen(true)}
             disabled={disabledOptions}
             onDelete={onDeleteCultivation}
+            onPlant={onPlant}
           />
         </div>
         <CreateCultivation

@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import colors from "../constants/cultivation/colors";
 
 export const plCvColor = ({ plCvs, cell, fieldView }) => {
   const plCv = plCvs.find((plCv) => {
@@ -15,7 +16,7 @@ export const plCvColor = ({ plCvs, cell, fieldView }) => {
   if (color && shade) {
     return `bg-${color}-${shade}`;
   }
-  return "bg-green-700";
+  return colors.cultivation.defaultPlCvColor;
 };
 
 export const showDate = (date) => {

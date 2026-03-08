@@ -1,4 +1,5 @@
 export default {
-    selectedCABackGround: "red-700",
-    activeCABackGround: "yellow-500",
-}   
+    cultivation: {
+        defaultPlCvColor: "bg-green-700", // Tailwind's green-400
+    },
+};

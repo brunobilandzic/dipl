@@ -21,6 +21,10 @@ export const SeedingModal = ({
   const [toPlantCells, setToPlantCells] = useState([]);
   const [isBeginSelected, setIsBeginSelected] = useState(false);
 
+  useEffect(() => {
+    console.log("To plant cells:", toPlantCells);
+  }, [toPlantCells]);
+
   const handleNotPlanted = (x, y) => {
     if (isBeginSelected && toPlantCells?.length > 0) {
       onEndCoordinates(x, y);

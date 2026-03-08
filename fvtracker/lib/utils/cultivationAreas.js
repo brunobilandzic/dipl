@@ -36,6 +36,7 @@ export const getCellsInRect = ({
   cultivations,
   toPlantCells,
   plCvs,
+  toPlantCultivation,
 }) => {
   let plantedCells;
   console.log("get cells in rect", {
@@ -64,12 +65,12 @@ export const getCellsInRect = ({
   } else if (cultivations) {
     plantedCells = getCUSCells(cultivations);
   } else if (toPlantCells) {
-    plantedCells = getPlantedCells(plCvs);
+    plantedCells = getPlCvsCells(toPlantCultivation.plantedCropVarieties);
   }
-
+  console.log("planted cells for rect", plantedCells);
   const overlaps = overlapsExistingCA(plantedCells, beginX, beginY, endX, endY);
   if (overlaps) {
-    console.log("overlapping")
+    console.log("overlapping");
     if (cultivationAreaDimensions) {
       return { error: dimensionError.CULTIVATION_AREA_OVERLAP };
     } else {
@@ -248,6 +249,6 @@ export function adjacentCellsGap({ x, y, gap, plantedCells }) {
   return adjacentCellsGap;
 }
 
-export function getPlantedCells () {
-  
+export function getPlCvsCells(plCvs) {
+  return plCvs?.filter((plCv) => plCv.cropVariety);
 }

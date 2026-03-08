@@ -227,3 +227,7 @@ const FieldCell = ({
     ></div>
   );
 };
+
+
+export const END_PLANTING = "End the planting"
+export const CONTINUE_PLANTING = "Continue planting"

@@ -8,6 +8,7 @@ import { showDate } from "@/lib/utils/display";
 import { useEffect, useState } from "react";
 import utils from "@/lib/utils";
 import { MenuModal } from "./menu";
+import { END_PLANTING, CONTINUE_PLANTING } from "@/lib/constants/cultivation/plants";
 
 export const SeedingModal = ({
   isOpen,
@@ -48,10 +49,13 @@ export const SeedingModal = ({
   const emptyToPlantCells = () => {
     setNewPlantage((prev) => ({ ...prev, toPlantCells: [] }));
   };
+  const showChooseNewEnd = () => {
+    setChooseNewEnd((prev) => ({ ...prev, isOpen: true, choice: null }));
+  };
 
   const handleNotPlanted = (x, y) => {
     if (isBeginSelected() && newPlantage.toPlantCells?.length > 0) {
-      onEndCoordinates(x, y);
+      showChooseNewEnd();
     } else {
       onBeginCoordinates(x, y);
     }

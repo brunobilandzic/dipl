@@ -229,5 +229,3 @@ const FieldCell = ({
 };
 
 
-export const END_PLANTING = "End the planting"
-export const CONTINUE_PLANTING = "Continue planting"

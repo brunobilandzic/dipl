@@ -94,6 +94,7 @@ const plantedCropVarietySchema = new Schema({
   cropVariety: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "CropVariety",
+    default: null
   },
   cultivation: {
     type: mongoose.Schema.Types.ObjectId,

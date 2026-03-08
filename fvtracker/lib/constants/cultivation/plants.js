@@ -1179,3 +1179,7 @@ const makeCultivation = () => {
   const numVegertables = Math.floor(Math.random() * 5) + 1; // 1-5 povrća
   const numFruits = Math.floor(Math.random() * 5) + 1; // 1-5 voća
 };
+
+
+export const END_PLANTING = "End the planting"
+export const CONTINUE_PLANTING = "Continue planting"

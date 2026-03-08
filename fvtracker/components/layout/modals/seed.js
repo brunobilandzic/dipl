@@ -18,7 +18,7 @@ export const SeedingModal = ({
   console.log("ccells:", cultivationCells);
   if (!cultivation || !isOpen) return null;
   const [dragEvent, setDragEvent] = useState(null);
-  const [selected, setSelected] = useState([]);
+  const [toPlantCells, setToPlantCells] = useState([]);
   const [isBeginSelected, setIsBeginSelected] = useState(false);
 
   const handleClick = (x, y) => {
@@ -26,18 +26,19 @@ export const SeedingModal = ({
       // End selection logic
     } else {
       setIsBeginSelected(true);
-      setSelected([{ x, y }]);
+      setToPlantCells([{ x, y }]);
     }
   };
 
+
   const handleDrag = (x, y) => {
     if (isBeginSelected) {
-      setSelected((prev) => [...prev, { x, y }]);
+      setToPlantCells((prev) => [...prev, { x, y }]);
     }
   };
 
   const reset = () => {
-    setSelected([]);
+    setToPlantCells([]);
     setIsBeginSelected(false);
     setDragEvent(null);
   };
@@ -60,7 +61,7 @@ export const SeedingModal = ({
             cultivationCells={cultivationCells}
             onRightClick={reset}
             seedMode={true}
-            toPlantCells={selected}
+            toPlantCells={toPlantCells}
           />
         </div>
       </div>

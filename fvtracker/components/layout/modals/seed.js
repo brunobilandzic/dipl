@@ -3,7 +3,8 @@
 import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
 import Modal, { ModalFooter } from "./modal";
 import { showDate } from "@/lib/utils/display";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import utils from "@/lib/utils";
 
 export const SeedingModal = ({
   isOpen,

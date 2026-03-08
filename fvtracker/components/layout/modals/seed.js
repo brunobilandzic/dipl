@@ -30,6 +30,11 @@ export const SeedingModal = ({
   };
   const [newPlantage, setNewPlantage] = useState(initialNewPlantage);
   const isBeginSelected = () => !!(newPlantage.beginX && newPlantage.beginY);
+  const [chooseNewEnd, setChooseNewEnd] = useState({
+    isOpen: false,
+    choice: null
+  })
+
   const turnOffBeginSelection = () => {
     setNewPlantage((prev) => ({ ...prev, beginX: null, beginY: null }));
   };

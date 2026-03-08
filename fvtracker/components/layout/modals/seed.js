@@ -21,15 +21,14 @@ export const SeedingModal = ({
   const [toPlantCells, setToPlantCells] = useState([]);
   const [isBeginSelected, setIsBeginSelected] = useState(false);
 
-  const handleClick = (x, y) => {
-    if (isBeginSelected) {
-      // End selection logic
+  const handleNotPlanted = (x, y) => {
+    if (isBeginSelected && toPlantCells?.length > 0) {
+      onEndCoordinates(x, y);
     } else {
       setIsBeginSelected(true);
-      setToPlantCells([{ x, y }]);
+      setToPlantCells((prev) => [...prev, `${x},${y}`]);
     }
   };
-
 
   const handleDrag = (x, y) => {
     if (isBeginSelected) {
@@ -62,6 +61,7 @@ export const SeedingModal = ({
             onRightClick={reset}
             seedMode={true}
             toPlantCells={toPlantCells}
+            handleNotPlanted={handleNotPlanted}
           />
         </div>
       </div>

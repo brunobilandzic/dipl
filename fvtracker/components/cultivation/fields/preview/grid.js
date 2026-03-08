@@ -23,7 +23,8 @@ export function FieldGrid({
   cuCellsFieldCoords = false,
   invertColor = false,
   seedMode = false,
-  toPlantCells = [],  
+  toPlantCells = [],
+  handleNotPlanted,
 }) {
   if (small) {
     return (
@@ -77,6 +78,7 @@ export function FieldGrid({
           invertColor={invertColor}
           seedMode={seedMode}
           toPlantCells={toPlantCells}
+          handleNotPlanted={handleNotPlanted}
         />
       </div>
     </>
@@ -102,8 +104,11 @@ const FieldCells = ({
   invertColor,
   seedMode,
   toPlantCells,
+  handleNotPlanted,
 }) => {
   let cells = [];
+
+  console.log("toplant", toPlantCells);
 
   const isSelected = (x, y) => {
     if (small) return false;
@@ -152,6 +157,7 @@ const FieldCells = ({
           selectedCultivationName={selectedCultivationName}
           invertColor={invertColor}
           seedMode={seedMode}
+          handleNotPlanted={handleNotPlanted}
         />,
       );
     }

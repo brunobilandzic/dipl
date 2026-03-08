@@ -61,6 +61,7 @@ export const SeedingModal = ({
     setDragEvent(null);
   };
 
+  if (!cultivation || !isOpen) return null;
   return (
     <Modal title="Seeding Modal" isOpen={isOpen} onCancel={onCancel}>
       <div className="flex flex-col gap-2">

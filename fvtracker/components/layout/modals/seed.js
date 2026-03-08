@@ -51,7 +51,7 @@ export const SeedingModal = ({
 
   const handleDrag = (x, y) => {
     if (isBeginSelected) {
-      setToPlantCells((prev) => [...prev, { x, y }]);
+      setToPlantCells((prev) => [...prev, `${x},${y}`]);
     }
   };
 

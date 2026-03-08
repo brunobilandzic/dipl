@@ -15,12 +15,22 @@ export const SeedingModal = ({
   cultivationCells,
 }) => {
   const [dragEvent, setDragEvent] = useState(null);
-  const [toPlantCells, setToPlantCells] = useState([]);
   const [isBeginSelected, setIsBeginSelected] = useState(false);
 
+  const initialNewPlantage = {
+    cultivation: cultivation?.id || null,
+    cropVarietyId: null,
+    toPlantCells: [],
+    name: "",
+    plantedAt: null,
+    harvestedAt: null,
+  };
+
+  const [newPlantage, setNewPlantage] = useState(initialNewPlantage);
+
   useEffect(() => {
-    console.log("To plant cells:", toPlantCells);
-  }, [toPlantCells]);
+    console.log("To plant cells:", newPlantage.toPlantCells);
+  }, [newPlantage.toPlantCells]);
 
   const handleNotPlanted = (x, y) => {
     if (isBeginSelected && toPlantCells?.length > 0) {
@@ -31,6 +41,11 @@ export const SeedingModal = ({
     }
   };
 
+  const onBeginCoordinates = (x, y) => {
+    setIsBeginSelected(true);
+    setNewPlantage((prev) => ({ ...prev, toPlantCells: [`${x},${y}`] }));
+  };
+
   const onEndCoordinates = (x, y) => {
     console.log("on end");
     const { planted } = utils.cultivation.cultivationAreas.getCellsInRect({
@@ -39,6 +54,7 @@ export const SeedingModal = ({
       endX: x,
       endY: y,
       toPlantCells: toPlantCells,
+      toPlantCultivation: cultivation,
     });
     console.log("Planted cells in rect:", planted);
     console.log("Existing toPlantCells before adding new ones:", toPlantCells);
@@ -46,17 +62,17 @@ export const SeedingModal = ({
       reset();
       return;
     }
-    setToPlantCells((prev) => [...prev, ...planted]);
+    setNewPlantage((prev) => ({ ...prev, toPlantCells: [...prev.toPlantCells, ...planted] }));
   };
 
   const handleDrag = (x, y) => {
     if (isBeginSelected) {
-      setToPlantCells((prev) => [...prev, `${x},${y}`]);
+      setNewPlantage((prev) => ({ ...prev, toPlantCells: [...prev.toPlantCells, `${x},${y}`] }));
     }
   };
 
   const reset = () => {
-    setToPlantCells([]);
+    setNewPlantage((prev) => ({ ...prev, toPlantCells: [] }));
     setIsBeginSelected(false);
     setDragEvent(null);
   };
@@ -80,7 +96,7 @@ export const SeedingModal = ({
             cultivationCells={cultivationCells}
             onRightClick={reset}
             seedMode={true}
-            toPlantCells={toPlantCells}
+            toPlantCells={newPlantage?.toPlantCellstoPlantCells}
             handleNotPlanted={handleNotPlanted}
           />
         </div>

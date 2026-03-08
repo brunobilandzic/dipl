@@ -34,6 +34,24 @@ export const SeedingModal = ({
     }
   };
 
+  const onEndCoordinates = (x, y) => {
+    console.log("on end");
+    const { planted } = utils.cultivation.cultivationAreas.getCellsInRect({
+      beginX: parseInt(toPlantCells[0].split(",")[0]),
+      beginY: parseInt(toPlantCells[0].split(",")[1]),
+      endX: x,
+      endY: y,
+      toPlantCells: toPlantCells,
+    });
+    console.log("Planted cells in rect:", planted);
+    console.log("Existing toPlantCells before adding new ones:", toPlantCells);
+    if (!planted) {
+      reset();
+      return;
+    }
+    setToPlantCells((prev) => [...prev, ...planted]);
+  };
+
   const handleDrag = (x, y) => {
     if (isBeginSelected) {
       setToPlantCells((prev) => [...prev, { x, y }]);

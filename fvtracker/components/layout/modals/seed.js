@@ -15,7 +15,6 @@ export const SeedingModal = ({
   cultivationCells,
 }) => {
   const [dragEvent, setDragEvent] = useState(null);
-  const [isBeginSelected, setIsBeginSelected] = useState(false);
 
   const initialNewPlantage = {
     cultivation: cultivation?.id || null,
@@ -24,56 +23,80 @@ export const SeedingModal = ({
     name: "",
     plantedAt: null,
     harvestedAt: null,
+    beginX: null,
+    beginY: null,
+    endX: null,
+    endY: null,
+  };
+  const [newPlantage, setNewPlantage] = useState(initialNewPlantage);
+  const isBeginSelected = () => !!(newPlantage.beginX && newPlantage.beginY);
+  const turnOffBeginSelection = () => {
+    setNewPlantage((prev) => ({ ...prev, beginX: null, beginY: null }));
+  };
+  const emptyToPlantCells = () => {
+    setNewPlantage((prev) => ({ ...prev, toPlantCells: [] }));
   };
 
-  const [newPlantage, setNewPlantage] = useState(initialNewPlantage);
-
   useEffect(() => {
-    console.log("To plant cells:", newPlantage.toPlantCells);
-  }, [newPlantage.toPlantCells]);
+    console.log("Tnp:", newPlantage);
+  }, [newPlantage]);
 
   const handleNotPlanted = (x, y) => {
-    if (isBeginSelected && toPlantCells?.length > 0) {
+    console.log("begin", isBeginSelected())
+    console.log("len", newPlantage.toPlantCells.length)
+    if (isBeginSelected() && newPlantage.toPlantCells?.length > 0) {
       onEndCoordinates(x, y);
     } else {
-      setIsBeginSelected(true);
-      setToPlantCells((prev) => [...prev, `${x},${y}`]);
+      onBeginCoordinates(x, y);
     }
   };
 
   const onBeginCoordinates = (x, y) => {
-    setIsBeginSelected(true);
-    setNewPlantage((prev) => ({ ...prev, toPlantCells: [`${x},${y}`] }));
+    setNewPlantage((prev) => ({
+      ...prev,
+      beginX: x,
+      beginY: y,
+      toPlantCells: [`${x},${y}`],
+    }));
   };
 
   const onEndCoordinates = (x, y) => {
-    console.log("on end");
     const { planted } = utils.cultivation.cultivationAreas.getCellsInRect({
-      beginX: parseInt(toPlantCells[0].split(",")[0]),
-      beginY: parseInt(toPlantCells[0].split(",")[1]),
+      beginX: newPlantage.beginX,
+      beginY: newPlantage.beginY,
       endX: x,
       endY: y,
-      toPlantCells: toPlantCells,
+      toPlantCells: newPlantage.toPlantCells,
       toPlantCultivation: cultivation,
     });
     console.log("Planted cells in rect:", planted);
-    console.log("Existing toPlantCells before adding new ones:", toPlantCells);
+    console.log(
+      "Existing toPlantCells before adding new ones:",
+      newPlantage.toPlantCells,
+    );
     if (!planted) {
       reset();
       return;
     }
-    setNewPlantage((prev) => ({ ...prev, toPlantCells: [...prev.toPlantCells, ...planted] }));
+    setNewPlantage((prev) => ({
+      ...prev,
+      endX: x,
+      endY: y,
+      toPlantCells: planted,
+    }));
   };
 
   const handleDrag = (x, y) => {
-    if (isBeginSelected) {
-      setNewPlantage((prev) => ({ ...prev, toPlantCells: [...prev.toPlantCells, `${x},${y}`] }));
+    if (isBeginSelected()) {
+      setNewPlantage((prev) => ({
+        ...prev,
+        toPlantCells: [...prev.toPlantCells, `${x},${y}`],
+      }));
     }
   };
 
   const reset = () => {
-    setNewPlantage((prev) => ({ ...prev, toPlantCells: [] }));
-    setIsBeginSelected(false);
+    setNewPlantage(initialNewPlantage);
     setDragEvent(null);
   };
 
@@ -96,7 +119,7 @@ export const SeedingModal = ({
             cultivationCells={cultivationCells}
             onRightClick={reset}
             seedMode={true}
-            toPlantCells={newPlantage?.toPlantCellstoPlantCells}
+            toPlantCells={newPlantage?.toPlantCells}
             handleNotPlanted={handleNotPlanted}
           />
         </div>

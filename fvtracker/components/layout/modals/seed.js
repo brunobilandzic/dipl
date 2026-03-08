@@ -40,6 +40,10 @@ export const SeedingModal = ({
     choice: null,
   });
 
+  useEffect(() => {
+    console.log("choicenewend state:", chooseNewEnd);
+  }, [chooseNewEnd]);
+
   const turnOffBeginSelection = () => {
     setNewPlantage((prev) => ({ ...prev, beginX: null, beginY: null }));
   };

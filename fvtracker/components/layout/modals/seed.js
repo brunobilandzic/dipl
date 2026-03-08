@@ -47,13 +47,7 @@ export const SeedingModal = ({
     setNewPlantage((prev) => ({ ...prev, toPlantCells: [] }));
   };
 
-  useEffect(() => {
-    console.log("Tnp:", newPlantage);
-  }, [newPlantage]);
-
   const handleNotPlanted = (x, y) => {
-    console.log("begin", isBeginSelected());
-    console.log("len", newPlantage.toPlantCells.length);
     if (isBeginSelected() && newPlantage.toPlantCells?.length > 0) {
       onEndCoordinates(x, y);
     } else {
@@ -79,11 +73,6 @@ export const SeedingModal = ({
       toPlantCells: newPlantage.toPlantCells,
       toPlantCultivation: cultivation,
     });
-    console.log("Planted cells in rect:", planted);
-    console.log(
-      "Existing toPlantCells before adding new ones:",
-      newPlantage.toPlantCells,
-    );
     if (!planted) {
       reset();
       return;

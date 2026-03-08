@@ -175,7 +175,7 @@ const FieldCell = ({
   selectedCultivationName,
   invertColor,
   seedMode,
-  toPlantCells
+  handleNotPlanted,
 }) => {
   const bgClass = selected
     ? "bg-green-500"
@@ -189,6 +189,8 @@ const FieldCell = ({
   );
 
   const handleClick = (e) => {
+    console.log("Cell clicked:", x, y);
+    console.log("Active:", active, "Selected:", selected, "Color:", color, "seedMode:", seedMode);
     if(seedMode && color === colors.cultivation.defaultPlCvColor) {
       console.log("Handling not planted for cell:", x, y);
       handleNotPlanted(x, y);

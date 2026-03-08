@@ -3,6 +3,7 @@
 import classNames from "classnames";
 import dimensionError from "@/lib/constants/errors/cultivation/dimensions";
 import utils from "@/lib/utils";
+import colors from "@/lib/constants/cultivation/colors";
 
 export function FieldGrid({
   width: fieldWidth,
@@ -188,6 +189,11 @@ const FieldCell = ({
   );
 
   const handleClick = (e) => {
+    if(seedMode && color === colors.cultivation.defaultPlCvColor) {
+      console.log("Handling not planted for cell:", x, y);
+      handleNotPlanted(x, y);
+      return;
+    }
     if (!active && color === "") {
       handleEmptyClick(x, y);
       return;

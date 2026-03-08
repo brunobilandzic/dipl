@@ -9,6 +9,7 @@ import Modal, { ModalFooter } from "./modal";
 import { showDate } from "@/lib/utils/display";
 import { useEffect, useState } from "react";
 import utils from "@/lib/utils";
+import { MenuModal } from "./menu";
 
 export const SeedingModal = ({
   isOpen,
@@ -36,8 +37,8 @@ export const SeedingModal = ({
   const isBeginSelected = () => !!(newPlantage.beginX && newPlantage.beginY);
   const [chooseNewEnd, setChooseNewEnd] = useState({
     isOpen: false,
-    choice: null
-  })
+    choice: null,
+  });
 
   const turnOffBeginSelection = () => {
     setNewPlantage((prev) => ({ ...prev, beginX: null, beginY: null }));
@@ -51,8 +52,8 @@ export const SeedingModal = ({
   }, [newPlantage]);
 
   const handleNotPlanted = (x, y) => {
-    console.log("begin", isBeginSelected())
-    console.log("len", newPlantage.toPlantCells.length)
+    console.log("begin", isBeginSelected());
+    console.log("len", newPlantage.toPlantCells.length);
     if (isBeginSelected() && newPlantage.toPlantCells?.length > 0) {
       onEndCoordinates(x, y);
     } else {
@@ -128,33 +129,33 @@ export const SeedingModal = ({
   if (!cultivation || !isOpen) return null;
   return (
     <>
-    <Modal title="Seeding Modal" isOpen={isOpen} onCancel={onCancel}>
-      <div className="flex flex-col gap-2">
-        <div className="font-bold text-xl">{cultivation?.name || "N/A"}</div>
-        <div>{cultivation?.description}</div>
-        <div className="text-sm text-gray-500">
-          Created at: {showDate(cultivation?.createdAt)} <br />
+      <Modal title="Seeding Modal" isOpen={isOpen} onCancel={onCancel}>
+        <div className="flex flex-col gap-2">
+          <div className="font-bold text-xl">{cultivation?.name || "N/A"}</div>
+          <div>{cultivation?.description}</div>
+          <div className="text-sm text-gray-500">
+            Created at: {showDate(cultivation?.createdAt)} <br />
+          </div>
         </div>
-      </div>
-      <div className="mt-4 p-4">
-        <div>
-          <FieldGrid
-            width={caDims.width}
-            length={caDims.length}
-            invertColor={true}
-            cultivationCells={cultivationCells}
-            onRightClick={reset}
-            seedMode={true}
-            toPlantCells={newPlantage?.toPlantCells}
-            handleNotPlanted={handleNotPlanted}
-          />
+        <div className="mt-4 p-4">
+          <div>
+            <FieldGrid
+              width={caDims.width}
+              length={caDims.length}
+              invertColor={true}
+              cultivationCells={cultivationCells}
+              onRightClick={reset}
+              seedMode={true}
+              toPlantCells={newPlantage?.toPlantCells}
+              handleNotPlanted={handleNotPlanted}
+            />
+          </div>
         </div>
-      </div>
-      <ModalFooter>
-        <div className={`btn submitButton`}>Submit</div>
-        <div className="btn cancelButton">Cancel</div>
-      </ModalFooter>
-    </Modal>
+        <ModalFooter>
+          <div className={`btn submitButton`}>Submit</div>
+          <div className="btn cancelButton">Cancel</div>
+        </ModalFooter>
+      </Modal>
       <MenuModal isOpen={chooseNewEnd.isOpen} options={choiceOptions} />
     </>
   );

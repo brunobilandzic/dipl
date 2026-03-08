@@ -11,7 +11,7 @@ import {
 
 export default {
   colors: {
-    selectedCABackGround: colors.selectedCABackGround,
+    ...colors,
   },
   field: {
     fieldDimensions,

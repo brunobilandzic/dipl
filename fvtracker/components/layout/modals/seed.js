@@ -1,8 +1,6 @@
 "use client";
 
 import {
-  CONTINUE_PLANTING,
-  END_PLANTING,
   FieldGrid,
 } from "@/components/cultivation/fields/preview/grid";
 import Modal, { ModalFooter } from "./modal";

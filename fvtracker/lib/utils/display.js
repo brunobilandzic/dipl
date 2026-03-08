@@ -20,7 +20,6 @@ export const plCvColor = ({ plCvs, cell, fieldView }) => {
 };
 
 export const showDate = (date) => {
-  console.log("showDate called with:", date);
   if (!date) return "N/A";
   return format(new Date(date), "PPP");
 };

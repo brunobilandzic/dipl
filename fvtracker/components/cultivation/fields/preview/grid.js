@@ -174,6 +174,7 @@ const FieldCell = ({
   selectedCultivationName,
   invertColor,
   seedMode,
+  toPlantCells
 }) => {
   const bgClass = selected
     ? "bg-green-500"

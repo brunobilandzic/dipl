@@ -1,6 +1,10 @@
 "use client";
 
-import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
+import {
+  CONTINUE_PLANTING,
+  END_PLANTING,
+  FieldGrid,
+} from "@/components/cultivation/fields/preview/grid";
 import Modal, { ModalFooter } from "./modal";
 import { showDate } from "@/lib/utils/display";
 import { useEffect, useState } from "react";
@@ -105,8 +109,25 @@ export const SeedingModal = ({
     setDragEvent(null);
   };
 
+  const choiceOptions = [
+    {
+      label: END_PLANTING,
+      onClick: () => {
+        setChooseNewEnd({ isOpen: false, choice: END_PLANTING });
+        // copilot recomend turnOffBeginSelection();
+      },
+    },
+    {
+      label: CONTINUE_PLANTING,
+      onClick: () => {
+        setChooseNewEnd({ isOpen: false, choice: CONTINUE_PLANTING });
+      },
+    },
+  ];
+
   if (!cultivation || !isOpen) return null;
   return (
+    <>
     <Modal title="Seeding Modal" isOpen={isOpen} onCancel={onCancel}>
       <div className="flex flex-col gap-2">
         <div className="font-bold text-xl">{cultivation?.name || "N/A"}</div>

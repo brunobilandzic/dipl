@@ -34,8 +34,17 @@ export const getCellsInRect = ({
   cultivationAreaDimensions,
   cultivationAreas,
   cultivations,
+  toPlantCells,
+  plCvs,
 }) => {
   let plantedCells;
+  console.log("get cells in rect", {
+    beginX,
+    beginY,
+    endX,
+    endY,
+    toPlantCells,
+  });
   if (cultivationAreaDimensions) {
     plantedCells = getCASCells(cultivationAreas);
     const valid = checkRectValidDimensions({
@@ -52,11 +61,15 @@ export const getCellsInRect = ({
         ),
       };
     }
-  } else {
+  } else if (cultivations) {
     plantedCells = getCUSCells(cultivations);
+  } else if (toPlantCells) {
+    plantedCells = getPlantedCells(plCvs);
   }
+
   const overlaps = overlapsExistingCA(plantedCells, beginX, beginY, endX, endY);
   if (overlaps) {
+    console.log("overlapping")
     if (cultivationAreaDimensions) {
       return { error: dimensionError.CULTIVATION_AREA_OVERLAP };
     } else {
@@ -233,4 +246,8 @@ export function adjacentCellsGap({ x, y, gap, plantedCells }) {
   ];
 
   return adjacentCellsGap;
+}
+
+export function getPlantedCells () {
+  
 }

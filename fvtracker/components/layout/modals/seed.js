@@ -30,6 +30,12 @@ export const SeedingModal = ({
     }
   };
 
+  const handleDrag = (x, y) => {
+    if (isBeginSelected) {
+      setSelected((prev) => [...prev, { x, y }]);
+    }
+  };
+
   const reset = () => {
     setSelected([]);
     setIsBeginSelected(false);
@@ -53,6 +59,8 @@ export const SeedingModal = ({
             invertColor={true}
             cultivationCells={cultivationCells}
             onRightClick={reset}
+            seedMode={true}
+            toPlantCells={selected}
           />
         </div>
       </div>

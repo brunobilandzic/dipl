@@ -13,10 +13,6 @@ export const SeedingModal = ({
   caDims,
   cultivationCells,
 }) => {
-  console.log("isopnen:", isOpen);
-  console.log("cultivation:", cultivation);
-  console.log("ccells:", cultivationCells);
-  if (!cultivation || !isOpen) return null;
   const [dragEvent, setDragEvent] = useState(null);
   const [toPlantCells, setToPlantCells] = useState([]);
   const [isBeginSelected, setIsBeginSelected] = useState(false);

@@ -151,7 +151,7 @@ export const SeedingModal = ({
           <div className="btn cancelButton">Cancel</div>
         </ModalFooter>
       </Modal>
-      <MenuModal isOpen={chooseNewEnd.isOpen} options={choiceOptions} />
+      <MenuModal invertColor="true" isOpen={chooseNewEnd.isOpen} options={choiceOptions} />
     </>
   );
 };

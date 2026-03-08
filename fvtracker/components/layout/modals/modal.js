@@ -1,13 +1,24 @@
 import { MdOutlineClose } from "react-icons/md";
 
-export default function Modal({ isOpen, onCancel, children, title }) {
+export default function Modal({
+  isOpen,
+  onCancel,
+  children,
+  title,
+  invertColor,
+}) {
+  const bgTextClassName = invertColor
+    ? " text-[var(--foreground)] bg-[var(--background)]"
+    : " bg-[var(--foreground)] text-[var(--background)] ";
   return (
     <>
       {isOpen && (
         <>
           <Backdrop onCancel={onCancel} />
           <div className="fixed inset-0 z-30 grid place-items-center p-4">
-            <div className="w-full max-w-xl max-h-[80vh] rounded-lg bg-[var(--foreground)] text-[var(--background)] flex flex-col overflow-hidden">
+            <div
+              className={`w-full max-w-xl max-h-[80vh] ${invertColor ? "max-w-lg" : ""} rounded-lg ${bgTextClassName} flex flex-col overflow-hidden`}
+            >
               <ModalHeader title={title} onCancel={onCancel} />
 
               <div className="flex-1 overflow-y-auto p-4">{children}</div>

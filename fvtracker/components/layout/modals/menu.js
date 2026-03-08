@@ -5,10 +5,16 @@ export function MenuModal({
   options = [],
   title = "Menu",
   isOpen = false,
+  invertColor,
 }) {
   if (!isOpen) return null;
   return (
-    <Modal isOpen={isOpen} onCancel={onCancel} title={title}>
+    <Modal
+      isOpen={isOpen}
+      onCancel={onCancel}
+      title={title}
+      invertColor={invertColor}
+    >
       <div className="flex flex-col gap-4">
         {options.map((option, index) => (
           <div

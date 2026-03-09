@@ -65,7 +65,7 @@ export const getCellsInRect = ({
   } else if (cultivations) {
     plantedCells = getCUSCells(cultivations);
   } else if (toPlantCells) {
-    plantedCells = getPlCvsCells(toPlantCultivation.plantedCropVarieties);
+    plantedCells = getPlCvsSeededCells(toPlantCultivation.plantedCropVarieties);
   }
   console.log("planted cells for rect", plantedCells);
   const overlaps = overlapsExistingCA(plantedCells, beginX, beginY, endX, endY);
@@ -249,6 +249,6 @@ export function adjacentCellsGap({ x, y, gap, plantedCells }) {
   return adjacentCellsGap;
 }
 
-export function getPlCvsCells(plCvs) {
+export function getPlCvsSeededCells(plCvs) {
   return plCvs?.filter((plCv) => plCv.cropVariety);
 }

@@ -10,6 +10,7 @@ import {
   END_PLANTING,
   CONTINUE_PLANTING,
 } from "@/lib/constants/cultivation/plants";
+import Modals from ".";
 
 export const SeedingModal = ({
   isOpen,
@@ -21,30 +22,19 @@ export const SeedingModal = ({
 }) => {
   const [dragEvent, setDragEvent] = useState(null);
 
-  const initialNewPlantage = {
-    cultivation: cultivation?.id || null,
-    cropVarietyId: null,
-    toPlantCells: [],
-    name: "",
-    plantedAt: null,
-    harvestedAt: null,
-    beginX: null,
-    beginY: null,
-    endX: null,
-    endY: null,
-  };
-  const [newPlantage, setNewPlantage] = useState(initialNewPlantage);
-  const isBeginSelected = () => !!(typeof newPlantage.beginX === "number" && typeof newPlantage.beginY === "number");
-  const [chooseNewEnd, setChooseNewEnd] = useState({
-    isOpen: false,
-    choice: null,
-    x: null,
-    y: null,
-  });
+  const [newPlantage, setNewPlantage] = useState(
+    initialNewPlantage(cultivation?.id),
+  );
+  const isBeginSelected = () =>
+    !!(
+      typeof newPlantage.beginX === "number" &&
+      typeof newPlantage.beginY === "number"
+    );
+  const [chooseNewEnd, setChooseNewEnd] = useState(initialChooseNewEnd);
 
-useEffect(() => {
+  useEffect(() => {
     console.log("newPlantage state:", newPlantage);
-}, [newPlantage]);
+  }, [newPlantage]);
 
   useEffect(() => {
     console.log("choicenewend state:", chooseNewEnd);
@@ -111,9 +101,9 @@ useEffect(() => {
   };
 
   const reset = () => {
-    setNewPlantage(initialNewPlantage);
+    setNewPlantage(initialNewPlantage(cultivation?.id));
     setDragEvent(null);
-    setChooseNewEnd({ isOpen: false, choice: null, x: null, y: null });
+    setChooseNewEnd(initialChooseNewEnd);
   };
 
   const choiceOptions = [
@@ -138,7 +128,7 @@ useEffect(() => {
       onClick: () => {
         reset();
       },
-      className: "btn w-full cancelButton"
+      className: "btn w-full cancelButton",
     },
   ];
 
@@ -186,3 +176,22 @@ const PlantCultivation = () => {
   return <Modals.FormModal />;
 };
 
+const initialChooseNewEnd = {
+  isOpen: false,
+  choice: null,
+  x: null,
+  y: null,
+};
+
+const initialNewPlantage = (cultivationId) => ({
+  cultivation: cultivationId || null,
+  cropVarietyId: null,
+  toPlantCells: [],
+  name: "",
+  plantedAt: null,
+  harvestedAt: null,
+  beginX: null,
+  beginY: null,
+  endX: null,
+  endY: null,
+});

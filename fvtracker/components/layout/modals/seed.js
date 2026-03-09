@@ -63,11 +63,11 @@ export const SeedingModal = ({
         y,
       });
     } else {
-      onBeginCoordinates(x, y);
+      onBeginCoordinates({ x, y });
     }
   };
 
-  const onBeginCoordinates = (x, y) => {
+  const onBeginCoordinates = ({ x, y }) => {
     setNewPlantage((prev) => ({
       ...prev,
       beginX: x,
@@ -76,7 +76,7 @@ export const SeedingModal = ({
     }));
   };
 
-  const onEndCoordinates = (x, y) => {
+  const onEndCoordinates = ({ x, y }) => {
     const { planted } = utils.cultivation.cultivationAreas.getCellsInRect({
       beginX: newPlantage.beginX,
       beginY: newPlantage.beginY,
@@ -97,7 +97,7 @@ export const SeedingModal = ({
     }));
   };
 
-  const handleDrag = (x, y) => {
+  const handleDrag = ({ x, y }) => {
     if (isBeginSelected()) {
       setNewPlantage((prev) => ({
         ...prev,

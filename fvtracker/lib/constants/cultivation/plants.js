@@ -1181,5 +1181,5 @@ const makeCultivation = () => {
 };
 
 
-export const END_PLANTING = "End the planting"
-export const CONTINUE_PLANTING = "Continue planting"
+export const END_PLANTING = "Završi spodručje sadnje"
+export const CONTINUE_PLANTING = "Nastavi kreirati područje sadnje"

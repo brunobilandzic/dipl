@@ -181,3 +181,8 @@ useEffect(() => {
     </>
   );
 };
+
+const PlantCultivation = () => {
+  return <Modals.FormModal />;
+};
+

@@ -42,6 +42,10 @@ export const SeedingModal = ({
     y: null,
   });
 
+useEffect(() => {
+    console.log("newPlantage state:", newPlantage);
+}, [newPlantage]);
+
   useEffect(() => {
     console.log("choicenewend state:", chooseNewEnd);
   }, [chooseNewEnd]);

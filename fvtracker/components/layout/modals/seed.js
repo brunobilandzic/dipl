@@ -117,7 +117,10 @@ export const SeedingModal = ({
       label: END_PLANTING,
       onClick: () => {
         setChooseNewEnd({ isOpen: false, choice: END_PLANTING });
-        onEndCoordinates();
+        onEndCoordinates({
+          x: chooseNewEnd.x,
+          y: chooseNewEnd.y,
+        });
       },
     },
     {

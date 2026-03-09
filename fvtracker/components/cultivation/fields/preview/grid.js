@@ -107,9 +107,7 @@ const FieldCells = ({
   handleNotPlanted,
 }) => {
   let cells = [];
-
-  console.log("toplant", toPlantCells);
-
+  
   const isSelected = (x, y) => {
     if (small) return false;
     const coord = `${x},${y}`;
@@ -195,10 +193,7 @@ const FieldCell = ({
   );
 
   const handleClick = (e) => {
-    console.log("Cell clicked:", x, y);
-    console.log("Active:", active, "Selected:", selected, "Color:", color, "seedMode:", seedMode);
     if(seedMode && color === colors.cultivation.defaultPlCvColor) {
-      console.log("Handling not planted for cell:", x, y);
       handleNotPlanted(x, y);
       return;
     }

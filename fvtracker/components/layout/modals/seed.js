@@ -109,6 +109,7 @@ export const SeedingModal = ({
   const reset = () => {
     setNewPlantage(initialNewPlantage);
     setDragEvent(null);
+    setChooseNewEnd({ isOpen: false, choice: null, x: null, y: null });
   };
 
   const choiceOptions = [
@@ -123,6 +124,12 @@ export const SeedingModal = ({
       label: CONTINUE_PLANTING,
       onClick: () => {
         setChooseNewEnd({ isOpen: false, choice: CONTINUE_PLANTING });
+      },
+    },
+    {
+      label: "Cancel",
+      onClick: () => {
+        reset();
       },
     },
   ];

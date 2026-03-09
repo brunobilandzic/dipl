@@ -1,14 +1,15 @@
 "use client";
 
-import {
-  FieldGrid,
-} from "@/components/cultivation/fields/preview/grid";
+import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
 import Modal, { ModalFooter } from "./modal";
 import { showDate } from "@/lib/utils/display";
 import { useEffect, useState } from "react";
 import utils from "@/lib/utils";
 import { MenuModal } from "./menu";
-import { END_PLANTING, CONTINUE_PLANTING } from "@/lib/constants/cultivation/plants";
+import {
+  END_PLANTING,
+  CONTINUE_PLANTING,
+} from "@/lib/constants/cultivation/plants";
 
 export const SeedingModal = ({
   isOpen,
@@ -37,6 +38,8 @@ export const SeedingModal = ({
   const [chooseNewEnd, setChooseNewEnd] = useState({
     isOpen: false,
     choice: null,
+    x: null,
+    y: null,
   });
 
   useEffect(() => {
@@ -49,13 +52,16 @@ export const SeedingModal = ({
   const emptyToPlantCells = () => {
     setNewPlantage((prev) => ({ ...prev, toPlantCells: [] }));
   };
-  const showChooseNewEnd = () => {
-    setChooseNewEnd((prev) => ({ ...prev, isOpen: true, choice: null }));
+  const showChooseNewEnd = ({ x, y }) => {
+    setChooseNewEnd((prev) => ({ ...prev, isOpen: true, choice: null, x, y }));
   };
 
   const handleNotPlanted = (x, y) => {
     if (isBeginSelected() && newPlantage.toPlantCells?.length > 0) {
-      showChooseNewEnd();
+      showChooseNewEnd({
+        x,
+        y,
+      });
     } else {
       onBeginCoordinates(x, y);
     }
@@ -110,7 +116,7 @@ export const SeedingModal = ({
       label: END_PLANTING,
       onClick: () => {
         setChooseNewEnd({ isOpen: false, choice: END_PLANTING });
-        // copilot recomend turnOffBeginSelection();
+        onEndCoordinates();
       },
     },
     {
@@ -151,7 +157,11 @@ export const SeedingModal = ({
           <div className="btn cancelButton">Cancel</div>
         </ModalFooter>
       </Modal>
-      <MenuModal invertColor="true" isOpen={chooseNewEnd.isOpen} options={choiceOptions} />
+      <MenuModal
+        invertColor="true"
+        isOpen={chooseNewEnd.isOpen}
+        options={choiceOptions}
+      />
     </>
   );
 };

@@ -32,6 +32,7 @@ export const SeedingModal = ({
       typeof newPlantage.beginY === "number"
     );
   const [chooseNewEnd, setChooseNewEnd] = useState(initialChooseNewEnd);
+  const [plantCultivationOpen, setPlantCultivationOpen] = useState(false);
 
   useEffect(() => {
     console.log("newPlantage state:", newPlantage);
@@ -90,6 +91,8 @@ export const SeedingModal = ({
       endY: y,
       toPlantCells: planted,
     }));
+
+    setPlantCultivationOpen(true)
   };
 
   const handleDrag = ({ x, y }) => {
@@ -105,6 +108,7 @@ export const SeedingModal = ({
     setNewPlantage(initialNewPlantage(cultivation?.id));
     setDragEvent(null);
     setChooseNewEnd(initialChooseNewEnd);
+    setPlantCultivationOpen(false);
   };
 
   const choiceOptions = [
@@ -169,6 +173,7 @@ export const SeedingModal = ({
         options={choiceOptions}
         onCancel={reset}
       />
+      <PlantCultivation isOpen={plantCultivationOpen} onCancel={reset} newPlantage={newPlantage} setNewPlantage={setNewPlantage}/>
     </>
   );
 };

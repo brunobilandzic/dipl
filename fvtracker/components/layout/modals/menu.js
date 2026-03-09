@@ -20,7 +20,7 @@ export function MenuModal({
           <div
             key={index}
             onClick={option.onClick}
-            className={option.className ? option.className : "btn"}
+            className={option.className ? option.className : "btn w-full"}
           >
             {option.label}
           </div>

@@ -67,7 +67,6 @@ export const getCellsInRect = ({
   } else if (toPlantCells) {
     plantedCells = getPlCvsSeededCells(toPlantCultivation.plantedCropVarieties);
   }
-  console.log("planted cells for rect", plantedCells);
   const overlaps = overlapsExistingCA(plantedCells, beginX, beginY, endX, endY);
   if (overlaps) {
     console.log("overlapping");
@@ -77,14 +76,9 @@ export const getCellsInRect = ({
       return { error: dimensionError.CULTIVATION_OVERLAP };
     }
   }
+
   const allCultivationCells = toPlantCultivation?.plantedCropVarieties.map(
     (plCv) => plCv.relativeCoords,
-  );
-  console.log("911,", allCultivationCells?.includes("9,11"));
-  console.log(
-    "all cultivation cells",
-    allCultivationCells?.length,
-    allCultivationCells,
   );
   const planted = [];
   const xStart = Math.min(beginX, endX);
@@ -94,10 +88,8 @@ export const getCellsInRect = ({
   for (let x = xStart; x <= xEnd; x++) {
     for (let y = yStart; y <= yEnd; y++) {
       if (toPlantCells && allCultivationCells?.includes(`${x},${y}`)) {
-        console.log("exists in plcvs")
         planted.push(`${x},${y}`);
-      } else if(!toPlantCells) {
-        console.log("bug add")
+      } else if (!toPlantCells) {
         planted.push(`${x},${y}`);
       }
     }
@@ -264,8 +256,9 @@ export function adjacentCellsGap({ x, y, gap, plantedCells }) {
 }
 
 export function getPlCvsSeededCells(plCvs) {
-  return plCvs?.map((plCv) => {
-    if (plCv.cropVariety) return plCv.relativeCoords
-  })?.filter((relCoord) => !!relCoord);
-
+  return plCvs
+    ?.map((plCv) => {
+      if (plCv.cropVariety) return plCv.relativeCoords;
+    })
+    ?.filter((relCoord) => !!relCoord);
 }

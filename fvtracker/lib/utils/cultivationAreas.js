@@ -96,7 +96,8 @@ export const getCellsInRect = ({
       if (toPlantCells && allCultivationCells?.includes(`${x},${y}`)) {
         console.log("exists in plcvs")
         planted.push(`${x},${y}`);
-      } else {
+      } else if(!toPlantCells) {
+        console.log("bug add")
         planted.push(`${x},${y}`);
       }
     }

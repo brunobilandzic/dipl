@@ -138,6 +138,7 @@ useEffect(() => {
       onClick: () => {
         reset();
       },
+      className: "btn w-full cancelButton"
     },
   ];
 

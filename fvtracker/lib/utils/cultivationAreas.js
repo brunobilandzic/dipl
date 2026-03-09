@@ -94,6 +94,7 @@ export const getCellsInRect = ({
   for (let x = xStart; x <= xEnd; x++) {
     for (let y = yStart; y <= yEnd; y++) {
       if (toPlantCells && allCultivationCells?.includes(`${x},${y}`)) {
+        console.log("exists in plcvs")
         planted.push(`${x},${y}`);
       } else {
         planted.push(`${x},${y}`);

@@ -171,6 +171,7 @@ export const SeedingModal = ({
         invertColor="true"
         isOpen={chooseNewEnd.isOpen}
         options={choiceOptions}
+        onCancel={reset}
       />
     </>
   );

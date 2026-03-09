@@ -11,6 +11,7 @@ import {
   CONTINUE_PLANTING,
 } from "@/lib/constants/cultivation/plants";
 import Modals from ".";
+import { AppInput } from "@/components/form/inputs";
 
 export const SeedingModal = ({
   isOpen,
@@ -172,8 +173,41 @@ export const SeedingModal = ({
   );
 };
 
-const PlantCultivation = () => {
-  return <Modals.FormModal />;
+const PlantCultivation = ({
+  isOpen,
+  onCancel,
+  onSubmit,
+  newPlantage,
+  setNewPlantage,
+}) => {
+  const onChange = (e) => {
+    const { name, value } = e;
+    setNewPlantage((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  return (
+    <Modals.FormModal
+      isOpen={isOpen}
+      onCancel={onCancel}
+      title="Zasadi na područje"
+      onSubmit={onSubmit}
+    >
+      <div className={`form`}>
+        <div className={``}>
+          <AppInput
+            type="text"
+            label="Ime"
+            name="name"
+            value={newPlantage.name}
+            onChange={onChange}
+          />
+        </div>
+      </div>
+    </Modals.FormModal>
+  );
 };
 
 const initialChooseNewEnd = {

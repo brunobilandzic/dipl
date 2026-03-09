@@ -34,7 +34,7 @@ export const SeedingModal = ({
     endY: null,
   };
   const [newPlantage, setNewPlantage] = useState(initialNewPlantage);
-  const isBeginSelected = () => !!(newPlantage.beginX && newPlantage.beginY);
+  const isBeginSelected = () => !!(typeof newPlantage.beginX === "number" && typeof newPlantage.beginY === "number");
   const [chooseNewEnd, setChooseNewEnd] = useState({
     isOpen: false,
     choice: null,

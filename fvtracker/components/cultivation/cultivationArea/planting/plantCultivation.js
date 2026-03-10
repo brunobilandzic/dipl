@@ -16,8 +16,8 @@ export const PlantCultivation = ({
   crops,
 }) => {
   const onChange = (e) => {
-    const { name, value } = e.target;
-    const label = e.target.options[e.target.selectedIndex].text;
+    const { name, value, options, selectedIndex } = e.target;
+    const label = options[selectedIndex].text;
     
     setNewPlantage((prev) => ({
       ...prev,

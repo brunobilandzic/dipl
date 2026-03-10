@@ -4,15 +4,15 @@ import {
 } from "@/models/sectors/cultivation/Cultivation";
 import { PlantedCropVariety } from "@/models/sectors/cultivation/Crops";
 import utils from "@/lib/utils";
-import { getCropVarietyById } from "./plant";
+import { createPlantedCropVarietiesCells, getCropVarietyById } from "./plant";
 
 export const getCultivationById = async (id) => {
-  const cultivation = await Cultivation.findById(id)
-  if(!cultivation) {
+  const cultivation = await Cultivation.findById(id);
+  if (!cultivation) {
     throw new Error("Cultivation not found with the provided ID.");
   }
   return cultivation;
-}
+};
 
 export async function createCultivation(cultivation) {
   console.log("Creating cultivation with data:", cultivation);
@@ -78,55 +78,6 @@ async function addEmptyPlCvs({
   relativeCoords,
   cropVarietyId,
 }) {
-  async function createPlantedCropVarietiesCells({
-    relativeCoords,
-    cropVarietyId,
-    planted,
-    cultivationId,
-  }) {
-    const plantedCropVarieties = [];
-    for (const relativeCoord of relativeCoords) {
-      const plantedCropVariety = await createCellPromise({
-        cultivationId,
-        relativeCoord,
-        cropVarietyId,
-        planted,
-      });
-      plantedCropVarieties.push(plantedCropVariety);
-    }
-    return plantedCropVarieties;
-  }
-
-  async function createCellPromise({
-    relativeCoord,
-    cropVarietyId,
-    planted,
-    cultivationId,
-  }) {
-    const fieldCoords = utils.cultivation.cultivations.relativeToFieldCoords({
-      planted,
-      cellCoords: relativeCoord,
-    });
-    let cropVariety = null;
-
-    if (cropVarietyId) {
-      cropVariety = await getCropVarietyById(cropVarietyId);
-      if (!cropVariety) {
-        throw new Error("Crop variety not found with the provided ID.");
-      }
-    }
-
-    const plantedCropVariety = new PlantedCropVariety({
-      cropVariety: cropVariety?._id || null,
-      relativeCoords: relativeCoord,
-      fieldCoords,
-      cultivation: cultivationId,
-    });
-
-    await plantedCropVariety.save();
-    return plantedCropVariety;
-  }
-
   const existingCul = await getCultivationByProperty({
     cultivationArea: cuArea,
     property: "name",
@@ -153,7 +104,6 @@ async function addEmptyPlCvs({
   });
   return existingCul;
 }
-
 
 export async function getCultivationByProperty({
   cultivationArea,

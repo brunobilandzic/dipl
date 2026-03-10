@@ -22,7 +22,6 @@ export const SeedingModal = ({
   cultivationCells,
 }) => {
   const [dragEvent, setDragEvent] = useState(null);
-
   const [newPlantage, setNewPlantage] = useState(
     initialNewPlantage(cultivation?.id),
   );

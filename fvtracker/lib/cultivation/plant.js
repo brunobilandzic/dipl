@@ -53,6 +53,8 @@ export async function getCropVarietyById(id) {
   return cropVariety;
 }
 
+
+//NOBODY uses this
 export async function plantCropVariety({
   cropVarietyId,
   cultivationAreaId,

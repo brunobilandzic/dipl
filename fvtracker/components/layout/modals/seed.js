@@ -197,7 +197,8 @@ const PlantCultivation = ({
   crops,
 }) => {
   const onChange = (e) => {
-    const { name, value } = e;
+    const { name, value } = e.target;
+    console.log(name, value);
     setNewPlantage((prev) => ({
       ...prev,
       [name]: value,

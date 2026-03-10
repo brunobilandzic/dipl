@@ -232,6 +232,10 @@ const PlantCultivation = ({
             name="generalType"
             value={newPlantage?.generalType || ""}
             onChange={onChange}
+options={crops?.generalTypes.map((mt) => ({
+              label: mt.name,
+              value: mt.name,
+            }))}
           />
         </div>
       </div>

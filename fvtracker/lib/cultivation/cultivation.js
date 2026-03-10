@@ -28,7 +28,7 @@ export async function createCultivation(cultivation) {
   }
 
   if (existingCulName) {
-    const existingCul = addPlCvs({
+    const existingCul = addEmptyPlCvs({
       existingCulName,
       cuArea,
       relativeCoords,
@@ -64,18 +64,61 @@ export async function createCultivation(cultivation) {
   return newCultivation;
 }
 
-async function addPlCvs({
+async function addEmptyPlCvs({
   existingCulName,
   cuArea,
   relativeCoords,
   cropVarietyId,
 }) {
-  console.log("Adding planted crop varieties to existing cultivation:", {
-    existingCulName,
-    cuAreaId: cuArea._id,
-    relativeCoordsLength: relativeCoords.length,
+  async function createPlantedCropVarietiesCells({
+    relativeCoords,
     cropVarietyId,
-  });
+    planted,
+    cultivationId,
+  }) {
+    const plantedCropVarieties = [];
+    for (const relativeCoord of relativeCoords) {
+      const plantedCropVariety = await createCellPromise({
+        cultivationId,
+        relativeCoord,
+        cropVarietyId,
+        planted,
+      });
+      plantedCropVarieties.push(plantedCropVariety);
+    }
+    return plantedCropVarieties;
+  }
+
+  async function createCellPromise({
+    relativeCoord,
+    cropVarietyId,
+    planted,
+    cultivationId,
+  }) {
+    const fieldCoords = utils.cultivation.cultivations.relativeToFieldCoords({
+      planted,
+      cellCoords: relativeCoord,
+    });
+    let cropVariety = null;
+
+    if (cropVarietyId) {
+      cropVariety = await getCropVarietyById(cropVarietyId);
+      if (!cropVariety) {
+        throw new Error("Crop variety not found with the provided ID.");
+      }
+    }
+
+    const plantedCropVariety = new PlantedCropVariety({
+      cropVariety: cropVariety?._id || null,
+      relativeCoords: relativeCoord,
+      fieldCoords,
+      cultivation: cultivationId,
+    });
+
+    await plantedCropVariety.save();
+    return plantedCropVariety;
+  }
+
   const existingCul = await getCultivationByProperty({
     cultivationArea: cuArea,
     property: "name",
@@ -101,55 +144,6 @@ async function addPlCvs({
     populate: { path: "cropVariety", populate: { path: "cropType" } },
   });
   return existingCul;
-}
-
-async function createPlantedCropVarietiesCells({
-  relativeCoords,
-  cropVarietyId,
-  planted,
-  cultivationId,
-}) {
-  const plantedCropVarieties = [];
-  for (const relativeCoord of relativeCoords) {
-    const plantedCropVariety = await createCellPromise({
-      cultivationId,
-      relativeCoord,
-      cropVarietyId,
-      planted,
-    });
-    plantedCropVarieties.push(plantedCropVariety);
-  }
-  return plantedCropVarieties;
-}
-
-async function createCellPromise({
-  relativeCoord,
-  cropVarietyId,
-  planted,
-  cultivationId,
-}) {
-  const fieldCoords = utils.cultivation.cultivations.relativeToFieldCoords({
-    planted,
-    cellCoords: relativeCoord,
-  });
-  let cropVariety = null;
-
-  if (cropVarietyId) {
-    cropVariety = await getCropVarietyById(cropVarietyId);
-    if (!cropVariety) {
-      throw new Error("Crop variety not found with the provided ID.");
-    }
-  }
-
-  const plantedCropVariety = new PlantedCropVariety({
-    cropVariety: cropVariety?._id || null,
-    relativeCoords: relativeCoord,
-    fieldCoords,
-    cultivation: cultivationId,
-  });
-
-  await plantedCropVariety.save();
-  return plantedCropVariety;
 }
 
 export async function getCultivationByProperty({

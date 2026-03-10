@@ -154,14 +154,6 @@ async function addEmptyPlCvs({
   return existingCul;
 }
 
-export async function createPlantage   ({
-  cultivationId,
-  varietyId,
-  toPlantCells,
-  plantedAt,
-}) {
-  
-}
 
 export async function getCultivationByProperty({
   cultivationArea,

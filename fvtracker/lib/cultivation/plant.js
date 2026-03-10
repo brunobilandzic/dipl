@@ -86,3 +86,17 @@ export async function plantCropVariety({
     message: `Planted ${cropVariety.name} in cultivation area ${cultivationArea.name} at cell ${cellCoords}, field cell ${fieldCoords}.`,
   };
 }
+
+export async function createPlantage   ({
+  cultivationId,
+  varietyId,
+  toPlantCells,
+  plantedAt,
+}) {
+  const cultivation = await Cultivation.findById(cultivationId);
+  if (!cultivation) {
+    throw new Error("Cultivation not found with the provided ID.");
+  }
+
+  const cropVariety = await getCropVarietyById(varietyId);
+}

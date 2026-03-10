@@ -216,15 +216,15 @@ const initialNewPlantage_wId = (cultivationId) => ({
 
   //all crops are names
   generalType: {
-    id: null,
+    _id: null,
     name: null,
   },
   type: {
-    id: null,
+    _id: null,
     name: null,
   },
   variety: {
-    id: null,
+    _id: null,
     name: null,
   },
 

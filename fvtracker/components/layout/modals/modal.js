@@ -10,7 +10,7 @@ export default function Modal({
   const bgTextClassName = invertColor
     ? " text-[var(--foreground)] bg-[var(--background)]"
     : " bg-[var(--foreground)] text-[var(--background)] ";
-  console.log(onCancel);
+
   return (
     <>
       {isOpen && (

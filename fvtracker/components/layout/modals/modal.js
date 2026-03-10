@@ -10,12 +10,17 @@ export default function Modal({
   const bgTextClassName = invertColor
     ? " text-[var(--foreground)] bg-[var(--background)]"
     : " bg-[var(--foreground)] text-[var(--background)] ";
+  console.log(onCancel);
   return (
     <>
       {isOpen && (
         <>
-          <Backdrop onCancel={onCancel} />
-          <div className="fixed inset-0 z-30 grid place-items-center p-4">
+          <div
+            className="fixed inset-0 z-[9999] grid place-items-center p-4 bg-black/40"
+            onClick={(e) => {
+              if (e.target === e.currentTarget) onCancel();
+            }}
+          >
             <div
               className={`w-full max-w-xl max-h-[80vh] ${invertColor ? "max-w-lg" : ""} rounded-lg ${bgTextClassName} flex flex-col overflow-hidden`}
             >
@@ -27,17 +32,6 @@ export default function Modal({
         </>
       )}
     </>
-  );
-}
-
-function Backdrop({ onCancel }) {
-  return (
-    <div
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onCancel();
-      }}
-      className="fixed top-0 left-0 z-20 w-full h-screen bg-black opacity-40 "
-    ></div>
   );
 }
 

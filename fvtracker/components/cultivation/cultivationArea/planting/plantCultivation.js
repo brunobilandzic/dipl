@@ -3,6 +3,9 @@
 import { useEffect, useState } from "react";
 import { AppSelect } from "@/components/form/inputs";
 import Modals from "@/components/layout/modals";
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
 
 export const PlantCultivation = ({
   isOpen,
@@ -93,6 +96,15 @@ export const PlantCultivation = ({
               }))}
             />
           )}
+          <div className="">
+            <DatePicker
+              selected={newPlantage.plantedAt}
+              onChange={(date) =>
+                setNewPlantage((prev) => ({ ...prev, plantedAt: date }))
+              }
+              placeholderText="Datum sadnje"
+            />
+          </div>
         </div>
       </div>
     </Modals.FormModal>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AppSelect } from "@/components/form/inputs";
+import { AppDatePicker, AppSelect } from "@/components/form/inputs";
 import Modals from "@/components/layout/modals";
 import DatePicker from "react-datepicker";
 
@@ -97,12 +97,12 @@ export const PlantCultivation = ({
             />
           )}
           <div className="">
-            <DatePicker
-              selected={newPlantage.plantedAt}
-              onChange={(date) =>
-                setNewPlantage((prev) => ({ ...prev, plantedAt: date }))
-              }
-              placeholderText="Datum sadnje"
+            <AppDatePicker
+              label="Datum sadnje"
+              name="plantedAt"
+              value={newPlantage.plantedAt}
+              onChange={onChange}
+              placeholder="Izaberite datum"
             />
           </div>
         </div>

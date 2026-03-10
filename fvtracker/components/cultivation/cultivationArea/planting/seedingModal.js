@@ -22,7 +22,7 @@ export const SeedingModal = ({
 }) => {
   const [dragEvent, setDragEvent] = useState(null);
   const [newPlantage, setNewPlantage] = useState(
-    initialNewPlantage(cultivation?.id),
+    initialNewPlantage(cultivation?._id),
   );
   const isBeginSelected = () =>
     !!(

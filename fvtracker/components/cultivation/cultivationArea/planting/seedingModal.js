@@ -22,7 +22,7 @@ export const SeedingModal = ({
 }) => {
   const [dragEvent, setDragEvent] = useState(null);
   const [newPlantage, setNewPlantage] = useState(
-    initialNewPlantage(cultivation?._id),
+    initialNewPlantage_wId(cultivation?._id),
   );
   const isBeginSelected = () =>
     !!(
@@ -201,6 +201,32 @@ const initialNewPlantage = (cultivationId) => ({
   generalType: "Agrumi",
   type: "Naranča",
   variety: "Valencia",
+
+  toPlantCells: [],
+  plantedAt: new Date("2026-03-10T00:00:00Z"),
+  harvestedAt: null,
+  beginX: null,
+  beginY: null,
+  endX: null,
+  endY: null,
+});
+
+const initialNewPlantage_wId = (cultivationId) => ({
+  cultivation: cultivationId || null,
+
+  //all crops are names
+  generalType: {
+    id: null,
+    name: null,
+  },
+  type: {
+    id: null,
+    name: null,
+  },
+  variety: {
+    id: null,
+    name: null,
+  },
 
   toPlantCells: [],
   plantedAt: new Date("2026-03-10T00:00:00Z"),

@@ -205,6 +205,7 @@ const PlantCultivation = ({
   };
 
   const [availableTypes, setAvailableTypes] = useState([]);
+  const [availableVarieties, setAvailableVarieties] = useState([]);
 
   useEffect(() => {
     if (newPlantage.generalType) {
@@ -217,6 +218,18 @@ const PlantCultivation = ({
     }
   }, [newPlantage.generalType, crops.types]);
 
+  useEffect(() => {
+    if (newPlantage.type) {
+      const varieties = crops.varieties.filter(
+        (v) => v.cropTypeName === newPlantage.type,
+      );
+      setAvailableVarieties(varieties);
+    } else {
+      setAvailableVarieties([]);
+    }
+  }, [newPlantage.type, crops.varieties]);
+
+  if (!isOpen) return null;
   return (
     <Modals.FormModal
       isOpen={isOpen}
@@ -251,6 +264,18 @@ const PlantCultivation = ({
               }))}
             />
           )}
+          {newPlantage.type && (
+            <AppSelect
+              label="Varijanta"
+              name="variety"
+              value={newPlantage?.variety || ""}
+              onChange={onChange}
+              options={availableVarieties?.map((cv) => ({
+                label: cv.name,
+                value: cv.name,
+              }))}
+            />
+          )}
         </div>
       </div>
     </Modals.FormModal>
@@ -266,7 +291,7 @@ const initialChooseNewEnd = {
 
 const initialNewPlantage = (cultivationId) => ({
   cultivation: cultivationId || null,
-  
+
   //all crops are names
   generalType: "",
   type: "",

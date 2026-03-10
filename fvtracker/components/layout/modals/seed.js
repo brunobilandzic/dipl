@@ -227,11 +227,10 @@ const PlantCultivation = ({
     >
       <div className={`form`}>
         <div className={``}>
-          <AppInput
-            type="text"
-            label="Ime"
-            name="name"
-            value={newPlantage.name}
+          <AppSelect
+            label="Glavna vrsta"
+            name="generalType"
+            value={newPlantage?.generalType || ""}
             onChange={onChange}
           />
         </div>

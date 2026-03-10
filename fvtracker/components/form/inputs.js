@@ -53,12 +53,13 @@ export const AppTextArea = ({
   );
 };
 
-export const AppSelect = ({ options, label, onChange, defaultValue }) => {
+export const AppSelect = ({ options, name, label, onChange, defaultValue }) => {
   return (
     <div className={`inputRow`}>
       <label className="label">{label}</label>
       <select
         className={`inputText`}
+        name={name}
         onChange={onChange}
         defaultValue={defaultValue}
       >

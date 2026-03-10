@@ -44,12 +44,6 @@ export const SeedingModal = ({
 
   const crops = useSelector((state) => state.cultivation.crops);
 
-  const turnOffBeginSelection = () => {
-    setNewPlantage((prev) => ({ ...prev, beginX: null, beginY: null }));
-  };
-  const emptyToPlantCells = () => {
-    setNewPlantage((prev) => ({ ...prev, toPlantCells: [] }));
-  };
   const showChooseNewEnd = ({ x, y }) => {
     setChooseNewEnd((prev) => ({ ...prev, isOpen: true, choice: null, x, y }));
   };

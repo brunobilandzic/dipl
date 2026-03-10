@@ -199,6 +199,7 @@ const PlantCultivation = ({
       onCancel={onCancel}
       title="Zasadi na područje"
       onSubmit={onSubmit}
+      invertColor={true}
     >
       <div className={`form`}>
         <div className={``}>

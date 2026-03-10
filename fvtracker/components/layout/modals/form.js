@@ -1,9 +1,16 @@
 import Modal, { ModalFooter } from "./modal";
 import styles from "@/components/form/form.module.css";
 
-export function FormModal({ isOpen, onCancel, onSubmit, title, children }) {
+export function FormModal({
+  isOpen,
+  onCancel,
+  onSubmit,
+  title,
+  children,
+  invertColor,
+}) {
   return (
-    <Modal isOpen={isOpen} onCancel={onCancel} title={title}>
+    <Modal invertColor={invertColor} isOpen={isOpen} onCancel={onCancel} title={title}>
       {" "}
       {children}
       <FormModalFooter onCancel={onCancel} onSubmit={onSubmit} />

@@ -1,6 +1,7 @@
 import { CropMainType, CropVariety } from "@/models/sectors/cultivation/Crops";
 import { getCultivationArea } from "./cultivationArea";
 import utils from "@/lib/utils";
+import { getCultivationById } from "./cultivation";
 
 export async function cropsData() {
   const cropMainTypes = await CropMainType.find().populate({
@@ -87,16 +88,13 @@ export async function plantCropVariety({
   };
 }
 
-export async function createPlantage   ({
+export async function createPlantage({
   cultivationId,
   varietyId,
   toPlantCells,
   plantedAt,
 }) {
-  const cultivation = await Cultivation.findById(cultivationId);
-  if (!cultivation) {
-    throw new Error("Cultivation not found with the provided ID.");
-  }
-
+  const cultivation = await getCultivationById(cultivationId);
+  await cultivation.populate({ path: "cultivationArea", select: "planted" });
   const cropVariety = await getCropVarietyById(varietyId);
 }

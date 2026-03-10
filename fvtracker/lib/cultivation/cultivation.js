@@ -6,6 +6,14 @@ import { PlantedCropVariety } from "@/models/sectors/cultivation/Crops";
 import utils from "@/lib/utils";
 import { getCropVarietyById } from "./plant";
 
+export const getCultivationById = async (id) => {
+  const cultivation = await Cultivation.findById(id)
+  if(!cultivation) {
+    throw new Error("Cultivation not found with the provided ID.");
+  }
+  return cultivation;
+}
+
 export async function createCultivation(cultivation) {
   console.log("Creating cultivation with data:", cultivation);
 

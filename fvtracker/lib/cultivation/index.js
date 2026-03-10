@@ -11,6 +11,7 @@ import {
   getCultivationByProperty,
   updateCultivation,
   deleteCultivation,
+  getCultivationById,
 } from "./cultivation";
 
 export default {
@@ -33,6 +34,7 @@ export default {
     plant: plantCropVariety,
   },
   cultivations: {
+    getById: getCultivationById,
     create: createCultivation,
     getByProperty: getCultivationByProperty,
     update: updateCultivation,

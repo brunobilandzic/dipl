@@ -19,14 +19,23 @@ export async function cropsData() {
 
     generalTypes.forEach((generalType) => {
       const { cropTypes, ...generalTypeData } = generalType._doc;
-      cropData.generalTypes.push(generalTypeData);
+      cropData.generalTypes.push({
+        ...generalTypeData,
+        mainTypeName: mainType.name,
+      });
 
       cropTypes.forEach((cropType) => {
         const { cropVarieties, ...cropTypeData } = cropType._doc;
-        cropData.types.push(cropTypeData);
+        cropData.types.push({
+          ...cropTypeData,
+          generalTypeName: generalType.name,
+        });
 
         cropVarieties.forEach((variety) => {
-          cropData.varieties.push(variety);
+          cropData.varieties.push({
+            ...variety,
+            cropTypeName: cropType.name,
+          });
         });
       });
     });
@@ -77,5 +86,3 @@ export async function plantCropVariety({
     message: `Planted ${cropVariety.name} in cultivation area ${cultivationArea.name} at cell ${cellCoords}, field cell ${fieldCoords}.`,
   };
 }
-
-

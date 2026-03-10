@@ -96,7 +96,7 @@ export const SeedingModal = ({
       toPlantCells: planted,
     }));
 
-    setPlantCultivationOpen(true)
+    setPlantCultivationOpen(true);
   };
 
   const handleDrag = ({ x, y }) => {

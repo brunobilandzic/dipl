@@ -19,7 +19,7 @@ export function checkEmpty(obj) {
   return false;
 }
 
-export const idToName = (id, list) => {
-  const item = list.find((item) => item._id === id);
+export const idToNames = ({ parentId, parentName, list }) => {
+  const item = list.find((item) => item[parentName] === parentId);
   return item ? item.name : null;
 };

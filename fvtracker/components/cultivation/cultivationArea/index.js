@@ -17,7 +17,7 @@ import utils from "@/lib/utils";
 import { CreateCultivation } from "./createCultivation";
 import cultivation from "@/lib/constants/cultivation";
 import { EditCultivation } from "./editCultivation";
-import { SeedingModal } from "@/components/cultivation/cultivationArea/seeding/seed";
+import { SeedingModal } from "@/components/cultivation/cultivationArea/plantCultivation";
 
 export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const dispatch = useDispatch();

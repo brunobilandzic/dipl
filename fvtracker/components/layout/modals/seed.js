@@ -17,7 +17,6 @@ export const SeedingModal = ({
   isOpen,
   onCancel,
   cultivation,
-  crops,
   caDims,
   cultivationCells,
 }) => {

@@ -35,7 +35,6 @@ export const getCellsInRect = ({
   cultivationAreas,
   cultivations,
   toPlantCells,
-  plCvs,
   toPlantCultivation,
 }) => {
   let plantedCells;

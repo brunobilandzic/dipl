@@ -17,10 +17,14 @@ export const PlantCultivation = ({
 }) => {
   const onChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
+    const label = e.target.options[e.target.selectedIndex].text;
+    
     setNewPlantage((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: {
+        name: label,
+        _id: value,
+      },
     }));
   };
 
@@ -73,7 +77,7 @@ export const PlantCultivation = ({
           />
         </div>
         <div className={``}>
-          {newPlantage.generalType && (
+          {newPlantage.generalType.name && (
             <AppSelect
               label="Tip biljke"
               name="type"
@@ -86,7 +90,7 @@ export const PlantCultivation = ({
               }))}
             />
           )}
-          {newPlantage.type && (
+          {newPlantage.type.name && (
             <AppSelect
               label="Varijanta"
               name="variety"

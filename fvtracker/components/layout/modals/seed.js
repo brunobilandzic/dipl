@@ -238,6 +238,20 @@ options={crops?.generalTypes.map((mt) => ({
             }))}
           />
         </div>
+        <div className={``}>
+          {newPlantage.generalType && (
+            <AppSelect
+              label="Tip biljke"
+              name="type"
+              value={newPlantage?.type || ""}
+              onChange={onChange}
+              options={availableTypes?.map((ct) => ({
+                label: ct.name,
+                value: ct.name,
+              }))}
+            />
+          )}
+        </div>
       </div>
     </Modals.FormModal>
   );

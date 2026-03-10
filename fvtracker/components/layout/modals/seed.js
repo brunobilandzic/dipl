@@ -182,7 +182,7 @@ export const SeedingModal = ({
         newPlantage={newPlantage}
         setNewPlantage={setNewPlantage}
         crops={crops}
-/>
+      />
     </>
   );
 };
@@ -232,7 +232,7 @@ const PlantCultivation = ({
             name="generalType"
             value={newPlantage?.generalType || ""}
             onChange={onChange}
-options={crops?.generalTypes.map((mt) => ({
+            options={crops?.generalTypes.map((mt) => ({
               label: mt.name,
               value: mt.name,
             }))}
@@ -266,13 +266,13 @@ const initialChooseNewEnd = {
 
 const initialNewPlantage = (cultivationId) => ({
   cultivation: cultivationId || null,
+  
   //all crops are names
   generalType: "",
   type: "",
   variety: "",
+
   toPlantCells: [],
-  name: "",
-  
   plantedAt: null,
   harvestedAt: null,
   beginX: null,

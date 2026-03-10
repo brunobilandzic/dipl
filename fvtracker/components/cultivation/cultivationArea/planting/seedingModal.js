@@ -139,6 +139,12 @@ export const SeedingModal = ({
     },
   ];
 
+  const onSubmitNewPlantage = () => {
+    //submit to backend
+    console.log("Submitting new plantage:", newPlantage);
+    reset();
+  };
+
   if (!cultivation || !isOpen) return null;
   return (
     <>

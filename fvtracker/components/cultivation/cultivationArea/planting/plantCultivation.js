@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { AppSelect } from "@/components/form/inputs";
-import Modals from "../../../layout/modals";
+import Modals from "@/components/layout/modals";
 
 export const PlantCultivation = ({
   isOpen,

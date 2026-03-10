@@ -229,7 +229,8 @@ const initialChooseNewEnd = {
 
 const initialNewPlantage = (cultivationId) => ({
   cultivation: cultivationId || null,
-  cropVarietyId: null,
+  cropTypeName: null,
+  cropVarietyName: null,
   toPlantCells: [],
   name: "",
   plantedAt: null,

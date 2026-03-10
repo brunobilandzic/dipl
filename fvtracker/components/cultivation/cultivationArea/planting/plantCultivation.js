@@ -64,6 +64,7 @@ export const PlantCultivation = ({
             label="Glavna vrsta"
             name="generalType"
             value={newPlantage?.generalType || ""}
+            defaultValue={newPlantage?.generalType}
             onChange={onChange}
             options={crops?.generalTypes.map((mt) => ({
               label: mt.name,
@@ -77,6 +78,7 @@ export const PlantCultivation = ({
               label="Tip biljke"
               name="type"
               value={newPlantage?.type || ""}
+              defaultValue={newPlantage?.type}
               onChange={onChange}
               options={availableTypes?.map((ct) => ({
                 label: ct.name,
@@ -89,6 +91,7 @@ export const PlantCultivation = ({
               label="Varijanta"
               name="variety"
               value={newPlantage?.variety || ""}
+              defaultValue={newPlantage?.variety}
               onChange={onChange}
               options={availableVarieties?.map((cv) => ({
                 label: cv.name,

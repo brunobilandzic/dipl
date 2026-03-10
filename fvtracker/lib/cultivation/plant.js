@@ -33,7 +33,7 @@ export async function cropsData() {
 
         cropVarieties.forEach((variety) => {
           cropData.varieties.push({
-            ...variety,
+            ...variety._doc,
             cropTypeName: cropType.name,
           });
         });

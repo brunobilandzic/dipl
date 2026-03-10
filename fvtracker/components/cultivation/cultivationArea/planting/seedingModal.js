@@ -182,6 +182,7 @@ export const SeedingModal = ({
         onCancel={reset}
       />
       <PlantCultivation
+        onSubmit={onSubmitNewPlantage}
         isOpen={plantCultivationOpen}
         onCancel={reset}
         newPlantage={newPlantage}

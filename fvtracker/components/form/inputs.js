@@ -73,3 +73,23 @@ export const AppSelect = ({ options, name, label, onChange, defaultValue }) => {
     </div>
   );
 };
+
+export const AppDatePicker = ({
+  label,
+  name,
+  value,
+  onChange,
+  placeholder,
+}) => {
+  return (
+    <div className={`inputRow`}>
+      <label className="label">{label}</label>
+      <DatePicker
+        className={`inputText`}
+        selected={value}
+        onChange={(date) => onChange({ target: { name, value: date } })}
+        placeholderText={placeholder}
+      />
+    </div>
+  );
+};

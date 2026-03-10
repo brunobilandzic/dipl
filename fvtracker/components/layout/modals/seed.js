@@ -42,6 +42,10 @@ export const SeedingModal = ({
     console.log("choicenewend state:", chooseNewEnd);
   }, [chooseNewEnd]);
 
+  // object with mainTypes, genTypes, types and varieties aray
+
+  const crops = useSelector((state) => state.cultivation.crops);
+
   const turnOffBeginSelection = () => {
     setNewPlantage((prev) => ({ ...prev, beginX: null, beginY: null }));
   };

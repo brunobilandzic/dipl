@@ -11,6 +11,7 @@ import {
   CONTINUE_PLANTING,
 } from "@/lib/constants/cultivation/plants";
 import Modals from ".";
+import { AppInput, AppSelect } from "@/components/form/inputs";
 import { useSelector } from "react-redux";
 
 export const SeedingModal = ({

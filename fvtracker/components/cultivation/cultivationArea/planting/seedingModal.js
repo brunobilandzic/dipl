@@ -197,12 +197,12 @@ const initialNewPlantage = (cultivationId) => ({
   cultivation: cultivationId || null,
 
   //all crops are names
-  generalType: "",
-  type: "",
-  variety: "",
+  generalType: "Agrumi",
+  type: "Naranča",
+  variety: "Valencia",
 
   toPlantCells: [],
-  plantedAt: null,
+  plantedAt: new Date("2026-03-10T00:00:00Z"),
   harvestedAt: null,
   beginX: null,
   beginY: null,

@@ -204,6 +204,19 @@ const PlantCultivation = ({
     }));
   };
 
+  const [availableTypes, setAvailableTypes] = useState([]);
+
+  useEffect(() => {
+    if (newPlantage.generalType) {
+      const types = crops.types.filter(
+        (t) => t.generalTypeName === newPlantage.generalType,
+      );
+      setAvailableTypes(types);
+    } else {
+      setAvailableTypes([]);
+    }
+  }, [newPlantage.generalType, crops.types]);
+
   return (
     <Modals.FormModal
       isOpen={isOpen}

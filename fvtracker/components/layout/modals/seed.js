@@ -11,7 +11,7 @@ import {
   CONTINUE_PLANTING,
 } from "@/lib/constants/cultivation/plants";
 import Modals from ".";
-import { AppInput } from "@/components/form/inputs";
+import { useSelector } from "react-redux";
 
 export const SeedingModal = ({
   isOpen,
@@ -176,7 +176,13 @@ export const SeedingModal = ({
         options={choiceOptions}
         onCancel={reset}
       />
-      <PlantCultivation isOpen={plantCultivationOpen} onCancel={reset} newPlantage={newPlantage} setNewPlantage={setNewPlantage}/>
+      <PlantCultivation
+        isOpen={plantCultivationOpen}
+        onCancel={reset}
+        newPlantage={newPlantage}
+        setNewPlantage={setNewPlantage}
+        crops={crops}
+/>
     </>
   );
 };
@@ -187,6 +193,7 @@ const PlantCultivation = ({
   onSubmit,
   newPlantage,
   setNewPlantage,
+  crops,
 }) => {
   const onChange = (e) => {
     const { name, value } = e;

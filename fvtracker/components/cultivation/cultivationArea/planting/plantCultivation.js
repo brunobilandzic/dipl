@@ -30,7 +30,7 @@ export const PlantCultivation = ({
   useEffect(() => {
     if (newPlantage.generalType) {
       const types = crops.types.filter(
-        (t) => t.generalTypeName === newPlantage.generalType,
+        (t) => t.generalTypeName === newPlantage.generalType.name,
       );
       setAvailableTypes(types);
     } else {
@@ -41,7 +41,7 @@ export const PlantCultivation = ({
   useEffect(() => {
     if (newPlantage.type) {
       const varieties = crops.varieties.filter(
-        (v) => v.cropTypeName === newPlantage.type,
+        (v) => v.cropTypeName === newPlantage.type.name,
       );
       setAvailableVarieties(varieties);
     } else {
@@ -63,12 +63,12 @@ export const PlantCultivation = ({
           <AppSelect
             label="Glavna vrsta"
             name="generalType"
-            value={newPlantage?.generalType || ""}
-            defaultValue={newPlantage?.generalType}
+            value={newPlantage?.generalType._id || ""}
+            defaultValue={newPlantage?.generalType._id || ""}
             onChange={onChange}
-            options={crops?.generalTypes.map((mt) => ({
-              label: mt.name,
-              value: mt.name,
+            options={crops?.generalTypes.map((gt) => ({
+              label: gt.name,
+              value: gt._id,
             }))}
           />
         </div>
@@ -77,12 +77,12 @@ export const PlantCultivation = ({
             <AppSelect
               label="Tip biljke"
               name="type"
-              value={newPlantage?.type || ""}
-              defaultValue={newPlantage?.type}
+              value={newPlantage?.type._id || ""}
+              defaultValue={newPlantage?.type._id || ""}
               onChange={onChange}
               options={availableTypes?.map((ct) => ({
                 label: ct.name,
-                value: ct.name,
+                value: ct._id,
               }))}
             />
           )}
@@ -90,12 +90,12 @@ export const PlantCultivation = ({
             <AppSelect
               label="Varijanta"
               name="variety"
-              value={newPlantage?.variety || ""}
-              defaultValue={newPlantage?.variety}
+              value={newPlantage?.variety._id || ""}
+              defaultValue={newPlantage?.variety._id || ""}
               onChange={onChange}
               options={availableVarieties?.map((cv) => ({
                 label: cv.name,
-                value: cv.name,
+                value: cv._id,
               }))}
             />
           )}

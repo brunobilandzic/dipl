@@ -30,7 +30,7 @@ export const SeedingModal = ({
         return initialNewPlantage_wId(cultivation._id);
       }
       return prev;
-});
+    });
   }, [cultivation?._id]);
 
   const isBeginSelected = () =>
@@ -144,7 +144,12 @@ export const SeedingModal = ({
 
   const onSubmitNewPlantage = () => {
     //submit to backend
-    console.log("Submitting new plantage:", newPlantage);
+    try {
+      const body = preparePlantageBody(newPlantage);
+      console.log("Submitting new plantage with body:", body);
+    } catch (error) {
+      console.error("Error preparing plantage body:", error);
+    }
     reset();
   };
 

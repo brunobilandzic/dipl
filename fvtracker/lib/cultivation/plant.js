@@ -98,7 +98,7 @@ export async function createPlantage({
   varietyId,
   toPlantCells,
   plantedAt,
-}) { 
+}) {
   const cultivation = await getCultivationById(cultivationId);
   await cultivation.populate({ path: "cultivationArea", select: "planted" });
   const cropVariety = await getCropVarietyById(varietyId);
@@ -111,7 +111,15 @@ export async function createPlantedCropVarietiesCells({
   cultivationId,
 }) {
   const plantedCropVarieties = [];
-  // promise array for all cells to be planted
+  for (const relativeCoord of relativeCoords) {
+    const plantedCropVariety = await createCellPromise({
+      cultivationId,
+      relativeCoord,
+      cropVarietyId,
+      planted,
+    });
+    plantedCropVarieties.push(plantedCropVariety);
+  }
   return plantedCropVarieties;
 }
 
@@ -125,18 +133,18 @@ async function createCellPromise({
     planted,
     cellCoords: relativeCoord,
   });
-  let cropVariety = null;
-
-  if (cropVarietyId) {
-    cropVariety = await getCropVarietyById(cropVarietyId);
-  }
 
   const plantedCropVariety = new PlantedCropVariety({
-    cropVariety: cropVariety?._id || null,
+    cropVariety: cropVarietyId || null,
     relativeCoords: relativeCoord,
     fieldCoords,
     cultivation: cultivationId,
   });
+
+  let cropVariety = null;
+  if (cropVarietyId) {
+    cropVariety = await getCropVarietyById(cropVarietyId);
+  }
 
   await plantedCropVariety.save();
   return plantedCropVariety;

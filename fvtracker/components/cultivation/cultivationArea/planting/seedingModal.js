@@ -26,10 +26,11 @@ export const SeedingModal = ({
     if (!cultivation?._id) return;
 
     setNewPlantage((prev) => {
-      if(cultivation._id !== prev.cultivation) {
-        return     initialNewPlantage_wId(cultivation._id);
+      if (cultivation._id !== prev.cultivation) {
+        return initialNewPlantage_wId(cultivation._id);
       }
-      return prev;});
+      return prev;
+});
   }, [cultivation?._id]);
 
   const isBeginSelected = () =>

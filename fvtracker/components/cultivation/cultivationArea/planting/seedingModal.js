@@ -21,9 +21,17 @@ export const SeedingModal = ({
   cultivationCells,
 }) => {
   const [dragEvent, setDragEvent] = useState(null);
-  const [newPlantage, setNewPlantage] = useState(
-    initialNewPlantage_wId(cultivation?._id),
-  );
+  const [newPlantage, setNewPlantage] = useState({});
+  useEffect(() => {
+    if (!cultivation?._id) return;
+
+    setNewPlantage((prev) => {
+      if(cultivation._id !== prev.cultivation) {
+        return     initialNewPlantage_wId(cultivation._id);
+      }
+      return prev;});
+  }, [cultivation?._id]);
+
   const isBeginSelected = () =>
     !!(
       typeof newPlantage.beginX === "number" &&

@@ -98,7 +98,7 @@ export async function createPlantage({
   varietyId,
   toPlantCells,
   plantedAt,
-}) {
+}) { 
   const cultivation = await getCultivationById(cultivationId);
   await cultivation.populate({ path: "cultivationArea", select: "planted" });
   const cropVariety = await getCropVarietyById(varietyId);
@@ -111,15 +111,7 @@ export async function createPlantedCropVarietiesCells({
   cultivationId,
 }) {
   const plantedCropVarieties = [];
-  for (const relativeCoord of relativeCoords) {
-    const plantedCropVariety = await createCellPromise({
-      cultivationId,
-      relativeCoord,
-      cropVarietyId,
-      planted,
-    });
-    plantedCropVarieties.push(plantedCropVariety);
-  }
+  // promise array for all cells to be planted
   return plantedCropVarieties;
 }
 

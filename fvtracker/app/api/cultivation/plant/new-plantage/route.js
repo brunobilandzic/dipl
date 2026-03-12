@@ -1,4 +1,5 @@
 import auth from "@/lib/auth";
+import dbConnect from "@/lib/db/mongooseConnect";
 
 export async function POST(request) {
   try {

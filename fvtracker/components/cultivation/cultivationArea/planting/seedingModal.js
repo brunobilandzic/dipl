@@ -245,3 +245,11 @@ const initialNewPlantage_wId = (cultivationId) => ({
   endX: null,
   endY: null,
 });
+
+const preparePlantageBody = (newPlantage) => ({
+  cultivationId: newPlantage.cultivationId,
+  cropVarietyId: newPlantage.variety._id,
+  relativeCoords: newPlantage.toPlantCells,
+  plantedAt: newPlantage.plantedAt,
+  harvestedAt: newPlantage.harvestedAt,
+});

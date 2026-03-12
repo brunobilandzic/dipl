@@ -35,7 +35,7 @@ export const PlantCultivation = ({
       }));
     }
   };
-  
+
   const [availableTypes, setAvailableTypes] = useState([]);
   const [availableVarieties, setAvailableVarieties] = useState([]);
 
@@ -75,8 +75,8 @@ export const PlantCultivation = ({
           <AppSelect
             label="Glavna vrsta"
             name="generalType"
-            value={newPlantage?.generalType._id || ""}
-            defaultValue={newPlantage?.generalType._id || ""}
+            value={newPlantage?.generalType?._id || ""}
+            defaultValue={newPlantage?.generalType?._id || ""}
             onChange={onChange}
             options={crops?.generalTypes.map((gt) => ({
               label: gt.name,

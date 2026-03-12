@@ -220,7 +220,7 @@ const initialNewPlantage = (cultivationId) => ({
 });
 
 const initialNewPlantage_wId = (cultivationId) => ({
-  cultivation: cultivationId || null,
+  cultivationId: cultivationId || null,
 
   //all crops are names
   generalType: {

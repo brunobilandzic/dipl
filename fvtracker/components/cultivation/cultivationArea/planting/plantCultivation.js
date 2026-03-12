@@ -17,17 +17,25 @@ export const PlantCultivation = ({
 }) => {
   const onChange = (e) => {
     const { name, value, options, selectedIndex } = e.target;
-    const label = options[selectedIndex].text;
-    
-    setNewPlantage((prev) => ({
-      ...prev,
-      [name]: {
-        name: label,
-        _id: value,
-      },
-    }));
-  };
 
+    if (options) {
+      const label = options[selectedIndex].text;
+
+      setNewPlantage((prev) => ({
+        ...prev,
+        [name]: {
+          name: label,
+          _id: value,
+        },
+      }));
+    } else {
+      setNewPlantage((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
+  };
+  
   const [availableTypes, setAvailableTypes] = useState([]);
   const [availableVarieties, setAvailableVarieties] = useState([]);
 

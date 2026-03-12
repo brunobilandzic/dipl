@@ -12,6 +12,7 @@ import {
 } from "@/lib/constants/cultivation/plants";
 import { useSelector } from "react-redux";
 import { PlantCultivation } from "./plantCultivation";
+import api from "@/lib/api";
 
 export const SeedingModal = ({
   isOpen,
@@ -142,11 +143,13 @@ export const SeedingModal = ({
     },
   ];
 
-  const onSubmitNewPlantage = () => {
+  const onSubmitNewPlantage = async () => {
     //submit to backend
     try {
       const body = preparePlantageBody(newPlantage);
-      console.log("Submitting new plantage with body:", body);
+      const res = await api.post("/cultivation/plant/new-plantage", body);
+      console.log("Plantage submitted successfully:", res);
+      
     } catch (error) {
       console.error("Error preparing plantage body:", error);
     }

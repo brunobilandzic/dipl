@@ -1,4 +1,8 @@
-import { CropMainType, CropVariety } from "@/models/sectors/cultivation/Crops";
+import {
+  CropMainType,
+  CropVariety,
+  PlantedCropVariety,
+} from "@/models/sectors/cultivation/Crops";
 import { getCultivationArea } from "./cultivationArea";
 import utils from "@/lib/utils";
 import { getCultivationById } from "./cultivation";
@@ -52,7 +56,6 @@ export async function getCropVarietyById(id) {
   }
   return cropVariety;
 }
-
 
 //NOBODY uses this
 export async function plantCropVariety({

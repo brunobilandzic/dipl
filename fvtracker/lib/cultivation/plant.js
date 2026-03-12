@@ -144,6 +144,8 @@ async function createCellPromise({
   let cropVariety = null;
   if (cropVarietyId) {
     cropVariety = await getCropVarietyById(cropVarietyId);
+    cropVariety.plantedCropVarieties.push(plantedCropVariety._id);
+    await cropVariety.save();
   }
 
   await plantedCropVariety.save();

@@ -226,23 +226,20 @@ const initialNewPlantage = (cultivationId) => ({
   endY: null,
 });
 
-const initialNewPlantage_wId = (cultivationId) => ({
+const initialNewPlantage_WId = (cultivationId) => ({
   cultivationId: cultivationId || null,
-
-  //all crops are names
   generalType: {
-    _id: null,
-    name: null,
+    _id: "699f3e94a9d129153ac7617f",
+    name: "Lisnato povrće",
   },
   type: {
-    _id: null,
-    name: null,
+    _id: "699f3e94a9d129153ac76180",
+    name: "Salata",
   },
   variety: {
-    _id: null,
-    name: null,
+    _id: "699f3e94a9d129153ac76181",
+    name: "Iceberg",
   },
-
   toPlantCells: [],
   plantedAt: new Date("2026-03-10T00:00:00Z"),
   harvestedAt: null,

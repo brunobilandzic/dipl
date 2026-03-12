@@ -26,13 +26,10 @@ export const SeedingModal = ({
   useEffect(() => {
     if (!cultivation?._id) return;
 
-    setNewPlantage((prev) => {
-      if (cultivation._id !== prev.cultivation) {
-        return initialNewPlantage_wId(cultivation._id);
-      }
-      return prev;
-    });
-  }, [cultivation?._id]);
+    setNewPlantage(
+      initialNewPlantage_WId ? initialNewPlantage_WId(cultivation?.id) : {},
+    );
+  }, [cultivation]);
 
   const isBeginSelected = () =>
     !!(
@@ -111,7 +108,9 @@ export const SeedingModal = ({
   };
 
   const reset = () => {
-    setNewPlantage(initialNewPlantage(cultivation?.id));
+    setNewPlantage(
+      initialNewPlantage_WId ? initialNewPlantage_WId(cultivation?.id) : {},
+    );
     setDragEvent(null);
     setChooseNewEnd(initialChooseNewEnd);
     setPlantCultivationOpen(false);
@@ -149,7 +148,6 @@ export const SeedingModal = ({
       const body = preparePlantageBody(newPlantage);
       const res = await api.post("/cultivation/plant/new-plantage", body);
       console.log("Plantage submitted successfully:", res);
-      
     } catch (error) {
       console.error("Error preparing plantage body:", error);
     }

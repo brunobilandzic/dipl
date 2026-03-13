@@ -45,7 +45,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       cultivationArea.cultivations,
     );
     return plcvs;
-  }, [cultivationArea]);
+  }, [cultivationArea, selectField, fields]);
 
   useEffect(() => {
     if (cultivationArea?._id) {

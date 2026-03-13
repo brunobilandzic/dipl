@@ -1,4 +1,5 @@
 import auth from "@/lib/auth";
+import cultivation from "@/lib/cultivation";
 import dbConnect from "@/lib/db/mongooseConnect";
 
 export async function POST(request) {
@@ -6,9 +7,13 @@ export async function POST(request) {
     await dbConnect();
     await auth.session.fetchSessionSpecificManager("CultivationManager");
     const body = await request.json();
-    console.log("Received request body:", body);
+    const newPlantage = await cultivation.plants.createPlantage(body);
     return Response.json(
-      { success: true, message: "Plantage created successfully" },
+      {
+        success: true,
+        message: `Plantage created successfully ${newPlantage?.length || 0} planted crop varieties`,
+        data: newPlantage,
+      },
       { status: 200 },
     );
   } catch (error) {

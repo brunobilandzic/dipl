@@ -57,7 +57,6 @@ export async function getCropVarietyById(id) {
   return cropVariety;
 }
 
-
 export async function createPlantage({
   cultivationId,
   cropVarietyId,
@@ -120,14 +119,19 @@ async function createPlantedCropVarietyPromise({
     cellCoords: relativeCoord,
   });
 
-  const plantedCropVariety = new PlantedCropVariety({
-    cropVariety: cropVarietyId || null,
-    relativeCoords: relativeCoord,
-    fieldCoords,
-    cultivation: cultivationId,
-    plantedAt,
-    harvestedAt,
-  });
+  const plantedCropVariety = await PlantedCropVariety.findOneAndUpdate(
+    {
+      cultivation: cultivationId,
+      relativeCoords: relativeCoord,
+    },
+    {
+      cropVariety: cropVarietyId,
+      fieldCoords,
+      plantedAt,
+      harvestedAt,
+    },
+    { new: true },
+  );
 
   let cropVariety = null;
   if (cropVarietyId) {

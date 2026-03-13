@@ -36,10 +36,15 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   );
 
   const cultivationArea = useMemo(() => {
+    console.log("Calculating cultivationArea for caSlug:", caSlug);
     return selectedField?.cultivationAreas?.find((ca) => ca.slug === caSlug);
   }, [selectedField, caSlug, fields]);
 
   const cultivationCells = useMemo(() => {
+    console.log(
+      "Calculating cultivationCells for cultivationArea:",
+      cultivationArea,
+    );
     if (!cultivationArea) return [];
     const plcvs = utils.cultivation.cultivations.getPlCvs(
       cultivationArea.cultivations,

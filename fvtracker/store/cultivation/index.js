@@ -186,15 +186,16 @@ const cultivationSlice = createSlice({
           if (!cultivation) continue;
 
           for (const plantage of newPlantage) {
-            const existPlCv = cultivation.plantedCropVarieties?.find(
+            console.log("redux plantage", plantage);
+            let existingPlCv = cultivation.plantedCropVarieties?.find(
               (pcv) => pcv._id === plantage._id,
             );
-            if (existPlCv) {
+            if (existingPlCv) {
               console.log(
                 "Plantage already exists in cultivation, skipping",
                 plantage,
               );
-              existPlCv.cropVariety = plantage.cropVariety;
+              existingPlCv.cropVariety = { ...plantage.cropVariety };
             }
           }
         }
@@ -203,14 +204,13 @@ const cultivationSlice = createSlice({
           if (field._id !== state.selectedField._id) return field;
 
           for (const ca of field.cultivationAreas) {
-            
             const cultivation = ca.cultivations.find(
               (cul) => cul._id === cultivationId,
             );
             if (!cultivation) continue;
 
             for (const plantage of newPlantage) {
-              console.log("redux plantage", plantage)
+              console.log("redux plantage", plantage);
               const existPlCv = cultivation.plantedCropVarieties?.find(
                 (pcv) => pcv._id === plantage._id,
               );
@@ -219,7 +219,7 @@ const cultivationSlice = createSlice({
                   "Plantage already exists in cultivation, adding",
                   plantage,
                 );
-                
+
                 existPlCv.cropVariety = plantage.cropVariety;
               }
             }

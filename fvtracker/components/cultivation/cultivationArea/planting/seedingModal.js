@@ -39,16 +39,7 @@ export const SeedingModal = ({
   const [chooseNewEnd, setChooseNewEnd] = useState(initialChooseNewEnd);
   const [plantCultivationOpen, setPlantCultivationOpen] = useState(false);
 
-  useEffect(() => {
-    console.log("newPlantage state:", newPlantage);
-  }, [newPlantage]);
-
-  useEffect(() => {
-    console.log("choicenewend state:", chooseNewEnd);
-  }, [chooseNewEnd]);
-
   // object with mainTypes, genTypes, types and varieties aray
-
   const crops = useSelector((state) => state.cultivation.crops);
   const dispatch = useDispatch();
 
@@ -138,9 +129,7 @@ export const SeedingModal = ({
     try {
       const body = preparePlantageBody(newPlantage);
       const res = await api.post("/cultivation/plant/new-plantage", body);
-      console.log("Plantage submitted successfully:", res);
       const newPlantageFromRes = res.data;
-      console.log("new plantage from res", newPlantageFromRes);
       dispatch(
         createPlantage({
           cultivationId: newPlantage.cultivationId,

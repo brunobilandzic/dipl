@@ -14,7 +14,7 @@ const CropsProvider = ({ children }) => {
   const user = useSelector((state) => state.user.session);
   useEffect(() => {
     if(!user) return;
-    if (!crops) {
+    if (!crops || crops.length === 0) {
       const fetchCrops = async () => {
         try {
           const res = await api.get("/cultivation/plant");

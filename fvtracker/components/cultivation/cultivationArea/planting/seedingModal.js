@@ -139,7 +139,14 @@ export const SeedingModal = ({
       const body = preparePlantageBody(newPlantage);
       const res = await api.post("/cultivation/plant/new-plantage", body);
       console.log("Plantage submitted successfully:", res);
-      dispatch(createPlantage({ cultivationId: newPlantage.cultivationId, newPlantage }));
+      const newPlantageFromRes = res.data;
+      console.log("new plantage from res", newPlantageFromRes);
+      dispatch(
+        createPlantage({
+          cultivationId: newPlantage.cultivationId,
+          newPlantage: newPlantageFromRes,
+        }),
+      );
     } catch (error) {
       console.error("Error preparing plantage body:", error);
     }

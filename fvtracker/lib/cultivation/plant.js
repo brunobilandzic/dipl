@@ -133,6 +133,8 @@ async function createPlantedCropVarietyPromise({
     { new: true },
   );
 
+  await plantedCropVariety.populate("cropVariety");
+
   let cropVariety = null;
   if (cropVarietyId) {
     cropVariety = await getCropVarietyById(cropVarietyId);

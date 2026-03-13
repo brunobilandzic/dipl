@@ -11,5 +11,6 @@ export default configureStore({
     error: errorReducer,
     loading: loadingReducer,
     cultivation: cultivationReducer,
+    cultivate: cultivateReducer,
   },
 });

@@ -168,7 +168,6 @@ const cultivationSlice = createSlice({
         })),
       }));
     },
-
     createPlantage: (state, action) => {
       const { cultivationId, newPlantage } = action.payload;
 
@@ -178,26 +177,44 @@ const cultivationSlice = createSlice({
         const cultivation = ca.cultivations.find(
           (c) => c._id === cultivationId,
         );
-        if (!cultivation) continue;
+        if (!cultivation) {
+          console.log("NO CULTIVATION FOUND for id:", cultivationId);
+          continue;
+        }
+        console.log("FOUND cultivation:", cultivation._id);
+        console.log(
+          "plantedCropVarieties count:",
+          cultivation.plantedCropVarieties?.length,
+        );
 
         for (const plantage of newPlantage) {
+          console.log("looking for plantage._id:", plantage._id);
+          console.log(
+            "available pcv ids:",
+            cultivation.plantedCropVarieties?.map((p) => p._id),
+          );
+
           const idx = cultivation.plantedCropVarieties?.findIndex(
             (pcv) => pcv._id === plantage._id,
           );
+          console.log("FOUND idx:", idx);
+
           if (idx !== -1 && idx !== undefined) {
+            console.log(
+              "BEFORE:",
+              JSON.stringify(cultivation.plantedCropVarieties[idx].cropVariety),
+            );
             cultivation.plantedCropVarieties[idx].cropVariety = {
               ...plantage.cropVariety,
             };
+            console.log(
+              "AFTER:",
+              JSON.stringify(cultivation.plantedCropVarieties[idx].cropVariety),
+            );
+          } else {
+            console.log("PLANTAGE NOT FOUND IN plantedCropVarieties");
           }
         }
-      }
-
-      // Sync fields ako postoji
-      const fieldIdx = state.fields.findIndex(
-        (f) => f._id === state.selectedField._id,
-      );
-      if (fieldIdx !== -1) {
-        state.fields[fieldIdx] = { ...state.selectedField };
       }
     },
   },

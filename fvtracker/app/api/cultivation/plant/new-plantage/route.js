@@ -8,14 +8,7 @@ export async function POST(request) {
     await auth.session.fetchSessionSpecificManager("CultivationManager");
     const body = await request.json();
     const newPlantage = await cultivation.plants.create(body);
-    return Response.json(
-      {
-        success: true,
-        message: `Plantage created successfully ${newPlantage?.length || 0} planted crop varieties`,
-        data: newPlantage,
-      },
-      { status: 200 },
-    );
+    return Response.json(newPlantage, { status: 200 });
   } catch (error) {
     console.error("Error creating plantage:", error);
     return Response.json(

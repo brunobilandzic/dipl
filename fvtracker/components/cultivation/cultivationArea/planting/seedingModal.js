@@ -10,9 +10,10 @@ import {
   END_PLANTING,
   CONTINUE_PLANTING,
 } from "@/lib/constants/cultivation/plants";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { PlantCultivation } from "./plantCultivation";
 import api from "@/lib/api";
+import { createPlantage } from "@/store/cultivation/cultivate";
 
 export const SeedingModal = ({
   isOpen,
@@ -49,6 +50,7 @@ export const SeedingModal = ({
   // object with mainTypes, genTypes, types and varieties aray
 
   const crops = useSelector((state) => state.cultivation.crops);
+  const dispatch = useDispatch();
 
   const showChooseNewEnd = ({ x, y }) => {
     setChooseNewEnd((prev) => ({ ...prev, isOpen: true, choice: null, x, y }));
@@ -137,6 +139,7 @@ export const SeedingModal = ({
       const body = preparePlantageBody(newPlantage);
       const res = await api.post("/cultivation/plant/new-plantage", body);
       console.log("Plantage submitted successfully:", res);
+      dispatch(createPlantage({ cultivationId: newPlantage.cultivationId, newPlantage }));
     } catch (error) {
       console.error("Error preparing plantage body:", error);
     }

@@ -9,7 +9,7 @@ export const cultivateSlice = createSlice({
     createPlantage: (state, action) => {
       // action contains cultivation Id and plantage
       if (state.selectedField) {
-        state.selectedField?.cultivationAreas =
+        state.selectedField.cultivationAreas =
           state.selectedField?.cultivationAreas.map((ca) => {
             const cultivation = ca.cultivations.find(
               (cul) => cul._id === action.payload.cultivationId,

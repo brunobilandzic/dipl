@@ -74,6 +74,8 @@ export async function createPlantage({
     plantedAt,
     planted: cultivation.cultivationArea.planted,
   });
+
+  return plantedCropVarieties;
 }
 
 export async function createPlantedCropVarietiesCells({
@@ -96,7 +98,10 @@ export async function createPlantedCropVarietiesCells({
     });
     plantedCropVarieties.push(plantedCropVariety);
   }
-  console.log("Created planted crop varieties for cells:", plantedCropVarieties);
+  console.log(
+    "Created planted crop varieties for cells:",
+    plantedCropVarieties,
+  );
   return plantedCropVarieties;
 }
 

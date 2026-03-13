@@ -107,7 +107,7 @@ const FieldCells = ({
   handleNotPlanted,
 }) => {
   let cells = [];
-  
+
   const isSelected = (x, y) => {
     if (small) return false;
     const coord = `${x},${y}`;
@@ -193,7 +193,7 @@ const FieldCell = ({
   );
 
   const handleClick = (e) => {
-    if(seedMode && color === colors.cultivation.defaultPlCvColor) {
+    if (seedMode && color === colors.cultivation.defaultPlCvColor) {
       handleNotPlanted(x, y);
       return;
     }
@@ -222,5 +222,3 @@ const FieldCell = ({
     ></div>
   );
 };
-
-

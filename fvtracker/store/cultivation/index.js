@@ -55,7 +55,6 @@ const cultivationSlice = createSlice({
       });
     },
     deleteCultivationArea: (state, action) => {
-      console.log("redux state deleting ca", action.payload);
       const id = action.payload;
       state.selectedField.cultivationAreas =
         state.selectedField.cultivationAreas.filter(
@@ -114,7 +113,6 @@ const cultivationSlice = createSlice({
     updateCultivation: (state, action) => {
       const updatedCultivation = action.payload;
       const cultivationId = updatedCultivation?._id;
-      console.log("redux state updating cultivation", updatedCultivation);
       if (!cultivationId) return;
 
       if (state.selectedField?.cultivationAreas) {
@@ -177,42 +175,16 @@ const cultivationSlice = createSlice({
         const cultivation = ca.cultivations.find(
           (c) => c._id === cultivationId,
         );
-        if (!cultivation) {
-          console.log("NO CULTIVATION FOUND for id:", cultivationId);
-          continue;
-        }
-        console.log("FOUND cultivation:", cultivation._id);
-        console.log(
-          "plantedCropVarieties count:",
-          cultivation.plantedCropVarieties?.length,
-        );
+        if (!cultivation) continue;
 
         for (const plantage of newPlantage) {
-          console.log("looking for plantage._id:", plantage._id);
-          console.log(
-            "available pcv ids:",
-            cultivation.plantedCropVarieties?.map((p) => p._id),
-          );
-
           const idx = cultivation.plantedCropVarieties?.findIndex(
             (pcv) => pcv._id === plantage._id,
           );
-          console.log("FOUND idx:", idx);
-
           if (idx !== -1 && idx !== undefined) {
-            console.log(
-              "BEFORE:",
-              JSON.stringify(cultivation.plantedCropVarieties[idx].cropVariety),
-            );
             cultivation.plantedCropVarieties[idx].cropVariety = {
               ...plantage.cropVariety,
             };
-            console.log(
-              "AFTER:",
-              JSON.stringify(cultivation.plantedCropVarieties[idx].cropVariety),
-            );
-          } else {
-            console.log("PLANTAGE NOT FOUND IN plantedCropVarieties");
           }
         }
       }

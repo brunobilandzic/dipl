@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { AppDatePicker, AppSelect } from "@/components/form/inputs";
 import Modals from "@/components/layout/modals";
-import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 

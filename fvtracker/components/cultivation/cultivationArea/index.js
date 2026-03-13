@@ -196,13 +196,10 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   };
 
   const onSubmitCultivation = async () => {
-    console.log("Submitting cultivation with details:", newCUDetails);
     try {
       const data =
         utils.cultivation.cultivations.prepareCultivationData(newCUDetails);
-      console.log("Submitting cultivation with data:", data);
       const res = await api.post(`/cultivation`, { data });
-      console.log("Cultivation created successfully:", res.data);
       dispatch(createCultivation(res.data.newCultivation));
       setSelectedCultivation(res.data.newCultivation);
       setIsBeginSelected(false);
@@ -218,10 +215,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     setCreateCultivationOpen(false);
     setNewCUDetails(initialNewCUDetails);
   };
-
-  useEffect(() => {
-    console.log("plantCultivation state changed:", plantCultivation);
-  }, [plantCultivation]);
 
   const onBack = () => router.push(`/upravljanje-poljima/${fieldSlug}`);
 

@@ -13,7 +13,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { PlantCultivation } from "./plantCultivation";
 import api from "@/lib/api";
-import { createPlantage } from "@/store/cultivation/cultivate";
+import { createPlantage } from "@/store/cultivation";
 
 export const SeedingModal = ({
   isOpen,

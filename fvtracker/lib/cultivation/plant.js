@@ -133,7 +133,24 @@ async function createPlantedCropVarietyPromise({
     { new: true },
   );
 
-  await plantedCropVariety.populate("cropVariety");
+  if (!plantedCropVariety) {
+    const newPlantedCropVariety = new PlantedCropVariety({
+      cultivation: cultivationId,
+      relativeCoords: relativeCoord,
+      fieldCoords,
+      relativeCoord,
+      plantedAt,
+      harvestedAt,
+      cropVariety: cropVarietyId,
+    });
+    await newPlantedCropVariety.save();
+    return newPlantedCropVariety;
+  }
+
+  await plantedCropVariety.populate({
+    path: "cropVariety",
+    populate: "cropType",
+  });
 
   let cropVariety = null;
   if (cropVarietyId) {

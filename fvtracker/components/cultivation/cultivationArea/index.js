@@ -109,7 +109,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       }
     };
     fillSelectedField();
-  }, [fieldSlug, caSlug, selectedField]);
+  }, [fieldSlug, caSlug, selectedField, fields]);
 
   useEffect(() => {
     const disabled = [];

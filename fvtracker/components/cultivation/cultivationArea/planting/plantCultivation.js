@@ -40,25 +40,25 @@ export const PlantCultivation = ({
 
   useEffect(() => {
     if (newPlantage.generalType) {
-      const types = crops.types.filter(
+      const types = crops?.types.filter(
         (t) => t.generalTypeName === newPlantage.generalType.name,
       );
       setAvailableTypes(types);
     } else {
       setAvailableTypes([]);
     }
-  }, [newPlantage.generalType, crops.types]);
+  }, [newPlantage?.generalType, crops?.types]);
 
   useEffect(() => {
     if (newPlantage.type) {
-      const varieties = crops.varieties.filter(
+      const varieties = crops?.varieties.filter(
         (v) => v.cropTypeName === newPlantage.type.name,
       );
       setAvailableVarieties(varieties);
     } else {
       setAvailableVarieties([]);
     }
-  }, [newPlantage.type, crops.varieties]);
+  }, [newPlantage?.type, crops?.varieties]);
 
   if (!isOpen) return null;
   return (

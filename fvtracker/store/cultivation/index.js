@@ -168,63 +168,38 @@ const cultivationSlice = createSlice({
         })),
       }));
     },
-    
-    createPlantage: (state, action) => {
-      // action contains cultivation Id and plantagež
 
-      console.log("redux date", typeof action.payload.newPlantage[0].plantedAt);
-      console.log("redux payload", action.payload);
-      console.log(state)
-      console.log(state.cultivation.selectedField)
+    createPlantage: (state, action) => {
+      const { cultivationId, newPlantage } = action.payload;
+
       if (state.selectedField) {
-        console.log("setting newplantage to selected field cas cu")
-        state.selectedField.cultivationAreas =
-          state.selectedField?.cultivationAreas.map((ca) => {
-            console.log("ccults", ca.cultivations);
-            const cultivation = ca.cultivations.find(
-              (cul) => cul._id === action.payload.cultivationId,
-            );
-            console.log("found cultivation for plantage", cultivation);
-            
-            if (!cultivation) return ca;
-            console.log("added plantage to cultivation")
-            return {
-              ...ca,
-              plantedCropVarieties: cultivation.plantedCropVarieties.push(
-                action.payload.newPlantage,
-              ),
-            };
-          });
-      }
-      state.fields = state.fields?.map((field) => {
-        if (field._id === state.selectedField._id) {
-          return {
-            ...field,
-            cultivationAreas: field.cultivationAreas.map((ca) => {
-              if (ca._id === state.selectedCultivationArea._id) {
-                return {
-                  ...ca,
-                  cultivations: ca.cultivations.map((cul) => {
-                    if (cul._id === action.payload.cultivationId) {
-                      return {
-                        ...cul,
-                        plantedCropVarieties: cul.plantedCropVarieties.push(
-                          action.payload.newPlantage,
-                        ),
-                      };
-                    }
-                    return cul;
-                  }),
-                };
-              }
-              return ca;
-            }),
-          };
+        for (const ca of state.selectedField.cultivationAreas) {
+          const cultivation = ca.cultivations.find(
+            (cul) => cul._id === cultivationId,
+          );
+          if (!cultivation) continue;
+
+          cultivation.plantedCropVarieties.push(...newPlantage);
+          break;
         }
-        return field;
-      });
+
+        state.fields = state.fields.map((field) => {
+          if (field._id !== state.selectedField._id) return field;
+
+          for (const ca of field.cultivationAreas) {
+            const cultivation = ca.cultivations.find(
+              (cul) => cul._id === cultivationId,
+            );
+            if (!cultivation) continue;
+
+            cultivation.plantedCropVarieties.push(...newPlantage);
+            break;
+          }
+
+          return field;
+        });
+      }
     },
-  
   },
 });
 

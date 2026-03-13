@@ -209,23 +209,6 @@ const initialChooseNewEnd = {
   y: null,
 };
 
-const initialNewPlantage = (cultivationId) => ({
-  cultivation: cultivationId || null,
-
-  //all crops are names
-  generalType: "Agrumi",
-  type: "Naranča",
-  variety: "Valencia",
-
-  toPlantCells: [],
-  plantedAt: new Date("2026-03-10T00:00:00Z"),
-  harvestedAt: null,
-  beginX: null,
-  beginY: null,
-  endX: null,
-  endY: null,
-});
-
 const initialNewPlantage_WId = (cultivationId) => ({
   cultivationId: cultivationId || null,
   generalType: {

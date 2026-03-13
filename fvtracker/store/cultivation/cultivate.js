@@ -1,8 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-
-};
+const initialState = {};
 
 export const cultivateSlice = createSlice({
   name: "cultivate",
@@ -10,14 +8,21 @@ export const cultivateSlice = createSlice({
   reducers: {
     createPlantage: (state, action) => {
       // action contains cultivation Id and plantage
-      state.selectedField?.cultivationAreas = state.selectedField?.cultivationAreas.map((ca) => {
-          const cultivation = ca.cultivations.find((cul) => cul._id === action.payload.cultivationId);
-          if(!cultivation) return ca;
-          return {
-            ...ca,
-            plantedCropVarieties: cultivation.plantedCropVarieties.push(action.payload.plantage)
-          }
-      })
+      if (state.selectedField) {
+        state.selectedField?.cultivationAreas =
+          state.selectedField?.cultivationAreas.map((ca) => {
+            const cultivation = ca.cultivations.find(
+              (cul) => cul._id === action.payload.cultivationId,
+            );
+            if (!cultivation) return ca;
+            return {
+              ...ca,
+              plantedCropVarieties: cultivation.plantedCropVarieties.push(
+                action.payload.plantage,
+              ),
+            };
+          });
+      }
       state.fields = state.fields?.map((field) => {
         if (field._id === state.selectedField._id) {
           return {
@@ -30,24 +35,25 @@ export const cultivateSlice = createSlice({
                     if (cul._id === action.payload.cultivationId) {
                       return {
                         ...cul,
-                        plantedCropVarieties: cul.plantedCropVarieties.push(action.payload.plantage)
-                      }
+                        plantedCropVarieties: cul.plantedCropVarieties.push(
+                          action.payload.plantage,
+                        ),
+                      };
                     }
                     return cul;
-                  })
-                }
+                  }),
+                };
               }
               return ca;
-            })
-          }
+            }),
+          };
         }
         return field;
-      })
-
+      });
     },
   },
 });
 
-export const { createPlantage} = cultivateSlice.actions;
+export const { createPlantage } = cultivateSlice.actions;
 
 export default cultivateSlice.reducer;

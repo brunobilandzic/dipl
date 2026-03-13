@@ -7,7 +7,7 @@ export async function POST(request) {
     await dbConnect();
     await auth.session.fetchSessionSpecificManager("CultivationManager");
     const body = await request.json();
-    const newPlantage = await cultivation.plants.createPlantage(body);
+    const newPlantage = await cultivation.plants.create(body);
     return Response.json(
       {
         success: true,

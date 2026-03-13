@@ -172,61 +172,32 @@ const cultivationSlice = createSlice({
     createPlantage: (state, action) => {
       const { cultivationId, newPlantage } = action.payload;
 
-      console.log("redux working with", action.payload);
+      if (!state.selectedField) return;
 
-      if (state.selectedField) {
-        console.log(
-          "selected field exists, trying to add plantage to cultivation",
-          state.selectedField,
+      for (const ca of state.selectedField.cultivationAreas) {
+        const cultivation = ca.cultivations.find(
+          (c) => c._id === cultivationId,
         );
-        for (const ca of state.selectedField.cultivationAreas) {
-          const cultivation = ca.cultivations.find(
-            (cul) => cul._id === cultivationId,
-          );
-          if (!cultivation) continue;
+        if (!cultivation) continue;
 
-          for (const plantage of newPlantage) {
-            console.log("redux plantage", plantage);
-            let existingPlCv = cultivation.plantedCropVarieties?.find(
-              (pcv) => pcv._id === plantage._id,
-            );
-            if (existingPlCv) {
-              console.log(
-                "Plantage already exists in cultivation, skipping",
-                plantage,
-              );
-              existingPlCv.cropVariety = { ...plantage.cropVariety };
-            }
+        for (const plantage of newPlantage) {
+          const idx = cultivation.plantedCropVarieties?.findIndex(
+            (pcv) => pcv._id === plantage._id,
+          );
+          if (idx !== -1 && idx !== undefined) {
+            cultivation.plantedCropVarieties[idx].cropVariety = {
+              ...plantage.cropVariety,
+            };
           }
         }
+      }
 
-        state.fields = state.fields.map((field) => {
-          if (field._id !== state.selectedField._id) return field;
-
-          for (const ca of field.cultivationAreas) {
-            const cultivation = ca.cultivations.find(
-              (cul) => cul._id === cultivationId,
-            );
-            if (!cultivation) continue;
-
-            for (const plantage of newPlantage) {
-              console.log("redux plantage", plantage);
-              const existPlCv = cultivation.plantedCropVarieties?.find(
-                (pcv) => pcv._id === plantage._id,
-              );
-              if (existPlCv) {
-                console.log(
-                  "Plantage already exists in cultivation, adding",
-                  plantage,
-                );
-
-                existPlCv.cropVariety = plantage.cropVariety;
-              }
-            }
-          }
-
-          return field;
-        });
+      // Sync fields ako postoji
+      const fieldIdx = state.fields.findIndex(
+        (f) => f._id === state.selectedField._id,
+      );
+      if (fieldIdx !== -1) {
+        state.fields[fieldIdx] = { ...state.selectedField };
       }
     },
   },

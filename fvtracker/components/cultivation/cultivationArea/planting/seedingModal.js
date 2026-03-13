@@ -27,7 +27,7 @@ export const SeedingModal = ({
     if (!cultivation?._id) return;
 
     setNewPlantage(
-      initialNewPlantage_WId ? initialNewPlantage_WId(cultivation?.id) : {},
+      initialNewPlantage_WId ? initialNewPlantage_WId(cultivation?._id) : {},
     );
   }, [cultivation]);
 
@@ -109,7 +109,7 @@ export const SeedingModal = ({
 
   const reset = () => {
     setNewPlantage(
-      initialNewPlantage_WId ? initialNewPlantage_WId(cultivation?.id) : {},
+      initialNewPlantage_WId ? initialNewPlantage_WId(cultivation?._id) : {},
     );
     setDragEvent(null);
     setChooseNewEnd(initialChooseNewEnd);

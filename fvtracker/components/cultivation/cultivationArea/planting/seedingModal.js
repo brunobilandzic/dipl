@@ -21,7 +21,6 @@ export const SeedingModal = ({
   caDims,
   cultivationCells,
 }) => {
-  const [dragEvent, setDragEvent] = useState(null);
   const [newPlantage, setNewPlantage] = useState({});
   useEffect(() => {
     if (!cultivation?._id) return;
@@ -98,20 +97,10 @@ export const SeedingModal = ({
     setPlantCultivationOpen(true);
   };
 
-  const handleDrag = ({ x, y }) => {
-    if (isBeginSelected()) {
-      setNewPlantage((prev) => ({
-        ...prev,
-        toPlantCells: [...prev.toPlantCells, `${x},${y}`],
-      }));
-    }
-  };
-
   const reset = () => {
     setNewPlantage(
       initialNewPlantage_WId ? initialNewPlantage_WId(cultivation?._id) : {},
     );
-    setDragEvent(null);
     setChooseNewEnd(initialChooseNewEnd);
     setPlantCultivationOpen(false);
   };

@@ -18,7 +18,7 @@ export const cultivateSlice = createSlice({
             return {
               ...ca,
               plantedCropVarieties: cultivation.plantedCropVarieties.push(
-                action.payload.plantage,
+                action.payload.newPlantage,
               ),
             };
           });
@@ -36,7 +36,7 @@ export const cultivateSlice = createSlice({
                       return {
                         ...cul,
                         plantedCropVarieties: cul.plantedCropVarieties.push(
-                          action.payload.plantage,
+                          action.payload.newPlantage,
                         ),
                       };
                     }

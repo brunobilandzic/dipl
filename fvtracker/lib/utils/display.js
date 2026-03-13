@@ -9,6 +9,7 @@ export const plCvColor = ({ plCvs, cell, fieldView }) => {
       return plCv.relativeCoords === cell;
     }
   });
+  
   if (!plCv) return "";
 
   const color = plCv.cropVariety?.cropType?.color;

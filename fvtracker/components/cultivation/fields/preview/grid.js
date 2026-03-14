@@ -25,6 +25,7 @@ export function FieldGrid({
   seedMode = false,
   toPlantCells = [],
   handleNotPlanted,
+  hanleCropVarietyClick,
 }) {
   if (small) {
     return (
@@ -79,6 +80,7 @@ export function FieldGrid({
           seedMode={seedMode}
           toPlantCells={toPlantCells}
           handleNotPlanted={handleNotPlanted}
+          hanleCropVarietyClick={hanleCropVarietyClick}
         />
       </div>
     </>
@@ -105,6 +107,7 @@ const FieldCells = ({
   seedMode,
   toPlantCells,
   handleNotPlanted,
+  hanleCropVarietyClick,
 }) => {
   let cells = [];
 

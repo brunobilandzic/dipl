@@ -142,8 +142,7 @@ export const SeedingModal = ({
     reset();
   };
 
-  const hanleCropVarietyClick = (cropVariety) => (e) => {
-    e.stopPropagation();
+  const hanleCropVarietyClick = (cropVariety) => {
     console.log("Clicked crop variety:", cropVariety);
   }
 
@@ -169,6 +168,7 @@ export const SeedingModal = ({
               seedMode={true}
               toPlantCells={newPlantage?.toPlantCells}
               handleNotPlanted={handleNotPlanted}
+              hanleCropVarietyClick={hanleCropVarietyClick}
             />
           </div>
         </div>

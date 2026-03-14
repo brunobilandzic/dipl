@@ -1,5 +1,5 @@
 export default {
     cultivation: {
-        defaultPlCvColor: "bg-green-700", // Tailwind's green-400
+        defaultPlCvColor: "bg-orange-900", 
     },
 };

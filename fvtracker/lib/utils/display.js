@@ -17,7 +17,10 @@ export const cvAndColor = ({ plCvs, cell, fieldView }) => {
   if (color && shade) {
     return { cropVariety: plCv.cropVariety, color: `bg-${color}-${shade}` };
   }
-  return { cropVariety: plCv.cropVariety, color: "bg-yellow-900" };
+  return {
+    cropVariety: plCv.cropVariety,
+    color: colors.cultivation.defaultPlCvColor,
+  };
 };
 
 export const showDate = (date) => {

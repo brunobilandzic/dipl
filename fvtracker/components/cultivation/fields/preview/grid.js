@@ -139,6 +139,20 @@ const FieldCells = ({
               fieldView: cuCellsFieldCoords,
             })
           : null;
+
+      const getTitle = () => {
+        if (cropVariety) {
+          return `(${x}, ${y}) - ${cropVariety?.cropType?.name} ${cropVariety?.name}`;
+        }
+        if(seedMode) {
+          return `(${x}, ${y}) - Not planted`;
+        }
+        if (cultivationName) {
+          return `(${x}, ${y}) - ${cultivationName}`;
+        }
+        return `(${x}, ${y})`;
+      };
+
       cells.push(
         <FieldCell
           key={`${x}-${y}`}
@@ -158,6 +172,7 @@ const FieldCells = ({
           invertColor={invertColor}
           seedMode={seedMode}
           handleNotPlanted={handleNotPlanted}
+          title={getTitle()}
         />,
       );
     }
@@ -182,6 +197,7 @@ const FieldCell = ({
   invertColor,
   seedMode,
   handleNotPlanted,
+  title,
 }) => {
   const bgClass = selected
     ? "bg-green-500"
@@ -210,12 +226,11 @@ const FieldCell = ({
 
     handleActiveClick(x, y);
   };
+
   return (
     <div
       className={cellClass}
-      title={
-        cultivationName ? `(${x}, ${y}) - ${cultivationName}` : `(${x}, ${y})`
-      }
+      title={title}
       onClick={handleClick}
       onContextMenu={(e) => {
         e.preventDefault();

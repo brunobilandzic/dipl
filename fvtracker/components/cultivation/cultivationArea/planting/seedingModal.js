@@ -43,7 +43,7 @@ export const SeedingModal = ({
       beginX: null,
       beginY: null,
     }));
-  }
+  };
   const [chooseNewEnd, setChooseNewEnd] = useState(initialChooseNewEnd);
   const [plantCultivationOpen, setPlantCultivationOpen] = useState(false);
 
@@ -75,7 +75,7 @@ export const SeedingModal = ({
     }));
   };
 
-  const onEndCoordinates = ({ x, y }) => {
+  const onEndCoordinates = ({ x, y, isContinue }) => {
     const { planted } = utils.cultivation.cultivationAreas.getCellsInRect({
       beginX: newPlantage.beginX,
       beginY: newPlantage.beginY,
@@ -95,7 +95,7 @@ export const SeedingModal = ({
       toPlantCells: prev.toPlantCells?.concat(planted),
     }));
 
-    setPlantCultivationOpen(true);
+    if (!isContinue) setPlantCultivationOpen(true);
   };
 
   const reset = () => {
@@ -160,7 +160,7 @@ export const SeedingModal = ({
 
   const hanleCropVarietyClick = (cropVariety) => {
     console.log("Clicked crop variety:", cropVariety);
-  }
+  };
 
   if (!cultivation || !isOpen) return null;
   return (

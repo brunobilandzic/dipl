@@ -139,7 +139,6 @@ const FieldCells = ({
             })
           : null;
 
-
       const handleClick = (e) => {
         if (seedMode && !cropVariety) {
           handleNotPlanted(x, y);

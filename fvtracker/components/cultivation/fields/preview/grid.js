@@ -197,6 +197,7 @@ const FieldCells = ({
           seedMode={seedMode}
           handleNotPlanted={handleNotPlanted}
           title={getTitle()}
+          handleClick={handleClick}
         />,
       );
     }
@@ -215,6 +216,7 @@ const FieldCell = ({
   selectedCultivationName,
   invertColor,
   title,
+  handleClick,
 }) => {
   const bgClass = selected
     ? "bg-green-500"

@@ -130,6 +130,15 @@ const FieldCells = ({
           fieldView: cuCellsFieldCoords,
         }));
       }
+
+      const cultivationName =
+        cultivationCells?.length > 0
+          ? utils.cultivation.cultivations.getCultivationNameForCell({
+              cultivationCells,
+              cell: `${x},${y}`,
+              fieldView: cuCellsFieldCoords,
+            })
+          : null;
       cells.push(
         <FieldCell
           key={`${x}-${y}`}
@@ -144,15 +153,7 @@ const FieldCells = ({
           handleActiveClick={handleActiveClick}
           isBeginSelected={isBeginSelected}
           enlarged={enlarged}
-          cultivationName={
-            cultivationCells?.length > 0
-              ? utils.cultivation.cultivations.getCultivationNameForCell({
-                  cultivationCells,
-                  cell: `${x},${y}`,
-                  fieldView: cuCellsFieldCoords,
-                })
-              : null
-          }
+          cultivationName={cultivationName}
           selectedCultivationName={selectedCultivationName}
           invertColor={invertColor}
           seedMode={seedMode}

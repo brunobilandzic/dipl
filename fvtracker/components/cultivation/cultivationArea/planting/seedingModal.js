@@ -84,7 +84,7 @@ export const SeedingModal = ({
       ...prev,
       endX: x,
       endY: y,
-      toPlantCells: planted,
+      toPlantCells: prev.toPlantCells?.concat(planted),
     }));
 
     setPlantCultivationOpen(true);
@@ -115,6 +115,11 @@ export const SeedingModal = ({
       label: CONTINUE_PLANTING,
       onClick: () => {
         setChooseNewEnd({ isOpen: false, choice: CONTINUE_PLANTING });
+        onEndCoordinates({
+          x: chooseNewEnd.x,
+          y: chooseNewEnd.y,
+          isContinue: true,
+        });
       },
     },
     {

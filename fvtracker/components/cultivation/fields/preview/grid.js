@@ -140,6 +140,26 @@ const FieldCells = ({
             })
           : null;
 
+
+      const handleClick = (e) => {
+        if (seedMode && !cropVariety) {
+          handleNotPlanted(x, y);
+          return;
+        }
+        if (!active && color === "") {
+          handleEmptyClick(x, y);
+          return;
+        }
+        if (isBeginSelected) {
+          alert(dimensionError.CULTIVATION_AREA_OVERLAP);
+          return;
+        }
+
+        handleActiveClick(x, y);
+      };
+
+      const active = plantedCells?.includes(`${x},${y}`);
+
       const getTitle = () => {
         if (cropVariety) {
           return `(${x}, ${y}) - ${cropVariety?.cropType?.name} ${cropVariety?.name}`;
@@ -209,23 +229,6 @@ const FieldCell = ({
     bgClass,
     cultivationName === selectedCultivationName ? "ring-2 ring-blue-500" : "",
   );
-
-  const handleClick = (e) => {
-    if (seedMode && color === colors.cultivation.defaultPlCvColor) {
-      handleNotPlanted(x, y);
-      return;
-    }
-    if (!active && color === "") {
-      handleEmptyClick(x, y);
-      return;
-    }
-    if (isBeginSelected) {
-      alert(dimensionError.CULTIVATION_AREA_OVERLAP);
-      return;
-    }
-
-    handleActiveClick(x, y);
-  };
 
   return (
     <div

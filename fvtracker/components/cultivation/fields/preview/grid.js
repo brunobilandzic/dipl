@@ -207,20 +207,13 @@ const FieldCells = ({
 const FieldCell = ({
   active,
   small,
-  x,
-  y,
   selected,
   color,
   onRightClick,
-  handleEmptyClick,
-  handleActiveClick,
-  isBeginSelected,
   enlarged,
   cultivationName,
   selectedCultivationName,
   invertColor,
-  seedMode,
-  handleNotPlanted,
   title,
 }) => {
   const bgClass = selected

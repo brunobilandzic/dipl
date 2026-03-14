@@ -136,7 +136,6 @@ const FieldCells = ({
           ? utils.cultivation.cultivations.getCultivationNameForCell({
               cultivationCells,
               cell: `${x},${y}`,
-              fieldView: cuCellsFieldCoords,
             })
           : null;
 

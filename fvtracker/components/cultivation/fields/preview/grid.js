@@ -148,9 +148,8 @@ const FieldCells = ({
           handleNotPlanted(x, y);
           return;
         }
-        if(seedMode && cropVariety) {
-          alert("This cell is already planted.");
-          return;
+        if (seedMode && cropVariety) {
+          return hanleCropVarietyClick(cropVariety);
         }
         if (!active && color === "") {
           handleEmptyClick(x, y);

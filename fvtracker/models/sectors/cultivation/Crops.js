@@ -128,6 +128,31 @@ const plantedCropVarietySchema = new Schema({
   //harvest..
 });
 
+const plantingPlanSchema = new Schema({
+  cultivation: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Cultivation",
+    required: true,
+  },
+  cropVariety: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "CropVariety",
+    required: true,
+  },
+  quantity: {
+    type: Number,
+    defult: 0,
+  },
+  plannedPlantingDate: {
+    type: Date,
+    default: null,
+  },
+  plannedHarvestingDate: {
+    type: Date,
+    default: null,
+  },
+});
+
 // model exports
 
 export const CropMainType =
@@ -148,3 +173,7 @@ export const CropVariety =
 export const PlantedCropVariety =
   mongoose.models.PlantedCropVariety ||
   mongoose.model("PlantedCropVariety", plantedCropVarietySchema);
+
+export const PlantingPlan =
+  mongoose.models.PlantingPlan ||
+  mongoose.model("PlantingPlan", plantingPlanSchema);

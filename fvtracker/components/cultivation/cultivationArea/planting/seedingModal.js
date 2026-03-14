@@ -36,6 +36,14 @@ export const SeedingModal = ({
       typeof newPlantage.beginX === "number" &&
       typeof newPlantage.beginY === "number"
     );
+
+  const removeBegin = () => {
+    setNewPlantage((prev) => ({
+      ...prev,
+      beginX: null,
+      beginY: null,
+    }));
+  }
   const [chooseNewEnd, setChooseNewEnd] = useState(initialChooseNewEnd);
   const [plantCultivationOpen, setPlantCultivationOpen] = useState(false);
 
@@ -120,6 +128,7 @@ export const SeedingModal = ({
           y: chooseNewEnd.y,
           isContinue: true,
         });
+        removeBegin();
       },
     },
     {

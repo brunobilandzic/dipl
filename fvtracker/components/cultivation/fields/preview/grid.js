@@ -159,11 +159,17 @@ const FieldCells = ({
       const active = plantedCells?.includes(`${x},${y}`);
 
       const getTitle = () => {
-        if (cropVariety) {
+        if (cropVariety && seedMode) {
           return `(${x}, ${y}) - ${cropVariety?.cropType?.name} ${cropVariety?.name}`;
         }
-        if(seedMode) {
+        if (cropVariety) {
+          return `(${x}, ${y}) - ${cultivationName} -  ${cropVariety?.cropType?.name} ${cropVariety?.name}`;
+        }
+        if (seedMode) {
           return `(${x}, ${y}) - Not planted`;
+        }
+        if (cultivationName && !cropVariety) {
+          return `(${x}, ${y}) - ${cultivationName} - Not planted`;
         }
         if (cultivationName) {
           return `(${x}, ${y}) - ${cultivationName}`;

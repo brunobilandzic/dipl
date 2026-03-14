@@ -122,12 +122,13 @@ const FieldCells = ({
   for (let y = 0; y < fieldLength; y++) {
     for (let x = 0; x < fieldWidth; x++) {
       let color = "";
+      let cropVariety = null;
       if (cultivationCells?.length > 0) {
-        color = utils.display.plCvColor({
+        ({ color, cropVariety } = utils.display.cvAndColor({
           plCvs: cultivationCells,
           cell: `${x},${y}`,
           fieldView: cuCellsFieldCoords,
-        });
+        }));
       }
       cells.push(
         <FieldCell

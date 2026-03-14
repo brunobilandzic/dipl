@@ -10,14 +10,14 @@ export const cvAndColor = ({ plCvs, cell, fieldView }) => {
     }
   });
 
-  if (!plCv) return "";
+  if (!plCv) return { cropVariety: null, color: "" };
 
   const color = plCv.cropVariety?.cropType?.color;
   const shade = plCv.cropVariety?.shade;
   if (color && shade) {
-    return { cropVariety: plCv.cropVariety, className: `bg-${color}-${shade}` };
+    return { cropVariety: plCv.cropVariety, color: `bg-${color}-${shade}` };
   }
-  return colors.cultivation.defaultPlCvColor;
+  return { cropVariety: plCv.cropVariety, color: "bg-yellow-900" };
 };
 
 export const showDate = (date) => {

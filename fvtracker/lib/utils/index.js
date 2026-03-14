@@ -35,7 +35,7 @@ import {
   getCASCultivations,
   filterCutivationCells
 } from "./cultivation";
-import { plCvColor, showDate } from "./display";
+import { cvAndColor, showDate } from "./display";
 
 export default {
   objects: {
@@ -86,7 +86,7 @@ export default {
     numbersInRanges,
   },
   display: {
-    plCvColor,
+    cvAndColor,
     showDate,
   },
 };

@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import colors from "../constants/cultivation/colors";
 
-export const plCvColor = ({ plCvs, cell, fieldView }) => {
+export const cvAndColor = ({ plCvs, cell, fieldView }) => {
   const plCv = plCvs.find((plCv) => {
     if (fieldView) {
       return plCv.fieldCoords === cell;

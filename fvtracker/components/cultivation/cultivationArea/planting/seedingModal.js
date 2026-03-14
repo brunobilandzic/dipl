@@ -142,6 +142,11 @@ export const SeedingModal = ({
     reset();
   };
 
+  const hanleCropVarietyClick = (cropVariety) => (e) => {
+    e.stopPropagation();
+    console.log("Clicked crop variety:", cropVariety);
+  }
+
   if (!cultivation || !isOpen) return null;
   return (
     <>

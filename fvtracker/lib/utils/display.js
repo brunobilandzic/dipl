@@ -9,13 +9,13 @@ export const plCvColor = ({ plCvs, cell, fieldView }) => {
       return plCv.relativeCoords === cell;
     }
   });
-  
+
   if (!plCv) return "";
 
   const color = plCv.cropVariety?.cropType?.color;
   const shade = plCv.cropVariety?.shade;
   if (color && shade) {
-    return `bg-${color}-${shade}`;
+    return { cropVariety: plCv.cropVariety, className: `bg-${color}-${shade}` };
   }
   return colors.cultivation.defaultPlCvColor;
 };

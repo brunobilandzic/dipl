@@ -8,13 +8,17 @@ export const fieldPlantedStatistics = (field) => {
   cultivationAreas.map((ca) => {
     caCells.push(...ca.planted);
     ca.cultivations.map((cu) => {
-      plantedCropVarieties.push(...cu.plantedCropVarieties);
+      cu.plantedCropVarieties.map((pcv) => {
+        console.log("Processing PlCv:", pcv);
+        if (pcv.cropVariety) plantedPlCvs.push(pcv);
+        else emptyPlCvs.push(pcv);
+      });
     });
   });
 
   return {
     totalCACells: caCells.length,
-    plantedPlCvs: plantedPlCvs.filter((plCv) => plCv.cropVariety),
-    emptyPlCvs: emptyPlCvs.filter((plCv) => !plCv.cropVariety),
+    plantedPlCvs,
+    emptyPlCvs,
   };
 };

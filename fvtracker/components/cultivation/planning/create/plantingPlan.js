@@ -56,7 +56,7 @@ const SelectField = ({ selectedField, setSelectedField }) => {
   return (
     <>
       <div>{fields?.length}</div>
-      <div className="flex w-full gap-4">
+      <div className="flex w-full flex-wrap gap-4">
         {fields &&
           fields.map((field) => {
             const cultivationCells = utils.cultivation.cultivations.getPlCvs(

@@ -13,10 +13,12 @@ export default function CreatePlantingPlanPageComonent() {
   const [selectedField, setSelectedField] = useState(null);
   return (
     <>
+    <div className="border p-4 rounded-lg">
       <SelectField
         selectedField={selectedField}
         setSelectedField={setSelectedField}
       />
+      </div>
     </>
   );
 }
@@ -56,7 +58,6 @@ const SelectField = ({ selectedField, setSelectedField }) => {
 
   return (
     <>
-      <div>{fields?.length}</div>
       <div className="flex w-full flex-wrap gap-4">
         {fields &&
           fields.map((field) => {

@@ -1,12 +1,7 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-const plantingPlanSchema = new Schema({
-  cultivation: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Cultivation",
-    required: true,
-  },
+const plantingItemSchema = new Schema({
   cropVariety: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "CropVariety",
@@ -16,6 +11,15 @@ const plantingPlanSchema = new Schema({
     type: Number,
     default: 0,
   },
+});
+
+const plantingPlanSchema = new Schema({
+  cultivation: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Cultivation",
+    required: true,
+  },
+  items: [plantingItemSchema],
   plannedPlantingDate: {
     type: Date,
     default: null,

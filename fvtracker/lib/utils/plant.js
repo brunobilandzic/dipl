@@ -1,22 +1,20 @@
 export const fieldPlantedStatistics = (field) => {
   const cultivationAreas = field.cultivationAreas || [];
-  const plantedCells = cultivationAreas.flatMap((ca) => ca.planted || []);
+  const caCells = [];
+  const plantedCropVarieties = [];
   const plantedPlCvs = [];
   const emptyPlCvs = [];
 
-  cultivationAreas.map((ca) =>
-    ca.cultivations.map((cul) =>
-      cul.plantedCropVarieties.map((pcv) => {
-        if (pcv.cropVariety) plantedPlCvs.push(pcv);
-        else emptyPlCvs.push(pcv);
-      }),
-    ),
-  );
+  cultivationAreas.map((ca) => {
+    caCells.push(...ca.planted);
+    ca.cultivations.map((cu) => {
+      plantedCropVarieties.push(...cu.plantedCropVarieties);
+    });
+  });
 
   return {
-    totalCACells,
-    plantedPlCvs,
-    emptyPlCvs,
-    plantedCells,
+    totalCACells: caCells.length,
+    plantedPlCvs: plantedPlCvs.filter((plCv) => plCv.cropVariety),
+    emptyPlCvs: emptyPlCvs.filter((plCv) => !plCv.cropVariety),
   };
 };

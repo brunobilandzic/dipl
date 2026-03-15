@@ -66,16 +66,31 @@ const SelectField = ({ selectedField, setSelectedField }) => {
             );
 
             return (
-              <FieldGrid
-                small={true}
-                width={field.dimensions.width}
-                length={field.dimensions.length}
-                plantedCells={utils.cultivation.cultivationAreas.getCASCells(
-                  field.cultivationAreas,
-                )}
-                cultivationCells={cultivationCells}
-                cuCellsFieldCoords={true}
-              />
+              <div
+                key={field._id}
+                className={`border-2 h-fit w-fit ${selectedField?._id === field._id ? "border-green-500" : "border-gray-300"} rounded-lg p-2 cursor-pointer flex flex-col items-center justify-center `}
+                onClickCapture={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  if (selectedField?._id === field._id) {
+                    setSelectedField(null);
+                    return;
+                  }
+                  setSelectedField(field);
+                }}
+              >
+                <div className="mb-2">{field.name}</div>
+                <FieldGrid
+                  small={true}
+                  width={field.dimensions.width}
+                  length={field.dimensions.length}
+                  plantedCells={utils.cultivation.cultivationAreas.getCASCells(
+                    field.cultivationAreas,
+                  )}
+                  cultivationCells={cultivationCells}
+                  cuCellsFieldCoords={true}
+                />
+              </div>
             );
           })}
       </div>

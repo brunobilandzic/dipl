@@ -7,6 +7,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
 import utils from "@/lib/utils";
+import { FieldStatistics } from "../../fields/general";
 
 export default function CreatePlantingPlanPageComonent() {
   const [selectedField, setSelectedField] = useState(null);
@@ -90,6 +91,9 @@ const SelectField = ({ selectedField, setSelectedField }) => {
                   cultivationCells={cultivationCells}
                   cuCellsFieldCoords={true}
                 />
+                <div className="mt-2 self-start">
+                  <FieldStatistics field={field} />
+                </div>
               </div>
             );
           })}

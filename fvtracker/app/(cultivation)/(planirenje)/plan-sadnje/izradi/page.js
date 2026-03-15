@@ -1,9 +1,14 @@
-import React from 'react'
+import CreatePlantingPlanPageComonent from "@/components/cultivation/planning/create/plantingPlan";
+import React from "react";
 
 function CreatePlantingPlanPage() {
   return (
-    <div>CreatePlantingPlanPage</div>
-  )
+    <>
+      <div>
+        <CreatePlantingPlanPageComonent />
+      </div>
+    </>
+  );
 }
 
-export default CreatePlantingPlanPage
+export default CreatePlantingPlanPage;

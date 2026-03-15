@@ -40,6 +40,13 @@ export default {
       ],
     },
     {
+      label: "planiranje",
+      submenu: [
+        { label: "plan sadnje", path: "/plan-sadnje" },
+        { label: "plan berbe", path: "/plan-berbe" },
+      ],
+    },
+    {
       label: "kultivacija",
       submenu: [
         { label: "sadnja", path: "/kultivacija/sadnja" },

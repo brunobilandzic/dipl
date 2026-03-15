@@ -19,6 +19,7 @@ import { setFields } from "@/store/cultivation";
 import { fieldCultivationAreaPoints } from "@/seed/cultivation/fields/create/analyze";
 import { Loading } from "@/components/layout/loading";
 import { useRouter } from "next/navigation";
+import { FieldStatistics } from "../general";
 
 export function FieldsList({}) {
   const fields = useSelector((state) => state.cultivation.fields);
@@ -108,6 +109,7 @@ function FieldItem({ field }) {
         <ListItemBody>
           <div className="flex justify-between">
             <div>
+              <FieldStatistics  field={field} />
               <div className="text-sm">
                 <div>{field.description}</div>
                 <div>

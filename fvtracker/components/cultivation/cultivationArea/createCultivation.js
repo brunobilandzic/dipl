@@ -23,7 +23,7 @@ export function CreateCultivation({
       <Modals.FormModal
         isOpen={isOpen}
         onCancel={onCancel}
-        title="Napravi novo područje"
+        title="Napravi nove gredice"
         onSubmit={onSubmit}
       >
         <div className="mb-4 text-sm text-gray-500">
@@ -47,32 +47,35 @@ export function CreateCultivation({
               ></AppSelect>
             ) : null}
           </div>
-          {!newCUDetails.existingCulName || newCUDetails.existingCulName === culConstants.names.NEW_CULTIVATION ? (
+          {!newCUDetails.existingCulName ||
+          newCUDetails.existingCulName ===
+            culConstants.names.NEW_CULTIVATION ? (
             <>
-            <div className={``}>
-              <AppInput
-                type="text"
-                label="Ime"
-                value={newCUDetails.name}
-                onChange={(e) => onFormChange("name", e.target.value)}
-            />
-            </div>
-          <div className={` `}>
-            <AppTextArea
-              label="opis"
-              value={newCUDetails.description}
-              onChange={(e) => onFormChange("description", e.target.value)}
-            />
-          </div>
-          <div
-            className={`${styles.info} grid grid-cols-2 grid-rows-2 w-fit gap-2 mt-6`}
-          >
-            <div className="font-bold">Duljina</div>
-            <div className="font-bold">Širina</div>
-            <div className="">{newCUDetails?.dimensions?.length || 1}</div>
-            <div className="">{newCUDetails?.dimensions?.width || 1}</div>
-          </div>
-        </>): null}
+              <div className={``}>
+                <AppInput
+                  type="text"
+                  label="Ime"
+                  value={newCUDetails.name}
+                  onChange={(e) => onFormChange("name", e.target.value)}
+                />
+              </div>
+              <div className={` `}>
+                <AppTextArea
+                  label="opis"
+                  value={newCUDetails.description}
+                  onChange={(e) => onFormChange("description", e.target.value)}
+                />
+              </div>
+              <div
+                className={`${styles.info} grid grid-cols-2 grid-rows-2 w-fit gap-2 mt-6`}
+              >
+                <div className="font-bold">Duljina</div>
+                <div className="font-bold">Širina</div>
+                <div className="">{newCUDetails?.dimensions?.length || 1}</div>
+                <div className="">{newCUDetails?.dimensions?.width || 1}</div>
+              </div>
+            </>
+          ) : null}
         </div>
       </Modals.FormModal>
     </>

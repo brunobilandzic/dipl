@@ -9,9 +9,19 @@ export const FieldStatistics = ({ field }) => {
   const stats = fieldPlantedStatistics(field);
   return (
     <div>
-      <p>Total CA Cells: {stats.totalCACells}</p>
-      <p>Planted PlCvs: {stats.plantedPlCvs.length}</p>
-      <p>Empty PlCvs: {stats.emptyPlCvs.length}</p>
+      <p>{stats.totalCACells} polja u područjma za sadnju</p>
+      <p>
+        {stats.plantedPlCvs.length + stats.emptyPlCvs.length} ukupno ćelija u
+        gredicama
+      </p>
+      <p>Posađeno: {stats.plantedPlCvs.length}</p>
+      <p>Prazne ćelije: {stats.emptyPlCvs.length}</p>
+      <p>
+        {Number((stats.plantedPlCvs.length /
+          (stats.plantedPlCvs.length + stats.emptyPlCvs.length)) *
+          100 || 0).toFixed(2)}
+        %
+      </p>
     </div>
   );
 };

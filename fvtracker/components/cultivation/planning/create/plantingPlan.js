@@ -33,6 +33,7 @@ const SelectField = ({ selectedField, setSelectedField }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("fields in select field component", fields);
     if (fields && fields.length > 0) return;
 
     (async () => {

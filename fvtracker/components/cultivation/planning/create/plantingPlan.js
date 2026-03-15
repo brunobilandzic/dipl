@@ -6,15 +6,17 @@ import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-function CreatePlantingPlanPageComonent() {
+export default function CreatePlantingPlanPageComonent() {
+  const [selectedField, setSelectedField] = useState(null);
   return (
     <>
-      <SelectField />
+      <SelectField
+        selectedField={selectedField}
+        setSelectedField={setSelectedField}
+      />
     </>
   );
 }
-
-export default CreatePlantingPlanPageComonent;
 
 export const CreatePlantagePlan = ({}) => {
   return (

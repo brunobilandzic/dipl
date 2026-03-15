@@ -5,6 +5,8 @@ import { setFields } from "@/store/cultivation";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
+import utils from "@/lib/utils";
 
 export default function CreatePlantingPlanPageComonent() {
   const [selectedField, setSelectedField] = useState(null);
@@ -51,5 +53,32 @@ const SelectField = ({ selectedField, setSelectedField }) => {
     })();
   }, [fields]);
 
-  return <>{fields?.length}</>;
+  return (
+    <>
+      <div>{fields?.length}</div>
+      <div className="flex w-full gap-4">
+        {fields &&
+          fields.map((field) => {
+            const cultivationCells = utils.cultivation.cultivations.getPlCvs(
+              utils.cultivation.cultivations.getCASCultivations(
+                field.cultivationAreas,
+              ),
+            );
+
+            return (
+              <FieldGrid
+                small={true}
+                width={field.dimensions.width}
+                length={field.dimensions.length}
+                plantedCells={utils.cultivation.cultivationAreas.getCASCells(
+                  field.cultivationAreas,
+                )}
+                cultivationCells={cultivationCells}
+                cuCellsFieldCoords={true}
+              />
+            );
+          })}
+      </div>
+    </>
+  );
 };

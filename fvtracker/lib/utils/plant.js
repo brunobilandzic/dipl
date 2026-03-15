@@ -1,7 +1,5 @@
 export const fieldPlantedStatistics = (field) => {
   const cultivationAreas = field.cultivationAreas || [];
-  if (field.name === "SEEDED FIELD")
-    console.log("Cultivation Areas:", cultivationAreas);
   const plantedCells = cultivationAreas.flatMap((ca) => ca.planted || []);
   const plantedPlCvs = [];
   const emptyPlCvs = [];
@@ -14,16 +12,11 @@ export const fieldPlantedStatistics = (field) => {
       }),
     ),
   );
-  if (field.name === "SEEDED FIELD") {
-    console.log("planted plcsvs:", plantedPlCvs);
-    console.log("empty plcsvs:", emptyPlCvs);
-  }
-
-  const totalCACells = plantedCells.length;
 
   return {
     totalCACells,
     plantedPlCvs,
-    emptyPlCvs
+    emptyPlCvs,
+    plantedCells,
   };
 };

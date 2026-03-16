@@ -1,5 +1,6 @@
 "use client";
 
+import { AppDatePicker, AppInput } from "@/components/form/inputs";
 import api from "@/lib/api";
 import { setFields } from "@/store/cultivation";
 import Link from "next/link";
@@ -13,12 +14,18 @@ export default function CreatePlantingPlanPageComonent() {
   const [selectedField, setSelectedField] = useState(null);
   return (
     <>
-    <div className="border p-4 rounded-lg">
-      <SelectField
-        selectedField={selectedField}
-        setSelectedField={setSelectedField}
-      />
+      <div className="border p-4 rounded-lg">
+        <SelectField
+          selectedField={selectedField}
+          setSelectedField={setSelectedField}
+        />
       </div>
+
+      {selectedField ? (
+        <div className="mt-4 rounded-lg border p-4">
+          <FillPlanInfo selectedField={selectedField} />
+        </div>
+      ) : null}
     </>
   );
 }
@@ -102,3 +109,186 @@ const SelectField = ({ selectedField, setSelectedField }) => {
     </>
   );
 };
+
+const createInitialFormData = () => ({
+  cultivation: "",
+  items: [{ cropVariety: "", quantity: 0 }],
+  plannedPlantingDate: null,
+  plannedHarvestingDate: null,
+});
+
+export const FillPlanInfo = ({ selectedField, onSubmit = () => {} }) => {
+  const [cropVarieties, setCropVarieties] = useState([]);
+  const [formData, setFormData] = useState(createInitialFormData);
+
+  useEffect(() => {
+    setFormData(createInitialFormData());
+  }, [selectedField?._id]);
+
+  useEffect(() => {
+    let ignore = false;
+
+    (async () => {
+      try {
+        const res = await api.get("/cultivation/plant");
+        if (!ignore && res.data?.varieties) {
+          setCropVarieties(res.data.varieties);
+        }
+      } catch (error) {
+        console.log("Error fetching crop varieties:", error);
+      }
+    })();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
+
+  const handleFormChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleItemChange = (index, field, value) => {
+    setFormData((prev) => ({
+      ...prev,
+      items: prev.items.map((item, itemIndex) => {
+        if (itemIndex !== index) {
+          return item;
+        }
+
+        return {
+          ...item,
+          [field]: field === "quantity" ? Number(value) : value,
+        };
+      }),
+    }));
+  };
+
+  const addItem = () => {
+    setFormData((prev) => ({
+      ...prev,
+      items: [...prev.items, { cropVariety: "", quantity: 0 }],
+    }));
+  };
+
+  const removeItem = (index) => {
+    if (formData.items.length === 1) {
+      return;
+    }
+
+    setFormData((prev) => ({
+      ...prev,
+      items: prev.items.filter((_, itemIndex) => itemIndex !== index),
+    }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSubmit({
+      ...formData,
+      items: formData.items.map((item) => ({
+        ...item,
+        quantity: Number(item.quantity) || 0,
+      })),
+    });
+  };
+
+  return (
+    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+      <div>
+        <div className="text-lg font-semibold">Plan sadnje</div>
+        <div className="text-sm text-gray-600">
+          {selectedField?.name
+            ? `Odabrano polje: ${selectedField.name}`
+            : "Popunite podatke plana sadnje."}
+        </div>
+      </div>
+      <div className="grid gap-4 md:grid-cols-2">
+        <AppDatePicker
+          label="Planirani datum sadnje"
+          name="plannedPlantingDate"
+          onChange={handleFormChange}
+          placeholder="Odaberite datum sadnje"
+          value={formData.plannedPlantingDate}
+        />
+        <AppDatePicker
+          label="Planirani datum berbe"
+          name="plannedHarvestingDate"
+          onChange={handleFormChange}
+          placeholder="Odaberite datum berbe"
+          value={formData.plannedHarvestingDate}
+        />
+      </div>
+
+      <div className="flex items-center justify-between gap-4">
+        <div className="text-base font-semibold">Stavke plana</div>
+        <button className="btn" onClick={addItem} type="button">
+          Dodaj stavku
+        </button>
+      </div>
+
+      <div className="flex flex-col gap-4">
+        {formData.items.map((item, index) => (
+          <div className="rounded-lg border p-4" key={`item-${index}`}>
+            <div className="mb-4 flex items-center justify-between gap-4">
+              <div className="font-medium">Stavka {index + 1}</div>
+              <button
+                className="text-sm text-red-600 disabled:cursor-not-allowed disabled:text-gray-400"
+                disabled={formData.items.length === 1}
+                onClick={() => removeItem(index)}
+                type="button"
+              >
+                Ukloni
+              </button>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_220px]">
+              <div className="inputRow">
+                <label className="label">Sorta</label>
+                <select
+                  className="inputText"
+                  onChange={(event) =>
+                    handleItemChange(index, "cropVariety", event.target.value)
+                  }
+                  required
+                  value={item.cropVariety}
+                >
+                  <option value="">Odaberite sortu</option>
+                  {cropVarieties.map((cropVariety) => (
+                    <option key={cropVariety._id} value={cropVariety._id}>
+                      {cropVariety.cropTypeName
+                        ? `${cropVariety.cropTypeName} - ${cropVariety.name}`
+                        : cropVariety.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <AppInput
+                label="Kolicina"
+                min={0}
+                name={`quantity-${index}`}
+                onChange={(event) =>
+                  handleItemChange(index, "quantity", event.target.value)
+                }
+                type="number"
+                value={item.quantity}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <button className="btn self-start" type="submit">
+        Spremi plan
+      </button>
+    </form>
+  );
+};
+
+
+  

@@ -21,3 +21,17 @@ export const fieldPlantedStatistics = (field) => {
     emptyPlCvs,
   };
 };
+
+export const prepareSubmitPlan = (plan) => {
+  const { items: _items, ...rest } = plan;
+
+  const items = plan.items.map((item) => ({
+    cropVariety: item.cropVariety,
+    quantity: item.quantity,
+  }));
+
+  return {
+    ...rest,
+    items,
+  };
+};

@@ -208,13 +208,16 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
   };
 
   const handleSubmit = async () => {
-    if (utils.objects.checkEmpty(formData)) {
+    const submitData = utils.plant.prepareSubmitPlan(formData);
+    console.log("Submitting planting plan with data:", submitData);
+    if (utils.objects.checkEmpty(submitData)) {
       alert("Molimo popunite sve podatke u formi.");
       return;
     }
+    return;
     try {
       const res = await api.post("/cultivation/planting-plans", {
-        ...formData,
+        ...submitData,
         fieldId: selectedField._id,
       });
       if (res.data && res.data.plantingPlan) {

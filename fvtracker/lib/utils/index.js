@@ -36,6 +36,7 @@ import {
   filterCutivationCells
 } from "./cultivation";
 import { cvAndColor, showDate } from "./display";
+import { prepareSubmitPlan } from "./plant";
 
 export default {
   objects: {
@@ -89,6 +90,9 @@ export default {
     cvAndColor,
     showDate,
   },
+  plant: {
+    prepareSubmitPlan,
+  }
 };
 
 export const nextFrame = () => new Promise((res) => requestAnimationFrame(res));

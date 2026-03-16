@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
 import utils from "@/lib/utils";
 import { FieldStatistics } from "../../fields/general";
+import handleError from "@/lib/constants/errors/client/handleError";
 
 export default function CreatePlantingPlanPageComonent() {
   const [selectedField, setSelectedField] = useState(null);
@@ -117,7 +118,7 @@ const createInitialFormData = () => ({
   plannedHarvestingDate: null,
 });
 
-export const FillPlanInfo = ({ selectedField, onSubmit = () => {} }) => {
+export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
   const crops = useSelector((state) => state.cultivation.crops);
   const {
     generalTypes = [],
@@ -198,12 +199,23 @@ export const FillPlanInfo = ({ selectedField, onSubmit = () => {} }) => {
       alert("Molimo popunite sve podatke u formi.");
       return;
     }
-      ...formData,
-      items: formData.items.map((item) => ({
-        cropVariety: item.cropVariety,
-        quantity: Number(item.quantity) || 0,
-      })),
-    });
+    try {
+      const res = await api.post("/cultivation/planting-plans", {
+        ...formData,
+        fieldId: selectedField._id,
+      });
+      if (res.data && res.data.plantingPlan) {
+        alert("Plan sadnje uspješno kreiran!");
+      }
+      setSelectedField(null);
+      setFormData(createInitialFormData());
+    } catch (error) {
+      console.error("Error creating planting plan:", error);
+      handleError({
+        ...error,
+        generalMessage: "Greška prilikom kreiranja plana sadnje",
+      });
+    }
   };
 
   return (

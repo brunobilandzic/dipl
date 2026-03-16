@@ -9,7 +9,6 @@ export const fieldPlantedStatistics = (field) => {
     caCells.push(...ca.planted);
     ca.cultivations.map((cu) => {
       cu.plantedCropVarieties.map((pcv) => {
-        console.log("Processing PlCv:", pcv);
         if (pcv.cropVariety) plantedPlCvs.push(pcv);
         else emptyPlCvs.push(pcv);
       });

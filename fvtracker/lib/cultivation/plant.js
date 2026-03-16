@@ -209,7 +209,7 @@ export async function getPlantingPlanById(id) {
 }
 
 export async function createPlantingPlan({ plantingPlanData }) {
-  const cultivationManager = await auth.session.specificManager({
+  await auth.session.specificManager({
     managerName: "CultivationManager",
   });
 

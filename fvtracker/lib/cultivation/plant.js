@@ -215,7 +215,6 @@ export async function createPlantingPlan({ plantingPlanData }) {
 
   const plantingPlan = new PlantingPlan({
     ...plantingPlanData,
-    cultivationManager: cultivationManager._id,
   });
   await plantingPlan.save();
   return plantingPlan;

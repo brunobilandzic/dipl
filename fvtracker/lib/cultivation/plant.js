@@ -6,6 +6,8 @@ import {
 import { getCultivationArea } from "./cultivationArea";
 import utils from "@/lib/utils";
 import { getCultivationById } from "./cultivation";
+import { PlantingPlan } from "@/models/documents/PlantingPlan";
+import auth from "@/lib/auth";
 
 export async function cropsData() {
   const cropMainTypes = await CropMainType.find().populate({
@@ -161,4 +163,25 @@ async function createPlantedCropVarietyPromise({
 
   await plantedCropVariety.save();
   return plantedCropVariety;
+}
+
+export async function getPlantingPlans() {
+  const generalManager = await auth.session.fetchSessionSpecificManager({
+    managerName: "GeneralManager",
+    throwError: false,
+  });
+  const cultivationManager = await auth.session.fetchSessionSpecificManager({
+    managerName: "CultivationManager",
+    throwError: false,
+  });
+  if (!generalManager && !cultivationManager) {
+    throw new Error(
+      "Unauthorized: User does not have access to planting plans.",
+    );
+  }
+
+  const plantingPlans = await PlantingPlan.find();
+  if (!plantingPlans) {
+    throw new Error("No planting plans found.");
+  }
 }

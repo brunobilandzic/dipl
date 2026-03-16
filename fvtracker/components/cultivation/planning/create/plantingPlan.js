@@ -232,7 +232,7 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
   };
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+    <div className="flex flex-col gap-4" onSubmit={handleSubmit}>
       <div>
         <div className="text-lg font-semibold">Plan sadnje</div>
         <div className="text-sm text-gray-600">
@@ -375,9 +375,9 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
         })}
       </div>
 
-      <button className="btn self-start" type="submit">
+      <div className="btn self-start" onClick={handleSubmit}>
         Spremi plan
-      </button>
-    </form>
+      </div>
+    </div>
   );
 };

@@ -190,4 +190,19 @@ export async function getPlantingPlans() {
   }
 }
 
-export async function getPlantingPlanById(id) {}
+export async function getPlantingPlanById(id) {
+  const { hasAccess } = await checkGeneralOrOtherManager({
+    managerNames: ["CultivationManager"],
+  });
+
+  if (!hasAccess) {
+    throw new Error("Unauthorized access to planting plan.");
+  }
+
+  const plantingPlan = await PlantingPlan.findById(id);
+  if (!plantingPlan) {
+    throw new Error("Planting plan not found with the provided ID.");
+  }
+
+  return plantingPlan;
+}

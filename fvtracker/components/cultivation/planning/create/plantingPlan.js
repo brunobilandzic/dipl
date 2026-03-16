@@ -111,13 +111,6 @@ const SelectField = ({ selectedField, setSelectedField }) => {
   );
 };
 
-const createInitialFormData = () => ({
-  cultivation: "",
-  items: [{ generalType: "", type: "", cropVariety: "", quantity: 0 }],
-  plannedPlantingDate: null,
-  plannedHarvestingDate: null,
-});
-
 export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
   const crops = useSelector((state) => state.cultivation.crops);
   const {

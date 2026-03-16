@@ -13,6 +13,7 @@ export function extractDBObject(objToExtract) {
 export function checkEmpty(obj) {
   for (const key in obj) {
     if (obj[key] === "" || obj[key] === null || obj[key] === undefined) {
+      console.log(`Field ${key} is empty, value: ${obj[key]}`);
       return true;
     }
   }

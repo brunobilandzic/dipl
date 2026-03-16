@@ -1,7 +1,8 @@
 import { handleCredentials, handleOAuth } from "./handlers";
 import {
+  fetchGeneralAndOtherManagers,
   fetchSessionAppUser,
-  fetchSessionSpecificManager,
+  specificManager,
 } from "./fetchSessionData";
 
 export default {
@@ -10,7 +11,8 @@ export default {
     handleCredentials,
   },
   session: {
-    fetchSessionAppUser,
-    fetchSessionSpecificManager,
+    appUser: fetchSessionAppUser,
+    specificManager: fetchSessionSpecificManager,
+    generalAndOtherManagers: fetchGeneralAndOtherManagers,
   },
 };

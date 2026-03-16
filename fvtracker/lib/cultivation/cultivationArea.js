@@ -5,8 +5,9 @@ import auth from "@/lib/auth";
 import { Cultivation } from "@/models/sectors/cultivation/Cultivation";
 
 export async function createCultivationArea(body) {
-  const cultivationManager =
-    await auth.session.fetchSessionSpecificManager({managerName: "CultivationManager"});
+  const cultivationManager = await auth.session.specificManager({
+    managerName: "CultivationManager",
+  });
 
   if (
     !cultivationManager.fields?.some((fid) => fid?.toString() === body.field)
@@ -39,8 +40,6 @@ async function createCultivationAreaRecord(properties) {
   return newCultivationArea;
 }
 
-
-
 export async function updateCultivationArea(body) {
   const cultivationArea = await CultivationArea.findById(body.id);
   if (!cultivationArea) {
@@ -58,8 +57,9 @@ export async function deleteCultivationArea(id) {
 }
 
 export const getCultivationArea = async (id) => {
-  const cultivationManager =
-    await auth.session.fetchSessionSpecificManager({managerName: "CultivationManager"});
+  const cultivationManager = await auth.session.specificManager({
+    managerName: "CultivationManager",
+  });
   await cultivationManager.populate({
     path: "fields",
     populate: {

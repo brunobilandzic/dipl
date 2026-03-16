@@ -21,8 +21,9 @@ export async function fetchFieldBySlug(slug) {
 export async function createField(body) {
   console.log("Creating field with data:", body);
 
-  const cultivationManager =
-    await auth.session.fetchSessionSpecificManager({managerName: "CultivationManager"});
+  const cultivationManager = await auth.session.specificManager({
+    managerName: "CultivationManager",
+  });
 
   await cultivationManager.populate("fields");
   checkFieldNameUnique(
@@ -32,7 +33,7 @@ export async function createField(body) {
 
   const field = await createFieldRecord({
     manager: cultivationManager._id,
-    ...body
+    ...body,
   });
   cultivationManager.fields.push(field);
   await cultivationManager.save();

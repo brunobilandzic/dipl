@@ -206,3 +206,9 @@ export async function getPlantingPlanById(id) {
 
   return plantingPlan;
 }
+
+export async function createPlantingPlan({ plantingPlanData }) {
+  const cultivationManager = await auth.session.specificManager({
+    managerName: "CultivationManager",
+  });
+}

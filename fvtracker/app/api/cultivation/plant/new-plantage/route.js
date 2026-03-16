@@ -5,7 +5,7 @@ import dbConnect from "@/lib/db/mongooseConnect";
 export async function POST(request) {
   try {
     await dbConnect();
-    await auth.session.fetchSessionSpecificManager({managerName: "CultivationManager"});
+    await auth.session.specificManager({ managerName: "CultivationManager" });
     const body = await request.json();
     const newPlantage = await cultivation.plants.create(body);
     return Response.json(newPlantage, { status: 200 });

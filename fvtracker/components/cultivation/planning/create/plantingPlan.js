@@ -112,15 +112,18 @@ const SelectField = ({ selectedField, setSelectedField }) => {
 
 const createInitialFormData = () => ({
   cultivation: "",
-  items: [{ cropVariety: "", quantity: 0 }],
+  items: [{ generalType: "", type: "", cropVariety: "", quantity: 0 }],
   plannedPlantingDate: null,
   plannedHarvestingDate: null,
 });
 
 export const FillPlanInfo = ({ selectedField, onSubmit = () => {} }) => {
   const crops = useSelector((state) => state.cultivation.crops);
-  const {mainTypes, generalTypes, types, varieties: cropVarieties} = crops || {};
-  console.log(cropVarieties?.length)
+  const {
+    generalTypes = [],
+    types = [],
+    varieties: cropVarieties = [],
+  } = crops || {};
 
   const [formData, setFormData] = useState(createInitialFormData);
 
@@ -144,6 +147,23 @@ export const FillPlanInfo = ({ selectedField, onSubmit = () => {} }) => {
           return item;
         }
 
+        if (field === "generalType") {
+          return {
+            ...item,
+            generalType: value,
+            type: "",
+            cropVariety: "",
+          };
+        }
+
+        if (field === "type") {
+          return {
+            ...item,
+            type: value,
+            cropVariety: "",
+          };
+        }
+
         return {
           ...item,
           [field]: field === "quantity" ? Number(value) : value,
@@ -155,7 +175,10 @@ export const FillPlanInfo = ({ selectedField, onSubmit = () => {} }) => {
   const addItem = () => {
     setFormData((prev) => ({
       ...prev,
-      items: [...prev.items, { cropVariety: "", quantity: 0 }],
+      items: [
+        ...prev.items,
+        { generalType: "", type: "", cropVariety: "", quantity: 0 },
+      ],
     }));
   };
 
@@ -175,7 +198,7 @@ export const FillPlanInfo = ({ selectedField, onSubmit = () => {} }) => {
     onSubmit({
       ...formData,
       items: formData.items.map((item) => ({
-        ...item,
+        cropVariety: item.cropVariety,
         quantity: Number(item.quantity) || 0,
       })),
     });
@@ -216,55 +239,113 @@ export const FillPlanInfo = ({ selectedField, onSubmit = () => {} }) => {
       </div>
 
       <div className="flex flex-col gap-4">
-        {formData.items.map((item, index) => (
-          <div className="rounded-lg border p-4" key={`item-${index}`}>
-            <div className="mb-4 flex items-center justify-between gap-4">
-              <div className="font-medium">Stavka {index + 1}</div>
-              <button
-                className="text-sm text-red-600 disabled:cursor-not-allowed disabled:text-gray-400"
-                disabled={formData.items.length === 1}
-                onClick={() => removeItem(index)}
-                type="button"
-              >
-                Ukloni
-              </button>
-            </div>
+        {formData.items.map((item, index) => {
+          const selectedGeneralType = generalTypes.find(
+            (generalType) => generalType._id === item.generalType,
+          );
+          const availableTypes = selectedGeneralType
+            ? types.filter(
+                (type) => type.generalTypeName === selectedGeneralType.name,
+              )
+            : [];
 
-            <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_220px]">
-              <div className="inputRow">
-                <label className="label">Sorta</label>
-                <select
-                  className="inputText"
-                  onChange={(event) =>
-                    handleItemChange(index, "cropVariety", event.target.value)
-                  }
-                  required
-                  value={item.cropVariety}
+          const selectedType = types.find((type) => type._id === item.type);
+          const availableVarieties = selectedType
+            ? cropVarieties.filter(
+                (cropVariety) => cropVariety.cropTypeName === selectedType.name,
+              )
+            : [];
+
+          return (
+            <div className="rounded-lg border p-4" key={`item-${index}`}>
+              <div className="mb-4 flex items-center justify-between gap-4">
+                <div className="font-medium">Stavka {index + 1}</div>
+                <button
+                  className="text-sm text-red-600 disabled:cursor-not-allowed disabled:text-gray-400"
+                  disabled={formData.items.length === 1}
+                  onClick={() => removeItem(index)}
+                  type="button"
                 >
-                  <option value="">Odaberite sortu</option>
-                  {cropVarieties.map((cropVariety) => (
-                    <option key={cropVariety._id} value={cropVariety._id}>
-                      {cropVariety.cropTypeName
-                        ? `${cropVariety.cropTypeName} - ${cropVariety.name}`
-                        : cropVariety.name}
-                    </option>
-                  ))}
-                </select>
+                  Ukloni
+                </button>
               </div>
 
-              <AppInput
-                label="Kolicina"
-                min={0}
-                name={`quantity-${index}`}
-                onChange={(event) =>
-                  handleItemChange(index, "quantity", event.target.value)
-                }
-                type="number"
-                value={item.quantity}
-              />
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="inputRow">
+                  <label className="label">Glavna vrsta</label>
+                  <select
+                    className="inputText"
+                    onChange={(event) =>
+                      handleItemChange(index, "generalType", event.target.value)
+                    }
+                    required
+                    value={item.generalType}
+                  >
+                    <option value="">Odaberite glavnu vrstu</option>
+                    {generalTypes.map((generalType) => (
+                      <option key={generalType._id} value={generalType._id}>
+                        {generalType.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="inputRow">
+                  <label className="label">Tip biljke</label>
+                  <select
+                    className="inputText"
+                    disabled={!item.generalType}
+                    onChange={(event) =>
+                      handleItemChange(index, "type", event.target.value)
+                    }
+                    required
+                    value={item.type}
+                  >
+                    <option value="">Odaberite tip biljke</option>
+                    {availableTypes.map((type) => (
+                      <option key={type._id} value={type._id}>
+                        {type.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="inputRow">
+                  <label className="label">Varijanta</label>
+                  <select
+                    className="inputText"
+                    disabled={!item.type}
+                    onChange={(event) =>
+                      handleItemChange(index, "cropVariety", event.target.value)
+                    }
+                    required
+                    value={item.cropVariety}
+                  >
+                    <option value="">Odaberite varijantu</option>
+                    {availableVarieties.map((cropVariety) => (
+                      <option key={cropVariety._id} value={cropVariety._id}>
+                        {cropVariety.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="inputRow">
+                  <AppInput
+                    label="Kolicina"
+                    min={0}
+                    name={`quantity-${index}`}
+                    onChange={(event) =>
+                      handleItemChange(index, "quantity", event.target.value)
+                    }
+                    type="number"
+                    value={item.quantity}
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <button className="btn self-start" type="submit">
@@ -273,6 +354,3 @@ export const FillPlanInfo = ({ selectedField, onSubmit = () => {} }) => {
     </form>
   );
 };
-
-
-  

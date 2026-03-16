@@ -118,31 +118,15 @@ const createInitialFormData = () => ({
 });
 
 export const FillPlanInfo = ({ selectedField, onSubmit = () => {} }) => {
-  const [cropVarieties, setCropVarieties] = useState([]);
+  const crops = useSelector((state) => state.cultivation.crops);
+  const {mainTypes, generalTypes, types, varieties: cropVarieties} = crops || {};
+  console.log(cropVarieties?.length)
+
   const [formData, setFormData] = useState(createInitialFormData);
 
   useEffect(() => {
     setFormData(createInitialFormData());
   }, [selectedField?._id]);
-
-  useEffect(() => {
-    let ignore = false;
-
-    (async () => {
-      try {
-        const res = await api.get("/cultivation/plant");
-        if (!ignore && res.data?.varieties) {
-          setCropVarieties(res.data.varieties);
-        }
-      } catch (error) {
-        console.log("Error fetching crop varieties:", error);
-      }
-    })();
-
-    return () => {
-      ignore = true;
-    };
-  }, []);
 
   const handleFormChange = (event) => {
     const { name, value } = event.target;

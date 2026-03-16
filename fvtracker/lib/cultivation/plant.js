@@ -166,22 +166,28 @@ async function createPlantedCropVarietyPromise({
 }
 
 export async function getPlantingPlans() {
-  const generalManager = await auth.session.fetchSessionSpecificManager({
-    managerName: "GeneralManager",
-    throwError: false,
-  });
-  const cultivationManager = await auth.session.fetchSessionSpecificManager({
-    managerName: "CultivationManager",
-    throwError: false,
-  });
-  if (!generalManager && !cultivationManager) {
-    throw new Error(
-      "Unauthorized: User does not have access to planting plans.",
-    );
+  const { hasAccess, generalManager, otherManagers } =
+    await checkGeneralOrOtherManager({
+      managerNames: ["CultivationManager"],
+    });
+  if (!hasAccess) {
+    throw new Error("Unauthorized access to planting plans.");
   }
 
-  const plantingPlans = await PlantingPlan.find();
+  const cultivationManager = otherManagers[0];
+
+  const getFilter = () => {
+    if (generalManager) {
+      return {};
+    } else if (cultivationManager) {
+      return { cultivationManager: cultivationManager._id };
+    }
+  };
+
+  const plantingPlans = await PlantingPlan.find(getFilter());
   if (!plantingPlans) {
     throw new Error("No planting plans found.");
   }
 }
+
+export async function getPlantingPlanById(id) {}

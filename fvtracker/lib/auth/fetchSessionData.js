@@ -45,7 +45,7 @@ export async function fetchSessionSpecificManager({
   return specificManager;
 }
 
-export async function checkGeneralOrOtherManager({ managerNames = [] }) {
+export async function fetchGeneralAndOtherManagers({ managerNames = [] }) {
   const response = {
     hasAccess: false,
     generalManager: null,

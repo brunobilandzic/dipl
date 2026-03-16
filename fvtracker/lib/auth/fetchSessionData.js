@@ -46,13 +46,19 @@ export async function fetchSessionSpecificManager({
 }
 
 export async function checkGeneralOrOtherManager({ managerNames = [] }) {
+  const response = {
+    hasAccess: false,
+    generalManager: null,
+    otherManagers: [],
+  };
   const generalManager = await fetchSessionSpecificManager({
     managerName: "GeneralManager",
     throwError: false,
   });
 
   if (generalManager) {
-    return { hasAccess: true, manager: generalManager };
+    response.hasAccess = true;
+    response.generalManager = generalManager;
   }
 
   for (const managerName of managerNames) {
@@ -61,9 +67,10 @@ export async function checkGeneralOrOtherManager({ managerNames = [] }) {
       throwError: false,
     });
     if (specificManager) {
-      return { hasAccess: true, manager: specificManager };
+      response.hasAccess = true;
+      response.otherManagers.push(specificManager);
     }
   }
 
-  return { hasAccess: false, manager: null };
+  return response;
 }

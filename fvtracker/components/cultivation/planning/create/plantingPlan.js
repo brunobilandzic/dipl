@@ -123,7 +123,6 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
     field: fieldId,
     items: [
       {
-        field: fieldId,
         generalType: "699f3e94a9d129153ac7617f",
         type: "699f3e94a9d129153ac76180",
         cropVariety: "699f3e94a9d129153ac76181",

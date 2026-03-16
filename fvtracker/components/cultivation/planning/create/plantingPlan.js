@@ -140,9 +140,17 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
     plannedHarvestingDate: new Date().toISOString().split("T")[0],
   });
 
+  const [formData, setFormData] = useState(
+    createInitialFormData({ fieldId: null }),
+  );
+
   useEffect(() => {
-    setFormData(createInitialFormData());
+    setFormData(createInitialFormData({ fieldId: selectedField?._id || null }));
   }, [selectedField?._id]);
+
+  useEffect(() => {
+    console.log("Form data updated:", formData);
+  }, [formData]);
 
   const handleFormChange = (event) => {
     const { name, value } = event.target;

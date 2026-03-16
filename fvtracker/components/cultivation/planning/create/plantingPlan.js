@@ -194,6 +194,10 @@ export const FillPlanInfo = ({ selectedField, onSubmit = () => {} }) => {
   };
 
   const handleSubmit = async () => {
+    if (utils.objects.checkEmpty(formData)) {
+      alert("Molimo popunite sve podatke u formi.");
+      return;
+    }
       ...formData,
       items: formData.items.map((item) => ({
         cropVariety: item.cropVariety,

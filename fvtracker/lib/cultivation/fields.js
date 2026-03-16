@@ -18,6 +18,14 @@ export async function fetchFieldBySlug(slug) {
   return field;
 }
 
+export async function fetchFieldById(id) {
+  const field = await Field.findById(id);
+  if (!field) {
+    throw new Error("Field not found");
+  }
+  return field;
+}
+
 export async function createField(body) {
   console.log("Creating field with data:", body);
 

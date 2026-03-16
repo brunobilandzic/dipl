@@ -22,7 +22,7 @@ export async function createField(body) {
   console.log("Creating field with data:", body);
 
   const cultivationManager =
-    await auth.session.fetchSessionSpecificManager("CultivationManager");
+    await auth.session.fetchSessionSpecificManager({managerName: "CultivationManager"});
 
   await cultivationManager.populate("fields");
   checkFieldNameUnique(

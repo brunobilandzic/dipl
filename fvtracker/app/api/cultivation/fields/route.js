@@ -8,7 +8,7 @@ export async function GET(request) {
     const slug = searchParams.get("slug");
     await dbConnect();
     const cultivationManager =
-      await auth.session.fetchSessionSpecificManager("CultivationManager");
+      await auth.session.fetchSessionSpecificManager({managerName: "CultivationManager"});
     await cultivationManager.populate({
       path: "fields",
       populate: {

@@ -25,15 +25,21 @@ async function fetchSessionEmail() {
   return session.user.email;
 }
 
-export async function fetchSessionSpecificManager(managerModelName) {
+export async function fetchSessionSpecificManager({
+  managerName,
+  throwError = true,
+}) {
   const appUser = await fetchSessionAppUser();
-  const specificManager = await mongoose.models[managerModelName].findOne({
+  const specificManager = await mongoose.models[managerName].findOne({
     rootManager: appUser.rootManager,
   });
   if (!specificManager) {
-    throw new Error(
-      `No ${managerModelName} found for session user with email: ${appUser.email}`,
-    );
+    if (throwError) {
+      throw new Error(
+        `No ${managerName} found for session user with email: ${appUser.email}`,
+      );
+    }
+    return null;
   }
 
   return specificManager;

@@ -5,7 +5,7 @@ import auth from "@/lib/auth";
 export async function POST(request) {
   try {
     await dbConnect();
-    await auth.session.fetchSessionSpecificManager("CultivationManager");
+    await auth.session.fetchSessionSpecificManager({managerName: "CultivationManager"});
     const body = await request.json();
     if (!body?.data)
       throw new Error("Missing cultivation details in request body");
@@ -23,7 +23,7 @@ export async function POST(request) {
 export async function PUT(request) {
   try {
     await dbConnect();
-    await auth.session.fetchSessionSpecificManager("CultivationManager");
+    await auth.session.fetchSessionSpecificManager({managerName: "CultivationManager"});
     const body = await request.json();
     const updatedCultivation = await cultivation.cultivations.update(body);
     return Response.json({ updatedCultivation }, { status: 200 });
@@ -36,7 +36,7 @@ export async function PUT(request) {
 export async function DELETE(request) {
   try {
     await dbConnect();
-    await auth.session.fetchSessionSpecificManager("CultivationManager");
+    await auth.session.fetchSessionSpecificManager({managerName: "CultivationManager"});
     const body = await request.json();
     const deleted = await cultivation.cultivations.delete(body.id);
     if (!deleted) {

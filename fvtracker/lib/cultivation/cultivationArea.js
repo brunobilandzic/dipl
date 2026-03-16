@@ -6,7 +6,7 @@ import { Cultivation } from "@/models/sectors/cultivation/Cultivation";
 
 export async function createCultivationArea(body) {
   const cultivationManager =
-    await auth.session.fetchSessionSpecificManager("CultivationManager");
+    await auth.session.fetchSessionSpecificManager({managerName: "CultivationManager"});
 
   if (
     !cultivationManager.fields?.some((fid) => fid?.toString() === body.field)
@@ -59,7 +59,7 @@ export async function deleteCultivationArea(id) {
 
 export const getCultivationArea = async (id) => {
   const cultivationManager =
-    await auth.session.fetchSessionSpecificManager("CultivationManager");
+    await auth.session.fetchSessionSpecificManager({managerName: "CultivationManager"});
   await cultivationManager.populate({
     path: "fields",
     populate: {

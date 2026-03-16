@@ -8,6 +8,7 @@ import utils from "@/lib/utils";
 import { getCultivationById } from "./cultivation";
 import { PlantingPlan } from "@/models/documents/PlantingPlan";
 import auth from "@/lib/auth";
+import { fetchGeneralAndOtherManagers } from "../auth/fetchSessionData";
 
 export async function cropsData() {
   const cropMainTypes = await CropMainType.find().populate({
@@ -167,7 +168,7 @@ async function createPlantedCropVarietyPromise({
 
 export async function getPlantingPlans() {
   const { hasAccess, generalManager, otherManagers } =
-    await checkGeneralOrOtherManager({
+    await fetchGeneralAndOtherManagers({
       managerNames: ["CultivationManager"],
     });
   if (!hasAccess) {
@@ -191,7 +192,7 @@ export async function getPlantingPlans() {
 }
 
 export async function getPlantingPlanById(id) {
-  const { hasAccess } = await checkGeneralOrOtherManager({
+  const { hasAccess } = await fetchGeneralAndOtherManagers({
     managerNames: ["CultivationManager"],
   });
 

@@ -14,9 +14,9 @@ const plantingItemSchema = new Schema({
 });
 
 const plantingPlanSchema = new Schema({
-  cultivation: {
+  field: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Cultivation",
+    ref: "Field",
     required: true,
   },
   items: [plantingItemSchema],

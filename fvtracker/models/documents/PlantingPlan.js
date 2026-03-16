@@ -11,6 +11,13 @@ const plantingItemSchema = new Schema({
     type: Number,
     default: 0,
   },
+  plantedCropVarieties: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "PlantedCropVariety",
+      default: [],
+    },
+  ],
 });
 
 const plantingPlanSchema = new Schema({

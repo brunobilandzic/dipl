@@ -2,7 +2,7 @@ import { handleCredentials, handleOAuth } from "./handlers";
 import {
   fetchGeneralAndOtherManagers,
   fetchSessionAppUser,
-  specificManager,
+  fetchSessionSpecificManager,
 } from "./fetchSessionData";
 
 export default {

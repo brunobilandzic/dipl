@@ -48,6 +48,13 @@ const fieldSchema = new mongoose.Schema({
     },
     required: true,
   },
+  plantingPlans: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "PlantingPlan",
+      default: [],
+    },
+  ],
 });
 
 fieldSchema.methods.addCultivationArea = async function (cultivationArea) {

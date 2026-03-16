@@ -212,4 +212,11 @@ export async function createPlantingPlan({ plantingPlanData }) {
   const cultivationManager = await auth.session.specificManager({
     managerName: "CultivationManager",
   });
+
+  const plantingPlan = new PlantingPlan({
+    ...plantingPlanData,
+    cultivationManager: cultivationManager._id,
+  });
+  await plantingPlan.save();
+  return plantingPlan;
 }

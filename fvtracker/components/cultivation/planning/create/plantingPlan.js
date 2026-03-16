@@ -126,7 +126,19 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
     varieties: cropVarieties = [],
   } = crops || {};
 
-  const [formData, setFormData] = useState(createInitialFormData);
+  const createInitialFormData = ({ fieldId = selectedField?._id || null }) => ({
+    items: [
+      {
+        field: fieldId,
+        generalType: "699f3e94a9d129153ac7617f",
+        type: "699f3e94a9d129153ac76180",
+        cropVariety: "699f3e94a9d129153ac76181",
+        quantity: 100,
+      },
+    ],
+    plannedPlantingDate: new Date().toISOString().split("T")[0],
+    plannedHarvestingDate: new Date().toISOString().split("T")[0],
+  });
 
   useEffect(() => {
     setFormData(createInitialFormData());

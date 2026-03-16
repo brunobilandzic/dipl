@@ -193,9 +193,7 @@ export const FillPlanInfo = ({ selectedField, onSubmit = () => {} }) => {
     }));
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onSubmit({
+  const handleSubmit = async () => {
       ...formData,
       items: formData.items.map((item) => ({
         cropVariety: item.cropVariety,

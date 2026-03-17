@@ -8,7 +8,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
 import utils from "@/lib/utils";
-import { FieldStatistics } from "../../fields/general";
+import { FieldStatistics } from "../../../fields/general";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { Loading } from "@/components/layout/loading";
 
@@ -25,7 +25,10 @@ export default function CreatePlantingPlanPageComonent() {
 
       {selectedField ? (
         <div className="mt-4 rounded-lg border p-4">
-          <FillPlanInfo selectedField={selectedField} setSelectedField={setSelectedField}/>
+          <FillPlanInfo
+            selectedField={selectedField}
+            setSelectedField={setSelectedField}
+          />
         </div>
       ) : null}
     </>
@@ -125,7 +128,9 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
     varieties: cropVarieties = [],
   } = crops || {};
 
-  const createInitialFormData = ({ field = selectedField?._id || null } = {}) => ({
+  const createInitialFormData = ({
+    field = selectedField?._id || null,
+  } = {}) => ({
     field,
     items: [
       {

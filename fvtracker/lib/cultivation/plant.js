@@ -220,7 +220,7 @@ export async function createPlantingPlan({ plantingPlanData }) {
     ...plantingPlanData,
   });
   field.plantingPlans.push(plantingPlan._id);
-  
+
   await field.save();
   await plantingPlan.save();
   return plantingPlan;

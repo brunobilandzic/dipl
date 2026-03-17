@@ -1,4 +1,4 @@
-import { CreatePlantagePlan } from "@/components/cultivation/planning/create/plantingPlan";
+import { CreatePlantagePlan } from "@/components/cultivation/cultivationArea/planting/plan/create";
 import React from "react";
 
 const PlantingPlanList = () => {

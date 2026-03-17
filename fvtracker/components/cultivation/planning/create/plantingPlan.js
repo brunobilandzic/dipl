@@ -125,7 +125,7 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
     varieties: cropVarieties = [],
   } = crops || {};
 
-  const createInitialFormData = ({ field = selectedField?._id || null }) => ({
+  const createInitialFormData = ({ field = selectedField?._id || null } = {}) => ({
     field,
     items: [
       {

@@ -125,8 +125,8 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
     varieties: cropVarieties = [],
   } = crops || {};
 
-  const createInitialFormData = ({ fieldId = selectedField?._id || null }) => ({
-    fieldId,
+  const createInitialFormData = ({ field = selectedField?._id || null }) => ({
+    field,
     items: [
       {
         generalType: "699f3e94a9d129153ac7617f",
@@ -140,11 +140,11 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
   });
 
   const [formData, setFormData] = useState(
-    createInitialFormData({ fieldId: null }),
+    createInitialFormData({ field: null }),
   );
 
   useEffect(() => {
-    setFormData(createInitialFormData({ fieldId: selectedField?._id || null }));
+    setFormData(createInitialFormData({ field: selectedField?._id || null }));
   }, [selectedField?._id]);
 
   useEffect(() => {

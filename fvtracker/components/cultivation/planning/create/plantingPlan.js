@@ -120,7 +120,7 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
   } = crops || {};
 
   const createInitialFormData = ({ fieldId = selectedField?._id || null }) => ({
-    field: fieldId,
+    fieldId,
     items: [
       {
         generalType: "699f3e94a9d129153ac7617f",

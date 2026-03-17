@@ -213,9 +213,8 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
     if (utils.objects.checkEmpty(submitData)) {
       return;
     }
-    return;
     try {
-      const res = await api.post("/cultivation/planting-plans", {
+      const res = await api.post("/cultivation/plant/plan", {
         ...submitData,
         fieldId: selectedField._id,
       });

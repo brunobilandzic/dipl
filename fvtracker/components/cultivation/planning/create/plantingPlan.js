@@ -226,6 +226,7 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
       if (res.data && res.data.plantingPlan) {
         alert("Plan sadnje uspješno kreiran!");
       }
+      console.log("Created planting plan:", res.data);
       setSelectedField(null);
       setFormData(createInitialFormData());
     } catch (error) {

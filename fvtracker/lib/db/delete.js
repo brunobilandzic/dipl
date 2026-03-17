@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import Cultivation from "@/models/sectors/cultivation";
-const { Field, CultivationArea } = Cultivation;
+const { Field, CultivationArea, Cultivation: CultivationRecord } = Cultivation;
 import dbConnect from "./mongooseConnect.js";
 import { CultivationManager } from "@/models/user/managers/CultivationManager.js";
 import {
@@ -8,6 +8,7 @@ import {
   CropMainType,
   CropType,
   CropVariety,
+  PlantedCropVariety,
 } from "@/models/sectors/cultivation/Crops.js";
 
 export const deleteDB = async () => {
@@ -26,7 +27,17 @@ export const deleteDB = async () => {
   return true;
 };
 
+export async function deleteCultivationsWithDocs() {
+  await CultivationRecord.deleteMany({});
+  await PlantedCropVariety.deleteMany({});
+  await CultivationArea.updateMany({}, { $set: { cultivations: [] } });
+  await Field.updateMany({}, { $set: { cultivations: [] } });
+  await CropVariety.updateMany({}, { $set: { plantedCropVarieties: [] } });
+  console.log("Deleted existing cultivations and planted crop varieties.");
+}
+
 export async function deleteFieldsWithDocs() {
+  await deleteCultivationsWithDocs();
   await Field.deleteMany({});
   await CultivationArea.deleteMany({});
   await CultivationManager.updateMany({}, { $set: { fields: [] } });
@@ -36,6 +47,7 @@ export async function deleteFieldsWithDocs() {
 }
 
 export async function deleteCrops() {
+  await deleteCultivationsWithDocs();
   await CropMainType.deleteMany({});
   await CropGeneralType.deleteMany({});
   await CropType.deleteMany({});

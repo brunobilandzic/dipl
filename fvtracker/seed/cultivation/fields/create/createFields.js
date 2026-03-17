@@ -187,6 +187,8 @@ function createCultivationArea(x, y, dim_x, dim_y, { name, description }) {
     }
   }
 
+  
+
   return {
     name,
     description,

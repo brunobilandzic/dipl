@@ -194,6 +194,7 @@ const cultivationSlice = createSlice({
       const fieldId = newPlan.field;
 
       const field = state.fields.find((f) => f._id === fieldId);
+      console.log("Adding new planting plan to field:", fieldId, newPlan);
       if (field) {
         field.plantingPlans = [...(field.plantingPlans || []), newPlan];
       }

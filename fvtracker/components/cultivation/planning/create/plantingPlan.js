@@ -10,6 +10,7 @@ import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
 import utils from "@/lib/utils";
 import { FieldStatistics } from "../../fields/general";
 import handleError from "@/lib/constants/errors/client/handleError";
+import { Loading } from "@/components/layout/loading";
 
 export default function CreatePlantingPlanPageComonent() {
   const [selectedField, setSelectedField] = useState(null);
@@ -63,6 +64,11 @@ const SelectField = ({ selectedField, setSelectedField }) => {
       }
     })();
   }, [fields]);
+
+  if (!fields || fields.length === 0) {
+    console.log("Fields not loaded yet, showing loading state");
+    return <Loading />;
+  }
 
   return (
     <>

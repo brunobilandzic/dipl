@@ -216,7 +216,6 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
     try {
       const res = await api.post("/cultivation/plant/plan", {
         ...submitData,
-        fieldId: selectedField._id,
       });
       if (res.data && res.data.plantingPlan) {
         alert("Plan sadnje uspješno kreiran!");

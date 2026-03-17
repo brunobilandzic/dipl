@@ -211,7 +211,6 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
     const submitData = utils.plant.prepareSubmitPlan(formData);
     console.log("Submitting planting plan with data:", submitData);
     if (utils.objects.checkEmpty(submitData)) {
-      alert("Molimo popunite sve podatke u formi.");
       return;
     }
     return;

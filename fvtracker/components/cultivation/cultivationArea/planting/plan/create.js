@@ -2,7 +2,7 @@
 
 import { AppDatePicker, AppInput } from "@/components/form/inputs";
 import api from "@/lib/api";
-import { setFields } from "@/store/cultivation";
+import { createPlantingPlan, setFields } from "@/store/cultivation";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -122,6 +122,7 @@ const SelectField = ({ selectedField, setSelectedField }) => {
 
 export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
   const crops = useSelector((state) => state.cultivation.crops);
+  const dispatch = useDispatch();
   const {
     generalTypes = [],
     types = [],
@@ -232,6 +233,7 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
         alert("Plan sadnje uspješno kreiran!");
       }
       console.log("Created planting plan:", res.data);
+      dispatch(createPlantingPlan(res.data));
       setSelectedField(null);
       setFormData(createInitialFormData());
     } catch (error) {

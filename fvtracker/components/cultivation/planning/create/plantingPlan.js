@@ -25,7 +25,7 @@ export default function CreatePlantingPlanPageComonent() {
 
       {selectedField ? (
         <div className="mt-4 rounded-lg border p-4">
-          <FillPlanInfo selectedField={selectedField} />
+          <FillPlanInfo selectedField={selectedField} setSelectedField={setSelectedField}/>
         </div>
       ) : null}
     </>

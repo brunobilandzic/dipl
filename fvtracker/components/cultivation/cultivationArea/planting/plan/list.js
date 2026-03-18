@@ -8,6 +8,7 @@ import { setFields } from "@/store/cultivation";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
+import { PlantingPlanListItem } from "./planItem";
 
 const PlantingPlanList = () => {
   const fields = useSelector((state) => state.cultivation.fields);
@@ -83,7 +84,11 @@ function FieldPlansItem({ fieldPlans }) {
       <div className="font-bold text-lg mb-4">{fieldName}:</div>
       {plantingPlans?.length > 0 ? (
         <div className="flex flex-col">
-          {plantingPlans.map((plan) => JSON.stringify(plan))}
+          {plantingPlans.map((plan) => (
+            <div key={uuid()} className="mb-2">
+              <PlantingPlanListItem plan={plan} />
+            </div>
+          ))}
         </div>
       ) : (
         "No planting plans for this field."

@@ -15,3 +15,26 @@ export async function POST(request) {
     return Response.json({ error: error.message }, { status: 500 });
   }
 }
+
+export async function DELETE(request) {
+  try {
+    await dbConnect();
+
+    let fieldId, planId;
+    try {
+      const body = await request.json();
+      ({ fieldId, planId } = body);
+    } catch {
+      // no body - delete all
+    }
+
+    await cultivation.plans.deletePlantingPlans({ fieldId, planId });
+    return Response.json(
+      { message: "Planting plans deleted" },
+      { status: 200 },
+    );
+  } catch (error) {
+    console.error(error);
+    return Response.json({ error: error.message }, { status: 500 });
+  }
+}

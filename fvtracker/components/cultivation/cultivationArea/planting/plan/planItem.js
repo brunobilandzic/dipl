@@ -47,3 +47,40 @@ const PlantingPlanItems = ({ items }) => {
   );
 };
 
+const PlantingPlanItem = ({ item }) => {
+  return (
+    <div className="border p-4 rounded w-[300px]">
+      <div>
+        <span className="font-semibold">Crop Variety: </span>
+        {item.cropVariety.name}
+      </div>
+      <div>
+        <span className="font-semibold">Quantity: </span>
+        {item.quantity}
+      </div>
+      <div>
+        <span className="font-semibold">Planted Crop Varieties: </span>
+        <PlantedCropVarietiesPlan
+          plantedCropVarieties={item.plantedCropVarieties}
+        />
+      </div>
+    </div>
+  );
+};
+
+const PlantedCropVarietiesPlan = ({ plantedCropVarieties }) => {
+  return (
+    <div>
+      {plantedCropVarieties && plantedCropVarieties.length > 0 ? (
+        plantedCropVarieties.map((pcv) => (
+          <div key={pcv._id}>
+            <span className="font-semibold">Cultivation: </span>
+            {pcv.cultivation.name}
+          </div>
+        ))
+      ) : (
+        <div>No planted crop varieties</div>
+      )}
+    </div>
+  );
+};

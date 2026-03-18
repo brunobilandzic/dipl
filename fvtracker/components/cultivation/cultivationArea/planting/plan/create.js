@@ -243,11 +243,11 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
       const res = await api.post("/cultivation/plant/plan", {
         ...submitData,
       });
-      if (res.data && res.data.plantingPlan) {
+      if (res.data && res.data.newPlantingPlan) {
         alert("Plan sadnje uspješno kreiran!");
       }
-      console.log("Created planting plan:", res.data);
-      dispatch(createPlantingPlan(res.data));
+      console.log("Created planting plan:", res.data.newPlantingPlan);
+      dispatch(createPlantingPlan(res.data.newPlantingPlan));
       setSelectedField(null);
       setFormData(createInitialFormData());
     } catch (error) {

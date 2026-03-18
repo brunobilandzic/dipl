@@ -63,3 +63,27 @@ async function createFieldRecord(properties) {
   await newField.save();
   return newField;
 }
+
+export async function deletePlansFromFields({ fieldId, planId }) {
+  const field = fieldId ? await fetchFieldById(fieldId) : null;
+  const fields = !field ? await fieldsList({}) : null;
+  if (field) {
+    if (planId) {
+      const planIndex = field.plantingPlans.indexOf(planId);
+      if (planIndex === -1) {
+        throw new Error("Plan not found in field");
+      }
+      field.plantingPlans.splice(planIndex, 1);
+      await field.save();
+      return;
+    } else {
+      field.plantingPlans = [];
+      await field.save();
+    }
+  } else if (fields) {
+    for (const f of fields) {
+      f.plantingPlans = [];
+      await f.save();
+    }
+  }
+}

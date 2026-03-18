@@ -3,7 +3,7 @@ import {
   fetchFieldBySlug,
   createField,
   fetchFieldById,
-  deletePlansFromField,
+  deletePlansFromFields,
 } from "./fields";
 import {
   createCultivationArea,
@@ -27,7 +27,7 @@ export default {
     findBySlug: fetchFieldBySlug,
     create: createField,
     findById: fetchFieldById,
-    deletePlans: deletePlansFromField,
+    deletePlans: deletePlansFromFields,
   },
   cultivationManager: {},
   cultivationArea: {

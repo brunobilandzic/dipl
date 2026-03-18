@@ -251,19 +251,4 @@ export async function getPlantingPlanById(id) {
   return plantingPlan;
 }
 
-export async function createPlantingPlan({ plantingPlanData }) {
-  await auth.session.specificManager({
-    managerName: "CultivationManager",
-  });
 
-  const field = await fetchFieldById(plantingPlanData.field);
-
-  const plantingPlan = new PlantingPlan({
-    ...plantingPlanData,
-  });
-  field.plantingPlans.push(plantingPlan._id);
-
-  await field.save();
-  await plantingPlan.save();
-  return plantingPlan;
-}

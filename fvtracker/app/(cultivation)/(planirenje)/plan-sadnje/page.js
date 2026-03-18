@@ -1,17 +1,16 @@
 import { CreatePlantagePlan } from "@/components/cultivation/cultivationArea/planting/plan/create";
+import PlantingPlanList from "@/components/cultivation/cultivationArea/planting/plan/list";
 import React from "react";
 
-const PlantingPlanList = () => {
+function PlantingPlanListPage() {
   return (
     <>
-      <div>
-        <CreatePlantagePlan />
+      <div className="flex flex-col gap-8">
         <PlantingPlanList />
+        <CreatePlantagePlan />
       </div>
     </>
   );
-};
+}
 
-export default PlantingPlanList;
-
-const PlantingPlanOptions = () => {};
+export default PlantingPlanListPage;

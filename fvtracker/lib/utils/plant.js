@@ -46,12 +46,12 @@ export const prepareSubmitPlan = (plan) => {
   };
 };
 
-export const getPlantingPlans = (fields) => {
-  const fieldPlans = {};
+export const getFieldsPlans = (fields) => {
+  const fieldsPlans = [];
   fields.forEach((field) => {
     if (!field.plantingPlans) return;
 
-    fieldPlans[field.name] = field.plantingPlans;
+    fieldsPlans.push({ fieldName: field.name, plantingPlans: field.plantingPlans });
   });
-  return fieldPlans;
+  return fieldsPlans;
 };

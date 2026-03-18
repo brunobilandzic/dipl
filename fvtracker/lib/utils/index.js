@@ -38,7 +38,7 @@ import {
   fieldHasCultivations,
 } from "./cultivation";
 import { cvAndColor, showDate } from "./display";
-import { prepareSubmitPlan, getPlantingPlans } from "./plant";
+import { prepareSubmitPlan, getFieldsPlans } from "./plant";
 
 export default {
   objects: {
@@ -96,6 +96,6 @@ export default {
   },
   plant: {
     prepareSubmitPlan,
-    getPlantingPlans,
+    getFieldsPlans,
   },
 };

@@ -12,22 +12,37 @@ export async function GET(request) {
     });
     await cultivationManager.populate({
       path: "fields",
-      populate: {
-        path: "cultivationAreas",
-        populate: [
-          {
-            path: "cultivations",
-            populate: {
-              path: "plantedCropVarieties",
+      populate: [
+        {
+          path: "cultivationAreas",
+          populate: [
+            {
+              path: "cultivations",
               populate: {
-                path: "plantingPlanItem",
-                populate: { path: "cropType" },
+                path: "plantedCropVarieties",
+                populate: {
+                  path: "plantingPlanItem",
+                  populate: { path: "cropType" },
+                },
               },
             },
-          },
-          { path: "field", select: "slug" },
-        ],
-      },
+            { path: "field", select: "slug" },
+          ],
+        },
+        {
+          path: "plantingPlans",
+          select: "-field",
+          populate: [
+            {
+              path: "items.cropVariety",
+              populate: { path: "cropType" },
+            },
+            {
+              path: "items.plantedCropVarieties",
+            },
+          ],
+        },
+      ],
     });
 
     if (slug) {

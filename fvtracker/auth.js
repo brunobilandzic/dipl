@@ -7,6 +7,7 @@ import { handleOAuth, handleCredentials } from "@/lib/auth/handlers";
 import users from "./lib/users";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  trustHost: true,
   adapter: MongoDBAdapter(clientPromise),
   session: { strategy: "jwt", maxAge: 30 * 24 * 60 * 60 },
   secret: process.env.AUTH_SECRET,

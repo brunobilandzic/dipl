@@ -1,3 +1,5 @@
+import utils from "@/lib/utils";
+
 export const PlantingPlanListItem = ({ plan }) => {
   return (
     <>
@@ -69,6 +71,10 @@ const PlantingPlanItem = ({ item }) => {
 };
 
 const PlantedCropVarietiesPlan = ({ plantedCropVarieties }) => {
+  const plantedCropVarietiesPerCultivation =
+    utils.plans.getPlantedCropVarietesPerCultivation({
+      items: [{ plantedCropVarieties }],
+    });
   return (
     <div>
       {plantedCropVarieties && plantedCropVarieties.length > 0 ? (

@@ -2,7 +2,7 @@ import SEED_TYPES from "@/seed/seedTypes";
 import users from "./users";
 import fields from "./cultivation/fields";
 import crops from "./cultivation/crops";
-import cultivations from "./cultivation/cultivation";
+// import cultivations from "./cultivation/cultivation";
 import { deleteDB } from "@/lib/db/delete";
 import { CropVariety } from "@/models/sectors/cultivation/Crops";
 
@@ -43,11 +43,10 @@ async function seedAll() {
     throw new Error("Seed All failed: no crop varieties were created.");
   }
 
-  const cultivationsSeedResult = await cultivations.create();
+  // const cultivationsSeedResult = await cultivations.create();
 
   return {
     cropVarietiesCount,
     cropsSeedResult,
-    cultivationsSeedResult,
   };
 }

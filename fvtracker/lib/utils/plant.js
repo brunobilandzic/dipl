@@ -45,3 +45,13 @@ export const prepareSubmitPlan = (plan) => {
     items,
   };
 };
+
+export const getPlantingPlans = (fields) => {
+  const fieldPlans = {};
+  fields.forEach((field) => {
+    if (!field.plantingPlans) return;
+
+    fieldPlans[field.name] = field.plantingPlans;
+  });
+  return fieldPlans;
+};

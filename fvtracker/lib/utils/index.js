@@ -33,7 +33,9 @@ import {
   getCUForCell,
   getCultivationNameForCell,
   getCASCultivations,
-  filterCutivationCells
+  filterCutivationCells,
+  getFieldCultivations,
+  fieldHasCultivations,
 } from "./cultivation";
 import { cvAndColor, showDate } from "./display";
 import { prepareSubmitPlan } from "./plant";
@@ -42,7 +44,7 @@ export default {
   objects: {
     extractDBObject,
     checkEmpty,
-    idToNames
+    idToNames,
   },
   strings: {
     makeUrlFriendly,
@@ -80,7 +82,9 @@ export default {
       getCUForCell,
       getCultivationNameForCell,
       getCASCultivations,
-      filterCutivationCells
+      filterCutivationCells,
+      getFieldCultivations,
+      fieldHasCultivations,
     },
   },
   formValidation: {
@@ -92,7 +96,5 @@ export default {
   },
   plant: {
     prepareSubmitPlan,
-  }
+  },
 };
-
-export const nextFrame = () => new Promise((res) => requestAnimationFrame(res));

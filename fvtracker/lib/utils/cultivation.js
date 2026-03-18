@@ -88,3 +88,23 @@ export const getCASCultivations = (cultivationAreas) => {
 export const filterCutivationCells = ({ cultivationCells, cultivationId }) => {
   return cultivationCells.filter((cc) => cc.cultivation === cultivationId);
 };
+
+export const getFieldCultivations = (field) => {
+  const cultivations = [];
+
+  field.cultivationAreas.forEach((ca) => {
+    ca.cultivations.forEach((cul) => {
+      cultivations.push(cul);
+    });
+  });
+
+  if (cultivations.length === 0) {
+    throw new Error("No cultivations found for this field");
+  }
+
+  return cultivations;
+};
+
+export const fieldHasCultivations = (field) => {
+  return field.cultivationAreas.some((ca) => ca.cultivations.length > 0);
+};

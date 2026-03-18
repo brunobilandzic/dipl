@@ -91,10 +91,10 @@ const cropVarietySchema = new Schema({
 });
 
 const plantedCropVarietySchema = new Schema({
-  cropVariety: {
+  plantingPlanItem: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "CropVariety",
-    default: null
+    ref: "PlantingPlanItem",
+    default: null,
   },
   cultivation: {
     type: mongoose.Schema.Types.ObjectId,
@@ -148,4 +148,3 @@ export const CropVariety =
 export const PlantedCropVariety =
   mongoose.models.PlantedCropVariety ||
   mongoose.model("PlantedCropVariety", plantedCropVarietySchema);
-

@@ -7,6 +7,7 @@ import utils from "@/lib/utils";
 import { setFields } from "@/store/cultivation";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { v4 as uuid } from "uuid";
 
 const PlantingPlanList = () => {
   const fields = useSelector((state) => state.cultivation.fields);
@@ -35,6 +36,7 @@ const PlantingPlanList = () => {
   const deletePlans = async () => {
     try {
       const res = await api.delete("/cultivation/plant/plan", {});
+      refreshFields();
     } catch (error) {
       handleError({
         ...error,
@@ -54,7 +56,13 @@ const PlantingPlanList = () => {
   return (
     <>
       <div>
-        <div>{JSON.stringify(fieldsPlans, null, 2)}</div>
+        <div>
+          {fieldsPlans.map((fieldPlans, index) => (
+            <div key={uuid()}>
+              <FieldPlansItem fieldPlans={fieldPlans} />
+            </div>
+          ))}
+        </div>
       </div>
       <div className="flex flex-col gap-4">
         <button
@@ -67,5 +75,21 @@ const PlantingPlanList = () => {
     </>
   );
 };
+
+function FieldPlansItem({ fieldPlans }) {
+  const { fieldName, plantingPlans } = fieldPlans;
+  return (
+    <div>
+      <div className="font-bold text-lg mb-4">{fieldName}:</div>
+      {plantingPlans?.length > 0 ? (
+        <div className="flex flex-col">
+          {plantingPlans.map((plan) => JSON.stringify(plan))}
+        </div>
+      ) : (
+        "No planting plans for this field."
+      )}
+    </div>
+  );
+}
 
 export default PlantingPlanList;

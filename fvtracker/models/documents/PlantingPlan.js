@@ -40,3 +40,7 @@ const plantingPlanSchema = new Schema({
 export const PlantingPlan =
   mongoose.models.PlantingPlan ||
   mongoose.model("PlantingPlan", plantingPlanSchema);
+
+export const PlantingPlanItem =
+  mongoose.models.PlantingPlanItem ||
+  mongoose.model("PlantingPlanItem", plantingItemSchema);

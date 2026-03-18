@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+
 const { Schema } = mongoose;
 
 const plantingItemSchema = new Schema({
@@ -21,6 +22,11 @@ const plantingItemSchema = new Schema({
 });
 
 const plantingPlanSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   field: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Field",

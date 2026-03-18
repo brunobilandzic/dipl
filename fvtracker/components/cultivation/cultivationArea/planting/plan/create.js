@@ -145,6 +145,7 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
       )[0]?._id || "";
 
     return {
+      name: "plan sadnje",
       field,
       items: [
         {
@@ -268,6 +269,15 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
             ? `Odabrano polje: ${selectedField.name}`
             : "Popunite podatke plana sadnje."}
         </div>
+      </div>
+      <div>
+        <AppInput
+          label="Naziv plana sadnje"
+          name="name"
+          onChange={handleFormChange}
+          placeholder="Unesite naziv plana sadnje"
+          value={formData.name}
+        />
       </div>
       <div className="grid gap-4 md:grid-cols-2">
         <AppDatePicker

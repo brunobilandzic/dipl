@@ -1175,11 +1175,6 @@ const allCropTypes = [
 
 export default allCropTypes;
 
-const makeCultivation = () => {
-  const numVegertables = Math.floor(Math.random() * 5) + 1; // 1-5 povrća
-  const numFruits = Math.floor(Math.random() * 5) + 1; // 1-5 voća
-};
-
-
 export const END_PLANTING = "Završi spodručje sadnje"
 export const CONTINUE_PLANTING = "Nastavi kreirati područje sadnje"
+

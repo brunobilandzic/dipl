@@ -192,6 +192,48 @@ export async function getPlantingPlans() {
   }
 }
 
+export async function getPlantingPlansFromcmfields() {
+  const { hasAccess, generalManager, otherManagers } =
+    await fetchGeneralAndOtherManagers({
+      managerNames: ["CultivationManager"],
+    });
+
+  if (!hasAccess) {
+    throw new Error("Unauthorized access to planting plans.");
+  }
+
+  if (generalManager) {
+    return await PlantingPlan.find({});
+  }
+
+  const cultivationManager = otherManagers[0];
+
+  if (!cultivationManager) {
+    throw new Error("Cultivation manager not found.");
+  }
+
+  await cultivationManager.populate({
+    path: "fields",
+    select: "name slug plantingPlans",
+    populate: {
+      path: "plantingPlans",
+      populate: {
+        path: "cropVariety",
+        populate: "cropType",
+      },
+    },
+  });
+
+  return cultivationManager.fields.reduce((plans, field) => {
+    const fieldPlans = field.plantingPlans.map((plan) => ({
+      ...plan._doc,
+      fieldName: field.name,
+      fieldSlug: field.slug,
+    }));
+    return [...plans, ...fieldPlans];
+  }, []);
+}
+
 export async function getPlantingPlanById(id) {
   const { hasAccess } = await fetchGeneralAndOtherManagers({
     managerNames: ["CultivationManager"],

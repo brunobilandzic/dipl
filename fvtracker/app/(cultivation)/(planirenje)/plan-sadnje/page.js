@@ -6,6 +6,7 @@ const PlantingPlanList = () => {
     <>
       <div>
         <CreatePlantagePlan />
+        <PlantingPlanList />
       </div>
     </>
   );

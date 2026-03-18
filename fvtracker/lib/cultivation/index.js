@@ -3,6 +3,7 @@ import {
   fetchFieldBySlug,
   createField,
   fetchFieldById,
+  deletePlansFromField,
 } from "./fields";
 import {
   createCultivationArea,
@@ -18,6 +19,7 @@ import {
   deleteCultivation,
   getCultivationById,
 } from "./cultivation";
+import { createPlantingPlan, deletePlantingPlans } from "./plans";
 
 export default {
   fields: {
@@ -25,6 +27,7 @@ export default {
     findBySlug: fetchFieldBySlug,
     create: createField,
     findById: fetchFieldById,
+    deletePlans: deletePlansFromField,
   },
   cultivationManager: {},
   cultivationArea: {
@@ -45,6 +48,10 @@ export default {
     getByProperty: getCultivationByProperty,
     update: updateCultivation,
     delete: deleteCultivation,
+  },
+  plans: {
+    deletePlantingPlans,
+    createPlantingPlan,
   },
 };
 

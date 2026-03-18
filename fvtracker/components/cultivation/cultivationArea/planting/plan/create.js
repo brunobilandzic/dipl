@@ -133,19 +133,31 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
 
   const createInitialFormData = ({
     field = selectedField?._id || null,
-  } = {}) => ({
-    field,
-    items: [
-      {
-        generalType: "699f3e94a9d129153ac7617f",
-        type: "699f3e94a9d129153ac76180",
-        cropVariety: "699f3e94a9d129153ac76181",
-        quantity: 100,
-      },
-    ],
-    plannedPlantingDate: new Date().toISOString().split("T")[0],
-    plannedHarvestingDate: new Date().toISOString().split("T")[0],
-  });
+  } = {}) => {
+    const defaultGeneralType = generalTypes[0]?._id || "";
+    const defaultType =
+      types.filter((t) => t.generalTypeName === generalTypes[0]?.name)[0]
+        ?._id || "";
+    const defaultVariety =
+      cropVarieties.filter(
+        (v) =>
+          v.cropTypeName === types.find((t) => t._id === defaultType)?.name,
+      )[0]?._id || "";
+
+    return {
+      field,
+      items: [
+        {
+          generalType: defaultGeneralType,
+          type: defaultType,
+          cropVariety: defaultVariety,
+          quantity: 100,
+        },
+      ],
+      plannedPlantingDate: new Date().toISOString().split("T")[0],
+      plannedHarvestingDate: new Date().toISOString().split("T")[0],
+    };
+  };
 
   const [formData, setFormData] = useState(
     createInitialFormData({ field: null }),

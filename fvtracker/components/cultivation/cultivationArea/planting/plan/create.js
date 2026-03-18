@@ -11,6 +11,7 @@ import utils from "@/lib/utils";
 import { FieldStatistics } from "../../../fields/general";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { Loading } from "@/components/layout/loading";
+import { fieldHasCultivations } from "@/lib/utils/cultivation";
 
 export default function CreatePlantingPlanPageComonent() {
   const [selectedField, setSelectedField] = useState(null);
@@ -83,6 +84,7 @@ const SelectField = ({ selectedField, setSelectedField }) => {
                 field.cultivationAreas,
               ),
             );
+            if (!fieldHasCultivations(field)) return;
 
             return (
               <div

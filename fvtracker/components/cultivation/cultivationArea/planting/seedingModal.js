@@ -92,7 +92,7 @@ export const SeedingModal = ({
       ...prev,
       endX: x,
       endY: y,
-      toPlantCells: prev.toPlantCells?.concat(planted),
+      toPlantCells: [...new Set([...prev.toPlantCells, ...planted])],
     }));
 
     if (!isContinue) setPlantCultivationOpen(true);
@@ -161,6 +161,10 @@ export const SeedingModal = ({
   const hanleCropVarietyClick = (cropVariety) => {
     console.log("Clicked crop variety:", cropVariety);
   };
+
+  useEffect(() => {
+    console.log("New plantage state:", newPlantage);
+  }, [newPlantage]);
 
   if (!cultivation || !isOpen) return null;
   return (

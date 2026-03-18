@@ -2,6 +2,7 @@
 
 import { Loading } from "@/components/layout/loading";
 import api from "@/lib/api";
+import utils from "@/lib/utils";
 import { setFields } from "@/store/cultivation";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -34,7 +35,9 @@ const PlantingPlanList = () => {
         <Loading />
       </div>
     );
-  return <div>{fields?.length}</div>;
+
+  const fieldsPlans = utils.plant.getFieldsPlans(fields);
+  return <div>{JSON.stringify(fieldsPlans)}</div>;
 };
 
 export default PlantingPlanList;

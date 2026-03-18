@@ -15,6 +15,7 @@ function CreateCA({
   setField,
   fieldId,
   setIsBeginSelected,
+  newCACoordinates,
 }) {
   const initialnewCADetails = {
     field: fieldId,
@@ -28,7 +29,6 @@ function CreateCA({
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const [newCADetails, setnewCADetails] = useState(initialnewCADetails);
-  const [newCACoordinates, setNewCACoordinates] = useState(null);
 
   const updateDimensions = (beginX, beginY, endX, endY) => {
     const dimensions = utils.cultivation.cultivationAreas.getDimensionsCA(
@@ -43,7 +43,7 @@ function CreateCA({
     });
   };
 
-  useEffect(() => {
+  /*  useEffect(() => {
     if (newCACoordinates?.planted?.length > 0) {
       updateDimensions(
         newCACoordinates.begin.x,
@@ -52,7 +52,7 @@ function CreateCA({
         newCACoordinates.end.y,
       );
     }
-  }, [newCACoordinates]);
+  }, [newCACoordinates]); */
 
   const onFormChange = (field, value) => {
     setnewCADetails({
@@ -150,13 +150,17 @@ function CreateCA({
           </div>
         </div>
       </Modals.FormModal>
-      <div
-        onClick={onAdd}
-        className="flex flex-col justify-center items-center gap-4 cursor-pointer"
-      >
-        <div><FaPlus className="text-4xl" /></div>
-        <div className="text-sm">Add Cultivation Area</div>
-      </div>
+      {newCACoordinates?.planted?.length > 1 && newCACoordinates?.planted?.length !== undefined ? (
+        <div
+          onClick={onAdd}
+          className="flex flex-col justify-center items-center gap-4 cursor-pointer"
+        >
+          <div>
+            <FaPlus className="text-4xl" />
+          </div>
+          <div className="text-sm">Add Cultivation Area</div>
+        </div>
+      ) : null}
     </>
   );
 }

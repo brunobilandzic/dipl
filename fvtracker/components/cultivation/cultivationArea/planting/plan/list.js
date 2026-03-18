@@ -12,22 +12,24 @@ const PlantingPlanList = () => {
   const fields = useSelector((state) => state.cultivation.fields);
   const dispatch = useDispatch();
 
+  const refreshFields = async () => {
+    try {
+      const res = await api.get("/cultivation/fields");
+      if (res.data && res.data.fields) {
+        dispatch(setFields(res.data.fields));
+      }
+    } catch (error) {
+      console.log("Error fetching fields:", error);
+      const errorMessage =
+        error.response?.data?.message || error.message || "Unknown error";
+      alert(`Error fetching fields: ${errorMessage}`);
+    }
+  };
+
   useEffect(() => {
     if (fields && fields.length > 0) return;
 
-    (async () => {
-      try {
-        const res = await api.get("/cultivation/fields");
-        if (res.data && res.data.fields) {
-          dispatch(setFields(res.data.fields));
-        }
-      } catch (error) {
-        console.log("Error fetching fields:", error);
-        const errorMessage =
-          error.response?.data?.message || error.message || "Unknown error";
-        alert(`Error fetching fields: ${errorMessage}`);
-      }
-    })();
+    refreshFields();
   }, [fields]);
 
   const deletePlans = async () => {

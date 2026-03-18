@@ -66,7 +66,6 @@ export async function createCultivation(cultivation) {
 
   await newCultivation.populate({
     path: "plantedCropVarieties",
-    populate: { path: "cropVariety", populate: { path: "cropType" } },
   });
 
   return newCultivation;

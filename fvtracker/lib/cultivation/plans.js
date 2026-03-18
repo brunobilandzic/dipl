@@ -1,9 +1,12 @@
-import { PlantingPlan, PlantingPlanItem } from "@/models/documents/PlantingPlan";
+import {
+  PlantingPlan,
+  PlantingPlanItem,
+} from "@/models/documents/PlantingPlan";
 import auth from "@/lib/auth";
-import { fetchFieldById } from "./fields";
+import { deletePlansFromFields, fetchFieldById } from "./fields";
 
 export async function deletePlantingPlans({ fieldId, planId }) {
-  await deletePlansFromField({ fieldId, planId });
+  await deletePlansFromFields({ fieldId, planId });
   await deletePlantingPlanItems({ planId });
   await deletePlantingPlanRecords({ planId });
 }

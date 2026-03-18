@@ -1,11 +1,11 @@
-import { createPlantingPlan } from "@/lib/cultivation/plant";
+import cultivation from "@/lib/cultivation";
 import dbConnect from "@/lib/db/mongooseConnect";
 
 export async function POST(request) {
   try {
     await dbConnect();
     const body = await request.json();
-    const newPlantingPlan = await createPlantingPlan({
+    const newPlantingPlan = await cultivation.plans.createPlantingPlan({
       plantingPlanData: body,
     });
     console.log("Created new planting plan:", newPlantingPlan);

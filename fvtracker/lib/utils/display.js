@@ -12,13 +12,16 @@ export const cvAndColor = ({ plCvs, cell, fieldView }) => {
 
   if (!plCv) return { cropVariety: null, color: "" };
 
-  const color = plCv.cropVariety?.cropType?.color;
-  const shade = plCv.cropVariety?.shade;
+  const color = plCv.plantingPlanItem?.cropVariety?.cropType?.color;
+  const shade = plCv.plantingPlanItem?.cropVariety?.shade;
   if (color && shade) {
-    return { cropVariety: plCv.cropVariety, color: `bg-${color}-${shade}` };
+    return {
+      cropVariety: plCv.plantingPlanItem?.cropVariety,
+      color: `bg-${color}-${shade}`,
+    };
   }
   return {
-    cropVariety: plCv.cropVariety,
+    cropVariety: plCv.plantingPlanItem?.cropVariety,
     color: colors.cultivation.defaultPlCvColor,
   };
 };

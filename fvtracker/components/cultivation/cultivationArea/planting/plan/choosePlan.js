@@ -6,5 +6,18 @@ export const ChoosePlan = ({ availablePlantingPlans, onChoose, onCancel }) => {
       </div>
     );
   }
-  return <div className="flex flex-wrap"></div>;
+  return (
+    <div className="flex flex-wrap p-4 border">
+      {availablePlantingPlans.map((avPlan) => (
+        <div
+          key={avPlan._id}
+          className="p-2 border rounded cursor-pointer"
+          onClick={() => onChoose(avPlan)}
+        >
+          <p>Plan sadnje: {avPlan.plantingPlanName}</p>
+          <p>Količina: {avPlan.quantity}</p>
+        </div>
+      ))}
+    </div>
+  );
 };

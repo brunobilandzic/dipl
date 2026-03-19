@@ -13,7 +13,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { PlantCultivation } from "./plantCultivation";
 import api from "@/lib/api";
-import { createPlantage } from "@/store/cultivation";
+import { createPlantage, setFields } from "@/store/cultivation";
 
 export const SeedingModal = ({
   isOpen,
@@ -23,6 +23,30 @@ export const SeedingModal = ({
   cultivationCells,
 }) => {
   const [newPlantage, setNewPlantage] = useState({});
+
+  const fields = useSelector((state) => state.cultivation.fields);
+
+  const refreshFields = async () => {
+    try {
+      const res = await api.get("/cultivation/fields");
+      if (res.data && res.data.fields) {
+        dispatch(setFields(res.data.fields));
+        setPlantingPlans(utils.plans.getFieldsPlans(res.data.fields));
+      }
+    } catch (error) {
+      console.log("Error fetching fields:", error);
+      const errorMessage =
+        error.response?.data?.message || error.message || "Unknown error";
+      alert(`Error fetching fields: ${errorMessage}`);
+    }
+  };
+
+  useEffect(() => {
+    if (fields && fields.length > 0) return;
+
+    refreshFields();
+  }, [fields]);
+  
   useEffect(() => {
     if (!cultivation?._id) return;
 

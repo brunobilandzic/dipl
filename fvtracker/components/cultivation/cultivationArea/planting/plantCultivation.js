@@ -4,9 +4,6 @@ import { useEffect, useState } from "react";
 import { AppDatePicker, AppSelect } from "@/components/form/inputs";
 import Modals from "@/components/layout/modals";
 import utils from "@/lib/utils";
-import { useSelector, useDispatch } from "react-redux";
-import api from "@/lib/api";
-import { setFields } from "@/store/cultivation";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -21,29 +18,7 @@ export const PlantCultivation = ({
   crops,
 }) => {
   const [availablePlantingPlans, setAvailablePlantingPlans] = useState([]);
-  const fields = useSelector((state) => state.cultivation.fields);
-  const dispatch = useDispatch();
 
-  const refreshFields = async () => {
-    try {
-      const res = await api.get("/cultivation/fields");
-      if (res.data && res.data.fields) {
-        dispatch(setFields(res.data.fields));
-        setPlantingPlans(utils.plans.getFieldsPlans(res.data.fields));
-      }
-    } catch (error) {
-      console.log("Error fetching fields:", error);
-      const errorMessage =
-        error.response?.data?.message || error.message || "Unknown error";
-      alert(`Error fetching fields: ${errorMessage}`);
-    }
-  };
-
-  useEffect(() => {
-    if (fields && fields.length > 0) return;
-
-    refreshFields();
-  }, [fields]);
   const onChange = (e) => {
     const { name, value, options, selectedIndex } = e.target;
 

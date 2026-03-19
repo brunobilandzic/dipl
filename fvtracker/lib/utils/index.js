@@ -39,7 +39,11 @@ import {
 } from "./cultivation";
 import { cvAndColor, showDate } from "./display";
 import { prepareSubmitPlan } from "./plant";
-import { getPlantedCropVarietesPerCultivation, getFieldsPlans } from "./plans";
+import {
+  getPlantedCropVarietesPerCultivation,
+  getFieldsPlans,
+  getPlansForCropVariety,
+} from "./plans";
 
 export default {
   objects: {
@@ -101,5 +105,6 @@ export default {
   plans: {
     getPlantedCropVarietesPerCultivation,
     getFieldsPlans,
+    getPlansForCropVariety,
   },
 };

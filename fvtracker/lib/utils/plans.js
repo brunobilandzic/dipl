@@ -39,8 +39,7 @@ export const getPlansForCropVariety = ({
       plantingItems.map((plItem) => {
         if (plItem.cropVariety?._id === cropVarietyId) {
           plans.push({
-            ...plItem,
-            plantingPlanName: pltPlan.name,
+            ...pltPlan,
           });
         }
       });

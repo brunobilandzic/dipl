@@ -81,10 +81,10 @@ const cropVarietySchema = new Schema({
     ref: "CropType",
     required: true,
   },
-  plantedCropVarieties: [
+  plantingPlanItems: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "PlantedCropVariety",
+      ref: "PlantingPlanItem",
       default: [],
     },
   ],

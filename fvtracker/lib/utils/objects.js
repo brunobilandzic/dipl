@@ -16,7 +16,7 @@ export function checkEmpty(obj, dontAlert = false) {
       if (!dontAlert) {
         alert(`Field ${key} is empty, value: ${obj[key]}`);
       }
-      
+
       return true;
     }
   }

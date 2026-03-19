@@ -23,6 +23,9 @@ export const SeedingModal = ({
   cultivationCells,
 }) => {
   const [newPlantage, setNewPlantage] = useState({});
+  const [plantingPlans, setPlantingPlans] = useState([]);
+  const [availablePlantingPlans, setAvailablePlantingPlans] = useState([]);
+  const dispatch = useDispatch();
 
   const fields = useSelector((state) => state.cultivation.fields);
 
@@ -75,7 +78,6 @@ export const SeedingModal = ({
 
   // object with mainTypes, genTypes, types and varieties aray
   const crops = useSelector((state) => state.cultivation.crops);
-  const dispatch = useDispatch();
 
   const showChooseNewEnd = ({ x, y }) => {
     setChooseNewEnd((prev) => ({ ...prev, isOpen: true, choice: null, x, y }));
@@ -186,6 +188,18 @@ export const SeedingModal = ({
     reset();
   };
 
+  useEffect(() => {
+    if (newPlantage?.variety?._id) {
+      const availablePlantingPlans = utils.plans.getPlansForCropVariety({
+        plantingPlans,
+        cropVarietyId: newPlantage.variety._id,
+      });
+      setAvailablePlantingPlans(availablePlantingPlans);
+    } else {
+      setAvailablePlantingPlans([]);
+    }
+  }, [newPlantage?.variety, plantingPlans]);
+
   const hanleCropVarietyClick = (cropVariety) => {
     console.log("Clicked crop variety:", cropVariety);
   };
@@ -239,6 +253,7 @@ export const SeedingModal = ({
         setNewPlantage={setNewPlantage}
         crops={crops}
         plantingPlans={plantingPlans}
+        availablePlantingPlans={availablePlantingPlans}
       />
     </>
   );

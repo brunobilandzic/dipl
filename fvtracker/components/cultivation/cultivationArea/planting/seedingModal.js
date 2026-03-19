@@ -46,7 +46,7 @@ export const SeedingModal = ({
 
     refreshFields();
   }, [fields]);
-  
+
   useEffect(() => {
     if (!cultivation?._id) return;
 
@@ -238,6 +238,7 @@ export const SeedingModal = ({
         newPlantage={newPlantage}
         setNewPlantage={setNewPlantage}
         crops={crops}
+        plantingPlans={plantingPlans}
       />
     </>
   );

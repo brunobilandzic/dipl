@@ -152,8 +152,10 @@ async function createPlantedCropVarietyPromise({
   }
 
   await plantedCropVariety.populate({
-    path: "cropVariety",
-    populate: "cropType",
+    path: "plantingPlanItem",
+    populate: {
+      path: "cropVariety",
+    },
   });
 
   let cropVariety = null;

@@ -40,7 +40,6 @@ export const getPlansForCropVariety = ({
         if (plItem.cropVariety?._id === cropVarietyId) {
           plans.push({
             ...plItem,
-            fieldName: fieldPlan.fieldName,
             plantingPlanName: pltPlan.name,
           });
         }

@@ -68,17 +68,19 @@ export async function createPlantage({
   relativeCoords,
   plantedAt,
   harvestedAt,
+  plantingPlanId,
 }) {
   const cultivation = await getCultivationById(cultivationId);
   await cultivation.populate({ path: "cultivationArea", select: "planted" });
 
   const plantedCropVarieties = await createPlantedCropVarietiesCells({
-    cultivationId,
+    cultivation,
     cropVarietyId,
     relativeCoords,
     harvestedAt,
     plantedAt,
     planted: cultivation.cultivationArea.planted,
+    plantingPlanId,
   });
 
   return plantedCropVarieties;
@@ -88,19 +90,21 @@ export async function createPlantedCropVarietiesCells({
   relativeCoords,
   cropVarietyId,
   planted,
-  cultivationId,
+  cultivation,
   harvestedAt,
   plantedAt,
+  plantingPlanId,
 }) {
   const plantedCropVarieties = [];
   for (const relativeCoord of relativeCoords) {
     const plantedCropVariety = await createPlantedCropVarietyPromise({
-      cultivationId,
+      cultivation,
       relativeCoord,
       cropVarietyId,
       planted,
       harvestedAt,
       plantedAt,
+      plantingPlanId,
     });
     plantedCropVarieties.push(plantedCropVariety);
   }
@@ -115,19 +119,22 @@ async function createPlantedCropVarietyPromise({
   relativeCoord,
   cropVarietyId,
   planted,
-  cultivationId,
+  cultivation,
   harvestedAt,
   plantedAt,
+  plantingPlanId,
 }) {
   const fieldCoords = utils.cultivation.cultivations.relativeToFieldCoords({
     planted,
     cellCoords: relativeCoord,
   });
+
   const field = await getFieldForCultivation({ cultivation });
+  const plantingPlan = await getPlantingPlanById(plantingPlanId);
 
   const plantedCropVariety = await PlantedCropVariety.findOneAndUpdate(
     {
-      cultivation: cultivationId,
+      cultivation: cultivation._id,
       relativeCoords: relativeCoord,
     },
     {
@@ -141,7 +148,7 @@ async function createPlantedCropVarietyPromise({
 
   if (!plantedCropVariety) {
     const newPlantedCropVariety = new PlantedCropVariety({
-      cultivation: cultivationId,
+      cultivation: cultivation._id,
       relativeCoords: relativeCoord,
       fieldCoords,
       relativeCoord,
@@ -254,5 +261,3 @@ export async function getPlantingPlanById(id) {
 
   return plantingPlan;
 }
-
-

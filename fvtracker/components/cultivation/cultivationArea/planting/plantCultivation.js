@@ -128,6 +128,7 @@ export const PlantCultivation = ({
           {JSON.stringify(availablePlantingPlans, null, 2)}
           <div>
             <ChoosePlan
+              selectedPlan={newPlantage.plantingPlan}
               availablePlantingPlans={availablePlantingPlans}
               onChoosePlan={onChoosePlan}
             />

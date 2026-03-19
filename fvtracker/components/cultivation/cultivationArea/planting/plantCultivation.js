@@ -93,6 +93,24 @@ export const PlantCultivation = ({
     }
   }, [newPlantage?.type, crops?.varieties]);
 
+  useEffect(() => {
+    console.log("Selected variety:", newPlantage.variety);
+    if (newPlantage.variety) {
+      setAvailablePlantingPlans(
+        utils.plans.getPlansForCropVariety({
+          plantingPlans,
+          cropVarietyId: newPlantage.variety._id,
+        }),
+      );
+    } else {
+      setAvailablePlantingPlans([]);
+    }
+  }, [newPlantage?.variety, plantingPlans]);
+
+  useEffect(() => {
+    console.log("Available planting plans:", availablePlantingPlans);
+  }, [availablePlantingPlans]);
+
   if (!isOpen) return null;
   return (
     <Modals.FormModal

@@ -72,7 +72,11 @@ export const PlantCultivation = ({
       const types = crops?.types.filter(
         (t) => t.generalTypeName === newPlantage.generalType.name,
       );
+      const varieties = crops?.varieties.filter((v) =>
+        types?.map((t) => t._id).includes(v.cropType?._id),
+      );
       setAvailableTypes(types);
+      setAvailableVarieties(varieties);
     } else {
       setAvailableTypes([]);
     }

@@ -209,6 +209,10 @@ export const SeedingModal = ({
   }, [newPlantage]);
 
   useEffect(() => {
+    console.log("Available planting plans updated:", availablePlantingPlans);
+  }, [availablePlantingPlans]);
+
+  useEffect(() => {
     console.log("Available planting plans:", availablePlantingPlans);
     console.log("All planting plans:", fieldsPlantingPlans);
     if (fields?.length > 0 && fieldsPlantingPlans?.length === 0) {

@@ -211,7 +211,18 @@ export const SeedingModal = ({
   useEffect(() => {
     console.log("Available planting plans:", availablePlantingPlans);
     console.log("All planting plans:", fieldsPlantingPlans);
-  }, [availablePlantingPlans, fieldsPlantingPlans]);
+    if (fields?.length > 0 && fieldsPlantingPlans?.length === 0) {
+      setFieldsPlantingPlans(utils.plans.getFieldsPlans(fields));
+      if (newPlantage?.variety?._id) {
+        setAvailablePlantingPlans(
+          utils.plans.getPlansForCropVariety({
+            fieldPlantingPlans: utils.plans.getFieldsPlans(fields),
+            cropVarietyId: newPlantage.variety._id,
+          }),
+        );
+      }
+    }
+  }, [fields]);
 
   if (!cultivation || !isOpen) return null;
   return (

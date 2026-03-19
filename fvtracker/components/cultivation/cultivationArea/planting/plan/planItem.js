@@ -73,17 +73,26 @@ const PlantingPlanItem = ({ item }) => {
 const PlantedCropVarietiesPlan = ({ plantedCropVarieties }) => {
   const plantedCropVarietiesPerCultivation =
     utils.plans.getPlantedCropVarietesPerCultivation({
-      items: [{ plantedCropVarieties }],
+      plantedCropVarieties,
     });
   return (
     <div>
       {plantedCropVarieties && plantedCropVarieties.length > 0 ? (
-        plantedCropVarieties.map((pcv) => (
-          <div key={pcv._id}>
-            <span className="font-semibold">Cultivation: </span>
-            {pcv.cultivation.name}
-          </div>
-        ))
+        Object.entries(plantedCropVarietiesPerCultivation).map(
+          ([cultivationName, plantedCropVarieties]) => (
+            <div key={cultivationName}>
+              <div className="font-semibold">{cultivationName}:</div>
+              <ul className="list-disc list-inside">
+                {plantedCropVarieties.map((plantedCropVariety) => (
+                  <li key={plantedCropVariety._id}>
+                    {plantedCropVariety.cropVariety.name} -{" "}
+                    {plantedCropVariety.quantity}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ),
+        )
       ) : (
         <div>No planted crop varieties</div>
       )}

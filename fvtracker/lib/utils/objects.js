@@ -10,10 +10,13 @@ export function extractDBObject(objToExtract) {
   return dbObject;
 }
 
-export function checkEmpty(obj) {
+export function checkEmpty(obj, dontAlert = false) {
   for (const key in obj) {
     if (obj[key] === "" || obj[key] === null || obj[key] === undefined) {
-      alert(`Field ${key} is empty, value: ${obj[key]}`);
+      if (!dontAlert) {
+        alert(`Field ${key} is empty, value: ${obj[key]}`);
+      }
+      
       return true;
     }
   }

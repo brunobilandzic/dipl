@@ -227,7 +227,7 @@ export const SeedingModal = ({
   const onChoosePlan = (plan) => {
     setNewPlantage((prev) => ({
       ...prev,
-      selectedPlantingPlan: plan,
+      plantingPlan: plan,
     }));
   };
 
@@ -318,7 +318,7 @@ const initialNewPlantage_WId = ({ cultivationId, crops }) => {
       _id: defaultVariety,
       name: cropVarieties.find((v) => v._id === defaultVariety)?.name || "N/A",
     },
-    selectedPlantingPlan: null,
+    plantingPlan: null,
     toPlantCells: [],
     plantedAt: new Date("2026-03-10T00:00:00Z"),
     harvestedAt: null,
@@ -335,4 +335,5 @@ const preparePlantageBody = (newPlantage) => ({
   relativeCoords: newPlantage.toPlantCells,
   plantedAt: newPlantage.plantedAt,
   harvestedAt: newPlantage.harvestedAt,
+  plantingPlanId: newPlantage.plantingPlan?._id,
 });

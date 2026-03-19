@@ -14,6 +14,10 @@ export const ChoosePlan = ({
     );
   }
 
+  console.log(
+    "Rendering ChoosePlan with availablePlantingPlans:",
+    availablePlantingPlans,
+  );
   return (
     <div className="flex flex-wrap p-4 border">
       {availablePlantingPlans.map((avPlan) => (

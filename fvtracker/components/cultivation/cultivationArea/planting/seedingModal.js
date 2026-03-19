@@ -27,7 +27,9 @@ export const SeedingModal = ({
     if (!cultivation?._id) return;
 
     setNewPlantage(
-      initialNewPlantage_WId ? initialNewPlantage_WId(cultivation?._id) : {},
+      initialNewPlantage_WId
+        ? initialNewPlantage_WId({ cultivationId: cultivation?._id, crops })
+        : {},
     );
   }, [cultivation]);
 
@@ -100,7 +102,9 @@ export const SeedingModal = ({
 
   const reset = () => {
     setNewPlantage(
-      initialNewPlantage_WId ? initialNewPlantage_WId(cultivation?._id) : {},
+      initialNewPlantage_WId
+        ? initialNewPlantage_WId({ cultivationId: cultivation?._id, crops })
+        : {},
     );
     setChooseNewEnd(initialChooseNewEnd);
     setPlantCultivationOpen(false);
@@ -222,28 +226,46 @@ const initialChooseNewEnd = {
   y: null,
 };
 
-const initialNewPlantage_WId = (cultivationId) => ({
-  cultivationId: cultivationId || null,
-  generalType: {
-    _id: "699f3e94a9d129153ac7617f",
-    name: "Lisnato povrće",
-  },
-  type: {
-    _id: "699f3e94a9d129153ac76180",
-    name: "Salata",
-  },
-  variety: {
-    _id: "699f3e94a9d129153ac76181",
-    name: "Iceberg",
-  },
-  toPlantCells: [],
-  plantedAt: new Date("2026-03-10T00:00:00Z"),
-  harvestedAt: null,
-  beginX: null,
-  beginY: null,
-  endX: null,
-  endY: null,
-});
+const initialNewPlantage_WId = ({ cultivationId, crops }) => {
+  const {
+    generalTypes = [],
+    types = [],
+    varieties: cropVarieties = [],
+  } = crops || {};
+
+  const defaultGeneralType = generalTypes[0]?._id || "";
+  const defaultType =
+    types.filter((t) => t.generalTypeName === generalTypes[0]?.name)[0]?._id ||
+    "";
+  const defaultVariety =
+    cropVarieties.filter(
+      (v) => v.cropTypeName === types.find((t) => t._id === defaultType)?.name,
+    )[0]?._id || "";
+
+  return {
+    cultivationId: cultivationId || null,
+    generalType: {
+      _id: defaultGeneralType,
+      name:
+        generalTypes.find((gt) => gt._id === defaultGeneralType)?.name || "N/A",
+    },
+    type: {
+      _id: defaultType,
+      name: types.find((t) => t._id === defaultType)?.name || "N/A",
+    },
+    variety: {
+      _id: defaultVariety,
+      name: cropVarieties.find((v) => v._id === defaultVariety)?.name || "N/A",
+    },
+    toPlantCells: [],
+    plantedAt: new Date("2026-03-10T00:00:00Z"),
+    harvestedAt: null,
+    beginX: null,
+    beginY: null,
+    endX: null,
+    endY: null,
+  };
+};
 
 const preparePlantageBody = (newPlantage) => ({
   cultivationId: newPlantage.cultivationId,

@@ -257,10 +257,6 @@ export const SeedingModal = ({
             />
           </div>
         </div>
-        <ModalFooter>
-          <div className={`btn submitButton`}>Submit</div>
-          <div className="btn cancelButton">Cancel</div>
-        </ModalFooter>
       </Modal>
       <MenuModal
         invertColor="true"

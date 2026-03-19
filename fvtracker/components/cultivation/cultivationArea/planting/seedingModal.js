@@ -302,6 +302,7 @@ const initialNewPlantage_WId = ({ cultivationId, crops }) => {
       _id: defaultVariety,
       name: cropVarieties.find((v) => v._id === defaultVariety)?.name || "N/A",
     },
+    selectedPlantingPlan: null,
     toPlantCells: [],
     plantedAt: new Date("2026-03-10T00:00:00Z"),
     harvestedAt: null,

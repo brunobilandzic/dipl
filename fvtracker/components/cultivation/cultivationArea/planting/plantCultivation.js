@@ -6,6 +6,7 @@ import Modals from "@/components/layout/modals";
 import utils from "@/lib/utils";
 
 import "react-datepicker/dist/react-datepicker.css";
+import { ChoosePlan } from "./plan/choosePlan";
 
 export const PlantCultivation = ({
   isOpen,
@@ -130,7 +131,11 @@ export const PlantCultivation = ({
               placeholder="Izaberite datum"
             />
           </div>
-          <div>{JSON.stringify(availablePlantingPlans, null, 2)}</div>
+          <div>
+            <ChoosePlan
+              availablePlantingPlans={availablePlantingPlans}
+            />
+          </div>
         </div>
       </div>
     </Modals.FormModal>

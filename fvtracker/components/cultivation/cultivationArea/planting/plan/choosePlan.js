@@ -1,4 +1,8 @@
-export const ChoosePlan = ({ availablePlantingPlans, onChoose, onCancel }) => {
+export const ChoosePlan = ({
+  availablePlantingPlans,
+  onChoosePlan,
+  onCancel,
+}) => {
   if (!availablePlantingPlans || availablePlantingPlans.length === 0) {
     return (
       <div className="p-4">
@@ -12,7 +16,7 @@ export const ChoosePlan = ({ availablePlantingPlans, onChoose, onCancel }) => {
         <div
           key={avPlan._id}
           className="p-2 border rounded cursor-pointer"
-          onClick={() => onChoose(avPlan)}
+          onClick={() => onChoosePlan(avPlan)}
         >
           <p>Plan sadnje: {avPlan.plantingPlanName}</p>
           <p>Količina: {avPlan.quantity}</p>

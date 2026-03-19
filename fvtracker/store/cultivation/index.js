@@ -5,6 +5,7 @@ const initialState = {
   selectedField: null,
   crops: null,
   selectedCultivationArea: null,
+  plantingPlans: [],
 };
 
 const cultivationSlice = createSlice({

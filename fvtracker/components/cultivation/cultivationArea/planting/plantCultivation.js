@@ -14,11 +14,9 @@ export const PlantCultivation = ({
   newPlantage,
   setNewPlantage,
   plantingPlans,
-  setPlantingPlans,
+  availablePlantingPlans,
   crops,
 }) => {
-  const [availablePlantingPlans, setAvailablePlantingPlans] = useState([]);
-
   const onChange = (e) => {
     const { name, value, options, selectedIndex } = e.target;
 
@@ -68,20 +66,6 @@ export const PlantCultivation = ({
       setAvailableVarieties([]);
     }
   }, [newPlantage?.type, crops?.varieties]);
-
-  useEffect(() => {
-    console.log("Selected variety:", newPlantage.variety);
-    if (newPlantage.variety && plantingPlans?.length > 0) {
-      setAvailablePlantingPlans(
-        utils.plans.getPlansForCropVariety({
-          plantingPlans,
-          cropVarietyId: newPlantage.variety._id,
-        }),
-      );
-    } else {
-      setAvailablePlantingPlans([]);
-    }
-  }, [newPlantage?.variety, plantingPlans]);
 
   useEffect(() => {
     console.log("Available planting plans:", availablePlantingPlans);

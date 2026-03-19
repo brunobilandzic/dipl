@@ -53,7 +53,7 @@ const PlantingPlanList = () => {
       </div>
     );
 
-  const fieldsPlans = utils.plant.getFieldsPlans(fields);
+  const fieldsPlans = utils.plans.getFieldsPlans(fields);
   return (
     <>
       <div>

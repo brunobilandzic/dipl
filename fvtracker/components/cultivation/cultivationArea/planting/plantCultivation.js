@@ -16,9 +16,10 @@ export const PlantCultivation = ({
   onSubmit,
   newPlantage,
   setNewPlantage,
+  plantingPlans,
+  setPlantingPlans,
   crops,
 }) => {
-  const [plantingPlans, setPlantingPlans] = useState([]);
   const [availablePlantingPlans, setAvailablePlantingPlans] = useState([]);
   const fields = useSelector((state) => state.cultivation.fields);
   const dispatch = useDispatch();

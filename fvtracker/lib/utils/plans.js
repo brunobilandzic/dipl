@@ -25,19 +25,27 @@ export const getFieldsPlans = (fields) => {
   return fieldsPlans;
 };
 
-export const getPlansForCropVariety = ({ plantingPlans, cropVarietyId }) => {
+export const getPlansForCropVariety = ({
+  fieldPlantingPlans,
+  cropVarietyId,
+}) => {
   const plans = [];
-  plantingPlans.forEach((plan) => {
-    const item = plan.items.find(
-      (item) => item.cropVariety._id === cropVarietyId,
-    );
-    if (item) {
-      plans.push({
-        ...plan,
-        fieldName: plan.field.name,
-        item,
+  console.log("gaplplpr:\n\n", { fieldPlantingPlans, cropVarietyId });
+  fieldPlantingPlans.forEach((fieldPlan) => {
+    const { plantingPlans } = fieldPlan;
+    plantingPlans.map((pltPlan) => {
+      const plantingItems = pltPlan?.items;
+      console.log("plantingItems:", plantingItems);
+      plantingItems.map((plItem) => {
+        if (plItem.cropVariety?._id === cropVarietyId) {
+          plans.push({
+            ...plItem,
+            fieldName: fieldPlan.fieldName,
+            plantingPlanName: pltPlan.name,
+          });
+        }
       });
-    }
+    });
   });
   return plans;
 };

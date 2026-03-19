@@ -131,10 +131,9 @@ export const PlantCultivation = ({
               placeholder="Izaberite datum"
             />
           </div>
+          {JSON.stringify(availablePlantingPlans, null, 2)}
           <div>
-            <ChoosePlan
-              availablePlantingPlans={availablePlantingPlans}
-            />
+            <ChoosePlan availablePlantingPlans={availablePlantingPlans} />
           </div>
         </div>
       </div>

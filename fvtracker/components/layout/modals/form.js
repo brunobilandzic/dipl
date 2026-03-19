@@ -8,25 +8,40 @@ export function FormModal({
   title,
   children,
   invertColor,
+  submitDisabled,
 }) {
   return (
-    <Modal invertColor={invertColor} isOpen={isOpen} onCancel={onCancel} title={title}>
+    <Modal
+      invertColor={invertColor}
+      isOpen={isOpen}
+      onCancel={onCancel}
+      title={title}
+    >
       {" "}
       {children}
-      <FormModalFooter onCancel={onCancel} onSubmit={onSubmit} />
+      <FormModalFooter
+        onCancel={onCancel}
+        onSubmit={onSubmit}
+        submitDisabled={submitDisabled}
+      />
     </Modal>
   );
 }
 
-function FormModalFooter({ onCancel, onSubmit }) {
+function FormModalFooter({ onCancel, onSubmit, submitDisabled }) {
+  console.log("submitDisabled:", submitDisabled);
   return (
     <ModalFooter>
       <div onClick={onCancel} className="btn cancelButton">
         Cancel
       </div>
-      <div onClick={onSubmit} className={`btn submitButton`}>
+      <button
+        onClick={submitDisabled ? null : onSubmit}
+        className={`btn submitButton ${submitDisabled ? "cursor-not-allowed opacity-50" : ""}`}
+        disabled={submitDisabled}
+      >
         Submit
-      </div>
+      </button>
     </ModalFooter>
   );
 }

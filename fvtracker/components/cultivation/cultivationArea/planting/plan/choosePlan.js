@@ -3,6 +3,7 @@ export const ChoosePlan = ({
   onChoosePlan,
   onCancel,
   selectedPlan,
+  cropVarietyId,
 }) => {
   console.log("selectedPlan:", selectedPlan);
 

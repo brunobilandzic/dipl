@@ -278,6 +278,7 @@ export const SeedingModal = ({
         fieldsPlantingPlans={fieldsPlantingPlans}
         availablePlantingPlans={availablePlantingPlans}
         onChoosePlan={onChoosePlan}
+        submitDisabled={utils.objects.checkEmpty(newPlantage, true)}
       />
     </>
   );

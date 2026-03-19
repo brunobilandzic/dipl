@@ -23,7 +23,7 @@ export const SeedingModal = ({
   cultivationCells,
 }) => {
   const [newPlantage, setNewPlantage] = useState({});
-  const [plantingPlans, setPlantingPlans] = useState([]);
+  const [fieldsPlantingPlans, setFieldsPlantingPlans] = useState([]);
   const [availablePlantingPlans, setAvailablePlantingPlans] = useState([]);
   const dispatch = useDispatch();
 
@@ -34,7 +34,7 @@ export const SeedingModal = ({
       const res = await api.get("/cultivation/fields");
       if (res.data && res.data.fields) {
         dispatch(setFields(res.data.fields));
-        setPlantingPlans(utils.plans.getFieldsPlans(res.data.fields));
+        setFieldsPlantingPlans(utils.plans.getFieldsPlans(res.data.fields));
       }
     } catch (error) {
       console.log("Error fetching fields:", error);
@@ -191,14 +191,14 @@ export const SeedingModal = ({
   useEffect(() => {
     if (newPlantage?.variety?._id) {
       const availablePlantingPlans = utils.plans.getPlansForCropVariety({
-        plantingPlans,
+        fieldPlantingPlans: fieldsPlantingPlans,
         cropVarietyId: newPlantage.variety._id,
       });
       setAvailablePlantingPlans(availablePlantingPlans);
     } else {
       setAvailablePlantingPlans([]);
     }
-  }, [newPlantage?.variety, plantingPlans]);
+  }, [newPlantage?.variety, fieldsPlantingPlans]);
 
   const hanleCropVarietyClick = (cropVariety) => {
     console.log("Clicked crop variety:", cropVariety);
@@ -252,7 +252,7 @@ export const SeedingModal = ({
         newPlantage={newPlantage}
         setNewPlantage={setNewPlantage}
         crops={crops}
-        plantingPlans={plantingPlans}
+        fieldsPlantingPlans={fieldsPlantingPlans}
         availablePlantingPlans={availablePlantingPlans}
       />
     </>

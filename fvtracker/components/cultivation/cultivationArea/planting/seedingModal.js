@@ -208,6 +208,11 @@ export const SeedingModal = ({
     console.log("New plantage state:", newPlantage);
   }, [newPlantage]);
 
+  useEffect(() => {
+    console.log("Available planting plans:", availablePlantingPlans);
+    console.log("All planting plans:", fieldsPlantingPlans);
+  }, [availablePlantingPlans, fieldsPlantingPlans]);
+
   if (!cultivation || !isOpen) return null;
   return (
     <>

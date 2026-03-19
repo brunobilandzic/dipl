@@ -18,6 +18,8 @@ export const PlantCultivation = ({
   setNewPlantage,
   crops,
 }) => {
+  const [plantingPlans, setPlantingPlans] = useState([]);
+  const [availablePlantingPlans, setAvailablePlantingPlans] = useState([]);
   const fields = useSelector((state) => state.cultivation.fields);
   const dispatch = useDispatch();
 
@@ -26,6 +28,7 @@ export const PlantCultivation = ({
       const res = await api.get("/cultivation/fields");
       if (res.data && res.data.fields) {
         dispatch(setFields(res.data.fields));
+        setPlantingPlans(utils.plans.getFieldsPlans(res.data.fields));
       }
     } catch (error) {
       console.log("Error fetching fields:", error);

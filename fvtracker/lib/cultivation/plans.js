@@ -37,3 +37,22 @@ export async function createPlantingPlan({ plantingPlanData }) {
   await plantingPlan.save();
   return plantingPlan;
 }
+
+export const getPlantingPlanById = async (planId) => {
+  const { hasAccess } = await auth.session.generalAndOtherManagers({
+    managerNames: ["CultivationManager"],
+  });
+  if (!hasAccess) {
+    throw new Error("Unauthorized access to planting plan.");
+  }
+  const plantingPlan = await PlantingPlan.findById(planId).populate({
+    path: "items",
+    populate: {
+      path: "cropVariety",
+    },
+  });
+  if (!plantingPlan) {
+    throw new Error("Planting plan not found.");
+  }
+  return plantingPlan;
+};

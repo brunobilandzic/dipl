@@ -38,8 +38,8 @@ import {
   fieldHasCultivations,
 } from "./cultivation";
 import { cvAndColor, showDate } from "./display";
-import { prepareSubmitPlan, getFieldsPlans } from "./plant";
-import { getPlantedCropVarietesPerCultivation } from "./plans";
+import { prepareSubmitPlan } from "./plant";
+import { getPlantedCropVarietesPerCultivation, getFieldsPlans } from "./plans";
 
 export default {
   objects: {
@@ -97,9 +97,9 @@ export default {
   },
   plant: {
     prepareSubmitPlan,
-    getFieldsPlans,
   },
   plans: {
     getPlantedCropVarietesPerCultivation,
+    getFieldsPlans,
   },
 };

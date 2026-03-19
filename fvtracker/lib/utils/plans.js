@@ -11,3 +11,16 @@ export const getPlantedCropVarietesPerCultivation = ({
   });
   return cultivationPlantedCropVarieties;
 };
+
+export const getFieldsPlans = (fields) => {
+  const fieldsPlans = [];
+  fields.forEach((field) => {
+    if (!field.plantingPlans) return;
+
+    fieldsPlans.push({
+      fieldName: field.name,
+      plantingPlans: field.plantingPlans,
+    });
+  });
+  return fieldsPlans;
+};

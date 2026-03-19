@@ -15,6 +15,7 @@ export const PlantCultivation = ({
   availablePlantingPlans,
   crops,
   onChoosePlan,
+  submitDisabled,
 }) => {
   const onChange = (e) => {
     const { name, value, options, selectedIndex } = e.target;
@@ -74,6 +75,7 @@ export const PlantCultivation = ({
       title="Zasadi na područje"
       onSubmit={onSubmit}
       invertColor={true}
+      submitDisabled={submitDisabled}
     >
       <div className={`form`}>
         <div className={``}>

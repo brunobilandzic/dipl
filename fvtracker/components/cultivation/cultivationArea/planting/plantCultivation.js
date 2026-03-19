@@ -68,10 +68,6 @@ export const PlantCultivation = ({
     }
   }, [newPlantage?.type, crops?.varieties]);
 
-  useEffect(() => {
-    console.log("Available planting plans:", availablePlantingPlans);
-  }, [availablePlantingPlans]);
-
   if (!isOpen) return null;
   return (
     <Modals.FormModal

@@ -130,6 +130,7 @@ export const PlantCultivation = ({
               placeholder="Izaberite datum"
             />
           </div>
+          <div>{JSON.stringify(availablePlantingPlans, null, 2)}</div>
         </div>
       </div>
     </Modals.FormModal>

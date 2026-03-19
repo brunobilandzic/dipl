@@ -87,3 +87,13 @@ export async function deletePlansFromFields({ fieldId, planId }) {
     }
   }
 }
+
+export async function getFieldForCultivation({ cultivation }) {
+  await cultivation.populate({
+    path: "cultivationArea",
+    select: "field",
+    populate: { path: "field", select: "name slug plantingPlans" },
+  });
+
+  console.log("Cultivation with populated field:", cultivation);
+}

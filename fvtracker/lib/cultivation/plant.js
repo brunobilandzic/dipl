@@ -10,6 +10,7 @@ import { PlantingPlan } from "@/models/documents/PlantingPlan";
 import auth from "@/lib/auth";
 import { fetchGeneralAndOtherManagers } from "../auth/fetchSessionData";
 import { fetchFieldById } from "./fields";
+import { getFieldForCultivation } from "./fields";
 
 export async function cropsData() {
   const cropMainTypes = await CropMainType.find().populate({
@@ -122,6 +123,7 @@ async function createPlantedCropVarietyPromise({
     planted,
     cellCoords: relativeCoord,
   });
+  const field = await getFieldForCultivation({ cultivation });
 
   const plantedCropVariety = await PlantedCropVariety.findOneAndUpdate(
     {

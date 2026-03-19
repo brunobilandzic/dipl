@@ -95,7 +95,7 @@ export const PlantCultivation = ({
 
   useEffect(() => {
     console.log("Selected variety:", newPlantage.variety);
-    if (newPlantage.variety) {
+    if (newPlantage.variety && plantingPlans?.length > 0) {
       setAvailablePlantingPlans(
         utils.plans.getPlansForCropVariety({
           plantingPlans,

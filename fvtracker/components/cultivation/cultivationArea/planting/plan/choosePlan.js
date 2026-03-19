@@ -19,7 +19,7 @@ export const ChoosePlan = ({
       {availablePlantingPlans.map((avPlan) => (
         <div
           key={avPlan._id}
-          className={`  p-2 m-2 border rounded cursor-pointer ${selectedPlan?._id === avPlan._id ? "border-green-200" : ""}`}
+          className={`  p-2 m-2 border rounded cursor-pointer ${selectedPlan?._id === avPlan._id ? "border-green-200 ring-green-500 ring-2" : ""}`}
           onClick={() => onChoosePlan(avPlan)}
         >
           <p>Plan sadnje: {avPlan.plantingPlanName}</p>

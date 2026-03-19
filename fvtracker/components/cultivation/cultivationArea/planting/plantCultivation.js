@@ -14,7 +14,6 @@ export const PlantCultivation = ({
   onSubmit,
   newPlantage,
   setNewPlantage,
-  plantingPlans,
   availablePlantingPlans,
   crops,
 }) => {

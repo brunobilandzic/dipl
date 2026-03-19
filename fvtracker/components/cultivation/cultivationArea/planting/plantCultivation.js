@@ -14,6 +14,7 @@ export const PlantCultivation = ({
   setNewPlantage,
   availablePlantingPlans,
   crops,
+  onChoosePlan,
 }) => {
   const onChange = (e) => {
     const { name, value, options, selectedIndex } = e.target;
@@ -126,7 +127,10 @@ export const PlantCultivation = ({
           </div>
           {JSON.stringify(availablePlantingPlans, null, 2)}
           <div>
-            <ChoosePlan availablePlantingPlans={availablePlantingPlans} />
+            <ChoosePlan
+              availablePlantingPlans={availablePlantingPlans}
+              onChoosePlan={onChoosePlan}
+            />
           </div>
         </div>
       </div>

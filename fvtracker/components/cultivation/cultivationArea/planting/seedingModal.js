@@ -224,6 +224,13 @@ export const SeedingModal = ({
     }
   }, [fields]);
 
+  const onChoosePlan = (plan) => {
+    setNewPlantage((prev) => ({
+      ...prev,
+      selectedPlantingPlan: plan,
+    }));
+  };
+
   if (!cultivation || !isOpen) return null;
   return (
     <>
@@ -270,6 +277,7 @@ export const SeedingModal = ({
         crops={crops}
         fieldsPlantingPlans={fieldsPlantingPlans}
         availablePlantingPlans={availablePlantingPlans}
+        onChoosePlan={onChoosePlan}
       />
     </>
   );

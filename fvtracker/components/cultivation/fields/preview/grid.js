@@ -172,8 +172,11 @@ const FieldCells = ({
         if (cropVariety) {
           return `(${x}, ${y}) - ${cultivationName} -  ${cropVariety?.cropType?.name} ${cropVariety?.name}`;
         }
+        if (seedMode && cultivationName && !cropVariety) {
+          return `(${x}, ${y}) - ${cultivationName} - Not planted`;
+        }
         if (seedMode) {
-          return `(${x}, ${y}) - Not planted`;
+          return ``;
         }
         if (cultivationName && !cropVariety) {
           return `(${x}, ${y}) - ${cultivationName} - Not planted`;
@@ -182,6 +185,11 @@ const FieldCells = ({
           return `(${x}, ${y}) - ${cultivationName}`;
         }
         return `(${x}, ${y})`;
+      };
+
+      const isDisabled = () => {
+        if (seedMode && !cultivationName) return true;
+        return false;
       };
 
       cells.push(
@@ -205,6 +213,7 @@ const FieldCells = ({
           handleNotPlanted={handleNotPlanted}
           title={getTitle()}
           handleClick={handleClick}
+          disabled={isDisabled()}
         />,
       );
     }
@@ -224,6 +233,7 @@ const FieldCell = ({
   invertColor,
   title,
   handleClick,
+  disabled,
 }) => {
   const bgClass = selected
     ? "bg-green-500"
@@ -234,6 +244,7 @@ const FieldCell = ({
     invertColor ? "border border-[var(--background)]" : "",
     bgClass,
     cultivationName === selectedCultivationName ? "ring-2 ring-blue-500" : "",
+    disabled ? "cursor-not-allowed opacity-50 bg-gray-500" : "",
   );
 
   return (

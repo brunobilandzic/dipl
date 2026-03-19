@@ -321,7 +321,6 @@ const initialNewPlantage_WId = ({ cultivationId, crops }) => {
     plantingPlan: null,
     toPlantCells: [],
     plantedAt: new Date("2026-03-10T00:00:00Z"),
-    harvestedAt: null,
     beginX: null,
     beginY: null,
     endX: null,

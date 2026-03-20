@@ -48,15 +48,15 @@ export const getPlansForCropVariety = ({
   return plans;
 };
 
-export const getPlantingPlanItem = ({ plantingPlan, cropVarietyId }) => {
-  const plantingPlanItem = plantingPlan.items.find(
+export const getPlantingPlanItemId = ({ plantingPlan, cropVarietyId }) => {
+  const plantingPlanItemSubDoc = plantingPlan.items.find(
     (item) => item.cropVariety?._id.toString() === cropVarietyId.toString(),
   );
-  if (!plantingPlanItem) {
+  if (!plantingPlanItemSubDoc) {
     throw new Error(
       `No planting plan item found for crop variety ID: ${cropVarietyId}`,
     );
   }
-  return plantingPlanItem;
+
+  return plantingPlanItemSubDoc._id;
 };
-  

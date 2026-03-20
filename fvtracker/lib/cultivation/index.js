@@ -11,7 +11,7 @@ import {
   updateCultivationArea,
   getCultivationArea,
 } from "./cultivationArea";
-import { createPlantage, cropsData, getCropVarietyById } from "./plant";
+import { createPlantage, cropsData, getCropVarietyById } from "./plants";
 import {
   createCultivation,
   getCultivationByProperty,

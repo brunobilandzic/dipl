@@ -176,6 +176,7 @@ export const SeedingModal = ({
       const body = preparePlantageBody(newPlantage);
       const res = await api.post("/cultivation/plant/new-plantage", body);
       const newPlantageFromRes = res.data;
+      console.log("Created new plantage:", newPlantageFromRes);
       dispatch(
         createPlantage({
           cultivationId: newPlantage.cultivationId,

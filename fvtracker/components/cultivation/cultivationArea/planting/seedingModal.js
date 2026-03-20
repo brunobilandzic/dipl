@@ -97,7 +97,7 @@ export const SeedingModal = ({
       ...prev,
       beginX: x,
       beginY: y,
-      toPlantCells: [...prev.toPlantCells, `${x},${y}`],
+      toPlantCells: [...(prev.toPlantCells ?? []), `${x},${y}`],
     }));
   };
 

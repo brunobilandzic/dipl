@@ -22,7 +22,10 @@ export async function GET(request) {
                 path: "plantedCropVarieties",
                 populate: {
                   path: "plantingPlanItem",
-                  populate: { path: "cropVariety" },
+                  populate: {
+                    path: "cropVariety",
+                    populate: { path: "cropType" },
+                  },
                 },
               },
             },

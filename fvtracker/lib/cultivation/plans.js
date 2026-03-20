@@ -24,12 +24,19 @@ const deletePlantingPlanRecords = async ({ planId }) => {
 
 export async function createPlantingPlan({ plantingPlanData }) {
   const field = await fetchFieldById(plantingPlanData.field);
-
+  const { items, ...planData } = plantingPlanData;
   const plantingPlan = new PlantingPlan({
-    ...plantingPlanData,
+    ...planData,
   });
   field.plantingPlans.push(plantingPlan._id);
-
+  for (const itemData of items) {
+    const plantingPlanItem = new PlantingPlanItem({
+      ...itemData,
+      plantingPlan: plantingPlan._id,
+    });
+    await plantingPlanItem.save();
+    plantingPlan.items.push(plantingPlanItem._id);
+  }
   await field.save();
   await plantingPlan.save();
   return plantingPlan;

@@ -153,7 +153,7 @@ async function createPlantedCropVarietyPromise({
   cropVariety.plantingPlanItems.push(plantingPlanItem._id);
   const plantedCropVariety = await PlantedCropVariety.findOneAndUpdate(
     {
-      cultivation: cultivation._id,
+      cultivation: cultivationId,
       relativeCoords: relativeCoord,
     },
     {

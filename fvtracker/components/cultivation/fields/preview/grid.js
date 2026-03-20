@@ -144,6 +144,10 @@ const FieldCells = ({
 
       const handleClick = (e) => {
         e.stopPropagation();
+        if (active) {
+          handleActiveClick(x, y);
+          return;
+        }
         if (seedMode && !cropVariety) {
           handleNotPlanted(x, y);
           return;

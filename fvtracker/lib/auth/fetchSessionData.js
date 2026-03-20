@@ -72,5 +72,11 @@ export async function fetchGeneralAndOtherManagers({ managerNames = [] }) {
     }
   }
 
+  if (!response.hasAccess) {
+    throw new Error(
+      `Unauthorized access: session user does not have required managers: ${managerNames.join(", ")}`,
+    );
+  }
+
   return response;
 }

@@ -131,6 +131,15 @@ async function createPlantedCropVarietyPromise({
 
   const field = await getFieldForCultivation({ cultivation });
   const plantingPlan = await getPlantingPlanById(plantingPlanId);
+  const plantingPlanItem = await utils.plans.getPlantingPlanItem({
+    plantingPlan,
+    cropVarietyId,
+  });
+
+  console.log({
+    plantingPlan,
+    plantingPlanItem,
+  });
 
   const plantedCropVariety = await PlantedCropVariety.findOneAndUpdate(
     {

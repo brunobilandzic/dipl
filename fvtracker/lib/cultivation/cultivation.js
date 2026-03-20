@@ -2,9 +2,7 @@ import {
   Cultivation,
   CultivationArea,
 } from "@/models/sectors/cultivation/Cultivation";
-import { PlantedCropVariety } from "@/models/sectors/cultivation/Crops";
-import utils from "@/lib/utils";
-import { createPlantedCropVarietiesCells, getCropVarietyById } from "./plant";
+import { createPlantedCropVarietiesCells } from "./plants";
 
 export const getCultivationById = async (id) => {
   const cultivation = await Cultivation.findById(id);

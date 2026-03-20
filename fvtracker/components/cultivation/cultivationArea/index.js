@@ -114,7 +114,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       }
     };
     fillSelectedField();
-  }, [fieldSlug, caSlug, selectedField, fields]);
+  }, [selectedField, fields]);
 
   useEffect(() => {
     const disabled = [];
@@ -285,32 +285,38 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
             onPlant={onPlant}
           />
         </div>
-        <CreateCultivation
-          cultivationAreaId={cultivationArea.id}
-          isOpen={createCultivationOpen}
-          onCancel={() => setCreateCultivationOpen(false)}
-          newCUDetails={newCUDetails}
-          setNewCUDetails={setNewCUDetails}
-          onSubmit={onSubmitCultivation}
-          existingCultivations={cultivationArea.cultivations}
-        />
-        <EditCultivation
-          isOpen={editCultivationOpen}
-          onCancel={() => setEditCultivationOpen(false)}
-          cultivationData={selectedCultivation}
-        />
-        <SeedingModal
-          isOpen={plantCultivation.isOpen}
-          onCancel={() => setPlantCultivation(initialPlantCultivation)}
-          cultivation={selectedCultivation}
-          caDims={{ width, length }}
-          cultivationCells={utils.cultivation.cultivations.filterCutivationCells(
-            {
-              cultivationCells,
-              cultivationId: selectedCultivation?._id,
-            },
-          )}
-        />
+        {createCultivationOpen && (
+          <CreateCultivation
+            cultivationAreaId={cultivationArea.id}
+            isOpen={createCultivationOpen}
+            onCancel={() => setCreateCultivationOpen(false)}
+            newCUDetails={newCUDetails}
+            setNewCUDetails={setNewCUDetails}
+            onSubmit={onSubmitCultivation}
+            existingCultivations={cultivationArea.cultivations}
+          />
+        )}
+        {editCultivationOpen && (
+          <EditCultivation
+            isOpen={editCultivationOpen}
+            onCancel={() => setEditCultivationOpen(false)}
+            cultivationData={selectedCultivation}
+          />
+        )}
+        {plantCultivation.isOpen && (
+          <SeedingModal
+            isOpen={plantCultivation.isOpen}
+            onCancel={() => setPlantCultivation(initialPlantCultivation)}
+            cultivation={selectedCultivation}
+            caDims={{ width, length }}
+            cultivationCells={utils.cultivation.cultivations.filterCutivationCells(
+              {
+                cultivationCells,
+                cultivationId: selectedCultivation?._id,
+              },
+            )}
+          />
+        )}
       </div>
     </>
   );

@@ -2,7 +2,7 @@ export const getPlantedCropVarietesPerCultivation = ({
   plantedCropVarieties,
 }) => {
   const cultivationPlantedCropVarieties = {};
-  plantedCropVarieties.forEach((plantedCropVariety) => {
+  plantedCropVarieties?.forEach((plantedCropVariety) => {
     const { cultivation, ...rest } = plantedCropVariety;
     if (!cultivationPlantedCropVarieties[cultivation?.name]) {
       cultivationPlantedCropVarieties[cultivation?.name] = [];
@@ -30,7 +30,6 @@ export const getPlansForCropVariety = ({
   cropVarietyId,
 }) => {
   const plans = [];
-  console.log("gaplplpr:\n\n", { fieldPlantingPlans, cropVarietyId });
   fieldPlantingPlans.forEach((fieldPlan) => {
     const { plantingPlans } = fieldPlan;
     plantingPlans.map((pltPlan) => {

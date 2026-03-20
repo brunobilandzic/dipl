@@ -22,7 +22,7 @@ export async function GET(request) {
                 path: "plantedCropVarieties",
                 populate: {
                   path: "plantingPlanItem",
-                  populate: { path: "cropType" },
+                  populate: { path: "cropVariety" },
                 },
               },
             },
@@ -34,11 +34,11 @@ export async function GET(request) {
           select: "-field",
           populate: [
             {
-              path: "items.cropVariety",
-              populate: { path: "cropType" },
-            },
-            {
-              path: "items.plantedCropVarieties",
+              path: "items",
+              populate: [
+                { path: "cropVariety", populate: { path: "cropType" } },
+                { path: "plantedCropVarieties" },
+              ],
             },
           ],
         },

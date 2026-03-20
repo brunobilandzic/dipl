@@ -4,6 +4,7 @@ import {
 } from "@/models/documents/PlantingPlan";
 import auth from "@/lib/auth";
 import { deletePlansFromFields, fetchFieldById } from "./fields";
+import utils from "../utils";
 
 export async function deletePlantingPlans({ fieldId, planId }) {
   await deletePlansFromFields({ fieldId, planId });
@@ -22,6 +23,7 @@ const deletePlantingPlanRecords = async ({ planId }) => {
 };
 
 export async function createPlantingPlan({ plantingPlanData }) {
+  console.log("pldata", { items: plantingPlanData.items });
   await auth.session.specificManager({
     managerName: "CultivationManager",
   });
@@ -55,4 +57,16 @@ export const getPlantingPlanById = async (planId) => {
     throw new Error("Planting plan not found.");
   }
   return plantingPlan;
+};
+
+export const getPlantingPlanRecord = async ({
+  plantingPlan,
+  cropVarietyId,
+}) => {
+  const plantingPlanItemId = utils.plans.getPlantingPlanItemId({
+    plantingPlan,
+    cropVarietyId,
+  });
+  const plantingPlanItem = await getPlantingPlanItemById(plantingPlanItemId);
+  return plantingPlanItem;
 };

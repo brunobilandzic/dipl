@@ -19,7 +19,11 @@ import {
   deleteCultivation,
   getCultivationById,
 } from "./cultivation";
-import { createPlantingPlan, deletePlantingPlans } from "./plans";
+import {
+  createPlantingPlan,
+  deletePlantingPlans,
+  getPlantingPlanRecord,
+} from "./plans";
 
 export default {
   fields: {
@@ -52,6 +56,8 @@ export default {
   plans: {
     deletePlantingPlans,
     createPlantingPlan,
+    getPlantingPlanRecord,
+    getCropVarietyById,
   },
 };
 

@@ -63,6 +63,11 @@ export const getPlantingPlanItemRecord = async ({
     plantingPlan,
     cropVarietyId,
   });
+  if (!plantingPlanItemId) {
+    throw new Error(
+      `No planting plan item found for crop variety ID: ${cropVarietyId}`,
+    );
+  }
   const plantingPlanItem = await getPlantingPlanItemById(plantingPlanItemId);
   return plantingPlanItem;
 };

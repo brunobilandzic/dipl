@@ -26,7 +26,7 @@ export const SeedingModal = ({
   const [fieldsPlantingPlans, setFieldsPlantingPlans] = useState([]);
   const [availablePlantingPlans, setAvailablePlantingPlans] = useState([]);
   const dispatch = useDispatch();
-
+  const crops = useSelector((state) => state.cultivation.crops);
   const fields = useSelector((state) => state.cultivation.fields);
 
   const refreshFields = async () => {
@@ -75,9 +75,6 @@ export const SeedingModal = ({
   };
   const [chooseNewEnd, setChooseNewEnd] = useState(initialChooseNewEnd);
   const [plantCultivationOpen, setPlantCultivationOpen] = useState(false);
-
-  // object with mainTypes, genTypes, types and varieties aray
-  const crops = useSelector((state) => state.cultivation.crops);
 
   const showChooseNewEnd = ({ x, y }) => {
     setChooseNewEnd((prev) => ({ ...prev, isOpen: true, choice: null, x, y }));

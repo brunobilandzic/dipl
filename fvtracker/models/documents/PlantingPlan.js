@@ -32,7 +32,13 @@ const plantingPlanSchema = new Schema({
     ref: "Field",
     required: true,
   },
-  items: [plantingItemSchema],
+  items: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "PlantingPlanItem",
+      default: [],
+    },
+  ],
   plannedPlantingDate: {
     type: Date,
     default: null,

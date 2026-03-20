@@ -170,7 +170,6 @@ const cultivationSlice = createSlice({
       const { cultivationId, newPlantage } = action.payload;
 
       if (!state.selectedField) return;
-
       for (const ca of state.selectedField.cultivationAreas) {
         const cultivation = ca.cultivations.find(
           (c) => c._id === cultivationId,
@@ -182,8 +181,12 @@ const cultivationSlice = createSlice({
             (pcv) => pcv._id === plantage._id,
           );
           if (idx !== -1 && idx !== undefined) {
-            cultivation.plantedCropVarieties[idx].cropVariety = {
-              ...plantage.cropVariety,
+            if (!cultivation.plantedCropVarieties[idx].plantingPlanItem) {
+              cultivation.plantedCropVarieties[idx].plantingPlanItem = {};
+            }
+            cultivation.plantedCropVarieties[idx].plantingPlanItem = {
+              ...cultivation.plantedCropVarieties[idx].plantingPlanItem,
+              ...plantage.plantingPlanItem,
             };
           }
         }

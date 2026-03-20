@@ -52,13 +52,14 @@ export const SeedingModal = ({
 
   useEffect(() => {
     if (!cultivation?._id) return;
-
+    if (!crops?.generalTypes?.length) return;
+    
     setNewPlantage(
       initialNewPlantage_WId
         ? initialNewPlantage_WId({ cultivationId: cultivation?._id, crops })
         : {},
     );
-  }, [cultivation]);
+  }, [cultivation, crops]);
 
   const isBeginSelected = () =>
     !!(

@@ -169,6 +169,12 @@ async function createPlantedCropVarietyPromise({
   if (!plantedCropVariety) {
     throw new Error("Failed to find planted crop variety at a given cell.");
   }
+
+  await plantedCropVariety.populate({
+    path: "plantingPlanItem",
+    populate: { path: "cropVariety", populate: { path: "cropType" } },
+  });
+
   plantingPlanItem.plantedCropVarieties.push(plantedCropVariety._id);
   await plantingPlanItem.save();
   await cropVariety.save();

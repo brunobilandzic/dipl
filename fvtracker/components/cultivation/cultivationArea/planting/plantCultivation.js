@@ -127,7 +127,6 @@ export const PlantCultivation = ({
               placeholder="Izaberite datum"
             />
           </div>
-          {JSON.stringify(availablePlantingPlans, null, 2)}
           <div>
             <ChoosePlan
               selectedPlan={newPlantage.plantingPlan}

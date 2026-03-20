@@ -127,6 +127,18 @@ async function createPlantedCropVarietyPromise({
     cellCoords: relativeCoord,
   });
 
+  if (!cropVarietyId) {
+    const newPlantedCropVariety = new PlantedCropVariety({
+      cultivation: cultivationId,
+      relativeCoords: relativeCoord,
+      fieldCoords,
+      plantedAt,
+      harvestedAt,
+    });
+    await newPlantedCropVariety.save();
+    return newPlantedCropVariety;
+  }
+
   const plantingPlan = await getPlantingPlanById(plantingPlanId);
   const plantingPlanItem = await getPlantingPlanItemRecord({
     plantingPlan,

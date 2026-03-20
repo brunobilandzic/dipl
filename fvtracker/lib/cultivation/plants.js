@@ -151,12 +151,6 @@ async function createPlantedCropVarietyPromise({
   }
   const cropVariety = await getCropVarietyById(cropVarietyId);
   cropVariety.plantingPlanItems.push(plantingPlanItem._id);
-
-  console.log({
-    plantingPlan,
-    plantingPlanItem,
-  });
-
   const plantedCropVariety = await PlantedCropVariety.findOneAndUpdate(
     {
       cultivation: cultivation._id,
@@ -176,7 +170,6 @@ async function createPlantedCropVarietyPromise({
     throw new Error("Failed to find planted crop variety at a given cell.");
   }
   plantingPlanItem.plantedCropVarieties.push(plantedCropVariety._id);
-  console.log("item", { plantingPlanItem });
   await plantingPlanItem.save();
   await cropVariety.save();
   await plantedCropVariety.save();

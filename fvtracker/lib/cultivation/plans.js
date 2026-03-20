@@ -23,11 +23,6 @@ const deletePlantingPlanRecords = async ({ planId }) => {
 };
 
 export async function createPlantingPlan({ plantingPlanData }) {
-  console.log("pldata", { items: plantingPlanData.items });
-  await auth.session.specificManager({
-    managerName: "CultivationManager",
-  });
-
   const field = await fetchFieldById(plantingPlanData.field);
 
   const plantingPlan = new PlantingPlan({
@@ -41,12 +36,6 @@ export async function createPlantingPlan({ plantingPlanData }) {
 }
 
 export const getPlantingPlanById = async (planId) => {
-  const { hasAccess } = await auth.session.generalAndOtherManagers({
-    managerNames: ["CultivationManager"],
-  });
-  if (!hasAccess) {
-    throw new Error("Unauthorized access to planting plan.");
-  }
   const plantingPlan = await PlantingPlan.findById(planId).populate({
     path: "items",
     populate: {
@@ -63,9 +52,6 @@ export const getPlantingPlanItemRecord = async ({
   plantingPlan,
   cropVarietyId,
 }) => {
-  await auth.session.generalAndOtherManagers({
-    managerNames: ["CultivationManager"],
-  });
   const plantingPlanItemId = utils.plans.getPlantingPlanItemId({
     plantingPlan,
     cropVarietyId,
@@ -75,9 +61,6 @@ export const getPlantingPlanItemRecord = async ({
 };
 
 export const getPlantingPlanItemById = async (itemId) => {
-  await auth.session.generalAndOtherManagers({
-    managerNames: ["CultivationManager"],
-  });
   const plantingPlanItem = await PlantingPlanItem.findById(itemId);
 
   if (!plantingPlanItem) {

@@ -8,7 +8,7 @@ import { getCultivationById } from "./cultivation";
 import { PlantingPlan } from "@/models/documents/PlantingPlan";
 import { fetchGeneralAndOtherManagers } from "../auth/fetchSessionData";
 import { getFieldForCultivation } from "./fields";
-import { getPlantingPlanItemRecord, getPlantingPlanRecord } from "./plans";
+import { getPlantingPlanItemRecord } from "./plans";
 
 export async function cropsData() {
   const cropMainTypes = await CropMainType.find().populate({

@@ -127,12 +127,18 @@ async function createPlantedCropVarietyPromise({
     cellCoords: relativeCoord,
   });
 
-  const field = await getFieldForCultivation({ cultivation });
   const plantingPlan = await getPlantingPlanById(plantingPlanId);
   const plantingPlanItem = await getPlantingPlanItemRecord({
     plantingPlan,
     cropVarietyId,
   });
+  if (!cropVarietyId) {
+    throw new Error(
+      "Crop variety ID is required to create a planted crop variety.",
+    );
+  }
+  const cropVariety = await getCropVarietyById(cropVarietyId);
+  cropVariety.plantingPlanItems.push(plantingPlanItem._id);
 
   console.log({
     plantingPlan,
@@ -149,40 +155,40 @@ async function createPlantedCropVarietyPromise({
       fieldCoords,
       plantedAt,
       harvestedAt,
+      plantingPlanItem: plantingPlanItem._id,
     },
     { new: true },
   );
 
   if (!plantedCropVariety) {
-    const newPlantedCropVariety = new PlantedCropVariety({
-      cultivation: cultivation._id,
-      relativeCoords: relativeCoord,
-      fieldCoords,
-      relativeCoord,
-      plantedAt,
-      harvestedAt,
-      cropVariety: cropVarietyId,
-    });
-    await newPlantedCropVariety.save();
-    return newPlantedCropVariety;
+    throw new Error("Failed to find planted crop variety at a given cell.");
   }
-
-  await plantedCropVariety.populate({
-    path: "plantingPlanItem",
-    populate: {
-      path: "cropVariety",
-    },
-  });
-
-  let cropVariety = null;
-  if (cropVarietyId) {
-    cropVariety = await getCropVarietyById(cropVarietyId);
-    cropVariety.plantedCropVarieties.push(plantedCropVariety._id);
-    await cropVariety.save();
-  }
-
+  plantingPlanItem.plantedCropVarieties.push(plantedCropVariety._id);
+  console.log("item", { plantingPlanItem });
+  await plantingPlanItem.save();
+  await cropVariety.save();
   await plantedCropVariety.save();
   return plantedCropVariety;
+}
+
+async function _createPlantedCropVarietyPromise({
+  relativeCoord,
+  cropVarietyId,
+  planted,
+  cultivation,
+  harvestedAt,
+  plantedAt,
+  plantingPlanId,
+}) {
+  console.log("Creating planted crop variety with data:", {
+    relativeCoord,
+    cropVarietyId,
+    planted,
+    cultivation,
+    harvestedAt,
+    plantedAt,
+    plantingPlanId,
+  });
 }
 
 export async function getPlantingPlans() {
@@ -253,13 +259,11 @@ export async function getPlantingPlansFromcmfields() {
 }
 
 export async function getPlantingPlanById(id) {
-  const { hasAccess } = await fetchGeneralAndOtherManagers({
-    managerNames: ["CultivationManager"],
-  });
-
   if (!hasAccess) {
     throw new Error("Unauthorized access to planting plan.");
   }
+
+  console.log("Fetching planting plan with ID:", id);
 
   const plantingPlan = await PlantingPlan.findById(id);
   if (!plantingPlan) {

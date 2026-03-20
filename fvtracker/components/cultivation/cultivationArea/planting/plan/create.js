@@ -166,7 +166,7 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
 
   useEffect(() => {
     setFormData(createInitialFormData({ field: selectedField?._id || null }));
-  }, [selectedField?._id]);
+  }, [selectedField?._id, crops]);
 
   useEffect(() => {
     console.log("Form data updated:", formData);

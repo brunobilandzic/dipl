@@ -36,15 +36,10 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   );
 
   const cultivationArea = useMemo(() => {
-    console.log("Calculating cultivationArea for caSlug:", caSlug);
     return selectedField?.cultivationAreas?.find((ca) => ca.slug === caSlug);
   }, [selectedField, caSlug, fields]);
 
   const cultivationCells = useMemo(() => {
-    console.log(
-      "Calculating cultivationCells for cultivationArea:",
-      cultivationArea,
-    );
     if (!cultivationArea) return [];
     const plcvs = utils.cultivation.cultivations.getPlCvs(
       cultivationArea.cultivations,
@@ -78,9 +73,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     const fillSelectedField = async () => {
       if (!selectedField && fields && fields.length > 0) {
         try {
-          console.log(
-            "slected field is null, but fields are in store, finding field...",
-          );
           const foundField = fields.find((f) => f.slug === fieldSlug);
           if (foundField) {
             dispatch(selectField(foundField));
@@ -94,10 +86,8 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
             generalMessage: "Failed to load cultivation area",
           });
         }
-        console.log("selected field is null, fetching field...");
       }
       if (!selectedField) {
-        console.log("selected field is null, fetching field...");
         try {
           const res = await api.get(`/cultivation/fields`, {
             params: {

@@ -54,7 +54,7 @@ const PlantingPlanItem = ({ item }) => {
     <div className="border p-4 rounded w-[300px]">
       <div>
         <span className="font-semibold">Crop Variety: </span>
-        {item.cropVariety.name}
+        {item.cropVariety?.name}
       </div>
       <div>
         <span className="font-semibold">Quantity: </span>

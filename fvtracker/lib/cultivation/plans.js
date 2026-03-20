@@ -63,10 +63,26 @@ export const getPlantingPlanItemRecord = async ({
   plantingPlan,
   cropVarietyId,
 }) => {
+  await auth.session.generalAndOtherManagers({
+    managerNames: ["CultivationManager"],
+  });
   const plantingPlanItemId = utils.plans.getPlantingPlanItemId({
     plantingPlan,
     cropVarietyId,
   });
   const plantingPlanItem = await getPlantingPlanItemById(plantingPlanItemId);
+  return plantingPlanItem;
+};
+
+export const getPlantingPlanItemById = async (itemId) => {
+  await auth.session.generalAndOtherManagers({
+    managerNames: ["CultivationManager"],
+  });
+  const plantingPlanItem = await PlantingPlanItem.findById(itemId);
+
+  if (!plantingPlanItem) {
+    throw new Error("Planting plan item not found.");
+  }
+
   return plantingPlanItem;
 };

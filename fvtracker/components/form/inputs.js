@@ -63,7 +63,7 @@ export const AppSelect = ({ options, name, label, onChange, defaultValue }) => {
         className={`inputText`}
         name={name}
         onChange={onChange}
-        defaultValue={defaultValue}
+        value={defaultValue}
       >
         <option value={""}>Odaberite</option>
         {options?.map((option) => (

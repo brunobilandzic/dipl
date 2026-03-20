@@ -129,7 +129,7 @@ async function createPlantedCropVarietyPromise({
 
   const field = await getFieldForCultivation({ cultivation });
   const plantingPlan = await getPlantingPlanById(plantingPlanId);
-  const plantingPlanItem = await utils.plans.getPlantingPlanItem({
+  const plantingPlanItem = await getPlantingPlanItemRecord({
     plantingPlan,
     cropVarietyId,
   });

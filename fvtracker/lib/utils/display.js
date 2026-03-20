@@ -2,6 +2,9 @@ import { format } from "date-fns";
 import colors from "../constants/cultivation/colors";
 
 export const cvAndColor = ({ plCvs, cell, fieldView }) => {
+  if (cell === "7,3") {
+    console.log("dispcolor: ", { plcv: plCvs[0], cell, fieldView });
+  }
   const plCv = plCvs.find((plCv) => {
     if (fieldView) {
       return plCv.fieldCoords === cell;

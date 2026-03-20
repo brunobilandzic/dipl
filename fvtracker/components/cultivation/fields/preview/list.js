@@ -109,7 +109,7 @@ function FieldItem({ field }) {
         <ListItemBody>
           <div className="flex justify-between">
             <div>
-              <FieldStatistics  field={field} />
+              <FieldStatistics field={field} />
               <div className="text-sm">
                 <div>{field.description}</div>
                 <div>

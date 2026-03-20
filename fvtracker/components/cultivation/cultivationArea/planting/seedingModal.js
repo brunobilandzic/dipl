@@ -261,24 +261,28 @@ export const SeedingModal = ({
           </div>
         </div>
       </Modal>
-      <MenuModal
-        invertColor="true"
-        isOpen={chooseNewEnd.isOpen}
-        options={choiceOptions}
-        onCancel={reset}
-      />
-      <PlantCultivation
-        onSubmit={onSubmitNewPlantage}
-        isOpen={plantCultivationOpen}
-        onCancel={reset}
-        newPlantage={newPlantage}
-        setNewPlantage={setNewPlantage}
-        crops={crops}
-        fieldsPlantingPlans={fieldsPlantingPlans}
-        availablePlantingPlans={availablePlantingPlans}
-        onChoosePlan={onChoosePlan}
-        submitDisabled={utils.objects.checkEmpty(newPlantage, true)}
-      />
+      {chooseNewEnd.isOpen && (
+        <MenuModal
+          invertColor="true"
+          isOpen={chooseNewEnd.isOpen}
+          options={choiceOptions}
+          onCancel={reset}
+        />
+      )}
+      {plantCultivationOpen && (
+        <PlantCultivation
+          onSubmit={onSubmitNewPlantage}
+          isOpen={plantCultivationOpen}
+          onCancel={reset}
+          newPlantage={newPlantage}
+          setNewPlantage={setNewPlantage}
+          crops={crops}
+          fieldsPlantingPlans={fieldsPlantingPlans}
+          availablePlantingPlans={availablePlantingPlans}
+          onChoosePlan={onChoosePlan}
+          submitDisabled={utils.objects.checkEmpty(newPlantage, true)}
+        />
+      )}
     </>
   );
 };

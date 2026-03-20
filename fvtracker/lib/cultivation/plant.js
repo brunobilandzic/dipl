@@ -3,14 +3,12 @@ import {
   CropVariety,
   PlantedCropVariety,
 } from "@/models/sectors/cultivation/Crops";
-import { getCultivationArea } from "./cultivationArea";
 import utils from "@/lib/utils";
 import { getCultivationById } from "./cultivation";
 import { PlantingPlan } from "@/models/documents/PlantingPlan";
-import auth from "@/lib/auth";
 import { fetchGeneralAndOtherManagers } from "../auth/fetchSessionData";
-import { fetchFieldById } from "./fields";
 import { getFieldForCultivation } from "./fields";
+import { getPlantingPlanItemRecord, getPlantingPlanRecord } from "./plans";
 
 export async function cropsData() {
   const cropMainTypes = await CropMainType.find().populate({

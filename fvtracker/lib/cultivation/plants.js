@@ -136,6 +136,10 @@ async function createPlantedCropVarietyPromise({
   }
 
   const plantingPlan = await getPlantingPlanById(plantingPlanId);
+  await plantingPlan.populate({
+    path: "items",
+    populate: { path: "cropVariety" },
+  });
   const plantingPlanItem = await getPlantingPlanItemRecord({
     plantingPlan,
     cropVarietyId,

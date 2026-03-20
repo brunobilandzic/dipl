@@ -171,26 +171,6 @@ async function createPlantedCropVarietyPromise({
   return plantedCropVariety;
 }
 
-async function _createPlantedCropVarietyPromise({
-  relativeCoord,
-  cropVarietyId,
-  planted,
-  cultivation,
-  harvestedAt,
-  plantedAt,
-  plantingPlanId,
-}) {
-  console.log("Creating planted crop variety with data:", {
-    relativeCoord,
-    cropVarietyId,
-    planted,
-    cultivation,
-    harvestedAt,
-    plantedAt,
-    plantingPlanId,
-  });
-}
-
 export async function getPlantingPlans() {
   const { hasAccess, generalManager, otherManagers } =
     await fetchGeneralAndOtherManagers({

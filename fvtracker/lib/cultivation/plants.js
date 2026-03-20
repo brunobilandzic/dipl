@@ -259,12 +259,6 @@ export async function getPlantingPlansFromcmfields() {
 }
 
 export async function getPlantingPlanById(id) {
-  if (!hasAccess) {
-    throw new Error("Unauthorized access to planting plan.");
-  }
-
-  console.log("Fetching planting plan with ID:", id);
-
   const plantingPlan = await PlantingPlan.findById(id);
   if (!plantingPlan) {
     throw new Error("Planting plan not found with the provided ID.");

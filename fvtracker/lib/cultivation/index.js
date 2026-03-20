@@ -22,7 +22,7 @@ import {
 import {
   createPlantingPlan,
   deletePlantingPlans,
-  getPlantingPlanRecord,
+  getPlantingPlanItemRecord,
 } from "./plans";
 
 export default {
@@ -56,7 +56,7 @@ export default {
   plans: {
     deletePlantingPlans,
     createPlantingPlan,
-    getPlantingPlanRecord,
+    getPlantingPlanItemRecord,
     getCropVarietyById,
   },
 };

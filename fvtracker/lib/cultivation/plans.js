@@ -59,7 +59,7 @@ export const getPlantingPlanById = async (planId) => {
   return plantingPlan;
 };
 
-export const getPlantingPlanRecord = async ({
+export const getPlantingPlanItemRecord = async ({
   plantingPlan,
   cropVarietyId,
 }) => {

@@ -106,10 +106,6 @@ export async function createPlantedCropVarietiesCells({
     });
     plantedCropVarieties.push(plantedCropVariety);
   }
-  console.log(
-    "Created planted crop varieties for cells:",
-    plantedCropVarieties,
-  );
   return plantedCropVarieties;
 }
 

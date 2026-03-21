@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { SelectField } from "../../planting/plan/create";
 import { useState } from "react";
 
@@ -17,7 +18,7 @@ export default function CreateHarvestingPlanPageComponent() {
   );
 }
 
-export const CreateHarvestingPlan = ({}) => {
+export const CreateHarvestingPlanLink = ({}) => {
   return (
     <>
       <Link href={"/plan-berbe/izradi"}>

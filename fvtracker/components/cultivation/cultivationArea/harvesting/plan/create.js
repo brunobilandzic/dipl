@@ -7,13 +7,22 @@ export default function CreateHarvestingPlanPageComponent() {
   const [selectedField, setSelectedField] = useState(null);
   return (
     <>
-    <div className="border p-4 rounded-lg">
-      <SelectField
-        selectedField={selectedField}
-        setSelectedField={setSelectedField}
-      />
-    </div>
-
+      <div className="border p-4 rounded-lg">
+        <SelectField
+          selectedField={selectedField}
+          setSelectedField={setSelectedField}
+        />
+      </div>
     </>
   );
 }
+
+export const CreateHarvestingPlan = ({}) => {
+  return (
+    <>
+      <Link href={"/plan-berbe/izradi"}>
+        <div className="btn">Izradi plan berbe</div>
+      </Link>
+    </>
+  );
+};

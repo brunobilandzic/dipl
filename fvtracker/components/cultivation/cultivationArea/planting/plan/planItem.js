@@ -5,16 +5,19 @@ import { v4 as uuid } from "uuid";
 export const PlantingPlanListItem = ({ plan }) => {
   return (
     <>
-    <Link href={`/cultivation/plan/${plan.slug}`} className="block p-4 border rounded">
-      <div>
-        <div className="text-lg font-bold ">{plan.name}</div>
-        <PlanDates
-          plannedPlantingDate={plan.plannedPlantingDate}
-          plannedHarvestingDate={plan.plannedHarvestingDate}
-        />
-        <PlantingPlanItems items={plan.items} />
-      </div>
-    </Link>
+      <Link
+        href={`/cultivation/plan/${plan.slug}`}
+        className="block p-4 border rounded"
+      >
+        <div>
+          <div className="text-lg font-bold ">{plan.name}</div>
+          <PlanDates
+            plannedPlantingDate={plan.plannedPlantingDate}
+            plannedHarvestingDate={plan.plannedHarvestingDate}
+          />
+          <PlantingPlanItems items={plan.items} />
+        </div>
+      </Link>
     </>
   );
 };
@@ -75,13 +78,23 @@ const PlantingPlanItem = ({ item }) => {
 };
 
 const PlantedCropVarietiesPlan = ({ plantedCropVarieties }) => {
+  console.log(
+    "PlantedCropVarietiesPlan - input plantedCropVarieties:",
+    plantedCropVarieties,
+  );
   const plantedCropVarietiesPerCultivation =
     utils.plans.getPlantedCropVarietesPerCultivation({
       plantedCropVarieties,
     });
-    
+
+  console.log(
+    "plantedCropVarietiesPerCultivation:",
+    plantedCropVarietiesPerCultivation,
+  );
+
   return (
     <div>
+      {JSON.stringify(plantedCropVarietiesPerCultivation, null, 2)}
       {plantedCropVarieties && plantedCropVarieties.length > 0 ? (
         Object.entries(plantedCropVarietiesPerCultivation).map(
           ([cultivationName, plantedCropVarieties]) => (
@@ -90,7 +103,7 @@ const PlantedCropVarietiesPlan = ({ plantedCropVarieties }) => {
               <ul className="list-disc list-inside">
                 {plantedCropVarieties.map((plantedCropVariety) => (
                   <li key={plantedCropVariety._id}>
-                    {plantedCropVariety.plantingPlanItem.cropVariety.name} -{" "}
+                    {plantedCropVariety.plantingPlanItem.cropVariety?.name} -{" "}
                     {plantedCropVariety.quantity}
                   </li>
                 ))}

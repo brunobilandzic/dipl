@@ -20,13 +20,19 @@ export async function GET(request) {
               path: "cultivations",
               populate: {
                 path: "plantedCropVarieties",
-                populate: {
-                  path: "plantingPlanItem",
-                  populate: {
-                    path: "cropVariety",
-                    populate: { path: "cropType" },
+                populate: [
+                  {
+                    path: "plantingPlanItem",
+                    populate: {
+                      path: "cropVariety",
+                      populate: { path: "cropType" },
+                    },
                   },
-                },
+                  {
+                    path: "cultivation",
+                    select: "name",
+                  },
+                ],
               },
             },
             { path: "field", select: "slug" },
@@ -40,7 +46,25 @@ export async function GET(request) {
               path: "items",
               populate: [
                 { path: "cropVariety", populate: { path: "cropType" } },
-                { path: "plantedCropVarieties" },
+                {
+                  path: "plantedCropVarieties",
+                  select: "-relativeCoords -fieldCoords",
+                  populate: [
+                    {
+                      path: "cultivation",
+                      select: "name",
+                    },
+                    {
+                      path: "plantingPlanItem",
+                      select: "cropVariety quantity",
+                      populate: {
+                        path: "cropVariety",
+                        select: "name cropType",
+                        populate: { path: "cropType", select: "name" },
+                      },
+                    },
+                  ],
+                },
               ],
             },
           ],

@@ -3,7 +3,7 @@ import { getCANameFromPlantedCropVarietiesInCultivation } from "@/lib/utils/cult
 import Link from "next/link";
 import { v4 as uuid } from "uuid";
 
-export const PlantingPlanListItem = ({ plan }) => {
+export const PlantingPlanListItem = ({ plan, multiple=true}) => {
   return (
     <>
       <Link
@@ -23,7 +23,7 @@ export const PlantingPlanListItem = ({ plan }) => {
   );
 };
 
-const PlanDates = ({ plannedPlantingDate, plannedHarvestingDate }) => {
+export const PlanDates = ({ plannedPlantingDate, plannedHarvestingDate }) => {
   return (
     <div className="text-sm text-gray-500">
       {plannedPlantingDate && (
@@ -42,7 +42,7 @@ const PlanDates = ({ plannedPlantingDate, plannedHarvestingDate }) => {
   );
 };
 
-const PlantingPlanItems = ({ items }) => {
+export const PlantingPlanItems = ({ items }) => {
   return (
     <div className="mt-2">
       <div>Items:</div>

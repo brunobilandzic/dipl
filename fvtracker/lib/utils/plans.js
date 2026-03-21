@@ -1,14 +1,18 @@
 export const getPlantedCropVarietesPerCultivation = ({
   plantedCropVarieties,
 }) => {
-  console.log("getPlantedCropVarietesPerCultivation - input plantedCropVarieties:", plantedCropVarieties);
   const cultivationPlantedCropVarieties = {};
   plantedCropVarieties?.forEach((plantedCropVariety) => {
-    const { cultivation, ...rest } = plantedCropVariety;
-    if (!cultivationPlantedCropVarieties[cultivation?.name]) {
-      cultivationPlantedCropVarieties[cultivation?.name] = [];
+    console.log("adding plantedCropVariety:", plantedCropVariety);
+    if (
+      !cultivationPlantedCropVarieties[plantedCropVariety.cultivation?.name]
+    ) {
+      cultivationPlantedCropVarieties[plantedCropVariety.cultivation?.name] =
+        [];
     }
-    cultivationPlantedCropVarieties[cultivation?.name].push(rest);
+    cultivationPlantedCropVarieties[plantedCropVariety.cultivation?.name].push(
+      plantedCropVariety,
+    );
   });
   return cultivationPlantedCropVarieties;
 };

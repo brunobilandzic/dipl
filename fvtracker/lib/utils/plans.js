@@ -65,9 +65,10 @@ export const getPlantingPlanItemId = ({ plantingPlan, cropVarietyId }) => {
   return plantingPlanItemSubDoc._id;
 };
 
-export const getPlantingPlanFromFields = ({ fieldPlantingPlans, plantingPlanSlug }) => {
-  for (const fieldPlan of fieldPlantingPlans) {
-    const foundPlan = fieldPlan.plantingPlans.find(
+export const getPlantingPlanFromFields = ({ fields, plantingPlanSlug }) => {
+  for (const field of fields) {
+    if (!field.plantingPlans) continue;
+    const foundPlan = field.plantingPlans.find(
       (plan) => plan.slug === plantingPlanSlug,
     );
     if (foundPlan) {

@@ -27,3 +27,11 @@ export const idToNames = ({ parentId, parentName, list }) => {
   const item = list.find((item) => item[parentName] === parentId);
   return item ? item.name : null;
 };
+
+export const stringifyObjectValues = (obj) => {
+  return Object.entries(obj).map(([key, value]) => (
+    <div key={key}>
+      {key}: {JSON.stringify(value, null, 2)}
+    </div>
+  ));
+};

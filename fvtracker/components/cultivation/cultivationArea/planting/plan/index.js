@@ -7,6 +7,7 @@ import { setFields } from "@/store/cultivation";
 
 import React from "react";
 import { getPlantingPlanFromFields } from "@/lib/utils/plans";
+import { stringifyObjectValues } from "@/lib/utils/objects";
 
 const PlantiPlanPageComponent = ({ slug }) => {
   const fields = useSelector((state) => state.cultivation.fields);
@@ -49,7 +50,12 @@ const PlantiPlanPageComponent = ({ slug }) => {
     console.log("Planting Plan:", plantingPlan);
   }, [plantingPlan, fields]);
 
-  return <div>{slug}</div>;
+  if (!plantingPlan) return <div>Planting plan not loaded...</div>;
+  return (
+    <div>
+      <div>{stringifyObjectValues(plantingPlan)}</div>
+    </div>
+  );
 };
 
 export default PlantiPlanPageComponent;

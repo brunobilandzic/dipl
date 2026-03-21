@@ -1,4 +1,4 @@
-import { extractDBObject, checkEmpty, idToNames } from "./objects";
+import { extractDBObject, checkEmpty, idToNames, stringifyObjectValues } from "./objects";
 import {
   makeUrlFriendly,
   dimensionsString,
@@ -52,6 +52,7 @@ export default {
     extractDBObject,
     checkEmpty,
     idToNames,
+    stringifyObjectValues,
   },
   strings: {
     makeUrlFriendly,

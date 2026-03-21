@@ -30,7 +30,12 @@ export async function GET(request) {
                   },
                   {
                     path: "cultivation",
-                    select: "name",
+                    select: "name cultivationArea",
+                    populate: {
+                      path: "cultivationArea",
+                      select: "name field",
+                      populate: { path: "field", select: "name slug" },
+                    },
                   },
                 ],
               },
@@ -52,7 +57,15 @@ export async function GET(request) {
                   populate: [
                     {
                       path: "cultivation",
-                      select: "name",
+                      select: "name cultivationArea",
+                      populate: {
+                        path: "cultivationArea",
+                        select: "name field",
+                        populate: {
+                          path: "field",
+                          select: "name slug",
+                        },
+                      },
                     },
                     {
                       path: "plantingPlanItem",

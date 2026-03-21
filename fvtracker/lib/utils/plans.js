@@ -1,6 +1,7 @@
 export const getPlantedCropVarietesPerCultivation = ({
   plantedCropVarieties,
 }) => {
+  console.log("getPlantedCropVarietesPerCultivation - input plantedCropVarieties:", plantedCropVarieties);
   const cultivationPlantedCropVarieties = {};
   plantedCropVarieties?.forEach((plantedCropVariety) => {
     const { cultivation, ...rest } = plantedCropVariety;
@@ -16,7 +17,7 @@ export const getFieldsPlans = (fields) => {
   const fieldsPlans = [];
   fields.forEach((field) => {
     if (!field.plantingPlans) return;
-
+    console.log("field planting plans:", field.plantingPlans);
     fieldsPlans.push({
       fieldName: field.name,
       plantingPlans: field.plantingPlans,

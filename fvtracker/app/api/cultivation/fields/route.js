@@ -45,7 +45,6 @@ export async function GET(request) {
         },
         {
           path: "plantingPlans",
-          select: "field items slug",
           populate: [
             {
               path: "items",

@@ -44,6 +44,7 @@ import {
   getFieldsPlans,
   getPlansForCropVariety,
   getPlantingPlanItemId,
+  getPlantingPlanFromFields,
 } from "./plans";
 
 export default {
@@ -108,5 +109,6 @@ export default {
     getFieldsPlans,
     getPlansForCropVariety,
     getPlantingPlanItemId,
+    getPlantingPlanFromFields,
   },
 };

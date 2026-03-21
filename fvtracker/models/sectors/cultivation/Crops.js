@@ -88,6 +88,13 @@ const cropVarietySchema = new Schema({
       default: [],
     },
   ],
+  harvestingPlanItems: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "HarvestingPlanItem",
+      default: [],
+    },
+  ],
 });
 
 const plantedCropVarietySchema = new Schema({

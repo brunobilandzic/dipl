@@ -8,6 +8,7 @@ import { setFields } from "@/store/cultivation";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
+import { FieldPlansItem } from "../../planting/plan/list";
 
 const HarvestingPlanList = () => {
   const fields = useSelector((state) => state.cultivation.fields);
@@ -52,7 +53,7 @@ const HarvestingPlanList = () => {
       </div>
     );
   console.log("fields:", fields);
-  const fieldsPlans = utils.plans.getFieldsPlans(fields);
+  const fieldsPlans = utils.plans.getFieldsHarvestingPlans(fields);
   return (
     <>
       <div>
@@ -75,25 +76,5 @@ const HarvestingPlanList = () => {
     </>
   );
 };
-
-function FieldPlansItem({ fieldPlans }) {
-  const { fieldName, plantingPlans } = fieldPlans;
-  return (
-    <div>
-      <div className="font-bold text-lg mb-4">{fieldName}:</div>
-      {plantingPlans?.length > 0 ? (
-        <div className="flex flex-col">
-          {plantingPlans.map((plan) => (
-            <div key={uuid()} className="mb-2">
-              {/*  <PlantingPlanListItem plan={plan} /> */}
-            </div>
-          ))}
-        </div>
-      ) : (
-        "No planting plans for this field."
-      )}
-    </div>
-  );
-}
 
 export default HarvestingPlanList;

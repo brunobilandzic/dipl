@@ -54,7 +54,7 @@ const PlantingPlanList = () => {
     );
 
   const fieldsPlans = utils.plans.getFieldsPlantingPlans(fields);
-  
+
   return (
     <>
       <div>
@@ -78,8 +78,14 @@ const PlantingPlanList = () => {
   );
 };
 
-function FieldPlansItem({ fieldPlans }) {
-  const { fieldName, plantingPlans } = fieldPlans;
+export function FieldPlansItem({ fieldPlans, plant = true }) {
+  let fieldName, plantingPlans, harvestingPlans;
+  if (plant) {
+    ({ fieldName, plantingPlans } = fieldPlans);
+  } else {
+    ({ fieldName, harvestingPlans } = fieldPlans);
+  }
+
   return (
     <div>
       <div className="font-bold text-lg mb-4">{fieldName}:</div>
@@ -87,7 +93,11 @@ function FieldPlansItem({ fieldPlans }) {
         <div className="flex flex-col">
           {plantingPlans.map((plan) => (
             <div key={uuid()} className="mb-2">
-              <PlantingPlanListItem plan={plan} />
+              {plant ? (
+                <PlantingPlanListItem plan={plan} />
+              ) : (
+                <div>{plan.name}</div>
+              )}
             </div>
           ))}
         </div>

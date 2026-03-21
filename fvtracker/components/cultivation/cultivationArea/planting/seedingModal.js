@@ -45,6 +45,20 @@ export const SeedingModal = ({
   };
 
   useEffect(() => {
+    if (fields?.length > 0 && fieldsPlantingPlans?.length === 0) {
+      setFieldsPlantingPlans(utils.plans.getFieldsPlans(fields));
+      if (newPlantage?.variety?._id) {
+        setAvailablePlantingPlans(
+          utils.plans.getPlansForCropVariety({
+            fieldPlantingPlans: utils.plans.getFieldsPlans(fields),
+            cropVarietyId: newPlantage.variety._id,
+          }),
+        );
+      }
+    }
+  }, [fields, newPlantage?.variety]);
+
+  useEffect(() => {
     if (fields && fields.length > 0) return;
 
     refreshFields();
@@ -174,7 +188,6 @@ export const SeedingModal = ({
       const body = preparePlantageBody(newPlantage);
       const res = await api.post("/cultivation/plant/new-plantage", body);
       const newPlantageFromRes = res.data;
-      console.log("Created new plantage:", newPlantageFromRes);
       dispatch(
         createPlantage({
           cultivationId: newPlantage.cultivationId,
@@ -210,22 +223,6 @@ export const SeedingModal = ({
   useEffect(() => {
     console.log("Available planting plans updated:", availablePlantingPlans);
   }, [availablePlantingPlans]);
-
-  useEffect(() => {
-    console.log("Available planting plans:", availablePlantingPlans);
-    console.log("All planting plans:", fieldsPlantingPlans);
-    if (fields?.length > 0 && fieldsPlantingPlans?.length === 0) {
-      setFieldsPlantingPlans(utils.plans.getFieldsPlans(fields));
-      if (newPlantage?.variety?._id) {
-        setAvailablePlantingPlans(
-          utils.plans.getPlansForCropVariety({
-            fieldPlantingPlans: utils.plans.getFieldsPlans(fields),
-            cropVarietyId: newPlantage.variety._id,
-          }),
-        );
-      }
-    }
-  }, [fields]);
 
   const onChoosePlan = (plan) => {
     setNewPlantage((prev) => ({

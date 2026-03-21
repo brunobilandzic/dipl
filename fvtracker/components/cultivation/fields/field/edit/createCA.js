@@ -16,6 +16,7 @@ function CreateCA({
   fieldId,
   setIsBeginSelected,
   newCACoordinates,
+  setNewCACoordinates,
 }) {
   const initialnewCADetails = {
     field: fieldId,
@@ -150,7 +151,8 @@ function CreateCA({
           </div>
         </div>
       </Modals.FormModal>
-      {newCACoordinates?.planted?.length > 1 && newCACoordinates?.planted?.length !== undefined ? (
+      {newCACoordinates?.planted?.length > 1 &&
+      newCACoordinates?.planted?.length !== undefined ? (
         <div
           onClick={onAdd}
           className="flex flex-col justify-center items-center gap-4 cursor-pointer"

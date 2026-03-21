@@ -247,6 +247,7 @@ function FieldEditCASPanel({
             cultivationAreaMenu={cultivationAreaMenu}
             setCultivationAreaMenu={setCultivationAreaMenu}
             newCACoordinates={newCACoordinates}
+            setNewCACoordinates={setNewCACoordinates}
           />
         </div>
       </div>

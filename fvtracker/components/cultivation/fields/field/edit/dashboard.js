@@ -12,6 +12,7 @@ export function FieldEditDashboard({
   cultivationAreaMenu,
   setCultivationAreaMenu,
   newCACoordinates,
+  setNewCACoordinates,
 }) {
   return (
     <div className="w-full flex justify-center items-center gap-4">
@@ -25,6 +26,7 @@ export function FieldEditDashboard({
           /*  setPlantedCells={setPlantedCells} */
           setIsBeginSelected={setIsBeginSelected}
           newCACoordinates={newCACoordinates}
+          setNewCACoordinates={setNewCACoordinates}
         />
       </DashboardItem>
       <DashboardItem>
@@ -32,6 +34,7 @@ export function FieldEditDashboard({
           cultivationAreaMenu={cultivationAreaMenu}
           setCultivationAreaMenu={setCultivationAreaMenu}
           /*  setPlantedCells={setPlantedCells} */
+          setNewCACoordinates={setNewCACoordinates}
         />
       </DashboardItem>
     </div>

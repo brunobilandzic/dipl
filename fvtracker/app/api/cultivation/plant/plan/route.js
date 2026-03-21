@@ -8,6 +8,30 @@ export async function POST(request) {
     const newPlantingPlan = await cultivation.plans.createPlantingPlan({
       plantingPlanData: body,
     });
+    await newPlantingPlan.populate([
+      {
+        path: "items",
+        populate: [
+          {
+            path: "cropVariety",
+            populate: {
+              path: "cropType",
+            },
+          },
+          {
+            path: "plantedCropVarieties",
+            populate: {
+              path: "cultivation",
+              select: "name",
+            },
+          },
+        ],
+      },
+      {
+        path: "field",
+        select: "name _id",
+      },
+    ]);
     console.log("Created new planting plan:", newPlantingPlan);
     return Response.json({ newPlantingPlan }, { status: 201 });
   } catch (error) {

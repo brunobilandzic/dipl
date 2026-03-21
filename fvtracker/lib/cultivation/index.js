@@ -25,6 +25,7 @@ import {
   getPlantingPlanItemById,
   getPlantingPlanItemRecord,
 } from "./plans";
+import { createHarvestPlan, deleteHarvestPlans } from "./harvestPlans";
 
 export default {
   fields: {
@@ -59,6 +60,10 @@ export default {
     createPlantingPlan,
     getPlantingPlanItemRecord,
     getPlantingPlanItemById,
+  },
+  harvestPlans: {
+    createHarvestPlan,
+    deleteHarvestPlans,
   },
 };
 

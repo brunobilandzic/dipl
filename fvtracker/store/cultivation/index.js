@@ -201,6 +201,15 @@ const cultivationSlice = createSlice({
         field.plantingPlans = [...(field.plantingPlans || []), newPlan];
       }
     },
+    createHarvestPlan: (state, action) => {
+      const newPlan = action.payload;
+      const fieldId = newPlan.field._id;
+
+      const field = state.fields.find((f) => f._id === fieldId);
+      if (field) {
+        field.harvestPlans = [...(field.harvestPlans || []), newPlan];
+      }
+    },
   },
 });
 
@@ -220,6 +229,7 @@ export const {
   deleteCultivation,
   createPlantage,
   createPlantingPlan,
+  createHarvestPlan,
 } = cultivationSlice.actions;
 
 export default cultivationSlice.reducer;

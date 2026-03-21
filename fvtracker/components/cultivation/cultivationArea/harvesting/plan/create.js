@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { SelectField } from "../../planting/plan/create";
+import { FillPlanInfo, SelectField } from "@/components/cultivation/cultivationArea/planting/plan/create";
 import { useState } from "react";
 
 export default function CreateHarvestingPlanPageComponent() {
@@ -14,6 +14,15 @@ export default function CreateHarvestingPlanPageComponent() {
           setSelectedField={setSelectedField}
         />
       </div>
+      {selectedField ? (
+        <div className="mt-4 rounded-lg border p-4">
+          <FillPlanInfo
+            selectedField={selectedField}
+            setSelectedField={setSelectedField}
+            plant={false}
+          />
+        </div>
+      ) : null}
     </>
   );
 }

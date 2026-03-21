@@ -125,7 +125,11 @@ export const SelectField = ({ selectedField, setSelectedField }) => {
   );
 };
 
-export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
+export const FillPlanInfo = ({
+  selectedField,
+  setSelectedField,
+  plant = true,
+}) => {
   const crops = useSelector((state) => state.cultivation.crops);
   const dispatch = useDispatch();
   const {
@@ -238,19 +242,31 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
 
   const handleSubmit = async () => {
     const submitData = utils.plant.prepareSubmitPlan(formData);
-    console.log("Submitting planting plan with data:", submitData);
+    console.log(
+      `Submmiting ${plant ? "planting" : "harvesting"} plan with data:`,
+      submitData,
+    );
     if (utils.objects.checkEmpty(submitData)) {
       return;
     }
     try {
-      const res = await api.post("/cultivation/plant/plan", {
-        ...submitData,
-      });
+      const res = await api.post(
+        `/cultivation/${plant ? "plant" : "harvest"}/plan`,
+        {
+          ...submitData,
+        },
+      );
       if (res.data && res.data.newPlantingPlan) {
         alert("Plan sadnje uspješno kreiran!");
       }
-      console.log("Created planting plan:", res.data.newPlantingPlan);
-      dispatch(createPlantingPlan(res.data.newPlantingPlan));
+      if (res.data && res.data.newHarvestingPlan) {
+        alert("Plan berbe uspješno kreiran!");
+      }
+      console.log(
+        `Created ${plant ? "planting" : "harvesting"} plan:`,
+        res.data[`new${plant ? "Planting" : "Harvesting"}Plan`],
+      );
+      /* dispatch(createPlantingPlan(res.data[`new${plant ? "Planting" : "Harvesting"}Plan`])); */
       setSelectedField(null);
       setFormData(createInitialFormData({}));
     } catch (error) {
@@ -265,30 +281,25 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
   return (
     <div className="flex flex-col gap-4" onSubmit={handleSubmit}>
       <div>
-        <div className="text-lg font-semibold">Plan sadnje</div>
+        <div className="text-lg font-semibold">
+          Plan {plant ? "sadnje" : "berbe"}
+        </div>
         <div className="text-sm text-gray-600">
           {selectedField?.name
             ? `Odabrano polje: ${selectedField.name}`
-            : "Popunite podatke plana sadnje."}
+            : `Popunite podatke plana ${plant ? "sadnje" : "berbe"}.`}
         </div>
       </div>
       <div>
         <AppInput
-          label="Naziv plana sadnje"
+          label={`Naziv plana ${plant ? "sadnje" : "berbe"}`}
           name="name"
           onChange={handleFormChange}
-          placeholder="Unesite naziv plana sadnje"
+          placeholder={`Unesite naziv plana ${plant ? "sadnje" : "berbe"}`}
           value={formData.name}
         />
       </div>
       <div className="grid gap-4 md:grid-cols-2">
-        <AppDatePicker
-          label="Planirani datum sadnje"
-          name="plannedPlantingDate"
-          onChange={handleFormChange}
-          placeholder="Odaberite datum sadnje"
-          value={formData.plannedPlantingDate}
-        />
         <AppDatePicker
           label="Planirani datum berbe"
           name="plannedHarvestingDate"

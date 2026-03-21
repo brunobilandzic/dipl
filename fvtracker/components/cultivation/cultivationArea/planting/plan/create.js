@@ -73,6 +73,9 @@ const SelectField = ({ selectedField, setSelectedField }) => {
     console.log("Fields not loaded yet, showing loading state");
     return <Loading />;
   }
+  if (fields.length === 0) {
+    return <div>No fields available. Please create a field first.</div>;
+  }
 
   return (
     <>

@@ -1,9 +1,13 @@
-import React from 'react'
+import PlantiPlanPageComponent from "@/components/cultivation/cultivationArea/planting/plan";
+import React from "react";
 
-function PlantingPlanPage() {
+async function PlantingPlanPage({ params }) {
+  const { slug } = await params;
   return (
-    <div>PlantingPlanPage</div>
-  )
+    <div>
+      <PlantiPlanPageComponent slug={slug} />
+    </div>
+  );
 }
 
-export default PlantingPlanPage
+export default PlantingPlanPage;

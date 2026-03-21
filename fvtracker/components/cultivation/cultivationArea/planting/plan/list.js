@@ -52,15 +52,15 @@ const PlantingPlanList = () => {
         <Loading />
       </div>
     );
-
+    console.log("fields:", fields);
   const fieldsPlans = utils.plans.getFieldsPlans(fields);
   return (
     <>
       <div>
         <div>
-          {fieldsPlans.map((fieldPlans, index) => (
+          {fieldsPlans.map((fieldPlan, index) => (
             <div key={uuid()}>
-              <FieldPlansItem fieldPlans={fieldPlans} />
+              <FieldPlansItem fieldPlans={fieldPlan} />
             </div>
           ))}
         </div>

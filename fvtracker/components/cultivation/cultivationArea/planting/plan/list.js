@@ -52,8 +52,9 @@ const PlantingPlanList = () => {
         <Loading />
       </div>
     );
-    console.log("fields:", fields);
-  const fieldsPlans = utils.plans.getFieldsPlans(fields);
+
+  const fieldsPlans = utils.plans.getFieldsPlantingPlans(fields);
+  
   return (
     <>
       <div>

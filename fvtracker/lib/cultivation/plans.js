@@ -4,6 +4,10 @@ import {
 } from "@/models/documents/plans/PlantingPlan";
 import { deletePlansFromFields, fetchFieldById } from "./fields";
 import utils from "../utils";
+import {
+  HarvestingPlan,
+  HarvestingPlanItem,
+} from "@/models/documents/plans/HarvestingPlan";
 import { getCropVarietyById } from "./plants";
 
 export async function deletePlantingPlans({ fieldId, planId }) {
@@ -44,6 +48,29 @@ export async function createPlantingPlan({ plantingPlanData }) {
   await plantingPlan.save();
   return plantingPlan;
 }
+
+export const createHarvestingPlan = async ({ harvestingPlanData }) => {
+  const field = await fetchFieldById(harvestingPlanData.field);
+  const { items, ...planData } = harvestingPlanData;
+  const harvestingPlan = new HarvestingPlan({
+    ...planData,
+  });
+  field.harvestingPlans.push(harvestingPlan._id);
+  for (const itemData of items) {
+    const harvestingPlanItem = new HarvestingPlanItem({
+      ...itemData,
+      harvestingPlan: harvestingPlan._id,
+    });
+    const cropVariety = await getCropVarietyById(itemData.cropVariety);
+    cropVariety.harvestingPlanItems.push(harvestingPlanItem._id);
+    await cropVariety.save();
+    await harvestingPlanItem.save();
+    harvestingPlan.items.push(harvestingPlanItem._id);
+  }
+  await field.save();
+  await harvestingPlan.save();
+  return harvestingPlan;
+};
 
 export const getPlantingPlanById = async (planId) => {
   const plantingPlan = await PlantingPlan.findById(planId).populate({

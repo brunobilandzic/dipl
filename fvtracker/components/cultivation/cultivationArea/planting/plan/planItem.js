@@ -1,8 +1,11 @@
 import utils from "@/lib/utils";
+import Link from "next/link";
+import { v4 as uuid } from "uuid";
 
 export const PlantingPlanListItem = ({ plan }) => {
   return (
     <>
+    <Link href={`/cultivation/plan/${plan.slug}`} className="block p-4 border rounded">
       <div>
         <div className="text-lg font-bold ">{plan.name}</div>
         <PlanDates
@@ -11,6 +14,7 @@ export const PlantingPlanListItem = ({ plan }) => {
         />
         <PlantingPlanItems items={plan.items} />
       </div>
+    </Link>
     </>
   );
 };
@@ -40,7 +44,7 @@ const PlantingPlanItems = ({ items }) => {
       <div>Items:</div>
       <div className="flex flex-wrap gap-4 mt-1">
         {items.map((item) => (
-          <div key={item._id} className="">
+          <div key={uuid()} className="">
             <PlantingPlanItem item={item} />
           </div>
         ))}
@@ -75,6 +79,7 @@ const PlantedCropVarietiesPlan = ({ plantedCropVarieties }) => {
     utils.plans.getPlantedCropVarietesPerCultivation({
       plantedCropVarieties,
     });
+    
   return (
     <div>
       {plantedCropVarieties && plantedCropVarieties.length > 0 ? (
@@ -85,7 +90,7 @@ const PlantedCropVarietiesPlan = ({ plantedCropVarieties }) => {
               <ul className="list-disc list-inside">
                 {plantedCropVarieties.map((plantedCropVariety) => (
                   <li key={plantedCropVariety._id}>
-                    {plantedCropVariety.cropVariety.name} -{" "}
+                    {plantedCropVariety.plantingPlanItem.cropVariety.name} -{" "}
                     {plantedCropVariety.quantity}
                   </li>
                 ))}

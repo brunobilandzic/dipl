@@ -219,6 +219,7 @@ export function plantedArrayToMap(planted) {
 export function prepareCulitvationArea({ newCADetails, newCACoordinates }) {
   const cultivationArea = {
     ...newCADetails,
+    dimensions: newCACoordinates.dimensions,
     planted: newCACoordinates.planted,
   };
 

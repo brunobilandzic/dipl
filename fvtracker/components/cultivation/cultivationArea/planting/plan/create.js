@@ -46,7 +46,7 @@ export const CreatePlantagePlan = ({}) => {
   );
 };
 
-const SelectField = ({ selectedField, setSelectedField }) => {
+export const SelectField = ({ selectedField, setSelectedField }) => {
   const fields = useSelector((state) => state.cultivation.fields);
   const dispatch = useDispatch();
 

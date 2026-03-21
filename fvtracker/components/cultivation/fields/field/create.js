@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 
 export function CreateFieldPageComponent() {
   const testFieldData = {
-    name: "Test Field",
+    name: `Test Field ${new Date().getTime()}`,
     description: "This is a test field",
     dimensions: {
       width: 50,
@@ -26,8 +26,8 @@ export function CreateFieldPageComponent() {
       latitude: 43.67028,
     },
     cultivationAreaDimensions: {
-      min_ca_dim: 10,
-      max_ca_dim: 30,
+      min_ca_dim: 1,
+      max_ca_dim: 10000,
       gap: 2,
     },
   };

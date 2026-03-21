@@ -1,4 +1,5 @@
 import utils from "@/lib/utils";
+import { getCANameFromPlantedCropVarietiesInCultivation } from "@/lib/utils/cultivationAreas";
 import Link from "next/link";
 import { v4 as uuid } from "uuid";
 
@@ -94,20 +95,32 @@ const PlantedCropVarietiesPlan = ({ plantedCropVarieties }) => {
 
   return (
     <div>
-      {JSON.stringify(plantedCropVarietiesPerCultivation, null, 2)}
       {plantedCropVarieties && plantedCropVarieties.length > 0 ? (
         Object.entries(plantedCropVarietiesPerCultivation).map(
           ([cultivationName, plantedCropVarieties]) => (
             <div key={cultivationName}>
-              <div className="font-semibold">{cultivationName}:</div>
-              <ul className="list-disc list-inside">
-                {plantedCropVarieties.map((plantedCropVariety) => (
-                  <li key={plantedCropVariety._id}>
-                    {plantedCropVariety.plantingPlanItem.cropVariety?.name} -{" "}
-                    {plantedCropVariety.quantity}
-                  </li>
-                ))}
-              </ul>
+              <div className="font-semibold">
+                {getCANameFromPlantedCropVarietiesInCultivation({
+                  plantedCropVariety: plantedCropVarieties[0],
+                })}{" "}
+                - {cultivationName}: {plantedCropVarieties?.length || 0} planted
+                crop varieties
+              </div>
+              {/* <ul className="list-disc list-inside">
+                {plantedCropVarieties.map((plantedCropVariety) => {
+                  console.log(
+                    "Rendering plantedCropVariety:",
+                    plantedCropVariety,
+                  );
+                  return (
+                    <li key={plantedCropVariety._id}>
+                      {plantedCropVariety.cultivation?.cultivationArea?.name} -{" "}
+                      {plantedCropVariety.cultivation?.name} -{" "}
+                      {plantedCropVariety.plantedAt}
+                    </li>
+                  );
+                })}
+              </ul> */}
             </div>
           ),
         )

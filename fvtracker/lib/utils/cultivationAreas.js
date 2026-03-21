@@ -261,3 +261,9 @@ export function getPlCvsSeededCells(plCvs) {
     })
     ?.filter((relCoord) => !!relCoord);
 }
+  
+export const getCANameFromPlantedCropVarietiesInCultivation = ({
+  plantedCropVariety,
+}) => {
+  return plantedCropVariety.cultivation?.cultivationArea?.name;
+};

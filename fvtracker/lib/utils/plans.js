@@ -56,6 +56,17 @@ export const getFieldsPlantingPlans = (fields) => {
   });
 };
 
+export const getFieldsHarvestingPlans = (fields) => {
+  const fieldPlans = getFieldsPlans({ fields, plant: false });
+  return fieldPlans.map((fieldPlan) => {
+    const { fieldName, plans } = fieldPlan;
+    return {
+      fieldName,
+      harvestingPlans: plans,
+    };
+  });
+};
+
 export const getPlansForCropVariety = ({
   fieldPlantingPlans,
   cropVarietyId,

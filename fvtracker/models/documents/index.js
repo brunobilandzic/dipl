@@ -1,5 +1,5 @@
-import { PlantingPlan } from "./PlantingPlan";
+import plans from "./plans";
 
 export default {
-  PlantingPlan,
+  plans,
 };

@@ -5,9 +5,8 @@ import {
 } from "@/models/sectors/cultivation/Crops";
 import utils from "@/lib/utils";
 import { getCultivationById } from "./cultivation";
-import { PlantingPlan } from "@/models/documents/PlantingPlan";
+import { PlantingPlan } from "@/models/documents/plans/PlantingPlan";
 import { fetchGeneralAndOtherManagers } from "../auth/fetchSessionData";
-import { getFieldForCultivation } from "./fields";
 import { getPlantingPlanItemRecord } from "./plans";
 
 export async function cropsData() {

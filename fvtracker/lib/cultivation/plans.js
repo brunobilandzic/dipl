@@ -1,8 +1,7 @@
 import {
   PlantingPlan,
   PlantingPlanItem,
-} from "@/models/documents/PlantingPlan";
-import auth from "@/lib/auth";
+} from "@/models/documents/plans/PlantingPlan";
 import { deletePlansFromFields, fetchFieldById } from "./fields";
 import utils from "../utils";
 

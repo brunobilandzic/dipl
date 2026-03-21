@@ -146,9 +146,8 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
         (v) =>
           v.cropTypeName === types.find((t) => t._id === defaultType)?.name,
       )[0]?._id || "";
-
     return {
-      name: "plan sadnje",
+      name: `Plan sadnje - ${field?.toString() || "Nije odabrano"} - ${new Date().toLocaleTimeString()}`,
       field,
       items: [
         {
@@ -253,7 +252,7 @@ export const FillPlanInfo = ({ selectedField, setSelectedField }) => {
       console.log("Created planting plan:", res.data.newPlantingPlan);
       dispatch(createPlantingPlan(res.data.newPlantingPlan));
       setSelectedField(null);
-      setFormData(createInitialFormData());
+      setFormData(createInitialFormData({}));
     } catch (error) {
       console.error("Error creating planting plan:", error);
       handleError({

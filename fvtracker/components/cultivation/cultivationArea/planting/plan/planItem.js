@@ -79,19 +79,10 @@ const PlantingPlanItem = ({ item }) => {
 };
 
 const PlantedCropVarietiesPlan = ({ plantedCropVarieties }) => {
-  console.log(
-    "PlantedCropVarietiesPlan - input plantedCropVarieties:",
-    plantedCropVarieties,
-  );
   const plantedCropVarietiesPerCultivation =
     utils.plans.getPlantedCropVarietesPerCultivation({
       plantedCropVarieties,
     });
-
-  console.log(
-    "plantedCropVarietiesPerCultivation:",
-    plantedCropVarietiesPerCultivation,
-  );
 
   return (
     <div>

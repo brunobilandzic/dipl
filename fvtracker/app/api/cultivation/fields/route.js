@@ -45,7 +45,7 @@ export async function GET(request) {
         },
         {
           path: "plantingPlans",
-          select: "-field",
+          select: "field items slug",
           populate: [
             {
               path: "items",
@@ -79,6 +79,10 @@ export async function GET(request) {
                   ],
                 },
               ],
+            },
+            {
+              path: "field",
+              select: "name slug",
             },
           ],
         },

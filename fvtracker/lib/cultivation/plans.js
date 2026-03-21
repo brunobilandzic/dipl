@@ -4,6 +4,7 @@ import {
 } from "@/models/documents/plans/PlantingPlan";
 import { deletePlansFromFields, fetchFieldById } from "./fields";
 import utils from "../utils";
+import { getCropVarietyById } from "./plants";
 
 export async function deletePlantingPlans({ fieldId, planId }) {
   await deletePlansFromFields({ fieldId, planId });
@@ -33,6 +34,9 @@ export async function createPlantingPlan({ plantingPlanData }) {
       ...itemData,
       plantingPlan: plantingPlan._id,
     });
+    const cropVariety = await getCropVarietyById(itemData.cropVariety);
+    cropVariety.plantingPlanItems.push(plantingPlanItem._id);
+    await cropVariety.save();
     await plantingPlanItem.save();
     plantingPlan.items.push(plantingPlanItem._id);
   }

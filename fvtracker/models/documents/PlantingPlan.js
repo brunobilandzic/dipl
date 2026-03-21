@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import { Field } from "@/models/sectors/cultivation/Field";
+import { makeUrlFriendly } from "@/lib/utils/strings";
 
 const { Schema } = mongoose;
 
@@ -19,6 +21,11 @@ const plantingItemSchema = new Schema({
       default: [],
     },
   ],
+  plantingPlan: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "PlantingPlan",
+    required: true,
+  },
 });
 
 const plantingPlanSchema = new Schema({
@@ -47,6 +54,14 @@ const plantingPlanSchema = new Schema({
     type: Date,
     default: null,
   },
+  slug: { type: String, unique: true, index: true },
+});
+
+plantingPlanSchema.pre("save", async function () {
+  if (this.isModified("name")) {
+    const field = await Field.findById(this.field);
+    this.slug = makeUrlFriendly(`${field?.name}-${this.name}`);
+  }
 });
 
 export const PlantingPlan =

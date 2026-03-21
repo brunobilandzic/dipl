@@ -4,7 +4,7 @@ import errorReducer from "./error";
 import loadingReducer from "./loading";
 import cultivationReducer from "./cultivation";
 
-export default configureStore({
+const store = configureStore({
   reducer: {
     user: userReducer,
     error: errorReducer,
@@ -12,3 +12,5 @@ export default configureStore({
     cultivation: cultivationReducer,
   },
 });
+
+export default store;

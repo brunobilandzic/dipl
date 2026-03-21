@@ -1,4 +1,9 @@
-import { extractDBObject, checkEmpty, idToNames, stringifyObjectValues } from "./objects";
+import {
+  extractDBObject,
+  checkEmpty,
+  idToNames,
+  stringifyObjectValues,
+} from "./objects";
 import {
   makeUrlFriendly,
   dimensionsString,
@@ -45,6 +50,7 @@ import {
   getPlansForCropVariety,
   getPlantingPlanItemId,
   getPlantingPlanFromFields,
+  getFieldsPlantingPlans,
 } from "./plans";
 
 export default {
@@ -111,5 +117,6 @@ export default {
     getPlansForCropVariety,
     getPlantingPlanItemId,
     getPlantingPlanFromFields,
+    getFieldsPlantingPlans,
   },
 };

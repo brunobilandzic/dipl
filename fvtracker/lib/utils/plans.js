@@ -17,7 +17,7 @@ export const getPlantedCropVarietesPerCultivation = ({
   return cultivationPlantedCropVarieties;
 };
 
-export const getFieldsPlans = (fields) => {
+export const _getFieldsPlans = (fields) => {
   const fieldsPlans = [];
   fields.forEach((field) => {
     if (!field.plantingPlans) return;
@@ -28,6 +28,32 @@ export const getFieldsPlans = (fields) => {
     });
   });
   return fieldsPlans;
+};
+
+export const getFieldsPlans = ({ fields, plant = true }) => {
+  const fieldsPlans = [];
+  if (!fields || fields.length === 0) return [];
+  fields.forEach((field) => {
+    if (!field.plantingPlans && !field.harvestingPlans) return;
+    console.log("field planting plans:", field.plantingPlans);
+    console.log("field harvesting plans:", field.harvestingPlans);
+    fieldsPlans.push({
+      fieldName: field.name,
+      plans: plant ? field.plantingPlans : field.harvestingPlans,
+    });
+  });
+  return fieldsPlans;
+};
+
+export const getFieldsPlantingPlans = (fields) => {
+  const fieldPlans = getFieldsPlans({ fields, plant: true });
+  return fieldPlans.map((fieldPlan) => {
+    const { fieldName, plans } = fieldPlan;
+    return {
+      fieldName,
+      plantingPlans: plans,
+    };
+  });
 };
 
 export const getPlansForCropVariety = ({

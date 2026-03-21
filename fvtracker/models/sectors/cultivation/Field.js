@@ -34,10 +34,6 @@ const fieldSchema = new mongoose.Schema({
       default: [],
     },
   ],
-  cultivations: [
-    // cultivation is consisted of cultivation cycles, eaych cycle of its own areas and crops
-    { type: mongoose.Schema.Types.ObjectId, ref: "Cultivation", default: [] },
-  ],
   location: {
     // defines cells beginning location in the field
     // cells are expanding in the first quadrant from this point

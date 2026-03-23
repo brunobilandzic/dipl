@@ -130,11 +130,11 @@ export const SeedingModal = ({
         y,
       });
     } else {
-      onBeginCoordinates({ x, y });
+      onBeginPlantingCoordinates({ x, y });
     }
   };
 
-  const onBeginCoordinates = ({ x, y }) => {
+  const onBeginPlantingCoordinates = ({ x, y }) => {
     setNewPlantage((prev) => ({
       ...prev,
       beginX: x,
@@ -143,7 +143,7 @@ export const SeedingModal = ({
     }));
   };
 
-  const onEndCoordinates = ({ x, y, isContinue }) => {
+  const onEndPlantingCoordinates = ({ x, y, isContinue }) => {
     const { planted } = utils.cultivation.cultivationAreas.getCellsInRect({
       beginX: newPlantage.beginX,
       beginY: newPlantage.beginY,
@@ -184,7 +184,7 @@ export const SeedingModal = ({
           setChooseNewEnd((prev) => {
             return { ...prev, isOpen: false, choice: END_PLANTING };
           });
-          onEndCoordinates({
+          onEndPlantingCoordinates({
             x: chooseNewEnd.x,
             y: chooseNewEnd.y,
           });
@@ -194,7 +194,7 @@ export const SeedingModal = ({
         label: CONTINUE_PLANTING,
         onClick: () => {
           setChooseNewEnd({ isOpen: false, choice: CONTINUE_PLANTING });
-          onEndCoordinates({
+          onEndPlantingCoordinates({
             x: chooseNewEnd.x,
             y: chooseNewEnd.y,
             isContinue: true,

@@ -165,6 +165,7 @@ export const SeedingModal = ({
       reset();
       return;
     }
+
     setNewPlantage((prev) => ({
       ...prev,
       endX: x,
@@ -183,6 +184,26 @@ export const SeedingModal = ({
     );
     setChooseNewEnd(initialChooseNewEnd);
     setPlantCultivationOpen(false);
+  };
+
+  const onBeginHarvestingCoordinates = ({ x, y }) => {
+    setNewHarvest((prev) => ({
+      ...prev,
+      beginX: x,
+      beginY: y,
+      toHarvestCells: [...(prev.toHarvestCells ?? []), `${x},${y}`],
+    }));
+  };
+
+  const onEndHarvestingCoordinates = ({ x, y, isContinue }) => {
+    const { harvested } = utils.cultivation.cultivationAreas.getCellsInRect({
+      beginX: newHarvest.beginX,
+      beginY: newHarvest.beginY,
+      endX: x,
+      endY: y,
+      toPlantCells: newHarvest.toHarvestCells,
+      toPlantCultivation: cultivation,
+    });
   };
 
   const choiceOptions = {

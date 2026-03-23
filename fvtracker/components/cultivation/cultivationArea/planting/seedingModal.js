@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { PlantCultivation } from "@/components/cultivation/cultivationArea/planting/plantCultivation";
 import api from "@/lib/api";
 import { createPlantage, setFields } from "@/store/cultivation";
+import { setLoading } from "@/store/loading";
 
 export const SeedingModal = ({
   isOpen,
@@ -216,6 +217,7 @@ export const SeedingModal = ({
     //submit to backend
     try {
       const body = preparePlantageBody(newPlantage);
+      dispatch(setLoading(true));
       const res = await api.post("/cultivation/plant/new-plantage", body);
       const newPlantageFromRes = res.data;
       dispatch(
@@ -226,6 +228,8 @@ export const SeedingModal = ({
       );
     } catch (error) {
       console.error("Error preparing plantage body:", error);
+    } finally {
+      dispatch(setLoading(false));
     }
     reset();
   };

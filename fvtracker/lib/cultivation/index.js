@@ -20,6 +20,7 @@ import {
   getCultivationById,
 } from "./cultivation";
 import {
+  createHarvestingPlan,
   createPlantingPlan,
   deletePlantingPlans,
   getPlantingPlanItemById,
@@ -59,6 +60,7 @@ export default {
     createPlantingPlan,
     getPlantingPlanItemRecord,
     getPlantingPlanItemById,
+    createHarvestingPlan,
   },
 };
 

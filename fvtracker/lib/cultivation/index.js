@@ -23,8 +23,11 @@ import {
   createHarvestingPlan,
   createPlantingPlan,
   deletePlantingPlans,
+  deleteHarvestingPlans,
   getPlantingPlanItemById,
   getPlantingPlanItemRecord,
+  updatePlantingPlan,
+  updateHarvestingPlan,
 } from "./plans";
 
 export default {
@@ -57,10 +60,13 @@ export default {
   },
   plans: {
     deletePlantingPlans,
+    deleteHarvestingPlans,
     createPlantingPlan,
     getPlantingPlanItemRecord,
     getPlantingPlanItemById,
     createHarvestingPlan,
+    updatePlantingPlan,
+    updateHarvestingPlan,
   },
 };
 

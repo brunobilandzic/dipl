@@ -91,13 +91,13 @@ export function FieldPlansItem({ fieldPlans, plant = true }) {
     if (plant) {
       return plantingPlans?.map((plan) => (
         <div key={uuid()} className="mb-2">
-          <PlantingPlanListItem plan={plan} />
+          <PlantingPlanListItem plan={plan} plant={true} />
         </div>
       ));
     } else {
       return harvestingPlans?.map((plan) => (
         <div key={uuid()} className="mb-2">
-          <PlantingPlanListItem plan={plan} />
+          <PlantingPlanListItem plan={plan} plant={false} />
         </div>
       ));
     }

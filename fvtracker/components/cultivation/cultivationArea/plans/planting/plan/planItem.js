@@ -3,11 +3,11 @@ import { getCANameFromPlantedCropVarietiesInCultivation } from "@/lib/utils/cult
 import Link from "next/link";
 import { v4 as uuid } from "uuid";
 
-export const PlantingPlanListItem = ({ plan, multiple=true}) => {
+export const PlantingPlanListItem = ({ plan, plant = true }) => {
   return (
     <>
       <Link
-        href={`/plan-sadnje/${plan.slug}`}
+        href={`/${plant ? "plan-sadnje" : "plan-berbe"}/${plan.slug}`}
         className="block p-4 border rounded"
       >
         <div>

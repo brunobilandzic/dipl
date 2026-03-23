@@ -1,4 +1,4 @@
-import PlantiPlanPageComponent from "@/components/cultivation/cultivationArea/planting/plan";
+import PlantiPlanPageComponent from "@/components/cultivation/cultivationArea/plans/planting/plan";
 import React from "react";
 
 async function PlantingPlanPage({ params }) {

@@ -298,6 +298,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
         )}
         {plantCultivation.isOpen && (
           <SeedingModal
+            fieldName={selectedField.name}
             isOpen={plantCultivation.isOpen}
             onCancel={() => setPlantCultivation(initialPlantCultivation)}
             cultivation={selectedCultivation}

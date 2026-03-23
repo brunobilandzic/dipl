@@ -21,6 +21,7 @@ export const SeedingModal = ({
   cultivation,
   caDims,
   cultivationCells,
+  fieldName,
 }) => {
   const [newPlantage, setNewPlantage] = useState({});
   const [allFieldPlans, setAllFieldPlans] = useState([]);

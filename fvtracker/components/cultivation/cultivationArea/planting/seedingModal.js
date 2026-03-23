@@ -57,16 +57,14 @@ export const SeedingModal = ({
   };
 
   useEffect(() => {
-    if (fields?.length > 0 && allFieldPlans?.length === 0) {
-      setAllFieldPlans(utils.plans.getFieldPlans(fields));
-      if (newPlantage?.variety?._id) {
-        setAvailablePlans(
-          utils.plans.getPlansForCropVariety({
-            allFieldPlans: utils.plans.getFieldsPlantingPlans(fields),
-            cropVarietyId: newPlantage.variety._id,
-          }),
-        );
-      }
+    if (newPlantage?.variety?._id) {
+      const availablePlans = utils.plans.getPlansForCropVariety({
+        allFieldPlans,
+        cropVarietyId: newPlantage.variety._id,
+      });
+      setAvailablePlans(availablePlans);
+    } else {
+      setAvailablePlans([]);
     }
   }, [fields, newPlantage?.variety]);
 

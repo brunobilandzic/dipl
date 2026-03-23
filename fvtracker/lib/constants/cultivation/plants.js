@@ -1178,3 +1178,6 @@ export default allCropTypes;
 export const END_PLANTING = "Završi spodručje sadnje"
 export const CONTINUE_PLANTING = "Nastavi kreirati područje sadnje"
 
+export const END_HARVESTING = "Završi područje žetve"
+export const CONTINUE_HARVESTING = "Nastavi kreirati područje žetve"
+

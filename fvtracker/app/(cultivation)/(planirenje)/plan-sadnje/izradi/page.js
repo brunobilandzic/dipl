@@ -1,4 +1,4 @@
-import CreatePlantingPlanPageComonent from "@/components/cultivation/cultivationArea/planting/plan/create";
+import CreatePlantingPlanPageComonent from "@/components/cultivation/cultivationArea/plans/planting/plan/create";
 import React from "react";
 
 function CreatePlantingPlanPage() {

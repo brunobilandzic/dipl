@@ -1,4 +1,4 @@
-import CreateHarvestingPlanPageComponent from "@/components/cultivation/cultivationArea/harvesting/plan/create";
+import CreateHarvestingPlanPageComponent from "@/components/cultivation/cultivationArea/plans/harvesting/plan/create";
 import React from "react";
 
 function CreateHarvestingPlanPage() {

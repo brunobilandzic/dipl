@@ -33,7 +33,7 @@ function SignUpForm(_signUpData = null) {
   return (
     <div className={`form`}>
       <div className={styles.head}>
-        <h2 className={styles.heading}>Sign Up</h2>
+        <h2 className={styles.heading}>Registracija</h2>
       </div>
       <div className={styles.body}>
         {inputs.map((input, i) => {
@@ -53,10 +53,7 @@ function SignUpForm(_signUpData = null) {
         })}
       </div>
       <div className={`${styles.footer}       flex justify-center`}>
-        <div
-          className={`btn submitButton btnLg`}
-          onClick={onSubmit}
-        >
+        <div className={`btn submitButton btnLg`} onClick={onSubmit}>
           Registracija
         </div>
       </div>

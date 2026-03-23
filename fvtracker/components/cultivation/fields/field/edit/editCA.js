@@ -53,7 +53,7 @@ export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
         formData,
       );
       console.log(res);
-      alert("Cultivation area updated successfully");
+      alert("Područje kultivacije je uspješno ažurirano");
       setCultivationAreaMenu(initialCAMenuState);
       dispatch(updateCultivationArea(res.data.updatedCultivationArea));
     } catch (error) {
@@ -62,7 +62,9 @@ export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
   };
 
   const onDelete = async () => {
-    if (!confirm("Are you sure you want to delete this cultivation area?")) {
+    if (
+      !confirm("Jeste li sigurni da želite obrisati ovo područje kultivacije?")
+    ) {
       return;
     }
     try {
@@ -78,7 +80,7 @@ export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
 
   const menuOptions = [
     {
-      label: "Edit",
+      label: "Uredi",
       onClick: () =>
         setCultivationAreaMenu((prev) => ({
           ...prev,
@@ -88,13 +90,15 @@ export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
       className: "btn w-full bg-blue-500 hover:bg-blue-600 text-white",
     },
     {
-      label: "Cultivate",
+      label: "Kultiviraj",
       onClick: () =>
-        router.push(`/upravljanje-poljima/${cultivationAreaMenu?.cultivationArea?.field?.slug}/ca/${cultivationAreaMenu?.cultivationArea?.slug}`),
+        router.push(
+          `/upravljanje-poljima/${cultivationAreaMenu?.cultivationArea?.field?.slug}/ca/${cultivationAreaMenu?.cultivationArea?.slug}`,
+        ),
       className: "btn w-full bg-green-500 hover:bg-green-600 text-white",
     },
     {
-      label: "Delete",
+      label: "Obriši",
       onClick: onDelete,
       className: "btn cancelButton w-full",
     },
@@ -109,7 +113,7 @@ export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
       {cultivationAreaMenu?.isOpen ? (
         <Modals.MenuModal
           options={menuOptions}
-          title="Cultivation Area Menu"
+          title="Izbornik područja kultivacije"
           onCancel={() => setCultivationAreaMenu(initialCAMenuState)}
           isOpen={cultivationAreaMenu?.isOpen}
         />
@@ -118,7 +122,7 @@ export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
         <Modals.UpdateModal
           onCancel={() => setCultivationAreaMenu(initialCAMenuState)}
           isOpen={cultivationAreaMenu?.isOpen}
-          title="Edit Cultivation Area"
+          title="Uredi područje kultivacije"
           onClose={() => setCultivationAreaMenu(initialCAMenuState)}
           onSubmit={onSubmit}
           onDelete={onDelete}

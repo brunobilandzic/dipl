@@ -44,6 +44,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     const plcvs = utils.cultivation.cultivations.getPlCvs(
       cultivationArea.cultivations,
     );
+    console.log("plcvs:", plcvs);
     return plcvs;
   }, [cultivationArea, selectField, fields]);
 
@@ -83,7 +84,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
         } catch (error) {
           handleError({
             ...error,
-            generalMessage: "Failed to load cultivation area",
+            generalMessage: "Neuspjelo učitavanje područja kultivacije",
           });
         }
       }
@@ -98,7 +99,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
         } catch (error) {
           handleError({
             ...error,
-            generalMessage: "Failed to load field from server",
+            generalMessage: "Neuspjelo učitavanje polja sa servera",
           });
         }
       }
@@ -193,12 +194,12 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       dispatch(createCultivation(res.data.newCultivation));
       setSelectedCultivation(res.data.newCultivation);
       setIsBeginSelected(false);
-      alert("Cultivation created successfully");
+      alert("Kultivacija je uspješno kreirana");
     } catch (error) {
       console.error("Error submitting cultivation:", error);
       handleError({
         ...error,
-        generalMessage: "Failed to create cultivation",
+        generalMessage: "Neuspjelo kreiranje kultivacije",
       });
       return;
     }
@@ -228,12 +229,12 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       });
       dispatch(deleteCultivation(selectedCultivation._id));
       setSelectedCultivation(null);
-      alert("Cultivation deleted successfully");
+      alert("Kultivacija je uspješno obrisana");
     } catch (error) {
       console.error("Error deleting cultivation:", error);
       handleError({
         ...error,
-        generalMessage: "Failed to delete cultivation",
+        generalMessage: "Neuspjelo brisanje kultivacije",
       });
     }
   };

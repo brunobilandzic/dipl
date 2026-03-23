@@ -37,8 +37,8 @@ export function FieldsList({}) {
       } catch (error) {
         console.log("Error fetching fields:", error);
         const errorMessage =
-          error.response?.data?.message || error.message || "Unknown error";
-        alert(`Error fetching fields: ${errorMessage}`);
+          error.response?.data?.message || error.message || "Nepoznata greška";
+        alert(`Greška pri dohvaćanju polja: ${errorMessage}`);
       }
     })();
   }, [fields]);
@@ -113,24 +113,24 @@ function FieldItem({ field }) {
               <div className="text-sm">
                 <div>{field.description}</div>
                 <div>
-                  Dimensions: {width}m x {length}m
+                  Dimenzije: {width}m x {length}m
                 </div>
                 <div>
-                  Location: {latitude.toFixed(4)}, {longitude.toFixed(4)}
+                  Lokacija: {latitude.toFixed(4)}, {longitude.toFixed(4)}
                 </div>
                 <div>
-                  CA Dim: {min_ca_dim}m - {max_ca_dim}m, Gap:{" "}
+                  Dimenzije PK: {min_ca_dim}m - {max_ca_dim}m, Razmak:{" "}
                   {cultivationAreasGap}m
                 </div>
                 <div>
-                  {cultivationAreas.length} cultivation areas,{" "}
+                  {cultivationAreas.length} područja kultivacije,{" "}
                   {
                     cultivationAreas.reduce(
                       (cus, ca) => cus.concat(ca.cultivations),
                       [],
                     ).length
                   }{" "}
-                  cultivations
+                  kultivacija
                 </div>
               </div>
             </div>

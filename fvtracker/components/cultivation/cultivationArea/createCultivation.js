@@ -27,7 +27,7 @@ export function CreateCultivation({
         onSubmit={onSubmit}
       >
         <div className="mb-4 text-sm text-gray-500">
-          field cells:{" "}
+          ćelije polja:{" "}
           {newCUDetails?.cuCells?.map((cell) => cell.fieldCoords).join(" | ")}
         </div>
 
@@ -61,7 +61,7 @@ export function CreateCultivation({
               </div>
               <div className={` `}>
                 <AppTextArea
-                  label="opis"
+                  label="Opis"
                   value={newCUDetails.description}
                   onChange={(e) => onFormChange("description", e.target.value)}
                 />

@@ -33,14 +33,14 @@ function FormModalFooter({ onCancel, onSubmit, submitDisabled }) {
   return (
     <ModalFooter>
       <div onClick={onCancel} className="btn cancelButton">
-        Cancel
+        Odustani
       </div>
       <button
         onClick={submitDisabled ? null : onSubmit}
         className={`btn submitButton ${submitDisabled ? "cursor-not-allowed opacity-50" : ""}`}
         disabled={submitDisabled}
       >
-        Submit
+        Spremi
       </button>
     </ModalFooter>
   );
@@ -63,7 +63,7 @@ export function UpdateModal({
     >
       <div className="flex items-center justify-end w-full pr-4 ">
         <div onClick={onDelete} className={`btn cancelButton btnSm `}>
-          Delete
+          Obriši
         </div>
       </div>
       {children}

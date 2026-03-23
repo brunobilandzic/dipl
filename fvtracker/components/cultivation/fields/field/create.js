@@ -151,7 +151,7 @@ export function CreateFieldPageComponent() {
         .MAX_CA_DIMENSION,
     },
     {
-      name: "Rastojanje između područja",
+      name: "Razmak između područja",
       value: fieldData.cultivationAreaDimensions.gap,
       min: cultivationConstants.field.cultivationAreaDimensions.MIN_GAP,
       max: cultivationConstants.field.cultivationAreaDimensions.MAX_GAP,

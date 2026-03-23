@@ -136,7 +136,7 @@ function CreateCA({
           </div>
           <div className={` `}>
             <AppTextArea
-              label="opis"
+              label="Opis"
               value={newCADetails.description}
               onChange={(e) => onFormChange("description", e.target.value)}
             />
@@ -160,7 +160,7 @@ function CreateCA({
           <div>
             <FaPlus className="text-4xl" />
           </div>
-          <div className="text-sm">Add Cultivation Area</div>
+          <div className="text-sm">Dodaj područje kultivacije</div>
         </div>
       ) : null}
     </>

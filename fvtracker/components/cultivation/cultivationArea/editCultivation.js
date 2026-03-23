@@ -42,7 +42,7 @@ export function EditCultivation({ isOpen, onCancel, cultivationData }) {
       console.log("Cultivation updated successfully:", res.data);
       dispatch(updateCultivation(res.data.updatedCultivation));
       onCancel();
-      alert("Cultivation updated successfully  - " + res.data.updatedCultivation.name);
+      alert("Kultivacija je uspješno ažurirana - " + res.data.updatedCultivation.name);
     } catch (error) {
       handleError(error);
     }

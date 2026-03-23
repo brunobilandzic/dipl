@@ -19,7 +19,7 @@ export function SignUpButton() {
   return (
     <Link href="/signup">
       <div className="btn p-4 cursor-pointer bg-green-500 text-white rounded">
-        Sign up
+        Registracija
       </div>
     </Link>
   );

@@ -8,10 +8,10 @@ export default async function Home() {
       <main className="flex min-h-screen gap-2 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 sm:items-start">
         <div className="flex gap-4 w-full justify-start items-center mb-4">
           <Link href="/auth">
-            <div className="btn">Authorize</div>
+            <div className="btn">Autorizacija</div>
           </Link>
           <Link href="/seed">
-            <div className="btn">Seed Data</div>
+            <div className="btn">Umetni podatke</div>
           </Link>
           <div className=" btn">
             <ThemeToggle />
@@ -30,8 +30,7 @@ export default async function Home() {
             To get started, edit the page.js file.
           </h1>
           <p className="max-w-md text-lg leading-8">
-            Looking for a starting point sacascas or more instructions? Head
-            over to{" "}
+            Looking for a starting point or more instructions? Head over to{" "}
             <a
               href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
               className="font-medium text-zinc-950 dark:text-zinc-50"

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React from "react";
 import LoginForm from "./form";
@@ -23,7 +23,7 @@ export function LoginButton() {
         signIn();
       }}
     >
-      Sign In
+      Prijava
     </button>
   );
 }
@@ -36,7 +36,7 @@ export function LogoutButton() {
         signOut();
       }}
     >
-      Sign Out
+      Odjava
     </button>
   );
 }

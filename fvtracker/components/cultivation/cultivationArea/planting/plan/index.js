@@ -23,8 +23,8 @@ const PlantiPlanPageComponent = ({ slug }) => {
     } catch (error) {
       console.log("Error fetching fields:", error);
       const errorMessage =
-        error.response?.data?.message || error.message || "Unknown error";
-      alert(`Error fetching fields: ${errorMessage}`);
+        error.response?.data?.message || error.message || "Nepoznata greška";
+      alert(`Greška pri dohvaćanju polja: ${errorMessage}`);
     }
   };
 
@@ -50,7 +50,7 @@ const PlantiPlanPageComponent = ({ slug }) => {
     console.log("Planting Plan:", plantingPlan);
   }, [plantingPlan, fields]);
 
-  if (!plantingPlan) return <div>Planting plan not loaded...</div>;
+  if (!plantingPlan) return <div>Plan sadnje nije učitan...</div>;
   return (
     <div>
       <div>{stringifyObjectValues(plantingPlan)}</div>

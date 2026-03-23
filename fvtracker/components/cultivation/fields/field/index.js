@@ -103,7 +103,8 @@ function FieldEditCASPanel({
 
   const cultivationCells = useMemo(() => {
     if (!cultivationAreas) return [];
-    const cultivations = utils.cultivation.cultivations.getCASCultivations(cultivationAreas);
+    const cultivations =
+      utils.cultivation.cultivations.getCASCultivations(cultivationAreas);
     const plcvs = utils.cultivation.cultivations.getPlCvs(cultivations);
     return plcvs;
   }, [field]);
@@ -120,7 +121,7 @@ function FieldEditCASPanel({
 
   const onEndCoordinates = (endX, endY) => {
     if (!newCACoordinates.begin) {
-      alert("Begin coordinates not set");
+      alert("Početne koordinate nisu postavljene");
       return;
     }
     const { x: beginX, y: beginY } = newCACoordinates.begin;

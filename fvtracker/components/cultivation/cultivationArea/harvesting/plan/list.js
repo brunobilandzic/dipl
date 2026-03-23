@@ -23,8 +23,8 @@ const HarvestingPlanList = () => {
     } catch (error) {
       console.log("Error fetching fields:", error);
       const errorMessage =
-        error.response?.data?.message || error.message || "Unknown error";
-      alert(`Error fetching fields: ${errorMessage}`);
+        error.response?.data?.message || error.message || "Nepoznata greška";
+      alert(`Greška pri dohvaćanju polja: ${errorMessage}`);
     }
   };
 
@@ -41,7 +41,7 @@ const HarvestingPlanList = () => {
     } catch (error) {
       handleError({
         ...error,
-        generalMessage: "Error deleting harvesting plans",
+        generalMessage: "Greška pri brisanju planova berbe",
       });
     }
   };
@@ -70,7 +70,7 @@ const HarvestingPlanList = () => {
           onClick={deletePlans}
           className="bg-red-500 text-white py-2 px-4 rounded"
         >
-          Delete Plans
+          Obriši planove
         </button>
       </div>
     </>

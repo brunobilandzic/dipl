@@ -3,7 +3,7 @@ import React from "react";
 function EnterPersonalInfo() {
   return (
     <>
-      <div>EnterPersonalInfo</div>
+      <div>Unesite osobne podatke</div>
     </>
   );
 }

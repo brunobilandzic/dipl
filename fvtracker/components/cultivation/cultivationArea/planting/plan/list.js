@@ -23,8 +23,8 @@ const PlantingPlanList = () => {
     } catch (error) {
       console.log("Error fetching fields:", error);
       const errorMessage =
-        error.response?.data?.message || error.message || "Unknown error";
-      alert(`Error fetching fields: ${errorMessage}`);
+        error.response?.data?.message || error.message || "Nepoznata greška";
+      alert(`Greška pri dohvaćanju polja: ${errorMessage}`);
     }
   };
 
@@ -41,7 +41,7 @@ const PlantingPlanList = () => {
     } catch (error) {
       handleError({
         ...error,
-        generalMessage: "Error deleting planting plans",
+        generalMessage: "Greška pri brisanju planova sadnje",
       });
     }
   };
@@ -71,7 +71,7 @@ const PlantingPlanList = () => {
           onClick={deletePlans}
           className="bg-red-500 text-white py-2 px-4 rounded"
         >
-          Delete Plans
+          Obriši planove
         </button>
       </div>
     </>
@@ -102,7 +102,7 @@ export function FieldPlansItem({ fieldPlans, plant = true }) {
           ))}
         </div>
       ) : (
-        "No planting plans for this field."
+        `Nema planova ${plant ? "sadnje" : "berbe"} za ovo polje.`
       )}
     </div>
   );

@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import styles from "@/components/form/form.module.css";
 import { AppInput } from "@/components/form/inputs";
 
-
 function LoginForm() {
   const [loginData, setLoginData] = useState({});
   const onChange = (e) => {
@@ -21,7 +20,7 @@ function LoginForm() {
   return (
     <div className={`${styles.form}`}>
       <div className={styles.head}>
-        <h2 className={styles.heading}>Login</h2>
+        <h2 className={styles.heading}>Prijava</h2>
       </div>
       <div className={styles.body}>
         {inputs.map((input, i) => {

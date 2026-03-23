@@ -12,7 +12,7 @@ export default function SeedOptions() {
       const response = await axios.delete("/api/delete");
       const { success } = response.data;
       console.log("SUCCESS:", response.data);
-      if (success) alert("Database deleted successfully");
+      if (success) alert("Baza je uspješno obrisana");
     } catch (error) {
       console.error("Error deleting database:", error);
       throw new Error(SEED_ERROR);
@@ -21,32 +21,32 @@ export default function SeedOptions() {
 
   const options = [
     {
-      label: "All",
+      label: "Sve",
       icon: <MdAllInclusive />,
       type: SEED_TYPES.ALL,
     },
     {
-      label: "Users",
+      label: "Korisnici",
       icon: <FaUserPlus />,
       type: SEED_TYPES.USERS,
     },
     {
-      label: "Fields",
+      label: "Polja",
       icon: <MdFoodBank />,
       type: SEED_TYPES.FIELDS,
     },
     {
-      label: "Crops",
+      label: "Usjevi",
       icon: <MdFoodBank />,
       type: SEED_TYPES.CROP_MAIN_TYPES,
     },
     {
-      label: "Cultivations",
+      label: "Kultivacije",
       icon: <MdFoodBank />,
       type: SEED_TYPES.CULTIVATIONS,
     },
     {
-      label: "DeleteDB",
+      label: "Obriši bazu",
       icon: <MdDeleteForever />,
       onClick: deleteDB,
     },
@@ -59,10 +59,10 @@ export default function SeedOptions() {
       const response = await axios.post("/api/seed", { seedType });
       console.log(response.data);
 
-      alert(`${seedType} completed successfully\n${response.data.message}`);
+      alert(`${seedType} uspješno dovršeno\n${response.data.message}`);
     } catch (error) {
       console.error("Error seeding data:", error);
-      throw new Error("Error seeding data");
+      throw new Error("Greška pri unosu podataka");
     }
   };
 
@@ -79,7 +79,7 @@ export default function SeedOptions() {
   return (
     <>
       <div className="">
-        <OptionButtons options={options.map(mapOption)} center={true}/>
+        <OptionButtons options={options.map(mapOption)} center={true} />
       </div>
     </>
   );

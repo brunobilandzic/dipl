@@ -12,6 +12,7 @@ import { FieldStatistics } from "../../../fields/general";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { Loading } from "@/components/layout/loading";
 import { fieldHasCultivations } from "@/lib/utils/cultivation";
+import { fieldHasPlantedCropVarieties } from "@/lib/utils/plant";
 
 export default function CreatePlantingPlanPageComonent() {
   const [selectedField, setSelectedField] = useState(null);
@@ -46,7 +47,11 @@ export const CreatePlantagePlan = ({}) => {
   );
 };
 
-export const SelectField = ({ selectedField, setSelectedField }) => {
+export const SelectField = ({
+  selectedField,
+  setSelectedField,
+  plant = true,
+}) => {
   const fields = useSelector((state) => state.cultivation.fields);
   const dispatch = useDispatch();
 
@@ -63,8 +68,8 @@ export const SelectField = ({ selectedField, setSelectedField }) => {
       } catch (error) {
         console.log("Error fetching fields:", error);
         const errorMessage =
-          error.response?.data?.message || error.message || "Unknown error";
-        alert(`Error fetching fields: ${errorMessage}`);
+          error.response?.data?.message || error.message || "Nepoznata greška";
+        alert(`Greška pri dohvaćanju polja: ${errorMessage}`);
       }
     })();
   }, [fields]);
@@ -74,7 +79,7 @@ export const SelectField = ({ selectedField, setSelectedField }) => {
     return <Loading />;
   }
   if (fields.length === 0) {
-    return <div>No fields available. Please create a field first.</div>;
+    return <div>Nema dostupnih polja. Prvo kreirajte polje.</div>;
   }
 
   return (
@@ -87,7 +92,17 @@ export const SelectField = ({ selectedField, setSelectedField }) => {
                 field.cultivationAreas,
               ),
             );
-            if (!fieldHasCultivations(field)) return;
+            if (field.name === "Test Field 1774099827922") {
+              console.log("field:", field);
+            }
+            if (plant && !fieldHasCultivations(field)) return;
+
+            if (!plant && !fieldHasPlantedCropVarieties(field)) {
+              console.log(
+                `field ${field.name} has no planted crop varieties, skipping`,
+              );
+              return;
+            }
 
             return (
               <div

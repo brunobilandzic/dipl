@@ -15,6 +15,7 @@ export default function CreateHarvestingPlanPageComponent() {
         <SelectField
           selectedField={selectedField}
           setSelectedField={setSelectedField}
+          plant={false}
         />
       </div>
       {selectedField ? (

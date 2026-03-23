@@ -39,8 +39,8 @@ export const SeedingModal = ({
     } catch (error) {
       console.log("Error fetching fields:", error);
       const errorMessage =
-        error.response?.data?.message || error.message || "Unknown error";
-      alert(`Error fetching fields: ${errorMessage}`);
+        error.response?.data?.message || error.message || "Nepoznata greška";
+      alert(`Greška pri dohvaćanju polja: ${errorMessage}`);
     }
   };
 
@@ -174,7 +174,7 @@ export const SeedingModal = ({
       },
     },
     {
-      label: "Cancel",
+      label: "Odustani",
       onClick: () => {
         reset();
       },
@@ -231,15 +231,19 @@ export const SeedingModal = ({
     }));
   };
 
+  useEffect(() => {
+    console.log("cucells:", cultivationCells);
+  }, [cultivationCells]);
+
   if (!cultivation || !isOpen) return null;
   return (
     <>
-      <Modal title="Seeding Modal" isOpen={isOpen} onCancel={onCancel}>
+      <Modal title="Sijanje" isOpen={isOpen} onCancel={onCancel}>
         <div className="flex flex-col gap-2">
           <div className="font-bold text-xl">{cultivation?.name || "N/A"}</div>
           <div>{cultivation?.description}</div>
           <div className="text-sm text-gray-500">
-            Created at: {showDate(cultivation?.createdAt)} <br />
+            Kreirano: {showDate(cultivation?.createdAt)} <br />
           </div>
         </div>
         <div className="mt-4 p-4">

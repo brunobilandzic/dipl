@@ -6,7 +6,7 @@ function SeedPageComponent() {
   return (
     <div className="flex flex-col gap-16">
       <div className="header-lg   ">
-        <div className="title text-center">Seed Documents</div>
+        <div className="title text-center">Inicijalni podaci</div>
         <div className="header-icon">
           <FaSeedling />
         </div>

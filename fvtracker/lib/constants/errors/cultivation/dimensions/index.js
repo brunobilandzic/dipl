@@ -5,4 +5,5 @@ export default {
   CULTIVATION_AREA_GAP: (gap) =>
     `Površine uzgoja moraju imati razmak od najmanje ${gap} ćelija između njih`,
   CULTIVATION_OVERLAP: "Uzgoji se ne smiju preklapati",
+  PLANT_OVERLAP: "Sadnje se ne smiju preklapati",
 };

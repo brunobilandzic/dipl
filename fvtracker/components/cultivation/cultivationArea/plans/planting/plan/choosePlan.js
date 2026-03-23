@@ -1,13 +1,17 @@
+import { checkPlansEmpty } from "@/lib/utils/plans";
+
 export const ChoosePlan = ({
   availablePlans,
   onChoosePlan,
   onCancel,
   selectedPlan,
   cropVarietyId,
+  plant,
 }) => {
   console.log("selectedPlan:", selectedPlan);
+  console.log("availablePlans in ChoosePlan:", availablePlans);
 
-  if (!availablePlantingPlans || availablePlantingPlans.length === 0) {
+  if (!availablePlans) {
     return (
       <div className="p-4">
         <p>Nema dostupnih planova sadnje za odabranu sortu.</p>
@@ -15,14 +19,22 @@ export const ChoosePlan = ({
     );
   }
 
-  console.log(
-    "Rendering ChoosePlan with availablePlantingPlans:",
-    availablePlantingPlans,
-  );
+  const getAvailablePlans = () => {
+    checkPlansEmpty(availablePlans);
+    return plant
+      ? availablePlans.plantingPlans
+      : availablePlans.harvestingPlans;
+  };
+
+  console.log("Rendering ChoosePlan with availablePlans:", availablePlans);
   return (
     <div className="flex flex-wrap p-4 border">
-      {availablePlantingPlans.map((avPlan) => {
-        console.log("Rendering available plan:", avPlan);
+      <div className="w-full mb-4">
+        <p className="font-bold">
+          Odaberite plan {plant ? "sadnje" : "berbe"} za odabranu sortu:
+        </p>
+      </div>
+      {getAvailablePlans().map((avPlan) => {
         const plantingPlanItem = avPlan.items.find(
           (item) => item.cropVariety?._id === cropVarietyId,
         );

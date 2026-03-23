@@ -33,11 +33,10 @@ async function handleAPIRequest(seedType) {
 
 async function seedAll() {
   await deleteDB();
-  await users.all();
-  await fields.create();
-
   const cropsSeedResult = await crops.mainTypes();
   const cropVarietiesCount = await CropVariety.countDocuments({});
+  await users.all();
+  await fields.create();
 
   if (cropVarietiesCount === 0) {
     throw new Error("Seed All failed: no crop varieties were created.");

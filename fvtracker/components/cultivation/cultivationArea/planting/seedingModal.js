@@ -23,8 +23,15 @@ export const SeedingModal = ({
   cultivationCells,
 }) => {
   const [newPlantage, setNewPlantage] = useState({});
-  const [fieldsPlantingPlans, setFieldsPlantingPlans] = useState([]);
-  const [availablePlantingPlans, setAvailablePlantingPlans] = useState([]);
+  const [allFieldPlans, setAllFieldPlans] = useState([]);
+  const [availablePlans, setAvailablePlans] = useState([]);
+  useEffect(() => {
+    console.log({
+      availablePlans,
+      allFieldPlans,
+    });
+  }, [availablePlans, allFieldPlans]);
+
   const dispatch = useDispatch();
   const crops = useSelector((state) => state.cultivation.crops);
   const fields = useSelector((state) => state.cultivation.fields);
@@ -45,12 +52,12 @@ export const SeedingModal = ({
   };
 
   useEffect(() => {
-    if (fields?.length > 0 && fieldsPlantingPlans?.length === 0) {
-      setFieldsPlantingPlans(utils.plans.getFieldsPlans(fields));
+    if (fields?.length > 0 && allFieldPlans?.length === 0) {
+      setAllFieldPlans(utils.plans.getFieldPlans(fields));
       if (newPlantage?.variety?._id) {
-        setAvailablePlantingPlans(
+        setAvailablePlans(
           utils.plans.getPlansForCropVariety({
-            fieldPlantingPlans: utils.plans.getFieldsPlans(fields),
+            allFieldPlans: utils.plans.getFieldsPlantingPlans(fields),
             cropVarietyId: newPlantage.variety._id,
           }),
         );
@@ -202,15 +209,15 @@ export const SeedingModal = ({
 
   useEffect(() => {
     if (newPlantage?.variety?._id) {
-      const availablePlantingPlans = utils.plans.getPlansForCropVariety({
-        fieldPlantingPlans: fieldsPlantingPlans,
+      const availablePlans = utils.plans.getPlansForCropVariety({
+        allFieldPlans: allFieldPlans,
         cropVarietyId: newPlantage.variety._id,
       });
-      setAvailablePlantingPlans(availablePlantingPlans);
+      setAvailablePlans(availablePlans);
     } else {
-      setAvailablePlantingPlans([]);
+      setAvailablePlans([]);
     }
-  }, [newPlantage?.variety, fieldsPlantingPlans]);
+  }, [newPlantage?.variety, allFieldPlans]);
 
   const hanleCropVarietyClick = (cropVariety) => {
     console.log("Clicked crop variety:", cropVariety);
@@ -221,8 +228,8 @@ export const SeedingModal = ({
   }, [newPlantage]);
 
   useEffect(() => {
-    console.log("Available planting plans updated:", availablePlantingPlans);
-  }, [availablePlantingPlans]);
+    console.log("Available planting plans updated:", availablePlans);
+  }, [availablePlans]);
 
   const onChoosePlan = (plan) => {
     setNewPlantage((prev) => ({
@@ -231,14 +238,11 @@ export const SeedingModal = ({
     }));
   };
 
-  useEffect(() => {
-    console.log("cucells:", cultivationCells);
-  }, [cultivationCells]);
-
   if (!cultivation || !isOpen) return null;
   return (
     <>
       <Modal title="Sijanje" isOpen={isOpen} onCancel={onCancel}>
+        {JSON.stringify(allFieldPlans)}
         <div className="flex flex-col gap-2">
           <div className="font-bold text-xl">{cultivation?.name || "N/A"}</div>
           <div>{cultivation?.description}</div>
@@ -279,8 +283,8 @@ export const SeedingModal = ({
           newPlantage={newPlantage}
           setNewPlantage={setNewPlantage}
           crops={crops}
-          fieldsPlantingPlans={fieldsPlantingPlans}
-          availablePlantingPlans={availablePlantingPlans}
+          allFieldPlans={allFieldPlans}
+          availablePlans={availablePlans}
           onChoosePlan={onChoosePlan}
           submitDisabled={utils.objects.checkEmpty(newPlantage, true)}
         />

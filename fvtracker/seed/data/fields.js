@@ -38,6 +38,8 @@ export const optimizedParams = {
     latitude: 43.67028,
     longitude: 16.70472,
   },
+  plantingPlans: [planInfo.plantingPlan],
+  harvestingPlans: [planInfo.harvestingPlan],
 };
 
 const planInfo = {

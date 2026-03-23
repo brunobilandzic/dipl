@@ -8,7 +8,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
 import utils from "@/lib/utils";
-import { FieldStatistics } from "@/components/cultivation/cultivationArea/fields/general";
+import { FieldStatistics } from "@/components/cultivation/fields/general";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { Loading } from "@/components/layout/loading";
 import { fieldHasCultivations } from "@/lib/utils/cultivation";

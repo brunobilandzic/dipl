@@ -8,7 +8,7 @@ import { setFields } from "@/store/cultivation";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
-import { FieldPlansItem } from "@/components/cultivationArea/plans/planting/plan/list";
+import { FieldPlansItem } from "@/components/cultivation/cultivationArea/plans/planting/plan/list";
 
 const HarvestingPlanList = () => {
   const fields = useSelector((state) => state.cultivation.fields);

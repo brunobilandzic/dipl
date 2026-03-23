@@ -1,17 +1,17 @@
 "use client";
 
 import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
-import Modal, { ModalFooter } from "@/components/cultivation/layout/modals/modal";
+import Modal from "@/components/layout/modals/modal";
 import { showDate } from "@/lib/utils/display";
 import { useEffect, useState } from "react";
 import utils from "@/lib/utils";
-import { MenuModal } from "@/components/cultivation/layout/modals/menu";
+import { MenuModal } from "@/components/layout/modals/menu";
 import {
   END_PLANTING,
   CONTINUE_PLANTING,
 } from "@/lib/constants/cultivation/plants";
 import { useDispatch, useSelector } from "react-redux";
-import { PlantCultivation } from "@/components/cultivation/cultivationArea/plans/planting/plantCultivation";
+import { PlantCultivation } from "@/components/cultivation/cultivationArea/planting/plantCultivation";
 import api from "@/lib/api";
 import { createPlantage, setFields } from "@/store/cultivation";
 
@@ -28,7 +28,7 @@ export const SeedingModal = ({
   const dispatch = useDispatch();
   const crops = useSelector((state) => state.cultivation.crops);
   const fields = useSelector((state) => state.cultivation.fields);
-
+  console.log("SeedingModal props:", { isOpen, cultivation, caDims, cultivationCells });
   const refreshFields = async () => {
     try {
       const res = await api.get("/cultivation/fields");
@@ -247,6 +247,7 @@ export const SeedingModal = ({
           </div>
         </div>
         <div className="mt-4 p-4">
+          {JSON.stringify(cultivationCells)}
           <div>
             <FieldGrid
               width={caDims.width}

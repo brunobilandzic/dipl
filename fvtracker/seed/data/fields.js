@@ -38,31 +38,44 @@ export const optimizedParams = {
     latitude: 43.67028,
     longitude: 16.70472,
   },
-  plantingPlans: [planInfo.plantingPlan],
-  harvestingPlans: [planInfo.harvestingPlan],
 };
 
-const planInfo = {
-  plantingPlan: {
-    name: "Plan sadnje 1",
-    description: "Plan sadnje za testiranje",
-    items: [
-      {
-        cropVariety: null, // Postavit ćemo ovo kasnije
-        quantity: 100,
-      },
-    ],
-  },
-  harvestingPlan: {
-    name: "Plan berbe 1",
-    description: "Plan berbe za testiranje",
-    items: [
-      {
-        cropVariety: null, // Postavit ćemo ovo kasnije
-        quantity: 100,
-      },
-    ],
-  },
+export const planInfo = ({ fieldId, cropVarietyId }) => {
+  return {
+    plantingPlan: {
+      field: fieldId, // Postavit ćemo ovo kasnije
+      name: "Plan sadnje 1",
+      description: "Plan sadnje za testiranje",
+      items: [
+        {
+          cropVariety: cropVarietyId, // Postavit ćemo ovo kasnije
+          quantity: 100,
+        },
+      ],
+    },
+    harvestingPlan: {
+      field: fieldId, // Postavit ćemo ovo kasnije
+      name: "Plan berbe 1",
+      description: "Plan berbe za testiranje",
+      items: [
+        {
+          cropVariety: cropVarietyId, // Postavit ćemo ovo kasnije
+          quantity: 100,
+        },
+      ],
+    },
+  };
+};
+
+export const optimizedCultivation = ({ caId }) => {
+  return {
+    cultivationArea: caId,
+    name: "SEEDED CULTIVATION",
+    description: "Cultivation optimized for seeders testing",
+    startDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
+    endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+    relativeCoords: ["0,0", "0,1", "1,0", "1,1"],
+  };
 };
 
 const optimizedParams2 = {

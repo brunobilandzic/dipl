@@ -68,16 +68,17 @@ export const SeedingModal = ({
   const checkPlans = () => !!allFieldPlans;
 
   useEffect(() => {
-    if (newPlantage?.variety?._id) {
+    if (newPlantage?.variety?._id && checkPlans()) {
       const availablePlans = utils.plans.getPlansForCropVariety({
         allFieldPlans,
         cropVarietyId: newPlantage.variety._id,
       });
+      console.log("Available plans for variety ID", newPlantage.variety._id, ":", availablePlans);
       setAvailablePlans(availablePlans);
     } else {
       setAvailablePlans([]);
     }
-  }, [fields, newPlantage?.variety]);
+  }, [newPlantage?.variety, allFieldPlans]);
 
   useEffect(() => {
     if (fields && fields.length > 0) return;
@@ -256,7 +257,10 @@ export const SeedingModal = ({
   return (
     <>
       <Modal title="Sijanje" isOpen={isOpen} onCancel={onCancel}>
-        {JSON.stringify(allFieldPlans)}
+        {JSON.stringify({
+          plantingPlans: allFieldPlans?.plantingPlans?.length,
+          harvestingPlans: allFieldPlans?.harvestingPlans?.length,
+        })}
         <div className="flex flex-col gap-2">
           <div className="font-bold text-xl">{cultivation?.name || "N/A"}</div>
           <div>{cultivation?.description}</div>
@@ -265,7 +269,6 @@ export const SeedingModal = ({
           </div>
         </div>
         <div className="mt-4 p-4">
-          {JSON.stringify(cultivationCells)}
           <div>
             <FieldGrid
               width={caDims.width}

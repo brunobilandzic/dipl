@@ -70,10 +70,7 @@ export async function PUT(request) {
     const { planId, ...planData } = body;
 
     if (!planId) {
-      return Response.json(
-        { error: "planId is required" },
-        { status: 400 },
-      );
+      return Response.json({ error: "planId is required" }, { status: 400 });
     }
 
     const updatedPlantingPlan = await cultivation.plans.updatePlantingPlan({

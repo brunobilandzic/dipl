@@ -307,9 +307,10 @@ export const FillPlanInfo = ({
             ...submitData,
           });
 
-      const resultPlan = res.data[
-        `${isEdit ? "updated" : "new"}${plant ? "Planting" : "Harvesting"}Plan`
-      ];
+      const resultPlan =
+        res.data[
+          `${isEdit ? "updated" : "new"}${plant ? "Planting" : "Harvesting"}Plan`
+        ];
 
       if (isEdit) {
         alert(`Plan ${plant ? "sadnje" : "berbe"} uspješno ažuriran!`);

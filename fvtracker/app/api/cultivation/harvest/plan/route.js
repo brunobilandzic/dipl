@@ -70,17 +70,13 @@ export async function PUT(request) {
     const { planId, ...planData } = body;
 
     if (!planId) {
-      return Response.json(
-        { error: "planId is required" },
-        { status: 400 },
-      );
+      return Response.json({ error: "planId is required" }, { status: 400 });
     }
 
-    const updatedHarvestingPlan =
-      await cultivation.plans.updateHarvestingPlan({
-        planId,
-        harvestingPlanData: planData,
-      });
+    const updatedHarvestingPlan = await cultivation.plans.updateHarvestingPlan({
+      planId,
+      harvestingPlanData: planData,
+    });
 
     return Response.json({ updatedHarvestingPlan }, { status: 200 });
   } catch (error) {

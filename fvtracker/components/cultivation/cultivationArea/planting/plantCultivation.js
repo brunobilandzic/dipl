@@ -130,7 +130,7 @@ export const PlantCultivation = ({
           <div>
             <ChoosePlan
               selectedPlan={newPlantage.plantingPlan}
-              availablePlantingPlans={availablePlantingPlans}
+              availablePlans={availablePlans}
               onChoosePlan={onChoosePlan}
               cropVarietyId={newPlantage.variety?._id}
               plant={true}

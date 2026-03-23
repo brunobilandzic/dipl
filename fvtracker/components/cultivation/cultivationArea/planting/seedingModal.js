@@ -36,7 +36,7 @@ export const SeedingModal = ({
   const dispatch = useDispatch();
   const crops = useSelector((state) => state.cultivation.crops);
   const fields = useSelector((state) => state.cultivation.fields);
-  console.log("SeedingModal props:", { isOpen, cultivation, caDims, cultivationCells });
+
   const refreshFields = async () => {
     try {
       const res = await api.get("/cultivation/fields");
@@ -55,6 +55,21 @@ export const SeedingModal = ({
       alert(`Greška pri dohvaćanju polja: ${errorMessage}`);
     }
   };
+
+  const getPlans = (fields) => {
+    const _field = fields.find((f) => f.name === field.name);
+    const allPlans = utils.plans.getFieldPlans({ field: _field });
+    console.log("setting allPlans:", allPlans);
+    setAllFieldPlans(allPlans);
+  };
+
+  useEffect(() => {
+    if (fields && fields.length > 0) {
+      getPlans(fields);
+    }
+  }, [fields]);
+
+  const checkPlans = () => !!allFieldPlans;
 
   useEffect(() => {
     if (newPlantage?.variety?._id) {

@@ -12,7 +12,7 @@ export const PlantCultivation = ({
   onSubmit,
   newPlantage,
   setNewPlantage,
-  availablePlantingPlans,
+  availablePlans,
   crops,
   onChoosePlan,
   submitDisabled,

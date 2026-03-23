@@ -60,7 +60,7 @@ const HarvestingPlanList = () => {
         <div>
           {fieldsPlans.map((fieldPlan, index) => (
             <div key={uuid()}>
-              <FieldPlansItem fieldPlans={fieldPlan} />
+              <FieldPlansItem fieldPlans={fieldPlan} plant={false} />
             </div>
           ))}
         </div>

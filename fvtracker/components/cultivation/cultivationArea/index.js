@@ -44,7 +44,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     const plcvs = utils.cultivation.cultivations.getPlCvs(
       cultivationArea.cultivations,
     );
-    console.log("plcvs:", plcvs);
     return plcvs;
   }, [cultivationArea, selectField, fields]);
 

@@ -42,10 +42,6 @@ export const SeedingModal = ({
       const res = await api.get("/cultivation/fields");
       if (res.data && res.data.fields) {
         dispatch(setFields(res.data.fields));
-        const getPlans = (fields) => {
-          const field = fields.find((f) => f.name === field.name);
-          return utils.plans.getFieldPlans({ field });
-        };
         setAllFieldPlans(getPlans(res.data.fields));
       }
     } catch (error) {

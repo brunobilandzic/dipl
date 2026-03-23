@@ -29,7 +29,7 @@ export async function GET(request) {
                     },
                   },
                   {
-                    path: "harvestingPlanItems",
+                    path: "harvestingPlanItem",
                     populate: {
                       path: "cropVariety",
                       populate: { path: "cropType" },
@@ -116,7 +116,7 @@ export async function GET(request) {
                       },
                     },
                     {
-                      path: "harvestingPlanItems",
+                      path: "harvestingPlanItem",
                       select: "cropVariety quantity",
                       populate: {
                         path: "cropVariety",

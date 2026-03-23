@@ -75,7 +75,9 @@ export const getFieldPlans = ({ field }) => ({
 export const getPlansForCropVariety = ({ allFieldPlans, cropVarietyId }) => {
   const plans = {};
 
-  allFieldPlans.plantingPlans?.forEach((plan) => {
+  if (checkPlansEmpty(allFieldPlans)) return plans;
+
+  allFieldPlans?.plantingPlans?.forEach((plan) => {
     if (
       plan.items.some(
         (item) => item.cropVariety?._id.toString() === cropVarietyId.toString(),
@@ -86,7 +88,7 @@ export const getPlansForCropVariety = ({ allFieldPlans, cropVarietyId }) => {
     }
   });
 
-  allFieldPlans.harvestingPlans?.forEach((plan) => {
+  allFieldPlans?.harvestingPlans?.forEach((plan) => {
     if (
       plan.items.some(
         (item) => item.cropVariety?._id.toString() === cropVarietyId.toString(),

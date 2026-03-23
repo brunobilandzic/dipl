@@ -6,10 +6,16 @@ import {
   cultivationAreaNamesConstant,
   optimizedParams,
   optimizedParamsArray,
+  planInfo,
 } from "../../../data/fields.js";
 import dbConnect from "@/lib/db/mongooseConnect.js";
 import { deleteFieldsWithDocs } from "@/lib/db/delete.js";
 import { randomPoint, notValidPoint } from "./generateCell.js";
+import {
+  createHarvestingPlan,
+  createPlantingPlan,
+} from "@/lib/cultivation/plans.js";
+import { CropVariety } from "@/models/sectors/cultivation/Crops.js";
 
 await dbConnect();
 
@@ -80,6 +86,19 @@ async function createFieldObject(fieldParams, msWindow = createFieldTimeMs) {
   };
 }
 
+async function createPlans({ fieldId, cropVarietyId }) {
+  console.log({ fieldId, cropVarietyId });
+  const newPlantingPlan = await createPlantingPlan({
+    plantingPlanData: planInfo({ fieldId, cropVarietyId }).plantingPlan,
+  });
+  const newHarvestingPlan = await createHarvestingPlan({
+    harvestingPlanData: planInfo({ fieldId, cropVarietyId }).harvestingPlan,
+  });
+  console.log(
+    `Created planting plan ${newPlantingPlan.name} and harvesting plan ${newHarvestingPlan.name} for field ${fieldId}.`,
+  );
+}
+
 async function createFieldsObjects(
   fieldParamsArray = optimizedParamsArray,
   msWindow = createFieldTimeMs,
@@ -135,8 +154,15 @@ export async function createFieldRecord(fieldObject) {
   const cultivationManager = await CultivationManager.findOne({});
   cultivationManager.fields.push(fieldRecord._id);
   fieldRecord.manager = cultivationManager._id;
+
+  const cropVariety = await CropVariety.findOne({ name: "Idared" });
+
   await cultivationManager.save();
   await fieldRecord.save();
+  await createPlans({
+    fieldId: fieldRecord._id,
+    cropVarietyId: cropVariety._id,
+  });
 
   const cultivationAreasPromises = fieldObject.cultivationAreas.map(
     async (ca) => {
@@ -186,8 +212,6 @@ function createCultivationArea(x, y, dim_x, dim_y, { name, description }) {
       plantedEmpty.push(`${xi},${yi}`);
     }
   }
-
-  
 
   return {
     name,

@@ -13,6 +13,7 @@ import handleError from "@/lib/constants/errors/client/handleError";
 import { Loading } from "@/components/layout/loading";
 import { fieldHasCultivations } from "@/lib/utils/cultivation";
 import { fieldHasPlantedCropVarieties } from "@/lib/utils/plant";
+import { getFieldPlans, getFieldsHarvestingPlans } from "@/lib/utils/plans";
 
 export default function CreatePlantingPlanPageComonent() {
   const [selectedField, setSelectedField] = useState(null);
@@ -294,156 +295,178 @@ export const FillPlanInfo = ({
   };
 
   return (
-    <div className="flex flex-col gap-4" onSubmit={handleSubmit}>
+    <>
       <div>
-        <div className="text-lg font-semibold">
-          Plan {plant ? "sadnje" : "berbe"}
+        <div>
+          {JSON.stringify(
+            getFieldPlans({ field: selectedField, plant: false }),
+          )}
         </div>
-        <div className="text-sm text-gray-600">
-          {selectedField?.name
-            ? `Odabrano polje: ${selectedField.name}`
-            : `Popunite podatke plana ${plant ? "sadnje" : "berbe"}.`}
-        </div>
-      </div>
-      <div>
-        <AppInput
-          label={`Naziv plana ${plant ? "sadnje" : "berbe"}`}
-          name="name"
-          onChange={handleFormChange}
-          placeholder={`Unesite naziv plana ${plant ? "sadnje" : "berbe"}`}
-          value={formData.name}
-        />
-      </div>
-      <div className="grid gap-4 md:grid-cols-2">
-        <AppDatePicker
-          label="Planirani datum berbe"
-          name="plannedHarvestingDate"
-          onChange={handleFormChange}
-          placeholder="Odaberite datum berbe"
-          value={formData.plannedHarvestingDate}
-        />
-      </div>
-
-      <div className="flex items-center justify-between gap-4">
-        <div className="text-base font-semibold">Stavke plana</div>
-        <button className="btn" onClick={addItem} type="button">
-          Dodaj stavku
-        </button>
-      </div>
-
-      <div className="flex flex-col gap-4">
-        {formData.items.map((item, index) => {
-          const selectedGeneralType = generalTypes.find(
-            (generalType) => generalType._id === item.generalType,
-          );
-          const availableTypes = selectedGeneralType
-            ? types.filter(
-                (type) => type.generalTypeName === selectedGeneralType.name,
-              )
-            : [];
-
-          const selectedType = types.find((type) => type._id === item.type);
-          const availableVarieties = selectedType
-            ? cropVarieties.filter(
-                (cropVariety) => cropVariety.cropTypeName === selectedType.name,
-              )
-            : [];
-
-          return (
-            <div className="rounded-lg border p-4" key={`item-${index}`}>
-              <div className="mb-4 flex items-center justify-between gap-4">
-                <div className="font-medium">Stavka {index + 1}</div>
-                <button
-                  className="text-sm text-red-600 disabled:cursor-not-allowed disabled:text-gray-400"
-                  disabled={formData.items.length === 1}
-                  onClick={() => removeItem(index)}
-                  type="button"
-                >
-                  Ukloni
-                </button>
-              </div>
-
-              <div className="grid gap-4 md:grid-cols-2">
-                <div className="inputRow">
-                  <label className="label">Glavna vrsta</label>
-                  <select
-                    className="inputText"
-                    onChange={(event) =>
-                      handleItemChange(index, "generalType", event.target.value)
-                    }
-                    required
-                    value={item.generalType}
-                  >
-                    <option value="">Odaberite glavnu vrstu</option>
-                    {generalTypes.map((generalType) => (
-                      <option key={generalType._id} value={generalType._id}>
-                        {generalType.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="inputRow">
-                  <label className="label">Tip biljke</label>
-                  <select
-                    className="inputText"
-                    disabled={!item.generalType}
-                    onChange={(event) =>
-                      handleItemChange(index, "type", event.target.value)
-                    }
-                    required
-                    value={item.type}
-                  >
-                    <option value="">Odaberite tip biljke</option>
-                    {availableTypes.map((type) => (
-                      <option key={type._id} value={type._id}>
-                        {type.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="inputRow">
-                  <label className="label">Varijanta</label>
-                  <select
-                    className="inputText"
-                    disabled={!item.type}
-                    onChange={(event) =>
-                      handleItemChange(index, "cropVariety", event.target.value)
-                    }
-                    required
-                    value={item.cropVariety}
-                  >
-                    <option value="">Odaberite varijantu</option>
-                    {availableVarieties.map((cropVariety) => (
-                      <option key={cropVariety._id} value={cropVariety._id}>
-                        {cropVariety.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="inputRow">
-                  <AppInput
-                    label="Kolicina"
-                    min={0}
-                    name={`quantity-${index}`}
-                    onChange={(event) =>
-                      handleItemChange(index, "quantity", event.target.value)
-                    }
-                    type="number"
-                    value={item.quantity}
-                  />
-                </div>
-              </div>
+        <div className="flex flex-col gap-4" onSubmit={handleSubmit}>
+          <div>
+            <div className="text-lg font-semibold">
+              Plan {plant ? "sadnje" : "berbe"}
             </div>
-          );
-        })}
-      </div>
+            <div className="text-sm text-gray-600">
+              {selectedField?.name
+                ? `Odabrano polje: ${selectedField.name}`
+                : `Popunite podatke plana ${plant ? "sadnje" : "berbe"}.`}
+            </div>
+          </div>
+          <div>
+            <AppInput
+              label={`Naziv plana ${plant ? "sadnje" : "berbe"}`}
+              name="name"
+              onChange={handleFormChange}
+              placeholder={`Unesite naziv plana ${plant ? "sadnje" : "berbe"}`}
+              value={formData.name}
+            />
+          </div>
+          <div className="grid gap-4 md:grid-cols-2">
+            <AppDatePicker
+              label="Planirani datum berbe"
+              name="plannedHarvestingDate"
+              onChange={handleFormChange}
+              placeholder="Odaberite datum berbe"
+              value={formData.plannedHarvestingDate}
+            />
+          </div>
 
-      <div className="btn self-start" onClick={handleSubmit}>
-        Spremi plan
+          <div className="flex items-center justify-between gap-4">
+            <div className="text-base font-semibold">Stavke plana</div>
+            <button className="btn" onClick={addItem} type="button">
+              Dodaj stavku
+            </button>
+          </div>
+
+          <div className="flex flex-col gap-4">
+            {formData.items.map((item, index) => {
+              const selectedGeneralType = generalTypes.find(
+                (generalType) => generalType._id === item.generalType,
+              );
+              const availableTypes = selectedGeneralType
+                ? types.filter(
+                    (type) => type.generalTypeName === selectedGeneralType.name,
+                  )
+                : [];
+
+              const selectedType = types.find((type) => type._id === item.type);
+              const availableVarieties = selectedType
+                ? cropVarieties.filter(
+                    (cropVariety) =>
+                      cropVariety.cropTypeName === selectedType.name,
+                  )
+                : [];
+
+              return (
+                <div className="rounded-lg border p-4" key={`item-${index}`}>
+                  <div className="mb-4 flex items-center justify-between gap-4">
+                    <div className="font-medium">Stavka {index + 1}</div>
+                    <button
+                      className="text-sm text-red-600 disabled:cursor-not-allowed disabled:text-gray-400"
+                      disabled={formData.items.length === 1}
+                      onClick={() => removeItem(index)}
+                      type="button"
+                    >
+                      Ukloni
+                    </button>
+                  </div>
+
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <div className="inputRow">
+                      <label className="label">Glavna vrsta</label>
+                      <select
+                        className="inputText"
+                        onChange={(event) =>
+                          handleItemChange(
+                            index,
+                            "generalType",
+                            event.target.value,
+                          )
+                        }
+                        required
+                        value={item.generalType}
+                      >
+                        <option value="">Odaberite glavnu vrstu</option>
+                        {generalTypes.map((generalType) => (
+                          <option key={generalType._id} value={generalType._id}>
+                            {generalType.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="inputRow">
+                      <label className="label">Tip biljke</label>
+                      <select
+                        className="inputText"
+                        disabled={!item.generalType}
+                        onChange={(event) =>
+                          handleItemChange(index, "type", event.target.value)
+                        }
+                        required
+                        value={item.type}
+                      >
+                        <option value="">Odaberite tip biljke</option>
+                        {availableTypes.map((type) => (
+                          <option key={type._id} value={type._id}>
+                            {type.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="inputRow">
+                      <label className="label">Varijanta</label>
+                      <select
+                        className="inputText"
+                        disabled={!item.type}
+                        onChange={(event) =>
+                          handleItemChange(
+                            index,
+                            "cropVariety",
+                            event.target.value,
+                          )
+                        }
+                        required
+                        value={item.cropVariety}
+                      >
+                        <option value="">Odaberite varijantu</option>
+                        {availableVarieties.map((cropVariety) => (
+                          <option key={cropVariety._id} value={cropVariety._id}>
+                            {cropVariety.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="inputRow">
+                      <AppInput
+                        label="Kolicina"
+                        min={0}
+                        name={`quantity-${index}`}
+                        onChange={(event) =>
+                          handleItemChange(
+                            index,
+                            "quantity",
+                            event.target.value,
+                          )
+                        }
+                        type="number"
+                        value={item.quantity}
+                      />
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="btn self-start" onClick={handleSubmit}>
+            Spremi plan
+          </div>
+        </div>
       </div>
-    </div>
+    </>
   );
 };

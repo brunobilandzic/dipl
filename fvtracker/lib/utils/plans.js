@@ -72,25 +72,32 @@ export const getFieldPlans = ({ field }) => ({
   harvestingPlans: field.harvestingPlans || [],
 });
 
-export const getPlansForCropVariety = ({
-  fieldPlantingPlans,
-  cropVarietyId,
-}) => {
-  const plans = [];
-  fieldPlantingPlans.forEach((fieldPlan) => {
-    const { plantingPlans } = fieldPlan;
-    plantingPlans.map((pltPlan) => {
-      const plantingItems = pltPlan?.items;
-      console.log("plantingItems:", plantingItems);
-      plantingItems.map((plItem) => {
-        if (plItem.cropVariety?._id === cropVarietyId) {
-          plans.push({
-            ...pltPlan,
-          });
-        }
-      });
-    });
+export const getPlansForCropVariety = ({ allFieldPlans, cropVarietyId }) => {
+  const plans = {};
+
+  allFieldPlans.plantingPlans?.forEach((plan) => {
+    if (
+      plan.items.some(
+        (item) => item.cropVariety?._id.toString() === cropVarietyId.toString(),
+      )
+    ) {
+      if (!plans.plantingPlans) plans.plantingPlans = [];
+      plans.plantingPlans.push(plan);
+    }
   });
+
+  allFieldPlans.harvestingPlans?.forEach((plan) => {
+    if (
+      plan.items.some(
+        (item) => item.cropVariety?._id.toString() === cropVarietyId.toString(),
+      )
+    ) {
+      if (!plans.harvestingPlans) plans.harvestingPlans = [];
+      plans.harvestingPlans.push(plan);
+    }
+  });
+
+  console.log("plans for crop variety ID", cropVarietyId, ":", plans);
   return plans;
 };
 

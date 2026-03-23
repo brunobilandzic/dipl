@@ -131,14 +131,14 @@ const plantedCropVarietySchema = new Schema({
     },
   },
   plantedAt: { type: Date, default: null },
-  harvestedCropVarietySchema: {
+  harvestingPlanItem: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "HarvestedCropVariety",
+    ref: "HarvestingPlanItem",
     default: null,
   },
 });
 
-const harvestedCropVarietySchema = new Schema({
+/* const harvestedCropVarietySchema = new Schema({
   harvestingPlanItem: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "HarvestingPlanItem",
@@ -171,12 +171,12 @@ const harvestedCropVarietySchema = new Schema({
     },
   },
   harvestedAt: { type: Date, default: null },
-  plantedCropVarietySchema: {
+  harvestingPlanItem: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "PlantedCropVariety",
+    ref: "HarvestingPlanItem",
     default: null,
   },
-});
+}); */
 
 // model exports
 
@@ -199,6 +199,6 @@ export const PlantedCropVariety =
   mongoose.models.PlantedCropVariety ||
   mongoose.model("PlantedCropVariety", plantedCropVarietySchema);
 
-export const HarvestedCropVariety =
+/* export const HarvestedCropVariety =
   mongoose.models.HarvestedCropVariety ||
-  mongoose.model("HarvestedCropVariety", harvestedCropVarietySchema);
+  mongoose.model("HarvestedCropVariety", harvestedCropVarietySchema); */

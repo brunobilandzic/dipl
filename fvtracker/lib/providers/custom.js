@@ -5,9 +5,15 @@ import { setCrops } from "@/store/cultivation";
 import api from "@/lib/api";
 import { Loading } from "@/components/layout/loading";
 import { setLoading } from "@/store/loading";
+import { clearError } from "@/store/error";
+import { ErrorComponent } from "@/components/layout/error";
 
 export default function CustomProviders({ children }) {
-  return <CropsProvider>{children}</CropsProvider>;
+  return (
+    <CropsProvider>
+      <ErrorProvider>{children}</ErrorProvider>
+    </CropsProvider>
+  );
 }
 
 const CropsProvider = ({ children }) => {
@@ -45,4 +51,12 @@ export const LoadingProvider = ({ children }) => {
   if (isLoading) return <Loading />;
 
   return children;
+};
+
+export const ErrorProvider = ({ children }) => {
+  const dispatch = useDispatch();
+  const message = useSelector((state) => state.error.message);
+  
+  if (!message) return children;
+  return <ErrorComponent message={message} />;
 };

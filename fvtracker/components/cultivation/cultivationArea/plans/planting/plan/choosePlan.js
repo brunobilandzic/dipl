@@ -1,5 +1,5 @@
 export const ChoosePlan = ({
-  availablePlantingPlans,
+  availablePlans,
   onChoosePlan,
   onCancel,
   selectedPlan,

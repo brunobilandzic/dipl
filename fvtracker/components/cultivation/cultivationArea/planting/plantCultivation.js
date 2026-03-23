@@ -133,6 +133,7 @@ export const PlantCultivation = ({
               availablePlantingPlans={availablePlantingPlans}
               onChoosePlan={onChoosePlan}
               cropVarietyId={newPlantage.variety?._id}
+              plant={true}
             />
           </div>
         </div>

@@ -249,8 +249,10 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
 
   return (
     <>
-      {JSON.stringify(newCUDetails, null, 2)}
-      <br />
+      <div>
+        <h1 className="text-2xl font-bold ">{cultivationArea.name}</h1>
+        <p className="">{cultivationArea.description}</p>
+      </div>
       {/* {JSON.stringify(cultivationArea.cultivations, null, 2)} */}
       <div className="grid grid-cols-6">
         <div className="col-start-1 col-end-6 h-screen flex flex-col ">

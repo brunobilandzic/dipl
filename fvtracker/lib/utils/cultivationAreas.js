@@ -68,12 +68,10 @@ export const getCellsInRect = ({
   }
   const overlaps = overlapsExistingCA(plantedCells, beginX, beginY, endX, endY);
   if (overlaps) {
-    console.log("overlapping");
-    if (cultivationAreaDimensions) {
+    if (cultivationAreaDimensions)
       return { error: dimensionError.CULTIVATION_AREA_OVERLAP };
-    } else {
-      return { error: dimensionError.CULTIVATION_OVERLAP };
-    }
+    if (cultivations) return { error: dimensionError.CULTIVATION_OVERLAP };
+    if (toPlantCells) return { error: dimensionError.PLANT_OVERLAP };
   }
 
   const allCultivationCells = toPlantCultivation?.plantedCropVarieties.map(

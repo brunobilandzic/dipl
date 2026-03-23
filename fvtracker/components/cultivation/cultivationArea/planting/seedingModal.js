@@ -24,6 +24,7 @@ export const SeedingModal = ({
   field,
 }) => {
   const [newPlantage, setNewPlantage] = useState({});
+  const [newHarvest, setNewHarvest] = useState({});
   const [allFieldPlans, setAllFieldPlans] = useState([]);
   const [availablePlans, setAvailablePlans] = useState([]);
   useEffect(() => {

@@ -124,3 +124,17 @@ export const getPlantingPlanFromFields = ({ fields, slug }) => {
   }
   return null;
 };
+
+export const checkPlansEmpty = (plans) => {
+  if (!(plans && plans.plantingPlans && plans.harvestingPlans)) {
+    console.error(
+      "plans",
+      !!plans,
+      "plans.plantingPlans",
+      !!plans?.plantingPlans,
+      "plans.harvestingPlans",
+      !!plans?.harvestingPlans,
+    );
+    throw new Error("Greška u dostupnmim planovima");
+  }
+};

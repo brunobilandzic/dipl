@@ -96,14 +96,14 @@ export const SelectField = ({
             if (field.name === "Test Field 1774099827922") {
               console.log("field:", field);
             }
-            if (plant && !fieldHasCultivations(field)) return;
+            /* if (plant && !fieldHasCultivations(field)) return;
 
             if (!plant && !fieldHasPlantedCropVarieties(field)) {
               console.log(
                 `field ${field.name} has no planted crop varieties, skipping`,
               );
               return;
-            }
+            } */
 
             return (
               <div

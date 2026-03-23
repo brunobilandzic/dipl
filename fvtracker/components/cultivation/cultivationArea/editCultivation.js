@@ -1,11 +1,10 @@
+import { AppInput } from "@/components/form/inputs";
 import Modals from "@/components/layout/modals";
+import api from "@/lib/api";
+import handleError from "@/lib/constants/errors/client/handleError";
+import { updateCultivation } from "@/store/cultivation";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { AppInput } from "@/components/form/inputs";
-import axios from "axios";
-import handleError from "@/lib/constants/errors/client/handleError";
-import { updateCultivation, deleteCultivation } from "@/store/cultivation";
-import api from "@/lib/api";
 
 export function EditCultivation({ isOpen, onCancel, cultivationData }) {
   const dispatch = useDispatch();

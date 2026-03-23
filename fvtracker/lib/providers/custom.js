@@ -1,8 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import handleError from "../constants/errors/client/handleError";
-import {setCrops} from "@/store/cultivation"
-import api from "@/lib/api"
+import { setCrops } from "@/store/cultivation";
+import api from "@/lib/api";
+import { Loading } from "@/components/layout/loading";
+import { setLoading } from "@/store/loading";
 
 export default function CustomProviders({ children }) {
   return <CropsProvider>{children}</CropsProvider>;
@@ -13,25 +15,34 @@ const CropsProvider = ({ children }) => {
   const crops = useSelector((state) => state.cultivation.crops);
   const user = useSelector((state) => state.user.session);
   useEffect(() => {
-    if(!user) return;
+    if (!user) return;
     if (!crops || crops.length === 0) {
       const fetchCrops = async () => {
         try {
+          dispatch(setLoading(true));
           const res = await api.get("/cultivation/plant");
           console.log("Fetched crops from API:", res);
           dispatch(setCrops(res.data));
+          dispatch(setLoading(false));
         } catch (error) {
-          console.error(error)
+          console.error(error);
           handleError({
             ...error,
-            generalMessage:
-              "Greška prilikom učitavanja podataka o kulturama",
+            generalMessage: "Greška prilikom učitavanja podataka o kulturama",
           });
         }
       };
       fetchCrops();
     }
   }, [crops, user]);
+
+  return children;
+};
+
+export const LoadingProvider = ({ children }) => {
+  const isLoading = useSelector((state) => state.loading.isLoading);
+
+  if (isLoading) return <Loading />;
 
   return children;
 };

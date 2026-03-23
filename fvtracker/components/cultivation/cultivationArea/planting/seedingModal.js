@@ -145,14 +145,21 @@ export const SeedingModal = ({
   };
 
   const onEndPlantingCoordinates = ({ x, y, isContinue }) => {
-    const { planted } = utils.cultivation.cultivationAreas.getCellsInRect({
-      beginX: newPlantage.beginX,
-      beginY: newPlantage.beginY,
-      endX: x,
-      endY: y,
-      toPlantCells: newPlantage.toPlantCells,
-      toPlantCultivation: cultivation,
-    });
+    const { planted, error } =
+      utils.cultivation.cultivationAreas.getCellsInRect({
+        beginX: newPlantage.beginX,
+        beginY: newPlantage.beginY,
+        endX: x,
+        endY: y,
+        toPlantCells: newPlantage.toPlantCells,
+        toPlantCultivation: cultivation,
+      });
+    if (error) {
+      console.log("Error getting cells in rect:", error);
+      dispatch(setError(error));
+      reset();
+      return;
+    }
     if (!planted) {
       reset();
       return;

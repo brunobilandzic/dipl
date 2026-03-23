@@ -29,6 +29,13 @@ export async function GET(request) {
                     },
                   },
                   {
+                    path: "harvestingPlanItems",
+                    populate: {
+                      path: "cropVariety",
+                      populate: { path: "cropType" },
+                    },
+                  },
+                  {
                     path: "cultivation",
                     select: "name cultivationArea",
                     populate: {
@@ -68,6 +75,48 @@ export async function GET(request) {
                     },
                     {
                       path: "plantingPlanItem",
+                      select: "cropVariety quantity",
+                      populate: {
+                        path: "cropVariety",
+                        select: "name cropType",
+                        populate: { path: "cropType", select: "name" },
+                      },
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              path: "field",
+              select: "name slug",
+            },
+          ],
+        },
+        {
+          path: "harvestingPlans",
+          populate: [
+            {
+              path: "items",
+              populate: [
+                { path: "cropVariety", populate: { path: "cropType" } },
+                {
+                  path: "plantedCropVarieties",
+                  select: "-relativeCoords -fieldCoords",
+                  populate: [
+                    {
+                      path: "cultivation",
+                      select: "name cultivationArea",
+                      populate: {
+                        path: "cultivationArea",
+                        select: "name field",
+                        populate: {
+                          path: "field",
+                          select: "name slug",
+                        },
+                      },
+                    },
+                    {
+                      path: "harvestingPlanItems",
                       select: "cropVariety quantity",
                       populate: {
                         path: "cropVariety",

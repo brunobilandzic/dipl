@@ -42,7 +42,11 @@ export const SeedingModal = ({
       const res = await api.get("/cultivation/fields");
       if (res.data && res.data.fields) {
         dispatch(setFields(res.data.fields));
-        setFieldsPlantingPlans(utils.plans.getFieldsPlans(res.data.fields));
+        const getPlans = (fields) => {
+          const field = fields.find((f) => f.name === fieldName);
+          return utils.plans.getFieldPlans({ field });
+        };
+        setAllFieldPlans(getPlans(res.data.fields));
       }
     } catch (error) {
       console.log("Error fetching fields:", error);

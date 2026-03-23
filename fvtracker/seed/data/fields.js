@@ -60,6 +60,7 @@ const planInfo = {
         quantity: 100,
       },
     ],
+  },
 };
 
 const optimizedParams2 = {

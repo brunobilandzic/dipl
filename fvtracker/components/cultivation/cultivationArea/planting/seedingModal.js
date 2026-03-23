@@ -74,7 +74,12 @@ export const SeedingModal = ({
         allFieldPlans,
         cropVarietyId: newPlantage.variety._id,
       });
-      console.log("Available plans for variety ID", newPlantage.variety._id, ":", availablePlans);
+      console.log(
+        "Available plans for variety ID",
+        newPlantage.variety._id,
+        ":",
+        availablePlans,
+      );
       setAvailablePlans(availablePlans);
     } else {
       setAvailablePlans([]);
@@ -171,39 +176,41 @@ export const SeedingModal = ({
     setPlantCultivationOpen(false);
   };
 
-  const choiceOptions = [
-    {
-      label: END_PLANTING,
-      onClick: () => {
-        setChooseNewEnd((prev) => {
-          return { ...prev, isOpen: false, choice: END_PLANTING };
-        });
-        onEndCoordinates({
-          x: chooseNewEnd.x,
-          y: chooseNewEnd.y,
-        });
+  const choiceOptions = {
+    planting: [
+      {
+        label: END_PLANTING,
+        onClick: () => {
+          setChooseNewEnd((prev) => {
+            return { ...prev, isOpen: false, choice: END_PLANTING };
+          });
+          onEndCoordinates({
+            x: chooseNewEnd.x,
+            y: chooseNewEnd.y,
+          });
+        },
       },
-    },
-    {
-      label: CONTINUE_PLANTING,
-      onClick: () => {
-        setChooseNewEnd({ isOpen: false, choice: CONTINUE_PLANTING });
-        onEndCoordinates({
-          x: chooseNewEnd.x,
-          y: chooseNewEnd.y,
-          isContinue: true,
-        });
-        removeBegin();
+      {
+        label: CONTINUE_PLANTING,
+        onClick: () => {
+          setChooseNewEnd({ isOpen: false, choice: CONTINUE_PLANTING });
+          onEndCoordinates({
+            x: chooseNewEnd.x,
+            y: chooseNewEnd.y,
+            isContinue: true,
+          });
+          removeBegin();
+        },
       },
-    },
-    {
-      label: "Odustani",
-      onClick: () => {
-        reset();
+      {
+        label: "Odustani",
+        onClick: () => {
+          reset();
+        },
+        className: "btn w-full cancelButton",
       },
-      className: "btn w-full cancelButton",
-    },
-  ];
+    ],
+  };
 
   const onSubmitNewPlantage = async () => {
     //submit to backend
@@ -289,7 +296,7 @@ export const SeedingModal = ({
         <MenuModal
           invertColor="true"
           isOpen={chooseNewEnd.isOpen}
-          options={choiceOptions}
+          options={choiceOptions.planting}
           onCancel={reset}
         />
       )}

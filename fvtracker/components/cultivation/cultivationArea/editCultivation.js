@@ -4,10 +4,7 @@ import { useDispatch } from "react-redux";
 import { AppInput } from "@/components/form/inputs";
 import axios from "axios";
 import handleError from "@/lib/constants/errors/client/handleError";
-import {
-  updateCultivation,
-  deleteCultivation,
-} from "@/store/cultivation";
+import { updateCultivation, deleteCultivation } from "@/store/cultivation";
 import api from "@/lib/api";
 
 export function EditCultivation({ isOpen, onCancel, cultivationData }) {
@@ -29,20 +26,17 @@ export function EditCultivation({ isOpen, onCancel, cultivationData }) {
   };
 
   const onSubmit = async () => {
-    console.log(
-      "Submitting cultivation edit with data:",
-      formData,
-    );
+    console.log("Submitting cultivation edit with data:", formData);
 
     try {
-      const res = await api.put(
-        `/cultivation`,
-        formData,
-      );
+      const res = await api.put(`/cultivation`, formData);
       console.log("Cultivation updated successfully:", res.data);
       dispatch(updateCultivation(res.data.updatedCultivation));
       onCancel();
-      alert("Kultivacija je uspješno ažurirana - " + res.data.updatedCultivation.name);
+      alert(
+        "Kultivacija je uspješno ažurirana - " +
+          res.data.updatedCultivation.name,
+      );
     } catch (error) {
       handleError(error);
     }

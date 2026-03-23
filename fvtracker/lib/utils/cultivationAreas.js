@@ -254,13 +254,13 @@ export function adjacentCellsGap({ x, y, gap, plantedCells }) {
 }
 
 export function getPlCvsSeededCells(plCvs) {
-  return plCvs
-    ?.map((plCv) => {
-      if (plCv.cropVariety) return plCv.relativeCoords;
-    })
-    ?.filter((relCoord) => !!relCoord);
+  return (
+    plCvs
+      ?.filter((plCv) => plCv.plantingPlanItem?.cropVariety)
+      ?.map((plCv) => plCv.relativeCoords) || []
+  );
 }
-  
+
 export const getCANameFromPlantedCropVarietiesInCultivation = ({
   plantedCropVariety,
 }) => {

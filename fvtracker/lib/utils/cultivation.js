@@ -21,7 +21,11 @@ export function getPlCvs(cultivations) {
   cultivations.forEach((cultivation) => {
     cultivation.plantedCropVarieties.forEach((pcv) => {
       if (pcv.relativeCoords) {
-        plCvs.push({ ...pcv, cultivationName: cultivation.name });
+        plCvs.push({
+          ...pcv,
+          cultivationName: cultivation.name,
+          cultivation: cultivation._id,
+        });
       }
     });
   });

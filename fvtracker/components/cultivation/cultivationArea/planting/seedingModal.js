@@ -15,6 +15,7 @@ import { PlantCultivation } from "@/components/cultivation/cultivationArea/plant
 import api from "@/lib/api";
 import { createPlantage, setFields } from "@/store/cultivation";
 import { setLoading } from "@/store/loading";
+import { setError } from "@/store/error";
 
 export const SeedingModal = ({
   isOpen,

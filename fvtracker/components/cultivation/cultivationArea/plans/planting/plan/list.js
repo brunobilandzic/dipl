@@ -86,24 +86,27 @@ export function FieldPlansItem({ fieldPlans, plant = true }) {
     ({ fieldName, harvestingPlans } = fieldPlans);
   }
 
+  const getPlans = () => {
+    console.log("fieldPlans:", fieldPlans);
+    if (plant) {
+      return plantingPlans?.map((plan) => (
+        <div key={uuid()} className="mb-2">
+          <PlantingPlanListItem plan={plan} />
+        </div>
+      ));
+    } else {
+      return harvestingPlans?.map((plan) => (
+        <div key={uuid()} className="mb-2">
+          <PlantingPlanListItem plan={plan} />
+        </div>
+      ));
+    }
+  };
+
   return (
     <div>
       <div className="font-bold text-lg mb-4">{fieldName}:</div>
-      {plantingPlans?.length > 0 ? (
-        <div className="flex flex-col">
-          {plantingPlans.map((plan) => (
-            <div key={uuid()} className="mb-2">
-              {plant ? (
-                <PlantingPlanListItem plan={plan} />
-              ) : (
-                <div>{plan.name}</div>
-              )}
-            </div>
-          ))}
-        </div>
-      ) : (
-        `Nema planova ${plant ? "sadnje" : "berbe"} za ovo polje.`
-      )}
+      <div className="pl-4 my-4">{getPlans()}</div>
     </div>
   );
 }

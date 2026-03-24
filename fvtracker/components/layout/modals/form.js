@@ -29,7 +29,6 @@ export function FormModal({
 }
 
 function FormModalFooter({ onCancel, onSubmit, submitDisabled }) {
-  console.log("submitDisabled:", submitDisabled);
   return (
     <ModalFooter>
       <div onClick={onCancel} className="btn cancelButton">

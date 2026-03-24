@@ -68,7 +68,7 @@ export function HarvestingModal({
   };
 
   const removeBegin = () => {
-    setNewPlantage((prev) => ({
+    setNewHarvest((prev) => ({
       ...prev,
       beginX: null,
       beginY: null,

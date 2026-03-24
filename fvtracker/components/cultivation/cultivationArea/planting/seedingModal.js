@@ -26,7 +26,6 @@ export const SeedingModal = ({
   field,
 }) => {
   const [newPlantage, setNewPlantage] = useState({});
-  const [newHarvest, setNewHarvest] = useState({});
   const [allFieldPlans, setAllFieldPlans] = useState([]);
   const [availablePlans, setAvailablePlans] = useState([]);
   useEffect(() => {
@@ -105,21 +104,18 @@ export const SeedingModal = ({
     );
   }, [cultivation, crops]);
 
+  // BEGIN LOGIC
+
   const isBeginSelected = () =>
     !!(
       typeof newPlantage.beginX === "number" &&
       typeof newPlantage.beginY === "number"
     );
 
-  const removeBegin = () => {
-    setNewPlantage((prev) => ({
-      ...prev,
-      beginX: null,
-      beginY: null,
-    }));
-  };
   const [chooseNewEnd, setChooseNewEnd] = useState(initialChooseNewEnd);
   const [plantCultivationOpen, setPlantCultivationOpen] = useState(false);
+
+  // PLANTING SELECTION
 
   const showChooseNewEnd = ({ x, y }) => {
     setChooseNewEnd((prev) => ({ ...prev, isOpen: true, choice: null, x, y }));
@@ -143,6 +139,7 @@ export const SeedingModal = ({
       beginY: y,
       toPlantCells: [...(prev.toPlantCells ?? []), `${x},${y}`],
     }));
+    // FIELD & PLANS LOADING
   };
 
   const onEndPlantingCoordinates = ({ x, y, isContinue }) => {
@@ -176,6 +173,16 @@ export const SeedingModal = ({
     if (!isContinue) setPlantCultivationOpen(true);
   };
 
+  // RESETING LOGIC
+
+  const removeBegin = () => {
+    setNewPlantage((prev) => ({
+      ...prev,
+      beginX: null,
+      beginY: null,
+    }));
+  };
+
   const reset = () => {
     setNewPlantage(
       initialNewPlantage_WId
@@ -184,26 +191,6 @@ export const SeedingModal = ({
     );
     setChooseNewEnd(initialChooseNewEnd);
     setPlantCultivationOpen(false);
-  };
-
-  const onBeginHarvestingCoordinates = ({ x, y }) => {
-    setNewHarvest((prev) => ({
-      ...prev,
-      beginX: x,
-      beginY: y,
-      toHarvestCells: [...(prev.toHarvestCells ?? []), `${x},${y}`],
-    }));
-  };
-
-  const onEndHarvestingCoordinates = ({ x, y, isContinue }) => {
-    const { harvested } = utils.cultivation.cultivationAreas.getCellsInRect({
-      beginX: newHarvest.beginX,
-      beginY: newHarvest.beginY,
-      endX: x,
-      endY: y,
-      toPlantCells: newHarvest.toHarvestCells,
-      toPlantCultivation: cultivation,
-    });
   };
 
   const choiceOptions = {
@@ -242,6 +229,8 @@ export const SeedingModal = ({
     ],
   };
 
+  // SUBMIT HANDLERS
+
   const onSubmitNewPlantage = async () => {
     //submit to backend
     try {
@@ -275,6 +264,8 @@ export const SeedingModal = ({
     }
   }, [newPlantage?.variety, allFieldPlans]);
 
+  // CROP VARIETY HANDLERS
+
   const hanleCropVarietyClick = (cropVariety) => {
     console.log("Clicked crop variety:", cropVariety);
   };
@@ -287,6 +278,8 @@ export const SeedingModal = ({
     console.log("Available planting plans updated:", availablePlans);
   }, [availablePlans]);
 
+  // PLAN SELECTION
+
   const onChoosePlan = (plan) => {
     setNewPlantage((prev) => ({
       ...prev,
@@ -294,13 +287,12 @@ export const SeedingModal = ({
     }));
   };
 
-  if (!cultivation || !isOpen) return null;
+  // RENDER
   return (
     <>
-      <Modal title="Sijanje" isOpen={isOpen} onCancel={onCancel}>
+      <Modal title="Sadnja" isOpen={isOpen} onCancel={onCancel}>
         {JSON.stringify({
           plantingPlans: allFieldPlans?.plantingPlans?.length,
-          harvestingPlans: allFieldPlans?.harvestingPlans?.length,
         })}
         <div className="flex flex-col gap-2">
           <div className="font-bold text-xl">{cultivation?.name || "N/A"}</div>

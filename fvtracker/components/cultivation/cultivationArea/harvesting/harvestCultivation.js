@@ -1,19 +1,27 @@
 import Modal from "@/components/layout/modals/modal";
+import { ChoosePlan } from "../plans/planting/plan/choosePlan";
 
 export const HarvestCultivation = ({
   isOpen,
   onCancel,
   onSubmit,
-  newNewHarvest,
+  newHarvest,
   setNewHarvest,
   availablePlans,
-  crops,
   onChoosePlan,
-  submitDisabled,
 }) => {
   return (
-    <Modal isOpen={isOpen} onClose={onCancel} invertColor={true}>
-      berba brate
+    <Modal isOpen={isOpen} onCancel={onCancel} invertColor={true}>
+      <div>
+        <ChoosePlan
+          selectedPlan={newHarvest.plantingPlan}
+          availablePlans={availablePlans}
+          onChoosePlan={onChoosePlan}
+          cropVarietyId={newHarvest.cropVariety?._id}
+          plant={false}
+          onCancel={onCancel}
+        />
+      </div>
     </Modal>
   );
 };

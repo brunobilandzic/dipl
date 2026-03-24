@@ -113,6 +113,8 @@ export function HarvestingModal({
     }
   };
 
+  // CHOICE MENU OPTIONS
+
   const choiceOptions = [
     {
       label: END_HARVESTING,

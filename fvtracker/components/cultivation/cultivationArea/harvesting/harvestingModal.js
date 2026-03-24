@@ -17,11 +17,7 @@ export function HarvestingModal({
   caDims,
 }) {
   const [newHarvest, setNewHarvest] = useState({});
-  const [handleNonBeginMenu, setHandleNonBeginMenu] = useState({
-    isOpen: false,
-    x: null,
-    y: null,
-  });
+  const [chooseNewEnd, setChooseNewEnd] = useState(initialChooseNewEnd);
 
   //use effects to monitor state changes
   useEffect(() => {
@@ -64,7 +60,7 @@ export function HarvestingModal({
         ? initialNewHarvest_WId({ cultivationId: cultivation?._id })
         : {},
     );
-    setHandleNonBeginMenu(initialChooseNewEnd);
+    setChooseNewEnd(initialChooseNewEnd);
   };
 
   const removeBegin = () => {
@@ -81,7 +77,7 @@ export function HarvestingModal({
 
   const handleCropVarietyClick = ({ cropVariety, x, y }) => {
     if (isBeginSelected() && newHarvest.toHarvestCells?.length > 0) {
-      setHandleNonBeginMenu({
+      setChooseNewEnd({
         x,
         y,
         isOpen: true,
@@ -94,7 +90,10 @@ export function HarvestingModal({
   const choiceOptions = [
     {
       label: END_HARVESTING,
-      onClick: () => {},
+      onClick: () => {
+        setChooseNewEnd((prev) => {
+          return { ...prev, isOpen: false, choice: END_HARVESTING };
+        });
     },
     {
       label: CONTINUE_HARVESTING,
@@ -135,10 +134,10 @@ export function HarvestingModal({
           </div>
         </div>
       </Modal>
-      {handleNonBeginMenu.isOpen && (
+      {chooseNewEnd.isOpen && (
         <MenuModal
           invertColor="true"
-          isOpen={handleNonBeginMenu.isOpen}
+          isOpen={chooseNewEnd.isOpen}
           onCancel={reset}
           options={choiceOptions}
         />

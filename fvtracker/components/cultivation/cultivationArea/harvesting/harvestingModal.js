@@ -30,11 +30,49 @@ export function HarvestingModal({
   const [allFieldPlans, setAllFieldPlans] = useState({});
   const [availablePlans, setAvailablePlans] = useState({});
 
+  const getPlans = () => {
+    if (!fields || fields.length === 0) {
+      console.log("No fields available to get plans from.");
+      return {};
+    }
+    const _field = fields.find((f) => f.name === field.name);
+    const allPlans = utils.plans.getFieldPlans({ field: _field });
+
+    setAllFieldPlans(allPlans);
+  };
+
+  useEffect(() => {
+    getPlans();
+  }, [fields]);
+
+  const checkPlans = () => {
+    return (
+      allFieldPlans?.harvestingPlans &&
+      allFieldPlans?.harvestingPlans?.length > 0
+    );
+  };
+
+  useEffect(() => {
+    if (newHarvest?.cropVariety?._id && checkPlans()) {
+      const availablePlans = utils.plans.getPlansForCropVariety({
+        allFieldPlans,
+        cropVarietyId: newHarvest.cropVariety._id,
+      });
+      setAvailablePlans(availablePlans);
+    } else {
+      setAvailablePlans({});
+    }
+  }, [newHarvest?.cropVariety?._id, allFieldPlans]);
+
   //use effects to monitor state changes
 
   useEffect(() => {
     console.log("New harvest state updated:", newHarvest);
   }, [newHarvest]);
+
+  useEffect(() => {
+    console.log("all plans for field:", allFieldPlans);
+  }, [allFieldPlans]);
 
   // set harvest when cult id
   useEffect(() => {

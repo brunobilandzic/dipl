@@ -307,7 +307,6 @@ export const SeedingModal = ({
               seedMode={true}
               toPlantCells={newPlantage?.toPlantCells}
               handleNotPlanted={handleNotPlanted}
-              hanleCropVarietyClick={hanleCropVarietyClick}
             />
           </div>
         </div>

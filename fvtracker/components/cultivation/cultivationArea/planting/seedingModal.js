@@ -86,7 +86,6 @@ export const SeedingModal = ({
 
   useEffect(() => {
     if (fields && fields.length > 0) return;
-    D;
     refreshFields();
   }, [fields]);
 

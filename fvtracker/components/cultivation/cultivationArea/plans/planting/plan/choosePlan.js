@@ -8,9 +8,6 @@ export const ChoosePlan = ({
   cropVarietyId,
   plant,
 }) => {
-  console.log("selectedPlan:", selectedPlan);
-  console.log("availablePlans in ChoosePlan:", availablePlans);
-
   if (!availablePlans) {
     return (
       <div className="p-4">
@@ -20,13 +17,21 @@ export const ChoosePlan = ({
   }
 
   const getAvailablePlans = () => {
-    checkPlansEmpty(availablePlans);
     return plant
       ? availablePlans.plantingPlans
       : availablePlans.harvestingPlans;
   };
 
-  console.log("Rendering ChoosePlan with availablePlans:", availablePlans);
+  if (getAvailablePlans() === undefined) {
+    return (
+      <div className="p-4">
+        <p>
+          Nema dostupnih planova {plant ? "sadnje" : "berbe"} za odabranu sortu.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-wrap p-4 border">
       <div className="w-full mb-4">
@@ -38,11 +43,6 @@ export const ChoosePlan = ({
         const plantingPlanItem = avPlan.items.find(
           (item) => item.cropVariety?._id === cropVarietyId,
         );
-        console.log(
-          "Found planting plan item for cultivation:",
-          plantingPlanItem,
-        );
-        console.log("item:", plantingPlanItem);
         return (
           <div
             key={avPlan._id}

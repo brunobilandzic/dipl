@@ -7,7 +7,7 @@ const initialChooseNewEnd = {
   y: null,
 };
 
-const initialNewHarvest_WId = ({ cultivationId, crops }) => {
+const initialNewHarvest_WId = ({ cultivationId }) => {
   // we are choosing variaty when clicking on it
   return {
     cultivationId: cultivationId || null,

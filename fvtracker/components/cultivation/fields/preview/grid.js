@@ -260,11 +260,11 @@ const FieldCell = ({
     : color || (active ? "bg-yellow-500" : "");
   const cellClass = classNames(
     small ? "w-1 h-1" : enlarged ? "w-6 h-6" : "w-3 h-3",
-    "border cursor-pointer",
+    "border ",
     invertColor ? "border border-[var(--background)]" : "",
     bgClass,
     cultivationName === selectedCultivationName ? "ring-2 ring-blue-500" : "",
-    disabled ? "cursor-not-allowed opacity-50 bg-gray-500" : "",
+    disabled ? "cursor-not-allowed opacity-50 bg-gray-500" : "cursor-pointer",
   );
 
   return (

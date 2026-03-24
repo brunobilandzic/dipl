@@ -22,12 +22,13 @@ export function HarvestingModal({
   caDims,
   field,
 }) {
-  const fields = useSelector((state) => state.fields);
+  const fields = useSelector((state) => state.cultivation.fields);
   const [newHarvest, setNewHarvest] = useState({});
   const [chooseNewEnd, setChooseNewEnd] = useState(initialChooseNewEnd);
   const [harvestCultivationOpen, setHarvestCultivationOpen] = useState(false);
 
   //use effects to monitor state changes
+
   useEffect(() => {
     console.log("New harvest state updated:", newHarvest);
   }, [newHarvest]);

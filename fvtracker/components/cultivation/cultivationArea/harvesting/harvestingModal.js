@@ -80,8 +80,7 @@ export function HarvestingModal({
   };
 
   const handleCropVarietyClick = ({ cropVariety, x, y }) => {
-    console.log("Clicked on cell with coordinates:", cropVariety, cellCoord);
-    if (isBeginSelected() && newPlantage.toPlantCells?.length > 0) {
+    if (isBeginSelected() && newHarvest.toHarvestCells?.length > 0) {
       setHandleNonBeginMenu({
         x,
         y,

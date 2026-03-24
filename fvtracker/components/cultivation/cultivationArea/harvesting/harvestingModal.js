@@ -281,7 +281,7 @@ const initialNewHarvest_WId = ({ cultivationId }) => {
   return {
     cultivationId: cultivationId || null,
     cropVariety: null,
-    harvestPlan: null,
+    harvestingPlan: null,
     toHarvestCells: [],
     harvestedAt: new Date("2026-03-10T00:00:00Z"),
     beginX: null,

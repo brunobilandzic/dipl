@@ -22,6 +22,8 @@ export function HarvestingModal({
   caDims,
   field,
 }) {
+  const dispatch = useDispatch();
+
   const fields = useSelector((state) => state.cultivation.fields);
   const [newHarvest, setNewHarvest] = useState({});
   const [chooseNewEnd, setChooseNewEnd] = useState(initialChooseNewEnd);
@@ -29,6 +31,25 @@ export function HarvestingModal({
 
   const [allFieldPlans, setAllFieldPlans] = useState({});
   const [availablePlans, setAvailablePlans] = useState({});
+
+  const refreshFields = async () => {
+    try {
+      const res = await api.get("/cultivation/fields");
+      if (res.data && res.data.fields) {
+        dispatch(setFields(res.data.fields));
+        setAllFieldPlans(getPlans(res.data.fields));
+      }
+    } catch (error) {
+      console.log("Error fetching fields:", error);
+      const errorMessage =
+        error.response?.data?.message || error.message || "Nepoznata greška";
+      alert(`Greška pri dohvaćanju polja: ${errorMessage}`);
+    }
+  };
+  useEffect(() => {
+    if (fields && fields.length > 0) return;
+    refreshFields();
+  }, [fields]);
 
   const getPlans = () => {
     if (!fields || fields.length === 0) {

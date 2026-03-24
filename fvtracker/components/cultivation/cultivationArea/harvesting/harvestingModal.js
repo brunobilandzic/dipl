@@ -47,7 +47,7 @@ export function HarvestingModal({
       typeof newHarvest.beginY === "number"
     );
 
-  const handleBeginSelection = ({ x, y }) => {
+  const onBeginPlantingCoordinates = ({ x, y }) => {
     setNewHarvest((prev) => ({
       ...prev,
       beginX: x,

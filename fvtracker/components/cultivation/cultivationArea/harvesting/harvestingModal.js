@@ -43,7 +43,7 @@ export function HarvestingModal({
       typeof newHarvest.beginY === "number"
     );
 
-  const onBeginPlantingCoordinates = ({ x, y }) => {
+  const onBeginHarvestingCoordinates = ({ x, y, cropVariety }) => {
     setNewHarvest((prev) => ({
       ...prev,
       beginX: x,
@@ -83,7 +83,8 @@ export function HarvestingModal({
         isOpen: true,
       });
     } else {
-      onBeginPlantingCoordinates({ x, y });
+      console.log("Selected cell crop variety:", cropVariety);
+      onBeginHarvestingCoordinates({ x, y, cropVariety });
     }
   };
 

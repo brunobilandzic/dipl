@@ -2,6 +2,11 @@ import Modal from "@/components/layout/modals/modal";
 import { showDate } from "@/lib/utils/display";
 import { useState, useEffect } from "react";
 import { FieldGrid } from "../../fields/preview/grid";
+import { MenuModal } from "@/components/layout/modals/menu";
+import {
+  CONTINUE_HARVESTING,
+  END_HARVESTING,
+} from "@/lib/constants/cultivation/plants";
 
 export function HarvestingModal({
   isOpen,
@@ -12,6 +17,12 @@ export function HarvestingModal({
   caDims,
 }) {
   const [newHarvest, setNewHarvest] = useState({});
+  const [handleNonBeginMenu, setHandleNonBeginMenu] = useState({
+    isOpen: false,
+    x: null,
+    y: null,
+  });
+
   console.log("HarvestingModal rendered with cultivation:", cultivation);
 
   // set harvest when cult id
@@ -50,6 +61,7 @@ export function HarvestingModal({
         ? initialNewHarvest_WId({ cultivationId: cultivation?._id })
         : {},
     );
+    setHandleNonBeginMenu(initialChooseNewEnd);
   };
 
   const removeBegin = () => {
@@ -66,15 +78,33 @@ export function HarvestingModal({
 
   const handleCropVarietyClick = ({ cropVariety, x, y }) => {
     console.log("Clicked on cell with coordinates:", cropVariety, cellCoord);
-    /* if (isBeginSelected() && newPlantage.toPlantCells?.length > 0) {
-      showChooseNewEnd({
+    if (isBeginSelected() && newPlantage.toPlantCells?.length > 0) {
+      setHandleNonBeginMenu({
         x,
         y,
       });
     } else {
       onBeginPlantingCoordinates({ x, y });
-    } */
+    }
   };
+
+  const choiceOptions = [
+    {
+      label: END_HARVESTING,
+      onClick: () => {},
+    },
+    {
+      label: CONTINUE_HARVESTING,
+      onClick: () => {},
+    },
+    {
+      label: "Odustani",
+      onClick: () => {
+        reset();
+      },
+      className: "btn w-full cancelButton",
+    },
+  ];
 
   return (
     <>
@@ -103,6 +133,13 @@ export function HarvestingModal({
           </div>
         </div>
       </Modal>
+      {handleNonBeginMenu.isOpen && (
+        <MenuModal
+          isOpen={handleNonBeginMenu.isOpen}
+          onCancel={reset}
+          options={choiceOptions}
+        />
+      )}
     </>
   );
 }

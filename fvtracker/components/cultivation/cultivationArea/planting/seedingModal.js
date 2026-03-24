@@ -264,11 +264,6 @@ export const SeedingModal = ({
     }
   }, [newPlantage?.variety, allFieldPlans]);
 
-  // CROP VARIETY HANDLERS
-
-  const hanleCropVarietyClick = (cropVariety) => {
-    console.log("Clicked crop variety:", cropVariety);
-  };
 
   useEffect(() => {
     console.log("New plantage state:", newPlantage);

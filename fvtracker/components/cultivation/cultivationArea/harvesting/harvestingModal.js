@@ -259,11 +259,10 @@ export function HarvestingModal({
           isOpen={harvestCultivationOpen}
           onCancel={reset}
           onSubmit={reset}
-          newNewHarvest={newHarvest}
+          newHarvest={newHarvest}
           setNewHarvest={setNewHarvest}
           availablePlans={availablePlans}
           onChoosePlan={onChoosePlan}
-          submitDisabled={submitDisabled}
         />
       )}
     </>

@@ -1,6 +1,10 @@
 import Modal from "@/components/layout/modals/modal";
 import { showDate } from "@/lib/utils/display";
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import api from "@/lib/api";
+import { setFields } from "@/store/cultivation";
+import { HarvestCultivation } from "./harvestCultivation";
 import { FieldGrid } from "../../fields/preview/grid";
 import { MenuModal } from "@/components/layout/modals/menu";
 import {
@@ -16,11 +20,12 @@ export function HarvestingModal({
   cultivation,
   cultivationCells,
   caDims,
-  field
+  field,
 }) {
   const fields = useSelector((state) => state.fields);
   const [newHarvest, setNewHarvest] = useState({});
   const [chooseNewEnd, setChooseNewEnd] = useState(initialChooseNewEnd);
+  const [harvestCultivationOpen, setHarvestCultivationOpen] = useState(false);
 
   //use effects to monitor state changes
   useEffect(() => {
@@ -58,7 +63,7 @@ export function HarvestingModal({
 
   // END LOGIC
 
-  const onEndHarvestingCoordinates = ({ x, y }) => {
+  const onEndHarvestingCoordinates = ({ x, y, isContinue }) => {
     console.log(newHarvest);
     const rectCells = utils.harvest.getHarvestCellsRect({
       beginX: newHarvest.beginX,
@@ -74,7 +79,8 @@ export function HarvestingModal({
       endY: y,
       toHarvestCells: [...new Set([...prev.toHarvestCells, ...rectCells])],
     }));
-    console.log("Calculated rect cells for harvesting:", rectCells);
+
+    if (!isContinue) setHarvestCultivationOpen(true);
   };
 
   // RESETING LOGIC
@@ -86,6 +92,7 @@ export function HarvestingModal({
         : {},
     );
     setChooseNewEnd(initialChooseNewEnd);
+    setHarvestCultivationOpen(false);
   };
 
   const removeBegin = () => {
@@ -175,6 +182,18 @@ export function HarvestingModal({
           isOpen={chooseNewEnd.isOpen}
           onCancel={reset}
           options={choiceOptions}
+        />
+      )}
+      {harvestCultivationOpen && (
+        <HarvestCultivation
+          isOpen={harvestCultivationOpen}
+          onCancel={reset}
+          onSubmit={reset}
+          newNewHarvest={newHarvest}
+          setNewHarvest={setNewHarvest}
+          availablePlans={availablePlans}
+          onChoosePlan={onChoosePlan}
+          submitDisabled={submitDisabled}
         />
       )}
     </>

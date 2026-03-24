@@ -44,6 +44,7 @@ export const getCellsInRect = ({
     endX,
     endY,
     toPlantCells,
+    toPlantCultivation
   });
   if (cultivationAreaDimensions) {
     plantedCells = getCASCells(cultivationAreas);

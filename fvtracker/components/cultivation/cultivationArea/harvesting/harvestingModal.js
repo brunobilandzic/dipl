@@ -136,6 +136,7 @@ export function HarvestingModal({
       </Modal>
       {handleNonBeginMenu.isOpen && (
         <MenuModal
+          invertColor="true"
           isOpen={handleNonBeginMenu.isOpen}
           onCancel={reset}
           options={choiceOptions}

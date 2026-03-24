@@ -122,6 +122,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       disabled.push(cultivation.names.MANAGE_SEEDING);
       disabled.push(cultivation.names.EDIT_INFO);
       disabled.push(cultivation.names.DELETE_CULTIVATION);
+      disabled.push(cultivation.names.HARVEST_CELLS);
     }
     setDisabledOptions(disabled);
   }, [newCUDetails, selectedCultivation]);

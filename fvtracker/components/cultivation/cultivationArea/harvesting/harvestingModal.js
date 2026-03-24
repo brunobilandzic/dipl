@@ -158,10 +158,7 @@ const initialNewHarvest_WId = ({ cultivationId }) => {
   // we are choosing variaty when clicking on it
   return {
     cultivationId: cultivationId || null,
-    variety: {
-      _id: null,
-      name: null,
-    },
+    cropVariety: null,
     harvestPlan: null,
     toHarvestCells: [],
     harvestedAt: new Date("2026-03-10T00:00:00Z"),

@@ -124,7 +124,6 @@ export function HarvestingModal({
               invertColor={true}
               cultivationCells={cultivationCells}
               onRightClick={reset}
-              seedMode={true}
               toPlantCells={newHarvest?.toHarvestCells}
               handleNotPlanted={handleNotPlanted}
               handleCropVarietyClick={handleCropVarietyClick}

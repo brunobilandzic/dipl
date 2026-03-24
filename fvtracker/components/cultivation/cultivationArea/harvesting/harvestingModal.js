@@ -84,6 +84,7 @@ export function HarvestingModal({
       setHandleNonBeginMenu({
         x,
         y,
+        isOpen: true,
       });
     } else {
       onBeginPlantingCoordinates({ x, y });

@@ -23,7 +23,10 @@ export function HarvestingModal({
     y: null,
   });
 
-  console.log("HarvestingModal rendered with cultivation:", cultivation);
+  //use effects to monitor state changes
+  useEffect(() => {
+    console.log("New harvest state updated:", newHarvest);
+  }, [newHarvest]);
 
   // set harvest when cult id
   useEffect(() => {

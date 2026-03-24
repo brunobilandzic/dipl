@@ -27,6 +27,9 @@ export function HarvestingModal({
   const [chooseNewEnd, setChooseNewEnd] = useState(initialChooseNewEnd);
   const [harvestCultivationOpen, setHarvestCultivationOpen] = useState(false);
 
+  const [allFieldPlans, setAllFieldPlans] = useState({});
+  const [availablePlans, setAvailablePlans] = useState({});
+
   //use effects to monitor state changes
 
   useEffect(() => {

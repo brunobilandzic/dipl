@@ -98,6 +98,7 @@ export function HarvestingModal({
               toPlantCells={newHarvest?.toHarvestCells}
               handleNotPlanted={handleNotPlanted}
               handleCropVarietyClick={handleCropVarietyClick}
+              harvestMode={true}
             />
           </div>
         </div>

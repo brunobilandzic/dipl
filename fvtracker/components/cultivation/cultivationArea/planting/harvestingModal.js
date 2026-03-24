@@ -1,4 +1,19 @@
-export function HarvestingModal({ isOpen, onCancel, onConfirm }) {}
+export function HarvestingModal({ isOpen, onCancel, onConfirm }) {
+  const [newHarvest, setNewHarvest] = useState({});
+
+  useEffect(() => {
+    if (!cultivation?._id) return;
+    if (!crops?.generalTypes?.length) return;
+
+    setNewHarvest(
+      initialNewHarvest_WId
+        ? initialNewHarvest_WId({ cultivationId: cultivation?._id })
+        : {},
+    );
+  }, [cultivation?._id]);
+
+  return <>{JSON.stringify(newHarvest, null, 2)}</>;
+}
 
 const initialChooseNewEnd = {
   isOpen: false,

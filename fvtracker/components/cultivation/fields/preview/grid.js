@@ -172,6 +172,11 @@ const FieldCells = ({
           return;
         }
 
+        if (seedMode && cropVariety) {
+          alert("Polje je već zasađeno, nije moguće posaditi preko.");
+          return;
+        }
+
         handleActiveClick(x, y);
       };
 

@@ -26,14 +26,8 @@ export const SeedingModal = ({
   field,
 }) => {
   const [newPlantage, setNewPlantage] = useState({});
-  const [allFieldPlans, setAllFieldPlans] = useState([]);
-  const [availablePlans, setAvailablePlans] = useState([]);
-  useEffect(() => {
-    console.log({
-      availablePlans,
-      allFieldPlans,
-    });
-  }, [availablePlans, allFieldPlans]);
+  const [allFieldPlans, setAllFieldPlans] = useState({});
+  const [availablePlans, setAvailablePlans] = useState({});
 
   const dispatch = useDispatch();
   const crops = useSelector((state) => state.cultivation.crops);
@@ -55,9 +49,13 @@ export const SeedingModal = ({
   };
 
   const getPlans = (fields) => {
+    if (!fields || fields.length === 0) {
+      console.log("No fields available to get plans from.");
+      return {};
+    }
     const _field = fields.find((f) => f.name === field.name);
     const allPlans = utils.plans.getFieldPlans({ field: _field });
-    console.log("setting allPlans:", allPlans);
+
     setAllFieldPlans(allPlans);
   };
 
@@ -67,29 +65,28 @@ export const SeedingModal = ({
     }
   }, [fields]);
 
-  const checkPlans = () => !!allFieldPlans;
+  const checkPlans = () => {
+    return (
+      allFieldPlans?.plantingPlans && allFieldPlans.plantingPlans?.length > 0
+    );
+  };
 
   useEffect(() => {
-    if (newPlantage?.variety?._id && checkPlans()) {
+    if (!checkPlans()) return;
+    if (newPlantage?.variety?._id && checkPlans) {
       const availablePlans = utils.plans.getPlansForCropVariety({
         allFieldPlans,
         cropVarietyId: newPlantage.variety._id,
       });
-      console.log(
-        "Available plans for variety ID",
-        newPlantage.variety._id,
-        ":",
-        availablePlans,
-      );
       setAvailablePlans(availablePlans);
     } else {
-      setAvailablePlans([]);
+      setAvailablePlans({});
     }
   }, [newPlantage?.variety, allFieldPlans]);
 
   useEffect(() => {
     if (fields && fields.length > 0) return;
-
+    D;
     refreshFields();
   }, [fields]);
 
@@ -264,10 +261,9 @@ export const SeedingModal = ({
     }
   }, [newPlantage?.variety, allFieldPlans]);
 
-
-  useEffect(() => {
+  /*   useEffect(() => {
     console.log("New plantage state:", newPlantage);
-  }, [newPlantage]);
+  }, [newPlantage]); */
 
   useEffect(() => {
     console.log("Available planting plans updated:", availablePlans);

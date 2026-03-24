@@ -193,41 +193,41 @@ export const SeedingModal = ({
     setPlantCultivationOpen(false);
   };
 
-  const choiceOptions = {
-    planting: [
-      {
-        label: END_PLANTING,
-        onClick: () => {
-          setChooseNewEnd((prev) => {
-            return { ...prev, isOpen: false, choice: END_PLANTING };
-          });
-          onEndPlantingCoordinates({
-            x: chooseNewEnd.x,
-            y: chooseNewEnd.y,
-          });
-        },
+  // MENU OPTIONS
+
+  const choiceOptions = [
+    {
+      label: END_PLANTING,
+      onClick: () => {
+        setChooseNewEnd((prev) => {
+          return { ...prev, isOpen: false, choice: END_PLANTING };
+        });
+        onEndPlantingCoordinates({
+          x: chooseNewEnd.x,
+          y: chooseNewEnd.y,
+        });
       },
-      {
-        label: CONTINUE_PLANTING,
-        onClick: () => {
-          setChooseNewEnd({ isOpen: false, choice: CONTINUE_PLANTING });
-          onEndPlantingCoordinates({
-            x: chooseNewEnd.x,
-            y: chooseNewEnd.y,
-            isContinue: true,
-          });
-          removeBegin();
-        },
+    },
+    {
+      label: CONTINUE_PLANTING,
+      onClick: () => {
+        setChooseNewEnd({ isOpen: false, choice: CONTINUE_PLANTING });
+        onEndPlantingCoordinates({
+          x: chooseNewEnd.x,
+          y: chooseNewEnd.y,
+          isContinue: true,
+        });
+        removeBegin();
       },
-      {
-        label: "Odustani",
-        onClick: () => {
-          reset();
-        },
-        className: "btn w-full cancelButton",
+    },
+    {
+      label: "Odustani",
+      onClick: () => {
+        reset();
       },
-    ],
-  };
+      className: "btn w-full cancelButton",
+    },
+  ];
 
   // SUBMIT HANDLERS
 
@@ -321,7 +321,7 @@ export const SeedingModal = ({
         <MenuModal
           invertColor="true"
           isOpen={chooseNewEnd.isOpen}
-          options={choiceOptions.planting}
+          options={choiceOptions}
           onCancel={reset}
         />
       )}

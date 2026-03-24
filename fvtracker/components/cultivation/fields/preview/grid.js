@@ -27,6 +27,7 @@ export function FieldGrid({
   handleNotPlanted,
   handleCropVarietyClick,
   harvestMode = false,
+  toHarvestCells = [],
 }) {
   if (small) {
     return (
@@ -83,6 +84,7 @@ export function FieldGrid({
           handleNotPlanted={handleNotPlanted}
           handleCropVarietyClick={handleCropVarietyClick}
           harvestMode={harvestMode}
+          toHarvestCells={toHarvestCells}
         />
       </div>
     </>
@@ -111,6 +113,7 @@ const FieldCells = ({
   handleNotPlanted,
   handleCropVarietyClick,
   harvestMode,
+  toHarvestCells,
 }) => {
   let cells = [];
 
@@ -121,7 +124,8 @@ const FieldCells = ({
       selectedCultivationArea?.planted?.includes(coord) ||
       (newCACoordinates?.planted?.includes(coord) && isBeginSelected) ||
       potentialCUCells?.includes(coord) ||
-      toPlantCells?.includes(coord)
+      toPlantCells?.includes(coord) ||
+      toHarvestCells?.includes(coord)
     );
   };
 
@@ -156,7 +160,6 @@ const FieldCells = ({
           return;
         }
         if (harvestMode && cropVariety) {
-          console.log("handle cv click", handleCropVarietyClick);
           return handleCropVarietyClick({ cropVariety, x, y });
         }
         if (harvestMode && !cropVariety) {

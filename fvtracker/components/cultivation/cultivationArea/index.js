@@ -326,7 +326,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
         )}
         {harvestCultivation.isOpen && (
           <>
-            harvest modal open
             <HarvestingModal
               isOpen={harvestCultivation.isOpen}
               onCancel={() => setHarvestCultivation(initialHarvestCultivation)}

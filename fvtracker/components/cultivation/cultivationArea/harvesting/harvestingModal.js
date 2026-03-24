@@ -7,6 +7,7 @@ import {
   CONTINUE_HARVESTING,
   END_HARVESTING,
 } from "@/lib/constants/cultivation/plants";
+import utils from "@/lib/utils";
 
 export function HarvestingModal({
   isOpen,
@@ -49,7 +50,29 @@ export function HarvestingModal({
       beginX: x,
       beginY: y,
       toHarvestCells: [...(prev.toHarvestCells ?? []), `${x},${y}`],
+      cropVariety,
     }));
+  };
+
+  // END LOGIC
+
+  const onEndHarvestingCoordinates = ({ x, y }) => {
+    console.log(newHarvest);
+    const rectCells = utils.harvest.getHarvestCellsRect({
+      beginX: newHarvest.beginX,
+      beginY: newHarvest.beginY,
+      endX: x,
+      endY: y,
+      cultivationCells,
+      cropVarietyId: newHarvest.cropVariety._id,
+    });
+    setNewHarvest((prev) => ({
+      ...prev,
+      endX: x,
+      endY: y,
+      toHarvestCells: [...new Set([...prev.toHarvestCells, ...rectCells])],
+    }));
+    console.log("Calculated rect cells for harvesting:", rectCells);
   };
 
   // RESETING LOGIC
@@ -70,6 +93,8 @@ export function HarvestingModal({
       beginY: null,
     }));
   };
+
+  // HANDLE CLICKS
 
   const handleNotPlanted = (x, y) => {
     alert("Polje nije zasađeno, nije moguće žeti");
@@ -95,6 +120,11 @@ export function HarvestingModal({
         setChooseNewEnd((prev) => {
           return { ...prev, isOpen: false, choice: END_HARVESTING };
         });
+        onEndHarvestingCoordinates({
+          x: chooseNewEnd.x,
+          y: chooseNewEnd.y,
+        });
+      },
     },
     {
       label: CONTINUE_HARVESTING,

@@ -26,7 +26,7 @@ export default {
     NEW_CULTIVATION: "Napravi novu kultivaciju",
     CHOOSE_CULTIVATION: "Odaberi kultivaciju",
     CULTIVATE_CELLS: "Kultiviraj ćelije",
-    MANAGE_SEEDING: "Sadna",
+    MANAGE_SEEDING: "Sadnja",
     EDIT_INFO: "Uredi",
     DELETE_CULTIVATION: "Obriši kultivaciju",
     HARVEST_CELLS: "Berba",

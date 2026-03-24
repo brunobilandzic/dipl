@@ -18,6 +18,7 @@ import { CreateCultivation } from "./createCultivation";
 import cultivation from "@/lib/constants/cultivation";
 import { EditCultivation } from "./editCultivation";
 import { SeedingModal } from "@/components/cultivation/cultivationArea/planting/seedingModal";
+import { HarvestingModal } from "@/components/cultivation/cultivationArea/harvesting/harvestingModal";
 
 export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const dispatch = useDispatch();
@@ -33,6 +34,9 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const [editCultivationOpen, setEditCultivationOpen] = useState(false);
   const [plantCultivation, setPlantCultivation] = useState(
     initialPlantCultivation,
+  );
+  const [harvestCultivation, setHarvestCultivation] = useState(
+    initialHarvestCultivation,
   );
 
   const cultivationArea = useMemo(() => {
@@ -246,6 +250,15 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     });
   };
 
+  const onHarvest = () => {
+    if (!selectedCultivation) return;
+    console.log("Selected cultivation for harvesting:", selectedCultivation);
+    setHarvestCultivation({
+      isOpen: true,
+      cultivation: selectedCultivation,
+    });
+  };
+
   return (
     <>
       <div>
@@ -275,6 +288,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
             disabled={disabledOptions}
             onDelete={onDeleteCultivation}
             onPlant={onPlant}
+            onHarvest={onHarvest}
           />
         </div>
         {createCultivationOpen && (
@@ -310,12 +324,34 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
             )}
           />
         )}
+        {harvestCultivation.isOpen && (
+          <>
+            harvest modal open
+            <HarvestingModal
+              isOpen={harvestCultivation.isOpen}
+              onCancel={() => setHarvestCultivation(initialHarvestCultivation)}
+              cultivation={selectedCultivation}
+              caDims={{ width, length }}
+              cultivationCells={utils.cultivation.cultivations.filterCutivationCells(
+                {
+                  cultivationCells,
+                  cultivationId: selectedCultivation?._id,
+                },
+              )}
+            />
+          </>
+        )}
       </div>
     </>
   );
 }
 
 const initialPlantCultivation = {
+  isOpen: false,
+  cultivation: null,
+};
+
+const initialHarvestCultivation = {
   isOpen: false,
   cultivation: null,
 };

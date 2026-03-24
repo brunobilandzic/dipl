@@ -26,7 +26,7 @@ export function FieldGrid({
   toPlantCells = [],
   handleNotPlanted,
   handleCropVarietyClick,
-  harvestMode = false
+  harvestMode = false,
 }) {
   if (small) {
     return (
@@ -110,7 +110,7 @@ const FieldCells = ({
   toPlantCells,
   handleNotPlanted,
   handleCropVarietyClick,
-  harvestMode
+  harvestMode,
 }) => {
   let cells = [];
 
@@ -158,6 +158,10 @@ const FieldCells = ({
         if (harvestMode && cropVariety) {
           console.log("handle cv click", handleCropVarietyClick);
           return handleCropVarietyClick({ cropVariety, x, y });
+        }
+        if (harvestMode && !cropVariety) {
+          handleNotPlanted(x, y);
+          return;
         }
         if (!active && color === "") {
           handleEmptyClick(x, y);

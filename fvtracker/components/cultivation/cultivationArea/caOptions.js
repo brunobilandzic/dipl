@@ -22,7 +22,7 @@ export default function CAOptions({
 }) {
   const options = [
     {
-      label: "Back to field",
+      label: "Natrag",
       onClick: onBack,
       icon: <MdArrowLeft />,
     },
@@ -45,16 +45,16 @@ export default function CAOptions({
       disabled: disabled?.includes(cultivation.names.MANAGE_SEEDING),
     },
     {
-      label: cultivation.names.DELETE_CULTIVATION,
-      onClick: onDelete,
-      icon: <MdOutlineDeleteForever />,
-      disabled: disabled?.includes(cultivation.names.DELETE_CULTIVATION),
-    },
-    {
       label: cultivation.names.HARVEST_CELLS,
       onClick: onHarvest,
       icon: <MdFoodBank />,
       disabled: disabled?.includes(cultivation.names.HARVEST_CELLS),
+    },
+    {
+      label: cultivation.names.DELETE_CULTIVATION,
+      onClick: onDelete,
+      icon: <MdOutlineDeleteForever />,
+      disabled: disabled?.includes(cultivation.names.DELETE_CULTIVATION),
     },
   ];
 

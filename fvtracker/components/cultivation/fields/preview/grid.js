@@ -153,7 +153,7 @@ const FieldCells = ({
           return;
         }
         if (seedMode && cropVariety) {
-          return hanleCropVarietyClick(cropVariety);
+          return hanleCropVarietyClick({ cropVariety, x, y });
         }
         if (!active && color === "") {
           handleEmptyClick(x, y);

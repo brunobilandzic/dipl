@@ -338,6 +338,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
                   cultivationId: selectedCultivation?._id,
                 },
               )}
+              field={selectedField}
             />
           </>
         )}

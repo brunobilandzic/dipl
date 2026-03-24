@@ -16,7 +16,9 @@ export function HarvestingModal({
   cultivation,
   cultivationCells,
   caDims,
+  field
 }) {
+  const fields = useSelector((state) => state.fields);
   const [newHarvest, setNewHarvest] = useState({});
   const [chooseNewEnd, setChooseNewEnd] = useState(initialChooseNewEnd);
 

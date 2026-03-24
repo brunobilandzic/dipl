@@ -213,6 +213,13 @@ export function HarvestingModal({
     },
   ];
 
+  const onChoosePlan = (plan) => {
+    setNewHarvest((prev) => ({
+      ...prev,
+      harvestingPlan: plan,
+    }));
+  };
+
   return (
     <>
       <Modal title="Berba" isOpen={isOpen} onCancel={onCancel}>

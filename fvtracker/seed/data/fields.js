@@ -31,8 +31,8 @@ export const optimizedParams = {
   width: 100,
   length: 100,
   min_ca_dim: 10,
-  max_ca_dim: 60,
-  gap: 2,
+  max_ca_dim: 100,
+  gap: 1,
   cultivationAreas: [],
   location: {
     latitude: 43.67028,

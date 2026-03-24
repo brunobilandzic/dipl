@@ -13,6 +13,8 @@ export function HarvestingModal({
 }) {
   const [newHarvest, setNewHarvest] = useState({});
   console.log("HarvestingModal rendered with cultivation:", cultivation);
+
+  // set harvest when cult id
   useEffect(() => {
     if (!cultivation?._id) return;
 
@@ -23,6 +25,25 @@ export function HarvestingModal({
     );
   }, [cultivation?._id]);
 
+  // BEGIN LOGIC
+
+  const isBeginSelected = () =>
+    !!(
+      typeof newHarvest.beginX === "number" &&
+      typeof newHarvest.beginY === "number"
+    );
+
+  const handleBeginSelection = ({ x, y }) => {
+    setNewHarvest((prev) => ({
+      ...prev,
+      beginX: x,
+      beginY: y,
+      toHarvestCells: [...(prev.toHarvestCells ?? []), `${x},${y}`],
+    }));
+  };
+
+  // RESETING LOGIC
+
   const reset = () => {
     setNewHarvest(
       initialNewHarvest_WId
@@ -31,13 +52,28 @@ export function HarvestingModal({
     );
   };
 
+  const removeBegin = () => {
+    setNewPlantage((prev) => ({
+      ...prev,
+      beginX: null,
+      beginY: null,
+    }));
+  };
+
   const handleNotPlanted = (x, y) => {
     alert("Polje nije zasađeno, nije moguće žeti");
   };
 
-  const hanleCropVarietyClick = ({ cropVariety, x, y }) => {
-    const cellCoord = `${x},${y}`;
+  const handleCropVarietyClick = ({ cropVariety, x, y }) => {
     console.log("Clicked on cell with coordinates:", cropVariety, cellCoord);
+    /* if (isBeginSelected() && newPlantage.toPlantCells?.length > 0) {
+      showChooseNewEnd({
+        x,
+        y,
+      });
+    } else {
+      onBeginPlantingCoordinates({ x, y });
+    } */
   };
 
   return (
@@ -61,7 +97,7 @@ export function HarvestingModal({
               seedMode={true}
               toPlantCells={newHarvest?.toHarvestCells}
               handleNotPlanted={handleNotPlanted}
-              hanleCropVarietyClick={hanleCropVarietyClick}
+              handleCropVarietyClick={handleCropVarietyClick}
             />
           </div>
         </div>

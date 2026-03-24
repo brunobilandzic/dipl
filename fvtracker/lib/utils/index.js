@@ -54,6 +54,7 @@ import {
   getFieldsHarvestingPlans,
   getFieldPlans,
 } from "./plans";
+import { getHarvestCellsRect } from "./harvest";
 
 export default {
   objects: {
@@ -122,5 +123,8 @@ export default {
     getFieldsPlantingPlans,
     getFieldsHarvestingPlans,
     getFieldPlans,
+  },
+  harvest: {
+    getHarvestCellsRect,
   },
 };

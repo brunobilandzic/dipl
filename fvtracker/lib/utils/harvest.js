@@ -1,4 +1,4 @@
-export const getHarvestRect = ({
+export const getHarvestCellsRect = ({
   beginX,
   beginY,
   endX,
@@ -6,7 +6,7 @@ export const getHarvestRect = ({
   cultivationCells,
   cropVarietyId,
 }) => {
-  const rect = [];
+  const rectCells = [];
 
   const minX = Math.min(beginX, endX);
   const maxX = Math.max(beginX, endX);
@@ -17,12 +17,13 @@ export const getHarvestRect = ({
     for (let y = minY; y <= maxY; y++) {
       const cellCoord = `${x},${y}`;
       const cell = cultivationCells.find((c) => c.relativeCoords === cellCoord);
-      const cellCropVarietyId = cell?.plantedCropVariety?.cropVariety?._id;
+      const cellCropVarietyId =
+        cell?.plantingPlanItem?.cropVariety?._id?.toString();
       if (cell && cellCropVarietyId === cropVarietyId) {
-        rect.push(cellCoord);
+        rectCells.push(cellCoord);
       }
     }
   }
 
-  return rect;
+  return rectCells;
 };

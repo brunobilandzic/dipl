@@ -29,6 +29,7 @@ export default {
     MANAGE_SEEDING: "Upravljaj sadnjom",
     EDIT_INFO: "Uredi informacije",
     DELETE_CULTIVATION: "Obriši kultivaciju",
+    HARVEST_CELLS: "Žetva ćelija",
   },
   menuModes: {
     EDIT: "EDIT",

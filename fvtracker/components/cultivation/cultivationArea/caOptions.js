@@ -5,12 +5,21 @@ import {
   MdAdUnits,
   MdArrowLeft,
   MdDeleteOutline,
+  MdFoodBank,
   MdInfoOutline,
   MdOutlineDeleteForever,
   MdOutlineViewColumn,
 } from "react-icons/md";
 
-export default function CAOptions({ onBack, onCultivate, disabled, onEdit, onDelete, onPlant }) {
+export default function CAOptions({
+  onBack,
+  onCultivate,
+  disabled,
+  onEdit,
+  onDelete,
+  onPlant,
+  onHarvest,
+}) {
   const options = [
     {
       label: "Back to field",
@@ -40,6 +49,12 @@ export default function CAOptions({ onBack, onCultivate, disabled, onEdit, onDel
       onClick: onDelete,
       icon: <MdOutlineDeleteForever />,
       disabled: disabled?.includes(cultivation.names.DELETE_CULTIVATION),
+    },
+    {
+      label: cultivation.names.HARVEST_CELLS,
+      onClick: onHarvest,
+      icon: <MdFoodBank />,
+      disabled: disabled?.includes(cultivation.names.HARVEST_CELLS),
     },
   ];
 

@@ -3,12 +3,11 @@
 import Link from "next/link";
 import roleitems from "./roleitems";
 import { useSession } from "next-auth/react";
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "@/store/userSlice";
-import api from "@/lib/api";
-import { setFields } from "@/store/cultivation";
 import { refreshFields } from "@/lib/utils/fields";
+import { refreshGeneralManager } from "@/lib/utils/generalManager";
 
 export default {
   roleitems,
@@ -56,6 +55,7 @@ function NavItems() {
         refreshFields({ dispatch });
       }
       if (managerModelName === "GeneralManager") {
+        refreshGeneralManager({ dispatch });
         console.log("General manager logged in, fetching role requests...");
       }
     }

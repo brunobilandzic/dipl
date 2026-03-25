@@ -7,7 +7,7 @@ const roleRequestSchema = new Schema({
     ref: "GeneralManager",
     required: true,
   },
-  requestManager: {
+  rootManager: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "RootManager",
     required: true,

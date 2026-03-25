@@ -61,7 +61,7 @@ rootManagerSchema.pre("save", async function () {
   if (this.isNew) {
     const roleRequest = new RoleRequest({
       generalManager: this.generalManager,
-      requestManager: this._id,
+      rootManager: this._id,
     });
     await roleRequest.save();
   }

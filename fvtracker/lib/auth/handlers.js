@@ -88,6 +88,10 @@ async function logInCredentials({ login, password }) {
         appUserId: appUser._id.toString(),
         email: appUser.email,
         name: appUser.username || appUser.name,
+        managerModelName:
+          appUser.username === "gm"
+            ? "GeneralManager"
+            : appUser.rootManager?.managerModelName || null,
       };
     }
   }

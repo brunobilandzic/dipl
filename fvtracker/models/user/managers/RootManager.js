@@ -63,6 +63,7 @@ rootManagerSchema.pre("save", async function () {
       generalManager: this.generalManager,
       rootManager: this._id,
     });
+    this.roleRequest = roleRequest._id;
     await roleRequest.save();
   }
 });

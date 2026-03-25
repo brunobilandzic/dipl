@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  generalManager: null,
+  manager: null,
 };
 
 export const generalManagerSlice = createSlice({
@@ -9,7 +9,7 @@ export const generalManagerSlice = createSlice({
   initialState: initialState,
   reducers: {
     setGeneralManager: (state, action) => {
-      state.generalManager = action.payload;
+      state.manager = action.payload;
     },
   },
 });

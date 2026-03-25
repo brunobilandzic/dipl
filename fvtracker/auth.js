@@ -24,7 +24,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           type: "text",
           placeholder: "Email ili username",
         },
-        password: { label: "Password", type: "password" },
+        password: { label: "Lozinka", type: "password" },
       },
       async authorize(credentials, req) {
         console.log("Authorizing with credentials:", credentials);

@@ -18,6 +18,8 @@ export const createGeneralManager = async () => {
     appUser: generalManagerAppUser._id,
   });
 
+  await generalManager.save();
+
   const rootManager = new RootManager({
     appUser: generalManagerAppUser._id,
     managerModelName: "GeneralManager",

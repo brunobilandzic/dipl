@@ -1,3 +1,4 @@
+import { RoleRequest } from "@/models/documents/requests/RoleRequest";
 import mongoose from "mongoose";
 
 const { Schema } = mongoose;
@@ -19,6 +20,10 @@ const rootManagerSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "AppUser",
     required: true,
+  },
+  roleRequest: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "RoleRequest",
   },
   generalManager: {
     type: mongoose.Schema.Types.ObjectId,
@@ -50,9 +55,18 @@ const rootManagerSchema = new Schema({
   ],
 });
 
-
+rootManagerSchema.pre("save", async function () {
+  console.log("Creating Role Request for new Root Manager");
+  console.log(this._doc);
+  if (this.isNew) {
+    const roleRequest = new RoleRequest({
+      generalManager: this.generalManager,
+      requestManager: this._id,
+    });
+    await roleRequest.save();
+  }
+});
 
 export const RootManager =
   mongoose.models.RootManager ||
   mongoose.model("RootManager", rootManagerSchema);
-

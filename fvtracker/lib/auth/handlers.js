@@ -1,6 +1,8 @@
 import dbConnect from "@/lib/db/mongooseConnect";
 import models from "@/models";
 import bcrypt from "bcrypt";
+import { GENERAL_MANAGER_USERNAME } from "../constants/users/managersUsernameModel";
+import { GENERAL_MANAGER } from "../constants/users/managerTypes";
 
 export async function handleOAuth({ email, given_name, family_name }) {
   await dbConnect();

@@ -14,6 +14,7 @@ import { createManager } from "@/seed/users/manager";
 import { createAdmin } from "./admin";
 import { RootManager } from "@/models/user/managers/RootManager";
 import { GeneralManager } from "@/models/user/managers/GeneralManager";
+import { GENERAL_MANAGER_USERNAME } from "@/lib/constants/users/managersUsernameModel";
 
 const check = async () => {
   await dbConnect();
@@ -40,7 +41,9 @@ export default async () => {
   // Now create other app users
   const promises = [];
   for (const appUserData of appUsersJsonArray) {
-    if (!["gm", "admin.admin"].includes(appUserData.username))
+    if (
+      ![GENERAL_MANAGER_USERNAME, "admin.admin"].includes(appUserData.username)
+    )
       promises.push(createAppUser(appUserData, generalManager._id));
   }
 
@@ -80,10 +83,10 @@ export const createAppUser = async (appUserData, generalManagerId) => {
   const appUser = new AppUser(appUserData);
   const username = appUser.username;
   await appUser.save();
-  
+
   if (
     username in usersConstants.usernameToModel &&
-    username !== "gm" &&
+    username !== GENERAL_MANAGER_USERNAME &&
     username !== "admin.admin"
   ) {
     // now we have to crate a root manager and specific manager

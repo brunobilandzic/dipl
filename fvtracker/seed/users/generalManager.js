@@ -3,12 +3,14 @@ import dbConnect from "@/lib/db/mongooseConnect";
 import appUsersJsonArray from "@/seed/data/appUsers";
 import { GeneralManager } from "@/models/user/managers/GeneralManager";
 import { RootManager } from "@/models/user/managers/RootManager";
+import { GENERAL_MANAGER_USERNAME } from "@/lib/constants/users/managersUsernameModel";
+import { GENERAL_MANAGER } from "@/lib/constants/users/managerTypes";
 
 export const createGeneralManager = async () => {
   await dbConnect();
 
   const generalManagerData = appUsersJsonArray.find(
-    (user) => user.username === "gm",
+    (user) => user.username === GENERAL_MANAGER_USERNAME,
   );
 
   const generalManagerAppUser = new AppUser(generalManagerData);
@@ -22,7 +24,7 @@ export const createGeneralManager = async () => {
 
   const rootManager = new RootManager({
     appUser: generalManagerAppUser._id,
-    managerModelName: "GeneralManager",
+    managerModelName: GENERAL_MANAGER,
     generalManager: generalManager._id,
   });
   await rootManager.save();

@@ -1,6 +1,14 @@
+import {
+  GENERAL_MANAGER_USERNAME,
+  CULTIVATION_MANAGER_USERNAME,
+  PRODUCTION_MANAGER_USERNAME,
+  WAREHOUSE_MANAGER_USERNAME,
+  FINANCIAL_MANAGER_USERNAME,
+} from "@/lib/constants/users/managersUsernameModel";
+
 const appUsersJsonArray = [
   {
-    username: "gm",
+    username: GENERAL_MANAGER_USERNAME,
     modelName: "GeneralManager",
     name: "General",
     surname: "Manager",
@@ -18,7 +26,7 @@ const appUsersJsonArray = [
     provider: "credentials",
   },
   {
-    username: "cm",
+    username: CULTIVATION_MANAGER_USERNAME,
     modelName: "CultivationManager",
     sector: "Cultivation",
     name: "Cultivation",
@@ -28,7 +36,7 @@ const appUsersJsonArray = [
     provider: "credentials",
   },
   {
-    username: "fm",
+    username: FINANCIAL_MANAGER_USERNAME,
     modelName: "FinancialManager",
     sector: "Financial",
     name: "Financial",
@@ -38,7 +46,7 @@ const appUsersJsonArray = [
     provider: "credentials",
   },
   {
-    username: "pm",
+    username: PRODUCTION_MANAGER_USERNAME,
     modelName: "ProductionManager",
     sector: "Production",
     name: "Production",
@@ -48,7 +56,7 @@ const appUsersJsonArray = [
     provider: "credentials",
   },
   {
-    username: "wm",
+    username: WAREHOUSE_MANAGER_USERNAME,
     modelName: "WarehouseManager",
     sector: "Warehouse",
     name: "Warehouse",

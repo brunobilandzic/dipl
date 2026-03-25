@@ -39,7 +39,7 @@ export default function PlanPageComponent({ slug, plant = true }) {
   const refreshFields = async () => {
     try {
       const res = await api.get("/cultivation/fields");
-      if (res.data?.fields) {
+      if (res.data?.fields && Array.isArray(res.data.fields) && res.data.fields.length > 0) {
         dispatch(setFields(res.data.fields));
       }
     } catch (error) {

@@ -35,7 +35,12 @@ export function HarvestingModal({
   const refreshFields = async () => {
     try {
       const res = await api.get("/cultivation/fields");
-      if (res.data && res.data.fields) {
+      if (
+        res.data &&
+        res.data.fields &&
+        Array.isArray(res.data.fields) &&
+        res.data.fields.length > 0
+      ) {
         dispatch(setFields(res.data.fields));
         setAllFieldPlans(getPlans(res.data.fields));
       }

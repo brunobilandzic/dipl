@@ -31,7 +31,12 @@ export function FieldsList({}) {
     (async () => {
       try {
         const res = await axios.get("/api/cultivation/fields");
-        if (res.data && res.data.fields) {
+        if (
+          res.data &&
+          res.data.fields &&
+          Array.isArray(res.data.fields) &&
+          res.data.fields.length > 0
+        ) {
           dispatch(setFields(res.data.fields));
         }
       } catch (error) {

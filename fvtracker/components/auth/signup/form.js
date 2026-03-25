@@ -122,7 +122,7 @@ const inputs = [
 ];
 
 const testSignUpData = {
-  email: "brunobilandzic98@gmail.com",
+  email: `${new Date().getTime()}@example.com`,
   username: "brunobilandzic",
   name: "Bruno",
   surname: "Bilandžić",

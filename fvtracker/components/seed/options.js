@@ -5,8 +5,11 @@ import { FaUserPlus } from "react-icons/fa";
 import { MdAllInclusive, MdDeleteForever, MdFoodBank } from "react-icons/md";
 import SEED_TYPES from "@/seed/seedTypes";
 import { OptionButtons } from "../layout/buttons/options";
+import { useDispatch } from "react-redux";
+import { setLoading } from "@/store/loading";
 
 export default function SeedOptions() {
+  const dispatch = useDispatch();
   const deleteDB = async () => {
     try {
       const response = await axios.delete("/api/delete");
@@ -55,10 +58,10 @@ export default function SeedOptions() {
   const API = async (seedType) => {
     try {
       console.log(`Seeding ${seedType}...`);
-
+      dispatch(setLoading(true));
       const response = await axios.post("/api/seed", { seedType });
       console.log(response.data);
-
+      dispatch(setLoading(false));
       alert(`${seedType} uspješno dovršeno\n${response.data.message}`);
     } catch (error) {
       console.error("Error seeding data:", error);

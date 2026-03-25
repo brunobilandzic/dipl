@@ -1,6 +1,6 @@
 import { usernameToModel, modelToUsername } from "./managersUsernameModel";
 
-const ROLE_STATUSES = {
+export const ROLE_STATUSES = {
   PENDING: "PENDING",
   APPROVED: "APPROVED",
   REJECTED: "REJECTED",

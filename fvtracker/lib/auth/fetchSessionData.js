@@ -1,6 +1,7 @@
 import { auth } from "@/auth";
 import { AppUser } from "@/models/user/AppUser";
 import mongoose from "mongoose";
+import { GENERAL_MANAGER } from "../constants/users/managerTypes";
 
 export async function fetchSessionAppUser() {
   const email = await fetchSessionEmail();
@@ -30,9 +31,14 @@ export async function fetchSessionSpecificManager({
   throwError = true,
 }) {
   const appUser = await fetchSessionAppUser();
-  const specificManager = await mongoose.models[managerName].findOne({
-    rootManager: appUser.rootManager,
-  });
+  let specificManager;
+  if (managerName === GENERAL_MANAGER) {
+    specificManager = await mongoose.models[managerName].findOne();
+  } else {
+    specificManager = await mongoose.models[managerName].findOne({
+      rootManager: appUser.rootManager,
+    });
+  }
   if (!specificManager) {
     if (throwError) {
       throw new Error(

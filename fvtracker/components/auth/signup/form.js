@@ -2,8 +2,14 @@
 
 import React, { useState, useEffect } from "react";
 import styles from "@/components/form/form.module.css";
-import { AppInput } from "@/components/form/inputs";
+import { AppInput, AppSelect } from "@/components/form/inputs";
 import { signIn } from "next-auth/react";
+import {
+  CULTIVATION_MANAGER,
+  FINANCIAL_MANAGER,
+  PRODUCTION_MANAGER,
+  WAREHOUSE_MANAGER,
+} from "@/lib/constants/users/managerTypes";
 
 function SignUpForm(_signUpData = null) {
   console.log("SignUpForm props", _signUpData);
@@ -51,6 +57,15 @@ function SignUpForm(_signUpData = null) {
             </div>
           );
         })}
+        <AppSelect
+          name="role"
+          label="Uloga"
+          options={roleOptions}
+          value={signUpData.role || ""}
+          onChange={(e) =>
+            setSignUpData((prev) => ({ ...prev, role: e.target.value }))
+          }
+        />
       </div>
       <div className={`${styles.footer}       flex justify-center`}>
         <div className={`btn submitButton btnLg`} onClick={onSubmit}>
@@ -62,6 +77,13 @@ function SignUpForm(_signUpData = null) {
 }
 
 export default SignUpForm;
+
+const roleOptions = [
+  { value: CULTIVATION_MANAGER, label: "Menadžer kultivacije" },
+  { value: PRODUCTION_MANAGER, label: "Menadžer proizvodnje" },
+  { value: WAREHOUSE_MANAGER, label: "Menadžer skladišta" },
+  { value: FINANCIAL_MANAGER, label: "Financijski menadžer" },
+];
 
 const inputs = [
   {

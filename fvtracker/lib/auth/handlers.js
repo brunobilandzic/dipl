@@ -38,6 +38,7 @@ async function signUpCredentials({
   surname,
   password,
   passwordConfirm,
+  requestedRole,
 }) {
   console.log("Signing up user with email:", email);
   const existingUser = await AppUser.findOne({ email });

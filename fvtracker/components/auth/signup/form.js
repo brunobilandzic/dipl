@@ -58,12 +58,15 @@ function SignUpForm(_signUpData = null) {
           );
         })}
         <AppSelect
-          name="role"
+          name="requestedRole"
           label="Uloga"
           options={roleOptions}
-          value={signUpData.role || ""}
+          value={signUpData.requestedRole || ""}
           onChange={(e) =>
-            setSignUpData((prev) => ({ ...prev, role: e.target.value }))
+            setSignUpData((prev) => ({
+              ...prev,
+              requestedRole: e.target.value,
+            }))
           }
         />
       </div>
@@ -125,4 +128,5 @@ const testSignUpData = {
   surname: "Bilandžić",
   password: "test1234",
   passwordConfirm: "test1234",
+  requestedRole: "",
 };

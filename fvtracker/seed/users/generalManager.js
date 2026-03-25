@@ -8,7 +8,7 @@ export const createGeneralManager = async () => {
   await dbConnect();
 
   const generalManagerData = appUsersJsonArray.find(
-    (user) => user.username === "general.manager",
+    (user) => user.username === "gm",
   );
 
   const generalManagerAppUser = new AppUser(generalManagerData);

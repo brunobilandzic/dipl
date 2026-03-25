@@ -2,7 +2,6 @@ import dbConnect from "@/lib/db/mongooseConnect";
 import models from "@/models";
 import bcrypt from "bcrypt";
 
-
 export async function handleOAuth({ email, given_name, family_name }) {
   await dbConnect();
   const appUser = await models.user.AppUser.findOne({ email });
@@ -71,7 +70,9 @@ async function signUpCredentials({
 
 async function logInCredentials({ login, password }) {
   login = login.trim().toLowerCase();
-  let appUser = await models.user.AppUser.findOne({ email: login }).populate("rootManager");
+  let appUser = await models.user.AppUser.findOne({ email: login }).populate(
+    "rootManager",
+  );
   if (!appUser) {
     appUser = await models.user.AppUser.findOne({ username: login }).populate(
       "rootManager",
@@ -84,6 +85,7 @@ async function logInCredentials({ login, password }) {
   if (appUser) {
     const authorized = await bcrypt.compare(password, appUser.password);
     if (authorized) {
+      console.log("User authorized:", appUser.email);
       return {
         appUserId: appUser._id.toString(),
         email: appUser.email,

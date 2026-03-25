@@ -1,4 +1,5 @@
 const { Schema } = require("mongoose");
+import mongoose from "mongoose";
 
 const roleRequestSchema = new Schema({
   generalManager: {

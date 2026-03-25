@@ -28,7 +28,7 @@ import {
   getMinValuesFromPlanted,
 } from "./cultivationAreas";
 import { numbersInRanges } from "./formValidation";
-import { extractCoords } from "./fields";
+import { extractCoords, refreshFields } from "./fields";
 import {
   getCUSCells,
   relativeToFieldCoords,
@@ -89,6 +89,7 @@ export default {
     },
     fields: {
       extractCoords,
+      refreshFields,
     },
     cultivations: {
       getCUSCells,

@@ -22,7 +22,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         login: {
           label: "Email ili username",
           type: "text",
-          placeholder: "unesite email ili username",
+          placeholder: "Email ili username",
         },
         password: { label: "Password", type: "password" },
       },

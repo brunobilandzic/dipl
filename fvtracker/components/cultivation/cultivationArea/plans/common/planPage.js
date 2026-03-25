@@ -3,14 +3,13 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
-import api from "@/lib/api";
 import { Loading } from "@/components/layout/loading";
-import { setFields } from "@/store/cultivation";
 import {
   PlanDates,
   PlantingPlanItems,
 } from "@/components/cultivation/cultivationArea/plans/planting/plan/planItem";
 import { FillPlanInfo } from "@/components/cultivation/cultivationArea/plans/planting/plan/create";
+import { refreshFields } from "@/lib/utils/fields";
 
 const findPlanFromFields = ({ fields, slug, plant = true }) => {
   if (!fields || fields.length === 0) return null;
@@ -36,23 +35,9 @@ export default function PlanPageComponent({ slug, plant = true }) {
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
 
-  const refreshFields = async () => {
-    try {
-      const res = await api.get("/cultivation/fields");
-      if (res.data?.fields && Array.isArray(res.data.fields) && res.data.fields.length > 0) {
-        dispatch(setFields(res.data.fields));
-      }
-    } catch (error) {
-      console.log("Error fetching fields:", error);
-      const errorMessage =
-        error.response?.data?.message || error.message || "Nepoznata greška";
-      alert(`Greška pri dohvaćanju polja: ${errorMessage}`);
-    }
-  };
-
   useEffect(() => {
     if (fields && fields.length > 0) return;
-    refreshFields();
+    refreshFields({ dispatch });
   }, [fields]);
 
   const foundData = useMemo(() => {
@@ -116,7 +101,7 @@ export default function PlanPageComponent({ slug, plant = true }) {
             initialPlan={plan}
             submitButtonLabel="Spremi promjene"
             onSaved={async () => {
-              await refreshFields();
+              await refreshFields({ dispatch });
               setIsEditing(false);
             }}
           />

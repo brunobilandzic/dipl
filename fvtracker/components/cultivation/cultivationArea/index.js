@@ -19,6 +19,7 @@ import cultivation from "@/lib/constants/cultivation";
 import { EditCultivation } from "./editCultivation";
 import { SeedingModal } from "@/components/cultivation/cultivationArea/planting/seedingModal";
 import { HarvestingModal } from "@/components/cultivation/cultivationArea/harvesting/harvestingModal";
+import { refreshFields } from "@/lib/utils/fields";
 
 export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const dispatch = useDispatch();
@@ -92,19 +93,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
         }
       }
       if (!selectedField) {
-        try {
-          const res = await api.get(`/cultivation/fields`, {
-            params: {
-              slug: fieldSlug,
-            },
-          });
-          dispatch(selectField(res.data.field));
-        } catch (error) {
-          handleError({
-            ...error,
-            generalMessage: "Neuspjelo učitavanje polja sa servera",
-          });
-        }
+        await refreshFields({ dispatch });
       }
     };
     fillSelectedField();

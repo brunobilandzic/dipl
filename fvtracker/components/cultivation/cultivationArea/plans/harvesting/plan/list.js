@@ -9,40 +9,22 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
 import { FieldPlansItem } from "@/components/cultivation/cultivationArea/plans/planting/plan/list";
+import { refreshFields } from "@/lib/utils/fields";
 
 const HarvestingPlanList = () => {
   const fields = useSelector((state) => state.cultivation.fields);
   const dispatch = useDispatch();
 
-  const refreshFields = async () => {
-    try {
-      const res = await api.get("/cultivation/fields");
-      if (
-        res.data &&
-        res.data.fields &&
-        Array.isArray(res.data.fields) &&
-        res.data.fields.length > 0
-      ) {
-        dispatch(setFields(res.data.fields));
-      }
-    } catch (error) {
-      console.log("Error fetching fields:", error);
-      const errorMessage =
-        error.response?.data?.message || error.message || "Nepoznata greška";
-      alert(`Greška pri dohvaćanju polja: ${errorMessage}`);
-    }
-  };
-
   useEffect(() => {
     if (fields && fields.length > 0) return;
 
-    refreshFields();
+    refreshFields({ dispatch });
   }, [fields]);
 
   const deletePlans = async () => {
     try {
-      const res = await api.delete("/cultivation/harvest/plan", {});
-      refreshFields();
+      await api.delete("/cultivation/harvest/plan", {});
+      refreshFields({ dispatch });
     } catch (error) {
       handleError({
         ...error,

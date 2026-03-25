@@ -10,6 +10,9 @@ const generalManagerSchema = new Schema({
   managers: [
     { type: mongoose.Schema.Types.ObjectId, ref: "RootManager", default: [] },
   ],
+  roleRequests: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "RoleRequest", default: [] },
+  ],
   employmentRequests: [
     {
       type: mongoose.Schema.Types.ObjectId,

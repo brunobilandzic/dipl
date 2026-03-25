@@ -7,28 +7,31 @@ export default {
   ],
   GeneralManager: [
     {
-      label: "odjeli",
-      submenu: [
-        { label: "kultivacija", path: "/odjeli/kultivacija" },
-        { label: "procesuiranje", path: "/odjeli/procesuiranje" },
-        { label: "skladištenje", path: "/odjeli/skladistenje" },
-        { label: "prodaja", path: "/odjeli/prodaja" },
-      ],
+      label: "pregled",
+      path: "/pregled",
     },
     {
       label: "menadžeri",
       submenu: [
-        { label: "lista", path: "/menadzeri/lista" },
-        { label: "postavljanje", path: "/menadzeri/postavljanje" },
+        { label: "pregled", path: "/menadzeri" },
+        { label: "zahtjevi", path: "/menadzeri/zahtjevi" },
       ],
     },
     {
       label: "radnici",
-      path: "/radnici",
+      submenu: [
+        { label: "lista", path: "/radnici" },
+        { label: "zahtjevi", path: "/radnici/zahtjevi" },
+        { label: "novi radnik", path: "/radnici/novi" },
+      ],
     },
     {
       label: "nabava",
-      path: "/nabava",
+      submenu: [
+        { label: "lista", path: "/nabava/lista" },
+        { label: "zahtjevi", path: "/nabava/zahtjevi" },
+        { label: "novi dobavljač", path: "/nabava/novi" },
+      ],
     },
   ],
   CultivationManager: [
@@ -47,19 +50,20 @@ export default {
       ],
     },
     {
-      label: "kultivacija",
+      label: "radnici",
       submenu: [
-        { label: "sadnja", path: "/kultivacija/sadnja" },
-        { label: "berba", path: "/kultivacija/berba" },
+        { label: "lista", path: "/radnici" },
+        { label: "zahtjevi", path: "/radnici/zahtjevi" },
+        { label: "novi radnik", path: "/radnici/novi" },
       ],
     },
     {
-      label: "radnici",
-      path: "/radnici",
-    },
-    {
       label: "nabava",
-      path: "/nabava",
+      submenu: [
+        { label: "lista", path: "/nabava/lista" },
+        { label: "zahtjevi", path: "/nabava/zahtjevi" },
+        { label: "novi dobavljač", path: "/nabava/novi" },
+      ],
     },
   ],
   ProductionManager: [
@@ -76,12 +80,20 @@ export default {
       ],
     },
     {
-      label: "zapošljavanje",
-      path: "/zaposljavanjе",
+      label: "radnici",
+      submenu: [
+        { label: "lista", path: "/radnici" },
+        { label: "zahtjevi", path: "/radnici/zahtjevi" },
+        { label: "novi radnik", path: "/radnici/novi" },
+      ],
     },
     {
       label: "nabava",
-      path: "/nabava",
+      submenu: [
+        { label: "lista", path: "/nabava/lista" },
+        { label: "zahtjevi", path: "/nabava/zahtjevi" },
+        { label: "novi dobavljač", path: "/nabava/novi" },
+      ],
     },
   ],
   WarehouseManager: [
@@ -105,12 +117,20 @@ export default {
       path: "/otpremnice",
     },
     {
-      label: "nabava",
-      path: "/nabava",
+      label: "radnici",
+      submenu: [
+        { label: "lista", path: "/radnici" },
+        { label: "zahtjevi", path: "/radnici/zahtjevi" },
+        { label: "novi radnik", path: "/radnici/novi" },
+      ],
     },
     {
-      label: "zaposlenici",
-      path: "/zaposlenici",
+      label: "nabava",
+      submenu: [
+        { label: "lista", path: "/nabava/lista" },
+        { label: "zahtjevi", path: "/nabava/zahtjevi" },
+        { label: "novi dobavljač", path: "/nabava/novi" },
+      ],
     },
   ],
   FinanceManager: [
@@ -125,6 +145,23 @@ export default {
     {
       label: "izvještaji",
       path: "/izvjestaji",
+    },
+    ,
+    {
+      label: "radnici",
+      submenu: [
+        { label: "lista", path: "/radnici" },
+        { label: "zahtjevi", path: "/radnici/zahtjevi" },
+        { label: "novi radnik", path: "/radnici/novi" },
+      ],
+    },
+    {
+      label: "nabava",
+      submenu: [
+        { label: "lista", path: "/nabava/lista" },
+        { label: "zahtjevi", path: "/nabava/zahtjevi" },
+        { label: "novi dobavljač", path: "/nabava/novi" },
+      ],
     },
   ],
 };

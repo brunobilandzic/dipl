@@ -11,7 +11,7 @@ export default {
       path: "/pregled",
     },
     {
-      label: "menadžeri",
+      label: "menadzeri",
       submenu: [
         { label: "pregled", path: "/menadzeri" },
         { label: "zahtjevi", path: "/menadzeri/zahtjevi" },

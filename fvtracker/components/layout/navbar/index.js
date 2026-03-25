@@ -6,6 +6,8 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "@/store/userSlice";
+import api from "@/lib/api";
+import { setFields } from "@/store/cultivation";
 
 export default {
   roleitems,
@@ -43,10 +45,34 @@ function NavItems() {
   const [items, setItems] = useState([]);
   const dispatch = useDispatch();
 
+  const refreshFields = async () => {
+    try {
+      const res = await api.get("/cultivation/fields");
+      if (
+        res.data &&
+        res.data.fields &&
+        Array.isArray(res.data.fields) &&
+        res.data.fields.length > 0
+      ) {
+        dispatch(setFields(res.data.fields));
+      }
+    } catch (error) {
+      console.log("Error fetching fields:", error);
+      const errorMessage =
+        error.response?.data?.message || error.message || "Nepoznata greška";
+      alert(`Greška pri dohvaćanju polja: ${errorMessage}`);
+    }
+  };
+
   useEffect(() => {
     if (status === "authenticated" && session.user?.managerModelName) {
+      const managerModelName = session.user.managerModelName;
+      console.log("User authenticated with manager model:", managerModelName);
       setManagerModelName(session.user?.managerModelName);
       dispatch(login(session.user));
+      if (managerModelName === "CultivationManager") {
+        refreshFields();
+      }
     }
   }, [status]);
 

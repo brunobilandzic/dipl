@@ -1,8 +1,14 @@
 import dbConnect from "@/lib/db/mongooseConnect";
 import models from "@/models";
+import { AppUser } from "@/models/user/AppUser";
 import bcrypt from "bcrypt";
 import { GENERAL_MANAGER_USERNAME } from "../constants/users/managersUsernameModel";
-import { GENERAL_MANAGER } from "../constants/users/managerTypes";
+import {
+  GENERAL_MANAGER,
+  MANAGER_TYPES,
+} from "../constants/users/managerTypes";
+import { GeneralManager } from "@/models/user/managers/GeneralManager";
+import { RootManager } from "@/models/user/managers/RootManager";
 
 export async function handleOAuth({ email, given_name, family_name }) {
   await dbConnect();
@@ -40,6 +46,7 @@ async function signUpCredentials({
   passwordConfirm,
   requestedRole,
 }) {
+  console.log("Required role for new user:", requestedRole);
   console.log("Signing up user with email:", email);
   const existingUser = await AppUser.findOne({ email });
   console.log("Existing user check:", existingUser);
@@ -66,6 +73,32 @@ async function signUpCredentials({
     password: hashedPassword,
     provider: "credentials",
   });
+  if (requestedRole) {
+    // right now, app is built for only one gen manager
+    if (!MANAGER_TYPES.includes(requestedRole)) {
+      console.log("Invalid requested role:", requestedRole);
+      return null;
+    }
+    const generalManager = await GeneralManager.findOne();
+    const rootManager = await new RootManager({
+      appUser: newUser._id,
+      managerModelName: requestedRole,
+      generalManager: generalManager._id,
+    });
+
+    const specificManager = await models.user[requestedRole].create({
+      appUser: newUser._id,
+      rootManager: rootManager._id,
+    });
+
+    rootManager.specificManager = specificManager._id;
+
+    console.log("created specific manager:", specificManager);
+
+    await specificManager.save();
+    await rootManager.save();
+  }
+
   await newUser.save();
   console.log("New user created:", newUser);
   return newUser;
@@ -94,8 +127,8 @@ async function logInCredentials({ login, password }) {
         email: appUser.email,
         name: appUser.username || appUser.name,
         managerModelName:
-          appUser.username === "gm"
-            ? "GeneralManager"
+          appUser.username === GENERAL_MANAGER_USERNAME
+            ? GENERAL_MANAGER
             : appUser.rootManager?.managerModelName || null,
       };
     }

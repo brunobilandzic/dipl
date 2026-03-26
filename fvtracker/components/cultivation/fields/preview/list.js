@@ -26,26 +26,8 @@ export function FieldsList({}) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (fields && fields.length > 0) return;
-
-    (async () => {
-      try {
-        const res = await axios.get("/api/cultivation/fields");
-        if (
-          res.data &&
-          res.data.fields &&
-          Array.isArray(res.data.fields) &&
-          res.data.fields.length > 0
-        ) {
-          dispatch(setFields(res.data.fields));
-        }
-      } catch (error) {
-        console.log("Error fetching fields:", error);
-        const errorMessage =
-          error.response?.data?.message || error.message || "Nepoznata greška";
-        alert(`Greška pri dohvaćanju polja: ${errorMessage}`);
-      }
-    })();
+    if (fields) return;
+    refreshFields({ dispatch });
   }, [fields]);
 
   if (!fields || fields.length === 0)

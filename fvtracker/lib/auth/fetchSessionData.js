@@ -32,7 +32,9 @@ export async function fetchSessionSpecificManager({
 }) {
   const appUser = await fetchSessionAppUser();
 
-  let specificManager = await mongoose.models[managerName].findOne();
+  let specificManager = await mongoose.models[managerName].findOne({
+    rootManager: appUser.rootManager,
+  });
   console.log({ specificManager });
   if (!specificManager) {
     if (throwError) {
@@ -73,9 +75,7 @@ export async function fetchSessionSpecificManager({
     return null;
   }
 
-  const status = specificManager.rootManager.roleRequest.status;
-
-  return { ...specificManager._doc, status };
+  return specificManager;
 }
 
 export async function fetchGeneralAndOtherManagers({ managerNames = [] }) {

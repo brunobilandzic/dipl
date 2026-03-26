@@ -2,6 +2,7 @@ import dbConnect from "@/lib/db/mongooseConnect";
 import auth from "@/lib/auth";
 import cultivation from "@/lib/cultivation";
 import { Field } from "@/models/sectors/cultivation/Field";
+import { ROLE_STATUSES } from "@/lib/constants/users";
 
 export async function GET(request) {
   try {
@@ -11,6 +12,12 @@ export async function GET(request) {
     const cultivationManager = await auth.session.specificManager({
       managerName: "CultivationManager",
     });
+    if (!cultivationManager.status !== ROLE_STATUSES.APPROVED) {
+      return Response.json(
+        { error: "Role request is not approved" },
+        { status: 401 },
+      );
+    }
     await cultivationManager.populate({
       path: "fields",
       populate: [

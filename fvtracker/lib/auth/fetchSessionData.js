@@ -33,7 +33,7 @@ export async function fetchSessionSpecificManager({
   const appUser = await fetchSessionAppUser();
 
   let specificManager = await mongoose.models[managerName].findOne();
-
+  console.log({ specificManager });
   if (!specificManager) {
     if (throwError) {
       throw new Error(
@@ -41,6 +41,10 @@ export async function fetchSessionSpecificManager({
       );
     }
     return null;
+  }
+
+  if (managerName == GENERAL_MANAGER) {
+    return specificManager;
   }
 
   if (!specificManager.rootManager) {
@@ -55,7 +59,7 @@ export async function fetchSessionSpecificManager({
   await specificManager.populate({
     path: "rootManager",
     populate: {
-      path: "roleRequests",
+      path: "roleRequest",
       select: "status",
     },
   });

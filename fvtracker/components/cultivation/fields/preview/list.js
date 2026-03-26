@@ -21,6 +21,9 @@ import { Loading } from "@/components/layout/loading";
 import { useRouter } from "next/navigation";
 import { FieldStatistics } from "../general";
 import { refreshFields } from "@/lib/utils/fields";
+import api from "@/lib/api";
+import handleError from "@/lib/constants/errors/client/handleError";
+import { setLoading } from "@/store/loading";
 
 export function FieldsList({}) {
   const fields = useSelector((state) => state.cultivation.fields);
@@ -31,7 +34,7 @@ export function FieldsList({}) {
     refreshFields({ dispatch });
   }, [fields]);
 
-  if (!fields || fields.length === 0)
+  if (!fields)
     return (
       <div className="w-full h-screen flex items-center justify-center">
         <Loading />
@@ -53,6 +56,7 @@ export function FieldsList({}) {
 
 function FieldItem({ field }) {
   const router = useRouter();
+  const dispatch = useDispatch();
   if (!field) return null;
   const {
     name,
@@ -82,14 +86,44 @@ function FieldItem({ field }) {
       : [],
   );
 
+  const handleDeleteCultivation = async () => {
+    if (!confirm("Jeste li sigurni da želite obrisati ovo polje?")) {
+      return;
+    }
+    try {
+      dispatch(setLoading(true));
+      await api.delete(`/cultivation/fields/`, {
+        params: { slug },
+      });
+      dispatch(setLoading(false));
+      refreshFields({ dispatch });
+    } catch (error) {
+      handleError({
+        ...error,
+        generalMessage: "Došlo je do greške prilikom brisanja polja.",
+      });
+      dispatch(setLoading(false));
+      return;
+    }
+  };
+
   return (
     <>
       <div className="">
         <Link href={`/upravljanje-poljima/${slug}`}>
           <ListItemHeader>
-            <div className="flex justify-between w-full cursor-pointer hover:bg-gray-50 hover:dark:bg-gray-500">
+            <div className="flex justify-between w-full cursor-pointer pb-2">
               <div className="flex flex-col gap-1">
                 <div className="font-bold">{field.name}</div>
+              </div>
+              <div
+                className="cursor-pointer text-sm  px-4 cancelButton"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleDeleteCultivation();
+                }}
+              >
+                Obriši
               </div>
             </div>
           </ListItemHeader>

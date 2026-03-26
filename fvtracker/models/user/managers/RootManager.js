@@ -25,6 +25,7 @@ const rootManagerSchema = new Schema({
   roleRequest: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "RoleRequest",
+    deault: null,
   },
   generalManager: {
     type: mongoose.Schema.Types.ObjectId,
@@ -57,9 +58,7 @@ const rootManagerSchema = new Schema({
 });
 
 rootManagerSchema.pre("save", async function () {
-  console.log("Creating Role Request for new Root Manager");
   if (this.isNew && this.managerModelName !== GENERAL_MANAGER) {
-    console.log("Creating role request for manager model:", this.managerModelName);
     const roleRequest = new RoleRequest({
       generalManager: this.generalManager,
       rootManager: this._id,

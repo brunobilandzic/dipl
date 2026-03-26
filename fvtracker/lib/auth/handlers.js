@@ -132,11 +132,13 @@ async function logInCredentials({ login, password }) {
   let appUser = await models.user.AppUser.findOne({ email: login }).populate(
     "rootManager",
   );
+
   if (!appUser) {
     appUser = await models.user.AppUser.findOne({ username: login }).populate(
       "rootManager",
     );
   }
+
   if (!appUser) {
     console.log("No user found with email or username:", login);
     return null;
@@ -146,7 +148,10 @@ async function logInCredentials({ login, password }) {
       console.log("User has no Root Manager:", login);
       return appUser;
     }
-    if (!appUser.rootManager.roleRequest) {
+    if (
+      !appUser.rootManager.roleRequest &&
+      appUser.rootManager.managerModelName !== GENERAL_MANAGER
+    ) {
       console.log("User's Root Manager has no Role Request:", login);
       return null;
     }
@@ -169,11 +174,7 @@ async function logInCredentials({ login, password }) {
   return null;
 }
 
-export async function authorizeCredentials({
-  email,
-  password,
-  signUp,
-}) {
+export async function authorizeCredentials({ email, password, signUp }) {
   console.log("authorizeCredentials called with email:", email);
   // compare passwords, otherwise return null
   await dbConnect();

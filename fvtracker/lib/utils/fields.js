@@ -7,14 +7,17 @@ export const extractCoords = (cell) => {
   return { width, length };
 };
 
-export const refreshFields = async ({ dispatch }) => {
+export const refreshFields = async ({ dispatch, router }) => {
   try {
     const res = await api.get("/cultivation/fields");
     if (res.data && res.data.fields && Array.isArray(res.data.fields)) {
       dispatch(setFields(res.data.fields));
     }
   } catch (error) {
-    console.log("Error fetching fields:", error);
+    if (error.response?.status === 403) {
+      router.push("/uloga-nije-odobrena");
+      return;
+    }
     const errorMessage =
       error.response?.data?.message || error.message || "Nepoznata greška";
     alert(`Greška pri dohvaćanju polja: ${errorMessage}`);

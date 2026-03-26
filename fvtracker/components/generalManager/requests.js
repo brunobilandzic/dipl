@@ -1,7 +1,10 @@
 "use client";
 
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import api from "@/lib/api";
+import { useState, useEffect } from "react";
+import { setLoading } from "@/store/loading";
 
 export const RoleRequestList = () => {
   const generalManager = useSelector((state) => state.generalManager.manager);
@@ -34,14 +37,17 @@ const RoleRequestItem = ({ roleRequest }) => {
           <div>Zahtjev za ulogu: {requestedRoleName}</div>
         </div>
         <div>
-          <RoleRequestStatus status={roleRequest.status} />
+          <RoleRequestStatus roleRequest={roleRequest} />
         </div>
       </div>
     </>
   );
 };
 
-const RoleRequestStatus = ({ status }) => {
+const RoleRequestStatus = ({ roleRequest }) => {
+  const { status } = roleRequest;
+  const [respondMenuOpen, setRespondMenuOpen] = useState(false);
+
   let statusBackground = "bg-gray-500";
   let statusColor = "text-white";
   switch (status) {
@@ -57,11 +63,59 @@ const RoleRequestStatus = ({ status }) => {
     default:
       break;
   }
+
   return (
-    <span
-      className={`text-white w-20 text-center px-2 py-2 rounded-lg ${statusBackground} text-sm font-semibold ${statusColor}`}
-    >
-      {status}
-    </span>
+    <div className="relative text-sm font-semibold">
+      {!respondMenuOpen && (
+        <span
+          onClick={() => setRespondMenuOpen(true)}
+          className={`text-white w-20 text-center px-2 py-2 rounded-lg ${statusBackground} relative ${statusColor} cursor-pointer`}
+        >
+          {status}
+        </span>
+      )}
+      {respondMenuOpen && (
+        <div className="">
+          <RespondMenu
+            roleRequest={roleRequest}
+            setRespondMenuOpen={setRespondMenuOpen}
+          />
+        </div>
+      )}
+    </div>
+  );
+};
+
+const RespondMenu = ({ roleRequest, setRespondMenuOpen }) => {
+  const dispatch = useDispatch();
+
+  const onRespond = async (response) => {
+    try {
+      dispatch(setLoading(true));
+      await api.put(`/general-manager/role-requests/${roleRequest._id}`, {
+        response,
+      });
+      setRespondMenuOpen(false);
+    } catch (error) {
+      console.error("Error responding to role request:", error);
+      dispatch(setLoading(false));
+    }
+  };
+
+  return (
+    <div className="flex gap-2">
+      <button
+        className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
+        onClick={() => onRespond("approved")}
+      >
+        Odobri
+      </button>
+      <button
+        className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
+        onClick={() => onRespond("rejected")}
+      >
+        Odbij
+      </button>
+    </div>
   );
 };

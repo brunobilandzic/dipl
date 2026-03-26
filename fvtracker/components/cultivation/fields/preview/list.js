@@ -20,6 +20,7 @@ import { fieldCultivationAreaPoints } from "@/seed/cultivation/fields/create/ana
 import { Loading } from "@/components/layout/loading";
 import { useRouter } from "next/navigation";
 import { FieldStatistics } from "../general";
+import { refreshFields } from "@/lib/utils/fields";
 
 export function FieldsList({}) {
   const fields = useSelector((state) => state.cultivation.fields);

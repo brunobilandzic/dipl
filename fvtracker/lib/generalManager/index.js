@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { fetchSessionSpecificManager } from "../auth/fetchSessionData";
 
 export const getGeneralManager = async () => {
@@ -17,7 +18,10 @@ export const getGeneralManager = async () => {
         ],
       },
     },
+    {
+      path: "managers"
+    },
   ]);
-  
+
   return generalManager;
 };

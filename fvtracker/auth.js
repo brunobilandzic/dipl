@@ -49,6 +49,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.email = user.email;
         token.managerModelName = user.managerModelName;
         token.name = user.name;
+        token.roleStatus = user.roleStatus;
       }
 
       if (account && account.provider === "google") {
@@ -73,6 +74,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.managerModelName = token.managerModelName;
         session.user.displayName = token.displayName;
         session.user.name = token.displayName;
+        session.user.roleStatus = token.roleStatus;
       }
       return session;
     },

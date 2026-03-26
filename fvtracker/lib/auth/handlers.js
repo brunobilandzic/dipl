@@ -9,6 +9,7 @@ import {
 } from "../constants/users/managerTypes";
 import { GeneralManager } from "@/models/user/managers/GeneralManager";
 import { RootManager } from "@/models/user/managers/RootManager";
+import { ROLE_STATUSES } from "../constants/users";
 
 export async function handleOAuth({ email, given_name, family_name }) {
   await dbConnect();
@@ -31,10 +32,34 @@ export async function handleOAuth({ email, given_name, family_name }) {
 
 export async function handleCredentials(credentials) {
   await dbConnect();
-  console.log("handleCredentials called with:", credentials);
+  let user;
 
-  if (credentials.isSignUp) return signUpCredentials(credentials);
-  return logInCredentials(credentials);
+  if (credentials.isSignUp) {
+    user = await signUpCredentials(credentials);
+  } else {
+    user = await logInCredentials(credentials);
+  }
+  if (!user) {
+    return null;
+  }
+  const getManagerModelName = () => {
+    if (!user.rootManager) {
+      return null;
+    }
+    if (credentials.requestedRole === GENERAL_MANAGER) {
+      return GENERAL_MANAGER;
+    } else {
+      return user.rootManager.managerModelName;
+    }
+  };
+
+  return {
+    appUserId: user._id.toString(),
+    email: user.email,
+    managerModelName: getManagerModelName(),
+    name: user.name,
+    roleStatus: user.roleStatus,
+  };
 }
 
 async function signUpCredentials({
@@ -46,10 +71,8 @@ async function signUpCredentials({
   passwordConfirm,
   requestedRole,
 }) {
-  console.log("Required role for new user:", requestedRole);
-  console.log("Signing up user with email:", email);
   const existingUser = await AppUser.findOne({ email });
-  console.log("Existing user check:", existingUser);
+
   if (existingUser) {
     return null;
   }
@@ -61,8 +84,6 @@ async function signUpCredentials({
     );
     return null;
   }
-
-  console.log("Creating new user...");
 
   const hashedPassword = await bcrypt.hash(password, 10);
   const newUser = new AppUser({
@@ -104,15 +125,7 @@ async function signUpCredentials({
 
   await newUser.save();
   console.log("New user created:", newUser);
-  return {
-    appUserId: newUser._id.toString(),
-    email: newUser.email,
-    name: newUser.username || newUser.name,
-    managerModelName:
-      newUser.username === GENERAL_MANAGER_USERNAME
-        ? GENERAL_MANAGER
-        : requestedRole || null,
-  };
+  return { ...newUser._doc, roleStatus: ROLE_STATUSES.PENDING };
 }
 
 async function logInCredentials({ login, password }) {
@@ -130,29 +143,36 @@ async function logInCredentials({ login, password }) {
     return null;
   }
   if (appUser) {
-    const authorized = await bcrypt.compare(password, appUser.password);
-    if (authorized) {
-      console.log("User authorized:", appUser.email);
-      return {
-        appUserId: appUser._id.toString(),
-        email: appUser.email,
-        name: appUser.username || appUser.name,
-        managerModelName:
-          appUser.username === GENERAL_MANAGER_USERNAME
-            ? GENERAL_MANAGER
-            : appUser.rootManager?.managerModelName || null,
-      };
+    if (!appUser.rootManager) {
+      console.log("User has no Root Manager:", login);
+      return appUser;
     }
+    if (!appUser.rootManager.roleRequest) {
+      console.log("User's Root Manager has no Role Request:", login);
+      return null;
+    }
+    await appUser.rootManager?.populate({
+      path: "roleRequest",
+      select: "status",
+    });
+    const authorized = await bcrypt.compare(password, appUser.password);
+    if (!authorized) {
+      console.log("Incorrect password for user:", login);
+      return null;
+    }
+
+    console.log("User authorized:", appUser.email);
+    return {
+      ...appUser._doc,
+      roleStatus: appUser.rootManager?.roleRequest?.status || null,
+    };
   }
   return null;
 }
 
 export async function authorizeCredentials({
   email,
-  name,
-  surname,
   password,
-  passwordConfirm,
   signUp,
 }) {
   console.log("authorizeCredentials called with email:", email);

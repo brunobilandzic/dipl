@@ -108,13 +108,19 @@ const RespondMenu = ({ roleRequest, setRespondMenuOpen }) => {
     <div className="flex gap-2">
       <button
         className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
-        onClick={() => onRespond("approved")}
+        onClick={() => onRespond(ROLE_STATUSES.APPROVED)}
       >
         Odobri
       </button>
       <button
+        className="bg-yellow-500 text-white px-4 py-2 rounded-md hover:bg-yellow-600"
+        onClick={() => onRespond(ROLE_STATUSES.PENDING)}
+      >
+        Na čekanju
+      </button>
+      <button
         className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600"
-        onClick={() => onRespond("rejected")}
+        onClick={() => onRespond(ROLE_STATUSES.REJECTED)}
       >
         Odbij
       </button>

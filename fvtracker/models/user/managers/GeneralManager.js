@@ -13,16 +13,6 @@ const generalManagerSchema = new Schema({
   roleRequests: [
     { type: mongoose.Schema.Types.ObjectId, ref: "RoleRequest", default: [] },
   ],
-  employmentRequests: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "EmploymentRequest",
-      default: [],
-    },
-  ],
-  orderRequests: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "OrderRequest", default: [] },
-  ],
 });
 
 generalManagerSchema.method.getRoleRequests = async function () {

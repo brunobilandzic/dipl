@@ -4,39 +4,20 @@ import { Loading } from "@/components/layout/loading";
 import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
 import utils from "@/lib/utils";
-import { setFields } from "@/store/cultivation";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
 import { PlantingPlanListItem } from "@/components/cultivation/cultivationArea/plans/planting/plan/planItem";
+import { refreshFields } from "@/lib/utils/fields";
 
 const PlantingPlanList = () => {
   const fields = useSelector((state) => state.cultivation.fields);
   const dispatch = useDispatch();
 
-  const refreshFields = async () => {
-    try {
-      const res = await api.get("/cultivation/fields");
-      if (
-        res.data &&
-        res.data.fields &&
-        Array.isArray(res.data.fields) &&
-        res.data.fields.length > 0
-      ) {
-        dispatch(setFields(res.data.fields));
-      }
-    } catch (error) {
-      console.log("Error fetching fields:", error);
-      const errorMessage =
-        error.response?.data?.message || error.message || "Nepoznata greška";
-      alert(`Greška pri dohvaćanju polja: ${errorMessage}`);
-    }
-  };
-
   useEffect(() => {
-    if (fields && fields.length > 0) return;
+    if (fields & fields.length > 0) return;
 
-    refreshFields();
+    refreshFields({ dispatch });
   }, [fields]);
 
   const deletePlans = async () => {

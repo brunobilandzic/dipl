@@ -33,26 +33,6 @@ export const SeedingModal = ({
   const crops = useSelector((state) => state.cultivation.crops);
   const fields = useSelector((state) => state.cultivation.fields);
 
-  const refreshFields = async () => {
-    try {
-      const res = await api.get("/cultivation/fields");
-      if (
-        res.data &&
-        res.data.fields &&
-        Array.isArray(res.data.fields) &&
-        res.data.fields.length > 0
-      ) {
-        dispatch(setFields(res.data.fields));
-        setAllFieldPlans(getPlans(res.data.fields));
-      }
-    } catch (error) {
-      console.log("Error fetching fields:", error);
-      const errorMessage =
-        error.response?.data?.message || error.message || "Nepoznata greška";
-      alert(`Greška pri dohvaćanju polja: ${errorMessage}`);
-    }
-  };
-
   const getPlans = (fields) => {
     if (!fields || fields.length === 0) {
       console.log("No fields available to get plans from.");
@@ -65,7 +45,7 @@ export const SeedingModal = ({
   };
 
   useEffect(() => {
-    if (fields && fields.length > 0) {
+    if (fields) {
       getPlans(fields);
     }
   }, [fields]);
@@ -90,8 +70,8 @@ export const SeedingModal = ({
   }, [newPlantage?.variety, allFieldPlans]);
 
   useEffect(() => {
-    if (fields && fields.length > 0) return;
-    refreshFields();
+    if (fields) return;
+    refreshFields({ dispatch });
   }, [fields]);
 
   useEffect(() => {

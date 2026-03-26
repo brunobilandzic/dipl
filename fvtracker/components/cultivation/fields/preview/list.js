@@ -15,7 +15,7 @@ import utils from "@/lib/utils";
 import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
-import { setFields } from "@/store/cultivation";
+import { deleteField, setFields } from "@/store/cultivation";
 import { fieldCultivationAreaPoints } from "@/seed/cultivation/fields/create/analyze";
 import { Loading } from "@/components/layout/loading";
 import { useRouter } from "next/navigation";
@@ -41,6 +41,10 @@ export function FieldsList({}) {
       </div>
     );
 
+  if (fields.length === 0) {
+    return <NoFields />;
+  }
+
   return (
     <>
       <List>
@@ -53,6 +57,25 @@ export function FieldsList({}) {
     </>
   );
 }
+
+const NoFields = () => {
+  const router = useRouter();
+  return (
+    <div className="w-full py-6 flex flex-col items-center justify-center gap-6">
+      <div className="text-2xl font-bold">Nema polja za prikaz</div>
+
+      <div className="text-sm text-gray-500">
+        Početkom dodajte polje kako biste mogli pratiti svoje usjeve!{" "}
+        <span
+          className="ml-2 btn btnSm"
+          onClick={() => router.push("/upravljanje-poljima/dodavanje")}
+        >
+          Dodaj polje
+        </span>
+      </div>
+    </div>
+  );
+};
 
 function FieldItem({ field }) {
   const router = useRouter();
@@ -95,15 +118,16 @@ function FieldItem({ field }) {
       await api.delete(`/cultivation/fields/`, {
         params: { slug },
       });
-      dispatch(setLoading(false));
+      dispatch(deleteField(slug));
       refreshFields({ dispatch });
     } catch (error) {
       handleError({
         ...error,
         generalMessage: "Došlo je do greške prilikom brisanja polja.",
       });
-      dispatch(setLoading(false));
       return;
+    } finally {
+      dispatch(setLoading(false));
     }
   };
 

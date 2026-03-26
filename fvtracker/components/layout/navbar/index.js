@@ -60,7 +60,6 @@ function NavItems() {
       }
       if (managerModelName === "GeneralManager" && !generalManagerRedux) {
         refreshGeneralManager({ dispatch });
-        console.log("General manager logged in, fetching role requests...");
       }
     }
   }, [status]);

@@ -10,12 +10,7 @@ export const extractCoords = (cell) => {
 export const refreshFields = async ({ dispatch }) => {
   try {
     const res = await api.get("/cultivation/fields");
-    if (
-      res.data &&
-      res.data.fields &&
-      Array.isArray(res.data.fields) &&
-      res.data.fields.length > 0
-    ) {
+    if (res.data && res.data.fields && Array.isArray(res.data.fields)) {
       dispatch(setFields(res.data.fields));
     }
   } catch (error) {

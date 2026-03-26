@@ -16,7 +16,7 @@ const HarvestingPlanList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (fields && fields.length > 0) return;
+    if (fields) return;
 
     refreshFields({ dispatch });
   }, [fields]);
@@ -33,7 +33,7 @@ const HarvestingPlanList = () => {
     }
   };
 
-  if (!fields || fields.length === 0)
+  if (!fields)
     return (
       <div className="w-full py-4 flex items-center justify-center">
         <Loading />

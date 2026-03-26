@@ -11,6 +11,7 @@ import utils from "@/lib/utils";
 import { FieldStatistics } from "@/components/cultivation/fields/general";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { Loading } from "@/components/layout/loading";
+import { refreshFields } from "@/lib/utils/fields";
 
 export default function CreatePlantingPlanPageComonent() {
   const [selectedField, setSelectedField] = useState(null);
@@ -55,21 +56,8 @@ export const SelectField = ({
 
   useEffect(() => {
     console.log("fields in select field component", fields);
-    if (fields && fields.length > 0) return;
-
-    (async () => {
-      try {
-        const res = await api.get("/cultivation/fields");
-        if (res.data && res.data.fields) {
-          dispatch(setFields(res.data.fields));
-        }
-      } catch (error) {
-        console.log("Error fetching fields:", error);
-        const errorMessage =
-          error.response?.data?.message || error.message || "Nepoznata greška";
-        alert(`Greška pri dohvaćanju polja: ${errorMessage}`);
-      }
-    })();
+    if (fields) return;
+    refreshFields({ dispatch });
   }, [fields]);
 
   if (!fields) {

@@ -76,7 +76,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
 
   useEffect(() => {
     const fillSelectedField = async () => {
-      if (!selectedField && fields && fields.length > 0) {
+      if (!selectedField && fields) {
         try {
           const foundField = fields.find((f) => f.slug === fieldSlug);
           if (foundField) {

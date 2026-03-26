@@ -145,6 +145,7 @@ export async function GET(request) {
       }
       return Response.json({ field }, { status: 200 });
     } else {
+      console.log("fields len", cultivationManager.fields.length);
       return Response.json(
         { fields: cultivationManager.fields },
         { status: 200 },

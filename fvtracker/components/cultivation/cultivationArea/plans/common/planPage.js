@@ -36,7 +36,7 @@ export default function PlanPageComponent({ slug, plant = true }) {
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    if (fields && fields.length > 0) return;
+    if (fields) return;
     refreshFields({ dispatch });
   }, [fields]);
 
@@ -47,7 +47,7 @@ export default function PlanPageComponent({ slug, plant = true }) {
   const plan = foundData?.plan || null;
   const selectedField = foundData?.field || plan?.field || null;
 
-  if (!fields || fields.length === 0) {
+  if (!fields) {
     return (
       <div className="w-full py-6 flex items-center justify-center">
         <Loading />

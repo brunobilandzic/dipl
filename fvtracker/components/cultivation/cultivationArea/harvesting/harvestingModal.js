@@ -38,8 +38,7 @@ export function HarvestingModal({
       if (
         res.data &&
         res.data.fields &&
-        Array.isArray(res.data.fields) &&
-        res.data.fields.length > 0
+        Array.isArray(res.data.fields)
       ) {
         dispatch(setFields(res.data.fields));
         setAllFieldPlans(getPlans(res.data.fields));
@@ -52,7 +51,7 @@ export function HarvestingModal({
     }
   };
   useEffect(() => {
-    if (fields && fields.length > 0) return;
+    if (fields) return;
     refreshFields();
   }, [fields]);
 

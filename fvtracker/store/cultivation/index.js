@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  fields: [],
+  fields: null,
   selectedField: null,
   crops: null,
   selectedCultivationArea: null,
@@ -13,6 +13,13 @@ const cultivationSlice = createSlice({
   reducers: {
     setFields: (state, action) => {
       state.fields = action.payload;
+    },
+    deleteField: (state, action) => {
+      const slug = action.payload;
+      state.fields = state.fields.filter((field) => field.slug !== slug);
+      if (state.selectedField?.slug === slug) {
+        state.selectedField = null;
+      }
     },
     setInitialState: (state) => {
       state = initialState;
@@ -220,6 +227,7 @@ export const {
   deleteCultivation,
   createPlantage,
   createPlantingPlan,
+  deleteField,
 } = cultivationSlice.actions;
 
 export default cultivationSlice.reducer;

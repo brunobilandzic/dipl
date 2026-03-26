@@ -95,6 +95,8 @@ async function signUpCredentials({
 
     console.log("created specific manager:", specificManager);
 
+    rootManager.appUser = newUser._id;
+
     await specificManager.save();
     await rootManager.save();
     newUser.rootManager = rootManager._id;

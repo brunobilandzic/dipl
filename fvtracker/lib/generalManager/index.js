@@ -5,18 +5,19 @@ export const getGeneralManager = async () => {
     managerName: "GeneralManager",
     throwError: true,
   });
-  await generalManager.populate({
-    path: "roleRequests",
-    populate: {
-      path: "rootManager",
-      populate: [
-        {
-          path: "appUser",
-        },
-      ],
+  await generalManager.populate([
+    {
+      path: "roleRequests",
+      populate: {
+        path: "rootManager",
+        populate: [
+          {
+            path: "appUser",
+          },
+        ],
+      },
     },
-  });
-  console.log("generalManager:", generalManager);
-
+  ]);
+  
   return generalManager;
 };

@@ -13,9 +13,8 @@ export async function GET(request) {
       managerName: "CultivationManager",
     });
     if (!cultivationManager.status !== ROLE_STATUSES.APPROVED) {
-      return Response.json(
-        { error: "Role request is not approved" },
-        { status: 401 },
+      return Response.redirect(
+        new URL("/zahtjev-nije-odobren", new URL(request.url).origin),
       );
     }
     await cultivationManager.populate({

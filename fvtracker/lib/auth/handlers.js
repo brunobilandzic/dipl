@@ -59,6 +59,7 @@ export async function handleCredentials(credentials) {
     managerModelName: getManagerModelName(),
     name: user.name,
     roleStatus: user.roleStatus,
+    username: user.username,
   };
 }
 

@@ -12,9 +12,14 @@ export async function GET(request) {
     const cultivationManager = await auth.session.specificManager({
       managerName: "CultivationManager",
     });
-    if (!cultivationManager.status !== ROLE_STATUSES.APPROVED) {
-      return Response.redirect(
-        new URL("/zahtjev-nije-odobren", new URL(request.url).origin),
+    console.log("Fetched cultivation manager for session:", cultivationManager);
+    if (
+      cultivationManager.rootManager.roleRequest.status !=
+      ROLE_STATUSES.APPROVED
+    ) {
+      return Response.json(
+        { message: "Unauthorized: Role request not approved" },
+        { status: 403 },
       );
     }
     await cultivationManager.populate({

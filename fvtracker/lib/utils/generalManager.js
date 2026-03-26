@@ -10,8 +10,6 @@ export const refreshGeneralManager = async ({ dispatch }) => {
     if (res.data && res.data.generalManager) {
       dispatch(setGeneralManager(res.data.generalManager));
     }
-    const managers = await getManagers(res.data.generalManager);
-    dispatch(setManagers(managers));
   } catch (error) {
     handleError({
       ...error,

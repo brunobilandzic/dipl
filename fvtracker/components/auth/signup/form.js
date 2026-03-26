@@ -12,6 +12,15 @@ import {
 } from "@/lib/constants/users/managerTypes";
 
 function SignUpForm(_signUpData = null) {
+  const testSignUpData = {
+    email: `${new Date().getTime()}@example.com`,
+    username: `brunobilandzic${Math.random().toString(16).slice(3, 6)}`,
+    name: `Bruno${new Date().getTime()}`,
+    surname: "Bilandžić",
+    password: "1",
+    passwordConfirm: "1",
+    requestedRole: MANAGER_TYPES[1],
+  };
   console.log("SignUpForm props", _signUpData);
   const [signUpData, setSignUpData] = useState(testSignUpData);
 
@@ -120,13 +129,3 @@ const inputs = [
     label: "Potvrdi lozinku",
   },
 ];
-
-const testSignUpData = {
-  email: `${new Date().getTime()}@example.com`,
-  username: "brunobilandzic",
-  name: "Bruno",
-  surname: "Bilandžić",
-  password: "test1234",
-  passwordConfirm: "test1234",
-  requestedRole: "",
-};

@@ -58,8 +58,8 @@ const rootManagerSchema = new Schema({
 
 rootManagerSchema.pre("save", async function () {
   console.log("Creating Role Request for new Root Manager");
-  console.log(this._doc);
   if (this.isNew && this.managerModelName !== GENERAL_MANAGER) {
+    console.log("Creating role request for manager model:", this.managerModelName);
     const roleRequest = new RoleRequest({
       generalManager: this.generalManager,
       rootManager: this._id,

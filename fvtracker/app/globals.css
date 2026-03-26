@@ -42,6 +42,9 @@
 .inputRow {
   @apply flex flex-col gap-2 mb-6;
 }
+.filterSelect .inputRow {
+  @apply mb-0;
+}
 }
 
 :root {

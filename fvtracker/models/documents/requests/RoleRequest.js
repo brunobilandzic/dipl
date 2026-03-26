@@ -1,4 +1,5 @@
 const { Schema } = require("mongoose");
+import { ROLE_STATUSES } from "@/lib/constants/users";
 import mongoose from "mongoose";
 
 const roleRequestSchema = new Schema({
@@ -14,19 +15,21 @@ const roleRequestSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ["pending", "approved", "rejected"],
-    default: "pending",
+    enum: Object.values(ROLE_STATUSES),
+    default: ROLE_STATUSES.PENDING,
   },
 });
 
 roleRequestSchema.pre("save", async function () {
-    const generalManager = await mongoose.models.GeneralManager.findById(this.generalManager);
-    if (!generalManager) {
-      throw new Error("General Manager not found for Role Request.");
-    }
-    generalManager.roleRequests.push(this._id);
-    await generalManager.save();
-})
+  const generalManager = await mongoose.models.GeneralManager.findById(
+    this.generalManager,
+  );
+  if (!generalManager) {
+    throw new Error("General Manager not found for Role Request.");
+  }
+  generalManager.roleRequests.push(this._id);
+  await generalManager.save();
+});
 
 export const RoleRequest =
   mongoose.models.RoleRequest ||

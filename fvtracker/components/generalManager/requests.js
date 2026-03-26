@@ -5,21 +5,59 @@ import { useSelector, useDispatch } from "react-redux";
 import api from "@/lib/api";
 import { useState, useEffect } from "react";
 import { setLoading } from "@/store/loading";
+import { AppSelect } from "../form/inputs";
+import { ROLE_STATUSES } from "@/lib/constants/users";
 
 export const RoleRequestList = () => {
   const generalManager = useSelector((state) => state.generalManager.manager);
+  const [filter, setFilter] = useState("all");
 
   return (
     <div>
-      <div>{JSON.stringify(generalManager?.roleRequests, null, 2)}</div>
-      <div className="text-2xl font-bold">Zahtjevi za uloge</div>
-      <div className="flex flex-col gap-4 ">
-        {generalManager?.roleRequests.map((roleRequest) => (
-          <div key={roleRequest._id}>
-            <RoleRequestItem roleRequest={roleRequest} />
-          </div>
-        ))}
+      <div className="flex justify-between items-center border-b-2 pb-4 pt-2">
+        <div className="text-2xl font-bold">Zahtjevi za uloge</div>
+        <FilterDropdown filter={filter} setFilter={setFilter} />
+      </div>{" "}
+      <div className="flex flex-col gap-4">
+        {generalManager?.roleRequests.map((roleRequest) => {
+          if (filter !== "all" && roleRequest.status !== filter) {
+            return null;
+          }
+          if (filter === "all") {
+            return (
+              <div key={roleRequest._id}>
+                <RoleRequestItem roleRequest={roleRequest} />
+              </div>
+            );
+          }
+          if (roleRequest.status === filter) {
+            return (
+              <div key={roleRequest._id}>
+                <RoleRequestItem roleRequest={roleRequest} />
+              </div>
+            );
+          }
+        })}
       </div>
+    </div>
+  );
+};
+
+const FilterDropdown = ({ filter, setFilter }) => {
+  const options = [
+    { value: "all", label: "Svi" },
+    { value: ROLE_STATUSES.PENDING, label: "Na čekanju" },
+    { value: ROLE_STATUSES.APPROVED, label: "Odobreni" },
+    { value: ROLE_STATUSES.REJECTED, label: "Odbijeni" },
+  ];
+
+  return (
+    <div className="relative filterSelect">
+      <AppSelect
+        options={options}
+        value={filter}
+        onChange={(e) => setFilter(e.target.value)}
+      />
     </div>
   );
 };

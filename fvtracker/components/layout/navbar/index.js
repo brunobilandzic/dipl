@@ -44,6 +44,7 @@ function NavItems() {
   const [managerModelName, setManagerModelName] = useState(null);
   const [items, setItems] = useState([]);
   const dispatch = useDispatch();
+  const generalManagerRedux = useSelector((state) => state.generalManager?.manager);
 
   useEffect(() => {
     if (status === "authenticated" && session.user?.managerModelName) {
@@ -54,7 +55,7 @@ function NavItems() {
       if (managerModelName === "CultivationManager") {
         refreshFields({ dispatch });
       }
-      if (managerModelName === "GeneralManager") {
+      if (managerModelName === "GeneralManager" && !generalManagerRedux) {
         refreshGeneralManager({ dispatch });
         console.log("General manager logged in, fetching role requests...");
       }

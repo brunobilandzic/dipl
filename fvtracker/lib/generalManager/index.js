@@ -1,7 +1,10 @@
-import { GeneralManager } from "@/models/user/managers/GeneralManager";
+import { fetchSessionSpecificManager } from "../auth/fetchSessionData";
 
 export const getGeneralManager = async () => {
-  const generalManager = await GeneralManager.findOne();
+  const generalManager = await fetchSessionSpecificManager({
+    managerName: "GeneralManager",
+    throwError: true,
+  });
   await generalManager.populate({
     path: "roleRequests",
     populate: {
@@ -17,4 +20,3 @@ export const getGeneralManager = async () => {
 
   return generalManager;
 };
-

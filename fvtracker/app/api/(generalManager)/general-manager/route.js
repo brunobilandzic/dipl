@@ -6,7 +6,6 @@ import { getGeneralManager } from "@/lib/generalManager";
 export async function GET() {
   await dbConnect();
   try {
-    await auth.session.specificManager({ managerName: GENERAL_MANAGER });
     const generalManager = await getGeneralManager();
     return Response.json({ generalManager }, { status: 200 });
   } catch (error) {

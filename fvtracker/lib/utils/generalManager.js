@@ -1,4 +1,4 @@
-import { setGeneralManager } from "@/store/generalManager";
+import { setGeneralManager, setManagers } from "@/store/generalManager";
 import handleError from "../constants/errors/client/handleError";
 import api from "../api";
 
@@ -10,6 +10,8 @@ export const refreshGeneralManager = async ({ dispatch }) => {
     if (res.data && res.data.generalManager) {
       dispatch(setGeneralManager(res.data.generalManager));
     }
+    const managers = await getManagers(res.data.generalManager);
+    dispatch(setManagers(managers));
   } catch (error) {
     handleError({
       ...error,
@@ -17,7 +19,6 @@ export const refreshGeneralManager = async ({ dispatch }) => {
     });
   }
 };
-
 
 const getManagers = async (generalManager) => {
   const managers = [];
@@ -28,4 +29,4 @@ const getManagers = async (generalManager) => {
     }
   }
   return managers;
-}
+};

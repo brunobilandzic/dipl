@@ -77,6 +77,7 @@ function SignUpForm(_signUpData = null) {
               requestedRole: e.target.value,
             }))
           }
+          defaultValue={signUpData.requestedRole || ""}
         />
       </div>
       <div className={`${styles.footer}       flex justify-center`}>

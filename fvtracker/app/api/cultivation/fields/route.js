@@ -1,6 +1,7 @@
 import dbConnect from "@/lib/db/mongooseConnect";
 import auth from "@/lib/auth";
 import cultivation from "@/lib/cultivation";
+import { Field } from "@/models/sectors/cultivation/Field";
 
 export async function GET(request) {
   try {
@@ -161,6 +162,33 @@ export async function POST(request) {
     const body = await request.json();
     const field = await cultivation.fields.create(body);
     return Response.json({ field }, { status: 201 });
+  } catch (error) {
+    console.error(error);
+    return Response.json({ error: error.message }, { status: 500 });
+  }
+}
+
+export async function DELETE(request) {
+  console.log("Received DELETE request for field");
+  try {
+    await dbConnect();
+    const { searchParams } = new URL(request.url);
+    const slug = searchParams.get("slug");
+
+    if (!slug) {
+      return Response.json({ message: "Slug is required" }, { status: 400 });
+    }
+
+    const deletedField = await Field.findOneAndDelete({ slug });
+
+    if (!deletedField) {
+      return Response.json({ message: "Field not found" }, { status: 404 });
+    }
+
+    return Response.json(
+      { message: "Field deleted successfully" },
+      { status: 200 },
+    );
   } catch (error) {
     console.error(error);
     return Response.json({ error: error.message }, { status: 500 });

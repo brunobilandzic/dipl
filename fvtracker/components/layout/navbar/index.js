@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { login } from "@/store/userSlice";
 import { refreshFields } from "@/lib/utils/fields";
 import { refreshGeneralManager } from "@/lib/utils/generalManager";
+import { ROLE_STATUSES } from "@/lib/constants/users";
 
 export default {
   roleitems,
@@ -55,10 +56,14 @@ function NavItems() {
       console.log("User authenticated with manager model:", managerModelName);
       setManagerModelName(session.user?.managerModelName);
       dispatch(login(session.user));
-      if (managerModelName === "CultivationManager" && !fieldsRedux) {
+      if (managerModelName === "CultivationManager" && !fieldsRedux && session.user?.roleStatus === ROLE_STATUSES.APPROVED) {
         refreshFields({ dispatch });
       }
-      if (managerModelName === "GeneralManager" && !generalManagerRedux) {
+      if (
+        managerModelName === "GeneralManager" &&
+        !generalManagerRedux &&
+        session.user?.roleStatus === ROLE_STATUSES.APPROVED
+      ) {
         refreshGeneralManager({ dispatch });
       }
     }

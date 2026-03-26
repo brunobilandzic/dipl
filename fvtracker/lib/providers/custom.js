@@ -3,9 +3,8 @@ import { useEffect } from "react";
 import handleError from "../constants/errors/client/handleError";
 import { setCrops } from "@/store/cultivation";
 import api from "@/lib/api";
-import { Loading } from "@/components/layout/loading";
+import { LoadingFullScreen } from "@/components/layout/loading";
 import { setLoading } from "@/store/loading";
-import { clearError } from "@/store/error";
 import { ErrorComponent } from "@/components/layout/error";
 
 export default function CustomProviders({ children }) {
@@ -48,7 +47,7 @@ const CropsProvider = ({ children }) => {
 export const LoadingProvider = ({ children }) => {
   const isLoading = useSelector((state) => state.loading.isLoading);
 
-  if (isLoading) return <Loading />;
+  if (isLoading) return <LoadingFullScreen />;
 
   return children;
 };
@@ -56,7 +55,7 @@ export const LoadingProvider = ({ children }) => {
 export const ErrorProvider = ({ children }) => {
   const dispatch = useDispatch();
   const message = useSelector((state) => state.error.message);
-  
+
   if (!message) return children;
   return <ErrorComponent message={message} />;
 };

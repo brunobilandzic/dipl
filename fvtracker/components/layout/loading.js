@@ -9,3 +9,11 @@ export function Loading() {
     </>
   );
 }
+
+export const LoadingFullScreen = () => {
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center  text-gray-600">
+      <ClipLoader size={100} color="currentColor" />
+    </div>
+  );
+};

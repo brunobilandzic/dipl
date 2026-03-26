@@ -102,7 +102,15 @@ async function signUpCredentials({
 
   await newUser.save();
   console.log("New user created:", newUser);
-  return newUser;
+  return {
+    appUserId: newUser._id.toString(),
+    email: newUser.email,
+    name: newUser.username || newUser.name,
+    managerModelName:
+      newUser.username === GENERAL_MANAGER_USERNAME
+        ? GENERAL_MANAGER
+        : requestedRole || null,
+  };
 }
 
 async function logInCredentials({ login, password }) {

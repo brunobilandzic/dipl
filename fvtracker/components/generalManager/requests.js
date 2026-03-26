@@ -92,10 +92,12 @@ const RespondMenu = ({ roleRequest, setRespondMenuOpen }) => {
   const onRespond = async (response) => {
     try {
       dispatch(setLoading(true));
-      await api.put(`/general-manager/role-requests/${roleRequest._id}`, {
+      await api.put(`/general-manager/role-requests`, {
+        requestId: roleRequest._id,
         response,
       });
       setRespondMenuOpen(false);
+      dispatch(setLoading(false));
     } catch (error) {
       console.error("Error responding to role request:", error);
       dispatch(setLoading(false));

@@ -14,7 +14,7 @@ export const RoleRequestList = () => {
       <div>{JSON.stringify(generalManager?.roleRequests, null, 2)}</div>
       <div className="text-2xl font-bold">Zahtjevi za uloge</div>
       <div className="flex flex-col gap-4 ">
-        {generalManager.roleRequests.map((roleRequest) => (
+        {generalManager?.roleRequests.map((roleRequest) => (
           <div key={roleRequest._id}>
             <RoleRequestItem roleRequest={roleRequest} />
           </div>

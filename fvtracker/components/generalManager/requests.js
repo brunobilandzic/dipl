@@ -8,11 +8,11 @@ export const RoleRequestList = () => {
 
   return (
     <div>
-      <div>{JSON.stringify(generalManager.roleRequests, null, 2)}</div>
+      <div>{JSON.stringify(generalManager?.roleRequests, null, 2)}</div>
       <div className="text-2xl font-bold">Zahtjevi za uloge</div>
       <div className="flex flex-col gap-4 ">
         {generalManager.roleRequests.map((roleRequest) => (
-          <div key={roleRequest.id}>
+          <div key={roleRequest._id}>
             <RoleRequestItem roleRequest={roleRequest} />
           </div>
         ))}

@@ -4,7 +4,7 @@ import Link from "next/link";
 import roleitems from "./roleitems";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "@/store/userSlice";
 import { refreshFields } from "@/lib/utils/fields";
 import { refreshGeneralManager } from "@/lib/utils/generalManager";
@@ -44,7 +44,10 @@ function NavItems() {
   const [managerModelName, setManagerModelName] = useState(null);
   const [items, setItems] = useState([]);
   const dispatch = useDispatch();
-  const generalManagerRedux = useSelector((state) => state.generalManager?.manager);
+  const generalManagerRedux = useSelector(
+    (state) => state.generalManager?.manager,
+  );
+  const fieldsRedux = useSelector((state) => state.fields);
 
   useEffect(() => {
     if (status === "authenticated" && session.user?.managerModelName) {
@@ -52,7 +55,7 @@ function NavItems() {
       console.log("User authenticated with manager model:", managerModelName);
       setManagerModelName(session.user?.managerModelName);
       dispatch(login(session.user));
-      if (managerModelName === "CultivationManager") {
+      if (managerModelName === "CultivationManager" && !fieldsRedux) {
         refreshFields({ dispatch });
       }
       if (managerModelName === "GeneralManager" && !generalManagerRedux) {

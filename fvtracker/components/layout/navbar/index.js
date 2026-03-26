@@ -9,6 +9,7 @@ import { login } from "@/store/userSlice";
 import { refreshFields } from "@/lib/utils/fields";
 import { refreshGeneralManager } from "@/lib/utils/generalManager";
 import { ROLE_STATUSES } from "@/lib/constants/users";
+import { useRouter } from "next/navigation";
 
 export default {
   roleitems,
@@ -45,6 +46,7 @@ function NavItems() {
   const [managerModelName, setManagerModelName] = useState(null);
   const [items, setItems] = useState([]);
   const dispatch = useDispatch();
+  const router = useRouter();
   const generalManagerRedux = useSelector(
     (state) => state.generalManager?.manager,
   );
@@ -53,17 +55,16 @@ function NavItems() {
   useEffect(() => {
     if (status === "authenticated" && session.user?.managerModelName) {
       const managerModelName = session.user.managerModelName;
-      console.log("User authenticated with manager model:", managerModelName);
       setManagerModelName(session.user?.managerModelName);
       dispatch(login(session.user));
-      if (managerModelName === "CultivationManager" && !fieldsRedux && session.user?.roleStatus === ROLE_STATUSES.APPROVED) {
-        refreshFields({ dispatch });
-      }
       if (
-        managerModelName === "GeneralManager" &&
-        !generalManagerRedux &&
+        managerModelName === "CultivationManager" &&
+        !fieldsRedux &&
         session.user?.roleStatus === ROLE_STATUSES.APPROVED
       ) {
+        refreshFields({ dispatch, router });
+      }
+      if (managerModelName === "GeneralManager" && !generalManagerRedux) {
         refreshGeneralManager({ dispatch });
       }
     }

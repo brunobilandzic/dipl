@@ -1,9 +1,9 @@
 import { usernameToModel, modelToUsername } from "./managersUsernameModel";
 
 export const ROLE_STATUSES = {
-  PENDING: "PENDING",
-  APPROVED: "APPROVED",
-  REJECTED: "REJECTED",
+  PENDING: "NA ČEKANJU",
+  APPROVED: "ODOBRENO",
+  REJECTED: "ODBIJENO",
 };
 
 export default {

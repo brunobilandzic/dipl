@@ -119,6 +119,7 @@ async function signUpCredentials({
     await specificManager.save();
     await rootManager.save();
     newUser.rootManager = rootManager._id;
+    await newUser.populate("rootManager");
   }
 
   await newUser.save();

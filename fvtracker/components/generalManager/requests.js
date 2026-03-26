@@ -51,13 +51,13 @@ const RoleRequestStatus = ({ roleRequest }) => {
   let statusBackground = "bg-gray-500";
   let statusColor = "text-white";
   switch (status) {
-    case "approved":
+    case ROLE_STATUSES.APPROVED:
       statusBackground = "bg-green-500";
       break;
-    case "rejected":
+    case ROLE_STATUSES.REJECTED:
       statusBackground = "bg-red-500";
       break;
-    case "pending":
+    case ROLE_STATUSES.PENDING:
       statusBackground = "bg-yellow-500";
       break;
     default:

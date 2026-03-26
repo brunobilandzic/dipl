@@ -1,3 +1,4 @@
+import { GENERAL_MANAGER } from "@/lib/constants/users/managerTypes";
 import { RoleRequest } from "@/models/documents/requests/RoleRequest";
 import mongoose from "mongoose";
 
@@ -58,7 +59,7 @@ const rootManagerSchema = new Schema({
 rootManagerSchema.pre("save", async function () {
   console.log("Creating Role Request for new Root Manager");
   console.log(this._doc);
-  if (this.isNew) {
+  if (this.isNew && this.managerModelName !== GENERAL_MANAGER) {
     const roleRequest = new RoleRequest({
       generalManager: this.generalManager,
       rootManager: this._id,

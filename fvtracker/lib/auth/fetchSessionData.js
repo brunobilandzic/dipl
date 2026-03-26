@@ -43,7 +43,35 @@ export async function fetchSessionSpecificManager({
     return null;
   }
 
-  return specificManager;
+  if (!specificManager.rootManager) {
+    if (throwError) {
+      throw new Error(
+        `No Root Manager associated with ${managerName} for session user with email: ${appUser.email}`,
+      );
+    }
+    return null;
+  }
+
+  await specificManager.populate({
+    path: "rootManager",
+    populate: {
+      path: "roleRequests",
+      select: "status",
+    },
+  });
+
+  if (!specificManager.rootManager?.roleRequest) {
+    if (throwError) {
+      throw new Error(
+        `No Role Request associated with Root Manager for ${managerName} for session user with email: ${appUser.email}`,
+      );
+    }
+    return null;
+  }
+
+  const status = specificManager.rootManager.roleRequest.status;
+
+  return { ...specificManager._doc, status };
 }
 
 export async function fetchGeneralAndOtherManagers({ managerNames = [] }) {

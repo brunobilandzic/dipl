@@ -15,7 +15,7 @@ const PlantingPlanList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (fields & fields.length > 0) return;
+    if (fields) return;
 
     refreshFields({ dispatch });
   }, [fields]);
@@ -23,7 +23,7 @@ const PlantingPlanList = () => {
   const deletePlans = async () => {
     try {
       const res = await api.delete("/cultivation/plant/plan", {});
-      refreshFields();
+      refreshFields({ dispatch });
     } catch (error) {
       handleError({
         ...error,
@@ -32,7 +32,7 @@ const PlantingPlanList = () => {
     }
   };
 
-  if (!fields || fields.length === 0)
+  if (!fields)
     return (
       <div className="w-full py-4 flex items-center justify-center">
         <Loading />

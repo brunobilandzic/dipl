@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   manager: null,
+  managers: null,
 };
 
 export const generalManagerSlice = createSlice({
@@ -22,8 +23,11 @@ export const generalManagerSlice = createSlice({
         }
       }
     },
+    setManagers: (state, action) => {
+      state.managers = action.payload;
+    },
   },
 });
 
-export const { setGeneralManager } = generalManagerSlice.actions;
+export const { setGeneralManager, setManagers } = generalManagerSlice.actions;
 export default generalManagerSlice.reducer;

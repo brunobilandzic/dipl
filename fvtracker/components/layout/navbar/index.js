@@ -25,7 +25,7 @@ export function Navbar() {
       </div>
       <div className=" flex-1 flex justify-end gap-8 ">
         <Link href="/seed">test podaci</Link>
-        <Link href="/auth">aautorizacija</Link>
+        <Link href="/autorizacija">aautorizacija</Link>
       </div>
     </div>
   );

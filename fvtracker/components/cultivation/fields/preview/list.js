@@ -24,13 +24,20 @@ import { refreshFields } from "@/lib/utils/fields";
 import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { setLoading } from "@/store/loading";
+import { useSession } from "next-auth/react";
 
 export function FieldsList({}) {
   const fields = useSelector((state) => state.cultivation.fields);
   const dispatch = useDispatch();
+  const { data: session } = useSession();
+  const router = useRouter();
 
   useEffect(() => {
     if (fields) return;
+    if (session?.user?.roleStatus !== "approved") {
+      router.push("/zahtjev-nije-odobren");
+      return
+    }
     refreshFields({ dispatch });
   }, [fields]);
 

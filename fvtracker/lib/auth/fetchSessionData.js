@@ -31,6 +31,10 @@ export async function fetchSessionSpecificManager({
   throwError = true,
 }) {
   const appUser = await fetchSessionAppUser();
+  await appUser.populate({
+    path: "rootManager",
+    select: "roleRequest"
+  });
   let specificManager;
   if (managerName === GENERAL_MANAGER) {
     specificManager = await mongoose.models[managerName].findOne();

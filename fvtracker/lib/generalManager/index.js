@@ -2,11 +2,11 @@ import mongoose from "mongoose";
 import { fetchSessionSpecificManager } from "../auth/fetchSessionData";
 
 export const getGeneralManager = async () => {
-  const generalManager = await fetchSessionSpecificManager({
+  const generalManagerDoc = await fetchSessionSpecificManager({
     managerName: "GeneralManager",
     throwError: true,
   });
-  await generalManager.populate([
+  await generalManagerDoc.populate([
     {
       path: "roleRequests",
       populate: {
@@ -14,14 +14,39 @@ export const getGeneralManager = async () => {
         populate: [
           {
             path: "appUser",
+            select: "name lastname username email",
           },
         ],
       },
     },
     {
-      path: "managers"
+      path: "managers",
+      populate: {
+        path: "appUser",
+        select: "name lastname username email",
+      },
     },
   ]);
+
+  const managers = [];
+
+  for (const manager of generalManagerDoc.managers) {
+    const specificManager = await mongoose.models[
+      manager.managerModelName
+    ].findOne({
+      rootManager: manager._id,
+    });
+    managers.push({
+      ...manager.toObject(),
+      managerModelName: manager.managerModelName,
+      specificManager: specificManager ? specificManager.toObject() : null,
+    });
+  }
+
+  const generalManager = {
+    ...generalManagerDoc.toObject(),
+    managers,
+  };
 
   return generalManager;
 };

@@ -25,6 +25,7 @@ import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { setLoading } from "@/store/loading";
 import { useSession } from "next-auth/react";
+import { ROLE_STATUSES } from "@/lib/constants/users";
 
 export function FieldsList({}) {
   const fields = useSelector((state) => state.cultivation.fields);
@@ -34,11 +35,7 @@ export function FieldsList({}) {
 
   useEffect(() => {
     if (fields) return;
-    if (session?.user?.roleStatus !== "approved") {
-      router.push("/zahtjev-nije-odobren");
-      return
-    }
-    refreshFields({ dispatch });
+    refreshFields({ dispatch, router });
   }, [fields]);
 
   if (!fields)

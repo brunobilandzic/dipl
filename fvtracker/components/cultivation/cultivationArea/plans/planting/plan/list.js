@@ -9,21 +9,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
 import { PlantingPlanListItem } from "@/components/cultivation/cultivationArea/plans/planting/plan/planItem";
 import { refreshFields } from "@/lib/utils/fields";
+import { useRouter } from "next/navigation";
 
 const PlantingPlanList = () => {
   const fields = useSelector((state) => state.cultivation.fields);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => {
     if (fields) return;
 
-    refreshFields({ dispatch });
+    refreshFields({ dispatch, router });
   }, [fields]);
 
   const deletePlans = async () => {
     try {
       const res = await api.delete("/cultivation/plant/plan", {});
-      refreshFields({ dispatch });
+      refreshFields({ dispatch, router });
     } catch (error) {
       handleError({
         ...error,

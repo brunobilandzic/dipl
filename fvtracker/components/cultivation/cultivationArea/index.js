@@ -93,7 +93,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
         }
       }
       if (!selectedField) {
-        await refreshFields({ dispatch });
+        await refreshFields({ dispatch, router });
       }
     };
     fillSelectedField();

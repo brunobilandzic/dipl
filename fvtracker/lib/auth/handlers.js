@@ -109,11 +109,8 @@ async function signUpCredentials({
     });
 
     const specificManager = await models.user[requestedRole].create({
-      appUser: newUser._id,
       rootManager: rootManager._id,
     });
-
-    rootManager.specificManager = specificManager._id;
 
     console.log("created specific manager:", specificManager);
 

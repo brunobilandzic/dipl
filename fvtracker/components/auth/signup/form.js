@@ -3,15 +3,19 @@
 import React, { useState, useEffect } from "react";
 import styles from "@/components/form/form.module.css";
 import { AppInput, AppSelect } from "@/components/form/inputs";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import {
   CULTIVATION_MANAGER,
   FINANCIAL_MANAGER,
+  MANAGER_TYPES,
   PRODUCTION_MANAGER,
   WAREHOUSE_MANAGER,
 } from "@/lib/constants/users/managerTypes";
+import { useRouter } from "next/navigation";
+import { Loading } from "@/components/layout/loading";
 
-function SignUpForm(_signUpData = null) {
+function SignUpForm() {
+  const { session, status } = useSession();
   const testSignUpData = {
     email: `${new Date().getTime()}@example.com`,
     username: `brunobilandzic${Math.random().toString(16).slice(3, 6)}`,
@@ -21,16 +25,20 @@ function SignUpForm(_signUpData = null) {
     passwordConfirm: "1",
     requestedRole: MANAGER_TYPES[1],
   };
-  console.log("SignUpForm props", _signUpData);
+
   const [signUpData, setSignUpData] = useState(testSignUpData);
 
+  const router = useRouter();
   useEffect(() => {
-    if (Object.keys(_signUpData).length > 0) {
-      setSignUpData(_signUpData);
-      console.log("SignUpForm useEffect setSignUpData", _signUpData);
+    if (status === "authenticated") {
+      router.replace("/");
     }
-  }, [_signUpData]);
-  console.log("SignUpForm render", testSignUpData);
+  }, [status, router]);
+
+  if (status === "loading") {
+    return <Loading />;
+  }
+
   const onChange = (e) => {
     const { name, value } = e.target;
     setSignUpData((prev) => ({ ...prev, [name]: value }));

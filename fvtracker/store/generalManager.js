@@ -11,6 +11,17 @@ export const generalManagerSlice = createSlice({
     setGeneralManager: (state, action) => {
       state.manager = action.payload;
     },
+    requestResponseUpdate: (state, action) => {
+      const { requestId, newStatus } = action.payload;
+      if (state.manager) {
+        const request = state.manager.roleRequests.find(
+          (req) => req._id === requestId,
+        );
+        if (request) {
+          request.status = newStatus;
+        }
+      }
+    },
   },
 });
 

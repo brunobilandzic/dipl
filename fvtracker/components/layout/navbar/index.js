@@ -54,6 +54,7 @@ function NavItems() {
 
   useEffect(() => {
     if (status === "authenticated" && session.user?.managerModelName) {
+      console.log("setting general manager and fields in navbar useEffect");
       const managerModelName = session.user.managerModelName;
       setManagerModelName(session.user?.managerModelName);
       dispatch(login(session.user));

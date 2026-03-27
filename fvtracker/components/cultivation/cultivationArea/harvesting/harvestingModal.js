@@ -214,6 +214,10 @@ export function HarvestingModal({
     }));
   };
 
+  const submitHarvest = () => {
+    console.log("Submitting harvest with data:", newHarvest);
+  };
+
   return (
     <>
       <Modal title="Berba" isOpen={isOpen} onCancel={onCancel}>
@@ -252,7 +256,7 @@ export function HarvestingModal({
         <HarvestCultivation
           isOpen={harvestCultivationOpen}
           onCancel={reset}
-          onSubmit={reset}
+          onSubmit={submitHarvest}
           newHarvest={newHarvest}
           setNewHarvest={setNewHarvest}
           availablePlans={availablePlans}

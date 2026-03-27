@@ -8,10 +8,11 @@ export async function getHarvestingPlanById(id) {
   return harvestingPlan;
 }
 
-export async function harvestRelativeCells({
-    cultivationId,
-    cropVarietyId,
-    plantingPlanId,
+export async function harvestCells({
+  cultivationId,
+  cropVarietyId,
+  toHarvestCells,
+  harvestingPlanId,
 }) {
     const cultivation = await getCultivationById(cultivationId);
     await cultivation.populate({ path: "cultivationArea", select: "planted" });

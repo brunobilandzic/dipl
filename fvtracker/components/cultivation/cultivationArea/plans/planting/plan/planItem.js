@@ -6,18 +6,10 @@ import { v4 as uuid } from "uuid";
 export const PlantingPlanListItem = ({ plan, plant = true }) => {
   return (
     <>
-      <Link
-        className="block p-4 border rounded"
-      >
-        <div>
-          <div className="text-lg font-bold ">{plan.name}</div>
-          <PlanDates
-            plannedPlantingDate={plan.plannedPlantingDate}
-            plannedHarvestingDate={plan.plannedHarvestingDate}
-          />
-          <PlantingPlanItems items={plan.items} />
-        </div>
-      </Link>
+      <div className="border p-4 rounded">
+        <div className="text-lg font-bold ">{plan.name}</div>
+        <PlantingPlanItems items={plan.items} />
+      </div>
     </>
   );
 };
@@ -43,9 +35,9 @@ export const PlanDates = ({ plannedPlantingDate, plannedHarvestingDate }) => {
 
 export const PlantingPlanItems = ({ items }) => {
   return (
-    <div className="mt-2">
+    <div className="mt-2 flex flex-col gap-2">
       <div>Items:</div>
-      <div className="flex flex-wrap gap-4 mt-1">
+      <div className="">
         {items.map((item) => (
           <div key={uuid()} className="">
             <PlantingPlanItem item={item} />
@@ -58,7 +50,7 @@ export const PlantingPlanItems = ({ items }) => {
 
 const PlantingPlanItem = ({ item }) => {
   return (
-    <div className="border p-4 rounded w-[300px]">
+    <div className="border p-4 rounded w-full">
       <div>
         <span className="font-semibold">Crop Variety: </span>
         {item.cropVariety?.name}

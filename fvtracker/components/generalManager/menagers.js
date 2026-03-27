@@ -21,7 +21,7 @@ export const ManagerList = () => {
   return (
     <>
       {JSON.stringify(generalManager, null, 2)}
-      <div>
+      <div className="space-y-4 mt-4">
         {generalManager.managers.map((manager) => (
           <ManagerListItem key={uuid()} manager={manager} />
         ))}

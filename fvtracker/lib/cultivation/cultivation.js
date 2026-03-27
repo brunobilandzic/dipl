@@ -75,6 +75,12 @@ async function addEmptyPlCvs({
   relativeCoords,
   cropVarietyId,
 }) {
+  console.log({
+    existingCulName,
+    cuArea,
+    relativeCoords,
+    cropVarietyId,
+  });
   const existingCul = await getCultivationByProperty({
     cultivationArea: cuArea,
     property: "name",
@@ -97,7 +103,6 @@ async function addEmptyPlCvs({
 
   await existingCul.populate({
     path: "plantedCropVarieties",
-    populate: { path: "cropVariety", populate: { path: "cropType" } },
   });
   return existingCul;
 }
@@ -109,10 +114,6 @@ export async function getCultivationByProperty({
 }) {
   await cultivationArea.populate({
     path: "cultivations",
-    populate: {
-      path: "plantedCropVarieties",
-      populate: { path: "cropVariety", populate: { path: "cropType" } },
-    },
   });
 
   return cultivationArea.cultivations.find((cul) => cul[property] === value);

@@ -42,7 +42,6 @@ const PlantingPlanList = () => {
     );
 
   const fieldsPlans = utils.plans.getFieldsPlantingPlans(fields);
-
   return (
     <>
       <div>
@@ -94,7 +93,7 @@ export function FieldPlansItem({ fieldPlans, plant = true }) {
   return (
     <div>
       <div className="font-bold text-lg mb-4">{fieldName}:</div>
-      <div className="pl-4 my-4">{getPlans()}</div>
+      <div className="pl-4 my-4 flex flex-col gap-4">{getPlans()}</div>
     </div>
   );
 }

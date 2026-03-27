@@ -159,7 +159,7 @@ async function createPlantedCropVarietyPromise({
       cropVariety: cropVarietyId,
       fieldCoords,
       plantedAt,
-      harvestedAt,
+      harvestedAt: null,
       plantingPlanItem: plantingPlanItem._id,
     },
     { new: true },

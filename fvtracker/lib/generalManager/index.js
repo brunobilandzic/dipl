@@ -21,10 +21,16 @@ export const getGeneralManager = async () => {
     },
     {
       path: "managers",
-      populate: {
-        path: "appUser",
-        select: "name lastname username email",
-      },
+      populate: [
+        {
+          path: "appUser",
+          select: "name lastname username email",
+        },
+        {
+          path: "roleRequest",
+          select: "status",
+        },
+      ],
     },
   ]);
 

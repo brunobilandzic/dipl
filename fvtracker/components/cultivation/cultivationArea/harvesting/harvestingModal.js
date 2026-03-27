@@ -2,8 +2,6 @@ import Modal from "@/components/layout/modals/modal";
 import { showDate } from "@/lib/utils/display";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import api from "@/lib/api";
-import { setFields } from "@/store/cultivation";
 import { HarvestCultivation } from "./harvestCultivation";
 import { FieldGrid } from "../../fields/preview/grid";
 import { MenuModal } from "@/components/layout/modals/menu";
@@ -12,6 +10,8 @@ import {
   END_HARVESTING,
 } from "@/lib/constants/cultivation/plants";
 import utils from "@/lib/utils";
+import { refreshFields } from "@/lib/utils/fields";
+import { useRouter } from "next/navigation";
 
 export function HarvestingModal({
   isOpen,
@@ -28,31 +28,13 @@ export function HarvestingModal({
   const [newHarvest, setNewHarvest] = useState({});
   const [chooseNewEnd, setChooseNewEnd] = useState(initialChooseNewEnd);
   const [harvestCultivationOpen, setHarvestCultivationOpen] = useState(false);
-
+  const router = useRouter();
   const [allFieldPlans, setAllFieldPlans] = useState({});
   const [availablePlans, setAvailablePlans] = useState({});
 
-  const refreshFields = async () => {
-    try {
-      const res = await api.get("/cultivation/fields");
-      if (
-        res.data &&
-        res.data.fields &&
-        Array.isArray(res.data.fields)
-      ) {
-        dispatch(setFields(res.data.fields));
-        setAllFieldPlans(getPlans(res.data.fields));
-      }
-    } catch (error) {
-      console.log("Error fetching fields:", error);
-      const errorMessage =
-        error.response?.data?.message || error.message || "Nepoznata greška";
-      alert(`Greška pri dohvaćanju polja: ${errorMessage}`);
-    }
-  };
   useEffect(() => {
     if (fields) return;
-    refreshFields();
+    refreshFields({ dispatch, router });
   }, [fields]);
 
   const getPlans = () => {

@@ -6,8 +6,8 @@ function PlantingPlanListPage() {
   return (
     <>
       <div className="flex flex-col gap-8">
-        <PlantingPlanList />
         <CreatePlantagePlan />
+        <PlantingPlanList />
       </div>
     </>
   );

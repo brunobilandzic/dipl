@@ -12,6 +12,9 @@ import {
 import utils from "@/lib/utils";
 import { refreshFields } from "@/lib/utils/fields";
 import { useRouter } from "next/navigation";
+import { setLoading } from "@/store/loading";
+import api from "@/lib/api";
+import handleError from "@/lib/constants/errors/client/handleError";
 
 export function HarvestingModal({
   isOpen,
@@ -214,8 +217,18 @@ export function HarvestingModal({
     }));
   };
 
-  const submitHarvest = () => {
-    console.log("Submitting harvest with data:", newHarvest);
+  const submitHarvest = async () => {
+    console.log("Submitting harvest with data:", prepareHarvestBody(newHarvest));
+    dispatch(setLoading(true));
+    try{
+      const res = await api.post("/cultivation/harvest/new-harvest", prepareHarvestBody(newHarvest));
+      console.log("Harvest submission response:", res);
+    } catch (error) {
+      console.error("Error submitting harvest:", error);
+      handleError({...error, customMessage: "Došlo je do greške prilikom kreiranja berbe."});
+    } finally {
+      dispatch(setLoading(false));
+    }
   };
 
   return (
@@ -291,8 +304,7 @@ const initialNewHarvest_WId = ({ cultivationId }) => {
 
 const prepareHarvestBody = (newHarvest) => ({
   cultivationId: newHarvest.cultivationId,
-  cropVarietyId: newHarvest.variety._id,
-  relativeCoords: newHarvest.toHarvestCells,
-  harvestedAt: newHarvest.harvestedAt,
-  plantingPlanId: newPlantage.plantingPlan?._id,
+  cropVarietyId: newHarvest.cropVariety._id,
+  harvestingPlanId: newHarvest.harvestingPlan?._id,
+  toHarvestCells: newHarvest.toHarvestCells,
 });

@@ -6,7 +6,6 @@ export const HarvestCultivation = ({
   onCancel,
   onSubmit,
   newHarvest,
-  setNewHarvest,
   availablePlans,
   onChoosePlan,
 }) => {

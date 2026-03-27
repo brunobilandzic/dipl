@@ -11,8 +11,6 @@ export async function POST(request) {
       throw new Error("Missing cultivation details in request body");
     const newCultivation = await cultivation.cultivations.create(body.data);
 
-    console.log(newCultivation);
-
     return Response.json({ newCultivation }, { status: 200 });
   } catch (error) {
     console.error(error);

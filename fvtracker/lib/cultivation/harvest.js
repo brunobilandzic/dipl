@@ -14,7 +14,4 @@ export async function harvestCells({
   toHarvestCells,
   harvestingPlanId,
 }) {
-    const cultivation = await getCultivationById(cultivationId);
-    await cultivation.populate({ path: "cultivationArea", select: "planted" });
-
- }
+const harvestCell = async ({ plantingPlanItem, relativeCoords }) => {};

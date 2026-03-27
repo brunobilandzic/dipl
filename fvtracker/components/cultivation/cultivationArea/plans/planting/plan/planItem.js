@@ -7,7 +7,6 @@ export const PlantingPlanListItem = ({ plan, plant = true }) => {
   return (
     <>
       <Link
-        href={`/${plant ? "plan-sadnje" : "plan-berbe"}/${plan.slug}`}
         className="block p-4 border rounded"
       >
         <div>

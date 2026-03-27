@@ -26,11 +26,6 @@ export function CreateCultivation({
         title="Napravi nove gredice"
         onSubmit={onSubmit}
       >
-        <div className="mb-4 text-sm text-gray-500">
-          ćelije polja:{" "}
-          {newCUDetails?.cuCells?.map((cell) => cell.fieldCoords).join(" | ")}
-        </div>
-
         <div className={`form`}>
           <div className={``}>
             {existingCultivations && existingCultivations.length > 0 ? (

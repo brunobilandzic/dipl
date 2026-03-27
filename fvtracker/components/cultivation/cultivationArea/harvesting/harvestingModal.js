@@ -218,15 +218,24 @@ export function HarvestingModal({
   };
 
   const submitHarvest = async () => {
-    console.log("Submitting harvest with data:", prepareHarvestBody(newHarvest));
+    console.log(
+      "Submitting harvest with data:",
+      prepareHarvestBody(newHarvest),
+    );
     dispatch(setLoading(true));
-    try{
-      const res = await api.post("/cultivation/harvest/new-harvest", prepareHarvestBody(newHarvest));
+    try {
+      const res = await api.post(
+        "/cultivation/harvest/new-harvest",
+        prepareHarvestBody(newHarvest),
+      );
       console.log("Harvest submission response:", res);
     } catch (error) {
       dispatch(setLoading(false));
       console.error("Error submitting harvest:", error);
-      handleError({...error, customMessage: "Došlo je do greške prilikom kreiranja berbe."});
+      handleError({
+        ...error,
+        customMessage: "Došlo je do greške prilikom kreiranja berbe.",
+      });
     } finally {
       dispatch(setLoading(false));
     }

@@ -73,6 +73,7 @@ export const getFieldPlans = ({ field }) => ({
 });
 
 export const getPlansForCropVariety = ({ allFieldPlans, cropVarietyId }) => {
+  console.log("geetting plans", { allFieldPlans, cropVarietyId });
   const plans = {};
 
   //if (checkPlansEmpty(allFieldPlans)) return plans;

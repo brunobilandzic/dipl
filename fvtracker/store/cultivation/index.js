@@ -94,12 +94,27 @@ const cultivationSlice = createSlice({
       if (state.selectedField?.cultivationAreas) {
         state.selectedField.cultivationAreas =
           state.selectedField.cultivationAreas.map((ca) => {
-            if (ca._id?.toString() === cultivationAreaId?.toString()) {
+            if (ca._id?.toString() === cultivationAreaId.toString()) {
+              const cultivationExists = (ca.cultivations || []).some(
+                (cul) => cul._id === newCultivation._id,
+              );
+
+              let updatedCultivations = ca.cultivations || [];
+
+              if (!cultivationExists) {
+                updatedCultivations = [...updatedCultivations, newCultivation];
+              } else {
+                updatedCultivations = updatedCultivations.map((cul) =>
+                  cul._id === newCultivation._id ? newCultivation : cul,
+                );
+              }
+
               return {
                 ...ca,
-                cultivations: [...(ca.cultivations || []), newCultivation],
+                cultivations: updatedCultivations,
               };
             }
+
             return ca;
           });
       }

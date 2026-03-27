@@ -1,4 +1,8 @@
-import { GENERAL_MANAGER } from "@/lib/constants/users/managerTypes";
+import { ROLE_STATUSES } from "@/lib/constants/users";
+import {
+  CULTIVATION_MANAGER,
+  GENERAL_MANAGER,
+} from "@/lib/constants/users/managerTypes";
 import { RoleRequest } from "@/models/documents/requests/RoleRequest";
 import mongoose from "mongoose";
 
@@ -62,6 +66,7 @@ rootManagerSchema.pre("save", async function () {
     const roleRequest = new RoleRequest({
       generalManager: this.generalManager,
       rootManager: this._id,
+      status: ROLE_STATUSES.APPROVED,
     });
     this.roleRequest = roleRequest._id;
     await roleRequest.save();

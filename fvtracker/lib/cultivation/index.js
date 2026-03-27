@@ -26,8 +26,6 @@ import {
   deleteHarvestingPlans,
   getPlantingPlanItemById,
   getPlantingPlanItemRecord,
-  updatePlantingPlan,
-  updateHarvestingPlan,
 } from "./plans";
 
 export default {
@@ -65,8 +63,6 @@ export default {
     getPlantingPlanItemRecord,
     getPlantingPlanItemById,
     createHarvestingPlan,
-    updatePlantingPlan,
-    updateHarvestingPlan,
   },
 };
 

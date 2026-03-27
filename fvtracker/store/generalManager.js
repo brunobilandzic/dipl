@@ -13,14 +13,25 @@ export const generalManagerSlice = createSlice({
       state.manager = action.payload;
     },
     requestResponseUpdate: (state, action) => {
-      const { requestId, newStatus } = action.payload;
+      const { roleRequestId, newStatus } = action.payload;
       if (state.manager) {
         const request = state.manager.roleRequests.find(
-          (req) => req._id === requestId,
+          (req) => req._id === roleRequestId,
         );
+
         if (request) {
           request.status = newStatus;
         }
+      }
+      if (state.manager.managers) {
+        state.manager.managers.forEach((manager) => {
+          if (
+            manager.roleRequest &&
+            manager.roleRequest._id === roleRequestId
+          ) {
+            manager.roleRequest.status = newStatus;
+          }
+        });
       }
     },
     setManagers: (state, action) => {
@@ -29,5 +40,6 @@ export const generalManagerSlice = createSlice({
   },
 });
 
-export const { setGeneralManager, setManagers } = generalManagerSlice.actions;
+export const { setGeneralManager, setManagers, requestResponseUpdate } =
+  generalManagerSlice.actions;
 export default generalManagerSlice.reducer;

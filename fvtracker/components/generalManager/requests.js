@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import { setLoading } from "@/store/loading";
 import { AppSelect } from "../form/inputs";
 import { ROLE_STATUSES } from "@/lib/constants/users";
+import { requestResponseUpdate } from "@/store/generalManager";
 
 export const RoleRequestList = () => {
   const generalManager = useSelector((state) => state.generalManager.manager);
@@ -32,9 +33,11 @@ export const RoleRequestList = () => {
           }
           if (roleRequest.status === filter) {
             return (
-              <div key={roleRequest._id}>
-                <RoleRequestItem roleRequest={roleRequest} />
-              </div>
+              <>
+                <div key={roleRequest._id}>
+                  <RoleRequestItem roleRequest={roleRequest} />
+                </div>
+              </>
             );
           }
         })}
@@ -65,6 +68,7 @@ const FilterDropdown = ({ filter, setFilter }) => {
 const RoleRequestItem = ({ roleRequest }) => {
   const { name, surname } = roleRequest.rootManager.appUser;
   const { managerModelName: requestedRoleName } = roleRequest.rootManager;
+
   return (
     <>
       <div className="flex justify-between items-center mb-2 p-4 border rounded-md shadow-md">
@@ -82,7 +86,7 @@ const RoleRequestItem = ({ roleRequest }) => {
   );
 };
 
-const RoleRequestStatus = ({ roleRequest }) => {
+export const RoleRequestStatus = ({ roleRequest }) => {
   const { status } = roleRequest;
   const [respondMenuOpen, setRespondMenuOpen] = useState(false);
 
@@ -126,7 +130,6 @@ const RoleRequestStatus = ({ roleRequest }) => {
 
 const RespondMenu = ({ roleRequest, setRespondMenuOpen }) => {
   const dispatch = useDispatch();
-
   const onRespond = async (response) => {
     try {
       dispatch(setLoading(true));
@@ -134,6 +137,12 @@ const RespondMenu = ({ roleRequest, setRespondMenuOpen }) => {
         requestId: roleRequest._id,
         response,
       });
+      dispatch(
+        requestResponseUpdate({
+          roleRequestId: roleRequest._id,
+          newStatus: response,
+        }),
+      );
       setRespondMenuOpen(false);
       dispatch(setLoading(false));
     } catch (error) {

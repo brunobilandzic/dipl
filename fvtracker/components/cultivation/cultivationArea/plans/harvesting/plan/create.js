@@ -22,7 +22,6 @@ export default function CreateHarvestingPlanPageComponent() {
         <div className="mt-4 rounded-lg border p-4">
           <FillPlanInfo
             selectedField={selectedField}
-            setSelectedField={setSelectedField}
             plant={false}
           />
         </div>

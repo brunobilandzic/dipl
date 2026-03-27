@@ -144,7 +144,7 @@ export function HarvestingModal({
     setHarvestCultivationOpen(false);
   };
 
-  const removeBegin = () => {
+  const resetBegin = () => {
     setNewHarvest((prev) => ({
       ...prev,
       beginX: null,
@@ -188,7 +188,15 @@ export function HarvestingModal({
     },
     {
       label: CONTINUE_HARVESTING,
-      onClick: () => {},
+      onClick: () => {
+        setChooseNewEnd({ isOpen: false, choice: CONTINUE_HARVESTING });
+        onEndHarvestingCoordinates({
+          x: chooseNewEnd.x,
+          y: chooseNewEnd.y,
+          isContinue: true,
+        });
+        resetBegin();
+      },
     },
     {
       label: "Odustani",

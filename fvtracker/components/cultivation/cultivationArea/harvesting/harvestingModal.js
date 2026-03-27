@@ -224,6 +224,7 @@ export function HarvestingModal({
       const res = await api.post("/cultivation/harvest/new-harvest", prepareHarvestBody(newHarvest));
       console.log("Harvest submission response:", res);
     } catch (error) {
+      dispatch(setLoading(false));
       console.error("Error submitting harvest:", error);
       handleError({...error, customMessage: "Došlo je do greške prilikom kreiranja berbe."});
     } finally {

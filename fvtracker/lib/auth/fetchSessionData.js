@@ -35,7 +35,7 @@ export async function fetchSessionSpecificManager({
   let specificManager = await mongoose.models[managerName].findOne({
     rootManager: appUser.rootManager,
   });
-  console.log({ specificManager });
+  
   if (!specificManager) {
     if (throwError) {
       throw new Error(

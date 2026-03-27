@@ -12,7 +12,7 @@ export async function GET(request) {
     const cultivationManager = await auth.session.specificManager({
       managerName: "CultivationManager",
     });
-    console.log("Fetched cultivation manager for session:", cultivationManager);
+
     if (
       cultivationManager.rootManager.roleRequest.status !=
       ROLE_STATUSES.APPROVED
@@ -156,7 +156,6 @@ export async function GET(request) {
       }
       return Response.json({ field }, { status: 200 });
     } else {
-      console.log("fields len", cultivationManager.fields.length);
       return Response.json(
         { fields: cultivationManager.fields },
         { status: 200 },

@@ -1,5 +1,5 @@
-import Modal from "@/components/layout/modals/modal";
 import { ChoosePlan } from "../plans/planting/plan/choosePlan";
+import { FormModal } from "@/components/layout/modals/form";
 
 export const HarvestCultivation = ({
   isOpen,
@@ -11,7 +11,14 @@ export const HarvestCultivation = ({
   onChoosePlan,
 }) => {
   return (
-    <Modal isOpen={isOpen} onCancel={onCancel} invertColor={true}>
+    <FormModal
+      isOpen={isOpen}
+      onCancel={onCancel}
+      invertColor={true}
+      title="Završavanje berbe"
+      onSubmit={onSubmit}
+      submitDisabled={!newHarvest.harvestingPlan}
+    >
       <div>
         <ChoosePlan
           selectedPlan={newHarvest.harvestingPlan}
@@ -22,6 +29,6 @@ export const HarvestCultivation = ({
           onCancel={onCancel}
         />
       </div>
-    </Modal>
+    </FormModal>
   );
 };

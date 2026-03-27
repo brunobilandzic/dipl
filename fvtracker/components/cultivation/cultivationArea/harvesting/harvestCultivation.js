@@ -10,6 +10,20 @@ export const HarvestCultivation = ({
   availablePlans,
   onChoosePlan,
 }) => {
+  if (
+    !newHarvest ||
+    !newHarvest.cropVariety ||
+    !newHarvest.cropVariety.cropType ||
+    !newHarvest.toHarvestCells
+  ) {
+    return null;
+  }
+  const quantityToHarvest = newHarvest.toHarvestCells?.length || 0;
+  const cropTypeName = newHarvest.cropVariety.cropType.name;
+  const cropVarietyName = newHarvest.cropVariety.name;
+
+  const quantityString =
+    quantityToHarvest === 1 ? "1 ćelije" : `${quantityToHarvest} ćelija`;
   return (
     <FormModal
       isOpen={isOpen}
@@ -19,7 +33,10 @@ export const HarvestCultivation = ({
       onSubmit={onSubmit}
       submitDisabled={!newHarvest.harvestingPlan}
     >
-      <div>
+      <div className="flex flex-col gap-4">
+        <div>
+          Branje {quantityString} {cropTypeName} {cropVarietyName || "N/A"}
+        </div>
         <ChoosePlan
           selectedPlan={newHarvest.harvestingPlan}
           availablePlans={availablePlans}

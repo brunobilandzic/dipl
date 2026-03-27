@@ -3,7 +3,6 @@ export const getPlantedCropVarietesPerCultivation = ({
 }) => {
   const cultivationPlantedCropVarieties = {};
   plantedCropVarieties?.forEach((plantedCropVariety) => {
-    console.log("adding plantedCropVariety:", plantedCropVariety);
     if (
       !cultivationPlantedCropVarieties[plantedCropVariety.cultivation?.name]
     ) {

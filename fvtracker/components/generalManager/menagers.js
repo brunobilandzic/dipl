@@ -32,6 +32,10 @@ export const ManagerList = () => {
 };
 
 const ManagerListItem = ({ manager }) => {
+  if (!manager || !manager.appUser) {
+    return <Loading />;
+  }
+
   return (
     <>
       <div className="border rounded-lg p-4 flex justify-between items-center">

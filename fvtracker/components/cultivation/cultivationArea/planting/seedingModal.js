@@ -214,6 +214,7 @@ export const SeedingModal = ({
 
   const onSubmitNewPlantage = async () => {
     //submit to backend
+    dispatch(setLoading(true));
     try {
       const body = preparePlantageBody(newPlantage);
       dispatch(setLoading(true));

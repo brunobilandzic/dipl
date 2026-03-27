@@ -14,7 +14,7 @@ export const HarvestCultivation = ({
     <Modal isOpen={isOpen} onCancel={onCancel} invertColor={true}>
       <div>
         <ChoosePlan
-          selectedPlan={newHarvest.plantingPlan}
+          selectedPlan={newHarvest.harvestingPlan}
           availablePlans={availablePlans}
           onChoosePlan={onChoosePlan}
           cropVarietyId={newHarvest.cropVariety?._id}

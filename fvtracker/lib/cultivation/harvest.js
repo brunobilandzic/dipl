@@ -19,9 +19,11 @@ export async function harvestCells({
   let plantedCropVarieties = await PlantedCropVariety.find({
     cultivation: cultivationId,
   }).populate("plantingPlanItem");
-  
+
   plantedCropVarieties = plantedCropVarieties.filter(
-    (pcv) => pcv.plantingPlanItem?.cropVariety.toString() === cropVarietyId,
+    (pcv) =>
+      pcv.plantingPlanItem?.cropVariety.toString() === cropVarietyId &&
+      toHarvestCells.includes(pcv.relativeCoords),
   );
   const harvestingPlan = await getHarvestingPlanById(harvestingPlanId);
 

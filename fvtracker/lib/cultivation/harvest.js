@@ -25,9 +25,33 @@ export async function harvestCells({
       pcv.plantingPlanItem?.cropVariety.toString() === cropVarietyId &&
       toHarvestCells.includes(pcv.relativeCoords),
   );
+
   const harvestingPlan = await getHarvestingPlanById(harvestingPlanId);
+  await harvestingPlan.populate("items");
 
-  console.log({ plantedCropVarieties, harvestingPlan, toHarvestCells });
+  const harvestingPlanItem = harvestingPlan.items.find(
+    (item) => item.cropVariety.toString() === cropVarietyId,
+  );
+  if (!harvestingPlanItem) {
+    throw new Error(
+      "Harvesting plan item not found for the given crop variety.",
+    );
+  }
+
+  harvestingPlanItem.plantedCropVarieties.push(
+    ...plantedCropVarieties.map((pcv) => pcv._id),
+  );
+  harvestingPlanItem.quantity -= plantedCropVarieties.length;
+  if (harvestingPlanItem.quantity < 0) {
+    harvestingPlanItem.quantity = 0; // Ensure quantity doesn't go negative
+  }
+  await harvestingPlanItem.save();
+  await harvestingPlan.save();
+
+  for (const pcv of plantedCropVarieties) {
+    pcv.plantingPlanItem = null;
+    pcv.harvestedAt = new Date();
+    pcv.harvestingPlanItem = harvestingPlanItem._id;
+    await pcv.save();
+  }
 }
-
-const harvestCell = async ({ plantingPlanItem, relativeCoords }) => {};

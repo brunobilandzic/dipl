@@ -39,9 +39,14 @@ const ManagerListItem = ({ manager }) => {
   return (
     <>
       <div className="border rounded-lg p-4 flex justify-between items-center">
-        <div className="flex flex-col">
-          <h3 className="font-bold"></h3>
-          <p className="text-sm text-gray-500"></p>
+        <div>
+          <div className="flex flex-col">
+            <h3 className="font-bold">
+              {manager.appUser.name} {manager.appUser.lastname}
+            </h3>
+            <p className="text-sm text-gray-500">{manager.appUser.email}</p>
+            <p className="text-sm text-gray-500">{manager.managerModelName}</p>
+          </div>
         </div>
       </div>
     </>

@@ -32,7 +32,6 @@ export async function createCultivation(cultivation) {
   if (!cuArea) {
     throw new Error("Cultivation area not found");
   }
-
   if (existingCulName) {
     const existingCul = addEmptyPlCvs({
       existingCulName,
@@ -77,7 +76,6 @@ async function addEmptyPlCvs({
 }) {
   console.log({
     existingCulName,
-    cuArea,
     relativeCoords,
     cropVarietyId,
   });

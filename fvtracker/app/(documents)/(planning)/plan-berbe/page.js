@@ -4,9 +4,9 @@ import React from "react";
 
 const CreateHarvestingPlanPage = () => {
   return (
-    <div>
-      <HarvestingPlanList />
+    <div className="flex flex-col gap-2">
       <CreateHarvestingPlanLink />
+      <HarvestingPlanList />
     </div>
   );
 };

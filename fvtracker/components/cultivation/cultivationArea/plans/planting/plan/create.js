@@ -2,7 +2,10 @@
 
 import { AppDatePicker, AppInput } from "@/components/form/inputs";
 import api from "@/lib/api";
-import { setFields } from "@/store/cultivation";
+import {
+  createHarvestingPlan,
+  createPlantingPlan,
+} from "@/store/cultivation";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +15,7 @@ import { FieldStatistics } from "@/components/cultivation/fields/general";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { Loading } from "@/components/layout/loading";
 import { refreshFields } from "@/lib/utils/fields";
+import { setLoading } from "@/store/loading";
 
 export default function CreatePlantingPlanPageComonent() {
   const [selectedField, setSelectedField] = useState(null);
@@ -26,10 +30,7 @@ export default function CreatePlantingPlanPageComonent() {
 
       {selectedField ? (
         <div className="mt-4 rounded-lg border p-4">
-          <FillPlanInfo
-            selectedField={selectedField}
-            setSelectedField={setSelectedField}
-          />
+          <FillPlanInfo selectedField={selectedField} />
         </div>
       ) : null}
     </>
@@ -119,51 +120,15 @@ export const SelectField = ({
   );
 };
 
-export const FillPlanInfo = ({
-  selectedField,
-  setSelectedField,
-  plant = true,
-  initialPlan = null,
-  onSaved = null,
-  submitButtonLabel = null,
-}) => {
+export const FillPlanInfo = ({ selectedField, plant = true }) => {
   const crops = useSelector((state) => state.cultivation.crops);
   const {
     generalTypes = [],
     types = [],
     varieties: cropVarieties = [],
   } = crops || {};
-
-  const isEdit = Boolean(initialPlan?._id);
-
-  const createInitialFormData = ({
-    field = selectedField?._id || initialPlan?.field?._id || null,
-  } = {}) => {
-    if (initialPlan) {
-      const plannedPlantingDate = initialPlan.plannedPlantingDate
-        ? new Date(initialPlan.plannedPlantingDate).toISOString().split("T")[0]
-        : new Date().toISOString().split("T")[0];
-      const plannedHarvestingDate = initialPlan.plannedHarvestingDate
-        ? new Date(initialPlan.plannedHarvestingDate)
-            .toISOString()
-            .split("T")[0]
-        : new Date().toISOString().split("T")[0];
-
-      return {
-        name: initialPlan.name || "",
-        field,
-        items:
-          initialPlan.items?.map((item) => ({
-            generalType: item.cropVariety?.cropType?.generalType || "",
-            type: item.cropVariety?.cropType?._id || "",
-            cropVariety: item.cropVariety?._id || "",
-            quantity: item.quantity || 0,
-          })) || [],
-        plannedPlantingDate,
-        plannedHarvestingDate,
-      };
-    }
-
+  const dispatch = useDispatch();
+  const createInitialFormData = ({ field = selectedField?._id } = {}) => {
     const defaultGeneralType = generalTypes[0]?._id || "";
     const defaultType =
       types.filter((t) => t.generalTypeName === generalTypes[0]?.name)[0]
@@ -191,17 +156,17 @@ export const FillPlanInfo = ({
 
   const [formData, setFormData] = useState(
     createInitialFormData({
-      field: selectedField?._id || initialPlan?.field?._id || null,
+      field: selectedField?._id,
     }),
   );
 
   useEffect(() => {
     setFormData(
       createInitialFormData({
-        field: selectedField?._id || initialPlan?.field?._id || null,
+        field: selectedField?._id,
       }),
     );
-  }, [selectedField?._id, initialPlan?._id, crops]);
+  }, [selectedField?._id, , crops]);
 
   useEffect(() => {
     console.log("Form data updated:", formData);
@@ -272,11 +237,11 @@ export const FillPlanInfo = ({
   const handleSubmit = async () => {
     const submitData = utils.plant.prepareSubmitPlan({
       ...formData,
-      field: selectedField?._id || initialPlan?.field?._id || formData.field,
+      field: selectedField?._id || formData.field,
     });
 
     console.log(
-      `Submitting ${isEdit ? "updated" : "new"} ${plant ? "planting" : "harvesting"} plan with data:`,
+      `Submitting new ${plant ? "planting" : "harvesting"} plan with data:`,
       submitData,
     );
 
@@ -285,41 +250,29 @@ export const FillPlanInfo = ({
     }
 
     try {
+      dispatch(setLoading(true));
       const endpoint = `/cultivation/${plant ? "plant" : "harvest"}/plan`;
-      const res = isEdit
-        ? await api.put(endpoint, {
-            planId: initialPlan._id,
-            ...submitData,
-          })
-        : await api.post(endpoint, {
-            ...submitData,
-          });
+      const res = await api.post(endpoint, {
+        ...submitData,
+      });
 
       const resultPlan =
-        res.data[
-          `${isEdit ? "updated" : "new"}${plant ? "Planting" : "Harvesting"}Plan`
-        ];
+        res.data[`new${plant ? "Planting" : "Harvesting"}Plan`];
 
-      if (isEdit) {
-        alert(`Plan ${plant ? "sadnje" : "berbe"} uspješno ažuriran!`);
-      } else {
-        alert(`Plan ${plant ? "sadnje" : "berbe"} uspješno kreiran!`);
-      }
+      alert(`Plan ${plant ? "sadnje" : "berbe"} uspješno kreiran!`);
 
       console.log(
-        `${isEdit ? "Updated" : "Created"} ${plant ? "planting" : "harvesting"} plan:`,
+        `Result ${plant ? "planting" : "harvesting"} plan:`,
         resultPlan,
       );
-
-      if (onSaved) {
-        onSaved(resultPlan);
+      if (plant) {
+        dispatch(createPlantingPlan(resultPlan));
+      } else {
+        dispatch(createHarvestingPlan(resultPlan));
       }
-
-      if (!isEdit) {
-        setSelectedField?.(null);
-        setFormData(createInitialFormData({}));
-      }
+      dispatch(setLoading(false));
     } catch (error) {
+      dispatch(setLoading(false));
       console.error(
         `Error ${isEdit ? "updating" : "creating"} ${plant ? "planting" : "harvesting"} plan:`,
         error,
@@ -495,7 +448,7 @@ export const FillPlanInfo = ({
           </div>
 
           <div className="btn self-start" onClick={handleSubmit}>
-            {submitButtonLabel || (isEdit ? "Spremi promjene" : "Spremi plan")}
+            Spremi plan {plant ? "sadnje" : "berbe"}
           </div>
         </div>
       </div>

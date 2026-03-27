@@ -9,6 +9,7 @@ export function FormModal({
   children,
   invertColor,
   submitDisabled,
+  submitText = "Spremi",  
 }) {
   return (
     <Modal
@@ -23,12 +24,13 @@ export function FormModal({
         onCancel={onCancel}
         onSubmit={onSubmit}
         submitDisabled={submitDisabled}
+        submitText={submitText}
       />
     </Modal>
   );
 }
 
-function FormModalFooter({ onCancel, onSubmit, submitDisabled }) {
+function FormModalFooter({ onCancel, onSubmit, submitDisabled, submitText }) {
   return (
     <ModalFooter>
       <div onClick={onCancel} className="btn cancelButton">
@@ -39,7 +41,7 @@ function FormModalFooter({ onCancel, onSubmit, submitDisabled }) {
         className={`btn submitButton ${submitDisabled ? "cursor-not-allowed opacity-50" : ""}`}
         disabled={submitDisabled}
       >
-        Spremi
+        {submitText}
       </button>
     </ModalFooter>
   );

@@ -75,6 +75,7 @@ export const PlantCultivation = ({
       title="Zasadi na područje"
       onSubmit={onSubmit}
       invertColor={true}
+      submitText="Završi sadnju"
       submitDisabled={submitDisabled}
     >
       <div className={`form`}>

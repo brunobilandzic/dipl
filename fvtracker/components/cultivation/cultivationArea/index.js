@@ -20,6 +20,7 @@ import { EditCultivation } from "./editCultivation";
 import { SeedingModal } from "@/components/cultivation/cultivationArea/planting/seedingModal";
 import { HarvestingModal } from "@/components/cultivation/cultivationArea/harvesting/harvestingModal";
 import { refreshFields } from "@/lib/utils/fields";
+import { setLoading } from "@/store/loading";
 
 export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const dispatch = useDispatch();
@@ -180,6 +181,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   };
 
   const onSubmitCultivation = async () => {
+    dispatch(setLoading(true));
     try {
       const data =
         utils.cultivation.cultivations.prepareCultivationData(newCUDetails);
@@ -195,6 +197,8 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
         generalMessage: "Neuspjelo kreiranje kultivacije",
       });
       return;
+    } finally {
+      dispatch(setLoading(false));
     }
     setCreateCultivationOpen(false);
     setNewCUDetails(initialNewCUDetails);
@@ -248,6 +252,8 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       cultivation: selectedCultivation,
     });
   };
+
+
 
   return (
     <>

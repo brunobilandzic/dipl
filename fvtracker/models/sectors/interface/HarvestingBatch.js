@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 
-const HarvestBatchSchema = new Schema({
+const harvestingBatchSchema = new Schema({
   harvestingPlan: {
     type: Schema.Types.ObjectId,
     ref: "HarvestingPlan",
@@ -22,7 +22,7 @@ const HarvestBatchSchema = new Schema({
   ],
 });
 
-const HarvestBatchItemSchema = new Schema({
+const harvestingBatchItemSchema = new Schema({
   cropVariety: {
     type: Schema.Types.ObjectId,
     ref: "CropVariety",
@@ -41,8 +41,11 @@ const HarvestBatchItemSchema = new Schema({
   ],
 });
 
-export const HarvestBatch = mongoose.model("HarvestBatch", HarvestBatchSchema);
-export const HarvestBatchItem = mongoose.model(
-  "HarvestBatchItem",
-  HarvestBatchItemSchema,
+export const HarvestingBatch = mongoose.model(
+  "HarvestingBatch",
+  harvestingBatchSchema,
+);
+export const HarvestingBatchItem = mongoose.model(
+  "HarvestingBatchItem",
+  harvestingBatchItemSchema,
 );

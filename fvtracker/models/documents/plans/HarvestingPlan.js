@@ -54,6 +54,13 @@ const harvestingPlanSchema = new Schema({
     type: Date,
     default: null,
   },
+  harvestingBatches: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "HarvestBatch",
+      default: [],
+    },
+  ],
   slug: { type: String, unique: true, index: true },
 });
 

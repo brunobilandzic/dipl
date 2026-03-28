@@ -233,8 +233,29 @@ const cultivationSlice = createSlice({
       }
     },
     harvestCells: (state, action) => {
-        // reverce createPlantage logic
-    }
+      // reverce createPlantage logic
+      const { cultivationId, harvestedCropVarieties } = action.payload;
+      if (!state.selectedField) return;
+
+      for (const ca of state.selectedField.cultivationAreas) {
+        const cultivation = ca.cultivations.find(
+          (c) => c._id === cultivationId,
+        );
+        if (!cultivation) continue;
+
+        for (const harvested of harvestedCropVarieties) {
+          for (const pcv of cultivation.plantedCropVarieties) {
+            if (pcv._id === harvested._id) {
+              console.log("pcv founc:", pcv);
+              pcv.plantingPlanItem = null;
+              pcv.harvestedAt = harvested.harvestedAt;
+              pcv.harvestingPlanItem = harvested.harvestingPlanItem;
+              console.log("Updated pcv after harvest:", pcv);
+            }
+          }
+        }
+      }
+    },
   },
 });
 
@@ -256,6 +277,7 @@ export const {
   createPlantingPlan,
   createHarvestingPlan,
   deleteField,
+  harvestCells,
 } = cultivationSlice.actions;
 
 export default cultivationSlice.reducer;

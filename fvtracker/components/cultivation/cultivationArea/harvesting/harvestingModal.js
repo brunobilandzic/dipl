@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { setLoading } from "@/store/loading";
 import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
+import { harvestCells } from "@/store/cultivation";
 
 export function HarvestingModal({
   isOpen,

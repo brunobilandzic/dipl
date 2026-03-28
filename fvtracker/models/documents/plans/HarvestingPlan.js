@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { Field } from "@/models/sectors/cultivation/Field";
 import { makeUrlFriendly } from "@/lib/utils/strings";
+import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
 
 const { Schema } = mongoose;
 
@@ -57,10 +58,9 @@ const harvestingPlanSchema = new Schema({
   harvestingBatch:
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "HarvestBatch",
+      ref: "HarvestingBatch",
       default: [],
     },
-  ,
   slug: { type: String, unique: true, index: true },
 });
 
@@ -69,7 +69,15 @@ harvestingPlanSchema.pre("save", async function () {
     const field = await Field.findById(this.field);
     this.slug = makeUrlFriendly(`${field?.name}-${this.name}`);
   }
-});
+  if(!this.harvestingBatch) {
+    const harvestingBatch = new HarvestingBatch({
+      harvestingPlan: this._id,
+    });
+    await harvestingBatch.save();
+    this.harvestingBatch = harvestingBatch._id;
+
+    }
+  });
 
 export const HarvestingPlan =
   mongoose.models.HarvestingPlan ||

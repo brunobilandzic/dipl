@@ -62,7 +62,7 @@ harvestingBatchSchema.methods.findOrCreateItemForCropVariety = async function ({
 };
 
 harvestingBatchSchema.methods.addPlantedCropVarieties = async function ({
-  plantedCropVariety,
+  plantedCropVarieties,
   quantity,
 }) {
   // Find or create the corresponding HarvestingBatchItem

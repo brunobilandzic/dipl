@@ -228,6 +228,13 @@ export function HarvestingModal({
         "/cultivation/harvest/new-harvest",
         prepareHarvestBody(newHarvest),
       );
+      dispatch(
+        harvestCells({
+          cultivationId: newHarvest.cultivationId,
+          harvestedCropVarieties: res.data.harvestedCropVarieties,
+        }),
+      );
+      dispatch(setLoading(false));
       console.log("Harvest submission response:", res);
     } catch (error) {
       dispatch(setLoading(false));

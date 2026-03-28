@@ -41,6 +41,13 @@ const harvestingBatchItemSchema = new Schema({
   ],
 });
 
+harvestingBatchSchema.methods.addPlantedCropVariety = async function ({
+  plantedCropVariety,
+  quantity,
+}) {
+  // Find or create the corresponding HarvestingBatchItem
+};
+
 export const HarvestingBatch = mongoose.model(
   "HarvestingBatch",
   harvestingBatchSchema,

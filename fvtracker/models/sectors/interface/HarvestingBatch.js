@@ -1,4 +1,5 @@
 import { Schema } from "mongoose";
+import mongoose from "mongoose";
 
 const harvestingBatchSchema = new Schema({
   harvestingPlan: {
@@ -74,11 +75,9 @@ harvestingBatchSchema.methods.addPlantedCropVarieties = async function ({
   await item.save();
 };
 
-export const HarvestingBatch = mongoose.model(
-  "HarvestingBatch",
-  harvestingBatchSchema,
-);
-export const HarvestingBatchItem = mongoose.model(
-  "HarvestingBatchItem",
-  harvestingBatchItemSchema,
-);
+export const HarvestingBatch =
+  mongoose.models.HarvestingBatch ||
+  mongoose.model("HarvestingBatch", harvestingBatchSchema);
+export const HarvestingBatchItem =
+  mongoose.models.HarvestingBatchItem ||
+  mongoose.model("HarvestingBatchItem", harvestingBatchItemSchema);

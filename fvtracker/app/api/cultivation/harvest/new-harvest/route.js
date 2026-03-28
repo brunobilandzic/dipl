@@ -7,10 +7,7 @@ export async function POST(req) {
     const newHarvest = body;
     console.log({ newHarvest });
     const harvestedCropVarieties = await harvestCells(newHarvest);
-    return Response.json(
-      { message: "New harvest created", harvestedCropVarieties },
-      { status: 201 },
-    );
+    return Response.json({ harvestedCropVarieties }, { status: 201 });
   } catch (error) {
     console.error("Error creating new harvest:", error);
     return Response.json(

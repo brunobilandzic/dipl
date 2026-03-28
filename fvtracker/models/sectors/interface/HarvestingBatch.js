@@ -23,6 +23,11 @@ const harvestingBatchSchema = new Schema({
 });
 
 const harvestingBatchItemSchema = new Schema({
+  harvestingBatch: {
+    type: Schema.Types.ObjectId,
+    ref: "HarvestingBatch",
+    required: true,
+  },
   cropVariety: {
     type: Schema.Types.ObjectId,
     ref: "CropVariety",

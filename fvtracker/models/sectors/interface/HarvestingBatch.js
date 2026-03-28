@@ -66,6 +66,12 @@ harvestingBatchSchema.methods.addPlantedCropVarieties = async function ({
   quantity,
 }) {
   // Find or create the corresponding HarvestingBatchItem
+  const item = await this.findOrCreateItemForCropVariety({
+    cropVarietyId: plantedCropVarieties[0], // Assuming the first variety is the main one
+  });
+  // Update the quantity or perform other operations as needed
+  item.quantity = (item.quantity || 0) + quantity;
+  await item.save();
 };
 
 export const HarvestingBatch = mongoose.model(

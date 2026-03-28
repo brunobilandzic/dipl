@@ -54,4 +54,6 @@ export async function harvestCells({
     pcv.harvestingPlanItem = harvestingPlanItem._id;
     await pcv.save();
   }
+
+  return plantedCropVarieties;
 }

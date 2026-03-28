@@ -190,7 +190,7 @@ const cultivationSlice = createSlice({
     },
     createPlantage: (state, action) => {
       const { cultivationId, newPlantage } = action.payload;
-
+      console.log("Creating/updating plantage with data:", action.payload);
       if (!state.selectedField) return;
       for (const ca of state.selectedField.cultivationAreas) {
         const cultivation = ca.cultivations.find(
@@ -232,6 +232,9 @@ const cultivationSlice = createSlice({
         field.harvestingPlans = [...(field.harvestingPlans || []), newPlan];
       }
     },
+    harvestCells: (state, action) => {
+        // reverce createPlantage logic
+    }
   },
 });
 

@@ -46,7 +46,22 @@ const harvestingBatchItemSchema = new Schema({
   ],
 });
 
-harvestingBatchSchema.methods.addPlantedCropVariety = async function ({
+harvestingBatchSchema.methods.findOrCreateItemForCropVariety = async function ({
+  cropVarietyId,
+}) {
+  let item = await HarvestingBatchItem.findOne({
+    harvestingBatch: this._id,
+    cropVariety: cropVarietyId,
+  });
+  if (!item)
+    item = new HarvestingBatchItem({
+      harvestingBatch: this._id,
+      cropVariety: cropVarietyId,
+    });
+  return item;
+};
+
+harvestingBatchSchema.methods.addPlantedCropVarieties = async function ({
   plantedCropVariety,
   quantity,
 }) {

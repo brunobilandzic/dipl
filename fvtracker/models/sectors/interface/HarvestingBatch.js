@@ -75,7 +75,7 @@ const harvestingBatchItemSchema = new Schema({
   ],
 });
 
-harvestingBatchItemSchema.methodss.quantity = function () {
+harvestingBatchItemSchema.methods.quantity = function () {
   return this.plantedCropVarieties.length;
 };
 

@@ -23,26 +23,6 @@ const harvestingBatchSchema = new Schema({
   ],
 });
 
-const harvestingBatchItemSchema = new Schema({
-  harvestingBatch: {
-    type: Schema.Types.ObjectId,
-    ref: "HarvestingBatch",
-    required: true,
-  },
-  cropVariety: {
-    type: Schema.Types.ObjectId,
-    ref: "CropVariety",
-    required: true,
-  },
-  plantedCropVarieties: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "PlantedCropVariety",
-      default: [],
-    },
-  ],
-});
-
 harvestingBatchSchema.methods.findOrCreateItemForCropVariety = async function ({
   cropVarietyId,
 }) {
@@ -70,6 +50,26 @@ harvestingBatchSchema.methods.addPlantedCropVarieties = async function ({
   item.quantity = (item.quantity || 0) + quantity;
   await item.save();
 };
+
+const harvestingBatchItemSchema = new Schema({
+  harvestingBatch: {
+    type: Schema.Types.ObjectId,
+    ref: "HarvestingBatch",
+    required: true,
+  },
+  cropVariety: {
+    type: Schema.Types.ObjectId,
+    ref: "CropVariety",
+    required: true,
+  },
+  plantedCropVarieties: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "PlantedCropVariety",
+      default: [],
+    },
+  ],
+});
 
 export const HarvestingBatch =
   mongoose.models.HarvestingBatch ||

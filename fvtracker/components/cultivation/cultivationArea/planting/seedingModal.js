@@ -333,9 +333,7 @@ const initialNewPlantage_WId = ({ cultivationId, crops }) => {
   } = crops || {};
 
   const defaultVariety =
-    cropVarieties.filter(
-      (v) => v.cropTypeName === types.find((t) => t._id === defaultType)?.name,
-    )[0]?._id || "";
+    cropVarieties.filter((v) => v.name === "Iceberg")[0]?._id || "";
 
   return {
     cultivationId: cultivationId || null,

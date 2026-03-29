@@ -7,6 +7,7 @@ import SEED_TYPES from "@/seed/seedTypes";
 import { OptionButtons } from "../layout/buttons/options";
 import { useDispatch } from "react-redux";
 import { setLoading } from "@/store/loading";
+import { signOut } from "next-auth/react";
 
 export default function SeedOptions() {
   const dispatch = useDispatch();
@@ -58,6 +59,7 @@ export default function SeedOptions() {
   const API = async (seedType) => {
     try {
       console.log(`Seeding ${seedType}...`);
+      await signOut({ redirect: false });
       dispatch(setLoading(true));
       const response = await axios.post("/api/seed", { seedType });
       console.log(response.data);

@@ -61,18 +61,5 @@ export async function harvestCells({
       cropVarietyId,
     });
 
-  console.log(
-    `Added ${plantedCropVarieties.length} planted crop varieties to harvesting batch item for crop variety ID: ${cropVarietyId}`,
-  );
-  console.log(
-    `Harvesting batch item now has ${harvestBatchItem.quantity()} planted crop varieties.`,
-  );
-  console.log({
-    harvestingBatch: harvestingPlan.harvestingBatch,
-    plantedCropVarietiesIds: plantedCropVarieties.map((pcv) => pcv._id),
-    cropVarietyId,
-    harvestBatchItem,
-  });
-
   return plantedCropVarieties;
 }

@@ -51,6 +51,8 @@ harvestingBatchSchema.methods.addPlantedCropVarieties = async function ({
   });
   item.plantedCropVarieties.push(...plantedCropVarietiesIds);
   await item.save();
+
+  return item
 };
 
 const harvestingBatchItemSchema = new Schema({

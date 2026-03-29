@@ -55,12 +55,11 @@ const harvestingPlanSchema = new Schema({
     type: Date,
     default: null,
   },
-  harvestingBatch:
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "HarvestingBatch",
-      default: [],
-    },
+  harvestingBatch: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "HarvestingBatch",
+    default: null,
+  },
   slug: { type: String, unique: true, index: true },
 });
 
@@ -69,15 +68,14 @@ harvestingPlanSchema.pre("save", async function () {
     const field = await Field.findById(this.field);
     this.slug = makeUrlFriendly(`${field?.name}-${this.name}`);
   }
-  if(!this.harvestingBatch) {
+  if (!this.harvestingBatch) {
     const harvestingBatch = new HarvestingBatch({
       harvestingPlan: this._id,
     });
     await harvestingBatch.save();
     this.harvestingBatch = harvestingBatch._id;
-
-    }
-  });
+  }
+});
 
 export const HarvestingPlan =
   mongoose.models.HarvestingPlan ||

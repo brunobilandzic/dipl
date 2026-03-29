@@ -42,15 +42,14 @@ harvestingBatchSchema.methods.findOrCreateItemForCropVariety = async function ({
 };
 
 harvestingBatchSchema.methods.addPlantedCropVarieties = async function ({
-  plantedCropVarieties,
-  quantity,
+  plantedCropVarietiesIds,
+  cropVarietyId,
 }) {
   // Find or create the corresponding HarvestingBatchItem
   const item = await this.findOrCreateItemForCropVariety({
-    cropVarietyId: plantedCropVarieties[0], // Assuming the first variety is the main one
+    cropVarietyId: cropVarietyId,
   });
-  // Update the quantity or perform other operations as needed
-  item.quantity = (item.quantity || 0) + quantity;
+  item.plantedCropVarieties.push(...plantedCropVarietiesIds);
   await item.save();
 };
 

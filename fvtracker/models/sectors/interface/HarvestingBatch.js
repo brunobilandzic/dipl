@@ -34,10 +34,6 @@ const harvestingBatchItemSchema = new Schema({
     ref: "CropVariety",
     required: true,
   },
-  quantity: {
-    type: Number,
-    default: 0,
-  },
   plantedCropVarieties: [
     {
       type: Schema.Types.ObjectId,

@@ -35,6 +35,9 @@ harvestingBatchSchema.methods.findOrCreateItemForCropVariety = async function ({
       harvestingBatch: this._id,
       cropVariety: cropVarietyId,
     });
+  await item.save();
+  this.harvestBatchItems.push(item._id);
+  await this.save();
   return item;
 };
 

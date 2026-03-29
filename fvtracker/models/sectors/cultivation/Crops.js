@@ -95,6 +95,13 @@ const cropVarietySchema = new Schema({
       default: [],
     },
   ],
+  harvestBatchItems: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "HarvestBatchItem",
+      default: [],
+    },
+  ],
 });
 
 const plantedCropVarietySchema = new Schema({

@@ -64,8 +64,18 @@ export async function harvestCells({
   return plantedCropVarieties;
 }
 
-export async function harvestingBatches() {
+export async function harvestingBatches({ cultivation = true }) {
+  return cultivation ? await cmBatches() : await pmBatches();
+}
+
+async function cmBatches() {
   const cultivationManager = await fetchSessionSpecificManager({
     managerName: "cultivationManager",
+  });
+}
+
+async function pmBatches() {
+  const productionManager = await fetchSessionSpecificManager({
+    managerName: "productionManager",
   });
 }

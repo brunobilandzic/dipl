@@ -63,3 +63,9 @@ export async function harvestCells({
 
   return plantedCropVarieties;
 }
+
+export async function harvestingBatches() {
+  const cultivationManager = await fetchSessionSpecificManager({ managerName: "cultivationManager" });
+
+  
+}

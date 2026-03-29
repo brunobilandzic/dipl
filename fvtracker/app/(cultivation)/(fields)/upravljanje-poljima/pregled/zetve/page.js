@@ -1,7 +1,14 @@
+import HarvestingBatches from "@/components/cultivation/cultivationArea/harvesting/harvestingBatches";
 import React from "react";
 
 const HarvestingBatchesPage = () => {
-  return <div>HarvestingBatchesPage</div>;
+  return (
+    <>
+      <div>
+        <HarvestingBatches />
+      </div>
+    </>
+  );
 };
 
 export default HarvestingBatchesPage;

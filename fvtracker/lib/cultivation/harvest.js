@@ -26,7 +26,9 @@ export async function harvestCells({
       toHarvestCells.includes(pcv.relativeCoords),
   );
 
-  const harvestingPlan = await getHarvestingPlanById(harvestingPlanId);
+  const harvestingPlan = await getHarvestingPlanById(harvestingPlanId).populate(
+    { path: "harvestingBatch" },
+  );
   await harvestingPlan.populate("items");
 
   const harvestingPlanItem = harvestingPlan.items.find(
@@ -54,6 +56,24 @@ export async function harvestCells({
     pcv.harvestingPlanItem = harvestingPlanItem._id;
     await pcv.save();
   }
+
+  const harvestBatchItem = await harvestingBatch.addPlantedCropVarieties({
+    plantedCropVarieties: plantedCropVarieties.map((pcv) => pcv._id),
+    cropVarietyId,
+  });
+
+  console.log(
+    `Added ${plantedCropVarieties.length} planted crop varieties to harvesting batch item for crop variety ID: ${cropVarietyId}`,
+  );
+  console.log(
+    `Harvesting batch item now has ${harvestBatchItem.quantity()} planted crop varieties.`,
+  );
+  console.log({
+    harvestingBatch,
+    plantedCropVarietiesIds: plantedCropVarieties.map((pcv) => pcv._id),
+    cropVarietyId,
+    harvestBatchItem,
+  });
 
   return plantedCropVarieties;
 }

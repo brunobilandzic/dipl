@@ -71,6 +71,10 @@ const harvestingBatchItemSchema = new Schema({
   ],
 });
 
+harvestingBatchItemSchema.methodss.quantity = function () {
+  return this.plantedCropVarieties.length;
+};
+
 export const HarvestingBatch =
   mongoose.models.HarvestingBatch ||
   mongoose.model("HarvestingBatch", harvestingBatchSchema);

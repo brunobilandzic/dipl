@@ -5,6 +5,7 @@ import crops from "./cultivation/crops";
 // import cultivations from "./cultivation/cultivation";
 import { deleteDB } from "@/lib/db/delete";
 import { CropVariety } from "@/models/sectors/cultivation/Crops";
+import production from "./production";
 
 const seed = {
   handleAPIRequest,
@@ -25,6 +26,8 @@ async function handleAPIRequest(seedType) {
       return await crops.mainTypes();
     case SEED_TYPES.CULTIVATIONS:
       return await cultivations.create();
+    case SEED_TYPES.PRODUCTION:
+      return await production.seedProduction();
 
     default:
       throw new Error(`Unknown seed type: ${seedType}`);
@@ -37,6 +40,7 @@ async function seedAll() {
   const cropVarietiesCount = await CropVariety.countDocuments({});
   await users.all();
   await fields.create();
+  await production.seedProduction();
 
   if (cropVarietiesCount === 0) {
     throw new Error("Seed All failed: no crop varieties were created.");

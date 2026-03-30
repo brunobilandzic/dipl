@@ -80,7 +80,6 @@ export async function fetchSessionSpecificManager({
 
 export async function fetchManager({ managerNames = [] }) {
   const response = {
-    hasAccess: false,
     generalManager: null,
     specificManager: null,
   };
@@ -90,10 +89,7 @@ export async function fetchManager({ managerNames = [] }) {
   });
 
   if (generalManager) {
-    return {
-      hasAccess: true,
-      generalManager,
-    };
+    response.generalManager = generalManager;
   }
 
   for (const managerName of managerNames) {
@@ -102,16 +98,11 @@ export async function fetchManager({ managerNames = [] }) {
       throwError: false,
     });
     if (specificManager) {
-      return {
-        hasAccess: true,
-        specificManager,
-      };
+      response.has
     }
   }
 
   throw new Error(
-    `No manager found for session user among types: ${managerNames.join(
-      ", ",
-    )}`,
+    `No manager found for session user among types: ${managerNames.join(", ")}`,
   );
 }

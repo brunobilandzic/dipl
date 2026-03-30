@@ -44,7 +44,7 @@ const HarvestingBatch = ({ fieldName, harvestingPlans, name }) => {
         {Object.keys(harvestingPlans).map((planName) => (
           <div className="border p-4" key={uuid()}>
             <p>Plan berbe: {planName}</p>
-            <p>Žetva: {name}</p>
+            <p>Žetva: {harvestingPlans[planName]?.name}</p>
             <p>Proizvodnja: {harvestingPlans[planName]?.productions?.length}</p>
             <p>
               Stavke: {harvestingPlans[planName]?.harvestingBatchItems?.length}

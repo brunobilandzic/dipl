@@ -10,6 +10,7 @@ import { refreshFields } from "@/lib/utils/fields";
 import { refreshGeneralManager } from "@/lib/utils/generalManager";
 import { ROLE_STATUSES } from "@/lib/constants/users";
 import { useRouter } from "next/navigation";
+import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
 
 export default {
   roleitems,
@@ -59,7 +60,7 @@ function NavItems() {
       setManagerModelName(session.user?.managerModelName);
       dispatch(login(session.user));
       if (
-        managerModelName === "CultivationManager" &&
+        managerModelName === CULTIVATION_MANAGER &&
         !fieldsRedux &&
         session.user?.roleStatus === ROLE_STATUSES.APPROVED
       ) {

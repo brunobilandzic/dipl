@@ -39,8 +39,7 @@ export default function SeedOptions() {
       icon: <MdFoodBank />,
       type: SEED_TYPES.FIELDS,
     },
-    {
-      label: "Usjevi",
+      label: "Bilke",
       icon: <MdFoodBank />,
       type: SEED_TYPES.CROP_MAIN_TYPES,
     },

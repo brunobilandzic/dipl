@@ -145,7 +145,7 @@ export async function GET(request) {
               select: "name slug",
             },
             {
-              path: "harvestingBatches",
+              path: "harvestingBatch",
               populate: {
                 select: "name harvestBatchItems productions",
                 path: "harvestingBatchItems",

@@ -2,6 +2,10 @@ import { Schema } from "mongoose";
 import mongoose from "mongoose";
 
 const harvestingBatchSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
   harvestingPlan: {
     type: Schema.Types.ObjectId,
     ref: "HarvestingPlan",

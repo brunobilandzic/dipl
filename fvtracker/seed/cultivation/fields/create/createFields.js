@@ -18,7 +18,7 @@ import {
 import { CropVariety } from "@/models/sectors/cultivation/Crops.js";
 import { CultivationArea } from "@/models/sectors/cultivation/Cultivation.js";
 import { createCultivation } from "../../cultivation/index.js";
-import { createNewPlantage } from "../../crops/crops.js";
+import { createNewHarvest, createNewPlantage } from "../../crops/crops.js";
 
 await dbConnect();
 
@@ -183,7 +183,7 @@ export async function createFieldRecord(fieldObject) {
     cultivationArea: cultivationCA,
   });
   await createNewPlantage({ plantingPlan: newPlantingPlan });
-
+  await createNewHarvest({ harvestingPlan: newHarvestingPlan });
   await fieldRecord.save();
   return fieldRecord;
 }

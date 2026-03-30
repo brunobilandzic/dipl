@@ -169,7 +169,6 @@ export const createNewPlantage = async ({ plantingPlan }) => {
     select: "plantedCropVarieties cropVariety quantity",
   });
   const plantingPlanItem = plantingPlan.items[0];
-  console.log({ plantingPlanItem, plantingPlan });
   const cropVarietyId = plantingPlan.items[0].cropVariety;
   await PlantedCropVariety.updateMany(
     {},
@@ -178,12 +177,40 @@ export const createNewPlantage = async ({ plantingPlan }) => {
   const plantedCropVarietes = await PlantedCropVariety.find({
     plantingPlanItem: plantingPlanItem._id,
   });
-  console.log({ plantedCropVarietes });
 
   plantingPlanItem.plantedCropVarieties.push(
     ...plantedCropVarietes.map((p) => p._id),
   );
   plantingPlanItem.quantity -= plantedCropVarietes.length;
-  console.log({ plantingPlanItem });
   await plantingPlanItem.save();
+};
+
+export const createNewHarvest = async ({ harvestingPlan }) => {
+  await harvestingPlan.populate([
+    {
+      path: "items",
+      select: "plantedCropVarieties cropVariety quantity",
+    },
+    {
+      path: "harvestingBatch",
+    },
+  ]);
+  const harvestingPlanItem = harvestingPlan.items[0];
+  const cropVarietyId = harvestingPlan.items[0].cropVariety;
+  await PlantedCropVariety.updateMany(
+    {},
+    { harvestingPlanItem: harvestingPlanItem._id },
+  );
+  const plantedCropVarietes = await PlantedCropVariety.find({
+    harvestingPlanItem: harvestingPlanItem._id,
+  });
+  const plcvids = plantedCropVarietes.map((p) => p._id);
+  harvestingPlanItem.plantedCropVarieties.push(...plcvids);
+  harvestingPlan.harvestingBatch.addPlantedCropVarieties({
+    plantedCropVarietiesIds: plcvids,
+    cropVarietyId,
+  });
+  harvestingPlanItem.quantity -= plantedCropVarietes.length;
+
+  await harvestingPlanItem.save();
 };

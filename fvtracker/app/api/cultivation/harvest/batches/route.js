@@ -1,9 +1,12 @@
-import { getHarvestingBatches } from "@/lib/cultivation/harvest";
+import {
+  getHarvestingBatches,
+  populateBatches,
+} from "@/lib/cultivation/harvest";
 
 export async function GET(req) {
   try {
-    const batches = await getHarvestingBatches();
-    return Response.json(batches);
+    const { searchParams } = new URL(request.url);
+    const managerName = searchParams.get("managerName");
   } catch (error) {
     console.error("Error fetching harvesting batches:", error);
     return Response.json(

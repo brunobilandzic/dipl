@@ -1,6 +1,7 @@
 import { HarvestingPlan } from "@/models/documents/plans/HarvestingPlan";
 import { getCultivationById } from "./cultivation";
 import { PlantedCropVariety } from "@/models/sectors/cultivation/Crops";
+import { CULTIVATION_MANAGER } from "../constants/users/managerTypes";
 
 export async function getHarvestingPlanById(id) {
   const harvestingPlan = await HarvestingPlan.findById(id);
@@ -64,8 +65,12 @@ export async function harvestCells({
   return plantedCropVarieties;
 }
 
-export async function getHarvestingBatches({ cultivation = true }) {
-  return cultivation ? await cmBatches() : await pmBatches();
+export async function getHarvestingBatches({
+  managerName = CULTIVATION_MANAGER,
+}) {
+  return managerName === CULTIVATION_MANAGER
+    ? await cmBatches()
+    : await pmBatches();
 }
 
 async function cmBatches() {
@@ -98,7 +103,7 @@ async function pmBatches() {
   });
 }
 
-function populateBatches({ harvestingBatches }) {
+export function populateBatches({ harvestingBatches }) {
   return harvestingBatches.populate([
     {
       path: "harvestingBatchItems",

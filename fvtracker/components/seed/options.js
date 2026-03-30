@@ -39,16 +39,16 @@ export default function SeedOptions() {
       icon: <FaUserPlus />,
       type: SEED_TYPES.USERS,
     },
-    {
-      label: "Polja",
-      icon: <MdFoodBank />,
-      type: SEED_TYPES.FIELDS,
-    },
         {
       label: "Kultivacije",
       icon: <MdFoodBank />,
       type: SEED_TYPES.CULTIVATIONS,
     }, */
+    {
+      label: "Polja",
+      icon: <MdFoodBank />,
+      type: SEED_TYPES.FIELDS,
+    },
     {
       label: "Bilke",
       icon: <MdFoodBank />,

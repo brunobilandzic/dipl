@@ -22,29 +22,33 @@ export default function HarvestingBatches() {
   return (
     <div>
       <h1>Harvesting Batches</h1>
-      {harvestingBatches?.map((hb) => (
+      {Object.keys(harvestingBatches).map((fieldName) => (
         <div key={uuid()}>
-          <HarvestingBatch {...hb} />
+          <HarvestingBatch
+            fieldName={fieldName}
+            harvestingPlans={harvestingBatches[fieldName]}
+          />
         </div>
       ))}
-      {/* Add your harvesting batches content here */}
     </div>
   );
 }
 
-const HarvestingBatch = ({
-  harvestingBatchItems,
-  harvestingPlan,
-  productions,
-  name,
-}) => {
+const HarvestingBatch = ({ fieldName, harvestingPlans }) => {
   return (
     <>
       <div>
-        <h2>{name}</h2>
-        <p>Harvesting Plan: {harvestingPlan?.name}</p>
-        <p>Productions: {productions?.length}</p>
-        <p>Batch Items: {harvestingBatchItems?.length}</p>
+        <h2>{fieldName}</h2>
+        {Object.keys(harvestingPlans).map((planName) => (
+          <div key={uuid()}>
+            <p>Harvesting Plan: {planName}</p>
+            <p>Productions: {harvestingPlans[planName]?.productions?.length}</p>
+            <p>
+              Batch Items:{" "}
+              {harvestingPlans[planName]?.harvestingBatchItems?.length}
+            </p>
+          </div>
+        ))}
       </div>
     </>
   );

@@ -30,20 +30,3 @@ export const getHarvestCellsRect = ({
   return rectCells;
 };
 
-export async function refreshHarvestingBatches({ dispatch, router }) {
-  try {
-    const res = await api.get("/cultivation/harvest/batches");
-    if (
-      res.data &&
-      res.data.harvestingBatches &&
-      Array.isArray(res.data.harvestingBatches)
-    ) {
-      dispatch(setHarvestingBatches(res.data.harvestingBatches));
-    }
-  } catch (error) {
-    handleError({
-      ...error,
-      generalMessage: "Došlo je do greške prilikom učitavanja serpantina.",
-    });
-  }
-}

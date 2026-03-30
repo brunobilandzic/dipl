@@ -18,8 +18,9 @@ export const refreshFields = async ({ dispatch, router }) => {
       router.push("/uloga-nije-odobrena");
       return;
     }
-    const errorMessage =
-      error.response?.data?.message || error.message || "Nepoznata greška";
-    alert(`Greška pri dohvaćanju polja: ${errorMessage}`);
+    handleError({
+      ...error,
+      generalMessage: "Došlo je do greške prilikom učitavanja polja.",
+    });
   }
 };

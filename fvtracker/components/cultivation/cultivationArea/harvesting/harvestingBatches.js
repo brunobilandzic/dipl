@@ -20,32 +20,34 @@ export default function HarvestingBatches() {
   console.log("harvestingBatches", harvestingBatches);
 
   return (
-    <div>
-      <h1>Harvesting Batches</h1>
-      {Object.keys(harvestingBatches).map((fieldName) => (
-        <div key={uuid()}>
-          <HarvestingBatch
-            fieldName={fieldName}
-            harvestingPlans={harvestingBatches[fieldName]}
-          />
-        </div>
-      ))}
+    <div className="flex flex-col gap-4">
+      <h1 className="border-b-2 font-bold text-3xl">Žetve</h1>
+      <div>
+        {Object.keys(harvestingBatches).map((fieldName) => (
+          <div key={uuid()}>
+            <HarvestingBatch
+              fieldName={fieldName}
+              harvestingPlans={harvestingBatches[fieldName]}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
 
-const HarvestingBatch = ({ fieldName, harvestingPlans }) => {
+const HarvestingBatch = ({ fieldName, harvestingPlans, name }) => {
   return (
     <>
-      <div>
-        <h2>{fieldName}</h2>
+      <div className="border p-4 rounded-lg">
+        <h2>Polje: {fieldName}</h2>
         {Object.keys(harvestingPlans).map((planName) => (
-          <div key={uuid()}>
-            <p>Harvesting Plan: {planName}</p>
-            <p>Productions: {harvestingPlans[planName]?.productions?.length}</p>
+          <div className="border p-4" key={uuid()}>
+            <p>Plan berbe: {planName}</p>
+            <p>Žetva: {name}</p>
+            <p>Proizvodnja: {harvestingPlans[planName]?.productions?.length}</p>
             <p>
-              Batch Items:{" "}
-              {harvestingPlans[planName]?.harvestingBatchItems?.length}
+              Stavke: {harvestingPlans[planName]?.harvestingBatchItems?.length}
             </p>
           </div>
         ))}

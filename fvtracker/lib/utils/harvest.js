@@ -33,7 +33,11 @@ export const getHarvestCellsRect = ({
 export async function refreshHarvestingBatches({ dispatch, router }) {
   try {
     const res = await api.get("/cultivation/harvest/batches");
-    if(res.data && res.data.harvestingBatches && Array.isArray(res.data.harvestingBatches)) {
+    if (
+      res.data &&
+      res.data.harvestingBatches &&
+      Array.isArray(res.data.harvestingBatches)
+    ) {
       dispatch(setHarvestingBatches(res.data.harvestingBatches));
     }
   } catch (error) {

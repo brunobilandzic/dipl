@@ -28,7 +28,4 @@ export const getHarvestCellsRect = ({
   return rectCells;
 };
 
-
-export async function refreshHarvestingBatches({dispatch, router}) {
-
-}
+export async function refreshHarvestingBatches({ dispatch, router }) {}

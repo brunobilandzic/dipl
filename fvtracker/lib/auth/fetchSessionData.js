@@ -98,7 +98,8 @@ export async function fetchManager({ managerNames = [] }) {
       throwError: false,
     });
     if (specificManager) {
-      response.has
+      response.specificManager = specificManager;
+      return response;
     }
   }
 

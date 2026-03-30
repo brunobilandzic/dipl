@@ -1,9 +1,12 @@
+import { fetchSessionSpecificManager } from "@/lib/auth/fetchSessionData";
+import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
 import cultivation from "@/lib/cultivation";
 import dbConnect from "@/lib/db/mongooseConnect";
 
 export async function POST(request) {
   try {
     await dbConnect();
+    await fetchSessionSpecificManager({ managerName: CULTIVATION_MANAGER });
     const body = await request.json();
     const newHarvestingPlan = await cultivation.plans.createHarvestingPlan({
       harvestingPlanData: body,

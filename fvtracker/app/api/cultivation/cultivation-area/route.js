@@ -1,11 +1,14 @@
 import dbConnect from "@/lib/db/mongooseConnect";
 import cultivation from "@/lib/cultivation";
+import { fetchSessionSpecificManager } from "@/lib/auth/fetchSessionData";
+import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
 
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");
     await dbConnect();
+    await fetchSessionSpecificManager({ managerName: CULTIVATION_MANAGER });
     if (id) {
       const cultivationArea = await cultivation.cultivationArea.get(id);
       return Response.json({ cultivationArea }, { status: 200 });

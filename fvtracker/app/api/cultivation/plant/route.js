@@ -4,6 +4,7 @@ import dbConnect from "@/lib/db/mongooseConnect";
 export async function POST(request) {
   try {
     await dbConnect();
+    
     const body = await request.json();
     const { cultivationAreaId, cropVarietyId, cellCoords } = body;
     const { success, message, cropVariety, fieldCoords, cultivationArea } =

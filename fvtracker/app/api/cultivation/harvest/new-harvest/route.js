@@ -1,8 +1,11 @@
-import cultivation from "@/lib/cultivation";
+import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
 import { harvestCells } from "@/lib/cultivation/harvest";
+import dbConnect from "@/lib/db/mongooseConnect";
 
 export async function POST(req) {
   try {
+    await dbConnect();
+    await fetchSessionSpecificManager({ managerName: CULTIVATION_MANAGER });
     const body = await req.json();
     const newHarvest = body;
     console.log({ newHarvest });

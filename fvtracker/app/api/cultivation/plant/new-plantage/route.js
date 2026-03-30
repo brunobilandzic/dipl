@@ -1,11 +1,11 @@
-import auth from "@/lib/auth";
+import { fetchSessionSpecificManager } from "@/lib/auth/fetchSessionData";
 import cultivation from "@/lib/cultivation";
 import dbConnect from "@/lib/db/mongooseConnect";
 
 export async function POST(request) {
   try {
     await dbConnect();
-    await auth.session.specificManager({ managerName: "CultivationManager" });
+    await fetchSessionSpecificManager({ managerName: "CultivationManager" });
     const body = await request.json();
     const newPlantage = await cultivation.plants.create(body);
     return Response.json(newPlantage, { status: 200 });

@@ -1,9 +1,12 @@
+import { fetchSessionSpecificManager } from "@/lib/auth/fetchSessionData";
+import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
 import cultivation from "@/lib/cultivation";
 import dbConnect from "@/lib/db/mongooseConnect";
 
 export async function POST(request) {
   try {
     await dbConnect();
+    await fetchSessionSpecificManager({ managerName: CULTIVATION_MANAGER });
     const body = await request.json();
     const newPlantingPlan = await cultivation.plans.createPlantingPlan({
       plantingPlanData: body,
@@ -43,6 +46,7 @@ export async function POST(request) {
 export async function DELETE(request) {
   try {
     await dbConnect();
+    await fetchSessionSpecificManager({ managerName: CULTIVATION_MANAGER });
 
     let fieldId, planId;
     try {
@@ -66,6 +70,7 @@ export async function DELETE(request) {
 export async function PUT(request) {
   try {
     await dbConnect();
+    await fetchSessionSpecificManager({ managerName: CULTIVATION_MANAGER });
     const body = await request.json();
     const { planId, ...planData } = body;
 

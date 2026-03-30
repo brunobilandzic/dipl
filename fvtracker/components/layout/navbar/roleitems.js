@@ -40,6 +40,7 @@ export default {
       submenu: [
         { label: "pregled", path: "/upravljanje-poljima/pregled" },
         { label: "dodavanje", path: "/upravljanje-poljima/dodavanje" },
+        { label: "zetve", path: "/upravljanje-poljima/pregled/zetve" },
       ],
     },
     {

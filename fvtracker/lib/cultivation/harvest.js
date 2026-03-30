@@ -64,7 +64,7 @@ export async function harvestCells({
   return plantedCropVarieties;
 }
 
-export async function harvestingBatches({ cultivation = true }) {
+export async function getHarvestingBatches({ cultivation = true }) {
   return cultivation ? await cmBatches() : await pmBatches();
 }
 

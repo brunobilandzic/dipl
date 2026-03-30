@@ -30,3 +30,11 @@ export const getHarvestCellsRect = ({
   return rectCells;
 };
 
+export const getHarvestingBatches = ({ fields }) => {
+  const batches = [];
+
+  const harvestingPlans = fields.map((f) => f.harvestingPlans).flat();
+  const harvestingBatches = harvestingPlans.map((hp) => hp.harvestingBatch);
+
+  return harvestingBatches;
+};

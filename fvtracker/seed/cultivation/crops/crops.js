@@ -61,7 +61,7 @@ async function createCropGeneralType(mainTypeId, generalTypeData) {
   const dbGeneralTypeData = utils.objects.extractDBObject(generalTypeData);
   return new Promise(async (resolve, reject) => {
     const cropGeneralType = new CropGeneralType({
-      mainType: mainTypeId,
+      mainCropType: mainTypeId,
       ...dbGeneralTypeData,
     });
 

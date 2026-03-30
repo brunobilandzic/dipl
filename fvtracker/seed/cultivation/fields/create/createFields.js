@@ -16,6 +16,8 @@ import {
   createPlantingPlan,
 } from "@/lib/cultivation/plans.js";
 import { CropVariety } from "@/models/sectors/cultivation/Crops.js";
+import { CultivationArea } from "@/models/sectors/cultivation/Cultivation.js";
+import { createCultivation } from "../../cultivation/index.js";
 
 await dbConnect();
 
@@ -171,6 +173,13 @@ export async function createFieldRecord(fieldObject) {
     },
   );
   await Promise.all(cultivationAreasPromises);
+  const cultivationCA = await CultivationArea.findOne({
+    field: fieldRecord._id,
+  });
+  await createCultivation({
+    cultivationArea: cultivationCA,
+  });
+
   await fieldRecord.save();
   return fieldRecord;
 }

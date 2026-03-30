@@ -31,10 +31,19 @@ export const getHarvestCellsRect = ({
 };
 
 export const getHarvestingBatches = ({ fields }) => {
-  const batches = [];
+  const batches = {};
 
-  const harvestingPlans = fields.map((f) => f.harvestingPlans).flat();
-  const harvestingBatches = harvestingPlans.map((hp) => hp.harvestingBatch);
+  for (const field of fields) {
+    batches[field.name] = {};
+  }
 
-  return harvestingBatches;
+  for (const key of Object.keys(batches)) {
+    const field = fields.find((f) => f.name === key);
+    batches[key] = field.harvestingPlans.reduce((acc, hp) => {
+      acc[hp.name] = hp.harvestingBatch;
+      return acc;
+    }, batches[key]);
+  }
+
+  return batches;
 };

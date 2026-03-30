@@ -1,4 +1,8 @@
-import { GENERAL_MANAGER } from "@/lib/constants/users/managerTypes";
+import { fetchGeneralAndOtherManagers } from "@/lib/auth/fetchSessionData";
+import {
+  CULTIVATION_MANAGER,
+  PRODUCTION_MANAGER,
+} from "@/lib/constants/users/managerTypes";
 import {
   getHarvestingBatches,
   populateBatches,
@@ -9,14 +13,20 @@ import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
 export async function GET(req) {
   try {
     await dbConnect();
-    const { searchParams } = new URL(request.url);
-    const managerName = searchParams.get("managerName");
-    if (managerName === GENERAL_MANAGER) {
+    const { otherManagers, generalManager } =
+      await fetchGeneralAndOtherManagers({
+        managerNames: [CULTIVATION_MANAGER, PRODUCTION_MANAGER],
+      });
+
+    if (generalManager) {
       let harvestingBatches = await HarvestingBatch.find();
       harvestingBatches = await populateBatches({ harvestingBatches });
       return Response.json({ harvestingBatches }, { status: 200 });
     }
-    const harvestingBatches = await getHarvestingBatches({ managerName });
+    // manager of intest is first in array
+    const harvestingBatches = await getHarvestingBatches({
+      managerName: otherManagers[0].managerModelName,
+    });
     return Response.json({ harvestingBatches }, { status: 200 });
   } catch (error) {
     console.error("Error fetching harvesting batches:", error);

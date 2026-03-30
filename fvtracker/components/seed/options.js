@@ -2,7 +2,12 @@
 
 import axios from "axios";
 import { FaUserPlus } from "react-icons/fa";
-import { MdAllInclusive, MdDeleteForever, MdFoodBank } from "react-icons/md";
+import {
+  MdAllInclusive,
+  MdDeleteForever,
+  MdFactory,
+  MdFoodBank,
+} from "react-icons/md";
 import SEED_TYPES from "@/seed/seedTypes";
 import { OptionButtons } from "../layout/buttons/options";
 import { useDispatch } from "react-redux";
@@ -29,7 +34,7 @@ export default function SeedOptions() {
       icon: <MdAllInclusive />,
       type: SEED_TYPES.ALL,
     },
-    {
+    /*     {
       label: "Korisnici",
       icon: <FaUserPlus />,
       type: SEED_TYPES.USERS,
@@ -39,14 +44,21 @@ export default function SeedOptions() {
       icon: <MdFoodBank />,
       type: SEED_TYPES.FIELDS,
     },
+        {
+      label: "Kultivacije",
+      icon: <MdFoodBank />,
+      type: SEED_TYPES.CULTIVATIONS,
+    }, */
+    {
       label: "Bilke",
       icon: <MdFoodBank />,
       type: SEED_TYPES.CROP_MAIN_TYPES,
     },
+
     {
-      label: "Kultivacije",
-      icon: <MdFoodBank />,
-      type: SEED_TYPES.CULTIVATIONS,
+      label: "Proizvodnja",
+      icon: <MdFactory />,
+      type: SEED_TYPES.PRODUCTION,
     },
     {
       label: "Obriši bazu",

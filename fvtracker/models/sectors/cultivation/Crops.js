@@ -19,6 +19,11 @@ const mainCropTypeSchema = new Schema({
 const cropGeneralTypeSchema = new Schema({
   name: { type: String, required: true },
   description: { type: String, default: "" },
+  mainCropType: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "CropMainType",
+    required: true,
+  },
   cropTypes: [
     { type: mongoose.Schema.Types.ObjectId, ref: "CropType", default: [] },
   ],

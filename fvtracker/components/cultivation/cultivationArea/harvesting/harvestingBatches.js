@@ -10,9 +10,9 @@ export default function HarvestingBatches() {
 
   // set batches based on fields data
   useEffect(() => {
-    if (!fields) return;
+    if (!fields || harvestingBatches !== null) return;
     setHarvestingBatches(getHarvestingBatches({ fields }));
-  }, [fields]);
+  }, [fields, harvestingBatches]);
 
   if (!fields) return <LoadingFullScreen />;
 

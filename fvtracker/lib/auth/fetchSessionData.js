@@ -35,7 +35,7 @@ export async function fetchSessionSpecificManager({
   let specificManager = await mongoose.models[managerName].findOne({
     rootManager: appUser.rootManager,
   });
-  
+
   if (!specificManager) {
     if (throwError) {
       throw new Error(
@@ -78,11 +78,11 @@ export async function fetchSessionSpecificManager({
   return specificManager;
 }
 
-export async function fetchGeneralAndOtherManagers({ managerNames = [] }) {
+export async function fetchManager({ managerNames = [] }) {
   const response = {
     hasAccess: false,
     generalManager: null,
-    otherManagers: [],
+    specificManager: null,
   };
   const generalManager = await fetchSessionSpecificManager({
     managerName: GENERAL_MANAGER,
@@ -90,8 +90,10 @@ export async function fetchGeneralAndOtherManagers({ managerNames = [] }) {
   });
 
   if (generalManager) {
-    response.hasAccess = true;
-    response.generalManager = generalManager;
+    return {
+      hasAccess: true,
+      generalManager,
+    };
   }
 
   for (const managerName of managerNames) {
@@ -100,16 +102,16 @@ export async function fetchGeneralAndOtherManagers({ managerNames = [] }) {
       throwError: false,
     });
     if (specificManager) {
-      response.hasAccess = true;
-      response.otherManagers.push(specificManager);
+      return {
+        hasAccess: true,
+        specificManager,
+      };
     }
   }
 
-  if (!response.hasAccess) {
-    throw new Error(
-      `Unauthorized access: session user does not have required managers: ${managerNames.join(", ")}`,
-    );
-  }
-
-  return response;
+  throw new Error(
+    `No manager found for session user among types: ${managerNames.join(
+      ", ",
+    )}`,
+  );
 }

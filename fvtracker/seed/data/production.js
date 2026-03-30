@@ -1,10 +1,19 @@
 export const products = [
   {
-    name: "Cherry rajčica Paket 10 kom",
-    cropVarieties: [{ name: "Cherry rajčica", cellProduces: 10 }],
+    name: "Cherry rajčica Paket",
+    cropVarieties: ["Cherry rajčica"],
   },
   {
     name: "Kuhani špinat konzerva 400g",
-    cropVarieties: [{ name: "Špinat", quantity: 1, cellProduces: 5 }],
+    ingredients: [
+      {
+        name: "Špinat",
+        productUses: 5,
+      },
+    ],
+  },
+  {
+    name: "Salata mix",
+    cropVarieties: ["Iceberg", "Kristalka"],
   },
 ];

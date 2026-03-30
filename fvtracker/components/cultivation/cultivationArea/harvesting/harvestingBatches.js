@@ -19,6 +19,7 @@ export default function HarvestingBatches() {
   return (
     <div>
       <h1>Harvesting Batches</h1>
+      {harvestingBatches?.length}
       {/* Add your harvesting batches content here */}
     </div>
   );

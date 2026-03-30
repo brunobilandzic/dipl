@@ -8,6 +8,7 @@ import { v4 as uuid } from "uuid";
 export default function HarvestingBatches() {
   const fields = useSelector((state) => state.cultivation.fields);
   const [harvestingBatches, setHarvestingBatches] = useState(null);
+  const [plansOpen, setPlansOpen] = useState(false);
 
   // set batches based on fields data
   useEffect(() => {
@@ -25,10 +26,18 @@ export default function HarvestingBatches() {
       <div>
         {Object.keys(harvestingBatches).map((fieldName) => (
           <div key={uuid()}>
-            <HarvestingBatch
-              fieldName={fieldName}
-              harvestingPlans={harvestingBatches[fieldName]}
-            />
+            <div
+              onClick={() => setPlansOpen(!plansOpen)}
+              className="flex flex-col justify-between border p-4 rounded-lg gap-4 cursor-pointer"
+            >
+              <h2 className="font-semibold text-xl">Polje: {fieldName}</h2>
+
+              {plansOpen && (
+                <HarvestingBatch
+                  harvestingPlans={harvestingBatches[fieldName]}
+                />
+              )}
+            </div>
           </div>
         ))}
       </div>
@@ -36,11 +45,10 @@ export default function HarvestingBatches() {
   );
 }
 
-const HarvestingBatch = ({ fieldName, harvestingPlans, name }) => {
+const HarvestingBatch = ({ harvestingPlans }) => {
   return (
     <>
-      <div className="border p-4 rounded-lg">
-        <h2>Polje: {fieldName}</h2>
+      <div className="">
         {Object.keys(harvestingPlans).map((planName) => (
           <div className="border p-4" key={uuid()}>
             <p>Plan berbe: {planName}</p>

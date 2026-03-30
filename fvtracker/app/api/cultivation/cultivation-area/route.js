@@ -10,6 +10,9 @@ export async function GET(request) {
       const cultivationArea = await cultivation.cultivationArea.get(id);
       return Response.json({ cultivationArea }, { status: 200 });
     }
+    if (!id) {
+      throw new Error("ID is required");
+    }
   } catch (error) {
     console.error(error);
     return Response.json({ error: error.message }, { status: 500 });

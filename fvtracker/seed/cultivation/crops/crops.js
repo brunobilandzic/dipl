@@ -4,6 +4,7 @@ import {
   CropMainType,
   CropType,
   CropVariety,
+  PlantedCropVariety,
 } from "@/models/sectors/cultivation/Crops";
 import utils from "@/lib/utils";
 import { deleteCrops } from "@/lib/db/delete";
@@ -161,3 +162,16 @@ export function logMainTypes(mainTypes) {
     }
   }
 }
+
+export const createNewPlantage = async ({ plantingPlan }) => {
+  const plantingPlanItem = plantingPlan.items[0];
+  const cropVarietyId = plantingPlan.items[0].cropVariety;
+  const plantedCropVarietes = await PlantedCropVariety.updateMany(
+    { cropVariety: cropVarietyId, plantingPlanItem: plantingPlanItem._id },
+    { new: true },
+  );
+  plantingPlanItem.plantedCropVarieties.push(
+    ...plantedCropVarietes.map((p) => p._id),
+  );
+  await plantingPlanItem.save();
+};

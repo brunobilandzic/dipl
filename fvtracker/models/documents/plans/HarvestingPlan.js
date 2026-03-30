@@ -71,7 +71,7 @@ harvestingPlanSchema.pre("save", async function () {
   if (!this.harvestingBatch) {
     const harvestingBatch = new HarvestingBatch({
       harvestingPlan: this._id,
-      name: `${this.name} Plan Batch`,
+      name: `${this.name} Žetva`,
     });
     await harvestingBatch.save();
     this.harvestingBatch = harvestingBatch._id;

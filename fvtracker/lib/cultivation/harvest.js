@@ -72,10 +72,60 @@ async function cmBatches() {
   const cultivationManager = await fetchSessionSpecificManager({
     managerName: "cultivationManager",
   });
+
+  let harvestingBatches = await cultivationManager.populate({
+    path: "fields",
+    select: "harvestingPlans",
+    populate: {
+      path: "harvestingPlans",
+      select: "harvestingBatch",
+      populate: {
+        path: "harvestingBatch",
+        select: "harvestingBatchItems productions",
+      },
+    },
+  });
+
+  harvestingBatches = await populateBatches({ harvestingBatches });
+  console.log({
+    harvestingBatches,
+  });
 }
 
 async function pmBatches() {
   const productionManager = await fetchSessionSpecificManager({
     managerName: "productionManager",
   });
+}
+
+function populateBatches({ harvestingBatches }) {
+  return harvestingBatches.populate([
+    {
+      path: "harvestingBatchItems",
+      populate: {
+        select: "cropVariety plantedCropVarieties",
+        populate: [
+          {
+            path: "cropVariety",
+            select: "name cropType",
+            populate: {
+              path: "cropType",
+              select: "name generalType",
+              populate: {
+                path: "generalType",
+                select: "name mainCropType",
+                populate: {
+                  path: "mainCropType",
+                  select: "name",
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      path: "productions",
+    },
+  ]);
 }

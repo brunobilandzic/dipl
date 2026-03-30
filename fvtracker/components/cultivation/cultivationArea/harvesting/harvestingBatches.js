@@ -15,7 +15,7 @@ export default function HarvestingBatches() {
     setHarvestingBatches(getHarvestingBatches({ fields }));
   }, [fields, harvestingBatches]);
 
-  if (!fields) return <LoadingFullScreen />;
+  if (!harvestingBatches) return <LoadingFullScreen />;
 
   console.log("harvestingBatches", harvestingBatches);
 

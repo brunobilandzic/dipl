@@ -144,6 +144,32 @@ export async function GET(request) {
               path: "field",
               select: "name slug",
             },
+            {
+              path: "harvestingBatches",
+              populate: {
+                select: "name harvestBatchItems productions",
+                path: "harvestingBatchItems",
+                populate: [
+                  {
+                    select: "cropVariety plantedCropVarieties",
+                    path: "cropVariety",
+                    select: "name cropType",
+                    populate: {
+                      path: "cropType",
+                      select: "name mainCropType",
+                      populate: { path: "mainCropType", select: "name" },
+                    },
+                  },
+                  {
+                    path: "plantedCropVariety",
+                    populate: {
+                      path: "plantingPlanItem",
+                      select: "quantity",
+                    },
+                  },
+                ],
+              },
+            },
           ],
         },
       ],

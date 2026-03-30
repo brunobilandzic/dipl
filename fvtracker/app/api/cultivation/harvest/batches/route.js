@@ -3,10 +3,12 @@ import {
   getHarvestingBatches,
   populateBatches,
 } from "@/lib/cultivation/harvest";
+import dbConnect from "@/lib/db/mongooseConnect";
 import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
 
 export async function GET(req) {
   try {
+    await dbConnect();
     const { searchParams } = new URL(request.url);
     const managerName = searchParams.get("managerName");
     if (managerName === GENERAL_MANAGER) {

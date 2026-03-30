@@ -18,6 +18,7 @@ const productsSchema = new Schema({
 
 productsSchema.pre("save", async function () {
   if (this.isModified("cropVarieties") && this.cropVarieties.length > 0) {
+    console.log(this._doc);
     const cropVarieties = await CropVariety.find({
       _id: { $in: this.cropVarieties },
     });

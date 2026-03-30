@@ -85,7 +85,7 @@ export async function fetchGeneralAndOtherManagers({ managerNames = [] }) {
     otherManagers: [],
   };
   const generalManager = await fetchSessionSpecificManager({
-    managerName: "GeneralManager",
+    managerName: GENERAL_MANAGER,
     throwError: false,
   });
 

@@ -69,6 +69,10 @@ export default {
   ],
   ProductionManager: [
     {
+      label: "proizvodi",
+      path: "/proizvodi",
+    },
+    {
       label: "postrojenja",
       path: "/postrojenja",
     },

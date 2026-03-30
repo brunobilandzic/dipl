@@ -6,7 +6,7 @@ import {
 import utils from "@/lib/utils";
 import { getCultivationById } from "./cultivation";
 import { PlantingPlan } from "@/models/documents/plans/PlantingPlan";
-import { fetchGeneralAndOtherManagers } from "../auth/fetchSessionData";
+import { fetchManager } from "../auth/fetchSessionData";
 import { getPlantingPlanItemRecord } from "./plans";
 
 export async function cropsData() {
@@ -184,15 +184,16 @@ async function createPlantedCropVarietyPromise({
 }
 
 export async function getPlantingPlans() {
-  const { hasAccess, generalManager, otherManagers } =
-    await fetchGeneralAndOtherManagers({
-      managerNames: ["CultivationManager"],
-    });
+  const {
+    hasAccess,
+    generalManager,
+    specificManager: cultivationManager,
+  } = await fetchManager({
+    managerNames: ["CultivationManager"],
+  });
   if (!hasAccess) {
     throw new Error("Unauthorized access to planting plans.");
   }
-
-  const cultivationManager = otherManagers[0];
 
   const getFilter = () => {
     if (generalManager) {
@@ -209,10 +210,13 @@ export async function getPlantingPlans() {
 }
 
 export async function getPlantingPlansFromcmfields() {
-  const { hasAccess, generalManager, otherManagers } =
-    await fetchGeneralAndOtherManagers({
-      managerNames: ["CultivationManager"],
-    });
+  const {
+    hasAccess,
+    generalManager,
+    specificManager: cultivationManager,
+  } = await fetchManager({
+    managerNames: ["CultivationManager"],
+  });
 
   if (!hasAccess) {
     throw new Error("Unauthorized access to planting plans.");
@@ -221,8 +225,6 @@ export async function getPlantingPlansFromcmfields() {
   if (generalManager) {
     return await PlantingPlan.find({});
   }
-
-  const cultivationManager = otherManagers[0];
 
   if (!cultivationManager) {
     throw new Error("Cultivation manager not found.");

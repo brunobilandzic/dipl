@@ -1,3 +1,4 @@
+import { fetchSessionSpecificManager } from "@/lib/auth/fetchSessionData";
 import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
 import { harvestCells } from "@/lib/cultivation/harvest";
 import dbConnect from "@/lib/db/mongooseConnect";

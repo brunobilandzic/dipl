@@ -107,6 +107,13 @@ const cropVarietySchema = new Schema({
       default: [],
     },
   ],
+  products: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
+      default: [],
+    },
+  ],
 });
 
 const plantedCropVarietySchema = new Schema({

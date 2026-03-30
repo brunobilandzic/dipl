@@ -51,11 +51,10 @@ function NavItems() {
   const generalManagerRedux = useSelector(
     (state) => state.generalManager?.manager,
   );
-  const fieldsRedux = useSelector((state) => state.fields);
+  const fieldsRedux = useSelector((state) => state.cultivation.fields);
 
   useEffect(() => {
     if (status === "authenticated" && session.user?.managerModelName) {
-      console.log("setting general manager and fields in navbar useEffect");
       const managerModelName = session.user.managerModelName;
       setManagerModelName(session.user?.managerModelName);
       dispatch(login(session.user));

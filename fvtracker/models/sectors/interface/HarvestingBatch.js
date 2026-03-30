@@ -7,10 +7,10 @@ const harvestingBatchSchema = new Schema({
     ref: "HarvestingPlan",
     required: true,
   },
-  harvestBatchItems: [
+  harvestingBatchItems: [
     {
       type: Schema.Types.ObjectId,
-      ref: "HarvestBatchItem",
+      ref: "HarvestingBatchItem",
       default: [],
     },
   ],
@@ -36,7 +36,7 @@ harvestingBatchSchema.methods.findOrCreateItemForCropVariety = async function ({
       cropVariety: cropVarietyId,
     });
   await item.save();
-  this.harvestBatchItems.push(item._id);
+  this.harvestingBatchItems.push(item._id);
   await this.save();
   return item;
 };

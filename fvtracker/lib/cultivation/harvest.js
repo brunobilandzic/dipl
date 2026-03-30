@@ -121,6 +121,22 @@ function populateBatches({ harvestingBatches }) {
               },
             },
           },
+          {
+            path: "plantedCropVarieties",
+            select: "cultivation fieldCoords",
+            populate: {
+              path: "cultivation",
+              select: "name cultivationArea",
+              populate: {
+                path: "cultivationArea",
+                select: "name field",
+                populate: {
+                  path: "field",
+                  select: "name",
+                },
+              },
+            },
+          },
         ],
       },
     },

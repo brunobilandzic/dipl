@@ -150,19 +150,23 @@ export async function GET(request) {
               populate: [
                 {
                   path: "harvestingBatchItems",
+                  select: "cropVariety plantedCropVarieties",
                   populate: [
                     {
                       path: "cropVariety",
-                      select: "cropVariety plantedCropVarieties",
                       select: "name cropType",
                       populate: {
                         path: "cropType",
-                        select: "name mainCropType",
-                        populate: { path: "mainCropType", select: "name" },
+                        select: "name generalType",
+                        populate: {
+                          path: "generalType",
+                          select: "name mainCropType",
+                          populate: { path: "mainCropType", select: "name" },
+                        },
                       },
                     },
                     {
-                      path: "plantedCropVariety",
+                      path: "plantedCropVarieties",
                       populate: {
                         path: "plantingPlanItem",
                         select: "quantity",

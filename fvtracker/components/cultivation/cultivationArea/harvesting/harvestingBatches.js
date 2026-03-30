@@ -3,6 +3,7 @@ import { LoadingFullScreen } from "@/components/layout/loading";
 import { getHarvestingBatches } from "@/lib/utils/harvest";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { v4 as uuid } from "uuid";
 
 export default function HarvestingBatches() {
   const fields = useSelector((state) => state.cultivation.fields);
@@ -16,11 +17,35 @@ export default function HarvestingBatches() {
 
   if (!fields) return <LoadingFullScreen />;
 
+  console.log("harvestingBatches", harvestingBatches);
+
   return (
     <div>
       <h1>Harvesting Batches</h1>
-      {harvestingBatches?.length}
+      {harvestingBatches?.map((hb) => (
+        <div key={uuid()}>
+          <HarvestingBatch {...hb} />
+        </div>
+      ))}
       {/* Add your harvesting batches content here */}
     </div>
   );
 }
+
+const HarvestingBatch = ({
+  harvestingBatchItems,
+  harvestingPlan,
+  productions,
+  name,
+}) => {
+  return (
+    <>
+      <div>
+        <h2>{name}</h2>
+        <p>Harvesting Plan: {harvestingPlan?.name}</p>
+        <p>Productions: {productions?.length}</p>
+        <p>Batch Items: {harvestingBatchItems?.length}</p>
+      </div>
+    </>
+  );
+};

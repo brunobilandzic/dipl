@@ -164,14 +164,26 @@ export function logMainTypes(mainTypes) {
 }
 
 export const createNewPlantage = async ({ plantingPlan }) => {
+  await plantingPlan.populate({
+    path: "items",
+    select: "plantedCropVarieties cropVariety quantity",
+  });
   const plantingPlanItem = plantingPlan.items[0];
+  console.log({ plantingPlanItem, plantingPlan });
   const cropVarietyId = plantingPlan.items[0].cropVariety;
-  const plantedCropVarietes = await PlantedCropVariety.updateMany(
-    { cropVariety: cropVarietyId, plantingPlanItem: plantingPlanItem._id },
-    { new: true },
+  await PlantedCropVariety.updateMany(
+    {},
+    { plantingPlanItem: plantingPlanItem._id },
   );
+  const plantedCropVarietes = await PlantedCropVariety.find({
+    plantingPlanItem: plantingPlanItem._id,
+  });
+  console.log({ plantedCropVarietes });
+
   plantingPlanItem.plantedCropVarieties.push(
     ...plantedCropVarietes.map((p) => p._id),
   );
+  plantingPlanItem.quantity -= plantedCropVarietes.length;
+  console.log({ plantingPlanItem });
   await plantingPlanItem.save();
 };

@@ -18,6 +18,7 @@ import {
 import { CropVariety } from "@/models/sectors/cultivation/Crops.js";
 import { CultivationArea } from "@/models/sectors/cultivation/Cultivation.js";
 import { createCultivation } from "../../cultivation/index.js";
+import { createNewPlantage } from "../../crops/crops.js";
 
 await dbConnect();
 
@@ -99,6 +100,8 @@ async function createPlans({ fieldId, cropVarietyId }) {
   console.log(
     `Created planting plan ${newPlantingPlan.name} and harvesting plan ${newHarvestingPlan.name} for field ${fieldId}.`,
   );
+
+  return { newPlantingPlan, newHarvestingPlan };
 }
 
 async function createFieldsObjects(
@@ -161,7 +164,7 @@ export async function createFieldRecord(fieldObject) {
 
   await cultivationManager.save();
   await fieldRecord.save();
-  await createPlans({
+  const { newPlantingPlan, newHarvestingPlan } = await createPlans({
     fieldId: fieldRecord._id,
     cropVarietyId: cropVariety._id,
   });
@@ -179,6 +182,7 @@ export async function createFieldRecord(fieldObject) {
   await createCultivation({
     cultivationArea: cultivationCA,
   });
+  await createNewPlantage({ plantingPlan: newPlantingPlan });
 
   await fieldRecord.save();
   return fieldRecord;

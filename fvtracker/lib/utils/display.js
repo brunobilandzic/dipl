@@ -10,11 +10,11 @@ export const cvAndColor = ({ plCvs, cell, fieldView }) => {
     }
   });
 
-  if (!plCv || plCv.harvestedAt) return { cropVariety: null, color: "" };
+  if (!plCv) return { cropVariety: null, color: "" };
 
   const color = plCv.plantingPlanItem?.cropVariety?.cropType?.color;
   const shade = plCv.plantingPlanItem?.cropVariety?.shade;
-  if (color && shade) {
+  if (color && shade && !plCv.harvestedAt) {
     return {
       cropVariety: plCv.plantingPlanItem?.cropVariety,
       color: `bg-${color}-${shade}`,

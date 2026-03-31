@@ -187,6 +187,9 @@ export const createNewPlantage = async ({ plantingPlan }) => {
   );
   plantingPlanItem.quantity -=
     plantedCropVarietes.length * plantingPlanItem.cropVariety.quantityPerCell;
+  if (plantingPlanItem.quantity < 0) {
+    plantingPlanItem.quantity = 0; // Ensure quantity doesn't go negative
+  }
   await plantingPlanItem.save();
 };
 
@@ -221,6 +224,8 @@ export const createNewHarvest = async ({ harvestingPlan }) => {
   });
   harvestingPlanItem.quantity -=
     plantedCropVarietes.length * harvestingPlanItem.cropVariety.quantityPerCell;
-
+  if (harvestingPlanItem.quantity < 0) {
+    harvestingPlanItem.quantity = 0; // Ensure quantity doesn't go negative
+  }
   await harvestingPlanItem.save();
 };

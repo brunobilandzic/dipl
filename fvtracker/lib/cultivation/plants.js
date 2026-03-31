@@ -176,6 +176,9 @@ async function createPlantedCropVarietyPromise({
 
   plantingPlanItem.plantedCropVarieties.push(plantedCropVariety._id);
   plantingPlanItem.quantity -= cropVariety.quantityPerCell;
+  if (plantingPlanItem.quantity < 0) {
+    plantingPlanItem.quantity = 0; // Ensure quantity doesn't go negative
+  }
 
   await plantingPlanItem.save();
   await cropVariety.save();

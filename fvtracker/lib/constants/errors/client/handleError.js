@@ -1,13 +1,13 @@
 import { handleApiError } from "./api";
 
-export default function handleError(error) {
+export default function handleError(error, router) {
   if (error.name === "AxiosError") {
     return handleApiError({
       ...error,
     });
   }
   if (error.response?.status === 403) {
-    router.push("/uloga-nije-odobrena");
+    router?.push("/uloga-nije-odobrena");
     return;
   }
   console.error("Unexpected error:", error);

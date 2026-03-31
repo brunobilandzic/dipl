@@ -18,13 +18,12 @@ export const refreshFields = async ({ dispatch, router }) => {
     dispatch(setLoading(false));
   } catch (error) {
     dispatch(setLoading(false));
-    if (error.response?.status === 403) {
-      router.push("/uloga-nije-odobrena");
-      return;
-    }
-    handleError({
-      ...error,
-      generalMessage: "Došlo je do greške prilikom učitavanja polja.",
-    });
+    handleError(
+      {
+        ...error,
+        generalMessage: "Došlo je do greške prilikom učitavanja polja.",
+      },
+      router,
+    );
   }
 };

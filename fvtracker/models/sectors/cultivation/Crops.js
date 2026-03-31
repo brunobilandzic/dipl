@@ -150,6 +150,7 @@ const plantedCropVarietySchema = new Schema({
       }
     },
   },
+  harvestedAt: { type: Date, default: null },
   plantedAt: { type: Date, default: null },
   harvestingPlanItem: {
     type: mongoose.Schema.Types.ObjectId,

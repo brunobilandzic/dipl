@@ -224,6 +224,7 @@ export const SeedingModal = ({
         createPlantage({
           cultivationId: newPlantage.cultivationId,
           newPlantage: newPlantageFromRes,
+          cropVarietyId: newPlantage.variety._id,
         }),
       );
     } catch (error) {

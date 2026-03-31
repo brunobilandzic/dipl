@@ -7,7 +7,7 @@ export const products = [
     name: "Kuhani špinat konzerva 400g",
     ingredients: [
       {
-        name: "Špinat",
+        name: "Obični špinat",
         productUses: 5,
       },
     ],

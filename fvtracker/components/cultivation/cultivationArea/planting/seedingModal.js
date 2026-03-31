@@ -336,7 +336,7 @@ const initialNewPlantage_WId = ({ cultivationId, crops }) => {
     types.filter((t) => t.generalTypeName === generalTypes[0]?.name)[0]?._id ||
     "";
   const defaultVariety =
-    cropVarieties.filter((v) => v.name === "Iceberg")[0]?._id || "";
+    cropVarieties.filter((v) => v.name === "Idared")[0]?._id || "";
 
   return {
     generalType: {

@@ -76,6 +76,7 @@ const cropTypeSchema = new Schema({
 const cropVarietySchema = new Schema({
   name: { type: String, required: true },
   description: { type: String, default: "" },
+  quantityPerCell: { type: Number, default: 1 },
   shade: {
     type: Number,
     enum: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900],

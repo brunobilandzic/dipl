@@ -49,7 +49,7 @@ export const planInfo = ({ fieldId, cropVarietyId }) => {
       items: [
         {
           cropVariety: cropVarietyId, // Postavit ćemo ovo kasnije
-          quantity: 100,
+          quantity: 1000,
         },
       ],
     },
@@ -60,7 +60,7 @@ export const planInfo = ({ fieldId, cropVarietyId }) => {
       items: [
         {
           cropVariety: cropVarietyId, // Postavit ćemo ovo kasnije
-          quantity: 100,
+          quantity: 1000,
         },
       ],
     },

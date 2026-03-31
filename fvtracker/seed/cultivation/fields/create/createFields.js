@@ -91,11 +91,12 @@ async function createFieldObject(fieldParams, msWindow = createFieldTimeMs) {
 
 async function createPlans({ fieldId, cropVarietyId }) {
   console.log({ fieldId, cropVarietyId });
+  const { plantingPlan, harvestingPlan } = planInfo({ fieldId, cropVarietyId });
   const newPlantingPlan = await createPlantingPlan({
-    plantingPlanData: planInfo({ fieldId, cropVarietyId }).plantingPlan,
+    plantingPlanData: plantingPlan,
   });
   const newHarvestingPlan = await createHarvestingPlan({
-    harvestingPlanData: planInfo({ fieldId, cropVarietyId }).harvestingPlan,
+    harvestingPlanData: harvestingPlan,
   });
   console.log(
     `Created planting plan ${newPlantingPlan.name} and harvesting plan ${newHarvestingPlan.name} for field ${fieldId}.`,

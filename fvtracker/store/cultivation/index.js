@@ -189,7 +189,7 @@ const cultivationSlice = createSlice({
       }));
     },
     createPlantage: (state, action) => {
-      const { cultivationId, newPlantage } = action.payload;
+      const { cultivationId, newPlantage, cropVarietyId } = action.payload;
       console.log("Creating/updating plantage with data:", action.payload);
       if (!state.selectedField) return;
       for (const ca of state.selectedField.cultivationAreas) {
@@ -211,6 +211,24 @@ const cultivationSlice = createSlice({
               ...plantage.plantingPlanItem,
             };
           }
+        }
+
+        break;
+      }
+
+      //available plans come from fields not selected field
+      const fieldName = state.selectedField.name;
+      const fid = state.fields.findIndex((f) => f.name === fieldName);
+
+      for (const plantingPlan of state.fields[fid].plantingPlans) {
+        const pItemId = plantingPlan.items.findIndex(
+          (item) => item.cropVariety._id === cropVarietyId,
+        );
+
+        if (pItemId !== -1 && pItemId !== undefined) {
+          plantingPlan.items[pItemId].quantity -=
+            newPlantage.length *
+            plantingPlan.items[pItemId].cropVariety.quantityPerCell;
         }
       }
     },

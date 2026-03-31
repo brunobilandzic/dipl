@@ -567,6 +567,10 @@ export const vegatablesGeneralCropTypes = [
     description:
       "Biljke koje daju mahune i koriste se kao povrće, svježe ili sušene.",
     cropTypes: [
+      {
+        name: "Grah",
+        color: "stone",
+        description: "Najraširenija mahunarka u prehrani.",
         cropVarieties: [
           { name: "Bijeli", shade: 200, quantityPerCell: 8 },
           { name: "Crveni", shade: 600, quantityPerCell: 8 },
@@ -577,6 +581,10 @@ export const vegatablesGeneralCropTypes = [
         cookingNotes: "Namakanje skraćuje kuhanje.",
         storage: "Suho i hladno mjesto.",
       },
+      {
+        name: "Grašak",
+        color: "green",
+        description: "Slatke zelene mahune ili zrna.",
         cropVarieties: [
           { name: "Mladi", shade: 400, quantityPerCell: 6 },
           { name: "Šećerac", shade: 500, quantityPerCell: 6 },
@@ -585,6 +593,10 @@ export const vegatablesGeneralCropTypes = [
         cookingNotes: "Kuhati vrlo kratko.",
         storage: "Hladnjak, 2–3 dana.",
       },
+      {
+        name: "Bob",
+        color: "green",
+        description: "Krupan grahast plod.",
         cropVarieties: [
           { name: "Zeleni", shade: 500, quantityPerCell: 6 },
           { name: "Suhi", shade: 700, quantityPerCell: 5 },
@@ -593,6 +605,10 @@ export const vegatablesGeneralCropTypes = [
         cookingNotes: "Oguliti kožicu nakon kuhanja.",
         storage: "Hladnjak, nekoliko dana.",
       },
+      {
+        name: "Leća",
+        color: "amber",
+        description: "Sitna mahunarka brzog kuhanja.",
         cropVarieties: [
           { name: "Zelena", shade: 600, quantityPerCell: 9 },
           { name: "Crvena", shade: 500, quantityPerCell: 9 },
@@ -602,6 +618,10 @@ export const vegatablesGeneralCropTypes = [
         cookingNotes: "Ne zahtijeva namakanje.",
         storage: "Suho.",
       },
+      {
+        name: "Slanutak",
+        color: "yellow",
+        description: "Mahunarka orašastog okusa.",
         cropVarieties: [
           { name: "Sitni", shade: 400, quantityPerCell: 8 },
           { name: "Krupan", shade: 500, quantityPerCell: 6 },
@@ -616,6 +636,10 @@ export const vegatablesGeneralCropTypes = [
     name: "Sjemenasto povrće",
     description: "Povrće kod kojeg se u prehrani koriste zrna ili sjemenke.",
     cropTypes: [
+      {
+        name: "Kukuruz",
+        color: "yellow",
+        description: "Slatko zrno koje se koristi svježe ili kuhano.",
         cropVarieties: [
           { name: "Šećerac", shade: 400, quantityPerCell: 4 },
           { name: "Kokičar", shade: 300, quantityPerCell: 3 },
@@ -624,6 +648,10 @@ export const vegatablesGeneralCropTypes = [
         cookingNotes: "Kuhati kratko.",
         storage: "Hladnjak, 2–3 dana.",
       },
+      {
+        name: "Bamija",
+        color: "lime",
+        description: "Plod sa sjemenkama, često u varivima.",
         cropVarieties: [
           { name: "Zelena", shade: 500, quantityPerCell: 4 },
           { name: "Crvena", shade: 600, quantityPerCell: 4 },
@@ -638,6 +666,10 @@ export const vegatablesGeneralCropTypes = [
     name: "Gljive",
     description: "Jestive gljive koje se u prehrani koriste kao povrće.",
     cropTypes: [
+      {
+        name: "Šampinjoni",
+        color: "stone",
+        description: "Najčešće uzgajane gljive.",
         cropVarieties: [
           { name: "Bijeli", shade: 200, quantityPerCell: 12 },
           { name: "Smeđi", shade: 500, quantityPerCell: 12 },
@@ -701,6 +733,10 @@ export const vegatablesGeneralCropTypes = [
         cookingNotes: "Ne kuhati dugo.",
         storage: "Sobna temperatura.",
       },
+      {
+        name: "Kopar",
+        color: "lime",
+        description: "Blaga aroma za ribu i povrće.",
         cropVarieties: [{ name: "Svježi", shade: 400, quantityPerCell: 16 }],
         culinaryUse: ["Umaci", "Juhe"],
         cookingNotes: "Dodavati na kraju.",
@@ -748,7 +784,9 @@ export const fruitsGeneralCropTypes = [
         name: "Dunja",
         color: "amber",
         description: "Tvrdo i aromatično voće.",
-        cropVarieties: [{ name: "Obična dunja", shade: 500, quantityPerCell: 80 }],
+        cropVarieties: [
+          { name: "Obična dunja", shade: 500, quantityPerCell: 80 },
+        ],
         culinaryUse: ["Marmelade", "Žele", "Pečenje"],
         cookingNotes: "Ne koristi se sirova.",
         storage: "Hladno i suho, dugo.",
@@ -1139,9 +1177,8 @@ const allCropTypes = [
 
 export default allCropTypes;
 
-export const END_PLANTING = "Završi spodručje sadnje"
-export const CONTINUE_PLANTING = "Nastavi kreirati područje sadnje"
+export const END_PLANTING = "Završi spodručje sadnje";
+export const CONTINUE_PLANTING = "Nastavi kreirati područje sadnje";
 
-export const END_HARVESTING = "Završi područje žetve"
-export const CONTINUE_HARVESTING = "Nastavi kreirati područje žetve"
-
+export const END_HARVESTING = "Završi područje žetve";
+export const CONTINUE_HARVESTING = "Nastavi kreirati područje žetve";

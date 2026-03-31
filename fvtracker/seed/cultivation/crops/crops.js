@@ -172,14 +172,16 @@ export const createNewPlantage = async ({ plantingPlan }) => {
       select: "quantityPerCell",
     },
   });
+  const plantageCoords = ["0,0", "0,1", "1,0", "1,1"]; // Example coordinates for planting
   const plantingPlanItem = plantingPlan.items[0];
   const cropVarietyId = plantingPlan.items[0].cropVariety;
   await PlantedCropVariety.updateMany(
-    {},
+    { relativeCoords: { $in: plantageCoords } },
     { plantingPlanItem: plantingPlanItem._id },
   );
   const plantedCropVarietes = await PlantedCropVariety.find({
     plantingPlanItem: plantingPlanItem._id,
+    relativeCoords: { $in: plantageCoords },
   });
 
   plantingPlanItem.plantedCropVarieties.push(
@@ -194,6 +196,7 @@ export const createNewPlantage = async ({ plantingPlan }) => {
 };
 
 export const createNewHarvest = async ({ harvestingPlan }) => {
+  const harvestCoords = ["0,0", "0,1"];
   await harvestingPlan.populate([
     {
       path: "items",
@@ -210,11 +213,12 @@ export const createNewHarvest = async ({ harvestingPlan }) => {
   const harvestingPlanItem = harvestingPlan.items[0];
   const cropVarietyId = harvestingPlan.items[0].cropVariety;
   await PlantedCropVariety.updateMany(
-    {},
-    { harvestingPlanItem: harvestingPlanItem._id },
+    { relativeCoords: { $in: harvestCoords } },
+    { harvestingPlanItem: harvestingPlanItem._id, harvestedAt: new Date() },
   );
   const plantedCropVarietes = await PlantedCropVariety.find({
     harvestingPlanItem: harvestingPlanItem._id,
+    relativeCoords: { $in: harvestCoords },
   });
   const plcvids = plantedCropVarietes.map((p) => p._id);
   harvestingPlanItem.plantedCropVarieties.push(...plcvids);

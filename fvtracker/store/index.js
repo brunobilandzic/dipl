@@ -4,6 +4,7 @@ import errorReducer from "./error";
 import loadingReducer from "./loading";
 import cultivationReducer from "./cultivation";
 import generalManagerReducer from "./generalManager";
+import productsReducer from "./production/products";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     loading: loadingReducer,
     cultivation: cultivationReducer,
     generalManager: generalManagerReducer,
+    products: productsReducer,
   },
 });
 

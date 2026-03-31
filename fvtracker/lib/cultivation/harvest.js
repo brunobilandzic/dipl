@@ -38,11 +38,13 @@ export async function harvestCells({
       "Harvesting plan item not found for the given crop variety.",
     );
   }
-
+  harvestingPlanItem.populate("cropVariety");
   harvestingPlanItem.plantedCropVarieties.push(
     ...plantedCropVarieties.map((pcv) => pcv._id),
   );
-  harvestingPlanItem.quantity -= plantedCropVarieties.length;
+  harvestingPlanItem.quantity -=
+    plantedCropVarieties.length *
+    harvestingPlanItem.cropVariety.quantityPerCell;
   if (harvestingPlanItem.quantity < 0) {
     harvestingPlanItem.quantity = 0; // Ensure quantity doesn't go negative
   }

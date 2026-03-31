@@ -28,17 +28,24 @@ export async function harvestCells({
   );
 
   const harvestingPlan = await getHarvestingPlanById(harvestingPlanId);
-  await harvestingPlan.populate("items harvestingBatch");
+  await harvestingPlan.populate([
+    {
+      path: "items",
+      select: "cropVariety quantity plantedCropVarieties",
+      populate: { path: "cropVariety", select: "quantityPerCell" },
+    },
+    { path: "harvestingBatch" },
+  ]);
 
   const harvestingPlanItem = harvestingPlan.items.find(
-    (item) => item.cropVariety.toString() === cropVarietyId,
+    (item) => item.cropVariety._id.toString() === cropVarietyId,
   );
   if (!harvestingPlanItem) {
     throw new Error(
       "Harvesting plan item not found for the given crop variety.",
     );
   }
-  harvestingPlanItem.populate("cropVariety");
+
   harvestingPlanItem.plantedCropVarieties.push(
     ...plantedCropVarieties.map((pcv) => pcv._id),
   );

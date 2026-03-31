@@ -167,6 +167,10 @@ export const createNewPlantage = async ({ plantingPlan }) => {
   await plantingPlan.populate({
     path: "items",
     select: "plantedCropVarieties cropVariety quantity",
+    populate: {
+      path: "cropVariety",
+      select: "quantityPerCell",
+    },
   });
   const plantingPlanItem = plantingPlan.items[0];
   const cropVarietyId = plantingPlan.items[0].cropVariety;
@@ -181,7 +185,8 @@ export const createNewPlantage = async ({ plantingPlan }) => {
   plantingPlanItem.plantedCropVarieties.push(
     ...plantedCropVarietes.map((p) => p._id),
   );
-  plantingPlanItem.quantity -= plantedCropVarietes.length;
+  plantingPlanItem.quantity -=
+    plantedCropVarietes.length * plantingPlanItem.cropVariety.quantityPerCell;
   await plantingPlanItem.save();
 };
 
@@ -190,6 +195,10 @@ export const createNewHarvest = async ({ harvestingPlan }) => {
     {
       path: "items",
       select: "plantedCropVarieties cropVariety quantity",
+      populate: {
+        path: "cropVariety",
+        select: "quantityPerCell",
+      },
     },
     {
       path: "harvestingBatch",
@@ -210,7 +219,8 @@ export const createNewHarvest = async ({ harvestingPlan }) => {
     plantedCropVarietiesIds: plcvids,
     cropVarietyId,
   });
-  harvestingPlanItem.quantity -= plantedCropVarietes.length;
+  harvestingPlanItem.quantity -=
+    plantedCropVarietes.length * harvestingPlanItem.cropVariety.quantityPerCell;
 
   await harvestingPlanItem.save();
 };

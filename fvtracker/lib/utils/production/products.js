@@ -1,5 +1,6 @@
 import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
+import { setProducts } from "@/store/production/products";
 
 export const refreshProducts = async ({ dispatch, router }) => {
   try {

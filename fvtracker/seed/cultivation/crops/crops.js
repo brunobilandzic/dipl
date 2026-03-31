@@ -174,7 +174,7 @@ export const createNewPlantage = async ({ plantingPlan }) => {
   });
   const plantageCoords = ["0,0", "0,1", "1,0", "1,1"]; // Example coordinates for planting
   const plantingPlanItem = plantingPlan.items[0];
-  const cropVarietyId = plantingPlan.items[0].cropVariety;
+  
   await PlantedCropVariety.updateMany(
     { relativeCoords: { $in: plantageCoords } },
     { plantingPlanItem: plantingPlanItem._id },

@@ -80,7 +80,9 @@ export const getPlansForCropVariety = ({ allFieldPlans, cropVarietyId }) => {
   allFieldPlans?.plantingPlans?.forEach((plan) => {
     if (
       plan.items.some(
-        (item) => item.cropVariety?._id.toString() === cropVarietyId.toString(),
+        (item) =>
+          item.cropVariety?._id.toString() === cropVarietyId.toString() &&
+          item.quantity > 0,
       )
     ) {
       if (!plans.plantingPlans) plans.plantingPlans = [];
@@ -91,7 +93,9 @@ export const getPlansForCropVariety = ({ allFieldPlans, cropVarietyId }) => {
   allFieldPlans?.harvestingPlans?.forEach((plan) => {
     if (
       plan.items.some(
-        (item) => item.cropVariety?._id.toString() === cropVarietyId.toString(),
+        (item) =>
+          item.cropVariety?._id.toString() === cropVarietyId.toString() &&
+          item.quantity > 0,
       )
     ) {
       if (!plans.harvestingPlans) plans.harvestingPlans = [];

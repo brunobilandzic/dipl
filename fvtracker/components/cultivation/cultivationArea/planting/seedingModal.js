@@ -246,9 +246,9 @@ export const SeedingModal = ({
     }
   }, [newPlantage?.variety, allFieldPlans]);
 
-  /*   useEffect(() => {
+  useEffect(() => {
     console.log("New plantage state:", newPlantage);
-  }, [newPlantage]); */
+  }, [newPlantage]);
 
   useEffect(() => {
     console.log("Available planting plans updated:", availablePlans);
@@ -331,11 +331,23 @@ const initialNewPlantage_WId = ({ cultivationId, crops }) => {
     types = [],
     varieties: cropVarieties = [],
   } = crops || {};
-
+  const defaultGeneralType = generalTypes[0]?._id || "";
+  const defaultType =
+    types.filter((t) => t.generalTypeName === generalTypes[0]?.name)[0]?._id ||
+    "";
   const defaultVariety =
     cropVarieties.filter((v) => v.name === "Iceberg")[0]?._id || "";
 
   return {
+    generalType: {
+      _id: defaultGeneralType,
+      name:
+        generalTypes.find((gt) => gt._id === defaultGeneralType)?.name || "N/A",
+    },
+    type: {
+      _id: defaultType,
+      name: types.find((t) => t._id === defaultType)?.name || "N/A",
+    },
     cultivationId: cultivationId || null,
     variety: {
       _id: defaultVariety,

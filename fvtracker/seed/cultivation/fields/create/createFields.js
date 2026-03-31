@@ -161,7 +161,7 @@ export async function createFieldRecord(fieldObject) {
   cultivationManager.fields.push(fieldRecord._id);
   fieldRecord.manager = cultivationManager._id;
 
-  const cropVariety = await CropVariety.findOne({ name: "Iceberg" });
+  const cropVariety = await CropVariety.findOne({ name: "Idared" });
 
   await cultivationManager.save();
   await fieldRecord.save();

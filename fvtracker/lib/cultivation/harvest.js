@@ -56,11 +56,10 @@ export async function harvestCells({
     await pcv.save();
   }
 
-  const harvestBatchItem =
-    await harvestingPlan.harvestingBatch.addPlantedCropVarieties({
-      plantedCropVarietiesIds: plantedCropVarieties.map((pcv) => pcv._id),
-      cropVarietyId,
-    });
+  await harvestingPlan.harvestingBatch.addPlantedCropVarieties({
+    plantedCropVarietiesIds: plantedCropVarieties.map((pcv) => pcv._id),
+    cropVarietyId,
+  });
 
   return plantedCropVarieties;
 }

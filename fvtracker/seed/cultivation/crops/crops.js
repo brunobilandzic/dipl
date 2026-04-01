@@ -8,6 +8,11 @@ import {
 } from "@/models/sectors/cultivation/Crops";
 import utils from "@/lib/utils";
 import { deleteCrops } from "@/lib/db/delete";
+import { PlantingPlan } from "@/models/documents/plans/PlantingPlan";
+import { HarvestingPlan } from "@/models/documents/plans/HarvestingPlan";
+import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
+import { Field } from "@/models/sectors/cultivation/Field";
+import { createPlans } from "@/seed/documents/plans";
 
 // Seed crop main types, general types, types, and varieties
 
@@ -234,7 +239,40 @@ export const createNewHarvest = async ({ harvestingPlan }) => {
   await harvestingPlanItem.save();
 };
 
-export async function hlantageHarvest({plantingPlan, harvestingPlan}) {
+export async function plantageHarvest({ plantingPlan, harvestingPlan }) {
   await createNewPlantage({ plantingPlan });
   await createNewHarvest({ harvestingPlan });
 }
+
+const deletePlantageHarvest = async () => {
+  await PlantedCropVariety.updateMany(
+    {},
+    { plantingPlanItem: null, harvestingPlanItem: null },
+  );
+  await PlantingPlan.deleteMany({});
+  await HarvestingPlan.deleteMany({});
+  await HarvestingBatch.deleteMany({});
+};
+
+export const seedPlantageHarvest = async ({ _fieldId, _cropVarietyId }) => {
+  await deletePlantageHarvest();
+  const cropVariety = await CropVariety.findOne({ name: "Idared" }).select(
+    "_id",
+  );
+  const fieldId = await plansFieldId(_fieldId);
+  const { newPlantingPlan, newHarvestingPlan } = await createPlans({
+    fieldId,
+    cropVarietyId: cropVariety._id,
+  });
+  await plantageHarvest({
+    plantingPlan: newPlantingPlan,
+    harvestingPlan: newHarvestingPlan,
+  });
+};
+
+const plansFieldId = async (fieldId) => {
+  if (!fieldId) {
+    return await Field.findOne({}).then((field) => field._id);
+  }
+  return fieldId;
+};

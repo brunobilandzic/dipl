@@ -13,12 +13,9 @@ import { randomPoint, notValidPoint } from "./generateCell.js";
 import { CropVariety } from "@/models/sectors/cultivation/Crops.js";
 import { CultivationArea } from "@/models/sectors/cultivation/Cultivation.js";
 import { createCultivation } from "../../cultivation/index.js";
-import {
-  createNewHarvest,
-  createNewPlantage,
-  hlantageHarvest,
-} from "../../crops/crops.js";
+import {} from "../../crops/crops.js";
 import { createPlans } from "@/seed/documents/plans.js";
+import crops from "../../crops/index.js";
 
 await dbConnect();
 
@@ -149,10 +146,6 @@ export async function createFieldRecord(fieldObject) {
 
   await cultivationManager.save();
   await fieldRecord.save();
-  const { newPlantingPlan, newHarvestingPlan } = await createPlans({
-    fieldId: fieldRecord._id,
-    cropVarietyId: cropVariety._id,
-  });
 
   const cultivationAreasPromises = fieldObject.cultivationAreas.map(
     async (ca) => {
@@ -167,9 +160,9 @@ export async function createFieldRecord(fieldObject) {
   await createCultivation({
     cultivationArea: cultivationCA,
   });
-  await hlantageHarvest({
-    plantingPlan: newPlantingPlan,
-    harvestingPlan: newHarvestingPlan,
+
+  await crops.plantageHarvest({
+    fieldId: fieldRecord._id,
   });
   await fieldRecord.save();
   return fieldRecord;

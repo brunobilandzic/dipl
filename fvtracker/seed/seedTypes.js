@@ -6,4 +6,5 @@ export default {
   CROP_MAIN_TYPES: "Seed Crop Main Types",
   CULTIVATIONS: "Seed Cultivations",
   PRODUCTION: "Seed Production",
+  PLANTAGE_HARVEST: "Seed Plantage Harvest",
 };

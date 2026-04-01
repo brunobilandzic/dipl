@@ -1,5 +1,6 @@
-import { seedCropMainTypes } from "./crops";
+import { seedCropMainTypes, seedPlantageHarvest } from "./crops";
 
 export default {
   mainTypes: seedCropMainTypes,
+  plantageHarvest: seedPlantageHarvest,
 };

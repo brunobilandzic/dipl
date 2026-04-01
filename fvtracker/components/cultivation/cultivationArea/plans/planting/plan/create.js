@@ -2,10 +2,7 @@
 
 import { AppDatePicker, AppInput } from "@/components/form/inputs";
 import api from "@/lib/api";
-import {
-  createHarvestingPlan,
-  createPlantingPlan,
-} from "@/store/cultivation";
+import { createHarvestingPlan, createPlantingPlan } from "@/store/cultivation";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -139,7 +136,7 @@ export const FillPlanInfo = ({ selectedField, plant = true }) => {
           v.cropTypeName === types.find((t) => t._id === defaultType)?.name,
       )[0]?._id || "";
     return {
-      name: `Plan sadnje - ${field?.toString() || "Nije odabrano"} - ${new Date().toLocaleTimeString()}`,
+      name: `Plan ${plant ? "sadnje" : "berbe"} - ${new Date().toLocaleString()}`,
       field,
       items: [
         {

@@ -80,6 +80,17 @@ harvestingBatchSchema.methods.cropVarietyQuantity = async function ({
   return item.quantity();
 };
 
+harvestingBatchSchema.methods.quantities = async function () {
+  const batch = await populatedBatch(this);
+  const quantities = {};
+
+  for (const item of batch.harvestingBatchItems) {
+    const quantity = await item.quantity();
+    quantities[item.cropVariety.name] = quantity;
+  }
+  return quantities;
+};
+
 const harvestingBatchItemSchema = new Schema({
   harvestingBatch: {
     type: Schema.Types.ObjectId,

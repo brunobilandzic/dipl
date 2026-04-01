@@ -13,6 +13,8 @@ import handleError from "@/lib/constants/errors/client/handleError";
 import { Loading } from "@/components/layout/loading";
 import { refreshFields } from "@/lib/utils/cultivation/fields";
 import { setLoading } from "@/store/loading";
+import { refreshManagers } from "@/lib/utils/production/managers";
+import { useRouter } from "next/navigation";
 
 export default function CreatePlantingPlanPageComonent() {
   const [selectedField, setSelectedField] = useState(null);
@@ -467,6 +469,8 @@ export const SelectProductionManager = ({
   selectedProductionManager,
 }) => {
   const productionManagers = useSelector((state) => state.production?.managers);
+  const dispatch = useDispatch();
+  const router = useRouter();
   useEffect(() => {
     if (!productionManagers)
       refreshManagers({

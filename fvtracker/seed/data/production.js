@@ -3,7 +3,7 @@ export const products = [
     name: "Cherry rajčica Paket 10 komada",
     ingredients: [
       {
-        name: "Cherry rajčica",
+        cropVarietyName: "Cherry rajčica",
         quantity: 10,
       },
     ],
@@ -12,7 +12,7 @@ export const products = [
     name: "Kuhani špinat konzerva 400g",
     ingredients: [
       {
-        name: "Obični špinat",
+        cropVarietyName: "Obični špinat",
         quantity: 5,
       },
     ],
@@ -21,11 +21,11 @@ export const products = [
     name: "Salata mix",
     ingredients: [
       {
-        name: "Iceberg",
+        cropVarietyName: "Iceberg",
         quantity: 5,
       },
       {
-        name: "Kristalka",
+        cropVarietyName: "Kristalka",
         quantity: 5,
       },
     ],

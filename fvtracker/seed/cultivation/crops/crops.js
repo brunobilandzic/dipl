@@ -174,7 +174,7 @@ export const createNewPlantage = async ({ plantingPlan }) => {
   });
   const plantageCoords = ["0,0", "0,1", "1,0", "1,1"]; // Example coordinates for planting
   const plantingPlanItem = plantingPlan.items[0];
-  
+
   await PlantedCropVariety.updateMany(
     { relativeCoords: { $in: plantageCoords } },
     { plantingPlanItem: plantingPlanItem._id },
@@ -220,6 +220,7 @@ export const createNewHarvest = async ({ harvestingPlan }) => {
     harvestingPlanItem: harvestingPlanItem._id,
     relativeCoords: { $in: harvestCoords },
   });
+  
   const plcvids = plantedCropVarietes.map((p) => p._id);
   harvestingPlan.harvestingBatch.addPlantedCropVarieties({
     plantedCropVarietiesIds: plcvids,

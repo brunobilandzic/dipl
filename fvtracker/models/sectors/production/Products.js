@@ -22,7 +22,9 @@ const productsSchema = new Schema({
 });
 
 productsSchema.pre("save", async function () {
-  if (this.isModified("ingredients") && this.ingredients.length > 0) {
+  if (!this.ingredients || this.ingredients.length === 0) {
+    throw new Error("Product must have at least one ingredient.");
+  }
     for (const ingredient of this.ingredients) {
       const cropVariety = await CropVariety.findOne(
         (cv) => cv.name === ingredient.cropVariety,

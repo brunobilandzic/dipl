@@ -14,7 +14,11 @@ import { randomPoint, notValidPoint } from "./generateCell.js";
 import { CropVariety } from "@/models/sectors/cultivation/Crops.js";
 import { CultivationArea } from "@/models/sectors/cultivation/Cultivation.js";
 import { createCultivation } from "../../cultivation/index.js";
-import { createNewHarvest, createNewPlantage } from "../../crops/crops.js";
+import {
+  createNewHarvest,
+  createNewPlantage,
+  hlantageHarvest,
+} from "../../crops/crops.js";
 import { createPlans } from "@/seed/documents/plans.js";
 
 await dbConnect();
@@ -164,8 +168,10 @@ export async function createFieldRecord(fieldObject) {
   await createCultivation({
     cultivationArea: cultivationCA,
   });
-  await createNewPlantage({ plantingPlan: newPlantingPlan });
-  await createNewHarvest({ harvestingPlan: newHarvestingPlan });
+  await hlantageHarvest({
+    plantingPlan: newPlantingPlan,
+    harvestingPlan: newHarvestingPlan,
+  });
   await fieldRecord.save();
   return fieldRecord;
 }

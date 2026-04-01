@@ -220,7 +220,7 @@ export const createNewHarvest = async ({ harvestingPlan }) => {
     harvestingPlanItem: harvestingPlanItem._id,
     relativeCoords: { $in: harvestCoords },
   });
-  
+
   const plcvids = plantedCropVarietes.map((p) => p._id);
   harvestingPlan.harvestingBatch.addPlantedCropVarieties({
     plantedCropVarietiesIds: plcvids,
@@ -233,3 +233,8 @@ export const createNewHarvest = async ({ harvestingPlan }) => {
   }
   await harvestingPlanItem.save();
 };
+
+export async function hlantageHarvest({plantingPlan, harvestingPlan}) {
+  await createNewPlantage({ plantingPlan });
+  await createNewHarvest({ harvestingPlan });
+}

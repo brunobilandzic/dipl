@@ -25,6 +25,7 @@ productsSchema.pre("save", async function () {
   if (!this.ingredients || this.ingredients.length === 0) {
     throw new Error("Product must have at least one ingredient.");
   }
+  if (this.isNew()) {
     for (const ingredient of this.ingredients) {
       const cropVariety = await CropVariety.findOne(
         (cv) => cv.name === ingredient.cropVariety,
@@ -32,9 +33,18 @@ productsSchema.pre("save", async function () {
       if (!cropVariety) {
         throw new Error(`Crop variety "${ingredient.cropVariety}" not found.`);
       }
+
+      const newIngredient = new Ingredient({
+        product: this._id,
+        cropVariety: cropVariety._id,
+        quantity: ingredient.quantity,
+      });
+
       ingredient.cropVariety = cropVariety._id;
-      cropVariety.products.push(this._id);
+      cropVariety.ingredients.push(newIngredient._id);
+
       await cropVariety.save();
+      await newIngredient.save();
     }
   }
 });

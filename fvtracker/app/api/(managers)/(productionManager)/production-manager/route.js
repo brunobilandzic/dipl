@@ -1,13 +1,22 @@
 import { fetchManager } from "@/lib/auth/fetchSessionData";
-import { PRODUCTION_MANAGER } from "@/lib/constants/users/managerTypes";
+import {
+  CULTIVATION_MANAGER,
+  PRODUCTION_MANAGER,
+} from "@/lib/constants/users/managerTypes";
+import { ProductionManager } from "@/models/user/managers/ProductionManager";
 
 export async function GET(request) {
   try {
+    const { searchParams } = new URL(request.url);
+    const queryAll = searchParams.get("all");
     const { generalManager, specificManager: productionManager } =
       await fetchManager({
-        managerNames: [PRODUCTION_MANAGER],
+        managerNames: [PRODUCTION_MANAGER, CULTIVATION_MANAGER],
       });
-
+    if (queryAll) {
+      const productionManagers = await ProductionManager.find({});
+      return Response.json({ productionManagers });
+    }
     return Response.json({ productionManager });
   } catch (error) {
     return Response.json(

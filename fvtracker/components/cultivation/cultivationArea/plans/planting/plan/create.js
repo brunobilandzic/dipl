@@ -488,7 +488,10 @@ export const SelectProductionManager = ({
       <AppSelect
         options={productionManagers.map((pm) => ({
           value: pm._id,
-          label: pm.name,
+          label:
+            pm.rootManager?.appUser?.name +
+            " " +
+            pm.rootManager?.appUser?.surname,
         }))}
         value={selectedProductionManager}
         onChange={(e) =>

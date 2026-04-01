@@ -36,11 +36,8 @@ const ingredientsSchema = new Schema({
   quantity: {
     type: Number,
     required: true,
-    validate: {
-      validator: function (value) {
-        return isNumber(value) && value % 1 === 0 && value > 0;
-      },
-    },
+  },
+});
   },
 });
 

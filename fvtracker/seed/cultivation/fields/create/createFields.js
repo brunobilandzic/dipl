@@ -6,7 +6,6 @@ import {
   cultivationAreaNamesConstant,
   optimizedParams,
   optimizedParamsArray,
-  planInfo,
 } from "../../../data/fields.js";
 import dbConnect from "@/lib/db/mongooseConnect.js";
 import { deleteFieldsWithDocs } from "@/lib/db/delete.js";

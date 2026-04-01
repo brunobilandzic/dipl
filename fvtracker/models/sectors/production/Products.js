@@ -1,31 +1,47 @@
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
 import { CropVariety } from "../cultivation/Crops";
+import { isNumber } from "lodash";
 
 const productsSchema = new Schema({
   name: {
     type: String,
     required: true,
   },
-  cropVarieties: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "CropVariety",
-      default: [],
-    },
-  ],
+  ingredients: [ingredientsSchema],
 });
 
 productsSchema.pre("save", async function () {
-  if (this.isModified("cropVarieties") && this.cropVarieties.length > 0) {
-    const cropVarieties = await CropVariety.find({
-      _id: { $in: this.cropVarieties },
-    });
-    for (const cropVariety of cropVarieties) {
+  if (this.isModified("ingredients") && this.ingredients.length > 0) {
+    for (const ingredient of this.ingredients) {
+      const cropVariety = cropVarieties.find(
+        (cv) => cv.name === ingredient.cropVariety,
+      );
+      if (!cropVariety) {
+        throw new Error(`Crop variety "${ingredient.cropVariety}" not found.`);
+      }
+      ingredient.cropVariety = cropVariety._id;
       cropVariety.products.push(this._id);
       await cropVariety.save();
     }
   }
+});
+
+const ingredientsSchema = new Schema({
+  cropVariety: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "CropVariety",
+    required: true,
+  },
+  quantity: {
+    type: Number,
+    required: true,
+    validate: {
+      validator: function (value) {
+        return isNumber(value) && value % 1 === 0 && value > 0;
+      },
+    },
+  },
 });
 
 export const Product =

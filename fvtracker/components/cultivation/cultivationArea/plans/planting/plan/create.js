@@ -137,6 +137,7 @@ export const FillPlanInfo = ({ selectedField, plant = true }) => {
       )[0]?._id || "";
     return {
       name: `Plan ${plant ? "sadnje" : "berbe"} - ${new Date().toLocaleString()}`,
+      productionManager: "",
       field,
       items: [
         {
@@ -442,6 +443,14 @@ export const FillPlanInfo = ({ selectedField, plant = true }) => {
                 </div>
               );
             })}
+            {!plant && (
+              <div className="mt-4">
+                <SelectProductionManager
+                  setFormData={setFormData}
+                  selectedProductionManager={formData.productionManager}
+                />
+              </div>
+            )}
           </div>
 
           <div className="btn self-start" onClick={handleSubmit}>

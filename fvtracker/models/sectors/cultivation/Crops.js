@@ -108,8 +108,9 @@ const cropVarietySchema = new Schema({
       default: [],
     },
   ],
-  products: [
+  productIngrediets: [
     {
+      //
       type: mongoose.Schema.Types.ObjectId,
       ref: "Ingredient",
       default: [],
@@ -117,7 +118,22 @@ const cropVarietySchema = new Schema({
   ],
 });
 
-cropVarietySchema.methods.
+cropVarietySchema.methods.products = async function () {
+  await this.populate({
+    path: "productIngrediets",
+    select: "product quantity",
+    populate: {
+      product: {
+        select: "name",
+      },
+    },
+  });
+
+  return this.productIngrediets.map((ing) => ({
+    productName: ing.product.name,
+    quantity: ing.quantity,
+  }));
+};
 
 const plantedCropVarietySchema = new Schema({
   plantingPlanItem: {

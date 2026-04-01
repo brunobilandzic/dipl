@@ -1,4 +1,4 @@
-import { extractCoords } from "@/lib/utils/fields";
+import { extractCoords } from "@/lib/utils/cultivation/fields";
 
 function max_dim(planted, dim) {
   return planted.reduce((max, cell) => {
@@ -39,9 +39,7 @@ function drawField(field) {
   for (let y = 0; y < length; y++) {
     let rowStr = "";
     for (let x = 0; x < width; x++) {
-      if (
-        plantedCells.some((plantedCell) => plantedCell === `${x},${y}`)
-      ) {
+      if (plantedCells.some((plantedCell) => plantedCell === `${x},${y}`)) {
         rowStr += "+";
       } else {
         rowStr += "-";

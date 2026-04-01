@@ -1,5 +1,5 @@
 import models from "@/models";
-import { plantedArrayToMap } from "@/lib/utils/cultivationAreas";
+import { plantedArrayToMap } from "@/lib/utils/cultivation/cultivationAreas";
 const { CultivationArea, Field } = models.sectors.cultivation;
 import auth from "@/lib/auth";
 import { Cultivation } from "@/models/sectors/cultivation/Cultivation";

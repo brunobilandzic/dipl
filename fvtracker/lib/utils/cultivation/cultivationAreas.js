@@ -1,4 +1,4 @@
-import dimensionError from "../constants/errors/cultivation/dimensions";
+import dimensionError from "../../constants/errors/cultivation/dimensions";
 import { extractCoords } from "./fields";
 import { getCUSCells } from "./cultivation";
 
@@ -44,7 +44,7 @@ export const getCellsInRect = ({
     endX,
     endY,
     toPlantCells,
-    toPlantCultivation
+    toPlantCultivation,
   });
   if (cultivationAreaDimensions) {
     plantedCells = getCASCells(cultivationAreas);

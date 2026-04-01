@@ -1,5 +1,5 @@
 import utils from "@/lib/utils";
-import { getCANameFromPlantedCropVarietiesInCultivation } from "@/lib/utils/cultivationAreas";
+import { getCANameFromPlantedCropVarietiesInCultivation } from "@/lib/utils/cultivation/cultivationAreas";
 import Link from "next/link";
 import { v4 as uuid } from "uuid";
 

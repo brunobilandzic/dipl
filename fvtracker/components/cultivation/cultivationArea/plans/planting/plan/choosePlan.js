@@ -1,4 +1,4 @@
-import { checkPlansEmpty } from "@/lib/utils/plans";
+import { checkPlansEmpty } from "@/lib/utils/cultivation/plans";
 
 export const ChoosePlan = ({
   availablePlans,

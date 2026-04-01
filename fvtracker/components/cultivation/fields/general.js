@@ -1,4 +1,4 @@
-import { fieldPlantedStatistics } from "@/lib/utils/plant";
+import { fieldPlantedStatistics } from "@/lib/utils/cultivation/plant";
 import React from "react";
 
 export const Feed = () => {
@@ -17,9 +17,11 @@ export const FieldStatistics = ({ field }) => {
       <p>Posađeno: {stats.plantedPlCvs.length}</p>
       <p>Prazne ćelije: {stats.emptyPlCvs.length}</p>
       <p>
-        {Number((stats.plantedPlCvs.length /
-          (stats.plantedPlCvs.length + stats.emptyPlCvs.length)) *
-          100 || 0).toFixed(2)}
+        {Number(
+          (stats.plantedPlCvs.length /
+            (stats.plantedPlCvs.length + stats.emptyPlCvs.length)) *
+            100 || 0,
+        ).toFixed(2)}
         %
       </p>
     </div>

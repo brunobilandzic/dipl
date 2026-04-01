@@ -11,7 +11,7 @@ import utils from "@/lib/utils";
 import { FieldStatistics } from "@/components/cultivation/fields/general";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { Loading } from "@/components/layout/loading";
-import { refreshFields } from "@/lib/utils/fields";
+import { refreshFields } from "@/lib/utils/cultivation/fields";
 import { setLoading } from "@/store/loading";
 
 export default function CreatePlantingPlanPageComonent() {

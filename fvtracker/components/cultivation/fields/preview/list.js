@@ -20,7 +20,7 @@ import { fieldCultivationAreaPoints } from "@/seed/cultivation/fields/create/ana
 import { Loading } from "@/components/layout/loading";
 import { useRouter } from "next/navigation";
 import { FieldStatistics } from "../general";
-import { refreshFields } from "@/lib/utils/fields";
+import { refreshFields } from "@/lib/utils/cultivation/fields";
 import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { setLoading } from "@/store/loading";

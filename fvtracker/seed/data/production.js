@@ -31,3 +31,5 @@ export const products = [
     ],
   },
 ];
+
+// ing qant must be reduced from batch

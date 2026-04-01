@@ -111,11 +111,13 @@ const cropVarietySchema = new Schema({
   products: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Product",
+      ref: "Ingredient",
       default: [],
     },
   ],
 });
+
+cropVarietySchema.methods.
 
 const plantedCropVarietySchema = new Schema({
   plantingPlanItem: {

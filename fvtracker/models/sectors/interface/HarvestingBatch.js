@@ -59,6 +59,32 @@ harvestingBatchSchema.methods.addPlantedCropVarieties = async function ({
   return item;
 };
 
+harvestingBatchSchema.methods.cropVarietyQuantity = async function ({
+  cropVarietyName,
+  cropVarietyId,
+} = {}) {
+  await this.populate({
+    path: "harvestingBatchItems",
+    select: "cropVariety plantedCropVarieties",
+    populate: "cropVariety",
+  });
+
+  const item = this.harvestingBatchItems.find((hbi) => {
+    if (cropVarietyId) {
+      return hbi.cropVariety._id.equals(cropVarietyId);
+    } else if (cropVarietyName) {
+      return hbi.cropVariety.name === cropVarietyName;
+    }
+  });
+
+  if (!item)
+    throw new Error(
+      `Crop variety with name "${cropVarietyName}" not found in this batch.`,
+    );
+
+  return item.quantity();
+};
+
 const harvestingBatchItemSchema = new Schema({
   harvestingBatch: {
     type: Schema.Types.ObjectId,
@@ -79,8 +105,9 @@ const harvestingBatchItemSchema = new Schema({
   ],
 });
 
-harvestingBatchItemSchema.methods.quantity = function () {
-  return this.plantedCropVarieties.length;
+harvestingBatchItemSchema.methods.quantity = async function () {
+  await this.populate("cropVariety");
+  return this.plantedCropVarieties.length * this.cropVariety.quantityPerCells;
 };
 
 export const HarvestingBatch =

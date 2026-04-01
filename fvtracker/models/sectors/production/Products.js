@@ -26,6 +26,7 @@ productsSchema.pre("save", async function () {
     throw new Error("Product must have at least one ingredient.");
   }
   if (this.isNew()) {
+    // ingredients come in pairs of {name, quantity}
     for (const ingredient of this.ingredients) {
       const cropVariety = await CropVariety.findOne(
         (cv) => cv.name === ingredient.cropVariety,
@@ -81,6 +82,30 @@ const productStockSchema = new Schema({
     type: Number,
     required: true,
   },
+});
+
+productStockSchema.pre("save", async function () {
+  if (this.isNew()) {
+    await this.populate([
+      {
+        path: "product",
+        select: "ingredients",
+      },
+      {
+        path: "harvestingBatch",
+        select: "harvestingBatchItems",
+        select: "cropVariety quantity",
+      },
+    ]);
+
+    for (const ingredient in this.product.ingredients) {
+      const item = this.harvestingBatch.harvestingBatchItems.find((hbi) =>
+        hbi.cropVariety.equals(ingredient.cropVariety),
+      );
+      item.quantity -= ingredient.quantity;
+      await item.save();33969
+    }
+  }
 });
 
 export const Product =

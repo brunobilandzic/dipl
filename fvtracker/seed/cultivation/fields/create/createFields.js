@@ -1,5 +1,5 @@
 import { Field } from "@/models/sectors/cultivation/Field.js";
-import { drawField, fieldFilledRatio, printFieldParams } from "./analyze.js";
+import { drawField } from "./analyze.js";
 import { CultivationManager } from "@/models/user/managers/CultivationManager.js";
 import {
   createFieldTimeMs,
@@ -11,16 +11,11 @@ import {
 import dbConnect from "@/lib/db/mongooseConnect.js";
 import { deleteFieldsWithDocs } from "@/lib/db/delete.js";
 import { randomPoint, notValidPoint } from "./generateCell.js";
-import {
-  createHarvestingPlan,
-  createPlantingPlan,
-} from "@/lib/cultivation/plans.js";
 import { CropVariety } from "@/models/sectors/cultivation/Crops.js";
 import { CultivationArea } from "@/models/sectors/cultivation/Cultivation.js";
 import { createCultivation } from "../../cultivation/index.js";
 import { createNewHarvest, createNewPlantage } from "../../crops/crops.js";
-import { HarvestingPlan } from "@/models/documents/plans/HarvestingPlan.js";
-import { PlantingPlan } from "@/models/documents/plans/PlantingPlan.js";
+import { createPlans } from "@/seed/documents/plans.js";
 
 await dbConnect();
 
@@ -89,25 +84,6 @@ async function createFieldObject(fieldParams, msWindow = createFieldTimeMs) {
     location,
     cultivationAreas: fieldDao.cultivationAreas,
   };
-}
-
-async function createPlans({ fieldId, cropVarietyId }) {
-  await HarvestingPlan.deleteMany({});
-  await PlantingPlan.deleteMany({});
-
-  console.log({ fieldId, cropVarietyId });
-  const { plantingPlan, harvestingPlan } = planInfo({ fieldId, cropVarietyId });
-  const newPlantingPlan = await createPlantingPlan({
-    plantingPlanData: plantingPlan,
-  });
-  const newHarvestingPlan = await createHarvestingPlan({
-    harvestingPlanData: harvestingPlan,
-  });
-  console.log(
-    `Created planting plan ${newPlantingPlan.name} and harvesting plan ${newHarvestingPlan.name} for field ${fieldId}.`,
-  );
-
-  return { newPlantingPlan, newHarvestingPlan };
 }
 
 async function createFieldsObjects(

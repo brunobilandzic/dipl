@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import { Field } from "@/models/sectors/cultivation/Field";
 import { makeUrlFriendly } from "@/lib/utils/strings";
 import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
+import { ProductionManager } from "@/models/user/managers/ProductionManager";
 
 const { Schema } = mongoose;
 
@@ -73,6 +74,11 @@ const harvestingPlanSchema = new Schema({
     default: null,
   },
   slug: { type: String, unique: true, index: true },
+  productionManager: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "ProductionManager",
+    required: true,
+  },
 });
 
 harvestingPlanSchema.pre("save", async function () {
@@ -88,11 +94,21 @@ harvestingPlanSchema.pre("save", async function () {
     await harvestingBatch.save();
     this.harvestingBatch = harvestingBatch._id;
   }
+  if (this.isNew) {
+    const productionManager = await ProductionManager.findById(
+      this.productionManager,
+    );
+    productionManager.harvestingPlans.push(this._id);
+    await productionManager.save();
+  }
 });
 
 harvestingPlanSchema.pre("deleteMany", async function () {
   const ids = await HarvestingPlan.find(this.getFilter()).distinct("_id");
   await HarvestingPlanItem.deleteMany({ harvestingPlan: { $in: ids } });
+  await ProductionManager.findByIdAndUpdate(this.productionManager, {
+    $pull: { harvestingPlans: { $in: ids } },
+  });
 });
 
 export const HarvestingPlan =

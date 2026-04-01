@@ -278,8 +278,9 @@ const cultivationSlice = createSlice({
       //available plans come from fields not selected field
       const fieldName = state.selectedField.name;
       const fid = state.fields.findIndex((f) => f.name === fieldName);
+      const field = state.fields[fid];
 
-      for (const harvestingPlan of state.fields[fid].harvestingPlans) {
+      for (const harvestingPlan of field.harvestingPlans) {
         const pItemId = harvestingPlan.items.findIndex(
           (item) => item.cropVariety._id === cropVarietyId,
         );
@@ -290,6 +291,19 @@ const cultivationSlice = createSlice({
             harvestingPlan.items[pItemId].cropVariety.quantityPerCell;
         }
       }
+
+      // update batch items
+      field.harvestingPlans.map((hp) => {
+        const harvestingBatch = hp.harvestingBatch;
+        const batchItemId = harvestingBatch.harvestingBatchItems.findIndex(
+          (item) => item.cropVariety._id === cropVarietyId,
+        );
+        if (batchItemId !== -1 && batchItemId !== undefined) {
+          harvestingBatch.harvestingBatchItems[
+            batchItemId
+          ].plantedCropVarieties.push(...harvestedCropVarieties);
+        }
+      });
     },
   },
 });

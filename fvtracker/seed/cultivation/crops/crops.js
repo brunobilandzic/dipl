@@ -231,6 +231,7 @@ export const createNewHarvest = async ({ harvestingPlan }) => {
     plantedCropVarietiesIds: plcvids,
     cropVarietyId,
   });
+  harvestingPlanItem.plantedCropVarieties.push(...plcvids);
   harvestingPlanItem.quantity -=
     plantedCropVarietes.length * harvestingPlanItem.cropVariety.quantityPerCell;
   if (harvestingPlanItem.quantity < 0) {

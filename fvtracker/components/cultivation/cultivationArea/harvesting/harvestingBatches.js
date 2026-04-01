@@ -49,18 +49,20 @@ export default function HarvestingBatchesFields() {
 const HarvestingBatches = ({ harvestingPlans }) => {
   return (
     <>
-      <div className="">
+      <div className="flex flex-col gap-4 mt-4">
         {Object.keys(harvestingPlans).map((planName) => (
           <div className="border p-4" key={uuid()}>
             <p>Plan berbe: {planName}</p>
             <p>Žetva: {harvestingPlans[planName]?.name}</p>
             <p>Proizvodnja: {harvestingPlans[planName]?.productions?.length}</p>
             <p>Stavke žetve:</p>
-            {harvestingPlans[planName]?.harvestingBatchItems?.map(
-              (batchItem) => (
-                <HarvestingBatchItem key={uuid()} batchItem={batchItem} />
-              ),
-            )}
+            <div className="flex flex-col gap-2 mt-2">
+              {harvestingPlans[planName]?.harvestingBatchItems?.map(
+                (batchItem) => (
+                  <HarvestingBatchItem key={uuid()} batchItem={batchItem} />
+                ),
+              )}
+            </div>
           </div>
         ))}
       </div>
@@ -69,16 +71,19 @@ const HarvestingBatches = ({ harvestingPlans }) => {
 };
 
 const HarvestingBatchItem = ({ batchItem }) => {
+  console.log("batchItem", batchItem);
+  if (!batchItem) return null;
+
   const { quantity, cropVarietyName, plcvCount } = harvestingBatchItemData({
     batchItem,
   });
 
   return (
-    <div className="border p-1" key={uuid()}>
+    <div className=" p-1 px-2" key={uuid()}>
       <p>Varijetnta: {cropVarietyName}</p>
       <p>Količina: {quantity}</p>
 
-      <p>Broj posađenih varijeteta: {plcvCount}</p>
+      <p>Broj ubranih polja: {plcvCount}</p>
     </div>
   );
 };

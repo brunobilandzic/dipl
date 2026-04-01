@@ -14,7 +14,14 @@ export async function GET(request) {
         managerNames: [PRODUCTION_MANAGER, CULTIVATION_MANAGER],
       });
     if (queryAll) {
-      const productionManagers = await ProductionManager.find({});
+      const productionManagers = await ProductionManager.find({}).populate({
+        path: "rootManager",
+        select: "appUser",
+        populate: {
+          path: "appUser",
+          select: "name surname",
+        },
+      });
       return Response.json({ productionManagers });
     }
     return Response.json({ productionManager });

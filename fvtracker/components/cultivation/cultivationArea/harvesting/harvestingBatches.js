@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
 
-export default function HarvestingBatches() {
+export default function HarvestingBatchesFields() {
   const fields = useSelector((state) => state.cultivation.fields);
   const [harvestingBatches, setHarvestingBatches] = useState(null);
   const [plansOpen, setPlansOpen] = useState(false);

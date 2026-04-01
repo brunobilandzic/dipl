@@ -33,6 +33,13 @@ const productionManagerSchema = new Schema({
   productions: [
     { type: mongoose.Schema.Types.ObjectId, ref: "Production", default: [] },
   ],
+  harvestingPlans: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "HarvestingPlan",
+      default: [],
+    },
+  ],
 });
 
 export const ProductionManager =

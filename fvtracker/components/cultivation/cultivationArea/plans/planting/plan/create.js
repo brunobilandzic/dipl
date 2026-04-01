@@ -1,6 +1,6 @@
 "use client";
 
-import { AppDatePicker, AppInput } from "@/components/form/inputs";
+import { AppDatePicker, AppInput, AppSelect } from "@/components/form/inputs";
 import api from "@/lib/api";
 import { createHarvestingPlan, createPlantingPlan } from "@/store/cultivation";
 import Link from "next/link";
@@ -468,7 +468,8 @@ export const SelectProductionManager = ({
   setFormData,
   selectedProductionManager,
 }) => {
-  const productionManagers = useSelector((state) => state.production?.managers);
+  const productionManagers = useSelector((state) => state.products?.managers);
+  console.log("Production managers from store:", productionManagers);
   const dispatch = useDispatch();
   const router = useRouter();
   useEffect(() => {

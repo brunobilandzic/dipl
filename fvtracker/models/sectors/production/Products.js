@@ -11,6 +11,7 @@ const productsSchema = new Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Ingredient",
+      default: [],
     },
   ],
   stocks: [

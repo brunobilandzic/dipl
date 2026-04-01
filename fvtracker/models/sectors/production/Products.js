@@ -22,10 +22,38 @@ const productsSchema = new Schema({
   ],
 });
 
-productsSchema.pre("save", async function () {
+productsSchema.methods.createIngredients = async function (ingredientsData) {
+  const ingredients = [];
+  for (const ingredientData of ingredientsData) {
+    const cropVariety = await CropVariety.findOne({
+      name: ingredientData.cropVarietyName,
+    });
+    if (!cropVariety) {
+      throw new Error(
+        `Crop variety ${ingredientData.cropVarietyName} not found.`,
+      );
+    }
+
+    const newIngredient = new Ingredient({
+      product: this._id,
+      cropVariety: cropVariety._id,
+      quantity: ingredientData.quantity,
+    });
+    await newIngredient.save();
+    ingredients.push(newIngredient);
+  }
+
+  return ingredients;
+};
+
+/* productsSchema.pre("save", async function () {
+  console.log(this._doc);
   if (!this.ingredients || this.ingredients.length === 0) {
     throw new Error("Product must have at least one ingredient.");
   }
+  console.log({
+    ingredients: this.ingredients,
+  });
   if (this.isNew()) {
     // ingredients come in pairs of {name, quantity}
     for (const ingredient of this.ingredients) {
@@ -41,7 +69,7 @@ productsSchema.pre("save", async function () {
         cropVariety: cropVariety._id,
         quantity: ingredient.quantity,
       });
-
+      console.log({ newIngredient });
       ingredient.cropVariety = cropVariety._id;
       cropVariety.ingredients.push(newIngredient._id);
 
@@ -49,7 +77,7 @@ productsSchema.pre("save", async function () {
       await newIngredient.save();
     }
   }
-});
+}); */
 
 const ingredientsSchema = new Schema({
   product: {
@@ -104,7 +132,8 @@ productStockSchema.pre("save", async function () {
         hbi.cropVariety.equals(ingredient.cropVariety),
       );
       item.quantity -= ingredient.quantity;
-      await item.save();33969
+      await item.save();
+      33969;
     }
   }
 });

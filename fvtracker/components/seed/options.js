@@ -54,7 +54,6 @@ export default function SeedOptions() {
       icon: <MdFoodBank />,
       type: SEED_TYPES.CROP_MAIN_TYPES,
     },
-
     {
       label: "Proizvodnja",
       icon: <MdFactory />,
@@ -70,7 +69,7 @@ export default function SeedOptions() {
   const API = async (seedType) => {
     try {
       console.log(`Seeding ${seedType}...`);
-      await signOut({ redirect: false });
+     // await signOut({ redirect: false });
       dispatch(setLoading(true));
       const response = await axios.post("/api/seed", { seedType });
       console.log(response.data);

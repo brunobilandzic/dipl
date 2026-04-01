@@ -452,3 +452,39 @@ export const FillPlanInfo = ({ selectedField, plant = true }) => {
     </>
   );
 };
+
+export const SelectProductionManager = ({
+  setFormData,
+  selectedProductionManager,
+}) => {
+  const productionManagers = useSelector((state) => state.production?.managers);
+  useEffect(() => {
+    if (!productionManagers)
+      refreshManagers({
+        dispatch,
+        router,
+      });
+  }, [productionManagers]);
+
+  if (!productionManagers) return null;
+
+  return (
+    <div className="flex flex-col gap-2">
+      <label className="font-semibold">Odaberite voditelja proizvodnje:</label>
+      <AppSelect
+        options={productionManagers.map((pm) => ({
+          value: pm._id,
+          label: pm.name,
+        }))}
+        value={selectedProductionManager}
+        onChange={(e) =>
+          setFormData((prev) => ({
+            ...prev,
+            productionManager: e.target.value,
+          }))
+        }
+        placeholder="Odaberite voditelja proizvodnje"
+      />
+    </div>
+  );
+};

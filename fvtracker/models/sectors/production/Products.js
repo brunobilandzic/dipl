@@ -14,7 +14,7 @@ const productsSchema = new Schema({
 productsSchema.pre("save", async function () {
   if (this.isModified("ingredients") && this.ingredients.length > 0) {
     for (const ingredient of this.ingredients) {
-      const cropVariety = cropVarieties.find(
+      const cropVariety = await CropVariety.findOne(
         (cv) => cv.name === ingredient.cropVariety,
       );
       if (!cropVariety) {

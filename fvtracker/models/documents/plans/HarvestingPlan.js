@@ -29,6 +29,18 @@ const harvestingItemSchema = new Schema({
   },
 });
 
+harvestingItemSchema.pre("deleteMany", async function () {
+  const ids = await HarvestingPlanItem.find(this.getFilter()).distinct("_id");
+  await PlantedCropVariety.updateMany(
+    { harvestingPlanItem: { $in: ids } },
+    { harvestingPlanItem: null, harvestedAt: null },
+  );
+  await CropVariety.updateMany(
+    { harvestingPlanItems: { $in: ids } },
+    { $pull: { harvestingPlanItems: { $in: ids } } },
+  );
+});
+
 const harvestingPlanSchema = new Schema({
   name: {
     type: String,

@@ -1,5 +1,6 @@
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
+import { CropVariety, PlantedCropVariety } from "../cultivation/Crops";
 
 const harvestingBatchSchema = new Schema({
   name: {
@@ -32,6 +33,11 @@ const harvestingBatchSchema = new Schema({
       default: [],
     },
   ],
+});
+
+harvestingBatchSchema.pre("deleteMany", async function () {
+  const ids = await HarvestingBatch.find(this.getFilter()).distinct("_id");
+  await HarvestingBatchItem.deleteMany({ harvestingBatch: { $in: ids } });
 });
 
 harvestingBatchSchema.methods.findOrCreateItemForCropVariety = async function ({
@@ -116,6 +122,18 @@ const harvestingBatchItemSchema = new Schema({
       default: [],
     },
   ],
+});
+
+harvestingBatchItemSchema.pre("deleteMany", async function () {
+  const ids = await HarvestingBatchItem.find(this.getFilter()).distinct("_id");
+  await PlantedCropVariety.updateMany(
+    { harvestingBatchItem: { $in: ids } },
+    { harvestingPlanItem: null, harvestedAt: null },
+  );
+  await CropVariety.updateMany(
+    { harvestingBatchItems: { $in: ids } },
+    { $pull: { harvestingBatchItems: { $in: ids } } },
+  );
 });
 
 harvestingBatchItemSchema.methods.quantity = async function () {

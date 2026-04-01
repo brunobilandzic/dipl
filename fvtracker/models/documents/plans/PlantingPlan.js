@@ -4,7 +4,7 @@ import { makeUrlFriendly } from "@/lib/utils/strings";
 
 const { Schema } = mongoose;
 
-const plantingItemSchema = new Schema({
+const plantingPlanItemSchema = new Schema({
   cropVariety: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "CropVariety",
@@ -26,6 +26,18 @@ const plantingItemSchema = new Schema({
     ref: "PlantingPlan",
     required: true,
   },
+});
+
+plantingPlanItemSchema.pre("deleteMany", async function () {
+  const ids = await PlantingPlanItem.find(this.getFilter()).distinct("_id");
+  await PlantedCropVariety.updateMany(
+    { plantingPlanItem: { $in: ids } },
+    { plantingPlanItem: null },
+  );
+  await CropVariety.updateMany(
+    { plantingPlanItems: { $in: ids } },
+    { $pull: { plantingPlanItems: { $in: ids } } },
+  );
 });
 
 const plantingPlanSchema = new Schema({
@@ -75,4 +87,4 @@ export const PlantingPlan =
 
 export const PlantingPlanItem =
   mongoose.models.PlantingPlanItem ||
-  mongoose.model("PlantingPlanItem", plantingItemSchema);
+  mongoose.model("PlantingPlanItem", plantingPlanItemSchema);

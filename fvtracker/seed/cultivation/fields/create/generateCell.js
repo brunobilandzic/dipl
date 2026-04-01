@@ -1,5 +1,3 @@
-import { getCASCells } from "@/lib/utils/cultivation/cultivationAreas";
-
 export function randomPoint(field) {
   const { width, length, min_ca_dim, max_ca_dim } = field;
 

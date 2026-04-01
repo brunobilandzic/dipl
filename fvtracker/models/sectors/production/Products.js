@@ -1,7 +1,6 @@
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
 import { CropVariety } from "../cultivation/Crops";
-import { isNumber } from "lodash";
 
 const productsSchema = new Schema({
   name: {

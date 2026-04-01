@@ -7,7 +7,12 @@ const productsSchema = new Schema({
     type: String,
     required: true,
   },
-  ingredients: [ingredientsSchema],
+  ingredients: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Ingredient",
+    },
+  ],
   stocks: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -63,6 +68,8 @@ const productStockSchema = new Schema({
 
 export const Product =
   mongoose.models.Product || mongoose.model("Product", productsSchema);
+export const Ingredient =
+  mongoose.models.Ingredient || mongoose.model("Ingredient", ingredientsSchema);
 export const ProductStock =
   mongoose.models.ProductStock ||
   mongoose.model("ProductStock", productStockSchema);

@@ -33,7 +33,7 @@ export default function HarvestingBatchesFields() {
               <h2 className="font-semibold text-xl">Polje: {fieldName}</h2>
 
               {plansOpen && (
-                <HarvestingBatch
+                <HarvestingBatches
                   harvestingPlans={harvestingBatches[fieldName]}
                 />
               )}
@@ -45,7 +45,7 @@ export default function HarvestingBatchesFields() {
   );
 }
 
-const HarvestingBatch = ({ harvestingPlans }) => {
+const HarvestingBatches = ({ harvestingPlans }) => {
   return (
     <>
       <div className="">

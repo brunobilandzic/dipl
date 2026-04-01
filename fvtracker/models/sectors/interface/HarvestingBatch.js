@@ -25,6 +25,13 @@ const harvestingBatchSchema = new Schema({
       default: [],
     },
   ],
+  productsStocks: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "ProductStock",
+      default: [],
+    },
+  ],
 });
 
 harvestingBatchSchema.methods.findOrCreateItemForCropVariety = async function ({

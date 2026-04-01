@@ -1,6 +1,7 @@
 "use client";
 import { LoadingFullScreen } from "@/components/layout/loading";
 import { getHarvestingBatches } from "@/lib/utils/harvest";
+import { harvestingBatchItemData } from "@/lib/utils/harvestingBatches";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
@@ -54,12 +55,30 @@ const HarvestingBatches = ({ harvestingPlans }) => {
             <p>Plan berbe: {planName}</p>
             <p>Žetva: {harvestingPlans[planName]?.name}</p>
             <p>Proizvodnja: {harvestingPlans[planName]?.productions?.length}</p>
-            <p>
-              Stavke: {harvestingPlans[planName]?.harvestingBatchItems?.length}
-            </p>
+            <p>Stavke žetve:</p>
+            {harvestingPlans[planName]?.harvestingBatchItems?.map(
+              (batchItem) => (
+                <HarvestingBatchItem key={uuid()} batchItem={batchItem} />
+              ),
+            )}
           </div>
         ))}
       </div>
     </>
+  );
+};
+
+const HarvestingBatchItem = ({ batchItem }) => {
+  const { quantity, cropVarietyName, plcvCount } = harvestingBatchItemData({
+    batchItem,
+  });
+
+  return (
+    <div className="border p-1" key={uuid()}>
+      <p>Varijetnta: {cropVarietyName}</p>
+      <p>Količina: {quantity}</p>
+
+      <p>Broj posađenih varijeteta: {plcvCount}</p>
+    </div>
   );
 };

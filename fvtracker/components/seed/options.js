@@ -69,7 +69,7 @@ export default function SeedOptions() {
   const API = async (seedType) => {
     try {
       console.log(`Seeding ${seedType}...`);
-     // await signOut({ redirect: false });
+      if (seedType === SEED_TYPES.ALL) await signOut({ redirect: false });
       dispatch(setLoading(true));
       const response = await axios.post("/api/seed", { seedType });
       console.log(response.data);

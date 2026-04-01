@@ -154,7 +154,7 @@ export async function GET(request) {
                   populate: [
                     {
                       path: "cropVariety",
-                      select: "name cropType",
+                      select: "name cropType quantityPerCell",
                       populate: {
                         path: "cropType",
                         select: "name generalType",

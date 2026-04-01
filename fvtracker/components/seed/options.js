@@ -43,16 +43,21 @@ export default function SeedOptions() {
       label: "Kultivacije",
       icon: <MdFoodBank />,
       type: SEED_TYPES.CULTIVATIONS,
-    }, */
+    }, 
+    {
+      label: "Biljke",
+      icon: <MdFoodBank />,
+      type: SEED_TYPES.CROP_MAIN_TYPES,
+    },*/
     {
       label: "Polja",
       icon: <MdFoodBank />,
       type: SEED_TYPES.FIELDS,
     },
     {
-      label: "Bilke",
+      label: "Sadnja i berba",
       icon: <MdFoodBank />,
-      type: SEED_TYPES.CROP_MAIN_TYPES,
+      type: SEED_TYPES.PLANTAGE_HARVEST,
     },
     {
       label: "Proizvodnja",

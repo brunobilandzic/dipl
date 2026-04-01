@@ -78,6 +78,11 @@ harvestingPlanSchema.pre("save", async function () {
   }
 });
 
+harvestingPlanSchema.pre("deleteMany", async function () {
+  const ids = await HarvestingPlan.find(this.getFilter()).distinct("_id");
+  await HarvestingPlanItem.deleteMany({ harvestingPlan: { $in: ids } });
+});
+
 export const HarvestingPlan =
   mongoose.models.HarvestingPlan ||
   mongoose.model("HarvestingPlan", harvestingPlanSchema);

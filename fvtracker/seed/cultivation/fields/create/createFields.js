@@ -19,6 +19,8 @@ import { CropVariety } from "@/models/sectors/cultivation/Crops.js";
 import { CultivationArea } from "@/models/sectors/cultivation/Cultivation.js";
 import { createCultivation } from "../../cultivation/index.js";
 import { createNewHarvest, createNewPlantage } from "../../crops/crops.js";
+import { HarvestingPlan } from "@/models/documents/plans/HarvestingPlan.js";
+import { PlantingPlan } from "@/models/documents/plans/PlantingPlan.js";
 
 await dbConnect();
 
@@ -90,6 +92,9 @@ async function createFieldObject(fieldParams, msWindow = createFieldTimeMs) {
 }
 
 async function createPlans({ fieldId, cropVarietyId }) {
+  await HarvestingPlan.deleteMany({});
+  await PlantingPlan.deleteMany({});
+
   console.log({ fieldId, cropVarietyId });
   const { plantingPlan, harvestingPlan } = planInfo({ fieldId, cropVarietyId });
   const newPlantingPlan = await createPlantingPlan({

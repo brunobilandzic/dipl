@@ -69,17 +69,18 @@ export default {
   ],
   ProductionManager: [
     {
-      label: "postrojenja",
-      path: "/postrojenja",
-    },
-    {
       label: "proizvodnja",
       submenu: [
         { label: "proizvodi", path: "/proizvodi" },
+        { label: "žetve", path: "/upravljanje-poljima/zetve" },
         { label: "zaprimanja", path: "/proizvodnja/zaprimanja" },
         { label: "procesuirenje", path: "/proizvodnja/procesuirenje" },
         { label: "slanje", path: "/proizvodnja/slanje" },
       ],
+    },
+    {
+      label: "postrojenja",
+      path: "/postrojenja",
     },
     {
       label: "radnici",

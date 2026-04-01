@@ -38,6 +38,11 @@ productsSchema.pre("save", async function () {
 });
 
 const ingredientsSchema = new Schema({
+  product: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Product",
+    required: true,
+  },
   cropVariety: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "CropVariety",

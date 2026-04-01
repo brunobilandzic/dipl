@@ -233,6 +233,7 @@ export function HarvestingModal({
         harvestCells({
           cultivationId: newHarvest.cultivationId,
           harvestedCropVarieties: res.data.harvestedCropVarieties,
+          cropVarietyId: newHarvest.cropVariety._id 
         }),
       );
       dispatch(setLoading(false));

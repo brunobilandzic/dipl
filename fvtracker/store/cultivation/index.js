@@ -252,7 +252,8 @@ const cultivationSlice = createSlice({
     },
     harvestCells: (state, action) => {
       // reverce createPlantage logic
-      const { cultivationId, harvestedCropVarieties } = action.payload;
+      const { cultivationId, harvestedCropVarieties, cropVarietyId } =
+        action.payload;
       if (!state.selectedField) return;
 
       for (const ca of state.selectedField.cultivationAreas) {
@@ -271,6 +272,22 @@ const cultivationSlice = createSlice({
               console.log("Updated pcv after harvest:", pcv);
             }
           }
+        }
+      }
+
+      //available plans come from fields not selected field
+      const fieldName = state.selectedField.name;
+      const fid = state.fields.findIndex((f) => f.name === fieldName);
+
+      for (const harvestingPlan of state.fields[fid].harvestingPlans) {
+        const pItemId = harvestingPlan.items.findIndex(
+          (item) => item.cropVariety._id === cropVarietyId,
+        );
+
+        if (pItemId !== -1 && pItemId !== undefined) {
+          harvestingPlan.items[pItemId].quantity -=
+            harvestedCropVarieties.length *
+            harvestingPlan.items[pItemId].cropVariety.quantityPerCell;
         }
       }
     },

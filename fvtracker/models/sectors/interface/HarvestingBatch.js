@@ -63,13 +63,8 @@ harvestingBatchSchema.methods.cropVarietyQuantity = async function ({
   cropVarietyName,
   cropVarietyId,
 } = {}) {
-  await this.populate({
-    path: "harvestingBatchItems",
-    select: "cropVariety plantedCropVarieties",
-    populate: "cropVariety",
-  });
-
-  const item = this.harvestingBatchItems.find((hbi) => {
+  const batch = await populatedBatch(this);
+  const item = batch.find((hbi) => {
     if (cropVarietyId) {
       return hbi.cropVariety._id.equals(cropVarietyId);
     } else if (cropVarietyName) {
@@ -116,3 +111,11 @@ export const HarvestingBatch =
 export const HarvestingBatchItem =
   mongoose.models.HarvestingBatchItem ||
   mongoose.model("HarvestingBatchItem", harvestingBatchItemSchema);
+
+const populatedBatch = async (batch) => {
+  return await batch.populate({
+    path: "harvestingBatchItems",
+    select: "cropVariety plantedCropVarieties",
+    populate: "cropVariety",
+  });
+};

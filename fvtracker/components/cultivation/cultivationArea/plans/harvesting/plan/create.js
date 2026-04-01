@@ -12,7 +12,8 @@ export default function CreateHarvestingPlanPageComponent() {
   const [selectedField, setSelectedField] = useState(null);
   return (
     <>
-      <div className="border p-4 rounded-lg">
+      <div className="">
+        <div className="font-bold text-3xl mb-2 underline">Izaberi polje:</div>
         <SelectField
           selectedField={selectedField}
           setSelectedField={setSelectedField}

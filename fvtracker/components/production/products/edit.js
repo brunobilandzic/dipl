@@ -1,4 +1,16 @@
-export const EditProduct = ({ product }) => {
+import { useState } from "react";
+
+const EditProductPage = ({ product }) => {
+  const [productForm, setProductForm] = useState(initialData({ product }));
+
+  return (
+    <div>
+      <div>Edit product {productForm.name}</div>
+    </div>
+  );
+};
+
+const EditProductForm = ({ productForm, setProductForm }) => {
   const initialFormData = initialData({ product });
 
   return (

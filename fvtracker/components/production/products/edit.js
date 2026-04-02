@@ -35,6 +35,12 @@ export default function EditProductPageComponent({ product }) {
 }
 
 const EditProductForm = ({ productForm, setProductForm, handleSubmit }) => {
+  const addIngredient = () => {
+    setProductForm({
+      ...productForm,
+      ingredients: [...productForm.ingredients, emptyIngredient],
+    });
+  };
   return (
     <div>
       <h2>Uredi proizvod</h2>
@@ -62,7 +68,12 @@ const EditProductForm = ({ productForm, setProductForm, handleSubmit }) => {
           }
         />
         <div className="ingredients">
-          <h3>Sastojci</h3>
+          <div className="flex items-center justify-between mb-2">
+            <h3>Sastojci</h3>
+            <div className="btn" type="button" onClick={addIngredient}>
+              Dodaj sastojak
+            </div>
+          </div>
           {productForm.ingredients.map((ingredient, index) => (
             <IngredientInput
               key={index}

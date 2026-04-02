@@ -22,11 +22,13 @@ const ProductList = () => {
   return (
     <div>
       <div className="font-bold text-3xl border-b-2">Lista proizvoda</div>
-      <ul>
+      <div className="my-4 flex flex-col gap-4">
         {products?.map((product) => (
-          <li key={product._id}>{product.name}</li>
+          <div key={product._id}>
+            <ProductItem product={product} />
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

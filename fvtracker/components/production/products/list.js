@@ -32,3 +32,30 @@ const ProductList = () => {
 };
 
 export default ProductList;
+
+const ProductItem = ({ product }) => {
+  return (
+    <div className="border p-4 rounded">
+      <h2 className="text-xl font-bold">{product.name}</h2>
+      <p>{product.description}</p>
+      <p className="text-sm text-gray-500">Price: ${product.price}</p>
+      <div className="mt-4">
+        <h3 className="text-lg font-semibold">Ingredients:</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+          {product.ingredients.map((ingredient) => (
+            <IngredientItem key={ingredient._id} ingredient={ingredient} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const IngredientItem = ({ ingredient }) => {
+  return (
+    <div className="border p-2 rounded">
+      <h3 className="text-lg font-semibold">{ingredient.cropVariety.name}</h3>
+      <p>Quantity: {ingredient.quantity}</p>
+    </div>
+  );
+};

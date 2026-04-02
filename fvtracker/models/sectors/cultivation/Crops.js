@@ -108,7 +108,7 @@ const cropVarietySchema = new Schema({
       default: [],
     },
   ],
-  productIngrediets: [
+  ingredients: [
     {
       //
       type: mongoose.Schema.Types.ObjectId,

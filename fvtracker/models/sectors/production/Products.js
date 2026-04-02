@@ -49,7 +49,9 @@ productsSchema.methods.createIngredients = async function ({
       cropVariety: cropVariety._id,
       quantity: ingredientData.quantity,
     });
+    cropVariety.ingredients.push(newIngredient._id);
 
+    await cropVariety.save();
     await newIngredient.save();
     ingredients.push(newIngredient);
   }

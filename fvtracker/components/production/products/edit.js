@@ -1,22 +1,28 @@
+"use client";
+
 import { useState } from "react";
 
-const EditProductPage = ({ product }) => {
+export default function EditProductPageComponent({ product }) {
   const [productForm, setProductForm] = useState(initialData({ product }));
 
   return (
     <div>
       <div>Edit product {productForm.name}</div>
+      <div>
+        <EditProductForm
+          productForm={productForm}
+          setProductForm={setProductForm}
+        />
+      </div>
     </div>
   );
-};
+}
 
 const EditProductForm = ({ productForm, setProductForm }) => {
-  const initialFormData = initialData({ product });
-
   return (
     <div>
       <h2>Uredi proizvod</h2>
-      <pre>{JSON.stringify(initialFormData, null, 2)}</pre>
+      <pre>{JSON.stringify(productForm, null, 2)}</pre>
     </div>
   );
 };
@@ -33,4 +39,3 @@ const initialData = ({ product }) => {
     })),
   };
 };
-

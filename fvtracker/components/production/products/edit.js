@@ -34,14 +34,3 @@ const initialData = ({ product }) => {
   };
 };
 
-const testProduct = {
-  name: "Proizvod 1",
-  description: "Opis proizvoda 1",
-  price: 10,
-  ingredients: [
-    {
-      cropVarietyName: "Cherry rajčica",
-      quantity: 10,
-    },
-  ],
-};

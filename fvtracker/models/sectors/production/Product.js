@@ -103,6 +103,11 @@ ingredientsSchema.pre("deleteMany", async function () {
     { ingredients: { $in: ids } },
     { $pull: { ingredients: { $in: ids } } },
   );
+
+  await Product.updateMany(
+    { ingredients: { $in: ids } },
+    { $pull: { ingredients: { $in: ids } } },
+  );
 });
 
 const productStockSchema = new Schema({

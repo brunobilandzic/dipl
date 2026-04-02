@@ -30,7 +30,9 @@ const productsSchema = new Schema({
   ],
 });
 
-productsSchema.methods.createIngredients = async function (ingredientsData) {
+productsSchema.methods.createIngredients = async function ({
+  ingredientsData,
+}) {
   const ingredients = [];
   for (const ingredientData of ingredientsData) {
     const cropVariety = await CropVariety.findOne({
@@ -47,11 +49,13 @@ productsSchema.methods.createIngredients = async function (ingredientsData) {
       cropVariety: cropVariety._id,
       quantity: ingredientData.quantity,
     });
+
     await newIngredient.save();
     ingredients.push(newIngredient);
   }
 
-  return ingredients;
+  this.ingredients.push(...ingredients.map((ing) => ing._id));
+  await this.save();
 };
 
 /* productsSchema.pre("save", async function () {

@@ -4,7 +4,7 @@ import { AppInput } from "@/components/form/inputs";
 import { submitProductForm } from "@/lib/utils/production/products";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function EditProductPageComponent({ product }) {
   const [productForm, setProductForm] = useState(initialData({ product }));
@@ -77,6 +77,7 @@ const EditProductForm = ({ productForm, setProductForm, handleSubmit }) => {
         <AppInput
           label="Cijena"
           value={productForm.price}
+          type="number"
           onChange={(e) =>
             setProductForm({ ...productForm, price: e.target.value })
           }
@@ -109,6 +110,8 @@ const EditProductForm = ({ productForm, setProductForm, handleSubmit }) => {
 };
 
 const IngredientInput = ({ ingredient, onChange, index, onDelete }) => {
+  const crops = useSelector((state) => state.cultivation.crops);
+
   return (
     <div className="border p-2 mb-2 rounded flex flex-col gap-2">
       <div className="flex items-center justify-between mt-1">
@@ -136,6 +139,7 @@ const IngredientInput = ({ ingredient, onChange, index, onDelete }) => {
       />
       <AppInput
         label="Količina"
+        type="number"
         value={ingredient.quantity}
         onChange={(e) =>
           onChange({

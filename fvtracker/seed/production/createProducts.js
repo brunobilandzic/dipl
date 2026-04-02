@@ -1,6 +1,6 @@
 import { CropVariety } from "@/models/sectors/cultivation/Crops";
 import { products } from "../data/production";
-import { Ingredient, Product } from "@/models/sectors/production/Products";
+import { Ingredient, Product } from "@/models/sectors/production/Product";
 import { makeUrlFriendly } from "@/lib/utils/strings";
 
 export const createProducts = async () => {

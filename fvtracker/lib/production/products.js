@@ -1,4 +1,4 @@
-import { Product } from "@/models/sectors/production/Products";
+import { Ingredient, Product } from "@/models/sectors/production/Product";
 
 export const getProducts = async () => {
   const products = await Product.find().populate([

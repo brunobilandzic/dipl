@@ -42,6 +42,15 @@ productSchema.pre("save", function () {
   }
 });
 
+productSchema.pre("findOneAndUpdate", function () {
+  const update = this.getUpdate();
+  console.log("Pre-update hook triggered with update:", update);
+  if (update.name) {
+    update.slug = makeUrlFriendly(update.name);
+    console.log("Updated slug to:", update.slug);
+  }
+});
+
 productSchema.methods.createIngredients = async function ({ ingredientsData }) {
   const ingredients = [];
   for (const ingredientData of ingredientsData) {

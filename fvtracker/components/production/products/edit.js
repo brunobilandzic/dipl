@@ -139,6 +139,7 @@ const IngredientInput = ({ ingredient, onChange, index, onDelete }) => {
 const initialData = ({ product }) => {
   if (!product) return testProduct;
   return {
+    _id: product._id,
     name: product.name,
     description: product.description,
     price: product.price,

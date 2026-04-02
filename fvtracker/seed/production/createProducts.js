@@ -16,8 +16,25 @@ export const createProducts = async () => {
     const cropVarietyIds = cropVarieties.map((cv) => cv._id);
     const product = new Product({
       name: productData.name,
-      cropVarieties: cropVarietyIds,
     });
+    for (const ingredientData of productData.ingredients) {
+      const cropVariety = await CropVariety.findOne({
+        name: ingredientData.cropVarietyName,
+      });
+      if (!cropVariety) {
+        throw new Error(
+          `Crop variety ${ingredientData.cropVarietyName} not found.`,
+        );
+      }
+      const newIngredient = new Ingredient({
+        product: product._id,
+        cropVariety: cropVariety._id,
+        quantity: ingredientData.quantity,
+      });
+      await newIngredient.save();
+      product.ingredients.push(newIngredient._id);
+    }
+
     console.log({ product });
     await product.createIngredients(productData.ingredients);
     await product.save();

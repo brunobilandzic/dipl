@@ -14,7 +14,6 @@ import { CropVariety } from "@/models/sectors/cultivation/Crops.js";
 import { CultivationArea } from "@/models/sectors/cultivation/Cultivation.js";
 import { createCultivation } from "../../cultivation/index.js";
 import {} from "../../crops/crops.js";
-import { createPlans } from "@/seed/documents/plans.js";
 import crops from "../../crops/index.js";
 
 await dbConnect();

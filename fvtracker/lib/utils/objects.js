@@ -35,3 +35,7 @@ export const stringifyObjectValues = (obj) => {
     </div>
   ));
 };
+
+export const sanitize = (obj) => {
+  return JSON.parse(JSON.stringify(obj));
+};

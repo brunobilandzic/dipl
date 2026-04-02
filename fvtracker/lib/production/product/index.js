@@ -32,9 +32,6 @@ export const getProductBySlug = async (slug) => {
 export const updateProduct = async ({ _updatedProduct, productId }) => {
   const { ingredients: updatedIngredients, ...updatedProduct } =
     _updatedProduct;
-  console.log("Updating product with ID:", productId);
-  console.log("Updated product data:", updatedProduct);
-  console.log("Updated ingredients data:", updatedIngredients);
   const product = await Product.findByIdAndUpdate(
     productId,
     { $set: updatedProduct },
@@ -43,41 +40,7 @@ export const updateProduct = async ({ _updatedProduct, productId }) => {
     path: "ingredients",
     populate: { path: "cropVariety", select: "name" },
   });
-  const existingIngredientIds = product.ingredients.map((ing) =>
-    ing._id.toString(),
-  );
-  const updatedIngredientIds = updatedIngredients
-    .filter((ing) => ing.id)
-    .map((ing) => ing.id);
 
-  const toDeleteIngredientIds = existingIngredientIds.filter(
-    (id) => !updatedIngredientIds.includes(id),
-  );
-
-  await Ingredient.deleteMany({ _id: { $in: toDeleteIngredientIds } });
-
-  const ingredients = [];
-  for (const ing of updatedIngredients) {
-    if (ing.id) {
-      const ingredient = await Ingredient.findOneAndUpdate(
-        { _id: ing.id },
-        { ...ing },
-        { new: true },
-      );
-    } else {
-      const cropVariety = await CropVariety.findOne({
-        name: ing.cropVarietyName,
-      });
-      const ingredient = new Ingredient({
-        product: product._id,
-        cropVariety: cropVariety._id,
-        quantity: ing.quantity,
-      });
-      await ingredient.save();
-      ingredients.push(ingredient);
-    }
-  }
-  console.log("Created/updated ingredients:", ingredients);
-  console.log("Associating ingredients with product:", product);
+  console.log("Updated product:", product);
   return product;
 };

@@ -34,7 +34,7 @@ export const submitProductForm = async ({
     let res;
     if (isEdit) {
       res = await api.put(`/products`, productForm, {
-        params: { id: productForm._id },
+        params: { id: productForm.id },
       });
     } else {
       res = await api.post("/products", productForm);

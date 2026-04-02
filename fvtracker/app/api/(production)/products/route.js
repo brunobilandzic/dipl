@@ -23,13 +23,11 @@ export const PUT = async (req) => {
     const body = await req.json();
     console.log("Received PUT request for product with id:", id);
     console.log("Request body:", body);
-    // Implement product update logic here using the id and body
-    // For example, you might call an updateProduct function that interacts with the database
-    // const updatedProduct = await updateProduct(id, body);
-    return Response.json(
-      { message: "Product updated successfully" },
-      { status: 200 },
-    );
+    const product = await updateProduct({
+      _updatedProduct: body,
+      productId: id,
+    });
+    return Response.json({ product }, { status: 200 });
   } catch (error) {
     console.error("Error updating product:", error);
     return Response.json(

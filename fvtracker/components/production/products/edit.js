@@ -161,3 +161,8 @@ const testProduct = {
     },
   ],
 };
+
+const emptyIngredient = {
+  cropVarietyName: "",
+  quantity: "",
+};

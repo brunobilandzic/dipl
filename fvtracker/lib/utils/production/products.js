@@ -51,7 +51,7 @@ export const submitProductForm = async ({
     handleError(
       {
         ...error,
-        generalMessage: `Failed to ${isEdit ? "update" : "create"} product. Please try again later.`,
+        generalMessage: `Greska pri ${isEdit ? "ažuriranju" : "kreiranju"} proizvoda. Molimo pokušajte ponovo kasnije.`,
       },
       router,
     );

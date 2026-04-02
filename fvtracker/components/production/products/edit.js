@@ -16,7 +16,7 @@ export default function EditProductPageComponent({ product }) {
     await submitProductForm({
       productForm,
       dispatch,
-      router, 
+      router,
       isEdit: true,
     });
   };
@@ -154,11 +154,12 @@ const IngredientInput = ({ ingredient, onChange, index, onDelete }) => {
 const initialData = ({ product }) => {
   if (!product) return testProduct;
   return {
-    _id: product._id,
+    id: product._id,
     name: product.name,
     description: product.description,
     price: product.price,
     ingredients: product.ingredients.map((ing) => ({
+      id: ing._id,
       cropVarietyName: ing.cropVariety.name,
       quantity: ing.quantity,
     })),

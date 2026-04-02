@@ -23,6 +23,21 @@ const EditProductForm = ({ productForm, setProductForm }) => {
     <div>
       <h2>Uredi proizvod</h2>
       <pre>{JSON.stringify(productForm, null, 2)}</pre>
+const IngredientInput = ({ ingredient, onChange, index }) => {
+  return (
+    <div className="ingredient-input">
+      <AppInput
+        label="Naziv sorte"
+        value={ingredient.cropVarietyName}
+        onChange={(e) =>
+          onChange({ ...ingredient, cropVarietyName: e.target.value })
+        }
+      />
+      <AppInput
+        label="Količina"
+        value={ingredient.quantity}
+        onChange={(e) => onChange({ ...ingredient, quantity: e.target.value })}
+      />
     </div>
   );
 };

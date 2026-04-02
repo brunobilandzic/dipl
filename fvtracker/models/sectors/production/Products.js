@@ -126,15 +126,6 @@ productStockSchema.pre("save", async function () {
         select: "cropVariety quantity",
       },
     ]);
-
-    for (const ingredient in this.product.ingredients) {
-      const item = this.harvestingBatch.harvestingBatchItems.find((hbi) =>
-        hbi.cropVariety.equals(ingredient.cropVariety),
-      );
-      item.quantity -= ingredient.quantity;
-      await item.save();
-      33969;
-    }
   }
 });
 

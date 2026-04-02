@@ -41,12 +41,20 @@ const EditProductForm = ({ productForm, setProductForm, handleSubmit }) => {
       ingredients: [...productForm.ingredients, emptyIngredient],
     });
   };
+
+  const onChangeIngredient = ({ index, updatedIngredient }) => {
+    const updatedIngredients = [...productForm.ingredients];
+    updatedIngredients[index] = updatedIngredient;
+    setProductForm({ ...productForm, ingredients: updatedIngredients });
+  };
+
   const onDeleteIngredient = (index) => {
     const updatedIngredients = productForm.ingredients.filter(
       (ing, i) => i !== index,
     );
     setProductForm({ ...productForm, ingredients: updatedIngredients });
   };
+
   return (
     <div>
       <h2>Uredi proizvod</h2>
@@ -84,14 +92,7 @@ const EditProductForm = ({ productForm, setProductForm, handleSubmit }) => {
             <IngredientInput
               key={index}
               ingredient={ingredient}
-              onChange={(updatedIngredient) => {
-                const updatedIngredients = [...productForm.ingredients];
-                updatedIngredients[index] = updatedIngredient;
-                setProductForm({
-                  ...productForm,
-                  ingredients: updatedIngredients,
-                });
-              }}
+              onChange={onChangeIngredient}
               index={index}
               onDelete={onDeleteIngredient}
             />
@@ -124,13 +125,27 @@ const IngredientInput = ({ ingredient, onChange, index, onDelete }) => {
         label="Naziv sorte"
         value={ingredient.cropVarietyName}
         onChange={(e) =>
-          onChange({ ...ingredient, cropVarietyName: e.target.value })
+          onChange({
+            index,
+            updatedIngredient: {
+              ...ingredient,
+              cropVarietyName: e.target.value,
+            },
+          })
         }
       />
       <AppInput
         label="Količina"
         value={ingredient.quantity}
-        onChange={(e) => onChange({ ...ingredient, quantity: e.target.value })}
+        onChange={(e) =>
+          onChange({
+            index,
+            updatedIngredient: {
+              ...ingredient,
+              quantity: e.target.value,
+            },
+          })
+        }
       />
     </div>
   );

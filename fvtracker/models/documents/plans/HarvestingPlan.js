@@ -109,6 +109,12 @@ harvestingPlanSchema.pre("deleteMany", async function () {
   await ProductionManager.findByIdAndUpdate(this.productionManager, {
     $pull: { harvestingPlans: { $in: ids } },
   });
+  await Field.updateOne(
+    {
+      harvestingPlans: { $in: [this._id] },
+    },
+    { $pull: { harvestingPlans: this._id } },
+  );
 });
 
 export const HarvestingPlan =

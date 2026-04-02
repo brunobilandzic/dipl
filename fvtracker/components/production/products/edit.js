@@ -41,6 +41,12 @@ const EditProductForm = ({ productForm, setProductForm, handleSubmit }) => {
       ingredients: [...productForm.ingredients, emptyIngredient],
     });
   };
+  const onDeleteIngredient = (index) => {
+    const updatedIngredients = productForm.ingredients.filter(
+      (ing, i) => i !== index,
+    );
+    setProductForm({ ...productForm, ingredients: updatedIngredients });
+  };
   return (
     <div>
       <h2>Uredi proizvod</h2>
@@ -87,6 +93,7 @@ const EditProductForm = ({ productForm, setProductForm, handleSubmit }) => {
                 });
               }}
               index={index}
+              onDelete={onDeleteIngredient}
             />
           ))}
         </div>
@@ -100,9 +107,19 @@ const EditProductForm = ({ productForm, setProductForm, handleSubmit }) => {
   );
 };
 
-const IngredientInput = ({ ingredient, onChange, index }) => {
+const IngredientInput = ({ ingredient, onChange, index, onDelete }) => {
   return (
-    <div className="ingredient-input">
+    <div className="border p-2 mb-2 rounded flex flex-col gap-2">
+      <div className="flex items-center justify-between mt-1">
+        <div className="text-lg font-semibold">Sastojak {index + 1}</div>
+        <div
+          className="btn cancelButton bg-transparent outline outline-red-500"
+          type="button"
+          onClick={() => onDelete(index)}
+        >
+          Obriši sastojak
+        </div>
+      </div>
       <AppInput
         label="Naziv sorte"
         value={ingredient.cropVarietyName}

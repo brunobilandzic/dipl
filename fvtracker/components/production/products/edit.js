@@ -16,7 +16,7 @@ export default function EditProductPageComponent({ product }) {
     await submitProductForm({
       productForm,
       dispatch,
-      router, // Replace with actual router instance
+      router, 
       isEdit: true,
     });
   };

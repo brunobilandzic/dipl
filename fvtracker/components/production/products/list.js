@@ -79,7 +79,7 @@ const ActionBar = ({ slug }) => {
   const onDelete = () => {};
   return (
     <div className="flex justify-end gap-2 mt-4">
-      <Link href={`/proizvodi/ured/${slug}`}>
+      <Link href={`/proizvodi/uredi/${slug}`}>
         <div className="btn">Uredi</div>
       </Link>
       <Link href={`/production/products/${slug}/stock`}>

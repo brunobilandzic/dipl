@@ -22,3 +22,36 @@ export const refreshProducts = async ({ dispatch, router }) => {
     );
   }
 };
+
+export const submitProductForm = async ({
+  productForm,
+  dispatch,
+  router,
+  isEdit = false,
+}) => {
+  try {
+    dispatch(setLoading(true));
+    let res;
+    if (isEdit) {
+      res = await api.put(`/products/${productForm.id}`, productForm);
+    } else {
+      res = await api.post("/products", productForm);
+    }
+    const product = res.data.product;
+    console.log(
+      `Product ${isEdit ? "updated" : "created"} successfully:`,
+      product,
+    );
+    dispatch(setLoading(false));
+  } catch (error) {
+    console.error(`Error ${isEdit ? "updating" : "creating"} product:`, error);
+    dispatch(setLoading(false));
+    handleError(
+      {
+        ...error,
+        generalMessage: `Failed to ${isEdit ? "update" : "create"} product. Please try again later.`,
+      },
+      router,
+    );
+  }
+};

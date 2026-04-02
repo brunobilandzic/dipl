@@ -5,6 +5,8 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { LoadingFullScreen } from "@/components/layout/loading";
+import Link from "next/link";
+import { priceEuroString } from "@/lib/utils/strings";
 
 const ProductList = () => {
   const dispatch = useDispatch();
@@ -46,7 +48,7 @@ const ProductItem = ({ product }) => {
       <div className="mt-4">
         <IngredientsList ingredients={product.ingredients} />
       </div>
-      <ActionBar productId={product._id} />
+      <ActionBar slug={product.slug} />
     </div>
   );
 };
@@ -73,12 +75,19 @@ const IngredientItem = ({ ingredient }) => {
   );
 };
 
-const ActionBar = ({ productId }) => {
+const ActionBar = ({ slug }) => {
+  const onDelete = () => {};
   return (
     <div className="flex justify-end gap-2 mt-4">
-      <div className="btn">Edit</div>
-      <div className="btn">Create Stock</div>
-      <div className="btn cancelButton">Delete</div>
+      <Link href={`/proizvodi/ured/${slug}`}>
+        <div className="btn">Uredi</div>
+      </Link>
+      <Link href={`/production/products/${slug}/stock`}>
+        <div className="btn">Create Stock</div>
+      </Link>
+      <div onClick={onDelete} className="btn cancelButton">
+        Delete
+      </div>
     </div>
   );
 };

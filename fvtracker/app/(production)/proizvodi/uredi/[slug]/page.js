@@ -1,5 +1,5 @@
 import EditProductPageComponent from "@/components/production/products/edit";
-import { getProductBySlug } from "@/lib/production/products";
+import { getProductBySlug } from "@/lib/production/product";
 import { sanitize } from "@/lib/utils/objects";
 
 const EditProductPage = async ({ params }) => {

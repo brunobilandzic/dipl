@@ -49,6 +49,7 @@ const ProductItem = ({ product }) => {
           ))}
         </div>
       </div>
+      <ActionBar productId={product._id} />
     </div>
   );
 };
@@ -57,7 +58,17 @@ const IngredientItem = ({ ingredient }) => {
   return (
     <div className="border p-2 rounded">
       <h3 className="text-lg font-semibold">{ingredient.cropVariety.name}</h3>
-      <p>Quantity: {ingredient.quantity}</p>
+      <p>Količina: {ingredient.quantity}</p>
+    </div>
+  );
+};
+
+const ActionBar = ({ productId }) => {
+  return (
+    <div className="flex justify-end gap-2 mt-4">
+      <div className="btn">Edit</div>
+      <div className="btn">Create Stock</div>
+      <div className="btn cancelButton">Delete</div>
     </div>
   );
 };

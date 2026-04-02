@@ -1,5 +1,6 @@
 "use client";
 
+import { AppInput } from "@/components/form/inputs";
 import { useState } from "react";
 
 export default function EditProductPageComponent({ product }) {
@@ -23,6 +24,51 @@ const EditProductForm = ({ productForm, setProductForm }) => {
     <div>
       <h2>Uredi proizvod</h2>
       <pre>{JSON.stringify(productForm, null, 2)}</pre>
+      <div className="form">
+        <AppInput
+          label="Naziv proizvoda"
+          value={productForm.name}
+          onChange={(e) =>
+            setProductForm({ ...productForm, name: e.target.value })
+          }
+        />
+        <AppInput
+          label="Opis proizvoda"
+          value={productForm.description}
+          onChange={(e) =>
+            setProductForm({ ...productForm, description: e.target.value })
+          }
+        />
+        <AppInput
+          label="Cijena"
+          value={productForm.price}
+          onChange={(e) =>
+            setProductForm({ ...productForm, price: e.target.value })
+          }
+        />
+        <div className="ingredients">
+          <h3>Sastojci</h3>
+          {productForm.ingredients.map((ingredient, index) => (
+            <IngredientInput
+              key={index}
+              ingredient={ingredient}
+              onChange={(updatedIngredient) => {
+                const updatedIngredients = [...productForm.ingredients];
+                updatedIngredients[index] = updatedIngredient;
+                setProductForm({
+                  ...productForm,
+                  ingredients: updatedIngredients,
+                });
+              }}
+              index={index}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const IngredientInput = ({ ingredient, onChange, index }) => {
   return (
     <div className="ingredient-input">

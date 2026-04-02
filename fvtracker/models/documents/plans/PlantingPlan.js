@@ -79,6 +79,12 @@ plantingPlanSchema.pre("save", async function () {
 plantingPlanSchema.pre("deleteMany", async function () {
   const ids = await PlantingPlan.find(this.getFilter()).distinct("_id");
   await PlantingPlanItem.deleteMany({ plantingPlan: { $in: ids } });
+  await Field.updateOne(
+    {
+      plantingPlans: { $in: [this._id] },
+    },
+    { $pull: { plantingPlans: this._id } },
+  );
 });
 
 export const PlantingPlan =

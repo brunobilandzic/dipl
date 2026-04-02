@@ -40,7 +40,7 @@ export const optimizedParams = {
   },
 };
 
-export const planInfo = ({ fieldId, cropVarietyId }) => {
+export const planInfo = ({ fieldId, cropVarietyId, productionManagerId }) => {
   return {
     plantingPlan: {
       field: fieldId, // Postavit ćemo ovo kasnije
@@ -63,6 +63,7 @@ export const planInfo = ({ fieldId, cropVarietyId }) => {
           quantity: 1000,
         },
       ],
+      productionManager: productionManagerId,
     },
   };
 };

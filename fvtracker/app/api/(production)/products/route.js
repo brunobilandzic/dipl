@@ -1,5 +1,5 @@
 import dbConnect from "@/lib/db/mongooseConnect";
-import { getProducts, updateProduct } from "@/lib/production";
+import { getProducts, updateProduct } from "@/lib/production/product";
 
 export const GET = async (req) => {
   try {

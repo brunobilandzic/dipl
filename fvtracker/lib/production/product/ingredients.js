@@ -1,7 +1,11 @@
 import { CropVariety } from "@/models/sectors/cultivation/Crops";
 import { Ingredient } from "@/models/sectors/production/Product";
 
-const fooo = async ({ ingredientsDb, updatedIngredients }) => {
+export const updateIngredients = async ({
+  ingredientsDb,
+  updatedIngredients,
+  productId,
+}) => {
   const existingIngredientIds = ingredientsDb.map((ing) => ing._id.toString());
   const updatedIngredientIds = updatedIngredients
     .filter((ing) => ing.id)
@@ -25,8 +29,11 @@ const fooo = async ({ ingredientsDb, updatedIngredients }) => {
       const cropVariety = await CropVariety.findOne({
         name: ing.cropVarietyName,
       });
+      if (!cropVariety) {
+        throw new Error(`Crop variety ${ing.cropVarietyName} not found.`);
+      }
       const ingredient = new Ingredient({
-        product: product._id,
+        product: productId,
         cropVariety: cropVariety._id,
         quantity: ing.quantity,
       });

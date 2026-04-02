@@ -13,6 +13,7 @@ import { OptionButtons } from "../layout/buttons/options";
 import { useDispatch } from "react-redux";
 import { setLoading } from "@/store/loading";
 import { signOut } from "next-auth/react";
+import handleError from "@/lib/constants/errors/client/handleError";
 
 export default function SeedOptions() {
   const dispatch = useDispatch();
@@ -82,7 +83,10 @@ export default function SeedOptions() {
       alert(`${seedType} uspješno dovršeno\n${response.data.message}`);
     } catch (error) {
       console.error("Error seeding data:", error);
-      throw new Error("Greška pri unosu podataka");
+      handleError({
+        ...error,
+        generalMessage: `Greška prilikom seeding ${seedType}`,
+      });
     }
   };
 

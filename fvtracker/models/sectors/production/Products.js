@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import { CropVariety } from "../cultivation/Crops";
 import { makeUrlFriendly } from "@/lib/utils/strings";
 
-const productsSchema = new Schema({
+const productSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -36,15 +36,13 @@ const productsSchema = new Schema({
   },
 });
 
-productsSchema.pre("save", function () {
+productSchema.pre("save", function () {
   if (this.isModified("name") || this.isNew) {
     this.slug = makeUrlFriendly(this.name);
   }
 });
 
-productsSchema.methods.createIngredients = async function ({
-  ingredientsData,
-}) {
+productSchema.methods.createIngredients = async function ({ ingredientsData }) {
   const ingredients = [];
   for (const ingredientData of ingredientsData) {
     const cropVariety = await CropVariety.findOne({
@@ -71,39 +69,6 @@ productsSchema.methods.createIngredients = async function ({
   this.ingredients.push(...ingredients.map((ing) => ing._id));
   await this.save();
 };
-
-/* productsSchema.pre("save", async function () {
-  console.log(this._doc);
-  if (!this.ingredients || this.ingredients.length === 0) {
-    throw new Error("Product must have at least one ingredient.");
-  }
-  console.log({
-    ingredients: this.ingredients,
-  });
-  if (this.isNew()) {
-    // ingredients come in pairs of {name, quantity}
-    for (const ingredient of this.ingredients) {
-      const cropVariety = await CropVariety.findOne(
-        (cv) => cv.name === ingredient.cropVariety,
-      );
-      if (!cropVariety) {
-        throw new Error(`Crop variety "${ingredient.cropVariety}" not found.`);
-      }
-
-      const newIngredient = new Ingredient({
-        product: this._id,
-        cropVariety: cropVariety._id,
-        quantity: ingredient.quantity,
-      });
-      console.log({ newIngredient });
-      ingredient.cropVariety = cropVariety._id;
-      cropVariety.ingredients.push(newIngredient._id);
-
-      await cropVariety.save();
-      await newIngredient.save();
-    }
-  }
-}); */
 
 const ingredientsSchema = new Schema({
   product: {
@@ -156,7 +121,7 @@ productStockSchema.pre("save", async function () {
 });
 
 export const Product =
-  mongoose.models.Product || mongoose.model("Product", productsSchema);
+  mongoose.models.Product || mongoose.model("Product", productSchema);
 export const Ingredient =
   mongoose.models.Ingredient || mongoose.model("Ingredient", ingredientsSchema);
 export const ProductStock =

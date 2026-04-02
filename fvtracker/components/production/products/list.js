@@ -4,6 +4,7 @@ import { refreshProducts } from "@/lib/utils/production/products";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
+import { LoadingFullScreen } from "@/components/layout/loading";
 
 const ProductList = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,8 @@ const ProductList = () => {
       refreshProducts({ dispatch, router });
     }
   }, [products]);
+
+  console.log({ products });
 
   return (
     <div>

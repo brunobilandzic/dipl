@@ -96,6 +96,15 @@ const ingredientsSchema = new Schema({
   },
 });
 
+ingredientsSchema.pre("deleteMany", async function () {
+  const ids = await Ingredient.find(this.getFilter()).distinct("_id");
+
+  await CropVariety.updateMany(
+    { ingredients: { $in: ids } },
+    { $pull: { ingredients: { $in: ids } } },
+  );
+});
+
 const productStockSchema = new Schema({
   product: {
     type: mongoose.Schema.Types.ObjectId,

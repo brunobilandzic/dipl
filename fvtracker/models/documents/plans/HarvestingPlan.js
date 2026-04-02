@@ -3,6 +3,8 @@ import { Field } from "@/models/sectors/cultivation/Field";
 import { makeUrlFriendly } from "@/lib/utils/strings";
 import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
 import { ProductionManager } from "@/models/user/managers/ProductionManager";
+import { CropVariety } from "@/models/sectors/cultivation/Crops";
+import { PlantedCropVariety } from "@/models/sectors/cultivation/Crops";
 
 const { Schema } = mongoose;
 

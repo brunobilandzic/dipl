@@ -1,6 +1,11 @@
 import mongoose from "mongoose";
 import { Field } from "@/models/sectors/cultivation/Field";
 import { makeUrlFriendly } from "@/lib/utils/strings";
+import {
+  CropVariety,
+  PlantedCropVariety,
+} from "@/models/sectors/cultivation/Crops";
+import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
 
 const { Schema } = mongoose;
 

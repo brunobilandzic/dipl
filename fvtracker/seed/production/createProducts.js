@@ -1,6 +1,7 @@
 import { CropVariety } from "@/models/sectors/cultivation/Crops";
 import { products } from "../data/production";
 import { Ingredient, Product } from "@/models/sectors/production/Products";
+import { makeUrlFriendly } from "@/lib/utils/strings";
 
 export const createProducts = async () => {
   await Product.deleteMany({}); // Clear existing products
@@ -10,14 +11,17 @@ export const createProducts = async () => {
     const cropVarieties = await CropVariety.find({
       name: { $in: productData.cropVarieties },
     });
-    const cropVarietyIds = cropVarieties.map((cv) => cv._id);
+
     const product = new Product({
       name: productData.name,
+      slug: makeUrlFriendly(productData.name),
+      description: productData.description,
+      price: productData.price,
     });
 
+    await product.save();
     await product.createIngredients({
       ingredientsData: productData.ingredients,
     });
-    await product.save();
   }
 };

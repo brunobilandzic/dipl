@@ -1,6 +1,7 @@
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
 import { CropVariety } from "../cultivation/Crops";
+import { makeUrlFriendly } from "@/lib/utils/strings";
 
 const productsSchema = new Schema({
   name: {
@@ -28,6 +29,17 @@ const productsSchema = new Schema({
       ref: "ProductStock",
     },
   ],
+  slug: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+});
+
+productsSchema.pre("save", function () {
+  if (this.isModified("name") || this.isNew) {
+    this.slug = makeUrlFriendly(this.name);
+  }
 });
 
 productsSchema.methods.createIngredients = async function ({

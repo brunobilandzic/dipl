@@ -44,15 +44,23 @@ const ProductItem = ({ product }) => {
         Cijena: {priceEuroString(product.price)}
       </p>
       <div className="mt-4">
-        <h3 className="text-lg font-semibold">Ingredients:</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
-          {product.ingredients.map((ingredient) => (
-            <IngredientItem key={ingredient._id} ingredient={ingredient} />
-          ))}
-        </div>
+        <IngredientsList ingredients={product.ingredients} />
       </div>
       <ActionBar productId={product._id} />
     </div>
+  );
+};
+
+const IngredientsList = ({ ingredients }) => {
+  return (
+    <>
+      <h3 className="text-lg font-semibold">Sastojci:</h3>
+      <div className="flex gap-2 mt-2">
+        {ingredients.map((ingredient) => (
+          <IngredientItem key={ingredient._id} ingredient={ingredient} />
+        ))}
+      </div>
+    </>
   );
 };
 

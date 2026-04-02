@@ -40,7 +40,9 @@ const ProductItem = ({ product }) => {
     <div className="border p-4 rounded">
       <h2 className="text-xl font-bold">{product.name}</h2>
       <p>{product.description}</p>
-      <p className="text-sm text-gray-500">Price: ${product.price}</p>
+      <p className="text-sm text-gray-500">
+        Cijena: {priceEuroString(product.price)}
+      </p>
       <div className="mt-4">
         <h3 className="text-lg font-semibold">Ingredients:</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">

@@ -1,11 +1,25 @@
 "use client";
 
 import { AppInput } from "@/components/form/inputs";
+import { submitProductForm } from "@/lib/utils/production/products";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 export default function EditProductPageComponent({ product }) {
   const [productForm, setProductForm] = useState(initialData({ product }));
+  const dispatch = useDispatch();
+  const router = useRouter();
 
+  const handleSubmit = async () => {
+    console.log("Submitting form with data:", productForm);
+    await submitProductForm({
+      productForm,
+      dispatch,
+      router, // Replace with actual router instance
+      isEdit: true,
+    });
+  };
   return (
     <div>
       <div>Edit product {productForm.name}</div>
@@ -13,13 +27,14 @@ export default function EditProductPageComponent({ product }) {
         <EditProductForm
           productForm={productForm}
           setProductForm={setProductForm}
+          handleSubmit={handleSubmit}
         />
       </div>
     </div>
   );
 }
 
-const EditProductForm = ({ productForm, setProductForm }) => {
+const EditProductForm = ({ productForm, setProductForm, handleSubmit }) => {
   return (
     <div>
       <h2>Uredi proizvod</h2>
@@ -63,6 +78,11 @@ const EditProductForm = ({ productForm, setProductForm }) => {
               index={index}
             />
           ))}
+        </div>
+        <div>
+          <div onClick={handleSubmit} className="btn submitButton">
+            Spremi promjene
+          </div>
         </div>
       </div>
     </div>

@@ -7,6 +7,14 @@ const productsSchema = new Schema({
     type: String,
     required: true,
   },
+  description: {
+    type: String,
+    default: "",
+  },
+  price: {
+    type: Number,
+    default: 0,
+  },
   ingredients: [
     {
       type: mongoose.Schema.Types.ObjectId,

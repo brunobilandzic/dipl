@@ -1,5 +1,6 @@
 "use client";
 
+import { ChooseCropVariety } from "@/components/cultivation/crops/choose";
 import { AppInput } from "@/components/form/inputs";
 import { LoadingFullScreen } from "@/components/layout/loading";
 import { submitProductForm } from "@/lib/utils/production/products";
@@ -55,7 +56,6 @@ const EditProductForm = ({ productForm, setProductForm, handleSubmit }) => {
     );
     setProductForm({ ...productForm, ingredients: updatedIngredients });
   };
-  if (!crops) return <LoadingFullScreen />;
   return (
     <div>
       <h2>Uredi proizvod</h2>
@@ -125,33 +125,22 @@ const IngredientInput = ({ ingredient, onChange, index, onDelete }) => {
           Obriši sastojak
         </div>
       </div>
-      <AppInput
-        label="Naziv sorte"
-        value={ingredient.cropVarietyName}
-        onChange={(e) =>
-          onChange({
-            index,
-            updatedIngredient: {
-              ...ingredient,
-              cropVarietyName: e.target.value,
-            },
-          })
-        }
-      />
-      <AppInput
-        label="Količina"
-        type="number"
-        value={ingredient.quantity}
-        onChange={(e) =>
-          onChange({
-            index,
-            updatedIngredient: {
-              ...ingredient,
-              quantity: e.target.value,
-            },
-          })
-        }
-      />
+      <ChooseCropVariety crops={crops}>
+        <AppInput
+          label="Količina"
+          type="number"
+          value={ingredient.quantity}
+          onChange={(e) =>
+            onChange({
+              index,
+              updatedIngredient: {
+                ...ingredient,
+                quantity: e.target.value,
+              },
+            })
+          }
+        />
+      </ChooseCropVariety>
     </div>
   );
 };

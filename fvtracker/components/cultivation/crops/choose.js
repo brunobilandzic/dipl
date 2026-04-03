@@ -104,26 +104,12 @@ export const ChooseCropVariety = ({
                   item={item}
                   availableTypes={availableTypes}
                 />
-
-                <div className="inputRow">
-                  <label className="label">Varijanta</label>
-                  <select
-                    className="inputText"
-                    disabled={!item.type}
-                    onChange={(event) =>
-                      handleItemChange(index, "cropVariety", event.target.value)
-                    }
-                    required
-                    value={item.cropVariety}
-                  >
-                    <option value="">Odaberite varijantu</option>
-                    {availableVarieties.map((cropVariety) => (
-                      <option key={cropVariety._id} value={cropVariety._id}>
-                        {cropVariety.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                <SelectCropVariety
+                  handleItemChange={handleItemChange}
+                  index={index}
+                  item={item}
+                  availableVarieties={availableVarieties}
+                />
 
                 <div className="inputRow">
                   <AppInput
@@ -229,6 +215,35 @@ const SelectCropType = ({ handleItemChange, index, item, availableTypes }) => {
         {availableTypes.map((type) => (
           <option key={type._id} value={type._id}>
             {type.name}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+};
+
+const SelectCropVariety = ({
+  handleItemChange,
+  index,
+  item,
+  availableVarieties,
+}) => {
+  return (
+    <div className="inputRow">
+      <label className="label">Varijanta</label>
+      <select
+        className="inputText"
+        disabled={!item.type}
+        onChange={(event) =>
+          handleItemChange(index, "cropVariety", event.target.value)
+        }
+        required
+        value={item.cropVariety}
+      >
+        <option value="">Odaberite varijantu</option>
+        {availableVarieties.map((cropVariety) => (
+          <option key={cropVariety._id} value={cropVariety._id}>
+            {cropVariety.name}
           </option>
         ))}
       </select>

@@ -92,24 +92,12 @@ export const ChooseCropVariety = ({
               />
 
               <div className="grid gap-4 md:grid-cols-2">
-                <div className="inputRow">
-                  <label className="label">Glavna vrsta</label>
-                  <select
-                    className="inputText"
-                    onChange={(event) =>
-                      handleItemChange(index, "generalType", event.target.value)
-                    }
-                    required
-                    value={item.generalType}
-                  >
-                    <option value="">Odaberite glavnu vrstu</option>
-                    {generalTypes.map((generalType) => (
-                      <option key={generalType._id} value={generalType._id}>
-                        {generalType.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                <SelectGeneralType
+                  handleItemChange={handleItemChange}
+                  index={index}
+                  item={item}
+                  generalTypes={generalTypes}
+                />
 
                 <div className="inputRow">
                   <label className="label">Tip biljke</label>
@@ -199,6 +187,28 @@ const getAvailableOptions = ({ generalTypes, types, cropVarieties, item }) => {
     availableVarieties,
   };
 };
+function SelectGeneralType({ handleItemChange, index, item, generalTypes }) {
+  return (
+    <div className="inputRow">
+      <label className="label">Glavna vrsta</label>
+      <select
+        className="inputText"
+        onChange={(event) =>
+          handleItemChange(index, "generalType", event.target.value)
+        }
+        required
+        value={item.generalType}
+      >
+        <option value="">Odaberite glavnu vrstu</option>
+        {generalTypes.map((generalType) => (
+          <option key={generalType._id} value={generalType._id}>
+            {generalType.name}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+}
 
 function ItemHeader({ index, cropsData, itemsName, removeItem }) {
   return (

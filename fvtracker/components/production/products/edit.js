@@ -108,7 +108,7 @@ const EditProductForm = ({ productForm, setProductForm, handleSubmit }) => {
               onDelete={onDeleteIngredient}
             />
           ))}
-        </div>
+        </div> */}
         <div>
           <div onClick={handleSubmit} className="btn submitButton">
             Spremi promjene
@@ -119,7 +119,7 @@ const EditProductForm = ({ productForm, setProductForm, handleSubmit }) => {
   );
 };
 
-const IngredientInput = ({ ingredient, onChange, index, onDelete }) => {
+/* const IngredientInput = ({ ingredient, onChange, index, onDelete }) => {
   const crops = useSelector((state) => state.cultivation.crops);
 
   return (
@@ -134,7 +134,7 @@ const IngredientInput = ({ ingredient, onChange, index, onDelete }) => {
           Obriši sastojak
         </div>
       </div>
-      <ChooseCropVariety crops={crops}>
+      <ChooseCropVarietyItems crops={crops}>
         <AppInput
           label="Količina"
           type="number"
@@ -149,10 +149,10 @@ const IngredientInput = ({ ingredient, onChange, index, onDelete }) => {
             })
           }
         />
-      </ChooseCropVariety>
+      </ChooseCropVarietyItems>
     </div>
   );
-};
+}; */
 
 const initialData = ({ product }) => {
   if (!product) return testProduct;

@@ -52,6 +52,18 @@ export const ChooseCropVariety = ({
     }));
   };
 
+  const removeItem = (index) => {
+    setCropsData((prev) => {
+      const newItems = prev[itemsName].filter(
+        (_, itemIndex) => itemIndex !== index,
+      );
+      return {
+        ...prev,
+        [itemsName]: newItems,
+      };
+    });
+  };
+
   return (
     <>
       <div className="flex items-center justify-between gap-4">

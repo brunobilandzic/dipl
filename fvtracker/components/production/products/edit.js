@@ -56,6 +56,9 @@ const EditProductForm = ({ productForm, setProductForm, handleSubmit }) => {
     );
     setProductForm({ ...productForm, ingredients: updatedIngredients });
   };
+
+  const crops = useSelector((state) => state.cultivation.crops);
+
   return (
     <div>
       <h2>Uredi proizvod</h2>

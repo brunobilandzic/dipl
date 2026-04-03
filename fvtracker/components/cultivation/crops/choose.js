@@ -98,26 +98,12 @@ export const ChooseCropVariety = ({
                   item={item}
                   generalTypes={generalTypes}
                 />
-
-                <div className="inputRow">
-                  <label className="label">Tip biljke</label>
-                  <select
-                    className="inputText"
-                    disabled={!item.generalType}
-                    onChange={(event) =>
-                      handleItemChange(index, "type", event.target.value)
-                    }
-                    required
-                    value={item.type}
-                  >
-                    <option value="">Odaberite tip biljke</option>
-                    {availableTypes.map((type) => (
-                      <option key={type._id} value={type._id}>
-                        {type.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+                <SelectCropType
+                  handleItemChange={handleItemChange}
+                  index={index}
+                  item={item}
+                  availableTypes={availableTypes}
+                />
 
                 <div className="inputRow">
                   <label className="label">Varijanta</label>
@@ -225,3 +211,27 @@ function ItemHeader({ index, cropsData, itemsName, removeItem }) {
     </div>
   );
 }
+
+const SelectCropType = ({ handleItemChange, index, item, availableTypes }) => {
+  return (
+    <div className="inputRow">
+      <label className="label">Tip biljke</label>
+      <select
+        className="inputText"
+        disabled={!item.generalType}
+        onChange={(event) =>
+          handleItemChange(index, "type", event.target.value)
+        }
+        required
+        value={item.type}
+      >
+        <option value="">Odaberite tip biljke</option>
+        {availableTypes.map((type) => (
+          <option key={type._id} value={type._id}>
+            {type.name}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
+};

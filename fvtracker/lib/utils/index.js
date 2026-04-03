@@ -43,7 +43,7 @@ import {
   fieldHasCultivations,
 } from "./cultivation/cultivation";
 import { cvAndColor, showDate } from "./display";
-import { prepareSubmitPlan } from "./cultivation/plant";
+import {} from "./cultivation/plant";
 import {
   getPlantedCropVarietesPerCultivation,
   getFieldsPlans,
@@ -53,6 +53,7 @@ import {
   getFieldsPlantingPlans,
   getFieldsHarvestingPlans,
   getFieldPlans,
+  prepareSubmitPlan,
 } from "./cultivation/plans";
 import { getHarvestCellsRect } from "./harvest";
 
@@ -112,9 +113,7 @@ export default {
     cvAndColor,
     showDate,
   },
-  plant: {
-    prepareSubmitPlan,
-  },
+  plant: {},
   plans: {
     getPlantedCropVarietesPerCultivation,
     getFieldsPlans,
@@ -124,6 +123,7 @@ export default {
     getFieldsPlantingPlans,
     getFieldsHarvestingPlans,
     getFieldPlans,
+    prepareSubmitPlan,
   },
   harvest: {
     getHarvestCellsRect,

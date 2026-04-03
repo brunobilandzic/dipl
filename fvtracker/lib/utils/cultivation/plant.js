@@ -22,29 +22,7 @@ export const fieldPlantedStatistics = (field) => {
   };
 };
 
-export const prepareSubmitPlan = (plan) => {
-  const mergedItems = {};
-  plan.items.forEach((item) => {
-    const key = item.cropVariety;
-    if (mergedItems[key]) {
-      mergedItems[key].quantity += item.quantity;
-    } else {
-      mergedItems[key] = { cropVariety: key, quantity: item.quantity };
-    }
-  });
-  plan.items = Object.values(mergedItems);
-  const { items: _items, ...rest } = plan;
 
-  const items = plan.items.map((item) => ({
-    cropVariety: item.cropVariety,
-    quantity: item.quantity,
-  }));
-
-  return {
-    ...rest,
-    items,
-  };
-};
 
 export const fieldHasPlantedCropVarieties = (field) => {
   

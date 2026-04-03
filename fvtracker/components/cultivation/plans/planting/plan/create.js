@@ -182,7 +182,7 @@ export const FillPlanInfo = ({ selectedField, plant = true }) => {
   };
 
   const handleSubmit = async () => {
-    const submitData = utils.plant.prepareSubmitPlan({
+    const submitData = utils.plans.prepareSubmitPlan({
       ...formData,
       field: selectedField?._id || formData.field,
     });

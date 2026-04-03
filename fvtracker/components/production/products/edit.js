@@ -9,7 +9,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function EditProductPageComponent({ product }) {
   const [productForm, setProductForm] = useState(initialData({ product }));
-  const crops = useSelector((state) => state.cultivation.crops);
   const dispatch = useDispatch();
   const router = useRouter();
 

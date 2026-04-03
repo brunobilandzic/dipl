@@ -63,21 +63,12 @@ export const ChooseCropVariety = ({
 
       <div className="flex flex-col gap-4">
         {cropsData[itemsName].map((item, index) => {
-          const selectedGeneralType = generalTypes.find(
-            (generalType) => generalType._id === item.generalType,
-          );
-          const availableTypes = selectedGeneralType
-            ? types.filter(
-                (type) => type.generalTypeName === selectedGeneralType.name,
-              )
-            : [];
-
-          const selectedType = types.find((type) => type._id === item.type);
-          const availableVarieties = selectedType
-            ? cropVarieties.filter(
-                (cropVariety) => cropVariety.cropTypeName === selectedType.name,
-              )
-            : [];
+          const { availableTypes, availableVarieties } = getAvailableOptions({
+            generalTypes,
+            types,
+            cropVarieties,
+            item,
+          });
 
           return (
             <div className="rounded-lg border p-4" key={`item-${index}`}>
@@ -180,4 +171,24 @@ export const ChooseCropVariety = ({
       </div>
     </>
   );
+};
+
+const getAvailableOptions = ({ generalTypes, types, cropVarieties, item }) => {
+  const selectedGeneralType = generalTypes.find(
+    (generalType) => generalType._id === item.generalType,
+  );
+  const availableTypes = selectedGeneralType
+    ? types.filter((type) => type.generalType === item.generalType)
+    : [];
+  const selectedType = availableTypes.find((type) => type._id === item.type);
+  const availableVarieties = selectedType
+    ? cropVarieties.filter((cropVariety) => cropVariety.type === item.type)
+    : [];
+
+  return {
+    selectedGeneralType,
+    availableTypes,
+    selectedType,
+    availableVarieties,
+  };
 };

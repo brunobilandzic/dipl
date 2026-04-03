@@ -269,6 +269,14 @@ export const FillPlanInfo = ({ selectedField, plant = true }) => {
             cropsData={formData}
             setCropsData={setFormData}
           />
+          {!plant && (
+            <div className="mt-4">
+              <SelectProductionManager
+                setFormData={setFormData}
+                selectedProductionManager={formData.productionManager}
+              />
+            </div>
+          )}
 
           <div className="btn self-start" onClick={handleSubmit}>
             Spremi plan {plant ? "sadnje" : "berbe"}

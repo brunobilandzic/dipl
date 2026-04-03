@@ -4,6 +4,7 @@ export const ChooseCropVariety = ({
   setCropsData,
   itemsName = "items",
   additionalInput,
+  emptyItem = { generalType: "", type: "", cropVariety: "", quantity: "" },
 }) => {
   const {
     generalTypes = [],
@@ -41,6 +42,13 @@ export const ChooseCropVariety = ({
           [field]: field === "quantity" ? Number(value) : value,
         };
       }),
+    }));
+  };
+
+  const addItem = () => {
+    setCropsData((prev) => ({
+      ...prev,
+      [itemsName]: [...prev[itemsName], { ...emptyItem }],
     }));
   };
 

@@ -15,7 +15,7 @@ import { refreshFields } from "@/lib/utils/cultivation/fields";
 import { setLoading } from "@/store/loading";
 import { refreshManagers } from "@/lib/utils/production/managers";
 import { useRouter } from "next/navigation";
-import { ChooseCropVariety } from "@/components/cultivation/crops/choose";
+import { ChooseCropVarietyItems } from "@/components/cultivation/crops/choose";
 
 export default function CreatePlantingPlanPageComonent() {
   const [selectedField, setSelectedField] = useState(null);
@@ -266,7 +266,7 @@ export const FillPlanInfo = ({ selectedField, plant = true }) => {
             />
           </div>
 
-          <ChooseCropVariety
+          <ChooseCropVarietyItems
             crops={crops}
             cropsData={formData}
             setCropsData={setFormData}

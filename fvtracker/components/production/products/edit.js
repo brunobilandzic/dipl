@@ -1,6 +1,6 @@
 "use client";
 
-import { ChooseCropVariety } from "@/components/cultivation/crops/choose";
+import { ChooseCropVarietyItems } from "@/components/cultivation/crops/choose";
 import { AppInput } from "@/components/form/inputs";
 import { LoadingFullScreen } from "@/components/layout/loading";
 import { submitProductForm } from "@/lib/utils/production/products";
@@ -83,7 +83,16 @@ const EditProductForm = ({ productForm, setProductForm, handleSubmit }) => {
             setProductForm({ ...productForm, price: e.target.value })
           }
         />
-        <div className="ingredients">
+        <ChooseCropVarietyItems
+          crops={crops}
+          cropsData={productForm.ingredients}
+          setCropsData={setProductForm}
+          itemsName="ingredients"
+          itemLabel="sastojak"
+          emptyItem={emptyIngredient}
+        />
+
+        {/* <div className="ingredients">
           <div className="flex items-center justify-between mb-2">
             <h3>Sastojci</h3>
             <div className="btn" type="button" onClick={addIngredient}>

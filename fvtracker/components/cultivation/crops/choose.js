@@ -1,6 +1,6 @@
 import { titleCaseLetter } from "@/lib/utils/strings";
 
-export const ChooseCropVariety = ({
+export const ChooseCropVarietyItems = ({
   crops,
   cropsData,
   setCropsData,

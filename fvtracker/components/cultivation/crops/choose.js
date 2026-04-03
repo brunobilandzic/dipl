@@ -2,7 +2,7 @@ export const ChooseCropVariety = ({
   crops,
   cropsData,
   setCropsData,
-  itemName,
+  itemsName = "items",
   additionalInput,
 }) => {
   const {
@@ -14,7 +14,7 @@ export const ChooseCropVariety = ({
   const handleItemChange = (index, field, value) => {
     setCropsData((prev) => ({
       ...prev,
-      items: prev.items.map((item, itemIndex) => {
+      [itemsName]: prev[itemsName].map((item, itemIndex) => {
         if (itemIndex !== index) {
           return item;
         }
@@ -54,7 +54,7 @@ export const ChooseCropVariety = ({
       </div>
 
       <div className="flex flex-col gap-4">
-        {cropsData.items.map((item, index) => {
+        {cropsData[itemsName].map((item, index) => {
           const selectedGeneralType = generalTypes.find(
             (generalType) => generalType._id === item.generalType,
           );
@@ -77,7 +77,7 @@ export const ChooseCropVariety = ({
                 <div className="font-medium">Stavka {index + 1}</div>
                 <button
                   className="text-sm text-red-600 disabled:cursor-not-allowed disabled:text-gray-400"
-                  disabled={cropsData.items.length === 1}
+                  disabled={cropsData[itemsName].length === 1}
                   onClick={() => removeItem(index)}
                   type="button"
                 >

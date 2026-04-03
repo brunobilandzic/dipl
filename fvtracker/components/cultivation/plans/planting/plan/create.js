@@ -138,7 +138,7 @@ export const FillPlanInfo = ({ selectedField, plant = true }) => {
         (v) =>
           v.cropTypeName === types.find((t) => t._id === defaultType)?.name,
       )[0]?._id || "";
-    return {
+    const formDataInitial = {
       name: `Plan ${plant ? "sadnje" : "berbe"} - ${new Date().toLocaleString()}`,
       productionManager: "",
       field,
@@ -153,6 +153,8 @@ export const FillPlanInfo = ({ selectedField, plant = true }) => {
       plannedPlantingDate: new Date().toISOString().split("T")[0],
       plannedHarvestingDate: new Date().toISOString().split("T")[0],
     };
+    plantingManagerField({ plant, formDataInitial });
+    return formDataInitial;
   };
 
   const [formData, setFormData] = useState(
@@ -327,4 +329,13 @@ export const SelectProductionManager = ({
       />
     </div>
   );
+};
+
+const plantingManagerField = ({ plant, formDataInitial }) => {
+  if (plant) {
+    delete formDataInitial.productionManager;
+    delete formDataInitial.plannedHarvestingDate;
+  } else {
+    delete formDataInitial.plannedPlantingDate;
+  }
 };

@@ -116,14 +116,6 @@ export const ChooseCropVariety = ({
             </div>
           );
         })}
-        {!plant && (
-          <div className="mt-4">
-            <SelectProductionManager
-              setFormData={setFormData}
-              selectedProductionManager={formData.productionManager}
-            />
-          </div>
-        )}
       </div>
     </>
   );

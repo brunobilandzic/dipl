@@ -3,7 +3,7 @@ export const ChooseCropVariety = ({
   cropsData,
   setCropsData,
   itemsName = "items",
-  additionalInput,
+  children,
   emptyItem = { generalType: "", type: "", cropVariety: "", quantity: "" },
 }) => {
   const {
@@ -111,18 +111,7 @@ export const ChooseCropVariety = ({
                   availableVarieties={availableVarieties}
                 />
 
-                <div className="inputRow">
-                  <AppInput
-                    label="Kolicina"
-                    min={0}
-                    name={`quantity-${index}`}
-                    onChange={(event) =>
-                      handleItemChange(index, "quantity", event.target.value)
-                    }
-                    type="number"
-                    value={item.quantity}
-                  />
-                </div>
+                {children}
               </div>
             </div>
           );

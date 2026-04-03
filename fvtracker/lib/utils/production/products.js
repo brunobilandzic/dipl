@@ -2,6 +2,7 @@ import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { setLoading } from "@/store/loading";
 import { setProducts } from "@/store/production/products";
+import { checkEmpty } from "../objects";
 
 export const refreshProducts = async ({ dispatch, router }) => {
   try {
@@ -28,11 +29,17 @@ export const submitProductForm = async ({
   dispatch,
   router,
   isEdit = false,
+  varieties,
 }) => {
   try {
     dispatch(setLoading(true));
     let res;
     if (isEdit) {
+      if (!productCheckValid({ product: productForm, varieties })) {
+        dispatch(setLoading(false));
+        return;
+      }
+
       res = await api.put(`/products`, productForm, {
         params: { id: productForm.id },
       });
@@ -56,4 +63,25 @@ export const submitProductForm = async ({
       router,
     );
   }
+};
+
+const productCheckValid = ({ product, varieties }) => {
+  if (checkEmpty(product)) return false;
+  for (const ing in product.ingredients) {
+    if (checkEmpty(ing)) return false;
+    if (!checkVariety({ cropVarietyName: ing.cropVarietyName, varieties })) {
+      return false;
+    }
+  }
+  return true;
+};
+
+const checkVariety = ({ cropVarietyName, varieties }) => {
+  const variety = varieties.find((v) => v.name === cropVarietyName);
+  if (!variety) {
+    alert(
+      `Crop variety ${cropVarietyName} not found in the list of varieties.`,
+    );
+  }
+  return !!variety;
 };

@@ -14,7 +14,7 @@ export function checkEmpty(obj, dontAlert = false) {
   for (const key in obj) {
     if (obj[key] === "" || obj[key] === null || obj[key] === undefined) {
       if (!dontAlert) {
-        alert(`Field ${key} is empty, value: ${obj[key]}`);
+        alert(`Polje ${key} je prazno: ${obj[key]}`);
       }
 
       return true;

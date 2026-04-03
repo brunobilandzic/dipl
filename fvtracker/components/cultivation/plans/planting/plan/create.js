@@ -264,8 +264,11 @@ export const FillPlanInfo = ({ selectedField, plant = true }) => {
             />
           </div>
 
-         <ChooseCropVariety crops={crops} cropsData={formData.items} setCropsData={setFormData} />
-          
+          <ChooseCropVariety
+            crops={crops}
+            cropsData={formData}
+            setCropsData={setFormData}
+          />
 
           <div className="btn self-start" onClick={handleSubmit}>
             Spremi plan {plant ? "sadnje" : "berbe"}

@@ -1,9 +1,12 @@
+import { titleCaseLetter } from "@/lib/utils/strings";
+
 export const ChooseCropVariety = ({
   crops,
   cropsData,
   setCropsData,
   itemsName = "items",
   children,
+  itemLabel = "stavka",
   emptyItem = { generalType: "", type: "", cropVariety: "", quantity: "" },
 }) => {
   const {
@@ -170,10 +173,18 @@ function SelectGeneralType({ handleItemChange, index, item, generalTypes }) {
   );
 }
 
-function ItemHeader({ index, cropsData, itemsName, removeItem }) {
+function ItemHeader({
+  index,
+  cropsData,
+  itemsName,
+  removeItem,
+  itemLabel = "stavka",
+}) {
   return (
     <div className="mb-4 flex items-center justify-between gap-4">
-      <div className="font-medium">Stavka {index + 1}</div>
+      <div className="font-medium">
+        {titleCaseLetter(itemLabel)} {index + 1}
+      </div>
       <button
         className="text-sm text-red-600 disabled:cursor-not-allowed disabled:text-gray-400"
         disabled={cropsData[itemsName].length === 1}

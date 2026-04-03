@@ -27,3 +27,12 @@ export const testCoordinates = (coordinates) =>
   /^[\d]+,[\d]+$/.test(coordinates);
 
 export const priceEuroString = (price) => `${price}€`;
+
+export const titleCaseLetter = (str) =>
+  String(str).charAt(0).toUpperCase() + String(str).slice(1);
+
+export const titleCaseString = (str) =>
+  String(str)
+    .split(" ")
+    .map((word) => titleCaseLetter(word))
+    .join(" ");

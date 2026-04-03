@@ -130,7 +130,7 @@ const getAvailableOptions = ({ generalTypes, types, cropVarieties, item }) => {
     : [];
   const selectedType = availableTypes.find((type) => type._id === item.type);
   const availableVarieties = selectedType
-    ? cropVarieties.filter((cropVariety) => cropVariety.type === item.type)
+    ? cropVarieties.filter((cropVariety) => cropVariety.cropType === item.type)
     : [];
 
   console.log("getAvailableOptions:", {

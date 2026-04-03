@@ -1,6 +1,7 @@
 "use client";
 
 import { AppInput } from "@/components/form/inputs";
+import { LoadingFullScreen } from "@/components/layout/loading";
 import { submitProductForm } from "@/lib/utils/production/products";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -55,7 +56,7 @@ const EditProductForm = ({ productForm, setProductForm, handleSubmit }) => {
     );
     setProductForm({ ...productForm, ingredients: updatedIngredients });
   };
-
+  if (!crops) return <LoadingFullScreen />;
   return (
     <div>
       <h2>Uredi proizvod</h2>

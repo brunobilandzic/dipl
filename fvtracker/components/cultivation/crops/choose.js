@@ -84,17 +84,12 @@ export const ChooseCropVariety = ({
 
           return (
             <div className="rounded-lg border p-4" key={`item-${index}`}>
-              <div className="mb-4 flex items-center justify-between gap-4">
-                <div className="font-medium">Stavka {index + 1}</div>
-                <button
-                  className="text-sm text-red-600 disabled:cursor-not-allowed disabled:text-gray-400"
-                  disabled={cropsData[itemsName].length === 1}
-                  onClick={() => removeItem(index)}
-                  type="button"
-                >
-                  Ukloni
-                </button>
-              </div>
+              <ItemHeader
+                index={index}
+                cropsData={cropsData}
+                itemsName={itemsName}
+                removeItem={removeItem}
+              />
 
               <div className="grid gap-4 md:grid-cols-2">
                 <div className="inputRow">
@@ -204,3 +199,19 @@ const getAvailableOptions = ({ generalTypes, types, cropVarieties, item }) => {
     availableVarieties,
   };
 };
+
+function ItemHeader({ index, cropsData, itemsName, removeItem }) {
+  return (
+    <div className="mb-4 flex items-center justify-between gap-4">
+      <div className="font-medium">Stavka {index + 1}</div>
+      <button
+        className="text-sm text-red-600 disabled:cursor-not-allowed disabled:text-gray-400"
+        disabled={cropsData[itemsName].length === 1}
+        onClick={() => removeItem(index)}
+        type="button"
+      >
+        Ukloni
+      </button>
+    </div>
+  );
+}

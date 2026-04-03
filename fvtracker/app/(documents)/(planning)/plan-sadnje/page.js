@@ -1,5 +1,5 @@
-import { CreatePlantagePlan } from "@/components/cultivation//cultivationArea/plans/planting/plan/create";
-import PlantingPlanList from "@/components/cultivation/cultivationArea/plans/planting/plan/list";
+import { CreatePlantagePlan } from "@/components/cultivation//plans/planting/plan/create";
+import PlantingPlanList from "@/components/cultivation/plans/planting/plan/list";
 import React from "react";
 
 function PlantingPlanListPage() {

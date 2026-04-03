@@ -1,4 +1,4 @@
-import CreateHarvestingPlanPageComponent from "@/components/cultivation/cultivationArea/plans/harvesting/plan/create";
+import CreateHarvestingPlanPageComponent from "@/components/cultivation/plans/harvesting/plan/create";
 import { fetchManager } from "@/lib/auth/fetchSessionData";
 import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
 import React from "react";

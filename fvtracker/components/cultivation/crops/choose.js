@@ -77,9 +77,9 @@ export const ChooseCropVarietyItems = ({
   return (
     <>
       <div className="flex items-center justify-between gap-4">
-        <div className="text-base font-semibold">Stavke plana</div>
+        <div className="text-base font-semibold">Unesi vrste</div>
         <button className="btn" onClick={addItem} type="button">
-          Dodaj stavku
+          Dodaj vrstu
         </button>
       </div>
 
@@ -155,7 +155,6 @@ const getAvailableOptions = ({ generalTypes, types, cropVarieties, item }) => {
   const availableVarieties = selectedType
     ? cropVarieties.filter((cropVariety) => cropVariety.cropType === item.type)
     : [];
-
 
   return {
     selectedGeneralType,

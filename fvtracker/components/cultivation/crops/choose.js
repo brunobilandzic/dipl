@@ -48,7 +48,7 @@ export const ChooseCropVarietyItems = ({
 
         return {
           ...item,
-          [field]: field === "quantity" ? Number(value) : value,
+          [field]: value,
         };
       }),
     }));

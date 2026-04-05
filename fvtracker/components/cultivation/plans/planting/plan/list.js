@@ -10,6 +10,7 @@ import { v4 as uuid } from "uuid";
 import { PlantingPlanListItem } from "@/components/cultivation/plans/planting/plan/planItem";
 import { refreshFields } from "@/lib/utils/cultivation/fields";
 import { useRouter } from "next/navigation";
+import { List } from "@/components/layout/preview/list";
 
 const PlantingPlanList = () => {
   const fields = useSelector((state) => state.cultivation.fields);
@@ -45,21 +46,17 @@ const PlantingPlanList = () => {
   return (
     <>
       <div>
-        <div>
+        <List
+          title="Planovi sadnje"
+          onCreateItem={() => router.push("/plan-sadnje/izradi")}
+          onDeleteList={deletePlans}
+        >
           {fieldsPlans.map((fieldPlan, index) => (
             <div key={uuid()}>
               <FieldPlansItem fieldPlans={fieldPlan} />
             </div>
           ))}
-        </div>
-      </div>
-      <div className="flex flex-col gap-4">
-        <button
-          onClick={deletePlans}
-          className="bg-red-500 text-white py-2 px-4 rounded"
-        >
-          Obriši planove
-        </button>
+        </List>
       </div>
     </>
   );

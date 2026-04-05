@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
 import { FieldPlansItem } from "@/components/cultivation/plans/planting/plan/list";
 import { refreshFields } from "@/lib/utils/cultivation/fields";
+import { List } from "@/components/layout/preview/list";
 
 const HarvestingPlanList = () => {
   const fields = useSelector((state) => state.cultivation.fields);
@@ -23,7 +24,8 @@ const HarvestingPlanList = () => {
 
   const deletePlans = async () => {
     try {
-      if (!confirm("Jeste li sigurni da želite obrisati sve planove berbe?")) return;
+      if (!confirm("Jeste li sigurni da želite obrisati sve planove berbe?"))
+        return;
       await api.delete("/cultivation/harvest/plan", {});
       refreshFields({ dispatch });
     } catch (error) {
@@ -45,13 +47,17 @@ const HarvestingPlanList = () => {
   return (
     <>
       <div>
-        <div>
+        <List
+          title="Planovi berbe"
+          onCreateItem={() => router.push("/plan-berbe/izradi")}
+          onDeleteList={deletePlans}
+        >
           {fieldsPlans.map((fieldPlan, index) => (
             <div key={uuid()}>
               <FieldPlansItem fieldPlans={fieldPlan} plant={false} />
             </div>
           ))}
-        </div>
+        </List>
       </div>
       <div className="flex flex-col gap-4">
         <button

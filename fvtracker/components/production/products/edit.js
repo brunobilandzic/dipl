@@ -37,26 +37,6 @@ export default function EditProductPageComponent({ product }) {
 }
 
 const EditProductForm = ({ productForm, setProductForm, handleSubmit }) => {
-  const addIngredient = () => {
-    setProductForm({
-      ...productForm,
-      ingredients: [...productForm.ingredients, emptyIngredient],
-    });
-  };
-
-  const onChangeIngredient = ({ index, updatedIngredient }) => {
-    const updatedIngredients = [...productForm.ingredients];
-    updatedIngredients[index] = updatedIngredient;
-    setProductForm({ ...productForm, ingredients: updatedIngredients });
-  };
-
-  const onDeleteIngredient = (index) => {
-    const updatedIngredients = productForm.ingredients.filter(
-      (ing, i) => i !== index,
-    );
-    setProductForm({ ...productForm, ingredients: updatedIngredients });
-  };
-
   const crops = useSelector((state) => state.cultivation.crops);
 
   return (

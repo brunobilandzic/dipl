@@ -1,4 +1,4 @@
-import {  Product } from "@/models/sectors/production/Product";
+import { Product } from "@/models/sectors/production/Product";
 import { updateIngredients } from "./ingredients";
 
 export const getProducts = async () => {
@@ -44,15 +44,22 @@ export const updateProduct = async ({ _updatedProduct, productId }) => {
 
   await product.populate({
     path: "ingredients",
-    populate: { path: "cropVariety", select: "name" },
+    populate: { path: "cropVariety", select: "name cropType" },
   });
 
-  await updateIngredients({
+  const ingredientIds = await updateIngredients({
     ingredientsDb: product.ingredients,
     updatedIngredients,
     productId: product._id,
   });
-
-  console.log("Updated product:", product);
+  
+  product.ingredients = ingredientIds;
+  await product.save();
+  console.log(
+    "Updated product:",
+    product,
+    "with ingredients:",
+    product.ingredients,
+  );
   return product;
 };

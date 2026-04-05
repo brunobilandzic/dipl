@@ -7,6 +7,7 @@ export const updateIngredients = async ({
   productId,
 }) => {
   const existingIngredientIds = ingredientsDb.map((ing) => ing._id.toString());
+  console.log("Existing ingredient IDs:", existingIngredientIds.length);
   const updatedIngredientIds = updatedIngredients
     .filter((ing) => ing._id)
     .map((ing) => ing._id);
@@ -25,6 +26,14 @@ export const updateIngredients = async ({
         { ...ing },
         { new: true },
       );
+      ingredients.push(ingredient);
+      const cropVariety = await CropVariety.findById(ing.cropVariety);
+      if (!cropVariety) {
+        throw new Error(`Crop variety ${ing.cropVariety} not found.`);
+      }
+
+      cropVariety.ingredients.push(ingredient._id);
+      await cropVariety.save();
     } else {
       //create new ingredient
       const cropVariety = await CropVariety.findById(ing.cropVariety);
@@ -36,12 +45,12 @@ export const updateIngredients = async ({
         cropVariety: cropVariety._id,
         quantity: ing.quantity,
       });
+
       cropVariety.ingredients.push(ingredient._id);
-      await ingredient.save();
+      await cropVariety.save();
       ingredients.push(ingredient);
     }
   }
-
 
   for (const ing of ingredients) {
     await ing.save();

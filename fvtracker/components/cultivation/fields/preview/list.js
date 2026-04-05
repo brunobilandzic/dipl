@@ -145,24 +145,21 @@ function FieldItem({ field }) {
     <>
       <div className="">
         <Link href={`/upravljanje-poljima/${slug}`}>
-          <ListItemHeader>
-            <div className="flex justify-between w-full cursor-pointer pb-1">
-              <div className="flex flex-col gap-1">
-                <div className="font-bold">{field.name}</div>
-              </div>
-              <div
-                className="cursor-pointer text-sm  px-4 cancelButton btnSm"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleDeleteCultivation();
-                }}
-              >
-                Obriši
-              </div>
+          <div className="flex justify-between w-full cursor-pointer pb-1">
+            <div className="flex flex-col gap-1">
+              <div className="font-bold">{field.name}</div>
             </div>
-          </ListItemHeader>
-        </Link>
-        <ListItemBody>
+            <div
+              className="cursor-pointer text-sm  px-4 cancelButton btnSm"
+              onClick={(e) => {
+                e.preventDefault();
+                handleDeleteCultivation();
+              }}
+            >
+              Obriši
+            </div>
+          </div>
+
           <div className="flex justify-between">
             <div>
               <FieldStatistics field={field} />
@@ -210,7 +207,7 @@ function FieldItem({ field }) {
               />
             </div>
           </div>
-        </ListItemBody>
+        </Link>
       </div>
     </>
   );

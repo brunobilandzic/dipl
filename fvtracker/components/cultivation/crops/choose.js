@@ -122,7 +122,19 @@ export const ChooseCropVarietyItems = ({
                   availableVarieties={availableVarieties}
                 />
 
-                {children}
+                {additionalItemFields &&
+                  additionalItemFields.length > 0 &&
+                  additionalItemFields.map((FieldComponent, fieldIndex) => (
+                    <div key={`additional-field-${fieldIndex}`}>
+                      {
+                        <FieldComponent
+                          item={item}
+                          handleItemChange={handleItemChange}
+                          index={index}
+                        />
+                      }
+                    </div>
+                  ))}
               </div>
             </div>
           );

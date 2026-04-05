@@ -40,7 +40,9 @@ export const updateProduct = async ({ _updatedProduct, productId }) => {
     productId,
     { $set: updatedProduct },
     { new: true },
-  ).populate({
+  );
+
+  await product.populate({
     path: "ingredients",
     populate: { path: "cropVariety", select: "name" },
   });

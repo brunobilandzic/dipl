@@ -87,11 +87,16 @@ function NavItems() {
 }
 
 function NavItem({ item }) {
+  const [subMenuOpen, setSubmenuOpen] = useState(false);
   if (item.submenu) {
     return (
-      <div className="relative group">
+      <div
+        onMouseEnter={() => setSubmenuOpen(true)}
+        onMouseLeave={() => setSubmenuOpen(false)}
+        className="relative group"
+      >
         <span className="cursor-pointer">{item.label}</span>
-        <div className="absolute left-0 top-full mt-2 w-40 bg-gray-700 text-white rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className={`absolute top-full left-0 mt-2 w-48 bg-gray-800 text-white rounded shadow-lg ${subMenuOpen ? "block" : "hidden"}`}>
           {item.submenu.map((subItem, index) => (
             <Link
               key={index}

@@ -41,4 +41,11 @@ export const updateIngredients = async ({
       ingredients.push(ingredient);
     }
   }
+
+
+  for (const ing of ingredients) {
+    await ing.save();
+  }
+
+  return ingredients.map((ing) => ing._id);
 };

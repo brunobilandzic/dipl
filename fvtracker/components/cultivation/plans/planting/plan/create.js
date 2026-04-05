@@ -120,7 +120,7 @@ export const SelectField = ({
   );
 };
 
-export const FillPlanInfo = ({ selectedField, plant = true }) => {
+export const FillPlanInfo = ({ selectedField, plant = true, itemsName }) => {
   const crops = useSelector((state) => state.cultivation.crops);
   const {
     generalTypes = [],
@@ -142,7 +142,7 @@ export const FillPlanInfo = ({ selectedField, plant = true }) => {
       name: `Plan ${plant ? "sadnje" : "berbe"} - ${new Date().toLocaleString()}`,
       productionManager: "",
       field,
-      items: [
+      [itemsName]: [
         {
           generalType: defaultGeneralType,
           type: defaultType,

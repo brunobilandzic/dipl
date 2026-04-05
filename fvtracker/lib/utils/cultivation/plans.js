@@ -1,3 +1,5 @@
+import { checkEmpty } from "../objects";
+
 export const getPlantedCropVarietesPerCultivation = ({
   plantedCropVarieties,
 }) => {
@@ -31,6 +33,7 @@ export const _getFieldsPlans = (fields) => {
 
 export const prepareSubmitPlan = (plan) => {
   const mergedItems = {};
+  if (checkEmpty(plan)) return;
   plan.items.forEach((item) => {
     const key = item.cropVariety;
     if (mergedItems[key]) {

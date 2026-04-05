@@ -223,7 +223,7 @@ export const FillPlanInfo = ({ selectedField, plant = true, itemsName }) => {
     } catch (error) {
       dispatch(setLoading(false));
       console.error(
-        `Error ${isEdit ? "updating" : "creating"} ${plant ? "planting" : "harvesting"} plan:`,
+        `Error creating ${plant ? "planting" : "harvesting"} plan:`,
         error,
       );
       handleError({

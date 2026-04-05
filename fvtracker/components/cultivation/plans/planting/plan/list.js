@@ -24,18 +24,6 @@ const PlantingPlanList = () => {
     refreshFields({ dispatch, router });
   }, [fields]);
 
-  const deletePlans = async () => {
-    try {
-      const res = await api.delete("/cultivation/plant/plan", {});
-      refreshFields({ dispatch, router });
-    } catch (error) {
-      handleError({
-        ...error,
-        generalMessage: "Greška pri brisanju planova sadnje",
-      });
-    }
-  };
-
   if (!fields)
     return (
       <div className="w-full py-4 flex items-center justify-center">
@@ -50,7 +38,7 @@ const PlantingPlanList = () => {
         <List
           title="Planovi sadnje"
           onCreateItem={() => router.push("/plan-sadnje/izradi")}
-          onDeleteList={deletePlans}
+          onDeleteList={deletePlan}
         >
           {fieldsPlans.map((fieldPlan, index) => (
             <div key={uuid()}>

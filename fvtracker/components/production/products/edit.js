@@ -36,7 +36,11 @@ export default function EditProductPageComponent({ product }) {
   );
 }
 
-const EditProductForm = ({ productForm, setProductForm, handleSubmit }) => {
+export const EditProductForm = ({
+  productForm,
+  setProductForm,
+  handleSubmit,
+}) => {
   const crops = useSelector((state) => state.cultivation.crops);
 
   return (

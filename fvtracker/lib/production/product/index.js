@@ -1,5 +1,6 @@
 import { Product } from "@/models/sectors/production/Product";
 import { updateIngredients } from "./ingredients";
+import { makeUrlFriendly } from "@/lib/utils/strings";
 
 export const getProducts = async () => {
   const products = await Product.find().populate([
@@ -61,5 +62,9 @@ export const updateProduct = async ({ _updatedProduct, productId }) => {
     "with ingredients:",
     product.ingredients,
   );
+  const newSlug = makeUrlFriendly(updatedProduct.name);
+  product.slug = newSlug;
+
+  await product.save();
   return product;
 };

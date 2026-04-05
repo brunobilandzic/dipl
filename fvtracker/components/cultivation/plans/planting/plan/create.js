@@ -120,7 +120,11 @@ export const SelectField = ({
   );
 };
 
-export const FillPlanInfo = ({ selectedField, plant = true, itemsName="items" }) => {
+export const FillPlanInfo = ({
+  selectedField,
+  plant = true,
+  itemsName = "items",
+}) => {
   const crops = useSelector((state) => state.cultivation.crops);
   const {
     generalTypes = [],

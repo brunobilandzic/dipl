@@ -1,8 +1,8 @@
 "use client";
 
 import { ChooseCropVarietyItems } from "@/components/cultivation/crops/choose";
+import { QuantityInput } from "@/components/cultivation/plans/planting/plan/create";
 import { AppInput } from "@/components/form/inputs";
-import { LoadingFullScreen } from "@/components/layout/loading";
 import { submitProductForm } from "@/lib/utils/production/products";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -93,6 +93,7 @@ const EditProductForm = ({ productForm, setProductForm, handleSubmit }) => {
           itemsName="ingredients"
           itemLabel="sastojak"
           emptyItem={emptyIngredient}
+          additionalItemFields={[QuantityInput]}
         />
 
         {/* <div className="ingredients">
@@ -165,8 +166,9 @@ const initialData = ({ product }) => {
     description: product.description,
     price: product.price,
     ingredients: product.ingredients.map((ing) => ({
-      id: ing._id,
-      cropVarietyName: ing.cropVariety.name,
+      generalType: ing.cropVariety?.cropType?.generalType || "",
+      type: ing.cropVariety?.cropType?._id || "",
+      cropVariety: ing.cropVariety?._id || "",
       quantity: ing.quantity,
     })),
   };

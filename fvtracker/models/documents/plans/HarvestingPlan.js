@@ -16,7 +16,13 @@ const harvestingItemSchema = new Schema({
   },
   quantity: {
     type: Number,
-    default: 0,
+    validate: {
+      validator: function (v) {
+        return v >= 0;
+      },
+      message: "Količina ne smije biti manja ili jednaka nuli",
+    },
+    required: true,
   },
   plantedCropVarieties: [
     {

@@ -289,6 +289,16 @@ export const FillPlanInfo = ({ selectedField, plant = true, itemsName }) => {
   );
 };
 
+const QuantityInput = ({ index, item, handleItemChange }) => (
+  <AppInput
+    label="Količina"
+    type="number"
+    name="quantity"
+    onChange={(e) => handleItemChange(index, "quantity", e.target.value)}
+    value={item.quantity}
+  />
+);
+
 export const SelectProductionManager = ({
   setFormData,
   selectedProductionManager,

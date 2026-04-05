@@ -29,16 +29,15 @@ export const submitProductForm = async ({
   dispatch,
   router,
   isEdit = false,
-  varieties,
 }) => {
   try {
     dispatch(setLoading(true));
     let res;
     if (isEdit) {
-      if (!productCheckValid({ product: productForm, varieties })) {
+      /*       if (!productCheckValid({ product: productForm, varieties })) {
         dispatch(setLoading(false));
         return;
-      }
+      } */
 
       res = await api.put(`/products`, productForm, {
         params: { id: productForm.id },
@@ -69,19 +68,17 @@ const productCheckValid = ({ product, varieties }) => {
   if (checkEmpty(product)) return false;
   for (const ing in product.ingredients) {
     if (checkEmpty(ing)) return false;
-    if (!checkVariety({ cropVarietyName: ing.cropVarietyName, varieties })) {
+    if (!checkVariety({ cropVarietyId: ing.cropVarietyId, varieties })) {
       return false;
     }
   }
   return true;
 };
 
-const checkVariety = ({ cropVarietyName, varieties }) => {
-  const variety = varieties.find((v) => v.name === cropVarietyName);
+const checkVariety = ({ cropVarietyId, varieties }) => {
+  const variety = varieties.find((v) => v._id === cropVarietyId);
   if (!variety) {
-    alert(
-      `Crop variety ${cropVarietyName} not found in the list of varieties.`,
-    );
+    alert(`Crop variety ${cropVarietyId} not found in the list of varieties.`);
   }
   return !!variety;
 };

@@ -53,15 +53,7 @@ export const updateProduct = async ({ _updatedProduct, productId }) => {
     updatedIngredients,
     productId: product._id,
   });
-  
   product.ingredients = ingredientIds;
-  await product.save();
-  console.log(
-    "Updated product:",
-    product,
-    "with ingredients:",
-    product.ingredients,
-  );
   const newSlug = makeUrlFriendly(updatedProduct.name);
   product.slug = newSlug;
 

@@ -138,7 +138,7 @@ const EditProductForm = ({ productForm, setProductForm, handleSubmit }) => {
   );
 }; */
 
-const initialData = ({ product }) => {
+export const initialData = ({ product } = {}) => {
   if (!product) return testProduct;
   return {
     id: product._id,

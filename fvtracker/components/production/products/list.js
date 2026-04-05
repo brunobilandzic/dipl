@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { LoadingFullScreen } from "@/components/layout/loading";
 import Link from "next/link";
 import { priceEuroString } from "@/lib/utils/strings";
+import { List } from "@/components/layout/preview/list";
 
 const ProductList = () => {
   const dispatch = useDispatch();
@@ -23,14 +24,13 @@ const ProductList = () => {
 
   return (
     <div>
-      <div className="font-bold text-3xl border-b-2">Lista proizvoda</div>
-      <div className="my-4 flex flex-col gap-4">
+      <List title="Proizvodi" onDeleteList={() => {}} onCreateItem={() => {}}>
         {products?.map((product) => (
           <div key={product._id}>
             <ProductItem product={product} />
           </div>
         ))}
-      </div>
+      </List>
     </div>
   );
 };

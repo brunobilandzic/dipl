@@ -23,6 +23,7 @@ const HarvestingPlanList = () => {
 
   const deletePlans = async () => {
     try {
+      if (!confirm("Jeste li sigurni da želite obrisati sve planove berbe?")) return;
       await api.delete("/cultivation/harvest/plan", {});
       refreshFields({ dispatch });
     } catch (error) {

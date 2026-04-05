@@ -22,7 +22,11 @@ export const getProductBySlug = async (slug) => {
       select: "cropVariety quantity",
       populate: {
         path: "cropVariety",
-        select: "name",
+        select: "name cropType",
+        populate: {
+          path: "cropType",
+          select: "name generalType",
+        },
       },
     },
   ]);

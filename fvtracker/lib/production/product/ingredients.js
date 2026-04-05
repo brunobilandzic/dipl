@@ -8,8 +8,8 @@ export const updateIngredients = async ({
 }) => {
   const existingIngredientIds = ingredientsDb.map((ing) => ing._id.toString());
   const updatedIngredientIds = updatedIngredients
-    .filter((ing) => ing.id)
-    .map((ing) => ing.id);
+    .filter((ing) => ing._id)
+    .map((ing) => ing._id);
 
   const toDeleteIngredientIds = existingIngredientIds.filter(
     (id) => !updatedIngredientIds.includes(id),
@@ -19,9 +19,9 @@ export const updateIngredients = async ({
 
   const ingredients = [];
   for (const ing of updatedIngredients) {
-    if (ing.id) {
+    if (ing._id) {
       const ingredient = await Ingredient.findOneAndUpdate(
-        { _id: ing.id },
+        { _id: ing._id },
         { ...ing },
         { new: true },
       );

@@ -24,7 +24,13 @@ const ProductList = () => {
 
   return (
     <div>
-      <List title="Proizvodi" onDeleteList={() => {}} onCreateItem={() => {}}>
+      <List
+        title="Proizvodi"
+        onDeleteList={() => {}}
+        onCreateItem={() => {
+          router.push("/proizvodi/izradi");
+        }}
+      >
         {products?.map((product) => (
           <div key={product._id}>
             <ProductItem product={product} />

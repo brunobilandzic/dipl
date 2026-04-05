@@ -1,3 +1,4 @@
+import api from "@/lib/api";
 import { checkEmpty } from "../objects";
 
 export const getPlantedCropVarietesPerCultivation = ({

@@ -59,14 +59,6 @@ const HarvestingPlanList = () => {
           ))}
         </List>
       </div>
-      <div className="flex flex-col gap-4">
-        <button
-          onClick={deletePlans}
-          className="bg-red-500 text-white py-2 px-4 rounded"
-        >
-          Obriši planove
-        </button>
-      </div>
     </>
   );
 };

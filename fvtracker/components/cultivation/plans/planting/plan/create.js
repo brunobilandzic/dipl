@@ -290,7 +290,7 @@ export const FillPlanInfo = ({ selectedField, plant = true, itemsName }) => {
   );
 };
 
-const QuantityInput = ({ index, item, handleItemChange }) => (
+export const QuantityInput = ({ index, item, handleItemChange }) => (
   <AppInput
     label="Količina"
     type="number"

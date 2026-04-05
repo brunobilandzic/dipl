@@ -9,6 +9,12 @@ export const ChooseCropVarietyItems = ({
   itemLabel = "stavka",
   emptyItem = { generalType: "", type: "", cropVariety: "", quantity: "" },
 }) => {
+  console.log("ChooseCropVarietyItems:", {
+    crops,
+    cropsData,
+    itemsName,
+  });
+
   const {
     generalTypes = [],
     types = [],
@@ -46,6 +52,7 @@ export const ChooseCropVarietyItems = ({
         };
       }),
     }));
+    console.log("handleItemChange:", { index, field, value });
   };
 
   const addItem = () => {

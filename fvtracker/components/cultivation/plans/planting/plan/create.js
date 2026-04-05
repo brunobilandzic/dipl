@@ -189,10 +189,7 @@ export const FillPlanInfo = ({ selectedField, plant = true, itemsName }) => {
       field: selectedField?._id || formData.field,
     });
 
-    console.log(
-      `Submitting new ${plant ? "planting" : "harvesting"} plan with data:`,
-      submitData,
-    );
+    if (!submitData) return;
 
     if (utils.objects.checkEmpty(submitData)) {
       return;

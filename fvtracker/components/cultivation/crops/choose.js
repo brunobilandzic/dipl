@@ -9,11 +9,6 @@ export const ChooseCropVarietyItems = ({
   itemLabel = "stavka",
   emptyItem = { generalType: "", type: "", cropVariety: "", quantity: "" },
 }) => {
-  console.log("ChooseCropVarietyItems:", {
-    crops,
-    cropsData,
-    itemsName,
-  });
 
   const {
     generalTypes = [],
@@ -144,12 +139,6 @@ const getAvailableOptions = ({ generalTypes, types, cropVarieties, item }) => {
     ? cropVarieties.filter((cropVariety) => cropVariety.cropType === item.type)
     : [];
 
-  console.log("getAvailableOptions:", {
-    selectedGeneralType,
-    availableTypes,
-    selectedType,
-    availableVarieties,
-  });
 
   return {
     selectedGeneralType,

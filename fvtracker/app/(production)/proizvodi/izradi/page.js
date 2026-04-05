@@ -1,5 +1,7 @@
-import EditProductPageComponent from "@/components/production/products/edit";
+import CreateProductPageComponent from "@/components/production/products/create";
 
-const CreateProductPage = async () => {};
+const CreateProductPage = async () => {
+  return <CreateProductPageComponent />;
+};
 
 export default CreateProductPage;

@@ -2,7 +2,7 @@ import React from "react";
 import { EditProductForm, initialData } from "./edit";
 import { submitProductForm } from "@/lib/utils/production/products";
 
-const CreateProductPage = () => {
+const CreateProductPageComponent = () => {
   const [productForm, setProductForm] = useState(initialData());
   const handleSubmit = async () => {
     console.log("Submitting form with data:", productForm);
@@ -26,4 +26,4 @@ const CreateProductPage = () => {
   );
 };
 
-export default CreateProductPage;
+export default CreateProductPageComponent;

@@ -1,13 +1,18 @@
 import utils from "@/lib/utils";
 import { getCANameFromPlantedCropVarietiesInCultivation } from "@/lib/utils/cultivation/cultivationAreas";
-import Link from "next/link";
 import { v4 as uuid } from "uuid";
 
-export const PlantingPlanListItem = ({ plan, plant = true }) => {
+export const PlantingPlanListItem = ({ plan, plant = true, onDelete }) => {
   return (
     <>
       <div className="border p-4 rounded">
-        <div className="text-lg font-bold ">{plan.name}</div>
+        <div className="flex justify-between items-center">
+          <div className="text-lg font-bold ">{plan.name}</div>
+          <div className="btn cancelButton btnSm" onClick={onDelete}>
+            Obrši
+          </div>
+        </div>
+
         <PlantingPlanItems items={plan.items} />
       </div>
     </>

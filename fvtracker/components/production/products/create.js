@@ -1,9 +1,29 @@
 import React from "react";
-import { initialData } from "./edit";
+import { EditProductForm, initialData } from "./edit";
+import { submitProductForm } from "@/lib/utils/production/products";
 
 const CreateProductPage = () => {
   const [productForm, setProductForm] = useState(initialData());
-  return <div>CreateProductPage</div>;
+  const handleSubmit = async () => {
+    console.log("Submitting form with data:", productForm);
+    await submitProductForm({
+      productForm,
+      dispatch,
+      router,
+    });
+  };
+  return (
+    <div>
+      <div>Izradi proizvod</div>
+      <div>
+        <EditProductForm
+          productForm={productForm}
+          setProductForm={setProductForm}
+          handleSubmit={handleSubmit}
+        />
+      </div>
+    </div>
+  );
 };
 
 export default CreateProductPage;

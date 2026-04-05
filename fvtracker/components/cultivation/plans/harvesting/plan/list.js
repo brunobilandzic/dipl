@@ -11,30 +11,19 @@ import { v4 as uuid } from "uuid";
 import { FieldPlansItem } from "@/components/cultivation/plans/planting/plan/list";
 import { refreshFields } from "@/lib/utils/cultivation/fields";
 import { List } from "@/components/layout/preview/list";
+import { useRouter } from "next/navigation";
+import { deletePlans } from "@/lib/utils/cultivation/plans";
 
 const HarvestingPlanList = () => {
   const fields = useSelector((state) => state.cultivation.fields);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => {
     if (fields) return;
 
     refreshFields({ dispatch });
   }, [fields]);
-
-  const deletePlans = async () => {
-    try {
-      if (!confirm("Jeste li sigurni da želite obrisati sve planove berbe?"))
-        return;
-      await api.delete("/cultivation/harvest/plan", {});
-      refreshFields({ dispatch });
-    } catch (error) {
-      handleError({
-        ...error,
-        generalMessage: "Greška pri brisanju planova berbe",
-      });
-    }
-  };
 
   if (!fields)
     return (

@@ -11,7 +11,7 @@ import { PlantingPlanListItem } from "@/components/cultivation/plans/planting/pl
 import { refreshFields } from "@/lib/utils/cultivation/fields";
 import { useRouter } from "next/navigation";
 import { List } from "@/components/layout/preview/list";
-import { deletePlan } from "@/lib/utils/cultivation/plans";
+import { deletePlans } from "@/lib/utils/cultivation/plans";
 
 const PlantingPlanList = () => {
   const fields = useSelector((state) => state.cultivation.fields);
@@ -38,7 +38,7 @@ const PlantingPlanList = () => {
         <List
           title="Planovi sadnje"
           onCreateItem={() => router.push("/plan-sadnje/izradi")}
-          onDeleteList={deletePlan}
+          onDeleteList={deletePlans}
         >
           {fieldsPlans.map((fieldPlan, index) => (
             <div key={uuid()}>
@@ -69,7 +69,7 @@ export function FieldPlansItem({ fieldPlans, plant = true }) {
           <PlantingPlanListItem
             plan={plan}
             plant={true}
-            onDelete={() => deletePlan({ planId: plan._id, plant: true })}
+            onDelete={() => deletePlans({ planId: plan._id, plant: true })}
           />
         </div>
       ));

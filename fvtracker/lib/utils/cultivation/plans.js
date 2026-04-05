@@ -173,7 +173,7 @@ export const checkPlansEmpty = (plans) => {
   }
 };
 
-export const deletePlan = async ({ planId, plant = true }) => {
+export const deletePlans = async ({ planId, plant = true }) => {
   if (!confirm("Jeste li sigurni da želite obrisati ovaj plan?")) {
     return;
   }

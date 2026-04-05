@@ -19,6 +19,18 @@ export function checkEmpty(obj, dontAlert = false) {
 
       return true;
     }
+    if (obj[key] instanceof Array) {
+      for (const item of obj[key]) {
+        if (checkEmpty(item)) {
+          if (!dontAlert) {
+            alert(
+              `Polje ${key} sadrži prazan element: ${JSON.stringify(item)}`,
+            );
+          }
+          return true;
+        }
+      }
+    }
   }
   return false;
 }

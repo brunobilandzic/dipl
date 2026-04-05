@@ -88,7 +88,7 @@ const EditProductForm = ({ productForm, setProductForm, handleSubmit }) => {
         />
         <ChooseCropVarietyItems
           crops={crops}
-          cropsData={productForm.ingredients}
+          cropsData={productForm}
           setCropsData={setProductForm}
           itemsName="ingredients"
           itemLabel="sastojak"

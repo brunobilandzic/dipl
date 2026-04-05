@@ -79,6 +79,12 @@ productSchema.methods.createIngredients = async function ({ ingredientsData }) {
   await this.save();
 };
 
+productSchema.pre("deleteMany", async function () {
+  const ids = await Product.find(this.getFilter()).distinct("_id");
+  await Ingredient.deleteMany({ product: { $in: ids } });
+  await ProductStock.deleteMany({ product: { $in: ids } });
+});
+
 const ingredientsSchema = new Schema({
   product: {
     type: mongoose.Schema.Types.ObjectId,

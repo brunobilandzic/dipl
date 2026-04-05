@@ -92,6 +92,7 @@ export const ChooseCropVarietyItems = ({
                 cropsData={cropsData}
                 itemsName={itemsName}
                 removeItem={removeItem}
+                itemLabel={itemLabel}
               />
 
               <div className="grid gap-4 md:grid-cols-2">

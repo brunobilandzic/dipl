@@ -166,6 +166,7 @@ const initialData = ({ product }) => {
     description: product.description,
     price: product.price,
     ingredients: product.ingredients.map((ing) => ({
+      ...ing,
       generalType: ing.cropVariety?.cropType?.generalType || "",
       type: ing.cropVariety?.cropType?._id || "",
       cropVariety: ing.cropVariety?._id || "",

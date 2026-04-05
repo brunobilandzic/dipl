@@ -171,3 +171,21 @@ export const checkPlansEmpty = (plans) => {
     throw new Error("Greška u dostupnmim planovima");
   }
 };
+
+export const deletePlan = async ({ planId, plant = true }) => {
+  if (!confirm("Jeste li sigurni da želite obrisati ovaj plan?")) {
+    return;
+  }
+  try {
+    const endpoint = plant
+      ? "/cultivation/plant/plan"
+      : "/cultivation/harvest/plan";
+    await api.delete(endpoint, { planId });
+    alert("Plan obrisan");
+    return true;
+  } catch (error) {
+    console.error("Error deleting plan:", error);
+    alert("Greška pri brisanju plana: " + error.message);
+    return false;
+  }
+};

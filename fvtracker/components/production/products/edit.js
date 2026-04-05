@@ -94,7 +94,6 @@ const EditProductForm = ({ productForm, setProductForm, handleSubmit }) => {
           itemLabel="sastojak"
           emptyItem={emptyIngredient}
           additionalItemFields={[QuantityInput]}
-          allowOne={true}
         />
 
         {/* <div className="ingredients">

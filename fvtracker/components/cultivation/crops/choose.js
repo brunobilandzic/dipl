@@ -84,7 +84,7 @@ export const ChooseCropVarietyItems = ({
       </div>
 
       <div className="flex flex-col gap-4">
-        {cropsData[itemsName].map((item, index) => {
+        {cropsData[itemsName]?.map((item, index) => {
           const { availableTypes, availableVarieties } = getAvailableOptions({
             generalTypes,
             types,

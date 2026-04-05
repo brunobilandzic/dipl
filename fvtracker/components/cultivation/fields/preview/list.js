@@ -51,7 +51,13 @@ export function FieldsList({}) {
 
   return (
     <>
-      <List>
+      <List
+        title="Polja"
+        onDeleteList={() => {}}
+        onCreateItem={() => {
+          router.push("/upravljanje-poljima/dodavanje");
+        }}
+      >
         {fields.map((field) => (
           <ListItem key={field._id}>
             <FieldItem field={field} />

@@ -11,6 +11,7 @@ import { PlantingPlanListItem } from "@/components/cultivation/plans/planting/pl
 import { refreshFields } from "@/lib/utils/cultivation/fields";
 import { useRouter } from "next/navigation";
 import { List } from "@/components/layout/preview/list";
+import { deletePlan } from "@/lib/utils/cultivation/plans";
 
 const PlantingPlanList = () => {
   const fields = useSelector((state) => state.cultivation.fields);
@@ -73,15 +74,27 @@ export function FieldPlansItem({ fieldPlans, plant = true }) {
   const getPlans = () => {
     console.log("fieldPlans:", fieldPlans);
     if (plant) {
+      if (!plantingPlans || plantingPlans.length === 0)
+        return <div>Nema planova sadnje</div>;
       return plantingPlans?.map((plan) => (
         <div key={uuid()} className="mb-2">
-          <PlantingPlanListItem plan={plan} plant={true} />
+          <PlantingPlanListItem
+            plan={plan}
+            plant={true}
+            onDelete={() => deletePlan({ planId: plan._id, plant: true })}
+          />
         </div>
       ));
     } else {
+      if (!harvestingPlans || harvestingPlans.length === 0)
+        return <div>Nema planova berbe</div>;
       return harvestingPlans?.map((plan) => (
         <div key={uuid()} className="mb-2">
-          <PlantingPlanListItem plan={plan} plant={false} />
+          <PlantingPlanListItem
+            plan={plan}
+            plant={false}
+            onDelete={() => deletePlan({ planId: plan._id, plant: false })}
+          />
         </div>
       ));
     }

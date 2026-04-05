@@ -93,10 +93,12 @@ function NavItem({ item }) {
       <div
         onMouseEnter={() => setSubmenuOpen(true)}
         onMouseLeave={() => setSubmenuOpen(false)}
-        className="relative group"
+        className="relative group "
       >
         <span className="cursor-pointer">{item.label}</span>
-        <div className={`absolute top-full left-0 mt-2 w-48 bg-gray-800 text-white rounded shadow-lg ${subMenuOpen ? "block" : "hidden"}`}>
+        <div
+          className={`absolute top-full left-0  w-48 bg-gray-800 text-white rounded shadow-lg ${subMenuOpen ? "block" : "hidden"}`}
+        >
           {item.submenu.map((subItem, index) => (
             <Link
               key={index}

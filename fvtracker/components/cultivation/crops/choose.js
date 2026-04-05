@@ -10,7 +10,7 @@ export const ChooseCropVarietyItems = ({
   itemLabel = "stavka",
   emptyItem = { generalType: "", type: "", cropVariety: "", quantity: "" },
   additionalItemFields,
-  allowOne,
+  allowZero = false,
 }) => {
   const {
     generalTypes = [],
@@ -101,7 +101,7 @@ export const ChooseCropVarietyItems = ({
                 itemsName={itemsName}
                 removeItem={removeItem}
                 itemLabel={itemLabel}
-                allowOne={allowOne}
+                allowZero={allowZero}
               />
 
               <div className="grid gap-4 md:grid-cols-2">
@@ -194,7 +194,7 @@ function ItemHeader({
   itemsName,
   removeItem,
   itemLabel = "stavka",
-  allowOne = false,
+  allowZero = false,
 }) {
   return (
     <div className="mb-4 flex items-center justify-between gap-4">
@@ -203,7 +203,7 @@ function ItemHeader({
       </div>
       <button
         className="text-sm text-red-600 disabled:cursor-not-allowed disabled:text-gray-400"
-        disabled={cropsData[itemsName].length === 1 && !allowOne}
+        disabled={cropsData[itemsName].length === 1 && !allowZero }
         onClick={() => removeItem(index)}
         type="button"
       >

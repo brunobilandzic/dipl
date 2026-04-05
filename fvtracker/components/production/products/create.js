@@ -1,9 +1,15 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import { EditProductForm, initialData } from "./edit";
 import { submitProductForm } from "@/lib/utils/production/products";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
 
 const CreateProductPageComponent = () => {
   const [productForm, setProductForm] = useState(initialData());
+  const dispatch = useDispatch();
+  const router = useRouter();
   const handleSubmit = async () => {
     console.log("Submitting form with data:", productForm);
     await submitProductForm({

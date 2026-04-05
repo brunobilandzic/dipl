@@ -26,11 +26,10 @@ export const updateIngredients = async ({
         { new: true },
       );
     } else {
-      const cropVariety = await CropVariety.findOne({
-        name: ing.cropVarietyName,
-      });
+      //create new ingredient
+      const cropVariety = await CropVariety.findById(ing.cropVarietyId);
       if (!cropVariety) {
-        throw new Error(`Crop variety ${ing.cropVarietyName} not found.`);
+        throw new Error(`Crop variety ${ing.cropVarietyId} not found.`);
       }
       const ingredient = new Ingredient({
         product: productId,

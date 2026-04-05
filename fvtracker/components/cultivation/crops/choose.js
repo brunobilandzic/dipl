@@ -1,4 +1,5 @@
 import { titleCaseLetter } from "@/lib/utils/strings";
+import { useEffect } from "react";
 
 export const ChooseCropVarietyItems = ({
   crops,
@@ -10,12 +11,15 @@ export const ChooseCropVarietyItems = ({
   emptyItem = { generalType: "", type: "", cropVariety: "", quantity: "" },
   additionalItemFields,
 }) => {
-
   const {
     generalTypes = [],
     types = [],
     varieties: cropVarieties = [],
   } = crops || {};
+
+  useEffect(() => {
+    console.log("cvi cropsData changed:", cropsData);
+  }, [cropsData]);
 
   const handleItemChange = (index, field, value) => {
     setCropsData((prev) => ({

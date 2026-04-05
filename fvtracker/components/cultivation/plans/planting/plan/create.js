@@ -270,6 +270,7 @@ export const FillPlanInfo = ({ selectedField, plant = true, itemsName }) => {
             crops={crops}
             cropsData={formData}
             setCropsData={setFormData}
+            additionalItemFields={[QuantityInput]}
           />
           {!plant && (
             <div className="mt-4">

@@ -8,6 +8,7 @@ export const ChooseCropVarietyItems = ({
   children,
   itemLabel = "stavka",
   emptyItem = { generalType: "", type: "", cropVariety: "", quantity: "" },
+  additionalItemFields,
 }) => {
 
   const {

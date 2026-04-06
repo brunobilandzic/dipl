@@ -42,6 +42,7 @@ export const submitProductForm = async ({
       res = await api.put(`/products`, productForm, {
         params: { id: productForm.id },
       });
+      router.push(`/proizvodi/uredi/${res.data.product.slug}`);
     } else {
       res = await api.post("/products", productForm);
     }

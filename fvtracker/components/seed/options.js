@@ -82,6 +82,7 @@ export default function SeedOptions() {
       dispatch(setLoading(false));
       alert(`${seedType} uspješno dovršeno\n${response.data.message}`);
     } catch (error) {
+      dispatch(setLoading(false));
       console.error("Error seeding data:", error);
       handleError({
         ...error,

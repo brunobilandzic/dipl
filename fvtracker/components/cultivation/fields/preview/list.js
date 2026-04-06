@@ -119,7 +119,7 @@ function FieldItem({ field }) {
       : [],
   );
 
-  const handleDeleteCultivation = async () => {
+  const handleDeleteField = async () => {
     if (!confirm("Jeste li sigurni da želite obrisati ovo polje?")) {
       return;
     }
@@ -153,7 +153,7 @@ function FieldItem({ field }) {
               className="cursor-pointer text-sm  px-4 cancelButton btnSm"
               onClick={(e) => {
                 e.preventDefault();
-                handleDeleteCultivation();
+                handleDeleteField();
               }}
             >
               Obriši

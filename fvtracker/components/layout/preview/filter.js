@@ -1,7 +1,7 @@
 import { AppInput } from "@/components/form/inputs";
 import { v4 as uuid } from "uuid";
 
-export const Filter = ({ options, filterData, setFilterData, onApply }) => {
+export const Filter = ({}) => {
   return (
     <>
       <div>{JSON.stringify(filterData, null, 2)}</div>
@@ -19,9 +19,13 @@ export const Filter = ({ options, filterData, setFilterData, onApply }) => {
             <InputComponent
               option={option}
               onChange={(e) => {
-                setFilterData({
-                  ...filterData,
-                  [option.name]: e.target.value,
+                setFilterData((prev) => {
+                  return prev.map((o, i) => {
+                    if (i === index) {
+                      return { ...o, [option.name]: e.target.value };
+                    }
+                    return o;
+                  });
                 });
               }}
             />

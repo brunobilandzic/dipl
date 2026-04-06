@@ -11,6 +11,7 @@ export const Filter = ({ filters, setFilters, onApply }) => {
               return (
                 <AppInput
                   key={index}
+                  placeholder="Pretraži po imenu"
                   value={option.value}
                   onChange={(e) => {
                     setFilters((prev) => {

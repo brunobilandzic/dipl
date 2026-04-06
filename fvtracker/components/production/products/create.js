@@ -1,13 +1,19 @@
 "use client";
 
-import React, { useState } from "react";
-import { EditProductForm, initialData } from "./edit";
+import React, { useEffect, useState } from "react";
+import { EditProductForm, testProduct } from "./edit";
 import { submitProductForm } from "@/lib/utils/production/products";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 
 const CreateProductPageComponent = () => {
-  const [productForm, setProductForm] = useState(initialData());
+  const crops = useSelector((state) => state.cultivation.crops);
+  const [productForm, setProductForm] = useState(testProduct({ crops }));
+  useEffect(() => {
+    if (crops) {
+      setProductForm(testProduct({ crops }));
+    }
+  }, [crops]);
   const dispatch = useDispatch();
   const router = useRouter();
   const handleSubmit = async () => {

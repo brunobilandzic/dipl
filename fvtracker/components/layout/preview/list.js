@@ -1,4 +1,10 @@
-export function List({ children, title, onDeleteList, onCreateItem }) {
+export function List({
+  children,
+  title,
+  onDeleteList,
+  onCreateItem,
+  FilterComponent,
+}) {
   return (
     <>
       <div className="list-header flex items-center justify-between mb-4 border-b-2 pb-1 ">
@@ -16,6 +22,7 @@ export function List({ children, title, onDeleteList, onCreateItem }) {
           )}
         </div>
       </div>
+      {FilterComponent && <FilterComponent />}
       <div className="flex flex-col gap-4 justify-start">{children}</div>
     </>
   );

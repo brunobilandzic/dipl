@@ -4,7 +4,7 @@ import {
   refreshProducts,
   deleteProducts,
 } from "@/lib/utils/production/products";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { LoadingFullScreen } from "@/components/layout/loading";
@@ -12,10 +12,25 @@ import Link from "next/link";
 import { priceEuroString } from "@/lib/utils/strings";
 import { List } from "@/components/layout/preview/list";
 
+/*
+FILTER OPTIONS:
+- name contains: 
+  {
+    type: "stingContains",
+    label: "Naziv sadrži",
+    field: "name"
+  }
+- price slide
+- ingredient
+
+*/
+
 const ProductList = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const products = useSelector((state) => state.products.items);
+
+  const [filterData, setFilterData] = useState(initialFilterData);
 
   useEffect(() => {
     if (products === null) {
@@ -107,4 +122,11 @@ const ActionBar = ({ productId, slug }) => {
       </div>
     </div>
   );
+};
+
+const initialFilterData = {
+  nameContains: "",
+  priceMin: null,
+  priceMax: null,
+  ingredient: "",
 };

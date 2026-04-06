@@ -26,7 +26,7 @@ const initFilters = [
 const ProductList = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const products = useSelector((state) => state.products.items);
+  const products = useSelector((state) => state.products.filteredItems);
   const [sortBy, setSortBy] = useState("newest");
   const [filters, setFilters] = useState(initFilters);
 

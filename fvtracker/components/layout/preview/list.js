@@ -44,7 +44,7 @@ export function ListItem({ children, actionOptions }) {
     <>
       <div className="flex flex-col gap-2 border p-4 rounded-lg">
         {children}
-        <ActionOptions options={actionOptions} />
+        {actionOptions && <ActionOptions options={actionOptions} />}
       </div>
     </>
   );

@@ -15,7 +15,7 @@ const productsSlice = createSlice({
       state.items = action.payload;
       state.filteredItems = action.payload;
     },
-   /*  addProduct: (state, action) => {
+    /*  addProduct: (state, action) => {
       state.items.push(action.payload);
     },
     removeProduct: (state, action) => {
@@ -47,10 +47,10 @@ const productsSlice = createSlice({
 });
 
 export const {
-  setProducts,/* 
+  setProducts /* 
   addProduct,
   removeProduct,
-  updateProduct, */
+  updateProduct, */,
   setManagers,
   sortProducts,
   filterProducts,
@@ -90,6 +90,8 @@ const filterProductsHelper = ({ _products, filters }) => {
           stringContains(product.name, filter.value),
         );
         break;
+      case "cropVarietySearch":
+        products = productsWithCropVarieties(products, filter.value);
       default:
         break;
     }

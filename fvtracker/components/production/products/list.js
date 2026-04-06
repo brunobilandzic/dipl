@@ -1,6 +1,9 @@
 "use client";
 
-import { refreshProducts } from "@/lib/utils/production/products";
+import {
+  refreshProducts,
+  deleteProducts,
+} from "@/lib/utils/production/products";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
@@ -54,7 +57,7 @@ const ProductItem = ({ product }) => {
       <div className="mt-4">
         <IngredientsList ingredients={product.ingredients} />
       </div>
-      <ActionBar slug={product.slug} />
+      <ActionBar productId={product._id} slug={product.slug} />
     </div>
   );
 };
@@ -81,8 +84,9 @@ const IngredientItem = ({ ingredient }) => {
   );
 };
 
-const ActionBar = ({ slug }) => {
-  const onDelete = () => {};
+const ActionBar = ({ productId, slug }) => {
+  const dispatch = useDispatch();
+  const router = useRouter();
   return (
     <div className="flex justify-end gap-2 mt-4">
       <Link href={`/proizvodi/uredi/${slug}`}>
@@ -91,7 +95,14 @@ const ActionBar = ({ slug }) => {
       <Link href={`/production/products/${slug}/stock`}>
         <div className="btn submitButton btnSm">Stanje</div>
       </Link>
-      <div onClick={onDelete} className="btn cancelButton btnSm">
+      <div
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          deleteProducts({ productIds: [productId], dispatch, router });
+        }}
+        className="btn cancelButton btnSm"
+      >
         Obriši
       </div>
     </div>

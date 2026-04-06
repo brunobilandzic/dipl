@@ -33,7 +33,7 @@ const productsSlice = createSlice({
       state.managers = action.payload;
     },
     sortProducts: (state, action) => {
-      state.items = sortProductsHelper({
+      state.filteredItems = sortProductsHelper({
         products: state.items,
         sortBy: action.payload,
       });

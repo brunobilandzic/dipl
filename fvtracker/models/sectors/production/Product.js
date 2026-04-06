@@ -34,6 +34,10 @@ const productSchema = new Schema({
     required: true,
     unique: true,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 productSchema.pre("save", function () {
@@ -54,9 +58,23 @@ productSchema.pre("findOneAndUpdate", function () {
 productSchema.methods.createIngredients = async function ({ ingredientsData }) {
   const ingredients = [];
   for (const ingredientData of ingredientsData) {
-    const cropVariety = await CropVariety.findById(ingredientData.cropVariety);
-    if (!cropVariety) {
-      throw new Error(`Crop variety ${ingredientData.cropVariety} not found.`);
+    let cropVariety;
+    if (ingredientData.cropVarietyName) {
+      cropVariety = await CropVariety.findOne({
+        name: ingredientData.cropVarietyName,
+      });
+      if (!cropVariety) {
+        throw new Error(
+          `Crop variety with name ${ingredientData.cropVarietyName} not found.`,
+        );
+      }
+    } else {
+      cropVariety = await CropVariety.findById(ingredientData.cropVariety);
+      if (!cropVariety) {
+        throw new Error(
+          `Crop variety with id ${ingredientData.cropVariety} not found.`,
+        );
+      }
     }
 
     const newIngredient = new Ingredient({

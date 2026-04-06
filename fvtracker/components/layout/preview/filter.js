@@ -26,9 +26,9 @@ export const Filter = ({ filters, setFilters, onApply }) => {
               );
           }
         })}
-        <div className="btn btnSm" onClick={onApply}>
+{/*         <div className="btn btnSm" onClick={onApply}>
           Primjeni
-        </div>
+        </div> */}
       </div>
     </>
   );

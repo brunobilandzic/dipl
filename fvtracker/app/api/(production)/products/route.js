@@ -63,8 +63,9 @@ export const POST = async (req) => {
 export const DELETE = async (req) => {
   try {
     await dbConnect();
-    const ids = req.nextUrl.searchParams.get("ids");
-    const product = await deleteProduct(id);
+    const idsString = req.nextUrl.searchParams.get("ids");
+    const productIds = idsString.split(",");
+    const product = await deleteProducts(productIds);
 
     return Response.json({ product }, { status: 200 });
   } catch (error) {

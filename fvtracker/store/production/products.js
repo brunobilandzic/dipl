@@ -15,7 +15,7 @@ const productsSlice = createSlice({
       state.items = action.payload;
       state.filteredItems = action.payload;
     },
-    addProduct: (state, action) => {
+   /*  addProduct: (state, action) => {
       state.items.push(action.payload);
     },
     removeProduct: (state, action) => {
@@ -27,7 +27,7 @@ const productsSlice = createSlice({
       state.items = state.items.map((product) =>
         product.id === action.payload.id ? action.payload : product,
       );
-    },
+    }, */
     setManagers: (state, action) => {
       state.managers = action.payload;
     },
@@ -47,10 +47,10 @@ const productsSlice = createSlice({
 });
 
 export const {
-  setProducts,
+  setProducts,/* 
   addProduct,
   removeProduct,
-  updateProduct,
+  updateProduct, */
   setManagers,
   sortProducts,
   filterProducts,

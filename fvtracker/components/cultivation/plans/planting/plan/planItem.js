@@ -1,20 +1,25 @@
+import { ListItem } from "@/components/layout/preview/list";
 import utils from "@/lib/utils";
 import { getCANameFromPlantedCropVarietiesInCultivation } from "@/lib/utils/cultivation/cultivationAreas";
 import { v4 as uuid } from "uuid";
 
 export const PlantingPlanListItem = ({ plan, plant = true, onDelete }) => {
+  const actionOptions = [
+    {
+      label: "Obriši",
+      onClick: onDelete,
+      className: "btn cancelButton btnSm",
+    },
+  ];
   return (
     <>
-      <div className="border p-4 rounded">
+      <ListItem actionOptions={actionOptions}>
         <div className="flex justify-between items-center">
           <div className="text-lg font-bold ">{plan.name}</div>
-          <div className="btn cancelButton btnSm" onClick={onDelete}>
-            Obrši
-          </div>
         </div>
 
         <PlantingPlanItems items={plan.items} />
-      </div>
+      </ListItem>
     </>
   );
 };

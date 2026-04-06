@@ -29,12 +29,21 @@ export const Filter = ({ filters, setFilters, onApply }) => {
                   }}
                 />
               );
+            case "cropVariety":
+              return (
+                <AppInput
+                  key={index}
+                  placeholder="Filtriraj po sorti"
+                  value={option.value}
+                  onChange={(e) => {
+                    onChange(index, e.target.value);
                   }}
                 />
               );
           }
         })}
-{/*         <div className="btn btnSm" onClick={onApply}>
+
+        {/*         <div className="btn btnSm" onClick={onApply}>
           Primjeni
         </div> */}
       </div>

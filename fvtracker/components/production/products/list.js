@@ -21,6 +21,11 @@ const initFilters = [
     placeholder: "Pretraži proizvode...",
     value: "",
   },
+  {
+    type: "cropVariety",
+    placeholder: "Filtriraj po sorti...",
+    value: "",
+  },
 ];
 
 const ProductList = () => {

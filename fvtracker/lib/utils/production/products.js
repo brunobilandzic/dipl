@@ -109,13 +109,15 @@ export const deleteProducts = async ({ productIds, dispatch, router }) => {
 };
 
 export const productsWithCropVarieties = (products, cropVarietySearch) => {
-  return products.map((product) => {
-    if (
-      product.ingredients.find((ing) =>
-        stringContains(ing.cropVariety.name, cropVarietySearch),
-      )
-    ) {
-      return product;
-    }
-  });
+  return products
+    .map((product) => {
+      if (
+        product.ingredients.find((ing) =>
+          stringContains(ing.cropVariety.name, cropVarietySearch),
+        )
+      ) {
+        return product;
+      }
+    })
+    .filter((p) => p);
 };

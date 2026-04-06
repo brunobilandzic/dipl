@@ -1,3 +1,4 @@
+import { productsWithCropVarieties } from "@/lib/utils/production/products";
 import { stringContains } from "@/lib/utils/strings";
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -85,12 +86,13 @@ const filterProductsHelper = ({ _products, filters }) => {
 
   for (const filter of filters) {
     switch (filter.type) {
-      case "search":
+      case "nameSearch":
         products = products.filter((product) =>
           stringContains(product.name, filter.value),
         );
         break;
       case "cropVarietySearch":
+        if (filter.value === "") break;
         products = productsWithCropVarieties(products, filter.value);
       default:
         break;

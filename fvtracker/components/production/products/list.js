@@ -17,12 +17,12 @@ import { Filter } from "@/components/layout/preview/filter";
 
 const initFilters = [
   {
-    type: "search",
+    type: "nameSearch",
     placeholder: "Pretraži proizvode...",
     value: "",
   },
   {
-    type: "cropVariety",
+    type: "cropVarietySearch",
     placeholder: "Filtriraj po sorti...",
     value: "",
   },

@@ -18,7 +18,7 @@ export const Filter = ({ filters, setFilters, onApply }) => {
       <div className="flex flex-col gap-2">
         {filters.map((option, index) => {
           switch (option.type) {
-            case "search":
+            case "nameSearch":
               return (
                 <AppInput
                   key={index}
@@ -29,7 +29,7 @@ export const Filter = ({ filters, setFilters, onApply }) => {
                   }}
                 />
               );
-            case "cropVariety":
+            case "cropVarietySearch":
               return (
                 <AppInput
                   key={index}

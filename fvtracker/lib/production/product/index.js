@@ -60,3 +60,15 @@ export const updateProduct = async ({ _updatedProduct, productId }) => {
   await product.save();
   return product;
 };
+
+export const createProduct = async ({ _newProductData }) => {
+  const { ingredients: newIngredients, ...newProductData } = _newProductData;
+  const product = await Product.create({
+    ...newProductData,
+    slug: makeUrlFriendly(newProductData.name),
+  });
+
+  await product.createIngredients(newIngredients);
+
+  return product;
+};

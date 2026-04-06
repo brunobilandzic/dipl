@@ -1,5 +1,9 @@
 import dbConnect from "@/lib/db/mongooseConnect";
-import { getProducts, updateProduct } from "@/lib/production/product";
+import {
+  createProduct,
+  getProducts,
+  updateProduct,
+} from "@/lib/production/product";
 
 export const GET = async (req) => {
   try {
@@ -32,6 +36,24 @@ export const PUT = async (req) => {
     console.error("Error updating product:", error);
     return Response.json(
       { error: "Failed to update product" },
+      { status: 500 },
+    );
+  }
+};
+
+export const POST = async (req) => {
+  try {
+    await dbConnect();
+    const body = await req.json();
+    const product = await createProduct({
+      _newProductData: body,
+    });
+
+    return Response.json({ product }, { status: 201 });
+  } catch (error) {
+    console.error("Error creating product:", error);
+    return Response.json(
+      { error: "Failed to create product" },
       { status: 500 },
     );
   }

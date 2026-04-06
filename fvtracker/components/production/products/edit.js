@@ -143,7 +143,7 @@ export const EditProductForm = ({
 }; */
 
 export const initialData = ({ product } = {}) => {
-  if (!product) return testProduct;
+  if (!product) throw new Error("Proizvod za uređivanje nije pronađen");
   return {
     id: product._id,
     name: product.name,

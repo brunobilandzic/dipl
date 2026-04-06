@@ -31,23 +31,41 @@ export function List({
       </div>
       {filterComponentProps && <Filter {...filterComponentProps} />}
       <div className="flex flex-col gap-4 justify-start">
-        <SortList sortBy={sortBy} setSortBy={setSortBy} />
-        <Filter filters={filters} setFilters={setFilters} />
+        {sortBy && <SortList sortBy={sortBy} setSortBy={setSortBy} />}
+        {filters && <Filter filters={filters} setFilters={setFilters} />}
         {children}
       </div>
     </>
   );
 }
 
-export function ListItem({ children }) {
+export function ListItem({ children, actionOptions }) {
   return (
     <>
       <div className="flex flex-col gap-2 border p-4 rounded-lg">
         {children}
+        <ActionOptions options={actionOptions} />
       </div>
     </>
   );
 }
+
+const ActionOptions = ({ options }) => {
+  return (
+    <div className="flex justify-end gap-2 mt-4">
+      {options.map((option) => {
+        return (
+          <div
+            className={`btn btnSm ${option.className}`}
+            onClick={option.onClick}
+          >
+            {option.label}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
 export function ListItemHeader({ children }) {
   return (

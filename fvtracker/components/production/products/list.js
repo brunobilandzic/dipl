@@ -81,12 +81,10 @@ const ProductItem = ({ product }) => {
     <ListItem>
       <h2 className="text-xl font-bold">{product.name}</h2>
       <p>{product.description}</p>
-      <p className="text-sm text-gray-500">
-        Cijena: {priceEuroString(product.price)}
-      </p>
-      <ProductInfoDates
+      <ProductInfo
         createdAt={product.createdAt}
         updatedAt={product.updatedAt}
+        price={product.price}
       />
       <div></div>
       <div className="mt-4">
@@ -98,11 +96,12 @@ const ProductItem = ({ product }) => {
   );
 };
 
-const ProductInfoDates = ({ createdAt, updatedAt }) => {
+const ProductInfo = ({ createdAt, updatedAt, price }) => {
   return (
     <div className="text-sm text-gray-500">
       <p>Datum kreiranja: {new Date(createdAt).toLocaleDateString()}</p>
       <p>Datum zadnje izmjene: {new Date(updatedAt).toLocaleDateString()}</p>
+      <p>Cijena: {priceEuroString(price)}</p>
     </div>
   );
 };

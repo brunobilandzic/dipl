@@ -4,18 +4,20 @@ import {
   refreshProducts,
   deleteProducts,
 } from "@/lib/utils/production/products";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { LoadingFullScreen } from "@/components/layout/loading";
 import Link from "next/link";
 import { priceEuroString } from "@/lib/utils/strings";
 import { List } from "@/components/layout/preview/list";
+import { SortList } from "@/components/layout/preview/sort";
 
 const ProductList = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const products = useSelector((state) => state.products.items);
+  const [sortBy, setSortBy] = useState("newest");
 
   useEffect(() => {
     if (products === null) {
@@ -34,6 +36,7 @@ const ProductList = () => {
           router.push("/proizvodi/izradi");
         }}
       >
+        <SortList sortBy={sortBy} setSortBy={setSortBy} />
         {products?.map((product) => (
           <div key={product._id}>
             <ProductItem product={product} />

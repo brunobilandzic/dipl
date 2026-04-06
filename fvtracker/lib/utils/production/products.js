@@ -86,6 +86,8 @@ const checkVariety = ({ cropVarietyId, varieties }) => {
 };
 
 export const deleteProducts = async ({ productIds, dispatch, router }) => {
+  if (!confirm("Jeste li sigurni da želite obrisati odabrane proizvode?"))
+    return;
   try {
     dispatch(setLoading(true));
     await api.delete(`/products`, { params: { ids: productIds.join(",") } });

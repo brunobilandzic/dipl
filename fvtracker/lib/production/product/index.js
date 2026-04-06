@@ -5,6 +5,7 @@ import { makeUrlFriendly } from "@/lib/utils/strings";
 export const getProducts = async () => {
   const products = await Product.find()
     .sort({ name: 1 })
+    .collation({ locale: "hr", strength: 2 })
     .populate([
       {
         path: "ingredients",

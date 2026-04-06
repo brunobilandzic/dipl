@@ -61,9 +61,11 @@ const ProductList = () => {
         onCreateItem={() => {
           router.push("/proizvodi/izradi");
         }}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+        filters={filters}
+        setFilters={setFilters}
       >
-        <SortList sortBy={sortBy} setSortBy={setSortBy} />
-        <Filter filters={filters} setFilters={setFilters} />
         {products?.map((product) => (
           <div key={product._id}>
             <ProductItem product={product} />

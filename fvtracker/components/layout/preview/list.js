@@ -1,4 +1,5 @@
 import { Filter } from "./filter";
+import { SortList } from "./sort";
 
 export function List({
   children,
@@ -6,6 +7,10 @@ export function List({
   onDeleteList,
   onCreateItem,
   filterComponentProps,
+  sortBy,
+  setSortBy,
+  filters,
+  setFilters,
 }) {
   return (
     <>
@@ -25,7 +30,11 @@ export function List({
         </div>
       </div>
       {filterComponentProps && <Filter {...filterComponentProps} />}
-      <div className="flex flex-col gap-4 justify-start">{children}</div>
+      <div className="flex flex-col gap-4 justify-start">
+        <SortList sortBy={sortBy} setSortBy={setSortBy} />
+        <Filter filters={filters} setFilters={setFilters} />
+        {children}
+      </div>
     </>
   );
 }
@@ -33,7 +42,9 @@ export function List({
 export function ListItem({ children }) {
   return (
     <>
-      <div className="flex flex-col gap-2 border p-4 rounded-lg">{children}</div>
+      <div className="flex flex-col gap-2 border p-4 rounded-lg">
+        {children}
+      </div>
     </>
   );
 }

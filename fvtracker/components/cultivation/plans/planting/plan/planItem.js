@@ -24,25 +24,6 @@ export const PlantingPlanListItem = ({ plan, plant = true, onDelete }) => {
   );
 };
 
-export const PlanDates = ({ plannedPlantingDate, plannedHarvestingDate }) => {
-  return (
-    <div className="text-sm text-gray-500">
-      {plannedPlantingDate && (
-        <div>
-          <span className="font-semibold">Planned Planting Date: </span>
-          {new Date(plannedPlantingDate).toLocaleDateString()}
-        </div>
-      )}
-      {plannedHarvestingDate && (
-        <div>
-          <span className="font-semibold">Planned Harvesting Date: </span>
-          {new Date(plannedHarvestingDate).toLocaleDateString()}
-        </div>
-      )}
-    </div>
-  );
-};
-
 export const PlantingPlanItems = ({ items }) => {
   return (
     <div className="mt-2 flex flex-col gap-2">

@@ -89,10 +89,10 @@ const ActionBar = ({ slug }) => {
         <div className="btn btnSm">Uredi</div>
       </Link>
       <Link href={`/production/products/${slug}/stock`}>
-        <div className="btn btnSm">Create Stock</div>
+        <div className="btn btnSm">Uredi stanje</div>
       </Link>
       <div onClick={onDelete} className="btn cancelButton btnSm">
-        Delete
+        Obriši
       </div>
     </div>
   );

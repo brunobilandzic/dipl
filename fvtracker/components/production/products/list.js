@@ -13,12 +13,22 @@ import { priceEuroString } from "@/lib/utils/strings";
 import { List } from "@/components/layout/preview/list";
 import { SortList } from "@/components/layout/preview/sort";
 import { sortProducts } from "@/store/production/products";
+import { Filter } from "@/components/layout/preview/filter";
+
+const initFilters = [
+  {
+    type: "search",
+    placeholder: "Pretraži proizvode...",
+    value: "",
+  },
+];
 
 const ProductList = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const products = useSelector((state) => state.products.items);
   const [sortBy, setSortBy] = useState("newest");
+  const [filters, setFilters] = useState(initFilters);
 
   useEffect(() => {
     if (!products) return;
@@ -43,6 +53,7 @@ const ProductList = () => {
         }}
       >
         <SortList sortBy={sortBy} setSortBy={setSortBy} />
+        <Filter filters={filters} setFilters={setFilters} />
         {products?.map((product) => (
           <div key={product._id}>
             <ProductItem product={product} />

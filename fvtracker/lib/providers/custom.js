@@ -30,6 +30,7 @@ const CropsProvider = ({ children }) => {
           dispatch(setCrops(res.data));
           dispatch(setLoading(false));
         } catch (error) {
+          dispatch(setLoading(false));
           console.error(error);
           handleError({
             ...error,

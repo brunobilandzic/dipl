@@ -38,12 +38,17 @@ const productSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  editedAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 productSchema.pre("save", function () {
   if (this.isModified("name") || this.isNew) {
     this.slug = makeUrlFriendly(this.name);
   }
+  this.editedAt = new Date();
 });
 
 productSchema.pre("findOneAndUpdate", function () {

@@ -12,12 +12,18 @@ import Link from "next/link";
 import { priceEuroString } from "@/lib/utils/strings";
 import { List } from "@/components/layout/preview/list";
 import { SortList } from "@/components/layout/preview/sort";
+import { sortProducts } from "@/store/production/products";
 
 const ProductList = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const products = useSelector((state) => state.products.items);
   const [sortBy, setSortBy] = useState("newest");
+
+  useEffect(() => {
+    if (!products) return;
+    dispatch(sortProducts(sortBy));
+  }, [sortBy]);
 
   useEffect(() => {
     if (products === null) {

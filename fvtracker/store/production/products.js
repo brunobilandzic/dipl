@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   items: null,
+  filteredItems: null,
   managers: null,
 };
 
@@ -12,6 +13,7 @@ const productsSlice = createSlice({
   reducers: {
     setProducts: (state, action) => {
       state.items = action.payload;
+      state.filteredItems = action.payload;
     },
     addProduct: (state, action) => {
       state.items.push(action.payload);
@@ -36,7 +38,7 @@ const productsSlice = createSlice({
       });
     },
     filterProducts: (state, action) => {
-      state.items = filterProductsHelper({
+      state.filteredItems = filterProductsHelper({
         _products: state.items,
         filters: action.payload,
       });
@@ -51,7 +53,7 @@ export const {
   updateProduct,
   setManagers,
   sortProducts,
-  filterProducts
+  filterProducts,
 } = productsSlice.actions;
 export default productsSlice.reducer;
 

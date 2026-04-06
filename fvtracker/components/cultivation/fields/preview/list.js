@@ -77,7 +77,7 @@ const NoFields = () => {
       <div className="text-sm text-gray-500">
         Početkom dodajte polje kako biste mogli pratiti svoje usjeve!{" "}
         <span
-          className="ml-2 btn btnSm"
+          className="ml-2 btn submitButton btnSm"
           onClick={() => router.push("/upravljanje-poljima/dodavanje")}
         >
           Dodaj polje

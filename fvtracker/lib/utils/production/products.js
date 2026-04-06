@@ -3,6 +3,7 @@ import handleError from "@/lib/constants/errors/client/handleError";
 import { setLoading } from "@/store/loading";
 import { setProducts } from "@/store/production/products";
 import { checkEmpty } from "../objects";
+import { stringContains } from "../strings";
 
 export const refreshProducts = async ({ dispatch, router }) => {
   try {
@@ -105,4 +106,16 @@ export const deleteProducts = async ({ productIds, dispatch, router }) => {
   } finally {
     dispatch(setLoading(false));
   }
+};
+
+export const productsWithCropVarieties = (products, cropVarietySearch) => {
+  return products.map((product) => {
+    if (
+      product.ingredients.find((ing) =>
+        stringContains(ing.cropVariety.name, cropVarietySearch),
+      )
+    ) {
+      return product;
+    }
+  });
 };

@@ -78,9 +78,35 @@ const ProductList = () => {
 
 export default ProductList;
 
-const ProductItem = ({ product }) => {
+const ProductItem = ({ product, router }) => {
+  const actionOptions = [
+    {
+      label: "Uredi",
+      className: "",
+      onClick: () => {
+        router.navigate(`/proizvodi/uredi/${product.slug}`);
+      },
+    },
+    {
+      label: "Stanje",
+      className: "submitButton",
+      onClick: () => {
+        router.navigate(`/proizvodi/${product.slug}/stock`);
+      },
+    },
+    {
+      label: "Obriši",
+      className: "cancelButton",
+      onClick: (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        deleteProducts({ productIds: [product._id], dispatch, router });
+      },
+    },
+  ];
+
   return (
-    <ListItem>
+    <ListItem actionOptions={actionOptions}>
       <h2 className="text-xl font-bold">{product.name}</h2>
       <p>{product.description}</p>
       <ProductInfo
@@ -92,8 +118,6 @@ const ProductItem = ({ product }) => {
       <div className="mt-4">
         <IngredientsList ingredients={product.ingredients} />
       </div>
-
-      <ActionBar productId={product._id} slug={product.slug} />
     </ListItem>
   );
 };

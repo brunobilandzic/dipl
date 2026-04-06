@@ -86,12 +86,12 @@ const ActionBar = ({ slug }) => {
   return (
     <div className="flex justify-end gap-2 mt-4">
       <Link href={`/proizvodi/uredi/${slug}`}>
-        <div className="btn">Uredi</div>
+        <div className="btn btnSm">Uredi</div>
       </Link>
       <Link href={`/production/products/${slug}/stock`}>
-        <div className="btn">Create Stock</div>
+        <div className="btn btnSm">Create Stock</div>
       </Link>
-      <div onClick={onDelete} className="btn cancelButton">
+      <div onClick={onDelete} className="btn cancelButton btnSm">
         Delete
       </div>
     </div>

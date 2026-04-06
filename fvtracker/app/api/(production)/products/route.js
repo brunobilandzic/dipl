@@ -63,7 +63,7 @@ export const POST = async (req) => {
 export const DELETE = async (req) => {
   try {
     await dbConnect();
-    const id = req.nextUrl.searchParams.get("id");
+    const ids = req.nextUrl.searchParams.get("ids");
     const product = await deleteProduct(id);
 
     return Response.json({ product }, { status: 200 });

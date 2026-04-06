@@ -28,6 +28,9 @@ const productsSlice = createSlice({
     setManagers: (state, action) => {
       state.managers = action.payload;
     },
+    sortProducts: (state, action) => {
+      state.items = sortProductsHelper(state.items, action.payload);
+    },
   },
 });
 
@@ -39,3 +42,26 @@ export const {
   setManagers,
 } = productsSlice.actions;
 export default productsSlice.reducer;
+
+const sortProductsHelper = (products, sortBy) => {
+  switch (sortBy) {
+    case "newest":
+      return [...products].sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
+      );
+    case "oldest":
+      return [...products].sort(
+        (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
+      );
+    case "priceAsc":
+      return [...products].sort((a, b) => a.price - b.price);
+    case "priceDesc":
+      return [...products].sort((a, b) => b.price - a.price);
+    case "fieldNameAsc":
+      return [...products].sort((a, b) => a.name.localeCompare(b.name));
+    case "fieldNameDesc":
+      return [...products].sort((a, b) => b.name.localeCompare(a.name));
+    default:
+      return products;
+  }
+};

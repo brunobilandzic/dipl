@@ -163,7 +163,7 @@ export const initialData = ({ product } = {}) => {
 };
 
 export const testProduct = ({ crops }) => ({
-  name: "Proizvod 1",
+  name: `Proizvod ${new Date().toLocaleString()}`,
   description: "Opis proizvoda 1",
   price: 10,
   ingredients: testCropItemData({ crops }),

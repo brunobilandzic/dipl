@@ -52,6 +52,7 @@ export const submitProductForm = async ({
       product,
     );
     dispatch(setLoading(false));
+    await refreshProducts({ dispatch, router });
   } catch (error) {
     console.error(`Error ${isEdit ? "updating" : "creating"} product:`, error);
     dispatch(setLoading(false));

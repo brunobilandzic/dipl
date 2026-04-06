@@ -15,7 +15,10 @@ import { refreshFields } from "@/lib/utils/cultivation/fields";
 import { setLoading } from "@/store/loading";
 import { refreshManagers } from "@/lib/utils/production/managers";
 import { useRouter } from "next/navigation";
-import { ChooseCropVarietyItems } from "@/components/cultivation/crops/choose";
+import {
+  ChooseCropVarietyItems,
+  testCropItemData,
+} from "@/components/cultivation/crops/choose";
 
 export default function CreatePlantingPlanPageComonent() {
   const [selectedField, setSelectedField] = useState(null);
@@ -126,34 +129,14 @@ export const FillPlanInfo = ({
   itemsName = "items",
 }) => {
   const crops = useSelector((state) => state.cultivation.crops);
-  const {
-    generalTypes = [],
-    types = [],
-    varieties: cropVarieties = [],
-  } = crops || {};
   const dispatch = useDispatch();
   const createInitialFormData = ({ field = selectedField?._id } = {}) => {
-    const defaultGeneralType = generalTypes[0]?._id || "";
-    const defaultType =
-      types.filter((t) => t.generalTypeName === generalTypes[0]?.name)[0]
-        ?._id || "";
-    const defaultVariety =
-      cropVarieties.filter(
-        (v) =>
-          v.cropTypeName === types.find((t) => t._id === defaultType)?.name,
-      )[0]?._id || "";
+    const defaultCropData = testCropItemData({ crops });
     const formDataInitial = {
       name: `Plan ${plant ? "sadnje" : "berbe"} - ${new Date().toLocaleString()}`,
       productionManager: "",
       field,
-      [itemsName]: [
-        {
-          generalType: defaultGeneralType,
-          type: defaultType,
-          cropVariety: defaultVariety,
-          quantity: 100,
-        },
-      ],
+      [itemsName]: defaultCropData,
       plannedPlantingDate: new Date().toISOString().split("T")[0],
       plannedHarvestingDate: new Date().toISOString().split("T")[0],
     };
@@ -173,7 +156,7 @@ export const FillPlanInfo = ({
         field: selectedField?._id,
       }),
     );
-  }, [selectedField?._id, , crops]);
+  }, [selectedField?._id, crops]);
 
   useEffect(() => {
     console.log("Form data updated:", formData);

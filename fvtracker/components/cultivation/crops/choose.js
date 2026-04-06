@@ -203,7 +203,7 @@ function ItemHeader({
       </div>
       <button
         className="text-sm text-red-600 disabled:cursor-not-allowed disabled:text-gray-400"
-        disabled={cropsData[itemsName].length === 1 && !allowZero }
+        disabled={cropsData[itemsName].length === 1 && !allowZero}
         onClick={() => removeItem(index)}
         type="button"
       >
@@ -264,4 +264,35 @@ const SelectCropVariety = ({
       </select>
     </div>
   );
+};
+
+export const testCropItemData = ({ crops }) => {
+  const { defaultGeneralType, defaultType, defaultVariety } =
+    initializeCropDefaults();
+  return [
+    {
+      generalType: defaultGeneralType,
+      type: defaultType,
+      cropVariety: defaultVariety,
+      quantity: 100,
+    },
+  ];
+
+  function initializeCropDefaults() {
+    const {
+      generalTypes = [],
+      types = [],
+      varieties: cropVarieties = [],
+    } = crops || {};
+    const defaultGeneralType = generalTypes[0]?._id || "";
+    const defaultType =
+      types.filter((t) => t.generalTypeName === generalTypes[0]?.name)[0]
+        ?._id || "";
+    const defaultVariety =
+      cropVarieties.filter(
+        (v) =>
+          v.cropTypeName === types.find((t) => t._id === defaultType)?.name,
+      )[0]?._id || "";
+    return { defaultGeneralType, defaultType, defaultVariety };
+  }
 };

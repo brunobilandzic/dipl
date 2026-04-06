@@ -1,6 +1,9 @@
 "use client";
 
-import { ChooseCropVarietyItems } from "@/components/cultivation/crops/choose";
+import {
+  ChooseCropVarietyItems,
+  testCropItemData,
+} from "@/components/cultivation/crops/choose";
 import { QuantityInput } from "@/components/cultivation/plans/planting/plan/create";
 import { AppInput } from "@/components/form/inputs";
 import { submitProductForm } from "@/lib/utils/production/products";
@@ -159,17 +162,12 @@ export const initialData = ({ product } = {}) => {
   };
 };
 
-const testProduct = {
+export const testProduct = ({ crops }) => ({
   name: "Proizvod 1",
   description: "Opis proizvoda 1",
   price: 10,
-  ingredients: [
-    {
-      cropVarietyName: "Cherry rajčica",
-      quantity: 10,
-    },
-  ],
-};
+  ingredients: testCropItemData({ crops }),
+});
 
 const emptyIngredient = {
   generalType: "",

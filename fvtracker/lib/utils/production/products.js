@@ -91,6 +91,7 @@ export const deleteProducts = async ({ productIds, dispatch, router }) => {
     for (const productId of productIds) {
       await api.delete(`/products`, { params: { id: productId } });
     }
+    await refreshProducts({ dispatch, router });
   } catch (error) {
     console.error("Error deleting products:", error);
     handleError();

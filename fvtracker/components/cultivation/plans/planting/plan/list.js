@@ -66,11 +66,7 @@ export function FieldPlansItem({ fieldPlans, plant = true }) {
         return <div>Nema planova sadnje</div>;
       return plantingPlans?.map((plan) => (
         <div key={uuid()} className="mb-2">
-          <PlantingPlanListItem
-            plan={plan}
-            plant={true}
-            onDelete={() => deletePlans({ planId: plan._id, plant: true })}
-          />
+          <PlantingPlanListItem plan={plan} plant={true} />
         </div>
       ));
     } else {
@@ -78,11 +74,7 @@ export function FieldPlansItem({ fieldPlans, plant = true }) {
         return <div>Nema planova berbe</div>;
       return harvestingPlans?.map((plan) => (
         <div key={uuid()} className="mb-2">
-          <PlantingPlanListItem
-            plan={plan}
-            plant={false}
-            onDelete={() => deletePlan({ planId: plan._id, plant: false })}
-          />
+          <PlantingPlanListItem plan={plan} plant={false} />
         </div>
       ));
     }
@@ -90,7 +82,10 @@ export function FieldPlansItem({ fieldPlans, plant = true }) {
 
   return (
     <div>
-      <div className="font-bold text-lg mb-4">{fieldName}:</div>
+      <div className=" mb-4">
+        Planovi za polje:{" "}
+        <span className="font-bolder text-lg underline">{fieldName}</span>
+      </div>
       <div className="pl-4 my-4 flex flex-col gap-4">{getPlans()}</div>
     </div>
   );

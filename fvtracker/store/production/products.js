@@ -40,6 +40,7 @@ export const {
   removeProduct,
   updateProduct,
   setManagers,
+  sortProducts,
 } = productsSlice.actions;
 export default productsSlice.reducer;
 

@@ -1,7 +1,7 @@
 import dbConnect from "@/lib/db/mongooseConnect";
 import {
   createProduct,
-  deleteProduct,
+  deleteProducts,
   getProducts,
   updateProduct,
 } from "@/lib/production/product";
@@ -65,7 +65,7 @@ export const DELETE = async (req) => {
     await dbConnect();
     const idsString = req.nextUrl.searchParams.get("ids");
     const productIds = idsString.split(",");
-    const product = await deleteProducts(productIds);
+    const product = await deleteProducts({ productIds });
 
     return Response.json({ product }, { status: 200 });
   } catch (error) {

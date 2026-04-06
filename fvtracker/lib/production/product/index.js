@@ -3,16 +3,18 @@ import { updateIngredients } from "./ingredients";
 import { makeUrlFriendly } from "@/lib/utils/strings";
 
 export const getProducts = async () => {
-  const products = await Product.find().populate([
-    {
-      path: "ingredients",
-      select: "cropVariety quantity",
-      populate: {
-        path: "cropVariety",
-        select: "name",
+  const products = await Product.find()
+    .sort({ name: 1 })
+    .populate([
+      {
+        path: "ingredients",
+        select: "cropVariety quantity",
+        populate: {
+          path: "cropVariety",
+          select: "name",
+        },
       },
-    },
-  ]);
+    ]);
   return products;
 };
 
@@ -68,7 +70,7 @@ export const createProduct = async ({ _newProductData }) => {
     slug: makeUrlFriendly(newProductData.name),
   });
 
-  await product.createIngredients(newIngredients);
+  await product.createIngredients({ ingredientsData: newIngredients });
 
   return product;
 };

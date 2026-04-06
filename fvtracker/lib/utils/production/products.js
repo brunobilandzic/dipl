@@ -102,5 +102,7 @@ export const deleteProducts = async ({ productIds, dispatch, router }) => {
       },
       router,
     );
+  } finally {
+    dispatch(setLoading(false));
   }
 };

@@ -76,8 +76,8 @@ export const createProduct = async ({ _newProductData }) => {
   return product;
 };
 
-export const deleteProduct = async (productId) => {
-  const product = await Product.findByIdAndDelete(productId);
+export const deleteProducts = async (productIds) => {
+  const product = await Product.deleteMany({ _id: { $in: productIds } });
   if (!product) {
     throw new Error("Product not found");
   }

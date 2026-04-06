@@ -29,7 +29,16 @@ const productsSlice = createSlice({
       state.managers = action.payload;
     },
     sortProducts: (state, action) => {
-      state.items = sortProductsHelper(state.items, action.payload);
+      state.items = sortProductsHelper({
+        products: state.items,
+        sortBy: action.payload,
+      });
+    },
+    filterProducts: (state, action) => {
+      state.items = filterProductsHelper({
+        _products: state.items,
+        filters: action.payload,
+      });
     },
   },
 });
@@ -44,7 +53,7 @@ export const {
 } = productsSlice.actions;
 export default productsSlice.reducer;
 
-const sortProductsHelper = (products, sortBy) => {
+const sortProductsHelper = ({ products, sortBy }) => {
   switch (sortBy) {
     case "newest":
       return [...products].sort(
@@ -65,4 +74,22 @@ const sortProductsHelper = (products, sortBy) => {
     default:
       return products;
   }
+};
+
+const filterProductsHelper = ({ _products, filters }) => {
+  let products = [..._products];
+
+  for (const filter of filters) {
+    switch (filter.type) {
+      case "search":
+        products = products.filter((product) =>
+          stringContains(product.name, filter.value),
+        );
+        break;
+      default:
+        break;
+    }
+  }
+
+  return products;
 };

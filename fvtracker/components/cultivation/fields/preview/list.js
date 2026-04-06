@@ -20,7 +20,10 @@ import { fieldCultivationAreaPoints } from "@/seed/cultivation/fields/create/ana
 import { Loading } from "@/components/layout/loading";
 import { useRouter } from "next/navigation";
 import { FieldStatistics } from "../general";
-import { refreshFields } from "@/lib/utils/cultivation/fields";
+import {
+  handleDeleteField,
+  refreshFields,
+} from "@/lib/utils/cultivation/fields";
 import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { setLoading } from "@/store/loading";
@@ -58,11 +61,18 @@ export function FieldsList({}) {
           router.push("/upravljanje-poljima/dodavanje");
         }}
       >
-        {fields.map((field) => (
-          <ListItem key={field._id}>
-            <FieldItem field={field} />
-          </ListItem>
-        ))}
+        {fields.map((field) => {
+          const actionOptions = createActionOptions({
+            dispatch,
+            router,
+            slug: field.slug,
+          });
+          return (
+            <ListItem key={field._id} actionOptions={actionOptions}>
+              <FieldItem field={field} />
+            </ListItem>
+          );
+        })}
       </List>
     </>
   );
@@ -74,10 +84,13 @@ const NoFields = () => {
     <div className="w-full py-6 flex flex-col items-center justify-center gap-6">
       <div className="text-2xl font-bold">Nema polja za prikaz</div>
 
-      <div className="text-sm text-gray-500">
-        Početkom dodajte polje kako biste mogli pratiti svoje usjeve!{" "}
+      <div className="text-sm ">
+        <span className="text-gray-500">
+          {" "}
+          Početkom dodajte polje kako biste mogli pratiti svoje usjeve!{" "}
+        </span>
         <span
-          className="ml-2 btn submitButton btnSm"
+          className="ml-2 btn submitButton btnSm "
           onClick={() => router.push("/upravljanje-poljima/dodavanje")}
         >
           Dodaj polje
@@ -119,47 +132,10 @@ function FieldItem({ field }) {
       : [],
   );
 
-  const handleDeleteField = async () => {
-    if (!confirm("Jeste li sigurni da želite obrisati ovo polje?")) {
-      return;
-    }
-    try {
-      dispatch(setLoading(true));
-      await api.delete(`/cultivation/fields/`, {
-        params: { slug },
-      });
-      dispatch(deleteField(slug));
-      refreshFields({ dispatch });
-    } catch (error) {
-      handleError({
-        ...error,
-        generalMessage: "Došlo je do greške prilikom brisanja polja.",
-      });
-      return;
-    } finally {
-      dispatch(setLoading(false));
-    }
-  };
-
   return (
     <>
       <div className="">
         <Link href={`/upravljanje-poljima/${slug}`}>
-          <div className="flex justify-between w-full cursor-pointer pb-1">
-            <div className="flex flex-col gap-1">
-              <div className="font-bold">{field.name}</div>
-            </div>
-            <div
-              className="cursor-pointer text-sm  px-4 cancelButton btnSm"
-              onClick={(e) => {
-                e.preventDefault();
-                handleDeleteField();
-              }}
-            >
-              Obriši
-            </div>
-          </div>
-
           <div className="flex justify-between">
             <div>
               <FieldStatistics field={field} />
@@ -212,3 +188,13 @@ function FieldItem({ field }) {
     </>
   );
 }
+
+const createActionOptions = ({ slug, dispatch, router }) => [
+  {
+    label: "Obriši",
+    className: "cancelButton",
+    onClick: () => {
+      handleDeleteField({ slug, dispatch, router });
+    },
+  },
+];

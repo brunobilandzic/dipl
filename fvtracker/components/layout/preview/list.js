@@ -1,5 +1,6 @@
 import { Filter } from "./filter";
 import { SortList } from "./sort";
+import { v4 as uuid } from "uuid";
 
 export function List({
   children,
@@ -58,6 +59,7 @@ const ActionOptions = ({ options }) => {
           <div
             className={`btn btnSm ${option.className}`}
             onClick={option.onClick}
+            key={uuid()}
           >
             {option.label}
           </div>

@@ -1,6 +1,6 @@
 import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
-import { setFields } from "@/store/cultivation";
+import { deleteField, setFields } from "@/store/cultivation";
 import { setLoading } from "@/store/loading";
 
 export const extractCoords = (cell) => {
@@ -25,5 +25,30 @@ export const refreshFields = async ({ dispatch, router }) => {
       },
       router,
     );
+  }
+};
+
+export const handleDeleteField = async ({ slug, dispatch, router }) => {
+  if (!confirm("Jeste li sigurni da želite obrisati ovo polje?")) {
+    return;
+  }
+  try {
+    dispatch(setLoading(true));
+    await api.delete(`/cultivation/fields/`, {
+      params: { slug },
+    });
+    dispatch(deleteField(slug));
+    refreshFields({ dispatch });
+  } catch (error) {
+    handleError(
+      {
+        ...error,
+        generalMessage: "Došlo je do greške prilikom brisanja polja.",
+      },
+      router,
+    );
+    return;
+  } finally {
+    dispatch(setLoading(false));
   }
 };

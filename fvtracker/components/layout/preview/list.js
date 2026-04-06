@@ -1,9 +1,11 @@
+import { Filter } from "./filter";
+
 export function List({
   children,
   title,
   onDeleteList,
   onCreateItem,
-  FilterComponent,
+  filterComponentProps,
 }) {
   return (
     <>
@@ -22,7 +24,7 @@ export function List({
           )}
         </div>
       </div>
-      {FilterComponent && <FilterComponent />}
+      {filterComponentProps && <Filter {...filterComponentProps} />}
       <div className="flex flex-col gap-4 justify-start">{children}</div>
     </>
   );

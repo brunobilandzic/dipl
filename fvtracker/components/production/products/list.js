@@ -68,7 +68,7 @@ const ProductList = () => {
       >
         {products?.map((product) => (
           <div key={product._id}>
-            <ProductItem product={product} />
+            <ProductItem router={router} product={product} />
           </div>
         ))}
       </List>
@@ -84,14 +84,14 @@ const ProductItem = ({ product, router }) => {
       label: "Uredi",
       className: "",
       onClick: () => {
-        router.navigate(`/proizvodi/uredi/${product.slug}`);
+        router.push(`/proizvodi/uredi/${product.slug}`);
       },
     },
     {
       label: "Stanje",
       className: "submitButton",
       onClick: () => {
-        router.navigate(`/proizvodi/${product.slug}/stock`);
+        router.push(`/proizvodi/${product.slug}/stock`);
       },
     },
     {

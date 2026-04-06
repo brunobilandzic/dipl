@@ -1,6 +1,7 @@
 import dbConnect from "@/lib/db/mongooseConnect";
 import {
   createProduct,
+  deleteProduct,
   getProducts,
   updateProduct,
 } from "@/lib/production/product";
@@ -54,6 +55,22 @@ export const POST = async (req) => {
     console.error("Error creating product:", error);
     return Response.json(
       { error: "Failed to create product" },
+      { status: 500 },
+    );
+  }
+};
+
+export const DELETE = async (req) => {
+  try {
+    await dbConnect();
+    const id = req.nextUrl.searchParams.get("id");
+    const product = await deleteProduct(id);
+
+    return Response.json({ product }, { status: 200 });
+  } catch (error) {
+    console.error("Error deleting product:", error);
+    return Response.json(
+      { error: "Failed to delete product" },
       { status: 500 },
     );
   }

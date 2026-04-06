@@ -74,3 +74,11 @@ export const createProduct = async ({ _newProductData }) => {
 
   return product;
 };
+
+export const deleteProduct = async (productId) => {
+  const product = await Product.findByIdAndDelete(productId);
+  if (!product) {
+    throw new Error("Product not found");
+  }
+  return product;
+};

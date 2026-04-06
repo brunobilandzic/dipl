@@ -36,3 +36,6 @@ export const titleCaseString = (str) =>
     .split(" ")
     .map((word) => titleCaseLetter(word))
     .join(" ");
+
+export const stringContains = (str, search) =>
+  String(str).toLowerCase().includes(String(search).toLowerCase());

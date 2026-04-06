@@ -1,4 +1,4 @@
-import HarvestingPlanList from "@/components/cultivation/plans/harvesting/plan/list";
+import HarvestingPlanList from "@/components/cultivation/plans/harvesting/list";
 import React from "react";
 
 const CreateHarvestingPlanPage = () => {

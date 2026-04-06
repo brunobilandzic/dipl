@@ -1,4 +1,4 @@
-import PlantingPlanList from "@/components/cultivation/plans/planting/plan/list";
+import PlantingPlanList from "@/components/cultivation/plans/planting/list";
 import React from "react";
 
 function PlantingPlanListPage() {

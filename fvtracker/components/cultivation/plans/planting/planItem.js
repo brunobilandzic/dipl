@@ -40,14 +40,15 @@ export const PlantingPlanItems = ({ items }) => {
 };
 
 const PlantingPlanItem = ({ item }) => {
+  const plcvs = 0
   return (
     <div className="border p-4 rounded w-full">
       <div>
-        <span className="font-semibold">Crop Variety: </span>
+        <span className="font-semibold">Vrsta: </span>
         {item.cropVariety?.name}
       </div>
       <div>
-        <span className="font-semibold">Quantity: </span>
+        <span className="font-semibold">Količina: </span>
         {item.quantity}
       </div>
       <div>

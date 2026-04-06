@@ -4,7 +4,7 @@ import {
   ChooseCropVarietyItems,
   testCropItemData,
 } from "@/components/cultivation/crops/choose";
-import { QuantityInput } from "@/components/cultivation/plans/planting/plan/create";
+import { QuantityInput } from "@/components/cultivation/plans/planting/create";
 import { AppInput } from "@/components/form/inputs";
 import { submitProductForm } from "@/lib/utils/production/products";
 import { useRouter } from "next/navigation";

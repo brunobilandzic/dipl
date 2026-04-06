@@ -4,7 +4,7 @@ import Link from "next/link";
 import {
   FillPlanInfo,
   SelectField,
-} from "@/components/cultivation/plans/planting/plan/create";
+} from "@/components/cultivation/plans/planting/create";
 import { useState } from "react";
 
 export default function CreateHarvestingPlanPageComponent() {

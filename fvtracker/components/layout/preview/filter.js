@@ -5,9 +5,9 @@ export const Filter = ({ options, filterData, setFilterData, onApply }) => {
   return (
     <>
       <div>{JSON.stringify(filterData, null, 2)}</div>
-      {options.map((option) => {
+      {options.map((option, index) => {
         let InputComponent;
-        switch (option.type) {
+        switch (option.filter) {
           case "stringContains":
             InputComponent = FieldStringContains;
             break;

@@ -12,7 +12,7 @@ import Link from "next/link";
 import { priceEuroString } from "@/lib/utils/strings";
 import { List } from "@/components/layout/preview/list";
 import { SortList } from "@/components/layout/preview/sort";
-import { sortProducts } from "@/store/production/products";
+import { filterProducts, sortProducts } from "@/store/production/products";
 import { Filter } from "@/components/layout/preview/filter";
 
 const initFilters = [

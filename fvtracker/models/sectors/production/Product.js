@@ -54,13 +54,9 @@ productSchema.pre("findOneAndUpdate", function () {
 productSchema.methods.createIngredients = async function ({ ingredientsData }) {
   const ingredients = [];
   for (const ingredientData of ingredientsData) {
-    const cropVariety = await CropVariety.findOne({
-      name: ingredientData.cropVarietyName,
-    });
+    const cropVariety = await CropVariety.findById(ingredientData.cropVariety);
     if (!cropVariety) {
-      throw new Error(
-        `Crop variety ${ingredientData.cropVarietyName} not found.`,
-      );
+      throw new Error(`Crop variety ${ingredientData.cropVariety} not found.`);
     }
 
     const newIngredient = new Ingredient({

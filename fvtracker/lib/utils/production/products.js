@@ -83,3 +83,15 @@ const checkVariety = ({ cropVarietyId, varieties }) => {
   }
   return !!variety;
 };
+
+export const deleteProducts = async ({ productIds, dispatch, router }) => {
+  try {
+    dispatch(setLoading(true));
+    for (const productId of productIds) {
+      await api.delete(`/products`, { params: { id: productId } });
+    }
+  } catch (error) {
+    console.error("Error deleting products:", error);
+    handleError();
+  }
+};

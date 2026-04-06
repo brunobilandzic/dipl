@@ -84,12 +84,26 @@ const ProductItem = ({ product }) => {
       <p className="text-sm text-gray-500">
         Cijena: {priceEuroString(product.price)}
       </p>
+      <ProductInfoDates
+        createdAt={product.createdAt}
+        updatedAt={product.updatedAt}
+      />
+      <div></div>
       <div className="mt-4">
         <IngredientsList ingredients={product.ingredients} />
       </div>
 
       <ActionBar productId={product._id} slug={product.slug} />
     </ListItem>
+  );
+};
+
+const ProductInfoDates = ({ createdAt, updatedAt }) => {
+  return (
+    <div className="text-sm text-gray-500">
+      <p>Datum kreiranja: {new Date(createdAt).toLocaleDateString()}</p>
+      <p>Datum zadnje izmjene: {new Date(updatedAt).toLocaleDateString()}</p>
+    </div>
   );
 };
 

@@ -2,6 +2,17 @@ import { AppInput } from "@/components/form/inputs";
 import { v4 as uuid } from "uuid";
 
 export const Filter = ({ filters, setFilters, onApply }) => {
+  const onChange = (index, value) => {
+    setFilters((prev) => {
+      return prev.map((o, i) => {
+        if (i === index) {
+          return { ...o, value };
+        }
+        return o;
+      });
+    });
+  };
+
   return (
     <>
       <div className="flex flex-col gap-2">
@@ -14,14 +25,10 @@ export const Filter = ({ filters, setFilters, onApply }) => {
                   placeholder="Pretraži po imenu"
                   value={option.value}
                   onChange={(e) => {
-                    setFilters((prev) => {
-                      return prev.map((o, i) => {
-                        if (i === index) {
-                          return { ...o, value: e.target.value };
-                        }
-                        return o;
-                      });
-                    });
+                    onChange(index, e.target.value);
+                  }}
+                />
+              );
                   }}
                 />
               );

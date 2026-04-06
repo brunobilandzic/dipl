@@ -33,7 +33,7 @@ export function List({
 export function ListItem({ children }) {
   return (
     <>
-      <div className="flex flex-col gap-2">{children}</div>
+      <div className="flex flex-col gap-2 border p-4 rounded-lg">{children}</div>
     </>
   );
 }

@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { LoadingFullScreen } from "@/components/layout/loading";
 import Link from "next/link";
 import { priceEuroString } from "@/lib/utils/strings";
-import { List } from "@/components/layout/preview/list";
+import { List, ListItem } from "@/components/layout/preview/list";
 import { SortList } from "@/components/layout/preview/sort";
 import { filterProducts, sortProducts } from "@/store/production/products";
 import { Filter } from "@/components/layout/preview/filter";
@@ -78,7 +78,7 @@ export default ProductList;
 
 const ProductItem = ({ product }) => {
   return (
-    <div className="border p-4 rounded">
+    <ListItem>
       <h2 className="text-xl font-bold">{product.name}</h2>
       <p>{product.description}</p>
       <p className="text-sm text-gray-500">
@@ -87,8 +87,9 @@ const ProductItem = ({ product }) => {
       <div className="mt-4">
         <IngredientsList ingredients={product.ingredients} />
       </div>
+
       <ActionBar productId={product._id} slug={product.slug} />
-    </div>
+    </ListItem>
   );
 };
 

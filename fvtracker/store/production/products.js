@@ -50,6 +50,7 @@ export const {
   updateProduct,
   setManagers,
   sortProducts,
+  filterProducts
 } = productsSlice.actions;
 export default productsSlice.reducer;
 

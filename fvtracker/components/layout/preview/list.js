@@ -63,6 +63,10 @@ export function List({
             sortOptions={sortOptions}
           />
         )}
+        {filters && filterOpen && (
+          <Filter filters={filters} setFilters={setFilters} />
+        )}
+
         {children}
       </div>
     </>

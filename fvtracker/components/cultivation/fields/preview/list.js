@@ -60,6 +60,8 @@ export function FieldsList({}) {
         }}
         filters={filters}
         setFilters={setFilters}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
       >
         {fields.map((field) => {
           const actionOptions = createActionOptions({

@@ -27,7 +27,14 @@ const defaultSortOptions = [
   { value: "oldest", label: "Najstarije" },
 ];
 
-export const SortOpenButton = ({ isOpen, setOpen }) => {
+export const fieldSortOptions = [
+  { value: "fieldNameAsc", label: "Naziv polja A-Z" },
+  { value: "fieldNameDesc", label: "Naziv polja Z-A" },
+  { value: "newest", label: "Najnovije" },
+  { value: "oldest", label: "Najstarije" },
+];
+
+export const SortOpenButton = ({ isOpen, setOpen, clearSort }) => {
   return (
     <ListHeaderShowButton
       label="Sortiraj"

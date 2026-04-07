@@ -16,6 +16,7 @@ import {
 import { initFilters } from "@/lib/utils/list";
 import { v4 as uuid } from "uuid";
 import { filterFields, sortFields } from "@/store/cultivation";
+import { fieldSortOptions } from "@/components/layout/preview/sort";
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
 
 export function FieldsList({}) {
@@ -64,6 +65,7 @@ export function FieldsList({}) {
         setFilters={setFilters}
         sortBy={sortBy}
         setSortBy={setSortBy}
+        sortOptions={fieldSortOptions}
       >
         {fields.map((field) => {
           const actionOptions = createActionOptions({

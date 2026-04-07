@@ -98,6 +98,19 @@ productSchema.methods.createIngredients = async function ({ ingredientsData }) {
   await this.save();
 };
 
+productSchema.methods.addProductStock = async function ({ harvestingBatchId, quantity }) {
+  const newStock = new ProductStock({
+    product: this._id,
+    harvestingBatch: harvestingBatchId,
+    quantity,
+  });
+  const harvestingBatch = await mongoose.model("HarvestingBatch").findById(harvestingBatchId);
+  if (!harvestingBatch) {
+    throw new Error(`Harvesting batch with id ${harvestingBatchId} not found.`);
+  }
+  // reduce from batch quantity
+}
+
 productSchema.pre("deleteMany", async function () {
   const ids = await Product.find(this.getFilter()).distinct("_id");
   await Ingredient.deleteMany({ product: { $in: ids } });

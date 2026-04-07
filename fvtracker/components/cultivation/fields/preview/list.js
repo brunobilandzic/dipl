@@ -3,20 +3,12 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
-import {
-  List,
-  ListItem,
-  ListItemBody,
-  ListItemHeader,
-} from "@/components/layout/preview/list";
+import { List, ListItem } from "@/components/layout/preview/list";
 
 import utils from "@/lib/utils";
 
 import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import { deleteField, setFields } from "@/store/cultivation";
-import { fieldCultivationAreaPoints } from "@/seed/cultivation/fields/create/analyze";
 import { Loading } from "@/components/layout/loading";
 import { useRouter } from "next/navigation";
 import { FieldStatistics } from "../general";
@@ -24,17 +16,24 @@ import {
   handleDeleteField,
   refreshFields,
 } from "@/lib/utils/cultivation/fields";
-import api from "@/lib/api";
-import handleError from "@/lib/constants/errors/client/handleError";
-import { setLoading } from "@/store/loading";
-import { useSession } from "next-auth/react";
-import { ROLE_STATUSES } from "@/lib/constants/users";
+import { initFilters } from "@/lib/constants/others";
 
 export function FieldsList({}) {
   const fields = useSelector((state) => state.cultivation.fields);
   const dispatch = useDispatch();
-  const { data: session } = useSession();
   const router = useRouter();
+  const [sortBy, setSortBy] = useState("newest");
+  const [filters, setFilters] = useState(initFilters("fields"));
+
+  useEffect(() => {
+    if (!fields) return;
+    // dispatch(filterProducts(filters));
+  }, [filters]);
+
+  useEffect(() => {
+    if (!fields) return;
+    // dispatch(sortProducts(sortBy));
+  }, [sortBy]);
 
   useEffect(() => {
     if (fields) return;
@@ -60,6 +59,8 @@ export function FieldsList({}) {
         onCreateItem={() => {
           router.push("/upravljanje-poljima/dodavanje");
         }}
+        filters={filters}
+        setFilters={setFilters}
       >
         {fields.map((field) => {
           const actionOptions = createActionOptions({

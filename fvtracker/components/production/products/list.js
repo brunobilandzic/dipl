@@ -13,6 +13,7 @@ import { priceEuroString } from "@/lib/utils/strings";
 import { List, ListItem } from "@/components/layout/preview/list";
 import { filterProducts, sortProducts } from "@/store/production/products";
 import { initFilters } from "@/lib/utils/list";
+import { productSortOptions } from "@/components/layout/preview/sort";
 
 const ProductList = () => {
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ const ProductList = () => {
         setSortBy={setSortBy}
         filters={filters}
         setFilters={setFilters}
+        sortOptions={productSortOptions}
       >
         {products?.map((product) => (
           <div key={product._id}>

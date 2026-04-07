@@ -3,7 +3,7 @@ import { v4 as uuid } from "uuid";
 export const ListHeaderShowButton = ({ label, isOpen, setOpen }) => {
   return (
     <div
-      className={`btn btnSm ${isOpen ? "cancelButton" : "submitButton"}`}
+      className={`btn btnSm ${isOpen ? "outline" : ""}`}
       onClick={() => setOpen(!isOpen)}
     >
       {label}

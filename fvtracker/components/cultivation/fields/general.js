@@ -22,7 +22,7 @@ export const FieldStatistics = ({ field }) => {
             (stats.plantedPlCvs.length + stats.emptyPlCvs.length)) *
             100 || 0,
         ).toFixed(2)}
-        %
+        % ćelija zasađeno od ćelija u gredicama.
       </p>
     </div>
   );

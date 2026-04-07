@@ -4,7 +4,7 @@ import utils from "@/lib/utils";
 
 export async function fieldsList(filter) {
   const fields = await Field.find(filter).sort({ createdAt: -1 });
-  if (!fields ) {
+  if (!fields) {
     throw new Error("No fields found");
   }
   return fields;
@@ -97,3 +97,12 @@ export async function getFieldForCultivation({ cultivation }) {
 
   console.log("Cultivation with populated field:", cultivation);
 }
+
+export const deleteField = async ({ filter }) => {
+  try {
+    await Field.deleteMany(filter);
+  } catch (error) {
+    console.error("Error deleting fields:", error);
+    throw new Error("Greška prilikom brisanja polja. " + error.message);
+  }
+};

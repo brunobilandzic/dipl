@@ -9,12 +9,14 @@ export const initFilters = (listType) => {
           type: "nameSearch",
           placeholder: "Pretraži polja...",
           value: "",
-        },
+        } /* 
         {
           type: "cropVarietySearch",
           placeholder: "Filtriraj po sorti...",
           value: "",
-        },
+        }, 
+        // careas, cultivations, sizes.....
+        */,
       ];
     case "products":
       return [

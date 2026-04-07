@@ -1,3 +1,4 @@
+import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { filterItems, sortItems } from "@/lib/utils/list";
 import { productsWithCropVarieties } from "@/lib/utils/production/products";
 import { stringContains } from "@/lib/utils/strings";
@@ -15,7 +16,10 @@ const productsSlice = createSlice({
   reducers: {
     setProducts: (state, action) => {
       state.items = action.payload;
-      state.filteredItems = action.payload;
+      state.filteredItems = sortItems({
+        items: action.payload,
+        sortBy: SORT_INIT_VALUE,
+      });
     },
     /*  addProduct: (state, action) => {
       state.items.push(action.payload);

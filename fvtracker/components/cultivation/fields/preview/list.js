@@ -2,11 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-
 import { List, ListItem } from "@/components/layout/preview/list";
-
 import utils from "@/lib/utils";
-
 import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
 import { useDispatch, useSelector } from "react-redux";
 import { Loading } from "@/components/layout/loading";
@@ -17,6 +14,7 @@ import {
   refreshFields,
 } from "@/lib/utils/cultivation/fields";
 import { initFilters } from "@/lib/utils/list";
+import { v4 as uuid } from "uuid";
 
 export function FieldsList({}) {
   const fields = useSelector((state) => state.cultivation.fields);
@@ -69,9 +67,9 @@ export function FieldsList({}) {
             slug: field.slug,
           });
           return (
-            <div>
+            <div key={uuid()}>
               <div className="mb-2 font-bold text-lg">{field.name}</div>
-              <ListItem key={field._id} actionOptions={actionOptions}>
+              <ListItem actionOptions={actionOptions}>
                 <FieldItem field={field} />
               </ListItem>
             </div>

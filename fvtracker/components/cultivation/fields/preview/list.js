@@ -125,6 +125,8 @@ function FieldItem({ field }) {
       gap: cultivationAreasGap,
     },
     slug,
+    createdAt,
+    updatedAt,
   } = field;
 
   const cultivationCells = useMemo(() => {
@@ -169,6 +171,10 @@ function FieldItem({ field }) {
                     ).length
                   }{" "}
                   kultivacija
+                </div>
+                <div>
+                  Kreirano: {new Date(createdAt).toLocaleDateString()} -
+                  Ažurirano: {new Date(updatedAt).toLocaleDateString()}
                 </div>
               </div>
             </div>

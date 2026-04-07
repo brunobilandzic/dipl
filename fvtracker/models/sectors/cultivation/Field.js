@@ -72,12 +72,11 @@ fieldSchema.methods.addCultivationArea = async function (cultivationArea) {
   this.cultivationAreas.push(newCultivationArea._id);
 };
 
-fieldSchema.pre("save", function (next) {
+fieldSchema.pre("save", function () {
   if (this.isModified("name")) {
     this.slug = utils.strings.makeUrlFriendly(this.name);
   }
   this.updatedAt = Date.now();
-  next();
 });
 
 /* const fieldGridCell = new mongoose.Schema({zapi

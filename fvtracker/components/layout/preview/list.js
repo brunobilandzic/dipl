@@ -50,24 +50,6 @@ export function ListItem({ children, actionOptions }) {
   );
 }
 
-const ActionOptions = ({ options }) => {
-  return (
-    <div className="flex justify-end gap-2 mt-4">
-      {options.map((option) => {
-        return (
-          <div
-            className={`btn btnSm ${option.className}`}
-            onClick={option.onClick}
-            key={uuid()}
-          >
-            {option.label}
-          </div>
-        );
-      })}
-    </div>
-  );
-};
-
 export function ListItemHeader({ children }) {
   return (
     <>

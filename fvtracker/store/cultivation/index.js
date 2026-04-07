@@ -1,4 +1,4 @@
-import { sortItems } from "@/lib/utils/list";
+import { filterItems, sortItems } from "@/lib/utils/list";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -20,6 +20,9 @@ const cultivationSlice = createSlice({
     deleteField: (state, action) => {
       const slug = action.payload;
       state.fields = state.fields.filter((field) => field.slug !== slug);
+      state.filteredFields = state.filteredFields.filter(
+        (field) => field.slug !== slug,
+      );
       if (state.selectedField?.slug === slug) {
         state.selectedField = null;
       }
@@ -27,6 +30,13 @@ const cultivationSlice = createSlice({
     sortFields: (state, action) => {
       const sortBy = action.payload;
       state.filteredFields = sortItems({ items: state.filteredFields, sortBy });
+    },
+    filterFields: (state, action) => {
+      state.filteredFields = filterItems({
+        _items: state.fields,
+        itemModelName: "Field",
+        filters: action.payload,
+      });
     },
     setInitialState: (state) => {
       state = initialState;
@@ -320,6 +330,7 @@ export const {
   setInitialState,
   selectField,
   addField,
+  sortFields,
   emptyCultivation,
   createCultivationArea,
   deleteCultivationArea,
@@ -334,6 +345,7 @@ export const {
   createHarvestingPlan,
   deleteField,
   harvestCells,
+  filterFields,
 } = cultivationSlice.actions;
 
 export default cultivationSlice.reducer;

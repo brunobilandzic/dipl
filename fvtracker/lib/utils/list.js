@@ -7,7 +7,7 @@ export const initFilters = (listType) => {
       return [
         {
           type: "nameSearch",
-          placeholder: "Pretraži proizvode...",
+          placeholder: "Pretraži polja...",
           value: "",
         },
         {

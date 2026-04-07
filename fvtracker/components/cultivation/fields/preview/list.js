@@ -15,7 +15,7 @@ import {
 } from "@/lib/utils/cultivation/fields";
 import { initFilters } from "@/lib/utils/list";
 import { v4 as uuid } from "uuid";
-import { sortFields } from "@/store/cultivation";
+import { filterFields, sortFields } from "@/store/cultivation";
 
 export function FieldsList({}) {
   const fields = useSelector((state) => state.cultivation.filteredFields);
@@ -27,7 +27,7 @@ export function FieldsList({}) {
 
   useEffect(() => {
     if (!fields) return;
-    // dispatch(filterProducts(filters));
+    dispatch(filterFields(filters));
   }, [filters]);
 
   useEffect(() => {

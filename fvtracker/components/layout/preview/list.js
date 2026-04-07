@@ -29,8 +29,8 @@ export function List({
             </div>
           )}
           {onCreateItem && <CreateListItemButton onCreate={onCreateItem} />}
+          {onDeleteList && <DeleteListButton onDelete={onDeleteList} />}
         </div>
-      </div>
       {filterComponentProps && <Filter {...filterComponentProps} />}
       <div className="flex flex-col gap-4 justify-start">
         {sortBy && <SortList sortBy={sortBy} setSortBy={setSortBy} />}

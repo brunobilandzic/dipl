@@ -1,4 +1,5 @@
 import { productsWithCropVarieties } from "./production/products";
+import { stringContains } from "./strings";
 
 export const sortItems = ({ items, sortBy }) => {
   switch (sortBy) {

@@ -1,4 +1,4 @@
-import { filterItems } from "@/lib/utils/list";
+import { filterItems, sortItems } from "@/lib/utils/list";
 import { productsWithCropVarieties } from "@/lib/utils/production/products";
 import { stringContains } from "@/lib/utils/strings";
 import { createSlice } from "@reduxjs/toolkit";
@@ -35,7 +35,7 @@ const productsSlice = createSlice({
     },
     sortProducts: (state, action) => {
       state.filteredItems = sortItems({
-        _items: state.items,
+        items: state.items,
         sortBy: action.payload,
       });
     },
@@ -58,6 +58,5 @@ export const {
   sortProducts,
   filterProducts,
 } = productsSlice.actions;
-export default productsSlice.reducer;
 
-const cropVarietySearch = { _items };
+export default productsSlice.reducer;

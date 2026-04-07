@@ -20,12 +20,25 @@ export function List({
   setFilters,
 }) {
   const [sortOpen, setSortOpen] = useState(false);
+
+  const clearSort = () => {
+    console.log("Clearing sort");
+    setSortBy("newest");
+    setSortOpen(false);
+  };
+
   return (
     <>
       <div className="list-header flex items-center justify-between mb-4 border-b-2 pb-1 ">
         <div className="text-xl font-bolder">{title}</div>
         <div className="flex gap-2 items-center">
-          {sortBy && <SortOpenButton isOpen={sortOpen} setOpen={setSortOpen} />}
+          {sortBy && (
+            <SortOpenButton
+              isOpen={sortOpen}
+              setOpen={setSortOpen}
+              clearSort={clearSort}
+            />
+          )}
           {onCreateItem && <CreateListItemButton onCreate={onCreateItem} />}
           {onDeleteList && <DeleteListButton onDelete={onDeleteList} />}
         </div>

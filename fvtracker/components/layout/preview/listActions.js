@@ -1,10 +1,17 @@
 import { v4 as uuid } from "uuid";
 
-export const ListHeaderShowButton = ({ label, isOpen, setOpen }) => {
+export const ListHeaderShowButton = ({ label, isOpen, setOpen, onClose }) => {
+  const handleClick = () => {
+    if (isOpen) {
+      onClose();
+    } else {
+      setOpen(true);
+    }
+  };
   return (
     <div
       className={`btn btnSm ${isOpen ? "outline" : ""}`}
-      onClick={() => setOpen(!isOpen)}
+      onClick={handleClick}
     >
       {label}
     </div>

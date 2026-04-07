@@ -38,8 +38,9 @@ export const SortOpenButton = ({ isOpen, setOpen, clearSort }) => {
   return (
     <ListHeaderShowButton
       label="Sortiraj"
-      setOpen={() => setOpen(!isOpen)}
+      setOpen={setOpen}
       isOpen={isOpen}
+      onClose={clearSort}
     />
   );
 };

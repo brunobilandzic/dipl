@@ -1,3 +1,4 @@
+import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { filterItems, sortItems } from "@/lib/utils/list";
 import { createSlice } from "@reduxjs/toolkit";
 
@@ -15,7 +16,10 @@ const cultivationSlice = createSlice({
   reducers: {
     setFields: (state, action) => {
       state.fields = action.payload;
-      state.filteredFields = action.payload;
+      state.filteredFields = sortItems({
+        items: action.payload,
+        sortBy: SORT_INIT_VALUE,
+      });
     },
     deleteField: (state, action) => {
       const slug = action.payload;

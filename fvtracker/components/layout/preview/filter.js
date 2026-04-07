@@ -1,5 +1,6 @@
 import { AppInput } from "@/components/form/inputs";
 import { v4 as uuid } from "uuid";
+import { ListHeaderShowButton } from "./listActions";
 
 export const Filter = ({ filters, setFilters, onApply }) => {
   const onChange = (index, value) => {
@@ -48,5 +49,11 @@ export const Filter = ({ filters, setFilters, onApply }) => {
         </div> */}
       </div>
     </>
+  );
+};
+
+export const FilterButton = ({ onClick, isOpen }) => {
+  return (
+    <ListHeaderShowButton label="Filtriraj" onClick={onClick} isOpen={isOpen} />
   );
 };

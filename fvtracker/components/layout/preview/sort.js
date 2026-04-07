@@ -1,4 +1,5 @@
 import { AppSelect } from "@/components/form/inputs";
+import { ListHeaderShowButton } from "./listActions";
 
 export const SortList = ({
   sortBy,
@@ -25,3 +26,9 @@ const defaultSortOptions = [
   { value: "newest", label: "Najnovije" },
   { value: "oldest", label: "Najstarije" },
 ];
+
+export const SortButton = ({ isOpen, setOpen }) => {
+  return (
+    <ListHeaderShowButton label="Sortiraj" onClick={onClick} isOpen={isOpen} />
+  );
+};

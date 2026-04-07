@@ -1,3 +1,4 @@
+import { filterItems } from "@/lib/utils/list";
 import { productsWithCropVarieties } from "@/lib/utils/production/products";
 import { stringContains } from "@/lib/utils/strings";
 import { createSlice } from "@reduxjs/toolkit";
@@ -33,14 +34,15 @@ const productsSlice = createSlice({
       state.managers = action.payload;
     },
     sortProducts: (state, action) => {
-      state.filteredItems = sortProductsHelper({
-        products: state.items,
+      state.filteredItems = sortItems({
+        _items: state.items,
         sortBy: action.payload,
       });
     },
     filterProducts: (state, action) => {
-      state.filteredItems = filterProductsHelper({
-        _products: state.items,
+      state.filteredItems = filterItems({
+        _items: state.items,
+        itemModelName: "Product",
         filters: action.payload,
       });
     },
@@ -58,46 +60,4 @@ export const {
 } = productsSlice.actions;
 export default productsSlice.reducer;
 
-const sortProductsHelper = ({ products, sortBy }) => {
-  switch (sortBy) {
-    case "newest":
-      return [...products].sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt),
-      );
-    case "oldest":
-      return [...products].sort(
-        (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
-      );
-    case "priceAsc":
-      return [...products].sort((a, b) => a.price - b.price);
-    case "priceDesc":
-      return [...products].sort((a, b) => b.price - a.price);
-    case "fieldNameAsc":
-      return [...products].sort((a, b) => a.name.localeCompare(b.name));
-    case "fieldNameDesc":
-      return [...products].sort((a, b) => b.name.localeCompare(a.name));
-    default:
-      return products;
-  }
-};
-
-const filterProductsHelper = ({ _products, filters }) => {
-  let products = [..._products];
-
-  for (const filter of filters) {
-    switch (filter.type) {
-      case "nameSearch":
-        products = products.filter((product) =>
-          stringContains(product.name, filter.value),
-        );
-        break;
-      case "cropVarietySearch":
-        if (filter.value === "") break;
-        products = productsWithCropVarieties(products, filter.value);
-      default:
-        break;
-    }
-  }
-
-  return products;
-};
+const cropVarietySearch = { _items };

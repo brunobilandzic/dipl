@@ -72,7 +72,7 @@ export default {
       label: "proizvodnja",
       submenu: [
         { label: "proizvodi", path: "/proizvodi" },
-        { label: "žetve", path: "/upravljanje-poljima/zetve" },
+        { label: "žetve", path: "/upravljanje-poljima/pregled/zetve" },
         { label: "zaprimanja", path: "/proizvodnja/zaprimanja" },
         { label: "procesuirenje", path: "/proizvodnja/procesuirenje" },
         { label: "slanje", path: "/proizvodnja/slanje" },

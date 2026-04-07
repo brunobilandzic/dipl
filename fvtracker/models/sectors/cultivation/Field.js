@@ -58,6 +58,8 @@ const fieldSchema = new mongoose.Schema({
       default: [],
     },
   ],
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
 });
 
 fieldSchema.methods.addCultivationArea = async function (cultivationArea) {
@@ -74,6 +76,8 @@ fieldSchema.pre("save", function (next) {
   if (this.isModified("name")) {
     this.slug = utils.strings.makeUrlFriendly(this.name);
   }
+  this.updatedAt = Date.now();
+  next();
 });
 
 /* const fieldGridCell = new mongoose.Schema({zapi

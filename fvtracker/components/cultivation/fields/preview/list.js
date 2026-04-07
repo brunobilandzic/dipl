@@ -16,13 +16,14 @@ import {
 import { initFilters } from "@/lib/utils/list";
 import { v4 as uuid } from "uuid";
 import { filterFields, sortFields } from "@/store/cultivation";
+import { SORT_INIT_VALUE } from "@/lib/constants/others";
 
 export function FieldsList({}) {
   const fields = useSelector((state) => state.cultivation.filteredFields);
   const dbFields = useSelector((state) => state.cultivation.fields);
   const dispatch = useDispatch();
   const router = useRouter();
-  const [sortBy, setSortBy] = useState("newest");
+  const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
   const [filters, setFilters] = useState(initFilters("fields"));
 
   useEffect(() => {

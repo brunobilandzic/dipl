@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Filter } from "./filter";
+import { Filter, FiltersOpenButton } from "./filter";
 import { Sort, SortOpenButton } from "./sort";
 import {
   ActionOptions,
@@ -12,19 +12,24 @@ export function List({
   title,
   onDeleteList,
   onCreateItem,
-  filterComponentProps,
   sortBy,
   setSortBy,
   sortOptions,
   filters,
   setFilters,
+  initialFilters,
 }) {
   const [sortOpen, setSortOpen] = useState(false);
+  const [filterOpen, setFilterOpen] = useState(false);
 
   const clearSort = () => {
-    console.log("Clearing sort");
     setSortBy("newest");
     setSortOpen(false);
+  };
+
+  const clearFilters = () => {
+    setFilters(initialFilters);
+    setFilterOpen(false);
   };
 
   return (
@@ -37,6 +42,13 @@ export function List({
               isOpen={sortOpen}
               setOpen={setSortOpen}
               clearSort={clearSort}
+            />
+          )}
+          {filters && (
+            <FiltersOpenButton
+              filterOpen={filterOpen}
+              setFilterOpen={setFilterOpen}
+              clearFilters={clearFilters}
             />
           )}
           {onCreateItem && <CreateListItemButton onCreate={onCreateItem} />}

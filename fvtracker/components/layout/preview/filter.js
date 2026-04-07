@@ -52,8 +52,17 @@ export const Filter = ({ filters, setFilters, onApply }) => {
   );
 };
 
-export const FilterButton = ({ onClick, isOpen }) => {
+export const FiltersOpenButton = ({
+  filterOpen,
+  setFilterOpen,
+  clearFilters,
+}) => {
   return (
-    <ListHeaderShowButton label="Filtriraj" onClick={onClick} isOpen={isOpen} />
+    <ListHeaderShowButton
+      label="Filtriraj"
+      isOpen={filterOpen}
+      setOpen={setFilterOpen}
+      onClose={clearFilters}
+    />
   );
 };

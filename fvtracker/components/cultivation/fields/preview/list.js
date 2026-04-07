@@ -63,6 +63,7 @@ export function FieldsList({}) {
         }}
         filters={filters}
         setFilters={setFilters}
+        initialFilters={initFilters("fields")}
         sortBy={sortBy}
         setSortBy={setSortBy}
         sortOptions={fieldSortOptions}

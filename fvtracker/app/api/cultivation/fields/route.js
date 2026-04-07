@@ -3,6 +3,9 @@ import auth from "@/lib/auth";
 import cultivation from "@/lib/cultivation";
 import { Field } from "@/models/sectors/cultivation/Field";
 import { ROLE_STATUSES } from "@/lib/constants/users";
+import { fetchManager } from "@/lib/auth/fetchSessionData";
+import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
+import { deleteFields } from "@/lib/cultivation/fields";
 
 export async function GET(request) {
   try {
@@ -219,14 +222,22 @@ export async function DELETE(request) {
   console.log("Received DELETE request for field");
   try {
     await dbConnect();
+    const { generalManager, specificManager } = await fetchManager({
+      managerNames: [CULTIVATION_MANAGER],
+    });
     const { searchParams } = new URL(request.url);
     const slug = searchParams.get("slug");
 
     if (!slug) {
+      if (generalManager) {
+        await deleteFields({});
+      } else if (specificManager) {
+        await deleteFields({ cultivationManager: specificManager._id });
+      }
       return Response.json({ message: "Slug is required" }, { status: 400 });
     }
 
-    const deletedField = await Field.findOneAndDelete({ slug });
+    const deletedField = await deleteFields({ slug });
 
     if (!deletedField) {
       return Response.json({ message: "Field not found" }, { status: 404 });

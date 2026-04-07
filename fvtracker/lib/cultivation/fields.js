@@ -98,9 +98,10 @@ export async function getFieldForCultivation({ cultivation }) {
   console.log("Cultivation with populated field:", cultivation);
 }
 
-export const deleteField = async ({ filter }) => {
+export const deleteFields = async ({ filter }) => {
   try {
     await Field.deleteMany(filter);
+    return true;
   } catch (error) {
     console.error("Error deleting fields:", error);
     throw new Error("Greška prilikom brisanja polja. " + error.message);

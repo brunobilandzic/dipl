@@ -19,6 +19,7 @@ import { sortFields } from "@/store/cultivation";
 
 export function FieldsList({}) {
   const fields = useSelector((state) => state.cultivation.filteredFields);
+  const dbFields = useSelector((state) => state.cultivation.fields);
   const dispatch = useDispatch();
   const router = useRouter();
   const [sortBy, setSortBy] = useState("newest");
@@ -46,7 +47,7 @@ export function FieldsList({}) {
       </div>
     );
 
-  if (fields.length === 0) {
+  if (dbFields.length === 0) {
     return <NoFields />;
   }
 

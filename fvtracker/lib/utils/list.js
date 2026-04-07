@@ -1,6 +1,6 @@
 import { productsWithCropVarieties } from "./production/products";
 
-export const sortItemsHelper = ({ items, sortBy }) => {
+export const sortItems = ({ items, sortBy }) => {
   switch (sortBy) {
     case "newest":
       return [...items].sort(

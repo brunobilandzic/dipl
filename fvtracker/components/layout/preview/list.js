@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Filter } from "./filter";
-import { SortList, SortOpenButton } from "./sort";
-import { v4 as uuid } from "uuid";
+import { Sort, SortOpenButton } from "./sort";
 import {
   ActionOptions,
   CreateListItemButton,

@@ -1,7 +1,7 @@
 import { AppSelect } from "@/components/form/inputs";
 import { ListHeaderShowButton } from "./listActions";
 
-export const SortList = ({
+export const Sort = ({
   sortBy,
   setSortBy,
   sortOptions = defaultSortOptions,

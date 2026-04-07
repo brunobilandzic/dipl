@@ -16,7 +16,7 @@ import {
   handleDeleteField,
   refreshFields,
 } from "@/lib/utils/cultivation/fields";
-import { initFilters } from "@/lib/constants/others";
+import { initFilters } from "@/lib/utils/list";
 
 export function FieldsList({}) {
   const fields = useSelector((state) => state.cultivation.fields);

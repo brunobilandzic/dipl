@@ -12,7 +12,7 @@ import Link from "next/link";
 import { priceEuroString } from "@/lib/utils/strings";
 import { List, ListItem } from "@/components/layout/preview/list";
 import { filterProducts, sortProducts } from "@/store/production/products";
-import { initFilters } from "@/lib/constants/others";
+import { initFilters } from "@/lib/utils/list";
 
 const ProductList = () => {
   const dispatch = useDispatch();

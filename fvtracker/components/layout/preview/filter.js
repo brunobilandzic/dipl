@@ -22,7 +22,7 @@ export const Filter = ({ filters, setFilters, onApply }) => {
               return (
                 <AppInput
                   key={index}
-                  placeholder="Pretraži po imenu"
+                  placeholder={option.placeholder}
                   value={option.value}
                   onChange={(e) => {
                     onChange(index, e.target.value);
@@ -33,7 +33,7 @@ export const Filter = ({ filters, setFilters, onApply }) => {
               return (
                 <AppInput
                   key={index}
-                  placeholder="Filtriraj po sorti"
+                  placeholder={option.placeholder}
                   value={option.value}
                   onChange={(e) => {
                     onChange(index, e.target.value);

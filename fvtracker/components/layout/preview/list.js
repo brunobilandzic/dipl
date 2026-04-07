@@ -1,6 +1,11 @@
 import { Filter } from "./filter";
 import { SortList } from "./sort";
 import { v4 as uuid } from "uuid";
+import {
+  ActionOptions,
+  CreateListItemButton,
+  DeleteListButton,
+} from "./listActions";
 
 export function List({
   children,
@@ -23,11 +28,7 @@ export function List({
               Dodaj
             </div>
           )}
-          {onDeleteList && (
-            <div className="btn cancelButton btnSm" onClick={onDeleteList}>
-              Obriši sve
-            </div>
-          )}
+          {onCreateItem && <CreateListItemButton onCreate={onCreateItem} />}
         </div>
       </div>
       {filterComponentProps && <Filter {...filterComponentProps} />}

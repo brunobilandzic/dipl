@@ -29,6 +29,13 @@ export const ActionOptions = ({ options }) => {
   );
 };
 
+export const CreateListItemButton = ({ onCreate }) => {
+  return (
+    <div className="btn submitButton btnSm" onClick={onCreate}>
+      Dodaj
+    </div>
+  );
+};
 export const DeleteListButton = ({ onDelete }) => {
   console.log("onDelete:", onDelete);
   return (

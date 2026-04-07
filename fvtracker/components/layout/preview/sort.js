@@ -19,19 +19,18 @@ export const Sort = ({
 };
 
 const defaultSortOptions = [
-  { value: "fieldNameAsc", label: "Naziv polja A-Z" },
-  { value: "fieldNameDesc", label: "Naziv polja Z-A" },
-  { value: "priceAsc", label: "Cijena rastuće" },
-  { value: "priceDesc", label: "Cijena padajuće" },
+  { value: "fieldNameAsc", label: "Naziv A-Z" },
+  { value: "fieldNameDesc", label: "Naziv Z-A" },
   { value: "newest", label: "Najnovije" },
   { value: "oldest", label: "Najstarije" },
 ];
 
-export const fieldSortOptions = [
-  { value: "fieldNameAsc", label: "Naziv polja A-Z" },
-  { value: "fieldNameDesc", label: "Naziv polja Z-A" },
-  { value: "newest", label: "Najnovije" },
-  { value: "oldest", label: "Najstarije" },
+export const fieldSortOptions = [...defaultSortOptions];
+
+export const productSortOptions = [
+  ...defaultSortOptions,
+  { value: "priceAsc", label: "Cijena rastuće" },
+  { value: "priceDesc", label: "Cijena padajuće" },
 ];
 
 export const SortOpenButton = ({ isOpen, setOpen, clearSort }) => {

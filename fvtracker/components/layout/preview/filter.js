@@ -22,7 +22,7 @@ export const Filter = ({ filters, setFilters, onApply }) => {
             case "nameSearch":
               return (
                 <AppInput
-                  key={uuid()}
+                  key={index}
                   placeholder={option.placeholder}
                   value={option.value}
                   onChange={(e) => {
@@ -33,7 +33,7 @@ export const Filter = ({ filters, setFilters, onApply }) => {
             case "cropVarietySearch":
               return (
                 <AppInput
-                  key={uuid()}
+                  key={index}
                   placeholder={option.placeholder}
                   value={option.value}
                   onChange={(e) => {

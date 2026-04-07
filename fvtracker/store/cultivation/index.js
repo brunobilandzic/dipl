@@ -1,3 +1,4 @@
+import { sortItems } from "@/lib/utils/list";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -22,6 +23,10 @@ const cultivationSlice = createSlice({
       if (state.selectedField?.slug === slug) {
         state.selectedField = null;
       }
+    },
+    sortFields: (state, action) => {
+      const sortBy = action.payload;
+      state.filteredFields = sortItems({ items: state.filteredFields, sortBy });
     },
     setInitialState: (state) => {
       state = initialState;

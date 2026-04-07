@@ -15,6 +15,7 @@ export function List({
   filterComponentProps,
   sortBy,
   setSortBy,
+  sortOptions,
   filters,
   setFilters,
 }) {
@@ -30,7 +31,13 @@ export function List({
         </div>
       </div>
       <div className="flex flex-col gap-4 justify-start">
-        {sortBy && sortOpen && <Sort sortBy={sortBy} setSortBy={setSortBy} />}
+        {sortBy && sortOpen && (
+          <Sort
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+            sortOptions={sortOptions}
+          />
+        )}
         {children}
       </div>
     </>

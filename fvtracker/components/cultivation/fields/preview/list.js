@@ -68,9 +68,12 @@ export function FieldsList({}) {
             slug: field.slug,
           });
           return (
-            <ListItem key={field._id} actionOptions={actionOptions}>
-              <FieldItem field={field} />
-            </ListItem>
+            <div>
+              <div className="mb-2 font-bold text-lg">{field.name}</div>
+              <ListItem key={field._id} actionOptions={actionOptions}>
+                <FieldItem field={field} />
+              </ListItem>
+            </div>
           );
         })}
       </List>

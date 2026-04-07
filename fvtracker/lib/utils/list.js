@@ -31,6 +31,7 @@ export const initFilters = (listType) => {
           value: "",
         },
       ];
+    
   }
 };
 
@@ -94,9 +95,3 @@ const cropVarietySearch = ({ itemModelName, items, value }) => {
 const nameSearch = ({ items, value }) => {
   return items.filter((item) => stringContains(item.name, value));
 };
-
-export const clearSort =
-  ({ dispatch, action }) =>
-  () => {
-    dispatch(dispatch(action("newest")));
-  };

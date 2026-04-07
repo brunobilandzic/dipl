@@ -11,29 +11,15 @@ import { LoadingFullScreen } from "@/components/layout/loading";
 import Link from "next/link";
 import { priceEuroString } from "@/lib/utils/strings";
 import { List, ListItem } from "@/components/layout/preview/list";
-import { SortList } from "@/components/layout/preview/sort";
 import { filterProducts, sortProducts } from "@/store/production/products";
-import { Filter } from "@/components/layout/preview/filter";
-
-const initFilters = [
-  {
-    type: "nameSearch",
-    placeholder: "Pretraži proizvode...",
-    value: "",
-  },
-  {
-    type: "cropVarietySearch",
-    placeholder: "Filtriraj po sorti...",
-    value: "",
-  },
-];
+import { initFilters } from "@/lib/constants/others";
 
 const ProductList = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const products = useSelector((state) => state.products.filteredItems);
   const [sortBy, setSortBy] = useState("newest");
-  const [filters, setFilters] = useState(initFilters);
+  const [filters, setFilters] = useState(initFilters("products"));
 
   useEffect(() => {
     if (!products) return;
@@ -52,6 +38,8 @@ const ProductList = () => {
   }, [products]);
 
   console.log({ products });
+
+  if (!products) return <LoadingFullScreen />;
 
   return (
     <div>

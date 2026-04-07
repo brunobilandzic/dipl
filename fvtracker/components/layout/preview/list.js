@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { Filter } from "./filter";
-import { SortList } from "./sort";
+import { SortList, SortOpenButton } from "./sort";
 import { v4 as uuid } from "uuid";
 import {
   ActionOptions,
@@ -18,20 +19,17 @@ export function List({
   filters,
   setFilters,
 }) {
+  const [sortOpen, setSortOpen] = useState(false);
   return (
     <>
       <div className="list-header flex items-center justify-between mb-4 border-b-2 pb-1 ">
         <div className="text-xl font-bolder">{title}</div>
         <div className="flex gap-2 items-center">
-          {onCreateItem && (
-            <div className="btn submitButton btnSm" onClick={onCreateItem}>
-              Dodaj
-            </div>
-          )}
+          {sortBy && <SortOpenButton isOpen={sortOpen} setOpen={setSortOpen} />}
           {onCreateItem && <CreateListItemButton onCreate={onCreateItem} />}
           {onDeleteList && <DeleteListButton onDelete={onDeleteList} />}
         </div>
-      {filterComponentProps && <Filter {...filterComponentProps} />}
+      </div>
       <div className="flex flex-col gap-4 justify-start">
         {sortBy && <SortList sortBy={sortBy} setSortBy={setSortBy} />}
         {filters && <Filter filters={filters} setFilters={setFilters} />}

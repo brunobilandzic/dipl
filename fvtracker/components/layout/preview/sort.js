@@ -27,8 +27,12 @@ const defaultSortOptions = [
   { value: "oldest", label: "Najstarije" },
 ];
 
-export const SortButton = ({ isOpen, setOpen }) => {
+export const SortOpenButton = ({ isOpen, setOpen }) => {
   return (
-    <ListHeaderShowButton label="Sortiraj" onClick={onClick} isOpen={isOpen} />
+    <ListHeaderShowButton
+      label="Sortiraj"
+      setOpen={() => setOpen(!isOpen)}
+      isOpen={isOpen}
+    />
   );
 };

@@ -17,7 +17,7 @@ import { initFilters } from "@/lib/utils/list";
 import { v4 as uuid } from "uuid";
 
 export function FieldsList({}) {
-  const fields = useSelector((state) => state.cultivation.fields);
+  const fields = useSelector((state) => state.cultivation.filteredFields);
   const dispatch = useDispatch();
   const router = useRouter();
   const [sortBy, setSortBy] = useState("newest");

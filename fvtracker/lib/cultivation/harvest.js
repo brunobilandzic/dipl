@@ -68,6 +68,7 @@ export async function harvestCells({
   await harvestingPlan.harvestingBatch.addPlantedCropVarieties({
     plantedCropVarietiesIds: plantedCropVarieties.map((pcv) => pcv._id),
     cropVarietyId,
+    quantityPerCell: harvestingPlanItem.cropVariety.quantityPerCell,
   });
 
   return plantedCropVarieties;

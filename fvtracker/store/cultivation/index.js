@@ -31,6 +31,12 @@ const cultivationSlice = createSlice({
         state.selectedField = null;
       }
     },
+    setFieldUpdated: (state, action) => {
+      const { fieldId } = action.payload;
+      const fields = setUpdatedField({ fields: state.fields, fieldId });
+      state.fields = fields;
+      state.filteredFields = fields;
+    },
     sortFields: (state, action) => {
       const sortBy = action.payload;
       state.filteredFields = sortItems({ items: state.filteredFields, sortBy });

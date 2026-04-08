@@ -356,7 +356,7 @@ export const {
   deleteField,
   harvestCells,
   filterFields,
-  setFieldUpdated
+  setFieldUpdated,
 } = cultivationSlice.actions;
 
 export default cultivationSlice.reducer;

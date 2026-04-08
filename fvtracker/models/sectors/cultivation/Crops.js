@@ -177,6 +177,11 @@ const plantedCropVarietySchema = new Schema({
     ref: "HarvestingPlanItem",
     default: null,
   },
+  harvestingBatchItem: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "HarvestBatchItem",
+    default: null,
+  },
 });
 
 plantedCropVarietySchema.pre("save", async function () {

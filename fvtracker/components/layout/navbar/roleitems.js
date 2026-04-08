@@ -40,7 +40,7 @@ export default {
       submenu: [
         { label: "pregled", path: "/upravljanje-poljima/pregled" },
         { label: "dodavanje", path: "/upravljanje-poljima/dodavanje" },
-        { label: "zetve", path: "/upravljanje-poljima/pregled/zetve" },
+        { label: "žetve", path: "/upravljanje-poljima/pregled/zetve" },
       ],
     },
     {
@@ -72,7 +72,7 @@ export default {
       label: "proizvodnja",
       submenu: [
         { label: "proizvodi", path: "/proizvodi" },
-        { label: "žetve", path: "/sirovine" },
+        { label: "sirovine", path: "/sirovine" },
         { label: "zaprimanja", path: "/proizvodnja/zaprimanja" },
         { label: "procesuirenje", path: "/proizvodnja/procesuirenje" },
         { label: "slanje", path: "/proizvodnja/slanje" },

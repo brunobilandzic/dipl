@@ -26,9 +26,9 @@ import {
   adjacentCellsGap,
   extractPlantedCells,
   getMinValuesFromPlanted,
-} from "./cultivation/cultivationAreas";
+} from "./cultivation/fields/cultivationAreas";
 import { numbersInRanges } from "./formValidation";
-import { extractCoords, refreshFields } from "./cultivation/fields";
+import { extractCoords, refreshFields } from "./cultivation/fields/fields";
 import {
   getCUSCells,
   relativeToFieldCoords,
@@ -41,7 +41,7 @@ import {
   filterCutivationCells,
   getFieldCultivations,
   fieldHasCultivations,
-} from "./cultivation/cultivation";
+} from "./cultivation/fields/cultivation";
 import { cvAndColor, showDate } from "./display";
 import {} from "./cultivation/plant";
 import {

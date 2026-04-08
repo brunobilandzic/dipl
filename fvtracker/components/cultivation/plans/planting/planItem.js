@@ -1,6 +1,6 @@
 import { ListItem } from "@/components/layout/preview/list";
 import utils from "@/lib/utils";
-import { getCANameFromPlantedCropVarietiesInCultivation } from "@/lib/utils/cultivation/cultivationAreas";
+import { getCANameFromPlantedCropVarietiesInCultivation } from "@/lib/utils/cultivation/fields/cultivationAreas";
 import { v4 as uuid } from "uuid";
 
 export const PlantingPlanListItem = ({ plan, plant = true, onDelete }) => {
@@ -40,7 +40,7 @@ export const PlantingPlanItems = ({ items }) => {
 };
 
 const PlantingPlanItem = ({ item }) => {
-  const plcvs = 0
+  const plcvs = 0;
   return (
     <div className="border p-4 rounded w-full">
       <div>

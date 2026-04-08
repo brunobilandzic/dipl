@@ -1,4 +1,4 @@
-import { extractCoords } from "@/lib/utils/cultivation/fields";
+import { extractCoords } from "@/lib/utils/cultivation/fields/fields";
 
 function max_dim(planted, dim) {
   return planted.reduce((max, cell) => {

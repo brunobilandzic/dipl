@@ -10,7 +10,7 @@ import {
   END_HARVESTING,
 } from "@/lib/constants/cultivation/plants";
 import utils from "@/lib/utils";
-import { refreshFields } from "@/lib/utils/cultivation/fields";
+import { refreshFields } from "@/lib/utils/cultivation/fields/fields";
 import { useRouter } from "next/navigation";
 import { setLoading } from "@/store/loading";
 import api from "@/lib/api";

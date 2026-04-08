@@ -8,7 +8,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
 import { PlantingPlanListItem } from "@/components/cultivation/plans/planting/planItem";
-import { refreshFields } from "@/lib/utils/cultivation/fields";
+import { refreshFields } from "@/lib/utils/cultivation/fields/fields";
 import { useRouter } from "next/navigation";
 import { List } from "@/components/layout/preview/list";
 import { deletePlans } from "@/lib/utils/cultivation/plans";

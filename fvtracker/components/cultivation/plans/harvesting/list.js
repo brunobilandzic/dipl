@@ -9,7 +9,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { v4 as uuid } from "uuid";
 import { FieldPlansItem } from "@/components/cultivation/plans/planting/list";
-import { refreshFields } from "@/lib/utils/cultivation/fields";
+import { refreshFields } from "@/lib/utils/cultivation/fields/fields";
 import { List } from "@/components/layout/preview/list";
 import { useRouter } from "next/navigation";
 import { deletePlans } from "@/lib/utils/cultivation/plans";

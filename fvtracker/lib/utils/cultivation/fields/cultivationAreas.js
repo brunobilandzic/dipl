@@ -1,4 +1,4 @@
-import dimensionError from "../../constants/errors/cultivation/dimensions";
+import dimensionError from "../../../constants/errors/cultivation/dimensions";
 import { extractCoords } from "./fields";
 import { getCUSCells } from "./cultivation";
 

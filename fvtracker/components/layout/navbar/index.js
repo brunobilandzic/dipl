@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "@/store/userSlice";
-import { refreshFields } from "@/lib/utils/cultivation/fields";
+import { refreshFields } from "@/lib/utils/cultivation/fields/fields";
 import { refreshGeneralManager } from "@/lib/utils/generalManager";
 import { ROLE_STATUSES } from "@/lib/constants/users";
 import { useRouter } from "next/navigation";

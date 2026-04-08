@@ -20,7 +20,7 @@ import cultivation from "@/lib/constants/cultivation";
 import { EditCultivation } from "./editCultivation";
 import { SeedingModal } from "@/components/cultivation/cultivationArea/planting/seedingModal";
 import { HarvestingModal } from "@/components/cultivation/cultivationArea/harvesting/harvestingModal";
-import { refreshFields } from "@/lib/utils/cultivation/fields";
+import { refreshFields } from "@/lib/utils/cultivation/fields/fields";
 import { setLoading } from "@/store/loading";
 import { sanitize } from "@/lib/utils/objects";
 

@@ -12,7 +12,7 @@ import { FieldStatistics } from "../general";
 import {
   handleDeleteField,
   refreshFields,
-} from "@/lib/utils/cultivation/fields";
+} from "@/lib/utils/cultivation/fields/fields";
 import { initFilters } from "@/lib/utils/list";
 import { v4 as uuid } from "uuid";
 import { filterFields, sortFields } from "@/store/cultivation";

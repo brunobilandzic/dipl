@@ -3,6 +3,10 @@ import { filterItems, sortItems } from "@/lib/utils/list";
 import { productsWithCropVarieties } from "@/lib/utils/production/products";
 import { stringContains } from "@/lib/utils/strings";
 import { createSlice } from "@reduxjs/toolkit";
+import api from "@/lib/api";
+import handleError from "@/lib/constants/errors/client/handleError";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { setLoading } from "../loading";
 
 const initialState = {
   products: {
@@ -58,6 +62,14 @@ const productsSlice = createSlice({
     },
   },
 });
+
+export const refreshMaterials = createAsyncThunk(
+  "products/fetchMaterials",
+  async (_, { dispatch }) => {
+    dispatch(setLoading(true));
+    const res = await api.get("");
+  },
+);
 
 export const {
   setProducts /* 

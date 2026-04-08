@@ -183,18 +183,15 @@ plantedCropVarietySchema.pre("save", async function () {
   if (!this.cultivation) return;
   const cultivation = await Cultivation.findById(this.cultivation).populate({
     path: "cultivationArea",
-    populate: { path: "field" },
+    select: "field",
   });
   if (!cultivation) {
     console.log("Cultivation not found for planted crop variety", this._id);
     return;
   }
-  const field = await Field.findById(cultivation.cultivationArea.field);
-  if (!field) {
-    console.log("Field not found for planted crop variety", this._id);
-    return;
-  }
-  await field.save(); // to trigger field's updatedAt change
+  await Field.findByIdAndUpdate(cultivation.cultivationArea.field, {
+    $set: { updatedAt: new Date() },
+  });
 });
 
 plantedCropVarietySchema.pre("deleteMany", async function () {

@@ -61,12 +61,15 @@ harvestingBatchSchema.methods.findOrCreateItemForCropVariety = async function ({
 harvestingBatchSchema.methods.addPlantedCropVarieties = async function ({
   plantedCropVarietiesIds,
   cropVarietyId,
+  quantityPerCell,
 }) {
   // Find or create the corresponding HarvestingBatchItem
   const item = await this.findOrCreateItemForCropVariety({
     cropVarietyId: cropVarietyId,
   });
   item.plantedCropVarieties.push(...plantedCropVarietiesIds);
+  const addedQuantity = plantedCropVarietiesIds.length * quantityPerCell;
+  item.batchQuantity += addedQuantity;
   await item.save();
 
   return item;
@@ -90,7 +93,7 @@ harvestingBatchSchema.methods.cropVarietyQuantity = async function ({
       `Crop variety with name "${cropVarietyName}" not found in this batch.`,
     );
 
-  return item.quantity();
+  return item.batchQuantity;
 };
 
 harvestingBatchSchema.methods.quantities = async function () {
@@ -98,7 +101,7 @@ harvestingBatchSchema.methods.quantities = async function () {
   const quantities = {};
 
   for (const item of batch.harvestingBatchItems) {
-    const quantity = await item.quantity();
+    const quantity = await item.batchQuantity;
     quantities[item.cropVariety.name] = quantity;
   }
   return quantities;
@@ -114,6 +117,10 @@ const harvestingBatchItemSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "CropVariety",
     required: true,
+  },
+  batchQuantity: {
+    type: Number,
+    default: 0,
   },
   plantedCropVarieties: [
     {
@@ -136,10 +143,10 @@ harvestingBatchItemSchema.pre("deleteMany", async function () {
   );
 });
 
-harvestingBatchItemSchema.methods.quantity = async function () {
+/* harvestingBatchItemSchema.methods.quantity = async function () {
   await this.populate("cropVariety");
   return this.plantedCropVarieties.length * this.cropVariety.quantityPerCells;
-};
+}; */
 
 export const HarvestingBatch =
   mongoose.models.HarvestingBatch ||

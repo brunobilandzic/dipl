@@ -21,7 +21,7 @@ const initialState = {
 };
 
 const productsSlice = createSlice({
-  name: "products",
+  name: "production",
   initialState,
   reducers: {
     setProducts: (state, action) => {
@@ -80,7 +80,7 @@ const productsSlice = createSlice({
 });
 
 export const refreshMaterials = createAsyncThunk(
-  "products/fetchMaterials",
+  "production/fetchMaterials",
   async (_, { dispatch }) => {
     dispatch(setLoading(true));
     const res = await api.get("");

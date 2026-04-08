@@ -73,10 +73,11 @@ export function List({
   );
 }
 
-export function ListItem({ children, actionOptions }) {
+export function ListItem({ children, actionOptions, title }) {
   return (
     <>
       <div className="flex flex-col gap-2 border p-4 rounded-lg">
+        {title && <h3 className="font-bold">{title}</h3>}
         {children}
         {actionOptions && <ActionOptions options={actionOptions} />}
       </div>

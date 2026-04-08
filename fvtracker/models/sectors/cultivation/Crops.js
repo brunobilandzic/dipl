@@ -180,10 +180,14 @@ const plantedCropVarietySchema = new Schema({
 });
 
 plantedCropVarietySchema.pre("save", async function () {
-  const cultivation = await Cultivation.findById(this.cultivation).populate({path: "cultivationArea", populate: {path: "field"}});
+  if (!this.cultivation) return;
+  const cultivation = await Cultivation.findById(this.cultivation).populate({
+    path: "cultivationArea",
+    populate: { path: "field" },
+  });
   if (!cultivation) {
-   console.log("Cultivation not found for planted crop variety", this._id);
-   return;
+    console.log("Cultivation not found for planted crop variety", this._id);
+    return;
   }
   const field = await Field.findById(cultivation.cultivationArea.field);
   if (!field) {
@@ -191,7 +195,7 @@ plantedCropVarietySchema.pre("save", async function () {
     return;
   }
   await field.save(); // to trigger field's updatedAt change
- }
+});
 
 /* const harvestedCropVarietySchema = new Schema({
   harvestingPlanItem: {

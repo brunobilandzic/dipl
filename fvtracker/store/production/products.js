@@ -61,6 +61,22 @@ const productsSlice = createSlice({
       });
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(refreshMaterials.fulfilled, (state, action) => {
+        state.materials.items = action.payload;
+        state.materials.filteredItems = sortItems({
+          items: action.payload,
+          sortBy: SORT_INIT_VALUE,
+        });
+      })
+      .addCase(refreshMaterials.rejected, (state, action) => {
+        handleError({
+          ...action.error,
+          generalMessage: "Failed to fetch materials. Please try again later.",
+        });
+      });
+  },
 });
 
 export const refreshMaterials = createAsyncThunk(
@@ -68,6 +84,8 @@ export const refreshMaterials = createAsyncThunk(
   async (_, { dispatch }) => {
     dispatch(setLoading(true));
     const res = await api.get("");
+    dispatch(setLoading(false));
+    return res.data.materials;
   },
 );
 

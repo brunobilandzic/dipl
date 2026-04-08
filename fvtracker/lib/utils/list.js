@@ -31,7 +31,6 @@ export const initFilters = (listType) => {
           value: "",
         },
       ];
-    
   }
 };
 

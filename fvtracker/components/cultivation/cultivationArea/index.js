@@ -6,6 +6,7 @@ import {
   createCultivation,
   deleteCultivation,
   selectField,
+  setFieldUpdated,
 } from "@/store/cultivation";
 import handleError from "@/lib/constants/errors/client/handleError";
 import api from "@/lib/api";
@@ -21,6 +22,7 @@ import { SeedingModal } from "@/components/cultivation/cultivationArea/planting/
 import { HarvestingModal } from "@/components/cultivation/cultivationArea/harvesting/harvestingModal";
 import { refreshFields } from "@/lib/utils/cultivation/fields";
 import { setLoading } from "@/store/loading";
+import { sanitize } from "@/lib/utils/objects";
 
 export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const dispatch = useDispatch();
@@ -186,8 +188,8 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       const data =
         utils.cultivation.cultivations.prepareCultivationData(newCUDetails);
       const res = await api.post(`/cultivation`, { data });
-      dispatch(createCultivation(res.data.newCultivation));
-      setSelectedCultivation(res.data.newCultivation);
+      dispatch(createCultivation(sanitize(res.data.newCultivation)));
+      setSelectedCultivation(sanitize(res.data.newCultivation));
       setIsBeginSelected(false);
       alert("Kultivacija je uspješno kreirana");
     } catch (error) {
@@ -225,6 +227,9 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
         data: { id: selectedCultivation._id },
       });
       dispatch(deleteCultivation(selectedCultivation._id));
+      dispatch(
+        setFieldUpdated({ fieldId: selectedField._id, updatedAt: new Date() }),
+      );
       setSelectedCultivation(null);
       alert("Kultivacija je uspješno obrisana");
     } catch (error) {

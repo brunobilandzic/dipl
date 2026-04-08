@@ -1,7 +1,7 @@
 import React from "react";
 
-const ProductionVarieties = () => {
-  return <div>Production Varieties</div>;
+const ProductionMaterialsPage = () => {
+  return <div>Production Materials</div>;
 };
 
-export default ProductionVarieties;
+export default ProductionMaterialsPage;

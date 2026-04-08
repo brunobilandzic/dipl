@@ -1,5 +1,5 @@
-import api from "../api";
-import handleError from "../constants/errors/client/handleError";
+import api from "../../../api";
+import handleError from "../../../constants/errors/client/handleError";
 
 export const harvestingBatchItemData = ({ batchItem }) => {
   const quantityPerCell = batchItem.cropVariety?.quantityPerCell || 0;

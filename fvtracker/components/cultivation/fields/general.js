@@ -1,4 +1,4 @@
-import { fieldPlantedStatistics } from "@/lib/utils/cultivation/plant";
+import { fieldPlantedStatistics } from "@/lib/utils/cultivation/plant/plant";
 import React from "react";
 
 export const Feed = () => {

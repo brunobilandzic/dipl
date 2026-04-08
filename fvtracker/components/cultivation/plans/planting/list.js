@@ -11,7 +11,7 @@ import { PlantingPlanListItem } from "@/components/cultivation/plans/planting/pl
 import { refreshFields } from "@/lib/utils/cultivation/fields/fields";
 import { useRouter } from "next/navigation";
 import { List } from "@/components/layout/preview/list";
-import { deletePlans } from "@/lib/utils/cultivation/plans";
+import { deletePlans } from "@/lib/utils/cultivation/plant/plans";
 
 const PlantingPlanList = () => {
   const fields = useSelector((state) => state.cultivation.fields);

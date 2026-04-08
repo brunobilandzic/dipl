@@ -43,7 +43,7 @@ import {
   fieldHasCultivations,
 } from "./cultivation/fields/cultivation";
 import { cvAndColor, showDate } from "./display";
-import {} from "./cultivation/plant";
+import {} from "./cultivation/plant/plant";
 import {
   getPlantedCropVarietesPerCultivation,
   getFieldsPlans,
@@ -54,8 +54,8 @@ import {
   getFieldsHarvestingPlans,
   getFieldPlans,
   prepareSubmitPlan,
-} from "./cultivation/plans";
-import { getHarvestCellsRect } from "./harvest";
+} from "./cultivation/plant/plans";
+import { getHarvestCellsRect } from "./cultivation/plant/harvest";
 
 export default {
   objects: {

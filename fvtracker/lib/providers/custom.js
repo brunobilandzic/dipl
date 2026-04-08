@@ -48,7 +48,7 @@ const CropsProvider = ({ children }) => {
 };
 
 export const LoadingProvider = ({ children }) => {
-  const isLoading = useSelector((state) => state.loading.isLoading);
+  const isLoading = useSelector((state) => loadingSelector(state));
 
   if (isLoading) return <LoadingFullScreen />;
 
@@ -61,4 +61,8 @@ export const ErrorProvider = ({ children }) => {
 
   if (!message) return children;
   return <ErrorComponent message={message} />;
+};
+
+const loadingSelector = (state) => {
+  return state.loading.isLoading || state.production.materials.loading;
 };

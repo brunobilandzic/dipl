@@ -17,6 +17,7 @@ const initialState = {
   materials: {
     items: null,
     filteredItems: null,
+    isLoading: false,
   },
 };
 
@@ -63,6 +64,9 @@ const productsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(refreshMaterials.pending, (state) => {
+        state.materials.isLoading = true;
+      })
       .addCase(refreshMaterials.fulfilled, (state, action) => {
         state.materials.items = action.payload;
         state.materials.filteredItems = sortItems({
@@ -71,10 +75,7 @@ const productsSlice = createSlice({
         });
       })
       .addCase(refreshMaterials.rejected, (state, action) => {
-        handleError({
-          ...action.error,
-          generalMessage: "Failed to fetch materials. Please try again later.",
-        });
+        state.materials.isLoading = false;
       });
   },
 });
@@ -82,9 +83,7 @@ const productsSlice = createSlice({
 export const refreshMaterials = createAsyncThunk(
   "production/fetchMaterials",
   async (_, { dispatch }) => {
-    dispatch(setLoading(true));
     const res = await api.get("/materials");
-    dispatch(setLoading(false));
     return res.data.materials;
   },
 );

@@ -96,6 +96,19 @@ cultivationAreaSchema.pre("save", async function () {
   }
 });
 
+cultivationAreaSchema.pre("deleteMany", async function () {
+  const cultivationAreas = await this.model
+    .find(this.getFilter())
+    .populate({ path: "cultivations", select: "plantedCropVarieties" });
+  await mongoose.models.PlantedCropVariety.deleteMany({
+    cultivation: {
+      $in: cultivationAreas
+        .reduce((culs, ca) => culs.concat(ca.cultivations), [])
+        .map((cul) => cul._id),
+    },
+  });
+});
+
 cultivationSchema.pre("save", function (next) {
   if (this.isModified("name")) {
     this.slug = utils.strings.makeUrlFriendly(this.name);

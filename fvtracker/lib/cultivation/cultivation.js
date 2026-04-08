@@ -132,5 +132,5 @@ export const updateCultivation = async (body) => {
 };
 
 export async function deleteCultivation(id) {
-  return await Cultivation.findByIdAndDelete(id);
+  return await Cultivation.deleteMany({ _id: id });
 }

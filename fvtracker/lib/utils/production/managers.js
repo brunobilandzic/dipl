@@ -1,5 +1,5 @@
 import api from "@/lib/api";
-import { setManagers } from "@/store/production/products";
+import { setManagers } from "@/store/production";
 
 export const refreshManagers = async ({ dispatch, router }) => {
   try {

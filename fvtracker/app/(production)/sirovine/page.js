@@ -1,15 +1,15 @@
-import { MaterialsList } from "@/components/production/materials/list";
+import { ProductionResources } from "@/components/production/resources/list";
 import { fetchManager } from "@/lib/auth/fetchSessionData";
 import { PRODUCTION_MANAGER } from "@/lib/constants/users/managerTypes";
 import React from "react";
 
-const ProductionMaterialsPage = async () => {
+const ProductionResourcesPage = async () => {
   const {} = await fetchManager({ managerNames: [PRODUCTION_MANAGER] });
   return (
     <div>
-      <MaterialsList />
+      <ProductionResources />
     </div>
   );
 };
 
-export default ProductionMaterialsPage;
+export default ProductionResourcesPage;

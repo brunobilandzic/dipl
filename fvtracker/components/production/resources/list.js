@@ -2,20 +2,16 @@
 
 import { LoadingFullScreen } from "@/components/layout/loading";
 import { List, ListItem } from "@/components/layout/preview/list";
-import {
-  cropVarietyBatchQuantities,
-  materialsList,
-} from "@/lib/utils/production/materials";
+import { cropVarietyBatchResources } from "@/lib/utils/production/resources";
 import { refreshMaterials } from "@/store/production";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-export const MaterialsList = ({}) => {
+export const ProductionResources = ({}) => {
   const materials = useSelector(
     (state) => state.production.materials.filteredItems,
   );
-  const resources = materials ? cropVarietyBatchQuantities({ materials }) : [];
-  console.log({ resources });
+  const resources = cropVarietyBatchResources({ materials });
   const dispatch = useDispatch();
   useEffect(() => {
     if (!materials) {
@@ -27,13 +23,13 @@ export const MaterialsList = ({}) => {
     <div>
       <List title="Materijali">
         {materials.map((material) => (
-          <MaterialsListItem key={material._id} material={material} />
+          <ProductionResource key={material._id} material={material} />
         ))}
       </List>
     </div>
   );
 };
 
-const MaterialsListItem = ({ material }) => {
+const ProductionResource = ({ material }) => {
   return <ListItem title={material.name} />;
 };

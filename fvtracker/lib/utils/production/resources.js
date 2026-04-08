@@ -1,5 +1,6 @@
-export const cropVarietyBatchQuantities = ({ materials }) => {
-  const cropVarietyBatchQuantities = [];
+export const cropVarietyBatchResources = ({ materials }) => {
+  if (!materials) return { resources: [] };
+  const resources = [];
   const harvestingBatchItems = materials.flatMap(
     (material) => material.harvestingBatchItems,
   );
@@ -7,7 +8,7 @@ export const cropVarietyBatchQuantities = ({ materials }) => {
     const cropVarietyName = item.cropVariety.name;
     const cropTypeName = item.cropVariety.cropType.name;
     const batchQuantity = item.batchQuantity;
-    const existingEntry = cropVarietyBatchQuantities.find(
+    const existingEntry = resources.find(
       (entry) =>
         entry.cropVarietyName === cropVarietyName &&
         entry.cropTypeName === cropTypeName,
@@ -15,7 +16,7 @@ export const cropVarietyBatchQuantities = ({ materials }) => {
     if (existingEntry) {
       existingEntry.batchQuantity += batchQuantity;
     } else {
-      cropVarietyBatchQuantities.push({
+      resources.push({
         cropVarietyName,
         cropTypeName,
         batchQuantity,
@@ -23,5 +24,8 @@ export const cropVarietyBatchQuantities = ({ materials }) => {
     }
   });
 
-  console.log({ cropVarietyBatchQuantities });
+  console.log({ resources });
+  return {
+    resources,
+  };
 };

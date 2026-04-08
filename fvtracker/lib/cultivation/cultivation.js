@@ -48,6 +48,8 @@ export async function createCultivation(cultivation) {
     description,
   });
 
+  await newCultivation.save();
+
   const plantedCropVarieties = await createPlantedCropVarietiesCells({
     relativeCoords,
     cropVarietyId,

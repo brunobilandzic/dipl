@@ -11,7 +11,7 @@ import { LoadingFullScreen } from "@/components/layout/loading";
 import Link from "next/link";
 import { priceEuroString } from "@/lib/utils/strings";
 import { List, ListItem } from "@/components/layout/preview/list";
-import { filterProducts, sortProducts } from "@/store/production/products";
+import { filterProducts, sortProducts } from "@/store/production";
 import { initFilters } from "@/lib/utils/list";
 import { productSortOptions } from "@/components/layout/preview/sort";
 
@@ -19,7 +19,7 @@ const ProductList = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const products = useSelector(
-    (state) => state.products.products.filteredItems,
+    (state) => state.production.products.filteredItems,
   );
   const [sortBy, setSortBy] = useState("newest");
   const [filters, setFilters] = useState(initFilters("products"));

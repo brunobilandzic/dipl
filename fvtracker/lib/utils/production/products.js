@@ -1,7 +1,7 @@
 import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { setLoading } from "@/store/loading";
-import { setProducts } from "@/store/production/products";
+import { setProducts } from "@/store/production";
 import { checkEmpty } from "../objects";
 import { stringContains } from "../strings";
 

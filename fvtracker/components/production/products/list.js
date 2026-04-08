@@ -18,7 +18,9 @@ import { productSortOptions } from "@/components/layout/preview/sort";
 const ProductList = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const products = useSelector((state) => state.products.filteredItems);
+  const products = useSelector(
+    (state) => state.products.products.filteredItems,
+  );
   const [sortBy, setSortBy] = useState("newest");
   const [filters, setFilters] = useState(initFilters("products"));
 
@@ -54,6 +56,7 @@ const ProductList = () => {
         setSortBy={setSortBy}
         filters={filters}
         setFilters={setFilters}
+        initialFilters={initFilters("products")}
         sortOptions={productSortOptions}
       >
         {products?.map((product) => (

@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 import utils from "@/lib/utils";
+import { Cultivation } from "./Cultivation";
+import { Field } from "./Field";
 
 // order is cropmaintype -> cropgeneratype -> croptype -> cropvariety
 
@@ -176,6 +178,20 @@ const plantedCropVarietySchema = new Schema({
     default: null,
   },
 });
+
+plantedCropVarietySchema.pre("save", async function () {
+  const cultivation = await Cultivation.findById(this.cultivation).populate({path: "cultivationArea", populate: {path: "field"}});
+  if (!cultivation) {
+   console.log("Cultivation not found for planted crop variety", this._id);
+   return;
+  }
+  const field = await Field.findById(cultivation.cultivationArea.field);
+  if (!field) {
+    console.log("Field not found for planted crop variety", this._id);
+    return;
+  }
+  await field.save(); // to trigger field's updatedAt change
+ }
 
 /* const harvestedCropVarietySchema = new Schema({
   harvestingPlanItem: {

@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { setLoading } from "@/store/loading";
 import { signOut } from "next-auth/react";
 import handleError from "@/lib/constants/errors/client/handleError";
+import { logOut } from "@/store/userSlice";
 
 export default function SeedOptions() {
   const dispatch = useDispatch();
@@ -75,7 +76,10 @@ export default function SeedOptions() {
   const API = async (seedType) => {
     try {
       console.log(`Seeding ${seedType}...`);
-      if (seedType === SEED_TYPES.ALL) await signOut({ redirect: false });
+      if (seedType === SEED_TYPES.ALL) {
+        await signOut({ redirect: false });
+        dispatch(logOut());
+      }
       dispatch(setLoading(true));
       const response = await axios.post("/api/seed", { seedType });
       console.log(response.data);

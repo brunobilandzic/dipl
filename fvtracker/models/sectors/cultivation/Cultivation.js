@@ -5,7 +5,6 @@ import { makeUrlFriendly } from "@/lib/utils/strings";
 
 const { Schema } = mongoose;
 
-
 const cultivationAreaSchema = new Schema({
   field: {
     type: mongoose.Schema.Types.ObjectId,
@@ -53,11 +52,13 @@ const cultivationSchema = new Schema({
   name: { type: String, required: true },
   slug: { type: String, unique: true, index: true },
   description: { type: String, default: "" },
-  plantedCropVarieties: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "PlantedCropVariety",
-    default: [],
-  }],
+  plantedCropVarieties: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "PlantedCropVariety",
+      default: [],
+    },
+  ],
   workHours: [
     {
       type: {
@@ -71,7 +72,7 @@ const cultivationSchema = new Schema({
         // needs functionality to calculate total hours from begin and end date time
         // and calculate payroll based on worker pay rate
       },
-      default:[]
+      default: [],
     },
   ],
   status: {
@@ -113,6 +114,12 @@ cultivationSchema.pre("save", function (next) {
   if (this.isModified("name")) {
     this.slug = utils.strings.makeUrlFriendly(this.name);
   }
+});
+
+cultivationSchema.pre("deleteMany", async function () {
+  await mongoose
+    .model("PlantedCropVariety")
+    .deleteMany({ cultivation: { $in: this.getFilter()._id } });
 });
 
 export const CultivationArea =

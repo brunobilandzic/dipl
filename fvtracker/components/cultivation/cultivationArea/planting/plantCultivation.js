@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { AppDatePicker, AppSelect } from "@/components/form/inputs";
 import Modals from "@/components/layout/modals";
 import "react-datepicker/dist/react-datepicker.css";
-import { ChoosePlan } from "@/components/cultivation/cultivationArea/plans/planting/plan/choosePlan";
+import { ChoosePlan } from "@/components/cultivation/plans/planting/choosePlan";
 
 export const PlantCultivation = ({
   isOpen,

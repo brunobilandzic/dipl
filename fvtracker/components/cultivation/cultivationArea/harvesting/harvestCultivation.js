@@ -1,4 +1,4 @@
-import { ChoosePlan } from "../plans/planting/plan/choosePlan";
+import { ChoosePlan } from "@/components/cultivation/plans/planting/choosePlan";
 import { FormModal } from "@/components/layout/modals/form";
 
 export const HarvestCultivation = ({

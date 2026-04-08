@@ -1,5 +1,6 @@
 "use client";
 
+import { LoadingFullScreen } from "@/components/layout/loading";
 import { List, ListItem } from "@/components/layout/preview/list";
 import { refreshMaterials } from "@/store/production";
 import { useEffect } from "react";
@@ -16,12 +17,12 @@ export const MaterialsList = ({}) => {
       dispatch(refreshMaterials());
     }
   }, [materials, dispatch]);
-  if (!materials) return dispatch(refreshMaterials());
+  if (!materials) return <LoadingFullScreen />;
   return (
     <div>
       <List title="Materijali">
         {materials.map((material) => (
-          <MaterialsListItem key={material.id} material={material} />
+          <MaterialsListItem key={material._id} material={material} />
         ))}
       </List>
     </div>

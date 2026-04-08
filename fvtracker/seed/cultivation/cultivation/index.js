@@ -8,6 +8,7 @@ export const createCultivation = async ({ cultivationArea, planted }) => {
     name: `Kultivacija ${new Date().toLocaleTimeString()}`,
     description: "Opis kultivacije 1",
   });
+  await newCultivation.save();
   const relativeCoords = [];
   for (let i = 0; i < 5; i++) {
     for (let j = 0; j < 5; j++) {

@@ -76,8 +76,7 @@ export function FieldsList({}) {
           });
           return (
             <div key={uuid()}>
-              <div className="mb-2 font-bold text-lg">{field.name}</div>
-              <ListItem actionOptions={actionOptions}>
+              <ListItem actionOptions={actionOptions} title={field.name}>
                 <FieldItem field={field} />
               </ListItem>
             </div>
@@ -150,9 +149,8 @@ function FieldItem({ field }) {
         <Link href={`/upravljanje-poljima/${slug}`}>
           <div className="flex justify-between">
             <div>
-              <FieldStatistics field={field} />
               <div className="text-sm">
-                <div>{field.description}</div>
+                <div>{description}</div>
                 <div>
                   Dimenzije: {width}m x {length}m
                 </div>
@@ -173,6 +171,7 @@ function FieldItem({ field }) {
                   }{" "}
                   kultivacija
                 </div>
+                <FieldStatistics field={field} />
                 <div>
                   Kreirano: {new Date(createdAt).toLocaleDateString()} -
                   Ažurirano: {new Date(updatedAt).toLocaleDateString()}

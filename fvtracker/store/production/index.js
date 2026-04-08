@@ -83,7 +83,7 @@ export const refreshMaterials = createAsyncThunk(
   "production/fetchMaterials",
   async (_, { dispatch }) => {
     dispatch(setLoading(true));
-    const res = await api.get("");
+    const res = await api.get("/materials");
     dispatch(setLoading(false));
     return res.data.materials;
   },

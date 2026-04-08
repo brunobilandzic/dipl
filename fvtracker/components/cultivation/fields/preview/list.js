@@ -173,8 +173,8 @@ function FieldItem({ field }) {
                 </div>
                 <FieldStatistics field={field} />
                 <div>
-                  Kreirano: {new Date(createdAt).toLocaleDateString()} -
-                  Ažurirano: {new Date(updatedAt).toLocaleDateString()}
+                  Kreirano: {new Date(createdAt).toLocaleString()} - Ažurirano:{" "}
+                  {new Date(updatedAt).toLocaleString()}
                 </div>
               </div>
             </div>

@@ -5,9 +5,15 @@ import { stringContains } from "@/lib/utils/strings";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  items: null,
-  filteredItems: null,
+  products: {
+    items: null,
+    filteredItems: null,
+  },
   managers: null,
+  materials: {
+    items: null,
+    filteredItems: null,
+  },
 };
 
 const productsSlice = createSlice({
@@ -15,8 +21,8 @@ const productsSlice = createSlice({
   initialState,
   reducers: {
     setProducts: (state, action) => {
-      state.items = action.payload;
-      state.filteredItems = sortItems({
+      state.products.items = action.payload;
+      state.products.filteredItems = sortItems({
         items: action.payload,
         sortBy: SORT_INIT_VALUE,
       });
@@ -38,14 +44,14 @@ const productsSlice = createSlice({
       state.managers = action.payload;
     },
     sortProducts: (state, action) => {
-      state.filteredItems = sortItems({
-        items: state.items,
+      state.products.filteredItems = sortItems({
+        items: state.products.items,
         sortBy: action.payload,
       });
     },
     filterProducts: (state, action) => {
-      state.filteredItems = filterItems({
-        _items: state.items,
+      state.products.filteredItems = filterItems({
+        _items: state.products.items,
         itemModelName: "Product",
         filters: action.payload,
       });

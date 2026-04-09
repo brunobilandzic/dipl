@@ -3,33 +3,35 @@
 import { LoadingFullScreen } from "@/components/layout/loading";
 import { List, ListItem } from "@/components/layout/preview/list";
 import { cropVarietyBatchResources } from "@/lib/utils/production/resources";
-import { refreshMaterials } from "@/store/production";
+import { refreshHarvestingBatches } from "@/store/production";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { v4 as uuid } from "uuid";
 
 export const ProductionResources = ({}) => {
-  const materials = useSelector(
-    (state) => state.production.materials.filteredItems,
+  const harvestingBatches = useSelector(
+    (state) => state.production.harvestingBatches.items,
   );
-  const resources = cropVarietyBatchResources({ materials });
+  const { resources } = cropVarietyBatchResources({ harvestingBatches });
   const dispatch = useDispatch();
   useEffect(() => {
-    if (!materials) {
-      dispatch(refreshMaterials());
+    if (!harvestingBatches) {
+      dispatch(refreshHarvestingBatches());
     }
-  }, [materials, dispatch]);
-  if (!materials) return <LoadingFullScreen />;
+  }, [harvestingBatches, dispatch]);
+  if (!harvestingBatches) return <LoadingFullScreen />;
   return (
     <div>
       <List title="Materijali">
-        {materials.map((material) => (
-          <ProductionResource key={material._id} material={material} />
+        {resources.map((resource) => (
+          <ProductionResource key={uuid()} resource={resource} />
         ))}
       </List>
     </div>
   );
 };
 
-const ProductionResource = ({ material }) => {
-  return <ListItem title={material.name} />;
+const ProductionResource = ({ resource }) => {
+  console.log({ resource });
+  return <ListItem title={resource.name} />;
 };

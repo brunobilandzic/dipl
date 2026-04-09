@@ -1,8 +1,8 @@
-export const cropVarietyBatchResources = ({ materials }) => {
-  if (!materials) return { resources: [] };
+export const cropVarietyBatchResources = ({ harvestingBatches }) => {
+  if (!harvestingBatches) return { resources: [] };
   const resources = [];
-  const harvestingBatchItems = materials.flatMap(
-    (material) => material.harvestingBatchItems,
+  const harvestingBatchItems = harvestingBatches.flatMap(
+    (batch) => batch.harvestingBatchItems,
   );
   harvestingBatchItems.forEach((item) => {
     const cropVarietyName = item.cropVariety.name;

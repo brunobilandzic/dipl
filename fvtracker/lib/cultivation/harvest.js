@@ -90,7 +90,7 @@ async function cmBatches() {
     managerName: "cultivationManager",
   });
 
-  let harvestingBatches = await cultivationManager.populate({
+  await cultivationManager.populate({
     path: "fields",
     select: "harvestingPlans",
     populate: {
@@ -102,8 +102,8 @@ async function cmBatches() {
       },
     },
   });
-
-  harvestingBatches = await populateBatches({ harvestingBatches });
+  console.log({ harvestingBatches });
+  const harvestingBatches = await populateBatches({ harvestingBatches });
   console.log({
     harvestingBatches,
   });

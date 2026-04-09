@@ -1,6 +1,6 @@
 import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
 
-export const getMaterials = async () => {
+export const getHarvestingBatches= async () => {
   const batches = await HarvestingBatch.find({}).populate([
     {
       path: "harvestingBatchItems",

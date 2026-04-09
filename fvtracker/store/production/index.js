@@ -83,7 +83,7 @@ const productsSlice = createSlice({
 export const refreshMaterials = createAsyncThunk(
   "production/fetchMaterials",
   async (_, { dispatch }) => {
-    const res = await api.get("/materials");
+    const res = await api.get("/harvesting-batches");
     return res.data.materials;
   },
 );

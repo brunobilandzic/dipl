@@ -7,11 +7,13 @@ const harvestingBatchSchema = new Schema({
     type: String,
     required: true,
   },
-  harvestingPlan: {
-    type: Schema.Types.ObjectId,
-    ref: "HarvestingPlan",
-    required: true,
-  },
+  harvestingPlans: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "HarvestingPlan",
+      required: true,
+    },
+  ],
   harvestingBatchItems: [
     {
       type: Schema.Types.ObjectId,

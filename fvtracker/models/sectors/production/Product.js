@@ -185,6 +185,13 @@ const productStockSchema = new Schema({
     type: Number,
     required: true,
   },
+  productionProcesses: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ProductionProcess",
+      default: [],
+    },
+  ],
 });
 
 productStockSchema.pre("save", async function () {

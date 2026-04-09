@@ -23,7 +23,7 @@ export const ProductionResources = ({}) => {
   if (!harvestingBatches) return <LoadingFullScreen />;
   return (
     <div>
-      <List title="Materijali">
+      <List title="Sirovine">
         {batchesResources.map((batchResources) => (
           <ProductionResource key={uuid()} batchResources={batchResources} />
         ))}
@@ -37,7 +37,7 @@ const ProductionResource = ({ batchResources }) => {
   if (!resources || resources.length === 0) return null;
   console.log({ batchResources });
   return (
-    <ListItem title={batchResources.batchName}>
+    <ListItem title={batchName}>
       <AppTable
         headerLabels={Object.keys(resources[0] || {}).map(
           (key) => batchResourceHeaderItems[key],

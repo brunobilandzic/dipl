@@ -33,5 +33,17 @@ export const ProductionResources = ({}) => {
 
 const ProductionResource = ({ resource }) => {
   console.log({ resource });
-  return <ListItem title={resource.name} />;
+  return (
+    <ListItem>
+      <div className="flex ">
+        <div className="mr-4">
+          <p className="font-bold">{resource.cropVarietyName}</p>
+          <p>{resource.cropTypeName}</p>
+        </div>
+        <div className="ml-auto">
+          <p className="font-bold">{resource.batchQuantity}</p>
+        </div>
+      </div>
+    </ListItem>
+  );
 };

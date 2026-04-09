@@ -37,6 +37,14 @@ export const getProductBySlug = async (slug) => {
   return product;
 };
 
+export const getProductById = async (id) => {
+  const product = await Product.findById(id);
+  if (!product) {
+    throw new Error(`Product with id ${id} not found.`);
+  }
+  return product;
+};
+
 export const updateProduct = async ({ _updatedProduct, productId }) => {
   const { ingredients: updatedIngredients, ...updatedProduct } =
     _updatedProduct;

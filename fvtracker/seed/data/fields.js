@@ -55,7 +55,7 @@ export const planInfo = ({ fieldId, cropVarietyId, productionManagerId }) => {
     },
     harvestingPlan: {
       field: fieldId, // Postavit ćemo ovo kasnije
-      name: `Plan berbe ${new Date().toLocaleString()}`,
+      name: `Plan berbe ${new Date().toLocaleTimeString()}`,
       description: "Plan berbe za testiranje",
       items: [
         {

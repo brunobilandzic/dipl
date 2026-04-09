@@ -22,6 +22,7 @@ export async function GET(request) {
           select: "name surname",
         },
       });
+
       return Response.json({ productionManagers });
     }
     return Response.json({ productionManager });

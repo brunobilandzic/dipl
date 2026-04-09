@@ -82,11 +82,6 @@ const harvestingPlanSchema = new Schema({
     default: null,
   },
   slug: { type: String, unique: true, index: true },
-  productionManager: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "ProductionManager",
-    required: true,
-  },
 });
 
 harvestingPlanSchema.pre("save", async function () {

@@ -39,3 +39,13 @@ export const products = [
 ];
 
 // ing qant must be reduced from batch
+
+export const productionFacilitiyInfo = {
+  name: "Proizvodni pogon 1",
+  description: "Pogon za proizvodnju gotovih proizvoda",
+}
+
+export const production = {
+  name: "Proizvodnja 1",
+  description: "Proizvodnja gotovih proizvoda na osnovu usjeva",
+}

@@ -57,11 +57,12 @@ export const SelectField = ({
 }) => {
   const fields = useSelector((state) => state.cultivation.fields);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => {
     console.log("fields in select field component", fields);
     if (fields) return;
-    refreshFields({ dispatch });
+    refreshFields({ dispatch, router });
   }, [fields]);
 
   if (!fields) {
@@ -255,7 +256,6 @@ export const FillPlanInfo = ({
             setCropsData={setFormData}
             additionalItemFields={[QuantityInput]}
           />
-        
           <div className="btn self-start" onClick={handleSubmit}>
             Spremi plan {plant ? "sadnje" : "berbe"}
           </div>

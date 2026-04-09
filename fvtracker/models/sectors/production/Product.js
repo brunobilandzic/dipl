@@ -117,17 +117,19 @@ productSchema.methods.addProductStock = async function ({
     }
     batchItem.batchQuantity -= ingredient.quantity * quantity;
   }
-  const newStock = new ProductStock({
+
+  const productionProcess = new ProductionProcess({
     product: this._id,
     harvestingBatch: harvestingBatchId,
     quantity,
   });
-  const harvestingBatch = await mongoose
-    .model("HarvestingBatch")
-    .findById(harvestingBatchId);
-  if (!harvestingBatch) {
-    throw new Error(`Harvesting batch with id ${harvestingBatchId} not found.`);
-  }
+
+  const newStock = new ProductStock({
+    product: this._id,
+    harvestingBatch: harvestingBatchId,
+    quantity,
+    productionProcesses: [productionProcess._id],
+  });
   // reduce from batch quantity
 };
 

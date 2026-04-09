@@ -1,7 +1,7 @@
 import { fetchManager } from "@/lib/auth/fetchSessionData";
 import { PRODUCTION_MANAGER } from "@/lib/constants/users/managerTypes";
 import dbConnect from "@/lib/db/mongooseConnect";
-import { getHarvestingBatches } from "@/lib/cultivation/harvest";
+import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
 
 export async function GET() {
   try {

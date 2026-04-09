@@ -6,7 +6,7 @@ import {
 import {
   getHarvestingBatches,
   populateBatches,
-} from "@/lib/cultivation/harvest";
+} from "@/lib/cultivation/harvest/batches";
 import dbConnect from "@/lib/db/mongooseConnect";
 import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
 

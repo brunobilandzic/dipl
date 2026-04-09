@@ -2,6 +2,7 @@
 
 import { LoadingFullScreen } from "@/components/layout/loading";
 import { List, ListItem } from "@/components/layout/preview/list";
+import { AppTable } from "@/components/layout/preview/table";
 import { cropVarietyBatchResources } from "@/lib/utils/production/resources";
 import { refreshHarvestingBatches } from "@/store/production";
 import { useEffect } from "react";
@@ -36,7 +37,13 @@ const ProductionResource = ({ batchResources }) => {
   console.log({ batchResources });
   return (
     <ListItem title={batchResources.batchName}>
-
+      <AppTable headerItems={batchResourceHeaderItems} />
     </ListItem>
   );
 };
+
+const batchResourceHeaderItems = [
+    { label: "Vrsta usjeva", value: "cropTypeName" },
+  { label: "Naziv sorte", value: "cropVarietyName" },
+  { label: "Količina u seriji", value: "batchQuantity" },
+];

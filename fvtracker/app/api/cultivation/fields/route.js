@@ -1,7 +1,5 @@
 import dbConnect from "@/lib/db/mongooseConnect";
-import auth from "@/lib/auth";
 import cultivation from "@/lib/cultivation";
-import { Field } from "@/models/sectors/cultivation/Field";
 import { ROLE_STATUSES } from "@/lib/constants/users";
 import { fetchManager } from "@/lib/auth/fetchSessionData";
 import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
@@ -16,6 +14,13 @@ export async function GET(request) {
       await fetchManager({
         managerNames: [CULTIVATION_MANAGER],
       });
+
+    if (!cultivationManager) {
+      return Response.json(
+        { message: "Unauthorized: No cultivation manager found" },
+        { status: 403 },
+      );
+    }
     if (
       cultivationManager?.rootManager?.roleRequest.status !=
       ROLE_STATUSES.APPROVED

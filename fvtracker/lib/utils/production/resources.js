@@ -30,3 +30,16 @@ export const cropVarietyBatchResources = ({ harvestingBatches }) => {
     batchesResources,
   };
 };
+
+
+export const getBatchWithResources = ({
+  harvestingBatches,
+  cropVaietyIds,
+  requiredQuantity,
+}) => {
+  if (!harvestingBatches) return null;
+  for (const batch of harvestingBatches) {
+    const hasResources = false
+    for (const item of batch.harvestingBatchItems) {
+      if(cropVaietyIds.includes(item.cropVariety._id.toString()) && item.batchQuantity >= requiredQuantity) {
+        continue

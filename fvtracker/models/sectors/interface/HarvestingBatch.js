@@ -37,6 +37,30 @@ const harvestingBatchSchema = new Schema({
   ],
 });
 
+const harvestingBatchItemSchema = new Schema({
+  harvestingBatch: {
+    type: Schema.Types.ObjectId,
+    ref: "HarvestingBatch",
+    required: true,
+  },
+  cropVariety: {
+    type: Schema.Types.ObjectId,
+    ref: "CropVariety",
+    required: true,
+  },
+  batchQuantity: {
+    type: Number,
+    default: 0,
+  },
+  plantedCropVarieties: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "PlantedCropVariety",
+      default: [],
+    },
+  ],
+});
+
 harvestingBatchSchema.pre("deleteMany", async function () {
   const ids = await HarvestingBatch.find(this.getFilter()).distinct("_id");
   await HarvestingBatchItem.deleteMany({ harvestingBatch: { $in: ids } });
@@ -110,30 +134,6 @@ harvestingBatchSchema.methods.quantities = async function () {
   }
   return quantities;
 };
-
-const harvestingBatchItemSchema = new Schema({
-  harvestingBatch: {
-    type: Schema.Types.ObjectId,
-    ref: "HarvestingBatch",
-    required: true,
-  },
-  cropVariety: {
-    type: Schema.Types.ObjectId,
-    ref: "CropVariety",
-    required: true,
-  },
-  batchQuantity: {
-    type: Number,
-    default: 0,
-  },
-  plantedCropVarieties: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "PlantedCropVariety",
-      default: [],
-    },
-  ],
-});
 
 harvestingBatchItemSchema.pre("deleteMany", async function () {
   const ids = await HarvestingBatchItem.find(this.getFilter()).distinct("_id");

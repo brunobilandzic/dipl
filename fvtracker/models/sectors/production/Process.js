@@ -13,6 +13,14 @@ const productionProcessSchema = {
     ref: "Product",
     required: true,
   },
+  productStock: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "ProductStock",
+  },
+  quantity: {
+    type: Number,
+    default: 0,
+  },
 };
 
 export const ProductionProcess =

@@ -125,18 +125,28 @@ productSchema.methods.addProductStock = async function ({
     quantity,
   });
 
-  const newStock = new ProductStock({
+  const existingStock = await ProductStock.findOne({
     product: this._id,
     harvestingBatch: harvestingBatchId,
-    quantity,
-    productionProcesses: [productionProcess._id],
-  });
+  }).populate("productionProcesses");
+  if (existingStock) {
+    existingStock.productionProcesses.push(productionProcess._id);
+    existingStock.quantity += quantity;
+    await existingStock.save();
+  } else {
+    const newStock = new ProductStock({
+      product: this._id,
+      harvestingBatch: harvestingBatchId,
+      quantity,
+      productionProcesses: [productionProcess._id],
+    });
+    await newStock.save();
+  }
 
   harvestingBatch.productionProcesses.push(productionProcess._id);
 
   await harvestingBatch.save();
   await productionProcess.save();
-  await newStock.save();
 
   // reduce from batch quantity
 };

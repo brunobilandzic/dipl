@@ -19,10 +19,10 @@ const harvestingBatchSchema = new Schema({
       default: [],
     },
   ],
-  productions: [
+  productionProcesses: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Production",
+      ref: "ProductionProcess",
       default: [],
     },
   ],

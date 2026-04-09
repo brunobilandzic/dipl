@@ -8,6 +8,7 @@ export const extractCoords = (cell) => {
   return { width, length };
 };
 
+
 export const refreshFields = async ({ dispatch, router }) => {
   try {
     dispatch(setLoading(true));

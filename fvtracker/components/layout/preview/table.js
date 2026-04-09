@@ -1,6 +1,10 @@
 import { PiEmpty } from "react-icons/pi";
 
-export const AppTable = ({ headerItems, rows }) => {
+export const AppTable = ({
+  headerItems,
+  rows,
+  emptyRowsLabel = "Nema podataka",
+}) => {
   const numCols = headerItems ? headerItems.length : 0;
   return (
     <>
@@ -29,17 +33,17 @@ export const AppTable = ({ headerItems, rows }) => {
           </tbody>
         </table>
       ) : (
-        <NoTableRows numCols={numCols} />
+        <NoTableRows emptyRowsLabel={emptyRowsLabel} />
       )}
     </>
   );
 };
 
-const NoTableRows = ({ numCols }) => {
+const NoTableRows = ({ emptyRowsLabel }) => {
   return (
     <div className="flex items-center justify-center gap-2 text-gray-500 text-2xl py-4">
       <PiEmpty />
-      <span>Nema podataka</span>
+      <span>{emptyRowsLabel}</span>
     </div>
   );
 };

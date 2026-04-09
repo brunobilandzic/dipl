@@ -1,4 +1,5 @@
 import { Base } from "@/models/Base";
+import mongoose from "mongoose";
 
 const productionProcessSchema = {
   machines: [

@@ -2,16 +2,9 @@ import { Schema } from "mongoose";
 import mongoose from "mongoose";
 import { CropVariety } from "../cultivation/Crops";
 import { makeUrlFriendly } from "@/lib/utils/strings";
+import { Base } from "@/models/Base";
 
 const productSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-  },
-  description: {
-    type: String,
-    default: "",
-  },
   price: {
     type: Number,
     default: 0,
@@ -33,14 +26,6 @@ const productSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
   },
 });
 
@@ -98,18 +83,23 @@ productSchema.methods.createIngredients = async function ({ ingredientsData }) {
   await this.save();
 };
 
-productSchema.methods.addProductStock = async function ({ harvestingBatchId, quantity }) {
+productSchema.methods.addProductStock = async function ({
+  harvestingBatchId,
+  quantity,
+}) {
   const newStock = new ProductStock({
     product: this._id,
     harvestingBatch: harvestingBatchId,
     quantity,
   });
-  const harvestingBatch = await mongoose.model("HarvestingBatch").findById(harvestingBatchId);
+  const harvestingBatch = await mongoose
+    .model("HarvestingBatch")
+    .findById(harvestingBatchId);
   if (!harvestingBatch) {
     throw new Error(`Harvesting batch with id ${harvestingBatchId} not found.`);
   }
   // reduce from batch quantity
-}
+};
 
 productSchema.pre("deleteMany", async function () {
   const ids = await Product.find(this.getFilter()).distinct("_id");
@@ -182,7 +172,8 @@ productStockSchema.pre("save", async function () {
 });
 
 export const Product =
-  mongoose.models.Product || mongoose.model("Product", productSchema);
+  mongoose.models.Product ||
+  Base.discriminator("Product", new mongoose.Schema(productSchema));
 export const Ingredient =
   mongoose.models.Ingredient || mongoose.model("Ingredient", ingredientsSchema);
 export const ProductStock =

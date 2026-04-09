@@ -6,6 +6,7 @@ import {
   PRODUCTION_MANAGER,
 } from "../constants/users/managerTypes";
 import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
+import { fetchSessionSpecificManager } from "../auth/fetchSessionData";
 
 export async function getHarvestingPlanById(id) {
   const harvestingPlan = await HarvestingPlan.findById(id);
@@ -115,7 +116,7 @@ async function cmBatches() {
 
 async function pmBatches() {
   await fetchSessionSpecificManager({
-    managerName: "productionManager",
+    managerName: PRODUCTION_MANAGER,
   });
   const batches = await HarvestingBatch.find({}).populate([
     {

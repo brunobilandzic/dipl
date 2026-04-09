@@ -12,11 +12,10 @@ export async function GET(request) {
     const { searchParams } = new URL(request.url);
     const slug = searchParams.get("slug");
     await dbConnect();
-    const { specificManager: cultivationManager } = await fetchManager({
-      managerNames: [CULTIVATION_MANAGER],
-      redirectUrl: `${new URL(request.url).origin}/autorizacija`,
-    });
-
+    const { specificManager: cultivationManager, redirect } =
+      await fetchManager({
+        managerNames: [CULTIVATION_MANAGER],
+      });
     if (
       cultivationManager.rootManager.roleRequest.status !=
       ROLE_STATUSES.APPROVED

@@ -31,7 +31,6 @@ export async function fetchSessionSpecificManager({
   throwError = true,
 }) {
   const appUser = await fetchSessionAppUser();
-
   let specificManager = await mongoose.models[managerName].findOne({
     rootManager: appUser.rootManager,
   });
@@ -103,6 +102,9 @@ export async function fetchManager({ managerNames = [] }) {
     }
   }
 
+    return { redirect: true };
+  
+  console.log("did not throw error yet");
   throw new Error(
     `No manager found for session user among types: ${managerNames.join(", ")}`,
   );

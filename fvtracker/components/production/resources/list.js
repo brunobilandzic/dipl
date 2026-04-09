@@ -23,27 +23,20 @@ export const ProductionResources = ({}) => {
   return (
     <div>
       <List title="Materijali">
-        {batchesResources.map((resource) => (
-          <ProductionResource key={uuid()} resource={resource} />
+        {batchesResources.map((batchResources) => (
+          <ProductionResource key={uuid()} batchResources={batchResources} />
         ))}
       </List>
     </div>
   );
 };
 
-const ProductionResource = ({ resource }) => {
-  console.log({ resource });
+const ProductionResource = ({ batchResources }) => {
+  const { batchName, resources } = batchResources;
+  console.log({ batchResources });
   return (
-    <ListItem title={resource.batchName}>
-      <div className="flex ">
-        <div className="mr-4">
-          <p className="font-bold">{resource.cropVarietyName}</p>
-          <p>{resource.cropTypeName}</p>
-        </div>
-        <div className="ml-auto">
-          <p className="font-bold">{resource.batchQuantity}</p>
-        </div>
-      </div>
+    <ListItem title={batchResources.batchName}>
+
     </ListItem>
   );
 };

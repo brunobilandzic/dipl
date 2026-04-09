@@ -4,14 +4,22 @@ export const cropVarietyBatchResources = ({ harvestingBatches }) => {
   const resources = harvestingBatches.map((batch) => {
     const batchName = batch.name;
     const batchResources = batch.harvestingBatchItems.forEach((item) => {
-      const cropVarietyName = item.cropVariety.name;
-      const cropTypeName = item.cropVariety.cropType.name;
-      const batchQuantity = item.batchQuantity;
+      const batchResource = {
+        cropVarietyName: item.cropVariety.name,
+        cropTypeName: item.cropVariety.cropType.name,
+        batchQuantity: item.batchQuantity,
+      };
+
+      const existingBatchResource = batchesResources.find(
+        (br) => br.batchName === batchName,
+      );
+      if (existingBatchResource) {
+        existingBatchResource.resources.push(batchResource);
+        return;
+      }
       batchesResources.push({
         batchName,
-        cropVarietyName,
-        cropTypeName,
-        batchQuantity,
+        resources: [batchResource],
       });
     });
     return batchResources;

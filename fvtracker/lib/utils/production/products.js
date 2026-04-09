@@ -121,3 +121,12 @@ export const productsWithCropVarieties = (products, cropVarietySearch) => {
     })
     .filter((p) => p);
 };
+
+export function extractVarietiesQuantities({ product, quantity }) {
+  const varietiesQuantities = {};
+  product.ingredients.forEach((ingredient) => {
+    varietiesQuantities[ingredient.cropVarietyId] =
+      ingredient.quantity * quantity;
+  });
+  return varietiesQuantities;
+}

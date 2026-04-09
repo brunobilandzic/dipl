@@ -16,6 +16,12 @@ const productionFacilitySchema = new Schema({
       ref: "ProductionMachine",
     },
   ],
+  processes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ProductionProcess",
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,

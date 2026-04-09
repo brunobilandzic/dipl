@@ -87,6 +87,14 @@ productSchema.methods.addProductStock = async function ({
   harvestingBatchId,
   quantity,
 }) {
+  // find harvesting batch for create product
+  const harvestingBatch = await mongoose
+    .model("HarvestingBatch")
+    .findById(harvestingBatchId)
+    .populate("harvestingBatchItems");
+  if (!harvestingBatch) {
+    throw new Error(`Harvesting batch with id ${harvestingBatchId} not found.`);
+  }
   const newStock = new ProductStock({
     product: this._id,
     harvestingBatch: harvestingBatchId,

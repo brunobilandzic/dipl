@@ -12,7 +12,7 @@ export const ProductionResources = ({}) => {
   const harvestingBatches = useSelector(
     (state) => state.production.harvestingBatches.items,
   );
-  const { resources } = cropVarietyBatchResources({ harvestingBatches });
+  const { batchesResources } = cropVarietyBatchResources({ harvestingBatches });
   const dispatch = useDispatch();
   useEffect(() => {
     if (!harvestingBatches) {
@@ -23,7 +23,7 @@ export const ProductionResources = ({}) => {
   return (
     <div>
       <List title="Materijali">
-        {resources.map((resource) => (
+        {batchesResources.map((resource) => (
           <ProductionResource key={uuid()} resource={resource} />
         ))}
       </List>
@@ -34,7 +34,7 @@ export const ProductionResources = ({}) => {
 const ProductionResource = ({ resource }) => {
   console.log({ resource });
   return (
-    <ListItem>
+    <ListItem title={resource.batchName}>
       <div className="flex ">
         <div className="mr-4">
           <p className="font-bold">{resource.cropVarietyName}</p>

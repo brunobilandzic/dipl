@@ -64,27 +64,27 @@ const productsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(refreshMaterials.pending, (state) => {
-        state.materials.isLoading = true;
+      .addCase(refreshHarvestingBatches.pending, (state) => {
+        state.isLoading = true;
       })
-      .addCase(refreshMaterials.fulfilled, (state, action) => {
-        state.materials.items = action.payload;
-        state.materials.filteredItems = sortItems({
+      .addCase(refreshHarvestingBatches.fulfilled, (state, action) => {
+        state.harvestingBatches.items = action.payload;
+        state.harvestingBatches.filteredItems = sortItems({
           items: action.payload,
           sortBy: SORT_INIT_VALUE,
         });
       })
-      .addCase(refreshMaterials.rejected, (state, action) => {
-        state.materials.isLoading = false;
+      .addCase(refreshHarvestingBatches.rejected, (state, action) => {
+        state.harvestingBatches.isLoading = false;
       });
   },
 });
 
-export const refreshMaterials = createAsyncThunk(
-  "production/fetchMaterials",
+export const refreshHarvestingBatches = createAsyncThunk(
+  "production/refreshHarvestingBatches",
   async (_, { dispatch }) => {
     const res = await api.get("/harvesting-batches");
-    return res.data.materials;
+    return res.data.harvestingBatches;
   },
 );
 

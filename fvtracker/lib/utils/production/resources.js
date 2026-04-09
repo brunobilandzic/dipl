@@ -33,13 +33,13 @@ export const cropVarietyBatchResources = ({ harvestingBatches }) => {
   };
 };
 
-export const getBatchWithResources = ({
+export const getBatchesWithResources = ({
   harvestingBatches,
   product,
   quantity,
 }) => {
   if (!harvestingBatches) return null;
-  let batch = null;
+  let batches = [];
   const varietiesQuantities = extractVarietiesQuantities({ product, quantity });
 
   for (const harvestingBatch of harvestingBatches) {
@@ -51,9 +51,10 @@ export const getBatchWithResources = ({
         break;
       }
       if (hasResources) {
-        batch = harvestingBatch;
+        batches.push(harvestingBatch);
         break;
       }
     }
   }
+  return batches;
 };

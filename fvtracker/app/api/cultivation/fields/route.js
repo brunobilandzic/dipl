@@ -12,8 +12,9 @@ export async function GET(request) {
     const { searchParams } = new URL(request.url);
     const slug = searchParams.get("slug");
     await dbConnect();
-    const cultivationManager = await auth.session.specificManager({
-      managerName: "CultivationManager",
+    const { specificManager: cultivationManager } = await fetchManager({
+      managerNames: [CULTIVATION_MANAGER],
+      redirectUrl: `${new URL(request.url).origin}/autorizacija`,
     });
 
     if (

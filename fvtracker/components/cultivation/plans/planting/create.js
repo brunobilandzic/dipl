@@ -134,7 +134,6 @@ export const FillPlanInfo = ({
     const defaultCropData = testCropItemData({ crops });
     const formDataInitial = {
       name: `Plan ${plant ? "sadnje" : "berbe"} - ${new Date().toLocaleString()}`,
-      productionManager: "",
       field,
       [itemsName]: defaultCropData,
       plannedPlantingDate: new Date().toISOString().split("T")[0],
@@ -256,15 +255,7 @@ export const FillPlanInfo = ({
             setCropsData={setFormData}
             additionalItemFields={[QuantityInput]}
           />
-          {!plant && (
-            <div className="mt-4">
-              <SelectProductionManager
-                setFormData={setFormData}
-                selectedProductionManager={formData.productionManager}
-              />
-            </div>
-          )}
-
+        
           <div className="btn self-start" onClick={handleSubmit}>
             Spremi plan {plant ? "sadnje" : "berbe"}
           </div>

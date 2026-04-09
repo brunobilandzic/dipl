@@ -37,13 +37,13 @@ const ProductionResource = ({ batchResources }) => {
   console.log({ batchResources });
   return (
     <ListItem title={batchResources.batchName}>
-      <AppTable headerItems={batchResourceHeaderItems} />
+      <AppTable headerItems={batchResourceHeaderItems} rows={resources} />
     </ListItem>
   );
 };
 
 const batchResourceHeaderItems = [
-    { label: "Vrsta usjeva", value: "cropTypeName" },
+  { label: "Vrsta usjeva", value: "cropTypeName" },
   { label: "Naziv sorte", value: "cropVarietyName" },
   { label: "Količina u seriji", value: "batchQuantity" },
 ];

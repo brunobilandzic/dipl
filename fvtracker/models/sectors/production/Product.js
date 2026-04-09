@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import { CropVariety } from "../cultivation/Crops";
 import { makeUrlFriendly } from "@/lib/utils/strings";
 import { Base } from "@/models/Base";
+import { ProductionProcess } from "./Process";
 
 const productSchema = new Schema({
   price: {
@@ -130,6 +131,13 @@ productSchema.methods.addProductStock = async function ({
     quantity,
     productionProcesses: [productionProcess._id],
   });
+
+  harvestingBatch.productionProcesses.push(productionProcess._id);
+
+  await harvestingBatch.save();
+  await productionProcess.save();
+  await newStock.save();
+
   // reduce from batch quantity
 };
 

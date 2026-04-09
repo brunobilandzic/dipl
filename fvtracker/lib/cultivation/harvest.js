@@ -77,9 +77,12 @@ export async function harvestCells({
 export async function getHarvestingBatches({
   managerName = CULTIVATION_MANAGER,
 }) {
-  return managerName === CULTIVATION_MANAGER
-    ? await cmBatches()
-    : await pmBatches();
+  switch (managerName) {
+    case CULTIVATION_MANAGER:
+      return await cmBatches();
+    case PRODUCTION_MANAGER:
+      return await pmBatches();
+  }
 }
 
 async function cmBatches() {

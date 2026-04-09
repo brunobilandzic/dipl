@@ -63,7 +63,7 @@ function NavItems() {
         !fieldsRedux &&
         session.user?.roleStatus === ROLE_STATUSES.APPROVED
       ) {
-        console.log("refreshing fields for cultivation manager");
+        console.log("refreshing fields for cultivation manager from navbar");
         refreshFields({ dispatch, router });
       }
       if (managerModelName === "GeneralManager" && !generalManagerRedux) {

@@ -17,7 +17,7 @@ export async function GET(request) {
         managerNames: [CULTIVATION_MANAGER],
       });
     if (
-      cultivationManager.rootManager.roleRequest.status !=
+      cultivationManager?.rootManager?.roleRequest.status !=
       ROLE_STATUSES.APPROVED
     ) {
       return Response.json(

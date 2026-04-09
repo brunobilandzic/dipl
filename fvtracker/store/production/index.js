@@ -1,12 +1,8 @@
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { filterItems, sortItems } from "@/lib/utils/list";
-import { productsWithCropVarieties } from "@/lib/utils/production/products";
-import { stringContains } from "@/lib/utils/strings";
 import { createSlice } from "@reduxjs/toolkit";
 import api from "@/lib/api";
-import handleError from "@/lib/constants/errors/client/handleError";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { setLoading } from "../loading";
 
 const initialState = {
   products: {
@@ -14,11 +10,11 @@ const initialState = {
     filteredItems: null,
   },
   managers: null,
-  materials: {
+  harvestingBatches: {
     items: null,
     filteredItems: null,
-    isLoading: false,
   },
+  isLoading: false,
 };
 
 const productsSlice = createSlice({

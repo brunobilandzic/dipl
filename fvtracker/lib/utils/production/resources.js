@@ -1,3 +1,5 @@
+import { extractVarietiesQuantities } from "./products";
+
 export const cropVarietyBatchResources = ({ harvestingBatches }) => {
   if (!harvestingBatches) return { resources: [] };
   const batchesResources = [];
@@ -31,15 +33,27 @@ export const cropVarietyBatchResources = ({ harvestingBatches }) => {
   };
 };
 
-
 export const getBatchWithResources = ({
   harvestingBatches,
-  cropVaietyIds,
-  requiredQuantity,
+  product,
+  quantity,
 }) => {
   if (!harvestingBatches) return null;
-  for (const batch of harvestingBatches) {
-    const hasResources = false
-    for (const item of batch.harvestingBatchItems) {
-      if(cropVaietyIds.includes(item.cropVariety._id.toString()) && item.batchQuantity >= requiredQuantity) {
-        continue
+  let batch = null;
+  const varietiesQuantities = extractVarietiesQuantities({ product, quantity });
+
+  for (const harvestingBatch of harvestingBatches) {
+    const hasResources = true;
+    for (const item of harvestingBatch.harvestingBatchItems) {
+      const requiredQuantity = varietiesQuantities[item.cropVarietyId];
+      if (!requiredQuantity || item.batchQuantity < requiredQuantity) {
+        hasResources = false;
+        break;
+      }
+      if (hasResources) {
+        batch = harvestingBatch;
+        break;
+      }
+    }
+  }
+};

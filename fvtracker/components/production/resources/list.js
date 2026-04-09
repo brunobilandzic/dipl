@@ -6,7 +6,7 @@ import { AppTable } from "@/components/layout/preview/table";
 import { cropVarietyBatchResources } from "@/lib/utils/production/resources";
 import { refreshHarvestingBatches } from "@/store/production";
 import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch, batch } from "react-redux";
 import { v4 as uuid } from "uuid";
 
 export const ProductionResources = ({}) => {
@@ -34,16 +34,22 @@ export const ProductionResources = ({}) => {
 
 const ProductionResource = ({ batchResources }) => {
   const { batchName, resources } = batchResources;
+  if (!resources || resources.length === 0) return null;
   console.log({ batchResources });
   return (
     <ListItem title={batchResources.batchName}>
-      <AppTable headerItems={batchResourceHeaderItems} rows={resources} />
+      <AppTable
+        headerLabels={Object.keys(resources[0] || {}).map(
+          (key) => batchResourceHeaderItems[key],
+        )}
+        rows={resources}
+      />
     </ListItem>
   );
 };
 
-const batchResourceHeaderItems = [
-  { label: "Vrsta usjeva", value: "cropTypeName" },
-  { label: "Naziv sorte", value: "cropVarietyName" },
-  { label: "Količina u seriji", value: "batchQuantity" },
-];
+const batchResourceHeaderItems = {
+  cropVarietyName: "Sorta",
+  cropTypeName: "Vrsta",
+  batchQuantity: "Količina",
+};

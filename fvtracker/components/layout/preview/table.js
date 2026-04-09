@@ -1,20 +1,21 @@
 import { PiEmpty } from "react-icons/pi";
 
 export const AppTable = ({
-  headerItems,
+  headerLabels,
   rows,
   emptyRowsLabel = "Nema podataka",
 }) => {
-  const numCols = headerItems ? headerItems.length : 0;
+  const numCols = headerLabels ? headerLabels.length : 0;
+  console.log({ headerLabels, rows });
   return (
     <>
       {rows?.length > 0 ? (
         <table className="w-full border-collapse">
           <thead>
             <tr>
-              {headerItems?.map((item, index) => (
+              {headerLabels?.map((label, index) => (
                 <th key={index} className="">
-                  {item.label}
+                  {label}
                 </th>
               ))}
             </tr>
@@ -23,9 +24,9 @@ export const AppTable = ({
           <tbody>
             {rows.map((row, rowIndex) => (
               <tr key={rowIndex} className="">
-                {row.map((cell, cellIndex) => (
+                {Object.keys(row).map((key, cellIndex) => (
                   <td key={cellIndex} className="">
-                    {cell}
+                    {row[key]}
                   </td>
                 ))}
               </tr>

@@ -22,7 +22,7 @@ export const AppTable = ({
 
           <tbody>
             {rows.map((row, rowIndex) => (
-              <tr key={rowIndex} className="border-t">
+              <tr key={rowIndex} className="">
                 {row.map((cell, cellIndex) => (
                   <td key={cellIndex} className="">
                     {cell}

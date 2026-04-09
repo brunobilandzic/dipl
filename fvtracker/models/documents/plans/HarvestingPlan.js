@@ -97,13 +97,6 @@ harvestingPlanSchema.pre("save", async function () {
     await harvestingBatch.save();
     this.harvestingBatch = harvestingBatch._id;
   }
-  if (this.isNew) {
-    const productionManager = await ProductionManager.findById(
-      this.productionManager,
-    );
-    productionManager.harvestingPlans.push(this._id);
-    await productionManager.save();
-  }
 });
 
 harvestingPlanSchema.pre("deleteMany", async function () {

@@ -1,13 +1,14 @@
 import { HarvestingPlan } from "@/models/documents/plans/HarvestingPlan";
-import { PlantingPlan } from "@/models/documents/plans/PlantingPlan";
+import {
+  PlantingPlan,
+  PlantingPlanItem,
+} from "@/models/documents/plans/PlantingPlan";
 import { planInfo } from "../data/fields";
 import {
   createHarvestingPlan,
   createPlantingPlan,
 } from "@/lib/cultivation/plans";
-import {
-  PRODUCTION_MANAGER_USERNAME,
-} from "@/lib/constants/users/managersUsernameModel";
+import { PRODUCTION_MANAGER_USERNAME } from "@/lib/constants/users/managersUsernameModel";
 import { ProductionManager } from "@/models/user/managers/ProductionManager";
 import { AppUser } from "@/models/user/AppUser";
 
@@ -40,3 +41,23 @@ export async function createPlans({ fieldId, cropVarietyId }) {
 
   return { newPlantingPlan, newHarvestingPlan };
 }
+
+export const addPlanItems = async ({ plan, ingredients }) => {
+  for (const ingredient of ingredients) {
+    const cropVarietyId = await getCropVarietyById(ingredient.cropVariety._id);
+    const itemData = {
+      cropVariety: ingredient.cropVariety,
+      quantity: ingredient.quantity * 3, // increase quantity for testing
+    };
+    const plantingPlanItem = new PlantingPlanItem({
+      ...itemData,
+      plantingPlan: plan._id,
+      cropVariety: cropVarietyId,
+    });
+    const cropVariety = await getCropVarietyById(cropVarietyId);
+    cropVariety.plantingPlanItems.push(plantingPlanItem._id);
+    await cropVariety.save();
+    await plantingPlanItem.save();
+    plan.items.push(plantingPlanItem._id);
+  }
+};

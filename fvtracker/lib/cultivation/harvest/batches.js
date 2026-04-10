@@ -9,7 +9,7 @@ import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
 export async function getHarvestingBatches({
   managerName = PRODUCTION_MANAGER,
   batchIds,
-}) {
+}={}) {
   switch (managerName) {
     case CULTIVATION_MANAGER:
       return await cmBatches({ batchIds });

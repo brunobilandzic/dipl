@@ -21,8 +21,6 @@ const baseSchema = new Schema({
   },
   slug: {
     type: String,
-    required: true,
-    unique: true,
   },
 });
 

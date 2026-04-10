@@ -14,6 +14,10 @@ const initialState = {
     items: null,
     filteredItems: null,
   },
+  productStocks: {
+    items: null,
+    filteredItems: null,
+  },
   isLoading: false,
 };
 
@@ -71,7 +75,20 @@ const productsSlice = createSlice({
         });
       })
       .addCase(refreshHarvestingBatches.rejected, (state, action) => {
-        state.harvestingBatches.isLoading = false;
+        state.isLoading = false;
+      })
+      .addCase(refreshProductsStocks.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(refreshProductsStocks.fulfilled, (state, action) => {
+        state.productStocks.items = action.payload;
+        state.productStocks.filteredItems = sortItems({
+          items: action.payload,
+          sortBy: SORT_INIT_VALUE,
+        });
+      })
+      .addCase(refreshProductsStocks.rejected, (state, action) => {
+        state.isLoading = false;
       });
   },
 });
@@ -81,6 +98,14 @@ export const refreshHarvestingBatches = createAsyncThunk(
   async (_, { dispatch }) => {
     const res = await api.get("/harvesting-batches");
     return res.data.harvestingBatches;
+  },
+);
+
+export const refreshProductsStocks = createAsyncThunk(
+  "production/refreshProductsStocks",
+  async (_, { dispatch }) => {
+    const res = await api.get("/product-stock");
+    return res.data.productStocks;
   },
 );
 

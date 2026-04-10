@@ -25,6 +25,8 @@ export const createProducts = async () => {
     await product.createIngredients({
       ingredientsData: productData.ingredients,
     });
+    const stock = await createProductStockSeed({ product });
+    console.log({ stock, product });
   }
 };
 
@@ -46,8 +48,15 @@ export const createProductStockSeed = async ({ product }) => {
     return;
   }
   console.log("Found batch with resources:", batchWithResources);
-  await product.createStock({
+  const stock = await product.createStock({
     harvestingBatchId: batchWithResources._id,
     quantity: 1,
   });
+  console.log(
+    "Created stock for product:",
+    product.name,
+    "Stock ID:",
+    stock._id,
+  );
+  return stock;
 };

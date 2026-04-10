@@ -9,7 +9,6 @@ export const createProducts = async () => {
   console.log("Creating products...");
   for (const productData of productsData) {
     const { ingredients, ...productBaseInfo } = productData;
-    console.log("Creating product with data:", productBaseInfo);
     const product = new Product({
       ...productBaseInfo,
     });

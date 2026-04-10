@@ -1,7 +1,7 @@
 import { getRandomString } from "@/lib/utils/strings";
 
 export const productsData = [
-  {
+  /* {
     name: "Cherry rajčica Paket 10 komada",
     description: "Paket od 10 komada cherry rajčice",
     price: 5,
@@ -37,7 +37,7 @@ export const productsData = [
         quantity: 5,
       },
     ],
-  },
+  }, */
   {
     name: "Jabuka Idared 1kg",
     description: "1 kilogram jabuka sorte Idared",

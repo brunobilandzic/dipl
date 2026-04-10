@@ -1,16 +1,8 @@
+import { Base } from "@/models/Base";
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
 
 const productionFacilitySchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  description: {
-    type: String,
-    default: "",
-  },
   machines: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -25,21 +17,9 @@ const productionFacilitySchema = new Schema({
       default: [],
     },
   ],
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
 });
 
-productionFacilitySchema.pre("save", function () {
-  this.updatedAt = new Date();
-});
-
-export const ProductionFacility = mongoose.model(
+export const ProductionFacility = mongoose.models.ProductionFacility || Base.discriminator(
   "ProductionFacility",
   productionFacilitySchema,
 );

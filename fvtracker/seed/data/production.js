@@ -1,6 +1,6 @@
 import { getRandomString } from "@/lib/utils/strings";
 
-export const products = [
+export const productsData = [
   {
     name: "Cherry rajčica Paket 10 komada",
     description: "Paket od 10 komada cherry rajčice",

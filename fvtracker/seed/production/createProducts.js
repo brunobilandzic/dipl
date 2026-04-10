@@ -1,5 +1,5 @@
 import { CropVariety } from "@/models/sectors/cultivation/Crops";
-import { products } from "../data/production";
+import { productsData } from "../data/production";
 import { Product } from "@/models/sectors/production/Product";
 import { makeUrlFriendly } from "@/lib/utils/strings";
 import { getBatchesWithResources } from "@/lib/utils/production/resources";
@@ -9,15 +9,11 @@ import { populateProductIngredients } from "@/lib/utils/production/products";
 export const createProducts = async () => {
   await Product.deleteMany({}); // Clear existing products
   console.log("Creating products...");
-  for (const productData of products) {
-    const cropVarieties = await CropVariety.find({
-      name: { $in: productData.cropVarieties },
-    });
-
+  for (const productData of productsData) {
+    const { ingredients, ...productBaseInfo } = productData;
+    console.log("Creating product with data:", productBaseInfo);
     const product = new Product({
-      name: productData.name,
-      description: productData.description,
-      price: productData.price,
+      ...productBaseInfo,
     });
 
     await product.save();

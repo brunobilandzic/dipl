@@ -175,7 +175,7 @@ productSchema.pre("deleteMany", async function () {
 const ingredientsSchema = new Schema({
   product: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Product",
+    ref: "Base",
     required: true,
   },
   cropVariety: {
@@ -206,7 +206,7 @@ ingredientsSchema.pre("deleteMany", async function () {
 const productStockSchema = new Schema({
   product: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Product",
+    ref: "Base",
     required: true,
   },
   harvestingBatch: {

@@ -11,7 +11,7 @@ const productionProcessSchema = {
   ],
   product: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Product",
+    ref: "Base",
     required: true,
   },
   productStock: {

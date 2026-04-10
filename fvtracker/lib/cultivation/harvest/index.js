@@ -1,20 +1,15 @@
 import { HarvestingPlan } from "@/models/documents/plans/HarvestingPlan";
-import { getCultivationById } from "./cultivation";
+import { getCultivationById } from "../cultivation";
 import { PlantedCropVariety } from "@/models/sectors/cultivation/Crops";
 import {
   CULTIVATION_MANAGER,
   PRODUCTION_MANAGER,
-} from "../constants/users/managerTypes";
+} from "../../constants/users/managerTypes";
 import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
-import { fetchSessionSpecificManager } from "../auth/fetchSessionData";
+import { fetchSessionSpecificManager } from "../../auth/fetchSessionData";
+import { getHarvestingPlanById } from "./plan";
 
-export async function getHarvestingPlanById(id) {
-  const harvestingPlan = await HarvestingPlan.findById(id);
-  if (!harvestingPlan) {
-    throw new Error("Harvesting plan not found.");
-  }
-  return harvestingPlan;
-}
+
 
 export async function harvestCells({
   cultivationId,
@@ -78,5 +73,3 @@ export async function harvestCells({
 
   return plantedCropVarieties;
 }
-
-

@@ -1,15 +1,24 @@
+// CULTIVATION MANAGER IS GETTING HARVESTING BATCHES THROUGH FIELDS, PRODUCTION MANAGER USES THIS FILE
+
+import {
+  CULTIVATION_MANAGER,
+  PRODUCTION_MANAGER,
+} from "@/lib/constants/users/managerTypes";
+import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
+
 export async function getHarvestingBatches({
-  managerName = CULTIVATION_MANAGER,
+  managerName = PRODUCTION_MANAGER,
+  batchIds,
 }) {
   switch (managerName) {
     case CULTIVATION_MANAGER:
-      return await cmBatches();
+      return await cmBatches({ batchIds });
     case PRODUCTION_MANAGER:
-      return await pmBatches();
+      return await pmBatches({ batchIds });
   }
 }
 
-async function cmBatches() {
+async function cmBatches({ batchIds }) {
   const cultivationManager = await fetchSessionSpecificManager({
     managerName: "cultivationManager",
   });
@@ -33,11 +42,12 @@ async function cmBatches() {
   });
 }
 
-async function pmBatches() {
+async function pmBatches({ batchIds }) {
   await fetchSessionSpecificManager({
     managerName: PRODUCTION_MANAGER,
   });
-  const batches = await HarvestingBatch.find({}).populate([
+  const filter = batchIds ? { _id: { $in: batchIds } } : {};
+  const batches = await HarvestingBatch.find(filter).populate([
     {
       path: "harvestingBatchItems",
       populate: [

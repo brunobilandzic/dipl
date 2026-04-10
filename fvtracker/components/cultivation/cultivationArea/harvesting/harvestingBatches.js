@@ -1,6 +1,6 @@
 "use client";
 import { LoadingFullScreen } from "@/components/layout/loading";
-import { getHarvestingBatches } from "@/lib/utils/cultivation/plant/harvest/batches";
+import { getHarvestingBatches } from "@/lib/utils/cultivation/plant/harvest";
 import { harvestingBatchItemData } from "@/lib/utils/cultivation/plant/harvestingBatches";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";

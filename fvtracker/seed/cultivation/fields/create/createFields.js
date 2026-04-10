@@ -83,7 +83,7 @@ async function createFieldsObjects(
   fieldParamsArray = optimizedParamsArray,
   msWindow = createFieldTimeMs,
 ) {
-  await deleteFieldsWithDocs();
+/*   await deleteFieldsWithDocs(); */
   const fieldObjects = [];
   const fieldPromises = [];
   for (let fieldParams of fieldParamsArray) {

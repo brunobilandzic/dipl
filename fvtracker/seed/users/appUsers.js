@@ -32,7 +32,7 @@ const check = async () => {
 
 export default async () => {
   console.log("Seeding appUsers...");
-  await check();
+  /*   await check(); */
 
   // Create admin and general manager first
   const admin = await createAdmin();

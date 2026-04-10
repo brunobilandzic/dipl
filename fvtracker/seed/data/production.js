@@ -36,6 +36,17 @@ export const products = [
       },
     ],
   },
+  {
+    name: "Jabuka Idared 1kg",
+    description: "1 kilogram jabuka sorte Idared",
+    price: 3,
+    ingredients: [
+      {
+        cropVarietyName: "Idared",
+        quantity: 20,
+      },
+    ],
+  }
 ];
 
 // ing qant must be reduced from batch

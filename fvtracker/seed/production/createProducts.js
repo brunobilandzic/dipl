@@ -16,7 +16,6 @@ export const createProducts = async () => {
 
     const product = new Product({
       name: productData.name,
-      slug: makeUrlFriendly(productData.name),
       description: productData.description,
       price: productData.price,
     });

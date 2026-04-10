@@ -44,9 +44,9 @@ async function cmBatches({ batchIds }) {
 }
 
 async function pmBatches({ batchIds }) {
-  await fetchSessionSpecificManager({
+/*   await fetchSessionSpecificManager({
     managerName: PRODUCTION_MANAGER,
-  });
+  }); */
   const filter = batchIds ? { _id: { $in: batchIds } } : {};
   const batches = await HarvestingBatch.find(filter).populate([
     {

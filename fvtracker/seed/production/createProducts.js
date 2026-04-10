@@ -2,8 +2,8 @@ import { CropVariety } from "@/models/sectors/cultivation/Crops";
 import { products } from "../data/production";
 import { Ingredient, Product } from "@/models/sectors/production/Product";
 import { makeUrlFriendly } from "@/lib/utils/strings";
-import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
 import { getBatchesWithResources } from "@/lib/utils/production/resources";
+import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
 
 export const createProducts = async () => {
   await Product.deleteMany({}); // Clear existing products
@@ -32,9 +32,7 @@ export const createProducts = async () => {
 
 export const createProductStockSeed = async ({ product }) => {
   console.log("Creating product stock for:", product);
-  const harvestingBatches = await HarvestingBatch.find().populate({
-    path: "harvestingBatchItems",
-  });
+  const harvestingBatches = await getHarvestingBatches();
   const [batchWithResources] = getBatchesWithResources({
     harvestingBatches,
     product,

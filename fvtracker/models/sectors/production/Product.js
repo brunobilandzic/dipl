@@ -4,6 +4,7 @@ import { CropVariety } from "../cultivation/Crops";
 import { makeUrlFriendly } from "@/lib/utils/strings";
 import { Base } from "@/models/Base";
 import { ProductionProcess } from "./Process";
+import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
 
 const productSchema = new Schema({
   price: {
@@ -90,10 +91,9 @@ productSchema.methods.createStock = async function ({
   quantity,
 }) {
   // find harvesting batch for create product
-  const harvestingBatch = await mongoose
-    .model("HarvestingBatch")
-    .findById(harvestingBatchId)
-    .populate("harvestingBatchItems");
+  const harvestingBatch = await getHarvestingBatches({
+    batchIds: [harvestingBatchId],
+  });
   if (!harvestingBatch) {
     throw new Error(`Harvesting batch with id ${harvestingBatchId} not found.`);
   }

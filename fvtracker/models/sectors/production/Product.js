@@ -227,7 +227,7 @@ const productStockSchema = new Schema({
 });
 
 productStockSchema.pre("save", async function () {
-  if (this.isNew()) {
+  if (this.isNew) {
     await this.populate([
       {
         path: "product",

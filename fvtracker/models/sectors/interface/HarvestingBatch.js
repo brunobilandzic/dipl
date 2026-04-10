@@ -133,6 +133,14 @@ harvestingBatchSchema.methods.quantities = async function () {
   return quantities;
 };
 
+harvestingBatchItemSchema.pre("save", async function () {
+  if(this.isModified("batchQuantity")) {
+    if (this.batchQuantity < 0) {
+      throw new Error("Batch quantity cannot be negative.");
+    }
+  }
+});
+
 harvestingBatchItemSchema.pre("deleteMany", async function () {
   const ids = await HarvestingBatchItem.find(this.getFilter()).distinct("_id");
   await PlantedCropVariety.updateMany(

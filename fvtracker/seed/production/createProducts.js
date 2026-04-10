@@ -28,13 +28,12 @@ export const createProducts = async () => {
       ingredientsData: productData.ingredients,
     });
     const stock = await createProductStockSeed({ product });
-    console.log({ stock, product });
   }
 };
 
 export const createProductStockSeed = async ({ product }) => {
   await populateProductIngredients({ products: [product] });
-  console.log("Creating product stock for:", product);
+  console.log("Creating product stock for:", product.name);
   const harvestingBatches = await getHarvestingBatches();
   const [batchWithResources] = getBatchesWithResources({
     harvestingBatches,
@@ -48,7 +47,7 @@ export const createProductStockSeed = async ({ product }) => {
     );
     return;
   }
-  console.log("Found batch with resources:", batchWithResources);
+  console.log("Found batch with resources:", batchWithResources.name);
   const stock = await product.createStock({
     harvestingBatchId: batchWithResources._id,
     quantity: 1,

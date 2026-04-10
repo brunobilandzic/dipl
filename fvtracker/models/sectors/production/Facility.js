@@ -10,10 +10,10 @@ const productionFacilitySchema = new Schema({
       default: [],
     },
   ],
-  processes: [
+  stocks: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Base",
+      ref: "ProductStock",
       default: [],
     },
   ],

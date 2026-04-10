@@ -5,7 +5,6 @@ import { makeUrlFriendly } from "@/lib/utils/strings";
 import { getBatchesWithResources } from "@/lib/utils/production/resources";
 import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
 import { populateProductIngredients } from "@/lib/utils/production/products";
-import { createPlantingPlansForProducts } from "../documents/plans";
 
 export const createProducts = async () => {
   await Product.deleteMany({}); // Clear existing products

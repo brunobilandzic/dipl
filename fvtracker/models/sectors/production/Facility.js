@@ -15,12 +15,14 @@ const productionFacilitySchema = new Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "ProductionMachine",
+      default: [],
     },
   ],
   processes: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "ProductionProcess",
+      ref: "Base",
+      default: [],
     },
   ],
   createdAt: {

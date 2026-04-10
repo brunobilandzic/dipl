@@ -30,6 +30,13 @@ const productSchema = new Schema({
     required: true,
     unique: true,
   },
+  productionProcesses: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Base",
+      default: [],
+    },
+  ],
 });
 
 productSchema.pre("save", function () {

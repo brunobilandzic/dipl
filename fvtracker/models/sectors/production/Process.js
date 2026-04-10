@@ -2,6 +2,10 @@ import { Base } from "@/models/Base";
 import mongoose from "mongoose";
 
 const productionProcessSchema = {
+  facility: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Base",
+  },
   machines: [
     {
       type: mongoose.Schema.Types.ObjectId,

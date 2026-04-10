@@ -9,7 +9,6 @@ import { createPlantingPlansForProducts } from "../documents/plans";
 
 export const createProducts = async () => {
   await Product.deleteMany({}); // Clear existing products
-  await Ingredient.deleteMany({}); // Clear existing ingredients
   console.log("Creating products...");
   for (const productData of products) {
     const cropVarieties = await CropVariety.find({

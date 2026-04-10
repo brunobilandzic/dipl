@@ -1,5 +1,6 @@
 // CULTIVATION MANAGER IS GETTING HARVESTING BATCHES THROUGH FIELDS, PRODUCTION MANAGER USES THIS FILE
 
+import { fetchSessionSpecificManager } from "@/lib/auth/fetchSessionData";
 import {
   CULTIVATION_MANAGER,
   PRODUCTION_MANAGER,
@@ -9,7 +10,7 @@ import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
 export async function getHarvestingBatches({
   managerName = PRODUCTION_MANAGER,
   batchIds,
-}={}) {
+} = {}) {
   switch (managerName) {
     case CULTIVATION_MANAGER:
       return await cmBatches({ batchIds });

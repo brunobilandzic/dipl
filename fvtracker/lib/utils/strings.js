@@ -39,3 +39,14 @@ export const titleCaseString = (str) =>
 
 export const stringContains = (str, search) =>
   String(str).toLowerCase().includes(String(search).toLowerCase());
+
+export const getRandomString = ({ beginning = "", length = 12 } = {}) => {
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let result = beginning;
+  const charactersLength = characters.length;
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+};

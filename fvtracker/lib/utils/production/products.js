@@ -124,9 +124,26 @@ export const productsWithCropVarieties = (products, cropVarietySearch) => {
 
 export function extractVarietiesQuantities({ product, quantity }) {
   const varietiesQuantities = {};
+  console.log({ product, quantity });
   product.ingredients.forEach((ingredient) => {
     varietiesQuantities[ingredient.cropVariety._id] =
       ingredient.quantity * quantity;
   });
   return varietiesQuantities;
 }
+
+export const populateProductIngredients = async ({ products }) => {
+  await Promise.all(
+    products.map((product) =>
+      product.populate({
+        path: "ingredients",
+        populate: {
+          path: "cropVariety",
+          populate: {
+            path: "cropType",
+          },
+        },
+      }),
+    ),
+  );
+};

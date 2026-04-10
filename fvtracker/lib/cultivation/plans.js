@@ -187,3 +187,13 @@ export const populatePlans = async ({ plans }) => {
     ]);
   }
 };
+
+const plantingPlanWithIngredients = async ({ cropVarietyIds }) => {
+  const plantingPlans = await PlantingPlan.find();
+  await populatePlans({ plans: plantingPlans });
+  return plantingPlans.filter((plan) =>
+    plan.items.some((item) =>
+      cropVarietyIds.includes(item.cropVariety._id.toString()),
+    ),
+  );
+};

@@ -158,3 +158,32 @@ export const getPlantingPlanItemById = async (itemId) => {
 
   return plantingPlanItem;
 };
+
+export const populatePlans = async ({ plans }) => {
+  for (const plan of plans) {
+    await plan.populate([
+      {
+        path: "items",
+        populate: [
+          {
+            path: "cropVariety",
+            populate: {
+              path: "cropType",
+            },
+          },
+          {
+            path: "plantedCropVarieties",
+            populate: {
+              path: "cultivation",
+              select: "name",
+            },
+          },
+        ],
+      },
+      {
+        path: "field",
+        select: "name _id",
+      },
+    ]);
+  }
+};

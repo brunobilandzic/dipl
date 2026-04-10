@@ -1,6 +1,7 @@
 import { fetchSessionSpecificManager } from "@/lib/auth/fetchSessionData";
 import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
 import cultivation from "@/lib/cultivation";
+import { populatePlans } from "@/lib/cultivation/plans";
 import dbConnect from "@/lib/db/mongooseConnect";
 
 export async function POST(request) {
@@ -11,30 +12,7 @@ export async function POST(request) {
     const newPlantingPlan = await cultivation.plans.createPlantingPlan({
       plantingPlanData: body,
     });
-    await newPlantingPlan.populate([
-      {
-        path: "items",
-        populate: [
-          {
-            path: "cropVariety",
-            populate: {
-              path: "cropType",
-            },
-          },
-          {
-            path: "plantedCropVarieties",
-            populate: {
-              path: "cultivation",
-              select: "name",
-            },
-          },
-        ],
-      },
-      {
-        path: "field",
-        select: "name _id",
-      },
-    ]);
+    await populatePlans({ plans: [newPlantingPlan] });
     console.log("Created new planting plan:", newPlantingPlan);
     return Response.json({ newPlantingPlan }, { status: 201 });
   } catch (error) {

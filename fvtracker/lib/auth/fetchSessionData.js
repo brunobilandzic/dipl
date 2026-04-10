@@ -102,8 +102,8 @@ export async function fetchManager({ managerNames = [] }) {
     }
   }
 
-    return { redirect: true };
-  
+      return { unauthorized: true }; 
+
   console.log("did not throw error yet");
   throw new Error(
     `No manager found for session user among types: ${managerNames.join(", ")}`,

@@ -1,4 +1,5 @@
 import { fetchManager } from "@/lib/auth/fetchSessionData";
+import { PRODUCTION_MANAGER } from "@/lib/constants/users/managerTypes";
 import dbConnect from "@/lib/db/mongooseConnect";
 import {
   createProduct,
@@ -13,6 +14,9 @@ export const GET = async (req) => {
     const { specificManager, unauthorized } = await fetchManager({
       managerNames: [PRODUCTION_MANAGER],
     });
+    if (unauthorized) {
+      return Response.json({ unauthorized: true }, { status: 403 });
+    }
     const products = await getProducts();
 
     return Response.json({ products }, { status: 200 });

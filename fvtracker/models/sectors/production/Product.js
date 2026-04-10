@@ -6,6 +6,7 @@ import { Base } from "@/models/Base";
 import { ProductionProcess } from "./Process";
 import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
 import { productionProcessInfo } from "@/seed/data/production";
+import { ProductionFacility } from "./Facility";
 
 const productSchema = new Schema({
   price: {
@@ -248,6 +249,19 @@ productStockSchema.pre("save", async function () {
       },
     ]);
   }
+});
+
+productStockSchema.pre("deleteMany", async function () {
+  const ids = await ProductStock.find(this.getFilter()).distinct("_id");
+  await ProductionProcess.deleteMany({ productStock: { $in: ids } });
+  await ProductionFacility.updateMany(
+    { stocks: { $in: ids } },
+    { $pull: { stocks: { $in: ids } } },
+  );
+  await Product.updateMany(
+    { stocks: { $in: ids } },
+    { $pull: { stocks: { $in: ids } } },
+  );
 });
 
 export const Product =

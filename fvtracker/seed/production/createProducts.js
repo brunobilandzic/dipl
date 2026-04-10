@@ -1,6 +1,6 @@
 import { CropVariety } from "@/models/sectors/cultivation/Crops";
 import { products } from "../data/production";
-import { Ingredient, Product } from "@/models/sectors/production/Product";
+import { Product } from "@/models/sectors/production/Product";
 import { makeUrlFriendly } from "@/lib/utils/strings";
 import { getBatchesWithResources } from "@/lib/utils/production/resources";
 import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";

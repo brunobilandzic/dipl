@@ -124,9 +124,8 @@ export const productsWithCropVarieties = (products, cropVarietySearch) => {
 
 export function extractVarietiesQuantities({ product, quantity }) {
   const varietiesQuantities = {};
-  console.log({ product, quantity });
   product.ingredients.forEach((ingredient) => {
-    varietiesQuantities[ingredient.cropVariety._id] =
+    varietiesQuantities[ingredient.cropVariety.name] =
       ingredient.quantity * quantity;
   });
   return varietiesQuantities;

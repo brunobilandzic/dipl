@@ -1,7 +1,5 @@
-import { CropVariety } from "@/models/sectors/cultivation/Crops";
 import { productsData } from "../data/production";
 import { Product } from "@/models/sectors/production/Product";
-import { makeUrlFriendly } from "@/lib/utils/strings";
 import { getBatchesWithResources } from "@/lib/utils/production/resources";
 import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
 import { populateProductIngredients } from "@/lib/utils/production/products";

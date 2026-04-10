@@ -1,3 +1,5 @@
+import { getRandomString } from "@/lib/utils/strings";
+
 export const products = [
   {
     name: "Cherry rajčica Paket 10 komada",
@@ -46,17 +48,30 @@ export const products = [
         quantity: 20,
       },
     ],
-  }
+  },
 ];
 
 // ing qant must be reduced from batch
 
 export const productionFacilitiyInfo = {
-  name: "Proizvodni pogon 1",
+  name: getRandomString({ beginning: "Proizvodni pogon 1", length: 5 }),
   description: "Pogon za proizvodnju gotovih proizvoda",
-}
+};
 
 export const productionProcessInfo = {
   name: "Proizvodnja 1",
   description: "Proizvodnja gotovih proizvoda na osnovu usjeva",
-}
+};
+
+export const getProductionProcessInfos = (n) => {
+  const processes = [];
+
+  for (let i = 0; i < n; i++) {
+    processes.push({
+      name: `Proizvodnja ${i + 1} ${new Date().toLocaleString()}`,
+      description: "Proizvodnja gotovih proizvoda na osnovu usjeva",
+    });
+  }
+
+  return processes;
+};

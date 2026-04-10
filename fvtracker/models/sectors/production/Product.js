@@ -120,7 +120,8 @@ productSchema.methods.createStock = async function ({
       );
     }
     batchItem.batchQuantity -= ingredient.quantity * quantity;
-    // await batchItem.save(); skip for now, to not waste harvested quatities
+
+    await batchItem.save();
   }
 
   const productionProcess = new ProductionProcess({

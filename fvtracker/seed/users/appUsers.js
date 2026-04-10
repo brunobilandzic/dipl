@@ -68,7 +68,7 @@ export default async () => {
     },
   ).exec();
 
-  console.log("General manager has", managersIds.length, "managers.");
+  console.log("Seeded", managersIds.length, "managers.");
   console.log(`Seeded ${results.length} appUsers.`);
 
   return {

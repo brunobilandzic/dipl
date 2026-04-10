@@ -146,28 +146,3 @@ const IngredientItem = ({ ingredient }) => {
     </div>
   );
 };
-
-const ActionBar = ({ productId, slug }) => {
-  const dispatch = useDispatch();
-  const router = useRouter();
-  return (
-    <div className="flex justify-end gap-2 mt-4">
-      <Link href={`/proizvodi/uredi/${slug}`}>
-        <div className="btn btnSm">Uredi</div>
-      </Link>
-      <Link href={`/production/products/${slug}/stock`}>
-        <div className="btn submitButton btnSm">Stanje</div>
-      </Link>
-      <div
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          deleteProducts({ productIds: [productId], dispatch, router });
-        }}
-        className="btn cancelButton btnSm"
-      >
-        Obriši
-      </div>
-    </div>
-  );
-};

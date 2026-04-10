@@ -9,11 +9,6 @@ const productionProcessSchema = {
       default: [],
     },
   ],
-  product: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Base",
-    required: true,
-  },
   productStock: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "ProductStock",

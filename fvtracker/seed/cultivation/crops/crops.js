@@ -26,7 +26,6 @@ export async function seedCropMainTypes() {
   }
   const mainTypes = await Promise.all(cropMainTypesPromises);
   console.log(`Created ${mainTypes.length} main crop types.`);
-  logMainTypes(mainTypes);
   return mainTypes;
 }
 

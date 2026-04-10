@@ -2,11 +2,10 @@ import api from "../../../api";
 import handleError from "../../../constants/errors/client/handleError";
 
 export const harvestingBatchItemData = ({ batchItem }) => {
-  const quantityPerCell = batchItem.cropVariety?.quantityPerCell || 0;
-
   const cropVarietyName = batchItem.cropVariety?.name || "N/A";
   const plcvCount = batchItem.plantedCropVarieties?.length || 0;
-  const quantity = quantityPerCell * plcvCount;
+  const quantity = batchItem.batchQuantity;
+  
   return { quantity, cropVarietyName, plcvCount };
 };
 

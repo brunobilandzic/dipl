@@ -91,19 +91,20 @@ productSchema.methods.createStock = async function ({
   quantity,
 }) {
   // find harvesting batch for create product
-  const harvestingBatch = await getHarvestingBatches({
+  const [harvestingBatch] = await getHarvestingBatches({
     batchIds: [harvestingBatchId],
   });
   if (!harvestingBatch) {
     throw new Error(`Harvesting batch with id ${harvestingBatchId} not found.`);
   }
-  this.populate({
+  await this.populate({
     path: "ingredients",
     populate: {
       path: "cropVariety",
     },
   });
   for (const ingredient of this.ingredients) {
+    console.log("Checking ingredient:", ingredient);
     const batchItem = harvestingBatch.harvestingBatchItems.find((item) =>
       item.cropVariety.equals(ingredient.cropVariety._id),
     );

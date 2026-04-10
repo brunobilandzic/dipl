@@ -1,3 +1,4 @@
+import { makeUrlFriendly } from "@/lib/utils/strings";
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
 
@@ -18,10 +19,19 @@ const baseSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  slug: {
+    type: String,
+    required: true,
+    unique: true,
+  },
 });
 
+baseSchema.index({ name: 1, slug: 1, __t: 1 }, { unique: true });
 baseSchema.pre("save", function () {
   this.updatedAt = new Date();
+  if (this.isModified("name") || this.isNew) {
+    this.slug = makeUrlFriendly(this.name);
+  }
 });
 
 export const Base = mongoose.models.Base || mongoose.model("Base", baseSchema);

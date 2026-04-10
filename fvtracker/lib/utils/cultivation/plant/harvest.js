@@ -30,7 +30,7 @@ export const getHarvestCellsRect = ({
   return rectCells;
 };
 
-export const getHarvestingBatches = ({ fields }) => {
+export const harvestingBatchesFields = ({ fields }) => {
   const batches = {};
 
   for (const field of fields) {

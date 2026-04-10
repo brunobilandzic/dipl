@@ -1,6 +1,6 @@
 "use client";
 import { LoadingFullScreen } from "@/components/layout/loading";
-import { getHarvestingBatches } from "@/lib/utils/cultivation/plant/harvest";
+import { harvestingBatchesFields } from "@/lib/utils/cultivation/plant/harvest";
 import { harvestingBatchItemData } from "@/lib/utils/cultivation/plant/harvestingBatches";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -14,7 +14,7 @@ export default function HarvestingBatchesFields() {
   // set batches based on fields data
   useEffect(() => {
     if (!fields || harvestingBatches !== null) return;
-    setHarvestingBatches(getHarvestingBatches({ fields }));
+    setHarvestingBatches(harvestingBatchesFields({ fields }));
   }, [fields, harvestingBatches]);
 
   if (!harvestingBatches) return <LoadingFullScreen />;

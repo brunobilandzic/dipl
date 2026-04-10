@@ -44,12 +44,12 @@ export const getBatchesWithResources = ({
 
   for (const harvestingBatch of harvestingBatches) {
     let hasResources = true;
-    for (const [cropVarietyId, requiredQuantity] of Object.entries(
+    for (const [cropVarietyName, requiredQuantity] of Object.entries(
       varietiesQuantities,
     )) {
       const item = harvestingBatch.harvestingBatchItems.find(
         (hbi) =>
-          hbi.cropVariety._id.equals(cropVarietyId) &&
+          hbi.cropVariety.name === cropVarietyName &&
           hbi.batchQuantity >= requiredQuantity,
       );
       if (!item) {

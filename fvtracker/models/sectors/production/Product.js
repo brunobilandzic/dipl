@@ -26,11 +26,6 @@ const productSchema = new Schema({
       ref: "ProductStock",
     },
   ],
-  slug: {
-    type: String,
-    required: true,
-    unique: true,
-  },
   productionProcesses: [
     {
       type: mongoose.Schema.Types.ObjectId,

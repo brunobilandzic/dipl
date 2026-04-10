@@ -75,3 +75,14 @@ export const getProductionProcessInfos = (n) => {
 
   return processes;
 };
+
+export const getProductionFacilityInfos = (n) => {
+  const facilities = [];
+  for (let i = 0; i < n; i++) {
+    facilities.push({
+      name: `Proizvodni pogon ${i + 1} ${new Date().toLocaleString()}`,
+      description: "Pogon za proizvodnju gotovih proizvoda",
+    });
+  }
+  return facilities;
+};

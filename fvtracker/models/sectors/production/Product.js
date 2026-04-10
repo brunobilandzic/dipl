@@ -5,7 +5,7 @@ import { makeUrlFriendly } from "@/lib/utils/strings";
 import { Base } from "@/models/Base";
 import { ProductionProcess } from "./Process";
 import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
-import { productionProcessInfo } from "@/seed/data/production";
+import { getProductionProcessInfos } from "@/seed/data/production";
 import { ProductionFacility } from "./Facility";
 
 const productSchema = new Schema({
@@ -98,6 +98,8 @@ productSchema.methods.createStock = async function ({
   // we make sure that harvset batch has needed resources before calling this method
   harvestingBatchId,
   quantity,
+  // get seed process info for 1 process
+  productionProcessInfo = getProductionProcessInfos(1)[0],
 }) {
   // find harvesting batch for create product
   const [harvestingBatch] = await getHarvestingBatches({
@@ -113,7 +115,6 @@ productSchema.methods.createStock = async function ({
     },
   });
   for (const ingredient of this.ingredients) {
-    console.log("Checking ingredient:", ingredient);
     const batchItem = harvestingBatch.harvestingBatchItems.find((item) =>
       item.cropVariety.equals(ingredient.cropVariety._id),
     );

@@ -41,12 +41,6 @@ async function createFieldObject(fieldParams, msWindow = createFieldTimeMs) {
         // 1 sec passed
       }
       if (elapsed > msWindow && field.cultivationAreas.length > 0) {
-        console.log(
-          "Time window exceeded, stopping field creation.",
-          elapsed / 1000,
-          "seconds.",
-        );
-
         return field;
       }
     }
@@ -100,9 +94,9 @@ async function createFieldsObjects(
   for (let field of resolvedFields) {
     fieldObjects.push(field);
   }
-  for (let field of fieldObjects) {
+  /* for (let field of fieldObjects) {
     drawField(field);
-  }
+  } */
   return fieldObjects;
 }
 
@@ -112,9 +106,6 @@ export async function createFields(
 ) {
   await deleteFieldsWithDocs();
   const fieldObjects = await createFieldsObjects(fieldParamsArray, msWindow);
-  console.log(
-    `Created ${fieldObjects.length} field objects. Now creating field records...`,
-  );
 
   const fieldRecords = [];
   const fieldRecordPromises = [];

@@ -28,6 +28,5 @@ export const createCultivation = async ({ cultivationArea, planted }) => {
   await cultivationArea.save();
 
   await newCultivation.save();
-  console.log({ newCultivation });
   return newCultivation;
 };

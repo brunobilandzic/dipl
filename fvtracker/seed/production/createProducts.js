@@ -33,7 +33,7 @@ export const createProducts = async () => {
 
 export const createProductStockSeed = async ({ product }) => {
   await populateProductIngredients({ products: [product] });
-  console.log("Creating product stock for:", product.name);
+
   const harvestingBatches = await getHarvestingBatches();
   const [batchWithResources] = getBatchesWithResources({
     harvestingBatches,
@@ -41,13 +41,8 @@ export const createProductStockSeed = async ({ product }) => {
     quantity: 1,
   });
   if (!batchWithResources) {
-    console.log(
-      "No harvesting batch with sufficient resources found for product:",
-      product.name,
-    );
     return;
   }
-  console.log("Found batch with resources:", batchWithResources.name);
   const stock = await product.createStock({
     harvestingBatchId: batchWithResources._id,
     quantity: 1,

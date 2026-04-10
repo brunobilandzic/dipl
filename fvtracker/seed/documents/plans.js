@@ -23,7 +23,6 @@ export async function createPlans({ fieldId, cropVarietyId }) {
   await HarvestingPlan.deleteMany({});
   await PlantingPlan.deleteMany({});
 
-  console.log({ fieldId, cropVarietyId });
   const { plantingPlan, harvestingPlan } = planInfo({
     fieldId,
     cropVarietyId,

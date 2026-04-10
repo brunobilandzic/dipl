@@ -3,5 +3,4 @@ import production from "./production";
 
 export default {
   cultivation,
-  production,
 };

@@ -2,10 +2,10 @@ import { Product, Ingredient, ProductStock } from "./Product";
 import { ProductionProcess } from "./Process";
 import { ProductionFacility } from "./Facility";
 
-export default {
+export default {/* 
   Product,
   Ingredient,
-  ProductStock,
+  ProductStock, */
   ProductionProcess,
   ProductionFacility,
 };

@@ -5,6 +5,7 @@ import { makeUrlFriendly } from "@/lib/utils/strings";
 import { Base } from "@/models/Base";
 import { ProductionProcess } from "./Process";
 import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
+import { productionProcessInfo } from "@/seed/data/production";
 
 const productSchema = new Schema({
   price: {
@@ -126,6 +127,7 @@ productSchema.methods.createStock = async function ({
     product: this._id,
     harvestingBatch: harvestingBatchId,
     quantity,
+    ...productionProcessInfo,
   });
 
   let stock;

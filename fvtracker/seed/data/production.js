@@ -56,7 +56,7 @@ export const productionFacilitiyInfo = {
   description: "Pogon za proizvodnju gotovih proizvoda",
 }
 
-export const productionProcess = {
+export const productionProcessInfo = {
   name: "Proizvodnja 1",
   description: "Proizvodnja gotovih proizvoda na osnovu usjeva",
 }

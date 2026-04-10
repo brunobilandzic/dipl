@@ -85,6 +85,7 @@ productSchema.methods.createIngredients = async function ({ ingredientsData }) {
 };
 
 productSchema.methods.createStock = async function ({
+  // we make sure that harvset batch has needed resources before calling this method
   harvestingBatchId,
   quantity,
 }) {

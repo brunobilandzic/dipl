@@ -7,13 +7,13 @@ import { refreshProductsStocks } from "@/store/production";
 
 const StockList = () => {
   const dispatch = useDispatch();
-  const products = useSelector((state) => state.production.productStocks.items);
-  console.log({products})
+  const stocks = useSelector((state) => state.production.productStocks.items);
+  console.log({ stocks });
   useEffect(() => {
-    if (!products) {
+    if (!stocks) {
       dispatch(refreshProductsStocks());
     }
-  }, [products]);
+  }, [stocks]);
   return <div>StockList</div>;
 };
 

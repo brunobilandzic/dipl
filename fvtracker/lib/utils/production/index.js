@@ -26,16 +26,16 @@ const dispatchPayloads = ({ manager, dispatch }) => {
   console.log("Dispatching production manager data to Redux...");
   console.log(manager);
   dispatch(setProducts(manager.products));
-  dispatch(
-    refreshProductsStocks.fulfilled(
-      manager.products.map((product) => ({
-        product: {
-          name: product.name,
-          description: product.description,
-        },
-        quantity: product.stock.quantity,
-        stock: product.stock,
-      })),
-    ),
-  );
+  dispatch(refreshProductsStocks.fulfilled(mapProductsStocks({ manager })));
+};
+
+const mapProductsStocks = ({ manager }) => {
+  return manager.products.map((product) => ({
+    product: {
+      name: product.name,
+      description: product.description,
+    },
+    quantity: product.stock.quantity,
+    productionProcesses: product.stock.productionProcesses,
+  }));
 };

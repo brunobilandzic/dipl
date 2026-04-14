@@ -104,7 +104,9 @@ export const refreshHarvestingBatches = createAsyncThunk(
 export const refreshProductsStocks = createAsyncThunk(
   "production/refreshProductsStocks",
   async (_, { dispatch }) => {
-    const res = await api.get("/product-stock");
+    console.log("Fetching product stocks...");
+    const res = await api.get("/productstock");
+    console.log("Fetched product stocks:", res.data.productStocks);
     return res.data.productStocks;
   },
 );

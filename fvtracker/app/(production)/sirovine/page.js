@@ -5,6 +5,7 @@ import React from "react";
 
 const ProductionResourcesPage = async () => {
   const {} = await fetchManager({ managerNames: [PRODUCTION_MANAGER] });
+
   return (
     <div>
       <ProductionResources />

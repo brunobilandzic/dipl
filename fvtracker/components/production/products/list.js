@@ -85,7 +85,7 @@ const ProductItem = ({ product, router }) => {
       },
     },
     {
-      label: "Zalihe",
+      label: "Dodaj zalihe",
       className: "submitButton",
       onClick: () => {
         setAddStockModalOpen(true);

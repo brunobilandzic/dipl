@@ -14,7 +14,7 @@ export const createProductStock = async ({
 
 export const getStocks = async () => {
   console.log("Fetching products stocks...");
-  const productsStocks = await ProductStock.findAll().populate([
+  const stocks = await ProductStock.findAll().populate([
     {
       path: "product",
       select: "name ingredients description",
@@ -42,4 +42,8 @@ export const getStocks = async () => {
       select: "name description",
     },
   ]);
+  if (!stocks) {
+    throw new Error("No product stocks found.");
+  }
+  return stocks;
 };

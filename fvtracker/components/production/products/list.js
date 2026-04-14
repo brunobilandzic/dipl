@@ -26,7 +26,6 @@ const ProductList = () => {
   const batches = useSelector(
     (state) => state.production.harvestingBatches.items,
   );
-  console.log({ batches });
   const [sortBy, setSortBy] = useState("newest");
   const [filters, setFilters] = useState(initFilters("products"));
 
@@ -45,8 +44,6 @@ const ProductList = () => {
       refreshProducts({ dispatch, router });
     }
   }, [products]); */
-
-  console.log({ products });
 
   if (!products) return <LoadingFullScreen />;
 

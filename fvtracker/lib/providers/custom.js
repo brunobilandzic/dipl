@@ -28,7 +28,6 @@ const CropsProvider = ({ children }) => {
         try {
           dispatch(setLoading(true));
           const res = await api.get("/cultivation/plant");
-          console.log("Fetched crops from API:", res);
           dispatch(setCrops(res.data));
           dispatch(setLoading(false));
         } catch (error) {

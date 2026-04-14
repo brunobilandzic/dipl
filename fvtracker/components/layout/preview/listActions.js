@@ -44,7 +44,6 @@ export const CreateListItemButton = ({ onCreate, label }) => {
   );
 };
 export const DeleteListButton = ({ onDelete, label }) => {
-  console.log("onDelete:", onDelete);
   return (
     <div className="btn cancelButton btnSm" onClick={onDelete}>
       {label || "Obriši sve"}

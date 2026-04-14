@@ -10,7 +10,6 @@ import {
 export default async function fillProductionRedux({ dispatch, router }) {
   try {
     dispatch(setLoading(true));
-    console.log("Fetching production manager data...");
     const res = await api.get("/productionManager");
     const batchesRes = await api.get("/harvesting-batches");
     const productionManager = res.data.productionManager;
@@ -32,7 +31,6 @@ export default async function fillProductionRedux({ dispatch, router }) {
 }
 
 const dispatchPayloads = ({ manager, dispatch, batches }) => {
-  console.log("Dispatching production manager data to Redux...");
   dispatch(setProducts(manager.products));
   dispatch(refreshProductsStocks.fulfilled(mapProductsStocks({ manager })));
   dispatch(refreshHarvestingBatches.fulfilled(batches));

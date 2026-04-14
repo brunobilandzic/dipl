@@ -89,12 +89,16 @@ export const productPossibleStocksNum = ({ harvestingBatches, product }) => {
         delete batchesCVS[batch.name];
         break;
       }
+      const cvQuantPossible = {
+        batchQuantity,
+        possible: Math.floor(batchQuantity / ing.quantity),
+      };
       if (!batchesCVS[batch.name]) {
         batchesCVS[batch.name] = {
-          [cvName]: batchQuantity,
+          [cvName]: cvQuantPossible,
         };
       }
-      batchesCVS[batch.name][cvName] = batchQuantity;
+      batchesCVS[batch.name][cvName] = cvQuantPossible;
     }
   }
 

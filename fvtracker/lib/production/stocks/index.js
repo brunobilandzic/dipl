@@ -37,5 +37,9 @@ export const getStocks = async () => {
         },
       ],
     },
+    {
+      path: "productionProcesses",
+      select: "name description",
+    },
   ]);
 };

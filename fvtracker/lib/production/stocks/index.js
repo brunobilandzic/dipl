@@ -11,7 +11,7 @@ export const createProductStock = async ({
   return stock;
 };
 
-export const getProductStocks = async () => {
-  console.log("Fetching product stock...");
-  return 2;
+export const getStocks = async () => {
+  console.log("Fetching products stocks...");
+  return { stocks: [1] };
 };

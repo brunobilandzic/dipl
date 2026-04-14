@@ -105,8 +105,9 @@ export const refreshProductsStocks = createAsyncThunk(
   "production/refreshProductsStocks",
   async (_, { dispatch }) => {
     console.log("Fetching product stocks...");
-    const res = await api.get("/productstock");
-    console.log("Fetched product stocks:", res.data.productStocks);
+    const res = await api.get("/stocks");
+    const data = res.data;
+    console.log(data)
     return res.data.productStocks;
   },
 );

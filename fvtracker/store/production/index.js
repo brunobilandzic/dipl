@@ -108,7 +108,7 @@ export const refreshProductsStocks = createAsyncThunk(
     const res = await api.get("/stocks");
     const data = res.data;
     console.log(data)
-    return res.data.productStocks;
+    return res.data.stocks;
   },
 );
 

@@ -10,7 +10,11 @@ import { refreshFields } from "@/lib/utils/cultivation/fields/fields";
 import { refreshGeneralManager } from "@/lib/utils/managers/generalManager";
 import { ROLE_STATUSES } from "@/lib/constants/users";
 import { useRouter } from "next/navigation";
-import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
+import {
+  CULTIVATION_MANAGER,
+  PRODUCTION_MANAGER,
+} from "@/lib/constants/users/managerTypes";
+import fillProductionRedux from "@/lib/utils/production";
 
 export default {
   roleitems,
@@ -68,6 +72,12 @@ function NavItems() {
       }
       if (managerModelName === "GeneralManager" && !generalManagerRedux) {
         refreshGeneralManager({ dispatch });
+      }
+      if (managerModelName === PRODUCTION_MANAGER) {
+        console.log(
+          "production manager logged in, refreshing producti data...",
+        );
+        fillProductionRedux({ dispatch, router });
       }
     }
   }, [status]);

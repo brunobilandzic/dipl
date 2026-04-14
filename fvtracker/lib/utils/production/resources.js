@@ -24,11 +24,9 @@ export const cropVarietyBatchResources = ({ harvestingBatches }) => {
         resources: [batchResource],
       });
     });
-    console.log({ batchName, batchResources });
     return batchResources;
   });
 
-  console.log({ batchesResources });
   return {
     batchesResources,
   };
@@ -67,7 +65,6 @@ export const getBatchesWithResources = ({
 
 // you get batches, ingredients
 export const getBatchesCVS = ({ harvestingBatches, product }) => {
-  console.log("analyzing resources for", product.name);
   const batchesWithResources = getBatchesWithResources({
     harvestingBatches,
     product,
@@ -79,11 +76,9 @@ export const getBatchesCVS = ({ harvestingBatches, product }) => {
     harvestingBatches.map((batch) => [batch.name, null]),
   );
 
-  console.log({ batchesCVS });
   for (const batch of harvestingBatches) {
     for (const ing of product.ingredients) {
       const cvName = ing.cropVariety.name;
-      console.log("looking for", cvName);
       const batchQuantity = getBatchQuantity({ batch, cvName });
       if (!batchQuantity) {
         delete batchesCVS[batch.name];
@@ -144,6 +139,5 @@ export const findMinPossibleBatchMap = ({ batchesCVS }) => {
     batchMap[batchName] = min;
   }
 
-  console.log({ batchMap });
   return batchMap;
 };

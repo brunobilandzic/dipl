@@ -18,6 +18,8 @@ export function List({
   filters,
   setFilters,
   initialFilters,
+  addLabel,
+  deleteLabel,
 }) {
   const [sortOpen, setSortOpen] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
@@ -51,8 +53,12 @@ export function List({
               clearFilters={clearFilters}
             />
           )}
-          {onCreateItem && <CreateListItemButton onCreate={onCreateItem} />}
-          {onDeleteList && <DeleteListButton onDelete={onDeleteList} />}
+          {onCreateItem && (
+            <CreateListItemButton onCreate={onCreateItem} label={addLabel} />
+          )}
+          {onDeleteList && (
+            <DeleteListButton onDelete={onDeleteList} label={deleteLabel} />
+          )}
         </div>
       </div>
       <div className="flex flex-col gap-4 justify-start">

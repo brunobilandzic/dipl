@@ -59,6 +59,8 @@ const ProductList = () => {
         setFilters={setFilters}
         initialFilters={initFilters("products")}
         sortOptions={productSortOptions}
+        addLabel="Izradi proizvod"
+        deleteLabel="Obriši proizvode"
       >
         {products?.map((product) => (
           <div key={product._id}>

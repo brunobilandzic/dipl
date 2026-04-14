@@ -52,6 +52,7 @@ export const planInfo = ({ fieldId, cropVarietyId, productionManagerId }) => {
           quantity: 1000,
         },
       ],
+      productionManager: productionManagerId,
     },
     harvestingPlan: {
       field: fieldId, // Postavit ćemo ovo kasnije

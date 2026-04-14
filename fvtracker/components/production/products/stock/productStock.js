@@ -1,3 +1,9 @@
+"use client";
+
+import { useSelector } from "react-redux";
+
 export const ProductStock = ({ slug }) => {
-  return <div>ProductStock: {slug}</div>;
+  const stocks = useSelector((state) => state.production.productStocks.items);
+  const stock = stocks?.find((s) => s.product.slug === slug);
+  return <div>ProductStock: {JSON.stringify(stock)}</div>;
 };

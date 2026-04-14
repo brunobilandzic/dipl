@@ -132,7 +132,7 @@ const ProductItem = ({ product, router }) => {
       {addStockModalOpen && (
         <AddProductStock
           isOpen={addStockModalOpen}
-          setIsOpen={setAddStockModalOpen}
+          onCancel={() => setAddStockModalOpen(false)}
           product={product}
         />
       )}

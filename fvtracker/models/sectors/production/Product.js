@@ -20,12 +20,10 @@ const productSchema = new Schema({
       default: [],
     },
   ],
-  stocks: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "ProductStock",
-    },
-  ],
+  stock: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "ProductStock",
+  },
   productionProcesses: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -137,10 +135,7 @@ productSchema.methods.createStock = async function ({
 
   let stock;
 
-  const existingStock = await ProductStock.findOne({
-    product: this._id,
-    harvestingBatch: harvestingBatchId,
-  }).populate("productionProcesses");
+  const existingStock = this.stock;
 
   if (existingStock) {
     existingStock.productionProcesses.push(productionProcess._id);
@@ -162,7 +157,7 @@ productSchema.methods.createStock = async function ({
   await productionProcess.save();
   await stock.save();
 
-  this.stocks.push(stock._id);
+  this.stocks = stock._id;
   await this.save();
 
   return stock;

@@ -52,8 +52,3 @@ export const createProductStockSeed = async ({ product }) => {
   );
   return stock;
 };
-
-export const plantProductsIngredients = async ({ ingredients }) => {
-  await populateProductIngredients({ products });
-  await addPlanItems({ ingredients, plant: true });
-};

@@ -42,7 +42,7 @@ const mapProductsStocks = ({ manager }) => {
       name: product.name,
       description: product.description,
     },
-    quantity: product.stock.quantity,
-    productionProcesses: product.stock.productionProcesses,
+    quantity: product.stock?.quantity,
+    productionProcesses: product.stock?.productionProcesses,
   }));
 };

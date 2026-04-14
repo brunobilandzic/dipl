@@ -130,3 +130,20 @@ const getBatchQuantity = ({ batch, cvName }) => {
     (hbi) => hbi.cropVariety.name == cvName,
   )?.batchQuantity;
 };
+
+export const findMinPossibleBatchMap = ({ batchesCVS }) => {
+  const batchMap = Object.fromEntries(
+    Object.keys(batchesCVS).map((key) => [key, null]),
+  );
+
+  for (const batchName of Object.keys(batchesCVS)) {
+    let min = Infinity;
+    for (const cvQuantPossible of Object.values(batchesCVS[batchName])) {
+      if (cvQuantPossible.possible < min) min = cvQuantPossible.possible;
+    }
+    batchMap[batchName] = min;
+  }
+
+  console.log({ batchMap });
+  return batchMap;
+};

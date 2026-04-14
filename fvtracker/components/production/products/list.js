@@ -14,6 +14,7 @@ import { List, ListItem } from "@/components/layout/preview/list";
 import { filterProducts, sortProducts } from "@/store/production";
 import { initFilters } from "@/lib/utils/list";
 import { productSortOptions } from "@/components/layout/preview/sort";
+import { AddProductStock } from "./stock/productStock";
 
 const ProductList = () => {
   const dispatch = useDispatch();
@@ -72,6 +73,7 @@ const ProductList = () => {
 export default ProductList;
 
 const ProductItem = ({ product, router }) => {
+  const [addStockModalOpen, setAddStockModalOpen] = useState(false);
   const actionOptions = [
     {
       label: "Uredi",
@@ -84,7 +86,7 @@ const ProductItem = ({ product, router }) => {
       label: "Zalihe",
       className: "submitButton",
       onClick: () => {
-        router.push(`/proizvodi/zalihe/${product.slug}`);
+        setAddStockModalOpen(true);
       },
     },
     {
@@ -99,33 +101,42 @@ const ProductItem = ({ product, router }) => {
   ];
 
   return (
-    <ListItem actionOptions={actionOptions}>
-      <div className="flex justify-between mt-4">
-        <div>
-          <h2 className="text-xl font-bold">{product.name}</h2>
-          <p>{product.description}</p>
-        </div>
-        <div className="stockquantity flex items-center gap-4">
-          <h3 className="font-semibold">Na zalihi:</h3>
-          <span className="text-5xl font-bold">
-            {product.stock?.quantity || 0}
-          </span>
-        </div>
-      </div>
-      <div className="flex justify-between mt-4">
-        <div>
-          <ProductInfo
-            createdAt={product.createdAt}
-            updatedAt={product.updatedAt}
-            price={product.price}
-          />
-
-          <div className="mt-4">
-            <IngredientsList ingredients={product.ingredients} />
+    <>
+      <ListItem actionOptions={actionOptions}>
+        <div className="flex justify-between mt-4">
+          <div>
+            <h2 className="text-xl font-bold">{product.name}</h2>
+            <p>{product.description}</p>
+          </div>
+          <div className="stockquantity flex items-center gap-4">
+            <h3 className="font-semibold">Na zalihi:</h3>
+            <span className="text-5xl font-bold">
+              {product.stock?.quantity || 0}
+            </span>
           </div>
         </div>
-      </div>
-    </ListItem>
+        <div className="flex justify-between mt-4">
+          <div>
+            <ProductInfo
+              createdAt={product.createdAt}
+              updatedAt={product.updatedAt}
+              price={product.price}
+            />
+
+            <div className="mt-4">
+              <IngredientsList ingredients={product.ingredients} />
+            </div>
+          </div>
+        </div>
+      </ListItem>
+      {addStockModalOpen && (
+        <AddProductStock
+          isOpen={addStockModalOpen}
+          setIsOpen={setAddStockModalOpen}
+          product={product}
+        />
+      )}
+    </>
   );
 };
 

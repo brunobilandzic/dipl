@@ -4,7 +4,8 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { refreshProductsStocks } from "@/store/production";
-import { List } from "@/components/layout/preview/list";
+import { List, ListItem } from "@/components/layout/preview/list";
+import { v4 as uuid } from "uuid";
 
 const StockList = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const StockList = () => {
     <div>
       <List title="Zalihe proizvoda">
         {stocks?.map((stock) => (
-          <StockItem key={stock._id} stock={stock} />
+          <StockItem stock={stock} />
         ))}
       </List>
     </div>
@@ -29,12 +30,24 @@ const StockList = () => {
 export default StockList;
 
 const StockItem = ({ stock }) => {
+  const actionOptions = [
+    {
+      label: "Dodaj zalihe",
+      className: "submitButton",
+      onClick: () => {
+        console.log("Dodaj zalihe za", stock.product.name);
+      },
+    },
+  ];
+
   console.log({ stock });
   return (
-    <div>
-      <h3>{stock.product.name}</h3>
-      <p>{stock.product.description}</p>
-      <p>Quantity: {stock.quantity}</p>
-    </div>
+    <ListItem key={uuid()} actionOptions={actionOptions}>
+      <div>
+        <h3>{stock.product.name}</h3>
+        <p>{stock.product.description}</p>
+        <p>Quantity: {stock.quantity}</p>
+      </div>
+    </ListItem>
   );
 };

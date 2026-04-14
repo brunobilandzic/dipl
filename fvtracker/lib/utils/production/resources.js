@@ -82,6 +82,23 @@ export const productPossibleStocksNum = ({ harvestingBatches, product }) => {
     });
   }
   console.log({ cvBatches });
+
+  let batchesCVS = Object.fromEntries(
+    harvestingBatches.map((batch) => [batch.name, null]),
+  );
+
+  console.log({ batchesCVS });
+  for (const batch of harvestingBatches) {
+    for (const ing of product.ingredients) {
+      const cvName = ing.cropVariety.name;
+      console.log("looking for", cvName);
+      if (!batchesCVS[batch.name]) {
+        batchesCVS[batch.name] = {
+          [cvName]: getBatchQuantity({ batch, cvName }),
+        };
+      }
+    }
+  }
 };
 
 const calculateCropVarietyAmouts = ({ batches, cvNames, needed }) => {

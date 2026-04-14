@@ -15,7 +15,10 @@ import { filterProducts, sortProducts } from "@/store/production";
 import { initFilters } from "@/lib/utils/list";
 import { productSortOptions } from "@/components/layout/preview/sort";
 import { AddProductStock } from "./stock/productStock";
-import { productPossibleStocksNum } from "@/lib/utils/production/resources";
+import {
+  getBatchesCVS,
+  findMinPossibleBatchMap,
+} from "@/lib/utils/production/resources";
 
 const ProductList = () => {
   const dispatch = useDispatch();
@@ -109,11 +112,14 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
       },
     },
   ];
-  const possibleStocksNum = productPossibleStocksNum({
-    harvestingBatches,
-    product,
+  const minPossibleBatchMap = findMinPossibleBatchMap({
+    batchesCVS: getBatchesCVS({
+      harvestingBatches,
+      product,
+    }),
   });
-  console.log(`${product.name}`, { possibleStocksNum });
+
+  console.log(`result for ${product.name}`, { minPossibleBatchMap });
   return (
     <>
       <ListItem actionOptions={actionOptions}>

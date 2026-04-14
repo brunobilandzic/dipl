@@ -15,6 +15,7 @@ import { filterProducts, sortProducts } from "@/store/production";
 import { initFilters } from "@/lib/utils/list";
 import { productSortOptions } from "@/components/layout/preview/sort";
 import { AddProductStock } from "./stock/productStock";
+import { productPossibleStocksNum } from "@/lib/utils/production/resources";
 
 const ProductList = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,10 @@ const ProductList = () => {
   const products = useSelector(
     (state) => state.production.products.filteredItems,
   );
+  const batches = useSelector(
+    (state) => state.production.harvestingBatches.items,
+  );
+  console.log({ batches });
   const [sortBy, setSortBy] = useState("newest");
   const [filters, setFilters] = useState(initFilters("products"));
 
@@ -74,7 +79,7 @@ const ProductList = () => {
 
 export default ProductList;
 
-const ProductItem = ({ product, router }) => {
+const ProductItem = ({ product, harvestingBatches, router }) => {
   const [addStockModalOpen, setAddStockModalOpen] = useState(false);
   const actionOptions = [
     {
@@ -101,7 +106,10 @@ const ProductItem = ({ product, router }) => {
       },
     },
   ];
-
+  const possibleStocksNum = productPossibleStocksNum({
+    harvestingBatches,
+    product,
+  });
   return (
     <>
       <ListItem actionOptions={actionOptions}>

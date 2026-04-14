@@ -34,11 +34,11 @@ const ProductList = () => {
     dispatch(sortProducts(sortBy));
   }, [sortBy]);
 
-  useEffect(() => {
+/*   useEffect(() => {
     if (products === null) {
       refreshProducts({ dispatch, router });
     }
-  }, [products]);
+  }, [products]); */
 
   console.log({ products });
 

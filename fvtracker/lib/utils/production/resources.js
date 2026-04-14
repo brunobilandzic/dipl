@@ -72,14 +72,25 @@ export const productPossibleStocksNum = ({ harvestingBatches, product }) => {
     product,
     quantity: 1,
   });
-  console.log({ batchesWithResources });
+  const batchCVS = {};
+  for (const ing of product.ingredients) {
+    const cvName = ing.cropVariety.name;
+    batchCVS[cvName] = calculateCropVarietyAmout({
+      batches: harvestingBatches,
+      cvName,
+    });
+  }
+  console.log({ batchCVS });
 };
 
-const calculateCropVarietyAmout = ({ batches, cropVarietyName }) => {
-  return batches.reduce((batchesCvQuantity, batch) => {
+const calculateCropVarietyAmout = ({ batches, cvName }) => {
+  const cvBatches = batches.reduce((batchesCvQuantity, batch) => {
     const batchQuantity = batch.harvestingBatchItems.find(
-      (hbi) => hbi.cropVariety.name == cropVarietyName,
+      (hbi) => hbi.cropVariety.name == cvName,
     ).batchQuantity;
     batchesCvQuantity[batch.name] = batchQuantity;
+    return batchesCvQuantity;
   }, {});
+  console.log({ cvBatches });
+  return cvBatches;
 };

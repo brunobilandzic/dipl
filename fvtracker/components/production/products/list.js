@@ -81,7 +81,7 @@ const ProductItem = ({ product, router }) => {
       },
     },
     {
-      label: "Stanje",
+      label: "Zalihe",
       className: "submitButton",
       onClick: () => {
         router.push(`/proizvodi/zalihe/${product.slug}`);

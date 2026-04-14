@@ -1,6 +1,7 @@
 import { Product } from "@/models/sectors/production/Product";
 import { updateIngredients } from "./ingredients";
 import { makeUrlFriendly } from "@/lib/utils/strings";
+import { ProductionManager } from "@/models/user/managers/ProductionManager";
 
 export const getProducts = async () => {
   const products = await Product.find()
@@ -74,13 +75,17 @@ export const updateProduct = async ({ _updatedProduct, productId }) => {
 
 export const createProduct = async ({ _newProductData }) => {
   const { ingredients: newIngredients, ...newProductData } = _newProductData;
+  const productionManager =
+    await ProductionManager.findOne().select("products _id");
   const product = await Product.create({
     ...newProductData,
+    productionManager: productionManager._id,
     slug: makeUrlFriendly(newProductData.name),
   });
 
   await product.createIngredients({ ingredientsData: newIngredients });
-
+  productionManager.products.push(product._id);
+  await productionManager.save();
   return product;
 };
 

@@ -82,6 +82,7 @@ export default ProductList;
 
 const ProductItem = ({ product, harvestingBatches, router }) => {
   const [addStockModalOpen, setAddStockModalOpen] = useState(false);
+  const dispatch = useDispatch();
   const actionOptions = [
     {
       label: "Uredi",
@@ -94,16 +95,17 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
       label: "Dodaj zalihe",
       className: "submitButton",
       onClick: () => {
+        s;
         setAddStockModalOpen(true);
       },
     },
     {
       label: "Obriši",
       className: "cancelButton",
-      onClick: (e) => {
+      onClick: async (e) => {
         e.preventDefault();
         e.stopPropagation();
-        deleteProducts({ productIds: [product._id], dispatch, router });
+        await deleteProducts({ productIds: [product._id] });
       },
     },
   ];
@@ -111,7 +113,7 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
     harvestingBatches,
     product,
   });
-  console.log({possibleStocksNum})
+  console.log({ possibleStocksNum });
   return (
     <>
       <ListItem actionOptions={actionOptions}>

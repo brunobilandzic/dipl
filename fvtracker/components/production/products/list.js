@@ -66,7 +66,11 @@ const ProductList = () => {
       >
         {products?.map((product) => (
           <div key={product._id}>
-            <ProductItem router={router} product={product} harvestingBatches={harvestingBatches} />
+            <ProductItem
+              router={router}
+              product={product}
+              harvestingBatches={harvestingBatches}
+            />
           </div>
         ))}
       </List>

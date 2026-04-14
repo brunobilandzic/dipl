@@ -161,7 +161,7 @@ productSchema.methods.createStock = async function ({
   await productionProcess.save();
   await stock.save();
 
-  this.stocks = stock._id;
+  this.stock = stock._id;
   await this.save();
 
   return stock;

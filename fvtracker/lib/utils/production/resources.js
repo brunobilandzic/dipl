@@ -67,6 +67,7 @@ export const getBatchesWithResources = ({
 
 // you get batches, ingredients
 export const productPossibleStocksNum = ({ harvestingBatches, product }) => {
+  console.log("analyzing resources for", product.name);
   const batchesWithResources = getBatchesWithResources({
     harvestingBatches,
     product,
@@ -96,6 +97,8 @@ export const productPossibleStocksNum = ({ harvestingBatches, product }) => {
       batchesCVS[batch.name][cvName] = batchQuantity;
     }
   }
+
+  return batchesCVS;
 };
 
 /* 

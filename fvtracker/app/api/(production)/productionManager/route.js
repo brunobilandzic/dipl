@@ -26,7 +26,7 @@ export async function GET(request) {
           },
         },
         {
-          path: "stocks",
+          path: "stock",
         },
       ],
     },

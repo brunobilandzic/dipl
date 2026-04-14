@@ -27,7 +27,7 @@ export const PlantingPlanListItem = ({ plan, plant = true, onDelete }) => {
 export const PlantingPlanItems = ({ items }) => {
   return (
     <div className="mt-2 flex flex-col gap-2">
-      <div>Items:</div>
+      <div>Stavke plana:</div>
       <div className="">
         {items.map((item) => (
           <div key={uuid()} className="">
@@ -77,8 +77,8 @@ const PlantedCropVarietiesPlan = ({ plantedCropVarieties }) => {
                 {getCANameFromPlantedCropVarietiesInCultivation({
                   plantedCropVariety: plantedCropVarieties[0],
                 })}{" "}
-                - {cultivationName}: {plantedCropVarieties?.length || 0} planted
-                crop varieties
+                - {cultivationName}: {plantedCropVarieties?.length || 0} ubranih
+                zasada.
               </div>
               {/* <ul className="list-disc list-inside">
                 {plantedCropVarieties.map((plantedCropVariety) => {

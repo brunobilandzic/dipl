@@ -7,6 +7,9 @@ export default async function fillProductionRedux({ dispatch, router }) {
     dispatch(setLoading(true));
     const res = await api.get("/productionManager");
     const productionManager = res.data;
+    console.log("Fetched production manager data:", productionManager);
+    dispatch(setLoading(false));
+    return productionManager;
   } catch (error) {
     handleError({
       ...error,

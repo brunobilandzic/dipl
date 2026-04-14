@@ -1,6 +1,6 @@
 import { setGeneralManager, setManagers } from "@/store/generalManager";
-import handleError from "../constants/errors/client/handleError";
-import api from "../api";
+import handleError from "../../constants/errors/client/handleError";
+import api from "../../api";
 
 export const refreshGeneralManager = async ({ dispatch }) => {
   try {

@@ -2,6 +2,11 @@ import { Base } from "@/models/Base";
 import mongoose from "mongoose";
 
 const productionProcessSchema = {
+  harvestingBatch: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "HarvestingBatch",
+    required: true,
+  },
   facility: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Base",

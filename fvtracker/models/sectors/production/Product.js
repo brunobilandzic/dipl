@@ -148,7 +148,6 @@ productSchema.methods.createStock = async function ({
   } else {
     const newStock = new ProductStock({
       product: this._id,
-      harvestingBatch: harvestingBatchId,
       quantity,
       productionProcesses: [productionProcess._id],
     });
@@ -160,7 +159,7 @@ productSchema.methods.createStock = async function ({
   await harvestingBatch.save();
   await productionProcess.save();
   await stock.save();
-
+  this.productionProcesses.push(productionProcess._id);
   this.stock = stock._id;
   await this.save();
 
@@ -212,11 +211,6 @@ const productStockSchema = new Schema({
     ref: "Base",
     required: true,
   },
-  harvestingBatch: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "HarvestingBatch",
-    required: true,
-  },
   quantity: {
     type: Number,
     required: true,
@@ -250,10 +244,6 @@ productStockSchema.pre("deleteMany", async function () {
   const ids = await ProductStock.find(this.getFilter()).distinct("_id");
   await ProductionProcess.deleteMany({ productStock: { $in: ids } });
   await ProductionFacility.updateMany(
-    { stocks: { $in: ids } },
-    { $pull: { stocks: { $in: ids } } },
-  );
-  await Product.updateMany(
     { stocks: { $in: ids } },
     { $pull: { stocks: { $in: ids } } },
   );

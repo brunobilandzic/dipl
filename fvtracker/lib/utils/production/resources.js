@@ -73,15 +73,6 @@ export const productPossibleStocksNum = ({ harvestingBatches, product }) => {
     quantity: 1,
   });
   const cvBatches = {};
-  for (const ing of product.ingredients) {
-    const cvName = ing.cropVariety.name;
-    cvBatches[cvName] = calculateCropVarietyAmouts({
-      batches: harvestingBatches,
-      cvName,
-      needed: ing.quantity,
-    });
-  }
-  console.log({ cvBatches });
 
   let batchesCVS = Object.fromEntries(
     harvestingBatches.map((batch) => [batch.name, null]),
@@ -107,6 +98,8 @@ export const productPossibleStocksNum = ({ harvestingBatches, product }) => {
   }
 };
 
+/* 
+
 const calculateCropVarietyAmouts = ({ batches, cvNames, needed }) => {
   let cvBatches = batches.reduce((batchesCvQuantity, batch) => {
     const batchQuantity = getBatchQuantity({ batch, cvNames });
@@ -123,7 +116,7 @@ const calculateCropVarietyAmouts = ({ batches, cvNames, needed }) => {
   console.log("cvbatches", cvBatches);
 
   return cvBatches;
-};
+}; */
 
 const getBatchQuantity = ({ batch, cvName }) => {
   return batch.harvestingBatchItems.find(

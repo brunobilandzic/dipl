@@ -13,7 +13,7 @@ const productionProcessSchema = {
       default: [],
     },
   ],
-  productStock: {
+  stock: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "ProductStock",
   },

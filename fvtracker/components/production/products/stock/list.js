@@ -35,7 +35,7 @@ const StockItem = ({ stock }) => {
       label: "Dodaj zalihe",
       className: "submitButton",
       onClick: () => {
-        console.log("Dodaj zalihe za", stock.product.name);
+        console.log("Dodaj zalihe", stock.product.name);
       },
     },
   ];

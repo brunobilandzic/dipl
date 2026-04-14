@@ -2,6 +2,7 @@
 
 import { useSelector, useDispatch } from "react-redux";
 import { refreshProductsStocks } from "@/store/production";
+import Modal from "@/components/layout/modals/modal";
 
 export const ProductStock = ({ slug }) => {
   const dispatch = useDispatch();
@@ -11,5 +12,15 @@ export const ProductStock = ({ slug }) => {
   }
   const stock = stocks?.find((s) => s.product.slug === slug);
 
-  return <div>ProductStock: {JSON.stringify(stock)}</div>;
+  return <div>ProductStock: {}</div>;
+};
+
+export const addProductStock = ({ product }) => {
+  return (
+    <Modal title={`Dodaj zalihe za ${product.name}`}>
+      <div>
+        <div>Trenutno na zalihi: {product?.stock.quantity || 0}</div>
+      </div>
+    </Modal>
+  );
 };

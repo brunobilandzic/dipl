@@ -26,6 +26,7 @@ const productsSlice = createSlice({
   initialState,
   reducers: {
     setProducts: (state, action) => {
+      console.log("Setting products in Redux:", action.payload);
       state.products.items = action.payload;
       state.products.filteredItems = sortItems({
         items: action.payload,
@@ -107,7 +108,7 @@ export const refreshProductsStocks = createAsyncThunk(
     console.log("Fetching product stocks...");
     const res = await api.get("/stocks");
     const data = res.data;
-    console.log(data)
+    console.log(data);
     return res.data.stocks;
   },
 );

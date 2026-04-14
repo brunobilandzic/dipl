@@ -8,30 +8,19 @@ const productionManagerSchema = new Schema({
     ref: "RootManager",
     required: true,
   },
-  processingBatches: [
-    // inputs to production process
+  products: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "ProcessingBatch",
+      ref: "Product",
       default: [],
     },
   ],
-  productionProducts: [
+  productionProcesses: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "ProductionProduct",
+      ref: "ProductionProcess",
       default: [],
     },
-  ],
-  qualityControlReports: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "QualityControlReport",
-      default: [],
-    },
-  ],
-  productions: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "Production", default: [] },
   ],
 });
 

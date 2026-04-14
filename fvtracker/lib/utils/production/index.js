@@ -1,7 +1,16 @@
 import api from "@/lib/api";
+import handleError from "@/lib/constants/errors/client/handleError";
+import { setLoading } from "@/store/loading";
 
-export default async function fillProductionRedux() {
+export default async function fillProductionRedux({ dispatch, router }) {
   try {
-    await api.get("/production");
-  } catch (error) {}
+    dispatch(setLoading(true));
+    const res = await api.get("/productionManager");
+    const productionManager = res.data;
+  } catch (error) {
+    handleError({
+      ...error,
+      generalMessage: "Greška pri dohvaćanju podataka o proizvodnji",
+    });
+  }
 }

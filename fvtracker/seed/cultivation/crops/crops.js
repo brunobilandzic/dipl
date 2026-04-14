@@ -19,7 +19,7 @@ import { createPlans } from "@/seed/documents/plans";
 // main types
 
 export async function seedCropMainTypes() {
-/*   await deleteCrops(); */
+  /*   await deleteCrops(); */
   const cropMainTypesPromises = [];
   for (const [key, mainTypeData] of allCropTypes.entries()) {
     cropMainTypesPromises.push(createMainType(mainTypeData));

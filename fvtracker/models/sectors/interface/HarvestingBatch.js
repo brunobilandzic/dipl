@@ -95,7 +95,8 @@ harvestingBatchSchema.methods.addPlantedCropVarieties = async function ({
   });
   item.plantedCropVarieties.push(...plantedCropVarietiesIds);
   const addedQuantity = plantedCropVarietiesIds.length * quantityPerCell;
-  console.log("added quantity", addedQuantity);
+  console.log("\nAdding quantity to batch:", addedQuantity);
+  console.log("\nadded quantity\n", addedQuantity);
   item.batchQuantity += addedQuantity;
   await item.save();
 
@@ -135,7 +136,7 @@ harvestingBatchSchema.methods.quantities = async function () {
 };
 
 harvestingBatchItemSchema.pre("save", async function () {
-  if(this.isModified("batchQuantity")) {
+  if (this.isModified("batchQuantity")) {
     if (this.batchQuantity < 0) {
       throw new Error("Batch quantity cannot be negative.");
     }

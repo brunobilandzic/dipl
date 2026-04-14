@@ -34,7 +34,7 @@ const ProductList = () => {
     dispatch(sortProducts(sortBy));
   }, [sortBy]);
 
-/*   useEffect(() => {
+  /*   useEffect(() => {
     if (products === null) {
       refreshProducts({ dispatch, router });
     }
@@ -100,16 +100,30 @@ const ProductItem = ({ product, router }) => {
 
   return (
     <ListItem actionOptions={actionOptions}>
-      <h2 className="text-xl font-bold">{product.name}</h2>
-      <p>{product.description}</p>
-      <ProductInfo
-        createdAt={product.createdAt}
-        updatedAt={product.updatedAt}
-        price={product.price}
-      />
-      <div></div>
-      <div className="mt-4">
-        <IngredientsList ingredients={product.ingredients} />
+      <div className="flex justify-between mt-4">
+        <div>
+          <h2 className="text-xl font-bold">{product.name}</h2>
+          <p>{product.description}</p>
+        </div>
+        <div className="stockquantity flex items-center gap-4">
+          <h3 className="font-semibold">Na zalihi:</h3>
+          <span className="text-5xl font-bold">
+            {product.stock?.quantity || 0}
+          </span>
+        </div>
+      </div>
+      <div className="flex justify-between mt-4">
+        <div>
+          <ProductInfo
+            createdAt={product.createdAt}
+            updatedAt={product.updatedAt}
+            price={product.price}
+          />
+
+          <div className="mt-4">
+            <IngredientsList ingredients={product.ingredients} />
+          </div>
+        </div>
       </div>
     </ListItem>
   );

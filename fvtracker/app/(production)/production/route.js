@@ -1,5 +1,6 @@
 import { fetchManager } from "@/lib/auth/fetchSessionData";
 import { PRODUCTION_MANAGER } from "@/lib/constants/users/managerTypes";
+import { ProductionManager } from "@/models/user/managers/ProductionManager";
 
 export async function GET(request) {
   const { generalManager, specificManager, unauthorized } = await fetchManager({
@@ -8,4 +9,28 @@ export async function GET(request) {
   if (unauthorized) {
     return Response.json({ unauthorized: true }, { status: 403 });
   }
+  const productionManager = await ProductionManager.findOne().populate([
+    {
+      path: "products",
+      populate: [
+        {
+          path: "ingredients",
+          select: "cropVariety quantity",
+          populate: {
+            path: "cropVariety",
+            select: "name cropType",
+            populate: {
+              path: "cropType",
+              select: "name",
+            },
+          },
+        },
+        {
+          path: "stocks",
+        },
+      ],
+    },
+  ]);
+
+  return Response.json({ productionManager }, { status: 200 });
 }

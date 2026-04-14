@@ -14,7 +14,7 @@ export const createProductStock = async ({
 
 export const getStocks = async () => {
   console.log("Fetching products stocks...");
-  const stocks = await ProductStock.findAll().populate([
+  const stocks = await ProductStock.find().populate([
     {
       path: "product",
       select: "name ingredients description",

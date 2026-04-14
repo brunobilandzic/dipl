@@ -1,7 +1,7 @@
 import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { setLoading } from "@/store/loading";
-import { setProducts } from "@/store/production";
+import { refreshProductsStocks, setProducts } from "@/store/production";
 
 export default async function fillProductionRedux({ dispatch, router }) {
   try {
@@ -24,6 +24,18 @@ export default async function fillProductionRedux({ dispatch, router }) {
 
 const dispatchPayloads = ({ manager, dispatch }) => {
   console.log("Dispatching production manager data to Redux...");
-  console.log( manager );
+  console.log(manager);
   dispatch(setProducts(manager.products));
+  dispatch(
+    refreshProductsStocks.fulfilled(
+      manager.products.map((product) => ({
+        product: {
+          name: product.name,
+          description: product.description,
+        },
+        quantity: product.stock.quantity,
+        stock: product.stock,
+      })),
+    ),
+  );
 };

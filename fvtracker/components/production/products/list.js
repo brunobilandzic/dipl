@@ -23,7 +23,7 @@ const ProductList = () => {
   const products = useSelector(
     (state) => state.production.products.filteredItems,
   );
-  const batches = useSelector(
+  const harvestingBatches = useSelector(
     (state) => state.production.harvestingBatches.items,
   );
   const [sortBy, setSortBy] = useState("newest");
@@ -66,7 +66,7 @@ const ProductList = () => {
       >
         {products?.map((product) => (
           <div key={product._id}>
-            <ProductItem router={router} product={product} />
+            <ProductItem router={router} product={product} harvestingBatches={harvestingBatches} />
           </div>
         ))}
       </List>

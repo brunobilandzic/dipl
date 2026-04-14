@@ -81,5 +81,5 @@ const calculateCropVarietyAmout = ({ batches, cropVarietyName }) => {
       (hbi) => hbi.cropVariety.name == cropVarietyName,
     ).batchQuantity;
     batchesCvQuantity[batch.name] = batchQuantity;
-  });
+  }, {});
 };

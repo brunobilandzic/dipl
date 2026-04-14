@@ -74,3 +74,12 @@ export const productPossibleStocksNum = ({ harvestingBatches, product }) => {
   });
   console.log({ batchesWithResources });
 };
+
+const calculateCropVarietyAmout = ({ batches, cropVarietyName }) => {
+  return batches.reduce((batchesCvQuantity, batch) => {
+    const batchQuantity = batch.harvestingBatchItems.find(
+      (hbi) => hbi.cropVariety.name == cropVarietyName,
+    ).batchQuantity;
+    batchesCvQuantity[batch.name] = batchQuantity;
+  });
+};

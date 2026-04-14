@@ -24,6 +24,7 @@ export const cropVarietyBatchResources = ({ harvestingBatches }) => {
         resources: [batchResource],
       });
     });
+    console.log({ batchName, batchResources });
     return batchResources;
   });
 
@@ -62,4 +63,14 @@ export const getBatchesWithResources = ({
     }
   }
   return batches;
+};
+
+// you get batches, ingredients
+export const productPossibleStocksNum = ({ harvestingBatches, product }) => {
+  const batchesWithResources = getBatchesWithResources({
+    harvestingBatches,
+    product,
+    quantity: 1,
+  });
+  console.log({ batchesWithResources });
 };

@@ -36,18 +36,18 @@ export const ActionOptions = ({ options }) => {
   );
 };
 
-export const CreateListItemButton = ({ onCreate }) => {
+export const CreateListItemButton = ({ onCreate, label }) => {
   return (
     <div className="btn submitButton btnSm" onClick={onCreate}>
-      Dodaj
+      {label || "Dodaj"}
     </div>
   );
 };
-export const DeleteListButton = ({ onDelete }) => {
+export const DeleteListButton = ({ onDelete, label }) => {
   console.log("onDelete:", onDelete);
   return (
     <div className="btn cancelButton btnSm" onClick={onDelete}>
-      Obriši sve
+      {label || "Obriši sve"}
     </div>
   );
 };

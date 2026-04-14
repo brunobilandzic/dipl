@@ -111,6 +111,7 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
     harvestingBatches,
     product,
   });
+  console.log({possibleStocksNum})
   return (
     <>
       <ListItem actionOptions={actionOptions}>

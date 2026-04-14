@@ -15,9 +15,13 @@ export const ProductStock = ({ slug }) => {
   return <div>ProductStock: {}</div>;
 };
 
-export const addProductStock = ({ product }) => {
+export const AddProductStock = ({ product, isOpen, onCancel }) => {
   return (
-    <Modal title={`Dodaj zalihe za ${product.name}`}>
+    <Modal
+      title={`Dodaj zalihe za ${product.name}`}
+      isOpen={isOpen}
+      onCancel={onCancel}
+    >
       <div>
         <div>Trenutno na zalihi: {product?.stock.quantity || 0}</div>
       </div>

@@ -10,3 +10,8 @@ export const createProductStock = async ({
   const stock = await product.createStock({ harvestingBatchId, quantity });
   return stock;
 };
+
+export const getProductStocks = async () => {
+  console.log("Fetching product stock...");
+  return 2;
+};

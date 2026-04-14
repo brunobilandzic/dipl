@@ -101,7 +101,7 @@ export async function fetchManager({ managerNames = [] }) {
       return response;
     }
   }
-
+  
   return { unauthorized: true };
 
   console.log("did not throw error yet");

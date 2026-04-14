@@ -72,15 +72,15 @@ export const productPossibleStocksNum = ({ harvestingBatches, product }) => {
     product,
     quantity: 1,
   });
-  const batchCVS = {};
+  const cvBatches = {};
   for (const ing of product.ingredients) {
     const cvName = ing.cropVariety.name;
-    batchCVS[cvName] = calculateCropVarietyAmout({
+    cvBatches[cvName] = calculateCropVarietyAmout({
       batches: harvestingBatches,
       cvName,
     });
   }
-  console.log({ batchCVS });
+  console.log({ cvBatches });
 };
 
 const calculateCropVarietyAmout = ({ batches, cvName }) => {

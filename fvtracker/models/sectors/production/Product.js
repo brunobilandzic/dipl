@@ -9,6 +9,10 @@ import { getProductionProcessInfos } from "@/seed/data/production";
 import { ProductionFacility } from "./Facility";
 
 const productSchema = new Schema({
+  productionManager: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "ProductionManager",
+  },
   price: {
     type: Number,
     default: 0,

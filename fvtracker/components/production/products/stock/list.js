@@ -20,7 +20,7 @@ const StockList = () => {
     <div>
       <List title="Zalihe proizvoda">
         {stocks?.map((stock) => (
-          <StockItem stock={stock} />
+          <StockItem key={uuid()} stock={stock} />
         ))}
       </List>
     </div>

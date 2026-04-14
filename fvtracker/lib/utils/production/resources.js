@@ -66,7 +66,11 @@ export const getBatchesWithResources = ({
 };
 
 // you get batches, ingredients
-export const productPossibleStocksNum = ({ harvestingBatches, product }) => {
+export const productPossibleStocksNum = ({
+  harvestingBatches,
+  product,
+  needed,
+}) => {
   const batchesWithResources = getBatchesWithResources({
     harvestingBatches,
     product,
@@ -78,12 +82,13 @@ export const productPossibleStocksNum = ({ harvestingBatches, product }) => {
     cvBatches[cvName] = calculateCropVarietyAmouts({
       batches: harvestingBatches,
       cvName,
+      needed
     });
   }
   console.log({ cvBatches });
 };
 
-const calculateCropVarietyAmouts = ({ batches, cvName }) => {
+const calculateCropVarietyAmouts = ({ batches, cvName, needed }) => {
   const cvBatches = batches.reduce((batchesCvQuantity, batch) => {
     batchesCvQuantity[batch.name] = getBatchQuantity({ batch, cvName });
     return batchesCvQuantity;

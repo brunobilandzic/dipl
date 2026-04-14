@@ -231,7 +231,7 @@ const productStockSchema = new Schema({
   ],
 });
 
-productStockSchema.pre("save", async function () {
+/* productStockSchema.pre("save", async function () {
   if (this.isNew) {
     await this.populate([
       {
@@ -245,7 +245,7 @@ productStockSchema.pre("save", async function () {
       },
     ]);
   }
-});
+}); */
 
 productStockSchema.pre("deleteMany", async function () {
   const ids = await ProductStock.find(this.getFilter()).distinct("_id");

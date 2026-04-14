@@ -1,3 +1,4 @@
+import { ProductStock } from "@/models/sectors/production/Product";
 import { getProductById } from "../product";
 
 export const createProductStock = async ({
@@ -13,5 +14,28 @@ export const createProductStock = async ({
 
 export const getStocks = async () => {
   console.log("Fetching products stocks...");
-  return { stocks: [1] };
+  const productsStocks = await ProductStock.findAll().populate([
+    {
+      path: "product",
+      select: "name ingredients description",
+      populate: [
+        {
+          path: "ingredients",
+          select: "cropVariety quantity",
+          populate: [
+            {
+              path: "cropVariety",
+              select: "name cropType",
+              populate: [
+                {
+                  path: "cropType",
+                  select: "name",
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  ]);
 };

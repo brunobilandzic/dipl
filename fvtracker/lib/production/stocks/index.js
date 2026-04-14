@@ -17,7 +17,7 @@ export const getStocks = async () => {
   const stocks = await ProductStock.find().populate([
     {
       path: "product",
-      select: "name ingredients description",
+      select: "name ingredients description slug",
       populate: [
         {
           path: "ingredients",

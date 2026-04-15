@@ -20,7 +20,6 @@ await dbConnect();
 
 async function createFieldObject(fieldParams, msWindow = createFieldTimeMs) {
   const msStart = Date.now();
-
   const { name, description, location, ...fieldDAO } = fieldParams;
   const _cultivationAreaNamesConstant = [...cultivationAreaNamesConstant];
 
@@ -83,7 +82,8 @@ async function createFieldsObjects(
   fieldParamsArray = optimizedParamsArray,
   msWindow = createFieldTimeMs,
 ) {
-/*   await deleteFieldsWithDocs(); */
+  /*   await deleteFieldsWithDocs(); */
+  console.log(`Creating ${fieldParamsArray.length} fields...`);
   const fieldObjects = [];
   const fieldPromises = [];
   for (let fieldParams of fieldParamsArray) {

@@ -150,7 +150,7 @@ export async function createFieldRecord(fieldObject) {
   const cultivation = await createCultivation({
     cultivationArea: cultivationCA,
   });
-
+  console.log(cultivation);
   await crops.plantageHarvest({
     fieldId: fieldRecord._id,
     cultivation,

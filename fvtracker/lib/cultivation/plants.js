@@ -133,7 +133,7 @@ async function createPlantedCropVarietyPromise({
     await newPlantedCropVariety.save();
     return newPlantedCropVariety;
   }
-
+  console.log("shall not log on seed");
   const plantingPlan = await getPlantingPlanById(plantingPlanId);
   await plantingPlan.populate({
     path: "items",

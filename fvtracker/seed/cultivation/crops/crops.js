@@ -176,6 +176,10 @@ export const createNewPlantage = async ({ plantingPlan }) => {
       select: "quantityPerCell name",
     },
   });
+  const plantingCoords = [];
+  // Example coordinates for planting
+  for (const item of plantingPlan.items) {
+  }
   const plantageCoords = ["0,0", "0,1", "1,0", "1,1"]; // Example coordinates for planting
   const plantingPlanItem = plantingPlan.items.find(
     (item) => item.cropVariety.name === "Idared",

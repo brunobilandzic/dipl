@@ -207,7 +207,7 @@ export const createNewHarvest = async ({ harvestingPlan }) => {
       select: "plantedCropVarieties cropVariety quantity",
       populate: {
         path: "cropVariety",
-        select: "quantityPerCell",
+        select: "quantityPerCell name",
       },
     },
     {

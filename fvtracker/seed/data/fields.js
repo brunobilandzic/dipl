@@ -80,51 +80,6 @@ export const optimizedCultivation = ({ caId }) => {
   };
 };
 
-const optimizedParams2 = {
-  name: "SEEDED FIELD 2",
-  description: "Field optimized for seeders testing",
-  width: 100,
-  length: 80,
-  min_ca_dim: 10,
-  max_ca_dim: 60,
-  gap: 2,
-  cultivationAreas: [],
-  location: {
-    latitude: 43.67028,
-    longitude: 16.70472,
-  },
-};
-
-const optimizedParams3 = {
-  name: "SEEDED FIELD 3",
-  description: "Field optimized for seeders testing",
-  width: 90,
-  length: 120,
-  min_ca_dim: 10,
-  max_ca_dim: 60,
-  gap: 2,
-  cultivationAreas: [],
-  location: {
-    latitude: 44.5,
-    longitude: 15.5,
-  },
-};
-
-const optimizedParams4 = {
-  name: "SEEDED FIELD 4",
-  description: "Field optimized for seeders testing",
-  width: 75,
-  length: 150,
-  min_ca_dim: 10,
-  max_ca_dim: 60,
-  gap: 2,
-  cultivationAreas: [],
-  location: {
-    latitude: 45.0,
-    longitude: 14.0,
-  },
-};
-
 export const optimizedParamsArray = [optimizedParams];
 
 const createFieldTimeSeconds = 5;

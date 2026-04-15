@@ -118,7 +118,6 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
     }),
   });
 
-  console.log(`result for ${product.name}`, { minPossibleBatchMap });
   return (
     <>
       <ListItem actionOptions={actionOptions}>

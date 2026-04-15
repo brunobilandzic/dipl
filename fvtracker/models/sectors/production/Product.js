@@ -27,6 +27,7 @@ const productSchema = new Schema({
   stock: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "ProductStock",
+    default: null,
   },
   productionProcesses: [
     {
@@ -40,6 +41,13 @@ const productSchema = new Schema({
 productSchema.pre("save", function () {
   if (this.isModified("name") || this.isNew) {
     this.slug = makeUrlFriendly(this.name);
+  }
+  if (this.isNew && !this.stock) {
+    const productStock = new ProductStock({
+      product: this._id,
+      quantity: 0,
+    });
+    this.stock = productStock._id;
   }
   this.updatedAt = new Date();
 });

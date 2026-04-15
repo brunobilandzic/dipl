@@ -264,7 +264,6 @@ export const seedPlantageHarvest = async ({ _fieldId, _cropVarietyId }) => {
   const cropVarietyIds = await CropVariety.find({
     name: { $in: cropVaietyNames },
   });
-  console.log({ cropVarietyIds });
   const fieldId = await plansFieldId(_fieldId);
   const { newPlantingPlan, newHarvestingPlan } = await createPlans({
     fieldId,

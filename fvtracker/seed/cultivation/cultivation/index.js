@@ -24,6 +24,7 @@ export const createCultivation = async ({ cultivationArea, planted }) => {
     relativeCoords,
     planted: cultivationArea.planted,
     cultivationId: newCultivation._id.toString(),
+    fieldId: cultivationArea.field._id.toString(),
   });
   console.log(`created ${plantedCropVarieties.length} planted crop varieties`);
   newCultivation.plantedCropVarieties = plantedCropVarieties.map((p) => p._id);

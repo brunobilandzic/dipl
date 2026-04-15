@@ -184,20 +184,23 @@ const plantedCropVarietySchema = new Schema({
   },
 });
 
-plantedCropVarietySchema.pre("save", async function () {
+/* plantedCropVarietySchema.pre("save", async function () {
   if (!this.cultivation) return;
-  const cultivation = await Cultivation.findById(this.cultivation).populate({
-    path: "cultivationArea",
-    select: "field",
+  await this.populate({
+    path: "cultivation",
+    select: "cultivationArea",
+    populate: {
+      path: "cultivationArea",
+      select: "field",
+      populate: {
+        path: "field",
+      },
+    },
   });
-  if (!cultivation) {
-    console.log("Cultivation not found for planted crop variety", this._id);
-    return;
-  }
-  await Field.findByIdAndUpdate(cultivation.cultivationArea.field, {
-    $set: { updatedAt: new Date() },
-  });
-});
+  const field = this.cultivation.cultivationArea.field;
+  console.log("updated field");
+  await field.save(); // to trigger field's updatedAt change
+}); */
 
 plantedCropVarietySchema.pre("deleteMany", async function () {
   const plantedCropVarieties = await this.model.find(this.getFilter());

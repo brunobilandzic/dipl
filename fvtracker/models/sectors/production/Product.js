@@ -38,7 +38,7 @@ const productSchema = new Schema({
   ],
 });
 
-productSchema.pre("save", function () {
+productSchema.pre("save", async function () {
   if (this.isModified("name") || this.isNew) {
     this.slug = makeUrlFriendly(this.name);
   }
@@ -48,6 +48,7 @@ productSchema.pre("save", function () {
       quantity: 0,
     });
     this.stock = productStock._id;
+    await productStock.save();
   }
   this.updatedAt = new Date();
 });

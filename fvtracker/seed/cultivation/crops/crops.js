@@ -228,6 +228,7 @@ export const createNewHarvest = async ({ harvestingPlan }) => {
   });
 
   const plcvids = plantedCropVarietes.map((p) => p._id);
+  console.log({ harvestedPlcvs: plantedCropVarietes });
   await harvestingPlan.harvestingBatch.addPlantedCropVarieties({
     plantedCropVarietiesIds: plcvids,
     cropVarietyId,

@@ -8,6 +8,7 @@ import { getCultivationById } from "./cultivation";
 import { PlantingPlan } from "@/models/documents/plans/PlantingPlan";
 import { fetchManager } from "../auth/fetchSessionData";
 import { getPlantingPlanItemRecord } from "./plans";
+import { Field } from "@/models/sectors/cultivation/Field";
 
 export async function cropsData() {
   const cropMainTypes = await CropMainType.find().populate({
@@ -91,8 +92,13 @@ export async function createPlantedCropVarietiesCells({
   harvestedAt,
   plantedAt,
   plantingPlanId,
+  fieldId,
 }) {
   const plantedCropVarieties = [];
+  const field = await Field.findById(fieldId);
+  if (!field) {
+    throw new Error("Field not found with the provided ID.");
+  }
   for (const relativeCoord of relativeCoords) {
     const plantedCropVariety = await createPlantedCropVarietyPromise({
       cultivationId,
@@ -106,6 +112,8 @@ export async function createPlantedCropVarietiesCells({
     console.log("created plcv", plantedCropVariety.relativeCoords);
     plantedCropVarieties.push(plantedCropVariety);
   }
+  field.updatedAt = new Date();
+  await field.save(); // to trigger field's updatedAt change
   return plantedCropVarieties;
 }
 

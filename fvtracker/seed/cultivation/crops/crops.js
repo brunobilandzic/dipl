@@ -302,6 +302,7 @@ export const seedPlantageHarvest = async ({ _fieldId, _cropVarietyId }) => {
   await plantageHarvest({
     plantingPlan: newPlantingPlan,
     harvestingPlan: newHarvestingPlan,
+    cultivation,
   });
 };
 

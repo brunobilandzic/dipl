@@ -173,11 +173,15 @@ export const createNewPlantage = async ({ plantingPlan }) => {
     select: "plantedCropVarieties cropVariety quantity",
     populate: {
       path: "cropVariety",
-      select: "quantityPerCell",
+      select: "quantityPerCell name",
     },
   });
   const plantageCoords = ["0,0", "0,1", "1,0", "1,1"]; // Example coordinates for planting
-  const plantingPlanItem = plantingPlan.items[0];
+  const plantingPlanItem = plantingPlan.items.find(
+    (item) => item.cropVariety.name === "Idared",
+  );
+  console.log({ plantingPlanItem });
+  const cropVarietyId = plantingPlanItem.cropVariety._id;
 
   await PlantedCropVariety.updateMany(
     { relativeCoords: { $in: plantageCoords } },

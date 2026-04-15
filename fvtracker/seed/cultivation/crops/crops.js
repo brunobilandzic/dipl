@@ -257,13 +257,15 @@ const deletePlantageHarvest = async () => {
 
 export const seedPlantageHarvest = async ({ _fieldId, _cropVarietyId }) => {
   await deletePlantageHarvest();
-  const cropVariety = await CropVariety.findOne({ name: "Idared" }).select(
-    "_id",
-  );
+  const cropVaietyNames = ["Idared", "Kristalka", "Istarski"];
+  const cropVarietyIds = await CropVariety.find({
+    name: { $in: cropVaietyNames },
+  });
+  console.log({ cropVarietyIds });
   const fieldId = await plansFieldId(_fieldId);
   const { newPlantingPlan, newHarvestingPlan } = await createPlans({
     fieldId,
-    cropVarietyId: cropVariety._id,
+    cropVarietyIds: cropVarietyIds.map((cv) => cv._id),
   });
   await plantageHarvest({
     plantingPlan: newPlantingPlan,

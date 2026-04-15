@@ -42,17 +42,17 @@ export const optimizedParams = {
   },
 };
 
-export const planInfo = ({ fieldId, cropVarietyId, productionManagerId }) => {
+export const planInfo = ({ fieldId, cropVarietyIds, productionManagerId }) => {
   return {
     plantingPlan: {
       field: fieldId, // Postavit ćemo ovo kasnije
       name: `Plan sadnje ${getRandomString(5)}`,
       description: "Plan sadnje za testiranje",
       items: [
-        {
+        cropVarietyIds.map((cropVarietyId) => ({
           cropVariety: cropVarietyId, // Postavit ćemo ovo kasnije
           quantity: 1000,
-        },
+        })),
       ],
       productionManager: productionManagerId,
     },
@@ -61,10 +61,10 @@ export const planInfo = ({ fieldId, cropVarietyId, productionManagerId }) => {
       name: `Plan berbe ${getRandomString(5)}`,
       description: "Plan berbe za testiranje",
       items: [
-        {
+        cropVarietyIds.map((cropVarietyId) => ({
           cropVariety: cropVarietyId, // Postavit ćemo ovo kasnije
           quantity: 1000,
-        },
+        })),
       ],
       productionManager: productionManagerId,
     },

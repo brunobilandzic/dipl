@@ -12,7 +12,7 @@ import { PRODUCTION_MANAGER_USERNAME } from "@/lib/constants/users/managersUsern
 import { ProductionManager } from "@/models/user/managers/ProductionManager";
 import { AppUser } from "@/models/user/AppUser";
 
-export async function createPlans({ fieldId, cropVarietyId }) {
+export async function createPlans({ fieldId, cropVarietyIds }) {
   const appUser = await AppUser.findOne({
     username: PRODUCTION_MANAGER_USERNAME,
   }).populate("rootManager");
@@ -25,7 +25,7 @@ export async function createPlans({ fieldId, cropVarietyId }) {
 
   const { plantingPlan, harvestingPlan } = planInfo({
     fieldId,
-    cropVarietyId,
+    cropVarietyIds,
     productionManagerId: productionManager._id,
   });
   const newPlantingPlan = await createPlantingPlan({

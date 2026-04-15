@@ -214,8 +214,10 @@ export const createNewHarvest = async ({ harvestingPlan }) => {
       path: "harvestingBatch",
     },
   ]);
-  const harvestingPlanItem = harvestingPlan.items[0];
-  const cropVarietyId = harvestingPlan.items[0].cropVariety;
+  const harvestingPlanItem = harvestingPlan.items.find(
+    (item) => item.cropVariety.name === "Idared",
+  );
+  const cropVarietyId = harvestingPlanItem.cropVariety._id;
   await PlantedCropVariety.updateMany(
     { relativeCoords: { $in: harvestCoords } },
     { harvestingPlanItem: harvestingPlanItem._id, harvestedAt: new Date() },

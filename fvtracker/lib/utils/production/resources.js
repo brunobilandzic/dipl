@@ -42,7 +42,6 @@ export const getBatchesWithResources = ({
   const varietiesQuantities = extractVarietiesQuantities({ product, quantity });
 
   for (const harvestingBatch of harvestingBatches) {
-    logHbiItems(harvestingBatch.harvestingBatchItems);
     let hasResources = true;
     for (const [cropVarietyName, requiredQuantity] of Object.entries(
       varietiesQuantities,

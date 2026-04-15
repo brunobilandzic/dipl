@@ -16,12 +16,16 @@ export const createCultivation = async ({ cultivationArea, planted }) => {
     }
   }
 
+  console.log(
+    `creating ${relativeCoords.length} empty planted crop varieties...`,
+  );
+
   const plantedCropVarieties = await createPlantedCropVarietiesCells({
     relativeCoords,
     planted: cultivationArea.planted,
     cultivationId: newCultivation._id.toString(),
   });
-
+  console.log(`created ${plantedCropVarieties.length} planted crop varieties`);
   newCultivation.plantedCropVarieties = plantedCropVarieties.map((p) => p._id);
 
   cultivationArea.cultivations.push(newCultivation._id);

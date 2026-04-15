@@ -251,9 +251,18 @@ export const createNewHarvest = async ({ harvestingPlan }) => {
   await harvestingPlanItem.save();
 };
 
-export async function plantageHarvest({ plantingPlan, harvestingPlan }) {
-  await createNewPlantage({ plantingPlan });
-  await createNewHarvest({ harvestingPlan });
+export async function plantageHarvest({
+  plantingPlan,
+  harvestingPlan,
+  cultivation,
+}) {
+  await createNewPlantage({
+    plantingPlan,
+    cultivationDimensions: getDimensionsFromPlanted(
+      cultivation.plantedCropVarietes.map((p) => p.relativeCoords),
+    ),
+  });
+  await createNewHarvest({ harvestingPlan, cultivation });
 }
 
 const deletePlantageHarvest = async () => {

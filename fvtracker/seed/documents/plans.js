@@ -34,9 +34,6 @@ export async function createPlans({ fieldId, cropVarietyIds }) {
   const newHarvestingPlan = await createHarvestingPlan({
     harvestingPlanData: harvestingPlan,
   });
-  console.log(
-    `Created planting plan ${newPlantingPlan.name} with items: ${newPlantingPlan.items.map((i) => ({ cropVariety: i.cropVariety.name })).join(", ")}.`,
-  );
 
   return { newPlantingPlan, newHarvestingPlan };
 }

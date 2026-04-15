@@ -1,4 +1,5 @@
 import { createPlantedCropVarietiesCells } from "@/lib/cultivation/plants";
+import { min } from "lodash";
 
 const { Cultivation } = require("@/models/sectors/cultivation/Cultivation");
 
@@ -10,8 +11,16 @@ export const createCultivation = async ({ cultivationArea, planted }) => {
   });
   await newCultivation.save();
   const relativeCoords = [];
-  for (let i = 0; i < Math.floor(cultivationArea.dimensions.width / 2); i++) {
-    for (let j = 0; j < cultivationArea.dimensions.length; j++) {
+  for (
+    let i = 0;
+    i < min([Math.floor(cultivationArea.dimensions.width / 2), 10]);
+    i++
+  ) {
+    for (
+      let j = 0;
+      j < min([Math.floor(cultivationArea.dimensions.length / 2), 10]);
+      j++
+    ) {
       relativeCoords.push(`${i},${j}`);
     }
   }

@@ -55,6 +55,7 @@ export async function createCultivation(cultivation) {
     cropVarietyId,
     planted: cuArea.planted,
     cultivationId: newCultivation._id.toString(),
+    fieldId: cuArea.field.toString(),
   });
 
   newCultivation.plantedCropVarieties = plantedCropVarieties.map((p) => p._id);

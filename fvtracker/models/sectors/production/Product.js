@@ -107,16 +107,6 @@ productSchema.methods.createStock = async function ({
   // get seed process info for 1 process
   productionProcessInfo = getProductionProcessInfos(1)[0],
 }) {
-  console.log(
-    "creating stock for product",
-    this.name,
-    "with harvesting batch id",
-    harvestingBatchId,
-    "and quantity",
-    quantity,
-    "productionProcessInfo",
-    productionProcessInfo,
-  );
   // find harvesting batch for create product
   const [harvestingBatch] = await getHarvestingBatches({
     batchIds: [harvestingBatchId],
@@ -158,9 +148,10 @@ productSchema.methods.createStock = async function ({
 
   let stock;
 
-  const existingStock = this.stock;
+  const existingStockId = this.stock;
 
-  if (existingStock) {
+  if (existingStockId) {
+    const existingStock = await ProductStock.findById(existingStockId);
     existingStock.productionProcesses.push(productionProcess._id);
     existingStock.quantity += quantity;
     stock = existingStock;
@@ -181,7 +172,9 @@ productSchema.methods.createStock = async function ({
   this.productionProcesses.push(productionProcess._id);
   this.stock = stock._id;
   await this.save();
-
+  console.log(
+    `Created production process with id ${productionProcess._id} for product ${this.name}. Updated stock quantity to ${stock.quantity}.`,
+  );
   return stock;
 
   // reduce from batch quantity

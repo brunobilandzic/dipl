@@ -42,6 +42,7 @@ export const getBatchesWithResources = ({
   const varietiesQuantities = extractVarietiesQuantities({ product, quantity });
 
   for (const harvestingBatch of harvestingBatches) {
+    logHbiItems(harvestingBatch.harvestingBatchItems);
     let hasResources = true;
     for (const [cropVarietyName, requiredQuantity] of Object.entries(
       varietiesQuantities,
@@ -61,6 +62,15 @@ export const getBatchesWithResources = ({
     }
   }
   return batches;
+};
+
+const logHbiItems = (items) => {
+  items.forEach((item) => {
+    console.log(
+      `Crop Variety: ${item.cropVariety.name}, Batch Quantity: ${item.batchQuantity}`,
+    );
+    console.log(`Planted Crop Varieties: ${item.plantedCropVarieties}`);
+  });
 };
 
 // you get batches, ingredients

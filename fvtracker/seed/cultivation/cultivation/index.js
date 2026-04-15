@@ -13,12 +13,12 @@ export const createCultivation = async ({ cultivationArea, planted }) => {
   const relativeCoords = [];
   for (
     let i = 0;
-    i < min([Math.floor(cultivationArea.dimensions.width / 2), 10]);
+    i < min([Math.floor(cultivationArea.dimensions.width / 2), 3]);
     i++
   ) {
     for (
       let j = 0;
-      j < min([Math.floor(cultivationArea.dimensions.length / 2), 10]);
+      j < min([Math.floor(cultivationArea.dimensions.length / 2), 3]);
       j++
     ) {
       relativeCoords.push(`${i},${j}`);

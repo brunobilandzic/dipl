@@ -269,6 +269,19 @@ export const seedPlantageHarvest = async ({ _fieldId, _cropVarietyId }) => {
     fieldId,
     cropVarietyIds: cropVarietyIds.map((cv) => cv._id),
   });
+  await newHarvestingPlan.populate({
+    path: "items",
+    populate: {
+      path: "cropVariety",
+      select: "name",
+    },
+  });
+  console.log({
+    planItems: newHarvestingPlan.items.map((i) => ({
+      cropVariety: i.cropVariety.name,
+      quantity: i.quantity,
+    })),
+  });
   await plantageHarvest({
     plantingPlan: newPlantingPlan,
     harvestingPlan: newHarvestingPlan,

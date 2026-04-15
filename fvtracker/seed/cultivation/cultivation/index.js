@@ -10,8 +10,8 @@ export const createCultivation = async ({ cultivationArea, planted }) => {
   });
   await newCultivation.save();
   const relativeCoords = [];
-  for (let i = 0; i < 5; i++) {
-    for (let j = 0; j < 5; j++) {
+  for (let i = 0; i < Math.floor(cultivationArea.dimensions.width / 2); i++) {
+    for (let j = 0; j < cultivationArea.dimensions.length; j++) {
       relativeCoords.push(`${i},${j}`);
     }
   }

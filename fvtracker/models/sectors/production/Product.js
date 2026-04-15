@@ -107,6 +107,16 @@ productSchema.methods.createStock = async function ({
   // get seed process info for 1 process
   productionProcessInfo = getProductionProcessInfos(1)[0],
 }) {
+  console.log(
+    "creating stock for product",
+    this.name,
+    "with harvesting batch id",
+    harvestingBatchId,
+    "and quantity",
+    quantity,
+    "productionProcessInfo",
+    productionProcessInfo,
+  );
   // find harvesting batch for create product
   const [harvestingBatch] = await getHarvestingBatches({
     batchIds: [harvestingBatchId],

@@ -40,27 +40,3 @@ export async function createPlans({ fieldId, cropVarietyIds }) {
 
   return { newPlantingPlan, newHarvestingPlan };
 }
-
-export const addPlanItems = async ({ plant, ingredients }) => {
-  const plan = plant
-    ? await PlantingPlan.findOne()
-    : await HarvestingPlan.findOne();
-
-  for (const ingredient of ingredients) {
-    const cropVarietyId = await getCropVarietyById(ingredient.cropVariety._id);
-    const itemData = {
-      cropVariety: ingredient.cropVariety,
-      quantity: ingredient.quantity * 3, // increase quantity for testing
-    };
-    const plantingPlanItem = new PlantingPlanItem({
-      ...itemData,
-      plantingPlan: plan._id,
-      cropVariety: cropVarietyId,
-    });
-    const cropVariety = await getCropVarietyById(cropVarietyId);
-    cropVariety.plantingPlanItems.push(plantingPlanItem._id);
-    await cropVariety.save();
-    await plantingPlanItem.save();
-    plan.items.push(plantingPlanItem._id);
-  }
-};

@@ -15,7 +15,13 @@ export const ProductStock = ({ slug }) => {
   return <div>ProductStock: {}</div>;
 };
 
-export const AddProductStock = ({ product, isOpen, onCancel }) => {
+export const AddProductStock = ({
+  product,
+  isOpen,
+  onCancel,
+  minPossibleBatchMap,
+}) => {
+  console.log({ minPossibleBatchMap, product });
   return (
     <Modal
       title={`Dodaj zalihe za ${product.name}`}
@@ -23,7 +29,7 @@ export const AddProductStock = ({ product, isOpen, onCancel }) => {
       onCancel={onCancel}
     >
       <div>
-        <div>Trenutno na zalihi: {product?.stock.quantity || 0}</div>
+        <div>Trenutno na zalihi: {product?.stock?.quantity || 0}</div>
       </div>
     </Modal>
   );

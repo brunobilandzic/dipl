@@ -98,7 +98,6 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
       label: "Dodaj zalihe",
       className: "submitButton",
       onClick: () => {
-        s;
         setAddStockModalOpen(true);
       },
     },
@@ -154,6 +153,7 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
           isOpen={addStockModalOpen}
           onCancel={() => setAddStockModalOpen(false)}
           product={product}
+          minPossibleBatchMap={minPossibleBatchMap}
         />
       )}
     </>

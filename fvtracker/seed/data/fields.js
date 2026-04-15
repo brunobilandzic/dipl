@@ -1,3 +1,5 @@
+import { getRandomString } from "@/lib/utils/strings";
+
 export const fieldParams = [
   {
     name: "Small CAS",
@@ -44,7 +46,7 @@ export const planInfo = ({ fieldId, cropVarietyId, productionManagerId }) => {
   return {
     plantingPlan: {
       field: fieldId, // Postavit ćemo ovo kasnije
-      name: `Plan sadnje ${new Date().toLocaleTimeString()}`,
+      name: `Plan sadnje ${getRandomString(5)}`,
       description: "Plan sadnje za testiranje",
       items: [
         {
@@ -56,7 +58,7 @@ export const planInfo = ({ fieldId, cropVarietyId, productionManagerId }) => {
     },
     harvestingPlan: {
       field: fieldId, // Postavit ćemo ovo kasnije
-      name: `Plan berbe ${new Date().toLocaleTimeString()}`,
+      name: `Plan berbe ${getRandomString(5)}`,
       description: "Plan berbe za testiranje",
       items: [
         {

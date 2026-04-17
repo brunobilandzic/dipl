@@ -177,7 +177,6 @@ export const createNewPlantage = async ({
   const plantingCoords = [];
   let cropCoords = [];
   const map = {};
-  console.log({ cultWidth, cultLength });
 
   for (
     let x = 0, planItemIndex = 0;
@@ -186,18 +185,15 @@ export const createNewPlantage = async ({
   ) {
     cropCoords = [];
     const cropVarietyName = plantingPlan.items[planItemIndex].cropVariety.name;
-    console.log(plantingPlan.items[planItemIndex]);
     map[cropVarietyName] = [];
-    console.log({map})
     for (let dx = 0; dx < 2; dx++) {
       for (let y = 0; y < 2; y++) {
         map[cropVarietyName].push(`${x + dx},${y}`);
-        console.log({ plantingCoords, cropCoords });
       }
     }
   }
-
   console.log("final coords to plant", map);
+
   await plantingPlan.populate({
     path: "items",
     select: "plantedCropVarieties cropVariety quantity",

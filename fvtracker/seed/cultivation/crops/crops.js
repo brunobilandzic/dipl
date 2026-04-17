@@ -314,6 +314,13 @@ export const seedPlantageHarvest = async ({ _fieldId, cultivation }) => {
       select: "name",
     },
   });
+  await newPlantingPlan.populate({
+    path: "items",
+    populate: {
+      path: "cropVariety",
+      select: "name",
+    },
+  });
   await plantageHarvest({
     plantingPlan: newPlantingPlan,
     harvestingPlan: newHarvestingPlan,

@@ -173,6 +173,7 @@ export const createNewPlantage = async ({
   cultivationDimensions,
 }) => {
   const { width: cultWidth, length: cultLength } = cultivationDimensions;
+  const varietiesNum = plantingPlan.items.length;
   const plantingCoords = [];
   let cropCoords = [];
   console.log({ cultWidth, cultLength });

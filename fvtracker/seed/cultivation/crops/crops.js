@@ -194,14 +194,6 @@ export const createNewPlantage = async ({
   }
   console.log("final coords to plant", map);
 
-  await plantingPlan.populate({
-    path: "items",
-    select: "plantedCropVarieties cropVariety quantity",
-    populate: {
-      path: "cropVariety",
-      select: "quantityPerCell name",
-    },
-  });
   /*   const { width: cultWidth, length: cultLength } = getDimensionsFromPlanted();
   const plantingCoords = plantingPlan.items.reduce((coords, item) => {}, []); */
   // Example coordinates for planting
@@ -236,19 +228,7 @@ export const createNewPlantage = async ({
 
 export const createNewHarvest = async ({ harvestingPlan }) => {
   const harvestCoords = ["0,0", "0,1"];
-  await harvestingPlan.populate([
-    {
-      path: "items",
-      select: "plantedCropVarieties cropVariety quantity",
-      populate: {
-        path: "cropVariety",
-        select: "quantityPerCell name",
-      },
-    },
-    {
-      path: "harvestingBatch",
-    },
-  ]);
+  
   const harvestingPlanItem = harvestingPlan.items.find(
     (item) => item.cropVariety.name === "Idared",
   );
@@ -313,13 +293,19 @@ export const seedPlantageHarvest = async ({ _fieldId, cultivation }) => {
     fieldId,
     cropVarietyIds: cropVarietyIds.map((cv) => cv._id),
   });
-  await newHarvestingPlan.populate({
-    path: "items",
-    populate: {
-      path: "cropVariety",
-      select: "name",
+  await newHarvestingPlan.populate([
+    {
+      path: "items",
+      select: "plantedCropVarieties cropVariety quantity",
+      populate: {
+        path: "cropVariety",
+        select: "quantityPerCell name",
+      },
     },
-  });
+    {
+      path: "harvestingBatch",
+    },
+  ]);
   await newPlantingPlan.populate({
     path: "items",
     populate: {

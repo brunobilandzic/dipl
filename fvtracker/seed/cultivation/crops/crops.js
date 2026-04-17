@@ -177,7 +177,7 @@ export const createNewPlantage = async ({
   const plantingCoords = [];
   let cropCoords = [];
   console.log({ cultWidth, cultLength });
-  for (let x = 0; x < cultWidth - 2; x = x + 2) {
+  for (let x = 0; x < cultWidth - 2 && x < varietiesNum; x = x + 2) {
     cropCoords = [];
     for (let dx = 0; dx < 2; dx++) {
       for (let y = 0; y < 2; y++) {

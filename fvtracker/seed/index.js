@@ -6,6 +6,7 @@ import crops from "./cultivation/crops";
 import { deleteDB } from "@/lib/db/delete";
 import { CropVariety } from "@/models/sectors/cultivation/Crops";
 import production from "./production";
+import { Cultivation } from "@/models/sectors/cultivation/Cultivation";
 
 const seed = {
   handleAPIRequest,
@@ -29,7 +30,10 @@ async function handleAPIRequest(seedType) {
     case SEED_TYPES.PRODUCTION:
       return await production.seedProduction();
     case SEED_TYPES.PLANTAGE_HARVEST:
-      return await crops.plantageHarvest({});
+      const cultivation = await Cultivation.findOne({}).populate(
+        "plantedCropVarieties",
+      );
+      return await crops.plantageHarvest({ cultivation });
 
     default:
       throw new Error(`Unknown seed type: ${seedType}`);

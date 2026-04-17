@@ -13,6 +13,7 @@ import { HarvestingPlan } from "@/models/documents/plans/HarvestingPlan";
 import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
 import { Field } from "@/models/sectors/cultivation/Field";
 import { createPlans } from "@/seed/documents/plans";
+import { getDimensionsFromPlanted } from "@/lib/utils/cultivation/fields/cultivationAreas";
 
 // Seed crop main types, general types, types, and varieties
 
@@ -167,7 +168,25 @@ export function logMainTypes(mainTypes) {
   }
 }
 
-export const createNewPlantage = async ({ plantingPlan }) => {
+export const createNewPlantage = async ({
+  plantingPlan,
+  cultivationDimensions,
+}) => {
+  const { width: cultWidth, length: cultLength } = cultivationDimensions;
+  const plantingCoords = [];
+  let cropCoords = [];
+  console.log({ cultWidth, cultLength });
+  for (let x = 0; x < cultWidth - 2; x = x + 2) {
+    cropCoords = [];
+    for (let dx = 0; dx < 2; dx++) {
+      for (let y = 0; y < 2; y++) {
+        cropCoords.push(`${x + dx},${y}`);
+        console.log({ plantingCoords, cropCoords });
+      }
+    }
+    plantingCoords.push(cropCoords);
+  }
+  console.log(plantingCoords);
   await plantingPlan.populate({
     path: "items",
     select: "plantedCropVarieties cropVariety quantity",

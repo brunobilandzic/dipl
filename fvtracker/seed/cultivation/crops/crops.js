@@ -196,7 +196,8 @@ export const createNewPlantage = async ({
       select: "quantityPerCell name",
     },
   });
-  const plantingCoords = [];
+  /*   const { width: cultWidth, length: cultLength } = getDimensionsFromPlanted();
+  const plantingCoords = plantingPlan.items.reduce((coords, item) => {}, []); */
   // Example coordinates for planting
   for (const item of plantingPlan.items) {
   }
@@ -295,7 +296,7 @@ const deletePlantageHarvest = async () => {
   await HarvestingBatch.deleteMany({});
 };
 
-export const seedPlantageHarvest = async ({ _fieldId, _cropVarietyId }) => {
+export const seedPlantageHarvest = async ({ _fieldId, cultivation }) => {
   await deletePlantageHarvest();
   const cropVaietyNames = ["Idared", "Kristalka", "Istarski"];
   const cropVarietyIds = await CropVariety.find({

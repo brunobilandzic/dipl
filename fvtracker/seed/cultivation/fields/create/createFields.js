@@ -152,7 +152,6 @@ export async function createFieldRecord(fieldObject) {
   });
 
   await cultivation.populate("plantedCropVarieties");
-  console.log(cultivation);
   await crops.plantageHarvest({
     fieldId: fieldRecord._id,
     cultivation,

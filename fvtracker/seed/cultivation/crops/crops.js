@@ -197,33 +197,34 @@ export const createNewPlantage = async ({
   /*   const { width: cultWidth, length: cultLength } = getDimensionsFromPlanted();
   const plantingCoords = plantingPlan.items.reduce((coords, item) => {}, []); */
   // Example coordinates for planting
-  for (const item of plantingPlan.items) {
+  for (const [key, value] of Object.entries(map)) {
+    const plantingPlanItem = plantingPlan.items.find(
+      (item) => item.cropVariety.name === key,
+    );
+    const docs = await PlantedCropVariety.find(
+      { relativeCoords: { $in: value } },
+      { _id: 1 },
+    );
+    await PlantedCropVariety.updateMany(
+      { _id: { $in: docs } },
+      { plantingPlanItem: plantingPlanItem._id },
+    );
+    plantingPlanItem.plantedCropVarieties.concat(docs.map((d) => d._id));
+    console.log({
+      plantedCropVarieties: docs.map((d) => d._id),
+      cropVarietyName: key,
+      plantingPlanItem: plantingPlanItem,
+      coords: value,
+      l: docs.length,
+      quantityPerCell: plantingPlanItem.cropVariety.quantityPerCell,
+    });
+    plantingPlanItem.quantity -=
+      docs.length * plantingPlanItem.cropVariety.quantityPerCell;
+    if (plantingPlanItem.quantity < 0) {
+      plantingPlanItem.quantity = 0; // Ensure quantity doesn't go negative
+    }
+    await plantingPlanItem.save();
   }
-  const plantageCoords = ["0,0", "0,1", "1,0", "1,1"]; // Example coordinates for planting
-  const plantingPlanItem = plantingPlan.items.find(
-    (item) => item.cropVariety.name === "Idared",
-  );
-  console.log({ plantingPlanItem });
-  const cropVarietyId = plantingPlanItem.cropVariety._id;
-
-  await PlantedCropVariety.updateMany(
-    { relativeCoords: { $in: plantageCoords } },
-    { plantingPlanItem: plantingPlanItem._id },
-  );
-  const plantedCropVarietes = await PlantedCropVariety.find({
-    plantingPlanItem: plantingPlanItem._id,
-    relativeCoords: { $in: plantageCoords },
-  });
-
-  plantingPlanItem.plantedCropVarieties.push(
-    ...plantedCropVarietes.map((p) => p._id),
-  );
-  plantingPlanItem.quantity -=
-    plantedCropVarietes.length * plantingPlanItem.cropVariety.quantityPerCell;
-  if (plantingPlanItem.quantity < 0) {
-    plantingPlanItem.quantity = 0; // Ensure quantity doesn't go negative
-  }
-  await plantingPlanItem.save();
 };
 
 export const createNewHarvest = async ({ harvestingPlan }) => {
@@ -306,13 +307,17 @@ export const seedPlantageHarvest = async ({ _fieldId, cultivation }) => {
       path: "harvestingBatch",
     },
   ]);
-  await newPlantingPlan.populate({
-    path: "items",
-    populate: {
-      path: "cropVariety",
-      select: "name",
+  console.log({hp: newHarvestingPlan.items.map((i) => i.cropVariety)});
+  await newPlantingPlan.populate([
+    {
+      path: "items",
+      select: "plantedCropVarieties cropVariety quantity",
+      populate: {
+        path: "cropVariety",
+        select: "quantityPerCell name",
+      },
     },
-  });
+  ]);
   await plantageHarvest({
     plantingPlan: newPlantingPlan,
     harvestingPlan: newHarvestingPlan,

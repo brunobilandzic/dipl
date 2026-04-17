@@ -109,7 +109,6 @@ export async function createPlantedCropVarietiesCells({
       plantedAt,
       plantingPlanId,
     });
-    console.log("created plcv", plantedCropVariety.relativeCoords);
     plantedCropVarieties.push(plantedCropVariety);
   }
   await field.save(); // to trigger field's updatedAt change

@@ -1,3 +1,4 @@
+import { MAX_CULTIVATION_SIZE } from "@/lib/constants/cultivation/field";
 import { createPlantedCropVarietiesCells } from "@/lib/cultivation/plants";
 import { min } from "lodash";
 
@@ -13,12 +14,20 @@ export const createCultivation = async ({ cultivationArea, planted }) => {
   const relativeCoords = [];
   for (
     let i = 0;
-    i < min([Math.floor(cultivationArea.dimensions.width / 2), 3]);
+    i <
+    min([
+      Math.floor(cultivationArea.dimensions.width / 2),
+      MAX_CULTIVATION_SIZE,
+    ]);
     i++
   ) {
     for (
       let j = 0;
-      j < min([Math.floor(cultivationArea.dimensions.length / 2), 3]);
+      j <
+      min([
+        Math.floor(cultivationArea.dimensions.length / 2),
+        MAX_CULTIVATION_SIZE,
+      ]);
       j++
     ) {
       relativeCoords.push(`${i},${j}`);

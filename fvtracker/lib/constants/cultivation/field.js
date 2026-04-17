@@ -57,7 +57,7 @@ export const locationInputs = {
     name: "longitude",
     type: "number",
     min: locationRanges.LONGITUDE.min,
-    max: locationRanges.LONGITUDE.max   ,
+    max: locationRanges.LONGITUDE.max,
   },
   latitude: {
     label: "Geografska širina",
@@ -91,3 +91,5 @@ export const cultivationAreaDimensionsInputs = {
     max: 20,
   },
 };
+
+export const MAX_CULTIVATION_SIZE = 15;

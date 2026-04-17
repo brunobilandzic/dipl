@@ -228,7 +228,7 @@ export const createNewPlantage = async ({
 
 export const createNewHarvest = async ({ harvestingPlan }) => {
   const harvestCoords = ["0,0", "0,1"];
-  
+
   const harvestingPlanItem = harvestingPlan.items.find(
     (item) => item.cropVariety.name === "Idared",
   );

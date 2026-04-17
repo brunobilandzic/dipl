@@ -279,7 +279,7 @@ export async function plantageHarvest({
   await createNewPlantage({
     plantingPlan,
     cultivationDimensions: getDimensionsFromPlanted(
-      cultivation.plantedCropVarietes.map((p) => p.relativeCoords),
+      cultivation.plantedCropVarieties.map((p) => p.relativeCoords),
     ),
   });
   await createNewHarvest({ harvestingPlan, cultivation });

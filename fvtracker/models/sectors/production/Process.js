@@ -3,11 +3,6 @@ import mongoose, { Schema } from "mongoose";
 import { Machine } from "./Machine";
 
 const productionProcessSchema = new Schema({
-  harvestingBatch: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "HarvestingBatch",
-    required: true,
-  },
   facility: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Base",
@@ -15,7 +10,7 @@ const productionProcessSchema = new Schema({
   machines: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "ProductionMachine",
+      ref: "Base",
       default: [],
     },
   ],

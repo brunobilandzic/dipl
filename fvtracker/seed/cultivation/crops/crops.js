@@ -218,10 +218,10 @@ export const createNewPlantage = async ({
     await plantingPlanItem.save();
   }
 
-  return map 
+  return map;
 };
 
-export const createNewHarvest = async ({ harvestingPlan }) => {
+export const createNewHarvest = async ({ harvestingPlan, plantingMap }) => {
   const harvestCoords = ["0,0", "0,1"];
 
   const harvestingPlanItem = harvestingPlan.items.find(
@@ -264,7 +264,7 @@ export async function plantageHarvest({
       cultivation.plantedCropVarieties.map((p) => p.relativeCoords),
     ),
   });
-  await createNewHarvest({ harvestingPlan, cultivation });
+  await createNewHarvest({ harvestingPlan, cultivation, plantedMap });
 }
 
 const deletePlantageHarvest = async () => {
@@ -301,7 +301,6 @@ export const seedPlantageHarvest = async ({ _fieldId, cultivation }) => {
       path: "harvestingBatch",
     },
   ]);
-  console.log({ hp: newHarvestingPlan.items.map((i) => i.cropVariety) });
   await newPlantingPlan.populate([
     {
       path: "items",

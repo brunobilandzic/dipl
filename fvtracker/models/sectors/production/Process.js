@@ -1,7 +1,8 @@
 import { Base } from "@/models/Base";
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
+import { Machine } from "./Machine";
 
-const productionProcessSchema = {
+const productionProcessSchema = new Schema({
   harvestingBatch: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "HarvestingBatch",
@@ -26,7 +27,7 @@ const productionProcessSchema = {
     type: Number,
     default: 0,
   },
-};
+});
 
 productionProcessSchema.pre("deleteMany", async function () {
   const ids = await ProductionProcess.find(this.getFilter()).distinct("_id");

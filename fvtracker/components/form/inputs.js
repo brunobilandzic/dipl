@@ -1,7 +1,7 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "./form.module.css";
-
+import { v4 as uuid } from "uuid";
 export const AppInput = ({
   label,
   name,
@@ -99,6 +99,16 @@ export const AppDatePicker = ({
         onChange={(date) => onChange({ target: { name, value: date } })}
         placeholderText={placeholder}
       />
+    </div>
+  );
+};
+
+export const SelectTable = ({ options }) => {
+  return (
+    <div className="flex flex-col cursor-pointer">
+      {options.map((Option) => {
+        <Option key={uuid()} />;
+      })}
     </div>
   );
 };

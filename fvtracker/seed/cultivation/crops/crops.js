@@ -222,7 +222,7 @@ export const createNewPlantage = async ({
 };
 
 export const createNewHarvest = async ({ harvestingPlan, plantingMap }) => {
-  for (const [cvName, coords] of Object.entries(plantingCoords)) {
+  for (const [cvName, plantedCoords] of Object.entries(plantingCoords)) {
     const harvestingPlanItem = harvestingPlan.items.find(
       (item) => item.cropVariety.name === cvName,
     );
@@ -230,6 +230,8 @@ export const createNewHarvest = async ({ harvestingPlan, plantingMap }) => {
       continue;
     }
     const cropVarietyId = harvestingPlanItem.cropVariety._id;
+    const harvestCoords = plantedCoords.slice(0, 2);
+    console.log("going to harvest", harvestCoords, "of cv:", cvName);
   }
 
   await PlantedCropVariety.updateMany(

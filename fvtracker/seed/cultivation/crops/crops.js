@@ -228,7 +228,7 @@ export const createNewHarvest = async ({ harvestingPlan, plantedMap }) => {
     const harvestingPlanItem = harvestingPlan.items.find(
       (item) => item.cropVariety.name === cvName,
     );
-    if (!item) {
+    if (!harvestingPlanItem) {
       continue;
     }
     const cropVarietyId = harvestingPlanItem.cropVariety._id;

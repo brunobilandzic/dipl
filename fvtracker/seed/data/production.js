@@ -72,7 +72,7 @@ export const getProductionProcessInfos = ({ productName }) => {
     processes.push({
       name: `Proizvodnja ${i + 1} ${new Date().toLocaleString()}`,
       description: "Proizvodnja gotovih proizvoda na osnovu usjeva",
-      machines: [machineName],
+      machineName,
     });
   }
 

@@ -192,7 +192,7 @@ export const createNewPlantage = async ({
       }
     }
   }
-  console.log("final coords to plant", map);
+  console.log("planted", Object.keys(map).join(", "));
 
   /*   const { width: cultWidth, length: cultLength } = getDimensionsFromPlanted();
   const plantingCoords = plantingPlan.items.reduce((coords, item) => {}, []); */
@@ -217,7 +217,6 @@ export const createNewPlantage = async ({
     }
     await plantingPlanItem.save();
   }
-  console.log({ map });
   return map;
 };
 

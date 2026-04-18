@@ -3,6 +3,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { refreshProductsStocks } from "@/store/production";
 import Modal from "@/components/layout/modals/modal";
+import { useState } from "react";
 
 export const ProductStock = ({ slug }) => {
   const dispatch = useDispatch();
@@ -35,8 +36,12 @@ export const AddProductStock = ({
   );
 };
 
-const CreateStockChooseBatch = ({minPossibleBatchMap}) => {
-  return <>
-  
-  </>
-}
+const CreateStockChooseBatch = ({ minPossibleBatchMap }) => {
+  const [choosenBatchName, setChoosenBatchName] = useState(null);
+  return (
+    <>
+      <div>{choosenBatchName}</div>
+      <div className="select-table"></div>
+    </>
+  );
+};

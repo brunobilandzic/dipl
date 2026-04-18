@@ -217,13 +217,13 @@ export const createNewPlantage = async ({
     }
     await plantingPlanItem.save();
   }
-
+  console.log({ map });
   return map;
 };
 
-export const createNewHarvest = async ({ harvestingPlan, plantingMap }) => {
-  console.log("starting harvest with planting map:", plantingMap);
-  for (const [cvName, plantedCoords] of Object.entries(plantingMap)) {
+export const createNewHarvest = async ({ harvestingPlan, plantedMap }) => {
+  console.log("starting harvest with planting map:", plantedMap);
+  for (const [cvName, plantedCoords] of Object.entries(plantedMap)) {
     console.log("harvesting cv:", cvName, "from coords:", plantedCoords);
     const harvestingPlanItem = harvestingPlan.items.find(
       (item) => item.cropVariety.name === cvName,

@@ -132,6 +132,7 @@ export const {
   setManagers,
   sortProducts,
   filterProducts,
+  setMachines
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

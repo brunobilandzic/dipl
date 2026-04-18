@@ -14,7 +14,7 @@ const MachinesList = () => {
     <div>
       <List title="Strojevi">
         {machines?.map((machine) => (
-          <ListItem key={machine.id}>
+          <ListItem key={machine._id}>
             <MachineItem machine={machine} />
           </ListItem>
         ))}

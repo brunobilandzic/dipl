@@ -30,13 +30,6 @@ const productSchema = new Schema({
     ref: "ProductStock",
     default: null,
   },
-  productionProcesses: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Base",
-      default: [],
-    },
-  ],
 });
 
 productSchema.pre("save", async function () {
@@ -175,7 +168,6 @@ productSchema.methods.createStock = async function ({
 
   await productionProcess.save();
   await stock.save();
-  this.productionProcesses.push(productionProcess._id);
   this.stock = stock._id;
   await this.save();
   console.log(

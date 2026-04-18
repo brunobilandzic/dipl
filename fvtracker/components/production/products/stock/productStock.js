@@ -12,13 +12,19 @@ export const AddProductStock = ({
   onCancel,
   minPossibleBatchMap,
 }) => {
-  const [productStock, setProductStock] = {
+  const [productStock, setProductStock] = useState({
     quantity: 1,
     batchName: null,
-  };
+  });
   useEffect(() => {
     console.log({ productStock });
   }, [productStock]);
+  const onChange = (e) => {
+    setProductStock((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
   return (
     <Modal
       title={`Dodaj zalihe za ${product.name}`}
@@ -26,7 +32,12 @@ export const AddProductStock = ({
       onCancel={onCancel}
     >
       <div>
-        <AppInput name="quantity" label="Količina" type="number"/>
+        <AppInput
+          name="quantity"
+          label="Količina"
+          type="number"
+          onChange={onChange}
+        />
         <CreateStockChooseBatch minPossibleBatchMap={minPossibleBatchMap} />
       </div>
     </Modal>

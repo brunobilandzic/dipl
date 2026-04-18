@@ -5,10 +5,10 @@ export const process = ({ productName }) => {};
 export const getMachineName = ({ productName }) => {
   const productNameWords = productName.split(" ");
   let machineName = null;
-  for (const [productNames, mapMachineName] of productMachineNameMap) {
-    const productNamesWords = productNames.split(" ");
-    for (const word in productNameWords) {
-      if (word in productNameWords) {
+  for (const [productNamesKey, mapMachineName] of productMachineNameMap) {
+    const productNamesKeys = productNamesKey.split(" ");
+    for (const word of productNameWords) {
+      if (word in productNamesKeys) {
         machineName = mapMachineName;
       }
     }

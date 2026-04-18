@@ -11,10 +11,10 @@ const machineSchema = new Schema({
   ],
 });
 
-machineSchema.statics.findOrCreate = async ({ name }) => {
+machineSchema.statics.findOrCreate = async function ({ name }) {
   let machine = this.findOne({ name });
   if (machine) return machine;
-  machine = await this.create({ name });
+  return this.create({ name });
 };
 
 export const Machine =

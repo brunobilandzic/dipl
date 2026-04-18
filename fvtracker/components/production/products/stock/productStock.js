@@ -16,9 +16,7 @@ export const AddProductStock = ({
     quantity: 1,
     batchName: null,
   });
-  useEffect(() => {
-    console.log({ productStock });
-  }, [productStock]);
+  useEffect(() => {}, [productStock]);
   const onChange = (e) => {
     setProductStock((prev) => ({
       ...prev,
@@ -41,29 +39,38 @@ export const AddProductStock = ({
         <CreateStockChooseBatch
           onChange={onChange}
           minPossibleBatchMap={minPossibleBatchMap}
+          quantity={productStock.quantity}
         />
       </div>
     </Modal>
   );
 };
 
-const CreateStockChooseBatch = ({ minPossibleBatchMap }) => {
+const CreateStockChooseBatch = ({
+  minPossibleBatchMap,
+  onChange,
+  quantity,
+}) => {
   const [choosenBatchName, setChoosenBatchName] = useState(null);
-  const batchOptions = Object.entries(minPossibleBatchMap).map(
-    ([batchName, possibleStock]) => {
+  const batchOptions = Object.entries(minPossibleBatchMap)
+    .filter(([_, possibleStock]) => possibleStock >= quantity)
+    .map(([batchName, possibleStock]) => {
       console.log({ batchName, possibleStock });
       return {
         value: batchName,
         label: `${batchName}`,
       };
-    },
-  );
+    });
   return (
     <>
       <div>{choosenBatchName}</div>
       <div className="select-batch">
         <div>Odaberi žetvu:</div>
-        <AppSelect />
+        <AppSelect
+          name="batchName"
+          onChange={onChange}
+          options={batchOptions}
+        />
       </div>
     </>
   );

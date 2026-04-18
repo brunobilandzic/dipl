@@ -232,16 +232,17 @@ export const createNewHarvest = async ({ harvestingPlan, plantingMap }) => {
     const cropVarietyId = harvestingPlanItem.cropVariety._id;
     const harvestCoords = plantedCoords.slice(0, 2);
     console.log("going to harvest", harvestCoords, "of cv:", cvName);
-  }
 
-  await PlantedCropVariety.updateMany(
-    { relativeCoords: { $in: harvestCoords } },
-    { harvestingPlanItem: harvestingPlanItem._id, harvestedAt: new Date() },
-  );
-  const plantedCropVarietes = await PlantedCropVariety.find({
-    harvestingPlanItem: harvestingPlanItem._id,
-    relativeCoords: { $in: harvestCoords },
-  });
+    const docs = await PlantedCropVariety.find(
+      { relativeCoords: { $in: harvestCoords } },
+      { _id: 1 },
+    );
+    const plcvIds = docs.map((d) => d._id);
+    await PlantedCropVariety.updateMany(
+      { _id: { $in: docs } },
+      { harvestingPlanItem: harvestingPlanItem._id, harvestedAt: new Date() },
+    );
+  }
 
   const plcvids = plantedCropVarietes.map((p) => p._id);
 

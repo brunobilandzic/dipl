@@ -222,7 +222,9 @@ export const createNewPlantage = async ({
 };
 
 export const createNewHarvest = async ({ harvestingPlan, plantingMap }) => {
+  console.log("starting harvest with planting map:", plantingMap);
   for (const [cvName, plantedCoords] of Object.entries(plantingMap)) {
+    console.log("harvesting cv:", cvName, "from coords:", plantedCoords);
     const harvestingPlanItem = harvestingPlan.items.find(
       (item) => item.cropVariety.name === cvName,
     );

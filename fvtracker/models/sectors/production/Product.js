@@ -101,38 +101,27 @@ productSchema.methods.createStock = async function ({
   // get seed process info for 1 process
   productionProcessInfo = getProductionProcessInfo({ productName: this.name }),
 }) {
-  // find harvesting batch for create product
-  const [harvestingBatch] = await getHarvestingBatches({
-    batchIds: [harvestingBatchId],
-  });
-  if (!harvestingBatch) {
-    throw new Error(`Harvesting batch with id ${harvestingBatchId} not found.`);
-  }
-  await this.populate({
-    path: "ingredients",
-    populate: {
-      path: "cropVariety",
-    },
-  });
-  for (const ingredient of this.ingredients) {
-    const batchItem = harvestingBatch.harvestingBatchItems.find((item) =>
-      item.cropVariety.equals(ingredient.cropVariety._id),
-    );
-    if (!batchItem) {
-      throw new Error(
-        `No matching harvesting batch item found for ingredient with crop variety ${ingredient.cropVariety.name}.`,
+  const deductResources = async ({ harvestingBatch }) => {
+    for (const ingredient of this.ingredients) {
+      const batchItem = harvestingBatch.harvestingBatchItems.find((item) =>
+        item.cropVariety.equals(ingredient.cropVariety._id),
       );
-    }
-    if (batchItem.batchQuantity < ingredient.quantity * quantity) {
-      throw new Error(
-        `Not enough quantity in harvesting batch for ingredient with crop variety ${ingredient.cropVariety.name}. Required: ${ingredient.quantity * quantity}, Available: ${batchItem.batchQuantity}`,
-      );
-    }
-    batchItem.batchQuantity -= ingredient.quantity * quantity;
+      if (!batchItem) {
+        throw new Error(
+          `No matching harvesting batch item found for ingredient with crop variety ${ingredient.cropVariety.name}.`,
+        );
+      }
+      if (batchItem.batchQuantity < ingredient.quantity * quantity) {
+        throw new Error(
+          `Not enough quantity in harvesting batch for ingredient with crop variety ${ingredient.cropVariety.name}. Required: ${ingredient.quantity * quantity}, Available: ${batchItem.batchQuantity}`,
+        );
+      }
+      batchItem.batchQuantity -= ingredient.quantity * quantity;
 
-    await batchItem.save();
-  }
-
+      await batchItem.save();
+    }
+  };
+  await deductResources({ harvestingBatch });
   const { machineName, ...processInfo } = productionProcessInfo;
 
   const machine = await Machine.findOrCreate({ name: machineName });

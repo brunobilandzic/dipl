@@ -33,7 +33,7 @@ const MachineItem = ({ machine }) => {
         createdAt={machine.createdAt}
         facility={machine.facility}
       />
-      <div></div>
+      <MachineStatistics productionProcesses={machine.productionProcesses} />
     </div>
   );
 };
@@ -42,9 +42,27 @@ const MachineDetails = ({ name, description, createdAt, facility }) => {
   return (
     <div>
       <div>{name}</div>
-      <div className="text-sm text-gray-500">{description}</div>
-      <div className="text-sm text-gray-500">Postrojenje: {facility?.name}</div>
-      <div>Izređen: {showDate(createdAt)}</div>
+      <div className="text-sm text-gray-500">
+        <div className="">{description}</div>
+        {facility?.name && (
+          <div className="">Postrojenje: {facility?.name}</div>
+        )}
+        <div>Izređen: {showDate(createdAt)}</div>
+      </div>
+    </div>
+  );
+};
+
+const MachineStatistics = ({ productionProcesses }) => {
+  const totalProcesses = productionProcesses.length;
+  const totalQuantityProduced = productionProcesses.reduce(
+    (total, process) => total + process.quantity,
+    0,
+  );
+  return (
+    <div className="text-sm text-gray-500">
+      <div>Ukupno procesa: {totalProcesses}</div>
+      <div>Ukupno proizvedeno: {totalQuantityProduced}</div>
     </div>
   );
 };

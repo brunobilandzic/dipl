@@ -12,12 +12,15 @@ export default async function fillProductionRedux({ dispatch, router }) {
     dispatch(setLoading(true));
     const res = await api.get("/productionManager");
     const batchesRes = await api.get("/harvesting-batches");
+    const machinesRes = await api.get("/machines");
     const productionManager = res.data.productionManager;
     const harvestingBatches = batchesRes.data.harvestingBatches;
+    const machines = machinesRes.data.machines;
     dispatchPayloads({
       manager: productionManager,
       dispatch,
       batches: harvestingBatches,
+      machines,
     });
     dispatch(setLoading(false));
     return productionManager;
@@ -31,6 +34,7 @@ export default async function fillProductionRedux({ dispatch, router }) {
 }
 
 const dispatchPayloads = ({ manager, dispatch, batches }) => {
+  console.log("Dispatching production manager data to Redux:", manager);
   dispatch(setProducts(manager.products));
   dispatch(refreshProductsStocks.fulfilled(mapProductsStocks({ manager })));
   dispatch(refreshHarvestingBatches.fulfilled(batches));

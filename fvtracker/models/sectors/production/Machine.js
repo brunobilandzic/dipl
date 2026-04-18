@@ -6,9 +6,16 @@ const machineSchema = new Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "ProductionProcess",
+      default: [],
     },
   ],
 });
+
+machineSchema.static.findOrCreate = async ({ name }) => {
+  let machine = this.findOne({ name });
+  if (machine) return machine;
+  machine = await this.create({ name });
+};
 
 export const Machine = Base.discriminator(
   "Machine",

@@ -293,6 +293,7 @@ export async function plantageHarvest({
       cultivation.plantedCropVarieties.map((p) => p.relativeCoords),
     ),
   });
+  console.log({plantedMap})
   await createNewHarvest({ harvestingPlan, cultivation, plantedMap });
 }
 

@@ -147,7 +147,6 @@ productSchema.methods.createStock = async function ({
   const productionProcess = new ProductionProcess({
     product: this._id,
     machines: [machine._id],
-    harvestingBatch: harvestingBatchId,
     quantity,
     ...processInfo,
   });
@@ -170,9 +169,10 @@ productSchema.methods.createStock = async function ({
     stock = newStock;
   }
 
-  harvestingBatch.productionProcesses.push(productionProcess._id);
+  productionProcess.productStock = stock._id;
+  machine.productionProcesses.push(productionProcess._id);
+  await machine.save();
 
-  await harvestingBatch.save();
   await productionProcess.save();
   await stock.save();
   this.productionProcesses.push(productionProcess._id);

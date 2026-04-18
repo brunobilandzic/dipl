@@ -16,7 +16,9 @@ export const AddProductStock = ({
     quantity: 1,
     batchName: null,
   };
-  console.log({ minPossibleBatchMap, product });
+  useEffect(() => {
+    console.log({ productStock });
+  }, [productStock]);
   return (
     <Modal
       title={`Dodaj zalihe za ${product.name}`}

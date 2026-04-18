@@ -102,19 +102,21 @@ productSchema.methods.createStock = async function ({
   productionProcessInfo = getProductionProcessInfo({ productName: this.name }),
 }) {
   const deductResources = async () => {
-      // find harvesting batch for create product
-  const [harvestingBatch] = await getHarvestingBatches({
-    batchIds: [harvestingBatchId],
-  });
-  if (!harvestingBatch) {
-    throw new Error(`Harvesting batch with id ${harvestingBatchId} not found.`);
-  }
-  await this.populate({
-    path: "ingredients",
-    populate: {
-      path: "cropVariety",
-    },
-  });
+    // find harvesting batch for create product
+    const [harvestingBatch] = await getHarvestingBatches({
+      batchIds: [harvestingBatchId],
+    });
+    if (!harvestingBatch) {
+      throw new Error(
+        `Harvesting batch with id ${harvestingBatchId} not found.`,
+      );
+    }
+    await this.populate({
+      path: "ingredients",
+      populate: {
+        path: "cropVariety",
+      },
+    });
     for (const ingredient of this.ingredients) {
       const batchItem = harvestingBatch.harvestingBatchItems.find((item) =>
         item.cropVariety.equals(ingredient.cropVariety._id),

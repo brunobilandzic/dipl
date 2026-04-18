@@ -249,6 +249,13 @@ export const createNewHarvest = async ({ harvestingPlan, plantedMap }) => {
       cropVarietyId,
       quantityPerCell: harvestingPlanItem.cropVariety.quantityPerCell,
     });
+    harvestingPlanItem.plantedCropVarieties.push(...plcvIds);
+    harvestingPlanItem.quantity -=
+      docs.length * harvestingPlanItem.cropVariety.quantityPerCell;
+    if (harvestingPlanItem.quantity < 0) {
+      harvestingPlanItem.quantity = 0; // Ensure quantity doesn't go negative
+    }
+    await harvestingPlanItem.save();
   }
 };
 

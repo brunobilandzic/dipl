@@ -27,12 +27,22 @@ const MachineItem = ({ machine }) => {
   console.log("Rendering machine item:", machine);
   return (
     <div className="flex justify-between">
-      <div>
-        <div>{machine.name}</div>
-        <div className="text-sm text-gray-500">{machine.description}</div>
-        <div>Izređen: {showDate(machine.createdAt)}</div>
-      </div>
+      <MachineDetails
+        name={machine.name}
+        description={machine.description}
+        createdAt={machine.createdAt}
+      />
       <div></div>
+    </div>
+  );
+};
+
+const MachineDetails = ({ name, description, createdAt }) => {
+  return (
+    <div>
+      <div>{name}</div>
+      <div className="text-sm text-gray-500">{description}</div>
+      <div>Izređen: {showDate(createdAt)}</div>
     </div>
   );
 };

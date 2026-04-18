@@ -9,6 +9,11 @@ const machineSchema = new Schema({
       default: [],
     },
   ],
+  productionFacility: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "ProductionFacility",
+    default: null,
+  },
 });
 
 machineSchema.statics.findOrCreate = async function ({ name }) {

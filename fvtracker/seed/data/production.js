@@ -66,6 +66,7 @@ export const productionProcessInfo = {
 
 export const getProductionProcessInfo = ({ productName }) => {
   const machineName = getMachineName({ productName });
+  console.log({ productName }, machineName);
 
   return {
     name: `Proizvodnja ${productName} ${getRandomString()}`,

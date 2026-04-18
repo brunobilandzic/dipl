@@ -112,3 +112,9 @@ export const SelectTable = ({ options }) => {
     </div>
   );
 };
+
+export const SelectTableOption = ({ onClick, choosen, children }) => {
+  return (
+    <div className={`${choosen ? "ring ring-green-500" : ""}`}>{children}</div>
+  );
+};

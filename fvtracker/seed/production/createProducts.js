@@ -8,13 +8,13 @@ import { ProductionManager } from "@/models/user/managers/ProductionManager";
 export const createProducts = async () => {
   await Product.deleteMany({}); // Clear existing products
   console.log("Creating products...");
-
+  const productionManager = await ProductionManager.findOne();
   for (const productData of productsData) {
     const { ingredients, ...productBaseInfo } = productData;
     const product = new Product({
       ...productBaseInfo,
+      productionManager: productionManager._id,
     });
-
     await product.save();
     await product.createIngredients({
       ingredientsData: productData.ingredients,
@@ -22,6 +22,8 @@ export const createProducts = async () => {
 
     const stock = await createProductStockSeed({ product });
     product.stock = stock._id;
+    productionManager.products.push(product._id);
+    await productionManager.save();
     await product.save();
     console.log(`Created product: ${product.name}`);
   }
@@ -29,7 +31,6 @@ export const createProducts = async () => {
 
 export const createProductStockSeed = async ({ product }) => {
   await populateProductIngredients({ products: [product] });
-
   const harvestingBatches = await getHarvestingBatches();
   const [batchWithResources] = getBatchesWithResources({
     harvestingBatches,

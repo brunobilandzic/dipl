@@ -7,3 +7,9 @@ export const productMachineNameMap = new Map([
   ["konzerva konzerve", "stroj za konzerviranje"],
   ["sok", "stroj za cijeđenje"],
 ]);
+
+export const productProcessNameMap = new Map([
+  ["pakiranje paket vrećica kg", "Pakiranje"],
+  ["konzerva konzerve", "Konzerviranje"],
+  ["sok", "Cijeđenje"],
+]);

@@ -58,7 +58,7 @@ const CreateStockChooseBatch = ({
       console.log({ batchName, possibleStock });
       return {
         value: batchName,
-        label: `${batchName}`,
+        label: `${batchName} - moguća izrada ${possibleStock} proizvoda`,
       };
     });
   return (

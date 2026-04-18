@@ -7,6 +7,7 @@ import { ProductionProcess } from "./Process";
 import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
 import { getProductionProcessInfos } from "@/seed/data/production";
 import { ProductionFacility } from "./Facility";
+import { Machine } from "./Machine";
 
 const productSchema = new Schema({
   productionManager: {
@@ -105,7 +106,7 @@ productSchema.methods.createStock = async function ({
   harvestingBatchId,
   quantity,
   // get seed process info for 1 process
-  productionProcessInfo = getProductionProcessInfos(1)[0],
+  productionProcessInfo = getProductionProcessInfos({ productName: this.name }),
 }) {
   // find harvesting batch for create product
   const [harvestingBatch] = await getHarvestingBatches({
@@ -138,6 +139,10 @@ productSchema.methods.createStock = async function ({
 
     await batchItem.save();
   }
+
+  const { machineName, ...processInfo } = productionProcessInfo;
+
+  const machine = await Machine.findOrCreate({ name: machineName });
 
   const productionProcess = new ProductionProcess({
     product: this._id,

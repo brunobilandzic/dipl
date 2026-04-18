@@ -30,12 +30,13 @@ export const AddProductStock = ({
       onCancel={onCancel}
     >
       <div>
-        <AppInput
+        <StockQuantity
           name="quantity"
           label="Količina"
           type="number"
           onChange={onChange}
         />
+
         <CreateStockChooseBatch
           onChange={onChange}
           minPossibleBatchMap={minPossibleBatchMap}
@@ -43,6 +44,17 @@ export const AddProductStock = ({
         />
       </div>
     </Modal>
+  );
+};
+
+const StockQuantity = ({ name, label, quantity, onChange }) => {
+  return (
+    <AppInput
+      name="quantity"
+      label="Količina"
+      type="number"
+      onChange={onChange}
+    />
   );
 };
 

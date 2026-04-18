@@ -64,19 +64,14 @@ export const productionProcessInfo = {
   description: "Proizvodnja gotovih proizvoda na osnovu usjeva",
 };
 
-export const getProductionProcessInfos = ({ productName }) => {
+export const getProductionProcessInfo = ({ productName }) => {
   const machineName = getMachineName({ productName });
-  const processes = [];
 
-  for (let i = 0; i < n; i++) {
-    processes.push({
-      name: `Proizvodnja ${i + 1} ${new Date().toLocaleString()}`,
-      description: "Proizvodnja gotovih proizvoda na osnovu usjeva",
-      machineName,
-    });
-  }
-
-  return processes;
+  return {
+    name: `Proizvodnja ${i + 1} ${new Date().toLocaleString()}`,
+    description: "Proizvodnja gotovih proizvoda na osnovu usjeva",
+    machineName,
+  };
 };
 
 export const getProductionFacilityInfos = (n) => {

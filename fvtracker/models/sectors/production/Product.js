@@ -5,7 +5,7 @@ import { makeUrlFriendly } from "@/lib/utils/strings";
 import { Base } from "@/models/Base";
 import { ProductionProcess } from "./Process";
 import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
-import { getProductionProcessInfos } from "@/seed/data/production";
+import { getProductionProcessInfo } from "@/seed/data/production";
 import { ProductionFacility } from "./Facility";
 import { Machine } from "./Machine";
 
@@ -146,9 +146,10 @@ productSchema.methods.createStock = async function ({
 
   const productionProcess = new ProductionProcess({
     product: this._id,
+    machines: [machine._id],
     harvestingBatch: harvestingBatchId,
     quantity,
-    ...productionProcessInfo,
+    ...processInfo,
   });
 
   let stock;

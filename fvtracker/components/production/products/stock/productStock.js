@@ -40,7 +40,15 @@ export const AddProductStock = ({
 
 const CreateStockChooseBatch = ({ minPossibleBatchMap }) => {
   const [choosenBatchName, setChoosenBatchName] = useState(null);
-  
+  const batchOptions = Object.entries(minPossibleBatchMap).map(
+    ([batchName, possibleStock]) => {
+      console.log({ batchName, possibleStock });
+      return {
+        value: batchName,
+        label: `${batchName}`,
+      };
+    },
+  );
   return (
     <>
       <div>{choosenBatchName}</div>

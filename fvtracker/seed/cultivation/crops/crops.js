@@ -242,22 +242,12 @@ export const createNewHarvest = async ({ harvestingPlan, plantingMap }) => {
       { _id: { $in: docs } },
       { harvestingPlanItem: harvestingPlanItem._id, harvestedAt: new Date() },
     );
+    await harvestingPlan.harvestingBatch.addPlantedCropVarieties({
+      plantedCropVarietiesIds: plcvIds,
+      cropVarietyId,
+      quantityPerCell: harvestingPlanItem.cropVariety.quantityPerCell,
+    });
   }
-
-  const plcvids = plantedCropVarietes.map((p) => p._id);
-
-  await harvestingPlan.harvestingBatch.addPlantedCropVarieties({
-    plantedCropVarietiesIds: plcvids,
-    cropVarietyId,
-    quantityPerCell: harvestingPlanItem.cropVariety.quantityPerCell,
-  });
-  harvestingPlanItem.plantedCropVarieties.push(...plcvids);
-  harvestingPlanItem.quantity -=
-    plantedCropVarietes.length * harvestingPlanItem.cropVariety.quantityPerCell;
-  if (harvestingPlanItem.quantity < 0) {
-    harvestingPlanItem.quantity = 0; // Ensure quantity doesn't go negative
-  }
-  await harvestingPlanItem.save();
 };
 
 export const createNewHarvest_bup = async ({ harvestingPlan, plantingMap }) => {

@@ -3,7 +3,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { refreshProductsStocks } from "@/store/production";
 import Modal from "@/components/layout/modals/modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AppInput, AppSelect } from "@/components/form/inputs";
 
 export const AddProductStock = ({
@@ -26,7 +26,7 @@ export const AddProductStock = ({
       onCancel={onCancel}
     >
       <div>
-        <div>Trenutno na zalihi: {product?.stock?.quantity || 0}</div>
+        <AppInput name="quantity" label="Količina" type="number"></AppInput>
         <CreateStockChooseBatch minPossibleBatchMap={minPossibleBatchMap} />
       </div>
     </Modal>
@@ -48,7 +48,6 @@ const CreateStockChooseBatch = ({ minPossibleBatchMap }) => {
     <>
       <div>{choosenBatchName}</div>
       <div className="select-batch">
-        <AppInput type="number"></AppInput>
         <div>Odaberi žetvu:</div>
         <AppSelect />
       </div>

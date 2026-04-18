@@ -11,7 +11,7 @@ const machineSchema = new Schema({
   ],
 });
 
-machineSchema.static.findOrCreate = async ({ name }) => {
+machineSchema.statics.findOrCreate = async ({ name }) => {
   let machine = this.findOne({ name });
   if (machine) return machine;
   machine = await this.create({ name });

@@ -241,6 +241,10 @@ const productStockSchema = new Schema({
       default: [],
     },
   ],
+  facility: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Base",
+  },
 });
 
 /* productStockSchema.pre("save", async function () {

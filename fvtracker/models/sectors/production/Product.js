@@ -101,6 +101,12 @@ productSchema.methods.createStock = async function ({
   // get seed process info for 1 process
   productionProcessInfo = getProductionProcessInfo({ productName: this.name }),
 }) {
+  const chooseProcess = async () => {
+    const processes = await ProductionProcess.findOrCreate({
+      name: productionProcessInfo.name,
+      product: this._id,
+    });
+  };
   const deductResources = async () => {
     // find harvesting batch for create product
     const [harvestingBatch] = await getHarvestingBatches({
@@ -138,6 +144,7 @@ productSchema.methods.createStock = async function ({
   };
 
   await deductResources();
+
   const { machineName, ...processInfo } = productionProcessInfo;
 
   const machine = await Machine.findOrCreate({ name: machineName });

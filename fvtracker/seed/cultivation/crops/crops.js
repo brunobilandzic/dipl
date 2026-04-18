@@ -180,7 +180,7 @@ export const createNewPlantage = async ({
 
   for (
     let x = 0, planItemIndex = 0;
-    x < cultWidth - 2 && x < varietiesNum && planItemIndex < varietiesNum;
+    x < cultWidth - 2 && planItemIndex < varietiesNum;
     x += 2, planItemIndex++
   ) {
     cropCoords = [];
@@ -210,14 +210,6 @@ export const createNewPlantage = async ({
       { plantingPlanItem: plantingPlanItem._id },
     );
     plantingPlanItem.plantedCropVarieties.concat(docs.map((d) => d._id));
-    console.log({
-      plantedCropVarieties: docs.map((d) => d._id),
-      cropVarietyName: key,
-      plantingPlanItem: plantingPlanItem,
-      coords: value,
-      l: docs.length,
-      quantityPerCell: plantingPlanItem.cropVariety.quantityPerCell,
-    });
     plantingPlanItem.quantity -=
       docs.length * plantingPlanItem.cropVariety.quantityPerCell;
     if (plantingPlanItem.quantity < 0) {
@@ -244,7 +236,7 @@ export const createNewHarvest = async ({ harvestingPlan }) => {
   });
 
   const plcvids = plantedCropVarietes.map((p) => p._id);
-  console.log({ harvestedPlcvs: plantedCropVarietes });
+  
   await harvestingPlan.harvestingBatch.addPlantedCropVarieties({
     plantedCropVarietiesIds: plcvids,
     cropVarietyId,
@@ -307,7 +299,7 @@ export const seedPlantageHarvest = async ({ _fieldId, cultivation }) => {
       path: "harvestingBatch",
     },
   ]);
-  console.log({hp: newHarvestingPlan.items.map((i) => i.cropVariety)});
+  console.log({ hp: newHarvestingPlan.items.map((i) => i.cropVariety) });
   await newPlantingPlan.populate([
     {
       path: "items",

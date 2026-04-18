@@ -222,12 +222,16 @@ export const createNewPlantage = async ({
 };
 
 export const createNewHarvest = async ({ harvestingPlan, plantingMap }) => {
-  const harvestCoords = ["0,0", "0,1"];
+  for (const [cvName, coords] of Object.entries(plantingCoords)) {
+    const harvestingPlanItem = harvestingPlan.items.find(
+      (item) => item.cropVariety.name === cvName,
+    );
+    if (!item) {
+      continue;
+    }
+    const cropVarietyId = harvestingPlanItem.cropVariety._id;
+  }
 
-  const harvestingPlanItem = harvestingPlan.items.find(
-    (item) => item.cropVariety.name === "Idared",
-  );
-  const cropVarietyId = harvestingPlanItem.cropVariety._id;
   await PlantedCropVariety.updateMany(
     { relativeCoords: { $in: harvestCoords } },
     { harvestingPlanItem: harvestingPlanItem._id, harvestedAt: new Date() },

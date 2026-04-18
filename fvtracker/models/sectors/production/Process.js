@@ -28,6 +28,14 @@ const productionProcessSchema = {
   },
 };
 
+productionProcessSchema.pre("deleteMany", async function () {
+  const ids = await ProductionProcess.find(this.getFilter()).distinct("_id");
+  await Machine.updateMany(
+    { productionProcesses: { $in: ids } },
+    { $pull: { productionProcesses: { $in: ids } } },
+  );
+});
+
 export const ProductionProcess =
   mongoose.models.ProductionProcess ||
   Base.discriminator(

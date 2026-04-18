@@ -190,6 +190,7 @@ productSchema.pre("deleteMany", async function () {
   const ids = await Product.find(this.getFilter()).distinct("_id");
   await Ingredient.deleteMany({ product: { $in: ids } });
   await ProductStock.deleteMany({ product: { $in: ids } });
+  await ProductionProcess.deleteMany({ product: { $in: ids } });
 });
 
 const ingredientsSchema = new Schema({

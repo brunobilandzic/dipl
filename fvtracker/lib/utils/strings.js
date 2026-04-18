@@ -50,3 +50,7 @@ export const getRandomString = ({ beginning = "", length = 12 } = {}) => {
   }
   return result;
 };
+
+export const onlyLetters = (str) => {
+  return String(str).replace(/[^a-zA-Z]/g, "");
+};

@@ -17,7 +17,6 @@ machineSchema.static.findOrCreate = async ({ name }) => {
   machine = await this.create({ name });
 };
 
-export const Machine = Base.discriminator(
-  "Machine",
-  new mongoose.Schema(machineSchema),
-);
+export const Machine =
+  mongoose.models.Machine ||
+  Base.discriminator("Machine", new mongoose.Schema(machineSchema));

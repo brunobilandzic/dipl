@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { hr } from "date-fns/locale";
 import colors from "../constants/cultivation/colors";
 
 export const cvAndColor = ({ plCvs, cell, fieldView }) => {
@@ -28,5 +29,5 @@ export const cvAndColor = ({ plCvs, cell, fieldView }) => {
 
 export const showDate = (date) => {
   if (!date) return "N/A";
-  return format(new Date(date), "PPP");
+  return format(new Date(date), "PPP", { locale: hr });
 };

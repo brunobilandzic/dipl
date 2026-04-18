@@ -6,17 +6,6 @@ import Modal from "@/components/layout/modals/modal";
 import { useState } from "react";
 import { AppInput, AppSelect } from "@/components/form/inputs";
 
-export const ProductStock = ({ slug }) => {
-  const dispatch = useDispatch();
-  const stocks = useSelector((state) => state.production.productStocks.items);
-  if (!stocks) {
-    dispatch(refreshProductsStocks());
-  }
-  const stock = stocks?.find((s) => s.product.slug === slug);
-
-  return <div>ProductStock: {}</div>;
-};
-
 export const AddProductStock = ({
   product,
   isOpen,

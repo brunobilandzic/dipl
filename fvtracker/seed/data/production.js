@@ -1,4 +1,5 @@
 import { getRandomString } from "@/lib/utils/strings";
+import { getMachineName } from "@/seed/production/processes";
 
 export const productsData = [
   /* {
@@ -63,13 +64,15 @@ export const productionProcessInfo = {
   description: "Proizvodnja gotovih proizvoda na osnovu usjeva",
 };
 
-export const getProductionProcessInfos = (n) => {
+export const getProductionProcessInfos = ({ productName }) => {
+  const machineName = getMachineName({ productName });
   const processes = [];
 
   for (let i = 0; i < n; i++) {
     processes.push({
       name: `Proizvodnja ${i + 1} ${new Date().toLocaleString()}`,
       description: "Proizvodnja gotovih proizvoda na osnovu usjeva",
+      machines: [machineName],
     });
   }
 

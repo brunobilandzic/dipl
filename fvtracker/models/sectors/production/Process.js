@@ -32,6 +32,13 @@ productionProcessSchema.pre("deleteMany", async function () {
   );
 });
 
+productionProcessSchema.statics.findOrCreate = async function ({ name }) {
+  console.log({ name });
+  let process = await this.findOne({ name });
+  if (process) return process;
+  return await this.create({ name });
+};
+
 export const ProductionProcess =
   mongoose.models.ProductionProcess ||
   Base.discriminator(

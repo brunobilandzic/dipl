@@ -34,3 +34,9 @@ export const AddProductStock = ({
     </Modal>
   );
 };
+
+const CreateStockChooseBatch = ({minPossibleBatchMap}) => {
+  return <>
+  
+  </>
+}

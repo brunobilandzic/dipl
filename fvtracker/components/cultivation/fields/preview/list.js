@@ -7,7 +7,7 @@ import utils from "@/lib/utils";
 import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
 import { useDispatch, useSelector } from "react-redux";
 import { Loading } from "@/components/layout/loading";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { FieldStatistics } from "../general";
 import {
   handleDeleteField,
@@ -18,6 +18,8 @@ import { v4 as uuid } from "uuid";
 import { filterFields, sortFields } from "@/store/cultivation";
 import { fieldSortOptions } from "@/components/layout/preview/sort";
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
+import { useSession } from "next-auth/react";
+import { UNAUTHORIZED_PAGE } from "@/lib/constants/users";
 
 export function FieldsList({}) {
   const fields = useSelector((state) => state.cultivation.filteredFields);
@@ -26,6 +28,7 @@ export function FieldsList({}) {
   const router = useRouter();
   const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
   const [filters, setFilters] = useState(initFilters("fields"));
+  const { data: session } = useSession();
 
   useEffect(() => {
     if (!fields) return;
@@ -39,6 +42,7 @@ export function FieldsList({}) {
 
   useEffect(() => {
     if (fields) return;
+    if (!session) redirect(UNAUTHORIZED_PAGE);
     refreshFields({ dispatch, router });
   }, [fields]);
 

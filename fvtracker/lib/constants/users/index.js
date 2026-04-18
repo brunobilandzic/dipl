@@ -11,3 +11,5 @@ export default {
   modelToUsername,
   ROLE_STATUSES,
 };
+
+export const UNAUTHORIZED_PAGE = "/uloga-nije-odobrena";

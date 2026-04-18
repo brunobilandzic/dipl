@@ -8,12 +8,11 @@ import { ProductionManager } from "@/models/user/managers/ProductionManager";
 export const createProducts = async () => {
   await Product.deleteMany({}); // Clear existing products
   console.log("Creating products...");
-  const productionManager = await ProductionManager.findOne(); // Assuming you have a production manager created
+
   for (const productData of productsData) {
     const { ingredients, ...productBaseInfo } = productData;
     const product = new Product({
       ...productBaseInfo,
-      productionManager: productionManager._id,
     });
 
     await product.save();

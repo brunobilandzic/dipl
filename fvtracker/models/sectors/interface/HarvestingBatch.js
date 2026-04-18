@@ -95,8 +95,6 @@ harvestingBatchSchema.methods.addPlantedCropVarieties = async function ({
   });
   item.plantedCropVarieties.push(...plantedCropVarietiesIds);
   const addedQuantity = plantedCropVarietiesIds.length * quantityPerCell;
-  console.log("\nAdding quantity to batch:", addedQuantity);
-  console.log("\nadded quantity\n", addedQuantity);
   item.batchQuantity += addedQuantity;
   await item.save();
 

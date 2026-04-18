@@ -38,7 +38,10 @@ export const AddProductStock = ({
           type="number"
           onChange={onChange}
         />
-        <CreateStockChooseBatch minPossibleBatchMap={minPossibleBatchMap} />
+        <CreateStockChooseBatch
+          onChange={onChange}
+          minPossibleBatchMap={minPossibleBatchMap}
+        />
       </div>
     </Modal>
   );

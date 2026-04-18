@@ -1,5 +1,5 @@
 import { getRandomString } from "@/lib/utils/strings";
-import { getMachineName } from "@/seed/production/processes";
+import { getMachineName, getProcessName } from "@/seed/production/processes";
 
 export const productsData = [
   /* {
@@ -65,13 +65,12 @@ export const productionProcessInfo = {
 };
 
 export const getProductionProcessInfo = ({ productName }) => {
-  const machineName = getMachineName({ productName });
-  console.log({ productName }, machineName);
+  const name = getProcessName({ productName });
+  console.log({ productName }, name);
 
   return {
-    name: `Proizvodnja ${productName} ${getRandomString()}`,
+    name,
     description: "Proizvodnja gotovih proizvoda na osnovu usjeva",
-    machineName,
   };
 };
 

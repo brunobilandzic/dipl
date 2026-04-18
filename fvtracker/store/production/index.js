@@ -18,6 +18,10 @@ const initialState = {
     items: null,
     filteredItems: null,
   },
+  machines: {
+    items: null,
+    filteredItems: null,
+  },
   isLoading: false,
 };
 
@@ -60,6 +64,13 @@ const productsSlice = createSlice({
         _items: state.products.items,
         itemModelName: "Product",
         filters: action.payload,
+      });
+    },
+    setMachines: (state, action) => {
+      state.machines.items = action.payload;
+      state.machines.filteredItems = sortItems({
+        items: action.payload,
+        sortBy: SORT_INIT_VALUE,
       });
     },
   },

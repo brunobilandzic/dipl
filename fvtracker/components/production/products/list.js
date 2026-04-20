@@ -19,6 +19,7 @@ import {
   getBatchesCVS,
   findMinPossibleBatchMap,
 } from "@/lib/utils/production/resources";
+import { ProductItemStocksInfo } from "./stock/Info";
 
 const ProductList = () => {
   const dispatch = useDispatch();
@@ -127,7 +128,7 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
             <h2 className="text-xl font-bold">{product.name}</h2>
             <p>{product.description}</p>
           </div>
-          <ProductItemStockInfo productionStocks={product.productionStocks} />
+          <ProductItemStocksInfo productionStocks={product.productionStocks} />
         </div>
         <div className="flex justify-between mt-4">
           <div>

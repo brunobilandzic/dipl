@@ -5,6 +5,7 @@ import {
 } from "@/models/sectors/production/Product";
 import { getProductById } from "../product";
 import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
+import { populateProductIngredients } from "@/lib/utils/production/products";
 
 export const createProductStock = async ({
   productId,
@@ -24,13 +25,10 @@ export const createProductStock = async ({
         `Harvesting batch with id ${harvestingBatchId} not found.`,
       );
     }
-    await this.populate({
-      path: "ingredients",
-      populate: {
-        path: "cropVariety",
-      },
+    await populateProductIngredients({
+      products: [product],
     });
-    for (const ingredient of this.ingredients) {
+    for (const ingredient of product.ingredients) {
       const batchItem = harvestingBatch.harvestingBatchItems.find((item) =>
         item.cropVariety.equals(ingredient.cropVariety._id),
       );
@@ -52,21 +50,21 @@ export const createProductStock = async ({
   await deductResources();
 
   let stock = await ProductionStock.findOne({
-    product: this._id,
+    product: product._id,
     facility: productionFacilityId,
   });
 
   if (!stock) {
     stock = new ProductionStock({
-      product: this._id,
+      product: product._id,
       quantity,
       facility: productionFacilityId,
     });
   } else {
-    stock.quantity = quantity;
+    stock.quantity += quantity;
   }
 
-  await stock.save;
+  await stock.save();
 
   return stock;
 };

@@ -60,6 +60,7 @@ export const createProductStock = async ({
     stock = new ProductionStock({
       product: this._id,
       quantity,
+      facility: productionFacilityId,
     });
   } else {
     stock.quantity = quantity;

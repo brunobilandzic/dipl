@@ -8,6 +8,7 @@ import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
 import { getProductionProcessInfo } from "@/seed/data/production/production";
 import { ProductionFacility } from "./Facility";
 import { Machine } from "./Machine";
+import { ProductionManager } from "@/models/user/managers/ProductionManager";
 
 const productSchema = new Schema({
   productionManager: {
@@ -154,6 +155,10 @@ productSchema.methods.createIngredients = async function ({ ingredientsData }) {
 
 productSchema.pre("deleteMany", async function () {
   const ids = await Product.find(this.getFilter()).distinct("_id");
+  await ProductionManager.updateMany(
+    { products: { $in: ids } },
+    { $pull: { products: { $in: ids } } },
+  );
   await Ingredient.deleteMany({ product: { $in: ids } });
   await ProductionStock.deleteMany({ product: { $in: ids } });
   await WarehouseStock.deleteMany({ product: { $in: ids } });

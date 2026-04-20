@@ -4,10 +4,12 @@ import { getBatchesWithResources } from "@/lib/utils/production/resources";
 import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
 import { populateProductIngredients } from "@/lib/utils/production/products";
 import { ProductionManager } from "@/models/user/managers/ProductionManager";
+import { createFacility } from "./facility";
 
 export const createProducts = async () => {
   await Product.deleteMany({}); // Clear existing products
   console.log("Creating products...");
+  const productionFacility = await createFacility();
   const productionManager = await ProductionManager.findOne();
   for (const productData of productsData) {
     const { ingredients, ...productBaseInfo } = productData;

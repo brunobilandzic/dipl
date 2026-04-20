@@ -5,6 +5,7 @@ import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
 import { populateProductIngredients } from "@/lib/utils/production/products";
 import { ProductionManager } from "@/models/user/managers/ProductionManager";
 import { createFacility } from "./facility";
+import { createProductStock } from "@/lib/production/stocks";
 
 export const createProducts = async () => {
   await Product.deleteMany({}); // Clear existing products
@@ -22,8 +23,10 @@ export const createProducts = async () => {
       ingredientsData: productData.ingredients,
     });
 
-    /*     const stock = await createProductStockSeed({ product });
-    product.stock = stock._id*/
+    const productionStock = await createProductStockSeed({
+      product,
+      productionFacilityId: productionFacility._id,
+    });
     productionManager.products.push(product._id);
     await productionManager.save();
     await product.save();
@@ -31,7 +34,10 @@ export const createProducts = async () => {
   }
 };
 
-export const createProductStockSeed = async ({ product }) => {
+export const createProductStockSeed = async ({
+  product,
+  productionFacilityId,
+}) => {
   await populateProductIngredients({ products: [product] });
   const harvestingBatches = await getHarvestingBatches();
   const [batchWithResources] = getBatchesWithResources({
@@ -42,15 +48,18 @@ export const createProductStockSeed = async ({ product }) => {
   if (!batchWithResources) {
     return;
   }
-  const stock = await product.createProductionStock({
+  const productionStock = await createProductStock({
+    productId: product._id,
     harvestingBatchId: batchWithResources._id,
     quantity: 1,
+    productionFacilityId,
   });
+  product.productionStocks.push(productionStock._id);
   console.log(
     "Created stock for product:",
     product.name,
-    "Stock ID:",
-    stock._id,
+    "\n",
+    productionStock,
   );
-  return stock;
+  return productionStock;
 };

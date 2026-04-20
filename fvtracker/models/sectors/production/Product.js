@@ -25,24 +25,82 @@ const productSchema = new Schema({
       default: [],
     },
   ],
-  stock: {
+  productionStocks: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ProductionStock",
+      default: null,
+    },
+  ],
+  warehouseStocks: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "WarehouseStock",
+      default: null,
+    },
+  ],
+});
+
+const ingredientsSchema = new Schema({
+  product: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "ProductStock",
-    default: null,
+    ref: "Base",
+    required: true,
   },
+  cropVariety: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "CropVariety",
+    required: true,
+  },
+  quantity: {
+    type: Number,
+    required: true,
+  },
+});
+
+const productionStockSchema = new Schema({
+  product: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Base",
+    required: true,
+  },
+  quantity: {
+    type: Number,
+    default: 0,
+  },
+  processes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ProductionProcess",
+      default: [],
+    },
+  ],
+  facility: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Base",
+  },
+});
+
+const warehouseStockSchema = new Schema({
+  product: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Base",
+    required: true,
+  },
+  quantity: {
+    type: Number,
+    default: 0,
+  },
+  warehouse: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Base",
+  },
+  // add other warerhouuse stock related fields later
 });
 
 productSchema.pre("save", async function () {
   if (this.isModified("name") || this.isNew) {
     this.slug = makeUrlFriendly(this.name);
-  }
-  if (this.isNew && !this.stock) {
-    const productStock = new ProductStock({
-      product: this._id,
-      quantity: 0,
-    });
-    this.stock = productStock._id;
-    await productStock.save();
   }
   this.updatedAt = new Date();
 });
@@ -94,7 +152,103 @@ productSchema.methods.createIngredients = async function ({ ingredientsData }) {
   await this.save();
 };
 
-productSchema.methods.createStock = async function ({
+productSchema.methods.createProductiStock = async function ({
+  // we make sure that harvset batch has needed resources before calling this method
+  harvestingBatchId,
+  quantity,
+  // get seed process info for 1 process
+  productionProcessInfo = getProductionProcessInfo({ productName: this.name }),
+}) {
+  const chooseProcess = async () => {
+    const processes = await ProductionProcess.findOrCreate({
+      name: productionProcessInfo.name,
+      product: this._id,
+    });
+  };
+  const deductResources = async () => {
+    // find harvesting batch for create product
+    const [harvestingBatch] = await getHarvestingBatches({
+      batchIds: [harvestingBatchId],
+    });
+    if (!harvestingBatch) {
+      throw new Error(
+        `Harvesting batch with id ${harvestingBatchId} not found.`,
+      );
+    }
+    await this.populate({
+      path: "ingredients",
+      populate: {
+        path: "cropVariety",
+      },
+    });
+    for (const ingredient of this.ingredients) {
+      const batchItem = harvestingBatch.harvestingBatchItems.find((item) =>
+        item.cropVariety.equals(ingredient.cropVariety._id),
+      );
+      if (!batchItem) {
+        throw new Error(
+          `No matching harvesting batch item found for ingredient with crop variety ${ingredient.cropVariety.name}.`,
+        );
+      }
+      if (batchItem.batchQuantity < ingredient.quantity * quantity) {
+        throw new Error(
+          `Not enough quantity in harvesting batch for ingredient with crop variety ${ingredient.cropVariety.name}. Required: ${ingredient.quantity * quantity}, Available: ${batchItem.batchQuantity}`,
+        );
+      }
+      batchItem.batchQuantity -= ingredient.quantity * quantity;
+
+      await batchItem.save();
+    }
+  };
+
+  await deductResources();
+
+  const { machineName, ...processInfo } = productionProcessInfo;
+
+  const machine = await Machine.findOrCreate({ name: machineName });
+
+  const productionProcess = new ProductionProcess({
+    product: this._id,
+    machines: [machine._id],
+    quantity,
+    ...processInfo,
+  });
+
+  let stock;
+
+  const existingStockId = this.stock;
+
+  if (existingStockId) {
+    const existingStock = await ProductStock.findById(existingStockId);
+    existingStock.productionProcesses.push(productionProcess._id);
+    existingStock.quantity += quantity;
+    stock = existingStock;
+  } else {
+    const newStock = new ProductStock({
+      product: this._id,
+      quantity,
+      productionProcesses: [productionProcess._id],
+    });
+    stock = newStock;
+  }
+
+  productionProcess.productStock = stock._id;
+  machine.productionProcesses.push(productionProcess._id);
+  await machine.save();
+
+  await productionProcess.save();
+  await stock.save();
+  this.stock = stock._id;
+  await this.save();
+  console.log(
+    `Created production process with id ${productionProcess._id} for product ${this.name}. Updated stock quantity to ${stock.quantity}.`,
+  );
+  return stock;
+
+  // reduce from batch quantity
+};
+
+productSchema.methods.createProductiStockBUP = async function ({
   // we make sure that harvset batch has needed resources before calling this method
   harvestingBatchId,
   quantity,
@@ -193,25 +347,8 @@ productSchema.methods.createStock = async function ({
 productSchema.pre("deleteMany", async function () {
   const ids = await Product.find(this.getFilter()).distinct("_id");
   await Ingredient.deleteMany({ product: { $in: ids } });
-  await ProductStock.deleteMany({ product: { $in: ids } });
+  await ProductionStock.deleteMany({ product: { $in: ids } });
   await ProductionProcess.deleteMany({ product: { $in: ids } });
-});
-
-const ingredientsSchema = new Schema({
-  product: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Base",
-    required: true,
-  },
-  cropVariety: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "CropVariety",
-    required: true,
-  },
-  quantity: {
-    type: Number,
-    required: true,
-  },
 });
 
 ingredientsSchema.pre("deleteMany", async function () {
@@ -226,29 +363,6 @@ ingredientsSchema.pre("deleteMany", async function () {
     { ingredients: { $in: ids } },
     { $pull: { ingredients: { $in: ids } } },
   );
-});
-
-const productStockSchema = new Schema({
-  product: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Base",
-    required: true,
-  },
-  quantity: {
-    type: Number,
-    required: true,
-  },
-  productionProcesses: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "ProductionProcess",
-      default: [],
-    },
-  ],
-  facility: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Base",
-  },
 });
 
 /* productStockSchema.pre("save", async function () {
@@ -281,6 +395,9 @@ export const Product =
   Base.discriminator("Product", new mongoose.Schema(productSchema));
 export const Ingredient =
   mongoose.models.Ingredient || mongoose.model("Ingredient", ingredientsSchema);
-export const ProductStock =
-  mongoose.models.ProductStock ||
-  mongoose.model("ProductStock", productStockSchema);
+export const ProductionStock =
+  mongoose.models.ProductionStock ||
+  mongoose.model("ProductionStock", productionStockSchema);
+export const WarehouseStock =
+  mongoose.models.WarehouseStock ||
+  mongoose.model("WarehouseStock", warehouseStockSchema);

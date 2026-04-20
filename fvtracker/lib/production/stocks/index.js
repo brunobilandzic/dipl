@@ -4,6 +4,7 @@ import {
   WarehouseStock,
 } from "@/models/sectors/production/Product";
 import { getProductById } from "../product";
+import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
 
 export const createProductStock = async ({
   productId,
@@ -11,6 +12,7 @@ export const createProductStock = async ({
   harvestingBatchId,
   quantity,
 }) => {
+  const product = await getProductById(productId);
   const deductResources = async () => {
     // to create product, we have tto use harvesterd
     // find harvesting batch for create product
@@ -48,12 +50,23 @@ export const createProductStock = async ({
     }
   };
   await deductResources();
-  // Implement the logic to create a product stock entry
-  const product = await getProductById(productId);
-  const stock = await product.createProductionStock({
-    harvestingBatchId,
-    quantity,
+
+  let stock = await ProductionStock.findOne({
+    product: this._id,
+    facility: productionFacilityId,
   });
+
+  if (!stock) {
+    stock = new ProductionStock({
+      product: this._id,
+      quantity,
+    });
+  } else {
+    stock.quantity = quantity;
+  }
+
+  await stock.save;
+
   return stock;
 };
 

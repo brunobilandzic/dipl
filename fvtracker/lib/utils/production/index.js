@@ -37,12 +37,12 @@ export default async function fillProductionRedux({ dispatch, router }) {
 const dispatchPayloads = ({ manager, dispatch, batches, machines }) => {
   console.log("Dispatching production manager data to Redux:", manager);
   dispatch(setProducts(manager.products));
-  dispatch(refreshProductsStocks.fulfilled(mapProductsStocks({ manager })));
+  // dispatch(refreshProductsStocks.fulfilled(mapProductsStocks({ manager })));
   dispatch(refreshHarvestingBatches.fulfilled(batches));
   dispatch(setMachines(machines));
 };
 
-const mapProductsStocks = ({ manager }) => {
+/* const mapProductsStocks = ({ manager }) => {
   return manager.products.map((product) => ({
     product: {
       name: product.name,
@@ -52,3 +52,4 @@ const mapProductsStocks = ({ manager }) => {
     productionProcesses: product.stock?.productionProcesses,
   }));
 };
+ */

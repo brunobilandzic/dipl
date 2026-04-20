@@ -1,7 +1,5 @@
 "use client";
 
-import { useSelector, useDispatch } from "react-redux";
-import { refreshProductsStocks } from "@/store/production";
 import Modal from "@/components/layout/modals/modal";
 import { useEffect, useState } from "react";
 import { AppInput, AppSelect } from "@/components/form/inputs";

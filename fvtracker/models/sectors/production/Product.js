@@ -381,7 +381,7 @@ ingredientsSchema.pre("deleteMany", async function () {
   }
 }); */
 
-productStockSchema.pre("deleteMany", async function () {
+productionStockSchema.pre("deleteMany", async function () {
   const ids = await ProductStock.find(this.getFilter()).distinct("_id");
   await ProductionProcess.deleteMany({ productStock: { $in: ids } });
   await ProductionFacility.updateMany(

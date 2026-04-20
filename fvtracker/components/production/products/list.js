@@ -127,10 +127,10 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
             <p>{product.description}</p>
           </div>
           <div className="stockquantity flex items-center gap-4">
-            <h3 className="font-semibold">Na zalihi:</h3>
+            {/* <h3 className="font-semibold">Na zalihi:</h3>
             <span className="text-5xl font-bold">
               {product.stock?.quantity || 0}
-            </span>
+            </span> */}
           </div>
         </div>
         <div className="flex justify-between mt-4">

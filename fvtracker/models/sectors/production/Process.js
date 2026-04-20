@@ -11,7 +11,7 @@ const productionProcessSchema = new Schema({
     type: Number,
     default: 0,
   },
-  createdAt: {
+  processedAt: {
     type: Date,
     default: Date.now,
   },

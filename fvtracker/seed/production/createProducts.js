@@ -20,8 +20,8 @@ export const createProducts = async () => {
       ingredientsData: productData.ingredients,
     });
 
-    const stock = await createProductStockSeed({ product });
-    product.stock = stock._id;
+    /*     const stock = await createProductStockSeed({ product });
+    product.stock = stock._id*/
     productionManager.products.push(product._id);
     await productionManager.save();
     await product.save();

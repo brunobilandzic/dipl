@@ -161,7 +161,7 @@ productSchema.pre("deleteMany", async function () {
   );
   await Ingredient.deleteMany({ product: { $in: ids } });
   await ProductionStock.deleteMany({ product: { $in: ids } });
-  await WarehouseStock.deleteMany({ product: { $in: ids } });
+  // await WarehouseStock.deleteMany({ product: { $in: ids } });
 });
 
 ingredientsSchema.pre("deleteMany", async function () {
@@ -196,7 +196,8 @@ ingredientsSchema.pre("deleteMany", async function () {
 
 productionStockSchema.pre("deleteMany", async function () {
   const ids = await ProductionStock.find(this.getFilter()).distinct("_id");
-  await ProductionProcess.deleteMany({ productStock: { $in: ids } });
+  console.log({ stocksIds: ids });
+  await ProductionProcess.deleteMany({ productionStock: { $in: ids } });
   await ProductionFacility.updateMany(
     { stocks: { $in: ids } },
     { $pull: { stocks: { $in: ids } } },

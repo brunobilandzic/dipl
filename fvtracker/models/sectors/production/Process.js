@@ -17,16 +17,7 @@ const productionProcessSchema = new Schema({
   },
 });
 
-productionProcessSchema.pre("deleteMany", async function () {
-  const ids = await ProductionProcess.find(this.getFilter()).distinct("_id");
-  await Machine.updateMany(
-    { productionProcesses: { $in: ids } },
-    { $pull: { productionProcesses: { $in: ids } } },
-  );
-});
-
 productionProcessSchema.statics.findOrCreate = async function ({ name }) {
-  console.log({ name });
   let process = await this.findOne({ name });
   if (process) return process;
   return await this.create({ name });

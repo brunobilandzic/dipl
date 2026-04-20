@@ -1,13 +1,24 @@
+import { productsAllProductionStocksSum } from "@/lib/utils/production/stocks";
+
 export const ProductItemStocksInfo = ({ productionStocks }) => {
+  const totalProductionQuantity = productsAllProductionStocksSum({
+    productionStocks,
+  });
+  console.log({ totalProductionQuantity });
   return (
     <>
       {" "}
       <div className="stockquantity flex items-center gap-4">
-        <h3 className="font-semibold">Na zalihi:</h3>
-        <span className="text-5xl font-bold">
-          {productionStocks?.quantity || 0}
-        </span>
+        <StockQuantity label="Pogoni" quantity={totalProductionQuantity} />
       </div>
     </>
+  );
+};
+
+const StockQuantity = ({ label, quantity }) => {
+  return (
+    <div>
+      <span>{label}:</span> {quantity || 0}
+    </div>
   );
 };

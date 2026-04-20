@@ -13,6 +13,7 @@ export const createProductStock = async ({
   productionFacilityId,
   harvestingBatchId,
   quantity,
+  comment,
 }) => {
   const product = await getProductById(productId);
   const deductResources = async () => {
@@ -68,6 +69,7 @@ export const createProductStock = async ({
   const productionProcess = new ProductionProcess({
     productionsStock: stock._id,
     quantity,
+    comment,
   });
   stock.processes.push(productionProcess._id);
 

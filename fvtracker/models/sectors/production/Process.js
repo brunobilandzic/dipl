@@ -3,6 +3,10 @@ import mongoose, { Schema } from "mongoose";
 import { Machine } from "./Machine";
 
 const productionProcessSchema = new Schema({
+  comment: {
+    type: String,
+    default: "Izrada proizvoda",
+  },
   productionStock: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "ProductStock",

@@ -3,24 +3,10 @@ import { Schema } from "mongoose";
 import mongoose from "mongoose";
 
 const productionFacilitySchema = new Schema({
-  machines: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "ProductionMachine",
-      default: [],
-    },
-  ],
   stocks: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "ProductStock",
-      default: [],
-    },
-  ],
-  processes: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "ProductionProcess",
+      ref: "ProductionStock",
       default: [],
     },
   ],
@@ -28,7 +14,7 @@ const productionFacilitySchema = new Schema({
 
 productionFacilitySchema.pre("deleteMany", async function () {
   const facilities = await this.model.find(this.getFilter()).distinct("_id");
-  await mongoose.model("ProductStock").deleteMany({
+  await mongoose.model("ProductionStock").deleteMany({
     productionFacility: { $in: facilities },
   });
 });

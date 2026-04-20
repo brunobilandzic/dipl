@@ -107,26 +107,6 @@ export const getBatchesCVS = ({ harvestingBatches, product }) => {
   return batchesCVS;
 };
 
-/* 
-
-const calculateCropVarietyAmouts = ({ batches, cvNames, needed }) => {
-  let cvBatches = batches.reduce((batchesCvQuantity, batch) => {
-    const batchQuantity = getBatchQuantity({ batch, cvNames });
-    if (!batchQuantity) {
-      const { [batch.name]: _, ...rest } = batchesCvQuantity;
-      return rest;
-    }
-    batchesCvQuantity[batch.name] = {
-      batchQuantity,
-      possible: Math.floor(batchQuantity / needed),
-    };
-    return batchesCvQuantity;
-  }, {});
-  console.log("cvbatches", cvBatches);
-
-  return cvBatches;
-}; */
-
 const getBatchQuantity = ({ batch, cvName }) => {
   return batch.harvestingBatchItems.find(
     (hbi) => hbi.cropVariety.name == cvName,

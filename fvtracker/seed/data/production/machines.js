@@ -1,4 +1,4 @@
-const machinesSeedData = [
+export const machinesSeedData = [
   {
     name: PACKAGING_MACHINE,
     description: "Stroj za pakiranje gotovih proizvoda u pakete",

@@ -30,14 +30,14 @@ const productSchema = new Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "ProductionStock",
-      default: null,
+      default: [],
     },
   ],
   warehouseStocks: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "WarehouseStock",
-      default: null,
+      default: [],
     },
   ],
 });

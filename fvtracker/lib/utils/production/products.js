@@ -55,6 +55,7 @@ export const submitProductForm = async ({
     dispatch(setLoading(false));
     alert(`Proizvod ${isEdit ? "ažuriran" : "kreiran"} uspješno!`);
     await refreshProducts({ dispatch, router });
+    router.push("/proizvodi");
   } catch (error) {
     console.error(`Error ${isEdit ? "updating" : "creating"} product:`, error);
     dispatch(setLoading(false));

@@ -133,18 +133,3 @@ export function extractVarietiesQuantities({ product, quantity }) {
   return varietiesQuantities;
 }
 
-export const populateProductIngredients = async ({ products }) => {
-  await Promise.all(
-    products.map((product) =>
-      product.populate({
-        path: "ingredients",
-        populate: {
-          path: "cropVariety",
-          populate: {
-            path: "cropType",
-          },
-        },
-      }),
-    ),
-  );
-};

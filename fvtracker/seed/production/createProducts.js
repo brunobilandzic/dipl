@@ -2,7 +2,7 @@ import { productsData } from "../data/production/products";
 import { Product } from "@/models/sectors/production/Product";
 import { getBatchesWithResources } from "@/lib/utils/production/resources";
 import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
-import { populateProductIngredients } from "@/lib/utils/production/products";
+import { populateProductIngredients } from "@/lib/production/product/ingredients";
 import { ProductionManager } from "@/models/user/managers/ProductionManager";
 import { createFacility } from "./facility";
 import { createProductStock } from "@/lib/production/stocks";

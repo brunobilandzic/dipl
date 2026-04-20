@@ -58,3 +58,20 @@ export const updateIngredients = async ({
 
   return ingredients.map((ing) => ing._id);
 };
+
+
+export const populateProductIngredients = async ({ products }) => {
+  await Promise.all(
+    products.map((product) =>
+      product.populate({
+        path: "ingredients",
+        populate: {
+          path: "cropVariety",
+          populate: {
+            path: "cropType",
+          },
+        },
+      }),
+    ),
+  );
+};

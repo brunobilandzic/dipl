@@ -5,7 +5,7 @@ import {
 } from "@/models/sectors/production/Product";
 import { getProductById } from "../product";
 import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
-import { populateProductIngredients } from "@/lib/utils/production/products";
+import { populateProductIngredients } from "@/lib/production/product/ingredients";
 import { ProductionProcess } from "@/models/sectors/production/Process";
 
 export const createProductStock = async ({

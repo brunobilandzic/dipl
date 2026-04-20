@@ -1,4 +1,8 @@
-import { ProductStock } from "@/models/sectors/production/Product";
+import {
+  ProductionStock,
+  ProductStock,
+  WarehouseStock,
+} from "@/models/sectors/production/Product";
 import { getProductById } from "../product";
 
 export const createProductStock = async ({
@@ -14,7 +18,8 @@ export const createProductStock = async ({
 
 export const getStocks = async () => {
   console.log("Fetching products stocks...");
-  const stocks = await ProductStock.find().populate([
+
+  const productionStocks = await ProductionStock.find().populate([
     {
       path: "product",
       select: "name ingredients description slug",
@@ -39,11 +44,25 @@ export const getStocks = async () => {
     },
     {
       path: "productionProcesses",
-      select: "name description",
+      select: "name description ",
+    },
+    {
+      path: "facility",
+      select: "name description ",
     },
   ]);
-  if (!stocks) {
+  if (!productionStocks) {
     throw new Error("No product stocks found.");
   }
-  return stocks;
+
+  const warehousedStocks = await WarehouseStock.find().populate([
+    {
+      path: "product",
+    },
+    {
+      path: "warehouse",
+    },
+  ]);
+
+  return { productionStocks, warehousedStocks };
 };

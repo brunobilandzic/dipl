@@ -2,6 +2,8 @@ import { fetchManager } from "@/lib/auth/fetchSessionData";
 import { PRODUCTION_MANAGER } from "@/lib/constants/users/managerTypes";
 import { ProductionManager } from "@/models/user/managers/ProductionManager";
 
+// here is the place we fetch all production data
+
 export async function GET(request) {
   const { generalManager, specificManager, unauthorized } = await fetchManager({
     managerNames: [PRODUCTION_MANAGER],
@@ -26,7 +28,12 @@ export async function GET(request) {
           },
         },
         {
-          path: "stock",
+          path: "productionStocks",
+          populate: [
+            {
+              path: "facility",
+            },
+          ],
         },
       ],
     },

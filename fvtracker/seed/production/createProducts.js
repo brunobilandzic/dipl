@@ -1,4 +1,4 @@
-import { productsData } from "../data/production";
+import { productsData } from "../data/production/production";
 import { Product } from "@/models/sectors/production/Product";
 import { getBatchesWithResources } from "@/lib/utils/production/resources";
 import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";

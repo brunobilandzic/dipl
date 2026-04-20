@@ -5,7 +5,7 @@ import { makeUrlFriendly } from "@/lib/utils/strings";
 import { Base } from "@/models/Base";
 import { ProductionProcess } from "./Process";
 import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
-import { getProductionProcessInfo } from "@/seed/data/production";
+import { getProductionProcessInfo } from "@/seed/data/production/production";
 import { ProductionFacility } from "./Facility";
 import { Machine } from "./Machine";
 

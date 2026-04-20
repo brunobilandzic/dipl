@@ -57,30 +57,14 @@ export const productionFacilitiyInfo = {
   description: "Pogon za proizvodnju gotovih proizvoda",
 };
 
-export const productionProcessInfo = {
-  name: "Proizvodnja 1",
-  description: "Proizvodnja gotovih proizvoda na osnovu usjeva",
-};
-
 export const getProductionProcessInfo = ({ productName }) => {
   const name = getProcessName({ productName });
-  console.log({ productName }, name);
+  console.log("creating process for product:", productName, "with name:", name);
 
   return {
     name,
     description: "Proizvodnja gotovih proizvoda na osnovu usjeva",
   };
-};
-
-export const getProductionFacilityInfos = (n) => {
-  const facilities = [];
-  for (let i = 0; i < n; i++) {
-    facilities.push({
-      name: `Proizvodni pogon ${i + 1} ${new Date().toLocaleString()}`,
-      description: "Pogon za proizvodnju gotovih proizvoda",
-    });
-  }
-  return facilities;
 };
 
 export const productMachineNameMap = new Map([
@@ -95,7 +79,7 @@ export const productProcessNameMap = new Map([
   ["sok", "Cijeđenje"],
 ]);
 
-export const processMahineMap = new Map([
+export const processMachineMap = new Map([
   ["pakiranje paket vrećica kg", "stroj za pakiranje"],
   ["konzerva konzerve", "stroj za konzerviranje"],
   ["sok", "stroj za cijeđenje"],

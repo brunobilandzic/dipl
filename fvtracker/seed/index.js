@@ -25,8 +25,6 @@ async function handleAPIRequest(seedType) {
       return await fields.create();
     case SEED_TYPES.CROP_MAIN_TYPES:
       return await crops.mainTypes();
-    case SEED_TYPES.CULTIVATIONS:
-      return await cultivations.create();
     case SEED_TYPES.PRODUCTION:
       return await production.seedProduction();
     case SEED_TYPES.PLANTAGE_HARVEST:

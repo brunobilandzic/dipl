@@ -6,6 +6,7 @@ import {
 import { getProductById } from "../product";
 import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
 import { populateProductIngredients } from "@/lib/utils/production/products";
+import { ProductionProcess } from "@/models/sectors/production/Process";
 
 export const createProductStock = async ({
   productId,
@@ -64,6 +65,13 @@ export const createProductStock = async ({
     stock.quantity += quantity;
   }
 
+  const productionProcess = new ProductionProcess({
+    productionsStock: stock._id,
+    quantity,
+  });
+  stock.processes.push(productionProcess._id);
+
+  await productionProcess.save();
   await stock.save();
 
   return stock;

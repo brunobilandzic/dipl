@@ -14,7 +14,7 @@ import { List, ListItem } from "@/components/layout/preview/list";
 import { filterProducts, sortProducts } from "@/store/production";
 import { initFilters } from "@/lib/utils/list";
 import { productSortOptions } from "@/components/layout/preview/sort";
-import { AddProductStock } from "./stock/ProductStock";
+import { AddProductStock } from "./stock/AddProductStock";
 import {
   getBatchesCVS,
   findMinPossibleBatchMap,

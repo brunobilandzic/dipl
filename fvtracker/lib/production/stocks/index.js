@@ -12,7 +12,10 @@ export const createProductStock = async ({
 }) => {
   // Implement the logic to create a product stock entry
   const product = await getProductById(productId);
-  const stock = await product.createProductionStock({ harvestingBatchId, quantity });
+  const stock = await product.createProductionStock({
+    harvestingBatchId,
+    quantity,
+  });
   return stock;
 };
 

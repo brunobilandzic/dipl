@@ -53,7 +53,7 @@ export const productsData = [
 // ing qant must be reduced from batch
 
 export const productionFacilitiyInfo = {
-  name: getRandomString({ beginning: "Proizvodni pogon 1", length: 5 }),
+  name: getRandomString({ beginning: "Proizvodni pogon", length: 5 }),
   description: "Pogon za proizvodnju gotovih proizvoda",
 };
 

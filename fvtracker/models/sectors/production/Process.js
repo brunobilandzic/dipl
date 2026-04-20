@@ -3,24 +3,17 @@ import mongoose, { Schema } from "mongoose";
 import { Machine } from "./Machine";
 
 const productionProcessSchema = new Schema({
-  facility: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Base",
-  },
-  machines: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Base",
-      default: [],
-    },
-  ],
-  stock: {
+  productionStock: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "ProductStock",
   },
   quantity: {
     type: Number,
     default: 0,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
 });
 
@@ -41,7 +34,4 @@ productionProcessSchema.statics.findOrCreate = async function ({ name }) {
 
 export const ProductionProcess =
   mongoose.models.ProductionProcess ||
-  Base.discriminator(
-    "ProductionProcess",
-    new mongoose.Schema(productionProcessSchema),
-  );
+  mongoose.model("ProductionProcess", productionProcessSchema);

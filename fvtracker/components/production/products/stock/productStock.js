@@ -28,7 +28,7 @@ export const AddProductStock = ({
       onCancel={onCancel}
     >
       <div>
-        <StockQuantity
+        <StockQuantityInput
           name="quantity"
           label="Količina"
           type="number"
@@ -45,7 +45,7 @@ export const AddProductStock = ({
   );
 };
 
-const StockQuantity = ({ name, label, quantity, onChange }) => {
+const StockQuantityInput = ({ name, label, quantity, onChange }) => {
   return (
     <AppInput
       name="quantity"

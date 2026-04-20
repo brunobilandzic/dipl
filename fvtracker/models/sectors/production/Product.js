@@ -152,20 +152,14 @@ productSchema.methods.createIngredients = async function ({ ingredientsData }) {
   await this.save();
 };
 
-productSchema.methods.createProductiStock = async function ({
-  // we make sure that harvset batch has needed resources before calling this method
+productSchema.methods.createProductionStock = async function ({
+  productionProcessId,
+  productionFacilityId,
   harvestingBatchId,
   quantity,
-  // get seed process info for 1 process
-  productionProcessInfo = getProductionProcessInfo({ productName: this.name }),
 }) {
-  const chooseProcess = async () => {
-    const processes = await ProductionProcess.findOrCreate({
-      name: productionProcessInfo.name,
-      product: this._id,
-    });
-  };
   const deductResources = async () => {
+    // to create product, we have tto use harvesterd
     // find harvesting batch for create product
     const [harvestingBatch] = await getHarvestingBatches({
       batchIds: [harvestingBatchId],
@@ -203,22 +197,12 @@ productSchema.methods.createProductiStock = async function ({
 
   await deductResources();
 
-  const { machineName, ...processInfo } = productionProcessInfo;
-
-  const machine = await Machine.findOrCreate({ name: machineName });
-
-  const productionProcess = new ProductionProcess({
+  let stock = await ProductionStock.findOne({
     product: this._id,
-    machines: [machine._id],
-    quantity,
-    ...processInfo,
+    facility: productionFacilityId,
   });
 
-  let stock;
-
-  const existingStockId = this.stock;
-
-  if (existingStockId) {
+  if (stock) {
     const existingStock = await ProductStock.findById(existingStockId);
     existingStock.productionProcesses.push(productionProcess._id);
     existingStock.quantity += quantity;

@@ -40,7 +40,7 @@ export const createProductStockSeed = async ({ product }) => {
   if (!batchWithResources) {
     return;
   }
-  const stock = await product.createStock({
+  const stock = await product.createProductionStock({
     harvestingBatchId: batchWithResources._id,
     quantity: 1,
   });

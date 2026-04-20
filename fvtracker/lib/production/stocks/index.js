@@ -7,9 +7,47 @@ import { getProductById } from "../product";
 
 export const createProductStock = async ({
   productId,
-  quantity,
+  productionFacilityId,
   harvestingBatchId,
+  quantity,
 }) => {
+  const deductResources = async () => {
+    // to create product, we have tto use harvesterd
+    // find harvesting batch for create product
+    const [harvestingBatch] = await getHarvestingBatches({
+      batchIds: [harvestingBatchId],
+    });
+    if (!harvestingBatch) {
+      throw new Error(
+        `Harvesting batch with id ${harvestingBatchId} not found.`,
+      );
+    }
+    await this.populate({
+      path: "ingredients",
+      populate: {
+        path: "cropVariety",
+      },
+    });
+    for (const ingredient of this.ingredients) {
+      const batchItem = harvestingBatch.harvestingBatchItems.find((item) =>
+        item.cropVariety.equals(ingredient.cropVariety._id),
+      );
+      if (!batchItem) {
+        throw new Error(
+          `No matching harvesting batch item found for ingredient with crop variety ${ingredient.cropVariety.name}.`,
+        );
+      }
+      if (batchItem.batchQuantity < ingredient.quantity * quantity) {
+        throw new Error(
+          `Not enough quantity in harvesting batch for ingredient with crop variety ${ingredient.cropVariety.name}. Required: ${ingredient.quantity * quantity}, Available: ${batchItem.batchQuantity}`,
+        );
+      }
+      batchItem.batchQuantity -= ingredient.quantity * quantity;
+
+      await batchItem.save();
+    }
+  };
+  await deductResources();
   // Implement the logic to create a product stock entry
   const product = await getProductById(productId);
   const stock = await product.createProductionStock({

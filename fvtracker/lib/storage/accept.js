@@ -6,6 +6,7 @@ export const acceptWarehouseStock = async ({
   quantity,
   productionFacilityId,
   warehouseId,
+  comment,
 }) => {
   const productionStock = await ProductionStock.findOne({
     product: productId,
@@ -36,6 +37,21 @@ export const acceptWarehouseStock = async ({
   }
   warehouseStock.quantity += quantity;
 
+  const warehouseAcceptanceProcess = new WarehouseAcceptanceProcess({
+    warehouseStock: warehouseStock._id,
+    productionStock: productionStock._id,
+    quantity,
+    comment,
+  });
+
+  productionStock.warehouseAcceptanceProcesses.push(
+    warehouseAcceptanceProcess._id,
+  );
+  warehouseStock.warehouseAcceptanceProcesses.push(
+    warehouseAcceptanceProcess._id,
+  );
+
   await productionStock.save();
   await warehouseStock.save();
+  await warehouseAcceptanceProcess.save();
 };

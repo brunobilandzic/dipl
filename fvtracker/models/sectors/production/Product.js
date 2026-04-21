@@ -6,7 +6,7 @@ import { Base } from "@/models/Base";
 import { ProductionProcess } from "./Process";
 import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
 import { getProductionProcessInfo } from "@/seed/data/production/production";
-import { ProductionFacility } from "./Facility";
+import { ProductionFacility, ProductionStock } from "./Facility";
 import { Machine } from "./Machine";
 import { ProductionManager } from "@/models/user/managers/ProductionManager";
 
@@ -59,28 +59,7 @@ const ingredientsSchema = new Schema({
   },
 });
 
-const productionStockSchema = new Schema({
-  product: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Base",
-    required: true,
-  },
-  quantity: {
-    type: Number,
-    default: 0,
-  },
-  processes: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "ProductionProcess",
-      default: [],
-    },
-  ],
-  facility: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Base",
-  },
-});
+
 
 productSchema.pre("save", async function () {
   if (this.isModified("name") || this.isNew) {
@@ -177,16 +156,6 @@ ingredientsSchema.pre("deleteMany", async function () {
   }
 }); */
 
-productionStockSchema.pre("deleteMany", async function () {
-  const ids = await ProductionStock.find(this.getFilter()).distinct("_id");
-  console.log({ stocksIds: ids });
-  await ProductionProcess.deleteMany({ productionStock: { $in: ids } });
-  await ProductionFacility.updateMany(
-    { stocks: { $in: ids } },
-    { $pull: { stocks: { $in: ids } } },
-  );
-});
-
 warehouseStockSchema.pre("deleteMany", async function () {
   const ids = await WarehouseStock.find(this.getFilter()).distinct("_id");
   /* await Warehouse.updateMany(
@@ -200,6 +169,3 @@ export const Product =
   Base.discriminator("Product", new mongoose.Schema(productSchema));
 export const Ingredient =
   mongoose.models.Ingredient || mongoose.model("Ingredient", ingredientsSchema);
-export const ProductionStock =
-  mongoose.models.ProductionStock ||
-  mongoose.model("ProductionStock", productionStockSchema);

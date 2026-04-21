@@ -37,7 +37,7 @@ const productionStockSchema = new Schema({
   warehouseAcceptanceProcesses: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "WarehouseProcess",
+      ref: "WarehouseAcceptanceProcess",
       default: [],
     },
   ],

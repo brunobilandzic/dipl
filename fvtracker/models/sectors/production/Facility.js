@@ -23,7 +23,7 @@ const productionStockSchema = new Schema({
     type: Number,
     default: 0,
   },
-  processes: [
+  productionProcesses: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "ProductionProcess",
@@ -34,6 +34,13 @@ const productionStockSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Base",
   },
+  warehouseAcceptanceProcesses: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "WarehouseProcess",
+      default: [],
+    },
+  ],
 });
 
 productionStockSchema.pre("deleteMany", async function () {

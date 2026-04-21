@@ -70,7 +70,7 @@ export const createProductStock = async ({
     comment,
   });
   await stock.populate({ path: "facility", select: "name" });
-  stock.processes.push(productionProcess._id);
+  stock.productionProcesses.push(productionProcess._id);
   harvestingBatch.productionProcesses.push(productionProcess._id);
   console.log(
     `Created product ${product.name} ${stock.quantity} stock in facility ${stock.facility.name}`,

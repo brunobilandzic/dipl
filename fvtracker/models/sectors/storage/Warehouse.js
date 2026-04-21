@@ -22,6 +22,13 @@ const warehouseStockSchema = new Schema({
     ref: "Base",
     required: true,
   },
+  warehouseAcceptanceProcesses: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "WarehouseAcceptanceProcess",
+      default: [],
+    },
+  ],
   quantity: {
     type: Number,
     default: 0,
@@ -90,4 +97,7 @@ export const WarehouseStock =
 
 export const WarehouseAcceptanceProcess =
   mongoose.models.WarehouseAcceptanceProcess ||
-  mongoose.model("WarehouseAcceptanceProcess", warehouseAcceptanceProcessSchema);
+  mongoose.model(
+    "WarehouseAcceptanceProcess",
+    warehouseAcceptanceProcessSchema,
+  );

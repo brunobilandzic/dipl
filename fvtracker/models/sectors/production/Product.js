@@ -82,23 +82,6 @@ const productionStockSchema = new Schema({
   },
 });
 
-const warehouseStockSchema = new Schema({
-  product: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Base",
-    required: true,
-  },
-  quantity: {
-    type: Number,
-    default: 0,
-  },
-  warehouse: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Base",
-  },
-  // add other warerhouuse stock related fields later
-});
-
 productSchema.pre("save", async function () {
   if (this.isModified("name") || this.isNew) {
     this.slug = makeUrlFriendly(this.name);
@@ -220,6 +203,3 @@ export const Ingredient =
 export const ProductionStock =
   mongoose.models.ProductionStock ||
   mongoose.model("ProductionStock", productionStockSchema);
-export const WarehouseStock =
-  mongoose.models.WarehouseStock ||
-  mongoose.model("WarehouseStock", warehouseStockSchema);

@@ -1,7 +1,9 @@
 import { getRandomString } from "@/lib/utils/strings";
+import { Warehouse } from "@/models/sectors/storage/Warehouse";
 import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
 
 export const seedWarehouse = async () => {
+  await Warehouse.deleteMany({});
   const warehouseManager = await WarehouseManager.findOne();
   if (!warehouseManager) {
     throw new Error(

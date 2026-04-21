@@ -26,13 +26,6 @@ const harvestingBatchSchema = new Schema({
       default: [],
     },
   ],
-  productsStocks: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "ProductStock",
-      default: [],
-    },
-  ],
 });
 
 const harvestingBatchItemSchema = new Schema({

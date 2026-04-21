@@ -48,8 +48,9 @@ export const createProductStock = async ({
 
       await batchItem.save();
     }
+    return harvestingBatch;
   };
-  await deductResources();
+  const harvestingBatch = await deductResources();
 
   let stock = await ProductionStock.findOne({
     product: product._id,
@@ -72,7 +73,8 @@ export const createProductStock = async ({
     comment,
   });
   stock.processes.push(productionProcess._id);
-
+  harvestingBatch.productionProcesses.push(productionProcess._id);
+  await harvestingBatch.save();
   await productionProcess.save();
   await stock.save();
 

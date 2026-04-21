@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { AppInput, AppSelect } from "@/components/form/inputs";
 import { useSelector } from "react-redux";
 import { FormModal } from "@/components/layout/modals/form";
+import { checkEmpty } from "@/lib/utils/objects";
 
 export const AddProductStock = ({
   product,
@@ -31,6 +32,10 @@ export const AddProductStock = ({
       title={`Dodaj zalihe za ${product.name}`}
       isOpen={isOpen}
       onCancel={onCancel}
+      submitDisabled={
+        checkEmpty(productStock, true) ||
+        Object.keys(minPossibleBatchMap).length === 0
+      }
     >
       <div>
         <AppInput

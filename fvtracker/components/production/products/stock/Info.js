@@ -1,8 +1,15 @@
 import { productsAllProductionStocksSum } from "@/lib/utils/production/stocks";
+import { totalWarehouseStockQuantity } from "@/lib/utils/storage/warehouse";
 
-export const ProductItemStocksInfo = ({ productionStocks }) => {
+export const ProductItemStocksInfo = ({
+  productionStocks,
+  warehouseStocks,
+}) => {
   const totalProductionQuantity = productsAllProductionStocksSum({
     productionStocks,
+  });
+  const totalWarehouseQuantity = totalWarehouseStockQuantity({
+    warehouseStocks,
   });
   console.log({ totalProductionQuantity });
   return (
@@ -10,6 +17,7 @@ export const ProductItemStocksInfo = ({ productionStocks }) => {
       {" "}
       <div className="stockquantity flex items-center gap-4">
         <StockQuantity label="Pogoni" quantity={totalProductionQuantity} />
+        <StockQuantity label="Skladišta" quantity={totalWarehouseQuantity} />
       </div>
     </>
   );

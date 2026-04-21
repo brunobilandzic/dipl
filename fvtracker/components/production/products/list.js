@@ -128,7 +128,7 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
             <h2 className="text-xl font-bold">{product.name}</h2>
             <p>{product.description}</p>
           </div>
-          <ProductItemStocksInfo productionStocks={product.productionStocks} />
+          <ProductItemStocksInfo productionStocks={product.productionStocks} warehouseStocks={product.warehouseStocks}/>
         </div>
         <div className="flex justify-between mt-4">
           <div>

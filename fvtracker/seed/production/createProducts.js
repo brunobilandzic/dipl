@@ -32,9 +32,11 @@ export const createProducts = async () => {
       product,
       productionFacilityId: productionFacility._id,
     });
+    productionFacility.stocks.push(productionStock._id);
     productionManager.products.push(product._id);
     await productionManager.save();
     await product.save();
+    await productionFacility.save();
     console.log(`Seeded product: ${product.name}`);
   }
 };

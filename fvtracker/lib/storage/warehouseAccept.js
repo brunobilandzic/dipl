@@ -57,7 +57,7 @@ export const acceptWarehouseStock = async ({
 
   await product.save();
   await productionStock.save();
-  
+
   await warehouseStock.save();
   await warehouseAcceptanceProcess.save();
 };

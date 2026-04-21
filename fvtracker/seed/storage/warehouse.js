@@ -2,7 +2,7 @@ import { getRandomString } from "@/lib/utils/strings";
 import { createWarehouse } from "@/lib/storage";
 import { Warehouse } from "@/models/sectors/storage/Warehouse";
 import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
-import { acceptWarehouseStock } from "@/lib/storage/accept";
+import { acceptWarehouseStock } from "@/lib/storage/warehouseAccept";
 
 export const seedWarehouse = async () => {
   await Warehouse.deleteMany({});

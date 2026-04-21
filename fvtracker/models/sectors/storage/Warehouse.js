@@ -41,6 +41,11 @@ const warehouseStockSchema = new Schema({
   // add other warerhouuse stock related fields later
 });
 
+warehouseSchema.pre("deleteMany", async function () {
+  const ids = await Warehouse.find(this.getFilter()).distinct("_id");
+  await WarehouseStock.deleteMany({ warehouse: { $in: ids } });
+});
+
 warehouseStockSchema.pre("save", function () {
   if (this.isModified("quantity") || this.isNew) {
     this.updatedAt = new Date();

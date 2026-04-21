@@ -47,10 +47,12 @@ export const acceptWarehouseStock = async ({
   productionStock.warehouseAcceptanceProcesses.push(
     warehouseAcceptanceProcess._id,
   );
-  warehouseStock.warehouseAcceptanceProcesses.push(
+  warehouseStock.warehouseAcceptanceProcesses = [
     warehouseAcceptanceProcess._id,
-  );
+  ];
+  product.warehouseStocks.push(warehouseStock._id);
 
+  await product.save();
   await productionStock.save();
   await warehouseStock.save();
   await warehouseAcceptanceProcess.save();

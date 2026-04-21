@@ -55,11 +55,5 @@ export const createProductStockSeed = async ({
     productionFacilityId,
   });
   product.productionStocks.push(productionStock._id);
-  console.log(
-    "Created stock for product:",
-    product.name,
-    "\n",
-    productionStock,
-  );
   return productionStock;
 };

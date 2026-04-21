@@ -89,7 +89,6 @@ const CreateStockChooseBatch = ({
   const batchOptions = Object.entries(minPossibleBatchMap)
     .filter(([_, possibleStock]) => possibleStock >= quantity)
     .map(([batchName, possibleStock]) => {
-      console.log({ batchName, possibleStock });
       return {
         value: batchName,
         label: `${batchName} - moguća izrada ${possibleStock} proizvoda`,

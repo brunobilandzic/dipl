@@ -1,4 +1,5 @@
 import { ProductionStock } from "@/models/sectors/production/Facility";
+import { WarehouseStock } from "@/models/sectors/storage/Warehouse";
 
 export const acceptWarehouseStock = async ({
   productId,
@@ -20,17 +21,21 @@ export const acceptWarehouseStock = async ({
       `Not enough quantity in production stock. Required: ${quantity}, Available: ${productionStock.quantity}`,
     );
   }
-  let stock = await WarehouseStock.findOne({
+  productionStock.quantity -= quantity;
+
+  let warehouseStock = await WarehouseStock.findOne({
     product: productId,
     warehouse: warehouseId,
   });
-  if (!stock) {
-    stock = new WarehouseStock({
+  if (!warehouseStock) {
+    warehouseStock = new WarehouseStock({
       product: productId,
       warehouse: warehouseId,
       quantity: 0,
     });
   }
-  stock.quantity += quantity
-  await stock.save();
+  warehouseStock.quantity += quantity;
+
+  await productionStock.save();
+  await warehouseStock.save();
 };

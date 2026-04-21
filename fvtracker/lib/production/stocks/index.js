@@ -1,5 +1,5 @@
 import { ProductionStock } from "@/models/sectors/production/Facility";
-import { WarehouseStock } from "@/models/sectors/warehouse/Warehouse";
+import { WarehouseStock } from "@/models/sectors/storage/Warehouse";
 import { getProductById } from "../product";
 import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
 import { populateProductIngredients } from "@/lib/production/product/ingredients";

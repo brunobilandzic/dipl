@@ -38,7 +38,6 @@ const productionStockSchema = new Schema({
 
 productionStockSchema.pre("deleteMany", async function () {
   const ids = await ProductionStock.find(this.getFilter()).distinct("_id");
-  console.log({ stocksIds: ids });
   await ProductionProcess.deleteMany({ productionStock: { $in: ids } });
   await ProductionFacility.updateMany(
     { stocks: { $in: ids } },

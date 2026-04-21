@@ -2,6 +2,7 @@ import { getRandomString } from "@/lib/utils/strings";
 import { createWarehouse } from "@/lib/storage";
 import { Warehouse } from "@/models/sectors/storage/Warehouse";
 import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
+import { acceptWarehouseStock } from "@/lib/storage/accept";
 
 export const seedWarehouse = async () => {
   await Warehouse.deleteMany({});
@@ -21,4 +22,18 @@ export const seedWarehouse = async () => {
     `Seeded warehouse: ${warehouse.name} with manager ${warehouseManager.name}`,
   );
   return warehouse;
+};
+
+export const createWarehouseStockSeed = async ({
+  product,
+  productionFacilityId,
+}) => {
+  const warehouse = await seedWarehouse();
+  await acceptWarehouseStock({
+    product,
+    quantity: 1,
+    productionFacilityId,
+    warehouseId: warehouse._id,
+    comment: "Initial stock from seeding",
+  });
 };

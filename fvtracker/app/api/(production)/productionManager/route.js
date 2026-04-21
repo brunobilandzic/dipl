@@ -35,6 +35,14 @@ export async function GET(request) {
             },
           ],
         },
+        {
+          path: "warehouseStocks",
+          populate: [
+            {
+              path: "warehouse",
+            },
+          ],
+        },
       ],
     },
   ]);

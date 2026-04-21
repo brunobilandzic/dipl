@@ -12,6 +12,8 @@ export const AddProductStock = ({
 }) => {
   const [productStock, setProductStock] = useState({
     quantity: 1,
+    comment: "",
+    productionFacilityId: null,
     batchName: null,
   });
   useEffect(() => {}, [productStock]);
@@ -28,13 +30,23 @@ export const AddProductStock = ({
       onCancel={onCancel}
     >
       <div>
+        <AppInput
+          name="comment"
+          label="Komentar"
+          type="text"
+          onChange={onChange}
+        />
         <StockQuantityInput
           name="quantity"
           label="Količina"
           type="number"
           onChange={onChange}
         />
-
+        {productStock.batchName && (
+          <div>
+            <strong>Odabrana žetva:</strong> {productStock.batchName}
+          </div>
+        )}
         <CreateStockChooseBatch
           onChange={onChange}
           minPossibleBatchMap={minPossibleBatchMap}

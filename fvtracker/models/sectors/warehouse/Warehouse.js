@@ -47,6 +47,14 @@ warehouseStockSchema.pre("save", function () {
   }
 });
 
+warehouseStockSchema.pre("deleteMany", async function () {
+  const ids = await WarehouseStock.find(this.getFilter()).distinct("_id");
+  await Warehouse.updateMany(
+    { stocks: { $in: ids } },
+    { $pull: { stocks: { $in: ids } } },
+  );
+});
+
 export const Warehouse =
   mongoose.models.Warehouse ||
   Base.discriminator("Warehouse", new mongoose.Schema(warehouseSchema));

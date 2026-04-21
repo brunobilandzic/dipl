@@ -156,14 +156,6 @@ ingredientsSchema.pre("deleteMany", async function () {
   }
 }); */
 
-warehouseStockSchema.pre("deleteMany", async function () {
-  const ids = await WarehouseStock.find(this.getFilter()).distinct("_id");
-  /* await Warehouse.updateMany(
-    { stocks: { $in: ids } },
-    { $pull: { stocks: { $in: ids } } },
-  ); */
-});
-
 export const Product =
   mongoose.models.Product ||
   Base.discriminator("Product", new mongoose.Schema(productSchema));

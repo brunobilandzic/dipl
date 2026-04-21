@@ -1,20 +1,23 @@
 import { ProductionStock } from "@/models/sectors/production/Facility";
+import {
   WarehouseAcceptanceProcess,
+  WarehouseStock,
+} from "@/models/sectors/storage/Warehouse";
 
 export const acceptWarehouseStock = async ({
-  productId,
+  product,
   quantity,
   productionFacilityId,
   warehouseId,
   comment,
 }) => {
   const productionStock = await ProductionStock.findOne({
-    product: productId,
+    product: product._id,
     facility: productionFacilityId,
   });
   if (!productionStock) {
     throw new Error(
-      `Production stock not found for product ${productId} in facility ${productionFacilityId}`,
+      `Production stock not found for product ${product._id} in facility ${productionFacilityId}`,
     );
   }
   if (productionStock.quantity < quantity) {
@@ -25,12 +28,12 @@ export const acceptWarehouseStock = async ({
   productionStock.quantity -= quantity;
 
   let warehouseStock = await WarehouseStock.findOne({
-    product: productId,
+    product: product._id,
     warehouse: warehouseId,
   });
   if (!warehouseStock) {
     warehouseStock = new WarehouseStock({
-      product: productId,
+      product: product._id,
       warehouse: warehouseId,
       quantity: 0,
     });

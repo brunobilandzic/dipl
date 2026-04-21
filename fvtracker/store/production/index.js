@@ -22,6 +22,10 @@ const initialState = {
     items: null,
     filteredItems: null,
   },
+  facilities: {
+    items: null,
+    filteredItems: null,
+  },
   isLoading: false,
 };
 
@@ -101,6 +105,19 @@ const productsSlice = createSlice({
       })
       .addCase(refreshProductsStocks.rejected, (state, action) => {
         state.isLoading = false;
+      })
+      .addCase(refreshFacilities.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(refreshFacilities.fulfilled, (state, action) => {
+        state.facilities.items = action.payload;
+        state.facilities.filteredItems = sortItems({
+          items: action.payload,
+          sortBy: SORT_INIT_VALUE,
+        });
+      })
+      .addCase(refreshFacilities.rejected, (state, action) => {
+        state.isLoading = false;
       });
   },
 });
@@ -124,6 +141,17 @@ export const refreshProductsStocks = createAsyncThunk(
   },
 );
 
+export const refreshFacilities = createAsyncThunk(
+  "production/refreshFacilities",
+  async (_, { dispatch }) => {
+    console.log("Fetching production facilities...");
+    const res = await api.get("/facilities");
+    const data = res.data;
+    console.log(data);
+    return res.data.facilities;
+  },
+);
+
 export const {
   setProducts /* 
   addProduct,
@@ -132,7 +160,7 @@ export const {
   setManagers,
   sortProducts,
   filterProducts,
-  setMachines
+  setMachines,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

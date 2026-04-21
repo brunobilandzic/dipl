@@ -1,11 +1,11 @@
-import { Product, Ingredient, ProductStock } from "./Product";
+import { Product, Ingredient } from "./Product";
 import { ProductionProcess } from "./Process";
-import { ProductionFacility } from "./Facility";
+import { ProductionFacility, ProductionStock } from "./Facility";
 
-export default {/* 
+export default {
   Product,
   Ingredient,
-  ProductStock, */
+  ProductionStock,
   ProductionProcess,
   ProductionFacility,
 };

@@ -41,6 +41,9 @@ export async function GET(request) {
             {
               path: "warehouse",
             },
+            {
+              path: "warehouseAcceptanceProcesses",
+            },
           ],
         },
       ],

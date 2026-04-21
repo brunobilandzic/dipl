@@ -30,7 +30,21 @@ const warehouseStockSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Base",
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now,
+  },
   // add other warerhouuse stock related fields later
+});
+
+warehouseStockSchema.pre("save", function () {
+  if (this.isModified("quantity") || this.isNew) {
+    this.updatedAt = new Date();
+  }
 });
 
 export const Warehouse =

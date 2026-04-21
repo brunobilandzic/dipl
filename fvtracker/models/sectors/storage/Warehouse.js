@@ -41,6 +41,26 @@ const warehouseStockSchema = new Schema({
   // add other warerhouuse stock related fields later
 });
 
+const warehouseAcceptanceProcessSchema = new Schema({
+  comment: {
+    type: String,
+    default: "Prihvat proizvoda u skladište",
+  },
+  warehouseStock: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "WarehouseStock",
+    required: true,
+  },
+  quantity: {
+    type: Number,
+    default: 0,
+  },
+  acceptedAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
 warehouseSchema.pre("deleteMany", async function () {
   const ids = await Warehouse.find(this.getFilter()).distinct("_id");
   await WarehouseStock.deleteMany({ warehouse: { $in: ids } });
@@ -67,3 +87,7 @@ export const Warehouse =
 export const WarehouseStock =
   mongoose.models.WarehouseStock ||
   mongoose.model("WarehouseStock", warehouseStockSchema);
+
+export const WarehouseAcceptanceProcess =
+  mongoose.models.WarehouseAcceptanceProcess ||
+  mongoose.model("WarehouseAcceptanceProcess", warehouseAcceptanceProcessSchema);

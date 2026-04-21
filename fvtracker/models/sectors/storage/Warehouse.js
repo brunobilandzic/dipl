@@ -58,6 +58,11 @@ const warehouseAcceptanceProcessSchema = new Schema({
     ref: "WarehouseStock",
     required: true,
   },
+  productionStock: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "ProductionStock",
+    required: true,
+  },
   quantity: {
     type: Number,
     default: 0,

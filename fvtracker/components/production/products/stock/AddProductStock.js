@@ -4,6 +4,7 @@ import Modal from "@/components/layout/modals/modal";
 import { useEffect, useState } from "react";
 import { AppInput, AppSelect } from "@/components/form/inputs";
 import { useSelector } from "react-redux";
+import { FormModal } from "@/components/layout/modals/form";
 
 export const AddProductStock = ({
   product,
@@ -26,7 +27,7 @@ export const AddProductStock = ({
     }));
   };
   return (
-    <Modal
+    <FormModal
       title={`Dodaj zalihe za ${product.name}`}
       isOpen={isOpen}
       onCancel={onCancel}
@@ -64,7 +65,7 @@ export const AddProductStock = ({
           }))}
         />
       </div>
-    </Modal>
+    </FormModal>
   );
 };
 

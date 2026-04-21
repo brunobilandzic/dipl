@@ -1,5 +1,5 @@
 import { ProductionStock } from "@/models/sectors/production/Facility";
-import { WarehouseStock } from "@/models/sectors/storage/Warehouse";
+  WarehouseAcceptanceProcess,
 
 export const acceptWarehouseStock = async ({
   productId,

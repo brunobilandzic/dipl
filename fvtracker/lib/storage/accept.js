@@ -1,6 +1,6 @@
 import { ProductionStock } from "@/models/sectors/production/Facility";
 
-export const createWareHouseStock = async ({
+export const createWarehouseStock = async ({
   productId,
   quantity,
   productionFacilityId,

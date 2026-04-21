@@ -32,8 +32,8 @@ export async function POST(request) {
     await dbConnect();
     const body = await request.json();
     const { productId, quantity, batchName, comment, productionFacilityId } =
-      body;
-    const productionStock = await createProductStock({
+      body.productionStockData;
+    const newProductionStock = await createProductStock({
       productId,
       batchName,
       productionFacilityId,
@@ -42,7 +42,7 @@ export async function POST(request) {
     });
 
     return Response.json(
-      { productionStock },
+      { newProductionStock },
       {
         headers: { "Content-Type": "application/json" },
       },

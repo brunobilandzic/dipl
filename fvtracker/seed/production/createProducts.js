@@ -6,6 +6,7 @@ import { populateProductIngredients } from "@/lib/production/product/ingredients
 import { ProductionManager } from "@/models/user/managers/ProductionManager";
 import { createFacility } from "./facility";
 import { createProductStock } from "@/lib/production/stocks";
+import { createWarehouseStockSeed } from "../storage/warehouse";
 
 export const createProducts = async () => {
   await Product.deleteMany({}); // Clear existing products
@@ -27,6 +28,10 @@ export const createProducts = async () => {
       product,
       productionFacilityId: productionFacility._id,
     });
+    const warehouseStock = await createWarehouseStockSeed({
+      product,
+      productionFacilityId: productionFacility._id,
+    });
     productionManager.products.push(product._id);
     await productionManager.save();
     await product.save();
@@ -43,7 +48,7 @@ export const createProductStockSeed = async ({
   const [batchWithResources] = getBatchesWithResources({
     harvestingBatches,
     product,
-    quantity: 1,
+    quantity: 2,
   });
   if (!batchWithResources) {
     return;
@@ -51,7 +56,7 @@ export const createProductStockSeed = async ({
   const productionStock = await createProductStock({
     productId: product._id,
     harvestingBatchId: batchWithResources._id,
-    quantity: 1,
+    quantity: 2,
     productionFacilityId,
   });
   product.productionStocks.push(productionStock._id);

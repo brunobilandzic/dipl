@@ -3,6 +3,7 @@
 import Modal from "@/components/layout/modals/modal";
 import { useEffect, useState } from "react";
 import { AppInput, AppSelect } from "@/components/form/inputs";
+import { useSelector } from "react-redux";
 
 export const AddProductStock = ({
   product,
@@ -16,6 +17,7 @@ export const AddProductStock = ({
     productionFacilityId: null,
     batchName: null,
   });
+  const facilities = useSelector((state) => state.production.facilities.items);
   useEffect(() => {}, [productStock]);
   const onChange = (e) => {
     setProductStock((prev) => ({
@@ -51,6 +53,15 @@ export const AddProductStock = ({
           onChange={onChange}
           minPossibleBatchMap={minPossibleBatchMap}
           quantity={productStock.quantity}
+        />
+        <AppSelect
+          name="productionFacilityId"
+          label="Proizvodni pogon"
+          onChange={onChange}
+          options={facilities.map((f) => ({
+            value: f._id,
+            label: f.name,
+          }))}
         />
       </div>
     </Modal>

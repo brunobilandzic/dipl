@@ -32,3 +32,23 @@ export const fieldHasPlantedCropVarieties = (field) => {
   console.log("fieldHasPlantedCropVarieties has:", has);
   return has;
 };
+
+export const plantedCount = ({ harvestingPlans, fields, cropVarietyId }) => {
+  const plantedPlCvs = fields.reduce((sum, f) => {
+    for (const ca of f.cultivationAreas) {
+      for (const cu of ca.cultivations) {
+        for (const pcv of cu.plantedCropVarieties) {
+          if (pcv.plantingPlanItem && !pcv.harvestingPlanItem) {
+            const hp = harvestingPlans.find(
+              (hp) => hp._id.toString() === pcv.plantingPlanItem.toString(),
+            );
+            if (hp) {
+              sum++;
+            }
+          }
+        }
+      }
+    }
+  }, 0);
+  const plannedPlCvs = harvestingPlans.reduce((sum, hp) => {}, 0);
+};

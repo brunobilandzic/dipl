@@ -3,62 +3,99 @@
 import Modal from "@/components/layout/modals/modal";
 import { useEffect, useState } from "react";
 import { AppInput, AppSelect } from "@/components/form/inputs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FormModal } from "@/components/layout/modals/form";
 import { checkEmpty } from "@/lib/utils/objects";
+import { submitProductionStock } from "@/lib/utils/production/stocks";
+import { setLoading } from "@/store/loading";
+import handleError from "@/lib/constants/errors/client/handleError";
 
-export const AddProductStock = ({
+const emptyProductionStock = ({ productId }) => ({
+  productId,
+  quantity: 1,
+  comment: "",
+  productionFacilityId: null,
+  harvestingBatchId: null,
+});
+
+export const CreateProductionStock = ({
   product,
   isOpen,
   onCancel,
   minPossibleBatchMap,
 }) => {
-  const [productStock, setProductStock] = useState({
+  const dispatch = useDispatch();
+  const [productionStock, setProductionStock] = useState({
+    productId: product._id,
     quantity: 1,
     comment: "",
     productionFacilityId: null,
-    batchName: null,
+    harvestingBatchId: null,
   });
   const facilities = useSelector((state) => state.production.facilities.items);
-  useEffect(() => {}, [productStock]);
+
   const onChange = (e) => {
-    setProductStock((prev) => ({
+    setProductionStock((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
+  const onSubmit = async () => {
+    try {
+      dispatch(setLoading(true));
+      const newProductionStock = await submitProductionStock({
+        productionStock,
+      });
+      dispatch(setLoading(false));
+      alert(`Zalihe proizvoda uspješno izrađene.`);
+    } catch (error) {
+      dispatch(setLoading(false));
+      handleError({
+        ...error,
+        generalMessage: "Greška prilikom izrade zaliha proizvoda.",
+      });
+    }
+  };
+
+  useEffect(() => {
+    console.log({ productionStock });
+  }, [productionStock]);
+
   return (
     <FormModal
       title={`Dodaj zalihe za ${product.name}`}
       isOpen={isOpen}
       onCancel={onCancel}
       submitDisabled={
-        checkEmpty(productStock, true) ||
+        checkEmpty(productionStock, true) ||
         Object.keys(minPossibleBatchMap).length === 0
       }
+      onSubmit={onSubmit}
     >
       <div>
         <AppInput
           name="comment"
           label="Komentar"
           type="text"
+          value={productionStock.comment}
           onChange={onChange}
         />
         <StockQuantityInput
           name="quantity"
           label="Količina"
           type="number"
+          value={productionStock.quantity}
           onChange={onChange}
         />
-        {productStock.batchName && (
+        {productionStock.harvestingBatchId && (
           <div>
-            <strong>Odabrana žetva:</strong> {productStock.batchName}
+            <strong>Odabrana žetva:</strong> {productionStock.harvestingBatchId}
           </div>
         )}
         <CreateStockChooseBatch
           onChange={onChange}
           minPossibleBatchMap={minPossibleBatchMap}
-          quantity={productStock.quantity}
+          quantity={productionStock.quantity}
         />
         <AppSelect
           name="productionFacilityId"
@@ -105,7 +142,7 @@ const CreateStockChooseBatch = ({
       <div className="select-batch">
         <div>Odaberi žetvu:</div>
         <AppSelect
-          name="batchName"
+          name="harvestingBatchId"
           onChange={onChange}
           options={batchOptions}
         />

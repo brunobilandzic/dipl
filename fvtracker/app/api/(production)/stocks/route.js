@@ -1,6 +1,8 @@
 import { createProductStock, getStocks } from "@/lib/production/stocks";
 import dbConnect from "@/lib/db/mongooseConnect";
 import { PRODUCTION_STOCK } from "@/lib/constants/production";
+import { WAREHOUSE_STOCK } from "@/lib/constants/warehouse";
+import { acceptWarehouseStock } from "@/lib/warehouse/accept";
 
 export async function GET(request) {
   try {
@@ -38,6 +40,16 @@ export async function POST(req) {
     if (stockType == PRODUCTION_STOCK) {
       stock = await createProductionStock({
         stockData: body.productionStockData,
+      });
+      return Response.json(
+        { stock },
+        {
+          headers: { "Content-Type": "application/json" },
+        },
+      );
+    } else if (stockType == WAREHOUSE_STOCK) {
+      stock = await acceptWarehouseStock({
+        stockData: body.warehouseStockData,
       });
       return Response.json(
         { stock },

@@ -1,14 +1,17 @@
 import { ProductionStock } from "@/models/sectors/production/Facility";
 import { WarehouseStock } from "@/models/sectors/storage/Warehouse";
 import { getProductById } from "../product";
-import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
+import {
+  findBatchByName,
+  getHarvestingBatches,
+} from "@/lib/cultivation/harvest/batches";
 import { populateProductIngredients } from "@/lib/production/product/ingredients";
 import { ProductionProcess } from "@/models/sectors/production/Process";
 
 export const createProductStock = async ({
   productId,
   productionFacilityId,
-  harvestingBatchId,
+  batchName,
   quantity,
   comment,
 }) => {
@@ -16,14 +19,7 @@ export const createProductStock = async ({
   const deductResources = async () => {
     // to create product, we have tto use harvesterd
     // find harvesting batch for create product
-    const [harvestingBatch] = await getHarvestingBatches({
-      batchIds: [harvestingBatchId],
-    });
-    if (!harvestingBatch) {
-      throw new Error(
-        `Harvesting batch with id ${harvestingBatchId} not found.`,
-      );
-    }
+    const harvestingBatch = await findBatchByName({ name: batchName });
     await populateProductIngredients({
       products: [product],
     });

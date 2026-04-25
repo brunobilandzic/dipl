@@ -20,6 +20,7 @@ import {
   findMinPossibleBatchMap,
 } from "@/lib/utils/production/resources";
 import { ProductItemStocksInfo } from "./stock/Info";
+import CreateWarehouseStock from "./stock/CreateWarehouseStock";
 
 const ProductList = () => {
   const dispatch = useDispatch();
@@ -85,7 +86,10 @@ const ProductList = () => {
 export default ProductList;
 
 const ProductItem = ({ product, harvestingBatches, router }) => {
-  const [addStockModalOpen, setAddStockModalOpen] = useState(false);
+  const [addProductionStockModalOpen, setAddProductionStockModalOpen] =
+    useState(false);
+  const [addWarehouseStockModalOpen, setAddWarehouseStockModalOpen] =
+    useState(false);
   console.log({ product });
   const dispatch = useDispatch();
   const actionOptions = [
@@ -100,7 +104,14 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
       label: "Izradi zalihe",
       className: "submitButton",
       onClick: () => {
-        setAddStockModalOpen(true);
+        setAddProductionStockModalOpen(true);
+      },
+    },
+    {
+      label: "Pošalji u skladište",
+      className: "secondaryButton",
+      onClick: () => {
+        setAddWarehouseStockModalOpen(true);
       },
     },
     {
@@ -147,12 +158,19 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
           </div>
         </div>
       </ListItem>
-      {addStockModalOpen && (
+      {addProductionStockModalOpen && (
         <CreateProductionStock
-          isOpen={addStockModalOpen}
-          onCancel={() => setAddStockModalOpen(false)}
+          isOpen={addProductionStockModalOpen}
+          onCancel={() => setAddProductionStockModalOpen(false)}
           product={product}
           minPossibleBatchMap={minPossibleBatchMap}
+        />
+      )}
+      {addWarehouseStockModalOpen && (
+        <CreateWarehouseStock
+          isOpen={addWarehouseStockModalOpen}
+          onCancel={() => setAddWarehouseStockModalOpen(false)}
+          product={product}
         />
       )}
     </>

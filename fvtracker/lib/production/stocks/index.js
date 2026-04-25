@@ -78,7 +78,7 @@ export const createProductStock = async ({
       facility: productionFacilityId,
     });
   } else {
-    stock.quantity += quantity;
+    stock.quantity += Number(quantity);
   }
 
   const productionProcess = new ProductionProcess({

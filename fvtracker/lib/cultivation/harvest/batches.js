@@ -19,6 +19,18 @@ export async function getHarvestingBatches({
   }
 }
 
+export async function findBatchByName({ name }) {
+  const harvestingBatch = await HarvestingBatch.findOne({
+    name,
+  });
+
+  if (!harvestingBatch)
+    throw new Error(`Harvesting batch with name ${name} not found.`);
+
+  await populateBatches({ harvestingBatches: harvestingBatch });
+  return harvestingBatch;
+}
+
 async function cmBatches({ batchIds }) {
   const cultivationManager = await fetchSessionSpecificManager({
     managerName: "cultivationManager",
@@ -44,7 +56,7 @@ async function cmBatches({ batchIds }) {
 }
 
 async function pmBatches({ batchIds }) {
-/*   await fetchSessionSpecificManager({
+  /*   await fetchSessionSpecificManager({
     managerName: PRODUCTION_MANAGER,
   }); */
   const filter = batchIds ? { _id: { $in: batchIds } } : {};

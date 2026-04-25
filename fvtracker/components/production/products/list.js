@@ -185,7 +185,9 @@ const IngredientsList = ({ ingredients }) => {
 const IngredientItem = ({ ingredient }) => {
   return (
     <div className="border p-2 rounded">
-      <h3 className="text-lg font-semibold">{ingredient.cropVariety.name}</h3>
+      <h3 className="text-lg font-semibold">
+        {ingredient.cropVariety.cropType.name} {ingredient.cropVariety.name}
+      </h3>
       <p>Količina: {ingredient.quantity}</p>
     </div>
   );

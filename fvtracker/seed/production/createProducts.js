@@ -30,7 +30,7 @@ export const createProducts = async () => {
     });
     const warehouseStock = await createWarehouseStockSeed({
       product,
-      productionFacilityId: productionFacility._id,
+      productionStock,
     });
     productionFacility.stocks.push(productionStock._id);
     productionManager.products.push(product._id);

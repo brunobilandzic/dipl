@@ -10,11 +10,8 @@ export const acceptWarehouseStock = async ({
   productionFacilityId,
   warehouseId,
   comment,
+  productionStock
 }) => {
-  const productionStock = await ProductionStock.findOne({
-    product: product._id,
-    facility: productionFacilityId,
-  });
   if (!productionStock) {
     throw new Error(
       `Production stock not found for product ${product._id} in facility ${productionFacilityId}`,
@@ -25,8 +22,9 @@ export const acceptWarehouseStock = async ({
       `Not enough quantity in production stock. Required: ${quantity}, Available: ${productionStock.quantity}`,
     );
   }
-  productionStock.quantity -= quantity;
+  productionStock.quantity -= Number(quantity);
 
+  
   let warehouseStock = await WarehouseStock.findOne({
     product: product._id,
     warehouse: warehouseId,
@@ -38,12 +36,12 @@ export const acceptWarehouseStock = async ({
       quantity: 0,
     });
   }
-  warehouseStock.quantity += quantity;
+  warehouseStock.quantity += Number(quantity);
 
   const warehouseAcceptanceProcess = new WarehouseAcceptanceProcess({
     warehouseStock: warehouseStock._id,
     productionStock: productionStock._id,
-    quantity,
+    quantity: Number(quantity),
     comment,
   });
 

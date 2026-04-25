@@ -31,6 +31,7 @@ export async function POST(request) {
   try {
     await dbConnect();
     const body = await request.json();
+    console.log({ body });
     const { productId, quantity, batchName, comment, productionFacilityId } =
       body.productionStockData;
     const newProductionStock = await createProductStock({

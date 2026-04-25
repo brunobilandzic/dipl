@@ -15,6 +15,7 @@ const CreateWarehouseStock = ({
     productId: product._id,
     quantity: 1,
     comment: "",
+    productionStock: null,
   });
   const [availableProductionStocks, setAvailableProductionStocks] =
     useState(productionStocks);

@@ -24,16 +24,27 @@ export const CreateProductionStock = ({
   onCancel,
   minPossibleBatchMap,
 }) => {
-  const dispatch = useDispatch();
-  const [productionStock, setProductionStock] = useState({
+  const blankFormData = {
     productId: product._id,
     quantity: 1,
     comment: "",
     productionFacilityId: null,
     harvestingBatchId: null,
-  });
-  const facilities = useSelector((state) => state.production.facilities.items);
+  };
+  const dispatch = useDispatch();
 
+  const facilities = useSelector((state) => state.production.facilities.items);
+  console.log({ minPossibleBatchMap });
+  const testFormData = {
+    productId: product._id,
+    quantity: 10,
+    comment: "Testna zaliha",
+    productionFacilityId: facilities.length > 0 ? facilities[0]._id : null,
+    harvestingBatchId: Object.keys(minPossibleBatchMap).length
+      ? Object.keys(minPossibleBatchMap)[0]
+      : null,
+  };
+  const [productionStock, setProductionStock] = useState(testFormData);
   const onChange = (e) => {
     setProductionStock((prev) => ({
       ...prev,

@@ -29,7 +29,7 @@ export const CreateProductionStock = ({
     quantity: 1,
     comment: "",
     productionFacilityId: null,
-    harvestingBatchId: null,
+    batchName: null,
   };
   const dispatch = useDispatch();
 
@@ -40,7 +40,7 @@ export const CreateProductionStock = ({
     quantity: 1,
     comment: "Testna zaliha",
     productionFacilityId: facilities.length > 0 ? facilities[0]._id : null,
-    harvestingBatchId: Object.keys(minPossibleBatchMap).length
+    batchName: Object.keys(minPossibleBatchMap).length
       ? Object.keys(minPossibleBatchMap)[0]
       : null,
   };
@@ -99,9 +99,9 @@ export const CreateProductionStock = ({
           value={productionStock.quantity}
           onChange={onChange}
         />
-        {productionStock.harvestingBatchId && (
+        {productionStock.batchName && (
           <div>
-            <strong>Odabrana žetva:</strong> {productionStock.harvestingBatchId}
+            <strong>Odabrana žetva:</strong> {productionStock.batchName}
           </div>
         )}
         <CreateStockChooseBatch

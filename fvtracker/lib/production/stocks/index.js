@@ -12,6 +12,7 @@ export const createProductStock = async ({
   productId,
   productionFacilityId,
   batchName,
+  harvestingBatchId,
   quantity,
   comment,
 }) => {
@@ -19,7 +20,14 @@ export const createProductStock = async ({
   const deductResources = async () => {
     // to create product, we have tto use harvesterd
     // find harvesting batch for create product
-    const harvestingBatch = await findBatchByName({ name: batchName });
+    const [harvestingBatch] = await getHarvestingBatches({
+      batchIds: [harvestingBatchId],
+    });
+    if (!harvestingBatch) {
+      throw new Error(
+        `Harvesting batch with id ${harvestingBatchId} not found.`,
+      );
+    }
     await populateProductIngredients({
       products: [product],
     });

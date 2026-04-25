@@ -171,6 +171,7 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
           isOpen={addWarehouseStockModalOpen}
           onCancel={() => setAddWarehouseStockModalOpen(false)}
           product={product}
+          productionStocks={product.productionStocks}
         />
       )}
     </>

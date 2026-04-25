@@ -3,7 +3,13 @@ import { FormModal } from "@/components/layout/modals/form";
 
 import React from "react";
 
-const CreateWarehouseStock = ({ product, isOpen, onCancel }) => {
+const CreateWarehouseStock = ({
+  product,
+  isOpen,
+  onCancel,
+  productionStocks,
+}) => {
+  console.log({ productionStocks });
   const [warehouseStock, setWarehouseStock] = React.useState({
     productId: product._id,
     quantity: 1,

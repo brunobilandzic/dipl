@@ -37,7 +37,7 @@ export const CreateProductionStock = ({
   console.log({ minPossibleBatchMap });
   const testFormData = {
     productId: product._id,
-    quantity: 10,
+    quantity: 1,
     comment: "Testna zaliha",
     productionFacilityId: facilities.length > 0 ? facilities[0]._id : null,
     harvestingBatchId: Object.keys(minPossibleBatchMap).length
@@ -91,6 +91,7 @@ export const CreateProductionStock = ({
           value={productionStock.comment}
           onChange={onChange}
         />
+        {productionStock.quantity}
         <StockQuantityInput
           name="quantity"
           label="Količina"
@@ -116,13 +117,14 @@ export const CreateProductionStock = ({
             value: f._id,
             label: f.name,
           }))}
+          defaultValue={facilities[0]?._id || ""}
         />
       </div>
     </FormModal>
   );
 };
 
-const StockQuantityInput = ({ name, label, quantity, onChange }) => {
+const StockQuantityInput = ({ name, label, test, value, onChange }) => {
   return (
     <AppInput
       name="quantity"
@@ -147,6 +149,10 @@ const CreateStockChooseBatch = ({
         label: `${batchName} - moguća izrada ${possibleStock} proizvoda`,
       };
     });
+  console.log({ minPossibleBatchMap });
+  console.log({ batchOptions });
+  const testBatchChoice = batchOptions[0];
+  console.log({ c: 1, testBatchChoice });
   return (
     <>
       <div>{choosenBatchName}</div>
@@ -156,6 +162,7 @@ const CreateStockChooseBatch = ({
           name="harvestingBatchId"
           onChange={onChange}
           options={batchOptions}
+          defaultValue={testBatchChoice.value}
         />
       </div>
     </>

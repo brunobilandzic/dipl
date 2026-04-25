@@ -11,6 +11,10 @@
     @apply bg-green-600  hover:bg-green-700 outline-green-300;
   }
 
+  .secondaryButton {
+    @apply bg-gray-800  hover:bg-gray-900 outline-gray-500;
+  }
+
   .cancelButton {
     @apply p-2 bg-red-600  rounded-md hover:bg-red-700 outline-red-300;
   }

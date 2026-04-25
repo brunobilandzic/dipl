@@ -27,7 +27,6 @@ export async function findBatchByName({ name }) {
   if (!harvestingBatch)
     throw new Error(`Harvesting batch with name ${name} not found.`);
 
-  await populateBatches({ harvestingBatches: harvestingBatch });
   return harvestingBatch;
 }
 

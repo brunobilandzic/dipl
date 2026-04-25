@@ -25,6 +25,10 @@ export const createProductStock = async ({
 
     if (batchName) {
       harvestingBatch = await findBatchByName({ name: batchName });
+      await harvestingBatch.populate({
+        path: "harvestingBatchItems",
+        select: "cropVariety batchQuantity",
+      });
     } else if (harvestingBatchId) {
       const res = await getHarvestingBatches({
         batchIds: [harvestingBatchId],

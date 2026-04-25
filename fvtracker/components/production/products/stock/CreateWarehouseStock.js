@@ -15,27 +15,42 @@ const CreateWarehouseStock = ({
     quantity: 1,
     comment: "",
   });
-
+  const [availableProductionStocks, setAvailableProductionStocks] =
+    useState(productionStocks);
   const onChange = (e) => {
+    if (e.target.name == "quantity") {
+      adjustStockOptions(e.target.value);
+    }
     setWarehouseStock((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }));
   };
 
+  const adjustStockOptions = (quantity) => {
+    setAvailableProductionStocks((prev) =>
+      prev.filter((ps) => ps.quantity >= quantity),
+    );
+  };
+
   return (
     <FormModal title="Pošalji u skladište" isOpen={isOpen} onCancel={onCancel}>
+      <AppInput
+        placeholder="Količina"
+        label="Količina"
+        name="quantity"
+        value={warehouseStock.quantity}
+        onChange={onChange}
+      />
       <AppSelect
         label="Izaberite proizvodnu zalihu"
         name="productionStockId"
         value={warehouseStock.productionStockId}
         onChange={onChange}
-        options={
-          productionStocks.map((ps) => ({
-            value: ps._id,
-            label: `${ps.name} (${ps.quantity})`
-          }))
-        }
+        options={productionStocks.map((ps) => ({
+          value: ps._id,
+          label: `${ps.name} (${ps.quantity})`,
+        }))}
       />
 
       <AppInput

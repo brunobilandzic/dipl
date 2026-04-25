@@ -28,26 +28,26 @@ export async function GET(request) {
   }
 }
 
-export async function POST(request) {
+export async function POST(req) {
   // route to add or create new stock
   try {
     await dbConnect();
     const stockType = req.nextUrl.searchParams.get("stockType");
     let stock;
+    const body = await req.json();
     if (stockType == PRODUCTION_STOCK) {
       stock = await createProductionStock({
         stockData: body.productionStockData,
       });
+      return Response.json(
+        { stock },
+        {
+          headers: { "Content-Type": "application/json" },
+        },
+      );
     }
-    const body = await request.json();
-    console.log({ body });
 
-    return Response.json(
-      { newProductionStock },
-      {
-        headers: { "Content-Type": "application/json" },
-      },
-    );
+    console.log({ body });
   } catch (error) {
     console.log("Error creating production stock:", error);
 

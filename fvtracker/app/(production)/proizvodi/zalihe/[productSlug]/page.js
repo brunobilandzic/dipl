@@ -1,4 +1,4 @@
-import { ProductStock } from "@/components/production/products/stock/AddProductStock";
+import { ProductStock } from "@/components/production/products/stock/CreateProductionStock";
 import React from "react";
 
 const ProductStockPage = async ({ params }) => {

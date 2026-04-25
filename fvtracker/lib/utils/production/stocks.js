@@ -19,6 +19,8 @@ export const productionStoksFacilities = ({ productionStocks }) => {
 };
 
 export const submitProductionStock = async ({ productionStock }) => {
-  const res = await api.post("/stocks", productionStock);
+  const res = await api.post("/stocks", {
+    productionStockData: productionStock,
+  });
   return res.data.newProductionStock;
 };

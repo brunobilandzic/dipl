@@ -14,7 +14,7 @@ import { List, ListItem } from "@/components/layout/preview/list";
 import { filterProducts, sortProducts } from "@/store/production";
 import { initFilters } from "@/lib/utils/list";
 import { productSortOptions } from "@/components/layout/preview/sort";
-import { AddProductStock } from "./stock/AddProductStock";
+import { CreateProductionStock } from "./stock/CreateProductionStock";
 import {
   getBatchesCVS,
   findMinPossibleBatchMap,
@@ -97,7 +97,7 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
       },
     },
     {
-      label: "Dodaj zalihe",
+      label: "Izradi zalihe",
       className: "submitButton",
       onClick: () => {
         setAddStockModalOpen(true);
@@ -128,7 +128,10 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
             <h2 className="text-xl font-bold">{product.name}</h2>
             <p>{product.description}</p>
           </div>
-          <ProductItemStocksInfo productionStocks={product.productionStocks} warehouseStocks={product.warehouseStocks}/>
+          <ProductItemStocksInfo
+            productionStocks={product.productionStocks}
+            warehouseStocks={product.warehouseStocks}
+          />
         </div>
         <div className="flex justify-between mt-4">
           <div>
@@ -145,7 +148,7 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
         </div>
       </ListItem>
       {addStockModalOpen && (
-        <AddProductStock
+        <CreateProductionStock
           isOpen={addStockModalOpen}
           onCancel={() => setAddStockModalOpen(false)}
           product={product}

@@ -1,5 +1,6 @@
 import { createProductStock, getStocks } from "@/lib/production/stocks";
 import dbConnect from "@/lib/db/mongooseConnect";
+import { PRODUCTION_STOCK } from "@/lib/constants/production";
 
 export async function GET(request) {
   try {
@@ -28,19 +29,18 @@ export async function GET(request) {
 }
 
 export async function POST(request) {
+  // route to add or create new stock
   try {
     await dbConnect();
+    const stockType = req.nextUrl.searchParams.get("stockType");
+    let stock;
+    if (stockType == PRODUCTION_STOCK) {
+      stock = await createProductionStock({
+        stockData: body.productionStockData,
+      });
+    }
     const body = await request.json();
     console.log({ body });
-    const { productId, quantity, batchName, comment, productionFacilityId } =
-      body.productionStockData;
-    const newProductionStock = await createProductStock({
-      productId,
-      batchName,
-      productionFacilityId,
-      quantity,
-      comment,
-    });
 
     return Response.json(
       { newProductionStock },
@@ -59,4 +59,17 @@ export async function POST(request) {
       },
     );
   }
+}
+
+async function createProductionStock({ stockData }) {
+  const { productId, quantity, batchName, comment, productionFacilityId } =
+    stockData;
+  const productionStock = await createProductStock({
+    productId,
+    batchName,
+    productionFacilityId,
+    quantity,
+    comment,
+  });
+  return productionStock;
 }

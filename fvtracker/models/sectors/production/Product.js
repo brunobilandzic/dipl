@@ -3,11 +3,6 @@ import mongoose from "mongoose";
 import { CropVariety } from "../cultivation/Crops";
 import { makeUrlFriendly } from "@/lib/utils/strings";
 import { Base } from "@/models/Base";
-import { ProductionProcess } from "./Process";
-import { getHarvestingBatches } from "@/lib/cultivation/harvest/batches";
-import { getProductionProcessInfo } from "@/seed/data/production/production";
-import { ProductionFacility, ProductionStock } from "./Facility";
-import { Machine } from "./Machine";
 import { ProductionManager } from "@/models/user/managers/ProductionManager";
 
 const productSchema = new Schema({

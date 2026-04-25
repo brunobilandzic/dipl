@@ -4,6 +4,7 @@ import { CropVariety } from "../cultivation/Crops";
 import { makeUrlFriendly } from "@/lib/utils/strings";
 import { Base } from "@/models/Base";
 import { ProductionManager } from "@/models/user/managers/ProductionManager";
+import { ProductionStock } from "./Facility";
 
 const productSchema = new Schema({
   productionManager: {

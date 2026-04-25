@@ -1,4 +1,5 @@
 import api from "@/lib/api";
+import { PRODUCTION_STOCK } from "@/lib/constants/production";
 
 export const productsAllProductionStocksSum = ({ productionStocks }) => {
   return productionStocks.reduce((acc, stock) => {
@@ -19,8 +20,16 @@ export const productionStoksFacilities = ({ productionStocks }) => {
 };
 
 export const submitProductionStock = async ({ productionStock }) => {
-  const res = await api.post("/stocks", {
-    productionStockData: productionStock,
-  });
+  const res = await api.post(
+    "/stocks",
+    {
+      productionStockData: productionStock,
+    },
+    {
+      params: {
+        stockType: PRODUCTION_STOCK,
+      },
+    },
+  );
   return res.data.newProductionStock;
 };

@@ -35,7 +35,12 @@ const CreateWarehouseStock = ({
   };
 
   return (
-    <FormModal title="Pošalji u skladište" isOpen={isOpen} onCancel={onCancel}>
+    <FormModal
+      title="Pošalji u skladište"
+      isOpen={isOpen}
+      onCancel={onCancel}
+      submitDisabled={checkEmpty(warehouseStock, true)}
+    >
       <AppInput
         placeholder="Količina"
         label="Količina"

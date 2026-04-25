@@ -10,7 +10,6 @@ const CreateWarehouseStock = ({
   onCancel,
   productionStocks,
 }) => {
-  console.log({ productionStocks });
   const [warehouseStock, setWarehouseStock] = useState({
     productId: product._id,
     quantity: 1,
@@ -30,8 +29,8 @@ const CreateWarehouseStock = ({
   };
 
   const adjustStockOptions = (quantity) => {
-    setAvailableProductionStocks((prev) =>
-      prev.filter((ps) => ps.quantity >= quantity),
+    setAvailableProductionStocks(
+      productionStocks.filter((ps) => ps.quantity >= quantity),
     );
   };
 
@@ -46,7 +45,7 @@ const CreateWarehouseStock = ({
       />
       <AppSelect
         label="Izaberite proizvodnu zalihu"
-        name="productionStockId"
+        name="productionStock"
         value={warehouseStock.productionStockId}
         onChange={onChange}
         options={availableProductionStocks.map((ps) => ({

@@ -14,6 +14,7 @@ export const ProductionResources = ({}) => {
     (state) => state.production.harvestingBatches.items,
   );
   const { batchesResources } = cropVarietyBatchResources({ harvestingBatches });
+  console.log({ batchesResources });
   const dispatch = useDispatch();
   useEffect(() => {
     if (!harvestingBatches) {
@@ -49,7 +50,6 @@ const ProductionResource = ({ batchResources }) => {
 };
 
 const batchResourceHeaderItems = {
-  cropVarietyName: "Sorta",
-  cropTypeName: "Vrsta",
+  cropVariety: "Sorta",
   batchQuantity: "Količina",
 };

@@ -1,9 +1,14 @@
 import { AppInput, AppSelect } from "@/components/form/inputs";
 import { FormModal } from "@/components/layout/modals/form";
+import handleError from "@/lib/constants/errors/client/handleError";
 import { checkEmpty } from "@/lib/utils/objects";
+import fillProductionRedux from "@/lib/utils/production";
+import { submitWarehouseStock } from "@/lib/utils/storage/warehouse";
+import { setLoading } from "@/store/loading";
 import { useEffect, useState } from "react";
 
 import React from "react";
+import { useDispatch } from "react-redux";
 
 const CreateWarehouseStock = ({
   product,
@@ -11,6 +16,7 @@ const CreateWarehouseStock = ({
   onCancel,
   productionStocks,
 }) => {
+  const dispatch = useDispatch();
   const [warehouseStock, setWarehouseStock] = useState({
     productId: product._id,
     quantity: 1,
@@ -35,12 +41,31 @@ const CreateWarehouseStock = ({
     );
   };
 
+  const onSubmit = async () => {
+    try {
+      dispatch(setLoading(true));
+      const newWareHouseStock = await submitWarehouseStock({
+        warehouseStockData: warehouseStock,
+      });
+      fillProductionRedux({ dispatch });
+      dispatch(setLoading(false));
+      alert(`Zalihe proizvoda uspješno izrađene.`);
+    } catch (error) {
+      dispatch(setLoading(false));
+      handleError({
+        ...error,
+        generalMessage: "Greška prilikom dodavanja zaliha u skladište.",
+      });
+    }
+  };
+
   return (
     <FormModal
       title="Pošalji u skladište"
       isOpen={isOpen}
       onCancel={onCancel}
       submitDisabled={checkEmpty(warehouseStock, true)}
+      onSubmit={onSubmit}
     >
       <AppInput
         placeholder="Količina"

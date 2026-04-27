@@ -1,6 +1,7 @@
 "use client";
 
 import { LoadingFullScreen } from "@/components/layout/loading";
+import { List, ListItem } from "@/components/layout/preview/list";
 import { setSelectedFacility } from "@/store/production";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,17 +21,36 @@ function Facility({ slug }) {
 
   return (
     <>
-      <div>Facility {facility?.name}</div>
       <div>
-        <FacilityStocks stocks={facility?.stocks} />
+        <ProductionStocks stocks={facility?.stocks} />
       </div>
     </>
   );
 }
 
-const FacilityStocks = ({ stocks }) => {
+const ProductionStocks = ({ stocks }) => {
   console.log("Facility stocks:", stocks);
-  return <div>FacilityStocks {stocks?.length}</div>;
+  return (
+    <div>
+      <List title={"Proizvodene zalihe"}>
+        {stocks?.map((stock) => (
+          <ProductStock key={stock._id} stock={stock} />
+        ))}
+      </List>
+    </div>
+  );
+};
+
+const ProductStock = ({ stock }) => {
+  return (
+    <>
+      <ListItem
+        title={stock?.product?.name}
+        subtitle={`Količina: ${stock?.quantity}`}
+      >
+      </ListItem>
+    </>
+  );
 };
 
 export default Facility;

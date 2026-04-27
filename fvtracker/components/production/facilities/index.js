@@ -1,3 +1,5 @@
+"use client";
+
 import { LoadingFullScreen } from "@/components/layout/loading";
 import React from "react";
 import { useSelector } from "react-redux";

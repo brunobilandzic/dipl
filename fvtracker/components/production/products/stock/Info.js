@@ -11,7 +11,7 @@ export const ProductItemStocksInfo = ({
   const totalWarehouseQuantity = totalWarehouseStockQuantity({
     warehouseStocks,
   });
-  console.log({ totalProductionQuantity });
+  
   return (
     <>
       {" "}

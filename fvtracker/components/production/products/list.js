@@ -90,7 +90,6 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
     useState(false);
   const [addWarehouseStockModalOpen, setAddWarehouseStockModalOpen] =
     useState(false);
-  console.log({ product });
   const dispatch = useDispatch();
   const actionOptions = [
     {

@@ -31,6 +31,7 @@ export async function GET(request) {
 }
 
 export async function POST(req) {
+  console.log("Received request to create stock");  
   // route to add or create new stock
   try {
     await dbConnect();

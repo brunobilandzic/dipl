@@ -9,7 +9,7 @@ import {
   submitFacilityForm,
   deleteFacilityClient,
 } from "@/lib/utils/production/facilities";
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { LoadingFullScreen } from "@/components/layout/loading";
@@ -17,6 +17,7 @@ import {
   refreshFacilities,
   sortFacilities,
   filterFacilities,
+  unselectFacility,
 } from "@/store/production";
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { initFilters } from "@/lib/utils/list";
@@ -34,6 +35,10 @@ const FacilitiesList = () => {
   const [form, setForm] = useState(emptyForm);
   const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
   const [filters, setFilters] = useState(initFilters("facilities"));
+
+  useEffect(() => {
+    dispatch(unselectFacility());
+  }, []);
 
   useEffect(() => {
     if (!facilities) return;

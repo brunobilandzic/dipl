@@ -3,6 +3,8 @@ import dbConnect from "@/lib/db/mongooseConnect";
 import { PRODUCTION_STOCK } from "@/lib/constants/production";
 import { WAREHOUSE_STOCK } from "@/lib/constants/warehouse";
 import { acceptWarehouseStock } from "@/lib/warehouse/accept";
+import { Product } from "@/models/sectors/production/Product";
+import { ProductionStock } from "@/models/sectors/production/Facility";
 
 export async function GET(request) {
   try {
@@ -31,7 +33,7 @@ export async function GET(request) {
 }
 
 export async function POST(req) {
-  console.log("Received request to create stock");  
+  console.log("Received request to create stock");
   // route to add or create new stock
   try {
     await dbConnect();
@@ -49,8 +51,13 @@ export async function POST(req) {
         },
       );
     } else if (stockType == WAREHOUSE_STOCK) {
+      const { warehouseStockData } = body;
+      const product = await Product.findById(warehouseStockData.productId);
+      const productionStock = await ProductionStock.findById(
+        warehouseStockData.productionStock,
+      );
       stock = await acceptWarehouseStock({
-        stockData: body.warehouseStockData,
+        product,
       });
       return Response.json(
         { stock },
@@ -62,7 +69,7 @@ export async function POST(req) {
 
     console.log({ body });
   } catch (error) {
-    console.log("Error creating production stock:", error);
+    console.log("Error creating stock:", error);
 
     return Response.json(
       { error: error.message },

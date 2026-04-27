@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { List, ListItem } from "@/components/layout/preview/list";
 import { FormModal, UpdateModal } from "@/components/layout/modals/form";
 import { AppInput, AppTextArea } from "@/components/form/inputs";
@@ -144,10 +145,15 @@ const FacilityItem = ({ facility }) => {
   return (
     <>
       <ListItem actionOptions={actionOptions}>
-        <div className="flex justify-between">
-          <FacilityDetails facility={facility} />
-          <FacilityStats stocks={facility.stocks} />
-        </div>
+        <Link
+          href={`/upravljanje-postrojenjima/${facility._id}`}
+          className="w-full"
+        >
+          <div className="flex justify-between">
+            <FacilityDetails facility={facility} />
+            <FacilityStats stocks={facility.stocks} />
+          </div>
+        </Link>
       </ListItem>
 
       {editOpen && (

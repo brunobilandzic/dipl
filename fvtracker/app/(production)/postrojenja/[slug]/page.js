@@ -1,7 +1,8 @@
 import React from "react";
 
-const ProductionFacilityPage = () => {
-  return <div>ProductionFacilityPage</div>;
-};
+async function ProductionFacilityPage({ params }) {
+  const { slug } = await params;
+  return <div>ProductionFacilityPage {slug}</div>;
+}
 
 export default ProductionFacilityPage;

@@ -1,16 +1,21 @@
 "use client";
 
-import { LoadingFullScreen } from "@/components/layout/loading";
 import { setSelectedFacility } from "@/store/production";
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function Facility({ slug }) {
   const dispatch = useDispatch();
   const facility = useSelector((state) => state.production.facilities.selected);
-  if (!facility) {
-    dispatch(setSelectedFacility(slug));
-  }
+
+  useEffect(() => {
+    if (!facility) {
+      dispatch(setSelectedFacility(slug));
+    }
+  }, [slug, dispatch, facility]);
+
+  console.log("Selected facility:", facility);
+
   return (
     <>
       <div>Facility {facility?.name}</div>

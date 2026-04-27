@@ -98,8 +98,13 @@ const productsSlice = createSlice({
       });
     },
     setSelectedFacility: (state, action) => {
-      if(!state.facilities.items) return;
-      state.facilities.selected = state.facilities.items.find((f) => f.slug === action.payload);
+      if (!state.facilities.items) return;
+      state.facilities.selected = state.facilities.items.find(
+        (f) => f.slug === action.payload,
+      );
+    },
+    unselectFacility: (state) => {
+      state.facilities.selected = null;
     },
   },
   extraReducers: (builder) => {
@@ -189,6 +194,7 @@ export const {
   sortFacilities,
   filterFacilities,
   setSelectedFacility,
+  unselectFacility,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

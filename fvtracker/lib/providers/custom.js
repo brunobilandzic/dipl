@@ -63,5 +63,9 @@ export const ErrorProvider = ({ children }) => {
 };
 
 const loadingSelector = (state) => {
-  return state.loading.isLoading || state.production.loading;
+  return (
+    state.loading.isLoading ||
+    state.production.loading ||
+    state.warehouses.isLoading
+  );
 };

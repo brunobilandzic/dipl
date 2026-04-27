@@ -78,10 +78,7 @@ export default {
     },
     {
       label: "postrojenja",
-      submenu: [
-        { label: "procesi", path: "/procesi" },
-        { label: "strojevi", path: "/strojevi" },
-      ],
+      path: "/postrojenja",
     },
     {
       label: "radnici",

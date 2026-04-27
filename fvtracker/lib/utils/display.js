@@ -31,3 +31,8 @@ export const showDate = (date) => {
   if (!date) return "N/A";
   return format(new Date(date), "PPP", { locale: hr });
 };
+
+export const showDateTime = (date) => {
+  if (!date) return "N/A";
+  return format(new Date(date), "PPP p", { locale: hr });
+};

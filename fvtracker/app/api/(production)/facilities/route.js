@@ -19,11 +19,6 @@ export const GET = async (req) => {
     if (unauthorized) {
       return Response.json({ unauthorized: true }, { status: 403 });
     }
-    const slug = req.nextUrl.searchParams.get("slug");
-    if (slug) {
-      const facility = await getFacilities({ slug });
-      return Response.json({ facility }, { status: 200 });
-    }
     const facilities = await getFacilities({});
     return Response.json({ facilities }, { status: 200 });
   } catch (error) {

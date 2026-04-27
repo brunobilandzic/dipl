@@ -1,9 +1,6 @@
 import { ProductionFacility } from "@/models/sectors/production/Facility";
 
-export const getFacilities = async ({ slug }) => {
-  if (slug) {
-    return populateFacilities(ProductionFacility.findOne({ slug }));
-  }
+export const getFacilities = async () => {
   return populateFacilities(ProductionFacility.find({}));
 };
 

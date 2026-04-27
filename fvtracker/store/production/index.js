@@ -25,6 +25,7 @@ const initialState = {
   facilities: {
     items: null,
     filteredItems: null,
+    selected: null,
   },
   isLoading: false,
 };
@@ -95,6 +96,9 @@ const productsSlice = createSlice({
         _items: state.facilities.items,
         filters: action.payload,
       });
+    },
+    setSelectedFacility: (state, action) => {
+      state.facilities.selected = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -182,7 +186,8 @@ export const {
   setMachines,
   setFacilities,
   sortFacilities,
-  filterFacilities
+  filterFacilities,
+  setSelectedFacility,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

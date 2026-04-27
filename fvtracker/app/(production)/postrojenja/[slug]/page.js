@@ -1,8 +1,13 @@
 import React from "react";
+import Facility from "@/components/production/facilities";
 
 async function ProductionFacilityPage({ params }) {
   const { slug } = await params;
-  return <div>ProductionFacilityPage {slug}</div>;
+  return (
+    <div>
+      <Facility slug={slug} />
+    </div>
+  );
 }
 
 export default ProductionFacilityPage;

@@ -8,6 +8,7 @@ import { getFacilities } from "@/lib/production/facilities/get";
 import { createFacility } from "@/lib/production/facilities/create";
 import { updateFacility } from "@/lib/production/facilities/update";
 import { deleteFacilities } from "@/lib/production/facilities/delete";
+import { makeUrlFriendly } from "@/lib/utils/strings";
 
 export const GET = async (req) => {
   try {
@@ -66,7 +67,10 @@ export const PUT = async (req) => {
     }
     const id = req.nextUrl.searchParams.get("id");
     const body = await req.json();
-    const facility = await updateFacility({ facilityId: id, data: body });
+    const facility = await updateFacility({
+      facilityId: id,
+      data: { ...body, slug: makeUrlFriendly(body.name) },
+    });
     return Response.json({ facility }, { status: 200 });
   } catch (error) {
     console.error("Greška pri ažuriranju postrojenja:", error);

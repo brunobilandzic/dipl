@@ -12,7 +12,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { LoadingFullScreen } from "@/components/layout/loading";
-import { refreshFacilities } from "@/store/production";
+import { refreshFacilities, sortFacilities } from "@/store/production";
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { initFilters } from "@/lib/utils/list";
 import { filterFields, sortFields } from "@/store/cultivation";
@@ -38,7 +38,7 @@ const FacilitiesList = () => {
 
   useEffect(() => {
     if (!facilities) return;
-    dispatch(sortFields(sortBy));
+    dispatch(sortFacilities(sortBy));
   }, [sortBy]);
 
   useEffect(() => {

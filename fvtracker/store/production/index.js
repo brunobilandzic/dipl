@@ -84,6 +84,12 @@ const productsSlice = createSlice({
         sortBy: SORT_INIT_VALUE,
       });
     },
+    sortFacilities: (state, action) => {
+      state.facilities.filteredItems = sortItems({
+        items: state.facilities.items,
+        sortBy: action.payload,
+      });
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -169,6 +175,7 @@ export const {
   filterProducts,
   setMachines,
   setFacilities,
+  sortFacilities,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

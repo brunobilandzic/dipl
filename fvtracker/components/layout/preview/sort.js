@@ -27,6 +27,8 @@ const defaultSortOptions = [
 
 export const fieldSortOptions = [...defaultSortOptions];
 
+export const facilitySortOptions = [...defaultSortOptions];
+
 export const productSortOptions = [
   ...defaultSortOptions,
   { value: "priceAsc", label: "Cijena rastuće" },

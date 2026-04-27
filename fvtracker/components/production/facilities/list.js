@@ -16,6 +16,7 @@ import { refreshFacilities } from "@/store/production";
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { initFilters } from "@/lib/utils/list";
 import { filterFields, sortFields } from "@/store/cultivation";
+import { facilitySortOptions } from "@/components/layout/preview/sort";
 
 const emptyForm = { name: "", description: "" };
 
@@ -72,7 +73,7 @@ const FacilitiesList = () => {
         initialFilters={initFilters("facilities")}
         sortBy={sortBy}
         setSortBy={setSortBy}
-        sortOptions={fieldSortOptions}
+        sortOptions={facilitySortOptions}
       >
         {facilities.map((facility) => (
           <FacilityItem key={facility._id} facility={facility} />

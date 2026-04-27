@@ -5,7 +5,6 @@ import { FormModal, UpdateModal } from "@/components/layout/modals/form";
 import { AppInput, AppTextArea } from "@/components/form/inputs";
 import { showDate } from "@/lib/utils/display";
 import {
-  refreshFacilitiesClient,
   submitFacilityForm,
   deleteFacilityClient,
 } from "@/lib/utils/production/facilities";

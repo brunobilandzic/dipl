@@ -6,13 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 
 function Facility({ slug }) {
   const dispatch = useDispatch();
-  const facility = useSelector((state) => state.production.facilities.selected);
+  const facilities = useSelector((state) => state.production.facilities);
 
-  useEffect(() => {
-    if (!facility) {
-      dispatch(setSelectedFacility(slug));
-    }
-  }, [slug, dispatch, facility]);
+  const facility = facilities?.find((f) => f.slug === slug);
 
   console.log("Selected facility:", facility);
 

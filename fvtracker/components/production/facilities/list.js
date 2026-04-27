@@ -13,6 +13,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { LoadingFullScreen } from "@/components/layout/loading";
 import { refreshFacilities } from "@/store/production";
+import { SORT_INIT_VALUE } from "@/lib/constants/others";
+import { initFilters } from "@/lib/utils/list";
+import { filterFields, sortFields } from "@/store/cultivation";
 
 const emptyForm = { name: "", description: "" };
 
@@ -24,6 +27,18 @@ const FacilitiesList = () => {
   );
   const [createOpen, setCreateOpen] = useState(false);
   const [form, setForm] = useState(emptyForm);
+  const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
+  const [filters, setFilters] = useState(initFilters("fields"));
+
+  useEffect(() => {
+    if (!facilities) return;
+    dispatch(filterFields(filters));
+  }, [filters]);
+
+  useEffect(() => {
+    if (!facilities) return;
+    dispatch(sortFields(sortBy));
+  }, [sortBy]);
 
   useEffect(() => {
     if (facilities === null) {

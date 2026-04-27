@@ -77,6 +77,13 @@ const productsSlice = createSlice({
         sortBy: SORT_INIT_VALUE,
       });
     },
+    setFacilities: (state, action) => {
+      state.facilities.items = action.payload;
+      state.facilities.filteredItems = sortItems({
+        items: action.payload,
+        sortBy: SORT_INIT_VALUE,
+      });
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -153,7 +160,7 @@ export const refreshFacilities = createAsyncThunk(
 );
 
 export const {
-  setProducts /* 
+  setProducts /*
   addProduct,
   removeProduct,
   updateProduct, */,
@@ -161,6 +168,7 @@ export const {
   sortProducts,
   filterProducts,
   setMachines,
+  setFacilities,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

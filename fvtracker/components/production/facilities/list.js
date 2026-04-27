@@ -28,7 +28,7 @@ const FacilitiesList = () => {
   const [createOpen, setCreateOpen] = useState(false);
   const [form, setForm] = useState(emptyForm);
   const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
-  const [filters, setFilters] = useState(initFilters("fields"));
+  const [filters, setFilters] = useState(initFilters("facilities"));
 
   useEffect(() => {
     if (!facilities) return;
@@ -67,6 +67,12 @@ const FacilitiesList = () => {
           setCreateOpen(true);
         }}
         addLabel="Dodaj postrojenje"
+        filters={filters}
+        setFilters={setFilters}
+        initialFilters={initFilters("fields")}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+        sortOptions={fieldSortOptions}
       >
         {facilities.map((facility) => (
           <FacilityItem key={facility._id} facility={facility} />

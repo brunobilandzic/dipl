@@ -31,6 +31,14 @@ export const initFilters = (listType) => {
           value: "",
         },
       ];
+    case "facilities":
+      return [
+        {
+          type: "nameSearch",
+          placeholder: "Pretraži postrojenja...",
+          value: "",
+        },
+      ];
   }
 };
 

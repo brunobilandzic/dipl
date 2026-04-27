@@ -22,7 +22,10 @@ function Facility({ slug }) {
   return (
     <>
       <div>
-        <ProductionStocks stocks={facility?.stocks} facilityName={facility?.name} />
+        <ProductionStocks
+          stocks={facility?.stocks}
+          facilityName={facility?.name}
+        />
       </div>
     </>
   );

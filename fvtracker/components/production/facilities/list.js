@@ -90,7 +90,12 @@ const FacilityItem = ({ facility }) => {
   };
 
   const handleEdit = async () => {
-    await submitFacilityForm({ form, facilityId: facility._id, dispatch, router });
+    await submitFacilityForm({
+      form,
+      facilityId: facility._id,
+      dispatch,
+      router,
+    });
     setEditOpen(false);
   };
 

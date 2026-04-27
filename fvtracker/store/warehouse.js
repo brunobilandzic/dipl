@@ -8,6 +8,11 @@ const initialState = {
   isLoading: false,
 };
 
+const warehousesSlice = createSlice({
+  name: "warehouses",
+  initialState,
+});
+
 export const fetchWarehouses = createAsyncThunk(
   "warehouses/fetchWarehouses",
   async (_, { dispatch }) => {
@@ -17,3 +22,5 @@ export const fetchWarehouses = createAsyncThunk(
     return res.data.warehouses;
   },
 );
+
+export default warehousesSlice.reducer;

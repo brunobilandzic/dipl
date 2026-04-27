@@ -1,12 +1,7 @@
 import { ProductionFacility } from "@/models/sectors/production/Facility";
 
 export const getFacilities = async () => {
-  return populateFacilities(ProductionFacility.find({}));
-};
-
-export const populateFacilities = async (facilities) => {
-  console.log(typeof facilities, Array.isArray(facilities));
-  await facilities.populate([
+  return ProductionFacility.find({}).populate([
     {
       path: "stocks",
       populate: [

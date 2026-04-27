@@ -98,7 +98,8 @@ const productsSlice = createSlice({
       });
     },
     setSelectedFacility: (state, action) => {
-      state.facilities.selected = action.payload;
+      if(!state.facilities.items) return;
+      state.facilities.selected = state.facilities.items.find((f) => f.slug === action.payload.slug);
     },
   },
   extraReducers: (builder) => {

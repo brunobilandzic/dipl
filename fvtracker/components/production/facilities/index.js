@@ -22,17 +22,17 @@ function Facility({ slug }) {
   return (
     <>
       <div>
-        <ProductionStocks stocks={facility?.stocks} />
+        <ProductionStocks stocks={facility?.stocks} facilityName={facility?.name} />
       </div>
     </>
   );
 }
 
-const ProductionStocks = ({ stocks }) => {
+const ProductionStocks = ({ stocks, facilityName }) => {
   console.log("Facility stocks:", stocks);
   return (
     <div>
-      <List title={"Proizvodene zalihe"}>
+      <List title={facilityName}>
         {stocks?.map((stock) => (
           <ProductStock key={stock._id} stock={stock} />
         ))}
@@ -47,8 +47,7 @@ const ProductStock = ({ stock }) => {
       <ListItem
         title={stock?.product?.name}
         subtitle={`Količina: ${stock?.quantity}`}
-      >
-      </ListItem>
+      ></ListItem>
     </>
   );
 };

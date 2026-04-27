@@ -7,6 +7,8 @@ import dbConnect from "@/lib/db/mongooseConnect";
 import { getFacilities } from "@/lib/production/facilities/get";
 import { createFacility } from "@/lib/production/facilities/create";
 import { updateFacility } from "@/lib/production/facilities/update";
+import { deleteFacilities } from "@/lib/production/facilities/delete";
+
 export const GET = async (req) => {
   try {
     await dbConnect();
@@ -70,3 +72,24 @@ export const PUT = async (req) => {
   }
 };
 
+export const DELETE = async (req) => {
+  try {
+    await dbConnect();
+    const { unauthorized } = await fetchManager({
+      managerNames: [PRODUCTION_MANAGER],
+    });
+    if (unauthorized) {
+      return Response.json({ unauthorized: true }, { status: 403 });
+    }
+    const idsString = req.nextUrl.searchParams.get("ids");
+    const facilityIds = idsString.split(",");
+    await deleteFacilities({ facilityIds });
+    return Response.json({ success: true }, { status: 200 });
+  } catch (error) {
+    console.error("Greška pri brisanju postrojenja:", error);
+    return Response.json(
+      { error: "Greška pri brisanju postrojenja" },
+      { status: 500 },
+    );
+  }
+};

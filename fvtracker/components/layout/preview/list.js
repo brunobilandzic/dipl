@@ -56,10 +56,10 @@ export function List({
           {onCreateItem && (
             <CreateListItemButton onCreate={onCreateItem} label={addLabel} />
           )}
+          {customButton && customButton}
           {onDeleteList && (
             <DeleteListButton onDelete={onDeleteList} label={deleteLabel} />
           )}
-          {customButton && customButton}
         </div>
       </div>
       <div className="flex flex-col gap-4 justify-start">

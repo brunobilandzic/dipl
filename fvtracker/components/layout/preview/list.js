@@ -20,6 +20,7 @@ export function List({
   initialFilters,
   addLabel,
   deleteLabel,
+  customButton
 }) {
   const [sortOpen, setSortOpen] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);

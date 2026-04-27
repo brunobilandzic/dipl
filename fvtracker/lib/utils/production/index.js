@@ -39,6 +39,7 @@ const dispatchPayloads = ({ manager, dispatch, batches }) => {
   // dispatch(refreshProductsStocks.fulfilled(mapProductsStocks({ manager })));
   dispatch(refreshHarvestingBatches.fulfilled(batches));
   dispatch(refreshFacilities());
+
 };
 
 /* const mapProductsStocks = ({ manager }) => {

@@ -5,3 +5,9 @@ export const createWarehouse = async ({ warehouseData }) => {
   await warehouse.save();
   return warehouse;
 };
+
+
+async function refreshWarehouses({ dispatch }) {
+  try {
+    const res = await api.get("/warehouses");
+    

@@ -1,5 +1,13 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+const initialState = {
+  warehouses: {
+    items: null,
+    filteredItems: null,
+  },
+  isLoading: false,
+};
+
 export const fetchWarehouses = createAsyncThunk(
   "warehouses/fetchWarehouses",
   async (_, { dispatch }) => {

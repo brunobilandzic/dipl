@@ -136,7 +136,7 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
       <ListItem actionOptions={actionOptions}>
         <div className="flex justify-between mt-4">
           <div>
-            <h2 className="text-xl font-bold">{product.name}</h2>
+            <h2 className="listitemheader">{product.name}</h2>
             <p>{product.description}</p>
           </div>
           <ProductItemStocksInfo

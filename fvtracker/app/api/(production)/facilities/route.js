@@ -23,7 +23,7 @@ export const GET = async (req) => {
       const facility = await getFacilities({ slug });
       return Response.json({ facility }, { status: 200 });
     }
-    const facilities = await getFacilities();
+    const facilities = await getFacilities({});
     return Response.json({ facilities }, { status: 200 });
   } catch (error) {
     console.error("Greška pri dohvaćanju postrojenja:", error);

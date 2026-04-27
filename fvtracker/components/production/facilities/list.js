@@ -12,10 +12,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { LoadingFullScreen } from "@/components/layout/loading";
-import { refreshFacilities, sortFacilities } from "@/store/production";
+import {
+  refreshFacilities,
+  sortFacilities,
+  filterFacilities,
+} from "@/store/production";
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { initFilters } from "@/lib/utils/list";
-import { filterFields, sortFields } from "@/store/cultivation";
 import { facilitySortOptions } from "@/components/layout/preview/sort";
 
 const emptyForm = { name: "", description: "" };
@@ -33,7 +36,7 @@ const FacilitiesList = () => {
 
   useEffect(() => {
     if (!facilities) return;
-    dispatch(filterFields(filters));
+    dispatch(filterFacilities(filters));
   }, [filters]);
 
   useEffect(() => {

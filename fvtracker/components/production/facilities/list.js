@@ -69,7 +69,7 @@ const FacilitiesList = () => {
         addLabel="Dodaj postrojenje"
         filters={filters}
         setFilters={setFilters}
-        initialFilters={initFilters("fields")}
+        initialFilters={initFilters("facilities")}
         sortBy={sortBy}
         setSortBy={setSortBy}
         sortOptions={fieldSortOptions}

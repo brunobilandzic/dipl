@@ -139,6 +139,7 @@ const productsSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(refreshFacilities.fulfilled, (state, action) => {
+        console.log("Facilities fetched successfully:", action.payload);
         state.facilities.items = action.payload;
         state.facilities.filteredItems = sortItems({
           items: action.payload,

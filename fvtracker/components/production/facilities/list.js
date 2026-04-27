@@ -145,10 +145,7 @@ const FacilityItem = ({ facility }) => {
   return (
     <>
       <ListItem actionOptions={actionOptions}>
-        <Link
-          href={`/upravljanje-postrojenjima/${facility._id}`}
-          className="w-full"
-        >
+        <Link href={`/postrojenja/${facility._id}`} className="w-full">
           <div className="flex justify-between">
             <FacilityDetails facility={facility} />
             <FacilityStats stocks={facility.stocks} />

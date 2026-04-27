@@ -59,6 +59,7 @@ export function List({
           {onDeleteList && (
             <DeleteListButton onDelete={onDeleteList} label={deleteLabel} />
           )}
+          {customButton && customButton}
         </div>
       </div>
       <div className="flex flex-col gap-4 justify-start">

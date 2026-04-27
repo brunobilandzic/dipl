@@ -44,10 +44,12 @@ const ProductionStocks = ({ stocks, facilityName }) => {
 const ProductStock = ({ stock }) => {
   return (
     <>
-      <ListItem
-        title={stock?.product?.name}
-        subtitle={`Količina: ${stock?.quantity}`}
-      ></ListItem>
+      <ListItem>
+        <div className="flex justify-between items-center">
+          <div className="listitemheader">{stock?.product?.name}</div>
+          <div className="text-3xl font-bold">{stock?.quantity}</div>
+        </div>
+      </ListItem>
     </>
   );
 };

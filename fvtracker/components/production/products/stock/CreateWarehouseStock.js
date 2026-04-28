@@ -29,11 +29,6 @@ const CreateWarehouseStock = ({
   });
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log("PARENT MOUNTED");
-    return () => console.log("PARENT UNMOUNTED");
-  }, []);
-
   console.log({ warehouses });
   const [warehouseStock, setWarehouseStock] = useState(createInitialFormData());
 

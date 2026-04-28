@@ -20,6 +20,13 @@ const CreateWarehouseStock = ({
   warehouses,
   clickedStock,
 }) => {
+  const createInitialFormData = () => ({
+    productId: product._id,
+    quantity: 1,
+    comment: `test dodavanja na skladište ${showDateTime(new Date())}`,
+    productionStockId: productionStocks[0]._id,
+    warehouseId: warehouses[0]?._id,
+  })
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,13 +35,8 @@ const CreateWarehouseStock = ({
   }, []);
 
   console.log({ warehouses });
-  const [warehouseStock, setWarehouseStock] = useState({
-    productId: product._id,
-    quantity: 1,
-    comment: `test dodavanja na skladište ${showDateTime(new Date())}`,
-    productionStockId: productionStocks[0]._id,
-    warehouseId: warehouses[0]?._id,
-  });
+  const [warehouseStock, setWarehouseStock] = useState(createInitialFormData());
+
   const [availableProductionStocks, setAvailableProductionStocks] =
     useState(productionStocks);
   const onChange = (e) => {
@@ -89,25 +91,25 @@ const CreateWarehouseStock = ({
       <AppSelect
         label="Izaberite skladište"
         name="warehouse"
-        value={warehouseStock.warehouse}
+        value={warehouseStock.warehouseId}
         onChange={onChange}
         options={warehouses.map((w) => ({
           value: w._id,
           label: w.name,
         }))}
-        defaultValue={warehouses[0]._id}
+        defaultValue={warehouses[0]?._id}
       />
       {!clickedStock && (
         <AppSelect
           label="Izaberite proizvodnu zalihu"
-          name="productionStock"
-          value={warehouseStock.productionStock}
+          name="productionStockId"
+          value={warehouseStock.productionStockId}
           onChange={onChange}
           options={availableProductionStocks.map((ps) => ({
             value: ps._id,
             label: `${ps.facility.name} (${ps.quantity})`,
           }))}
-          defaultValue={productionStocks[0]._id}
+          defaultValue={productionStocks[0]?._id}
         />
       )}
       <AppInput

@@ -41,9 +41,11 @@ export const createProductStock = async ({
         `Harvesting batch with id ${harvestingBatchId} not found.`,
       );
     }
+    console.log("Found harvesting batch:", harvestingBatch);
     await populateProductIngredients({
       products: [product],
     });
+    console.log("Populated product ingredients:", product.ingredients);
     for (const ingredient of product.ingredients) {
       const batchItem = harvestingBatch.harvestingBatchItems.find((item) =>
         item.cropVariety.equals(ingredient.cropVariety._id),

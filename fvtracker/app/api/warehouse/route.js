@@ -3,6 +3,9 @@ export async function GET(request, { params }) {
   if (warehouseId) {
     const { getWarehouse } = await import("@/lib/warehouses/get");
     const warehouse = await getWarehouse({ warehouseId });
-    return new Response(JSON.stringify(warehouse));
+  } else {
+    const { getWarehouses } = await import("@/lib/warehouses/get");
+    const warehouses = await getWarehouses();
+    return Response.json({ warehouses });
   }
 }

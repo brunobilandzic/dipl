@@ -1,7 +1,7 @@
 import { AppInput, AppSelect } from "@/components/form/inputs";
 import { FormModal } from "@/components/layout/modals/form";
 import handleError from "@/lib/constants/errors/client/handleError";
-import {  showDateTime } from "@/lib/utils/display";
+import { showDateTime } from "@/lib/utils/display";
 import { checkEmpty } from "@/lib/utils/objects";
 import fillProductionRedux from "@/lib/utils/production";
 import { submitWarehouseStock } from "@/lib/utils/storage/warehouse";
@@ -9,7 +9,7 @@ import { setLoading } from "@/store/loading";
 import { useEffect, useState } from "react";
 
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const CreateWarehouseStock = ({
   product,
@@ -18,6 +18,8 @@ const CreateWarehouseStock = ({
   productionStocks,
 }) => {
   const dispatch = useDispatch();
+  const warehouses = useSelector((state) => state.warehouses.warehouses.items);
+  console.log({ warehouses });
   const [warehouseStock, setWarehouseStock] = useState({
     productId: product._id,
     quantity: 1,

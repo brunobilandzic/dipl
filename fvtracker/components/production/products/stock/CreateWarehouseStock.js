@@ -37,12 +37,19 @@ const CreateWarehouseStock = ({
   const [availableProductionStocks, setAvailableProductionStocks] =
     useState(productionStocks);
   const onChange = (e) => {
-    if (e.target.name == "quantity") {
-      adjustStockOptions(e.target.value);
+    const { name, value } = e.target;
+    if (name == "quantity") {
+      if (clickedStock?.quantity < value) {
+        alert(
+          `Unesena količina je veća od dostupne količine na proizvodnoj zalihi (${clickedStock.quantity}). Molimo unesite manju količinu.`,
+        );
+        return;
+      }
+      adjustStockOptions(value);
     }
     setWarehouseStock((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
   };
 

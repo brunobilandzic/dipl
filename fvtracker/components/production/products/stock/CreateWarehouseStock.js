@@ -20,6 +20,12 @@ const CreateWarehouseStock = ({
 }) => {
   const dispatch = useDispatch();
   const warehouses = useSelector((state) => state.warehouses.warehouses.items);
+
+  useEffect(() => {
+    console.log("PARENT MOUNTED");
+    return () => console.log("PARENT UNMOUNTED");
+  }, []);
+
   useEffect(() => {
     if (!warehouses) dispatch(fetchWarehouses());
     console.log({ warehouses });

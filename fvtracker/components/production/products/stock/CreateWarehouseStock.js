@@ -17,7 +17,7 @@ const CreateWarehouseStock = ({
   isOpen,
   onCancel,
   productionStocks,
-  warehouses
+  warehouses,
 }) => {
   const dispatch = useDispatch();
 
@@ -77,12 +77,16 @@ const CreateWarehouseStock = ({
       submitDisabled={checkEmpty(warehouseStock, true)}
       onSubmit={onSubmit}
     >
-      <AppInput
-        placeholder="Količina"
-        label="Količina"
-        name="quantity"
-        value={warehouseStock.quantity}
+      <AppSelect
+        label="Izaberite skladište"
+        name="warehouse"
+        value={warehouseStock.warehouse}
         onChange={onChange}
+        options={warehouses.map((w) => ({
+          value: w._id,
+          label: w.name,
+        }))}
+        defaultValue={warehouses[0]._id}
       />
       <AppSelect
         label="Izaberite proizvodnu zalihu"
@@ -95,7 +99,13 @@ const CreateWarehouseStock = ({
         }))}
         defaultValue={productionStocks[0]._id}
       />
-
+      <AppInput
+        placeholder="Količina"
+        label="Količina"
+        name="quantity"
+        value={warehouseStock.quantity}
+        onChange={onChange}
+      />
       <AppInput
         placeholder="Komentar"
         label="Komentar"

@@ -56,6 +56,17 @@ export async function POST(req) {
       const productionStock = await ProductionStock.findById(
         warehouseStockData.productionStock,
       );
+      if (productionStock.quantity < warehouseStockData.quantity) {
+        return Response.json(
+          {
+            error:
+              "Unesena količina je veća od dostupne količine na proizvodnoj zalihi.",
+          },
+          {
+            status: 400,
+          },
+        );
+      }
       stock = await acceptWarehouseStock({
         product,
       });

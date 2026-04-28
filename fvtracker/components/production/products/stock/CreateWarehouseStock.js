@@ -6,6 +6,7 @@ import { checkEmpty } from "@/lib/utils/objects";
 import fillProductionRedux from "@/lib/utils/production";
 import { submitWarehouseStock } from "@/lib/utils/storage/warehouse";
 import { setLoading } from "@/store/loading";
+import { fetchWarehouses } from "@/store/warehouse";
 import { useEffect, useState } from "react";
 
 import React from "react";
@@ -19,6 +20,10 @@ const CreateWarehouseStock = ({
 }) => {
   const dispatch = useDispatch();
   const warehouses = useSelector((state) => state.warehouses.warehouses.items);
+  useEffect(() => {
+    if (!warehouses) dispatch(fetchWarehouses());
+    console.log({ warehouses });
+  }, []);
   console.log({ warehouses });
   const [warehouseStock, setWarehouseStock] = useState({
     productId: product._id,

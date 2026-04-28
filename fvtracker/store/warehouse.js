@@ -26,6 +26,7 @@ const warehousesSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchWarehouses.fulfilled, (state, action) => {
+        console.log("Updating state with fetched warehouses:", action.payload);
         state.warehouses.items = action.payload;
         state.warehouses.filteredItems = action.payload;
         state.isLoading = false;

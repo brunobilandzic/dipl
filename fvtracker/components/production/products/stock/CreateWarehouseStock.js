@@ -18,6 +18,7 @@ const CreateWarehouseStock = ({
   onCancel,
   productionStocks,
   warehouses,
+  clickedStock,
 }) => {
   const dispatch = useDispatch();
 
@@ -88,17 +89,19 @@ const CreateWarehouseStock = ({
         }))}
         defaultValue={warehouses[0]._id}
       />
-      <AppSelect
-        label="Izaberite proizvodnu zalihu"
-        name="productionStock"
-        value={warehouseStock.productionStock}
-        onChange={onChange}
-        options={availableProductionStocks.map((ps) => ({
-          value: ps._id,
-          label: `${ps.facility.name} (${ps.quantity})`,
-        }))}
-        defaultValue={productionStocks[0]._id}
-      />
+      {!clickedStock && (
+        <AppSelect
+          label="Izaberite proizvodnu zalihu"
+          name="productionStock"
+          value={warehouseStock.productionStock}
+          onChange={onChange}
+          options={availableProductionStocks.map((ps) => ({
+            value: ps._id,
+            label: `${ps.facility.name} (${ps.quantity})`,
+          }))}
+          defaultValue={productionStocks[0]._id}
+        />
+      )}
       <AppInput
         placeholder="Količina"
         label="Količina"

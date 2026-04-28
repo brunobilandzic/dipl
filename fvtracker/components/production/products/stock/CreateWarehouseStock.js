@@ -32,7 +32,8 @@ const CreateWarehouseStock = ({
     productId: product._id,
     quantity: 1,
     comment: `test dodavanja na skladište ${showDateTime(new Date())}`,
-    productionStock: productionStocks[0]._id,
+    productionStockId: productionStocks[0]._id,
+    warehouseId: warehouses[0]?._id,
   });
   const [availableProductionStocks, setAvailableProductionStocks] =
     useState(productionStocks);

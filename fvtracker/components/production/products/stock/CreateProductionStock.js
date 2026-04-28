@@ -38,7 +38,7 @@ export const CreateProductionStock = ({
 
   const facilities = useSelector((state) => state.production.facilities.items);
   console.log({ minPossibleBatchMap });
-  const testFormData = {
+  const testFormData = () => ({
     productId: product._id,
     quantity: 1,
     comment: "Testna zaliha",
@@ -46,8 +46,8 @@ export const CreateProductionStock = ({
     batchName: Object.keys(minPossibleBatchMap).length
       ? Object.keys(minPossibleBatchMap)[0]
       : null,
-  };
-  const [productionStock, setProductionStock] = useState(testFormData);
+  });
+  const [productionStock, setProductionStock] = useState(testFormData());
   const onChange = (e) => {
     setProductionStock((prev) => ({
       ...prev,
@@ -60,6 +60,9 @@ export const CreateProductionStock = ({
       const newProductionStock = await submitProductionStock({
         productionStock,
       });
+      alert(
+        `Zaliha proizvoda uspješno izrađena. ID: ${newProductionStock._id}`,
+      );
       fillProductionRedux({ dispatch });
       dispatch(setLoading(false));
       alert(`Zalihe proizvoda uspješno izrađene.`);
@@ -134,6 +137,7 @@ const StockQuantityInput = ({ name, label, test, value, onChange }) => {
       name="quantity"
       label="Količina"
       type="number"
+      value={value}
       onChange={onChange}
     />
   );

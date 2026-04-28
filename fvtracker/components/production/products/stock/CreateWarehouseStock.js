@@ -24,9 +24,9 @@ const CreateWarehouseStock = ({
     productId: product._id,
     quantity: 1,
     comment: `test dodavanja na skladište ${showDateTime(new Date())}`,
-    productionStockId: productionStocks[0]._id,
-    warehouseId: warehouses[0]?._id,
-  })
+    productionStockId: null,
+    warehouseId: null,
+  });
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -55,6 +55,10 @@ const CreateWarehouseStock = ({
       [name]: value,
     }));
   };
+
+  useEffect(() => {
+    console.log({ warehouseStock });
+  }, [warehouseStock]);
 
   const adjustStockOptions = (quantity) => {
     setAvailableProductionStocks(
@@ -97,7 +101,6 @@ const CreateWarehouseStock = ({
           value: w._id,
           label: w.name,
         }))}
-        defaultValue={warehouses[0]?._id}
       />
       {!clickedStock && (
         <AppSelect
@@ -109,7 +112,6 @@ const CreateWarehouseStock = ({
             value: ps._id,
             label: `${ps.facility.name} (${ps.quantity})`,
           }))}
-          defaultValue={productionStocks[0]?._id}
         />
       )}
       <AppInput

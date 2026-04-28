@@ -21,6 +21,7 @@ import {
 } from "@/lib/utils/production/resources";
 import { ProductItemStocksInfo } from "./stock/Info";
 import CreateWarehouseStock from "./stock/CreateWarehouseStock";
+import { fetchWarehouses } from "@/store/warehouse";
 
 const ProductList = () => {
   const dispatch = useDispatch();
@@ -90,6 +91,11 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
     useState(false);
   const [addWarehouseStockModalOpen, setAddWarehouseStockModalOpen] =
     useState(false);
+  const warehouses = useSelector((state) => state.warehouses.warehouses.items);
+  useEffect(() => {
+    if (!warehouses) dispatch(fetchWarehouses());
+    console.log({ warehouses });
+  }, [warehouses]);
   const dispatch = useDispatch();
   const actionOptions = [
     {
@@ -168,9 +174,12 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
       {addWarehouseStockModalOpen && (
         <CreateWarehouseStock
           isOpen={addWarehouseStockModalOpen}
-          onCancel={() => setAddWarehouseStockModalOpen(false)}
+          onCancel={() => {
+            setAddWarehouseStockModalOpen(false);
+          }}
           product={product}
           productionStocks={product.productionStocks}
+          warehouses={warehouses}
         />
       )}
     </>

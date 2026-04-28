@@ -31,6 +31,7 @@ const warehousesSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(fetchWarehouses.rejected, (state) => {
+        alert("Greška prilikom dohvaćanja skladišta.");
         state.isLoading = false;
       });
   },

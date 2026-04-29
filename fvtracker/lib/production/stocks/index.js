@@ -19,6 +19,7 @@ export const createProductStock = async ({
   quantity,
   comment,
 }) => {
+  console.log("creating product stock");
   const product = await getProductById(productId);
   const deductResources = async () => {
     // to create product, we have tto use harvesterd
@@ -92,7 +93,7 @@ export const createProductStock = async ({
   } else {
     stock.quantity += Number(quantity);
   }
-
+  console.log({ stock });
   const productionProcess = new ProductionProcess({
     productionsStock: stock._id,
     quantity,
@@ -107,7 +108,7 @@ export const createProductStock = async ({
   await harvestingBatch.save();
   await productionProcess.save();
   await stock.save();
-
+  console.log({ facility });
   return stock;
 };
 

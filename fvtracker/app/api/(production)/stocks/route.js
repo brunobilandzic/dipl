@@ -53,6 +53,7 @@ export async function POST(req) {
       );
     } else if (stockType == WAREHOUSE_STOCK) {
       const { warehouseStockData } = body;
+      console.log({ warehouseStockData });
       const product = await Product.findById(warehouseStockData.productId);
       const productionStock = await ProductionStock.findById(
         warehouseStockData.productionStockId,

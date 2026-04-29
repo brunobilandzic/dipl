@@ -71,6 +71,10 @@ export async function POST(req) {
       }
       stock = await acceptWarehouseStock({
         product,
+        quantity: warehouseStockData.quantity,
+        productionStock,
+        warehouseId: warehouseStockData.warehouseId,
+        comment: warehouseStockData.comment,
       });
       return Response.json(
         { newWarehouseStock: stock },

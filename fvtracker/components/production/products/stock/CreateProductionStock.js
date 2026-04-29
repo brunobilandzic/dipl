@@ -61,11 +61,10 @@ export const CreateProductionStock = ({
         productionStock,
       });
       alert(
-        `Zaliha proizvoda uspješno izrađena. ID: ${newProductionStock._id}`,
+        `${newProductionStock.quantity} zaliha proizvoda ${product.name} uspješno dodana na zalihe.`,
       );
       fillProductionRedux({ dispatch });
       dispatch(setLoading(false));
-      alert(`Zalihe proizvoda uspješno izrađene.`);
     } catch (error) {
       dispatch(setLoading(false));
       handleError({

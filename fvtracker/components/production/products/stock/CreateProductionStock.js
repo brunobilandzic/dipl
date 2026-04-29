@@ -13,14 +13,6 @@ import { refreshProducts } from "@/lib/utils/production/products";
 import { refreshHarvestingBatches } from "@/store/production";
 import fillProductionRedux from "@/lib/utils/production";
 
-const emptyProductionStock = ({ productId }) => ({
-  productId,
-  quantity: 1,
-  comment: "",
-  productionFacilityId: null,
-  harvestingBatchId: null,
-});
-
 export const CreateProductionStock = ({
   product,
   isOpen,

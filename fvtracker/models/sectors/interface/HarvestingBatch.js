@@ -91,6 +91,8 @@ harvestingBatchSchema.methods.addPlantedCropVarieties = async function ({
   item.batchQuantity += addedQuantity;
   await item.save();
 
+  console.log({ hb: this, item });
+
   return item;
 };
 

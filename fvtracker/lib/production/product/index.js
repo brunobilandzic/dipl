@@ -13,7 +13,11 @@ export const getProducts = async () => {
         select: "cropVariety quantity",
         populate: {
           path: "cropVariety",
-          select: "name",
+          select: "name cropType",
+          populate: {
+            path: "cropType",
+            select: "name",
+          },
         },
       },
     ]);

@@ -218,4 +218,5 @@ const IngredientItem = ({ ingredient }) => {
       <p>Količina: {ingredient.quantity}</p>
     </div>
   );
+  
 };

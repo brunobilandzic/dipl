@@ -67,7 +67,10 @@ export const createProductStock = async ({
     return harvestingBatch;
   };
   const harvestingBatch = await deductResources();
-
+  const facility = await ProductionFacility.findById(productionFacilityId);
+  if (!facility) {
+    throw new Error(`Production facility with id ${productionFacilityId} not found.`);
+  }
   let stock = await ProductionStock.findOne({
     product: product._id,
     facility: productionFacilityId,
@@ -79,6 +82,8 @@ export const createProductStock = async ({
       quantity,
       facility: productionFacilityId,
     });
+    facility.stocks.push(stock._id);
+    await facility.save();
   } else {
     stock.quantity += Number(quantity);
   }

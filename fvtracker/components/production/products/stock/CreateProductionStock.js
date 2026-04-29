@@ -124,7 +124,6 @@ export const CreateProductionStock = ({
             value: f._id,
             label: f.name,
           }))}
-          defaultValue={facilities[0]?._id || ""}
         />
       </div>
     </FormModal>

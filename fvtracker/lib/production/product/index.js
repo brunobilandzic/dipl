@@ -1,5 +1,5 @@
 import { Product } from "@/models/sectors/production/Product";
-import { updateIngredients } from "./ingredients";
+import { populateIngredientsConfig, updateIngredients } from "./ingredients";
 import { makeUrlFriendly } from "@/lib/utils/strings";
 import { ProductionManager } from "@/models/user/managers/ProductionManager";
 
@@ -8,18 +8,7 @@ export const getProducts = async () => {
     .sort({ name: 1 })
     .collation({ locale: "hr", strength: 2 })
     .populate([
-      {
-        path: "ingredients",
-        select: "cropVariety quantity",
-        populate: {
-          path: "cropVariety",
-          select: "name cropType",
-          populate: {
-            path: "cropType",
-            select: "name",
-          },
-        },
-      },
+      populateIngredientsConfig
     ]);
   return products;
 };

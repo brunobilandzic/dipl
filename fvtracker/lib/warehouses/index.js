@@ -7,7 +7,4 @@ export const createWarehouse = async ({ warehouseData }) => {
 };
 
 
-async function refreshWarehouses({ dispatch }) {
-  try {
-    const res = await api.get("/warehouses");
     

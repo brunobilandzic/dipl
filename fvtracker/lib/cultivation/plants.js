@@ -82,6 +82,7 @@ export async function createPlantage({
     plantedAt,
     planted: cultivation.cultivationArea.planted,
     plantingPlanId,
+    fieldId: cultivation.cultivationArea.field,
   });
 
   return plantedCropVarieties;

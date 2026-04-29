@@ -1,6 +1,7 @@
 import { handleApiError } from "./api";
 
 export default function handleError(error, router) {
+  console.error("Handling error:", error);
   if (error.response?.status === 403) {
     console.log("redirecting\n\n");
     router?.push("/uloga-nije-odobrena");

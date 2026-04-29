@@ -169,7 +169,7 @@ const CreateStockChooseBatch = ({
           name="harvestingBatchId"
           onChange={onChange}
           options={batchOptions}
-          defaultValue={testBatchChoice.value}
+          defaultValue={testBatchChoice?.value}
         />
       </div>
     </>

@@ -4,6 +4,7 @@ export const cropVarietyBatchResources = ({ harvestingBatches }) => {
   if (!harvestingBatches) return { resources: [] };
   const batchesResources = [];
   const resources = harvestingBatches.map((batch) => {
+    console.log({ batch });
     const batchName = batch.name;
     const batchResources = batch.harvestingBatchItems.forEach((item) => {
       const batchResource = {

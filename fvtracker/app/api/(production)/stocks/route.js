@@ -44,8 +44,9 @@ export async function POST(req) {
       stock = await createProductionStock({
         stockData: body.productionStockData,
       });
+
       return Response.json(
-        { stock },
+        { newProductionStock: stock },
         {
           headers: { "Content-Type": "application/json" },
         },
@@ -71,7 +72,7 @@ export async function POST(req) {
         product,
       });
       return Response.json(
-        { stock },
+        { newWarehouseStock: stock },
         {
           headers: { "Content-Type": "application/json" },
         },

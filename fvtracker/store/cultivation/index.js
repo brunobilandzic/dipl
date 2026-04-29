@@ -323,6 +323,7 @@ const cultivationSlice = createSlice({
       // update batch items
       field.harvestingPlans.map((hp) => {
         const harvestingBatch = hp.harvestingBatch;
+        console.log({  harvestingBatch });
         const batchItemId = harvestingBatch.harvestingBatchItems.findIndex(
           (item) => item.cropVariety._id === cropVarietyId,
         );

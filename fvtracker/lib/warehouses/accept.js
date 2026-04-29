@@ -10,7 +10,7 @@ export const acceptWarehouseStock = async ({
   productionFacilityId,
   warehouseId,
   comment,
-  productionStock
+  productionStock,
 }) => {
   if (!productionStock) {
     throw new Error(
@@ -24,11 +24,11 @@ export const acceptWarehouseStock = async ({
   }
   productionStock.quantity -= Number(quantity);
 
-  
   let warehouseStock = await WarehouseStock.findOne({
     product: product._id,
     warehouse: warehouseId,
   });
+  console.log({ found: warehouseStock });
   if (!warehouseStock) {
     warehouseStock = new WarehouseStock({
       product: product._id,

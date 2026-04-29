@@ -1,4 +1,4 @@
-import { ProductionStock } from "@/models/sectors/production/Facility";
+import { ProductionFacility, ProductionStock } from "@/models/sectors/production/Facility";
 import { WarehouseStock } from "@/models/sectors/storage/Warehouse";
 import { getProductById } from "../product";
 import {

@@ -73,7 +73,7 @@ export async function createPlantage({
     path: "cultivationArea",
     select: "planted field",
   });
-  console.log(cultivation.cultivationArea.field);
+
   const plantedCropVarieties = await createPlantedCropVarietiesCells({
     cultivationId,
     cropVarietyId,

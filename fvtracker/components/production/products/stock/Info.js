@@ -4,14 +4,16 @@ import { totalWarehouseStockQuantity } from "@/lib/utils/storage/warehouse";
 export const ProductItemStocksInfo = ({
   productionStocks,
   warehouseStocks,
+  productName,
 }) => {
+  console.log({ productionStocks, warehouseStocks, productName });
   const totalProductionQuantity = productsAllProductionStocksSum({
     productionStocks,
   });
   const totalWarehouseQuantity = totalWarehouseStockQuantity({
     warehouseStocks,
   });
-  
+
   return (
     <>
       {" "}

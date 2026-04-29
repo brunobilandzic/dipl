@@ -2,7 +2,7 @@ import { createProductStock, getStocks } from "@/lib/production/stocks";
 import dbConnect from "@/lib/db/mongooseConnect";
 import { PRODUCTION_STOCK } from "@/lib/constants/production";
 import { WAREHOUSE_STOCK } from "@/lib/constants/warehouse";
-import { acceptWarehouseStock } from "@/lib/warehouse/accept";
+import { acceptWarehouseStock } from "@/lib/warehouses/accept";
 import { Product } from "@/models/sectors/production/Product";
 import { ProductionStock } from "@/models/sectors/production/Facility";
 

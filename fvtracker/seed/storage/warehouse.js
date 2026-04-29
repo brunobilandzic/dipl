@@ -1,8 +1,8 @@
 import { getRandomString } from "@/lib/utils/strings";
-import { createWarehouse } from "@/lib/warehouse";
+import { createWarehouse } from "@/lib/warehouses";
 import { Warehouse } from "@/models/sectors/storage/Warehouse";
 import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
-import { acceptWarehouseStock } from "@/lib/warehouse/accept";
+import { acceptWarehouseStock } from "@/lib/warehouses/accept";
 
 export const seedWarehouse = async () => {
   await Warehouse.deleteMany({});

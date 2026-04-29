@@ -1,4 +1,7 @@
-import { ProductionFacility, ProductionStock } from "@/models/sectors/production/Facility";
+import {
+  ProductionFacility,
+  ProductionStock,
+} from "@/models/sectors/production/Facility";
 import { WarehouseStock } from "@/models/sectors/storage/Warehouse";
 import { getProductById } from "../product";
 import {
@@ -69,7 +72,9 @@ export const createProductStock = async ({
   const harvestingBatch = await deductResources();
   const facility = await ProductionFacility.findById(productionFacilityId);
   if (!facility) {
-    throw new Error(`Production facility with id ${productionFacilityId} not found.`);
+    throw new Error(
+      `Production facility with id ${productionFacilityId} not found.`,
+    );
   }
   let stock = await ProductionStock.findOne({
     product: product._id,

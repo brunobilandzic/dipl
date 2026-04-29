@@ -24,8 +24,9 @@ const CreateWarehouseStock = ({
     productId: product._id,
     quantity: 1,
     comment: `test dodavanja na skladište ${showDateTime(new Date())}`,
-    productionStockId: null,
-    warehouseId: null,
+    productionStockId:
+      productionStocks.length > 0 ? productionStocks[0]._id : null,
+    warehouseId: warehouses.length > 0 ? warehouses[0]._id : null,
   });
   const dispatch = useDispatch();
 
@@ -89,8 +90,8 @@ const CreateWarehouseStock = ({
     >
       <AppSelect
         label="Izaberite skladište"
-        name="warehouse"
-        value={warehouseStock.warehouseId}
+        name="warehouseId"
+        defaultValue={warehouseStock.warehouseId}
         onChange={onChange}
         options={warehouses.map((w) => ({
           value: w._id,
@@ -101,7 +102,7 @@ const CreateWarehouseStock = ({
         <AppSelect
           label="Izaberite proizvodnu zalihu"
           name="productionStockId"
-          value={warehouseStock.productionStockId}
+          defaultValue={warehouseStock.productionStockId}
           onChange={onChange}
           options={availableProductionStocks.map((ps) => ({
             value: ps._id,

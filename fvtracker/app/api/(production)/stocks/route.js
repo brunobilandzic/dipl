@@ -55,7 +55,7 @@ export async function POST(req) {
       const { warehouseStockData } = body;
       const product = await Product.findById(warehouseStockData.productId);
       const productionStock = await ProductionStock.findById(
-        warehouseStockData.productionStock,
+        warehouseStockData.productionStockId,
       );
       if (productionStock.quantity < warehouseStockData.quantity) {
         return Response.json(

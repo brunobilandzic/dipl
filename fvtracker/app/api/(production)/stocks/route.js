@@ -76,6 +76,7 @@ export async function POST(req) {
         warehouseId: warehouseStockData.warehouseId,
         comment: warehouseStockData.comment,
       });
+      console.log({ stock });
       return Response.json(
         { newWarehouseStock: stock },
         {

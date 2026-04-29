@@ -166,7 +166,7 @@ const CreateStockChooseBatch = ({
       <div className="select-batch">
         <div>Odaberi žetvu:</div>
         <AppSelect
-          name="harvestingBatchId"
+          name="batchName"
           onChange={onChange}
           options={batchOptions}
           defaultValue={testBatchChoice?.value}

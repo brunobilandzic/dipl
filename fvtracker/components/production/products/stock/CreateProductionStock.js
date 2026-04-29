@@ -115,6 +115,7 @@ export const CreateProductionStock = ({
           onChange={onChange}
           minPossibleBatchMap={minPossibleBatchMap}
           quantity={productionStock.quantity}
+          defaultValue={productionStock.batchName}
         />
         <AppSelect
           name="productionFacilityId"
@@ -124,6 +125,7 @@ export const CreateProductionStock = ({
             value: f._id,
             label: f.name,
           }))}
+          defaultValue={productionStock.productionFacilityId}
         />
       </div>
     </FormModal>
@@ -146,6 +148,7 @@ const CreateStockChooseBatch = ({
   minPossibleBatchMap,
   onChange,
   quantity,
+  defaultValue,
 }) => {
   const [choosenBatchName, setChoosenBatchName] = useState(null);
   const batchOptions = Object.entries(minPossibleBatchMap)
@@ -169,7 +172,7 @@ const CreateStockChooseBatch = ({
           name="batchName"
           onChange={onChange}
           options={batchOptions}
-          defaultValue={testBatchChoice?.value}
+          defaultValue={defaultValue}
         />
       </div>
     </>

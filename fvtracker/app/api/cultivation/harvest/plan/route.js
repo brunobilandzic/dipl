@@ -34,6 +34,17 @@ export async function POST(request) {
         path: "field",
         select: "name _id",
       },
+      {
+        path: "harvestingBatch",
+        populate: [
+          {
+            path: "harvestingBatchItems",
+            populate: {
+              path: "cropVariety",
+            },
+          },
+        ],
+      },
     ]);
     console.log("Created new harvesting plan:", newHarvestingPlan);
     return Response.json({ newHarvestingPlan }, { status: 201 });

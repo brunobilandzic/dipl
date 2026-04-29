@@ -1,6 +1,6 @@
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { filterItems, sortItems } from "@/lib/utils/list";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 
 const initialState = {
   fields: null,

@@ -304,6 +304,7 @@ const cultivationSlice = createSlice({
 
       //available plans come from fields not selected field
       const fieldName = state.selectedField.name;
+      console.log({ fields: current(state.fields), fieldName });
       const fid = state.fields.findIndex((f) => f.name === fieldName);
       const field = state.fields[fid];
 

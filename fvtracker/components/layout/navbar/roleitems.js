@@ -99,23 +99,8 @@ export default {
   ],
   WarehouseManager: [
     {
-      label: "pregled",
-      submenu: [
-        { label: "stanje", path: "/pregled/stanje" },
-        { label: "raspored", path: "/pregled/raspored" },
-      ],
-    },
-    {
-      label: "zahtjevi",
-      path: "/zahtjevi",
-    },
-    {
-      label: "primke",
-      path: "/primke",
-    },
-    {
-      label: "otpremnice",
-      path: "/otpremnice",
+      label: "skladište",
+      submenu: [{ label: "jedinice", path: "/skladisne-jedinice" }],
     },
     {
       label: "radnici",

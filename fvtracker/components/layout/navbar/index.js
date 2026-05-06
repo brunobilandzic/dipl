@@ -86,7 +86,7 @@ function NavItems() {
         console.log(
           "warehouse manager logged in, refreshing warehouse data...",
         );
-        fillWarehouseRedux(dispatch);
+        fillWarehouseRedux({ dispatch });
       }
     }
   }, [status]);

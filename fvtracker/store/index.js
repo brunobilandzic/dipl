@@ -15,7 +15,7 @@ const store = configureStore({
     cultivation: cultivationReducer,
     generalManager: generalManagerReducer,
     production: productionReducer,
-    warehouses: warehouseReducer,
+    warehouse: warehouseReducer,
   },
 });
 

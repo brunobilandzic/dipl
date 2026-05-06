@@ -190,7 +190,7 @@ async function createPlantedCropVarietyPromise({
   if (plantingPlanItem.quantity < 0) {
     plantingPlanItem.quantity = 0; // Ensure quantity doesn't go negative
   }
-
+  console.log({plantingPlanItem})
   await plantingPlanItem.save();
   await cropVariety.save();
   await plantedCropVariety.save();

@@ -57,7 +57,9 @@ const ProductStock = ({ stock }) => {
             {stock?.quantity <= 0 ? (
               <>
                 {" "}
-                <EmptyIcon />
+                <div className="text-xl flex items-center pt-1">
+                  <EmptyIcon />
+                </div>
               </>
             ) : (
               stock.quantity

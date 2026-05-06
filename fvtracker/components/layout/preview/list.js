@@ -20,7 +20,7 @@ export function List({
   initialFilters,
   addLabel,
   deleteLabel,
-  customButton
+  customButtons,
 }) {
   const [sortOpen, setSortOpen] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
@@ -57,7 +57,7 @@ export function List({
           {onCreateItem && (
             <CreateListItemButton onCreate={onCreateItem} label={addLabel} />
           )}
-          {customButton && customButton}
+          {customButtons && customButtons}
           {onDeleteList && (
             <DeleteListButton onDelete={onDeleteList} label={deleteLabel} />
           )}

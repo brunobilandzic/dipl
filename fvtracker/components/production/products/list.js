@@ -91,7 +91,7 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
     useState(false);
   const [addWarehouseStockModalOpen, setAddWarehouseStockModalOpen] =
     useState(false);
-  const warehouses = useSelector((state) => state.warehouses.warehouses.items);
+  const warehouses = useSelector((state) => state.warehouse.warehouses.items);
   useEffect(() => {
     if (!warehouses) dispatch(fetchWarehouses());
     console.log({ warehouses });
@@ -219,5 +219,4 @@ const IngredientItem = ({ ingredient }) => {
       <p>Količina: {ingredient.quantity}</p>
     </div>
   );
-  
 };

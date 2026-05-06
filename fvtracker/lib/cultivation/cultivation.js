@@ -87,14 +87,17 @@ async function addEmptyPlCvs({
     property: "name",
     value: existingCulName,
   });
+
   if (!existingCul) {
     throw new Error("Cultivation to be added to not found");
   }
+
   const plantedCropVarieties = await createPlantedCropVarietiesCells({
     relativeCoords,
     cropVarietyId,
     planted: cuArea.planted,
     cultivationId: existingCul._id.toString(),
+    fieldId: cuArea.field.toString(),
   });
 
   existingCul.plantedCropVarieties.push(

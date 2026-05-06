@@ -7,9 +7,7 @@ export const getProducts = async () => {
   const products = await Product.find()
     .sort({ name: 1 })
     .collation({ locale: "hr", strength: 2 })
-    .populate([
-      populateIngredientsConfig
-    ]);
+    .populate([populateIngredientsConfig]);
   return products;
 };
 
@@ -89,3 +87,10 @@ export const deleteProducts = async ({ productIds }) => {
   }
   return product;
 };
+
+export const populateProductsConfig = [
+  {
+    path: "products",
+    populate: populateIngredientsConfig,
+  },
+];

@@ -28,7 +28,7 @@ export const PlantingPlanItems = ({ items }) => {
   return (
     <div className="mt-2 flex flex-col gap-2">
       <div>Stavke plana:</div>
-      <div className="">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {items.map((item) => (
           <div key={uuid()} className="">
             <PlantingPlanItem item={item} />
@@ -42,7 +42,7 @@ export const PlantingPlanItems = ({ items }) => {
 const PlantingPlanItem = ({ item }) => {
   const plcvs = 0;
   return (
-    <div className="border p-4 rounded w-full">
+    <div className="border h-full p-4 rounded w-full">
       <div>
         <span className="font-semibold">Vrsta: </span>
         {item.cropVariety?.name}

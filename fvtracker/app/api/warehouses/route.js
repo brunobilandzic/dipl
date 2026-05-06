@@ -1,3 +1,5 @@
+import warehousePopulateConfig from "@/lib/warehouses/populateConfig";
+
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
@@ -8,6 +10,9 @@ export async function GET(request) {
   } else {
     const { getWarehouses } = await import("@/lib/warehouses/get");
     const warehouses = await getWarehouses();
+    for (let wh of warehouses) {
+      await wh.populate(warehousePopulateConfig);
+    }
     return Response.json({ warehouses });
   }
 }

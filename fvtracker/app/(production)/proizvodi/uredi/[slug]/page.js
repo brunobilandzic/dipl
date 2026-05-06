@@ -10,7 +10,6 @@ const EditProductPage = async ({ params }) => {
     throw new Error("Product not found");
   }
 
-  console.log({ product });
   return (
     <div>
       <EditProductPageComponent product={sanitize(product)} />

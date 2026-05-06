@@ -210,7 +210,7 @@ export const createNewPlantage = async ({
       { _id: { $in: docs } },
       { plantingPlanItem: plantingPlanItem._id },
     );
-    plantingPlanItem.plantedCropVarieties.concat(docs.map((d) => d._id));
+    plantingPlanItem.plantedCropVarieties.push(...docs.map((d) => d._id));
     plantingPlanItem.quantity -=
       docs.length * plantingPlanItem.cropVariety.quantityPerCell;
     if (plantingPlanItem.quantity < 0) {

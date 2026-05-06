@@ -1,6 +1,7 @@
 "use client";
 
 import { LoadingFullScreen } from "@/components/layout/loading";
+import { EmptyIcon } from "@/components/layout/preview/icons";
 import { List, ListItem } from "@/components/layout/preview/list";
 import { setSelectedFacility } from "@/store/production";
 import React, { useEffect } from "react";
@@ -45,12 +46,23 @@ const ProductionStocks = ({ stocks, facilityName }) => {
 };
 
 const ProductStock = ({ stock }) => {
+  if (!stock) return;
+  console.log({ stock });
   return (
     <>
       <ListItem>
-        <div className="flex justify-between items-center">
+        <div className={`flex justify-between items-center `}>
           <div className="listitemheader">{stock?.product?.name}</div>
-          <div className="text-3xl font-bold">{stock?.quantity}</div>
+          <div className="text-3xl font-bold">
+            {stock?.quantity <= 0 ? (
+              <>
+                {" "}
+                <EmptyIcon />
+              </>
+            ) : (
+              stock.quantity
+            )}
+          </div>
         </div>
       </ListItem>
     </>

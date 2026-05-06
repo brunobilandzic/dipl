@@ -34,8 +34,6 @@ export const PUT = async (req) => {
     await dbConnect();
     const id = req.nextUrl.searchParams.get("id");
     const body = await req.json();
-    console.log("Received PUT request for product with id:", id);
-    console.log("Request body:", body);
     const product = await updateProduct({
       _updatedProduct: body,
       productId: id,

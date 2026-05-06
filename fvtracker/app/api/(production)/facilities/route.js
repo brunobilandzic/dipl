@@ -20,10 +20,7 @@ export const GET = async (req) => {
       return Response.json({ unauthorized: true }, { status: 403 });
     }
     const facilities = await getFacilities({});
-    console.log(
-      "Dohvaćena postrojenja:",
-      facilities?.map((f) => f.name),
-    );
+    
     return Response.json({ facilities }, { status: 200 });
   } catch (error) {
     console.error("Greška pri dohvaćanju postrojenja:", error);

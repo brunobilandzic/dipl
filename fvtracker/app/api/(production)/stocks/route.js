@@ -33,7 +33,6 @@ export async function GET(request) {
 }
 
 export async function POST(req) {
-  console.log("Received request to create stock");
   // route to add or create new stock
   try {
     await dbConnect();
@@ -53,7 +52,6 @@ export async function POST(req) {
       );
     } else if (stockType == WAREHOUSE_STOCK) {
       const { warehouseStockData } = body;
-      console.log({ warehouseStockData });
       const product = await Product.findById(warehouseStockData.productId);
       const productionStock = await ProductionStock.findById(
         warehouseStockData.productionStockId,
@@ -76,7 +74,6 @@ export async function POST(req) {
         warehouseId: warehouseStockData.warehouseId,
         comment: warehouseStockData.comment,
       });
-      console.log({ stock });
       return Response.json(
         { newWarehouseStock: stock },
         {
@@ -84,8 +81,6 @@ export async function POST(req) {
         },
       );
     }
-
-    console.log({ body });
   } catch (error) {
     console.log("Error creating stock:", error);
 

@@ -13,8 +13,11 @@ import { useRouter } from "next/navigation";
 import {
   CULTIVATION_MANAGER,
   PRODUCTION_MANAGER,
+  WAREHOUSE_MANAGER,
 } from "@/lib/constants/users/managerTypes";
 import fillProductionRedux from "@/lib/utils/production";
+import { fetchWarehouses } from "@/store/warehouse";
+import { fillWarehouseRedux } from "@/lib/utils/storage";
 
 export default {
   roleitems,
@@ -78,6 +81,12 @@ function NavItems() {
           "production manager logged in, refreshing producti data...",
         );
         fillProductionRedux({ dispatch, router });
+      }
+      if (managerModelName === WAREHOUSE_MANAGER) {
+        console.log(
+          "warehouse manager logged in, refreshing warehouse data...",
+        );
+        fillWarehouseRedux(dispatch);
       }
     }
   }, [status]);

@@ -2,6 +2,7 @@ import Modals from "@/components/layout/modals";
 import { AppInput, AppSelect, AppTextArea } from "@/components/form/inputs";
 import styles from "@/components/form/form.module.css";
 import culConstants from "@/lib/constants/cultivation";
+import { useEffect } from "react";
 
 export function CreateCultivation({
   isOpen,
@@ -17,6 +18,10 @@ export function CreateCultivation({
       [field]: value,
     });
   };
+
+  useEffect(() => {
+    console.log("newCUDetails:", newCUDetails);
+  }, [newCUDetails]);
 
   return (
     <>
@@ -38,7 +43,7 @@ export function CreateCultivation({
                   label: cul.name,
                   value: cul.name,
                 }))}
-                defaultValue={culConstants.names.NEW_CULTIVATION}
+                defaultValue={newCUDetails.existingCulName}
               ></AppSelect>
             ) : null}
           </div>

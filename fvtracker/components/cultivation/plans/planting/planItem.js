@@ -18,13 +18,13 @@ export const PlantingPlanListItem = ({ plan, plant = true, onDelete }) => {
           <div className="text-lg font-bold ">{plan.name}</div>
         </div>
 
-        <PlantingPlanItems items={plan.items} />
+        <PlantingPlanItems items={plan.items} plant={plant} />
       </ListItem>
     </>
   );
 };
 
-export const PlantingPlanItems = ({ items }) => {
+export const PlantingPlanItems = ({ items, plant }) => {
   console.log({ items });
   return (
     <div className="mt-2 flex flex-col gap-2">
@@ -32,7 +32,7 @@ export const PlantingPlanItems = ({ items }) => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {items.map((item) => (
           <div key={uuid()} className="">
-            <PlantingPlanItem item={item} />
+            <PlantingPlanItem item={item} plant={plant} />
           </div>
         ))}
       </div>
@@ -40,7 +40,7 @@ export const PlantingPlanItems = ({ items }) => {
   );
 };
 
-const PlantingPlanItem = ({ item }) => {
+const PlantingPlanItem = ({ item, plant }) => {
   const plcvs = 0;
   return (
     <div className="border h-full p-4 rounded w-full">
@@ -56,13 +56,14 @@ const PlantingPlanItem = ({ item }) => {
         <span className="font-semibold">Planted Crop Varieties: </span>
         <PlantedCropVarietiesPlan
           plantedCropVarieties={item.plantedCropVarieties}
+          plant={plant}
         />
       </div>
     </div>
   );
 };
 
-const PlantedCropVarietiesPlan = ({ plantedCropVarieties }) => {
+const PlantedCropVarietiesPlan = ({ plantedCropVarieties, plant }) => {
   const plantedCropVarietiesPerCultivation =
     utils.plans.getPlantedCropVarietesPerCultivation({
       plantedCropVarieties,
@@ -78,7 +79,8 @@ const PlantedCropVarietiesPlan = ({ plantedCropVarieties }) => {
                 {getCANameFromPlantedCropVarietiesInCultivation({
                   plantedCropVariety: plantedCropVarieties[0],
                 })}{" "}
-                - {cultivationName}: {plantedCropVarieties?.length || 0} ubranih
+                - {cultivationName}: {plantedCropVarieties?.length || 0}{" "}
+                {plant ? "zasađenih " : "ubranih "}
                 zasada.
               </div>
               {/* <ul className="list-disc list-inside">

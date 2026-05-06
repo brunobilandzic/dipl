@@ -230,7 +230,6 @@ export const createNewHarvest = async ({ harvestingPlan, plantedMap }) => {
     }
     const cropVarietyId = harvestingPlanItem.cropVariety._id;
     const harvestCoords = plantedCoords.slice(0, 2);
-    console.log("harvesting:", harvestCoords.length, "cells of", cvName);
 
     const docs = await PlantedCropVariety.find(
       { relativeCoords: { $in: harvestCoords } },

@@ -216,7 +216,7 @@ export const createNewPlantage = async ({
     if (plantingPlanItem.quantity < 0) {
       plantingPlanItem.quantity = 0; // Ensure quantity doesn't go negative
     }
-    console.log({ plantingPlanItem });
+
     await plantingPlanItem.save();
   }
   return map;

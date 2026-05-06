@@ -3,6 +3,7 @@ import {
   WarehouseAcceptanceProcess,
   WarehouseStock,
 } from "@/models/sectors/storage/Warehouse";
+import { getWarehouse } from "./get";
 
 export const acceptWarehouseStock = async ({
   product,
@@ -30,12 +31,16 @@ export const acceptWarehouseStock = async ({
   });
   console.log({ found: warehouseStock });
   if (!warehouseStock) {
+    const warehouse = await getWarehouse({ id: warehouseId });
     warehouseStock = new WarehouseStock({
       product: product._id,
       warehouse: warehouseId,
       quantity: 0,
     });
+    warehouse.stocks.push(warehouseStock._id);
     product.warehouseStocks.push(warehouseStock._id);
+    console.log({ warehouse });
+    await warehouse.save();
   }
   warehouseStock.quantity += Number(quantity);
 

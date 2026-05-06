@@ -54,9 +54,9 @@ export const acceptWarehouseStock = async ({
   productionStock.warehouseAcceptanceProcesses.push(
     warehouseAcceptanceProcess._id,
   );
-  warehouseStock["warehouseAcceptanceProcesses"] = [
+  warehouseStock.warehouseAcceptanceProcesses.push(
     warehouseAcceptanceProcess._id,
-  ];
+  );
 
   await product.save();
   await productionStock.save();

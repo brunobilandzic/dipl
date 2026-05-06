@@ -205,7 +205,7 @@ export const createNewPlantage = async ({
       { relativeCoords: { $in: value } },
       { _id: 1 },
     );
-    console.log({ docs });
+ 
     await PlantedCropVariety.updateMany(
       { _id: { $in: docs } },
       { plantingPlanItem: plantingPlanItem._id },

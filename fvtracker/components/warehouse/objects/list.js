@@ -1,5 +1,6 @@
 "use client";
 import { ListItem, List } from "@/components/layout/preview/list";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export const WarehouseList = () => {
@@ -22,9 +23,28 @@ export const WarehouseList = () => {
 };
 
 const WarehouseListItem = ({ warehouse }) => {
+  const [edit, setEdit] = useState(false);
+  const handleDelete = () => {};
+  const actionOptions = [
+    {
+      label: "Uredi",
+      className: "",
+      onClick: () => setEditOpen(true),
+    },
+    {
+      label: "Obriši",
+      className: "cancelButton",
+      onClick: handleDelete,
+    },
+  ];
+
   return (
     <div>
-      <ListItem title={warehouse.name} subtitle={warehouse.location} />
+      <ListItem
+        actionOptions={actionOptions}
+        title={warehouse.name}
+        subtitle={warehouse.location}
+      ></ListItem>
     </div>
   );
 };

@@ -205,6 +205,7 @@ export const createNewPlantage = async ({
       { relativeCoords: { $in: value } },
       { _id: 1 },
     );
+    console.log({ docs });
     await PlantedCropVariety.updateMany(
       { _id: { $in: docs } },
       { plantingPlanItem: plantingPlanItem._id },
@@ -215,6 +216,7 @@ export const createNewPlantage = async ({
     if (plantingPlanItem.quantity < 0) {
       plantingPlanItem.quantity = 0; // Ensure quantity doesn't go negative
     }
+    console.log({ plantingPlanItem });
     await plantingPlanItem.save();
   }
   return map;

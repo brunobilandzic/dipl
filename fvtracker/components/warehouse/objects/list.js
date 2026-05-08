@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { EditWarehouseModal } from "./editWarehouse";
 import { useRouter } from "next/navigation";
+import { deleteWarehouse } from "@/lib/utils/storage/warehouse";
 
 export const WarehouseList = () => {
   const warehouses = useSelector(
@@ -30,16 +31,23 @@ export const WarehouseList = () => {
         onDeleteList={() => {}}
       >
         {warehouses.map((wh) => (
-          <WarehouseListItem key={wh._id} warehouse={wh} />
+          <WarehouseListItem
+            dispatch={dispatch}
+            router={router}
+            key={wh._id}
+            warehouse={wh}
+          />
         ))}
       </List>
     </>
   );
 };
 
-const WarehouseListItem = ({ warehouse }) => {
+const WarehouseListItem = ({ warehouse, dispatch, router }) => {
   const [editOpen, setEditOpen] = useState(false);
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    deleteWarehouse({ warehouseId: warehouse._id, dispatch, router });
+  };
   const actionOptions = [
     {
       label: "Uredi",

@@ -19,6 +19,7 @@ export function EditWarehouseModal({ warehouse, onCancel, isOpen }) {
 
   const handleSubmit = async () => {
     await submitWarehouseForm({
+      isEdit: true,
       form,
       warehouseId: warehouse._id,
       dispatch,

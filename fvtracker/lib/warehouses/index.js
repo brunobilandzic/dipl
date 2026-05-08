@@ -6,5 +6,9 @@ export const createWarehouse = async ({ warehouseData }) => {
   return warehouse;
 };
 
-
-    
+export const updateWarehouse = async ({ id, data }) => {
+  const warehouse = await getWarehouse({ id });
+  Object.assign(warehouse, data);
+  await warehouse.save();
+  return warehouse;
+};

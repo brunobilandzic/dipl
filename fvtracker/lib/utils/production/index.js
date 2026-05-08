@@ -4,8 +4,6 @@ import { setLoading } from "@/store/loading";
 import {
   refreshFacilities,
   refreshHarvestingBatches,
-  refreshProductsStocks,
-  setMachines,
   setProducts,
 } from "@/store/production";
 import { fetchWarehouses } from "@/store/warehouse";

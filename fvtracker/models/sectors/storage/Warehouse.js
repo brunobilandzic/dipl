@@ -1,6 +1,7 @@
 import { Base } from "@/models/Base";
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
+import { Product } from "../production/Product";
 
 const warehouseSchema = new Schema({
   warehouseManager: {
@@ -86,6 +87,10 @@ warehouseStockSchema.pre("save", function () {
 
 warehouseStockSchema.pre("deleteMany", async function () {
   const ids = await WarehouseStock.find(this.getFilter()).distinct("_id");
+  await Product.updateMany(
+    { warehouseStocks: { $in: ids } },
+    { $pull: { warehouseStocks: { $in: ids } } },
+  );
   await Warehouse.updateMany(
     { stocks: { $in: ids } },
     { $pull: { stocks: { $in: ids } } },

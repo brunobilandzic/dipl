@@ -4,6 +4,7 @@ import handleError from "@/lib/constants/errors/client/handleError";
 import { showDateTime } from "@/lib/utils/display";
 import { checkEmpty } from "@/lib/utils/objects";
 import fillProductionRedux from "@/lib/utils/production";
+import { getAvailableFacilities } from "@/lib/utils/production/facilities";
 import { submitWarehouseStock } from "@/lib/utils/storage/warehouse";
 import { setLoading } from "@/store/loading";
 import { useEffect, useState } from "react";
@@ -28,8 +29,7 @@ const CreateWarehouseStock = ({
     warehouseId: warehouses.length > 0 ? warehouses[0]._id : null,
   });
   const dispatch = useDispatch();
-
-  console.log({ warehouses });
+  const [availableWarehouses, setAvailableWarehouses] = useState(warehouses);
   const [warehouseStock, setWarehouseStock] = useState(createInitialFormData());
 
   const [availableProductionStocks, setAvailableProductionStocks] =
@@ -50,10 +50,6 @@ const CreateWarehouseStock = ({
       [name]: value,
     }));
   };
-
-  useEffect(() => {
-    console.log({ warehouseStock });
-  }, [warehouseStock]);
 
   const adjustStockOptions = (quantity) => {
     setAvailableProductionStocks(
@@ -79,6 +75,15 @@ const CreateWarehouseStock = ({
     }
   };
 
+  useEffect(() => {
+    setAvailableWarehouses(
+      getAvailableFacilities({
+        facilities: warehouses,
+        requiredVolume: warehouseStock.quantity,
+      }),
+    );
+  }, [warehouseStock.quantity]);
+
   return (
     <FormModal
       title="Pošalji u skladište"
@@ -92,7 +97,7 @@ const CreateWarehouseStock = ({
         name="warehouseId"
         defaultValue={warehouseStock.warehouseId}
         onChange={onChange}
-        options={warehouses.map((w) => ({
+        options={availableWarehouses.map((w) => ({
           value: w._id,
           label: w.name,
         }))}

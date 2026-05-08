@@ -71,9 +71,14 @@ export const prepareFacilityStocksInfo = ({ stocks }) => {
   const totalQuantity = stocks.reduce((acc, stock) => acc + stock.quantity, 0);
   const productCount = stocks.length;
   console.log("prepareFacilityStocksInfo", { stocks });
-  const totalVolumeUsed = stocks.reduce(
+  const totalVolumeUsed = facilityTotalVolumeUsed({ stocks });
+  return { totalQuantity, productCount, totalVolumeUsed };
+};
+
+export const facilityTotalVolumeUsed = ({ stocks }) => {
+  return stocks.reduce(
     (acc, stock) => acc + stock.quantity * stock.product.stockVolume,
     0,
   );
-  return { totalQuantity, productCount, totalVolumeUsed };
+};
 };

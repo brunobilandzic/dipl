@@ -28,7 +28,7 @@ export const CreateProductionStock = ({
   const dispatch = useDispatch();
 
   const facilities = useSelector((state) => state.production.facilities.items);
-  console.log({ minPossibleBatchMap });
+  const [availableFacilities, setAvailableFacilities] = useState([]);
   const testFormData = () => ({
     productId: product._id,
     quantity: 1,
@@ -66,10 +66,13 @@ export const CreateProductionStock = ({
   };
 
   useEffect(() => {
-    console.log({ productionStock });
-  }, [productionStock]);
-
-
+    setAvailableFacilities(
+      getAvailableFacilities({
+        facilities,
+        requiredVolume: productionStock.quantity,
+      }),
+    );
+  }, [productionStock.quantity]);
 
   return (
     <FormModal
@@ -113,7 +116,7 @@ export const CreateProductionStock = ({
           name="productionFacilityId"
           label="Proizvodni pogon"
           onChange={onChange}
-          options={facilities.map((f) => ({
+          options={availableFacilities.map((f) => ({
             value: f._id,
             label: f.name,
           }))}

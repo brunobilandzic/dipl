@@ -63,6 +63,17 @@ productionFacilitySchema.pre("deleteMany", async function () {
   });
 });
 
+productionFacilitySchema.methods.totalVolumeUsed = async function () {
+  const stocks = await mongoose
+    .model("ProductionStock")
+    .find({ facility: this._id })
+    .populate("product");
+  return stocks.reduce((total, stock) => {
+    const productVolume = stock.product.volume || 0;
+    return total + productVolume * stock.quantity;
+  }, 0);
+};
+
 export const ProductionFacility =
   mongoose.models.ProductionFacility ||
   Base.discriminator("ProductionFacility", productionFacilitySchema);

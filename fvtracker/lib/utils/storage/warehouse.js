@@ -60,7 +60,9 @@ export const submitWarehouseForm = async ({
 export const deleteWarehouse = async ({ warehouseId, dispatch, router }) => {
   if (!confirm("Jeste li sigurni da želite obrisati ovo skladište?")) return;
   try {
-    await api.delete(`/warehouses/${warehouseId}`);
+    await api.delete(`/warehouses`, {
+      params: { id: warehouseId },
+    });
     dispatch(fetchWarehouses());
     router.push("/skladisne-jedinice");
   } catch (error) {

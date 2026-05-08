@@ -42,7 +42,6 @@ const ProductionStocks = ({ stocks, facilityName }) => {
 
 const ProductStock = ({ stock }) => {
   if (!stock) return;
-  console.log({ stock });
   return (
     <>
       <ListItem>

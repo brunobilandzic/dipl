@@ -16,6 +16,7 @@ export const seedWarehouse = async () => {
     name: `Skladište ${getRandomString({ beginning: "WH", length: 3 })}`,
     description: "Skladište za pohranu proizvoda",
     warehouseManager: warehouseManager._id,
+    volume: 10000,
   };
   const warehouse = await createWarehouse({ warehouseData });
   console.log(

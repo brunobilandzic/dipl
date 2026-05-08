@@ -48,9 +48,12 @@ const ProductStock = ({ stock }) => {
         <div className={`flex justify-between items-center `}>
           <div>
             <div className="listitemheader">{stock?.product?.name}</div>
-            <p className="listitemDescription">
-              {getIngredientsList({ ingredients: stock?.product?.ingredients })}
-            </p>
+              <p>
+                Sastojci:{" "}
+                {getIngredientsList({
+                  ingredients: stock?.product?.ingredients,
+                })}
+              </p>
           </div>
           <div className="text-3xl font-bold">
             {stock?.quantity <= 0 ? (

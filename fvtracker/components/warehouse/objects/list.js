@@ -4,6 +4,7 @@ import { ListItem, List } from "@/components/layout/preview/list";
 import Link from "next/link";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { EditWarehouseModal } from "./editWarehouse";
 
 export const WarehouseList = () => {
   const warehouses = useSelector(
@@ -33,7 +34,7 @@ export const WarehouseList = () => {
 };
 
 const WarehouseListItem = ({ warehouse }) => {
-  const [edit, setEdit] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
   const handleDelete = () => {};
   const actionOptions = [
     {
@@ -57,6 +58,13 @@ const WarehouseListItem = ({ warehouse }) => {
       >
         <Link href={`/skladisne-jedinice/${warehouse.slug}`}>Pregled</Link>
       </ListItem>
+      {editOpen && (
+        <EditWarehouseModal
+          warehouse={warehouse}
+          onCancel={() => setEditOpen(false)}
+          isOpen={editOpen}
+        />
+      )}
     </div>
   );
 };

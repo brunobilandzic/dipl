@@ -102,7 +102,7 @@ export const EditProductForm = ({
             />
           ))}
         </div> */}
-        <SubmitButton label={submitLabel} onClick={handleSubmit} />
+        <SubmitButton label={submitLabel} handleSubmit={handleSubmit} />
       </div>
     </div>
   );

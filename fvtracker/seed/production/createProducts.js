@@ -59,6 +59,5 @@ export const createProductStockSeed = async ({
     quantity: 2,
     productionFacilityId,
   });
-  product.productionStocks.push(productionStock._id);
   return productionStock;
 };

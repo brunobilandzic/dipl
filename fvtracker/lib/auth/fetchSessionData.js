@@ -101,7 +101,7 @@ export async function fetchManager({ managerNames = [] }) {
       return response;
     }
   }
-  
+
   return { unauthorized: true };
 
   console.log("did not throw error yet");
@@ -109,3 +109,13 @@ export async function fetchManager({ managerNames = [] }) {
     `No manager found for session user among types: ${managerNames.join(", ")}`,
   );
 }
+
+export const checkManager = async ({ managerNames = [] }) => {
+  const { unauthorized, specificManager } = await fetchManager({
+    managerNames,
+  });
+  if (unauthorized) {
+    throw new Error("Unauthorized: no manager found for session user");
+  }
+  return specificManager;
+};

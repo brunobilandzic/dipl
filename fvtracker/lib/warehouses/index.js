@@ -1,4 +1,5 @@
 import { Warehouse } from "@/models/sectors/storage/Warehouse";
+import { getWarehouse } from "./get";
 
 export const createWarehouse = async ({ warehouseData }) => {
   const warehouse = new Warehouse(warehouseData);

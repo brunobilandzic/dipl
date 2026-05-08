@@ -1,7 +1,15 @@
+import { UnathorizedPage } from "@/components/auth/unAuthorized";
 import { WarehouseList } from "@/components/warehouse/objects/list";
+import { fetchManager } from "@/lib/auth/fetchSessionData";
+import { WAREHOUSE_MANAGER } from "@/lib/constants/users/managerTypes";
 import React from "react";
 
-function WarehouseListPage() {
+async function WarehouseListPage() {
+  const { specificManager, generalManager, unAuthorized } = await fetchManager({
+    managerNames: [WAREHOUSE_MANAGER],
+  });
+  if (unAuthorized) return <UnathorizedPage />;
+
   return (
     <div>
       <WarehouseList />

@@ -1,4 +1,4 @@
-import { FormModal } from "@/components/layout/modals/form";
+import { FormModal, UpdateModal } from "@/components/layout/modals/form";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { AppInput, AppTextArea } from "@/components/form/inputs";
@@ -27,14 +27,17 @@ export function EditWarehouseModal({ warehouse, onCancel, isOpen }) {
     onCancel();
   };
 
+  const handleDelete = async () => {
+    if (!confirm("Jeste li sigurni da želite obrisati ovo skladište?")) return;
+  };
+
   return (
     <UpdateModal
       isOpen={isOpen}
       onCancel={onCancel}
       onSubmit={handleSubmit}
       title="Uredi skladište"
-      submitText="Spremi"
-      submitDisabled={!form.name.trim()}
+      onDelete={handleDelete}
     >
       <AppInput
         label="Naziv"

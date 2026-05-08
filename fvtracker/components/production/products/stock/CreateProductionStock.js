@@ -150,10 +150,7 @@ const CreateStockChooseBatch = ({
         label: `${batchName} - moguća izrada ${possibleStock} proizvoda`,
       };
     });
-  console.log({ minPossibleBatchMap });
-  console.log({ batchOptions });
-  const testBatchChoice = batchOptions[0];
-  console.log({ c: 1, testBatchChoice });
+
   return (
     <>
       <div>{choosenBatchName}</div>

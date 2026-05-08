@@ -1,6 +1,7 @@
 "use client";
 import { LoadingFullScreen } from "@/components/layout/loading";
 import { ListItem, List } from "@/components/layout/preview/list";
+import Link from "next/link";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -53,7 +54,9 @@ const WarehouseListItem = ({ warehouse }) => {
         actionOptions={actionOptions}
         title={warehouse.name}
         subtitle={warehouse.location}
-      ></ListItem>
+      >
+        <Link href={`/skladisne-jedinice/${warehouse.slug}`}>Pregled</Link>
+      </ListItem>
     </div>
   );
 };

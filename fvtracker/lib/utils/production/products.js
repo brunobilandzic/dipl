@@ -4,6 +4,7 @@ import { setLoading } from "@/store/loading";
 import { setProducts } from "@/store/production";
 import { checkEmpty } from "../objects";
 import { stringContains } from "../strings";
+import fillProductionRedux from ".";
 
 export const refreshProducts = async ({ dispatch, router }) => {
   try {
@@ -54,7 +55,7 @@ export const submitProductForm = async ({
     );
     dispatch(setLoading(false));
     alert(`Proizvod ${isEdit ? "ažuriran" : "kreiran"} uspješno!`);
-    await refreshProducts({ dispatch, router });
+    await fillProductionRedux({ dispatch, router });
     router.push("/proizvodi");
   } catch (error) {
     console.error(`Error ${isEdit ? "updating" : "creating"} product:`, error);

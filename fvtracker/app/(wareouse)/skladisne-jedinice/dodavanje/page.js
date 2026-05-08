@@ -4,7 +4,7 @@ import { WAREHOUSE_MANAGER } from "@/lib/constants/users/managerTypes";
 import React from "react";
 
 async function CreateWarehousePage() {
-  const { speciicManger } = await fetchManager({
+  await fetchManager({
     managerNames: [WAREHOUSE_MANAGER],
   });
   return (

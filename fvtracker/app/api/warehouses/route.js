@@ -48,3 +48,20 @@ export async function PUT(request) {
     );
   }
 }
+
+export async function DELETE(request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    let id = searchParams.get("id");
+    if (!id) {
+      return Response.json({ error: "ID nije naveden" }, { status: 400 });
+    }
+    await deleteWarehouse({ id });
+    return Response.json({ success: true }, { status: 200 });
+  } catch (err) {
+    return Response.json(
+      { error: err?.message ?? String(err) },
+      { status: 500 },
+    );
+  }
+}

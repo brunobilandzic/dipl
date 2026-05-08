@@ -28,7 +28,7 @@ export function EditWarehouseModal({ warehouse, onCancel, isOpen }) {
   };
 
   return (
-    <FormModal
+    <UpdateModal
       isOpen={isOpen}
       onCancel={onCancel}
       onSubmit={handleSubmit}
@@ -48,6 +48,6 @@ export function EditWarehouseModal({ warehouse, onCancel, isOpen }) {
         value={form.description}
         onChange={handleChange}
       />
-    </FormModal>
+    </UpdateModal>
   );
 }

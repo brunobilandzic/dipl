@@ -15,6 +15,10 @@ const warehouseSchema = new Schema({
       default: [],
     },
   ],
+  volume: {
+    type: Number,
+    required: true,
+  },
 });
 
 const warehouseStockSchema = new Schema({

@@ -36,6 +36,10 @@ const productSchema = new Schema({
       default: [],
     },
   ],
+  stockVolume: {
+    type: Number,
+    required: true,
+  },
 });
 
 const ingredientsSchema = new Schema({
@@ -54,8 +58,6 @@ const ingredientsSchema = new Schema({
     required: true,
   },
 });
-
-
 
 productSchema.pre("save", async function () {
   if (this.isModified("name") || this.isNew) {

@@ -1,10 +1,10 @@
 import CreateWarehouse from "@/components/warehouse/objects/create";
-import { fetchManager } from "@/lib/auth/fetchSessionData";
+import { checkManager } from "@/lib/auth/fetchSessionData";
 import { WAREHOUSE_MANAGER } from "@/lib/constants/users/managerTypes";
 import React from "react";
 
 async function CreateWarehousePage() {
-  await fetchManager({
+  await checkManager({
     managerNames: [WAREHOUSE_MANAGER],
   });
   return (

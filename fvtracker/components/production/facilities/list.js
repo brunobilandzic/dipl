@@ -24,7 +24,7 @@ import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { initFilters } from "@/lib/utils/list";
 import { facilitySortOptions } from "@/components/layout/preview/sort";
 
-const emptyForm = { name: "", description: "" };
+const emptyForm = { name: "", description: "", volume: 0 };
 
 const FacilitiesList = () => {
   const dispatch = useDispatch();
@@ -115,6 +115,7 @@ const FacilityItem = ({ facility }) => {
   const [form, setForm] = useState({
     name: facility.name,
     description: facility.description ?? "",
+    volume: facility.volume ?? 0,
   });
 
   const handleChange = (e) => {
@@ -211,6 +212,14 @@ const FacilityForm = ({ form, onChange }) => (
       value={form.description}
       onChange={onChange}
       placeholder="Kratki opis postrojenja"
+    />
+    <AppInput
+      label="Kapacitet"
+      name="volume"
+      type="number"
+      value={form.volume || ""}
+      onChange={onChange}
+      placeholder="Kapacitet postrojenja"
     />
   </div>
 );

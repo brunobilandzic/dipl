@@ -47,7 +47,11 @@ export const submitFacilityForm = async ({
   }
 };
 
-export const deleteFacilityClient = async ({ facilityId, dispatch, router }) => {
+export const deleteFacilityClient = async ({
+  facilityId,
+  dispatch,
+  router,
+}) => {
   if (!confirm("Jeste li sigurni da želite obrisati ovo postrojenje?")) return;
   try {
     dispatch(setLoading(true));
@@ -61,4 +65,10 @@ export const deleteFacilityClient = async ({ facilityId, dispatch, router }) => 
   } finally {
     dispatch(setLoading(false));
   }
+};
+
+export const prepareFacilityStocksInfo = ({ stocks }) => {
+  const totalQuantity = stocks.reduce((acc, stock) => acc + stock.quantity, 0);
+  const productCount = stocks.length;
+  return { totalQuantity, productCount };
 };

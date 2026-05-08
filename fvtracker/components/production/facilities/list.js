@@ -8,6 +8,7 @@ import { showDate } from "@/lib/utils/display";
 import {
   submitFacilityForm,
   deleteFacilityClient,
+  prepareFacilityStocksInfo,
 } from "@/lib/utils/production/facilities";
 import React, { use, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -185,11 +186,16 @@ const FacilityDetails = ({ facility }) => (
   </div>
 );
 
-const FacilityStats = ({ stocks }) => (
-  <div className="text-sm text-gray-500 text-right">
-    <p>Zalihe: {stocks?.length ?? 0}</p>
-  </div>
-);
+const FacilityStats = ({ stocks }) => {
+  const { productCount, totalQuantity } = prepareFacilityStocksInfo({ stocks });
+
+  return (
+    <div className="text-sm text-gray-500 text-right">
+      <p>Proizvodi: {productCount}</p>
+      <p>Ukupno: {totalQuantity}</p>
+    </div>
+  );
+};
 
 const FacilityForm = ({ form, onChange }) => (
   <div className="flex flex-col gap-4 p-4">

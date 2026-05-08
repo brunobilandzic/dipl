@@ -10,11 +10,7 @@ async function WarehouseListPage() {
   });
   if (unAuthorized) return <UnathorizedPage />;
 
-  return (
-    <div>
-      <WarehouseList />
-    </div>
-  );
+  return <div>{specificManager && <WarehouseList />}</div>;
 }
 
 export default WarehouseListPage;

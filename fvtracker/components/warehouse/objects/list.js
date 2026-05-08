@@ -1,4 +1,5 @@
 "use client";
+import { LoadingFullScreen } from "@/components/layout/loading";
 import { ListItem, List } from "@/components/layout/preview/list";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,9 +12,17 @@ export const WarehouseList = () => {
 
   console.log({ warehouses });
 
+  if (!warehouses) return <LoadingFullScreen />;
+
   return (
     <>
-      <List title="Skladišta">
+      <List
+        title="Skladišta"
+        onCreateItem={() => {}}
+        addLabel="Dodaj skladište"
+        deleteLabel="Obriši skladišta"
+        onDeleteList={() => {}}
+      >
         {warehouses.map((wh) => (
           <WarehouseListItem key={wh._id} warehouse={wh} />
         ))}

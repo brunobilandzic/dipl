@@ -17,3 +17,8 @@ export const updateWarehouse = async ({ id, data }) => {
 export const deleteWarehouse = async ({ id }) => {
   await Warehouse.findByIdAndDelete(id);
 };
+
+export const deleteWarehouses = async ({ ids } = {}) => {
+  if (!ids) await Warehouse.deleteMany({});
+  else await Warehouse.deleteMany({ _id: { $in: ids } });
+};

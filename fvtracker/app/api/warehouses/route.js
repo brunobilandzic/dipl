@@ -1,6 +1,7 @@
 import {
   createWarehouse,
   deleteWarehouse,
+  deleteWarehouses,
   updateWarehouse,
 } from "@/lib/warehouses";
 import { getWarehouses, getWarehouse } from "@/lib/warehouses/get";
@@ -54,7 +55,8 @@ export async function DELETE(request) {
     const { searchParams } = new URL(request.url);
     let id = searchParams.get("id");
     if (!id) {
-      return Response.json({ error: "ID nije naveden" }, { status: 400 });
+      await deleteWarehouses();
+      return Response.json({ success: true }, { status: 200 });
     }
     await deleteWarehouse({ id });
     return Response.json({ success: true }, { status: 200 });

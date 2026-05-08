@@ -1,4 +1,8 @@
-import { deleteWarehouse, updateWarehouse } from "@/lib/warehouses";
+import {
+  createWarehouse,
+  deleteWarehouse,
+  updateWarehouse,
+} from "@/lib/warehouses";
 import { getWarehouses, getWarehouse } from "@/lib/warehouses/get";
 import warehousePopulateConfig from "@/lib/warehouses/populateConfig";
 
@@ -16,6 +20,20 @@ export async function GET(request) {
     return Response.json({ warehouses });
   }
 }
+
+export async function POST(request) {
+  try {
+    const body = await request.json();
+    const warehouse = await createWarehouse({ warehouseData: body });
+    return Response.json({ warehouse }, { status: 201 });
+  } catch (err) {
+    return Response.json(
+      { error: err?.message ?? String(err) },
+      { status: 500 },
+    );
+  }
+}
+
 export async function PUT(request) {
   try {
     const { searchParams } = new URL(request.url);

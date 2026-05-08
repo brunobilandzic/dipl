@@ -23,6 +23,7 @@ import {
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { initFilters } from "@/lib/utils/list";
 import { facilitySortOptions } from "@/components/layout/preview/sort";
+import { GiBattery100 } from "react-icons/gi";
 
 const emptyForm = { name: "", description: "", volume: 0 };
 
@@ -155,7 +156,10 @@ const FacilityItem = ({ facility }) => {
         <Link href={`/postrojenja/${facility.slug}`} className="w-full">
           <div className="flex justify-between">
             <FacilityDetails facility={facility} />
-            <FacilityStats stocks={facility.stocks} />
+            <FacilityStats
+              stocks={facility.stocks}
+              facilityVolume={facility.volume}
+            />
           </div>
         </Link>
       </ListItem>
@@ -186,13 +190,18 @@ const FacilityDetails = ({ facility }) => (
   </div>
 );
 
+const FacilityStats = ({ stocks, facilityVolume }) => {
   const { productCount, totalQuantity, totalVolumeUsed } =
     prepareFacilityStocksInfo({ stocks });
 
   return (
     <div className="text-sm text-gray-500 text-right">
       <p>Proizvodi: {productCount}</p>
-      <p>Ukupno: {totalQuantity}</p>
+      <p className="flex items-center gap-1">
+        <div></div>
+        <GiBattery100 className="opacity-50" /> {totalVolumeUsed} od{" "}
+        {facilityVolume}
+      </p>
     </div>
   );
 };

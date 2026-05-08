@@ -177,12 +177,11 @@ const FacilityItem = ({ facility }) => {
 const FacilityDetails = ({ facility }) => (
   <div>
     <h2 className="text-xl font-bold">{facility.name}</h2>
-    {facility.description && (
-      <p className="listitemDescription">{facility.description}</p>
-    )}
-    <p className="listitemDescription">
-      Dodano: {showDate(facility.createdAt)}
-    </p>
+    <div className="listitemDescription">
+      {facility.description && <p>{facility.description}</p>}
+      <p>Dodano: {showDate(facility.createdAt)}</p>
+      <p>Kapacitet: {facility.volume}</p>
+    </div>
   </div>
 );
 

@@ -82,11 +82,11 @@ export const facilityTotalVolumeUsed = ({ stocks }) => {
   );
 };
 
-export const availableFacilities = ({ facilities, requiredVolume }) => {
+export const getAvailableFacilities = ({ facilities, requiredVolume }) => {
   return facilities.filter((facility) => {
     const totalVolumeUsed = facilityTotalVolumeUsed({
       stocks: facility.stocks,
     });
-    return totalVolumeUsed < requiredVolume;
+    return facility.volume - totalVolumeUsed > requiredVolume;
   });
 };

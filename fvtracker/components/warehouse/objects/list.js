@@ -5,12 +5,14 @@ import Link from "next/link";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { EditWarehouseModal } from "./editWarehouse";
+import { useRouter } from "next/navigation";
 
 export const WarehouseList = () => {
   const warehouses = useSelector(
     (state) => state.warehouse.warehouses.filteredItems,
   );
   const dispatch = useDispatch();
+  const router = useRouter();
 
   console.log({ warehouses });
 
@@ -20,7 +22,9 @@ export const WarehouseList = () => {
     <>
       <List
         title="Skladišta"
-        onCreateItem={() => {}}
+        onCreateItem={() => {
+          router.push("/skladisne-jedinice/dodavanje");
+        }}
         addLabel="Dodaj skladište"
         deleteLabel="Obriši skladišta"
         onDeleteList={() => {}}

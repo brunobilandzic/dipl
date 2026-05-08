@@ -21,6 +21,10 @@ export const getFacilities = async () => {
             },
           },
         },
+        {
+          path: "productionProcesses",
+          select: "quantity",
+        },
       ],
     },
   ]);

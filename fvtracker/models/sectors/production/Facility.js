@@ -11,6 +11,10 @@ const productionFacilitySchema = new Schema({
       default: [],
     },
   ],
+  volume: {
+    type: Number,
+    required: true,
+  },
 });
 
 const productionStockSchema = new Schema({
@@ -41,10 +45,6 @@ const productionStockSchema = new Schema({
       default: [],
     },
   ],
-  volume: {
-    type: Number,
-    required: true,
-  },
 });
 
 productionStockSchema.pre("deleteMany", async function () {

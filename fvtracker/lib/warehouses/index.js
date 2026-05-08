@@ -12,3 +12,7 @@ export const updateWarehouse = async ({ id, data }) => {
   await warehouse.save();
   return warehouse;
 };
+
+export const deleteWarehouse = async ({ id }) => {
+  await Warehouse.findByIdAndDelete(id);
+};

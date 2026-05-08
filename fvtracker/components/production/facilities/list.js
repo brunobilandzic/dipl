@@ -198,7 +198,6 @@ const FacilityStats = ({ stocks, facilityVolume }) => {
     <div className="text-sm text-gray-500 text-right">
       <p>Proizvodi: {productCount}</p>
       <p className="flex items-center gap-1">
-        <div></div>
         <GiBattery100 className="opacity-50" /> {totalVolumeUsed} od{" "}
         {facilityVolume}
       </p>

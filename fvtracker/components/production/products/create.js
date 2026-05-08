@@ -32,6 +32,7 @@ const CreateProductPageComponent = () => {
           productForm={productForm}
           setProductForm={setProductForm}
           handleSubmit={handleSubmit}
+          isEdit={false}
         />
       </div>
     </div>

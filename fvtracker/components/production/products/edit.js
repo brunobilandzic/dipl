@@ -43,9 +43,10 @@ export const EditProductForm = ({
   productForm,
   setProductForm,
   handleSubmit,
+  isEdit = true,
 }) => {
   const crops = useSelector((state) => state.cultivation.crops);
-
+  const submitLabel = isEdit ? "Spremi promjene" : "Izradi proizvod";
   return (
     <div>
       <h2>Uredi proizvod</h2>
@@ -100,11 +101,7 @@ export const EditProductForm = ({
             />
           ))}
         </div> */}
-        <div>
-          <div onClick={handleSubmit} className="btn submitButton">
-            Spremi promjene
-          </div>
-        </div>
+        <SubmitButton label={submitLabel} onClick={handleSubmit} />
       </div>
     </div>
   );

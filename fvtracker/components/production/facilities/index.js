@@ -28,7 +28,6 @@ function Facility({ slug }) {
 }
 
 const ProductionStocks = ({ stocks, facilityName }) => {
-  console.log("Facility stocks:", stocks);
   return (
     <div>
       <List title={facilityName}>

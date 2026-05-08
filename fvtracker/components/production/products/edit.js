@@ -75,6 +75,14 @@ export const EditProductForm = ({
             setProductForm({ ...productForm, price: e.target.value })
           }
         />
+        <AppInput
+          label="Skladišni volumen"
+          value={productForm.stockVolume}
+          type="number"
+          onChange={(e) =>
+            setProductForm({ ...productForm, stockVolume: e.target.value })
+          }
+        />
         <ChooseCropVarietyItems
           crops={crops}
           cropsData={productForm}
@@ -165,6 +173,7 @@ export const testProduct = ({ crops }) => ({
   description: "Opis proizvoda 1",
   price: 10,
   ingredients: testCropItemData({ crops }),
+  stockVolume: 1,
 });
 
 const emptyIngredient = {

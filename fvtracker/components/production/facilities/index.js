@@ -58,8 +58,11 @@ const ProductStock = ({ stock }) => {
             {stock?.quantity <= 0 ? (
               <>
                 {" "}
-                <div className="text-xl flex items-center pt-1">
+                <div className="text-xl flex flex-col items-center pt-1 gap-1">
                   <EmptyIcon />
+                  <div className="text-xs text-gray-500 font-normal">
+                    Nema novih zaliha
+                  </div>
                 </div>
               </>
             ) : (

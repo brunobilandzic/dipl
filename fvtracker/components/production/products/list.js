@@ -87,7 +87,7 @@ const ProductList = () => {
 
 export default ProductList;
 
-const ProductItem = ({ product, harvestingBatches, router , dispatch}) => {
+const ProductItem = ({ product, harvestingBatches, router, dispatch }) => {
   const [addProductionStockModalOpen, setAddProductionStockModalOpen] =
     useState(false);
   const [addWarehouseStockModalOpen, setAddWarehouseStockModalOpen] =
@@ -97,7 +97,7 @@ const ProductItem = ({ product, harvestingBatches, router , dispatch}) => {
     if (!warehouses) dispatch(fetchWarehouses());
     console.log({ warehouses });
   }, [warehouses]);
-  
+
   const actionOptions = [
     {
       label: "Uredi",
@@ -130,6 +130,7 @@ const ProductItem = ({ product, harvestingBatches, router , dispatch}) => {
       },
     },
   ];
+
   const minPossibleBatchMap = findMinPossibleBatchMap({
     batchesCVS: getBatchesCVS({
       harvestingBatches,

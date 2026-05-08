@@ -191,15 +191,15 @@ const FacilityDetails = ({ facility }) => (
 );
 
 const FacilityStats = ({ stocks, facilityVolume }) => {
-  const { productCount, totalQuantity, totalVolumeUsed } =
+  const { productCount, totalQuantity, totalVolumeUsed, manufacturedCount } =
     prepareFacilityStocksInfo({ stocks });
 
   return (
     <div className="text-sm text-gray-500 text-right">
       <p>Proizvodi: {productCount}</p>
+      <p>Proizvedeno: {manufacturedCount}</p>
       <p className="flex items-center gap-1">
-        <GiBattery100 className="opacity-50" /> {totalVolumeUsed} od{" "}
-        {facilityVolume}
+        Zauzeto: {totalVolumeUsed} od {facilityVolume}
       </p>
     </div>
   );

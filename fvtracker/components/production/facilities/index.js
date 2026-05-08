@@ -12,12 +12,6 @@ function Facility({ slug }) {
   const dispatch = useDispatch();
   const facilities = useSelector((state) => state.production.facilities);
   const facility = facilities?.items?.find((f) => f.slug === slug);
-  useEffect(() => {
-    console.log("Facilities in state:", facilities);
-    const facility = facilities?.items?.find((f) => f.slug === slug);
-  }, [facilities]);
-
-  console.log("Selected facility:", facility);
 
   if (!facility) return <LoadingFullScreen />;
 

@@ -76,6 +76,7 @@ const ProductList = () => {
               router={router}
               product={product}
               harvestingBatches={harvestingBatches}
+              dispatch={dispatch}
             />
           </div>
         ))}
@@ -86,7 +87,7 @@ const ProductList = () => {
 
 export default ProductList;
 
-const ProductItem = ({ product, harvestingBatches, router }) => {
+const ProductItem = ({ product, harvestingBatches, router , dispatch}) => {
   const [addProductionStockModalOpen, setAddProductionStockModalOpen] =
     useState(false);
   const [addWarehouseStockModalOpen, setAddWarehouseStockModalOpen] =
@@ -96,7 +97,7 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
     if (!warehouses) dispatch(fetchWarehouses());
     console.log({ warehouses });
   }, [warehouses]);
-  const dispatch = useDispatch();
+  
   const actionOptions = [
     {
       label: "Uredi",
@@ -125,7 +126,7 @@ const ProductItem = ({ product, harvestingBatches, router }) => {
       onClick: async (e) => {
         e.preventDefault();
         e.stopPropagation();
-        await deleteProducts({ productIds: [product._id] });
+        await deleteProducts({ productIds: [product._id], dispatch, router });
       },
     },
   ];

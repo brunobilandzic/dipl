@@ -1,3 +1,5 @@
+"use client"
+
 import SubmitButton from "@/components/form";
 import { AppInput } from "@/components/form/inputs";
 import React, { useState } from "react";

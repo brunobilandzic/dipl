@@ -186,8 +186,8 @@ const FacilityDetails = ({ facility }) => (
   </div>
 );
 
-const FacilityStats = ({ stocks }) => {
-  const { productCount, totalQuantity } = prepareFacilityStocksInfo({ stocks });
+  const { productCount, totalQuantity, totalVolumeUsed } =
+    prepareFacilityStocksInfo({ stocks });
 
   return (
     <div className="text-sm text-gray-500 text-right">

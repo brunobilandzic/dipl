@@ -51,12 +51,11 @@ const WarehouseListItem = ({ warehouse }) => {
 
   return (
     <div>
-      <ListItem
-        actionOptions={actionOptions}
-        title={warehouse.name}
-        subtitle={warehouse.location}
-      >
-        <Link href={`/skladisne-jedinice/${warehouse.slug}`}>Pregled</Link>
+      <ListItem actionOptions={actionOptions} subtitle={warehouse.location}>
+        <Link href={`/skladisne-jedinice/${warehouse.slug}`}>
+          <div className="listitemheader">{warehouse.name}</div>
+          <p className="listitemDescription">{warehouse.description}</p>
+        </Link>
       </ListItem>
       {editOpen && (
         <EditWarehouseModal

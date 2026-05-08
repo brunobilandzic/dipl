@@ -8,6 +8,7 @@ import {
   setMachines,
   setProducts,
 } from "@/store/production";
+import { fetchWarehouses } from "@/store/warehouse";
 
 export default async function fillProductionRedux({ dispatch, router }) {
   try {
@@ -39,7 +40,7 @@ const dispatchPayloads = ({ manager, dispatch, batches }) => {
   // dispatch(refreshProductsStocks.fulfilled(mapProductsStocks({ manager })));
   dispatch(refreshHarvestingBatches.fulfilled(batches));
   dispatch(refreshFacilities());
-
+  dispatch(fetchWarehouses());
 };
 
 /* const mapProductsStocks = ({ manager }) => {

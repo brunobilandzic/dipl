@@ -1,3 +1,4 @@
+import { getWarehouses, getWarehouse } from "@/lib/warehouses/get";
 import warehousePopulateConfig from "@/lib/warehouses/populateConfig";
 
 export async function GET(request) {

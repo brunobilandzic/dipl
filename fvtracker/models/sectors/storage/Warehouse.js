@@ -83,6 +83,17 @@ warehouseSchema.pre("deleteMany", async function () {
   await WarehouseStock.deleteMany({ warehouse: { $in: ids } });
 });
 
+warehouseSchema.methods.totalVolumeUsed = async function () {
+  const stocks = await mongoose
+    .model("WarehouseStock")
+    .find({ warehouse: this._id })
+    .populate("product");
+  return stocks.reduce((total, stock) => {
+    const productVolume = stock.product.volume || 0;
+    return total + productVolume * stock.quantity;
+  }, 0);
+};
+
 warehouseStockSchema.pre("save", function () {
   if (this.isModified("quantity") || this.isNew) {
     this.updatedAt = new Date();

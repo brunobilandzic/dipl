@@ -9,8 +9,6 @@ import { checkEmpty } from "@/lib/utils/objects";
 import { submitProductionStock } from "@/lib/utils/production/stocks";
 import { setLoading } from "@/store/loading";
 import handleError from "@/lib/constants/errors/client/handleError";
-import { refreshProducts } from "@/lib/utils/production/products";
-import { refreshHarvestingBatches } from "@/store/production";
 import fillProductionRedux from "@/lib/utils/production";
 import { getAvailableFacilities } from "@/lib/utils/production/facilities";
 

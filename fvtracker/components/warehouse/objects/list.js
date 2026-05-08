@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { EditWarehouseModal } from "./editWarehouse";
 import { useRouter } from "next/navigation";
 import { deleteWarehouse } from "@/lib/utils/storage/warehouse";
+import { deleteWarehouses } from "@/lib/utils/storage/warehouse";
 
 export const WarehouseList = () => {
   const warehouses = useSelector(
@@ -28,7 +29,9 @@ export const WarehouseList = () => {
         }}
         addLabel="Dodaj skladište"
         deleteLabel="Obriši skladišta"
-        onDeleteList={() => {}}
+        onDeleteList={() => {
+          deleteWarehouses({ dispatch, router });
+        }}
       >
         {warehouses.map((wh) => (
           <WarehouseListItem

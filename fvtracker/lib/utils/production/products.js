@@ -134,3 +134,8 @@ export function extractVarietiesQuantities({ product, quantity }) {
   return varietiesQuantities;
 }
 
+export const getIngredientsList = ({ ingredients }) => {
+  return ingredients
+    .map((ing) => `${ing.cropVariety.name} (${ing.quantity})`)
+    .join(", ");
+};

@@ -3,6 +3,7 @@
 import { LoadingFullScreen } from "@/components/layout/loading";
 import { EmptyIcon } from "@/components/layout/preview/icons";
 import { List, ListItem } from "@/components/layout/preview/list";
+import { getIngredientsList } from "@/lib/utils/production/products";
 import { setSelectedFacility } from "@/store/production";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -52,7 +53,12 @@ const ProductStock = ({ stock }) => {
     <>
       <ListItem>
         <div className={`flex justify-between items-center `}>
-          <div className="listitemheader">{stock?.product?.name}</div>
+          <div>
+            <div className="listitemheader">{stock?.product?.name}</div>
+            <p className="listitemDescription">
+              {getIngredientsList({ ingredients: stock?.product?.ingredients })}
+            </p>
+          </div>
           <div className="text-3xl font-bold">
             {stock?.quantity <= 0 ? (
               <>

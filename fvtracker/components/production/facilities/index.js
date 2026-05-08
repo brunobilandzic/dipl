@@ -53,6 +53,14 @@ const ProductStock = ({ stock }) => {
                   ingredients: stock?.product?.ingredients,
                 })}
               </p>
+              <p>
+                Proizvdeno ukupno u postrojenju:{" "}
+                {stock?.productionProcesses?.reduce(
+                  (acc, curr) => acc + curr.quantity,
+                  0,
+                ) || 0}
+              </p>
+            </div>
           </div>
           <div className="text-3xl font-bold">
             {stock?.quantity <= 0 ? (

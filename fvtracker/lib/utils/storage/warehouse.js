@@ -27,7 +27,7 @@ export const submitWarehouseStock = async ({ warehouseStockData }) => {
 };
 
 export const submitWarehouseForm = async ({
-  isEdit,
+  isEdit = false,
   form,
   warehouseId,
   dispatch,

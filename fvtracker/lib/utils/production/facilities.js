@@ -70,5 +70,10 @@ export const deleteFacilityClient = async ({
 export const prepareFacilityStocksInfo = ({ stocks }) => {
   const totalQuantity = stocks.reduce((acc, stock) => acc + stock.quantity, 0);
   const productCount = stocks.length;
-  return { totalQuantity, productCount };
+  console.log("prepareFacilityStocksInfo", { stocks });
+  const totalVolume = stocks.reduce(
+    (acc, stock) => acc + stock.quantity * stock.product.stockVolume,
+    0,
+  );
+  return { totalQuantity, productCount, totalVolume };
 };

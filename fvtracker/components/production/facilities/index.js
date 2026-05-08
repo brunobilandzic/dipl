@@ -47,6 +47,7 @@ const ProductStock = ({ stock }) => {
         <div className={`flex justify-between items-center `}>
           <div>
             <div className="listitemheader">{stock?.product?.name}</div>
+            <div className="listitemDescription">
               <p>
                 Sastojci:{" "}
                 {getIngredientsList({

@@ -53,3 +53,21 @@ export const submitWarehouseForm = async ({
     );
   }
 };
+
+export const deleteWarehouse = async ({ warehouseId, dispatch, router }) => {
+  if (!confirm("Jeste li sigurni da želite obrisati ovo skladište?")) return;
+  try {
+    await api.delete(`/warehouses/${warehouseId}`);
+    dispatch(fetchWarehouses());
+    router.push("/skladisne-jedinice");
+  } catch (error) {
+    console.error("Error deleting warehouse:", error);
+    handleError(
+      {
+        ...error,
+        generalMessage: "Došlo je do greške prilikom brisanja skladišta.", 
+      },
+      router,
+    );
+  }
+}

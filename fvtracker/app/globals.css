@@ -59,6 +59,9 @@ tbody {
 .listitemheader {
   @apply text-xl font-bold
 }
+.listitemDescription {
+  @apply mt-1 text-sm text-gray-500
+}
 }
 
 :root {

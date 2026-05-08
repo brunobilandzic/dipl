@@ -177,9 +177,9 @@ const FacilityDetails = ({ facility }) => (
   <div>
     <h2 className="text-xl font-bold">{facility.name}</h2>
     {facility.description && (
-      <p className="text-sm text-gray-500">{facility.description}</p>
+      <p className="listitemDescription">{facility.description}</p>
     )}
-    <p className="text-sm text-gray-500">
+    <p className="listitemDescription">
       Dodano: {showDate(facility.createdAt)}
     </p>
   </div>

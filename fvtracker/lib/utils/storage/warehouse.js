@@ -34,7 +34,9 @@ export const submitWarehouseForm = async ({
 }) => {
   try {
     if (isEdit) {
-      await api.put(`/warehouses/${warehouseId}`, form);
+      await api.put(`/warehouses`, form, {
+        params: { id: warehouseId },
+      });
     } else {
       await api.post("/warehouses", form);
     }
@@ -65,9 +67,9 @@ export const deleteWarehouse = async ({ warehouseId, dispatch, router }) => {
     handleError(
       {
         ...error,
-        generalMessage: "Došlo je do greške prilikom brisanja skladišta.", 
+        generalMessage: "Došlo je do greške prilikom brisanja skladišta.",
       },
       router,
     );
   }
-}
+};

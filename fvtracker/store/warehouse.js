@@ -4,8 +4,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
   warehouses: {
-    items: null,
-    filteredItems: null,
+    items: [],
+    filteredItems: [],
   },
   isLoading: false,
 };

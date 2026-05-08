@@ -1,6 +1,7 @@
 import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { WAREHOUSE_STOCK } from "@/lib/constants/warehouse";
+import { fetchWarehouses } from "@/store/warehouse";
 
 export const totalWarehouseStockQuantity = ({ warehouseStocks }) => {
   return warehouseStocks.reduce((acc, stock) => {

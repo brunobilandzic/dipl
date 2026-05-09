@@ -12,6 +12,7 @@ import { showDate } from "@/lib/utils/display";
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { filterWarehouses, sortWarehouses } from "@/store/warehouse";
 import { initFilters } from "@/lib/utils/list";
+import { prepareFacilityStocksInfo } from "@/lib/utils/production/facilities";
 
 export const WarehouseList = () => {
   const warehouses = useSelector(
@@ -68,6 +69,9 @@ export const WarehouseList = () => {
 
 const WarehouseListItem = ({ warehouse, dispatch, router }) => {
   const [editOpen, setEditOpen] = useState(false);
+  const { totalQuantity, productCount, totalVolumeUsed } =
+    prepareFacilityStocksInfo({ stocks: warehouse.stocks });
+  console.log({ totalQuantity, productCount, totalVolumeUsed });
   const handleDelete = () => {
     deleteWarehouse({ warehouseId: warehouse._id, dispatch, router });
   };

@@ -2,13 +2,15 @@
 import { LoadingFullScreen } from "@/components/layout/loading";
 import { ListItem, List } from "@/components/layout/preview/list";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { EditWarehouseModal } from "./editWarehouse";
 import { useRouter } from "next/navigation";
 import { deleteWarehouse } from "@/lib/utils/storage/warehouse";
 import { deleteWarehouses } from "@/lib/utils/storage/warehouse";
 import { showDate } from "@/lib/utils/display";
+import { SORT_INIT_VALUE } from "@/lib/constants/others";
+import { sortWarehouses } from "@/store/warehouse";
 
 export const WarehouseList = () => {
   const warehouses = useSelector(
@@ -16,8 +18,14 @@ export const WarehouseList = () => {
   );
   const dispatch = useDispatch();
   const router = useRouter();
+  const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
 
   console.log({ warehouses });
+
+  useEffect(() => {
+    if (!warehouses) return;
+    dispatch(sortWarehouses(sortBy));
+  }, [sortBy]);
 
   if (!warehouses) return <LoadingFullScreen />;
 
@@ -33,6 +41,8 @@ export const WarehouseList = () => {
         onDeleteList={() => {
           deleteWarehouses({ dispatch, router });
         }}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
       >
         {warehouses.map((wh) => (
           <WarehouseListItem

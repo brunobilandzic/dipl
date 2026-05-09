@@ -13,7 +13,7 @@ const initialState = {
 const warehousesSlice = createSlice({
   name: "warehouses",
   initialState,
-  actions: {
+  reducers: {
     filterWarehouses: (state, action) => {
       state.warehouses.filteredItems = filterItems({
         _items: state.warehouses.items,
@@ -22,7 +22,7 @@ const warehousesSlice = createSlice({
     },
     sortWarehouses: (state, action) => {
       state.warehouses.filteredItems = sortItems({
-        _items: state.warehouses.filteredItems,
+        items: state.warehouses.filteredItems,
         sortBy: action.payload,
       });
     },

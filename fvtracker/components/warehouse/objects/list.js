@@ -10,7 +10,8 @@ import { deleteWarehouse } from "@/lib/utils/storage/warehouse";
 import { deleteWarehouses } from "@/lib/utils/storage/warehouse";
 import { showDate } from "@/lib/utils/display";
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
-import { sortWarehouses } from "@/store/warehouse";
+import { filterWarehouses, sortWarehouses } from "@/store/warehouse";
+import { initFilters } from "@/lib/utils/list";
 
 export const WarehouseList = () => {
   const warehouses = useSelector(
@@ -19,6 +20,7 @@ export const WarehouseList = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
+  const [filters, setFilters] = useState(initFilters("warehouses"));
 
   console.log({ warehouses });
 
@@ -26,6 +28,10 @@ export const WarehouseList = () => {
     if (!warehouses) return;
     dispatch(sortWarehouses(sortBy));
   }, [sortBy]);
+  useEffect(() => {
+    if (!warehouses) return;
+    dispatch(filterWarehouses(filters));
+  }, [filters]);
 
   if (!warehouses) return <LoadingFullScreen />;
 
@@ -43,6 +49,9 @@ export const WarehouseList = () => {
         }}
         sortBy={sortBy}
         setSortBy={setSortBy}
+        filters={filters}
+        setFilters={setFilters}
+        initialFilters={initFilters("warehouses")}
       >
         {warehouses.map((wh) => (
           <WarehouseListItem

@@ -8,6 +8,7 @@ import { EditWarehouseModal } from "./editWarehouse";
 import { useRouter } from "next/navigation";
 import { deleteWarehouse } from "@/lib/utils/storage/warehouse";
 import { deleteWarehouses } from "@/lib/utils/storage/warehouse";
+import { showDate } from "@/lib/utils/display";
 
 export const WarehouseList = () => {
   const warehouses = useSelector(
@@ -69,7 +70,11 @@ const WarehouseListItem = ({ warehouse, dispatch, router }) => {
       <ListItem actionOptions={actionOptions} subtitle={warehouse.location}>
         <Link href={`/skladisne-jedinice/${warehouse.slug}`}>
           <div className="listitemheader">{warehouse.name}</div>
-          <p className="listitemDescription">{warehouse.description}</p>
+          <div className="listitemDescription">
+            <p>{warehouse.description}</p>
+            <p>Kapacitet: {warehouse.volume}</p>
+            <p>Kreirano: {showDate(warehouse.createdAt)}</p>
+          </div>
         </Link>
       </ListItem>
       {editOpen && (

@@ -3,6 +3,7 @@
 import SubmitButton from "@/components/form";
 import { AppInput } from "@/components/form/inputs";
 import { submitWarehouseForm } from "@/lib/utils/storage/warehouse";
+import { getRandomString } from "@/lib/utils/strings";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -10,10 +11,17 @@ import { useDispatch } from "react-redux";
 const initialWarehouseForm = {
   name: "",
   description: "",
+  volume: "",
+};
+
+const testWarehouse = {
+  name: getRandomString({ beginning: "Skladište", length: 5 }),
+  description: "Glavno skladište za elektroničke uređaje",
+  volume: "10000",
 };
 
 function CreateWarehouse() {
-  const [newWarehouse, setNewWarehouse] = useState({});
+  const [newWarehouse, setNewWarehouse] = useState(testWarehouse);
   const dispatch = useDispatch();
   const router = useRouter();
   const handleChange = (e) => {

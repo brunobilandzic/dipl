@@ -47,6 +47,12 @@ function CreateWarehouse() {
         value={newWarehouse.description || ""}
         onChange={handleChange}
       />
+      <AppInput
+        label="Kapacitet skladišta"
+        name="volume"
+        value={newWarehouse.volume || ""}
+        onChange={handleChange}
+      />
       <SubmitButton label="Izradi skladište" handleSubmit={handleSubmit} />
     </div>
   );

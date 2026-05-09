@@ -39,6 +39,14 @@ export const initFilters = (listType) => {
           value: "",
         },
       ];
+    case "warehouses":
+      return [
+        {
+          type: "nameSearch",
+          placeholder: "Pretraži skladišta...",
+          value: "",
+        },
+      ];
   }
 };
 

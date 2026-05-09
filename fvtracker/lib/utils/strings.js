@@ -48,7 +48,7 @@ export const getRandomString = ({ beginning = "", length = 12 } = {}) => {
   for (let i = 0; i < length; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
-  return result;
+  return result + " " + new Date().toLocaleString();
 };
 
 export const onlyLetters = (str) => {

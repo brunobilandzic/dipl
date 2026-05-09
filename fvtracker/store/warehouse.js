@@ -1,5 +1,5 @@
 import api from "@/lib/api";
-import { filterItems } from "@/lib/utils/list";
+import { filterItems, sortItems } from "@/lib/utils/list";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -18,6 +18,12 @@ const warehousesSlice = createSlice({
       state.warehouses.filteredItems = filterItems({
         _items: state.warehouses.items,
         filters: action.payload,
+      });
+    },
+    sortWarehouses: (state, action) => {
+      state.warehouses.filteredItems = sortItems({
+        _items: state.warehouses.filteredItems,
+        sortBy: action.payload,
       });
     },
   },
@@ -48,5 +54,7 @@ export const fetchWarehouses = createAsyncThunk(
     return res.data.warehouses;
   },
 );
+
+export const { filterWarehouses, sortWarehouses } = warehousesSlice.actions;
 
 export default warehousesSlice.reducer;

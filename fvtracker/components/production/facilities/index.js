@@ -6,6 +6,7 @@ import { List, ListItem } from "@/components/layout/preview/list";
 import { getIngredientsList } from "@/lib/utils/production/products";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import CreateWarehouseStock from "../products/stock/CreateWarehouseStock";
 
 function Facility({ slug }) {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const ProductionStocks = ({ stocks, facilityName }) => {
 const ProductStock = ({ stock }) => {
   const [addWarehouseStockModalOpen, setAddWarehouseStockModalOpen] =
     useState(false);
+  const warehouses = useSelector((state) => state.warehouse.warehouses.items);
   const actionOptions = [
     {
       label: "Dodaj na skladište",
@@ -89,6 +91,15 @@ const ProductStock = ({ stock }) => {
           </div>
         </div>
       </ListItem>
+      {addWarehouseStockModalOpen && (
+        <CreateWarehouseStock
+          isOpen={addWarehouseStockModalOpen}
+          onCancel={() => setAddWarehouseStockModalOpen(false)}
+          product={stock.product}
+          clickedStock={stock}
+          warehouses={warehouses}
+        />
+      )}
     </>
   );
 };

@@ -24,8 +24,8 @@ const CreateWarehouseStock = ({
     quantity: 1,
     comment: `test dodavanja na skladište ${showDateTime(new Date())}`,
     productionStockId:
-      productionStocks.length > 0 ? productionStocks[0]._id : null,
-    warehouseId: warehouses.length > 0 ? warehouses[0]._id : null,
+      productionStocks?.length > 0 ? productionStocks[0]._id : null,
+    warehouseId: warehouses?.length > 0 ? warehouses[0]._id : null,
   });
   const dispatch = useDispatch();
   const [availableWarehouses, setAvailableWarehouses] = useState(warehouses);
@@ -98,7 +98,7 @@ const CreateWarehouseStock = ({
         name="warehouseId"
         defaultValue={warehouseStock.warehouseId}
         onChange={onChange}
-        options={availableWarehouses.map((w) => ({
+        options={availableWarehouses?.map((w) => ({
           value: w._id,
           label: w.name,
         }))}

@@ -13,6 +13,8 @@ import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { filterWarehouses, sortWarehouses } from "@/store/warehouse";
 import { initFilters } from "@/lib/utils/list";
 import { prepareFacilityStocksInfo } from "@/lib/utils/production/facilities";
+import { FacilityStats } from "@/components/production/facilities/list";
+import { GiBattery100 } from "react-icons/gi";
 
 export const WarehouseList = () => {
   const warehouses = useSelector(
@@ -92,11 +94,21 @@ const WarehouseListItem = ({ warehouse, dispatch, router }) => {
     <div>
       <ListItem actionOptions={actionOptions} subtitle={warehouse.location}>
         <Link href={`/skladisne-jedinice/${warehouse.slug}`}>
-          <div className="listitemheader">{warehouse.name}</div>
-          <div className="listitemDescription">
-            <p>{warehouse.description}</p>
-            <p>Kapacitet: {warehouse.volume}</p>
-            <p>Kreirano: {showDate(warehouse.createdAt)}</p>
+          <div className="flex justify-between">
+            <div>
+              <div className="listitemheader">{warehouse.name}</div>
+              <div className="listitemDescription">
+                <p>{warehouse.description}</p>
+                <p>Kapacitet: {warehouse.volume}</p>
+                <p>Kreirano: {showDate(warehouse.createdAt)}</p>
+              </div>
+            </div>
+            <div>
+              <WarehouseStats
+                stocks={warehouse.stocks}
+                warehouseVolume={warehouse.volume}
+              />
+            </div>
           </div>
         </Link>
       </ListItem>
@@ -108,5 +120,20 @@ const WarehouseListItem = ({ warehouse, dispatch, router }) => {
         />
       )}
     </div>
+  );
+};
+
+const WarehouseStats = ({ stocks, warehouseVolume }) => {
+  const { productCount, totalQuantity, totalVolumeUsed } =
+    prepareFacilityStocksInfo({ stocks });
+  return (
+    <>
+      <div className="text-sm text-gray-500 text-right flex flex-col items-end">
+        <p>Količina proizvoda: {totalQuantity}</p>
+        <p className="flex items-center gap-1">
+          Zauzeto: {totalVolumeUsed} od {warehouseVolume}
+        </p>
+      </div>
+    </>
   );
 };

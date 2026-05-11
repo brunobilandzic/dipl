@@ -8,6 +8,9 @@ const warehousePopulateConfig = [
         path: "product",
         populate: populateIngredientsConfig,
       },
+      {
+        path: "warehouseAcceptanceProcesses",
+      },
     ],
   },
 ];

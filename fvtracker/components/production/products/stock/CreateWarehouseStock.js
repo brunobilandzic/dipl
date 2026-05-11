@@ -2,7 +2,6 @@ import { AppInput, AppSelect } from "@/components/form/inputs";
 import { FormModal } from "@/components/layout/modals/form";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { showDateTime } from "@/lib/utils/display";
-import { checkEmpty } from "@/lib/utils/objects";
 import fillProductionRedux from "@/lib/utils/production";
 import { getAvailableFacilities } from "@/lib/utils/production/facilities";
 import { submitWarehouseStock } from "@/lib/utils/storage/warehouse";

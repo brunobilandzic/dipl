@@ -190,7 +190,7 @@ const FacilityDetails = ({ facility }) => (
   </div>
 );
 
-const FacilityStats = ({ stocks, facilityVolume }) => {
+export const FacilityStats = ({ stocks, facilityVolume }) => {
   const { productCount, totalQuantity, totalVolumeUsed, manufacturedCount } =
     prepareFacilityStocksInfo({ stocks });
 

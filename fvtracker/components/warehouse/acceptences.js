@@ -23,17 +23,19 @@ function WarehouseAcceptances({ acceptances }) {
 
 const ProductAcceptances = ({ product, warehouseAcceptanceProcesses }) => {
   return (
-    <div>
-      <h3>{product.name}</h3>
-      <List>
-        {warehouseAcceptanceProcesses.map((acceptance) => (
-          <WarehouseAcceptProcess
-            key={acceptance._id}
-            acceptance={acceptance}
-          />
-        ))}
-      </List>
-    </div>
+    <ListItem>
+      <div>
+        <h3>{product.name}</h3>
+        <List>
+          {warehouseAcceptanceProcesses.map((acceptance) => (
+            <WarehouseAcceptProcess
+              key={acceptance._id}
+              acceptance={acceptance}
+            />
+          ))}
+        </List>
+      </div>
+    </ListItem>
   );
 };
 

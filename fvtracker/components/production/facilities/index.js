@@ -55,7 +55,11 @@ const ProductStock = ({ stock }) => {
   return (
     <>
       <ListItem actionOptions={actionOptions}>
-        {newFunction(stock)}
+        <StockItem
+          product={stock.product}
+          productionProcesses={stock.productionProcesses}
+          quantity={stock.quantity}
+        />
       </ListItem>
       {addWarehouseStockModalOpen && (
         <CreateWarehouseStock
@@ -71,20 +75,21 @@ const ProductStock = ({ stock }) => {
 };
 
 export default Facility;
-function newFunction(stock) {
+
+function StockItem({product, productionProcesses, quantity}) {
   return <div className={`flex justify-between items-center `}>
     <div>
-      <div className="listitemheader">{stock?.product?.name}</div>
+      <div className="listitemheader">{product?.name}</div>
       <div className="listitemDescription">
         <p>
           Sastojci:{" "}
           {getIngredientsList({
-            ingredients: stock?.product?.ingredients,
+            ingredients: product?.ingredients,
           })}
         </p>
         <p>
           Proizvdeno ukupno u postrojenju:{" "}
-          {stock?.productionProcesses?.reduce(
+          {productionProcesses?.reduce(
             (acc, curr) => acc + curr.quantity,
             0
           ) || 0}
@@ -92,7 +97,7 @@ function newFunction(stock) {
       </div>
     </div>
     <div className="text-3xl font-bold">
-      {stock?.quantity <= 0 ? (
+      {quantity <= 0 ? (
         <>
           {" "}
           <div className="text-xl flex flex-col items-center pt-1 gap-1">
@@ -103,7 +108,7 @@ function newFunction(stock) {
           </div>
         </>
       ) : (
-        stock.quantity
+        quantity
       )}
     </div>
   </div>;

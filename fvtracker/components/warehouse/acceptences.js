@@ -1,11 +1,32 @@
 import React from "react";
 import { List, ListItem } from "../layout/preview/list";
+import { showDateTime } from "@/lib/utils/display";
 
 function WarehouseAcceptances({ acceptances }) {
+  console.log({ acceptances });
   return (
     <div>
       <List>
-        {acceptances.map((acceptance) => (
+        {acceptances.map((productAcceptances) => (
+          <ProductAcceptances
+            key={productAcceptances.product}
+            product={productAcceptances.product}
+            warehouseAcceptanceProcesses={
+              productAcceptances.warehouseAcceptanceProcesses
+            }
+          />
+        ))}
+      </List>
+    </div>
+  );
+}
+
+const ProductAcceptances = ({ product, warehouseAcceptanceProcesses }) => {
+  return (
+    <div>
+      <h3>{product.name}</h3>
+      <List>
+        {warehouseAcceptanceProcesses.map((acceptance) => (
           <WarehouseAcceptProcess
             key={acceptance._id}
             acceptance={acceptance}
@@ -14,12 +35,21 @@ function WarehouseAcceptances({ acceptances }) {
       </List>
     </div>
   );
-}
+};
 
 const WarehouseAcceptProcess = ({ acceptance }) => {
+  console.log({ acceptance });
   return (
     <ListItem>
-      {acceptance.product.name} - {acceptance.quantity}
+      <div className="listitemDescription">
+        <div> {showDateTime(acceptance.acceptedAt)}</div>
+      </div>
+      <div> {acceptance.comment}</div>
+      <div>
+        {" "}
+        Primljeno: {acceptance.quantity} komad
+        {acceptance.quantity !== 1 ? "a" : ""}
+      </div>
     </ListItem>
   );
 };

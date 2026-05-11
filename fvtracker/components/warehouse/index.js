@@ -66,6 +66,7 @@ const WarehouseStocks = ({ stocks, onCancel, warehouseName }) => {
 };
 
 const WarehouseStockItem = ({ stock }) => {
+    console.log({ stock });
   return (
     <div>
       <ListItem>

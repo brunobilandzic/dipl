@@ -5,7 +5,7 @@ import { EmptyIcon } from "@/components/layout/preview/icons";
 import { List, ListItem } from "@/components/layout/preview/list";
 import { getIngredientsList } from "@/lib/utils/production/products";
 import { setSelectedFacility } from "@/store/production";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function Facility({ slug }) {
@@ -40,10 +40,20 @@ const ProductionStocks = ({ stocks, facilityName }) => {
 };
 
 const ProductStock = ({ stock }) => {
+  const [addWarehouseStockModalOpen, setAddWarehouseStockModalOpen] =
+    useState(false);
+  const actionOptions = [
+    {
+      label: "Dodaj na skladište",
+      onClick: () => {
+        setAddWarehouseStockModalOpen(true);
+      },
+    },
+  ];
   if (!stock) return;
   return (
     <>
-      <ListItem>
+      <ListItem actionOptions={actionOptions}>
         <div className={`flex justify-between items-center `}>
           <div>
             <div className="listitemheader">{stock?.product?.name}</div>

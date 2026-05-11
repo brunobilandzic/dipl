@@ -52,6 +52,8 @@ function WarehousePageComponent({ slug }) {
     return (
       <WarehouseAcceptances
         acceptances={buildAcceptances({ stocks: warehouse.stocks })}
+        warehouseName={warehouse.name}
+        onCancel={() => setAcceptancesView(false)}
       />
     );
   }
@@ -72,7 +74,10 @@ const WarehouseStocks = ({ stocks, onCancel, warehouseName }) => {
       <List
         title={`Zalihe na skladištu ${warehouseName}`}
         customButtons={
-          <ReturnButton onClick={onCancel} returnLabel="Povratak na zalihe" />
+          <ReturnButton
+            onClick={onCancel}
+            returnLabel="Povratak na skladiste"
+          />
         }
       >
         {stocks.map((stock) => (

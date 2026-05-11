@@ -126,7 +126,6 @@ const productsSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(refreshProductsStocks.fulfilled, (state, action) => {
-        console.log({ action });
         state.productStocks.items = action.payload.productionStocks;
         state.productStocks.filteredItems = sortItems({
           items: action.payload.productionStocks,

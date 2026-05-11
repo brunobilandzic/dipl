@@ -196,8 +196,6 @@ export const FacilityStats = ({ stocks, facilityVolume }) => {
 
   return (
     <div className="text-sm text-gray-500 text-right">
-      <p>Proizvodi: {productCount}</p>
-      <p>Proizvedeno: {manufacturedCount}</p>
       <p className="flex items-center gap-1">
         Zauzeto: {totalVolumeUsed} od {facilityVolume}
       </p>

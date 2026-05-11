@@ -126,7 +126,6 @@ const WarehouseStats = ({ stocks, warehouseVolume }) => {
   return (
     <>
       <div className="text-sm text-gray-500 text-right flex flex-col items-end">
-        <p>Količina proizvoda: {totalQuantity}</p>
         <p className="flex items-center gap-1">
           Zauzeto: {totalVolumeUsed} od {warehouseVolume}
         </p>

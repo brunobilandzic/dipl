@@ -24,7 +24,9 @@ const CreateWarehouseStock = ({
     quantity: 1,
     comment: `test dodavanja na skladište ${showDateTime(new Date())}`,
     productionStockId:
-      productionStocks?.length > 0 ? productionStocks[0]._id : null,
+      productionStocks?.length > 0
+        ? productionStocks[0]._id
+        : clickedStock?._id || null,
     warehouseId: warehouses?.length > 0 ? warehouses[0]._id : null,
   });
   const dispatch = useDispatch();

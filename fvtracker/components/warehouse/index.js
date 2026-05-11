@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { FaCubesStacked } from "react-icons/fa6";
 import { useSelector } from "react-redux";
-import { List } from "../layout/preview/list";
+import { List, ListItem } from "../layout/preview/list";
 import { OptionButtons } from "../layout/buttons/options";
 import { ReturnButton } from "../layout/buttons/buttons";
 
@@ -58,9 +58,22 @@ const WarehouseStocks = ({ stocks, onCancel, warehouseName }) => {
         }
       >
         {stocks.map((stock) => (
-          <div key={stock._id}>{stock?.product?.name}</div>
+          <WarehouseStockItem key={stock._id} stock={stock} />
         ))}
       </List>
+    </div>
+  );
+};
+
+const WarehouseStockItem = ({ stock }) => {
+  return (
+    <div>
+      <ListItem>
+        <div className="flex justify-between">
+          <div>{stock.product.name}</div>
+          <div>{stock.quantity} kom</div>
+        </div>
+      </ListItem>
     </div>
   );
 };

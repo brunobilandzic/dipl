@@ -1,4 +1,4 @@
-import CreateWarehouse from "@/components/warehouse/objects/create";
+import CreateWarehouse from "@/components/warehouse/create";
 import { checkManager } from "@/lib/auth/fetchSessionData";
 import { WAREHOUSE_MANAGER } from "@/lib/constants/users/managerTypes";
 import React from "react";

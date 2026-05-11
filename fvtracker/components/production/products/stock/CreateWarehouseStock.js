@@ -31,15 +31,18 @@ const CreateWarehouseStock = ({
   const dispatch = useDispatch();
   const [availableWarehouses, setAvailableWarehouses] = useState(warehouses);
   const [warehouseStock, setWarehouseStock] = useState(createInitialFormData());
-
   const [availableProductionStocks, setAvailableProductionStocks] =
     useState(productionStocks);
+
   const onChange = (e) => {
     const { name, value } = e.target;
     if (name == "quantity") {
-      if (clickedStock?.quantity < value) {
+      const selectedProductionStock = productionStocks.find(
+        (ps) => ps._id === warehouseStock.productionStockId,
+      );
+      if (selectedProductionStock?.quantity < value) {
         alert(
-          `Unesena količina je veća od dostupne količine na proizvodnoj zalihi (${clickedStock.quantity}). Molimo unesite manju količinu.`,
+          `Unesena količina je veća od dostupne količine na proizvodnoj zalihi (${selectedProductionStock?.quantity}). Molimo unesite manju količinu.`,
         );
         return;
       }
@@ -110,7 +113,7 @@ const CreateWarehouseStock = ({
           onChange={onChange}
           options={availableProductionStocks.map((ps) => ({
             value: ps._id,
-            label: `${ps.facility.name} (${ps.quantity})`,
+            label: `${ps.facility.name} (Na zalihi: ${ps.quantity})`,
           }))}
         />
       )}

@@ -13,8 +13,6 @@ import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { filterWarehouses, sortWarehouses } from "@/store/warehouse";
 import { initFilters } from "@/lib/utils/list";
 import { prepareFacilityStocksInfo } from "@/lib/utils/production/facilities";
-import { FacilityStats } from "@/components/production/facilities/list";
-import { GiBattery100 } from "react-icons/gi";
 
 export const WarehouseList = () => {
   const warehouses = useSelector(

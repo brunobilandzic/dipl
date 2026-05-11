@@ -6,12 +6,16 @@ import { useSelector } from "react-redux";
 import { List, ListItem } from "../layout/preview/list";
 import { OptionButtons } from "../layout/buttons/options";
 import { ReturnButton } from "../layout/buttons/buttons";
+import WarehouseAcceptances from "./acceptences";
+import { IoEnterOutline } from "react-icons/io5";
+import { buildAcceptances } from "@/lib/utils/storage/acceptances";
 
 function WarehousePageComponent({ slug }) {
   const warehouses = useSelector((state) => state.warehouse.warehouses.items);
   const warehouse = warehouses?.find((w) => w.slug === slug);
 
   const [stocksView, setStocksView] = useState(false);
+  const [acceptancesView, setAcceptancesView] = useState(false);
 
   const options = [
     {
@@ -19,6 +23,13 @@ function WarehousePageComponent({ slug }) {
       icon: <FaCubesStacked />,
       onClick: () => {
         setStocksView(true);
+      },
+    },
+    {
+      label: "Prijemi",
+      icon: <IoEnterOutline />,
+      onClick: () => {
+        setAcceptancesView(true);
       },
     },
   ];
@@ -35,6 +46,13 @@ function WarehousePageComponent({ slug }) {
           warehouseName={warehouse.name}
         />
       </div>
+    );
+  }
+  if (acceptancesView) {
+    return (
+      <WarehouseAcceptances
+        acceptances={buildAcceptances({ stocks: warehouse.stocks })}
+      />
     );
   }
   return (

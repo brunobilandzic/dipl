@@ -92,7 +92,6 @@ const CreateWarehouseStock = ({
       title="Pošalji u skladište"
       isOpen={isOpen}
       onCancel={onCancel}
-      submitDisabled={checkEmpty(warehouseStock, true)}
       onSubmit={onSubmit}
     >
       <AppSelect

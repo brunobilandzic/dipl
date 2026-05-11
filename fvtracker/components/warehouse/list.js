@@ -71,7 +71,6 @@ const WarehouseListItem = ({ warehouse, dispatch, router }) => {
   const [editOpen, setEditOpen] = useState(false);
   const { totalQuantity, productCount, totalVolumeUsed } =
     prepareFacilityStocksInfo({ stocks: warehouse.stocks });
-  console.log({ totalQuantity, productCount, totalVolumeUsed });
   const handleDelete = () => {
     deleteWarehouse({ warehouseId: warehouse._id, dispatch, router });
   };

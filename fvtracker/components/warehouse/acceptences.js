@@ -1,12 +1,21 @@
 import React from "react";
 import { List, ListItem } from "../layout/preview/list";
 import { showDateTime } from "@/lib/utils/display";
+import { ReturnButton } from "../layout/buttons/buttons";
 
-function WarehouseAcceptances({ acceptances }) {
+function WarehouseAcceptances({ acceptances, warehouseName, onCancel }) {
   console.log({ acceptances });
   return (
     <div>
-      <List>
+      <List
+        title={`Skladište ${warehouseName} - Prijemi`}
+        customButtons={
+          <ReturnButton
+            onClick={onCancel}
+            returnLabel="Povratak na skladiste"
+          />
+        }
+      >
         {acceptances.map((productAcceptances) => (
           <ProductAcceptances
             key={productAcceptances.product}

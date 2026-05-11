@@ -2,6 +2,7 @@ import { Base } from "@/models/Base";
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
 import { ProductionProcess } from "./Process";
+import { Product } from "./Product";
 
 const productionFacilitySchema = new Schema({
   stocks: [
@@ -53,6 +54,10 @@ productionStockSchema.pre("deleteMany", async function () {
   await ProductionFacility.updateMany(
     { stocks: { $in: ids } },
     { $pull: { stocks: { $in: ids } } },
+  );
+  await Product.updateMany(
+    { productionStocks: { $in: ids } },
+    { $pull: { productionStocks: { $in: ids } } },
   );
 });
 

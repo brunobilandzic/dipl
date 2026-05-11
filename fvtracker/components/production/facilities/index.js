@@ -4,7 +4,6 @@ import { LoadingFullScreen } from "@/components/layout/loading";
 import { EmptyIcon } from "@/components/layout/preview/icons";
 import { List, ListItem } from "@/components/layout/preview/list";
 import { getIngredientsList } from "@/lib/utils/production/products";
-import { setSelectedFacility } from "@/store/production";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

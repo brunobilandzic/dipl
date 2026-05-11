@@ -1,11 +1,17 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { use, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { refreshProductsStocks } from "@/store/production";
 import { List, ListItem } from "@/components/layout/preview/list";
 import { v4 as uuid } from "uuid";
+import { CreateProductionStock } from "./CreateProductionStock";
+import {
+  findMinPossibleBatchMap,
+  getBatchesCVS,
+} from "@/lib/utils/production/resources";
+import { LoadingFullScreen } from "@/components/layout/loading";
 
 const StockList = () => {
   const dispatch = useDispatch();
@@ -30,24 +36,55 @@ const StockList = () => {
 export default StockList;
 
 const StockItem = ({ stock }) => {
+  const [addProductStockModalOpen, setAddProductStockModalOpen] =
+    useState(false);
+  const harvestingBatches = useSelector(
+    (state) => state.production.harvestingBatches.items,
+  );
+  const product = stock.product;
   const actionOptions = [
     {
       label: "Dodaj zalihe",
       className: "submitButton",
       onClick: () => {
         console.log("Dodaj zalihe", stock.product.name);
+        setAddProductStockModalOpen(true);
       },
     },
   ];
 
+  useEffect(() => {
+    console.log("modal open state changed:", addProductStockModalOpen);
+  }, [addProductStockModalOpen]);
+
+  if (!product || !harvestingBatches) return <LoadingFullScreen />;
+
+  const minPossibleBatchMap = findMinPossibleBatchMap({
+    batchesCVS: getBatchesCVS({
+      harvestingBatches,
+      product,
+    }),
+  });
+
   console.log({ stock });
   return (
-    <ListItem key={uuid()} actionOptions={actionOptions}>
-      <div>
-        <h3>{stock.product.name}</h3>
-        <p>{stock.product.description}</p>
-        <p>Quantity: {stock.quantity}</p>
-      </div>
-    </ListItem>
+    <>
+      <ListItem key={uuid()} actionOptions={actionOptions}>
+        <div>
+          <h3>{stock.product.name}</h3>
+          <p>{stock.product.description}</p>
+          <p>Quantity: {stock.quantity}</p>
+        </div>
+      </ListItem>
+      {addProductStockModalOpen && (
+        <CreateProductionStock
+          isOpen={addProductStockModalOpen}
+          product={stock.product}
+          onClose={() => setAddProductStockModalOpen(false)}
+          minPossibleBatchMap={minPossibleBatchMap}
+          onCancel={() => setAddProductStockModalOpen(false)}
+        />
+      )}
+    </>
   );
 };

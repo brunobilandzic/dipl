@@ -76,41 +76,42 @@ const ProductStock = ({ stock }) => {
 
 export default Facility;
 
-function StockItem({product, productionProcesses, quantity}) {
-  return <div className={`flex justify-between items-center `}>
-    <div>
-      <div className="listitemheader">{product?.name}</div>
-      <div className="listitemDescription">
-        <p>
-          Sastojci:{" "}
-          {getIngredientsList({
-            ingredients: product?.ingredients,
-          })}
-        </p>
-        <p>
-          Proizvdeno ukupno u postrojenju:{" "}
-          {productionProcesses?.reduce(
-            (acc, curr) => acc + curr.quantity,
-            0
-          ) || 0}
-        </p>
+export function StockItem({ product, productionProcesses, quantity }) {
+  return (
+    <div className={`flex justify-between items-center `}>
+      <div>
+        <div className="listitemheader">{product?.name}</div>
+        <div className="listitemDescription">
+          <p>
+            Sastojci:{" "}
+            {getIngredientsList({
+              ingredients: product?.ingredients,
+            })}
+          </p>
+          <p>
+            Proizvdeno ukupno u postrojenju:{" "}
+            {productionProcesses?.reduce(
+              (acc, curr) => acc + curr.quantity,
+              0,
+            ) || 0}
+          </p>
+        </div>
+      </div>
+      <div className="text-3xl font-bold">
+        {quantity <= 0 ? (
+          <>
+            {" "}
+            <div className="text-xl flex flex-col items-center pt-1 gap-1">
+              <EmptyIcon />
+              <div className="text-xs text-gray-500 font-normal">
+                Nema novih zaliha
+              </div>
+            </div>
+          </>
+        ) : (
+          quantity
+        )}
       </div>
     </div>
-    <div className="text-3xl font-bold">
-      {quantity <= 0 ? (
-        <>
-          {" "}
-          <div className="text-xl flex flex-col items-center pt-1 gap-1">
-            <EmptyIcon />
-            <div className="text-xs text-gray-500 font-normal">
-              Nema novih zaliha
-            </div>
-          </div>
-        </>
-      ) : (
-        quantity
-      )}
-    </div>
-  </div>;
+  );
 }
-

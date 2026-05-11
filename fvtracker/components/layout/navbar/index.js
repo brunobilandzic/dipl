@@ -18,6 +18,7 @@ import {
 import fillProductionRedux from "@/lib/utils/production";
 import { fetchWarehouses } from "@/store/warehouse";
 import { fillWarehouseRedux } from "@/lib/utils/storage";
+import { refreshProducts } from "@/lib/utils/production/products";
 
 export default {
   roleitems,
@@ -88,6 +89,9 @@ function NavItems() {
         );
         fillWarehouseRedux({ dispatch });
       }
+    } else if (status === "unauthenticated") {
+      console.log("user is unauthenticated, refreshing products...");
+      refreshProducts({ dispatch, router });
     }
   }, [status]);
 

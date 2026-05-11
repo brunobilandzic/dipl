@@ -126,9 +126,10 @@ const productsSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(refreshProductsStocks.fulfilled, (state, action) => {
-        state.productStocks.items = action.payload;
+        console.log({ action });
+        state.productStocks.items = action.payload.productionStocks;
         state.productStocks.filteredItems = sortItems({
-          items: action.payload,
+          items: action.payload.productionStocks,
           sortBy: SORT_INIT_VALUE,
         });
       })
@@ -166,7 +167,7 @@ export const refreshProductsStocks = createAsyncThunk(
     console.log("Fetching product stocks...");
     const res = await api.get("/stocks");
     const data = res.data;
-    console.log(data);
+    console.log({data});
     return res.data.stocks;
   },
 );

@@ -12,19 +12,18 @@ export const getCartFromLocalStorage = () => {
   return cart ? JSON.parse(cart) : null;
 };
 
-export const fillCartRedux = ({ dispatch, useSelector }) => {
-  const cartItems = useSelector((state) => state.webstore.cart.items);
-  useEffect(() => {
-    if (cartItems.length > 0) {
-      return;
-    }
-    const localCart = getCartFromLocalStorage();
-    if (localCart && localCart.items) {
-      localCart.items.forEach((item) => {
-        dispatch(
-          addToCartRedux({ product: item.product, quantity: item.quantity }),
-        );
-      });
-    }
-  }, [dispatch]);
+export const fillCartRedux = ({ dispatch, cartItems }) => {
+  console.log({ cartItems });
+  if (cartItems.length > 0) {
+    return;
+  }
+  const localCart = getCartFromLocalStorage();
+  console.log({ localCart });
+  if (localCart && localCart.items) {
+    localCart.items.forEach((item) => {
+      dispatch(
+        addToCartRedux({ product: item.product, quantity: item.quantity }),
+      );
+    });
+  }
 };

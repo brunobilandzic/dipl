@@ -1,3 +1,5 @@
+"use client";
+
 import { preventEvent } from "@/lib/utils/dev";
 import { useEffect, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";

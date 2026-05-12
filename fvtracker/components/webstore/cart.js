@@ -4,11 +4,16 @@ import { preventEvent } from "@/lib/utils/dev";
 import { useEffect, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { List } from "../layout/preview/list";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { changeQuantity } from "@/store/webstore";
 
 export const CartPageComponent = () => {
-  const cart = useSelector((state) => state.webstore.cart);
-  const [cartItems, setCartItems] = useState(cart.items);
+  const dispatch = useDispatch();
+  const cartItems = useSelector((state) => state.webstore.cart.items);
+
+  const onQuantityChange = (cartItem, quantity) => {
+    dispatch(changeQuantity({ productId: cartItem.product.id, quantity }));
+  };
   console.log({ cartItems });
   return (
     <List
@@ -20,18 +25,54 @@ export const CartPageComponent = () => {
       }
     >
       {cartItems?.map((cartItem, index) => {
-        return <CartItem key={index} cartItem={cartItem} />;
+        return (
+          <CartItem
+            key={index}
+            cartItem={cartItem}
+            onQuantityChange={onQuantityChange}
+          />
+        );
       })}
     </List>
   );
 };
 
-const CartItem = ({ cartItem }) => {
-  const { product, quantity } = cartItem;
+const CartItem = ({ cartItem, onQuantityChange }) => {
+  const { product, quantity: quantityProp } = cartItem;
+  const [quantity, setQuantity] = useState(quantityProp);
+  const quantityEdit = (newQuantity, e) => {
+    preventEvent(e);
+    onQuantityChange(cartItem, newQuantity);
+  };
   return (
     <>
-      <div>
-        <div>{product.name}</div>
+      <div className="flex justify-between items-center">
+        <div className="text-lg font-bold">{product.name}</div>
+        <div>
+          <CartItemQuantity
+            quantity={quantity}
+            setQuantity={setQuantity}
+            quantityEdit={quantityEdit}
+          />
+        </div>
+      </div>
+    </>
+  );
+};
+
+const CartItemQuantity = ({ quantity, setQuantity, quantityEdit }) => {
+  return (
+    <>
+      <div className="w-14">
+        <input
+          className="w-full text-center"
+          type="number"
+          onChange={(e) => {
+            setQuantity(e.target.value);
+            quantityEdit(e.target.value, e);
+          }}
+          value={quantity}
+        />
       </div>
     </>
   );

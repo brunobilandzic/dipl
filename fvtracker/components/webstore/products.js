@@ -43,18 +43,27 @@ const ProductsTilesGrid = ({ title, products }) => {
 
 function ProductTile({ index, product }) {
   const dispatch = useDispatch();
-  const [cartQuantity, setCartQuantity] = useState("");
+  const cartItems = useSelector((state) => state.webstore.cart.items);
+  const [cartQuantity, setCartQuantity] = useState(
+    productInCart({
+      productId: product.id,
+      cartItems: cartItems,
+    }) || "",
+  );
   const addToCart = () => {
     console.log("adding", { product: product.name, cartQuantity });
     dispatch(addToCartRedux({ product, quantity: cartQuantity }));
   };
-  const inCartQuantity = useSelector((state) =>
-    productInCart({
-      productId: product.id,
-      cartItems: state.webstore.cart.items,
-    }),
-  );
-  console.log({ inCartQuantity });
+  useEffect(() => {
+    setCartQuantity(
+      productInCart({
+        productId: product.id,
+        cartItems: cartItems,
+      }) || "",
+    );
+  }, [cartItems]);
+
+  console.log({ cartQuantity });
 
   const productActions = [
     {

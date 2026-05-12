@@ -35,6 +35,7 @@ const productsSlice = createSlice({
       state.cart.items = state.cart.items.filter(
         (item) => item.product.id !== productId,
       );
+      localStorage.setItem("cart", JSON.stringify(state.cart));
     },
     fillReduxCart: (state, action) => {
       state.cart.items = action.payload;
@@ -47,6 +48,10 @@ const productsSlice = createSlice({
       if (existingItem) {
         existingItem.quantity = quantity;
       }
+      localStorage.setItem("cart", JSON.stringify(state.cart));
+    },
+    emptyCart: (state, action) => {
+      state.cart = initialState.cart;
       localStorage.setItem("cart", JSON.stringify(state.cart));
     },
   },

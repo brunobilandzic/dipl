@@ -20,10 +20,6 @@ export const fillCartRedux = ({ dispatch, cartItems }) => {
   const localCart = getCartFromLocalStorage();
   console.log({ localCart });
   if (localCart && localCart.items) {
-    localCart.items.forEach((item) => {
-      dispatch(
-        addToCartRedux({ product: item.product, quantity: item.quantity }),
-      );
-    });
+    dispatch(fillReduxCart(localCart));
   }
 };

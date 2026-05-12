@@ -37,7 +37,12 @@ export const AddToCartQuantity = ({ quantity, setQuantity, addToCart }) => {
   );
 };
 
-export const AddToCartButton = ({ onClick, cartQuantity, setCartQuantity }) => {
+export const AddToCartButton = ({
+  onClick,
+  cartQuantity,
+  setCartQuantity,
+  addToCart,
+}) => {
   const [addToCartClicked, setAddToCartClicked] = useState(false);
   useEffect(() => {
     console.log("addToCartClicked changed:", addToCartClicked);
@@ -56,6 +61,7 @@ export const AddToCartButton = ({ onClick, cartQuantity, setCartQuantity }) => {
           <AddToCartQuantity
             quantity={cartQuantity}
             setQuantity={setCartQuantity}
+            addToCart={addToCart}
           />
         )}
         <FaShoppingCart />

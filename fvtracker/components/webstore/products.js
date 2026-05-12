@@ -37,13 +37,17 @@ const ProductsTilesGrid = ({ title, products }) => {
 };
 
 function ProductTile({ index, product }) {
-  const [cartQuantity, setCartQuantity] = useState(null);
+  const [cartQuantity, setCartQuantity] = useState("");
+  const addToCart = () => {
+    console.log("adding", { product: product.name, cartQuantity });
+  };
   const productActions = [
     {
       component: (
         <AddToCartButton
           cartQuantity={cartQuantity}
           setCartQuantity={setCartQuantity}
+          addToCart={addToCart}
         />
       ),
       onClick: () => {
@@ -51,6 +55,7 @@ function ProductTile({ index, product }) {
       },
     },
   ];
+
   return (
     <AppTile key={index} tile={product}>
       <div className=" flex flex-col justify-between h-full">

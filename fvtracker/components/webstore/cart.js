@@ -4,6 +4,7 @@ import { preventEvent } from "@/lib/utils/dev";
 import { useEffect, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { List } from "../layout/preview/list";
+import { useSelector } from "react-redux";
 
 export const CartPageComponent = () => {
   const cart = useSelector((state) => state.webstore.cart);
@@ -26,7 +27,7 @@ const CartItem = ({ cartItem }) => {
   return (
     <>
       <div>
-        <div></div>
+        <div>{product.name}</div>
       </div>
     </>
   );

@@ -72,7 +72,7 @@ function ProductTile({ index, product }) {
 
         <div>
           {" "}
-          <div className="text-sm mt-2">
+          <div className="text-sm my-1">
             Sastojci: {getIngredientsList({ ingredients: product.ingredients })}
           </div>
           <div className="flex justify-between items-center h-fit">

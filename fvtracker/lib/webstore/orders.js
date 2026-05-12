@@ -1,7 +1,7 @@
 import { Order } from "@/models/sectors/sales";
 import { getCustomer } from "./customer";
 
-export const placeOrder = async ({ cartItems, customerData }) => {
+export const createOrder = async ({ cartItems, customerData }) => {
   const lastOrderNumber = await Order.findOne()
     .sort({ number: -1 })
     .select("number");

@@ -1,10 +1,10 @@
 import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
 
-export const submitOrder = async ({ customerData, orderData }) => {
+export const sendOrder = async ({ customerData, cartItems }) => {
   try {
-    console.log("Podaci narudžbe:", orderData);
-    const response = await api.post("/orders", { customerData, orderData });
+    console.log("Podaci narudžbe:", { customerData, cartItems });
+    const response = await api.post("/orders", { customerData, cartItems });
     return response.data;
   } catch (error) {
     console.error("Greška pri slanju narudžbe:", error);

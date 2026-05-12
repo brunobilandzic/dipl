@@ -70,8 +70,6 @@ function ProductTile({ index, product }) {
           <h3 className="listitemheader">{product.name}</h3>
           <p className="listitemDescription break-words line-clamp-20">
             {product.description}
-            dvsdvasvd dasvsad asvd asvd asvd asvd asvd asvd asvd asvd asvd asvd
-            asvd asvd
           </p>
         </div>
 

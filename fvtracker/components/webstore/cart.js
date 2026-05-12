@@ -69,7 +69,12 @@ export const AddToCartButton = ({
             setAddToCartClicked={setAddToCartClicked}
           />
         )}
-        <FaShoppingCart />
+        <div className="flex justify-center gap-1 items-center">
+          <div>
+            <FaShoppingCart />
+          </div>
+          <div className="font-bold mt-1">{cartQuantity}</div>
+        </div>
       </div>
     </>
   );

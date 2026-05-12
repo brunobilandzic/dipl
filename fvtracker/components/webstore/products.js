@@ -44,7 +44,13 @@ function ProductTile({ index, tile }) {
   const productActions = [
     {
       component: (
-        <div className="text-xl">
+        <div
+          className="text-xl hover:text-2xl hover:font-bold "
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
+          }}
+        >
           <FaShoppingCart />
         </div>
       ),
@@ -75,7 +81,7 @@ const ProductActions = ({ actions }) => {
   return (
     <div>
       {actions.map((action, index) => (
-        <div className="" key={index} onClick={action.onClick}>
+        <div className="" key={index}>
           {action.component}
         </div>
       ))}

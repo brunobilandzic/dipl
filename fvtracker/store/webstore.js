@@ -33,8 +33,8 @@ const productsSlice = createSlice({
   },
 });
 
-export const refreshProducts = createAsyncThunk(
-  "production/refreshProducts",
+export const refreshProductsThunk = createAsyncThunk(
+  "webstore/refreshProducts",
   async () => {
     console.log("Fetching products...");
     const res = await api.get("/products");

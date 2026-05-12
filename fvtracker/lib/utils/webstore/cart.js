@@ -1,5 +1,7 @@
+import { fillReduxCart } from "@/store/webstore";
+
 export const productInCart = ({ productId, cartItems }) => {
-  const productItem = cartItems.find((item) => item.product.id === productId);
+  const productItem = cartItems?.find((item) => item.product.id === productId);
   return productItem ? productItem.quantity : null;
 };
 
@@ -20,6 +22,6 @@ export const fillCartRedux = ({ dispatch, cartItems }) => {
   const localCart = getCartFromLocalStorage();
   console.log({ localCart });
   if (localCart && localCart.items) {
-    dispatch(fillReduxCart(localCart));
+    dispatch(fillReduxCart(localCart.items));
   }
 };

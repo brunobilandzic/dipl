@@ -11,12 +11,6 @@ import {
 export const GET = async (req) => {
   try {
     await dbConnect();
-    const { specificManager, unauthorized } = await fetchManager({
-      managerNames: [PRODUCTION_MANAGER],
-    });
-    if (unauthorized) {
-      return Response.json({ unauthorized: true }, { status: 403 });
-    }
     const products = await getProducts();
 
     return Response.json({ products }, { status: 200 });

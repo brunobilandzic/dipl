@@ -12,6 +12,8 @@ export const CartPageComponent = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.webstore.cart.items);
 
+  const placeOrder = () => {};
+
   const onQuantityChange = (cartItem, quantity) => {
     if (quantity == 0) {
       if (!confirm("Želite li ukloniti proizvod iz košarice?")) return;
@@ -28,7 +30,9 @@ export const CartPageComponent = () => {
     >
       Isprazni
     </div>,
-    <div className="btn submitButton btnSm">Naruči</div>,
+    <div className="btn submitButton btnSm" onClick={placeOrder}>
+      Naruči
+    </div>,
   ];
   return (
     <List

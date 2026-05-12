@@ -40,6 +40,18 @@ const ProductsTilesGrid = ({ title, products: tiles }) => {
 };
 
 function ProductTile({ index, tile }) {
+  const productActions = [
+    {
+      component: (
+        <div className="text-xl">
+          <FaShoppingCart />
+        </div>
+      ),
+      onClick: () => {
+        console.log("adding to cart");
+      },
+    },
+  ];
   return (
     <AppTile key={index} tile={tile}>
       <div className="flex flex-col justify-between h-full">

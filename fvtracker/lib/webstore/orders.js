@@ -18,6 +18,7 @@ export const placeOrder = async ({ cartItems, customerData }) => {
     number: newOrderNumber,
   }).save();
   customer.orders.push(order._id);
+  console.log({ order, customer });
 
   await order.save();
   await customer.save();

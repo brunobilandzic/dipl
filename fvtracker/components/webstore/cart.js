@@ -2,7 +2,12 @@ import { preventEvent } from "@/lib/utils/dev";
 import { useEffect, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 
-export const AddToCartQuantity = ({ quantity, setQuantity, addToCart }) => {
+export const AddToCartQuantity = ({
+  quantity,
+  setQuantity,
+  addToCart,
+  setAddToCartClicked,
+}) => {
   const onChange = (e) => {
     e.stopPropagation();
     e.preventDefault();
@@ -17,6 +22,7 @@ export const AddToCartQuantity = ({ quantity, setQuantity, addToCart }) => {
   const submitClick = (e) => {
     preventEvent(e);
     addToCart(quantity);
+    setAddToCartClicked(false);
   };
 
   return (
@@ -62,6 +68,7 @@ export const AddToCartButton = ({
             quantity={cartQuantity}
             setQuantity={setCartQuantity}
             addToCart={addToCart}
+            setAddToCartClicked={setAddToCartClicked}
           />
         )}
         <FaShoppingCart />

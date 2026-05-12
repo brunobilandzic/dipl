@@ -15,7 +15,7 @@ export const AddToCartQuantity = ({
     if (isNaN(value)) {
       setQuantity(null);
     } else {
-      setQuantity(value);
+      setQuantity(Number.parseInt(e.target.value));
     }
   };
 

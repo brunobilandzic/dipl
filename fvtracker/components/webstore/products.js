@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { LoadingFullScreen } from "../layout/loading";
 import { AppTile, AppTilesGrid } from "../layout/preview/tile";
+import { FaShoppingCart } from "react-icons/fa";
 
 export const ProductList = ({}) => {
   const products = useSelector(
@@ -59,10 +60,25 @@ function ProductTile({ index, tile }) {
           <h3 className="listitemheader">{tile.name}</h3>
           <p className="listitemDescription">{tile.description}</p>
         </div>
-        <div>
-          <p>Price: ${tile.price}</p>
+        <div className="flex justify-between items-center">
+          <p className="text-xl">${tile.price}</p>
+          <div>
+            <ProductActions actions={productActions} />
+          </div>
         </div>
       </div>
     </AppTile>
   );
 }
+
+const ProductActions = ({ actions }) => {
+  return (
+    <div>
+      {actions.map((action, index) => (
+        <div className="" key={index} onClick={action.onClick}>
+          {action.component}
+        </div>
+      ))}
+    </div>
+  );
+};

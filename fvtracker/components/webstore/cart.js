@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { List } from "../layout/preview/list";
 import { useSelector, useDispatch } from "react-redux";
-import { changeQuantity } from "@/store/webstore";
+import { changeQuantity, removeFromCart } from "@/store/webstore";
+import { FaXmark } from "react-icons/fa6";
 
 export const CartPageComponent = () => {
   const dispatch = useDispatch();
@@ -38,16 +39,28 @@ export const CartPageComponent = () => {
 };
 
 const CartItem = ({ cartItem, onQuantityChange }) => {
+  const dispatch = useDispatch();
   const { product, quantity: quantityProp } = cartItem;
   const [quantity, setQuantity] = useState(quantityProp);
   const quantityEdit = (newQuantity, e) => {
     preventEvent(e);
     onQuantityChange(cartItem, newQuantity);
   };
+  const onRemove = (e) => {
+    dispatch(removeFromCart(cartItem.product.id));
+  };
   return (
     <>
       <div className="flex justify-between items-center">
-        <div className="text-lg font-bold">{product.name}</div>
+        <div className="listitemheader flex items-center gap-4">
+          <div>
+            <FaXmark
+              className="cursor-pointer hover:text-red-500"
+              onClick={onRemove}
+            />
+          </div>
+          <div className="text-lg font-bold">{product.name}</div>
+        </div>
         <div>
           <CartItemQuantity
             quantity={quantity}

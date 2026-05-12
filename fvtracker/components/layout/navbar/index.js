@@ -19,6 +19,7 @@ import fillProductionRedux from "@/lib/utils/production";
 import { fetchWarehouses } from "@/store/warehouse";
 import { fillWarehouseRedux } from "@/lib/utils/storage";
 import { refreshProducts } from "@/lib/utils/production/products";
+import { refreshProductsThunk } from "@/store/webstore";
 
 export default {
   roleitems,
@@ -60,6 +61,16 @@ function NavItems() {
     (state) => state.generalManager?.manager,
   );
   const fieldsRedux = useSelector((state) => state.cultivation.fields);
+
+  const productsRedux = useSelector(
+    (state) => state.webstore.products.filteredItems,
+  );
+
+  console.log({ productsRedux });
+
+  useEffect(() => {
+    dispatch(refreshProductsThunk());
+  }, [dispatch]);
 
   useEffect(() => {
     if (status === "authenticated" && session.user?.managerModelName) {

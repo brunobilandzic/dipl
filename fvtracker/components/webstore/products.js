@@ -37,16 +37,14 @@ const ProductsTilesGrid = ({ title, products }) => {
 };
 
 function ProductTile({ index, product }) {
+  const [cartQuantity, setCartQuantity] = useState(null);
   const productActions = [
     {
       component: (
-        <ProductActionComponent
-          onClick={() => {
-            console.log("clicked cart");
-          }}
-        >
-          <FaShoppingCart />
-        </ProductActionComponent>
+        <AddToCartButton
+          cartQuantity={cartQuantity}
+          setCartQuantity={setCartQuantity}
+        />
       ),
       onClick: () => {
         console.log("adding to cart");

@@ -26,9 +26,15 @@ const ProductsTilesGrid = ({ products: tiles }) => {
         <AppTilesGrid>
           {tiles.map((tile, index) => (
             <AppTile key={index} tile={tile}>
-              <h3>{tile.name}</h3>
-              <p>{tile.description}</p>
-              <p>Price: ${tile.price}</p>
+              <div className="flex flex-col justify-between h-full">
+                <div>
+                  <h3 className="listitemheader">{tile.name}</h3>
+                  <p className="listitemDescription">{tile.description}</p>
+                </div>
+                <div>
+                  <p>Price: ${tile.price}</p>
+                </div>
+              </div>
             </AppTile>
           ))}
           <AppTile />

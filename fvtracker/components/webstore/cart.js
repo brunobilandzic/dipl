@@ -41,10 +41,15 @@ export const CartPageComponent = () => {
     <div
       className="btn cancelButton btnSm"
       onClick={() => dispatch(emptyCart())}
+      key="isprazni"
     >
       Isprazni
     </div>,
-    <div className="btn submitButton btnSm" onClick={() => setFillInfo(true)}>
+    <div
+      className="btn submitButton btnSm"
+      onClick={() => setFillInfo(true)}
+      key="naruči"
+    >
       Naruči
     </div>,
   ];

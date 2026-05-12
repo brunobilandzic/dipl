@@ -3,16 +3,32 @@
 import { preventEvent } from "@/lib/utils/dev";
 import { useEffect, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
+import { List } from "../layout/preview/list";
 
 export const CartPageComponent = () => {
+  const cart = useSelector((state) => state.webstore.cart);
+  const [cartItems, setCartItems] = useState(cart.items);
+
   return (
     <List
       title={
-        <div>
+        <div className="flex items-center gap-">
+          <span>Košarica </span>
           <FaShoppingCart />
         </div>
       }
     ></List>
+  );
+};
+
+const CartItem = ({ cartItem }) => {
+  const { product, quantity } = cartItem;
+  return (
+    <>
+      <div>
+        <div></div>
+      </div>
+    </>
   );
 };
 

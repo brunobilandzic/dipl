@@ -1,9 +1,12 @@
 import { AppInput } from "../form/inputs";
 import { FormModal } from "../layout/modals/form";
 
-export const CustomerInfoForm = ({ isOpen, onCancel, customerData, setCustomerData }) => {
-
-
+export const CustomerInfoForm = ({
+  isOpen,
+  onCancel,
+  customerData,
+  setCustomerData,
+}) => {
   const onChange = (e) => {
     setCustomerData((prev) => ({
       ...prev,

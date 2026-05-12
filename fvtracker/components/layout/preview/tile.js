@@ -11,12 +11,10 @@ export const AppTile = ({ onClick, children }) => {
   );
 };
 
-export const AppTilesGrid = ({ tiles }) => {
+export const AppTilesGrid = ({ children }) => {
   return (
     <div className="grid grid-cols-2 md:grid-cols-6 gap-2 md:gap-4">
-      {tiles.map((tile, index) => (
-        <AppTile key={index} tile={tile} />
-      ))}
+      {children}
     </div>
   );
 };

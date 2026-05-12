@@ -4,6 +4,7 @@ import { setLoading } from "@/store/loading";
 import {
   refreshFacilities,
   refreshHarvestingBatches,
+  refreshProductsStocks,
   setProducts,
 } from "@/store/production";
 import { fetchWarehouses } from "@/store/warehouse";
@@ -39,6 +40,7 @@ const dispatchPayloads = ({ manager, dispatch, batches }) => {
   dispatch(refreshHarvestingBatches.fulfilled(batches));
   dispatch(refreshFacilities());
   dispatch(fetchWarehouses());
+  dispatch(refreshProductsStocks());
 };
 
 /* const mapProductsStocks = ({ manager }) => {

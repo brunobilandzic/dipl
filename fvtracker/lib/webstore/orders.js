@@ -1,7 +1,7 @@
 import { Order } from "@/models/sectors/sales";
 import { getCustomer } from "./customer";
 
-export const placeOrder = async ({ cartItems, customerData }) => {
+export const placeOrder = async ({ orderData, customerData }) => {
   const lastOrderNumber = await Order.findOne()
     .sort({ number: -1 })
     .select("number");
@@ -11,7 +11,7 @@ export const placeOrder = async ({ cartItems, customerData }) => {
   const customer = await getCustomer({ customerData });
   const order = await new Order({
     customer: customer._id,
-    items: cartItems.map((item) => ({
+    items: orderData.items.map((item) => ({
       product: item.product._id,
       quantity: item.quantity,
     })),

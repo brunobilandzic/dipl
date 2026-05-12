@@ -43,3 +43,5 @@ export const refreshProducts = createAsyncThunk(
     return res.data.products;
   },
 );
+
+export default productsSlice.reducer;

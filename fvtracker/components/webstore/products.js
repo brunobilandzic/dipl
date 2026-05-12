@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 import { LoadingFullScreen } from "../layout/loading";
 import { AppTile, AppTilesGrid } from "../layout/preview/tile";
 import { getIngredientsList } from "@/lib/utils/production/products";
+import { useState } from "react";
+import { AddToCartButton } from "./cart";
 
 export const ProductList = ({}) => {
   const products = useSelector(

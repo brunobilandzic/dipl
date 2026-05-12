@@ -35,6 +35,9 @@ const productsSlice = createSlice({
         (item) => item.product.id !== productId,
       );
     },
+    fillReduxCart: (state, action) => {
+      state.cart.items = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder

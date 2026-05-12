@@ -5,6 +5,7 @@ import { getIngredientsList } from "@/lib/utils/production/products";
 import { useEffect, useState } from "react";
 import { AddToCartButton } from "./cart";
 import { addToCartRedux, refreshProductsThunk } from "@/store/webstore";
+import { productInCart } from "@/lib/utils/webstore/cart";
 
 export const ProductList = ({}) => {
   const products = useSelector(
@@ -47,6 +48,13 @@ function ProductTile({ index, product }) {
     console.log("adding", { product: product.name, cartQuantity });
     dispatch(addToCartRedux({ product, quantity: cartQuantity }));
   };
+  const inCartQuantity = useSelector((state) =>
+    productInCart({
+      productId: product.id,
+      cartItems: state.webstore.cart.items,
+    }),
+  );
+  console.log({ inCartQuantity });
 
   const productActions = [
     {

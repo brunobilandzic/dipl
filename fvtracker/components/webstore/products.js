@@ -19,23 +19,13 @@ export const ProductList = ({}) => {
   );
 };
 
-const ProductsTilesGrid = ({ products: tiles }) => {
+const ProductsTilesGrid = ({ title, products: tiles }) => {
   return (
     <>
       <div>
         <AppTilesGrid>
           {tiles.map((tile, index) => (
-            <AppTile key={index} tile={tile}>
-              <div className="flex flex-col justify-between h-full">
-                <div>
-                  <h3 className="listitemheader">{tile.name}</h3>
-                  <p className="listitemDescription">{tile.description}</p>
-                </div>
-                <div>
-                  <p>Price: ${tile.price}</p>
-                </div>
-              </div>
-            </AppTile>
+            <ProductTile index={index} tile={tile} />
           ))}
           <AppTile />
           <AppTile />
@@ -48,3 +38,19 @@ const ProductsTilesGrid = ({ products: tiles }) => {
     </>
   );
 };
+
+function ProductTile({ index, tile }) {
+  return (
+    <AppTile key={index} tile={tile}>
+      <div className="flex flex-col justify-between h-full">
+        <div>
+          <h3 className="listitemheader">{tile.name}</h3>
+          <p className="listitemDescription">{tile.description}</p>
+        </div>
+        <div>
+          <p>Price: ${tile.price}</p>
+        </div>
+      </div>
+    </AppTile>
+  );
+}

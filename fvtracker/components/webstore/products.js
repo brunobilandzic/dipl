@@ -31,6 +31,12 @@ const ProductsTilesGrid = ({ products: tiles }) => {
               <p>Price: ${tile.price}</p>
             </AppTile>
           ))}
+          <AppTile />
+          <AppTile />
+          <AppTile />
+          <AppTile />
+          <AppTile />
+          <AppTile />
         </AppTilesGrid>
       </div>
     </>

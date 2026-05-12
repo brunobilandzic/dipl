@@ -57,7 +57,7 @@ function ProductTile({ index, product }) {
   useEffect(() => {
     setCartQuantity(
       productInCart({
-        productId: product.id,
+        productId: product._id,
         cartItems: cartItems,
       }) || "",
     );

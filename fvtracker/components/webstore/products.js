@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import { LoadingFullScreen } from "../layout/loading";
 import { AppTile, AppTilesGrid } from "../layout/preview/tile";
-import { FaShoppingCart } from "react-icons/fa";
 import { getIngredientsList } from "@/lib/utils/production/products";
 
 export const ProductList = ({}) => {

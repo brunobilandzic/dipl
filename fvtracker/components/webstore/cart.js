@@ -7,8 +7,17 @@ import { List } from "../layout/preview/list";
 import { useSelector, useDispatch } from "react-redux";
 import { changeQuantity, emptyCart, removeFromCart } from "@/store/webstore";
 import { FaXmark } from "react-icons/fa6";
+import { CustomerInfoForm } from "./checkout";
 
 export const CartPageComponent = () => {
+  const initialCustomer = {
+    name: "a",
+    surname: "b",
+    email: "c@c",
+    address: "d",
+  };
+  const [customerData, setCustomerData] = useState(initialCustomer);
+  const [fillInfo, setFillInfo] = useState(false);
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.webstore.cart.items);
 
@@ -35,25 +44,35 @@ export const CartPageComponent = () => {
     </div>,
   ];
   return (
-    <List
-      title={
-        <div className="flex items-center gap-2">
-          <span>Košarica </span>
-          <FaShoppingCart />
-        </div>
-      }
-      customButtons={cartActionButtons}
-    >
-      {cartItems?.map((cartItem, index) => {
-        return (
-          <CartItem
-            key={index}
-            cartItem={cartItem}
-            onQuantityChange={onQuantityChange}
-          />
-        );
-      })}
-    </List>
+    <>
+      <List
+        title={
+          <div className="flex items-center gap-2">
+            <span>Košarica </span>
+            <FaShoppingCart />
+          </div>
+        }
+        customButtons={cartActionButtons}
+      >
+        {cartItems?.map((cartItem, index) => {
+          return (
+            <CartItem
+              key={index}
+              cartItem={cartItem}
+              onQuantityChange={onQuantityChange}
+            />
+          );
+        })}
+      </List>
+      {fillInfo && (
+        <CustomerInfoForm
+          isOpen={fillInfo}
+          onCancel={() => setFillInfo(false)}
+          customerData={customerData}
+          setCustomerData={setCustomerData}
+        />
+      )}
+    </>
   );
 };
 

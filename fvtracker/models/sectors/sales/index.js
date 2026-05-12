@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const orderSchema = new Schema({
-  orderNumber: {
+  number: {
     type: String,
     required: true,
     unique: true,

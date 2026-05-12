@@ -40,6 +40,29 @@ export const AddToCartQuantity = ({
     </>
   );
 };
+
+export const AddToCartButton = ({ onClick, cartQuantity, setCartQuantity }) => {
+  const [addToCartClicked, setAddToCartClicked] = useState(false);
+  useEffect(() => {
+    console.log("addToCartClicked changed:", addToCartClicked);
+  }, [addToCartClicked]);
+  return (
+    <>
+      <div
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          setAddToCartClicked(!addToCartClicked);
+        }}
+        className="relative"
+      >
+        {addToCartClicked && (
+          <AddToCartQuantity
+            quantity={cartQuantity}
+            setQuantity={setCartQuantity}
+          />
+        )}
+        <FaShoppingCart />
       </div>
     </>
   );

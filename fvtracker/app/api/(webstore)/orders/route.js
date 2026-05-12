@@ -1,6 +1,7 @@
+import dbConnect from "@/lib/db/mongooseConnect";
 import { createOrder } from "@/lib/webstore/orders";
 
-export async function POST({ req }) {
+export async function POST(req) {
   try {
     await dbConnect();
     const body = await req.json();

@@ -85,5 +85,10 @@ export const refreshProductsThunk = createAsyncThunk(
 );
 
 export default productsSlice.reducer;
-export const { addToCartRedux, removeFromCart, fillReduxCart, changeQuantity } =
-  productsSlice.actions;
+export const {
+  addToCartRedux,
+  removeFromCart,
+  fillReduxCart,
+  changeQuantity,
+  emptyCart,
+} = productsSlice.actions;

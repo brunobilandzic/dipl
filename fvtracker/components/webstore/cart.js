@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import { List } from "../layout/preview/list";
 import { useSelector, useDispatch } from "react-redux";
-import { changeQuantity, removeFromCart } from "@/store/webstore";
+import { changeQuantity, emptyCart, removeFromCart } from "@/store/webstore";
 import { FaXmark } from "react-icons/fa6";
 
 export const CartPageComponent = () => {
@@ -16,6 +16,15 @@ export const CartPageComponent = () => {
     dispatch(changeQuantity({ productId: cartItem.product.id, quantity }));
   };
   console.log({ cartItems });
+  const cartActionButtons = [
+    <div
+      className="btn cancelButton btnSm"
+      onClick={() => dispatch(emptyCart())}
+    >
+      Isprazni
+    </div>,
+    <div className="btn submitButton btnSm">Naruči</div>,
+  ];
   return (
     <List
       title={
@@ -24,6 +33,7 @@ export const CartPageComponent = () => {
           <FaShoppingCart />
         </div>
       }
+      customButtons={cartActionButtons}
     >
       {cartItems?.map((cartItem, index) => {
         return (

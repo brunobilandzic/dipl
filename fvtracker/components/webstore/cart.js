@@ -13,7 +13,7 @@ export const CartPageComponent = () => {
   return (
     <List
       title={
-        <div className="flex items-center gap-">
+        <div className="flex items-center gap-2">
           <span>Košarica </span>
           <FaShoppingCart />
         </div>

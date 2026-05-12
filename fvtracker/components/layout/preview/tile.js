@@ -11,7 +11,7 @@ export const AppTile = ({ onClick, children }) => {
   );
 };
 
-export const AppTileGrid = ({ tiles }) => {
+export const AppTilesGrid = ({ tiles }) => {
   return (
     <div className="grid grid-cols-2 md:grid-cols-6 gap-2 md:gap-4">
       {tiles.map((tile, index) => (

@@ -1,9 +1,10 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LoadingFullScreen } from "../layout/loading";
 import { AppTile, AppTilesGrid } from "../layout/preview/tile";
 import { getIngredientsList } from "@/lib/utils/production/products";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AddToCartButton } from "./cart";
+import { addToCartRedux, refreshProductsThunk } from "@/store/webstore";
 
 export const ProductList = ({}) => {
   const products = useSelector(
@@ -40,10 +41,13 @@ const ProductsTilesGrid = ({ title, products }) => {
 };
 
 function ProductTile({ index, product }) {
+  const dispatch = useDispatch();
   const [cartQuantity, setCartQuantity] = useState("");
   const addToCart = () => {
     console.log("adding", { product: product.name, cartQuantity });
+    dispatch(addToCartRedux({ product, quantity: cartQuantity }));
   };
+
   const productActions = [
     {
       component: (

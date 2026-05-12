@@ -6,6 +6,7 @@ export const CustomerInfoForm = ({
   onCancel,
   customerData,
   setCustomerData,
+  submitOrder,
 }) => {
   const onChange = (e) => {
     setCustomerData((prev) => ({
@@ -17,7 +18,7 @@ export const CustomerInfoForm = ({
   return (
     <FormModal
       title="Unesite Vaše podatke"
-      onSubmit={() => {}}
+      onSubmit={submitOrder}
       submitText="Nastavi"
     >
       <AppInput

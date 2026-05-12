@@ -20,13 +20,13 @@ export const ProductList = ({}) => {
   );
 };
 
-const ProductsTilesGrid = ({ title, products: tiles }) => {
+const ProductsTilesGrid = ({ title, products }) => {
   return (
     <>
       <div>
         <AppTilesGrid>
-          {tiles.map((tile, index) => (
-            <ProductTile index={index} tile={tile} />
+          {products.map((product, index) => (
+            <ProductTile index={index} product={product} />
           ))}
           <AppTile />
           <AppTile />
@@ -40,19 +40,17 @@ const ProductsTilesGrid = ({ title, products: tiles }) => {
   );
 };
 
-function ProductTile({ index, tile }) {
+function ProductTile({ index, product }) {
   const productActions = [
     {
       component: (
-        <div
-          className="text-xl hover:text-2xl hover:font-bold "
-          onClick={(e) => {
-            e.stopPropagation();
-            e.preventDefault();
+        <ProductActionComponent
+          onClick={() => {
+            console.log("clicked cart");
           }}
         >
           <FaShoppingCart />
-        </div>
+        </ProductActionComponent>
       ),
       onClick: () => {
         console.log("adding to cart");
@@ -60,14 +58,14 @@ function ProductTile({ index, tile }) {
     },
   ];
   return (
-    <AppTile key={index} tile={tile}>
+    <AppTile key={index} tile={product}>
       <div className="flex flex-col justify-between h-full">
         <div>
-          <h3 className="listitemheader">{tile.name}</h3>
-          <p className="listitemDescription">{tile.description}</p>
+          <h3 className="listitemheader">{product.name}</h3>
+          <p className="listitemDescription">{product.description}</p>
         </div>
         <div className="flex justify-between items-center">
-          <p className="text-xl">${tile.price}</p>
+          <p className="text-xl">${product.price}</p>
           <div>
             <ProductActions actions={productActions} />
           </div>
@@ -86,5 +84,22 @@ const ProductActions = ({ actions }) => {
         </div>
       ))}
     </div>
+  );
+};
+
+const ProductActionComponent = ({ onClick, children }) => {
+  return (
+    <>
+      <div
+        className="text-xl hover:text-2xl hover:font-bold "
+        onClick={(e) => {
+          e.stopPropagation();
+          e.preventDefault();
+          onClick();
+        }}
+      >
+        {children}
+      </div>
+    </>
   );
 };

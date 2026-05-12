@@ -2,6 +2,18 @@ import { preventEvent } from "@/lib/utils/dev";
 import { useEffect, useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 
+export const CartPage = () => {
+  return (
+    <List
+      title={
+        <div>
+          <FaShoppingCart />
+        </div>
+      }
+    ></List>
+  );
+};
+
 export const AddToCartQuantity = ({
   quantity,
   setQuantity,

@@ -10,14 +10,9 @@ import CreateWarehouseStock from "../products/stock/CreateWarehouseStock";
 
 function Facility({ slug }) {
   const dispatch = useDispatch();
-  const facilities = useSelector((state) => state.production.facilities);
-  const [facility, setFacility] = useState(null);
-
-  useEffect(() => {
-    if (!facilities || facilities.items === null) return;
-    const foundFacility = facilities.items.find((f) => f._id === slug);
-    setFacility(foundFacility);
-  }, [facilities, slug]);
+  const facility = useSelector((state) =>
+    state.production.facilities?.items?.find((f) => f.slug === slug),
+  );
 
   if (!facility) return <LoadingFullScreen />;
 

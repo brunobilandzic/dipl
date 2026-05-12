@@ -1,4 +1,5 @@
 import api from "@/lib/api";
+import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { sortItems } from "@/lib/utils/list";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -11,15 +12,15 @@ const initialState = {
 };
 
 const productsSlice = createSlice({
-  name: "production",
+  name: "webstore",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(refreshProducts.pending, (state) => {
+      .addCase(refreshProductsThunk.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(refreshProducts.fulfilled, (state, action) => {
+      .addCase(refreshProductsThunk.fulfilled, (state, action) => {
         state.products.items = action.payload;
         state.products.filteredItems = sortItems({
           items: action.payload,
@@ -27,7 +28,7 @@ const productsSlice = createSlice({
         });
         state.isLoading = false;
       })
-      .addCase(refreshProducts.rejected, (state) => {
+      .addCase(refreshProductsThunk.rejected, (state) => {
         state.isLoading = false;
       });
   },

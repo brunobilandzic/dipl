@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 export const CartPageComponent = () => {
   const cart = useSelector((state) => state.webstore.cart);
   const [cartItems, setCartItems] = useState(cart.items);
-
+  console.log({ cartItems });
   return (
     <List
       title={
@@ -18,7 +18,11 @@ export const CartPageComponent = () => {
           <FaShoppingCart />
         </div>
       }
-    ></List>
+    >
+      {cartItems?.map((cartItem, index) => {
+        return <CartItem key={index} cartItem={cartItem} />;
+      })}
+    </List>
   );
 };
 

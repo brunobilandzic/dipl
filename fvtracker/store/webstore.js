@@ -47,6 +47,7 @@ const productsSlice = createSlice({
       if (existingItem) {
         existingItem.quantity = quantity;
       }
+      localStorage.setItem("cart", JSON.stringify(state.cart));
     },
   },
   extraReducers: (builder) => {

@@ -20,6 +20,8 @@ export const CustomerInfoForm = ({
       title="Unesite Vaše podatke"
       onSubmit={submitOrder}
       submitText="Nastavi"
+      isOpen={isOpen}
+      onCancel={onCancel}
     >
       <AppInput
         label="Ime"

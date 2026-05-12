@@ -28,6 +28,7 @@ const productsSlice = createSlice({
       } else {
         state.cart.items.push({ product, quantity });
       }
+      localStorage.setItem("cart", JSON.stringify(state.cart));
     },
     removeFromCart: (state, action) => {
       const productId = action.payload;
@@ -70,4 +71,5 @@ export const refreshProductsThunk = createAsyncThunk(
 );
 
 export default productsSlice.reducer;
-export const { addToCartRedux, removeFromCart, fillReduxCart } = productsSlice.actions;
+export const { addToCartRedux, removeFromCart, fillReduxCart } =
+  productsSlice.actions;

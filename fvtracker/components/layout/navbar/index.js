@@ -20,6 +20,7 @@ import { fetchWarehouses } from "@/store/warehouse";
 import { fillWarehouseRedux } from "@/lib/utils/storage";
 import { refreshProducts } from "@/lib/utils/production/products";
 import { refreshProductsThunk } from "@/store/webstore";
+import { fillCartRedux } from "@/lib/utils/webstore/cart";
 
 export default {
   roleitems,
@@ -61,6 +62,7 @@ function NavItems() {
     (state) => state.generalManager?.manager,
   );
   const fieldsRedux = useSelector((state) => state.cultivation.fields);
+  const cartItems = useSelector((state) => state.webstore.cart.items);
 
   const productsRedux = useSelector(
     (state) => state.webstore.products.filteredItems,
@@ -103,6 +105,7 @@ function NavItems() {
     } else if (status === "unauthenticated") {
       console.log("user is unauthenticated, refreshing products...");
       refreshProducts({ dispatch, router });
+      fillCartRedux({ dispatch, cartItems });
     }
   }, [status]);
 

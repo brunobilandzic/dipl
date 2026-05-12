@@ -39,6 +39,15 @@ const productsSlice = createSlice({
     fillReduxCart: (state, action) => {
       state.cart.items = action.payload;
     },
+    changeQuantity: (state, action) => {
+      const { productId, quantity } = action.payload;
+      const existingItem = state.cart.items.find(
+        (item) => item.product.id === productId,
+      );
+      if (existingItem) {
+        existingItem.quantity = quantity;
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -70,5 +79,5 @@ export const refreshProductsThunk = createAsyncThunk(
 );
 
 export default productsSlice.reducer;
-export const { addToCartRedux, removeFromCart, fillReduxCart } =
+export const { addToCartRedux, removeFromCart, fillReduxCart, changeQuantity } =
   productsSlice.actions;

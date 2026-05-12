@@ -3,7 +3,7 @@ export const AppTile = ({ onClick, children }) => {
     <>
       <div
         onClick={onClick}
-        className="border rounded-lg col-span-1 row-span-1 p-4 cursor-pointer hover:outline hover:outline-2 hover:outline-blue-500"
+        className="border rounded-lg col-span-1 row-span-1 h-[200px] md:h-[300px] p-4 cursor-pointer hover:outline hover:outline-2 hover:outline-blue-500"
       >
         {children}
       </div>

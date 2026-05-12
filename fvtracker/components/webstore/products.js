@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { LoadingFullScreen } from "../layout/loading";
+import { AppTile, AppTilesGrid } from "../layout/preview/tile";
 
 export const ProductList = ({}) => {
   const products = useSelector(
@@ -13,15 +14,25 @@ export const ProductList = ({}) => {
 
   return (
     <div>
-      {products.map((product) => (
-        <div key={product._id}>
-          <h3>{product.name}</h3>
-          <p>{product.description}</p>
-          <p>Price: ${product.price}</p>
-        </div>
-      ))}
+      <ProductsTilesGrid products={products} />
     </div>
   );
 };
 
-const ProductTilesGrid = ({ product }) => {};
+const ProductsTilesGrid = ({ products: tiles }) => {
+  return (
+    <>
+      <div>
+        <AppTilesGrid>
+          {tiles.map((tile, index) => (
+            <AppTile key={index} tile={tile}>
+              <h3>{tile.name}</h3>
+              <p>{tile.description}</p>
+              <p>Price: ${tile.price}</p>
+            </AppTile>
+          ))}
+        </AppTilesGrid>
+      </div>
+    </>
+  );
+};

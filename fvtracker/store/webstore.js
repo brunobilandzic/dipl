@@ -8,13 +8,34 @@ const initialState = {
     items: [],
     filteredItems: [],
   },
+  cart: {
+    items: [],
+  },
   isLoading: false,
 };
 
 const productsSlice = createSlice({
   name: "webstore",
   initialState,
-  reducers: {},
+  reducers: {
+    addToCart: (state, action) => {
+      const { product, quantity } = action.payload;
+      const existingItem = state.cart.items.find(
+        (item) => item.product.id === product.id,
+      );
+      if (existingItem) {
+        existingItem.quantity += quantity;
+      } else {
+        state.cart.items.push({ product, quantity });
+      }
+    },
+    removeFromCart: (state, action) => {
+      const productId = action.payload;
+      state.cart.items = state.cart.items.filter(
+        (item) => item.product.id !== productId,
+      );
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(refreshProductsThunk.pending, (state) => {
@@ -46,3 +67,4 @@ export const refreshProductsThunk = createAsyncThunk(
 );
 
 export default productsSlice.reducer;
+export const { addToCart, removeFromCart } = productsSlice.actions;

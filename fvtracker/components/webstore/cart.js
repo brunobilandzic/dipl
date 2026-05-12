@@ -50,9 +50,7 @@ export const AddToCartButton = ({
   addToCart,
 }) => {
   const [addToCartClicked, setAddToCartClicked] = useState(false);
-  useEffect(() => {
-    console.log("addToCartClicked changed:", addToCartClicked);
-  }, [addToCartClicked]);
+
   return (
     <>
       <div

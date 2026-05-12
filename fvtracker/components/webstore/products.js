@@ -9,7 +9,10 @@ export const ProductList = ({}) => {
   const products = useSelector(
     (state) => state.webstore.products.filteredItems,
   );
-  console.log("Products in ProductList:", products);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!products) dispatch(refreshProductsThunk());
+  }, [products]);
 
   if (!products) {
     return <LoadingFullScreen />;

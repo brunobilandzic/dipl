@@ -18,7 +18,7 @@ const productsSlice = createSlice({
   name: "webstore",
   initialState,
   reducers: {
-    addToCart: (state, action) => {
+    addToCartRedux: (state, action) => {
       const { product, quantity } = action.payload;
       const existingItem = state.cart.items.find(
         (item) => item.product.id === product.id,
@@ -67,4 +67,4 @@ export const refreshProductsThunk = createAsyncThunk(
 );
 
 export default productsSlice.reducer;
-export const { addToCart, removeFromCart } = productsSlice.actions;
+export const { addToCartRedux, removeFromCart } = productsSlice.actions;

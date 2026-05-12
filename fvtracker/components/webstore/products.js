@@ -23,3 +23,5 @@ export const ProductList = ({}) => {
     </div>
   );
 };
+
+const ProductTilesGrid = ({ product }) => {};

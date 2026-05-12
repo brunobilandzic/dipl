@@ -1,3 +1,5 @@
+import { FaShoppingCart } from "react-icons/fa";
+
 export default {
   admin: [
     {
@@ -151,3 +153,10 @@ export default {
     },
   ],
 };
+
+export const guestNavItems = [
+  {
+    label: <FaShoppingCart />,
+    path: "/kosarica"
+  },
+];

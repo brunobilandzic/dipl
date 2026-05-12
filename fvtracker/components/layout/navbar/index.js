@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import roleitems from "./roleitems";
+import roleitems, { guestNavItems } from "./roleitems";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -106,6 +106,7 @@ function NavItems() {
       console.log("user is unauthenticated, refreshing products...");
       refreshProducts({ dispatch, router });
       fillCartRedux({ dispatch, cartItems });
+      setItems(guestNavItems);
     }
   }, [status]);
 

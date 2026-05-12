@@ -13,6 +13,11 @@ export const CartPageComponent = () => {
   const cartItems = useSelector((state) => state.webstore.cart.items);
 
   const onQuantityChange = (cartItem, quantity) => {
+    if (quantity == 0) {
+      if (!confirm("Želite li ukloniti proizvod iz košarice?")) return;
+      dispatch(removeFromCart(cartItem.product.id));
+      return;
+    }
     dispatch(changeQuantity({ productId: cartItem.product.id, quantity }));
   };
   console.log({ cartItems });

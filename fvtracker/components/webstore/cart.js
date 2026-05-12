@@ -65,7 +65,7 @@ const CartItemQuantity = ({ quantity, setQuantity, quantityEdit }) => {
     <>
       <div className="w-14">
         <input
-          className="w-full text-center"
+          className="w-full text-center p-2 rounded-lg"
           type="number"
           onChange={(e) => {
             setQuantity(e.target.value);

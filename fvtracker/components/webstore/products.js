@@ -27,14 +27,8 @@ const ProductsTilesGrid = ({ title, products }) => {
       <div>
         <AppTilesGrid>
           {products.map((product, index) => (
-            <ProductTile index={index} product={product} />
+            <ProductTile key={index} index={index} product={product} />
           ))}
-          <AppTile />
-          <AppTile />
-          <AppTile />
-          <AppTile />
-          <AppTile />
-          <AppTile />
         </AppTilesGrid>
       </div>
     </>

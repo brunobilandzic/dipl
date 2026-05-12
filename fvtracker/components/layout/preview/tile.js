@@ -11,9 +11,12 @@ export const AppTile = ({ onClick, children }) => {
   );
 };
 
-export const AppTilesGrid = ({ children }) => {
+export const AppTilesGrid = ({ children, key }) => {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-6 gap-2 md:gap-4 w-full md:w-[1280px]">
+    <div
+      key={key}
+      className="grid grid-cols-2 md:grid-cols-6 gap-2 md:gap-4 w-full md:w-[1280px]"
+    >
       {children}
     </div>
   );

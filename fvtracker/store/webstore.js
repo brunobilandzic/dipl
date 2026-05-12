@@ -65,7 +65,6 @@ export const refreshProductsThunk = createAsyncThunk(
     console.log("Fetching products...");
     const res = await api.get("/products");
     const data = res.data;
-    console.log({ data });
     return res.data.products;
   },
 );

@@ -3,3 +3,8 @@ export const infiniteLoopDebug = (timeout = 1000 * 10) => {
     throw new Error("Infinite loop prevent...");
   }, timeout);
 };
+
+export const preventEvent = (e) => {
+  e.stopPropagation();
+  e.preventDefault();
+};

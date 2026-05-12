@@ -32,7 +32,7 @@ const productsSlice = createSlice({
   },
 });
 
-const refreshProducts = createAsyncThunk(
+export const refreshProducts = createAsyncThunk(
   "production/refreshProducts",
   async () => {
     console.log("Fetching products...");

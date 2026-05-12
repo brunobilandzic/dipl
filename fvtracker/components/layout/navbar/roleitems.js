@@ -156,7 +156,11 @@ export default {
 
 export const guestNavItems = [
   {
-    label: <FaShoppingCart />,
-    path: "/kosarica"
+    label: (
+      <div className="text-2xl">
+        <FaShoppingCart />
+      </div>
+    ),
+    path: "/kosarica",
   },
 ];

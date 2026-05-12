@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { changeQuantity, emptyCart, removeFromCart } from "@/store/webstore";
 import { FaXmark } from "react-icons/fa6";
 import { CustomerInfoForm } from "./checkout";
+import { sendOrder } from "@/lib/utils/webstore/orders";
 
 export const CartPageComponent = () => {
   const initialCustomer = {
@@ -21,7 +22,11 @@ export const CartPageComponent = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.webstore.cart.items);
 
-  const placeOrder = () => {};
+  const placeOrder = () => {
+    sendOrder({ customerData, cartItems });
+    /* setFillInfo(false);
+    dispatch(emptyCart()); */
+  };
 
   const onQuantityChange = (cartItem, quantity) => {
     if (quantity == 0) {
@@ -39,7 +44,7 @@ export const CartPageComponent = () => {
     >
       Isprazni
     </div>,
-    <div className="btn submitButton btnSm" onClick={placeOrder}>
+    <div className="btn submitButton btnSm" onClick={() => setFillInfo(true)}>
       Naruči
     </div>,
   ];
@@ -70,6 +75,7 @@ export const CartPageComponent = () => {
           onCancel={() => setFillInfo(false)}
           customerData={customerData}
           setCustomerData={setCustomerData}
+          submitOrder={placeOrder}
         />
       )}
     </>

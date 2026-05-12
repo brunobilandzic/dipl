@@ -1,13 +1,8 @@
 import { AppInput } from "../form/inputs";
+import { FormModal } from "../layout/modals/form";
 
-export const CustomerInfoForm = () => {
-  const initialCustomer = {
-    name: "a",
-    surname: "b",
-    email: "c@c",
-    address: "d",
-  };
-  const [customerData, setCustomerData] = useState(initialCustomer);
+export const CustomerInfoForm = ({ isOpen, onCancel, customerData, setCustomerData }) => {
+
 
   const onChange = (e) => {
     setCustomerData((prev) => ({
@@ -17,7 +12,11 @@ export const CustomerInfoForm = () => {
   };
 
   return (
-    <div>
+    <FormModal
+      title="Unesite Vaše podatke"
+      onSubmit={() => {}}
+      submitText="Nastavi"
+    >
       <AppInput
         label="Ime"
         name="name"
@@ -42,6 +41,6 @@ export const CustomerInfoForm = () => {
         value={customerData.address}
         onChange={onChange}
       />
-    </div>
+    </FormModal>
   );
 };

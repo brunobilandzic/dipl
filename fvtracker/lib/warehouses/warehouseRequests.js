@@ -1,4 +1,4 @@
-import { WarehouseRequest } from "../interface/Request";
+import { WarehouseRequest } from "../../models/sectors/interface/Request";
 
 export const createWarehouseRequest = async (requestData) => {
   const warehouseRequest = new WarehouseRequest({

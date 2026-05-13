@@ -16,15 +16,6 @@ export const OrdersList = () => {
 };
 
 const OrderListItem = ({ order }) => {
-  const orderActions = [
-    {
-      label: "Izradi račun",
-      onClick: () => {
-        console.log("izrada računa za", order.number);
-      },
-      className: "btn submitButton btnSm",
-    },
-  ];
   console.log({ order });
   return (
     <ListItem>
@@ -34,6 +25,15 @@ const OrderListItem = ({ order }) => {
 };
 
 const OrderItem = ({ order }) => {
+  const orderActions = [
+    {
+      label: "Izradi račun",
+      onClick: () => {
+        console.log("izrada računa za", order.number);
+      },
+      className: "btn submitButton btnSm",
+    },
+  ];
   return (
     <div className="flex justify-between items-start">
       <div>

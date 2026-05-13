@@ -53,7 +53,6 @@ warehouseRequestSchema.pre("deleteMany", async function () {
   );
 });
 
-export const WarehouseRequest = RequestDocument.discriminator(
-  "WarehouseRequest",
-  warehouseRequestSchema,
-);
+export const WarehouseRequest =
+  mongoose.models.WarehouseRequest ||
+  RequestDocument.discriminator("WarehouseRequest", warehouseRequestSchema);

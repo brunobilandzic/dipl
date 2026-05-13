@@ -5,16 +5,16 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
   products: {
-    items: [],
-    filteredItems: [],
+    items: null,
+    filteredItems: null,
   },
   cart: {
-    items: [],
+    items: null,
   },
   isLoading: false,
   orders: {
-    items: [],
-    filteredItems: [],
+    items: null,
+    filteredItems: null,
   },
 };
 

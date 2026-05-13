@@ -1,7 +1,7 @@
 import { fetchManager } from "@/lib/auth/fetchSessionData";
 import { FINANCIAL_MANAGER } from "@/lib/constants/users/managerTypes";
 import dbConnect from "@/lib/db/mongooseConnect";
-import { createOrder, getOrders } from "@/lib/webstore/orders";
+import { createOrder, deleteOrder, getOrders } from "@/lib/webstore/orders";
 
 export async function POST(req) {
   try {

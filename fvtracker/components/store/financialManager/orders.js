@@ -7,13 +7,19 @@ import {
   WAREHOUSE_REQUESTED,
 } from "@/lib/constants/webstore/orders";
 import { getName, showDate, showDateTime } from "@/lib/utils/display";
+import { sortOrders } from "@/store/webstore";
 import classNames from "classnames";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 export const OrdersList = () => {
+  const dispatch = useDispatch();
   const orders = useSelector((state) => state.webstore.orders.filteredItems);
   const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
+  useEffect(() => {
+    dispatch(sortOrders(sortBy));
+  }, [sortBy]);
+
   return (
     <List
       title="Narudžbe"

@@ -1,7 +1,7 @@
 import { makeUrlFriendly } from "@/lib/utils/strings";
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
-import { PENDING, REQUEST_STATUSES } from "./sectors/interface/Request";
+import { PENDING, REQUEST_STATUSES } from "@/lib/constants/documents/requests";
 
 const baseSchema = new Schema({
   name: {

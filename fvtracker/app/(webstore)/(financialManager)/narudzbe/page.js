@@ -1,4 +1,5 @@
 import { UnathorizedPage } from "@/components/auth/unAuthorized";
+import { OrdersList } from "@/components/store/financialManager/orders";
 import { fetchManager } from "@/lib/auth/fetchSessionData";
 import { FINANCIAL_MANAGER } from "@/lib/constants/users/managerTypes";
 import React from "react";
@@ -13,7 +14,12 @@ async function OrdersPage() {
   });
   if (unauthorized) return <UnathorizedPage />;
   if (generalManager) return <div>OrdersPage General Manager</div>;
-  if (financialManager) return <div>OrdersPage Financial Manager</div>;
+  if (financialManager)
+    return (
+      <div>
+        <OrdersList />
+      </div>
+    );
   return <div>OrdersPage No Manager</div>;
 }
 

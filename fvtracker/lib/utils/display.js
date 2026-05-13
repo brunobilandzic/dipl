@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import { hr } from "date-fns/locale";
 import colors from "../constants/cultivation/colors";
+import { titleCaseString } from "./strings";
 
 export const cvAndColor = ({ plCvs, cell, fieldView }) => {
   const plCv = plCvs.find((plCv) => {
@@ -35,4 +36,8 @@ export const showDate = (date) => {
 export const showDateTime = (date) => {
   if (!date) return "N/A";
   return format(new Date(date), "PPP p", { locale: hr });
+};
+
+export const getName = ({ firstName, lastName }) => {
+  return titleCaseString(`${firstName} ${lastName}`);
 };

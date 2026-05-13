@@ -38,6 +38,6 @@ export const showDateTime = (date) => {
   return format(new Date(date), "PPP p", { locale: hr });
 };
 
-export const getName = ({ firstName, lastName }) => {
-  return titleCaseString(`${firstName} ${lastName}`);
+export const getName = ({ name, surname }) => {
+  return titleCaseString(`${name} ${surname}`);
 };

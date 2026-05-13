@@ -1,3 +1,4 @@
+import { fetchWarehouseRequests } from "@/store/sales";
 import { fetchWarehouses } from "@/store/warehouse";
 
 export const fillWarehouseRedux = ({ dispatch }) => {
@@ -6,4 +7,5 @@ export const fillWarehouseRedux = ({ dispatch }) => {
 
 const dispatchActions = ({ dispatch }) => {
   dispatch(fetchWarehouses());
+  dispatch(fetchWarehouseRequests());
 };

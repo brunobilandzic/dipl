@@ -24,3 +24,17 @@ export const fillOrdersRedux = async ({ dispatch }) => {
     );
   }
 };
+
+export const deleteOrder = async ({ orderId, dispatch, router }) => {
+  try {
+    await api.delete(`/orders`, {
+      params: { id: orderId },
+    });
+  } catch (error) {
+    console.error("Greška pri brisanju narudžbe:", error);
+    handleError(
+      { ...error, customMessage: "Greška pri brisanju narudžbe" },
+      router,
+    );
+  }
+};

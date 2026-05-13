@@ -30,6 +30,7 @@ export const deleteOrder = async ({ orderId, dispatch, router }) => {
     await api.delete(`/orders`, {
       params: { id: orderId },
     });
+    dispatch(refreshOrdersThunk());
   } catch (error) {
     console.error("Greška pri brisanju narudžbe:", error);
     handleError(

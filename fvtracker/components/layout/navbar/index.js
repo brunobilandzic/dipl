@@ -71,7 +71,6 @@ function NavItems() {
     (state) => state.webstore.products.filteredItems,
   );
 
-  console.log({ productsRedux });
 
   useEffect(() => {
     dispatch(refreshProductsThunk());
@@ -113,6 +112,9 @@ function NavItems() {
         fillOrdersRedux({ dispatch });
       }
       if (managerModelName === FINANCIAL_MANAGER) {
+        console.log(
+          "financial manager logged in, refreshing warehouse requests data...",
+        );
         fillWarehouseRequestsRedux({ dispatch });
       }
     } else if (status === "unauthenticated") {

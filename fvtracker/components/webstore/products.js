@@ -47,7 +47,7 @@ function ProductTile({ index, product }) {
   const cartItems = useSelector((state) => state.webstore.cart.items);
   const [cartQuantity, setCartQuantity] = useState(
     productInCart({
-      productId: product.id,
+      productId: product._id,
       cartItems: cartItems,
     }) || "",
   );

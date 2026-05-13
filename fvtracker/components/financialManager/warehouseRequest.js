@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FormModal } from "../layout/modals/form";
+import { AppInput, AppSelect } from "../form/inputs";
 
 export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
   const initialWarehouseRequest = {
@@ -11,5 +12,19 @@ export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
   const [warehouseRequest, setWarehouseRequest] = useState(
     initialWarehouseRequest,
   );
-  return <FormModal isOpen={isOpen} onCancel={onCancel}></FormModal>;
+  const onChange = (e) => {
+    setWarehouseRequest((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+  return (
+    <FormModal isOpen={isOpen} onCancel={onCancel}>
+      <AppSelect
+        name="warehouseManagerId"
+        label="Skladištar"
+        onChange={onChange}
+      />
+    </FormModal>
+  );
 };

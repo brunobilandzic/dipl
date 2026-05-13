@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 export const OrdersList = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const orders = useSelector((state) => state.webstore.orders.filteredItems);
   const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
   const [filters, setFilters] = useState(initFilters("orders"));
@@ -37,13 +38,18 @@ export const OrdersList = () => {
       initialFilters={initFilters("orders")}
     >
       {orders?.map((order) => (
-        <OrderListItem key={order._id} order={order} />
+        <OrderListItem
+          key={order._id}
+          order={order}
+          dispatch={dispatch}
+          router={router}
+        />
       ))}
     </List>
   );
 };
 
-const OrderListItem = ({ order }) => {
+const OrderListItem = ({ order, dispatch, router }) => {
   const orderActions = [
     ...(!(order.state === DELIVERED)
       ? [

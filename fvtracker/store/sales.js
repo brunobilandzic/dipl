@@ -1,3 +1,4 @@
+import api from "@/lib/api";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -26,9 +27,10 @@ const salesSlice = createSlice({
 
 export const fetchWarehouseRequests = createAsyncThunk(
   "sales/fetchWarehouseRequests",
-  async ({ dispatch, router }) => {
+  async (_, { dispatch }) => {
     console.log("Fetching warehouse requests...");
     const res = await api.get("/warehouse-requests");
+    console.log("Warehouse requests fetched:", res.data);
     return res.data;
   },
 );

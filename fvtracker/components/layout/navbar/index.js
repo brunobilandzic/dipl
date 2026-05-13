@@ -12,6 +12,7 @@ import { ROLE_STATUSES } from "@/lib/constants/users";
 import { useRouter } from "next/navigation";
 import {
   CULTIVATION_MANAGER,
+  FINANCIAL_MANAGER,
   PRODUCTION_MANAGER,
   WAREHOUSE_MANAGER,
 } from "@/lib/constants/users/managerTypes";
@@ -101,6 +102,13 @@ function NavItems() {
           "warehouse manager logged in, refreshing warehouse data...",
         );
         fillWarehouseRedux({ dispatch });
+      }
+      if (
+        managerModelName === FINANCIAL_MANAGER ||
+        managerModelName === GENERAL_MANAGER ||
+        managerModelName === WAREHOUSE_MANAGER
+      ) {
+        fillOrdersRedux({ dispatch });
       }
     } else if (status === "unauthenticated") {
       console.log("user is unauthenticated, refreshing products...");

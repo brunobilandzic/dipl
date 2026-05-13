@@ -2,11 +2,10 @@ import { Order } from "@/models/sectors/sales";
 import { getCustomer } from "./customer";
 
 export const createOrder = async ({ cartItems, customerData }) => {
-  const lastOrderNumber = await Order.findOne()
-    .sort({ number: -1 })
-    .select("number");
-  const newOrderNumber = lastOrderNumber
-    ? String(Number(lastOrderNumber.number) + 1).padStart(6, "0")
+  const lastOrder = await Order.findOne().sort({ number: -1 }).select("number");
+
+  const newOrderNumber = lastOrder
+    ? String(Number(lastOrder?.number) + 1).padStart(6, "0")
     : "000001";
   const customer = await getCustomer({ customerData });
   const order = await new Order({

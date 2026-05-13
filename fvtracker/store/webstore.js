@@ -12,6 +12,10 @@ const initialState = {
     items: [],
   },
   isLoading: false,
+  orders: {
+    items: [],
+    filteredItems: [],
+  },
 };
 
 const productsSlice = createSlice({
@@ -81,6 +85,16 @@ export const refreshProductsThunk = createAsyncThunk(
     const res = await api.get("/products");
     const data = res.data;
     return res.data.products;
+  },
+);
+
+export const refreshOrdersThunk = createAsyncThunk(
+  "webstore/refreshOrders",
+  async () => {
+    console.log("Fetching orders...");
+    const res = await api.get("/orders");
+    const data = res.data;
+    return res.data.orders;
   },
 );
 

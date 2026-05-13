@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { AddToCartButton } from "./cart";
 import { addToCartRedux, refreshProductsThunk } from "@/store/webstore";
 import { productInCart } from "@/lib/utils/webstore/cart";
+import { priceEuroString } from "@/lib/utils/strings";
 
 export const ProductList = ({}) => {
   const products = useSelector(
@@ -96,7 +97,7 @@ function ProductTile({ index, product }) {
             Sastojci: {getIngredientsList({ ingredients: product.ingredients })}
           </div>
           <div className="flex justify-between items-center h-fit">
-            <p className="text-xl">${product.price}</p>
+            <p className="text-xl">{priceEuroString(product.price)}</p>
             <div>
               <ProductActions actions={productActions} />
             </div>

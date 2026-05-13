@@ -1,10 +1,13 @@
 import { WarehouseRequest } from "@/models/documents/requests/WarehouseRequest";
 
 export const createWarehouseRequest = async (requestData) => {
+  const { ...modelData } = requestData;
   const warehouseRequest = new WarehouseRequest({
+    ...modelData,
     financialManager: requestData.financialManagerId,
     warehouseManager: requestData.warehouseManagerId,
     items: requestData.items,
+    orderNumber: requestData.orderNumber,
   });
   await warehouseRequest.save();
 };

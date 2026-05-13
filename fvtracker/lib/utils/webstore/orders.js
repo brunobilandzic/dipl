@@ -25,8 +25,8 @@ export const fillOrdersRedux = async ({ dispatch }) => {
   }
 };
 
-export const deleteOrder = async ({ orderId, dispatch, router }) => {
-  if (!alert("Jeste li sigurni da želite obrisati ovu narudžbu?")) return;
+export const deleteOrderUtil = async ({ orderId, dispatch, router }) => {
+  if (!confirm("Jeste li sigurni da želite obrisati ovu narudžbu?")) return;
   try {
     await api.delete(`/orders`, {
       params: { id: orderId },

@@ -1,3 +1,4 @@
+import { ORDER_STATES } from "@/lib/constants/webstore/orders";
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
@@ -34,6 +35,11 @@ const orderSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now,
+  },
+  state: {
+    type: String,
+    enum: ORDER_STATES,
+    default: "pending",
   },
 });
 

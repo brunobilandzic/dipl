@@ -1,6 +1,9 @@
 import { fetchManager } from "@/lib/auth/fetchSessionData";
 import { FINANCIAL_MANAGER } from "@/lib/constants/users/managerTypes";
-import { createWarehouseRequest } from "@/lib/warehouses/warehouseRequests";
+import {
+  createWarehouseRequest,
+  getWarehouseRequests,
+} from "@/lib/warehouses/warehouseRequests";
 
 export async function GET(request) {
   console.log("Received GET request for warehouse requests");
@@ -13,6 +16,8 @@ export async function GET(request) {
         status: 401,
       });
     }
+    const warehouseRequests = await getWarehouseRequests();
+    return Response.json({ warehouseRequests });
   } catch (error) {
     console.error("Error fetching warehouse requests:", error);
     return new Response(

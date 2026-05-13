@@ -1,3 +1,4 @@
+"use client"
 import { List, ListItem } from "@/components/layout/preview/list";
 
 export const OrdersList = () => {

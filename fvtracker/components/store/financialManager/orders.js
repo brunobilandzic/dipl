@@ -1,5 +1,9 @@
 "use client";
 import { List, ListItem } from "@/components/layout/preview/list";
+import {
+  DELIVERED,
+  WAREHOUSE_REQUESTED,
+} from "@/lib/constants/webstore/orders";
 import { getName, showDate } from "@/lib/utils/display";
 import classNames from "classnames";
 import { useSelector } from "react-redux";
@@ -17,11 +21,24 @@ export const OrdersList = () => {
 
 const OrderListItem = ({ order }) => {
   const orderActions = [
-    {
-      label: "Izbriši",
-      className: "cancelButton",
-    },
-    ...(!order.receipt
+    ...(!(order.state === DELIVERED)
+      ? [
+          {
+            label: "Izbriši",
+            className: "cancelButton",
+          },
+        ]
+      : []),
+    ...(!(order.state === WAREHOUSE_REQUESTED)
+      ? [
+          {
+            label: "Zatraži skladište",
+            className: "submitButton",
+          },
+        ]
+      : []),
+    ...(!order.receipt &&
+    ![WAREHOUSE_REQUESTED, DELIVERED].includes(order.state)
       ? [
           {
             label: "Izradi račun",
@@ -31,7 +48,7 @@ const OrderListItem = ({ order }) => {
             className: "submitButton",
           },
         ]
-      : [
+      : !(order.state == DELIVERED) && [
           {
             label: "Pošalji",
             className: "submitButton",

@@ -127,5 +127,5 @@ export const {
   fillReduxCart,
   changeQuantity,
   emptyCart,
-  sortOrders
+  sortOrders,
 } = productsSlice.actions;

@@ -26,16 +26,6 @@ const baseSchema = new Schema({
 });
 
 const requestSchema = new Schema({
-  requestedBy: {
-    type: Schema.Types.ObjectId,
-    ref: "RootManager",
-    required: true,
-  },
-  requestedTo: {
-    type: Schema.Types.ObjectId,
-    ref: "RootManager",
-    required: true,
-  },
   status: {
     type: String,
     enum: REQUEST_STATUSES,
@@ -46,6 +36,10 @@ const requestSchema = new Schema({
     default: Date.now,
   },
   fullfilledAt: {
+    type: Date,
+    default: null,
+  },
+  rejectedAt: {
     type: Date,
     default: null,
   },
@@ -70,4 +64,5 @@ requestSchema.pre("save", function () {
 });
 
 export const Base = mongoose.models.Base || mongoose.model("Base", baseSchema);
-export const Request = mongoose.models.Request || mongoose.model("Request", requestSchema);
+export const Request =
+  mongoose.models.Request || mongoose.model("Request", requestSchema);

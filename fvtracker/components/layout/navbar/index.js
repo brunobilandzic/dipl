@@ -23,6 +23,7 @@ import { refreshProducts } from "@/lib/utils/production/products";
 import { refreshProductsThunk } from "@/store/webstore";
 import { fillCartRedux } from "@/lib/utils/webstore/cart";
 import { fillOrdersRedux } from "@/lib/utils/webstore/orders";
+import { fillWarehouseRequestsRedux } from "@/lib/utils/documents/requests";
 
 export default {
   roleitems,
@@ -110,6 +111,9 @@ function NavItems() {
         managerModelName === WAREHOUSE_MANAGER
       ) {
         fillOrdersRedux({ dispatch });
+      }
+      if (managerModelName === FINANCIAL_MANAGER) {
+        fillWarehouseRequestsRedux({ dispatch });
       }
     } else if (status === "unauthenticated") {
       console.log("user is unauthenticated, refreshing products...");

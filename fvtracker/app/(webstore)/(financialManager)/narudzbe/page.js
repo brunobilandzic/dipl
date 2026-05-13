@@ -1,5 +1,5 @@
 import { UnathorizedPage } from "@/components/auth/unAuthorized";
-import { OrdersList } from "@/components/store/financialManager/orders";
+import { OrdersList } from "@/components/financialManager/orders";
 import { fetchManager } from "@/lib/auth/fetchSessionData";
 import { FINANCIAL_MANAGER } from "@/lib/constants/users/managerTypes";
 import React from "react";

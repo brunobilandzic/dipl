@@ -64,5 +64,5 @@ requestSchema.pre("save", function () {
 });
 
 export const Base = mongoose.models.Base || mongoose.model("Base", baseSchema);
-export const Request =
-  mongoose.models.Request || mongoose.model("Request", requestSchema);
+export const RequestDocument =
+  mongoose.models.RequestDocument || mongoose.model("RequestDocument", requestSchema);

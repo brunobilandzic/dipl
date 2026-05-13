@@ -74,6 +74,20 @@ const productsSlice = createSlice({
       })
       .addCase(refreshProductsThunk.rejected, (state) => {
         state.isLoading = false;
+      })
+      .addCase(refreshOrdersThunk.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(refreshOrdersThunk.fulfilled, (state, action) => {
+        state.orders.items = action.payload;
+        state.orders.filteredItems = sortItems({
+          items: action.payload,
+          sortBy: SORT_INIT_VALUE,
+        });
+        state.isLoading = false;
+      })
+      .addCase(refreshOrdersThunk.rejected, (state) => {
+        state.isLoading = false;
       });
   },
 });
@@ -94,6 +108,7 @@ export const refreshOrdersThunk = createAsyncThunk(
     console.log("Fetching orders...");
     const res = await api.get("/orders");
     const data = res.data;
+    console.log({ ordersData: data });
     return res.data.orders;
   },
 );

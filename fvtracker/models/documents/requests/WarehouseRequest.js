@@ -1,3 +1,4 @@
+import { RequestDocument } from "@/models/Base";
 import { FinancialManager } from "@/models/user/managers/FinancialManager";
 import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
 import mongoose from "mongoose";
@@ -52,7 +53,7 @@ warehouseRequestSchema.pre("deleteMany", async function () {
   );
 });
 
-export const WarehouseRequest = Request.discriminator(
+export const WarehouseRequest = RequestDocument.discriminator(
   "WarehouseRequest",
   warehouseRequestSchema,
 );

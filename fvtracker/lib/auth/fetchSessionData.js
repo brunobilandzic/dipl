@@ -97,6 +97,8 @@ export async function fetchManager({ managerNames = [] }) {
       throwError: false,
     });
     if (specificManager) {
+      // return first manager found
+      // needs better logic, but for now we will only use one manager type per page so it will do for that
       response.specificManager = specificManager;
       return response;
     }

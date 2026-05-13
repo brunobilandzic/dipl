@@ -1,3 +1,4 @@
+import { getName } from "./display";
 import { productsWithCropVarieties } from "./production/products";
 import { stringContains } from "./strings";
 
@@ -122,5 +123,10 @@ const nameSearch = ({ items, value }) => {
 };
 
 const customerSearch = ({ items, value }) => {
-  return items.filter((item) => stringContains(item.customer.name, value));
+  return items.filter((item) =>
+    stringContains(
+      getName({ name: item.customer.name, surname: item.customer.surname }),
+      value,
+    ),
+  );
 };

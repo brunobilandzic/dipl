@@ -27,7 +27,7 @@ const OrderListItem = ({ order }) => {
   ];
   console.log({ order });
   return (
-    <ListItem>
+    <ListItem actionOptions={orderActions}>
       <OrderItem order={order} />
     </ListItem>
   );

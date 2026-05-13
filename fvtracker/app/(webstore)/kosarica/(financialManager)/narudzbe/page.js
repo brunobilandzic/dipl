@@ -1,9 +1,20 @@
-import React from 'react'
+import { UnathorizedPage } from "@/components/auth/unAuthorized";
+import { fetchManager } from "@/lib/auth/fetchSessionData";
+import { FINANCIAL_MANAGER } from "@/lib/constants/users/managerTypes";
+import React from "react";
 
-function OrdersPage() {
-  return (
-    <div>OrdersPage</div>
-  )
+async function OrdersPage() {
+  const {
+    specificManager: financialManager,
+    unauthorized,
+    generalManager,
+  } = await fetchManager({
+    managerNames: [FINANCIAL_MANAGER],
+  });
+  if (unauthorized) return <UnathorizedPage />;
+  if (generalManager) return <div>OrdersPage General Manager</div>;
+  if (financialManager) return <div>OrdersPage Financial Manager</div>;
+  return <div>OrdersPage No Manager</div>;
 }
 
-export default OrdersPage
+export default OrdersPage;

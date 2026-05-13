@@ -1,6 +1,8 @@
+import { FinancialManager } from "@/models/user/managers/FinancialManager";
+import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
 import mongoose from "mongoose";
 
-const WarehouseRequestSchema = new mongoose.Schema({
+const warehouseRequestSchema = new mongoose.Schema({
   financialManager: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "FinancialManager",
@@ -27,7 +29,19 @@ const WarehouseRequestSchema = new mongoose.Schema({
   ],
 });
 
+warehouseRequestSchema.pre("deleteMany", async function () {
+  const requestIds = await this.model.find(this.getFilter()).distinct("_id");
+  await FinancialManager.updateMany(
+    { warehouseRequests: { $in: requestIds } },
+    { $pull: { warehouseRequests: { $in: requestIds } } },
+  );
+  await WarehouseManager.updateMany(
+    { warehouseRequests: { $in: requestIds } },
+    { $pull: { warehouseRequests: { $in: requestIds } } },
+  );
+});
+
 export const WarehouseRequest = Request.discriminator(
   "WarehouseRequest",
-  WarehouseRequestSchema,
+  warehouseRequestSchema,
 );

@@ -29,6 +29,17 @@ const warehouseRequestSchema = new mongoose.Schema({
   ],
 });
 
+warehouseRequestSchema.pre("save", async function () {
+  if (this.isNew) {
+    await FinancialManager.findByIdAndUpdate(this.financialManager, {
+      $push: { warehouseRequests: this._id },
+    });
+    await WarehouseManager.findByIdAndUpdate(this.warehouseManager, {
+      $push: { warehouseRequests: this._id },
+    });
+  }
+});
+
 warehouseRequestSchema.pre("deleteMany", async function () {
   const requestIds = await this.model.find(this.getFilter()).distinct("_id");
   await FinancialManager.updateMany(

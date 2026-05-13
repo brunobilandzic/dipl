@@ -8,3 +8,9 @@ export const createWarehouseRequest = async (requestData) => {
   });
   await warehouseRequest.save();
 };
+
+export const getWarehouseRequests = async () => {
+  const requests = await WarehouseRequest.find();
+
+  return requests;
+};

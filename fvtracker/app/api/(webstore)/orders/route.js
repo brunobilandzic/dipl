@@ -1,5 +1,5 @@
 import dbConnect from "@/lib/db/mongooseConnect";
-import { createOrder } from "@/lib/webstore/orders";
+import { createOrder, getOrders } from "@/lib/webstore/orders";
 
 export async function POST(req) {
   try {
@@ -11,6 +11,22 @@ export async function POST(req) {
     console.error("Greška pri izradi narudžbe:", error);
     return Response.json(
       { error: "Greška pri izradi narudžbe" },
+      { status: 500 },
+    );
+  }
+}
+
+export async function GET(req) {
+  try {
+    await dbConnect();
+    const { searchParams } = new URL(req.url);
+    const customerId = searchParams.get("customerId");
+    const orders = await getOrders({ customerId });
+    return Response.json({ orders }, { status: 200 });
+  } catch (error) {
+    console.error("Greška pri dohvaćanju narudžbi:", error);
+    return Response.json(
+      { error: "Greška pri dohvaćanju narudžbi" },
       { status: 500 },
     );
   }

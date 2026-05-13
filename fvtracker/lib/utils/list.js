@@ -47,6 +47,14 @@ export const initFilters = (listType) => {
           value: "",
         },
       ];
+    case "orders":
+      return [
+        {
+          type: "customerSearch",
+          placeholder: "Ime kupca...",
+          value: "",
+        },
+      ];
   }
 };
 
@@ -88,6 +96,8 @@ export const filterItems = ({ _items, itemModelName, filters }) => {
           items,
           value: filter.value,
         });
+      case "customerSearch":
+        items = customerSearch({ items, value: filter.value });
       default:
         break;
     }
@@ -109,4 +119,8 @@ const cropVarietySearch = ({ itemModelName, items, value }) => {
 
 const nameSearch = ({ items, value }) => {
   return items.filter((item) => stringContains(item.name, value));
+};
+
+const customerSearch = ({ items, value }) => {
+  return items.filter((item) => stringContains(item.customer.name, value));
 };

@@ -1,6 +1,6 @@
 import api from "@/lib/api";
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
-import { sortItems } from "@/lib/utils/list";
+import { filterItems, sortItems } from "@/lib/utils/list";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -63,6 +63,13 @@ const productsSlice = createSlice({
       state.orders.filteredItems = sortItems({
         items: state.orders.filteredItems,
         sortBy,
+      });
+    },
+    filterOrders: (state, action) => {
+      const filters = action.payload;
+      state.orders.filteredItems = filterItems({
+        _items: state.orders.items,
+        filters,
       });
     },
   },
@@ -128,4 +135,5 @@ export const {
   changeQuantity,
   emptyCart,
   sortOrders,
+  filterOrders,
 } = productsSlice.actions;

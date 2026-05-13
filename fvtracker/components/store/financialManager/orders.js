@@ -7,7 +7,8 @@ import {
   WAREHOUSE_REQUESTED,
 } from "@/lib/constants/webstore/orders";
 import { getName, showDate, showDateTime } from "@/lib/utils/display";
-import { sortOrders } from "@/store/webstore";
+import { initFilters } from "@/lib/utils/list";
+import { filterOrders, sortOrders } from "@/store/webstore";
 import classNames from "classnames";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -16,9 +17,13 @@ export const OrdersList = () => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.webstore.orders.filteredItems);
   const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
+  const [filters, setFilters] = useState(initFilters("orders"));
   useEffect(() => {
     dispatch(sortOrders(sortBy));
   }, [sortBy]);
+  useEffect(() => {
+    dispatch(filterOrders(filters));
+  }, [filters]);
 
   return (
     <List
@@ -26,6 +31,9 @@ export const OrdersList = () => {
       sortBy={sortBy}
       setSortBy={setSortBy}
       sortOptions={orderSortOptions}
+      filters={filters}
+      setFilters={setFilters}
+      initialFilters={initFilters("orders")}
     >
       {orders?.map((order) => (
         <OrderListItem key={order._id} order={order} />

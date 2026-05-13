@@ -41,6 +41,17 @@ export const Filter = ({ filters, setFilters, onApply }) => {
                   }}
                 />
               );
+            case "customerSearch":
+              return (
+                <AppInput
+                  key={index}
+                  placeholder={option.placeholder}
+                  value={option.value}
+                  onChange={(e) => {
+                    onChange(index, e.target.value);
+                  }}
+                />
+              );
           }
         })}
 

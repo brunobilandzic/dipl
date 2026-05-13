@@ -18,11 +18,15 @@ export const OrdersList = () => {
 const OrderListItem = ({ order }) => {
   const orderActions = [
     {
+      label: "Izbriši",
+      className: "cancelButton",
+    },
+    {
       label: "Izradi račun",
       onClick: () => {
         console.log("izrada računa za", order.number);
       },
-      className: "btn submitButton btnSm",
+      className: "submitButton",
     },
   ];
   console.log({ order });

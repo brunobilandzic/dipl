@@ -121,7 +121,7 @@ export default {
       ],
     },
   ],
-  FinanceManager: [
+  FinancialManager: [
     {
       label: "narudžbe",
       path: "/narudzbe",

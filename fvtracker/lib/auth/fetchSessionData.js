@@ -90,7 +90,13 @@ export async function fetchManager({ managerNames = [] }) {
   if (generalManager) {
     response.generalManager = generalManager;
   }
-
+  if (managerNames.length === 0) {
+    // if no specific manager types provided, return general manager if exists or unauthorized
+    console.log(
+      "No specific manager types provided, returning general manager if exists",
+    );
+    return response.generalManager ? response : { unauthorized: true };
+  }
   for (const managerName of managerNames) {
     const specificManager = await fetchSessionSpecificManager({
       managerName,

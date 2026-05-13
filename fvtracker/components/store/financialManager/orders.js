@@ -19,9 +19,11 @@ export const OrdersList = () => {
   const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
   const [filters, setFilters] = useState(initFilters("orders"));
   useEffect(() => {
+    if (!orders) return;
     dispatch(sortOrders(sortBy));
   }, [sortBy]);
   useEffect(() => {
+    if (!orders) return;
     dispatch(filterOrders(filters));
   }, [filters]);
 

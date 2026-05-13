@@ -9,10 +9,7 @@ export const sendOrder = async ({ customerData, cartItems }) => {
     return response.data;
   } catch (error) {
     console.error("Greška pri slanju narudžbe:", error);
-    handleError(
-      { ...error, customMessage: "Greška pri slanju narudžbe" },
-      router,
-    );
+    handleError({ ...error, customMessage: "Greška pri slanju narudžbe" });
   }
 };
 

@@ -8,7 +8,10 @@ import {
 } from "@/lib/constants/webstore/orders";
 import { getName, showDateTime } from "@/lib/utils/display";
 import { initFilters } from "@/lib/utils/list";
+import { deleteOrderUtil } from "@/lib/utils/webstore/orders";
+
 import { filterOrders, sortOrders } from "@/store/webstore";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -56,6 +59,9 @@ const OrderListItem = ({ order, dispatch, router }) => {
           {
             label: "Izbriši",
             className: "cancelButton",
+            onClick: () => {
+              deleteOrderUtil({ orderId: order._id, dispatch, router });
+            },
           },
         ]
       : []),

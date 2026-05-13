@@ -21,13 +21,22 @@ const OrderListItem = ({ order }) => {
       label: "Izbriši",
       className: "cancelButton",
     },
-    {
-      label: "Izradi račun",
-      onClick: () => {
-        console.log("izrada računa za", order.number);
-      },
-      className: "submitButton",
-    },
+    ...(!order.receipt
+      ? [
+          {
+            label: "Izradi račun",
+            onClick: () => {
+              console.log("izrada računa za", order.number);
+            },
+            className: "submitButton",
+          },
+        ]
+      : [
+          {
+            label: "Pošalji",
+            className: "submitButton",
+          },
+        ]),
   ];
   console.log({ order });
   return (

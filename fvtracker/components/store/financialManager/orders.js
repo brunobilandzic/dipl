@@ -1,17 +1,26 @@
 "use client";
 import { List, ListItem } from "@/components/layout/preview/list";
+import { orderSortOptions } from "@/components/layout/preview/sort";
+import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import {
   DELIVERED,
   WAREHOUSE_REQUESTED,
 } from "@/lib/constants/webstore/orders";
 import { getName, showDate, showDateTime } from "@/lib/utils/display";
 import classNames from "classnames";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 
 export const OrdersList = () => {
   const orders = useSelector((state) => state.webstore.orders.filteredItems);
+  const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
   return (
-    <List title="Narudžbe">
+    <List
+      title="Narudžbe"
+      sortBy={sortBy}
+      setSortBy={setSortBy}
+      sortOptions={orderSortOptions}
+    >
       {orders?.map((order) => (
         <OrderListItem key={order._id} order={order} />
       ))}

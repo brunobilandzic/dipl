@@ -35,6 +35,13 @@ export const productSortOptions = [
   { value: "priceDesc", label: "Cijena padajuće" },
 ];
 
+export const orderSortOptions = [
+  { value: "newest", label: "Najnovije" },
+  { value: "oldest", label: "Najstarije" },
+  { value: "priceAsc", label: "Cijena rastuće" },
+  { value: "priceDesc", label: "Cijena padajuće" },
+];
+
 export const SortOpenButton = ({ isOpen, setOpen, clearSort }) => {
   return (
     <ListHeaderShowButton

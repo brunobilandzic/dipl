@@ -22,6 +22,7 @@ import { fillWarehouseRedux } from "@/lib/utils/storage";
 import { refreshProducts } from "@/lib/utils/production/products";
 import { refreshProductsThunk } from "@/store/webstore";
 import { fillCartRedux } from "@/lib/utils/webstore/cart";
+import { fillOrdersRedux } from "@/lib/utils/webstore/orders";
 
 export default {
   roleitems,

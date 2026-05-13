@@ -14,6 +14,7 @@ import { filterOrders, sortOrders } from "@/store/webstore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { WarehouseRequestModal } from "./warehouseRequest";
 
 export const OrdersList = () => {
   const dispatch = useDispatch();
@@ -53,6 +54,7 @@ export const OrdersList = () => {
 };
 
 const OrderListItem = ({ order, dispatch, router }) => {
+  const [warehouseRequestOpen, setWarehouseRequestOpen] = useState(false);
   const orderActions = [
     ...(!(order.state === DELIVERED)
       ? [
@@ -68,8 +70,11 @@ const OrderListItem = ({ order, dispatch, router }) => {
     ...(!(order.state === WAREHOUSE_REQUESTED)
       ? [
           {
-            label: "Zatraži skladište",
+            label: "Zahtjev skladištu",
             className: "submitButton",
+            onClick: () => {
+              setWarehouseRequestOpen(true);
+            },
           },
         ]
       : []),
@@ -93,9 +98,18 @@ const OrderListItem = ({ order, dispatch, router }) => {
   ];
   console.log({ order });
   return (
-    <ListItem actionOptions={orderActions}>
-      <OrderItem order={order} />
-    </ListItem>
+    <>
+      <ListItem actionOptions={orderActions}>
+        <OrderItem order={order} />
+      </ListItem>
+      {warehouseRequestOpen && (
+        <WarehouseRequestModal
+          isOpen={warehouseRequestOpen}
+          onCancel={() => setWarehouseRequestOpen(false)}
+          order={order}
+        />
+      )}
+    </>
   );
 };
 

@@ -9,7 +9,7 @@ const initialState = {
     filteredItems: null,
   },
   cart: {
-    items: null,
+    items: [],
   },
   isLoading: false,
   orders: {
@@ -25,7 +25,7 @@ const productsSlice = createSlice({
     addToCartRedux: (state, action) => {
       const { product, quantity } = action.payload;
       const existingItem = state.cart.items.find(
-        (item) => item.product.id === product.id,
+        (item) => item.product._id === product._id,
       );
       if (existingItem) {
         existingItem.quantity += quantity;

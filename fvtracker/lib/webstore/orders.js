@@ -23,3 +23,12 @@ export const createOrder = async ({ cartItems, customerData }) => {
   await order.save();
   await customer.save();
 };
+
+export const getOrders = async ({ customerId = null }) => {
+  const orders = await Order.find({
+    ...(customerId && { customer: customerId }),
+  })
+    .populate("customer")
+    .populate("items.product");
+  return orders;
+};

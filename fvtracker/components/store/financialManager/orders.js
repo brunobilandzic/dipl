@@ -4,7 +4,7 @@ import {
   DELIVERED,
   WAREHOUSE_REQUESTED,
 } from "@/lib/constants/webstore/orders";
-import { getName, showDate } from "@/lib/utils/display";
+import { getName, showDate, showDateTime } from "@/lib/utils/display";
 import classNames from "classnames";
 import { useSelector } from "react-redux";
 
@@ -69,7 +69,6 @@ const OrderItem = ({ order }) => {
       <div>
         <div className="listitemheader">Narudžba #{order.number} </div>
         <div>
-          Kupac:{" "}
           {getName({
             name: order.customer.name,
             surname: order.customer.surname,
@@ -79,15 +78,14 @@ const OrderItem = ({ order }) => {
           <OrderItems items={order.items} />
         </div>
       </div>
-      <div className="listitemDescription">{showDate(order.createdAt)}</div>
+      <div className="listitemDescription">{showDateTime(order.createdAt)}</div>
     </div>
   );
 };
 
 const OrderItems = ({ items }) => {
   return (
-    <div>
-      <div>Stavke:</div>
+    <div className="mt-2">
       <ul>
         {items.map((item) => (
           <li key={item._id}>

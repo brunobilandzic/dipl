@@ -1,4 +1,4 @@
-import { ORDER_STATES } from "@/lib/constants/webstore/orders";
+import { ORDER_STATES, PENDING } from "@/lib/constants/webstore/orders";
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
@@ -39,7 +39,7 @@ const orderSchema = new Schema({
   state: {
     type: String,
     enum: ORDER_STATES,
-    default: "pending",
+    default: PENDING,
   },
 });
 

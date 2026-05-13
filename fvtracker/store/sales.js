@@ -25,7 +25,11 @@ const salesSlice = createSlice({
 export const fetchWarehouseRequests = createAsyncThunk(
   "sales/fetchWarehouseRequests",
   async ({ dispatch, router }) => {
+    console.log("Fetching warehouse requests...");
     const res = await api.get("/warehouse-requests");
     return res.data;
   },
 );
+
+export const {} = salesSlice.actions;
+export default salesSlice.reducer;

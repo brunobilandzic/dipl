@@ -12,9 +12,10 @@ export async function GET(request) {
       managerNames: [FINANCIAL_MANAGER],
     });
     if (unauthorized) {
-      return new Response(JSON.stringify({ message: "Unauthorized" }), {
-        status: 401,
-      });
+      return Response.json(
+        { message: "Nemate pravo pristupa" },
+        { status: 403 },
+      );
     }
     const warehouseRequests = await getWarehouseRequests();
     return Response.json({ warehouseRequests });
@@ -34,17 +35,18 @@ export async function POST(request) {
       managerNames: [FINANCIAL_MANAGER],
     });
     if (unauthorized) {
-      return new Response(JSON.stringify({ message: "Unauthorized" }), {
-        status: 401,
-      });
+      return Response.json(
+        { message: "Nemate pravo pristupa" },
+        { status: 403 },
+      );
     }
     const requestData = await request.json();
     const warehouseRequest = await createWarehouseRequest(requestData);
     return Response.json({ message: "Zahtjev uspješno poslan skladištu." });
   } catch (error) {
     console.error("Error creating warehouse request:", error);
-    return new Response(
-      JSON.stringify({ message: "Greška prilikom izrade zahtjeva skladištu." }),
+    return Response.json(
+      { message: "Greška prilikom izrade zahtjeva skladištu." },
       { status: 500 },
     );
   }

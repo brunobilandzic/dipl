@@ -1,3 +1,5 @@
+import { fetchManager } from "@/lib/auth/fetchSessionData";
+import { FINANCIAL_MANAGER } from "@/lib/constants/users/managerTypes";
 import dbConnect from "@/lib/db/mongooseConnect";
 import { createOrder, getOrders } from "@/lib/webstore/orders";
 
@@ -27,6 +29,28 @@ export async function GET(req) {
     console.error("Greška pri dohvaćanju narudžbi:", error);
     return Response.json(
       { error: "Greška pri dohvaćanju narudžbi" },
+      { status: 500 },
+    );
+  }
+}
+
+export async function DELETE(req) {
+  try {
+    const { unathorized } = await fetchManager({
+      managerNames: [FINANCIAL_MANAGER],
+    });
+    if (unathorized) {
+      return Response.json({ error: "Nedovoljno ovlasti" }, { status: 403 });
+    }
+    await dbConnect();
+    const { searchParams } = new URL(req.url);
+    const orderId = searchParams.get("id");
+    await deleteOrder({ orderId });
+    return Response.json({ message: "Narudžba obrisana" }, { status: 200 });
+  } catch (error) {
+    console.error("Greška pri brisanju narudžbe:", error);
+    return Response.json(
+      { error: "Greška pri brisanju narudžbe" },
       { status: 500 },
     );
   }

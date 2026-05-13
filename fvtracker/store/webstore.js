@@ -58,6 +58,13 @@ const productsSlice = createSlice({
       state.cart = initialState.cart;
       localStorage.setItem("cart", JSON.stringify(state.cart));
     },
+    sortOrders: (state, action) => {
+      const sortBy = action.payload;
+      state.orders.filteredItems = sortItems({
+        items: state.orders.filteredItems,
+        sortBy,
+      });
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -120,4 +127,5 @@ export const {
   fillReduxCart,
   changeQuantity,
   emptyCart,
+  sortOrders
 } = productsSlice.actions;

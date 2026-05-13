@@ -31,3 +31,7 @@ export const getOrders = async ({ customerId = null }) => {
     .populate("items.product");
   return orders;
 };
+
+export const deleteOrder = async ({ orderId }) => {
+  await Order.findByIdAndDelete(orderId);
+};

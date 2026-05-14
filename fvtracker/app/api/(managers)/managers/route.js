@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
+import { findManagerName } from "./naming";
 
-export async function GET(req) {
+export async function GET(request) {
   const { searchParams } = new URL(request.url);
-  const managerType = searchParams.get("managerType");
+  const managersType = searchParams.get("managersType");
   const managers = await mongoose
-    .model(managerType)
+    .model(findManagerName({ managersType: managersType }))
     .find()
     .populate([
       {

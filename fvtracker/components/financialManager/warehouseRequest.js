@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { FormModal } from "../layout/modals/form";
 import { AppInput, AppSelect } from "../form/inputs";
+import { useSelector } from "react-redux";
 
 export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
   const initialWarehouseRequest = {
@@ -12,6 +13,10 @@ export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
   const [warehouseRequest, setWarehouseRequest] = useState(
     initialWarehouseRequest,
   );
+  const warehouseManagers = useSelector(
+    (state) => state.managers.warehouseManagers,
+  );
+
   const onChange = (e) => {
     setWarehouseRequest((prev) => ({
       ...prev,

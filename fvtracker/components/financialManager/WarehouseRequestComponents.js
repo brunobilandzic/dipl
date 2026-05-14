@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import { FormModal } from "../layout/modals/form";
 import { AppInput, AppSelect } from "../form/inputs";

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormModal } from "../layout/modals/form";
 import { AppInput, AppSelect } from "../form/inputs";
 import { useSelector } from "react-redux";
@@ -23,12 +23,21 @@ export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
       [e.target.name]: e.target.value,
     }));
   };
+
+  useEffect(() => {
+    console.log(warehouseRequest);
+  }, [warehouseRequest]);
   return (
     <FormModal isOpen={isOpen} onCancel={onCancel}>
       <AppSelect
         name="warehouseManagerId"
         label="Skladištar"
         onChange={onChange}
+        options={warehouseManagers?.map((wm) => ({
+          value: wm._id,
+          label:
+            wm.rootManager.appUser.name + " " + wm.rootManager.appUser.surname,
+        }))}
       />
     </FormModal>
   );

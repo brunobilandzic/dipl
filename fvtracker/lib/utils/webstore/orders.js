@@ -15,7 +15,8 @@ export const sendOrder = async ({ customerData, cartItems }) => {
 
 export const fillOrdersRedux = async ({ dispatch }) => {
   try {
-    dispatch(refreshOrdersThunk());
+    const ordersRes = await api.get("/orders");
+    dispatch(refreshOrdersThunk.fulfilled(ordersRes.data.orders));
   } catch (error) {
     console.error("Greška pri dohvatanju narudžbi:", error);
     handleError(

@@ -56,3 +56,20 @@ export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
     </FormModal>
   );
 };
+
+export const WarehouseRequestList = () => {
+  const warehouseRequests = useSelector(
+    (state) => state.warehouse.warehouseRequests,
+  );
+  console.log({ warehouseRequests });
+  return (
+    <>
+      {warehouseRequests?.map((wr) => (
+        <div key={wr._id}>
+          <p>{wr.order}</p>
+          <p>{wr.warehouseManager}</p>
+        </div>
+      ))}
+    </>
+  );
+};

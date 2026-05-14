@@ -10,6 +10,7 @@ import {
 import { GeneralManager } from "@/models/user/managers/GeneralManager";
 import { RootManager } from "@/models/user/managers/RootManager";
 import { ROLE_STATUSES } from "../constants/users";
+import mongoose from "mongoose";
 
 export async function handleOAuth({ email, given_name, family_name }) {
   await dbConnect();
@@ -53,6 +54,11 @@ export async function handleCredentials(credentials) {
     }
   };
 
+  const manager = await mongoose
+    .model(getManagerModelName())
+    .findOne({ rootManager: user.rootManager?._id });
+  console.log("Found manager for user:", manager);
+
   return {
     appUserId: user._id.toString(),
     email: user.email,
@@ -60,6 +66,7 @@ export async function handleCredentials(credentials) {
     name: user.name,
     roleStatus: user.roleStatus,
     username: user.username,
+    managerId: manager?._id.toString() || null,
   };
 }
 

@@ -1,4 +1,4 @@
-import { fetchWarehouseRequests } from "@/store/sales";
+import { fetchWarehouseRequests } from "@/store/warehouse";
 import { fetchWarehouses } from "@/store/warehouse";
 
 export const fillWarehouseRedux = ({ dispatch }) => {

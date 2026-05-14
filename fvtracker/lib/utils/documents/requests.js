@@ -1,5 +1,5 @@
 import api from "@/lib/api";
-import { fetchWarehouseRequests } from "@/store/sales";
+import { fetchWarehouseRequests } from "@/store/warehouse";
 
 export const fillWarehouseRequestsRedux = ({ dispatch }) => {
   dispatch(fetchWarehouseRequests());

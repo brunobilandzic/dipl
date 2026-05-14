@@ -7,6 +7,7 @@ const initialState = {
     items: [],
     filteredItems: [],
   },
+  warehouseRequests: null,
   isLoading: false,
 };
 
@@ -41,6 +42,16 @@ const warehousesSlice = createSlice({
       .addCase(fetchWarehouses.rejected, (state) => {
         alert("Greška prilikom dohvaćanja skladišta.");
         state.isLoading = false;
+      })
+      .addCase(fetchWarehouseRequests.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchWarehouseRequests.fulfilled, (state, action) => {
+        state.warehouseRequests = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(fetchWarehouseRequests.rejected, (state) => {
+        state.isLoading = false;
       });
   },
 });
@@ -54,7 +65,15 @@ export const fetchWarehouses = createAsyncThunk(
     return res.data.warehouses;
   },
 );
-
+export const fetchWarehouseRequests = createAsyncThunk(
+  "warehouses/fetchWarehouseRequests",
+  async (_, { dispatch }) => {
+    console.log("Fetching warehouse requests...");
+    const res = await api.get("/warehouse-requests");
+    console.log("Warehouse requests fetched:", res.data);
+    return res.data.warehouseRequests;
+  },
+);
 export const { filterWarehouses, sortWarehouses } = warehousesSlice.actions;
 
 export default warehousesSlice.reducer;

@@ -37,7 +37,7 @@ const ProductList = () => {
 
   useEffect(() => {
     if (!products) return;
-    dispatch(filterProducts(filters));
+    dispatch(filterProducts({ filters, sortBy }));
   }, [filters]);
 
   useEffect(() => {

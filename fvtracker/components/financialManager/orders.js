@@ -28,7 +28,7 @@ export const OrdersList = () => {
   }, [sortBy]);
   useEffect(() => {
     if (!orders) return;
-    dispatch(filterOrders(filters));
+    dispatch(filterOrders({ filters, sortBy }));
   }, [filters]);
 
   return (
@@ -96,7 +96,6 @@ const OrderListItem = ({ order, dispatch, router }) => {
           },
         ]),
   ];
-  console.log({ order });
   return (
     <>
       <ListItem actionOptions={orderActions}>

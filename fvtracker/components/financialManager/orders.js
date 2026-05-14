@@ -15,6 +15,8 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { WarehouseRequestModal } from "./WarehouseRequestComponents";
+import { orderAmount } from "@/lib/utils/sales";
+import { priceEuroString } from "@/lib/utils/strings";
 
 export const OrdersList = () => {
   const dispatch = useDispatch();
@@ -127,7 +129,14 @@ const OrderItem = ({ order }) => {
           <OrderItems items={order.items} />
         </div>
       </div>
-      <div className="listitemDescription">{showDateTime(order.createdAt)}</div>
+      <div>
+        <div className="font-bold italic text-right">
+          {priceEuroString(orderAmount(order).toFixed(2))}
+        </div>
+        <div className="listitemDescription">
+          {showDateTime(order.createdAt)}
+        </div>
+      </div>
     </div>
   );
 };

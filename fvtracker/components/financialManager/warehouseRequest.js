@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { FormModal } from "../layout/modals/form";
 import { AppInput, AppSelect } from "../form/inputs";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { sendWarehouseRequest } from "@/lib/utils/documents/requests";
+import { useRouter } from "next/navigation";
 
 export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
   const initialWarehouseRequest = {
@@ -16,6 +18,8 @@ export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
   const warehouseManagers = useSelector(
     (state) => state.managers.warehouseManagers,
   );
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   const onChange = (e) => {
     setWarehouseRequest((prev) => ({
@@ -24,11 +28,19 @@ export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
     }));
   };
 
+  const handleSubmit = () => {
+    sendWarehouseRequest({
+      requestData: warehouseRequest,
+      dispatch,
+      router,
+    });
+  };
+
   useEffect(() => {
     console.log(warehouseRequest);
   }, [warehouseRequest]);
   return (
-    <FormModal isOpen={isOpen} onCancel={onCancel}>
+    <FormModal isOpen={isOpen} onCancel={onCancel} onSubmit={handleSubmit}>
       <AppSelect
         name="warehouseManagerId"
         label="Skladištar"

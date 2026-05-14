@@ -24,6 +24,7 @@ import { refreshProductsThunk } from "@/store/webstore";
 import { fillCartRedux } from "@/lib/utils/webstore/cart";
 import { fillOrdersRedux } from "@/lib/utils/webstore/orders";
 import { fillWarehouseRequestsRedux } from "@/lib/utils/documents/requests";
+import { fillManagersSelection } from "@/store/managers";
 
 export default {
   roleitems,
@@ -71,7 +72,6 @@ function NavItems() {
     (state) => state.webstore.products.filteredItems,
   );
 
-
   useEffect(() => {
     dispatch(refreshProductsThunk());
   }, [dispatch]);
@@ -116,6 +116,7 @@ function NavItems() {
           "financial manager logged in, refreshing warehouse requests data...",
         );
         fillWarehouseRequestsRedux({ dispatch });
+        dispatch(fillManagersSelection({ managersType: "warehouseManagers" }));
       }
     } else if (status === "unauthenticated") {
       console.log("user is unauthenticated, refreshing products...");

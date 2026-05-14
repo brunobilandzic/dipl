@@ -15,6 +15,7 @@ import {
   FINANCIAL_MANAGER,
   PRODUCTION_MANAGER,
   WAREHOUSE_MANAGER,
+  GENERAL_MANAGER
 } from "@/lib/constants/users/managerTypes";
 import fillProductionRedux from "@/lib/utils/production";
 import { fetchWarehouses } from "@/store/warehouse";

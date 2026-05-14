@@ -1,6 +1,7 @@
 import { WarehouseRequest } from "@/models/documents/requests/WarehouseRequest";
 
 export const createWarehouseRequest = async (requestData) => {
+  console.log(requestData);
   const { ...modelData } = requestData;
   const warehouseRequest = new WarehouseRequest({
     ...modelData,

@@ -21,20 +21,6 @@ const warehouseRequestSchema = new mongoose.Schema({
     ref: "WarehouseManager",
     required: true,
   },
-  items: [
-    {
-      product: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
-        required: true,
-      },
-      quantity: {
-        type: Number,
-        required: true,
-        min: 1,
-      },
-    },
-  ],
 });
 
 warehouseRequestSchema.pre("save", async function () {

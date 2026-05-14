@@ -8,6 +8,7 @@ import productionReducer from "./production/index.js";
 import warehouseReducer from "./warehouse";
 import storeReducer from "./webstore";
 import salesReducer from "./sales";
+import managersReducer from "./managers";
 
 const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ const store = configureStore({
     warehouse: warehouseReducer,
     webstore: storeReducer,
     sales: salesReducer,
+    managers: managersReducer,
   },
 });
 

@@ -4,9 +4,13 @@ import { useEffect, useState } from "react";
 import { FormModal } from "../layout/modals/form";
 import { AppInput, AppSelect } from "../form/inputs";
 import { useDispatch, useSelector } from "react-redux";
-import { sendWarehouseRequest } from "@/lib/utils/documents/requests";
+import {
+  sendWarehouseRequest,
+  warehouseRequestItems,
+} from "@/lib/utils/documents/requests";
 import { useRouter } from "next/navigation";
 import { refreshOrdersThunk } from "@/store/webstore";
+import { ListItem } from "../layout/preview/list";
 
 export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
   const initialWarehouseRequest = {
@@ -66,12 +70,40 @@ export const WarehouseRequestList = () => {
   console.log({ warehouseRequests });
   return (
     <>
-      {warehouseRequests?.map((wr) => (
-        <div key={wr._id}>
-          <p>{wr.order}</p>
-          <p>{wr.warehouseManager}</p>
-        </div>
-      ))}
+      <div className="text-2xl font-bold mb-4">Zahtjevi skladištu</div>
+      <div className="flex flex-col gap-4 mb-6">
+        {warehouseRequests?.map((wr) => (
+          <WarehouseRequestListItem key={wr._id} request={wr} />
+        ))}
+      </div>
     </>
+  );
+};
+
+const WarehouseRequestListItem = ({ request }) => {
+  console.log({ request });
+  return (
+    <ListItem>
+      {" "}
+      <div key={request._id}>
+        <p>Narudžba: {request.order.number}</p>
+        <div>
+          <ItemList items={warehouseRequestItems(request)} />
+        </div>
+      </div>
+    </ListItem>
+  );
+};
+
+const ItemList = ({ items }) => {
+  console.log({ items });
+  return (
+    <ul className="list-disc list-inside">
+      {items.map((item, index) => (
+        <li key={index}>
+          {item.product} x {item.quantity}
+        </li>
+      ))}
+    </ul>
   );
 };

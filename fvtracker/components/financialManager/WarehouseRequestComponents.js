@@ -11,6 +11,7 @@ import {
 import { useRouter } from "next/navigation";
 import { refreshOrdersThunk } from "@/store/webstore";
 import { ListItem } from "../layout/preview/list";
+import { WAREHOUSE_MANAGER } from "@/lib/constants/users/managerTypes";
 
 export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
   const initialWarehouseRequest = {
@@ -81,9 +82,27 @@ export const WarehouseRequestList = () => {
 };
 
 const WarehouseRequestListItem = ({ request }) => {
+  const managerModelName = useSelector(
+    (state) => state.user.session.managerModelName,
+  );
+  console.log({ managerModelName });
+
+  const actions = [
+    ...(managerModelName == WAREHOUSE_MANAGER
+      ? [
+          {
+            label: "Obradi",
+            onClick: () => {
+              console.log("Obradi zahtjev");
+            },
+            className: "submitButton",
+          },
+        ]
+      : []),
+  ];
   console.log({ request });
   return (
-    <ListItem>
+    <ListItem actionOptions={actions}>
       {" "}
       <div key={request._id}>
         <p>Narudžba: {request.order.number}</p>

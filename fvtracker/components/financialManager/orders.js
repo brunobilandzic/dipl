@@ -14,7 +14,7 @@ import { filterOrders, sortOrders } from "@/store/webstore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { WarehouseRequestModal } from "./warehouseRequest";
+import { WarehouseRequestModal } from "./WarehouseRequestComponents";
 
 export const OrdersList = () => {
   const dispatch = useDispatch();

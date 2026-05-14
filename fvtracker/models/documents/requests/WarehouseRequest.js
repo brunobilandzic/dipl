@@ -1,9 +1,15 @@
 import { RequestDocument } from "@/models/Base";
+import { Order } from "@/models/sectors/sales";
 import { FinancialManager } from "@/models/user/managers/FinancialManager";
 import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
 import mongoose from "mongoose";
 
 const warehouseRequestSchema = new mongoose.Schema({
+  order: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Order",
+    required: true,
+  },
   financialManager: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "FinancialManager",
@@ -38,6 +44,10 @@ warehouseRequestSchema.pre("save", async function () {
     await WarehouseManager.findByIdAndUpdate(this.warehouseManager, {
       $push: { warehouseRequests: this._id },
     });
+    const order = await Order.findById(this.order);
+    if (!order) throw new Error("Povezana narudžba nije pronađena");
+    order.warehouseRequest = this._id;
+    await order.save();
   }
 });
 

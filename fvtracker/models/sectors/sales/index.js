@@ -27,6 +27,11 @@ const orderSchema = new Schema({
       },
     },
   ],
+  warehouseRequest: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "WarehouseRequest",
+    default: null,
+  },
   receipt: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Receipt",

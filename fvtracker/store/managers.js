@@ -2,7 +2,7 @@ import api from "@/lib/api";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  workhouseManagers: null,
+  warehouseManagers: null,
   financialManagers: null,
   productionManagers: null,
   cultivationManagers: null,

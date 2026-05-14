@@ -4,6 +4,7 @@ import { AppInput, AppSelect } from "../form/inputs";
 import { useDispatch, useSelector } from "react-redux";
 import { sendWarehouseRequest } from "@/lib/utils/documents/requests";
 import { useRouter } from "next/navigation";
+import { refreshOrdersThunk } from "@/store/webstore";
 
 export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
   const initialWarehouseRequest = {
@@ -33,6 +34,8 @@ export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
       dispatch,
       router,
     });
+    onCancel();
+    dispatch(refreshOrdersThunk());
   };
 
   useEffect(() => {

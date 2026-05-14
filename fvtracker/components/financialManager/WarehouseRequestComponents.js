@@ -7,8 +7,7 @@ import { useRouter } from "next/navigation";
 
 export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
   const initialWarehouseRequest = {
-    items: order.items,
-    orderNumber: order.number,
+    orderId: order._id,
     warehouseManagerId: null,
     financialManagerId: null,
   };

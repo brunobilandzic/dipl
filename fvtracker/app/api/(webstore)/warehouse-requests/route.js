@@ -1,5 +1,5 @@
 import { fetchManager } from "@/lib/auth/fetchSessionData";
-import { FINANCIAL_MANAGER } from "@/lib/constants/users/managerTypes";
+import { FINANCIAL_MANAGER, WAREHOUSE_MANAGER } from "@/lib/constants/users/managerTypes";
 import {
   createWarehouseRequest,
   getWarehouseRequests,
@@ -9,7 +9,7 @@ export async function GET(request) {
   console.log("Received GET request for warehouse requests");
   try {
     const { unauthorized } = await fetchManager({
-      managerNames: [FINANCIAL_MANAGER],
+      managerNames: [FINANCIAL_MANAGER, WAREHOUSE_MANAGER],
     });
     if (unauthorized) {
       return Response.json(

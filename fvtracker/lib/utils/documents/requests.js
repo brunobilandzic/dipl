@@ -24,7 +24,7 @@ export const sendWarehouseRequest = async ({
 
 export const warehouseRequestItems = (request) => {
   return request.order.items.map((item) => ({
-    product: item.product._id,
+    product: item.product.name,
     quantity: item.quantity,
   }));
 };

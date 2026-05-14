@@ -1,3 +1,4 @@
+import { WAREHOUSE_REQUESTED } from "@/lib/constants/webstore/orders";
 import { RequestDocument } from "@/models/Base";
 import { Order } from "@/models/sectors/sales";
 import { FinancialManager } from "@/models/user/managers/FinancialManager";
@@ -47,6 +48,7 @@ warehouseRequestSchema.pre("save", async function () {
     const order = await Order.findById(this.order);
     if (!order) throw new Error("Povezana narudžba nije pronađena");
     order.warehouseRequest = this._id;
+    order.state = WAREHOUSE_REQUESTED;
     await order.save();
   }
 });

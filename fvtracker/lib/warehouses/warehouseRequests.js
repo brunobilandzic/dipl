@@ -1,4 +1,5 @@
 import { WarehouseRequest } from "@/models/documents/requests/WarehouseRequest";
+import { populateIngredientsConfig } from "../production/product/ingredients";
 
 export const createWarehouseRequest = async (requestData) => {
   console.log(requestData);
@@ -14,6 +15,14 @@ export const createWarehouseRequest = async (requestData) => {
 };
 
 export const getWarehouseRequests = async () => {
-  const requests = await WarehouseRequest.find();
+  const requests = await WarehouseRequest.find().populate([
+    {
+      path: "order",
+      populate: {
+        path: "items.product",
+        populate: populateIngredientsConfig,
+      },
+    },
+  ]);
   return requests;
 };

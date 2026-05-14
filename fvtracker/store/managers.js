@@ -19,8 +19,8 @@ export const managersSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(fillManagersSelection.fulfilled, (state, action) => {
-      const { managers, managerType } = action.payload;
-      state[`${managerType}`] = managers;
+      const { managers, managersType } = action.payload;
+      state[`${managersType}`] = managers;
       state.isLoading = false;
     });
     builder.addCase(fillManagersSelection.rejected, (state, action) => {
@@ -32,9 +32,9 @@ export const managersSlice = createSlice({
 
 export const fillManagersSelection = createAsyncThunk(
   "managers/fillManagersSelection",
-  async ({ managerType }, { dispatch }) => {
-    const res = await api.get(`/managers?managerType=${managerType}`);
-    return { managers: res.data.managers, managerType };
+  async ({ managersType }, { dispatch }) => {
+    const res = await api.get(`/managers?managersType=${managersType}`);
+    return { managers: res.data.managers, managersType };
   },
 );
 

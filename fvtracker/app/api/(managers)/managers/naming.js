@@ -1,7 +1,6 @@
 import {
   CULTIVATION_MANAGER,
   PRODUCTION_MANAGER,
-  CULTIVATION_MANAGER,
   GENERAL_MANAGER,
   WAREHOUSE_MANAGER,
 } from "@/lib/constants/users/managerTypes";

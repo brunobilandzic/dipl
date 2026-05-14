@@ -102,7 +102,10 @@ export default {
   WarehouseManager: [
     {
       label: "skladište",
-      submenu: [{ label: "jedinice", path: "/skladisne-jedinice" }],
+      submenu: [
+        { label: "jedinice", path: "/skladisne-jedinice" },
+        { label: "zahtjevi", path: "/skladiste-zahtjevi" },
+      ],
     },
     {
       label: "radnici",
@@ -124,7 +127,7 @@ export default {
   FinancialManager: [
     {
       label: "narudžbe",
-      path: "/narudzbe",
+      submenu: [{ label: "pregled", path: "/narudzbe" }],
     },
     {
       label: "računi",

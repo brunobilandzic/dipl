@@ -66,10 +66,15 @@ const productsSlice = createSlice({
       });
     },
     filterOrders: (state, action) => {
-      const filters = action.payload;
+      const filters = action.payload.filters;
+      const sortBy = action.payload.sortBy || SORT_INIT_VALUE;
       state.orders.filteredItems = filterItems({
         _items: state.orders.items,
         filters,
+      });
+      state.orders.filteredItems = sortItems({
+        items: state.orders.filteredItems,
+        sortBy,
       });
     },
   },
@@ -94,6 +99,12 @@ const productsSlice = createSlice({
       })
       .addCase(refreshOrdersThunk.fulfilled, (state, action) => {
         state.orders.items = action.payload;
+        console.log(
+          sortItems({
+            items: action.payload,
+            sortBy: SORT_INIT_VALUE,
+          }),
+        );
         state.orders.filteredItems = sortItems({
           items: action.payload,
           sortBy: SORT_INIT_VALUE,

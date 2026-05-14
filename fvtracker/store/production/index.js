@@ -65,10 +65,15 @@ const productsSlice = createSlice({
       });
     },
     filterProducts: (state, action) => {
+      const { filters, sortBy } = action.payload;
       state.products.filteredItems = filterItems({
         _items: state.products.items,
         itemModelName: "Product",
-        filters: action.payload,
+        filters,
+      });
+      state.products.filteredItems = sortItems({
+        items: state.products.filteredItems,
+        sortBy,
       });
     },
     setMachines: (state, action) => {
@@ -166,7 +171,7 @@ export const refreshProductsStocks = createAsyncThunk(
     console.log("Fetching product stocks...");
     const res = await api.get("/stocks");
     const data = res.data;
-    console.log({data});
+    console.log({ data });
     return res.data.stocks;
   },
 );

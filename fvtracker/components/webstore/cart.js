@@ -24,8 +24,8 @@ export const CartPageComponent = () => {
 
   const placeOrder = () => {
     sendOrder({ customerData, cartItems });
-    /* setFillInfo(false);
-    dispatch(emptyCart()); */
+    setFillInfo(false);
+    dispatch(emptyCart());
   };
 
   const onQuantityChange = (cartItem, quantity) => {

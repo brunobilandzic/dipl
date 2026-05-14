@@ -21,3 +21,10 @@ export const sendWarehouseRequest = async ({
     );
   }
 };
+
+export const warehouseRequestItems = (request) => {
+  return request.order.items.map((item) => ({
+    product: item.product._id,
+    quantity: item.quantity,
+  }));
+};

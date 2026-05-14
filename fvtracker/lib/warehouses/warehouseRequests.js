@@ -7,9 +7,9 @@ export const createWarehouseRequest = async (requestData) => {
     ...modelData,
     financialManager: requestData.financialManagerId,
     warehouseManager: requestData.warehouseManagerId,
-    items: requestData.items,
-    orderNumber: requestData.orderNumber,
+    order: requestData.orderId,
   });
+
   await warehouseRequest.save();
 };
 

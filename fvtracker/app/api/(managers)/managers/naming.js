@@ -5,6 +5,7 @@ export const managerSelectionTypes = {
   FINANCIAL_MANAGER: "financialManagers",
   PRODUCTION_MANAGER: "productionManagers",
   WAREHOUSE_MANAGER: "warehouseManagers",
+  GENERAL_MANAGER: "generalManagers",
 };
 
 export const findManagerName = ({ managersType }) => {
@@ -17,6 +18,8 @@ export const findManagerName = ({ managersType }) => {
       return PRODUCTION_MANAGER;
     case managerSelectionTypes.WAREHOUSE_MANAGER:
       return WAREHOUSE_MANAGER;
+    case managerSelectionTypes.GENERAL_MANAGER:
+      return GENERAL_MANAGER;
     default:
       return null;
   }

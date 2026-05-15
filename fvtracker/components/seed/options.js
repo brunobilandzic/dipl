@@ -67,6 +67,11 @@ export default function SeedOptions() {
       type: SEED_TYPES.PRODUCTION,
     },
     {
+      label: "Prodaja",
+      icon: <MdFactory />,
+      type: SEED_TYPES.SEED_SALES,
+    },
+    {
       label: "Obriši bazu",
       icon: <MdDeleteForever />,
       onClick: deleteDB,

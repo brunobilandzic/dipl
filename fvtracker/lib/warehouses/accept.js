@@ -29,7 +29,7 @@ export const acceptWarehouseStock = async ({
     product: product._id,
     warehouse: warehouseId,
   });
-  console.log({ found: warehouseStock });
+
   if (!warehouseStock) {
     const warehouse = await getWarehouse({ id: warehouseId });
     warehouseStock = new WarehouseStock({

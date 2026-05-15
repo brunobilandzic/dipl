@@ -1,4 +1,6 @@
+import { WarehouseRequest } from "@/models/documents/requests/WarehouseRequest";
 import { FinancialManager } from "@/models/user/managers/FinancialManager";
+import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
 
 export const createWarehouseRequests = async ({ orders }) => {
   const financialManager = await FinancialManager.findOne({}).select("_id");

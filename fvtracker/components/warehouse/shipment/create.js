@@ -48,39 +48,59 @@ const ChooseWarehouseSources = ({
       <div>Odarite skladišne izvore</div>
       <div>Potrebno je još: </div>
       <div>
-        {warehouses.map((warehouse) => {
-          const stockStatus = calculateWarehouseStock({
-            productQuantities,
-            stocks: warehouse.stocks,
-          });
-
+        {productQuantities.map((pq) => {
           return (
-            <div
-              key={warehouse._id}
-              className="flex justify-between gap-2 overflow-hidden items-center py-2"
-            >
-              <div>{warehouse.name}</div>
-              <div>Stanje: {stockStatus}</div>
-              <div className="w-16">
-                <AppInput
-                  type="number"
-                  value={shipment.sources[warehouse._id] || ""}
-                  onChange={(e) => {
-                    if (parseInt(e.target.value) > stockStatus) {
-                      alert("Nema dovoljno zaliha u ovom skladištu");
-                      return;
-                    }
-                    setShipment({
-                      ...shipment,
-                      sources: {
-                        ...shipment.sources,
-                        [warehouse._id]: parseInt(e.target.value) || 0,
-                      },
-                    });
-                  }}
-                  max={stockStatus}
-                />
-              </div>
+            <div key={pq.productName}>
+              <div>{pq.productName}</div>
+              {warehouses.map((w) => {
+                const availableStock = calculateWarehouseStock({
+                  productName: pq.productName,
+                  stocks: w.stocks,
+                });
+                return (
+                  <div key={w.id}>
+                    <div>{w.name}</div>
+                    <div>{availableStock}</div>
+                    <AppInput
+                      type="number"
+                      value={
+                        shipment.sources.find((s) => s.warehouseId === w.id)
+                          ?.quantity || ""
+                      }
+                      onChange={(e) => {
+                        const quantity = parseInt(e.target.value);
+                        if (quantity > availableStock) {
+                          alert("Nema toliko na skladištu");
+                          return;
+                        }
+                        setShipment((prev) => {
+                          const existingSource = prev.sources.find(
+                            (s) => s.warehouseId === w.id,
+                          );
+                          if (existingSource) {
+                            return {
+                              ...prev,
+                              sources: prev.sources.map((s) =>
+                                s.warehouseId === w.id
+                                  ? { warehouseId: w.id, quantity }
+                                  : s,
+                              ),
+                            };
+                          } else {
+                            return {
+                              ...prev,
+                              sources: [
+                                ...prev.sources,
+                                { warehouseId: w.id, quantity },
+                              ],
+                            };
+                          }
+                        });
+                      }}
+                    />
+                  </div>
+                );
+              })}
             </div>
           );
         })}

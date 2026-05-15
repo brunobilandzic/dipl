@@ -32,3 +32,7 @@ export const getWarehouseRequests = async () => {
   ]);
   return requests;
 };
+
+export const shipWarehouseRequest = async ({ warehouseRequestId }) => {
+  const request = await getWarehouseRequestById(warehouseRequestId);
+};

@@ -327,4 +327,13 @@ const appUsersJsonArray = [
   },
 ];
 
+export const customers = [
+  {
+    name: "Adam",
+    surname: "Johnson",
+    email: "adam.johnson@example.com",
+    address: "123 Main St, Anytown, USA",
+  },
+];
+
 export default appUsersJsonArray;

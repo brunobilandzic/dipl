@@ -47,60 +47,74 @@ const ChooseWarehouseSources = ({
     <div>
       <div>Odarite skladišne izvore</div>
       <div>Potrebno je još: </div>
-      <div>
+      <div className="pt-4">
         {productQuantities.map((pq) => {
           return (
-            <div key={pq.productName}>
-              <div>{pq.productName}</div>
-              {warehouses.map((w) => {
-                const availableStock = calculateWarehouseStock({
-                  productName: pq.productName,
-                  stocks: w.stocks,
-                });
-                return (
-                  <div key={w.id}>
-                    <div>{w.name}</div>
-                    <div>{availableStock}</div>
-                    <AppInput
-                      type="number"
-                      value={
-                        shipment.sources.find((s) => s.warehouseId === w.id)
-                          ?.quantity || ""
-                      }
-                      onChange={(e) => {
-                        const quantity = parseInt(e.target.value);
-                        if (quantity > availableStock) {
-                          alert("Nema toliko na skladištu");
-                          return;
-                        }
-                        setShipment((prev) => {
-                          const existingSource = prev.sources.find(
-                            (s) => s.warehouseId === w.id,
-                          );
-                          if (existingSource) {
-                            return {
-                              ...prev,
-                              sources: prev.sources.map((s) =>
-                                s.warehouseId === w.id
-                                  ? { warehouseId: w.id, quantity }
-                                  : s,
-                              ),
-                            };
-                          } else {
-                            return {
-                              ...prev,
-                              sources: [
-                                ...prev.sources,
-                                { warehouseId: w.id, quantity },
-                              ],
-                            };
+            <div className="" key={pq.productName}>
+              <div className="font-bold">{pq.productName}</div>
+              <div>
+                {warehouses.map((w) => {
+                  const availableStock = calculateWarehouseStock({
+                    productName: pq.productName,
+                    stocks: w.stocks,
+                  });
+                  return (
+                    <div
+                      className="flex justify-between items-center"
+                      key={w.id}
+                    >
+                      <div className="flex gap-2 items-center">
+                        <div>{w.name}</div>
+                        <div>
+                          <span className="italic text-gray-500">
+                            {availableStock} stavka
+                          </span>
+                        </div>
+                      </div>
+                      <div className="warehouse-quantities">
+                        <input
+                          className="inputRow p-1 w-12"
+                          type="number"
+                          value={
+                            shipment.sources.find((s) => s.warehouseId === w.id)
+                              ?.quantity || ""
                           }
-                        });
-                      }}
-                    />
-                  </div>
-                );
-              })}
+                          onChange={(e) => {
+                            const quantity = parseInt(e.target.value);
+                            if (quantity > availableStock) {
+                              alert("Nema toliko na skladištu");
+                              return;
+                            }
+                            setShipment((prev) => {
+                              const existingSource = prev.sources.find(
+                                (s) => s.warehouseId === w.id,
+                              );
+                              if (existingSource) {
+                                return {
+                                  ...prev,
+                                  sources: prev.sources.map((s) =>
+                                    s.warehouseId === w.id
+                                      ? { warehouseId: w.id, quantity }
+                                      : s,
+                                  ),
+                                };
+                              } else {
+                                return {
+                                  ...prev,
+                                  sources: [
+                                    ...prev.sources,
+                                    { warehouseId: w.id, quantity },
+                                  ],
+                                };
+                              }
+                            });
+                          }}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           );
         })}

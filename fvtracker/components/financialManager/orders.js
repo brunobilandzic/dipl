@@ -14,9 +14,10 @@ import { filterOrders, sortOrders } from "@/store/webstore";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { WarehouseRequestModal } from "./WarehouseRequestComponents";
+import { WarehouseRequestModal } from "@/components/warehouse/warehouseRequest/create";
 import { orderAmount } from "@/lib/utils/sales";
 import { priceEuroString } from "@/lib/utils/strings";
+import { PENDING } from "@/lib/constants/documents/requests";
 
 export const OrdersList = () => {
   const dispatch = useDispatch();
@@ -57,8 +58,9 @@ export const OrdersList = () => {
 
 const OrderListItem = ({ order, dispatch, router }) => {
   const [warehouseRequestOpen, setWarehouseRequestOpen] = useState(false);
+  console.log({ order });
   const orderActions = [
-    ...(!(order.state === DELIVERED)
+    ...(order.state == PENDING
       ? [
           {
             label: "Izbriši",
@@ -80,8 +82,7 @@ const OrderListItem = ({ order, dispatch, router }) => {
           },
         ]
       : []),
-    ...(!order.receipt &&
-    ![WAREHOUSE_REQUESTED, DELIVERED].includes(order.state)
+    ...(!order.receipt && ![DELIVERED].includes(order.state)
       ? [
           {
             label: "Izradi račun",
@@ -91,12 +92,7 @@ const OrderListItem = ({ order, dispatch, router }) => {
             className: "submitButton",
           },
         ]
-      : !(order.state == DELIVERED) && [
-          {
-            label: "Pošalji",
-            className: "submitButton",
-          },
-        ]),
+      : []),
   ];
   return (
     <>

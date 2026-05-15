@@ -6,7 +6,7 @@ import { Order } from "@/models/sectors/sales";
 export const createOrders = async () => {
   await Order.deleteMany({}); // Clear existing orders
   console.log("Creating orders...");
-
+  const createdOrders = [];
   const customer = await getCustomer();
   const items = await buildOrderItems();
 
@@ -16,7 +16,10 @@ export const createOrders = async () => {
       customer: customer._id,
       items,
     });
+    createdOrders.push(newOrder);
   }
+
+  return createdOrders;
 };
 
 const buildOrderItems = async () => {

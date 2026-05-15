@@ -3,6 +3,8 @@ import { createWarehouseRequests } from "./warehouseRequests";
 
 export default {
   seedSales: async () => {
-    await createWarehouseRequests({ orders: await createOrders() });
+    const orders = await createOrders();
+    // create req for only one order
+    await createWarehouseRequests({ orders: [orders[0]] });
   },
 };

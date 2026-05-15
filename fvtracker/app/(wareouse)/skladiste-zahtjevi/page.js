@@ -1,4 +1,4 @@
-import { WarehouseRequestList } from "@/components/financialManager/WarehouseRequestComponents";
+import { WarehouseRequestList } from "@/components/warehouse/warehouseRequest/WarehouseRequestComponents";
 import React from "react";
 
 function WarehouseRequestsPage() {

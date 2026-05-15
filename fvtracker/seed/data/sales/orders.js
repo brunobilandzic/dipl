@@ -1,8 +1,8 @@
 export const ordersSeedData = [
   {
-    number: 1,
+    number: String(1).padStart(6, "0"),
   },
   {
-    number: 2,
+    number: String(2).padStart(6, "0"),
   },
 ];

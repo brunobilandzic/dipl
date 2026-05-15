@@ -67,6 +67,7 @@ const loadingSelector = (state) => {
     state.loading.isLoading ||
     state.production.loading ||
     state.warehouse.isLoading ||
-    state.webstore.isLoading
+    state.webstore.isLoading ||
+    state.sales.isLoading
   );
 };

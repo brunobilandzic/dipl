@@ -1,15 +1,11 @@
 "use client";
 
-
 import { useDispatch, useSelector } from "react-redux";
-import {
-  warehouseRequestItems,
-} from "@/lib/utils/documents/requests";
+import { warehouseRequestItems } from "@/lib/utils/documents/requests";
 import { ListItem } from "../../layout/preview/list";
 import { WAREHOUSE_MANAGER } from "@/lib/constants/users/managerTypes";
-
-
-
+import { CreateShipmentModal } from "../shipment/create";
+import { useState } from "react";
 
 export const WarehouseRequestList = () => {
   const warehouseRequests = useSelector(
@@ -32,6 +28,7 @@ const WarehouseRequestListItem = ({ request }) => {
   const managerModelName = useSelector(
     (state) => state.user.session.managerModelName,
   );
+  const [createShipmentModalOpen, setCreateShipmentModalOpen] = useState(false);
   console.log({ managerModelName });
 
   const actions = [
@@ -40,7 +37,7 @@ const WarehouseRequestListItem = ({ request }) => {
           {
             label: "Obradi",
             onClick: () => {
-              console.log("Obradi zahtjev");
+              setCreateShipmentModalOpen(true);
             },
             className: "submitButton",
           },
@@ -49,15 +46,25 @@ const WarehouseRequestListItem = ({ request }) => {
   ];
   console.log({ request });
   return (
-    <ListItem actionOptions={actions}>
-      {" "}
-      <div key={request._id}>
-        <p>Narudžba: {request.order.number}</p>
-        <div>
-          <ItemList items={warehouseRequestItems(request)} />
+    <>
+      <ListItem actionOptions={actions}>
+        {" "}
+        <div key={request._id}>
+          <p>Narudžba: {request.order.number}</p>
+          <div>
+            <ItemList items={warehouseRequestItems(request)} />
+          </div>
         </div>
-      </div>
-    </ListItem>
+      </ListItem>
+      {createShipmentModalOpen && (
+        <CreateShipmentModal
+          isOpen={createShipmentModalOpen}
+          onCancel={() => setCreateShipmentModalOpen(false)}
+          warehouseRequestId={request._id}
+          items={warehouseRequestItems(request)}
+        />
+      )}
+    </>
   );
 };
 

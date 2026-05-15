@@ -24,8 +24,10 @@ const buildOrderItems = async () => {
 
   console.log(`Adding ${product.name} to order items...`);
 
-  return {
-    product: product._id,
-    quantity: 1,
-  };
+  return [
+    {
+      product: product._id,
+      quantity: 1,
+    },
+  ];
 };

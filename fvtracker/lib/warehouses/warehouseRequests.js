@@ -1,6 +1,12 @@
 import { WarehouseRequest } from "@/models/documents/requests/WarehouseRequest";
 import { populateIngredientsConfig } from "../production/product/ingredients";
 
+export const getWarehouseRequestById = async (id) => {
+  const request = await WarehouseRequest.findById(id);
+  if (!request) throw new Error("Zahtev nije pronađen");
+  return request;
+};
+
 export const createWarehouseRequest = async (requestData) => {
   console.log(requestData);
   const { ...modelData } = requestData;

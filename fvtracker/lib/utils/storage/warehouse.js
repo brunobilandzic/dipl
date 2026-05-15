@@ -94,3 +94,20 @@ export const deleteWarehouses = async ({ dispatch, router }) => {
     );
   }
 };
+
+export const calculateWarehouseStock = ({ productQuantities, stocks }) => {
+  console.log({ productQuantities, stocks });
+  let min = Infinity;
+
+  for (const { productName, neededQuantity } of productQuantities) {
+    const productStock = stocks.find(
+      (stock) => stock.product.name === productName,
+    );
+    const possible = Math.floor(productStock.quantity / neededQuantity);
+    if (possible < min) {
+      min = possible;
+    }
+  }
+
+  return min;
+};

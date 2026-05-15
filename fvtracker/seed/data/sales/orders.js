@@ -2,4 +2,7 @@ export const ordersSeedData = [
   {
     number: 1,
   },
+  {
+    number: 2,
+  },
 ];

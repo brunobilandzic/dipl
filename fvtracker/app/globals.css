@@ -49,6 +49,9 @@
 .filterSelect .inputRow {
   @apply mb-0;
 }
+.warehouse-quantities .inputRow {
+  @apply mb-0
+}
 th, td {
   @apply  p-2 text-left;
 }

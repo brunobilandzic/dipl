@@ -25,8 +25,6 @@ export const createOrders = async () => {
 const buildOrderItems = async () => {
   const product = await Product.findOne({}).select("name");
 
-  console.log(`Adding ${product.name} to order items...`);
-
   return [
     {
       product: product._id,

@@ -12,7 +12,7 @@ import { deleteOrderUtil } from "@/lib/utils/webstore/orders";
 
 import { filterOrders, sortOrders } from "@/store/webstore";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { WarehouseRequestModal } from "@/components/warehouse/warehouseRequest/create";
 import { orderAmount } from "@/lib/utils/sales";
@@ -24,7 +24,8 @@ export const OrdersList = () => {
   const router = useRouter();
   const orders = useSelector((state) => state.webstore.orders.filteredItems);
   const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
-  const [filters, setFilters] = useState(initFilters("orders"));
+  const initialFilters = useMemo(() => initFilters("orders"), []);
+  const [filters, setFilters] = useState(initialFilters);
   useEffect(() => {
     if (!orders) return;
     dispatch(sortOrders(sortBy));
@@ -42,7 +43,7 @@ export const OrdersList = () => {
       sortOptions={orderSortOptions}
       filters={filters}
       setFilters={setFilters}
-      initialFilters={initFilters("orders")}
+      initialFilters={initialFilters}
     >
       {orders?.map((order) => (
         <OrderListItem

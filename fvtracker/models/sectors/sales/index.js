@@ -65,21 +65,7 @@ const receiptSchema = new Schema({
   },
 });
 
-const shipmentSchema = new Schema({
-  order: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Order",
-    required: true,
-  },
-  shippedAt: {
-    type: Date,
-    default: Date.now,
-  },
-});
-
 export const Receipt =
   mongoose.models.Receipt || mongoose.model("Receipt", receiptSchema);
-export const Shipment =
-  mongoose.models.Shipment || mongoose.model("Shipment", shipmentSchema);
 export const Order =
   mongoose.models.Order || mongoose.model("Order", orderSchema);

@@ -39,8 +39,12 @@ export const acceptWarehouseStock = async ({
     });
     warehouse.stocks.push(warehouseStock._id);
     product.warehouseStocks.push(warehouseStock._id);
-    console.log({ warehouse });
+
+    await product.save();
     await warehouse.save();
+    console.log(
+      `Creating new warehouse stock for product ${product.name} in warehouse ${warehouse.name}`,
+    );
   }
   warehouseStock.quantity += Number(quantity);
 

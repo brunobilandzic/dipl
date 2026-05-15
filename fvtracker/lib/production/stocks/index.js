@@ -95,7 +95,7 @@ export const createProductStock = async ({
   } else {
     stock.quantity += Number(quantity);
   }
-  console.log({ stock });
+
   const productionProcess = new ProductionProcess({
     productionsStock: stock._id,
     quantity,
@@ -110,7 +110,6 @@ export const createProductStock = async ({
   await harvestingBatch.save();
   await productionProcess.save();
   await stock.save();
-  console.log({ facility });
   return stock;
 };
 

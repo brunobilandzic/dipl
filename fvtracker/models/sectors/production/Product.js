@@ -59,13 +59,6 @@ const ingredientsSchema = new Schema({
   },
 });
 
-productSchema.pre("save", async function () {
-  if (this.isModified("name") || this.isNew) {
-    this.slug = makeUrlFriendly(this.name);
-  }
-  this.updatedAt = new Date();
-});
-
 productSchema.pre("findOneAndUpdate", function () {
   const update = this.getUpdate();
   console.log("Pre-update hook triggered with update:", update);

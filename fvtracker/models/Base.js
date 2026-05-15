@@ -25,6 +25,13 @@ const baseSchema = new Schema({
   },
 });
 
+baseSchema.pre("save", function () {
+  if (this.isModified("name") || this.isNew) {
+    this.slug = makeUrlFriendly(this.name);
+  }
+  this.updatedAt = new Date();
+});
+
 const requestSchema = new Schema({
   status: {
     type: String,
@@ -47,4 +54,5 @@ const requestSchema = new Schema({
 
 export const Base = mongoose.models.Base || mongoose.model("Base", baseSchema);
 export const RequestDocument =
-  mongoose.models.RequestDocument || mongoose.model("RequestDocument", requestSchema);
+  mongoose.models.RequestDocument ||
+  mongoose.model("RequestDocument", requestSchema);

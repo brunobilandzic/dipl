@@ -1,15 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { FormModal } from "../layout/modals/form";
-import { AppInput, AppSelect } from "../form/inputs";
+import { FormModal } from "../../layout/modals/form";
+import { AppInput, AppSelect } from "../../form/inputs";
 import { useDispatch, useSelector } from "react-redux";
 import {
   sendWarehouseRequest,
   warehouseRequestItems,
 } from "@/lib/utils/documents/requests";
 import { useRouter } from "next/navigation";
-import { ListItem } from "../layout/preview/list";
+import { ListItem } from "../../layout/preview/list";
 import { WAREHOUSE_MANAGER } from "@/lib/constants/users/managerTypes";
 import { fillOrdersRedux } from "@/lib/utils/webstore/orders";
 

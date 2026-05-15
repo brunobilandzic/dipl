@@ -9,9 +9,9 @@ import {
   warehouseRequestItems,
 } from "@/lib/utils/documents/requests";
 import { useRouter } from "next/navigation";
-import { refreshOrdersThunk } from "@/store/webstore";
 import { ListItem } from "../layout/preview/list";
 import { WAREHOUSE_MANAGER } from "@/lib/constants/users/managerTypes";
+import { fillOrdersRedux } from "@/lib/utils/webstore/orders";
 
 export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
   const initialWarehouseRequest = {
@@ -35,14 +35,14 @@ export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
     }));
   };
 
-  const handleSubmit = () => {
-    sendWarehouseRequest({
+  const handleSubmit = async () => {
+    await sendWarehouseRequest({
       requestData: warehouseRequest,
       dispatch,
       router,
     });
     onCancel();
-    dispatch(refreshOrdersThunk());
+    fillOrdersRedux({ dispatch });
   };
 
   useEffect(() => {

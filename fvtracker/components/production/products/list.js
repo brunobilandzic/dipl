@@ -95,7 +95,6 @@ const ProductItem = ({ product, harvestingBatches, router, dispatch }) => {
   const warehouses = useSelector((state) => state.warehouse.warehouses.items);
   useEffect(() => {
     if (!warehouses) dispatch(fetchWarehouses());
-    console.log({ warehouses });
   }, [warehouses]);
 
   const actionOptions = [

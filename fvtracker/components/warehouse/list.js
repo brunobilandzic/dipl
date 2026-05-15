@@ -35,7 +35,7 @@ export const WarehouseList = () => {
   }, [filters]);
 
   if (!warehouses) return <LoadingFullScreen />;
-
+  console.log({ warehouses });
   return (
     <>
       <List

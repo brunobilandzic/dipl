@@ -6,13 +6,14 @@ import { populateProductIngredients } from "@/lib/production/product/ingredients
 import { ProductionManager } from "@/models/user/managers/ProductionManager";
 import { createFacility } from "./facility";
 import { createProductStock } from "@/lib/production/stocks";
-import { createWarehouseStockSeed } from "../storage/warehouse";
+import { createWarehouseStockSeed, seedWarehouse } from "../storage/warehouse";
 
 export const createProducts = async () => {
   await Product.deleteMany({}); // Clear existing products
   console.log("Creating products...");
   const productionFacility = await createFacility();
   const productionManager = await ProductionManager.findOne();
+  const warehouse = await seedWarehouse();
   for (const productData of productsData) {
     const { ingredients, ...productBaseInfo } = productData;
     const product = new Product({

@@ -99,3 +99,20 @@ export const calculateWarehouseStock = ({ productName, stocks }) => {
   const stock = stocks.find((stock) => stock.product.name === productName);
   return stock ? stock.quantity : 0;
 };
+
+const calculateNeededQuantities = ({ orderItems, shipment }) => {
+  return orderItems.map((i) => ({
+    productName: i.product,
+    neededQuantity:
+      i.quantity -
+      shipment.sources.reduce((acc, s) => {
+        const stock = s.stocks.find(
+          (stock) => stock.product.name === i.product.name,
+        );
+        if (stock) {
+          acc += stock.quantity;
+        }
+        return acc;
+      }, 0),
+  }));
+};

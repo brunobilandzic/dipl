@@ -78,8 +78,11 @@ const ChooseWarehouseSources = ({
                           className="inputRow p-1 w-12"
                           type="number"
                           value={
-                            shipment.sources.find((s) => s.warehouseId === w.id)
-                              ?.quantity || ""
+                            shipment.sources.find(
+                              (s) =>
+                                s.warehouseId === w._id &&
+                                s.productName === pq.productName,
+                            )?.quantity || ""
                           }
                           onChange={(e) => {
                             const quantity = parseInt(e.target.value);

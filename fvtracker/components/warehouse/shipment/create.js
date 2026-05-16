@@ -83,7 +83,12 @@ const ChooseWarehouseSources = ({
                         <div>{w.name}</div>
                         <div>
                           <span className="italic text-gray-500">
-                            {availableStock} stavka
+                            {sourceQuantity({
+                              wh: w,
+                              productName: pq.productName,
+                            }) || 0}
+                            {"/"}
+                            {availableStock}
                           </span>
                         </div>
                       </div>

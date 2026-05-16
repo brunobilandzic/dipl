@@ -5,7 +5,6 @@ import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
 import { acceptWarehouseStock } from "@/lib/warehouses/accept";
 
 export const seedWarehouse = async () => {
-  await Warehouse.deleteMany({});
   const warehouseManager = await WarehouseManager.findOne();
   if (!warehouseManager) {
     throw new Error(
@@ -28,10 +27,9 @@ export const seedWarehouse = async () => {
 export const createWarehouseStockSeed = async ({
   product,
   productionStock,
-  warehouseId
+  warehouseId,
 }) => {
-
- const warehouseStock = await acceptWarehouseStock({
+  const warehouseStock = await acceptWarehouseStock({
     product,
     quantity: 1,
     productionStock,

@@ -37,6 +37,7 @@ export const CreateShipmentModal = ({
         onCancel();
       }}
       onSubmit={() => submitShipment({ shipment })}
+      title="Otpremnica"
     >
       <ChooseWarehouseSources
         shipment={shipment}

@@ -14,10 +14,11 @@ export const CreateShipmentModal = ({
   warehouseRequestId,
   items,
 }) => {
-  const [shipment, setShipment] = useState({
+  const emptyShipment = {
     warehouseRequestId,
     sources: [],
-  });
+  };
+  const [shipment, setShipment] = useState(emptyShipment);
   const warehouses = useSelector((state) => state.warehouse.warehouses.items);
   const productQuantities = items.map((i) => ({
     productName: i.product,
@@ -30,7 +31,10 @@ export const CreateShipmentModal = ({
     <FormModal
       submitDisabled={!isRequestFulfilled({ orderItems: items, shipment })}
       isOpen={isOpen}
-      onCancel={onCancel}
+      onCancel={() => {
+        setShipment(emptyShipment);
+        onCancel();
+      }}
     >
       <ChooseWarehouseSources
         shipment={shipment}

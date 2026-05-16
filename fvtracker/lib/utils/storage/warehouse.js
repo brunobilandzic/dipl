@@ -121,3 +121,19 @@ export const isRequestFulfilled = ({ orderItems, shipment }) => {
   const neededQuantities = calculateNeededQuantities({ orderItems, shipment });
   return neededQuantities.every((nq) => nq.neededQuantity <= 0);
 };
+
+export const submitShipment = async ({ shipment }) => {
+  console.log({ shipment });
+  try {
+    await api.post("/warehouse-requests/fill", {
+      shipment,
+    });
+    alert("Špedicija uspješno kreirana!");
+  } catch (error) {
+    console.error("Error submitting shipment:", error);
+    handleError({
+      ...error,
+      generalMessage: "Došlo je do greške prilikom kreiranja špedicije.",
+    });
+  }
+};

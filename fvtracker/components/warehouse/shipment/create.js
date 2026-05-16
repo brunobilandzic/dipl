@@ -50,6 +50,11 @@ const ChooseWarehouseSources = ({
     orderItems,
     shipment,
   });
+
+  const sourceQuantity = ({ wh, productName }) =>
+    shipment.sources.find(
+      (s) => s.warehouseId === wh._id && s.productName === productName,
+    )?.quantity || "";
   return (
     <div>
       <div>Odarite skladišne izvore</div>
@@ -82,13 +87,10 @@ const ChooseWarehouseSources = ({
                         <input
                           className="inputRow p-1 w-12"
                           type="number"
-                          value={
-                            shipment.sources.find(
-                              (s) =>
-                                s.warehouseId === w._id &&
-                                s.productName === pq.productName,
-                            )?.quantity || ""
-                          }
+                          value={sourceQuantity({
+                            wh: w,
+                            productName: pq.productName,
+                          })}
                           onChange={(e) => {
                             const quantity = parseInt(e.target.value);
                             if (quantity > availableStock) {

@@ -32,6 +32,7 @@ export const createProducts = async () => {
     const warehouseStock = await createWarehouseStockSeed({
       product,
       productionStock,
+      warehouseId: warehouse._id,
     });
     console.log(
       `Created product stock for ${product.name} with quantity ${productionStock.quantity} and warehouse stock with quantity ${warehouseStock.quantity}`,

@@ -43,7 +43,10 @@ const ChooseWarehouseSources = ({
   warehouses,
   productQuantities,
 }) => {
-  console.log({ shipment, warehouses });
+  const needed = calculateNeededQuantities({
+    orderItems,
+    shipment,
+  });
 
   return (
     <div>

@@ -101,7 +101,7 @@ export const calculateWarehouseStock = ({ productName, stocks }) => {
 };
 
 export const calculateNeededQuantities = ({ orderItems, shipment }) => {
-  const copilotArray = orderItems.map((i) => {
+  const neededQuantities = orderItems.map((i) => {
     const existingQuantity = shipment.sources.reduce((acc, source) => {
       if (source.productName === i.product) {
         acc += Number(source.quantity);
@@ -113,6 +113,6 @@ export const calculateNeededQuantities = ({ orderItems, shipment }) => {
       neededQuantity: i.quantity - existingQuantity,
     };
   });
-  console.log({ copilotArray });
-  return copilotArray;
+  console.log({ neededQuantities });
+  return neededQuantities;
 };

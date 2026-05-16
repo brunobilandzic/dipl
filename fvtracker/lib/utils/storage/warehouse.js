@@ -107,7 +107,7 @@ const calculateNeededQuantities = ({ orderItems, shipment }) => {
       i.quantity -
       shipment.sources.reduce((acc, s) => {
         const stock = s.stocks.find(
-          (stock) => stock.product.name === i.product.name,
+          (stock) => stock.product.name === i.product,
         );
         if (stock) {
           acc += stock.quantity;

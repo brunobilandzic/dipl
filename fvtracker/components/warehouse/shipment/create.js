@@ -3,6 +3,7 @@ import { FormModal } from "@/components/layout/modals/form";
 import {
   calculateNeededQuantities,
   calculateWarehouseStock,
+  isRequestFulfilled,
 } from "@/lib/utils/storage/warehouse";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -26,7 +27,11 @@ export const CreateShipmentModal = ({
     console.log({ shipment });
   }, [shipment]);
   return (
-    <FormModal isOpen={isOpen} onCancel={onCancel}>
+    <FormModal
+      submitDisabled={!isRequestFulfilled({ orderItems: items, shipment })}
+      isOpen={isOpen}
+      onCancel={onCancel}
+    >
       <ChooseWarehouseSources
         shipment={shipment}
         setShipment={setShipment}
@@ -49,6 +54,8 @@ const ChooseWarehouseSources = ({
     orderItems,
     shipment,
   });
+
+  console.log(isRequestFulfilled({ orderItems, shipment }));
 
   const sourceQuantity = ({ wh, productName }) =>
     shipment.sources.find(

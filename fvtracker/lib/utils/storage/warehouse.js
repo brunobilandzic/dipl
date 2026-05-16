@@ -116,3 +116,8 @@ export const calculateNeededQuantities = ({ orderItems, shipment }) => {
   console.log({ neededQuantities });
   return neededQuantities;
 };
+
+export const isRequestFulfilled = ({ orderItems, shipment }) => {
+  const neededQuantities = calculateNeededQuantities({ orderItems, shipment });
+  return neededQuantities.every((nq) => nq.neededQuantity <= 0);
+};

@@ -52,7 +52,7 @@ const ChooseWarehouseSources = ({
           return (
             <div className="" key={pq.productName}>
               <div className="font-bold">{pq.productName}</div>
-              <div>
+              <div className="flex flex-col gap-2 pl-4">
                 {warehouses.map((w) => {
                   const availableStock = calculateWarehouseStock({
                     productName: pq.productName,

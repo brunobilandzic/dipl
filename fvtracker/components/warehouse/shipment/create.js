@@ -4,6 +4,7 @@ import {
   calculateNeededQuantities,
   calculateWarehouseStock,
   isRequestFulfilled,
+  submitShipment,
 } from "@/lib/utils/storage/warehouse";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -35,6 +36,7 @@ export const CreateShipmentModal = ({
         setShipment(emptyShipment);
         onCancel();
       }}
+      onSubmit={submitShipment({ shipment })}
     >
       <ChooseWarehouseSources
         shipment={shipment}

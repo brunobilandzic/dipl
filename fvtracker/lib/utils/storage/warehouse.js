@@ -100,19 +100,22 @@ export const calculateWarehouseStock = ({ productName, stocks }) => {
   return stock ? stock.quantity : 0;
 };
 
-const calculateNeededQuantities = ({ orderItems, shipment }) => {
-  return orderItems.map((i) => ({
-    productName: i.product,
-    neededQuantity:
-      i.quantity -
-      shipment.sources.reduce((acc, s) => {
-        const stock = s.stocks.find(
-          (stock) => stock.product.name === i.product,
-        );
-        if (stock) {
-          acc += stock.quantity;
-        }
-        return acc;
-      }, 0),
-  }));
+export const calculateNeededQuantities = ({ orderItems, shipment }) => {
+  console.log({ orderItems, shipment });
+  const copilotArray = orderItems.map((i) => {
+    const existingQuantity = shipment.sources.reduce((acc, source) => {
+      console.log({ source, i });
+      if (source.productName === i.product) {
+        acc += Number(source.quantity);
+      }
+      return acc;
+    }, 0);
+    console.log({ i, existingQuantity });
+    return {
+      productName: i.product,
+      neededQuantity: i.quantity - existingQuantity,
+    };
+  });
+  console.log({ copilotArray });
+  return copilotArray;
 };

@@ -55,10 +55,14 @@ const ChooseWarehouseSources = ({
     shipment.sources.find(
       (s) => s.warehouseId === wh._id && s.productName === productName,
     )?.quantity || "";
+  const neededString = neededQuantities
+    .map((nq) => `${nq.productName}: ${nq.neededQuantity}`)
+    .join(", ");
+
   return (
     <div>
       <div>Odarite skladišne izvore</div>
-      <div>Potrebno je još: </div>
+      <div>Potrebno je još: {neededString}</div>
       <div className="pt-4">
         {productQuantities.map((pq) => {
           return (

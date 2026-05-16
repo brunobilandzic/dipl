@@ -1,6 +1,9 @@
 import { AppInput } from "@/components/form/inputs";
 import { FormModal } from "@/components/layout/modals/form";
-import { calculateWarehouseStock } from "@/lib/utils/storage/warehouse";
+import {
+  calculateNeededQuantities,
+  calculateWarehouseStock,
+} from "@/lib/utils/storage/warehouse";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -47,7 +50,6 @@ const ChooseWarehouseSources = ({
     orderItems,
     shipment,
   });
-
   return (
     <div>
       <div>Odarite skladišne izvore</div>
@@ -93,23 +95,39 @@ const ChooseWarehouseSources = ({
                               alert("Nema toliko na skladištu");
                               return;
                             }
+                            const newShipment = (() => {
+                              const existingSource = shipment.sources.find(
+                                (s) =>
                                   s.warehouseId === w._id &&
+                                  s.productName === pq.productName,
                               );
                               if (existingSource) {
                                 return {
+                                  ...shipment,
+                                  sources: shipment.sources.map((s) =>
                                     s.warehouseId === w._id
+                                      ? {
+                                          ...s,
+                                          quantity,
+                                        }
                                       : s,
                                   ),
                                 };
                               } else {
                                 return {
-                                  ...prev,
+                                  ...shipment,
                                   sources: [
+                                    ...shipment.sources,
+                                    {
                                       warehouseId: w._id,
+                                      quantity,
+                                      productName: pq.productName,
+                                    },
                                   ],
                                 };
                               }
-                            });
+                            })();
+                            setShipment(newShipment);
                           }}
                         />
                       </div>

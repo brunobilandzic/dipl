@@ -128,12 +128,12 @@ export const submitShipment = async ({ shipment }) => {
     await api.post("/warehouse-requests/fill", {
       shipment,
     });
-    alert("Špedicija uspješno kreirana!");
+    alert("Otpremnica uspješno kreirana!");
   } catch (error) {
     console.error("Error submitting shipment:", error);
     handleError({
       ...error,
-      generalMessage: "Došlo je do greške prilikom kreiranja špedicije.",
+      generalMessage: "Došlo je do greške prilikom kreiranja otpremnice.",
     });
   }
 };

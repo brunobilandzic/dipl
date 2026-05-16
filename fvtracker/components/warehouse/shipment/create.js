@@ -18,7 +18,6 @@ export const CreateShipmentModal = ({
     sources: [],
   });
   const warehouses = useSelector((state) => state.warehouse.warehouses.items);
-  console.log({ items });
   const productQuantities = items.map((i) => ({
     productName: i.product,
     neededQuantity: i.quantity,

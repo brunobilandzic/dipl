@@ -126,7 +126,8 @@ export const submitShipment = async ({ shipment }) => {
   console.log({ shipment });
   try {
     await api.post("/warehouse-requests/fill", {
-      shipment,
+      shipmentSources: shipment.sources,
+      warehouseRequestId: shipment.warehouseRequestId,
     });
     alert("Otpremnica uspješno kreirana!");
   } catch (error) {

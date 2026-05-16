@@ -7,14 +7,17 @@ import { ProductionManager } from "@/models/user/managers/ProductionManager";
 import { createFacility } from "./facility";
 import { createProductStock } from "@/lib/production/stocks";
 import { createWarehouseStockSeed, seedWarehouse } from "../storage/warehouse";
+import { Warehouse } from "@/models/sectors/storage/Warehouse";
 
 export const createProducts = async () => {
   await Product.deleteMany({}); // Clear existing products
+  await Warehouse.deleteMany({});
   console.log("Creating products...");
   const productionFacility = await createFacility();
   const productionManager = await ProductionManager.findOne();
-  const warehouse = await seedWarehouse();
+  
   for (const productData of productsData) {
+    const warehouse = await seedWarehouse();
     const { ingredients, ...productBaseInfo } = productData;
     const product = new Product({
       ...productBaseInfo,

@@ -66,7 +66,7 @@ const ChooseWarehouseSources = ({
                   return (
                     <div
                       className="flex justify-between items-center"
-                      key={w.id}
+                      key={w._id}
                     >
                       <div className="flex gap-2 items-center">
                         <div>{w.name}</div>
@@ -93,16 +93,11 @@ const ChooseWarehouseSources = ({
                               alert("Nema toliko na skladištu");
                               return;
                             }
-                            setShipment((prev) => {
-                              const existingSource = prev.sources.find(
-                                (s) => s.warehouseId === w.id,
+                                  s.warehouseId === w._id &&
                               );
                               if (existingSource) {
                                 return {
-                                  ...prev,
-                                  sources: prev.sources.map((s) =>
-                                    s.warehouseId === w.id
-                                      ? { warehouseId: w.id, quantity }
+                                    s.warehouseId === w._id
                                       : s,
                                   ),
                                 };
@@ -110,8 +105,7 @@ const ChooseWarehouseSources = ({
                                 return {
                                   ...prev,
                                   sources: [
-                                    ...prev.sources,
-                                    { warehouseId: w.id, quantity },
+                                      warehouseId: w._id,
                                   ],
                                 };
                               }

@@ -36,7 +36,7 @@ export const CreateShipmentModal = ({
         setShipment(emptyShipment);
         onCancel();
       }}
-      onSubmit={submitShipment({ shipment })}
+      onSubmit={() => submitShipment({ shipment })}
     >
       <ChooseWarehouseSources
         shipment={shipment}

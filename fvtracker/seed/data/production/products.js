@@ -48,4 +48,16 @@ export const productsData = [
     ],
     stockVolume: 4,
   },
+  {
+    name: "Kristalka mix",
+    description: "Mješavina različitih kristalka",
+    price: 4,
+    ingredients: [
+      {
+        cropVarietyName: "Kristalka",
+        quantity: 10,
+      },
+    ],
+    stockVolume: 40,
+  },
 ];

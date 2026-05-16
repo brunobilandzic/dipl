@@ -55,6 +55,38 @@ const ChooseWarehouseSources = ({
     shipment.sources.find(
       (s) => s.warehouseId === wh._id && s.productName === productName,
     )?.quantity || "";
+
+  const setNewShipment = ({ w, pq, quantity }) => {
+    const existingSource = shipment.sources.find(
+      (s) => s.warehouseId === w._id && s.productName === pq.productName,
+    );
+    if (existingSource) {
+      return setShipment((prev) => ({
+        ...prev,
+        sources: prev.sources.map((s) =>
+          s.warehouseId === w._id && s.productName === pq.productName
+            ? {
+                ...s,
+                quantity,
+              }
+            : s,
+        ),
+      }));
+    } else {
+      return setShipment((prev) => ({
+        ...prev,
+        sources: [
+          ...shipment.sources,
+          {
+            warehouseId: w._id,
+            quantity,
+            productName: pq.productName,
+          },
+        ],
+      }));
+    }
+  };
+
   const neededString = neededQuantities
     .map((nq) => `${nq.productName}: ${nq.neededQuantity}`)
     .join(", ");
@@ -106,39 +138,8 @@ const ChooseWarehouseSources = ({
                               alert("Nema toliko na skladištu");
                               return;
                             }
-                            const newShipment = (() => {
-                              const existingSource = shipment.sources.find(
-                                (s) =>
-                                  s.warehouseId === w._id &&
-                                  s.productName === pq.productName,
-                              );
-                              if (existingSource) {
-                                return {
-                                  ...shipment,
-                                  sources: shipment.sources.map((s) =>
-                                    s.warehouseId === w._id
-                                      ? {
-                                          ...s,
-                                          quantity,
-                                        }
-                                      : s,
-                                  ),
-                                };
-                              } else {
-                                return {
-                                  ...shipment,
-                                  sources: [
-                                    ...shipment.sources,
-                                    {
-                                      warehouseId: w._id,
-                                      quantity,
-                                      productName: pq.productName,
-                                    },
-                                  ],
-                                };
-                              }
-                            })();
-                            setShipment(newShipment);
+
+                            setNewShipment({ w, pq, quantity });
                           }}
                         />
                       </div>

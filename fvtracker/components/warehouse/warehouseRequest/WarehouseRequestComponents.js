@@ -11,7 +11,6 @@ export const WarehouseRequestList = () => {
   const warehouseRequests = useSelector(
     (state) => state.warehouse.warehouseRequests,
   );
-  console.log({ warehouseRequests });
   return (
     <>
       <div className="text-2xl font-bold mb-4">Zahtjevi skladištu</div>
@@ -29,7 +28,6 @@ const WarehouseRequestListItem = ({ request }) => {
     (state) => state.user.session.managerModelName,
   );
   const [createShipmentModalOpen, setCreateShipmentModalOpen] = useState(false);
-  console.log({ managerModelName });
 
   const actions = [
     ...(managerModelName == WAREHOUSE_MANAGER
@@ -44,7 +42,6 @@ const WarehouseRequestListItem = ({ request }) => {
         ]
       : []),
   ];
-  console.log({ request });
   return (
     <>
       <ListItem actionOptions={actions}>
@@ -69,7 +66,6 @@ const WarehouseRequestListItem = ({ request }) => {
 };
 
 const ItemList = ({ items }) => {
-  console.log({ items });
   return (
     <ul className="list-disc list-inside">
       {items.map((item, index) => (

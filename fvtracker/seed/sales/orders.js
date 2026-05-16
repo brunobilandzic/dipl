@@ -23,12 +23,9 @@ export const createOrders = async () => {
 };
 
 const buildOrderItems = async () => {
-  const product = await Product.findOne({}).select("name");
-
-  return [
-    {
-      product: product._id,
-      quantity: 1,
-    },
-  ];
+  const products = await Product.find({});
+  return products.map((product) => ({
+    product: product._id,
+    quantity: 1,
+  }));
 };

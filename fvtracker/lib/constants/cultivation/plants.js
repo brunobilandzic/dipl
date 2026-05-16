@@ -12,15 +12,15 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Bogata vlaknima, vitaminima A i K, nizak sadržaj kalorija. Pomaže pri izgradnji čvrstih kostiju i poboljšanju vida.",
         cropVarieties: [
-          { name: "Iceberg", shade: 200, quantityPerCell: 6 },
-          { name: "Kristalka", shade: 300, quantityPerCell: 5 },
-          { name: "Puterica", shade: 400, quantityPerCell: 6 },
-          { name: "Batavia", shade: 500, quantityPerCell: 5 },
-          { name: "Rimska salata", shade: 600, quantityPerCell: 4 },
-          { name: "Lollo rosso", shade: 700, quantityPerCell: 6 },
-          { name: "Lollo bionda", shade: 100, quantityPerCell: 6 },
-          { name: "Hrastov list", shade: 800, quantityPerCell: 8 },
-          { name: "Baby leaf salate", shade: 50, quantityPerCell: 16 },
+          { name: "Iceberg", shade: 200, quantityPerCell: 250 },
+          { name: "Kristalka", shade: 300, quantityPerCell: 210 },
+          { name: "Puterica", shade: 400, quantityPerCell: 54 },
+          { name: "Batavia", shade: 500, quantityPerCell: 45 },
+          { name: "Rimska salata", shade: 600, quantityPerCell: 36 },
+          { name: "Lollo rosso", shade: 700, quantityPerCell: 54 },
+          { name: "Lollo bionda", shade: 100, quantityPerCell: 54 },
+          { name: "Hrastov list", shade: 800, quantityPerCell: 72 },
+          { name: "Baby leaf salate", shade: 50, quantityPerCell: 144 },
         ],
         culinaryUse: [
           "Svježe salate",
@@ -42,14 +42,14 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Izvor željeza, kalcija, vitamina K i antioksidanata. Sprječava anemiju i poboljšava sirenje krvi. Izvrstan za jačanje imuniteta.",
         cropVarieties: [
-          { name: "Obični špinat", shade: 500, quantityPerCell: 8 },
-          { name: "Novozelandski špinat", shade: 400, quantityPerCell: 3 },
-          { name: "Malabarski špinat", shade: 600, quantityPerCell: 3 },
-          { name: "Jagodasti špinat", shade: 700, quantityPerCell: 4 },
-          { name: "Perzijski špinat", shade: 200, quantityPerCell: 8 },
-          { name: "Divlji špinat", shade: 800, quantityPerCell: 10 },
-          { name: "Planinski špinat", shade: 900, quantityPerCell: 9 },
-          { name: "Baby špinat", shade: 300, quantityPerCell: 12 },
+          { name: "Obični špinat", shade: 500, quantityPerCell: 72 },
+          { name: "Novozelandski špinat", shade: 400, quantityPerCell: 27 },
+          { name: "Malabarski špinat", shade: 600, quantityPerCell: 27 },
+          { name: "Jagodasti špinat", shade: 700, quantityPerCell: 36 },
+          { name: "Perzijski špinat", shade: 200, quantityPerCell: 72 },
+          { name: "Divlji špinat", shade: 800, quantityPerCell: 90 },
+          { name: "Planinski špinat", shade: 900, quantityPerCell: 81 },
+          { name: "Baby špinat", shade: 300, quantityPerCell: 108 },
         ],
         culinaryUse: [
           "Svježe salate (baby listovi)",
@@ -71,11 +71,11 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Bogata magnezijom, željezom i vlaknima. Pomaže pri regulaciji krvnog tlaka i poboljšava probavu. Sadrži antioksidanse koji štite od bolesti.",
         cropVarieties: [
-          { name: "Bijela blitva", shade: 200, quantityPerCell: 4 },
-          { name: "Zelena blitva", shade: 500, quantityPerCell: 4 },
-          { name: "Crvena blitva", shade: 700, quantityPerCell: 4 },
-          { name: "Žuta blitva", shade: 400, quantityPerCell: 4 },
-          { name: "Baby blitva", shade: 300, quantityPerCell: 6 },
+          { name: "Bijela blitva", shade: 200, quantityPerCell: 36 },
+          { name: "Zelena blitva", shade: 500, quantityPerCell: 36 },
+          { name: "Crvena blitva", shade: 700, quantityPerCell: 36 },
+          { name: "Žuta blitva", shade: 400, quantityPerCell: 36 },
+          { name: "Baby blitva", shade: 300, quantityPerCell: 54 },
         ],
         culinaryUse: [
           "Kuhanje i pirjanje",
@@ -96,13 +96,13 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Izvor vitamina C i K, sadrže sulforafan koji ima protiupalnih svojstava. Sprječavaju rak i jačaju imunitet. Odličan izvor vlakana.",
         cropVarieties: [
-          { name: "Kelj", shade: 600, quantityPerCell: 3 },
-          { name: "Raštika", shade: 500, quantityPerCell: 3 },
-          { name: "Kovrčavi kelj", shade: 700, quantityPerCell: 3 },
-          { name: "Kineski kupus", shade: 300, quantityPerCell: 4 },
-          { name: "Pak choi", shade: 400, quantityPerCell: 5 },
-          { name: "Tatsoi", shade: 200, quantityPerCell: 6 },
-          { name: "Mizuna", shade: 100, quantityPerCell: 8 },
+          { name: "Kelj", shade: 600, quantityPerCell: 27 },
+          { name: "Raštika", shade: 500, quantityPerCell: 27 },
+          { name: "Kovrčavi kelj", shade: 700, quantityPerCell: 27 },
+          { name: "Kineski kupus", shade: 300, quantityPerCell: 36 },
+          { name: "Pak choi", shade: 400, quantityPerCell: 45 },
+          { name: "Tatsoi", shade: 200, quantityPerCell: 54 },
+          { name: "Mizuna", shade: 100, quantityPerCell: 72 },
         ],
         culinaryUse: [
           "Kuhanje i pirjanje",
@@ -123,11 +123,11 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Podržava zdravlje jetre i probave. Sadrži inulina koji hranit korisne bakterije u crijevima. Sniža krvni šećer i pomaže pri mršavljenju.",
         cropVarieties: [
-          { name: "Radič", shade: 700, quantityPerCell: 4 },
-          { name: "Cikorija", shade: 600, quantityPerCell: 4 },
-          { name: "Endivija", shade: 400, quantityPerCell: 5 },
-          { name: "Escarole", shade: 500, quantityPerCell: 5 },
-          { name: "Puntarelle", shade: 800, quantityPerCell: 3 },
+          { name: "Radič", shade: 700, quantityPerCell: 36 },
+          { name: "Cikorija", shade: 600, quantityPerCell: 36 },
+          { name: "Endivija", shade: 400, quantityPerCell: 45 },
+          { name: "Escarole", shade: 500, quantityPerCell: 45 },
+          { name: "Puntarelle", shade: 800, quantityPerCell: 27 },
         ],
         culinaryUse: [
           "Svježa konzumacija",
@@ -149,10 +149,10 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Bogat mineralno i vitaminima, posebno vitaminom K. Pomaže pri detoksikaciji organizma. Snažno diuretsko i desinficijuće svojstvo.",
         cropVarieties: [
-          { name: "Maslačak", shade: 600, quantityPerCell: 8 },
-          { name: "Kopriva", shade: 700, quantityPerCell: 6 },
-          { name: "Šćir", shade: 500, quantityPerCell: 9 },
-          { name: "Loboda", shade: 800, quantityPerCell: 8 },
+          { name: "Maslačak", shade: 600, quantityPerCell: 72 },
+          { name: "Kopriva", shade: 700, quantityPerCell: 54 },
+          { name: "Šćir", shade: 500, quantityPerCell: 81 },
+          { name: "Loboda", shade: 800, quantityPerCell: 72 },
         ],
         culinaryUse: [
           "Blanširanje",
@@ -180,11 +180,11 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Bogata likopenom i витамином C, jaka antioksidacijska svojstva. Štiti od srčanih bolesti i raka. Pomaže pri izgradnji kostiju.",
         cropVarieties: [
-          { name: "Cherry rajčica", shade: 400, quantityPerCell: 2 },
-          { name: "Šljivar", shade: 500, quantityPerCell: 1 },
-          { name: "Volovsko srce", shade: 600, quantityPerCell: 1 },
-          { name: "Beefsteak", shade: 700, quantityPerCell: 1 },
-          { name: "Žuta rajčica", shade: 300, quantityPerCell: 2 },
+          { name: "Cherry rajčica", shade: 400, quantityPerCell: 18 },
+          { name: "Šljivar", shade: 500, quantityPerCell: 9 },
+          { name: "Volovsko srce", shade: 600, quantityPerCell: 9 },
+          { name: "Beefsteak", shade: 700, quantityPerCell: 9 },
+          { name: "Žuta rajčica", shade: 300, quantityPerCell: 18 },
         ],
         culinaryUse: ["Svježa konzumacija", "Umaci", "Juhe", "Pečenje"],
         cookingNotes: "Kuhanjem se pojačava okus i dostupnost likopena.",
@@ -198,11 +198,11 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Odličan izvor vitamina C, karotenoidâ i kapsaicina. Jača imunitet i sprječava upale. Poboljšava cirkulaciju krvi.",
         cropVarieties: [
-          { name: "Babura", shade: 400, quantityPerCell: 1 },
-          { name: "Roga", shade: 500, quantityPerCell: 1 },
-          { name: "Kapia", shade: 600, quantityPerCell: 1 },
-          { name: "Feferon", shade: 700, quantityPerCell: 2 },
-          { name: "Čili paprika", shade: 800, quantityPerCell: 3 },
+          { name: "Babura", shade: 400, quantityPerCell: 9 },
+          { name: "Roga", shade: 500, quantityPerCell: 9 },
+          { name: "Kapia", shade: 600, quantityPerCell: 9 },
+          { name: "Feferon", shade: 700, quantityPerCell: 18 },
+          { name: "Čili paprika", shade: 800, quantityPerCell: 27 },
         ],
         culinaryUse: ["Svježe salate", "Pečenje", "Punjenje", "Kuhanje"],
         cookingNotes: "Pečenjem se pojačava slatkoća. Ljutina ovisi o sorti.",
@@ -215,9 +215,9 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Idealan za hidrataciju, mali sadržaj kalorija. Sadrži silicij za zdrave kožu i kosu. Pomaže pri gubitku težine.",
         cropVarieties: [
-          { name: "Salatni krastavac", shade: 500, quantityPerCell: 2 },
-          { name: "Kornišon", shade: 600, quantityPerCell: 3 },
-          { name: "Mini krastavac", shade: 400, quantityPerCell: 4 },
+          { name: "Salatni krastavac", shade: 500, quantityPerCell: 18 },
+          { name: "Kornišon", shade: 600, quantityPerCell: 27 },
+          { name: "Mini krastavac", shade: 400, quantityPerCell: 36 },
         ],
         culinaryUse: ["Svježe salate", "Kiseljenje", "Hladne juhe"],
         cookingNotes: "Najčešće se koristi sirov, bez termičke obrade.",
@@ -231,9 +231,9 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Nizak sadržaj kalorija, bogata vlaknima. Sadrži beta-karoten i vitamina C. Pomaže pri probavi i jačanju imuniteta.",
         cropVarieties: [
-          { name: "Zelena tikvica", shade: 500, quantityPerCell: 2 },
-          { name: "Žuta tikvica", shade: 300, quantityPerCell: 2 },
-          { name: "Okrugla tikvica", shade: 600, quantityPerCell: 2 },
+          { name: "Zelena tikvica", shade: 500, quantityPerCell: 18 },
+          { name: "Žuta tikvica", shade: 300, quantityPerCell: 18 },
+          { name: "Okrugla tikvica", shade: 600, quantityPerCell: 18 },
         ],
         culinaryUse: ["Pirjanje", "Pečenje", "Roštilj", "Juhe"],
         cookingNotes: "Brzo omekšava; kratka obrada daje najbolju teksturu.",
@@ -246,9 +246,9 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Sadrži nasutin koji smanjuje krvni kolesterol. Bogat antioksidansima i vlaknima. Pomaže pri kontroli težine.",
         cropVarieties: [
-          { name: "Ljubičasti patlidžan", shade: 700, quantityPerCell: 1 },
-          { name: "Bijeli patlidžan", shade: 200, quantityPerCell: 1 },
-          { name: "Mini patlidžan", shade: 600, quantityPerCell: 2 },
+          { name: "Ljubičasti patlidžan", shade: 700, quantityPerCell: 9 },
+          { name: "Bijeli patlidžan", shade: 200, quantityPerCell: 9 },
+          { name: "Mini patlidžan", shade: 600, quantityPerCell: 18 },
         ],
         culinaryUse: ["Pečenje", "Grilanje", "Variva", "Namazi"],
         cookingNotes:
@@ -262,10 +262,10 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Bogata beta-karotenom i vitaminom C, prirodna slatkoća umjesto šećera. Pomaže pri zdravlju očiju i kostiju. Niski indeks glikemije.",
         cropVarieties: [
-          { name: "Muškatna tikva", shade: 500, quantityPerCell: 1 },
-          { name: "Hokkaido", shade: 600, quantityPerCell: 1 },
-          { name: "Butternut", shade: 400, quantityPerCell: 1 },
-          { name: "Tikva golica", shade: 700, quantityPerCell: 1 },
+          { name: "Muškatna tikva", shade: 500, quantityPerCell: 9 },
+          { name: "Hokkaido", shade: 600, quantityPerCell: 9 },
+          { name: "Butternut", shade: 400, quantityPerCell: 9 },
+          { name: "Tikva golica", shade: 700, quantityPerCell: 9 },
         ],
         culinaryUse: ["Juhe", "Pečenje", "Pirei", "Deserti"],
         cookingNotes: "Slatkast okus dolazi do izražaja pečenjem.",
@@ -285,10 +285,10 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Izvor beta-karotena koji se pretvara u vitamin A, jačanja vida. Bogata vlaknima i antioksidansima. Sprječava bolesti srca.",
         cropVarieties: [
-          { name: "Nantes", shade: 500, quantityPerCell: 14 },
-          { name: "Chantenay", shade: 600, quantityPerCell: 12 },
-          { name: "Imperator", shade: 700, quantityPerCell: 10 },
-          { name: "Ljubičasta mrkva", shade: 400, quantityPerCell: 14 },
+          { name: "Nantes", shade: 500, quantityPerCell: 126 },
+          { name: "Chantenay", shade: 600, quantityPerCell: 108 },
+          { name: "Imperator", shade: 700, quantityPerCell: 90 },
+          { name: "Ljubičasta mrkva", shade: 400, quantityPerCell: 126 },
         ],
         culinaryUse: ["Svježe", "Juhe", "Variva", "Pečenje"],
         cookingNotes: "Kratko kuhanje čuva slatkoću.",
@@ -301,9 +301,9 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Bogata dušičnima koji poboljšavaju krvni tlak. Sadrži betalainâ koje su moćne antioksidanse. Pomaže pri detoksikaciji jetre.",
         cropVarieties: [
-          { name: "Crvena", shade: 700, quantityPerCell: 12 },
-          { name: "Zlatna", shade: 400, quantityPerCell: 12 },
-          { name: "Chioggia", shade: 500, quantityPerCell: 12 },
+          { name: "Crvena", shade: 700, quantityPerCell: 108 },
+          { name: "Zlatna", shade: 400, quantityPerCell: 108 },
+          { name: "Chioggia", shade: 500, quantityPerCell: 108 },
         ],
         culinaryUse: ["Pečenje", "Kuhanje", "Salate"],
         cookingNotes: "Pečenje pojačava slatkoću.",
@@ -316,8 +316,8 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Bogata vitaminom C i vlaknima. Jača imunitet i pomaže pri probavi. Ima blago dezinficijuća svojstva.",
         cropVarieties: [
-          { name: "Bijela", shade: 200, quantityPerCell: 6 },
-          { name: "Crna", shade: 800, quantityPerCell: 4 },
+          { name: "Bijela", shade: 200, quantityPerCell: 54 },
+          { name: "Crna", shade: 800, quantityPerCell: 36 },
         ],
         culinaryUse: ["Svježe", "Salate"],
         cookingNotes: "Oguliti za blaži okus.",
@@ -330,9 +330,9 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Bogata vitaminom C, pomaže pri jačanju imuniteta. Sadrži fito-kemikalije s protiupalnim svojstvima. Nizak sadržaj kalorija.",
         cropVarieties: [
-          { name: "Crvena", shade: 500, quantityPerCell: 16 },
-          { name: "Bijela", shade: 200, quantityPerCell: 16 },
-          { name: "Ljubičasta", shade: 700, quantityPerCell: 16 },
+          { name: "Crvena", shade: 500, quantityPerCell: 144 },
+          { name: "Bijela", shade: 200, quantityPerCell: 144 },
+          { name: "Ljubičasta", shade: 700, quantityPerCell: 144 },
         ],
         culinaryUse: ["Svježe"],
         cookingNotes: "Najbolja sirova.",
@@ -345,8 +345,8 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Bogat vlaknima i vitaminima. Jača probavu i smanjuje nadutost. Ima diuretska svojstva.",
         cropVarieties: [
-          { name: "Dugi", shade: 400, quantityPerCell: 12 },
-          { name: "Kratki", shade: 300, quantityPerCell: 10 },
+          { name: "Dugi", shade: 400, quantityPerCell: 108 },
+          { name: "Kratki", shade: 300, quantityPerCell: 90 },
         ],
         culinaryUse: ["Juhe", "Variva"],
         cookingNotes: "Dodaje se rano u kuhanju.",
@@ -358,7 +358,7 @@ export const vegatablesGeneralCropTypes = [
         description: "Slatkast korijen sličan mrkvi.",
         healthBenefits:
           "Bogat vlaknima i vitaminom C. Pomaže pri zdravoj probavi i održavanju razine šećera. Ima antioksidacijska svojstva.",
-        cropVarieties: [{ name: "Klasični", shade: 500, quantityPerCell: 10 }],
+        cropVarieties: [{ name: "Klasični", shade: 500, quantityPerCell: 90 }],
         culinaryUse: ["Pečenje", "Juhe", "Pire"],
         cookingNotes: "Pečenjem postaje vrlo sladak.",
         storage: "Hladnjak, 2–3 tjedna.",
@@ -376,10 +376,10 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Bogat kalijumom i vitaminom B6. Sadrži rezistentnog škroba koji je od koristi za zdravu probavu. Bez glutena.",
         cropVarieties: [
-          { name: "Mladi", shade: 200, quantityPerCell: 4 },
-          { name: "Bijeli", shade: 100, quantityPerCell: 3 },
-          { name: "Crveni", shade: 400, quantityPerCell: 3 },
-          { name: "Ljubičasti", shade: 600, quantityPerCell: 2 },
+          { name: "Mladi", shade: 200, quantityPerCell: 36 },
+          { name: "Bijeli", shade: 100, quantityPerCell: 27 },
+          { name: "Crveni", shade: 400, quantityPerCell: 27 },
+          { name: "Ljubičasti", shade: 600, quantityPerCell: 18 },
         ],
         culinaryUse: ["Kuhanje", "Pečenje", "Prženje", "Pire"],
         cookingNotes: "Različite sorte imaju različit udio škroba.",
@@ -392,9 +392,9 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Izvor beta-karotena i manganeza. Bogat antioksidansima koji štite od bolesti. Pomaže pri regulaciji krvnog šećera.",
         cropVarieties: [
-          { name: "Narančasti", shade: 500, quantityPerCell: 2 },
-          { name: "Ljubičasti", shade: 700, quantityPerCell: 2 },
-          { name: "Bijeli", shade: 200, quantityPerCell: 3 },
+          { name: "Narančasti", shade: 500, quantityPerCell: 18 },
+          { name: "Ljubičasti", shade: 700, quantityPerCell: 18 },
+          { name: "Bijeli", shade: 200, quantityPerCell: 27 },
         ],
         culinaryUse: ["Pečenje", "Juhe", "Pire"],
         cookingNotes: "Ne guliti prije pečenja.",
@@ -406,7 +406,7 @@ export const vegatablesGeneralCropTypes = [
         description: "Gomolj orašastog okusa.",
         healthBenefits:
           "Sadrži inulina koji hranit zdrave bakterije u crijevima. Pomaže pri snižavanju krvnog šećera i kolesterola. Nizak glikemijski indeks.",
-        cropVarieties: [{ name: "Klasični", shade: 500, quantityPerCell: 4 }],
+        cropVarieties: [{ name: "Klasični", shade: 500, quantityPerCell: 36 }],
         culinaryUse: ["Pečenje", "Juhe"],
         cookingNotes: "Kratka obrada.",
         storage: "Hladnjak, do 2 tjedna.",
@@ -424,10 +424,10 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Sadrži kvercetin i sulfidnih spojeva s antibakterijskim svojstvima. Pomaže pri zaštiti srca i snižavanju kolesterola. Jača imunitet.",
         cropVarieties: [
-          { name: "Bijeli", shade: 200, quantityPerCell: 12 },
-          { name: "Crveni", shade: 600, quantityPerCell: 10 },
-          { name: "Žuti", shade: 400, quantityPerCell: 10 },
-          { name: "Mladi", shade: 300, quantityPerCell: 14 },
+          { name: "Bijeli", shade: 200, quantityPerCell: 108 },
+          { name: "Crveni", shade: 600, quantityPerCell: 90 },
+          { name: "Žuti", shade: 400, quantityPerCell: 90 },
+          { name: "Mladi", shade: 300, quantityPerCell: 126 },
         ],
         culinaryUse: ["Pirjanje", "Pečenje", "Sirovo"],
         cookingNotes: "Pirjanjem postaje sladak.",
@@ -440,8 +440,8 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Sadrži alicina s jakim antibakterijskim svojstvima. Pomaže pri zaštiti srca i snižavanju krvnog tlaka. Prirodan antibiotik.",
         cropVarieties: [
-          { name: "Bijeli", shade: 200, quantityPerCell: 8 },
-          { name: "Ljubičasti", shade: 600, quantityPerCell: 6 },
+          { name: "Bijeli", shade: 200, quantityPerCell: 72 },
+          { name: "Ljubičasti", shade: 600, quantityPerCell: 54 },
         ],
         culinaryUse: ["Začinjavanje", "Ulja", "Umaci"],
         cookingNotes: "Ne prepeći.",
@@ -454,8 +454,8 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Bogat vlaknima i vitaminom C. Pomaže pri jačanju kostiju i imuniteta. Ima blaga diuretska svojstva.",
         cropVarieties: [
-          { name: "Zimski", shade: 600, quantityPerCell: 2 },
-          { name: "Ljetni", shade: 400, quantityPerCell: 2 },
+          { name: "Zimski", shade: 600, quantityPerCell: 18 },
+          { name: "Ljetni", shade: 400, quantityPerCell: 18 },
         ],
         culinaryUse: ["Juhe", "Pirjanje", "Pečenje"],
         cookingNotes: "Dobro oprati slojeve.",
@@ -468,8 +468,8 @@ export const vegatablesGeneralCropTypes = [
         healthBenefits:
           "Bogat antioksidansima i flonoidima. Pomaže pri regulaciji krvnog šećera i kolesterola. Blagi antibakterijski učinak.",
         cropVarieties: [
-          { name: "Crveni", shade: 600, quantityPerCell: 8 },
-          { name: "Smeđi", shade: 500, quantityPerCell: 8 },
+          { name: "Crveni", shade: 600, quantityPerCell: 72 },
+          { name: "Smeđi", shade: 500, quantityPerCell: 72 },
         ],
         culinaryUse: ["Umaci", "Pirjanje"],
         cookingNotes: "Idealno za fine umake.",
@@ -486,8 +486,8 @@ export const vegatablesGeneralCropTypes = [
         color: "lime",
         description: "Hrskava stabljika blagog okusa.",
         cropVarieties: [
-          { name: "Zeleni", shade: 500, quantityPerCell: 6 },
-          { name: "Blijedi", shade: 200, quantityPerCell: 6 },
+          { name: "Zeleni", shade: 500, quantityPerCell: 54 },
+          { name: "Blijedi", shade: 200, quantityPerCell: 54 },
         ],
         culinaryUse: ["Svježe", "Juhe"],
         cookingNotes: "Kratko kuhati.",
@@ -498,8 +498,8 @@ export const vegatablesGeneralCropTypes = [
         color: "emerald",
         description: "Sezonska stabljikasta kultura.",
         cropVarieties: [
-          { name: "Zelena", shade: 600, quantityPerCell: 4 },
-          { name: "Bijela", shade: 200, quantityPerCell: 4 },
+          { name: "Zelena", shade: 600, quantityPerCell: 36 },
+          { name: "Bijela", shade: 200, quantityPerCell: 36 },
         ],
         culinaryUse: ["Kuhanje", "Grilanje"],
         cookingNotes: "Vrlo kratka obrada.",
@@ -510,8 +510,8 @@ export const vegatablesGeneralCropTypes = [
         color: "rose",
         description: "Kisela stabljika, botanički povrće.",
         cropVarieties: [
-          { name: "Zelena", shade: 400, quantityPerCell: 3 },
-          { name: "Crvena", shade: 700, quantityPerCell: 3 },
+          { name: "Zelena", shade: 400, quantityPerCell: 27 },
+          { name: "Crvena", shade: 700, quantityPerCell: 27 },
         ],
         culinaryUse: ["Deserti", "Kompoti"],
         cookingNotes: "Listovi nisu jestivi.",
@@ -528,9 +528,9 @@ export const vegatablesGeneralCropTypes = [
         color: "slate",
         description: "Zbijeni cvat neutralnog okusa.",
         cropVarieties: [
-          { name: "Bijela", shade: 100, quantityPerCell: 6 },
-          { name: "Zelena", shade: 400, quantityPerCell: 5 },
-          { name: "Ljubičasta", shade: 600, quantityPerCell: 5 },
+          { name: "Bijela", shade: 100, quantityPerCell: 54 },
+          { name: "Zelena", shade: 400, quantityPerCell: 45 },
+          { name: "Ljubičasta", shade: 600, quantityPerCell: 45 },
         ],
         culinaryUse: ["Kuhanje", "Pečenje"],
         cookingNotes: "Ne prekuhati.",
@@ -541,8 +541,8 @@ export const vegatablesGeneralCropTypes = [
         color: "green",
         description: "Zeleni cvat bogat hranjivim tvarima.",
         cropVarieties: [
-          { name: "Klasična", shade: 600, quantityPerCell: 3 },
-          { name: "Broccolini", shade: 500, quantityPerCell: 4 },
+          { name: "Klasična", shade: 600, quantityPerCell: 27 },
+          { name: "Broccolini", shade: 500, quantityPerCell: 36 },
         ],
         culinaryUse: ["Parenje", "Wok"],
         cookingNotes: "Parenje čuva boju.",
@@ -553,8 +553,8 @@ export const vegatablesGeneralCropTypes = [
         color: "green",
         description: "Cvjetni pupoljak.",
         cropVarieties: [
-          { name: "Zelena", shade: 500, quantityPerCell: 2 },
-          { name: "Ljubičasta", shade: 700, quantityPerCell: 2 },
+          { name: "Zelena", shade: 500, quantityPerCell: 18 },
+          { name: "Ljubičasta", shade: 700, quantityPerCell: 18 },
         ],
         culinaryUse: ["Kuhanje", "Pečenje"],
         cookingNotes: "Limun sprječava tamnjenje.",
@@ -572,10 +572,10 @@ export const vegatablesGeneralCropTypes = [
         color: "stone",
         description: "Najraširenija mahunarka u prehrani.",
         cropVarieties: [
-          { name: "Bijeli", shade: 200, quantityPerCell: 8 },
-          { name: "Crveni", shade: 600, quantityPerCell: 8 },
-          { name: "Crni", shade: 800, quantityPerCell: 7 },
-          { name: "Trebješ", shade: 400, quantityPerCell: 9 },
+          { name: "Bijeli", shade: 200, quantityPerCell: 72 },
+          { name: "Crveni", shade: 600, quantityPerCell: 72 },
+          { name: "Crni", shade: 800, quantityPerCell: 63 },
+          { name: "Trebješ", shade: 400, quantityPerCell: 81 },
         ],
         culinaryUse: ["Variva", "Juhe", "Salate"],
         cookingNotes: "Namakanje skraćuje kuhanje.",
@@ -586,8 +586,8 @@ export const vegatablesGeneralCropTypes = [
         color: "green",
         description: "Slatke zelene mahune ili zrna.",
         cropVarieties: [
-          { name: "Mladi", shade: 400, quantityPerCell: 6 },
-          { name: "Šećerac", shade: 500, quantityPerCell: 6 },
+          { name: "Mladi", shade: 400, quantityPerCell: 54 },
+          { name: "Šećerac", shade: 500, quantityPerCell: 54 },
         ],
         culinaryUse: ["Kuhanje", "Rižota"],
         cookingNotes: "Kuhati vrlo kratko.",
@@ -598,8 +598,8 @@ export const vegatablesGeneralCropTypes = [
         color: "green",
         description: "Krupan grahast plod.",
         cropVarieties: [
-          { name: "Zeleni", shade: 500, quantityPerCell: 6 },
-          { name: "Suhi", shade: 700, quantityPerCell: 5 },
+          { name: "Zeleni", shade: 500, quantityPerCell: 54 },
+          { name: "Suhi", shade: 700, quantityPerCell: 45 },
         ],
         culinaryUse: ["Variva", "Pire"],
         cookingNotes: "Oguliti kožicu nakon kuhanja.",
@@ -610,9 +610,9 @@ export const vegatablesGeneralCropTypes = [
         color: "amber",
         description: "Sitna mahunarka brzog kuhanja.",
         cropVarieties: [
-          { name: "Zelena", shade: 600, quantityPerCell: 9 },
-          { name: "Crvena", shade: 500, quantityPerCell: 9 },
-          { name: "Smeđa", shade: 700, quantityPerCell: 10 },
+          { name: "Zelena", shade: 600, quantityPerCell: 81 },
+          { name: "Crvena", shade: 500, quantityPerCell: 81 },
+          { name: "Smeđa", shade: 700, quantityPerCell: 90 },
         ],
         culinaryUse: ["Juhe", "Variva"],
         cookingNotes: "Ne zahtijeva namakanje.",
@@ -623,8 +623,8 @@ export const vegatablesGeneralCropTypes = [
         color: "yellow",
         description: "Mahunarka orašastog okusa.",
         cropVarieties: [
-          { name: "Sitni", shade: 400, quantityPerCell: 8 },
-          { name: "Krupan", shade: 500, quantityPerCell: 6 },
+          { name: "Sitni", shade: 400, quantityPerCell: 72 },
+          { name: "Krupan", shade: 500, quantityPerCell: 54 },
         ],
         culinaryUse: ["Humus", "Variva", "Salate"],
         cookingNotes: "Dugo kuhanje ili namakanje.",
@@ -641,8 +641,8 @@ export const vegatablesGeneralCropTypes = [
         color: "yellow",
         description: "Slatko zrno koje se koristi svježe ili kuhano.",
         cropVarieties: [
-          { name: "Šećerac", shade: 400, quantityPerCell: 4 },
-          { name: "Kokičar", shade: 300, quantityPerCell: 3 },
+          { name: "Šećerac", shade: 400, quantityPerCell: 36 },
+          { name: "Kokičar", shade: 300, quantityPerCell: 27 },
         ],
         culinaryUse: ["Kuhanje", "Pečenje"],
         cookingNotes: "Kuhati kratko.",
@@ -653,8 +653,8 @@ export const vegatablesGeneralCropTypes = [
         color: "lime",
         description: "Plod sa sjemenkama, često u varivima.",
         cropVarieties: [
-          { name: "Zelena", shade: 500, quantityPerCell: 4 },
-          { name: "Crvena", shade: 600, quantityPerCell: 4 },
+          { name: "Zelena", shade: 500, quantityPerCell: 36 },
+          { name: "Crvena", shade: 600, quantityPerCell: 36 },
         ],
         culinaryUse: ["Variva", "Prženje"],
         cookingNotes: "Kratko kuhati da se ne sluzi.",
@@ -671,8 +671,8 @@ export const vegatablesGeneralCropTypes = [
         color: "stone",
         description: "Najčešće uzgajane gljive.",
         cropVarieties: [
-          { name: "Bijeli", shade: 200, quantityPerCell: 12 },
-          { name: "Smeđi", shade: 500, quantityPerCell: 12 },
+          { name: "Bijeli", shade: 200, quantityPerCell: 108 },
+          { name: "Smeđi", shade: 500, quantityPerCell: 108 },
         ],
         culinaryUse: ["Pirjanje", "Juhe", "Pečenje"],
         cookingNotes: "Ne namakati u vodi.",
@@ -683,8 +683,8 @@ export const vegatablesGeneralCropTypes = [
         color: "gray",
         description: "Mesnate gljive blagog okusa.",
         cropVarieties: [
-          { name: "Siva", shade: 500, quantityPerCell: 12 },
-          { name: "Bijela", shade: 200, quantityPerCell: 12 },
+          { name: "Siva", shade: 500, quantityPerCell: 108 },
+          { name: "Bijela", shade: 200, quantityPerCell: 108 },
         ],
         culinaryUse: ["Wok", "Pečenje"],
         cookingNotes: "Kratko peći.",
@@ -695,8 +695,8 @@ export const vegatablesGeneralCropTypes = [
         color: "amber",
         description: "Aromatične gljive azijskog porijekla.",
         cropVarieties: [
-          { name: "Svježi", shade: 600, quantityPerCell: 10 },
-          { name: "Sušeni", shade: 700, quantityPerCell: 8 },
+          { name: "Svježi", shade: 600, quantityPerCell: 90 },
+          { name: "Sušeni", shade: 700, quantityPerCell: 72 },
         ],
         culinaryUse: ["Juhe", "Umaci"],
         cookingNotes: "Sušene prethodno namočiti.",
@@ -714,8 +714,8 @@ export const vegatablesGeneralCropTypes = [
         color: "green",
         description: "Svježe lišće za završetak jela.",
         cropVarieties: [
-          { name: "List", shade: 600, quantityPerCell: 20 },
-          { name: "Korijen", shade: 500, quantityPerCell: 12 },
+          { name: "List", shade: 600, quantityPerCell: 180 },
+          { name: "Korijen", shade: 500, quantityPerCell: 108 },
         ],
         culinaryUse: ["Svježe", "Juhe"],
         cookingNotes: "Dodavati na kraju.",
@@ -726,8 +726,8 @@ export const vegatablesGeneralCropTypes = [
         color: "green",
         description: "Aromatična biljka osjetljiva na hladnoću.",
         cropVarieties: [
-          { name: "Zeleni", shade: 500, quantityPerCell: 8 },
-          { name: "Ljubičasti", shade: 700, quantityPerCell: 8 },
+          { name: "Zeleni", shade: 500, quantityPerCell: 72 },
+          { name: "Ljubičasti", shade: 700, quantityPerCell: 72 },
         ],
         culinaryUse: ["Umaci", "Salate"],
         cookingNotes: "Ne kuhati dugo.",
@@ -737,7 +737,7 @@ export const vegatablesGeneralCropTypes = [
         name: "Kopar",
         color: "lime",
         description: "Blaga aroma za ribu i povrće.",
-        cropVarieties: [{ name: "Svježi", shade: 400, quantityPerCell: 16 }],
+        cropVarieties: [{ name: "Svježi", shade: 400, quantityPerCell: 144 }],
         culinaryUse: ["Umaci", "Juhe"],
         cookingNotes: "Dodavati na kraju.",
         storage: "Hladnjak, kratko.",

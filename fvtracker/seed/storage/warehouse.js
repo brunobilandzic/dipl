@@ -29,12 +29,13 @@ export const createWarehouseStockSeed = async ({
   product,
   productionStock,
 }) => {
-  const warehouse = await seedWarehouse();
-  await acceptWarehouseStock({
+
+ const warehouseStock = await acceptWarehouseStock({
     product,
     quantity: 1,
     productionStock,
     warehouseId: warehouse._id,
     comment: "Initial stock from seeding",
   });
+  return warehouseStock;
 };

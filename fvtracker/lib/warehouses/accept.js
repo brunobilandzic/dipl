@@ -67,4 +67,6 @@ export const acceptWarehouseStock = async ({
 
   await warehouseStock.save();
   await warehouseAcceptanceProcess.save();
+
+  return warehouseStock;
 };

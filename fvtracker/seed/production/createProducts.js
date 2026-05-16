@@ -32,6 +32,9 @@ export const createProducts = async () => {
       product,
       productionStock,
     });
+    console.log(
+      `Created product stock for ${product.name} with quantity ${productionStock.quantity} and warehouse stock with quantity ${warehouseStock.quantity}`,
+    );
     productionManager.products.push(product._id);
     await productionManager.save();
     await product.save();

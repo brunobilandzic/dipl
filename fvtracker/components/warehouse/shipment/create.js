@@ -46,7 +46,7 @@ const ChooseWarehouseSources = ({
   warehouses,
   productQuantities,
 }) => {
-  const needed = calculateNeededQuantities({
+  const neededQuantities = calculateNeededQuantities({
     orderItems,
     shipment,
   });

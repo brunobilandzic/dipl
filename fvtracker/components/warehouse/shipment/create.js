@@ -30,7 +30,6 @@ export const CreateShipmentModal = ({
   }, [shipment]);
   return (
     <FormModal
-      submitDisabled={!isRequestFulfilled({ orderItems: items, shipment })}
       isOpen={isOpen}
       onCancel={() => {
         setShipment(emptyShipment);

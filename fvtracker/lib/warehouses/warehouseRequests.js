@@ -36,3 +36,8 @@ export const getWarehouseRequests = async () => {
 export const shipWarehouseRequest = async ({ warehouseRequestId }) => {
   const request = await getWarehouseRequestById(warehouseRequestId);
 };
+
+export const fillWarehouseRequest = async ({
+  warehouseRequestId,
+  shipmentSources,
+}) => {};

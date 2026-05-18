@@ -41,6 +41,8 @@ export const shipWarehouseRequest = async ({ warehouseRequestId }) => {
 export const fillWarehouseRequest = async ({
   warehouseRequestId,
   shipmentSources,
+  warehouseManagerId,
+  financialManagerId,
 }) => {
   const warehouseRequest = await getWarehouseRequestById(warehouseRequestId);
   warehouseRequest.populate([

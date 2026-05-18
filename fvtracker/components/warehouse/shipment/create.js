@@ -52,7 +52,6 @@ export const CreateShipmentModal = ({
         productQuantities={productQuantities}
         shipmentItems={items}
         order={order}
-        order={order}
       />
     </FormModal>
   );

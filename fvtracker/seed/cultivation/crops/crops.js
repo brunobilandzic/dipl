@@ -186,10 +186,20 @@ export const createNewPlantage = async ({
   const map = {};
 
   for (
-    let x = 0, planItemIndex = 0;
-    x < cultWidth - 2 && planItemIndex < varietiesNum;
-    x += 2, planItemIndex++
+    let x = 0, y = 0, planItemIndex = 0;
+    planItemIndex < varietiesNum;
+    x += PLANTAGE_SIZE, planItemIndex++
   ) {
+    if (x + PLANTAGE_SIZE >= cultWidth) {
+      x = 0;
+      y += PLANTAGE_SIZE;
+    }
+    if (y + PLANTAGE_SIZE >= cultLength) {
+      console.log(
+        "Reached the end of cultivation area, cannot plant more varieties.",
+      );
+      break;
+    }
     cropCoords = [];
     const cropVarietyName = plantingPlan.items[planItemIndex].cropVariety.name;
     map[cropVarietyName] = [];

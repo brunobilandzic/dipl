@@ -27,6 +27,10 @@ const WarehouseRequestListItem = ({ request }) => {
   const managerModelName = useSelector(
     (state) => state.user.session.managerModelName,
   );
+  const order = useSelector((state) =>
+    state.webstore.orders.items.find((o) => o._id === request.order._id),
+  );
+
   const [createShipmentModalOpen, setCreateShipmentModalOpen] = useState(false);
 
   const actions = [
@@ -49,7 +53,10 @@ const WarehouseRequestListItem = ({ request }) => {
         <div key={request._id}>
           <p>Narudžba: {request.order.number}</p>
           <div>
-            <ItemList items={warehouseRequestItems(request)} />
+            <ItemList
+              items={warehouseRequestItems(request)}
+              orderItems={order?.items || []}
+            />
           </div>
         </div>
       </ListItem>
@@ -65,7 +72,7 @@ const WarehouseRequestListItem = ({ request }) => {
   );
 };
 
-const ItemList = ({ items }) => {
+const ItemList = ({ items, orderItems }) => {
   return (
     <ul className="list-disc list-inside">
       {items.map((item, index) => (

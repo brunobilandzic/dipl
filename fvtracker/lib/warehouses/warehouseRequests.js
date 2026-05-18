@@ -78,5 +78,13 @@ export const fillWarehouseRequest = async ({
       );
       continue;
     }
+    const product = warehouse.stocks.find((s) => s.product.name === productName)?.product;
+    if (!product) {
+      console.error(
+        `Nema zaliha proizvoda ${productName} u skladištu ${warehouse.name}`,
+      );
+      continue;
+    }
+    
   }
 };

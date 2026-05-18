@@ -99,9 +99,10 @@ export const fillWarehouseRequest = async ({
     stock.shipmentItems.push(shipmentItem._id);
 
     await stock.save();
-    await product.save();
-    await shipment.save();
-    await warehouseRequest.save();
     await shipmentItem.save();
   }
+
+  await product.save();
+  await shipment.save();
+  await warehouseRequest.save();
 };

@@ -15,7 +15,7 @@ export const AppTilesGrid = ({ children, key }) => {
   return (
     <div
       key={key}
-      className="grid grid-cols-2 md:grid-cols-6 gap-2 md:gap-4 w-full md:w-[1280px]"
+      className="grid grid-cols-2 md:grid-cols-5 gap-2 md:gap-4 w-full"
     >
       {children}
     </div>

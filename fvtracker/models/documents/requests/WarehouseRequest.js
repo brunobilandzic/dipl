@@ -1,6 +1,7 @@
 import { WAREHOUSE_REQUESTED } from "@/lib/constants/webstore/orders";
 import { RequestDocument } from "@/models/Base";
 import { Order } from "@/models/sectors/sales";
+import { Shipment } from "@/models/sectors/sales/Shipment";
 import { FinancialManager } from "@/models/user/managers/FinancialManager";
 import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
 import mongoose from "mongoose";
@@ -21,17 +22,20 @@ const warehouseRequestSchema = new mongoose.Schema({
     ref: "WarehouseManager",
     required: true,
   },
-  shipments: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Shipment",
-      default: null,
-    },
-  ],
+  shipment: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Shipment",
+    default: null,
+  },
 });
 
 warehouseRequestSchema.pre("save", async function () {
   if (this.isNew) {
+    const shipment = new Shipment({
+      warehouseRequest: this._id,
+    });
+    this.shipment = shipment._id;
+    await shipment.save();
     await FinancialManager.findByIdAndUpdate(this.financialManager, {
       $push: { warehouseRequests: this._id },
     });

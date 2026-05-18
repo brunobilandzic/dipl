@@ -62,7 +62,6 @@ const ChooseWarehouseSources = ({
     shipment,
   });
 
-
   const sourceQuantity = ({ wh, productName }) =>
     shipment.sources.find(
       (s) => s.warehouseId === wh._id && s.productName === productName,

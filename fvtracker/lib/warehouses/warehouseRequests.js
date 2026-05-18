@@ -112,7 +112,7 @@ export const fillWarehouseRequest = async ({
     await stock.save();
     await shipmentItem.save();
   }
-  
+
   await warehouseRequest.shipment.save();
   await warehouseRequest.save();
 

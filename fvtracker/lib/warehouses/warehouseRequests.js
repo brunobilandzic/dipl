@@ -98,5 +98,14 @@ export const fillWarehouseRequest = async ({
 
     shipment.shipmentItems.push(shipmentItem._id);
     product.shipmentItems.push(shipmentItem._id);
+
+    stock.quantity -= quantity;
+    if (stock.quantity < 0) {
+      console.error(
+        `Nema dovoljno zaliha proizvoda ${productName} u skladištu ${warehouse.name}`,
+      );
+      continue;
+    }
+    stock.shipmentItems.push(shipmentItem._id);
   }
 };

@@ -11,7 +11,7 @@ import {
 import SEED_TYPES from "@/seed/seedTypes";
 import { OptionButtons } from "../layout/buttons/options";
 import { useDispatch } from "react-redux";
-import { setLoading } from "@/store/loading";
+import {  setSeedLoading } from "@/store/loading";
 import { signOut } from "next-auth/react";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { logOut } from "@/store/userSlice";
@@ -85,13 +85,13 @@ export default function SeedOptions() {
         await signOut({ redirect: false });
         dispatch(logOut());
       }
-      dispatch(setLoading(true));
+      dispatch(setSeedLoading(true));
       const response = await axios.post("/api/seed", { seedType });
       console.log(response.data);
-      dispatch(setLoading(false));
+      dispatch(setSeedLoading(false));
       alert(`${seedType} uspješno dovršeno\n${response.data.message}`);
     } catch (error) {
-      dispatch(setLoading(false));
+      dispatch(setSeedLoading(false));
       console.error("Error seeding data:", error);
       handleError({
         ...error,

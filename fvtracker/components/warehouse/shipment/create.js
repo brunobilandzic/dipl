@@ -115,7 +115,7 @@ const ChooseWarehouseSources = ({
     <div>
       <div>Odarite skladišne izvore</div>
       <div>
-        {!isRequestFulfilled({ orderItems, shipment })
+        {!isRequestFulfilled({ shipmentItems, shipment, order })
           ? `Potrebno je još: ${neededString}`
           : "Zahtjev ispunjen"}
       </div>

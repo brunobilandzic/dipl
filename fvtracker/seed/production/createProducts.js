@@ -58,10 +58,11 @@ export const createProductStockSeed = async ({
 }) => {
   await populateProductIngredients({ products: [product] });
   const harvestingBatches = await getHarvestingBatches();
+  const STOCK_QUANTITY = 5;
   const [batchWithResources] = getBatchesWithResources({
     harvestingBatches,
     product,
-    quantity: 2,
+    quantity: STOCK_QUANTITY,
   });
   if (!batchWithResources) {
     return;
@@ -69,7 +70,7 @@ export const createProductStockSeed = async ({
   const productionStock = await createProductStock({
     productId: product._id,
     harvestingBatchId: batchWithResources._id,
-    quantity: 2,
+    quantity: STOCK_QUANTITY,
     productionFacilityId,
   });
   return productionStock;

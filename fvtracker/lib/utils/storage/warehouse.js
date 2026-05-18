@@ -106,15 +106,26 @@ export const calculateNeededQuantities = ({
   shipment,
   order,
 }) => {
+  const neededQuantities = shipmentItems.map((shi) => {
     const existingQuantity = shipment.sources.reduce((acc, source) => {
-      if (source.productName === i.product) {
+      if (source.productName === shi.product) {
         acc += Number(source.quantity);
       }
       return acc;
     }, 0);
+    const shippedQuantity = order.items.reduce((acc, oi) => {
+      console.log({ oi });
+      acc += oi.shipmentItems.reduce((sAcc, si) => {
+        if (si.product.name === shi.product) {
+          sAcc += Number(si.quantity);
+        }
+        return sAcc;
+      }, 0);
+      return acc;
+    }, 0);
     return {
-      productName: i.product,
-      neededQuantity: i.quantity - existingQuantity,
+      productName: shi.product,
+      neededQuantity: shi.quantity - shippedQuantity - existingQuantity,
     };
   });
   console.log({ neededQuantities });

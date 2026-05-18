@@ -150,6 +150,10 @@ const ChooseWarehouseSources = ({
                             productName: pq.productName,
                           })}
                           onChange={(e) => {
+                            if (e.target.value === "") {
+                              setNewShipment({ w, pq, quantity: 0 });
+                              return;
+                            }
                             const quantity = parseInt(e.target.value);
                             if (quantity > availableStock) {
                               alert("Nema toliko na skladištu");

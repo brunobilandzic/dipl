@@ -51,6 +51,8 @@ export const CreateShipmentModal = ({
         warehouses={warehouses}
         productQuantities={productQuantities}
         shipmentItems={items}
+        order={order}
+        order={order}
       />
     </FormModal>
   );
@@ -62,6 +64,7 @@ const ChooseWarehouseSources = ({
   setShipment,
   warehouses,
   productQuantities,
+  order,
 }) => {
   const neededQuantities = calculateNeededQuantities({
     shipmentItems,

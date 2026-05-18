@@ -36,5 +36,8 @@ const shipmentItemSchema = new Schema({
   },
 });
 
-export const Shipment = mongoose.model("Shipment", shipmentSchema);
-export const ShipmentItem = mongoose.model("ShipmentItem", shipmentItemSchema);
+export const Shipment =
+  mongoose.models.Shipment || mongoose.model("Shipment", shipmentSchema);
+export const ShipmentItem =
+  mongoose.models.ShipmentItem ||
+  mongoose.model("ShipmentItem", shipmentItemSchema);

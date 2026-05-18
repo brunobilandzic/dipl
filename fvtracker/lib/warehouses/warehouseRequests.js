@@ -1,6 +1,7 @@
 import { WarehouseRequest } from "@/models/documents/requests/WarehouseRequest";
 import { populateIngredientsConfig } from "../production/product/ingredients";
 import { Warehouse } from "@/models/sectors/storage/Warehouse";
+import { Shipment } from "@/models/sectors/sales/Shipment";
 
 export const getWarehouseRequestById = async (id) => {
   const request = await WarehouseRequest.findById(id);
@@ -44,6 +45,13 @@ export const fillWarehouseRequest = async ({
   warehouseManagerId,
   financialManagerId,
 }) => {
+  const shipment = new Shipment({
+    warehouseRequest: warehouseRequestId,
+    warehouseManager: warehouseManagerId,
+    financialManager: financialManagerId,
+  });
+  await shipment.save();
+
   const warehouseRequest = await getWarehouseRequestById(warehouseRequestId);
   warehouseRequest.populate([
     {
@@ -51,7 +59,7 @@ export const fillWarehouseRequest = async ({
     },
     {},
   ]);
-  
+
   for (const source of shipmentSources) {
     const { warehouseId, productName, quantity } = source;
     const warehouse = await Warehouse.findById(warehouseId);

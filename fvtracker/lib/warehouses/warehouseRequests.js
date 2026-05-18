@@ -1,5 +1,6 @@
 import { WarehouseRequest } from "@/models/documents/requests/WarehouseRequest";
 import { populateIngredientsConfig } from "../production/product/ingredients";
+import { Warehouse } from "@/models/sectors/storage/Warehouse";
 
 export const getWarehouseRequestById = async (id) => {
   const request = await WarehouseRequest.findById(id);

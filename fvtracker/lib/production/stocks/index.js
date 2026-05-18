@@ -60,6 +60,13 @@ export const createProductStock = async ({
         );
       }
       if (batchItem.batchQuantity < ingredient.quantity * quantity) {
+        console.error(
+          `Not enough quantity in harvesting batch for ingredient with crop variety ${ingredient.cropVariety.name}. Required: ${ingredient.quantity * quantity}, Available: ${batchItem.batchQuantity}`,
+        );
+        return {
+          stop: true,
+          message: `Not enough quantity in harvesting batch for ingredient with crop variety ${ingredient.cropVariety.name}. Required: ${ingredient.quantity * quantity}, Available: ${batchItem.batchQuantity}`,
+        };
         throw new Error(
           `Not enough quantity in harvesting batch for ingredient with crop variety ${ingredient.cropVariety.name}. Required: ${ingredient.quantity * quantity}, Available: ${batchItem.batchQuantity}`,
         );

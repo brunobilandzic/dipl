@@ -102,4 +102,10 @@ export const fillWarehouseRequest = async ({
   await product.save();
   await shipment.save();
   await warehouseRequest.save();
+
+  return {
+    message: "Zahtev je uspešno popunjen i poslat na isporuku.",
+    shipment,
+    warehouseRequest,
+  };
 };

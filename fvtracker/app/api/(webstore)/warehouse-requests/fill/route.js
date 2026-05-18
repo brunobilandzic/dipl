@@ -12,9 +12,14 @@ export async function POST(request) {
       return Response.json({ message: "Unauthorized" }, { status: 403 });
     }
     const { warehouseRequestId, shipmentSources } = await request.json();
-    await fillWarehouseRequest({ warehouseRequestId, shipmentSources });
+    const result = await fillWarehouseRequest({
+      warehouseRequestId,
+      shipmentSources,
+    });
 
-    return Response.json({ message: "Warehouse request filled successfully" });
+    console.log(result);
+
+    return Response.json(result);
   } catch (error) {
     console.error("Error filling warehouse request:", error);
     return Response.json(

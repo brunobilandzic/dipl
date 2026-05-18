@@ -2,6 +2,7 @@ import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { WAREHOUSE_STOCK } from "@/lib/constants/warehouse";
 import { fetchWarehouses } from "@/store/warehouse";
+import { fillWarehouseRedux } from ".";
 
 export const totalWarehouseStockQuantity = ({ warehouseStocks }) => {
   return warehouseStocks.reduce((acc, stock) => {
@@ -130,7 +131,7 @@ export const submitShipment = async ({ shipment, dispatch }) => {
       warehouseRequestId: shipment.warehouseRequestId,
     });
     alert("Otpremnica uspješno kreirana!");
-    dispatch(fetchWarehouses());
+    fillWarehouseRedux({ dispatch });
   } catch (error) {
     console.error("Error submitting shipment:", error);
     handleError({

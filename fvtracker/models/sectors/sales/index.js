@@ -20,9 +20,6 @@ const orderSchema = new Schema({
   items: [
     { type: mongoose.Schema.Types.ObjectId, ref: "OrderItem", required: true },
   ],
-  shippedItems: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "OrderItem", required: true },
-  ],
   warehouseRequest: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "WarehouseRequest",
@@ -55,6 +52,9 @@ const orderItemSchema = new Schema({
     required: true,
     min: 1,
   },
+  shipmentItems: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "ShipmentItem", default: [] },
+  ],
 });
 
 const receiptSchema = new Schema({

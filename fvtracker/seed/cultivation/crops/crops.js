@@ -168,6 +168,8 @@ export function logMainTypes(mainTypes) {
   }
 }
 
+const PLANTAGE_SIZE = 3;
+
 export const createNewPlantage = async ({
   plantingPlan,
   cultivationDimensions,
@@ -231,7 +233,7 @@ export const createNewPlantage = async ({
       { relativeCoords: { $in: value } },
       { _id: 1 },
     );
- 
+
     await PlantedCropVariety.updateMany(
       { _id: { $in: docs } },
       { plantingPlanItem: plantingPlanItem._id },

@@ -78,6 +78,10 @@ export const createProductStock = async ({
     return harvestingBatch;
   };
   const harvestingBatch = await deductResources();
+  if (harvestingBatch.stop) {
+    return { stop: true, message: harvestingBatch.message };
+  }
+
   const facility = await ProductionFacility.findById(productionFacilityId);
   if (!facility) {
     throw new Error(

@@ -1,7 +1,6 @@
 import { fetchManager } from "@/lib/auth/fetchSessionData";
-import {
-  WAREHOUSE_MANAGER,
-} from "@/lib/constants/users/managerTypes";
+import { WAREHOUSE_MANAGER } from "@/lib/constants/users/managerTypes";
+import { fillWarehouseRequest } from "@/lib/warehouses/warehouseRequests";
 
 export async function POST(request) {
   const { specificManager, generalManager, unauthorized } = await fetchManager({
@@ -11,7 +10,7 @@ export async function POST(request) {
     return Response.json({ message: "Unauthorized" }, { status: 403 });
   }
   const { warehouseRequestId, shipmentSources } = await request.json();
-  console.log({ warehouseRequestId, shipmentSources });
+  await fillWarehouseRequest({ warehouseRequestId, shipmentSources });
 
   return Response.json({ message: "Warehouse request filled successfully" });
 }

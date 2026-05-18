@@ -14,16 +14,6 @@ const shipmentSchema = {
       default: [],
     },
   ],
-  warehouseManager: {
-    type: Schema.Types.ObjectId,
-    ref: "WarehouseManager",
-    required: true,
-  },
-  financialManager: {
-    type: Schema.Types.ObjectId,
-    ref: "FinancialManager",
-    required: true,
-  },
 };
 
 const shipmentItemSchema = new Schema({

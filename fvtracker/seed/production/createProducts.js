@@ -48,7 +48,7 @@ export const createProducts = async () => {
     productionManager.products.push(product._id);
     await productionManager.save();
     await product.save();
-    console.log(`Seeded product: ${product.name}`);
+      console.log(`Seeded product: ${product.name}`);
   }
 };
 

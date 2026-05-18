@@ -101,8 +101,11 @@ export const calculateWarehouseStock = ({ productName, stocks }) => {
   return stock ? stock.quantity : 0;
 };
 
-export const calculateNeededQuantities = ({ orderItems, shipment }) => {
-  const neededQuantities = orderItems.map((i) => {
+export const calculateNeededQuantities = ({
+  shipmentItems,
+  shipment,
+  order,
+}) => {
     const existingQuantity = shipment.sources.reduce((acc, source) => {
       if (source.productName === i.product) {
         acc += Number(source.quantity);

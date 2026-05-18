@@ -132,8 +132,12 @@ export const calculateNeededQuantities = ({
   return neededQuantities;
 };
 
-export const isRequestFulfilled = ({ orderItems, shipment }) => {
-  const neededQuantities = calculateNeededQuantities({ orderItems, shipment });
+export const isRequestFulfilled = ({ shipmentItems, shipment, order }) => {
+  const neededQuantities = calculateNeededQuantities({
+    shipmentItems,
+    shipment,
+    order
+  });
   return neededQuantities.every((nq) => nq.neededQuantity <= 0);
 };
 

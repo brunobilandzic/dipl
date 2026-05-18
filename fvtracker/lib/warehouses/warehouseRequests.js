@@ -62,7 +62,7 @@ export const fillWarehouseRequest = async ({
   for (const source of shipmentSources) {
     const { warehouseId, productName, quantity } = source;
 
-    const warehouse = getWarehouse({ id: warehouseId });
+    const warehouse = await getWarehouse({ id: warehouseId });
     await warehouse.populate({
       path: "stocks",
       populate: {

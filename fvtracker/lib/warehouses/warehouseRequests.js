@@ -51,7 +51,10 @@ export const fillWarehouseRequest = async ({
     {
       path: "order",
       populate: {
-        path: "items.product",
+        path: "items",
+        populate: {
+          path: "product",
+        },
       },
     },
     {

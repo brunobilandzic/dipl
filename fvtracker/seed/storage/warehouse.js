@@ -18,7 +18,7 @@ export const seedWarehouse = async () => {
     volume: 10000,
   };
   const warehouse = await createWarehouse({ warehouseData });
-  
+
   return warehouse;
 };
 
@@ -41,7 +41,7 @@ export const createWarehouseStockSeed = async ({
 }) => {
   const warehouseStock = await acceptWarehouseStock({
     product,
-    quantity: 1,
+    quantity: 3,
     productionStock,
     warehouseId,
     comment: "Initial stock from seeding",

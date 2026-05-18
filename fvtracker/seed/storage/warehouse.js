@@ -19,7 +19,7 @@ export const seedWarehouse = async () => {
   };
   const warehouse = await createWarehouse({ warehouseData });
   console.log(
-    `Seeded warehouse: ${warehouse.name} with manager ${warehouseManager.name}`,
+    `Seeded warehouse: ${warehouse.name} with manager ${warehouseManager._id}`,
   );
   return warehouse;
 };

@@ -15,6 +15,12 @@ export const CreateShipmentModal = ({
   warehouseRequestId,
   items,
 }) => {
+  const order = useSelector((state) =>
+    state.webstore.orders.items.find(
+      (o) => o.warehouseRequest === warehouseRequestId,
+    ),
+  );
+
   const dispatch = useDispatch();
   const emptyShipment = {
     warehouseRequestId,

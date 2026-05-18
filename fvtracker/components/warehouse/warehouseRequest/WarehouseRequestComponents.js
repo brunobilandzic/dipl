@@ -70,7 +70,9 @@ const ItemList = ({ items }) => {
     <ul className="list-disc list-inside">
       {items.map((item, index) => (
         <li key={index}>
-          {item.product} x {item.quantity}
+          {item.product} x {item.quantity},{" "}
+          {getShippedQuantity({ productName: item.product, orderItems })} od{" "}
+          {item.quantity} poslanih
         </li>
       ))}
     </ul>

@@ -74,6 +74,7 @@ export const fillWarehouseRequest = async ({
       );
       continue;
     }
+    const product = stock.product;
 
     const shipmentItem = new ShipmentItem({
       product: product._id,

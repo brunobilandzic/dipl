@@ -108,7 +108,7 @@ export const fillWarehouseRequest = async ({
       continue;
     }
     stock.shipmentItems.push(shipmentItem._id);
-
+    await orderItem.save();
     await stock.save();
     await shipmentItem.save();
   }

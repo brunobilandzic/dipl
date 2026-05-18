@@ -107,7 +107,11 @@ const ChooseWarehouseSources = ({
   return (
     <div>
       <div>Odarite skladišne izvore</div>
-      <div>Potrebno je još: {neededString}</div>
+      <div>
+        {!isRequestFulfilled({ orderItems, shipment })
+          ? `Potrebno je još: ${neededString}`
+          : "Zahtjev ispunjen"}
+      </div>
       <div className="pt-4">
         {productQuantities.map((pq) => {
           return (

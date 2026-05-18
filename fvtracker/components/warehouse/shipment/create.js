@@ -7,7 +7,7 @@ import {
   submitShipment,
 } from "@/lib/utils/storage/warehouse";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export const CreateShipmentModal = ({
   isOpen,
@@ -15,6 +15,7 @@ export const CreateShipmentModal = ({
   warehouseRequestId,
   items,
 }) => {
+  const dispatch = useDispatch();
   const emptyShipment = {
     warehouseRequestId,
     sources: [],
@@ -35,7 +36,7 @@ export const CreateShipmentModal = ({
         setShipment(emptyShipment);
         onCancel();
       }}
-      onSubmit={() => submitShipment({ shipment })}
+      onSubmit={() => submitShipment({ shipment, dispatch })}
       title="Otpremnica"
     >
       <ChooseWarehouseSources

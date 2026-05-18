@@ -122,7 +122,7 @@ export const isRequestFulfilled = ({ orderItems, shipment }) => {
   return neededQuantities.every((nq) => nq.neededQuantity <= 0);
 };
 
-export const submitShipment = async ({ shipment }) => {
+export const submitShipment = async ({ shipment, dispatch }) => {
   console.log({ shipment });
   try {
     await api.post("/warehouse-requests/fill", {
@@ -130,6 +130,7 @@ export const submitShipment = async ({ shipment }) => {
       warehouseRequestId: shipment.warehouseRequestId,
     });
     alert("Otpremnica uspješno kreirana!");
+    dispatch(fetchWarehouses());
   } catch (error) {
     console.error("Error submitting shipment:", error);
     handleError({

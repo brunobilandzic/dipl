@@ -62,7 +62,6 @@ const ChooseWarehouseSources = ({
     shipment,
   });
 
-  console.log(isRequestFulfilled({ orderItems, shipment }));
 
   const sourceQuantity = ({ wh, productName }) =>
     shipment.sources.find(

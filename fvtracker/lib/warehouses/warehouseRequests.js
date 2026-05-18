@@ -95,5 +95,8 @@ export const fillWarehouseRequest = async ({
       warehouseStock: stock._id,
     });
     await shipmentItem.save();
+    
+    shipment.shipmentItems.push(shipmentItem._id);
+    product.shipmentItems.push(shipmentItem._id);
   }
 };

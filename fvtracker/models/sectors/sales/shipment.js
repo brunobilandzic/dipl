@@ -7,17 +7,11 @@ const shipmentSchema = {
     ref: "WarehouseRequest",
     required: true,
   },
-  warehouseItems: [
+  shipmentItems: [
     {
-      warehouse: {
-        type: Schema.Types.ObjectId,
-        ref: "Warehouse",
-        required: true,
-      },
-      quantity: {
-        type: Number,
-        required: true,
-      },
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ShipmentItem",
+      default: [],
     },
   ],
   warehouseManager: {
@@ -32,4 +26,25 @@ const shipmentSchema = {
   },
 };
 
+const shipmentItemSchema = new Schema({
+  product: {
+    type: Schema.Types.ObjectId,
+    ref: "Base",
+    required: true,
+  },
+  quantity: {
+    type: Number,
+    required: true,
+  },
+  shipment: {
+    type: Schema.Types.ObjectId,
+    ref: "Shipment",
+  },
+  warehouseStock: {
+    type: Schema.Types.ObjectId,
+    ref: "WarehouseStock",
+  },
+});
+
 export const Shipment = mongoose.model("Shipment", shipmentSchema);
+export const ShipmentItem = mongoose.model("ShipmentItem", shipmentItemSchema);

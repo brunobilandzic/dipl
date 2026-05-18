@@ -10,12 +10,10 @@ export const createOrder = async ({ cartItems, customerData }) => {
   const customer = await getCustomer({ customerData });
   const order = await new Order({
     customer: customer._id,
-    items: cartItems.map((item) => ({
-      product: item.product._id,
-      quantity: item.quantity,
-    })),
     number: newOrderNumber,
   }).save();
+  for (const item of cartItems) {
+    const orderItem = new orderItem
   customer.orders.push(order._id);
   console.log({ order, customer });
 

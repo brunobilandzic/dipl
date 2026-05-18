@@ -74,3 +74,5 @@ export const Receipt =
   mongoose.models.Receipt || mongoose.model("Receipt", receiptSchema);
 export const Order =
   mongoose.models.Order || mongoose.model("Order", orderSchema);
+export const OrderItem =
+  mongoose.models.OrderItem || mongoose.model("OrderItem", orderItemSchema);

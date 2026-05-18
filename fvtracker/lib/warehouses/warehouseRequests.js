@@ -50,7 +50,6 @@ export const fillWarehouseRequest = async ({
     warehouseManager: warehouseManagerId,
     financialManager: financialManagerId,
   });
-  await shipment.save();
 
   const warehouseRequest = await getWarehouseRequestById(warehouseRequestId);
   warehouseRequest.populate([
@@ -59,6 +58,7 @@ export const fillWarehouseRequest = async ({
     },
     {},
   ]);
+  warehouseRequest.shipments.push(shipment._id);
 
   for (const source of shipmentSources) {
     const { warehouseId, productName, quantity } = source;

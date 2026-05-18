@@ -34,6 +34,13 @@ const warehouseStockSchema = new Schema({
       default: [],
     },
   ],
+  shipmentItems: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ShipmentItem",
+      default: [],
+    },
+  ],
   quantity: {
     type: Number,
     default: 0,

@@ -51,16 +51,13 @@ export const fillWarehouseRequest = async ({
   console.log({ shipmentSources });
   for (const source of shipmentSources) {
     const { warehouseId, productName, quantity } = source;
-    const existingSource = warehouseRequest.sources.find(
-      (s) =>
-        s.warehouseId.toString() === warehouseId &&
-        s.productName === productName,
-    );
-    if (existingSource) {
-      existingSource.quantity += quantity;
-      shipmentSources = shipmentSources.filter((s) => s !== source);
-    } else {
-    }
+    const warehouse = await Warehouse.findById(warehouseId);
+    await warehouse.populate({
+      path: "stocks",
+      populate: {
+        path: "product",
+      },
+    });
   }
   console.log({ shipmentSources, c: 1 });
 };

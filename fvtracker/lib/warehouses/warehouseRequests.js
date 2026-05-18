@@ -46,10 +46,6 @@ export const fillWarehouseRequest = async ({
   warehouseRequestId,
   shipmentSources,
 }) => {
-  const shipment = new Shipment({
-    warehouseRequest: warehouseRequestId,
-  });
-
   const warehouseRequest = await getWarehouseRequestById(warehouseRequestId);
   warehouseRequest.populate([
     {
@@ -58,8 +54,10 @@ export const fillWarehouseRequest = async ({
         path: "items.product",
       },
     },
+    {
+      path: "shipment",
+    },
   ]);
-  warehouseRequest.shipments.push(shipment._id);
 
   for (const source of shipmentSources) {
     const { warehouseId, productName, quantity } = source;
@@ -91,13 +89,13 @@ export const fillWarehouseRequest = async ({
     const shipmentItem = new ShipmentItem({
       product: product._id,
       quantity,
-      shipment: shipment._id,
+      shipment: warehouseRequest.shipment._id,
       warehouseStock: stock._id,
       orderItem: orderItem._id,
     });
 
     orderItem.shipmentItems.push(shipmentItem._id);
-    shipment.shipmentItems.push(shipmentItem._id);
+    warehouseRequest.shipment.shipmentItems.push(shipmentItem._id);
 
     stock.quantity -= quantity;
     if (stock.quantity < 0) {
@@ -111,13 +109,13 @@ export const fillWarehouseRequest = async ({
     await stock.save();
     await shipmentItem.save();
   }
-
-  await shipment.save();
+  
+  await warehouseRequest.shipment.save();
   await warehouseRequest.save();
 
   return {
     message: "Zahtev je uspešno popunjen i poslat na isporuku.",
-    shipment,
+    shipment: warehouseRequest.shipment,
     warehouseRequest,
   };
 };

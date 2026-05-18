@@ -14,18 +14,10 @@ const orderSchema = new Schema({
     required: true,
   },
   items: [
-    {
-      product: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
-        required: true,
-      },
-      quantity: {
-        type: Number,
-        required: true,
-        min: 1,
-      },
-    },
+    { type: mongoose.Schema.Types.ObjectId, ref: "OrderItem", required: true },
+  ],
+  shippedItems: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "OrderItem", required: true },
   ],
   warehouseRequest: {
     type: mongoose.Schema.Types.ObjectId,
@@ -45,6 +37,19 @@ const orderSchema = new Schema({
     type: String,
     enum: ORDER_STATES,
     default: PENDING,
+  },
+});
+
+const orderItemSchema = new Schema({
+  product: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Product",
+    required: true,
+  },
+  quantity: {
+    type: Number,
+    required: true,
+    min: 1,
   },
 });
 

@@ -52,7 +52,6 @@ export const fillWarehouseRequest = async ({
     {
       path: "order",
     },
-    {},
   ]);
   warehouseRequest.shipments.push(shipment._id);
 

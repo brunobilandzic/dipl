@@ -65,7 +65,7 @@ export const fillWarehouseRequest = async ({
       },
     });
     const stock = warehouse.stocks.find(
-      (whs) => whs.product.name == s.productName,
+      (whs) => whs.product.name == source.productName,
     );
     if (!stock) {
       console.error(

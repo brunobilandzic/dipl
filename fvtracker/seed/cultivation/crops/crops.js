@@ -203,9 +203,18 @@ export const createNewPlantage = async ({
     cropCoords = [];
     const cropVarietyName = plantingPlan.items[planItemIndex].cropVariety.name;
     map[cropVarietyName] = [];
-    for (let dx = 0; dx < 2; dx++) {
-      for (let y = 0; y < 2; y++) {
-        map[cropVarietyName].push(`${x + dx},${y}`);
+    for (let dx = 0; dx < PLANTAGE_SIZE && x + dx < cultWidth; dx++) {
+      for (let dy = 0; dy < PLANTAGE_SIZE && y + dy < cultLength; dy++) {
+        if (x + dx == cultWidth) {
+          dx = 0;
+          dy = cultLength + 1;
+          continue;
+        }
+        if (y + dy == cultLength) {
+          console.log("reached the end of plantage", map);
+          break;
+        }
+        map[cropVarietyName].push(`${x + dx},${y + dy}`);
       }
     }
   }

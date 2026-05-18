@@ -58,6 +58,6 @@ export const productsData = [
         quantity: 10,
       },
     ],
-    stockVolume: 40,
+    stockVolume: 3,
   },
 ];

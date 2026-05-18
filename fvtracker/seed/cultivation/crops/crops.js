@@ -172,6 +172,13 @@ export const createNewPlantage = async ({
   plantingPlan,
   cultivationDimensions,
 }) => {
+  await PlantedCropVariety.updateMany(
+    {},
+    {
+      plantingPlanItem: null,
+      harvestingPlanItem: null,
+    },
+  );
   const { width: cultWidth, length: cultLength } = cultivationDimensions;
   const varietiesNum = plantingPlan.items.length;
   const plantingCoords = [];

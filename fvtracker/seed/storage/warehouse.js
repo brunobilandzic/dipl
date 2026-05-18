@@ -24,6 +24,18 @@ export const seedWarehouse = async () => {
   return warehouse;
 };
 
+export const seedWarehouses = async (count = 5) => {
+  const warehouses = [];
+  await Warehouse.deleteMany({});
+  console.log(`Seeding ${count} warehouses...`);
+  for (let i = 0; i < count; i++) {
+    const warehouse = await seedWarehouse();
+    warehouses.push(warehouse);
+  }
+
+  return warehouses;
+};
+
 export const createWarehouseStockSeed = async ({
   product,
   productionStock,

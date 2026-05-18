@@ -6,7 +6,11 @@ import { populateProductIngredients } from "@/lib/production/product/ingredients
 import { ProductionManager } from "@/models/user/managers/ProductionManager";
 import { createFacility } from "./facility";
 import { createProductStock } from "@/lib/production/stocks";
-import { createWarehouseStockSeed, seedWarehouse } from "../storage/warehouse";
+import {
+  createWarehouseStockSeed,
+  seedWarehouse,
+  seedWarehouses,
+} from "../storage/warehouse";
 import { Warehouse } from "@/models/sectors/storage/Warehouse";
 
 export const createProducts = async () => {
@@ -15,7 +19,8 @@ export const createProducts = async () => {
   console.log("Creating products...");
   const productionFacility = await createFacility();
   const productionManager = await ProductionManager.findOne();
-  
+  const warehouses = await seedWarehouses(5);
+
   for (const productData of productsData) {
     const warehouse = await seedWarehouse();
     const { ingredients, ...productBaseInfo } = productData;

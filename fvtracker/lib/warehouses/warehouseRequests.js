@@ -49,7 +49,7 @@ export const fillWarehouseRequest = async ({
     },
     {},
   ]);
-  console.log({ shipmentSources });
+  
   for (const source of shipmentSources) {
     const { warehouseId, productName, quantity } = source;
     const warehouse = await Warehouse.findById(warehouseId);
@@ -69,5 +69,4 @@ export const fillWarehouseRequest = async ({
       continue;
     }
   }
-  console.log({ shipmentSources, c: 1 });
 };

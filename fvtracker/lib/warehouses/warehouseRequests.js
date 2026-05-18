@@ -40,4 +40,27 @@ export const shipWarehouseRequest = async ({ warehouseRequestId }) => {
 export const fillWarehouseRequest = async ({
   warehouseRequestId,
   shipmentSources,
-}) => {};
+}) => {
+  const warehouseRequest = await getWarehouseRequestById(warehouseRequestId);
+  warehouseRequest.populate([
+    {
+      path: "order",
+    },
+    {},
+  ]);
+  console.log({ shipmentSources });
+  for (const source of shipmentSources) {
+    const { warehouseId, productName, quantity } = source;
+    const existingSource = warehouseRequest.sources.find(
+      (s) =>
+        s.warehouseId.toString() === warehouseId &&
+        s.productName === productName,
+    );
+    if (existingSource) {
+      existingSource.quantity += quantity;
+      shipmentSources = shipmentSources.filter((s) => s !== source);
+    } else {
+    }
+  }
+  console.log({ shipmentSources, c: 1 });
+};

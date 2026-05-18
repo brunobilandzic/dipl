@@ -23,7 +23,7 @@ export const planInfo = ({ fieldId, cropVarietyIds, productionManagerId }) => {
       description: "Plan sadnje za testiranje",
       items: cropVarietyIds.map((cropVarietyId) => ({
         cropVariety: cropVarietyId, // Postavit ćemo ovo kasnije
-        quantity: 1000,
+        quantity: 10000,
       })),
       productionManager: productionManagerId,
     },
@@ -33,7 +33,7 @@ export const planInfo = ({ fieldId, cropVarietyIds, productionManagerId }) => {
       description: "Plan berbe za testiranje",
       items: cropVarietyIds.map((cropVarietyId) => ({
         cropVariety: cropVarietyId, // Postavit ćemo ovo kasnije
-        quantity: 1000,
+        quantity: 10000,
       })),
       productionManager: productionManagerId,
     },

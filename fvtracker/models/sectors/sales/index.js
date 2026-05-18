@@ -8,6 +8,10 @@ const orderSchema = new Schema({
     required: true,
     unique: true,
   },
+  comment: {
+    type: String,
+    default: "",
+  },
   customer: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Customer",

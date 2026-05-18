@@ -21,8 +21,9 @@ export const createProducts = async () => {
   const productionManager = await ProductionManager.findOne();
   const warehouses = await seedWarehouses(5);
 
+  let stopIteration = false;
+  const products = [];
   for (const productData of productsData) {
-    const warehouse = await seedWarehouse();
     const { ingredients, ...productBaseInfo } = productData;
     const product = new Product({
       ...productBaseInfo,
@@ -32,23 +33,32 @@ export const createProducts = async () => {
     await product.createIngredients({
       ingredientsData: productData.ingredients,
     });
+    products.push(product);
+  }
+  for (const warehouse of warehouses) {
+    for (const product of products) {
+      const { productionStock, stop } = await createProductStockSeed({
+        product,
+        productionFacilityId: productionFacility._id,
+      });
+      if (stop) {
+        stopIteration = true;
+        continue;
+      }
+      const warehouseStock = await createWarehouseStockSeed({
+        product,
+        productionStock,
+        warehouseId: warehouse._id,
+      });
+      console.log(
+        `Created product stock for ${product.name} with quantity ${productionStock.quantity} and warehouse stock with quantity ${warehouseStock.quantity}`,
+      );
+      productionManager.products.push(product._id);
 
-    const productionStock = await createProductStockSeed({
-      product,
-      productionFacilityId: productionFacility._id,
-    });
-    const warehouseStock = await createWarehouseStockSeed({
-      product,
-      productionStock,
-      warehouseId: warehouse._id,
-    });
-    console.log(
-      `Created product stock for ${product.name} with quantity ${productionStock.quantity} and warehouse stock with quantity ${warehouseStock.quantity}`,
-    );
-    productionManager.products.push(product._id);
-    await productionManager.save();
-    await product.save();
+      await productionManager.save();
+      await product.save();
       console.log(`Seeded product: ${product.name}`);
+    }
   }
 };
 
@@ -65,7 +75,7 @@ export const createProductStockSeed = async ({
     quantity: STOCK_QUANTITY,
   });
   if (!batchWithResources) {
-    return;
+    return { productionStock: null, stop: false };
   }
   const productionStock = await createProductStock({
     productId: product._id,
@@ -73,5 +83,6 @@ export const createProductStockSeed = async ({
     quantity: STOCK_QUANTITY,
     productionFacilityId,
   });
-  return productionStock;
+  console.log({ productionStock });
+  return { productionStock, stop: productionStock.stop };
 };

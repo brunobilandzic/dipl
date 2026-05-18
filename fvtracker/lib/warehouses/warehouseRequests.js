@@ -87,6 +87,13 @@ export const fillWarehouseRequest = async ({
       );
       continue;
     }
-    
+
+    const shipmentItem = new ShipmentItem({
+      product: product._id,
+      quantity,
+      shipment: shipment._id,
+      warehouseStock: stock._id,
+    });
+    await shipmentItem.save();
   }
 };

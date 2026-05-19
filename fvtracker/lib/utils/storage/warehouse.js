@@ -164,15 +164,23 @@ export const submitShipment = async ({ newShipmentData, dispatch }) => {
 
 // function exists...
 
-export const calculateShipmentShipped = ({
-  newShipmentItems,
-  oldShipmentItems,
-}) => {};
+export const calculateIsShipmentShipped = ({ shipmentItems }) => {
+  const shipmentSources = shipmentItems.reduce((acc, si) => {
+    if (!si.shipmentSources) return acc;
+    return [...acc, ...si.shipmentSources];
+  }, []);
 
-export const shipmentItemsTotals = ({ shipmentSources }) => {
+  const totals = shipmentSourcesTotals({ shipmentSources });
+  console.log({ totals });
+  return Object.values(totals).every((total) => total > 0);
+};
+
+export const shipmentSourcesTotals = ({ shipmentSources }) => {
   return shipmentSources.reduce((acc, source) => {
-    acc[source.productName] =
-      (acc[source.productName] || 0) + Number(source.quantity);
+    if (!acc[source.product.name]) {
+      acc[source.product.name] = 0;
+    }
+    acc[source.product.name] += Number(source.quantity);
     return acc;
   }, {});
 };

@@ -207,7 +207,7 @@ const ShipmentStatus = ({
     return <div className="text-green-600 font-bold">Zahtjev je ispunjen</div>;
   switch (status) {
     case SHIPMENT_PENDING:
-      return neededString;
+      return <ShipmentPending neededString={neededString} />;
     case SHIPMENT_SHIPPABLE:
       return "Spremno za otpremu";
     case SHIPMENT_SHIPPED:
@@ -218,5 +218,5 @@ const ShipmentStatus = ({
 };
 
 const ShipmentPending = ({ shipmentItems, neededString }) => {
-  return <div>Na čekanju</div>;
+  return <div>Na čekanju: {neededString}</div>;
 };

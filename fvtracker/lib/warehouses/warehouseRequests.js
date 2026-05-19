@@ -104,12 +104,13 @@ export const fillWarehouseRequest = async ({
       (oi) => oi.product.name === productName,
     );
 
-    const shipmentItem = new ShipmentItem({
+    const shipmentSource = new ShipmentSource({
       product: product._id,
       quantity,
       shipment: warehouseRequest.shipment._id,
       warehouseStock: stock._id,
       orderItem: orderItem._id,
+      shipmentItem: shipmentItem._id, 
     });
 
     orderItem.shipmentItems.push(shipmentItem._id);

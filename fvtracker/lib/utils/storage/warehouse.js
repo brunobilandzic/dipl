@@ -134,9 +134,7 @@ export const calculateNeededQuantities = ({
   return neededQuantities;
 };
 
-export const isRequestFulfilled = ({
-  neededQuantities,
-}) => {
+export const isRequestFulfilled = ({ neededQuantities }) => {
   return neededQuantities.every((nq) => nq.neededQuantity <= 0);
 };
 

@@ -26,6 +26,19 @@ const shipmentSchema = {
 };
 
 const shipmentItemSchema = new Schema({
+  shipment: {
+    type: Schema.Types.ObjectId,
+    ref: "Shipment",
+  },
+  sources: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "ShipmentSource",
+    },
+  ],
+});
+
+const shipmentSourceSchema = new Schema({
   product: {
     type: Schema.Types.ObjectId,
     ref: "Base",
@@ -35,11 +48,7 @@ const shipmentItemSchema = new Schema({
     type: Number,
     required: true,
   },
-  shipment: {
-    type: Schema.Types.ObjectId,
-    ref: "Shipment",
-  },
-  warehouseStock: {
+  shipmentItem: {
     type: Schema.Types.ObjectId,
     ref: "WarehouseStock",
   },
@@ -50,3 +59,6 @@ export const Shipment =
 export const ShipmentItem =
   mongoose.models.ShipmentItem ||
   mongoose.model("ShipmentItem", shipmentItemSchema);
+export const ShipmentSource =
+  mongoose.models.ShipmentSource ||
+  mongoose.model("ShipmentSource", shipmentSourceSchema);

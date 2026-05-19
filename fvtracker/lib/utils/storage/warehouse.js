@@ -117,9 +117,9 @@ export const calculateNeededQuantities = ({
     console.log({ existingQuantity });
     const shippedQuantity = order.items.reduce((acc, oi) => {
       console.log({ oi });
-      acc += oi.shipmentItems.reduce((sAcc, si) => {
-        if (si.product.name === shi.product) {
-          sAcc += Number(si.quantity);
+      acc += oi.shipmentSources.reduce((sAcc, ss) => {
+        if (ss.product.name === shi.product) {
+          sAcc += Number(ss.quantity);
         }
         return sAcc;
       }, 0);

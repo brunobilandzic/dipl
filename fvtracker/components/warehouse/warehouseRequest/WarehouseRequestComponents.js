@@ -103,8 +103,8 @@ const getShippedQuantity = ({ productName, orderItems }) => {
   const a = orderItems
     .filter((oi) => oi.product.name === productName)
     .reduce((acc, oi) => {
-      acc += oi.shipmentItems.reduce((sAcc, si) => {
-        sAcc += Number(si.quantity);
+      acc += oi.shipmentSources.reduce((sAcc, ss) => {
+        sAcc += Number(ss.quantity);
         return sAcc;
       }, 0);
       return acc;

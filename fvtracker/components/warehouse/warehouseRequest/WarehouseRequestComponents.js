@@ -6,6 +6,11 @@ import { ListItem } from "../../layout/preview/list";
 import { WAREHOUSE_MANAGER } from "@/lib/constants/users/managerTypes";
 import { CreateShipmentModal } from "../shipment/create";
 import { useState } from "react";
+import {
+  SHIPMENT_SHIPPED,
+  SHIPMENT_SHIPPABLE,
+  SHIPMENT_PENDING,
+} from "@/lib/constants/warehouse/shipment";
 
 export const WarehouseRequestList = () => {
   const warehouseRequests = useSelector(
@@ -72,6 +77,8 @@ const WarehouseRequestListItem = ({ request }) => {
           onCancel={() => setCreateShipmentModalOpen(false)}
           warehouseRequestId={request._id}
           items={warehouseRequestItems(request)}
+          shipment={request.shipment}
+          order={order}
         />
       )}
     </>

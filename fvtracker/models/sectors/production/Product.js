@@ -36,6 +36,13 @@ const productSchema = new Schema({
       default: [],
     },
   ],
+  shipmentSources: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ShipmentSource",
+      default: [],
+    },
+  ],
   stockVolume: {
     type: Number,
     required: true,

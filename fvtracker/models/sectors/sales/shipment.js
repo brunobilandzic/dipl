@@ -1,3 +1,7 @@
+import {
+  SHIPMENT_STATUSES,
+  SHIPMENT_PENDING,
+} from "@/lib/constants/warehouse/shipment";
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
 
@@ -14,6 +18,11 @@ const shipmentSchema = {
       default: [],
     },
   ],
+  status: {
+    type: String,
+    enum: SHIPMENT_STATUSES,
+    default: SHIPMENT_PENDING,
+  },
 };
 
 const shipmentItemSchema = new Schema({

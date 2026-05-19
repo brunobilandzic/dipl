@@ -52,8 +52,8 @@ const orderItemSchema = new Schema({
     required: true,
     min: 1,
   },
-  shipmentItems: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "ShipmentItem", default: [] },
+  shipmentSources: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "ShipmentSource", default: [] },
   ],
 });
 

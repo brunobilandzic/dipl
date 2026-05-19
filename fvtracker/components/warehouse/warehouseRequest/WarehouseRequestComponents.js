@@ -24,6 +24,12 @@ export const WarehouseRequestList = () => {
 };
 
 const WarehouseRequestListItem = ({ request }) => {
+  console.log({ request });
+  let isShipable = request.shipment?.status === SHIPMENT_SHIPPABLE;
+  let isSipped = request.shipment?.status === SHIPMENT_SHIPPED;
+  let isPending =
+    !request.shipment || request.shipment?.status === SHIPMENT_PENDING;
+
   const managerModelName = useSelector(
     (state) => state.user.session.managerModelName,
   );

@@ -119,7 +119,11 @@ const ChooseWarehouseSources = ({
     <div>
       <div>Odarite skladišne izvore</div>
       <div>
-        <ShipmentStatus status={getSipmentStatusText()} />
+        <ShipmentStatus
+          neededString={neededString}
+          status={shipmentStatus}
+          shipmentItems={shipmentItems}
+        />
       </div>
       <div className="pt-4">
         {productQuantities.map((pq) => {
@@ -185,22 +189,19 @@ const ChooseWarehouseSources = ({
   );
 };
 
-const ShipmentStatus = ({ shipment }) => {
-  const getSipmentStatusText = () => {
-    switch (shipment?.status) {
-      case SHIPMENT_PENDING:
-        return "Na čekanju";
-      case SHIPMENT_SHIPPABLE:
-        return "Spremno za otpremu";
-      case SHIPMENT_SHIPPED:
-        return "Otpremljeno";
-      default:
-        return `SHIPMENT STATUS ${shipmentStatus}`;
-    }
-  };
-  return `Status: ${status}`;
+const ShipmentStatus = ({ status, shipmentItems, neededString }) => {
+  switch (status) {
+    case SHIPMENT_PENDING:
+      return neededString;
+    case SHIPMENT_SHIPPABLE:
+      return "Spremno za otpremu";
+    case SHIPMENT_SHIPPED:
+      return "Otpremljeno";
+    default:
+      return `SHIPMENT STATUS ${status}`;
+  }
 };
 
-const ShipmentPending = ({ shipmentItems }) => {
+const ShipmentPending = ({ shipmentItems, neededString }) => {
   return <div>Na čekanju</div>;
 };

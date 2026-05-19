@@ -19,7 +19,7 @@ export const CreateShipmentModal = ({
   onCancel,
   warehouseRequestId,
   items,
-  shipment: oldShipment,
+  oldShipment,
   order,
 }) => {
   console.log({ message: "old shipment", oldShipment });

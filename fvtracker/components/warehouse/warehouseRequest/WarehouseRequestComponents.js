@@ -77,7 +77,7 @@ const WarehouseRequestListItem = ({ request }) => {
           onCancel={() => setCreateShipmentModalOpen(false)}
           warehouseRequestId={request._id}
           items={warehouseRequestItems(request)}
-          shipment={request.shipment}
+          oldShipment={request.shipment}
           order={order}
         />
       )}

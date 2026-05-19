@@ -145,6 +145,15 @@ export const fillWarehouseRequest = async ({
     await shipmentSource.save();
   }
 
+  if (
+    calculateIsShipmentShipped({
+      shipmentItems: [...warehouseRequest.shipment.shipmentItems, shipmentItem],
+    })
+  ) {
+    console.log("Shipment is fully shipped", warehouseRequest.shipment.shipmentItems, "...");
+    warehouseRequest.shipment.status = SHIPMENT_SHIPPED;
+  }
+
   await warehouseRequest.shipment.save();
   await warehouseRequest.save();
 

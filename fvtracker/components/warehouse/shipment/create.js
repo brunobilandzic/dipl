@@ -197,18 +197,14 @@ const ChooseWarehouseSources = ({
   );
 };
 
-const ShipmentStatus = ({
-  status,
-  neededString,
-  isFullfilled,
-}) => {
+const ShipmentStatus = ({ status, neededString, isFullfilled }) => {
+  if (status === SHIPMENT_SHIPPED) return "Otpremljeno";
+
   if (isFullfilled)
     return <div className="text-green-600 font-bold">Zahtjev je ispunjen</div>;
   switch (status) {
     case SHIPMENT_PENDING:
-      return <ShipmentPending neededString={neededString} />;
-    case SHIPMENT_SHIPPABLE:
-      return "Spremno za otpremu";
+      return neededString;
     case SHIPMENT_SHIPPED:
       return "Otpremljeno";
     default:
@@ -217,5 +213,5 @@ const ShipmentStatus = ({
 };
 
 const ShipmentPending = ({ shipmentItems, neededString }) => {
-  return <div>Na čekanju: {neededString}</div>;
+  return <div>Na čekanju</div>;
 };

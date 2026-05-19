@@ -39,6 +39,12 @@ const orderSchema = new Schema({
     enum: ORDER_STATES,
     default: PENDING,
   },
+  shipmentItems: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ShipmentItem",
+    },
+  ],
 });
 
 const orderItemSchema = new Schema({

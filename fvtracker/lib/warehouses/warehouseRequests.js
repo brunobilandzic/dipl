@@ -1,8 +1,17 @@
 import { WarehouseRequest } from "@/models/documents/requests/WarehouseRequest";
 import { populateIngredientsConfig } from "../production/product/ingredients";
 import { Warehouse } from "@/models/sectors/storage/Warehouse";
-import { Shipment, ShipmentItem } from "@/models/sectors/sales/Shipment";
+import {
+  Shipment,
+  ShipmentItem,
+  ShipmentSource,
+} from "@/models/sectors/sales/Shipment";
 import { getWarehouse } from "./get";
+import {
+  calculateIsShipmentShipped,
+  calculateShipmentShipped,
+} from "../utils/storage/warehouse";
+import { SHIPMENT_SHIPPED } from "../constants/warehouse/shipment";
 
 export const getWarehouseRequestById = async (id) => {
   const request = await WarehouseRequest.findById(id);
@@ -84,7 +93,7 @@ export const fillWarehouseRequest = async ({
     shipment: warehouseRequest.shipment._id,
     order: warehouseRequest.order._id,
   });
-  
+
   warehouseRequest.order.shipmentItems.push(shipmentItem._id);
   warehouseRequest.shipment.shipmentItems.push(shipmentItem._id);
   console.log({ shipmentItem });
@@ -154,7 +163,9 @@ export const fillWarehouseRequest = async ({
     warehouseRequest.shipment.status = SHIPMENT_SHIPPED;
   }
 
+  await shipmentItem.save();
   await warehouseRequest.shipment.save();
+  await warehouseRequest.order.save();
   await warehouseRequest.save();
 
   return {

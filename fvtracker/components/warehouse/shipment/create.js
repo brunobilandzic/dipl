@@ -199,7 +199,6 @@ const ChooseWarehouseSources = ({
 
 const ShipmentStatus = ({
   status,
-  shipmentItems,
   neededString,
   isFullfilled,
 }) => {

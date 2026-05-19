@@ -63,6 +63,7 @@ export const fillWarehouseRequest = async ({
   ]);
 
   for (const source of shipmentSources) {
+    // the stuff we input in the form
     const { warehouseId, productName, quantity } = source;
 
     const warehouse = await getWarehouse({ id: warehouseId });

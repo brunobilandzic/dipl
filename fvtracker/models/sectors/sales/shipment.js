@@ -34,6 +34,7 @@ const shipmentItemSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: "ShipmentSource",
+      default: [],
     },
   ],
 });
@@ -49,6 +50,10 @@ const shipmentSourceSchema = new Schema({
     required: true,
   },
   shipmentItem: {
+    type: Schema.Types.ObjectId,
+    ref: "ShipmentItem",
+  },
+  warehouseStock: {
     type: Schema.Types.ObjectId,
     ref: "WarehouseStock",
   },

@@ -39,7 +39,11 @@ export const getWarehouseRequests = async () => {
       populate: {
         path: "shipmentItems",
         populate: {
-          path: "product",
+          path: "sources",
+          populate: {
+            path: "product",
+            select: "name",
+          },
         },
       },
     },

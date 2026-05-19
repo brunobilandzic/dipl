@@ -48,7 +48,7 @@ export const CreateShipmentModal = ({
       title="Otpremnica"
     >
       <ChooseWarehouseSources
-        shipmentData={newShipmentData}
+        newShipmentData={newShipmentData}
         setNewShipmentData={setNewShipmentData}
         warehouses={warehouses}
         productQuantities={productQuantities}
@@ -62,7 +62,7 @@ export const CreateShipmentModal = ({
 
 const ChooseWarehouseSources = ({
   shipmentItems,
-  shipmentData,
+  newShipmentData,
   setNewShipmentData,
   warehouses,
   productQuantities,
@@ -71,17 +71,17 @@ const ChooseWarehouseSources = ({
 }) => {
   const neededQuantities = calculateNeededQuantities({
     shipmentItems,
-    shipment: shipmentData,
+    shipment: newShipmentData,
     order,
   });
 
   const sourceQuantity = ({ wh, productName }) =>
-    shipmentData.sources.find(
+    newShipmentData.sources.find(
       (s) => s.warehouseId === wh._id && s.productName === productName,
     )?.quantity || "";
 
   const setNewShipment = ({ w, pq, quantity }) => {
-    const existingSource = shipmentData.sources.find(
+    const existingSource = newShipmentData.sources.find(
       (s) => s.warehouseId === w._id && s.productName === pq.productName,
     );
     if (existingSource) {

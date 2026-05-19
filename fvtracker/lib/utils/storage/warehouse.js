@@ -157,3 +157,7 @@ export const submitShipment = async ({ newShipmentData, dispatch }) => {
 };
 
 // function exists...
+
+export const calculateShipmentShipped = ({ newShipmentItems, oldShipmentItems }) => {
+  
+}

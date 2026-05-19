@@ -79,7 +79,7 @@ const ItemList = ({ items, orderItems }) => {
         <li key={index}>
           {item.product} x {item.quantity},{" "}
           {getShippedQuantity({ productName: item.product, orderItems })} od{" "}
-          {item.quantity} poslanih
+          {item.quantity} isporučeno
         </li>
       ))}
     </ul>

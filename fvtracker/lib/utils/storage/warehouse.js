@@ -103,11 +103,12 @@ export const calculateWarehouseStock = ({ productName, stocks }) => {
 
 export const calculateNeededQuantities = ({
   shipmentItems,
-  shipment,
+  newShipmentData,
   order,
 }) => {
+  console.log({ shipmentItems, newShipmentData, order });
   const neededQuantities = shipmentItems.map((shi) => {
-    const existingQuantity = shipment.sources.reduce((acc, source) => {
+    const existingQuantity = newShipmentData.sources.reduce((acc, source) => {
       if (source.productName === shi.product) {
         acc += Number(source.quantity);
       }
@@ -133,9 +134,9 @@ export const calculateNeededQuantities = ({
   return neededQuantities;
 };
 
-export const isRequestFulfilled = ({ shipmentItems, shipment, order }) => {
+export const isRequestFulfilled = ({ shipment, order }) => {
   const neededQuantities = calculateNeededQuantities({
-    shipmentItems,
+    shipmentItems: shipment.shipmentItems,
     shipment,
     order,
   });

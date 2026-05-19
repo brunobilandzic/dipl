@@ -137,7 +137,7 @@ export const isRequestFulfilled = ({ shipmentItems, shipment, order }) => {
   const neededQuantities = calculateNeededQuantities({
     shipmentItems,
     shipment,
-    order
+    order,
   });
   return neededQuantities.every((nq) => nq.neededQuantity <= 0);
 };
@@ -159,3 +159,5 @@ export const submitShipment = async ({ shipment, dispatch }) => {
     });
   }
 };
+
+// function exists...

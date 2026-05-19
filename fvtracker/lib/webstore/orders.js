@@ -46,7 +46,7 @@ export const getOrders = async ({ customerId = null }) => {
           path: "product",
         },
         {
-          path: "shipmentItems",
+          path: "shipmentSources",
           populate: {
             path: "product",
             select: "name",

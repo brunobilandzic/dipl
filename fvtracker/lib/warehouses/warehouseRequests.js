@@ -71,7 +71,10 @@ export const fillWarehouseRequest = async ({
     },
   ]);
 
-  const newShipmentItems = [];
+  const shipmentItem = new ShipmentItem({
+    shipment: warehouseRequest.shipment._id,
+  });
+  const newShipmentSources = [];
 
   for (const source of shipmentSources) {
     // the stuff we input in the form

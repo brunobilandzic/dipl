@@ -84,6 +84,7 @@ export const fillWarehouseRequest = async ({
     shipment: warehouseRequest.shipment._id,
     order: warehouseRequest.order._id,
   });
+  
   warehouseRequest.order.shipmentItems.push(shipmentItem._id);
   warehouseRequest.shipment.shipmentItems.push(shipmentItem._id);
   console.log({ shipmentItem });
@@ -120,15 +121,15 @@ export const fillWarehouseRequest = async ({
     const shipmentSource = new ShipmentSource({
       product: product._id,
       quantity,
-      shipment: warehouseRequest.shipment._id,
       warehouseStock: stock._id,
       orderItem: orderItem._id,
-      shipmentItem: shipmentItem._id, 
+      shipmentItem: shipmentItem._id,
     });
 
-    orderItem.shipmentItems.push(shipmentItem._id);
-    warehouseRequest.shipment.shipmentItems.push(shipmentItem._id);
-    newShipmentItems.push(shipmentItem);
+    orderItem.shipmentSources.push(shipmentSource._id);
+    shipmentItem.sources.push(shipmentSource._id);
+
+    newShipmentSources.push(shipmentSource);
 
     stock.quantity -= quantity;
     if (stock.quantity < 0) {
@@ -137,10 +138,11 @@ export const fillWarehouseRequest = async ({
       );
       continue;
     }
-    stock.shipmentItems.push(shipmentItem._id);
+    stock.shipmentSources.push(shipmentItem._id);
+
     await orderItem.save();
     await stock.save();
-    await shipmentItem.save();
+    await shipmentSource.save();
   }
 
   await warehouseRequest.shipment.save();

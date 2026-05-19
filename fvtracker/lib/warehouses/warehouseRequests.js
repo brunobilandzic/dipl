@@ -85,6 +85,8 @@ export const fillWarehouseRequest = async ({
     order: warehouseRequest.order._id,
   });
   warehouseRequest.order.shipmentItems.push(shipmentItem._id);
+  warehouseRequest.shipment.shipmentItems.push(shipmentItem._id);
+  console.log({ shipmentItem });
   const newShipmentSources = [];
 
   for (const source of shipmentSources) {

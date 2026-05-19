@@ -34,10 +34,10 @@ const warehouseStockSchema = new Schema({
       default: [],
     },
   ],
-  shipmentItems: [
+  shipmentSources: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "ShipmentItem",
+      ref: "ShipmentSource",
       default: [],
     },
   ],

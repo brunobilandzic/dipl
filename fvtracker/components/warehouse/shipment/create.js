@@ -44,7 +44,7 @@ export const CreateShipmentModal = ({
         setNewShipmentData(emptyShipment);
         onCancel();
       }}
-      onSubmit={() => submitShipment({ shipment: newShipmentData, dispatch })}
+      onSubmit={() => submitShipment({  newShipmentData, dispatch })}
       title="Otpremnica"
     >
       <ChooseWarehouseSources

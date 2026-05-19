@@ -138,12 +138,12 @@ export const isRequestFulfilled = ({ neededQuantities }) => {
   return neededQuantities.every((nq) => nq.neededQuantity <= 0);
 };
 
-export const submitShipment = async ({ shipment, dispatch }) => {
-  console.log({ shipment });
+export const submitShipment = async ({ newShipmentData, dispatch }) => {
+  console.log("submitting...", { newShipmentData });
   try {
     await api.post("/warehouse-requests/fill", {
-      shipmentSources: shipment.sources,
-      warehouseRequestId: shipment.warehouseRequestId,
+      shipmentSources: newShipmentData.sources,
+      warehouseRequestId: newShipmentData.warehouseRequestId,
     });
     alert("Otpremnica uspješno kreirana!");
     fillWarehouseRedux({ dispatch });

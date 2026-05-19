@@ -1,6 +1,11 @@
 import { AppInput } from "@/components/form/inputs";
 import { FormModal } from "@/components/layout/modals/form";
 import {
+  SHIPMENT_PENDING,
+  SHIPMENT_SHIPPABLE,
+  SHIPMENT_SHIPPED,
+} from "@/lib/constants/warehouse/shipment";
+import {
   calculateNeededQuantities,
   calculateWarehouseStock,
   isRequestFulfilled,
@@ -104,6 +109,19 @@ const ChooseWarehouseSources = ({
           },
         ],
       }));
+    }
+  };
+
+  const getSipmentStatusText = () => {
+    switch (shipmentStatus) {
+      case SHIPMENT_PENDING:
+        return "Na čekanju";
+      case SHIPMENT_SHIPPABLE:
+        return "Spremno za otpremu";
+      case SHIPMENT_SHIPPED:
+        return "Otpremljeno";
+      default:
+        return `SHIPMENT STATUS ${shipmentStatus}`;
     }
   };
 

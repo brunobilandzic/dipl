@@ -34,6 +34,15 @@ export const getWarehouseRequests = async () => {
         },
       },
     },
+    {
+      path: "shipment",
+      populate: {
+        path: "shipmentItems",
+        populate: {
+          path: "product",
+        },
+      },
+    },
   ]);
   return requests;
 };

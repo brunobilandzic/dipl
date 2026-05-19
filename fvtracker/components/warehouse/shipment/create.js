@@ -49,7 +49,7 @@ export const CreateShipmentModal = ({
     >
       <ChooseWarehouseSources
         shipmentData={newShipmentData}
-        setShipmentData={setNewShipmentData}
+        setNewShipmentData={setNewShipmentData}
         warehouses={warehouses}
         productQuantities={productQuantities}
         shipmentItems={items}
@@ -63,7 +63,7 @@ export const CreateShipmentModal = ({
 const ChooseWarehouseSources = ({
   shipmentItems,
   shipmentData,
-  setShipmentData,
+  setNewShipmentData,
   warehouses,
   productQuantities,
   order,
@@ -85,7 +85,7 @@ const ChooseWarehouseSources = ({
       (s) => s.warehouseId === w._id && s.productName === pq.productName,
     );
     if (existingSource) {
-      return setShipmentData((prev) => ({
+      return setNewShipmentData((prev) => ({
         ...prev,
         sources: prev.sources.map((s) =>
           s.warehouseId === w._id && s.productName === pq.productName
@@ -97,7 +97,7 @@ const ChooseWarehouseSources = ({
         ),
       }));
     } else {
-      return setShipmentData((prev) => ({
+      return setNewShipmentData((prev) => ({
         ...prev,
         sources: [
           ...newShipmentData.sources,
@@ -111,19 +111,6 @@ const ChooseWarehouseSources = ({
     }
   };
 
-  const getSipmentStatusText = () => {
-    switch (shipmentStatus) {
-      case SHIPMENT_PENDING:
-        return "Na čekanju";
-      case SHIPMENT_SHIPPABLE:
-        return "Spremno za otpremu";
-      case SHIPMENT_SHIPPED:
-        return "Otpremljeno";
-      default:
-        return `SHIPMENT STATUS ${shipmentStatus}`;
-    }
-  };
-
   const neededString = neededQuantities
     .map((nq) => `${nq.productName}: ${nq.neededQuantity}`)
     .join(", ");
@@ -131,7 +118,9 @@ const ChooseWarehouseSources = ({
   return (
     <div>
       <div>Odarite skladišne izvore</div>
-      <div></div>
+      <div>
+        <ShipmentStatus status={getSipmentStatusText()} />
+      </div>
       <div className="pt-4">
         {productQuantities.map((pq) => {
           return (
@@ -194,4 +183,24 @@ const ChooseWarehouseSources = ({
       </div>
     </div>
   );
+};
+
+const ShipmentStatus = ({ shipment }) => {
+  const getSipmentStatusText = () => {
+    switch (shipment?.status) {
+      case SHIPMENT_PENDING:
+        return "Na čekanju";
+      case SHIPMENT_SHIPPABLE:
+        return "Spremno za otpremu";
+      case SHIPMENT_SHIPPED:
+        return "Otpremljeno";
+      default:
+        return `SHIPMENT STATUS ${shipmentStatus}`;
+    }
+  };
+  return `Status: ${status}`;
+};
+
+const ShipmentPending = ({ shipmentItems }) => {
+  return <div>Na čekanju</div>;
 };

@@ -158,6 +158,15 @@ export const submitShipment = async ({ newShipmentData, dispatch }) => {
 
 // function exists...
 
-export const calculateShipmentShipped = ({ newShipmentItems, oldShipmentItems }) => {
-  
-}
+export const calculateShipmentShipped = ({
+  newShipmentItems,
+  oldShipmentItems,
+}) => {};
+
+export const shipmentItemsTotals = ({ shipmentSources }) => {
+  return shipmentSources.reduce((acc, source) => {
+    acc[source.productName] =
+      (acc[source.productName] || 0) + Number(source.quantity);
+    return acc;
+  }, {});
+};

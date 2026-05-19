@@ -18,7 +18,7 @@ export const CreateShipmentModal = ({
   isOpen,
   onCancel,
   warehouseRequestId,
-  items,
+  shipmentItems,
   oldShipment,
   order,
 }) => {
@@ -30,7 +30,7 @@ export const CreateShipmentModal = ({
   };
   const [newShipmentData, setNewShipmentData] = useState(emptyShipment);
   const warehouses = useSelector((state) => state.warehouse.warehouses.items);
-  const productQuantities = items.map((i) => ({
+  const productQuantities = shipmentItems.map((i) => ({
     productName: i.product,
     neededQuantity: i.quantity,
   }));
@@ -52,7 +52,7 @@ export const CreateShipmentModal = ({
         setNewShipmentData={setNewShipmentData}
         warehouses={warehouses}
         productQuantities={productQuantities}
-        shipmentItems={items}
+        shipmentItems={shipmentItems}
         order={order}
         shipmentStatus={oldShipment?.status}
       />

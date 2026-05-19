@@ -19,44 +19,42 @@ export const CreateShipmentModal = ({
   onCancel,
   warehouseRequestId,
   items,
+  shipment: oldShipment,
+  order,
 }) => {
-  const order = useSelector((state) =>
-    state.webstore.orders.items.find(
-      (o) => o.warehouseRequest === warehouseRequestId,
-    ),
-  );
-
+  console.log({ message: "old shipment", oldShipment });
   const dispatch = useDispatch();
   const emptyShipment = {
     warehouseRequestId,
     sources: [],
   };
-  const [shipment, setShipment] = useState(emptyShipment);
+  const [newShipmentData, setNewShipmentData] = useState(emptyShipment);
   const warehouses = useSelector((state) => state.warehouse.warehouses.items);
   const productQuantities = items.map((i) => ({
     productName: i.product,
     neededQuantity: i.quantity,
   }));
   useEffect(() => {
-    console.log({ shipment });
-  }, [shipment]);
+    console.log({ newShipmentData });
+  }, [newShipmentData]);
   return (
     <FormModal
       isOpen={isOpen}
       onCancel={() => {
-        setShipment(emptyShipment);
+        setNewShipmentData(emptyShipment);
         onCancel();
       }}
-      onSubmit={() => submitShipment({ shipment, dispatch })}
+      onSubmit={() => submitShipment({ shipment: newShipmentData, dispatch })}
       title="Otpremnica"
     >
       <ChooseWarehouseSources
-        shipment={shipment}
-        setShipment={setShipment}
+        shipmentData={newShipmentData}
+        setShipmentData={setNewShipmentData}
         warehouses={warehouses}
         productQuantities={productQuantities}
         shipmentItems={items}
         order={order}
+        shipmentStatus={oldShipment?.status}
       />
     </FormModal>
   );
@@ -64,29 +62,30 @@ export const CreateShipmentModal = ({
 
 const ChooseWarehouseSources = ({
   shipmentItems,
-  shipment,
-  setShipment,
+  shipmentData,
+  setShipmentData,
   warehouses,
   productQuantities,
   order,
+  shipmentStatus,
 }) => {
   const neededQuantities = calculateNeededQuantities({
     shipmentItems,
-    shipment,
+    shipment: shipmentData,
     order,
   });
 
   const sourceQuantity = ({ wh, productName }) =>
-    shipment.sources.find(
+    shipmentData.sources.find(
       (s) => s.warehouseId === wh._id && s.productName === productName,
     )?.quantity || "";
 
   const setNewShipment = ({ w, pq, quantity }) => {
-    const existingSource = shipment.sources.find(
+    const existingSource = shipmentData.sources.find(
       (s) => s.warehouseId === w._id && s.productName === pq.productName,
     );
     if (existingSource) {
-      return setShipment((prev) => ({
+      return setShipmentData((prev) => ({
         ...prev,
         sources: prev.sources.map((s) =>
           s.warehouseId === w._id && s.productName === pq.productName
@@ -98,10 +97,10 @@ const ChooseWarehouseSources = ({
         ),
       }));
     } else {
-      return setShipment((prev) => ({
+      return setShipmentData((prev) => ({
         ...prev,
         sources: [
-          ...shipment.sources,
+          ...newShipmentData.sources,
           {
             warehouseId: w._id,
             quantity,
@@ -132,11 +131,7 @@ const ChooseWarehouseSources = ({
   return (
     <div>
       <div>Odarite skladišne izvore</div>
-      <div>
-        {!isRequestFulfilled({ shipmentItems, shipment, order })
-          ? `Potrebno je još: ${neededString}`
-          : "Zahtjev ispunjen"}
-      </div>
+      <div></div>
       <div className="pt-4">
         {productQuantities.map((pq) => {
           return (

@@ -71,6 +71,8 @@ export const fillWarehouseRequest = async ({
     },
   ]);
 
+  const newShipmentItems = [];
+
   for (const source of shipmentSources) {
     // the stuff we input in the form
     const { warehouseId, productName, quantity } = source;
@@ -109,6 +111,7 @@ export const fillWarehouseRequest = async ({
 
     orderItem.shipmentItems.push(shipmentItem._id);
     warehouseRequest.shipment.shipmentItems.push(shipmentItem._id);
+    newShipmentItems.push(shipmentItem);
 
     stock.quantity -= quantity;
     if (stock.quantity < 0) {

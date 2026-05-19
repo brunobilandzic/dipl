@@ -71,9 +71,16 @@ const ChooseWarehouseSources = ({
 }) => {
   const neededQuantities = calculateNeededQuantities({
     shipmentItems,
-     newShipmentData,
+    newShipmentData,
     order,
   });
+
+  const isFullfilled = isRequestFulfilled({
+    neededQuantities,
+    newShipmentData,
+  });
+
+  console.log({ neededQuantities, isFullfilled });
 
   const sourceQuantity = ({ wh, productName }) =>
     newShipmentData.sources.find(
@@ -123,6 +130,7 @@ const ChooseWarehouseSources = ({
           neededString={neededString}
           status={shipmentStatus}
           shipmentItems={shipmentItems}
+          isFullfilled={isFullfilled}
         />
       </div>
       <div className="pt-4">
@@ -189,7 +197,14 @@ const ChooseWarehouseSources = ({
   );
 };
 
-const ShipmentStatus = ({ status, shipmentItems, neededString }) => {
+const ShipmentStatus = ({
+  status,
+  shipmentItems,
+  neededString,
+  isFullfilled,
+}) => {
+  if (isFullfilled)
+    return <div className="text-green-600 font-bold">Zahtjev je ispunjen</div>;
   switch (status) {
     case SHIPMENT_PENDING:
       return neededString;

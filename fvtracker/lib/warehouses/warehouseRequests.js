@@ -60,14 +60,19 @@ export const fillWarehouseRequest = async ({
   shipmentSources,
 }) => {
   const warehouseRequest = await getWarehouseRequestById(warehouseRequestId);
-  warehouseRequest.populate([
+  await warehouseRequest.populate([
     {
       path: "order",
       populate: {
         path: "items",
-        populate: {
-          path: "product",
-        },
+        populate: [
+          {
+            path: "product",
+          },
+          {
+            path: "shipmentSources",
+          },
+        ],
       },
     },
     {

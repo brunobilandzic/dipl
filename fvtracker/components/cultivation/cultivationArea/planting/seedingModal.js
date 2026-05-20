@@ -16,6 +16,8 @@ import api from "@/lib/api";
 import { createPlantage, setFields } from "@/store/cultivation";
 import { setLoading } from "@/store/loading";
 import { setError } from "@/store/error";
+import handleError from "@/lib/constants/errors/client/handleError";
+import { useRouter } from "next/navigation";
 
 export const SeedingModal = ({
   isOpen,
@@ -30,6 +32,7 @@ export const SeedingModal = ({
   const [availablePlans, setAvailablePlans] = useState({});
 
   const dispatch = useDispatch();
+  const router = useRouter();
   const crops = useSelector((state) => state.cultivation.crops);
   const fields = useSelector((state) => state.cultivation.fields);
 
@@ -229,6 +232,13 @@ export const SeedingModal = ({
       );
     } catch (error) {
       console.error("Error preparing plantage body:", error);
+      handleError(
+        {
+          ...error,
+          generalMessage: "Greška prilikom kreiranja sadnje",
+        },
+        router,
+      );
     } finally {
       dispatch(setLoading(false));
     }

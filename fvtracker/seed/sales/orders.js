@@ -21,9 +21,15 @@ export const createOrders = async () => {
         product: item.product,
         quantity: item.quantity,
       });
+      const product = await Product.findById(item.product);
+      product.orderItems.push(orderItem._id);
+
       createdOrders.push(newOrder);
-      await orderItem.save();
+
       newOrder.items.push(orderItem._id);
+
+      await product.save();
+      await orderItem.save();
     }
     await newOrder.save();
   }

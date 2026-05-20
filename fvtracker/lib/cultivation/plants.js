@@ -7,7 +7,7 @@ import utils from "@/lib/utils";
 import { getCultivationById } from "./cultivation";
 import { PlantingPlan } from "@/models/documents/plans/PlantingPlan";
 import { fetchManager } from "../auth/fetchSessionData";
-import { getPlantingPlanItemRecord } from "./plans";
+import { getPlantingPlanById, getPlantingPlanItemRecord } from "./plans";
 import { Field } from "@/models/sectors/cultivation/Field";
 
 export async function cropsData() {
@@ -140,7 +140,7 @@ export async function createPlantedCropVarietiesCells({
       cropVariety.quantityPerCell * updatedPlcvs.length;
     if (plantingPlanItem.quantity < 0) {
       throw new Error(
-        "Not enough crop variety quantity in the planting plan item to plant all cells.",
+        "Nema dovoljno planiranih količina za ovu sadnju. Smanjite broj sadnih mjesta.",
       );
     }
     for (const plc of updatedPlcvs) {

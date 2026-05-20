@@ -1,6 +1,11 @@
 warehouse aisles
 product categories
 
-loadanje, selektivni redux
-proucit plcv on cult creation (insert array of plcvs to db)
+//loadanje proucit plcv on cult creation (insert array of plcvs to db)
+// proizvodi selektivni redux
+
+
+plans with enough in items getPlans available shit
+show harvesting batch processes
+
 user interface 

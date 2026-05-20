@@ -62,11 +62,15 @@ export const SeedingModal = ({
 
   useEffect(() => {
     if (!checkPlans()) return;
-    if (newPlantage?.variety?._id && checkPlans) {
+    if (newPlantage?.variety?._id && checkPlans()) {
+      const cropVariety = crops?.varieties?.find(
+        (v) => v._id.toString() === newPlantage.variety._id.toString(),
+      );
       const availablePlans = utils.plans.getPlansForCropVariety({
         allFieldPlans,
-        cropVarietyId: newPlantage.variety._id,
+        cropVariety,
       });
+
       setAvailablePlans(availablePlans);
     } else {
       setAvailablePlans({});
@@ -262,9 +266,12 @@ export const SeedingModal = ({
 
   useEffect(() => {
     if (newPlantage?.variety?._id) {
+      const cropVariety = crops?.varieties?.find(
+        (v) => v._id.toString() === newPlantage.variety._id.toString(),
+      );
       const availablePlans = utils.plans.getPlansForCropVariety({
         allFieldPlans: allFieldPlans,
-        cropVarietyId: newPlantage.variety._id,
+        cropVariety,
       });
       setAvailablePlans(availablePlans);
     } else {

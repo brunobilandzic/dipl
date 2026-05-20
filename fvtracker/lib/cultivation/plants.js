@@ -104,6 +104,58 @@ export async function createPlantedCropVarietiesCells({
     throw new Error("Field not found with the provided ID.");
   }
 
+  if (plantingPlanId && cropVarietyId) {
+    const plantingPlan = await getPlantingPlanById(plantingPlanId);
+    await plantingPlan.populate({
+      path: "items",
+      populate: { path: "cropVariety" },
+    });
+    const plantingPlanItem = await getPlantingPlanItemRecord({
+      plantingPlan,
+      cropVarietyId,
+    });
+    const cropVariety = await getCropVarietyById(cropVarietyId);
+    cropVariety.plantingPlanItems.push(plantingPlanItem._id);
+
+    await PlantedCropVariety.updateMany(
+      {
+        cultivation: cultivationId,
+        relativeCoords: { $in: relativeCoords },
+      },
+      {
+        cropVariety: cropVarietyId,
+        plantedAt,
+        harvestedAt: null,
+        plantingPlanItem: plantingPlanItem._id,
+      },
+      { new: true },
+    );
+    const updatedPlcvs = await PlantedCropVariety.find({
+      cultivation: cultivationId,
+      relativeCoords: { $in: relativeCoords },
+    });
+    plantingPlanItem.plantedCropVarieties.push(
+      ...updatedPlcvs.map((p) => p._id),
+    );
+    plantingPlanItem.quantity -=
+      cropVariety.quantityPerCell * updatedPlcvs.length;
+    if (plantingPlanItem.quantity < 0) {
+      throw new Error(
+        "Not enough crop variety quantity in the planting plan item to plant all cells.",
+      );
+    }
+    for (const plc of updatedPlcvs) {
+      await plc.populate({
+        path: "plantingPlanItem",
+        populate: { path: "cropVariety", populate: { path: "cropType" } },
+      });
+    }
+    await plantingPlanItem.save();
+    await cropVariety.save();
+    plantedCropVarieties.push(...updatedPlcvs);
+    return plantedCropVarieties;
+  }
+
   // for speed
   const plcvObjects = [];
   for (const relativeCoord of relativeCoords) {

@@ -38,7 +38,7 @@ export const CreateProductionStock = ({
       ? Object.keys(minPossibleBatchMap)[0]
       : null,
   });
-  const [productionStock, setProductionStock] = useState(testFormData());
+  const [productionStock, setProductionStock] = useState(testFormData);
   const onChange = (e) => {
     setProductionStock((prev) => ({
       ...prev,
@@ -73,6 +73,21 @@ export const CreateProductionStock = ({
       }),
     );
   }, [productionStock.quantity]);
+
+  if (minPossibleBatchMap && Object.keys(minPossibleBatchMap).length === 0) {
+    return (
+      <Modal
+        title={`Nije moguće dodati zalihe za ${product.name}`}
+        isOpen={isOpen}
+        onCancel={onCancel}
+      >
+        <div>
+          Nažalost, nije moguće dodati zalihe za ovaj proizvod jer nema
+          dostupnih žetvi koje zadovoljavaju uvjete za izradu proizvoda.
+        </div>
+      </Modal>
+    );
+  }
 
   return (
     <FormModal

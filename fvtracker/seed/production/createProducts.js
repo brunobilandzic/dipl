@@ -34,6 +34,7 @@ export const createProducts = async () => {
       ingredientsData: productData.ingredients,
     });
     products.push(product);
+    productionManager.products.push(product._id);
   }
   for (const warehouse of warehouses) {
     for (const product of products) {
@@ -53,11 +54,9 @@ export const createProducts = async () => {
       console.log(
         `Created product stock for ${product.name} with quantity ${productionStock.quantity} and warehouse stock with quantity ${warehouseStock.quantity}`,
       );
-      productionManager.products.push(product._id);
 
       await productionManager.save();
       await product.save();
-      console.log(`Seeded product: ${product.name}`);
     }
   }
 };

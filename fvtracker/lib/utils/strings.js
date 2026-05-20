@@ -56,8 +56,9 @@ export const onlyLetters = (str) => {
 };
 
 export const cropVarietyFullName = (cropVariety) => {
-  if (!cropVariety) return "N/A";
-  const varietyName = cropVariety.name || "N/A";
-  const cropTypeName = cropVariety.cropType?.name || "N/A";
-  return `${cropTypeName} - ${varietyName}`;
-}
+  if (!cropVariety) return "";
+  const varietyName = cropVariety.name || "";
+  const cropTypeName = cropVariety.cropType?.name || "";
+  const generalTypeName = cropVariety.cropType?.generalType?.name || "";
+  return `${generalTypeName}: ${cropTypeName} - ${varietyName}`;
+};

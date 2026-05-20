@@ -6,7 +6,7 @@ export const harvestingBatchItemData = ({ batchItem }) => {
   const cropVarietyString = cropVarietyFullName(batchItem.cropVariety);
   const plcvCount = batchItem.plantedCropVarieties?.length || 0;
   const quantity = batchItem.batchQuantity;
-  
+
   return { quantity, cropVarietyString, plcvCount };
 };
 

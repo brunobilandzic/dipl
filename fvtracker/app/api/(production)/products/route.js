@@ -13,6 +13,8 @@ export const GET = async (req) => {
     await dbConnect();
     const products = await getProducts();
 
+    console.log("Fetched products:", products.length);
+
     return Response.json({ products }, { status: 200 });
   } catch (error) {
     console.error("Error fetching managers:", error);

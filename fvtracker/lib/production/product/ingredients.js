@@ -84,6 +84,7 @@ export const populateIngredientsConfig = {
     populate: {
       path: "cropType",
       select: "name generalType",
+      populate: { path: "generalType", select: "name" },
     },
   },
 };

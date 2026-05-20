@@ -10,6 +10,7 @@ import {
 } from "@/lib/cultivation/harvest/batches";
 import { populateProductIngredients } from "@/lib/production/product/ingredients";
 import { ProductionProcess } from "@/models/sectors/production/Process";
+import { HarvestingBatchItem } from "@/models/sectors/interface/HarvestingBatch";
 
 export const createProductStock = async ({
   productId,
@@ -112,12 +113,13 @@ export const createProductStock = async ({
     quantity,
     comment,
   });
+  await HarvestingBatchItem.updateMany(
+    { harvestingBatch: harvestingBatch._id },
+    { $push: { productionProcesses: productionProcess._id } },
+  );
   await stock.populate({ path: "facility", select: "name" });
   stock.productionProcesses.push(productionProcess._id);
-  harvestingBatch.productionProcesses.push(productionProcess._id);
-  console.log(
-    `Created product ${product.name} ${stock.quantity} stock in facility ${stock.facility.name}`,
-  );
+
   await harvestingBatch.save();
   await productionProcess.save();
   await stock.save();

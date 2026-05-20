@@ -5,8 +5,6 @@ import {
 } from "@/models/sectors/cultivation/Crops";
 import utils from "@/lib/utils";
 import { getCultivationById } from "./cultivation";
-import { PlantingPlan } from "@/models/documents/plans/PlantingPlan";
-import { fetchManager } from "../auth/fetchSessionData";
 import { getPlantingPlanById, getPlantingPlanItemRecord } from "./plans";
 import { Field } from "@/models/sectors/cultivation/Field";
 

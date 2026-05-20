@@ -223,9 +223,11 @@ plantedCropVarietySchema.pre("updateMany", async function () {
     populate: {
       path: "cultivationArea",
       select: "field",
+      populate: "field",
     },
   });
-  const cultivation = fieldPlcv.cultivation.cultivationArea.field.save(); // to trigger field's updatedAt change
+  if (!fieldPlcv) return;
+  await fieldPlcv.cultivation.cultivationArea.field.save(); // to trigger field's updatedAt change
 });
 
 export const CropMainType =

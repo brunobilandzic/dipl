@@ -24,7 +24,7 @@ export default function HarvestingBatchesFields() {
   return (
     <div className="flex flex-col gap-4">
       <h1 className="border-b-2 font-bold text-3xl">Žetve</h1>
-      <div>
+      <div className="flex flex-col gap-4">
         {Object.keys(harvestingBatches).map((fieldName) => (
           <div key={uuid()}>
             <div

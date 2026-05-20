@@ -18,6 +18,7 @@ import { setLoading } from "@/store/loading";
 import { setError } from "@/store/error";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { useRouter } from "next/navigation";
+import { getDimensionsCA } from "@/lib/utils/cultivation/fields/cultivationAreas";
 
 export const SeedingModal = ({
   isOpen,
@@ -156,6 +157,20 @@ export const SeedingModal = ({
 
     if (!isContinue) setPlantCultivationOpen(true);
   };
+
+  const compareDimensions = () => {
+    const { width, length } = getDimensionsCA(
+      newPlantage.beginX,
+      newPlantage.beginY,
+      newPlantage.endX,
+      newPlantage.endY,
+    );
+  };
+
+/*   useEffect(() => {
+    console.log({ newPlantage });
+    compareDimensions();
+  }, [newPlantage]); */
 
   // RESETING LOGIC
 

@@ -126,24 +126,6 @@ export async function createPlantedCropVarietiesCells({
   plantedCropVarieties.push(...newPlantedCropVarieties);
 
   return plantedCropVarieties;
-
-  /*
-    old code, create plcv model one by one, slow
-  
-  for (const relativeCoord of relativeCoords) {
-    const plantedCropVariety = await createPlantedCropVarietyPromise({
-      cultivationId,
-      relativeCoord,
-      cropVarietyId,
-      planted,
-      harvestedAt,
-      plantedAt,
-      plantingPlanId,
-    });
-    plantedCropVarieties.push(plantedCropVariety);
-  }
-  await field.save(); // to trigger field's updatedAt change
-  return plantedCropVarieties; */
 }
 
 async function createPlantedCropVarietyPromise({

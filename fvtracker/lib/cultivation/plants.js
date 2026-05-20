@@ -103,6 +103,33 @@ export async function createPlantedCropVarietiesCells({
   if (!field) {
     throw new Error("Field not found with the provided ID.");
   }
+
+  // for speed
+  const plcvObjects = [];
+  for (const relativeCoord of relativeCoords) {
+    const fieldCoords = utils.cultivation.cultivations.relativeToFieldCoords({
+      planted,
+      cellCoords: relativeCoord,
+    });
+    plcvObjects.push({
+      cultivation: cultivationId,
+      relativeCoords: relativeCoord,
+      fieldCoords,
+      plantedAt,
+      harvestedAt,
+      plantingPlanItem: cropVarietyId ? plantingPlanId : null,
+      cropVariety: cropVarietyId || null,
+    });
+  }
+  const newPlantedCropVarieties =
+    await PlantedCropVariety.insertMany(plcvObjects);
+  plantedCropVarieties.push(...newPlantedCropVarieties);
+
+  return plantedCropVarieties;
+
+  /*
+    old code, create plcv model one by one, slow
+  
   for (const relativeCoord of relativeCoords) {
     const plantedCropVariety = await createPlantedCropVarietyPromise({
       cultivationId,
@@ -116,7 +143,7 @@ export async function createPlantedCropVarietiesCells({
     plantedCropVarieties.push(plantedCropVariety);
   }
   await field.save(); // to trigger field's updatedAt change
-  return plantedCropVarieties;
+  return plantedCropVarieties; */
 }
 
 async function createPlantedCropVarietyPromise({
@@ -190,7 +217,7 @@ async function createPlantedCropVarietyPromise({
   if (plantingPlanItem.quantity < 0) {
     plantingPlanItem.quantity = 0; // Ensure quantity doesn't go negative
   }
-  console.log({plantingPlanItem})
+  console.log({ plantingPlanItem });
   await plantingPlanItem.save();
   await cropVariety.save();
   await plantedCropVariety.save();

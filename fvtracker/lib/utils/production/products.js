@@ -1,7 +1,7 @@
 import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { setLoading } from "@/store/loading";
-import { setProducts } from "@/store/production";
+import { setProducts, updateProduct } from "@/store/production";
 import { checkEmpty } from "../objects";
 import { stringContains } from "../strings";
 import fillProductionRedux from ".";
@@ -53,9 +53,10 @@ export const submitProductForm = async ({
       `Product ${isEdit ? "updated" : "created"} successfully:`,
       product,
     );
+    dispatch(updateProduct(product));
     dispatch(setLoading(false));
     alert(`Proizvod ${isEdit ? "ažuriran" : "kreiran"} uspješno!`);
-    await fillProductionRedux({ dispatch, router });
+
     router.push("/proizvodi");
   } catch (error) {
     console.error(`Error ${isEdit ? "updating" : "creating"} product:`, error);

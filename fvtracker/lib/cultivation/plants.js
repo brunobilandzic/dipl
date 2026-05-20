@@ -84,7 +84,6 @@ export async function createPlantage({
     plantingPlanId,
     fieldId: cultivation.cultivationArea.field,
   });
-
   return plantedCropVarieties;
 }
 
@@ -163,23 +162,23 @@ export async function createPlantedCropVarietiesCells({
       planted,
       cellCoords: relativeCoord,
     });
+
     plcvObjects.push({
       cultivation: cultivationId,
       relativeCoords: relativeCoord,
       fieldCoords,
       plantedAt,
       harvestedAt,
-      plantingPlanItem: cropVarietyId ? plantingPlanId : null,
-      cropVariety: cropVarietyId || null,
     });
   }
+
   const newPlantedCropVarieties =
     await PlantedCropVariety.insertMany(plcvObjects);
   plantedCropVarieties.push(...newPlantedCropVarieties);
 
   return plantedCropVarieties;
 }
-
+/* 
 async function createPlantedCropVarietyPromise({
   relativeCoord,
   cropVarietyId,
@@ -266,3 +265,4 @@ export async function getPlantingPlanById(id) {
 
   return plantingPlan;
 }
+ */

@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { AppDatePicker, AppSelect } from "@/components/form/inputs";
 import Modals from "@/components/layout/modals";
 import "react-datepicker/dist/react-datepicker.css";
 import { ChoosePlan } from "@/components/cultivation/plans/planting/choosePlan";
+import { getDimensionsCA } from "@/lib/utils/cultivation/fields/cultivationAreas";
 
 export const PlantCultivation = ({
   isOpen,

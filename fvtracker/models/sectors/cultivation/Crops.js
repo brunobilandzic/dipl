@@ -216,6 +216,17 @@ plantedCropVarietySchema.pre("deleteMany", async function () {
   await Promise.all(fields.map((field) => field.save())); // to trigger fields' updatedAt change
 });
 
+plantedCropVarietySchema.pre("updateMany", async function () {
+  const fieldPlcv = await this.model.findOne(this.getFilter()).populate({
+    path: "cultivation",
+    select: "cultivationArea",
+    populate: {
+      path: "cultivationArea",
+      select: "field",
+    },
+  });
+  const cultivation = fieldPlcv.cultivation.cultivationArea.field.save(); // to trigger field's updatedAt change
+  
 /* const harvestedCropVarietySchema = new Schema({
   harvestingPlanItem: {
     type: mongoose.Schema.Types.ObjectId,

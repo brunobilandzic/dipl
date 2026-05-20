@@ -57,6 +57,8 @@ export const updateProduct = async ({ _updatedProduct, productId }) => {
     productId: product._id,
   });
   product.ingredients = ingredientIds;
+
+  await product.populate(populateIngredientsConfig)
   const newSlug = makeUrlFriendly(updatedProduct.name);
   product.slug = newSlug;
 

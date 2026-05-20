@@ -42,19 +42,19 @@ const productsSlice = createSlice({
         sortBy: SORT_INIT_VALUE,
       });
     },
-    /*  addProduct: (state, action) => {
-      state.items.push(action.payload);
+     addProduct: (state, action) => {
+      state.products.items.push(action.payload);
     },
     removeProduct: (state, action) => {
-      state.items = state.items.filter(
+      state.products.items = state.products.items.filter(
         (product) => product.id !== action.payload,
       );
     },
     updateProduct: (state, action) => {
-      state.items = state.items.map((product) =>
-        product.id === action.payload.id ? action.payload : product,
+      state.products.items = state.products.items.map((product) =>
+        product._id === action.payload._id ? action.payload : product,
       );
-    }, */
+    },
     setManagers: (state, action) => {
       state.managers = action.payload;
     },
@@ -187,10 +187,10 @@ export const refreshFacilities = createAsyncThunk(
 );
 
 export const {
-  setProducts /*
+  setProducts,
   addProduct,
   removeProduct,
-  updateProduct, */,
+  updateProduct,
   setManagers,
   sortProducts,
   filterProducts,

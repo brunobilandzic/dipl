@@ -7,6 +7,12 @@ import { ProductionManager } from "@/models/user/managers/ProductionManager";
 import { ProductionStock } from "./Facility";
 
 const productSchema = new Schema({
+  orderItems: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "OrderItem",
+    },
+  ],
   productionManager: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "ProductionManager",

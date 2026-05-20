@@ -227,47 +227,6 @@ plantedCropVarietySchema.pre("updateMany", async function () {
   });
   const cultivation = fieldPlcv.cultivation.cultivationArea.field.save(); // to trigger field's updatedAt change
 });
-/* const harvestedCropVarietySchema = new Schema({
-  harvestingPlanItem: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "HarvestingPlanItem",
-    default: null,
-  },
-  cultivation: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Cultivation",
-  },
-  relativeCoords: {
-    type: String,
-    default: null,
-    validate: (coords) => {
-      if (coords && !utils.strings.testCoordinates(coords)) {
-        throw new Error(
-          "Invalid cell coordinates format. Expected format: 'x,y'",
-        );
-      }
-    },
-  },
-  fieldCoords: {
-    type: String,
-    default: null,
-    validate: (coords) => {
-      if (coords && !utils.strings.testCoordinates(coords)) {
-        throw new Error(
-          "Invalid field coordinates format. Expected format: 'x,y'",
-        );
-      }
-    },
-  },
-  harvestedAt: { type: Date, default: null },
-  harvestingPlanItem: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "HarvestingPlanItem",
-    default: null,
-  },
-}); */
-
-// model exports
 
 export const CropMainType =
   mongoose.models.CropMainType ||

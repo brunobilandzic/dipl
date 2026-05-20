@@ -54,3 +54,10 @@ export const getRandomString = ({ beginning = "", length = 12 } = {}) => {
 export const onlyLetters = (str) => {
   return String(str).replace(/[^a-zA-Z]/g, "");
 };
+
+export const cropVarietyFullName = (cropVariety) => {
+  if (!cropVariety) return "N/A";
+  const varietyName = cropVariety.name || "N/A";
+  const cropTypeName = cropVariety.cropType?.name || "N/A";
+  return `${cropTypeName} - ${varietyName}`;
+}

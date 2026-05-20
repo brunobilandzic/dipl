@@ -51,7 +51,6 @@ export default function HarvestingBatchesFields() {
 }
 
 const HarvestingBatches = ({ harvestingPlans }) => {
-  console.log("harvestingPlans", harvestingPlans);
   if (Object.keys(harvestingPlans).length === 0)
     return <div>Nema žetvi za ovo polje</div>;
   return (
@@ -61,8 +60,7 @@ const HarvestingBatches = ({ harvestingPlans }) => {
           <div className="border p-4" key={uuid()}>
             <p>Plan berbe: {planName}</p>
             <p>Žetva: {harvestingPlans[planName]?.name}</p>
-            <p>Proizvodnja: {harvestingPlans[planName]?.productions?.length}</p>
-            <p>Stavke žetve:</p>
+            <p className="mt-2">Stavke žetve:</p>
             <div className="flex flex-col gap-2 mt-2">
               {harvestingPlans[planName]?.harvestingBatchItems?.map(
                 (batchItem) => (

@@ -158,7 +158,8 @@ export async function GET(request) {
               populate: [
                 {
                   path: "harvestingBatchItems",
-                  select: "cropVariety plantedCropVarieties batchQuantity",
+                  select:
+                    "cropVariety plantedCropVarieties batchQuantity productionProcesses",
                   populate: [
                     {
                       path: "cropVariety",
@@ -179,6 +180,10 @@ export async function GET(request) {
                         path: "plantingPlanItem",
                         select: "quantity",
                       },
+                    },
+                    {
+                      path: "productionProcesses",
+                      select: "quantity comment productionsStock",
                     },
                   ],
                 },

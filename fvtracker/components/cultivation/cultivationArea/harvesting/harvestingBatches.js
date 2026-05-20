@@ -51,6 +51,9 @@ export default function HarvestingBatchesFields() {
 }
 
 const HarvestingBatches = ({ harvestingPlans }) => {
+  console.log("harvestingPlans", harvestingPlans);
+  if (Object.keys(harvestingPlans).length === 0)
+    return <div>Nema žetvi za ovo polje</div>;
   return (
     <>
       <div className="flex flex-col gap-4 mt-4">

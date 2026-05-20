@@ -1,5 +1,6 @@
 import { Order, OrderItem } from "@/models/sectors/sales";
 import { getCustomer } from "./customer";
+import { Product } from "@/models/sectors/production/Product";
 
 export const createOrder = async ({ cartItems, customerData }) => {
   const lastOrder = await Order.findOne().sort({ number: -1 }).select("number");
@@ -13,17 +14,20 @@ export const createOrder = async ({ cartItems, customerData }) => {
     number: newOrderNumber,
   }).save();
   for (const item of cartItems) {
+    const product = await Product.findById(item.product._id);
     const orderItem = new OrderItem({
       order: order._id,
       product: item.product._id,
       quantity: item.quantity,
     });
+
+    product.orderItems.push(orderItem._id);
+    await product.save();
     order.items.push(orderItem._id);
     await orderItem.save();
   }
 
   customer.orders.push(order._id);
-  console.log({ order, customer });
 
   await order.save();
   console.log(
@@ -56,7 +60,6 @@ export const getOrders = async ({ customerId = null }) => {
     },
   ]);
 
-  console.log(orders);
   return orders;
 };
 

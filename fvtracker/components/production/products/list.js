@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  refreshProducts,
   deleteProducts,
 } from "@/lib/utils/production/products";
 import React, { useEffect, useState } from "react";

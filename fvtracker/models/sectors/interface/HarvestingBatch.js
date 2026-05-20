@@ -19,13 +19,6 @@ const harvestingBatchSchema = new Schema({
       default: [],
     },
   ],
-  productionProcesses: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "ProductionProcess",
-      default: [],
-    },
-  ],
 });
 
 const harvestingBatchItemSchema = new Schema({
@@ -47,6 +40,13 @@ const harvestingBatchItemSchema = new Schema({
     {
       type: Schema.Types.ObjectId,
       ref: "PlantedCropVariety",
+      default: [],
+    },
+  ],
+  productionProcesses: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "ProductionProcess",
       default: [],
     },
   ],

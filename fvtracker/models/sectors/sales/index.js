@@ -59,7 +59,11 @@ const orderItemSchema = new Schema({
     min: 1,
   },
   shipmentSources: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "ShipmentSource", default: [] },
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "ShipmentSource",
+      default: [],
+    },
   ],
 });
 

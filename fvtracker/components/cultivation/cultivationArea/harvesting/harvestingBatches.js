@@ -17,6 +17,10 @@ export default function HarvestingBatchesFields() {
     setHarvestingBatches(harvestingBatchesFields({ fields }));
   }, [fields, harvestingBatches]);
 
+  const togglePlansOpen = (fieldName) => {
+    setPlansOpen((prev) => (prev === fieldName ? "" : fieldName));
+  };
+
   if (!harvestingBatches) return <LoadingFullScreen />;
 
   console.log("harvestingBatches", harvestingBatches);
@@ -28,12 +32,12 @@ export default function HarvestingBatchesFields() {
         {Object.keys(harvestingBatches).map((fieldName) => (
           <div key={uuid()}>
             <div
-              onClick={() => setPlansOpen(!plansOpen)}
+              onClick={() => togglePlansOpen(fieldName)}
               className="flex flex-col justify-between border p-4 rounded-lg gap-4 cursor-pointer"
             >
               <h2 className="font-semibold text-xl">Polje: {fieldName}</h2>
 
-              {plansOpen && (
+              {plansOpen === fieldName && (
                 <HarvestingBatches
                   harvestingPlans={harvestingBatches[fieldName]}
                 />

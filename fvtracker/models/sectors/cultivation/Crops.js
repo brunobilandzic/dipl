@@ -226,7 +226,7 @@ plantedCropVarietySchema.pre("updateMany", async function () {
     },
   });
   const cultivation = fieldPlcv.cultivation.cultivationArea.field.save(); // to trigger field's updatedAt change
-  
+});
 /* const harvestedCropVarietySchema = new Schema({
   harvestingPlanItem: {
     type: mongoose.Schema.Types.ObjectId,

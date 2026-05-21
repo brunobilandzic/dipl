@@ -155,6 +155,22 @@ export const fillWarehouseRequest = async ({
     await shipmentSource.save();
   }
 
+  await shipmentItem.save();
+
+  const siPopulate = [
+    {
+      path: "sources",
+      populate: {
+        path: "product",
+      },
+    },
+  ];
+  await shipmentItem.populate(siPopulate);
+  await shipment.populate({
+    path: "shipmentItems",
+    populate: siPopulate,
+  });
+
   if (
     calculateIsShipmentShipped({
       shipmentItems: [...warehouseRequest.shipment.shipmentItems, shipmentItem],

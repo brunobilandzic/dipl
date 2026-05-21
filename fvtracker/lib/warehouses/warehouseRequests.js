@@ -15,6 +15,7 @@ import { SHIPMENT_SHIPPED } from "../constants/warehouse/shipment";
 
 export const getWarehouseRequestById = async (id) => {
   const request = await WarehouseRequest.findById(id);
+  await request.populate([]);
   if (!request) throw new Error("Zahtev nije pronađen");
   return request;
 };

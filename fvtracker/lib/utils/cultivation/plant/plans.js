@@ -108,6 +108,10 @@ export const getPlansForCropVariety = ({
   const plans = {};
 
   //if (checkPlansEmpty(allFieldPlans)) return plans;
+  if (!cropVariety) {
+    console.log("no crop variety defined in get available plans");
+    return allFieldPlans;
+  }
 
   const plantingPlans = allFieldPlans?.plantingPlans;
   const harvestingPlans = allFieldPlans?.harvestingPlans;

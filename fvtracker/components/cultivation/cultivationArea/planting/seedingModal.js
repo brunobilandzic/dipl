@@ -19,6 +19,7 @@ import { setError } from "@/store/error";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { useRouter } from "next/navigation";
 import { getDimensionsCA } from "@/lib/utils/cultivation/fields/cultivationAreas";
+import { refreshFields } from "@/lib/utils/cultivation/fields/fields";
 
 export const SeedingModal = ({
   isOpen,

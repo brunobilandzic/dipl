@@ -175,10 +175,6 @@ export const SeedingModal = ({
     return width * length;
   };
 
-/*   useEffect(() => {
-    console.log({ newPlantage });
-    compareDimensions();
-  }, [newPlantage]); */
 
   // RESETING LOGIC
 

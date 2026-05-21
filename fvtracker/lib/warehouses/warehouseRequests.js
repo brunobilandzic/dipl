@@ -9,13 +9,12 @@ import {
 import { getWarehouse } from "./get";
 import {
   calculateIsShipmentShipped,
-  calculateShipmentShipped,
+  warehouseRequestPopulateShipmentItems,
 } from "../utils/storage/warehouse";
 import { SHIPMENT_SHIPPED } from "../constants/warehouse/shipment";
 
 export const getWarehouseRequestById = async (id) => {
   const request = await WarehouseRequest.findById(id);
-  await request.populate([]);
   if (!request) throw new Error("Zahtev nije pronađen");
   return request;
 };
@@ -49,34 +48,16 @@ export const fillWarehouseRequest = async ({
   shipmentSources,
 }) => {
   const warehouseRequest = await getWarehouseRequestById(warehouseRequestId);
-  await warehouseRequest.populate([
-    {
-      path: "order",
-      populate: {
-        path: "items",
-        populate: [
-          {
-            path: "product",
-          },
-          {
-            path: "shipmentSources",
-          },
-        ],
-      },
-    },
-    {
-      path: "shipment",
-    },
-  ]);
+  await warehouseRequest.populate(warehouseRequestPopulateShipmentItems);
+  const shipment = await Shipment.findById(warehouseRequest.shipment);
 
   const shipmentItem = new ShipmentItem({
-    shipment: warehouseRequest.shipment._id,
+    shipment: shipment._id,
     order: warehouseRequest.order._id,
   });
 
-  warehouseRequest.order.shipmentItems.push(shipmentItem._id);
-  warehouseRequest.shipment.shipmentItems.push(shipmentItem._id);
-  console.log({ shipmentItem });
+  shipment.shipmentItems.push(shipmentItem._id);
+
   const newShipmentSources = [];
 
   for (const source of shipmentSources) {
@@ -152,10 +133,10 @@ export const fillWarehouseRequest = async ({
 
   if (
     calculateIsShipmentShipped({
-      shipmentItems: [...warehouseRequest.shipment.shipmentItems, shipmentItem],
+      shipmentItems: [...shipment.shipmentItems, shipmentItem],
     })
   ) {
-    console.log("Shipment is fully shipped", warehouseRequest.shipment.shipmentItems, "...");
+    console.log("Shipment is fully shipped", shipment.shipmentItems, "...");
     warehouseRequest.shipment.status = SHIPMENT_SHIPPED;
   }
 

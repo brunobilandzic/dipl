@@ -265,7 +265,7 @@ export const SeedingModal = ({
       const availablePlans = utils.plans.getPlansForCropVariety({
         allFieldPlans: allFieldPlans,
         cropVariety,
-        plantageArea: getPlantageDimensions(),
+        plantageArea: getPlantageDimensions(newPlantage),
       });
       setAvailablePlans(availablePlans);
     } else {

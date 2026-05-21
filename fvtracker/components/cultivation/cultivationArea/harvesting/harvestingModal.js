@@ -16,6 +16,7 @@ import { setLoading } from "@/store/loading";
 import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { harvestCells } from "@/store/cultivation";
+import { getPlantageDimensions } from "../planting/seedingModal";
 
 export function HarvestingModal({
   isOpen,
@@ -67,7 +68,8 @@ export function HarvestingModal({
     if (newHarvest?.cropVariety?._id && checkPlans()) {
       const availablePlans = utils.plans.getPlansForCropVariety({
         allFieldPlans,
-        cropVarietyId: newHarvest.cropVariety._id,
+        plantageArea: getPlantageDimensions(newHarvest),
+        cropVariety: newHarvest.cropVariety,
       });
       setAvailablePlans(availablePlans);
     } else {

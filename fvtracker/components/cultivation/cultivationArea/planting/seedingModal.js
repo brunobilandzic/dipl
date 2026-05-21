@@ -241,6 +241,7 @@ export const SeedingModal = ({
           cropVarietyId: newPlantage.variety._id,
         }),
       );
+      await refreshFields({ dispatch });
     } catch (error) {
       console.error("Error preparing plantage body:", error);
       handleError(

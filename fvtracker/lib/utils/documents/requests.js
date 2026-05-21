@@ -11,7 +11,9 @@ export const sendWarehouseRequest = async ({
   router,
 }) => {
   try {
+    dispatch(setLoading(true));
     const res = await api.post("/warehouse-requests", requestData);
+    dispatch(setLoading(false));
     return res.data;
   } catch (error) {
     console.error("Error sending warehouse request:", error);

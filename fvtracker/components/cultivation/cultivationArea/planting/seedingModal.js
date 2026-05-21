@@ -62,7 +62,7 @@ export const SeedingModal = ({
 
   useEffect(() => {
     if (!checkPlans()) return;
-    if (newPlantage?.variety?._id && checkPlans()) {
+    if (newPlantage?.variety?._id) {
       const cropVariety = crops?.varieties?.find(
         (v) => v._id.toString() === newPlantage.variety._id.toString(),
       );

@@ -107,13 +107,15 @@ export function HarvestingModal({
     );
 
   const onBeginHarvestingCoordinates = ({ x, y, cropVariety }) => {
-    setNewHarvest((prev) => ({
-      ...prev,
-      beginX: x,
-      beginY: y,
-      toHarvestCells: [...(prev.toHarvestCells ?? []), `${x},${y}`],
-      cropVariety,
-    }));
+    setNewHarvest((prev) => {
+      return {
+        ...prev,
+        beginX: x,
+        beginY: y,
+        toHarvestCells: [...(prev.toHarvestCells ?? []), `${x},${y}`],
+        cropVariety,
+      };
+    });
   };
 
   // END LOGIC

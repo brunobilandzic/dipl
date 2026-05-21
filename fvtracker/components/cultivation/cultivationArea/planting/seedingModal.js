@@ -66,7 +66,7 @@ export const SeedingModal = ({
       const cropVariety = crops?.varieties?.find(
         (v) => v._id.toString() === newPlantage.variety._id.toString(),
       );
-      const plantageArea = getPlantageDimensions();
+      const plantageArea = getPlantageDimensions(newPlantage);
       const availablePlans = utils.plans.getPlansForCropVariety({
         allFieldPlans,
         cropVariety,

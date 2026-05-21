@@ -75,7 +75,7 @@ export function HarvestingModal({
     } else {
       setAvailablePlans({});
     }
-  }, [newHarvest?.cropVariety?._id, allFieldPlans]);
+  }, [newHarvest?.cropVariety?._id]);
 
   //use effects to monitor state changes
 

@@ -175,7 +175,6 @@ export const SeedingModal = ({
     return width * length;
   };
 
-
   // RESETING LOGIC
 
   const removeBegin = () => {
@@ -189,7 +188,10 @@ export const SeedingModal = ({
   const reset = () => {
     setNewPlantage(
       initialNewPlantage_WId
-        ? initialNewPlantage_WId({ cultivationId: cultivation?._id, crops })
+        ? initialNewPlantage_WId({
+            cultivationId: cultivation?._id,
+            crops,
+          })
         : {},
     );
     setChooseNewEnd(initialChooseNewEnd);

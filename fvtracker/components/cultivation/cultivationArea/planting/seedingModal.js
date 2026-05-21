@@ -164,13 +164,15 @@ export const SeedingModal = ({
     if (!isContinue) setPlantCultivationOpen(true);
   };
 
-  const compareDimensions = () => {
+  const getPlantageDimensions = () => {
     const { width, length } = getDimensionsCA(
       newPlantage.beginX,
       newPlantage.beginY,
       newPlantage.endX,
       newPlantage.endY,
     );
+
+    return width * length;
   };
 
 /*   useEffect(() => {

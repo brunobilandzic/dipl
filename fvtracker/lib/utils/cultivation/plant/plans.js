@@ -114,7 +114,6 @@ export const getPlansForCropVariety = ({
   plantingPlans?.forEach((plan) => {
     if (
       plan.items.some((item) => {
-        console.log(item)
         return (
           item.cropVariety?._id.toString() === cropVariety._id.toString() &&
           item.quantity > plantageArea * cropVariety.quantityPerCell

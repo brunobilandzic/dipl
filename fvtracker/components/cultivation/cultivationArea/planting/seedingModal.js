@@ -278,7 +278,7 @@ export const SeedingModal = ({
     } else {
       setAvailablePlans([]);
     }
-  }, [newPlantage?.variety,]);
+  }, [newPlantage?.variety]);
 
   useEffect(() => {
     console.log("New plantage state:", newPlantage);

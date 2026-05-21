@@ -184,3 +184,28 @@ export const shipmentSourcesTotals = ({ shipmentSources }) => {
     return acc;
   }, {});
 };
+
+export const warehouseRequestPopulateShipmentItems = [
+  {
+    path: "order",
+    populate: {
+      path: "items",
+      populate: {
+        path: "product",
+      },
+    },
+  },
+  {
+    path: "shipment",
+    populate: {
+      path: "shipmentItems",
+      populate: {
+        path: "sources",
+        populate: {
+          path: "product",
+          select: "name",
+        },
+      },
+    },
+  },
+];

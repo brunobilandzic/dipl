@@ -34,30 +34,9 @@ export const createWarehouseRequest = async (requestData) => {
 };
 
 export const getWarehouseRequests = async () => {
-  const requests = await WarehouseRequest.find().populate([
-    {
-      path: "order",
-      populate: {
-        path: "items",
-        populate: {
-          path: "product",
-        },
-      },
-    },
-    {
-      path: "shipment",
-      populate: {
-        path: "shipmentItems",
-        populate: {
-          path: "sources",
-          populate: {
-            path: "product",
-            select: "name",
-          },
-        },
-      },
-    },
-  ]);
+  const requests = await WarehouseRequest.find().populate(
+    warehouseRequestPopulateShipmentItems,
+  );
   return requests;
 };
 

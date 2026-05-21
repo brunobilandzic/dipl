@@ -127,11 +127,12 @@ export const getPlansForCropVariety = ({
 
   allFieldPlans?.harvestingPlans?.forEach((plan) => {
     if (
-      plan.items.some(
-        (item) =>
-          item.cropVariety?._id.toString() === cropVarietyId.toString() &&
-          item.quantity > 0,
-      )
+      plan.items.some((item) => {
+        return (
+          item.cropVariety?._id.toString() === cropVariety._id.toString() &&
+          item.quantity >= plantageArea * cropVariety.quantityPerCell
+        );
+      })
     ) {
       if (!plans.harvestingPlans) plans.harvestingPlans = [];
       plans.harvestingPlans.push(plan);

@@ -99,8 +99,12 @@ export const getFieldPlans = ({ field }) => ({
   harvestingPlans: field.harvestingPlans || [],
 });
 
-export const getPlansForCropVariety = ({ allFieldPlans, cropVariety }) => {
-  console.log("geetting plans", { allFieldPlans, cropVariety });
+export const getPlansForCropVariety = ({
+  allFieldPlans,
+  cropVariety,
+  plantageArea,
+}) => {
+  console.log("geetting plans", { allFieldPlans, cropVariety, plantageArea });
   const plans = {};
 
   //if (checkPlansEmpty(allFieldPlans)) return plans;
@@ -111,7 +115,7 @@ export const getPlansForCropVariety = ({ allFieldPlans, cropVariety }) => {
         console.log(item)
         return (
           item.cropVariety?._id.toString() === cropVariety._id.toString() &&
-          item.quantity > 0
+          item.quantity > plantageArea * cropVariety.quantityPerCell
         );
       })
     ) {

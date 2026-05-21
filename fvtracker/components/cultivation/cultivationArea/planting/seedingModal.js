@@ -66,9 +66,11 @@ export const SeedingModal = ({
       const cropVariety = crops?.varieties?.find(
         (v) => v._id.toString() === newPlantage.variety._id.toString(),
       );
+      const plantageArea = getPlantageDimensions();
       const availablePlans = utils.plans.getPlansForCropVariety({
         allFieldPlans,
         cropVariety,
+        plantageArea,
       });
 
       setAvailablePlans(availablePlans);
@@ -272,12 +274,13 @@ export const SeedingModal = ({
       const availablePlans = utils.plans.getPlansForCropVariety({
         allFieldPlans: allFieldPlans,
         cropVariety,
+        plantageArea: getPlantageDimensions(),
       });
       setAvailablePlans(availablePlans);
     } else {
       setAvailablePlans([]);
     }
-  }, [newPlantage?.variety, allFieldPlans]);
+  }, [newPlantage?.variety,]);
 
   useEffect(() => {
     console.log("New plantage state:", newPlantage);

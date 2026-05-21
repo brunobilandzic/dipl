@@ -164,17 +164,6 @@ export const SeedingModal = ({
     if (!isContinue) setPlantCultivationOpen(true);
   };
 
-  const getPlantageDimensions = () => {
-    const { width, length } = getDimensionsCA(
-      newPlantage.beginX,
-      newPlantage.beginY,
-      newPlantage.endX,
-      newPlantage.endY,
-    );
-
-    return width * length;
-  };
-
   // RESETING LOGIC
 
   const removeBegin = () => {
@@ -407,3 +396,9 @@ const preparePlantageBody = (newPlantage) => ({
   harvestedAt: newPlantage.harvestedAt,
   plantingPlanId: newPlantage.plantingPlan?._id,
 });
+
+export const getPlantageDimensions = ({ beginX, beginY, endX, endY }) => {
+  const { width, length } = getDimensionsCA(beginX, beginY, endX, endY);
+
+  return width * length;
+};

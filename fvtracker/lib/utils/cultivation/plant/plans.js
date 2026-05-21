@@ -109,7 +109,9 @@ export const getPlansForCropVariety = ({
 
   //if (checkPlansEmpty(allFieldPlans)) return plans;
 
-  allFieldPlans?.plantingPlans?.forEach((plan) => {
+  const plantPlans = allFieldPlans?.plantingPlans;
+
+  plantingPlans?.forEach((plan) => {
     if (
       plan.items.some((item) => {
         console.log(item)

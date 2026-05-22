@@ -164,6 +164,13 @@ export const submitShipment = async ({ newShipmentData, dispatch }) => {
 
 // function exists...
 
+export const buildRequired = ({ orderItems }) => {
+  return orderItems.map((oi) => ({
+    productName: oi.product.name,
+    quantity: oi.quantity,
+  }));
+};
+
 export const calculateIsShipmentShipped = ({ shipmentItems }) => {
   const shipmentSources = shipmentItems.reduce((acc, si) => {
     if (!si.shipmentSources) return acc;

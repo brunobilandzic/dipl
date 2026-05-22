@@ -11,7 +11,10 @@ import {
   calculateIsShipmentShipped,
   warehouseRequestPopulateShipmentItems,
 } from "../utils/storage/warehouse";
-import { SHIPMENT_SHIPPED } from "../constants/warehouse/shipment";
+import {
+  SHIPMENT_SHIPPABLE,
+  SHIPMENT_SHIPPED,
+} from "../constants/warehouse/shipment";
 import { Order } from "@/models/sectors/sales";
 
 export const getWarehouseRequestById = async (id) => {

@@ -96,7 +96,7 @@ export const fillWarehouseRequest = async ({
       (whs) => whs.product.name == source.productName,
     );
     if (!stock) {
-      console.error(
+      throw new Error(
         `Nema zaliha proizvoda ${productName} u skladištu ${warehouse.name}, ne postoji.`,
       );
       continue;

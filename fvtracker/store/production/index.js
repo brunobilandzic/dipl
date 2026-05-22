@@ -60,7 +60,7 @@ const productsSlice = createSlice({
     },
     sortProducts: (state, action) => {
       state.products.filteredItems = sortItems({
-        items: state.products.items,
+        items: state.products.filteredItems,
         sortBy: action.payload,
       });
     },

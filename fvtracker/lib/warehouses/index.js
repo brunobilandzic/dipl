@@ -1,8 +1,13 @@
 import { Warehouse } from "@/models/sectors/storage/Warehouse";
 import { getWarehouse } from "./get";
 
-export const createWarehouse = async ({ warehouseData }) => {
+export const createWarehouse = async ({ warehouseData, warehouseManager }) => {
   const warehouse = new Warehouse(warehouseData);
+  warehouse.warehouseManager = warehouseManager;
+
+  warehouseManager.warehouses.push(warehouse._id);
+
+  await warehouseManager.save();
   await warehouse.save();
   return warehouse;
 };

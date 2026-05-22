@@ -15,10 +15,10 @@ import {
   FINANCIAL_MANAGER,
   PRODUCTION_MANAGER,
   WAREHOUSE_MANAGER,
-  GENERAL_MANAGER
+  GENERAL_MANAGER,
 } from "@/lib/constants/users/managerTypes";
 import fillProductionRedux from "@/lib/utils/production";
-import { fetchWarehouses } from "@/store/warehouse";
+import { fetchShipments, fetchWarehouses } from "@/store/warehouse";
 import { fillWarehouseRedux } from "@/lib/utils/storage";
 import { refreshProducts } from "@/lib/utils/production/products";
 import { refreshProductsThunk } from "@/store/webstore";
@@ -110,13 +110,16 @@ function NavItems() {
         managerModelName === GENERAL_MANAGER ||
         managerModelName === WAREHOUSE_MANAGER
       ) {
+        console.log("shipments called from navbar");
+        dispatch(fetchShipments());
         fillOrdersRedux({ dispatch });
+        fillWarehouseRequestsRedux({ dispatch });
       }
       if (managerModelName === FINANCIAL_MANAGER) {
         console.log(
           "financial manager logged in, refreshing warehouse requests data...",
         );
-        fillWarehouseRequestsRedux({ dispatch });
+
         dispatch(fillManagersSelection({ managersType: "warehouseManagers" }));
       }
     } else if (status === "unauthenticated") {

@@ -189,6 +189,9 @@ export const fillWarehouseRequest = async ({
       "...",
     );
     shipment.status = SHIPMENT_SHIPPED;
+  } else if (newShipmentSources.length > 0) {
+    console.log("Shipment is Shipable shipped");
+    shipment.status = SHIPMENT_PENDING;
   }
 
   await shipmentItem.save();

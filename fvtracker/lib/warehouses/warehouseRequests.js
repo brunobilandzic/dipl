@@ -60,6 +60,22 @@ export const fillWarehouseRequest = async ({
       }
     },
   });
+  const order = await Order.findById(warehouseRequest.order).populate([
+    {
+      path: "items",
+      populate: [
+        {
+          path: "shipmentSources",
+          populate: {
+            path: "product",
+          },
+        },
+        {
+          path: "product",
+        },
+      ],
+    },
+  ]);
 
   const oldSources = shipment.shipmentItems.reduce((acc, si) => {
     if (!si.sources) return acc;

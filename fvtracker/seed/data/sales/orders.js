@@ -1,8 +1,4 @@
-export const ordersSeedData = [
-  {
-    number: String(1).padStart(6, "0"),
-  },
-  {
-    number: String(2).padStart(6, "0"),
-  },
-];
+export const ordersSeedData = Array.from({ length: 5 }).map((_, i) => ({
+  number: `00000${i + 1}`,
+  date: new Date(),
+}));

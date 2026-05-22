@@ -82,6 +82,5 @@ export const createProductStockSeed = async ({
     quantity: STOCK_QUANTITY,
     productionFacilityId,
   });
-  console.log({ productionStock });
   return { productionStock, stop: productionStock.stop };
 };

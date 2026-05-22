@@ -69,7 +69,11 @@ const WarehouseRequestListItem = ({ request }) => {
   ];
   return (
     <>
-      <ListItem actionOptions={actions}>
+      <ListItem
+        actionOptions={actions}
+        _className={` border ${outlineClassName} border-2`}
+        title={`Zahtjev za narudžbom ${request.order.number}`}
+      >
         {" "}
         <div key={request._id}>
           <p>Narudžba: {request.order.number}</p>

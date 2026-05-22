@@ -50,14 +50,13 @@ export const fillWarehouseRequest = async ({
 }) => {
   const warehouseRequest = await getWarehouseRequestById(warehouseRequestId);
   await warehouseRequest.populate(warehouseRequestPopulateShipmentItems);
-  const shipment = await Shipment.findById(warehouseRequest.shipment);
-  const order = await Order.findById(warehouseRequest.order).populate({
-    path: "items",
+  const shipment = await Shipment.findById(warehouseRequest.shipment).populate({
+    path: "shipmentItems",
     populate: {
-      path: "shipmentSources",
+      path: "sources",
       populate: {
         path: "product",
-      }
+      },
     },
   });
   const order = await Order.findById(warehouseRequest.order).populate([
@@ -83,13 +82,13 @@ export const fillWarehouseRequest = async ({
   }, []);
 
   console.log({
+    msg: "Filling warehouse request",
     shipmentSources,
     oldSources,
   });
 
   const shipmentItem = new ShipmentItem({
     shipment: shipment._id,
-    order: warehouseRequest.order._id,
   });
 
   shipment.shipmentItems.push(shipmentItem._id);
@@ -115,14 +114,10 @@ export const fillWarehouseRequest = async ({
       throw new Error(
         `Nema zaliha proizvoda ${productName} u skladištu ${warehouse.name}, ne postoji.`,
       );
-      continue;
     }
 
     const product = stock.product;
-
-    const orderItem = warehouseRequest.order.items.find(
-      (oi) => oi.product.name === productName,
-    );
+    const orderItem = order.items.find((oi) => oi.product.name === productName);
 
     const shipmentSource = new ShipmentSource({
       product: product._id,
@@ -142,7 +137,6 @@ export const fillWarehouseRequest = async ({
       throw new Error(
         `Nema dovoljno zaliha proizvoda ${productName} u skladištu ${warehouse.name}`,
       );
-      continue;
     }
     stock.shipmentSources.push(shipmentItem._id);
 
@@ -151,8 +145,10 @@ export const fillWarehouseRequest = async ({
     await shipmentSource.save();
   }
 
-  await shipmentItem.save();
+  console.log({ newShipmentSources, msg: "New shipment sources" });
 
+  await shipmentItem.save();
+  await shipment.save();
   const siPopulate = [
     {
       path: "sources",
@@ -162,24 +158,43 @@ export const fillWarehouseRequest = async ({
     },
   ];
   await shipmentItem.populate(siPopulate);
-  await shipment.populate({
+
+  // get fresh shipment with populated sources to check if it's fully shipped
+  const populatedShipment = await Shipment.findById(shipment._id).populate({
     path: "shipmentItems",
     populate: siPopulate,
   });
 
+  console.log(
+    populatedShipment.shipmentItems.forEach((si) => {
+      console.log(si.sources);
+    }),
+  );
+  console.log(
+    "populatedShipment.shipmentItems",
+    populatedShipment.shipmentItems,
+    populatedShipment.shipmentItems.length,
+  );
+  console.log("new shipmentItem", shipmentItem);
+
   if (
     calculateIsShipmentShipped({
-      shipmentItems: [...shipment.shipmentItems, shipmentItem],
+      shipmentItems: [...populatedShipment.shipmentItems],
+      orderItems: order.items,
     })
   ) {
-    console.log("Shipment is fully shipped", shipment.shipmentItems, "...");
-    warehouseRequest.shipment.status = SHIPMENT_SHIPPED;
+    console.log(
+      "Shipment is fully shipped",
+      populatedShipment.shipmentItems,
+      "...",
+    );
+    shipment.status = SHIPMENT_SHIPPED;
   }
 
   await shipmentItem.save();
-  await warehouseRequest.shipment.save();
   await warehouseRequest.order.save();
   await warehouseRequest.save();
+  await shipment.save();
 
   return {
     message: "Zahtev je uspešno popunjen i poslat na isporuku.",

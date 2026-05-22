@@ -12,6 +12,7 @@ import {
   warehouseRequestPopulateShipmentItems,
 } from "../utils/storage/warehouse";
 import { SHIPMENT_SHIPPED } from "../constants/warehouse/shipment";
+import { Order } from "@/models/sectors/sales";
 
 export const getWarehouseRequestById = async (id) => {
   const request = await WarehouseRequest.findById(id);
@@ -50,6 +51,15 @@ export const fillWarehouseRequest = async ({
   const warehouseRequest = await getWarehouseRequestById(warehouseRequestId);
   await warehouseRequest.populate(warehouseRequestPopulateShipmentItems);
   const shipment = await Shipment.findById(warehouseRequest.shipment);
+  const order = await Order.findById(warehouseRequest.order).populate({
+    path: "items",
+    populate: {
+      path: "shipmentSources",
+      populate: {
+        path: "product",
+      }
+    },
+  });
 
   const shipmentItem = new ShipmentItem({
     shipment: shipment._id,

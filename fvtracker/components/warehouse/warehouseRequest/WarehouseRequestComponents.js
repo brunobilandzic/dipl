@@ -35,6 +35,16 @@ const WarehouseRequestListItem = ({ request }) => {
   let isPending =
     !request.shipment || request.shipment?.status === SHIPMENT_PENDING;
 
+  let outlineClassName;
+
+  if (isShipable) {
+    outlineClassName = "border-yellow-700";
+  } else if (isSipped) {
+    outlineClassName = "border-green-700";
+  } else if (isPending) {
+    outlineClassName = "border-gray-700";
+  }
+
   const managerModelName = useSelector(
     (state) => state.user.session.managerModelName,
   );

@@ -1,3 +1,5 @@
+import { fetchManager } from "@/lib/auth/fetchSessionData";
+import { WAREHOUSE_MANAGER } from "@/lib/constants/users/managerTypes";
 import {
   createWarehouse,
   deleteWarehouse,
@@ -5,7 +7,6 @@ import {
   updateWarehouse,
 } from "@/lib/warehouses";
 import { getWarehouses, getWarehouse } from "@/lib/warehouses/get";
-import warehousePopulateConfig from "@/lib/warehouses/populateConfig";
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
@@ -13,19 +14,39 @@ export async function GET(request) {
   if (id) {
     const warehouse = await getWarehouse({ id });
     return Response.json({ warehouse });
+  }
+  const { specificManager: warehouseManager, unauthorized } =
+    await fetchManager({
+      managerNames: [WAREHOUSE_MANAGER],
+    });
+
+  if (warehouseManager) {
+    const warehouses = await getWarehouses({ managerId: warehouseManager._id });
+    return Response.json({ warehouses });
   } else {
-    const warehouses = await getWarehouses();
-    for (let wh of warehouses) {
-      await wh.populate(warehousePopulateConfig);
-    }
+    const warehouses = await getWarehouses({ managerId });
     return Response.json({ warehouses });
   }
 }
 
 export async function POST(request) {
   try {
+    const { specificManager: warehouseManager, unauthorized } =
+      await fetchManager({
+        managerNames: [WAREHOUSE_MANAGER],
+      });
+    if (unauthorized) {
+      return Response.json(
+        { error: "Unauthorized: user is not a warehouse manager" },
+        { status: 403 },
+      );
+    }
     const body = await request.json();
-    const warehouse = await createWarehouse({ warehouseData: body });
+    console.log({ body });
+    const warehouse = await createWarehouse({
+      warehouseData: body,
+      warehouseManager,
+    });
     return Response.json({ warehouse }, { status: 201 });
   } catch (err) {
     return Response.json(

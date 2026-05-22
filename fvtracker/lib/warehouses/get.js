@@ -11,7 +11,17 @@ export async function getWarehouse({ id }) {
   return warehouse;
 }
 
-export async function getWarehouses() {
+export async function getWarehouses({ managerId }) {
+  if (managerId) {
+    const warehouses = await Warehouse.find({
+      warehouseManager: managerId,
+    }).populate(warehousePopulateConfig);
+    if (!warehouses) {
+      throw new Error("No warehouses found for the provided manager.");
+    }
+    return warehouses;
+  }
+
   const warehouses = await Warehouse.find().populate(warehousePopulateConfig);
   if (!warehouses) {
     throw new Error("No warehouses found");

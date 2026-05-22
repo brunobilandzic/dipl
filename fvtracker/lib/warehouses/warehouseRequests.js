@@ -123,7 +123,7 @@ export const fillWarehouseRequest = async ({
 
     stock.quantity -= quantity;
     if (stock.quantity < 0) {
-      console.error(
+      throw new Error(
         `Nema dovoljno zaliha proizvoda ${productName} u skladištu ${warehouse.name}`,
       );
       continue;

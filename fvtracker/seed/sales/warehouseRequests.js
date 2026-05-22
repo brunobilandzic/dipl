@@ -1,6 +1,7 @@
 import { WarehouseRequest } from "@/models/documents/requests/WarehouseRequest";
 import { FinancialManager } from "@/models/user/managers/FinancialManager";
 import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
+import { createShipments } from "./shipment";
 
 export const createWarehouseRequests = async ({ orders }) => {
   const financialManager = await FinancialManager.findOne({}).select("_id");
@@ -15,5 +16,7 @@ export const createWarehouseRequests = async ({ orders }) => {
     await warehouseRequest.save();
     createdWarehouseRequests.push(warehouseRequest);
   }
+
+  await createShipments({ warehouseRequests: createdWarehouseRequests });
   return createdWarehouseRequests;
 };

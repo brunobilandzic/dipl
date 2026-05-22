@@ -171,7 +171,11 @@ export const buildRequired = ({ orderItems }) => {
   }));
 };
 
-export const calculateIsShipmentShipped = ({ shipmentItems }) => {
+  console.log({
+    msg: "Calculating if shipment is shipped",
+    shipmentItems,
+    orderItems,
+  });
   const shipmentSources = shipmentItems.reduce((acc, si) => {
     if (!si.shipmentSources) return acc;
     return [...acc, ...si.shipmentSources];

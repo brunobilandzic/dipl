@@ -34,11 +34,6 @@ const orderSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  state: {
-    type: String,
-    enum: ORDER_STATES,
-    default: PENDING,
-  } 
 });
 
 const orderItemSchema = new Schema({

@@ -8,11 +8,13 @@ const warehouseManagerSchema = new Schema({
     ref: "RootManager",
     required: true,
   },
-  storageFacility: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "StorageFacility",
-    default: null,
-  },
+  warehouses: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Warehouse",
+      default: null,
+    },
+  ],
 });
 
 export const WarehouseManager =

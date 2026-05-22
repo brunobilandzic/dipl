@@ -55,7 +55,7 @@ const WarehouseRequestListItem = ({ request }) => {
   const [createShipmentModalOpen, setCreateShipmentModalOpen] = useState(false);
 
   const actions = [
-    ...(managerModelName == WAREHOUSE_MANAGER
+    ...(managerModelName == WAREHOUSE_MANAGER && !isSipped
       ? [
           {
             label: "Obradi",

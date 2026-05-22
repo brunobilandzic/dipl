@@ -110,12 +110,13 @@ export const calculateNeededQuantities = ({
 
   const neededQuantities = shipmentItems.map((shi) => {
     console.log({ shipmentItem: shi });
-    const existingQuantity = newShipmentData.sources.reduce((acc, source) => {
-      if (source.productName === shi.product) {
-        acc += Number(source.quantity);
-      }
-      return acc;
-    }, 0);
+    const existingQuantity =
+      newShipmentData.sources.reduce((acc, source) => {
+        if (source.productName === shi.product) {
+          acc += Number(source.quantity);
+        }
+        return acc;
+      }, 0) || 0;
 
     console.log({ existingQuantity });
 
@@ -171,22 +172,42 @@ export const buildRequired = ({ orderItems }) => {
   }));
 };
 
+export const calculateIsShipmentShipped = ({ shipmentItems, orderItems }) => {
   console.log({
     msg: "Calculating if shipment is shipped",
     shipmentItems,
     orderItems,
   });
-  const shipmentSources = shipmentItems.reduce((acc, si) => {
-    if (!si.shipmentSources) return acc;
-    return [...acc, ...si.shipmentSources];
-  }, []);
+  const required = buildRequired({ orderItems });
+  console.log({ required });
 
+  const shipmentSources = shipmentItems.reduce((acc, si) => {
+    if (!si.sources) return acc;
+    return [...acc, ...si.sources];
+  }, []);
+  console.log({ allSources: shipmentSources });
+  if (shipmentSources.length === 0) return false;
   const totals = shipmentSourcesTotals({ shipmentSources });
-  console.log({ totals });
-  return Object.values(totals).every((total) => total > 0);
+  let shipmentShipped = true;
+  for (const req of required) {
+    if (!totals[req.productName] || totals[req.productName] < req.quantity) {
+      shipmentShipped = false;
+    }
+  }
+
+  console.log({ shipmentShipped });
+
+  console.log({ shipmentSources: { ...totals } });
+  return shipmentShipped;
 };
 
 export const shipmentSourcesTotals = ({ shipmentSources }) => {
+  console.log({
+    t: shipmentSources.map((s) => ({
+      product: s.product.name,
+      quantity: s.quantity,
+    })),
+  });
   return shipmentSources.reduce((acc, source) => {
     if (!acc[source.product.name]) {
       acc[source.product.name] = 0;

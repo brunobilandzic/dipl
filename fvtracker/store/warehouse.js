@@ -8,6 +8,7 @@ const initialState = {
     filteredItems: [],
   },
   warehouseRequests: null,
+  shipments: null,
   isLoading: false,
 };
 
@@ -52,6 +53,16 @@ const warehousesSlice = createSlice({
       })
       .addCase(fetchWarehouseRequests.rejected, (state) => {
         state.isLoading = false;
+      })
+      .addCase(fetchShipments.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchShipments.fulfilled, (state, action) => {
+        state.shipments = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(fetchShipments.rejected, (state) => {
+        state.isLoading = false;
       });
   },
 });
@@ -74,6 +85,16 @@ export const fetchWarehouseRequests = createAsyncThunk(
     return res.data.warehouseRequests;
   },
 );
+export const fetchShipments = createAsyncThunk(
+  "warehouses/fetchShipments",
+  async (_, { dispatch }) => {
+    console.log("Fetching shipments...");
+    const res = await api.get("/shipments");
+    console.log("Shipments fetched:", res.data);
+    return res.data.shipments;
+  },
+);
+
 export const { filterWarehouses, sortWarehouses } = warehousesSlice.actions;
 
 export default warehousesSlice.reducer;

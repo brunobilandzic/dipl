@@ -30,6 +30,10 @@ const appUserSchema = new Schema({
     enum: ["google", "credentials"],
     default: "credentials",
   },
+  isAdmin: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 appUserSchema.pre("save", function (next) {

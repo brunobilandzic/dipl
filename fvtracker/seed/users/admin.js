@@ -18,7 +18,7 @@ export const createAdmin = async () => {
 
   const adminData = appUsersJsonArray.find((user) => user.username === "admin");
   console.log("Admin data found in JSON:", adminData);
-  const adminAppUser = new AppUser(adminData);
+  const adminAppUser = new AppUser({ ...adminData, isAdmin: true });
   await adminAppUser.save();
 
   console.log("Created admin AppUser:", adminAppUser);

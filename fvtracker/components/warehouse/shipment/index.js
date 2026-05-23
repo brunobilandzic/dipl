@@ -21,7 +21,6 @@ function ShipmentPageComponent({ shipment }) {
   const managerModelName = useSelector(
     (state) => state.user?.session?.managerModelName,
   );
-  console.log({ managerModelName });
 
   const { warehouseRequest, status, shipmentItems } = shipment;
   const { order } = warehouseRequest || {};
@@ -30,9 +29,7 @@ function ShipmentPageComponent({ shipment }) {
     [],
   );
 
-  console.log({ sources });
 
-  console.log({ shipmentPage: shipment });
   return (
     <div>
       <div>

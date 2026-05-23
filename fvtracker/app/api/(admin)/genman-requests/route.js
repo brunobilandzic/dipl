@@ -62,7 +62,7 @@ export async function POST(req) {
     }
     await request.save();
     console.log({ request });
-    return Response.json({ message: "Zahtjev odobren" });
+    return Response.json({ request, message: "Zahtjev odobren" });
   } catch (error) {
     console.error("Error approving general manager request:", error);
     return Response.json(

@@ -11,24 +11,26 @@ import {
   SHIPMENT_SHIPPED_PARTLY,
   SHIPMENT_PENDING,
 } from "@/lib/constants/warehouse/shipment";
+import { useRouter } from "next/navigation";
 
 export const WarehouseRequestList = () => {
   const warehouseRequests = useSelector(
     (state) => state.warehouse.warehouseRequests,
   );
+  const router = useRouter();
   return (
     <>
       <div className="text-2xl font-bold mb-4">Zahtjevi skladištu</div>
       <div className="flex flex-col gap-4 mb-6">
         {warehouseRequests?.map((wr) => (
-          <WarehouseRequestListItem key={wr._id} request={wr} />
+          <WarehouseRequestListItem key={wr._id} request={wr} router={router} />
         ))}
       </div>
     </>
   );
 };
 
-const WarehouseRequestListItem = ({ request }) => {
+const WarehouseRequestListItem = ({ request, router }) => {
   console.log({ request });
   let isPartlyShipped = request.shipment?.status === SHIPMENT_SHIPPED_PARTLY;
   let isFullyShipped = request.shipment?.status === SHIPMENT_SHIPPED_FULLY;
@@ -59,7 +61,8 @@ const WarehouseRequestListItem = ({ request }) => {
       ? [
           {
             label: "Obradi",
-            onClick: () => {
+            onClick: (e) => {
+              e.stopPropagation();
               setCreateShipmentModalOpen(true);
             },
             className: "submitButton",
@@ -70,6 +73,8 @@ const WarehouseRequestListItem = ({ request }) => {
   return (
     <>
       <ListItem
+        href={`/otpremnice/${request.shipment._id}`}
+        router={router}
         actionOptions={actions}
         _className={` border ${outlineClassName} border-2`}
         title={`Zahtjev za narudžbom ${request.order.number}`}

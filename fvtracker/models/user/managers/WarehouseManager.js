@@ -15,6 +15,13 @@ const warehouseManagerSchema = new Schema({
       default: null,
     },
   ],
+  warehouseRequests: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "WarehouseRequest",
+      default: [],
+    },
+  ],
 });
 
 export const WarehouseManager =

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import roleitems, { guestNavItems } from "./roleitems";
+import roleitems, { adminNavItems, guestNavItems } from "./roleitems";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -135,6 +135,12 @@ function NavItems() {
       setItems(roleitems[managerModelName] || []);
     }
   }, [managerModelName]);
+
+  useEffect(() => {
+    if (status === "authenticated" && session.user?.isAdmin) {
+      setItems(adminNavItems);
+    }
+  }, [status]);
 
   return (
     <>

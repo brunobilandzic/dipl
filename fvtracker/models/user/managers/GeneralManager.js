@@ -13,6 +13,11 @@ const generalManagerSchema = new Schema({
   roleRequests: [
     { type: mongoose.Schema.Types.ObjectId, ref: "RoleRequest", default: [] },
   ],
+  generalManagerRequest: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "GeneralManagerRequest",
+    default: null,
+  },
 });
 
 generalManagerSchema.method.getRoleRequests = async function () {

@@ -21,20 +21,15 @@ const roleRequestSchema = new Schema({
 });
 
 const generalManagerRequestSchema = new Schema({
-  appUser: {
+  generalManager: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "AppUser",
-    required: true,
+    ref: "GeneralManager",
+    default: null,
   },
   status: {
     type: String,
     enum: Object.values(ROLE_STATUSES),
     default: ROLE_STATUSES.PENDING,
-  },
-  admin: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Admin",
-    required: true,
   },
 });
 

@@ -38,6 +38,11 @@ export default function SeedOptions() {
       icon: <MdAllInclusive />,
       type: SEED_TYPES.ALL,
     },
+    {
+      label: "Admin",
+      icon: <FaUserPlus />,
+      type: SEED_TYPES.ADMIN,
+    },
     /*     {
       label: "Korisnici",
       icon: <FaUserPlus />,

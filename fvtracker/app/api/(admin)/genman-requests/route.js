@@ -5,7 +5,7 @@ import { GeneralManager } from "@/models/user/managers/GeneralManager";
 
 export async function GET(request) {
   try {
-    const { unauthorized, admin } = await fetchSessionData({
+    const { unauthorized, admin } = await fetchAdmin({
       requireAdmin: true,
     });
     if (unauthorized) {

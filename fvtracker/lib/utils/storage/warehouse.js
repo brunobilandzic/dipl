@@ -173,11 +173,6 @@ export const buildRequired = ({ orderItems }) => {
 };
 
 export const calculateIsShipmentShipped = ({ shipmentItems, orderItems }) => {
-  console.log({
-    msg: "Calculating if shipment is shipped",
-    shipmentItems,
-    orderItems,
-  });
   const required = buildRequired({ orderItems });
   console.log({ required });
 

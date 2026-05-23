@@ -8,7 +8,7 @@ export const createShipments = async ({ warehouseRequests }) => {
     const orderItems = warehouseRequest.order.items;
     await fillWarehouseRequest({
       warehouseRequestId: warehouseRequest._id,
-      shipmentSources: buildShipmentSources({
+      shipmentSources: await buildShipmentSources({
         orderItems,
         warehouseManagerId: warehouseRequest.warehouseManager,
       }),

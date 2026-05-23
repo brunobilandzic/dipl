@@ -117,21 +117,24 @@ async function signUpCredentials({
         );
         return null;
       }
-      const admin = await Admin.findOne();
-      if (!admin) {
-        console.log("No admin found, cannot create General Manager");
-        return null;
-      }
-
-      const generalManagerRequest = new GeneralManagerRequest({
+      const generalManager = await new GeneralManager();
+      const generalManagerRootManager = await new RootManager({
         appUser: newUser._id,
-        admin: admin._id,
+        managerModelName: GENERAL_MANAGER,
+        generalManager: generalManager._id,
       });
-      await generalManagerRequest.save();
+      generalManager.rootManager = generalManagerRootManager._id;
+      await generalManager.save();
+      await generalManagerRootManager.save();
+      newUser.rootManager = generalManagerRootManager._id;
+      await newUser.populate("rootManager");
+      await newUser.save();
+      return newUser;
     }
     // right now, app is built for only one gen manager
+    if (!requestedRole) return newUser;
     if (!MANAGER_TYPES.includes(requestedRole)) {
-      return newUser;
+      throw new Error("Invalid manager type requested: " + requestedRole);
     }
     const generalManager = await GeneralManager.findOne();
     const rootManager = await new RootManager({

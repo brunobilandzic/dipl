@@ -65,7 +65,7 @@ const FilterDropdown = ({ filter, setFilter }) => {
   );
 };
 
-const RoleRequestItem = ({ roleRequest }) => {
+export const RoleRequestItem = ({ roleRequest }) => {
   const { name, surname } = roleRequest.rootManager.appUser;
   const { managerModelName: requestedRoleName } = roleRequest.rootManager;
 

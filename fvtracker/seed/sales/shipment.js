@@ -16,7 +16,7 @@ export const createShipments = async ({ warehouseRequests }) => {
   }
 };
 
-const buildShipmentSources = ({ orderItems, warehouseManagerId }) => {
+const buildShipmentSources = async ({ orderItems, warehouseManagerId }) => {
   const sources = [];
 
   for (const oi of orderItems) {

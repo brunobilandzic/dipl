@@ -57,19 +57,14 @@ const orderItemSchema = new Schema({
 });
 
 const receiptSchema = new Schema({
-  order: {
+  shipmentItem: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Order",
+    ref: "ShipmentItem",
     required: true,
   },
   createdAt: {
     type: Date,
     default: Date.now,
-  },
-  number: {
-    type: String,
-    required: true,
-    unique: true,
   },
 });
 

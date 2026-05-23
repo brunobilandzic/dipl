@@ -190,6 +190,7 @@ export const calculateIsShipmentShipped = ({ shipmentItems, orderItems }) => {
     }
   }
 
+  console.log({ shipmentSources: { ...totals } });
   console.log({ shipmentShipped });
 
   console.log({ shipmentSources: { ...totals } });

@@ -9,7 +9,9 @@ export default {
     await deleteDB();
     const orders = await createOrders();
     // create req for only one order
-    const warehouseRequests = await createWarehouseRequests({ orders });
+    const warehouseRequests = await createWarehouseRequests({
+      orders: orders.slice(0, orders.length - 1),
+    });
   },
 };
 

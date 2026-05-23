@@ -18,7 +18,9 @@ async function GeneralManagerRequestsPage() {
 
   return (
     <div>
-      <RoleRequestItem roleRequest={generalManagerRequest} />
+      <div>
+        <div>{JSON.stringify(generalManagerRequest)}</div>
+      </div>
     </div>
   );
 }

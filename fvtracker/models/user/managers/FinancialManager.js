@@ -9,7 +9,6 @@ const financialManagerSchema = new Schema({
     required: true,
   },
   orders: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order", default: [] }],
-
 });
 
 export const FinancialManager =

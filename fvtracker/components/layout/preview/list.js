@@ -81,10 +81,19 @@ export function List({
   );
 }
 
-export function ListItem({ children, actionOptions, title, _className }) {
+export function ListItem({
+  children,
+  actionOptions,
+  title,
+  _className,
+  href,
+  router,
+}) {
+  console.log({ href, router });
   return (
     <>
       <div
+        onClick={href ? router.push(href) : () => {}}
         className={`flex flex-col gap-2 border p-4 rounded-lg ${_className || ""}`}
       >
         {title && <h3 className="font-bold">{title}</h3>}

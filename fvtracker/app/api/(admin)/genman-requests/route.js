@@ -12,11 +12,22 @@ export async function GET(request) {
       return Response.json({ error: "Unauthorized" }, { status: 403 });
     }
 
-    const generalManagerRequests = await mongoose
-      .model("GeneralManagerRequest")
-      .find({ admin: admin._id })
-      .populate("appUser", "name surname email");
-    return Response.json({ generalManagerRequests });
+    const generalManagerRequest = await GeneralManagerRequest.findOne(
+      {},
+    ).populate([
+      {
+        path: "generalManager",
+        populate: {
+          path: "rootManager",
+          populate: {
+            path: "appUser",
+            select: "email name surname",
+          },
+        },
+      },
+    ]);
+
+    return Response.json({ generalManagerRequest });
   } catch (error) {
     console.error("Error fetching general manager requests:", error);
     return Response.json(

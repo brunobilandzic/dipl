@@ -33,7 +33,11 @@ const buildShipmentSources = async ({ orderItems, warehouseManagerId }) => {
       warehouseManagerId,
     });
 
-    console.log({ warehouse });
+    if (!warehouseId) {
+      continue;
+    }
+
+    console.log({ warehouseId });
 
     sources.push({
       productName: oi.product.name,

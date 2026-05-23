@@ -11,6 +11,8 @@ import { GeneralManager } from "@/models/user/managers/GeneralManager";
 import { RootManager } from "@/models/user/managers/RootManager";
 import { ROLE_STATUSES } from "../constants/users";
 import mongoose from "mongoose";
+import { Admin } from "@/models/user/Admin";
+import { GeneralManagerRequest } from "@/models/documents/requests/RoleRequest";
 
 export async function handleOAuth({ email, given_name, family_name }) {
   await dbConnect();
@@ -113,6 +115,11 @@ async function signUpCredentials({
         console.log(
           "General Manager already exists, cannot create another one",
         );
+        return null;
+      }
+      const admin = await Admin.findOne();
+      if (!admin) {
+        console.log("No admin found, cannot create General Manager");
         return null;
       }
     }

@@ -7,6 +7,7 @@ import { signIn, useSession } from "next-auth/react";
 import {
   CULTIVATION_MANAGER,
   FINANCIAL_MANAGER,
+  GENERAL_MANAGER,
   MANAGER_TYPES,
   PRODUCTION_MANAGER,
   WAREHOUSE_MANAGER,
@@ -100,6 +101,7 @@ function SignUpForm() {
 export default SignUpForm;
 
 const roleOptions = [
+  { value: GENERAL_MANAGER, label: "Generalni menadžer" },
   { value: CULTIVATION_MANAGER, label: "Menadžer kultivacije" },
   { value: PRODUCTION_MANAGER, label: "Menadžer proizvodnje" },
   { value: WAREHOUSE_MANAGER, label: "Menadžer skladišta" },

@@ -8,6 +8,9 @@ const adminSchema = new Schema({
     ref: "AppUser",
     required: true,
   },
+  generalManagerRequests: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "GeneralManagerRequest" },
+  ],
   roleRequests: [{ type: mongoose.Schema.Types.ObjectId, ref: "RoleRequest" }],
 });
 

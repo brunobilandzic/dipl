@@ -16,7 +16,20 @@ export async function POST(req) {
 
     const { shipmentItemId } = await req.json();
 
-    const shipmentItem = await ShipmentItem.findById(shipmentItemId);
+    const shipmentItem = await ShipmentItem.findById(shipmentItemId).populate([
+      {
+        path: "shipment",
+        select: "warehouseRequest",
+        populate: {
+          path: "warehouseRequest",
+          select: "order",
+          populate: {
+            path: "order",
+            select: "receipts",
+          },
+        },
+      },
+    ]);
 
     if (!shipmentItem) {
       return Response.json(
@@ -30,8 +43,10 @@ export async function POST(req) {
     });
 
     shipmentItem.receipt = newReceipt._id;
+    shipmentItem.shipment.warehouseRequest.order.receipts.push(newReceipt._id);
 
     await newReceipt.save();
+    await shipmentItem.shipment.warehouseRequest.order.save();
     await shipmentItem.save();
 
     return Response.json({ newReceipt, message: "Račun uspješno kreiran" });

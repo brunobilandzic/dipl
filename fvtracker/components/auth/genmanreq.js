@@ -16,14 +16,9 @@ export const GeneralManagerRequestComponent = ({}) => {
   const router = useRouter();
 
   useEffect(() => {
-    console.log({ request });
-  }, [request]);
-
-  useEffect(() => {
     const fetchRequest = async () => {
       try {
         const response = await api.get("/genman-requests");
-        console.log({ response });
         setRequest(response.data.generalManagerRequest);
       } catch (error) {
         handleError({
@@ -37,16 +32,10 @@ export const GeneralManagerRequestComponent = ({}) => {
     fetchRequest();
   }, []);
 
-  useEffect(() => {
-    console.log(appUser);
-    return () => console.log("UNMOUNT");
-  }, []);
-
   const respond = async (status) => {
     try {
       dispatch(setLoading(true));
       const response = await api.post("/genman-requests", { status });
-      console.log({ response });
       router.refresh();
     } catch (error) {
       console.error("Error approving general manager request:", error);

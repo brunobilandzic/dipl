@@ -37,18 +37,17 @@ const buildShipmentSources = async ({ orderItems, warehouseManagerId }) => {
       continue;
     }
 
-    console.log({ warehouseId });
-
     sources.push({
       productName: oi.product.name,
       quantity: oi.quantity,
       warehouseId,
     });
   }
+
   return sources;
 };
 
-const findWarehouseForShipmentSource = async ({
+const findWarehouseForSource = async ({
   shipmentSource,
   warehouseManagerId,
 }) => {
@@ -74,15 +73,8 @@ const findWarehouseForShipmentSource = async ({
   if (stocksWithQuantity.length === 0) {
     console.log({
       error: `Nema dovoljno zaliha za proizvod ${shipmentSource.productName}`,
-      shipmentSource,
-      stocks: stocks.map((s) => ({
-        product: s.product.name,
-        quantity: s.quantity,
-      })),
     });
-    throw new Error(
-      `Nema dovoljno zaliha za proizvod ${shipmentSource.productName}`,
-    );
+    return null;
   }
 
   return stocksWithQuantity[0].warehouse;

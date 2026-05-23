@@ -6,12 +6,17 @@ import { showDate, showDateTime } from "@/lib/utils/display";
 import { sortItems } from "@/lib/utils/list";
 import { notFound } from "next/navigation";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
+import { setLoading } from "@/store/loading";
 
 function ShipmentPageComponent({ shipment }) {
   if (!shipment) {
     return notFound();
   }
+
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   const managerModelName = useSelector(
     (state) => state.user?.session?.managerModelName,
@@ -37,6 +42,8 @@ function ShipmentPageComponent({ shipment }) {
           <ShipmentItemList
             managerModelName={managerModelName}
             shipmentItems={shipmentItems}
+            dispatch={dispatch}
+            router={router}
           />
         </div>
       </div>
@@ -46,7 +53,12 @@ function ShipmentPageComponent({ shipment }) {
 
 export default ShipmentPageComponent;
 
-const ShipmentItemList = ({ managerModelName, shipmentItems }) => {
+const ShipmentItemList = ({
+  managerModelName,
+  shipmentItems,
+  dispatch,
+  router,
+}) => {
   const sortedShipmentItems = sortItems({
     items: shipmentItems,
     sortBy: "createdAt",
@@ -59,6 +71,8 @@ const ShipmentItemList = ({ managerModelName, shipmentItems }) => {
           key={si._id}
           shipmentItem={si}
           managerModelName={managerModelName}
+          dispatch={dispatch}
+          router={router}
         />
       ))}
     </div>

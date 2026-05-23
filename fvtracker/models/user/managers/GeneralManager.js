@@ -27,6 +27,8 @@ generalManagerSchema.pre("save", async function () {
       generalManager: this._id,
     });
     this.generalManagerRequest = generalManagerRequest._id;
+
+    await generalManagerRequest.save();
   }
 });
 

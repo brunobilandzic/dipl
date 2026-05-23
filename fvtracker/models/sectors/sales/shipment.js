@@ -42,6 +42,10 @@ const shipmentItemSchema = new Schema({
     ref: "Receipt",
     default: null,
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 const shipmentSourceSchema = new Schema({

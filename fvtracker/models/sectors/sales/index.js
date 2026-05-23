@@ -25,11 +25,13 @@ const orderSchema = new Schema({
     ref: "WarehouseRequest",
     default: null,
   },
-  receipt: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Receipt",
-    default: null,
-  },
+  receipts: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Receipt",
+      default: [],
+    },
+  ],
   createdAt: {
     type: Date,
     default: Date.now,

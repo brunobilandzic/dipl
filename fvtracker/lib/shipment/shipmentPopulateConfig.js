@@ -4,8 +4,10 @@ export default [
     populate: [
       {
         path: "order",
-        populate: "items",
-        populate: "product shipmentSources",
+        populate: {
+          path: "items",
+          populate: "product",
+        },
       },
     ],
   },

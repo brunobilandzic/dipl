@@ -77,6 +77,15 @@ export async function fetchSessionSpecificManager({
   return specificManager;
 }
 
+export const fetchAdmin = async () => {
+  const appUser = await fetchSessionAppUser();
+  const admin = await mongoose.models.Admin.findOne({ appUser: appUser._id });
+  if (!admin) {
+    return { unauthorized: true };
+  }
+  return { admin };
+};
+
 export async function fetchManager({ managerNames = [] }) {
   const response = {
     generalManager: null,

@@ -10,8 +10,8 @@ import {
   warehouseRequestPopulateShipmentItems,
 } from "../utils/storage/warehouse";
 import {
-  SHIPMENT_SHIPPABLE,
-  SHIPMENT_SHIPPED,
+  SHIPMENT_SHIPPED_FULLY,
+  SHIPMENT_SHIPPED_PARTLY,
 } from "../constants/warehouse/shipment";
 import { Order } from "@/models/sectors/sales";
 
@@ -158,7 +158,7 @@ export const fillWarehouseRequest = async ({
   ];
   await shipmentItem.populate(siPopulate);
 
-  // get fresh shipment with populated sources to check if it's fully shipped
+  // get fresh shipment with populated sources to check if it's fully SHIPMENT_SHIPPED_FULLY
   const populatedShipment = await Shipment.findById(shipment._id).populate({
     path: "shipmentItems",
     populate: siPopulate,
@@ -171,14 +171,16 @@ export const fillWarehouseRequest = async ({
     })
   ) {
     console.log(
-      "Shipment is fully shipped",
-      populatedShipment.shipmentItems,
-      "...",
+      "Shipment is fully SHIPMENT_SHIPPED_FULLY ",
+      shipment.shipmentItems.length,
+      "shipment items.",
     );
-    shipment.status = SHIPMENT_SHIPPED;
+    shipment.status = SHIPMENT_SHIPPED_FULLY;
   } else if (newShipmentSources.length > 0) {
-    console.log("Shipment is Shipable shipped");
-    shipment.status = SHIPMENT_SHIPPABLE;
+    console.log(
+      "Shipment partially SHIPMENT_SHIPPED_FULLY , at least one source added.",
+    );
+    shipment.status = SHIPMENT_SHIPPED_PARTLY;
   }
 
   await shipmentItem.save();

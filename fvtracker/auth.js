@@ -58,12 +58,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         const email = token.email ?? profile?.email;
         const appUser = await users.getAppUser({ email });
         if (appUser) {
-          await appUser.populate("rootManager");
           token.appUserId = appUser._id.toString();
+          token.displayName = appUser.username || appUser.name;
+        }
+        if (appUser && appUser.rootManager) {
+          await appUser.populate("rootManager");
           token.managerModelName = appUser.rootManager
             ? appUser.rootManager.managerModelName
             : null;
-          token.displayName = appUser.username || appUser.name;
         }
       }
       return token;

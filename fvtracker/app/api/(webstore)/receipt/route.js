@@ -5,6 +5,7 @@ import { ShipmentItem } from "@/models/sectors/sales/Shipment";
 
 export async function POST(req) {
   try {
+    console.log("Received request to create receipt");
     const { specificManager: financialManager, unauthorized } =
       await fetchManager({
         managerNames: [FINANCIAL_MANAGER],
@@ -33,7 +34,7 @@ export async function POST(req) {
     await newReceipt.save();
     await shipmentItem.save();
 
-    return Response.json({ message: "Račun uspješno kreiran" });
+    return Response.json({ newReceipt, message: "Račun uspješno kreiran" });
   } catch (error) {
     console.error("Error creating receipt:", error);
     return Response.json({

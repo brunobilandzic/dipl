@@ -11,7 +11,7 @@ import {
 import SEED_TYPES from "@/seed/seedTypes";
 import { OptionButtons } from "../layout/buttons/options";
 import { useDispatch } from "react-redux";
-import {  setSeedLoading } from "@/store/loading";
+import { setSeedLoading } from "@/store/loading";
 import { signOut } from "next-auth/react";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { logOut } from "@/store/userSlice";
@@ -19,9 +19,11 @@ import { logOut } from "@/store/userSlice";
 export default function SeedOptions() {
   const dispatch = useDispatch();
   const deleteDB = async () => {
+    console.log("Deleting database...");
     try {
       const response = await axios.delete("/api/delete");
       const { success } = response.data;
+      await signOut();
       console.log("SUCCESS:", response.data);
       if (success) alert("Baza je uspješno obrisana");
     } catch (error) {

@@ -11,6 +11,10 @@ export const createOrders = async () => {
   const customer = await getCustomer();
   const items = await buildOrderItems();
 
+  const financialManager = await FinancialManager.findOne({}).select(
+    "_id orders ",
+  );
+
   for (const orderData of ordersSeedData) {
     const newOrder = await Order.create({
       ...orderData,

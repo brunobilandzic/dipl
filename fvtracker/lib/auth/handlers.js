@@ -141,6 +141,12 @@ async function logInCredentials({ login, password }) {
   );
 
   if (!appUser) {
+    appUser = await models.user.AppUser.findOne({ username: login }).populate(
+      "rootManager",
+    );
+  }
+
+  if (!appUser) {
     console.log("No user found with email or username:", login);
     return null;
   }

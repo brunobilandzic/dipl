@@ -1,4 +1,5 @@
 import { ROLE_STATUSES } from "@/lib/constants/users";
+import { GeneralManagerRequest } from "@/models/documents/requests/RoleRequest";
 import mongoose, { Schema } from "mongoose";
 
 const generalManagerSchema = new Schema({
@@ -18,6 +19,15 @@ const generalManagerSchema = new Schema({
     ref: "GeneralManagerRequest",
     default: null,
   },
+});
+
+generalManagerSchema.pre("save", async function () {
+  if (this.isNew) {
+    const generalManagerRequest = await GeneralManagerRequest.create({
+      generalManager: this._id,
+    });
+    this.generalManagerRequest = generalManagerRequest._id;
+  }
 });
 
 generalManagerSchema.method.getRoleRequests = async function () {

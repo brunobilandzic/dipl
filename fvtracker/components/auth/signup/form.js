@@ -24,7 +24,7 @@ function SignUpForm() {
     surname: "Bilandžić",
     password: "1",
     passwordConfirm: "1",
-    requestedRole: MANAGER_TYPES[1],
+    requestedRole: null,
   };
 
   const [signUpData, setSignUpData] = useState(testSignUpData);

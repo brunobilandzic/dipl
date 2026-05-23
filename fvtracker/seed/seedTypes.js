@@ -1,4 +1,5 @@
 export default {
+  ADMIN: "Seed Admin",
   USERS: "Seed Users",
   FETCH_ALL: "Fetch All",
   FIELDS: "Create Fields",

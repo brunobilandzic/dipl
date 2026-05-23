@@ -6,6 +6,12 @@ export async function GET(request) {
     if (unauthorized) {
       return Response.json({ error: "Unauthorized" }, { status: 403 });
     }
+
+    const generalManagerRequests = await mongoose
+      .model("GeneralManagerRequest")
+      .find({ admin: admin._id })
+      .populate("appUser", "name surname email");
+    return Response.json({ generalManagerRequests });
   } catch (error) {
     console.error("Error fetching general manager requests:", error);
     return Response.json(

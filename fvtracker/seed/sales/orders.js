@@ -29,13 +29,13 @@ export const createOrders = async () => {
       const product = await Product.findById(item.product);
       product.orderItems.push(orderItem._id);
 
-      createdOrders.push(newOrder);
-
       newOrder.items.push(orderItem._id);
 
       await product.save();
       await orderItem.save();
     }
+
+    createdOrders.push(newOrder);
     await newOrder.save();
   }
 

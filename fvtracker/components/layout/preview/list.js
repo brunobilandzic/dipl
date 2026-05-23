@@ -91,7 +91,6 @@ export function ListItem({
   href,
   router,
 }) {
-  console.log({ href, router });
   return (
     <>
       <div

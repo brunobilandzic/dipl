@@ -2,8 +2,8 @@ import { AppInput } from "@/components/form/inputs";
 import { FormModal } from "@/components/layout/modals/form";
 import {
   SHIPMENT_PENDING,
-  SHIPMENT_SHIPPABLE,
-  SHIPMENT_SHIPPED,
+  SHIPMENT_SHIPPED_FULLY,
+  SHIPMENT_SHIPPED_PARTLY,
 } from "@/lib/constants/warehouse/shipment";
 import {
   calculateNeededQuantities,
@@ -44,7 +44,7 @@ export const CreateShipmentModal = ({
         setNewShipmentData(emptyShipment);
         onCancel();
       }}
-      onSubmit={() => submitShipment({  newShipmentData, dispatch })}
+      onSubmit={() => submitShipment({ newShipmentData, dispatch })}
       title="Otpremnica"
     >
       <ChooseWarehouseSources
@@ -198,14 +198,14 @@ const ChooseWarehouseSources = ({
 };
 
 const ShipmentStatus = ({ status, neededString, isFullfilled }) => {
-  if (status === SHIPMENT_SHIPPED) return "Otpremljeno";
+  if (status === SHIPMENT_SHIPPED_FULLY) return "Otpremljeno";
 
   if (isFullfilled)
     return <div className="text-green-600 font-bold">Zahtjev je ispunjen</div>;
   switch (status) {
     case SHIPMENT_PENDING:
       return neededString;
-    case SHIPMENT_SHIPPED:
+    case SHIPMENT_SHIPPED_FULLY:
       return "Otpremljeno";
     default:
       return `SHIPMENT STATUS ${status}`;

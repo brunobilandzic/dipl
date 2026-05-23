@@ -61,3 +61,6 @@ roleRequestSchema.pre("save", async function () {
 export const RoleRequest =
   mongoose.models.RoleRequest ||
   mongoose.model("RoleRequest", roleRequestSchema);
+export const GeneralManagerRequest =
+  mongoose.models.GeneralManagerRequest ||
+  mongoose.model("GeneralManagerRequest", generalManagerRequestSchema);

@@ -17,7 +17,7 @@ const appUsersJsonArray = [
     provider: "credentials",
   },
   {
-    username: "admin.admin",
+    username: "admin",
     modelName: "Admin",
     name: "Admin",
     surname: "Admin",

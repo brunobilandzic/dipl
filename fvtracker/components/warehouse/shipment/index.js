@@ -14,7 +14,7 @@ function ShipmentPageComponent({ shipment }) {
   }
 
   const managerModelName = useSelector(
-    (state) => state.user.session.managerModelName,
+    (state) => state.user?.session?.managerModelName,
   );
   console.log({ managerModelName });
 

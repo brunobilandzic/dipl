@@ -125,7 +125,12 @@ const ShipmentItem = ({ shipmentItem, managerModelName, dispatch, router }) => {
       <div>
         <strong>Stavke:</strong>
         <SourceList sources={sources} />
-        <div></div>
+        {receipt && (
+          <div className="pt-8 text-right">
+            <strong>Račun kreiran</strong> {receipt.number} (kreiran{" "}
+            {showDateTime(receipt.createdAt)})
+          </div>
+        )}
       </div>
     </ListItem>
   );

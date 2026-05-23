@@ -1,6 +1,8 @@
 "use client";
 
 import { ListItem } from "@/components/layout/preview/list";
+import api from "@/lib/api";
+import handleError from "@/lib/constants/errors/client/handleError";
 import { FINANCIAL_MANAGER } from "@/lib/constants/users/managerTypes";
 import { showDate, showDateTime } from "@/lib/utils/display";
 import { sortItems } from "@/lib/utils/list";
@@ -28,7 +30,6 @@ function ShipmentPageComponent({ shipment }) {
     (acc, si) => [...acc, ...si.sources],
     [],
   );
-
 
   return (
     <div>
@@ -76,8 +77,29 @@ const ShipmentItemList = ({
   );
 };
 
-const ShipmentItem = ({ shipmentItem, managerModelName }) => {
+const ShipmentItem = ({ shipmentItem, managerModelName, dispatch, router }) => {
   const { sources, receipt, createdAt, _id } = shipmentItem;
+
+  const handleReceiptCreation = async () => {
+    try {
+      dispatch(setLoading(true));
+      const res = await api.post("/receipt", {
+        shipmentItemId: _id,
+      });
+      shipmentItem.receipt = res.data.newReceipt; // Assuming the response contains the new receipt ID
+      dispatch(setLoading(false));
+      console.log("Receipt creation response:", res);
+      // Handle success (e.g., show a message, refresh data)
+    } catch (error) {
+      console.error("Error creating receipt:", error);
+      dispatch(setLoading(false));
+      // Handle error (e.g., show an error message)
+      handleError(
+        { ...error, generalMessage: "Greška prilikom kreiranja računa" },
+        router,
+      );
+    }
+  };
 
   const actionOptions = [
     ...(managerModelName === FINANCIAL_MANAGER && !receipt
@@ -86,13 +108,14 @@ const ShipmentItem = ({ shipmentItem, managerModelName }) => {
             label: "Izradi račun",
             onClick: (e) => {
               e.stopPropagation();
-              console.log("Creating receipt for shipment item", shipmentItem);
+              handleReceiptCreation();
             },
             className: "submitButton",
           },
         ]
       : []),
   ];
+
   return (
     <ListItem
       key={_id}

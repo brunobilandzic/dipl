@@ -72,7 +72,7 @@ const OrderListItem = ({ order, dispatch, router }) => {
           },
         ]
       : []),
-    ...(!(order.state === WAREHOUSE_REQUESTED)
+    ...(!order.warehouseRequest
       ? [
           {
             label: "Zahtjev skladištu",
@@ -80,17 +80,6 @@ const OrderListItem = ({ order, dispatch, router }) => {
             onClick: () => {
               setWarehouseRequestOpen(true);
             },
-          },
-        ]
-      : []),
-    ...(!order.receipt && ![DELIVERED].includes(order.state)
-      ? [
-          {
-            label: "Izradi račun",
-            onClick: () => {
-              console.log("izrada računa za", order.number);
-            },
-            className: "submitButton",
           },
         ]
       : []),
@@ -144,7 +133,12 @@ const OrderItems = ({ items }) => {
       <ul>
         {items.map((item) => (
           <li key={item._id}>
-            {item.product.name} x {item.quantity}
+            {item.product.name} Poslano:{" "}
+            {item.shipmentSources.reduce(
+              (total, source) => total + source.quantity,
+              0,
+            )}{" "}
+            / {item.quantity}
           </li>
         ))}
       </ul>

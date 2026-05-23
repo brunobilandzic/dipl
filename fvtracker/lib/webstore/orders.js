@@ -1,4 +1,4 @@
-import { Order, OrderItem } from "@/models/sectors/sales";
+import { Order, OrderItem, Receipt } from "@/models/sectors/sales";
 import { getCustomer } from "./customer";
 import { Product } from "@/models/sectors/production/Product";
 
@@ -57,6 +57,19 @@ export const getOrders = async ({ customerId = null }) => {
           },
         },
       ],
+    },
+    {
+      path: "receipts",
+      populate: {
+        path: "shipmentItem",
+        populate: {
+          path: "sources",
+          populate: {
+            path: "product",
+            select: "name",
+          },
+        },
+      },
     },
   ]);
 

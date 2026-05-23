@@ -28,7 +28,7 @@ const buildShipmentSources = async ({ orderItems, warehouseManagerId }) => {
       productName: oi.product.name,
       quantity: oi.quantity,
     };
-    const warehouse = findWarehouseForShipmentSource({
+    const warehouseId = await findWarehouseForSource({
       shipmentSource,
       warehouseManagerId,
     });

@@ -20,6 +20,33 @@ const roleRequestSchema = new Schema({
   },
 });
 
+const generalManagerRequestSchema = new Schema({
+  appUser: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "AppUser",
+    required: true,
+  },
+  status: {
+    type: String,
+    enum: Object.values(ROLE_STATUSES),
+    default: ROLE_STATUSES.PENDING,
+  },
+  admin: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Admin",
+    required: true,
+  },
+});
+
+generalManagerRequestSchema.pre("save", async function () {
+  const admin = await mongoose.models.Admin.findById(this.admin);
+  if (!admin) {
+    throw new Error("Admin not found for General Manager Request.");
+  }
+  admin.generalManagerRequests.push(this._id);
+  await admin.save();
+});
+
 roleRequestSchema.pre("save", async function () {
   const generalManager = await mongoose.models.GeneralManager.findById(
     this.generalManager,

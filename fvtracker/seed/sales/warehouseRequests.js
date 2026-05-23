@@ -19,10 +19,8 @@ export const createWarehouseRequests = async ({ orders }) => {
       warehouseManager: warehouseManager._id,
     });
 
-    financialManager.warehouseRequests.push(warehouseRequest._id);
     warehouseManager.warehouseRequests.push(warehouseRequest._id);
 
-    await financialManager.save();
     await warehouseManager.save();
 
     order.warehouseRequest = warehouseRequest._id;

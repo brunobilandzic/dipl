@@ -5,6 +5,8 @@ import { GeneralManager } from "@/models/user/managers/GeneralManager";
 import { RootManager } from "@/models/user/managers/RootManager";
 import { GENERAL_MANAGER_USERNAME } from "@/lib/constants/users/managersUsernameModel";
 import { GENERAL_MANAGER } from "@/lib/constants/users/managerTypes";
+import { ROLE_STATUSES } from "@/lib/constants/users";
+import { GeneralManagerRequest } from "@/models/documents/requests/RoleRequest";
 
 export const createGeneralManager = async () => {
   await dbConnect();
@@ -19,6 +21,10 @@ export const createGeneralManager = async () => {
   const generalManager = new GeneralManager({
     appUser: generalManagerAppUser._id,
   });
+  await generalManager.save();
+  const request = await GeneralManagerRequest.findOne();
+  request.status = ROLE_STATUSES.APPROVED;
+  await request.save();
 
   await generalManager.save();
 

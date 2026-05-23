@@ -11,4 +11,21 @@ export default [
       },
     ],
   },
+  {
+    path: "shipmentItems",
+    populate: [
+      {
+        path: "sources",
+        populate: [
+          {
+            path: "warehouseStock",
+            populate: "warehouse",
+          },
+          {
+            path: "product",
+          },
+        ],
+      },
+    ],
+  },
 ];

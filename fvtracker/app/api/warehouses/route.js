@@ -24,7 +24,7 @@ export async function GET(request) {
     const warehouses = await getWarehouses({ managerId: warehouseManager._id });
     return Response.json({ warehouses });
   } else {
-    const warehouses = await getWarehouses({ managerId });
+    const warehouses = await getWarehouses({});
     return Response.json({ warehouses });
   }
 }

@@ -38,7 +38,7 @@ const buildShipmentSources = async ({ orderItems, warehouseManagerId }) => {
     sources.push({
       productName: oi.product.name,
       quantity: oi.quantity,
-      warehouse,
+      warehouseId,
     });
   }
   return sources;

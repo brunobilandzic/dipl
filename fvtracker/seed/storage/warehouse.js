@@ -17,8 +17,9 @@ export const seedWarehouse = async () => {
     warehouseManager: warehouseManager._id,
     volume: 10000,
   };
-  const warehouse = await createWarehouse({ warehouseData });
-
+  const warehouse = await createWarehouse({ warehouseData, warehouseManager });
+  warehouseManager.warehouses.push(warehouse._id);
+  await warehouseManager.save();
   return warehouse;
 };
 

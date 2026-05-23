@@ -37,6 +37,11 @@ const shipmentItemSchema = new Schema({
       default: [],
     },
   ],
+  receipt: {
+    type: Schema.Types.ObjectId,
+    ref: "Receipt",
+    default: null,
+  },
 });
 
 const shipmentSourceSchema = new Schema({
@@ -58,7 +63,6 @@ const shipmentSourceSchema = new Schema({
     ref: "WarehouseStock",
   },
 });
-
 
 export const Shipment =
   mongoose.models.Shipment || mongoose.model("Shipment", shipmentSchema);

@@ -122,6 +122,12 @@ async function signUpCredentials({
         console.log("No admin found, cannot create General Manager");
         return null;
       }
+
+      const generalManagerRequest = new GeneralManagerRequest({
+        appUser: newUser._id,
+        admin: admin._id,
+      });
+      await generalManagerRequest.save();
     }
     // right now, app is built for only one gen manager
     if (!MANAGER_TYPES.includes(requestedRole)) {

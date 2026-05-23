@@ -20,6 +20,10 @@ const buildShipmentSources = ({ orderItems, warehouseManagerId }) => {
   const sources = [];
 
   for (const oi of orderItems) {
+    if (Math.random() < 0.5) {
+      console.log({ skipping: oi.product.name });
+      continue;
+    }
     const shipmentSource = {
       productName: oi.product.name,
       quantity: oi.quantity,

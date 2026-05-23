@@ -1,12 +1,6 @@
 import { FaShoppingCart } from "react-icons/fa";
 
 export default {
-  admin: [
-    {
-      label: "korisnici",
-      path: "/korisnici",
-    },
-  ],
   GeneralManager: [
     {
       label: "pregled",
@@ -159,6 +153,13 @@ export default {
     },
   ],
 };
+
+export const adminNavItems = [
+  {
+    label: "zahtjevi",
+    path: "/zahtjevi/generalni-menadzer",
+  },
+];
 
 export const guestNavItems = [
   {

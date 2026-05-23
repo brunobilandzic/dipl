@@ -757,7 +757,7 @@ export const fruitsGeneralCropTypes = [
         color: "red",
         description: "Najraširenije jabučasto voće.",
         cropVarieties: [
-          { name: "Idared", shade: 600, quantityPerCell: 120 },
+          { name: "Idared", shade: 600, quantityPerCell: 250 },
           { name: "Golden Delicious", shade: 400, quantityPerCell: 150 },
           { name: "Granny Smith", shade: 500, quantityPerCell: 140 },
           { name: "Fuji", shade: 700, quantityPerCell: 160 },

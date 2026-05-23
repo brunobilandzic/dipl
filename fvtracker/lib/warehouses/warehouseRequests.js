@@ -148,8 +148,6 @@ export const fillWarehouseRequest = async ({
     await shipmentSource.save();
   }
 
-  console.log({ newShipmentSources, msg: "New shipment sources" });
-
   await shipmentItem.save();
   await shipment.save();
   const siPopulate = [
@@ -167,18 +165,6 @@ export const fillWarehouseRequest = async ({
     path: "shipmentItems",
     populate: siPopulate,
   });
-
-  console.log(
-    populatedShipment.shipmentItems.forEach((si) => {
-      console.log(si.sources);
-    }),
-  );
-  console.log(
-    "populatedShipment.shipmentItems",
-    populatedShipment.shipmentItems,
-    populatedShipment.shipmentItems.length,
-  );
-  console.log("new shipmentItem", shipmentItem);
 
   if (
     calculateIsShipmentShipped({

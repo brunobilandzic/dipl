@@ -127,7 +127,10 @@ export default {
   FinancialManager: [
     {
       label: "narudžbe",
-      submenu: [{ label: "pregled", path: "/narudzbe" }],
+      submenu: [
+        { label: "pregled", path: "/narudzbe" },
+        { label: "otpremnice", path: "/otpremnice" },
+      ],
     },
     {
       label: "računi",

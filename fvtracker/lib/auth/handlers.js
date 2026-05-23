@@ -61,7 +61,6 @@ export async function handleCredentials(credentials) {
         .model(getManagerModelName())
         .findOne({ rootManager: user.rootManager?._id })
     : null;
-  console.log("Found manager for user:", manager);
 
   return {
     appUserId: user._id.toString(),
@@ -71,6 +70,7 @@ export async function handleCredentials(credentials) {
     roleStatus: user.roleStatus,
     username: user.username,
     managerId: manager?._id.toString() || null,
+    isAdmin: user.isAdmin || false,
   };
 }
 
@@ -107,6 +107,15 @@ async function signUpCredentials({
     provider: "credentials",
   });
   if (requestedRole) {
+    if (requestedRole === GENERAL_MANAGER) {
+      const existingGeneralManager = await GeneralManager.findOne();
+      if (existingGeneralManager) {
+        console.log(
+          "General Manager already exists, cannot create another one",
+        );
+        return null;
+      }
+    }
     // right now, app is built for only one gen manager
     if (!MANAGER_TYPES.includes(requestedRole)) {
       console.log("Invalid requested role:", requestedRole);
@@ -155,6 +164,12 @@ async function logInCredentials({ login, password }) {
     return null;
   }
   if (appUser) {
+    const authorized = await bcrypt.compare(password, appUser.password);
+    if (!authorized) {
+      console.log("Incorrect password for user:", login);
+      return null;
+    }
+    console.log("Found user in DB:", appUser);
     if (!appUser.rootManager) {
       console.log("User has no Root Manager:", login);
       return appUser;
@@ -170,11 +185,6 @@ async function logInCredentials({ login, password }) {
       path: "roleRequest",
       select: "status",
     });
-    const authorized = await bcrypt.compare(password, appUser.password);
-    if (!authorized) {
-      console.log("Incorrect password for user:", login);
-      return null;
-    }
 
     console.log("User authorized:", appUser.email);
     return {

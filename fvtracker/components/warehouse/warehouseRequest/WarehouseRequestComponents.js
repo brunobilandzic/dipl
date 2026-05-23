@@ -7,8 +7,8 @@ import { WAREHOUSE_MANAGER } from "@/lib/constants/users/managerTypes";
 import { CreateShipmentModal } from "../shipment/create";
 import { useState } from "react";
 import {
-  SHIPMENT_SHIPPED,
-  SHIPMENT_SHIPPABLE,
+  SHIPMENT_SHIPPED_FULLY,
+  SHIPMENT_SHIPPED_PARTLY,
   SHIPMENT_PENDING,
 } from "@/lib/constants/warehouse/shipment";
 
@@ -30,16 +30,16 @@ export const WarehouseRequestList = () => {
 
 const WarehouseRequestListItem = ({ request }) => {
   console.log({ request });
-  let isShipable = request.shipment?.status === SHIPMENT_SHIPPABLE;
-  let isSipped = request.shipment?.status === SHIPMENT_SHIPPED;
+  let isPartlyShipped = request.shipment?.status === SHIPMENT_SHIPPED_PARTLY;
+  let isFullyShipped = request.shipment?.status === SHIPMENT_SHIPPED_FULLY;
   let isPending =
     !request.shipment || request.shipment?.status === SHIPMENT_PENDING;
 
   let outlineClassName;
 
-  if (isShipable) {
+  if (isPartlyShipped) {
     outlineClassName = "border-yellow-700";
-  } else if (isSipped) {
+  } else if (isFullyShipped) {
     outlineClassName = "border-green-700";
   } else if (isPending) {
     outlineClassName = "border-gray-700";
@@ -55,7 +55,7 @@ const WarehouseRequestListItem = ({ request }) => {
   const [createShipmentModalOpen, setCreateShipmentModalOpen] = useState(false);
 
   const actions = [
-    ...(managerModelName == WAREHOUSE_MANAGER && !isSipped
+    ...(managerModelName == WAREHOUSE_MANAGER && !isFullyShipped
       ? [
           {
             label: "Obradi",

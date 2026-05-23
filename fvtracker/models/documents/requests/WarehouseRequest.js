@@ -12,11 +12,6 @@ const warehouseRequestSchema = new mongoose.Schema({
     ref: "Order",
     required: true,
   },
-  financialManager: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "FinancialManager",
-    required: true,
-  },
   warehouseManager: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "WarehouseManager",

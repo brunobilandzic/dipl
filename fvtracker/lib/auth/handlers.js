@@ -54,9 +54,13 @@ export async function handleCredentials(credentials) {
     }
   };
 
-  const manager = await mongoose
-    .model(getManagerModelName())
-    .findOne({ rootManager: user.rootManager?._id });
+  const managerModelName = getManagerModelName();
+
+  const manager = managerModelName
+    ? await mongoose
+        .model(getManagerModelName())
+        .findOne({ rootManager: user.rootManager?._id })
+    : null;
   console.log("Found manager for user:", manager);
 
   return {

@@ -8,6 +8,7 @@ import { CropVariety } from "@/models/sectors/cultivation/Crops";
 import production from "./production";
 import { Cultivation } from "@/models/sectors/cultivation/Cultivation";
 import sales from "./sales";
+import { createAdmin } from "./users/admin";
 
 const seed = {
   handleAPIRequest,
@@ -20,6 +21,8 @@ async function handleAPIRequest(seedType) {
   switch (seedType) {
     case SEED_TYPES.ALL:
       return await seedAll();
+    case SEED_TYPES.ADMIN:
+      return await createAdmin();
     case SEED_TYPES.USERS:
       return await users.all();
     case SEED_TYPES.FIELDS:

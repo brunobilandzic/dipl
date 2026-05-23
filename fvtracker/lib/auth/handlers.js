@@ -131,8 +131,7 @@ async function signUpCredentials({
     }
     // right now, app is built for only one gen manager
     if (!MANAGER_TYPES.includes(requestedRole)) {
-      console.log("Invalid requested role:", requestedRole);
-      return null;
+      return newUser;
     }
     const generalManager = await GeneralManager.findOne();
     const rootManager = await new RootManager({

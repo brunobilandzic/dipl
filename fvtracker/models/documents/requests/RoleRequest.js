@@ -38,15 +38,6 @@ const generalManagerRequestSchema = new Schema({
   },
 });
 
-generalManagerRequestSchema.pre("save", async function () {
-  const admin = await mongoose.models.Admin.findById(this.admin);
-  if (!admin) {
-    throw new Error("Admin not found for General Manager Request.");
-  }
-  admin.generalManagerRequests.push(this._id);
-  await admin.save();
-});
-
 roleRequestSchema.pre("save", async function () {
   const generalManager = await mongoose.models.GeneralManager.findById(
     this.generalManager,

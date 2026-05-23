@@ -63,7 +63,7 @@ const ShipmentItemList = ({
   });
   console.log({ sortedShipmentItems });
   return (
-    <div>
+    <div className="flex flex-col gap-8">
       {sortedShipmentItems?.map((si) => (
         <ShipmentItem
           key={si._id}

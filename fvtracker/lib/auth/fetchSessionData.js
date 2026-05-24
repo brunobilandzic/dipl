@@ -136,3 +136,17 @@ export const checkManager = async ({ managerNames = [] }) => {
   }
   return specificManager;
 };
+
+export const fetchSessionRootManager = async () => {
+  const appUser = await fetchSessionAppUser();
+  const rootManager = await mongoose.models.RootManager.findOne({
+    appUser: appUser._id,
+  });
+
+  if (!rootManager) {
+    return { unauthorized: true };
+  }
+  return {
+    rootManager,
+  };
+};

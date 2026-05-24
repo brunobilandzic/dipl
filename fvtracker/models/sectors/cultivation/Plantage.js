@@ -52,6 +52,6 @@ plantageSchema.methods.workerAppUser = async function () {
 
 export const Plantage =
   mongoose.models.Plantage || mongoose.model("Plantage", plantageSchema);
-export const PlantedItem =
-  mongoose.models.PlantedItem ||
-  mongoose.model("PlantedItem", plantageItemSchema);
+export const PlantageItem =
+  mongoose.models.PlantageItem ||
+  mongoose.model("PlantageItem", plantageItemSchema);

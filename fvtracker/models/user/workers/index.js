@@ -1,4 +1,5 @@
 // base worker shema
+import { getAppUser } from "@/lib/users/appUser";
 import mongoose from "mongoose";
 
 const workerSchema = new mongoose.Schema({

@@ -1,6 +1,7 @@
 // base worker shema
 import { getAppUser } from "@/lib/users/appUser";
 import mongoose from "mongoose";
+import { AppUser } from "../AppUser";
 
 const workerSchema = new mongoose.Schema({
   appUser: {
@@ -37,6 +38,11 @@ workerSchema.pre("save", async function () {
     appUser.worker = this._id;
     await appUser.save();
   }
+});
+
+workerSchema.pre("deleteMany", async function () {
+  const workers = await this.model.find(this.getFilter()).distinct("_id");
+  await AppUser.deleteMany({ worker: { $in: workers.map((w) => w._id) } });
 });
 
 workerSchema.methods.getRole = async function () {

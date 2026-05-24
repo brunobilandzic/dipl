@@ -15,6 +15,7 @@ import { CultivationArea } from "@/models/sectors/cultivation/Cultivation.js";
 import { createCultivation } from "../../cultivation/index.js";
 import {} from "../../crops/crops.js";
 import crops from "../../crops/index.js";
+import { CultivationWorker } from "@/models/user/workers/CultivationWorker.js";
 
 await dbConnect();
 
@@ -152,9 +153,11 @@ export async function createFieldRecord(fieldObject) {
   });
 
   await cultivation.populate("plantedCropVarieties");
+  const cultivationWorker = await CultivationWorker.findOne();
   await crops.plantageHarvest({
     fieldId: fieldRecord._id,
     cultivation,
+    cultivationWorkerId: cultivationWorker._id,
   });
   await fieldRecord.save();
   return fieldRecord;

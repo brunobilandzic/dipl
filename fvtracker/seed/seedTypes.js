@@ -9,4 +9,5 @@ export default {
   PRODUCTION: "Seed Production",
   PLANTAGE_HARVEST: "Seed Plantage Harvest",
   SEED_SALES: "Seed Sales",
+  WORKERS: "Seed Workers",
 };

@@ -25,6 +25,8 @@ async function handleAPIRequest(seedType) {
       return await createAdmin();
     case SEED_TYPES.USERS:
       return await users.all();
+    case SEED_TYPES.WORKERS:
+      return await users.workers();
     case SEED_TYPES.FIELDS:
       return await fields.create();
     case SEED_TYPES.CROP_MAIN_TYPES:

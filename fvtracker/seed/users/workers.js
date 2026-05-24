@@ -4,6 +4,8 @@ import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
 import { createAppUser } from "./appUsers";
 import dbConnect from "@/lib/db/mongooseConnect";
 import { Worker } from "@/models/user/workers";
+import mongoose from "mongoose";
+import { CultivationWorker } from "@/models/user/workers/CultivationWorker";
 
 export const seedWorkers = async () => {
   await dbConnect();
@@ -11,6 +13,7 @@ export const seedWorkers = async () => {
   const workers = [];
   for (const appUserData of workersAppUsers) {
     const { appUserId } = await createAppUser(appUserData);
+    const appUser = await mongoose.models["AppUser"].findById(appUserId);
     console.log(`Created worker app user with id ${appUserId}`);
     const managerModelName = workersManagersMap[appUserData.username];
     if (!managerModelName) {
@@ -23,6 +26,8 @@ export const seedWorkers = async () => {
       managerModelName,
     });
 
+    console.log({ rootManager });
+
     let worker;
     switch (managerModelName) {
       case CULTIVATION_MANAGER:
@@ -30,6 +35,8 @@ export const seedWorkers = async () => {
           appUser: appUserId,
           manager: rootManager._id,
         });
+        appUser.worker = worker._id;
+        await appUser.save();
         await worker.save();
         workers[managerModelName]
           ? workers[managerModelName].push(worker)

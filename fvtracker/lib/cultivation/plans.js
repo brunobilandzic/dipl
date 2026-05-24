@@ -74,6 +74,7 @@ const deleteHarvestingPlansFromFields = async ({ fieldId, planId }) => {
 };
 
 export async function createPlantingPlan({ plantingPlanData }) {
+  console.log({ plantingPlanData });
   const field = await fetchFieldById(plantingPlanData.field);
   const { items, ...planData } = plantingPlanData;
   const plantingPlan = new PlantingPlan({

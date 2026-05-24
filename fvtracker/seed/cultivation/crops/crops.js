@@ -13,7 +13,10 @@ import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
 import { Field } from "@/models/sectors/cultivation/Field";
 import { createPlans } from "@/seed/documents/plans";
 import { getDimensionsFromPlanted } from "@/lib/utils/cultivation/fields/cultivationAreas";
-import { PlantageWork } from "@/models/user/workers/CultivationWorker";
+import {
+  CultivationWorker,
+  PlantageWork,
+} from "@/models/user/workers/CultivationWorker";
 import { getCultivationWorkerById } from "@/lib/cultivation/cultivationWorker";
 import { Plantage } from "@/models/sectors/cultivation/Plantage";
 
@@ -225,7 +228,9 @@ export const createNewPlantage = async ({
   }
   console.log("planted", Object.keys(map).join(", "));
 
-  const cultivationWorker = await getCultivationWorkerById(cultivationWorkerId);
+  const cultivationWorker = cultivationWorkerId
+    ? await getCultivationWorkerById(cultivationWorkerId)
+    : await CultivationWorker.findOne();
 
   /*   const { width: cultWidth, length: cultLength } = getDimensionsFromPlanted();
   const plantingCoords = plantingPlan.items.reduce((coords, item) => {}, []); */
@@ -261,10 +266,9 @@ export const createNewPlantage = async ({
 
   const plantage = new Plantage({
     plantedCropVarieties: plcvIds,
-    cultivationWorker: cultivationWorkerId,
   });
   const plantageWork = new PlantageWork({
-    cultivationWorker: cultivationWorkerId,
+    worker: cultivationWorker._id,
     plantage: plantage._id,
     hoursWorked: plcvIds.length * 0.5, // Example: 0.5 hours per planted crop variety
   });
@@ -274,10 +278,10 @@ export const createNewPlantage = async ({
   await plantageWork.save();
   await plantage.save();
 
-  cultivationWorker.plantages.push(plantage._id);
+  cultivationWorker.plantageWorks.push(plantage._id);
 
   await plantage.save();
-
+  console.log({ map });
   await cultivationWorker.save();
   return map;
 };
@@ -332,12 +336,14 @@ export async function plantageHarvest({
   plantingPlan,
   harvestingPlan,
   cultivation,
+  cultivationWorkerId,
 }) {
   const plantedMap = await createNewPlantage({
     plantingPlan,
     cultivationDimensions: getDimensionsFromPlanted(
       cultivation.plantedCropVarieties.map((p) => p.relativeCoords),
     ),
+    cultivationWorkerId,
   });
 
   // await createNewHarvest({ harvestingPlan, cultivation, plantedMap });
@@ -353,7 +359,11 @@ const deletePlantageHarvest = async () => {
   await HarvestingBatch.deleteMany({});
 };
 
-export const seedPlantageHarvest = async ({ _fieldId, cultivation }) => {
+export const seedPlantageHarvest = async ({
+  _fieldId,
+  cultivation,
+  cultivationWorkerId,
+}) => {
   await deletePlantageHarvest();
   const cropVaietyNames = ["Idared", "Kristalka", "Istarski"];
   const cropVarietyIds = await CropVariety.find({
@@ -391,6 +401,7 @@ export const seedPlantageHarvest = async ({ _fieldId, cultivation }) => {
     plantingPlan: newPlantingPlan,
     harvestingPlan: newHarvestingPlan,
     cultivation,
+    cultivationWorkerId,
   });
 };
 

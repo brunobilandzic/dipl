@@ -238,6 +238,7 @@ export const createNewPlantage = async ({
   /*   const { width: cultWidth, length: cultLength } = getDimensionsFromPlanted();
   const plantingCoords = plantingPlan.items.reduce((coords, item) => {}, []); */
   // Example coordinates for planting
+  let plantedLength = 0;
   for (const [key, value] of Object.entries(map)) {
     const plantingPlanItem = plantingPlan.items.find(
       (item) => item.cropVariety.name === key,
@@ -246,6 +247,8 @@ export const createNewPlantage = async ({
       { relativeCoords: { $in: value } },
       { _id: 1 },
     );
+
+    plantedLength += docs.length;
 
     await PlantedCropVariety.updateMany(
       { _id: { $in: docs } },
@@ -272,6 +275,15 @@ export const createNewPlantage = async ({
     await plantageItem.save();
   }
 
+  const plantageWork = new PlantageWork({
+    worker: cultivationWorker._id,
+    plantage: plantage._id,
+    hoursWorked: plantedLength,
+  });
+
+  plantage.work = plantageWork._id;
+
+  await plantageWork.save();
   await plantage.save();
 
   return map;

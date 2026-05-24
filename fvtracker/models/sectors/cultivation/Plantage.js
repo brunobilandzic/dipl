@@ -20,9 +20,9 @@ const plantageSchema = new Schema(
         ref: "PlantedCropVariety",
       },
     ],
-    worker: {
+    work: {
       type: Schema.Types.ObjectId,
-      ref: "CultivationWorker",
+      ref: "PlantageWork",
       required: true,
     },
   },

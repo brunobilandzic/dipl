@@ -14,6 +14,7 @@ import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
 import { Field } from "@/models/sectors/cultivation/Field";
 import { createPlans } from "@/seed/documents/plans";
 import { getDimensionsFromPlanted } from "@/lib/utils/cultivation/fields/cultivationAreas";
+import { Plantage } from "@/models/sectors/cultivation/Plantage";
 
 // Seed crop main types, general types, types, and varieties
 
@@ -221,7 +222,11 @@ export const createNewPlantage = async ({
     }
   }
   console.log("planted", Object.keys(map).join(", "));
-
+  console.log("creating plantage");
+  const plantage = new Plantage({
+    plantingPlan: plantingPlan._id,
+    workerUsername: "cmw",
+  });
   /*   const { width: cultWidth, length: cultLength } = getDimensionsFromPlanted();
   const plantingCoords = plantingPlan.items.reduce((coords, item) => {}, []); */
   // Example coordinates for planting
@@ -244,6 +249,12 @@ export const createNewPlantage = async ({
     if (plantingPlanItem.quantity < 0) {
       plantingPlanItem.quantity = 0; // Ensure quantity doesn't go negative
     }
+
+    const cropVariety = await CropVariety.findOne({
+      name: key,
+    });
+
+    const plantageItem = new PlantageIt
 
     await plantingPlanItem.save();
   }

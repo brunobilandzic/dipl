@@ -345,7 +345,7 @@ export async function plantageHarvest({
     ),
   });
 
-  await createNewHarvest({ harvestingPlan, cultivation, plantedMap });
+  // await createNewHarvest({ harvestingPlan, cultivation, plantedMap });
 }
 
 const deletePlantageHarvest = async () => {

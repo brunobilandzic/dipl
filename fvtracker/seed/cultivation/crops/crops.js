@@ -224,6 +224,7 @@ export const createNewPlantage = async ({
   }
   console.log("planted", Object.keys(map).join(", "));
   console.log("creating plantage");
+
   const plantage = new Plantage({
     plantingPlan: plantingPlan._id,
     workerUsername: "cmw",

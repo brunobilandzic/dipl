@@ -65,7 +65,6 @@ plantageSchema.pre("save", async function () {
   if (!cultivation) {
     throw new Error("Associated cultivation not found");
   }
-  console.log({ cultivation });
   cultivation.plantages.push(this._id);
   await cultivation.save();
 });

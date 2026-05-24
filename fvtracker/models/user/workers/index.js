@@ -18,6 +18,18 @@ const workerSchema = new mongoose.Schema({
   },
 });
 
+const workSchema = new mongoose.Schema({
+  worker: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Worker",
+    required: true,
+  },
+  hoursWorked: {
+    type: Number,
+    required: true,
+  },
+});
+
 workerSchema.methods.getRole = async function () {
   const rootManager = await mongoose
     .model("RootManager")
@@ -27,3 +39,4 @@ workerSchema.methods.getRole = async function () {
 
 export const Worker =
   mongoose.models.Worker || mongoose.model("Worker", workerSchema);
+export const Work = mongoose.models.Work || mongoose.model("Work", workSchema);

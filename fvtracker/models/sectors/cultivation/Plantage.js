@@ -59,6 +59,24 @@ plantageSchema.pre("save", async function () {
   await plantingPlan.save();
 });
 
+plantageItemSchema.pre("save", async function () {
+  if (!this.isNew) return;
+  const plantage = await this.populate("plantage").execPopulate();
+  if (!plantage) {
+    throw new Error("Associated plantage not found");
+  }
+  plantage.plantageItems.push(this._id);
+  await plantage.save();
+
+  const plantingPlanItem =
+    await this.populate("plantingPlanItem").execPopulate();
+  if (!plantingPlanItem) {
+    throw new Error("Associated planting plan item not found");
+  }
+  plantingPlanItem.plantageItems.push(this._id);
+  await plantingPlanItem.save();
+});
+
 export const Plantage =
   mongoose.models.Plantage || mongoose.model("Plantage", plantageSchema);
 export const PlantageItem =

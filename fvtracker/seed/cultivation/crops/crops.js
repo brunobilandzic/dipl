@@ -13,9 +13,7 @@ import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
 import { Field } from "@/models/sectors/cultivation/Field";
 import { createPlans } from "@/seed/documents/plans";
 import { getDimensionsFromPlanted } from "@/lib/utils/cultivation/fields/cultivationAreas";
-import {
-  PlantageWork,
-} from "@/models/user/workers/CultivationWorker";
+import { PlantageWork } from "@/models/user/workers/CultivationWorker";
 import { getCultivationWorkerById } from "@/lib/cultivation/cultivationWorker";
 import { Plantage } from "@/models/sectors/cultivation/Plantage";
 
@@ -228,6 +226,7 @@ export const createNewPlantage = async ({
   console.log("planted", Object.keys(map).join(", "));
 
   const cultivationWorker = await getCultivationWorkerById(cultivationWorkerId);
+
   /*   const { width: cultWidth, length: cultLength } = getDimensionsFromPlanted();
   const plantingCoords = plantingPlan.items.reduce((coords, item) => {}, []); */
   // Example coordinates for planting
@@ -288,13 +287,8 @@ export const createNewHarvest = async ({
   plantedMap,
   cultivationWorkerId,
 }) => {
-  const cultivationWorker =
-    await CultivationWorker.findById(cultivationWorkerId);
-
-  if (!cultivationWorker) {
-    throw new Error("Cultivation worker not found with the provided ID.");
-  }
-
+  const cultivationWorker = await getCultivationWorkerById(cultivationWorkerId);
+  const hplcvIds = [];
   for (const [cvName, plantedCoords] of Object.entries(plantedMap)) {
     const harvestingPlanItem = harvestingPlan.items.find(
       (item) => item.cropVariety.name === cvName,
@@ -313,6 +307,7 @@ export const createNewHarvest = async ({
       { _id: 1 },
     );
     const plcvIds = docs.map((d) => d._id);
+    hplcvIds.push(...plcvIds);
     await PlantedCropVariety.updateMany(
       { _id: { $in: docs } },
       { harvestingPlanItem: harvestingPlanItem._id, harvestedAt: new Date() },
@@ -321,6 +316,7 @@ export const createNewHarvest = async ({
       plantedCropVarietiesIds: plcvIds,
       cropVarietyId,
       quantityPerCell: harvestingPlanItem.cropVariety.quantityPerCell,
+      cultivationWorkerId,
     });
     harvestingPlanItem.plantedCropVarieties.push(...plcvIds);
     harvestingPlanItem.quantity -=
@@ -331,7 +327,6 @@ export const createNewHarvest = async ({
     await harvestingPlanItem.save();
   }
 };
-
 
 export async function plantageHarvest({
   plantingPlan,

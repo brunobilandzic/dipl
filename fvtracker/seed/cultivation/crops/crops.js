@@ -263,6 +263,17 @@ export const createNewPlantage = async ({
     plantedCropVarieties: plcvIds,
     cultivationWorker: cultivationWorkerId,
   });
+  const plantageWork = new PlantageWork({
+    cultivationWorker: cultivationWorkerId,
+    plantage: plantage._id,
+    hoursWorked: plcvIds.length * 0.5, // Example: 0.5 hours per planted crop variety
+  });
+
+  plantage.work = plantageWork._id;
+
+  await plantageWork.save();
+  await plantage.save();
+
   cultivationWorker.plantages.push(plantage._id);
 
   await plantage.save();

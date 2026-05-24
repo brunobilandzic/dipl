@@ -3,6 +3,11 @@ import { Schema } from "mongoose";
 
 const plantageSchema = new Schema(
   {
+    plantingPlan: {
+      type: Schema.Types.ObjectId,
+      ref: "PlantingPlan",
+      required: true,
+    },
     planredCropVarieties: [
       {
         type: Schema.Types.ObjectId,

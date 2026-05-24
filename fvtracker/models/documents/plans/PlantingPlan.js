@@ -57,6 +57,12 @@ plantingPlanItemSchema.pre("deleteMany", async function () {
 });
 
 const plantingPlanSchema = new Schema({
+  plantages: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Plantage",
+    },
+  ],
   name: {
     type: String,
     required: true,

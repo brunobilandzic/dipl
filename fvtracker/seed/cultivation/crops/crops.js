@@ -272,6 +272,7 @@ export const createNewPlantage = async ({
       cropVariety: cropVariety._id,
       relativeCoords: value,
     });
+    plantage.plantageItems.push(plantageItem._id);
     await plantingPlanItem.save();
     await plantageItem.save();
   }

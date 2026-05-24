@@ -320,7 +320,7 @@ export const createNewHarvest = async ({
   }
 };
 
-export const createNewHarvest_bup = async ({ harvestingPlan, plantingMap }) => {
+/* export const createNewHarvest_bup = async ({ harvestingPlan, plantingMap }) => {
   const harvestCoords = ["0,0", "0,1"];
 
   const harvestingPlanItem = harvestingPlan.items.find(

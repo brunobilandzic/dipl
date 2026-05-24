@@ -50,11 +50,6 @@ const harvestingBatchItemSchema = new Schema({
       default: [],
     },
   ],
-  cultivationWorker: {
-    type: Schema.Types.ObjectId,
-    ref: "CultivationWorker",
-    required: true,
-  },
 });
 
 harvestingBatchSchema.pre("deleteMany", async function () {
@@ -86,11 +81,17 @@ harvestingBatchSchema.methods.addPlantedCropVarieties = async function ({
   plantedCropVarietiesIds,
   cropVarietyId,
   quantityPerCell,
+  cultivationWorkerId,
 }) {
   // Find or create the corresponding HarvestingBatchItem
   const item = await this.findOrCreateItemForCropVariety({
     cropVarietyId: cropVarietyId,
   });
+  const cultivationWorker =
+    await mongoose.models["CultivationWorker"].findById(cultivationWorkerId);
+  if (!cultivationWorker) {
+    throw new Error("Cultivation worker not found with the provided ID.");
+  }
   item.plantedCropVarieties.push(...plantedCropVarietiesIds);
   const addedQuantity = plantedCropVarietiesIds.length * quantityPerCell;
   item.batchQuantity += addedQuantity;

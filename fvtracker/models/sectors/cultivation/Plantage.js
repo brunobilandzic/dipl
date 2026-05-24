@@ -11,6 +11,13 @@ const plantageSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  plantedCropVarieties: [
+    {
+      type: Schema.types.ObjectId,
+      ref: "PlantedCropVariety",
+      required: true,
+    },
+  ],
 });
 
 export const Plantage =

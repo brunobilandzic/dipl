@@ -288,38 +288,6 @@ export const createNewHarvest = async ({ harvestingPlan, plantedMap }) => {
   }
 };
 
-export const createNewHarvest_bup = async ({ harvestingPlan, plantingMap }) => {
-  const harvestCoords = ["0,0", "0,1"];
-
-  const harvestingPlanItem = harvestingPlan.items.find(
-    (item) => item.cropVariety.name === "Idared",
-  );
-  const cropVarietyId = harvestingPlanItem.cropVariety._id;
-  await PlantedCropVariety.updateMany(
-    { relativeCoords: { $in: harvestCoords } },
-    { harvestingPlanItem: harvestingPlanItem._id, harvestedAt: new Date() },
-  );
-  const plantedCropVarietes = await PlantedCropVariety.find({
-    harvestingPlanItem: harvestingPlanItem._id,
-    relativeCoords: { $in: harvestCoords },
-  });
-
-  const plcvids = plantedCropVarietes.map((p) => p._id);
-
-  await harvestingPlan.harvestingBatch.addPlantedCropVarieties({
-    plantedCropVarietiesIds: plcvids,
-    cropVarietyId,
-    quantityPerCell: harvestingPlanItem.cropVariety.quantityPerCell,
-  });
-  harvestingPlanItem.plantedCropVarieties.push(...plcvids);
-  harvestingPlanItem.quantity -=
-    plantedCropVarietes.length * harvestingPlanItem.cropVariety.quantityPerCell;
-  if (harvestingPlanItem.quantity < 0) {
-    harvestingPlanItem.quantity = 0; // Ensure quantity doesn't go negative
-  }
-  await harvestingPlanItem.save();
-};
-
 export async function plantageHarvest({
   plantingPlan,
   harvestingPlan,

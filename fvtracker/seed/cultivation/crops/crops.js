@@ -14,7 +14,7 @@ import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
 import { Field } from "@/models/sectors/cultivation/Field";
 import { createPlans } from "@/seed/documents/plans";
 import { getDimensionsFromPlanted } from "@/lib/utils/cultivation/fields/cultivationAreas";
-import { Plantage } from "@/models/sectors/cultivation/Plantage";
+import { Plantage, PlantageItem } from "@/models/sectors/cultivation/Plantage";
 
 // Seed crop main types, general types, types, and varieties
 
@@ -254,7 +254,13 @@ export const createNewPlantage = async ({
       name: key,
     });
 
-    const plantageItem = new PlantageIt
+    const plantageItem = new PlantageItem({
+      plantage: plantage._id,
+      cropVariety: cropVariety._id,
+      relativeCoords: value,
+    });
+    plantage.plantageItems.push(plantageItem._id);
+    await plantageItem.save();
 
     await plantingPlanItem.save();
   }

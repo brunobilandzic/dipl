@@ -174,6 +174,7 @@ const PLANTAGE_SIZE = 3;
 export const createNewPlantage = async ({
   plantingPlan,
   cultivationDimensions,
+  cultivationId,
 }) => {
   await PlantedCropVariety.updateMany(
     {},
@@ -226,7 +227,9 @@ export const createNewPlantage = async ({
   const plantage = new Plantage({
     plantingPlan: plantingPlan._id,
     workerUsername: "cmw",
+    cultivation: cultivationId,
   });
+  await plantage.save();
   /*   const { width: cultWidth, length: cultLength } = getDimensionsFromPlanted();
   const plantingCoords = plantingPlan.items.reduce((coords, item) => {}, []); */
   // Example coordinates for planting
@@ -255,15 +258,17 @@ export const createNewPlantage = async ({
     });
 
     const plantageItem = new PlantageItem({
+      plantingPlanItem: plantingPlanItem._id,
       plantage: plantage._id,
       cropVariety: cropVariety._id,
       relativeCoords: value,
     });
-    plantage.plantageItems.push(plantageItem._id);
-    await plantageItem.save();
 
-    await plantingPlanItem.save();
+    await plantageItem.save();
   }
+
+  await plantage.save();
+
   return map;
 };
 
@@ -315,6 +320,7 @@ export async function plantageHarvest({
     cultivationDimensions: getDimensionsFromPlanted(
       cultivation.plantedCropVarieties.map((p) => p.relativeCoords),
     ),
+    cultivationId: cultivation._id,
   });
 
   await createNewHarvest({ harvestingPlan, cultivation, plantedMap });

@@ -232,7 +232,6 @@ export const createNewPlantage = async ({
   const cultivationWorker = await CultivationWorker.findOne();
   const plantage = new Plantage({
     plantingPlan: plantingPlan._id,
-    workerUsername: "cmw",
     cultivation: cultivationId,
   });
   await plantage.save();

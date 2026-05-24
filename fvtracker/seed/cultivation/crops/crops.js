@@ -330,6 +330,11 @@ export const createNewHarvest = async ({ harvestingPlan, plantedMap }) => {
     if (harvestingPlanItem.quantity < 0) {
       harvestingPlanItem.quantity = 0; // Ensure quantity doesn't go negative
     }
+    const cultivationWorker = await CultivationWorker.findOne();
+    harvestingPlanItem.addHarvestWork({
+      hoursWorked: docs.length,
+      workerId: cultivationWorker._id,
+    });
     await harvestingPlanItem.save();
   }
 };

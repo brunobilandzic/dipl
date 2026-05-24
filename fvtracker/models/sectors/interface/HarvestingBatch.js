@@ -1,6 +1,7 @@
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
 import { CropVariety, PlantedCropVariety } from "../cultivation/Crops";
+import { HarvestWork } from "@/models/user/workers/CultivationWork";
 
 const harvestingBatchSchema = new Schema({
   name: {
@@ -140,6 +141,22 @@ harvestingBatchItemSchema.pre("save", async function () {
     }
   }
 });
+
+harvestingBatchItemSchema.methods.addHarvestWork = async function ({
+  hoursWorked,
+  workerId,
+}) {
+  const harvestWork = new HarvestWork({
+    harvestingBatchItem: this._id,
+    hoursWorked,
+    worker: workerId,
+  });
+  this.harvestWorks.push(harvestWork._id);
+  
+  await this.save();
+  await harvestWork.save();
+  return harvestWork;
+};
 
 harvestingBatchItemSchema.pre("deleteMany", async function () {
   const ids = await HarvestingBatchItem.find(this.getFilter()).distinct("_id");

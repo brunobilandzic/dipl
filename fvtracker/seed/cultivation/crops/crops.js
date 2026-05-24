@@ -10,7 +10,10 @@ import utils from "@/lib/utils";
 import { deleteCrops } from "@/lib/db/delete";
 import { PlantingPlan } from "@/models/documents/plans/PlantingPlan";
 import { HarvestingPlan } from "@/models/documents/plans/HarvestingPlan";
-import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
+import {
+  HarvestingBatch,
+  HarvestingBatchItem,
+} from "@/models/sectors/interface/HarvestingBatch";
 import { Field } from "@/models/sectors/cultivation/Field";
 import { createPlans } from "@/seed/documents/plans";
 import { getDimensionsFromPlanted } from "@/lib/utils/cultivation/fields/cultivationAreas";
@@ -292,6 +295,7 @@ export const createNewPlantage = async ({
 };
 
 export const createNewHarvest = async ({ harvestingPlan, plantedMap }) => {
+  await HarvestingBatchItem.deleteMany();
   for (const [cvName, plantedCoords] of Object.entries(plantedMap)) {
     const harvestingPlanItem = harvestingPlan.items.find(
       (item) => item.cropVariety.name === cvName,

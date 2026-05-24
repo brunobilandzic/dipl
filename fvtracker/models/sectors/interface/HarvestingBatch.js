@@ -151,7 +151,8 @@ harvestingBatchItemSchema.methods.addHarvestWork = async function ({
     hoursWorked,
     worker: workerId,
   });
-  const cultivationWorker = await harvestWork.populate("worker");
+  await harvestWork.populate("worker");
+  const cultivationWorker = harvestWork.worker;
   cultivationWorker.harvestWorks.push(harvestWork._id);
 
   await cultivationWorker.save();

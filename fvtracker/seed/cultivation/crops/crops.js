@@ -15,6 +15,8 @@ import { Field } from "@/models/sectors/cultivation/Field";
 import { createPlans } from "@/seed/documents/plans";
 import { getDimensionsFromPlanted } from "@/lib/utils/cultivation/fields/cultivationAreas";
 import { CultivationWorker } from "@/models/user/workers/CultivationWorker";
+import { getCultivationWorkerById } from "@/lib/cultivation/cultivationWorker";
+import { Plantage } from "@/models/sectors/cultivation/Plantage";
 
 // Seed crop main types, general types, types, and varieties
 
@@ -224,9 +226,11 @@ export const createNewPlantage = async ({
   }
   console.log("planted", Object.keys(map).join(", "));
 
+  const cultivationWorker = await getCultivationWorkerById(cultivationWorkerId);
   /*   const { width: cultWidth, length: cultLength } = getDimensionsFromPlanted();
   const plantingCoords = plantingPlan.items.reduce((coords, item) => {}, []); */
   // Example coordinates for planting
+  const plcvIds = [];
   for (const [key, value] of Object.entries(map)) {
     const plantingPlanItem = plantingPlan.items.find(
       (item) => item.cropVariety.name === key,
@@ -235,6 +239,8 @@ export const createNewPlantage = async ({
       { relativeCoords: { $in: value } },
       { _id: 1 },
     );
+
+    plcvIds.push(...docs.map((d) => d._id));
 
     await PlantedCropVariety.updateMany(
       { _id: { $in: docs } },
@@ -250,17 +256,18 @@ export const createNewPlantage = async ({
       plantingPlanItem.quantity = 0; // Ensure quantity doesn't go negative
     }
 
-    const cultivationWorker =
-      await CultivationWorker.findById(cultivationWorkerId);
-
-    if (!cultivationWorker) {
-      throw new Error("Cultivation worker not found with the provided ID.");
-    }
-    cultivationWorker.plantedCropVarieties.push(...docs.map((d) => d._id));
-
-    await cultivationWorker.save();
     await plantingPlanItem.save();
   }
+
+  const plantage = new Plantage({
+    plantedCropVarieties: plcvIds,
+    cultivationWorker: cultivationWorkerId,
+  });
+  cultivationWorker.plantages.push(plantage._id);
+
+  await plantage.save();
+
+  await cultivationWorker.save();
   return map;
 };
 

@@ -362,7 +362,7 @@ export const createNewHarvest = async ({
     harvestingPlanItem.quantity = 0; // Ensure quantity doesn't go negative
   }
   await harvestingPlanItem.save();
-};
+}; */
 
 export async function plantageHarvest({
   plantingPlan,

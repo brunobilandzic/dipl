@@ -7,14 +7,15 @@ import {
   PlantedCropVariety,
 } from "@/models/sectors/cultivation/Crops";
 import utils from "@/lib/utils";
-import { deleteCrops } from "@/lib/db/delete";
 import { PlantingPlan } from "@/models/documents/plans/PlantingPlan";
 import { HarvestingPlan } from "@/models/documents/plans/HarvestingPlan";
 import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
 import { Field } from "@/models/sectors/cultivation/Field";
 import { createPlans } from "@/seed/documents/plans";
 import { getDimensionsFromPlanted } from "@/lib/utils/cultivation/fields/cultivationAreas";
-import { CultivationWorker } from "@/models/user/workers/CultivationWorker";
+import {
+  PlantageWork,
+} from "@/models/user/workers/CultivationWorker";
 import { getCultivationWorkerById } from "@/lib/cultivation/cultivationWorker";
 import { Plantage } from "@/models/sectors/cultivation/Plantage";
 

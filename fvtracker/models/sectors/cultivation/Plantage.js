@@ -13,9 +13,9 @@ const plantageSchema = new Schema({
       required: true,
     },
   ],
-  cultivationWorker: {
+  plantageWork: {
     type: Schema.Types.ObjectId,
-    ref: "CultivationWorker",
+    ref: "PlantageWork",
     required: true,
   },
 });

@@ -36,28 +36,11 @@ const rootManagerSchema = new Schema({
     ref: "GeneralManager",
     required: true,
   },
-  employees: [
-    { type: mongoose.Schema.Types.ObjectId, ref: "Worker", default: [] },
-  ],
-  employmentCalls: [
-    // job postings created by the manager
+  workers: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "EmploymentCall",
-      default: [],
+      ref: "Worker",
     },
-  ],
-  employmentRequests: [
-    // people applying for jobs
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "EmploymentRequest",
-      default: [],
-    },
-  ],
-  orderRequests: [
-    //people placing orders to buy products
-    { type: mongoose.Schema.Types.ObjectId, ref: "OrderRequest", default: [] },
   ],
 });
 

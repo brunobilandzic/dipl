@@ -65,6 +65,7 @@ export async function createPlantage({
   plantedAt,
   harvestedAt,
   plantingPlanId,
+  cultivationWorkerId,
 }) {
   const cultivation = await getCultivationById(cultivationId);
   await cultivation.populate({
@@ -81,6 +82,7 @@ export async function createPlantage({
     planted: cultivation.cultivationArea.planted,
     plantingPlanId,
     fieldId: cultivation.cultivationArea.field,
+    cultivationWorkerId,
   });
   return plantedCropVarieties;
 }
@@ -94,6 +96,7 @@ export async function createPlantedCropVarietiesCells({
   plantedAt,
   plantingPlanId,
   fieldId,
+  cultivationWorkerId,
 }) {
   const plantedCropVarieties = [];
   const field = await Field.findById(fieldId);
@@ -124,6 +127,7 @@ export async function createPlantedCropVarietiesCells({
         plantedAt,
         harvestedAt: null,
         plantingPlanItem: plantingPlanItem._id,
+        cultivationWorker: cultivationWorkerId,
       },
       { new: true },
     );

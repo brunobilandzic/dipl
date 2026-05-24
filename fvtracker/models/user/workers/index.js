@@ -30,6 +30,14 @@ const workSchema = new mongoose.Schema({
   },
 });
 
+workerSchema.pre("save", async function () {
+  if (this.isNew) {
+    const appUser = await getAppUser({ _id: this.appUser });
+    appUser.worker = this._id;
+    await appUser.save();
+  }
+});
+
 workerSchema.methods.getRole = async function () {
   const rootManager = await mongoose
     .model("RootManager")

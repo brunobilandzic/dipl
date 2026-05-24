@@ -13,7 +13,7 @@ const plantageSchema = new Schema(
       ref: "PlantingPlan",
       required: true,
     },
-    plantedItems: [
+    plantageItems: [
       {
         type: Schema.Types.ObjectId,
         ref: "PlantedCropVariety",
@@ -29,7 +29,7 @@ const plantageSchema = new Schema(
   },
 );
 
-const plantedItemSchema = new Schema({
+const plantageItemSchema = new Schema({
   plantage: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Plantage",
@@ -54,4 +54,4 @@ export const Plantage =
   mongoose.models.Plantage || mongoose.model("Plantage", plantageSchema);
 export const PlantedItem =
   mongoose.models.PlantedItem ||
-  mongoose.model("PlantedItem", plantedItemSchema);
+  mongoose.model("PlantedItem", plantageItemSchema);

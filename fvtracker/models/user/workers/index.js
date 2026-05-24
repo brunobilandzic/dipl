@@ -12,6 +12,10 @@ const workerSchema = new mongoose.Schema({
     ref: "RootManager",
     default: null,
   },
+  hiredAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 workerSchema.methods.getRole = async function () {

@@ -6,6 +6,12 @@ import { makeUrlFriendly } from "@/lib/utils/strings";
 const { Schema } = mongoose;
 
 const cultivationAreaSchema = new Schema({
+  plantages: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Plantage",
+    },
+  ],
   field: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Field",

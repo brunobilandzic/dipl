@@ -1,10 +1,11 @@
 import { AppUser } from "@/models/user/AppUser";
 import { Schema } from "mongoose";
+import mongoose from "mongoose";
 
 const plantageSchema = new Schema(
   {
     cultivation: {
-      type: mongoose.Schema.Types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "Cultivation",
       required: true,
     },
@@ -57,6 +58,12 @@ plantageSchema.pre("save", async function () {
   }
   plantingPlan.plantages.push(this._id);
   await plantingPlan.save();
+  const cultivation = await this.populate("cultivation").execPopulate();
+  if (!cultivation) {
+    throw new Error("Associated cultivation not found");
+  }
+  cultivation.plantages.push(this._id);
+  await cultivation.save();
 });
 
 plantageItemSchema.pre("save", async function () {

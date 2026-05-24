@@ -1,5 +1,6 @@
 import { AppUser } from "@/models/user/AppUser";
 import { workersJson } from "../data/appUsers";
+import { CultivationWorker } from "@/models/user/workers/CultivationWork";
 
 export const seedWorkers = async () => {
   for (const workerData of workersJson) {

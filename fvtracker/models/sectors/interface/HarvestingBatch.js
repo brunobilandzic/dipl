@@ -50,6 +50,11 @@ const harvestingBatchItemSchema = new Schema({
       default: [],
     },
   ],
+  cultivationWorker: {
+    type: Schema.Types.ObjectId,
+    ref: "CultivationWorker",
+    required: true,
+  },
 });
 
 harvestingBatchSchema.pre("deleteMany", async function () {

@@ -181,6 +181,7 @@ export const createNewPlantage = async ({
   cultivationId,
 }) => {
   await Plantage.deleteMany();
+  await PlantageWork.deleteMany();
   await PlantedCropVariety.updateMany(
     {},
     {

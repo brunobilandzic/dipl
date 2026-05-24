@@ -264,7 +264,18 @@ export const createNewPlantage = async ({
   return map;
 };
 
-export const createNewHarvest = async ({ harvestingPlan, plantedMap }) => {
+export const createNewHarvest = async ({
+  harvestingPlan,
+  plantedMap,
+  cultivationWorkerId,
+}) => {
+  const cultivationWorker =
+    await CultivationWorker.findById(cultivationWorkerId);
+
+  if (!cultivationWorker) {
+    throw new Error("Cultivation worker not found with the provided ID.");
+  }
+
   for (const [cvName, plantedCoords] of Object.entries(plantedMap)) {
     const harvestingPlanItem = harvestingPlan.items.find(
       (item) => item.cropVariety.name === cvName,

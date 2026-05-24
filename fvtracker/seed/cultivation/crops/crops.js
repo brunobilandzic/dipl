@@ -15,6 +15,10 @@ import { Field } from "@/models/sectors/cultivation/Field";
 import { createPlans } from "@/seed/documents/plans";
 import { getDimensionsFromPlanted } from "@/lib/utils/cultivation/fields/cultivationAreas";
 import { Plantage, PlantageItem } from "@/models/sectors/cultivation/Plantage";
+import {
+  CultivationWorker,
+  PlantageWork,
+} from "@/models/user/workers/CultivationWork";
 
 // Seed crop main types, general types, types, and varieties
 
@@ -225,7 +229,7 @@ export const createNewPlantage = async ({
   }
   console.log("planted", Object.keys(map).join(", "));
   console.log("creating plantage");
-
+  const cultivationWorker = await CultivationWorker.findOne();
   const plantage = new Plantage({
     plantingPlan: plantingPlan._id,
     workerUsername: "cmw",

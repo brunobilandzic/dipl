@@ -7,6 +7,11 @@ const workerSchema = new mongoose.Schema({
     ref: "AppUser",
     required: true,
   },
+  manager: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "RootManager",
+    default: null,
+  },
 });
 
 export const Worker =

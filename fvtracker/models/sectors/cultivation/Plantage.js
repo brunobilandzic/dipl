@@ -2,11 +2,6 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const plantageSchema = new Schema({
-  cultivation: {
-    type: Schema.Types.ObjectId,
-    ref: "Cultivation",
-    required: true,
-  },
   plantedAt: {
     type: Date,
     default: Date.now,
@@ -18,6 +13,11 @@ const plantageSchema = new Schema({
       required: true,
     },
   ],
+  cultivationWorker: {
+    type: Schema.Types.ObjectId,
+    ref: "CultivationWorker",
+    required: true,
+  },
 });
 
 export const Plantage =

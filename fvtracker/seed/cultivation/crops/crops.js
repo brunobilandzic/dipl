@@ -14,6 +14,7 @@ import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
 import { Field } from "@/models/sectors/cultivation/Field";
 import { createPlans } from "@/seed/documents/plans";
 import { getDimensionsFromPlanted } from "@/lib/utils/cultivation/fields/cultivationAreas";
+import { CultivationWorker } from "@/models/user/workers/CultivationWorker";
 
 // Seed crop main types, general types, types, and varieties
 
@@ -173,6 +174,7 @@ const PLANTAGE_SIZE = 3;
 export const createNewPlantage = async ({
   plantingPlan,
   cultivationDimensions,
+  cultivationWorkerId,
 }) => {
   await PlantedCropVariety.updateMany(
     {},
@@ -236,7 +238,10 @@ export const createNewPlantage = async ({
 
     await PlantedCropVariety.updateMany(
       { _id: { $in: docs } },
-      { plantingPlanItem: plantingPlanItem._id },
+      {
+        plantingPlanItem: plantingPlanItem._id,
+        cultivationWorker: cultivationWorkerId,
+      },
     );
     plantingPlanItem.plantedCropVarieties.push(...docs.map((d) => d._id));
     plantingPlanItem.quantity -=
@@ -245,6 +250,15 @@ export const createNewPlantage = async ({
       plantingPlanItem.quantity = 0; // Ensure quantity doesn't go negative
     }
 
+    const cultivationWorker =
+      await CultivationWorker.findById(cultivationWorkerId);
+
+    if (!cultivationWorker) {
+      throw new Error("Cultivation worker not found with the provided ID.");
+    }
+    cultivationWorker.plantedCropVarieties.push(...docs.map((d) => d._id));
+
+    await cultivationWorker.save();
     await plantingPlanItem.save();
   }
   return map;

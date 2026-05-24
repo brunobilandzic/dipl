@@ -1,11 +1,13 @@
 import { Schema } from "mongoose";
+import { Worker } from "../index";
+import mongoose from "mongoose";
 import { Work } from ".";
 
 const cultivationWorkerSchema = new Schema({
-  plantages: [
+  plantageWork: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Plantage",
+      ref: "PlantageWork",
       default: [],
     },
   ],

@@ -34,6 +34,11 @@ const appUserSchema = new Schema({
     type: Boolean,
     default: false,
   },
+  worker: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Worker",
+    default: null,
+  },
 });
 
 appUserSchema.pre("save", function (next) {

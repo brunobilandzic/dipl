@@ -10,6 +10,12 @@ import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
 const { Schema } = mongoose;
 
 const plantingPlanItemSchema = new Schema({
+  plantageItems: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "PlantageItem",
+    },
+  ],
   cropVariety: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "CropVariety",

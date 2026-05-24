@@ -34,9 +34,9 @@ const plantageItemSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Plantage",
   },
-  cropVariety: {
+  plantingPlanItem: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "CropVariety",
+    ref: "PlantingPlanItem",
   },
   relativeCoords: {
     type: [String],

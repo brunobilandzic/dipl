@@ -14,5 +14,12 @@ const workerSchema = new mongoose.Schema({
   },
 });
 
+workerSchema.methods.getRole = async function () {
+  const rootManager = await mongoose
+    .model("RootManager")
+    .findOne({ workers: this._id });
+  return rootManager ? rootManager.managerModelName : null;
+};
+
 export const Worker =
   mongoose.models.Worker || mongoose.model("Worker", workerSchema);

@@ -2,22 +2,18 @@
 
 import { LoadingFullScreen } from "@/components/layout/loading";
 import api from "@/lib/api";
-import { useEffect } from "react";
+import { fetchWorkers } from "@/lib/utils/workers/api";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 export const WorkersPageComponent = ({ managerModelName }) => {
-  const [workers, setWorkers] = useState(null);
+  const workers = useSelector((state) => state.workers.workers);
+
   useEffect(() => {
-    const fetchWorkers = async () => {
-      try {
-        const res = await api.get("/workers", {
-          params: {
-            managerModelName,
-          },
-        });
-        setWorkers(res.data.workers);
-      } catch (error) {}
-    };
-  });
+    if (workers) return;
+
+    fetchWorkers(managerModelName);
+  }, [managerModelName, workers]);
 
   if (!workers) return <LoadingFullScreen />;
 

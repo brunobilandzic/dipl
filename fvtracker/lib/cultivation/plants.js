@@ -102,6 +102,13 @@ export async function createPlantedCropVarietiesCells({
   }
 
   if (plantingPlanId && cropVarietyId) {
+    const plantage = new Plantage({
+      plantingPlan: plantingPlanId,
+      workerUsername,
+      cultivation: cultivationId,
+    });
+    await plantage.save();
+
     const plantingPlan = await getPlantingPlanById(plantingPlanId);
     await plantingPlan.populate({
       path: "items",

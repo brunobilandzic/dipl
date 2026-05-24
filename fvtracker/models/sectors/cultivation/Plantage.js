@@ -49,6 +49,15 @@ plantageSchema.methods.workerAppUser = async function () {
   const appUser = await AppUser.findOne({ username: this.workerUsername });
   return appUser;
 };
+plantageSchema.pre("save", async function () {
+  if (!this.isNew) return;
+  const plantingPlan = await this.populate("plantingPlan").execPopulate();
+  if (!plantingPlan) {
+    throw new Error("Associated planting plan not found");
+  }
+  plantingPlan.plantages.push(this._id);
+  await plantingPlan.save();
+});
 
 export const Plantage =
   mongoose.models.Plantage || mongoose.model("Plantage", plantageSchema);

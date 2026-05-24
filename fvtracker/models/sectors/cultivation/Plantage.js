@@ -52,31 +52,35 @@ plantageSchema.methods.workerAppUser = async function () {
 };
 plantageSchema.pre("save", async function () {
   if (!this.isNew) return;
-  const plantingPlan = await this.populate("plantingPlan").execPopulate();
+  await this.populate("plantingPlan");
+  const plantingPlan = this.plantingPlan;
   if (!plantingPlan) {
     throw new Error("Associated planting plan not found");
   }
   plantingPlan.plantages.push(this._id);
   await plantingPlan.save();
-  const cultivation = await this.populate("cultivation").execPopulate();
+  await this.populate("cultivation");
+  const cultivation = this.cultivation;
   if (!cultivation) {
     throw new Error("Associated cultivation not found");
   }
+  console.log({cultivation});
   cultivation.plantages.push(this._id);
   await cultivation.save();
 });
 
 plantageItemSchema.pre("save", async function () {
   if (!this.isNew) return;
-  const plantage = await this.populate("plantage").execPopulate();
+  await this.populate("plantage");
+  const plantage = this.plantage;
   if (!plantage) {
     throw new Error("Associated plantage not found");
   }
   plantage.plantageItems.push(this._id);
   await plantage.save();
+  await this.populate("plantingPlanItem");
+  const plantingPlanItem = this.plantingPlanItem;
 
-  const plantingPlanItem =
-    await this.populate("plantingPlanItem").execPopulate();
   if (!plantingPlanItem) {
     throw new Error("Associated planting plan item not found");
   }

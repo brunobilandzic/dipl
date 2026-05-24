@@ -20,8 +20,9 @@ const plantageSchema = new Schema(
         ref: "PlantedCropVariety",
       },
     ],
-    workerUsername: {
-      type: String,
+    worker: {
+      type: Schema.Types.ObjectId,
+      ref: "CultivationWorker",
       required: true,
     },
   },
@@ -64,7 +65,7 @@ plantageSchema.pre("save", async function () {
   if (!cultivation) {
     throw new Error("Associated cultivation not found");
   }
-  console.log({cultivation});
+  console.log({ cultivation });
   cultivation.plantages.push(this._id);
   await cultivation.save();
 });

@@ -50,6 +50,13 @@ const harvestingBatchItemSchema = new Schema({
       default: [],
     },
   ],
+  harvestWorks: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "HarvestWork",
+      default: [],
+    },
+  ],
 });
 
 harvestingBatchSchema.pre("deleteMany", async function () {
@@ -144,6 +151,7 @@ harvestingBatchItemSchema.pre("deleteMany", async function () {
     { harvestingBatchItems: { $in: ids } },
     { $pull: { harvestingBatchItems: { $in: ids } } },
   );
+  await HarvestWork.deleteMany({ harvestingBatchItem: { $in: ids } });
 });
 
 /* harvestingBatchItemSchema.methods.quantity = async function () {

@@ -8,7 +8,7 @@ const check = async () => {
   await dbConnect();
   const adminCount = await Admin.countDocuments();
   if (adminCount > 0) {
-    await Admin.deleteOne({ username: users.roles.ADMIN.username });
+    await Admin.deleteMany();
     console.log(`Deleted existing admin user`);
   }
 };

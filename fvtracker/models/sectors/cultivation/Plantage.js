@@ -8,7 +8,7 @@ const plantageSchema = new Schema({
   },
   plantedCropVarieties: [
     {
-      type: Schema.types.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: "PlantedCropVariety",
       required: true,
     },

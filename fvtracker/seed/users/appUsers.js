@@ -15,6 +15,7 @@ import { createAdmin } from "./admin";
 import { RootManager } from "@/models/user/managers/RootManager";
 import { GeneralManager } from "@/models/user/managers/GeneralManager";
 import { GENERAL_MANAGER_USERNAME } from "@/lib/constants/users/managersUsernameModel";
+import { seedWorkers } from "./workers";
 
 const check = async () => {
   await dbConnect();
@@ -70,7 +71,7 @@ export default async () => {
 
   console.log("Seeded", managersIds.length, "managers.");
   console.log(`Seeded ${results.length} appUsers.`);
-
+  await seedWorkers();
   return {
     appUsersIds: results.map((res) => res.appUserId),
     managersIds: results.map((res) => res.managerId),

@@ -10,10 +10,10 @@ const cultivationWorkerSchema = new Schema({
       default: [],
     },
   ],
-  harvests: [
+  harvestWorks: [
     {
       type: Schema.Types.ObjectId,
-      ref: "Harvest",
+      ref: "HarvestWork",
       default: [],
     },
   ],
@@ -31,9 +31,29 @@ const plantageWorkSchema = new Schema({
   },
 });
 
+const harvestWorkSchema = new Schema({
+  harvestingBatchItem: {
+    type: Schema.Types.ObjectId,
+    ref: "HarvestingBatchItem",
+    required: true,
+  },
+  hoursWorked: {
+    type: Number,
+    required: true,
+  },
+  worker: {
+    type: Schema.Types.ObjectId,
+    ref: "CultivationWorker",
+    required: true,
+  },
+});
+
 export const CultivationWorker =
   mongoose.models.CultivationWorker ||
   Worker.discriminator("CultivationWorker", cultivationWorkerSchema);
 export const PlantageWork =
   mongoose.models.PlantageWork ||
   Work.discriminator("PlantageWork", plantageWorkSchema);
+export const HarvestWork =
+  mongoose.models.HarvestWork ||
+  Work.discriminator("HarvestWork", harvestWorkSchema);

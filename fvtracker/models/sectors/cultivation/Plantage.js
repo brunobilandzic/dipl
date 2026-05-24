@@ -23,7 +23,7 @@ const plantageSchema = new Schema(
     work: {
       type: Schema.Types.ObjectId,
       ref: "PlantageWork",
-      required: true,
+      default: null,
     },
   },
   {

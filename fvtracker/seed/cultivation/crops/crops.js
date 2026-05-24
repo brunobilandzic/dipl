@@ -330,8 +330,21 @@ export const createNewHarvest = async ({ harvestingPlan, plantedMap }) => {
     if (harvestingPlanItem.quantity < 0) {
       harvestingPlanItem.quantity = 0; // Ensure quantity doesn't go negative
     }
+
+    const harvestingBatchItem = await HarvestingBatchItem.findOne({
+      cropVariety: cropVarietyId,
+      harvestingBatch: harvestingPlan.harvestingBatch._id,
+    });
+    if (!harvestingBatchItem) {
+      console.warn(
+        `Harvesting batch item not found for crop variety ${cvName}`,
+      );
+      continue;
+    }
+
     const cultivationWorker = await CultivationWorker.findOne();
-    harvestingPlanItem.addHarvestWork({
+
+    harvestingBatchItem.addHarvestWork({
       hoursWorked: docs.length,
       workerId: cultivationWorker._id,
     });

@@ -48,11 +48,12 @@ export default function SeedOptions() {
       icon: <FaUserPlus />,
       type: SEED_TYPES.WORKERS,
     },
-    /*     {
+    {
       label: "Korisnici",
       icon: <FaUserPlus />,
       type: SEED_TYPES.USERS,
     },
+    /*
         {
       label: "Kultivacije",
       icon: <MdFoodBank />,

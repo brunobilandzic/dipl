@@ -43,6 +43,11 @@ export default function SeedOptions() {
       icon: <FaUserPlus />,
       type: SEED_TYPES.ADMIN,
     },
+    {
+      label: "Radnici",
+      icon: <FaUserPlus />,
+      type: SEED_TYPES.WORKERS,
+    },
     /*     {
       label: "Korisnici",
       icon: <FaUserPlus />,

@@ -45,11 +45,13 @@ export const fetchWorkers = createAsyncThunk(
   "workers/fetchWorkers",
   async (managerModelName, { dispatch }) => {
     // Simulate an API call
+    console.log("Fetching workers for managerModelName:", managerModelName);
     const response = await api.get(`/workers`, {
       params: {
         managerModelName,
       },
     });
+    console.log("Workers fetched:", response.data);
     return response.data;
   },
 );

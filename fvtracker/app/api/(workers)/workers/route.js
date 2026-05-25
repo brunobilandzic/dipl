@@ -1,16 +1,14 @@
 import { fetchManager } from "@/lib/auth/fetchSessionData";
-import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
 import dbConnect from "@/lib/db/mongooseConnect";
 import { getWorkers } from "@/lib/workers/get";
 
 export async function GET(req) {
   try {
-    const { searchParams } = new URL(request.url);
+    const managerModelName = req.nextUrl.searchParams.get("managerModelName");
     await dbConnect();
-    const { specificManager: cultivationManager, unauthorized } =
-      await fetchManager({
-        managerModelNames: [CULTIVATION_MANAGER],
-      });
+    const { specificManager, unauthorized } = await fetchManager({
+      managerNames: [managerModelName],
+    });
     if (unauthorized) {
       return Response.json(
         { error: "Nemate pravo pristupa radnicima" },
@@ -18,8 +16,8 @@ export async function GET(req) {
       );
     }
     const workers = await getWorkers({
-      rootManagerId: cultivationManager.rootManager,
-      managerModelName: CULTIVATION_MANAGER,
+      rootManagerId: specificManager.rootManager._id,
+      managerModelName: managerModelName,
     });
     return Response.json({ workers });
   } catch (error) {

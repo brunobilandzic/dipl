@@ -1,3 +1,4 @@
+import api from "@/lib/api";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -52,7 +53,7 @@ export const fetchWorkers = createAsyncThunk(
       },
     });
     console.log("Workers fetched:", response.data);
-    return response.data;
+    return response.data.workers;
   },
 );
 

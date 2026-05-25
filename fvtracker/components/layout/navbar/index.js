@@ -26,6 +26,7 @@ import { fillCartRedux } from "@/lib/utils/webstore/cart";
 import { fillOrdersRedux } from "@/lib/utils/webstore/orders";
 import { fillWarehouseRequestsRedux } from "@/lib/utils/documents/requests";
 import { fillManagersSelection } from "@/store/managers";
+import { fetchWorkers } from "@/store/workers";
 
 export default {
   roleitems,
@@ -79,6 +80,7 @@ function NavItems() {
 
   useEffect(() => {
     if (status === "authenticated" && session.user?.managerModelName) {
+      dispatch(fetchWorkers(session.user.managerModelName));
       const managerModelName = session.user.managerModelName;
       setManagerModelName(session.user?.managerModelName);
       dispatch(login(session.user));

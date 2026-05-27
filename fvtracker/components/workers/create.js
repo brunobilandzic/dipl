@@ -2,9 +2,16 @@
 
 import styles from "@/components/form/form.module.css";
 import { AppInput } from "@/components/form/inputs";
+import api from "@/lib/api";
+import handleError from "@/lib/constants/errors/client/handleError";
+import { setLoading } from "@/store/loading";
+import { useRouter } from "next/router";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 export const CreateWorker = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const emptyWorkerData = {
     name: "worker",
     surname: "test",
@@ -48,8 +55,24 @@ export const CreateWorker = () => {
     }));
   };
 
-  const onSubmit = () => {
-    console.log("Submitting worker data:", workerData);
+  const onSubmit = async () => {
+    console.log("Submitting worker data:", { workerData });
+
+    try {
+      dispatch(setLoading(true));
+      const res = await api.post("/workers/create", { workerData });
+    } catch (error) {
+      console.error("Error creating worker:", error);
+      handleError(
+        {
+          ...error,
+          generalMessage: "Greška pri kreiranju radnika",
+        },
+        router,
+      );
+    } finally {
+      dispatch(setLoading(false));
+    }
   };
 
   return (

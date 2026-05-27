@@ -6,7 +6,8 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 export const WorkersPageComponent = ({ managerModelName }) => {
-  const workers = useSelector((state) => state.workers);
+  const workersState = useSelector((state) => state.workers);
+  const { items: workers, isLoading } = workersState;
 
   useEffect(() => {
     if (workers) return;

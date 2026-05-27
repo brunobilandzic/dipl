@@ -28,3 +28,29 @@ export async function GET(req) {
     );
   }
 }
+
+export async function POST(req) {
+  try {
+    const { managerModelName, workerData } = await req.json();
+    await dbConnect();
+    const { specificManager, unauthorized } = await fetchManager({
+      managerNames: [managerModelName],
+    });
+    if (unauthorized) {
+      return Response.json(
+        { error: "Nemate pravo pristupa radnicima" },
+        { status: 403 },
+      );
+    }
+    const newWorker = await createWorker({
+      rootManagerId: specificManager.rootManager._id,
+    });
+    return Response.json({ worker: newWorker });
+  } catch (error) {
+    console.error("Worker creation error:", error);
+    return Response.json(
+      { error: "Greška pri kreiranju radnika" },
+      { status: 500 },
+    );
+  }
+}

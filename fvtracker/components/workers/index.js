@@ -12,6 +12,8 @@ export const WorkersPageComponent = ({ managerModelName }) => {
 
   if (!workers) return <LoadingFullScreen />;
 
+  console.log("showing workers", {workers});
+
   return (
     <div>
       <div>

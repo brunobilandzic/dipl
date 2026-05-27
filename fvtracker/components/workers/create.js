@@ -54,7 +54,7 @@ export const CreateWorker = () => {
   return (
     <div className={`form`}>
       <div className={styles.head}>
-        <h2 className={styles.heading}>Registracija</h2>
+        <h2 className={styles.heading}>Izradi radnika</h2>
       </div>
       <div className={styles.body}>
         {inputs.map((input, i) => {

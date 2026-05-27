@@ -1,3 +1,6 @@
+import styles from "@/components/form/form.module.css";
+import { useState } from "react";
+
 export const CreateWorker = () => {
   const emptyWorkerData = {
     name: "",
@@ -6,4 +9,60 @@ export const CreateWorker = () => {
     password: "",
   };
   const [workerData, setWorkerData] = useState(emptyWorkerData);
+  const inputs = [
+    {
+      name: "email",
+      placeholder: "Email",
+      type: "email",
+      label: "Email",
+    },
+    {
+      name: "username",
+      placeholder: "Korisničko ime",
+      type: "text",
+      label: "Korisničko ime",
+    },
+    {
+      name: "name",
+      placeholder: "Ime",
+      type: "text",
+      label: "Ime",
+    },
+    { name: "surname", placeholder: "Prezime", type: "text", label: "Prezime" },
+    {
+      name: "password",
+      type: "password",
+      label: "Lozinka",
+    },
+  ];
+
+  return (
+    <div className={`form`}>
+      <div className={styles.head}>
+        <h2 className={styles.heading}>Registracija</h2>
+      </div>
+      <div className={styles.body}>
+        {inputs.map((input, i) => {
+          const { name, placeholder, type } = input;
+          return (
+            <div key={i}>
+              <AppInput
+                name={name}
+                placeholder={placeholder}
+                type={type}
+                value={signUpData[name] || ""}
+                onChange={onChange}
+                label={input.label}
+              />
+            </div>
+          );
+        })}
+      </div>
+      <div className={`${styles.footer}       flex justify-center`}>
+        <div className={`btn submitButton btnLg`} onClick={onSubmit}>
+          Kreiraj radnika
+        </div>
+      </div>
+    </div>
+  );
 };

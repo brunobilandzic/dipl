@@ -1,5 +1,9 @@
-import { fetchManager } from "@/lib/auth/fetchSessionData";
+import {
+  fetchManager,
+  fetchSessionRootManager,
+} from "@/lib/auth/fetchSessionData";
 import dbConnect from "@/lib/db/mongooseConnect";
+import { createWorker } from "@/lib/workers/create";
 import { getWorkers } from "@/lib/workers/get";
 
 export async function GET(req) {
@@ -31,11 +35,10 @@ export async function GET(req) {
 
 export async function POST(req) {
   try {
-    const { managerModelName, workerData } = await req.json();
     await dbConnect();
-    const { specificManager, unauthorized } = await fetchManager({
-      managerNames: [managerModelName],
-    });
+    const { rootManager, unauthorized } = await fetchSessionRootManager();
+    const { workerData } = await req.json();
+
     if (unauthorized) {
       return Response.json(
         { error: "Nemate pravo pristupa radnicima" },
@@ -43,8 +46,10 @@ export async function POST(req) {
       );
     }
     const newWorker = await createWorker({
-      rootManagerId: specificManager.rootManager._id,
+      rootManager,
+      workerData,
     });
+    console.log("Worker created successfully:", newWorker);
     return Response.json({ worker: newWorker });
   } catch (error) {
     console.error("Worker creation error:", error);

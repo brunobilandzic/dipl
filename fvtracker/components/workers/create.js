@@ -60,7 +60,11 @@ export const CreateWorker = () => {
 
     try {
       dispatch(setLoading(true));
-      const res = await api.post("/workers/create", { workerData });
+      const res = await api.post("/workers", { workerData });
+      alert(`Radnik uspešno kreiran.`, {
+        type: "success",
+      });
+      console.log({ newWorker: res.data.worker });
     } catch (error) {
       console.error("Error creating worker:", error);
       handleError(

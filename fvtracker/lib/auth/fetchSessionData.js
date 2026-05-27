@@ -150,3 +150,11 @@ export const fetchSessionRootManager = async () => {
     rootManager,
   };
 };
+
+export const fetchSessionManagerModelName = async () => {
+  const { rootManager, unauthorized } = await fetchSessionRootManager();
+  if (unauthorized) {
+    return { unauthorized: true };
+  }
+  return { managerModelName: rootManager.managerModelName };
+};

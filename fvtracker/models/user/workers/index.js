@@ -21,17 +21,22 @@ const workerSchema = new mongoose.Schema(
   },
 );
 
-const workSchema = new mongoose.Schema({
-  worker: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Worker",
-    required: true,
+const workSchema = new mongoose.Schema(
+  {
+    worker: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Worker",
+      required: true,
+    },
+    hoursWorked: {
+      type: Number,
+      required: true,
+    },
   },
-  hoursWorked: {
-    type: Number,
-    required: true,
+  {
+    timestamps: true,
   },
-});
+);
 
 workerSchema.pre("save", async function () {
   if (this.isNew) {

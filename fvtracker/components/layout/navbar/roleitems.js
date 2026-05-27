@@ -15,11 +15,7 @@ export default {
     },
     {
       label: "radnici",
-      submenu: [
-        { label: "lista", path: "/radnici" },
-        { label: "zahtjevi", path: "/radnici/zahtjevi" },
-        { label: "novi radnik", path: "/radnici/novi" },
-      ],
+      path: "/radnici",
     },
     {
       label: "nabava",
@@ -48,11 +44,7 @@ export default {
     },
     {
       label: "radnici",
-      submenu: [
-        { label: "lista", path: "/radnici" },
-        { label: "zahtjevi", path: "/radnici/zahtjevi" },
-        { label: "novi radnik", path: "/radnici/novi" },
-      ],
+      path: "/radnici",
     },
     {
       label: "nabava",
@@ -78,11 +70,7 @@ export default {
     },
     {
       label: "radnici",
-      submenu: [
-        { label: "lista", path: "/radnici" },
-        { label: "zahtjevi", path: "/radnici/zahtjevi" },
-        { label: "novi radnik", path: "/radnici/novi" },
-      ],
+      path: "/radnici",
     },
     {
       label: "nabava",
@@ -103,11 +91,7 @@ export default {
     },
     {
       label: "radnici",
-      submenu: [
-        { label: "lista", path: "/radnici" },
-        { label: "zahtjevi", path: "/radnici/zahtjevi" },
-        { label: "novi radnik", path: "/radnici/novi" },
-      ],
+      path: "/radnici",
     },
     {
       label: "nabava",
@@ -137,11 +121,7 @@ export default {
     ,
     {
       label: "radnici",
-      submenu: [
-        { label: "lista", path: "/radnici" },
-        { label: "zahtjevi", path: "/radnici/zahtjevi" },
-        { label: "novi radnik", path: "/radnici/novi" },
-      ],
+      path: "/radnici",
     },
     {
       label: "nabava",

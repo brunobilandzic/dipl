@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 export const createWorker = async ({ workerData, rootManager }) => {
   const { ...workerAppUserData } = workerData;
   const appUser = new AppUser(workerAppUserData);
+  await appUser.save();
 
   let specificWorker;
 

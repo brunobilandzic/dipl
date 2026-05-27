@@ -10,6 +10,12 @@ const warehousePopulateConfig = [
       },
       {
         path: "warehouseAcceptanceProcesses",
+        populate: {
+          path: "productionStock",
+          populate: {
+            path: "facility",
+          },
+        },
       },
     ],
   },

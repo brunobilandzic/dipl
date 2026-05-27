@@ -19,7 +19,7 @@ export const createProducts = async () => {
   console.log("Creating products...");
   const productionFacility = await createFacility();
   const productionManager = await ProductionManager.findOne();
-  const warehouses = await seedWarehouses(5);
+  const warehouses = await seedWarehouses(3);
 
   let stopIteration = false;
   const products = [];
@@ -51,13 +51,16 @@ export const createProducts = async () => {
         productionStock,
         warehouseId: warehouse._id,
       });
-      console.log(
-        `Created product stock for ${product.name} with quantity ${productionStock.quantity} and warehouse stock with quantity ${warehouseStock.quantity}`,
-      );
 
       await productionManager.save();
       await product.save();
     }
+  }
+  console.log(`Stocked product in ${warehouses.length} warehouses.`);
+  if (stopIteration) {
+    console.warn(
+      "Neki proizvodi nisu mogli biti proizvedeni zbog nedostatka resursa. Molimo provjerite logove za detalje.",
+    );
   }
 };
 

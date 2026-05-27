@@ -65,10 +65,12 @@ const cultivationSchema = new Schema({
       default: [],
     },
   ],
-  plantageWorks: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "PlantageWork",
-  },
+  plantageWorks: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "PlantageWork",
+    },
+  ],
   harvestWorks: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "HarvestWork",
@@ -108,6 +110,22 @@ cultivationSchema.pre("save", function (next) {
     this.slug = utils.strings.makeUrlFriendly(this.name);
   }
 });
+
+cultivationSchema.methods.addPlantageWork = async function ({
+  worker,
+  hoursWorked,
+}) {
+  const plantageWork = new PlantageWork({
+    worker: worker._id,
+    hoursWorked,
+  });
+  worker.plantageWorks.push(plantageWork._id);
+  await worker.save();
+  this.plantageWorks.push(plantageWork._id);
+  await this.save();
+  await plantageWork.save();
+  return plantageWork;
+};
 
 cultivationSchema.pre("deleteMany", async function () {
   await mongoose

@@ -11,7 +11,7 @@ export const getWorkers = async ({ rootManagerId, managerModelName }) => {
   for (const worker of workers) {
     switch (managerModelName) {
       case CULTIVATION_MANAGER:
-        console.log("Populating cultivation work for worker:", { worker });
+        console.log("Populating cultivation work for worker:", worker);
       // find cult worker and populate
       default:
         return workers;

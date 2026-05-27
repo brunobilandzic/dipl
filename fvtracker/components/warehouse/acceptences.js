@@ -18,7 +18,7 @@ function WarehouseAcceptances({ acceptances, warehouseName, onCancel }) {
       >
         {acceptances.map((productAcceptances) => (
           <ProductAcceptances
-            key={productAcceptances.product}
+            key={productAcceptances.product._id}
             product={productAcceptances.product}
             warehouseAcceptanceProcesses={
               productAcceptances.warehouseAcceptanceProcesses
@@ -55,7 +55,10 @@ const WarehouseAcceptProcess = ({ acceptance }) => {
       <div className="listitemDescription">
         <div> {showDateTime(acceptance.acceptedAt)}</div>
       </div>
-      <div> {acceptance.comment}</div>
+      <div>
+        Proizvodni pogon: {acceptance.productionStock?.facility?.name || "N/A"}
+      </div>
+      <div>Stavka: {acceptance.comment}</div>
       <div>
         {" "}
         Primljeno: {acceptance.quantity} komad

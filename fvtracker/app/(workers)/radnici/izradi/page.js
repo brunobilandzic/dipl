@@ -1,4 +1,4 @@
-import { CreateWorker } from "@/components/workers/manage/create";
+import { CreateWorker } from "@/components/workers/create";
 import React from "react";
 
 function CreateWorkerPage() {

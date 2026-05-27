@@ -45,12 +45,12 @@ export async function POST(req) {
         { status: 403 },
       );
     }
-    const newWorker = await createWorker({
+    const { specificWorker } = await createWorker({
       rootManager,
       workerData,
     });
-    console.log("Worker created successfully:", newWorker);
-    return Response.json({ worker: newWorker });
+    console.log("Worker created successfully:", specificWorker);
+    return Response.json({ worker: specificWorker });
   } catch (error) {
     console.error("Worker creation error:", error);
     return Response.json(

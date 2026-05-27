@@ -1,4 +1,7 @@
+"use client";
+
 import styles from "@/components/form/form.module.css";
+import { AppInput } from "@/components/form/inputs";
 import { useState } from "react";
 
 export const CreateWorker = () => {
@@ -36,6 +39,18 @@ export const CreateWorker = () => {
     },
   ];
 
+  const onChange = (e) => {
+    const { name, value } = e.target;
+    setWorkerData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const onSubmit = () => {
+    console.log("Submitting worker data:", workerData);
+  };
+
   return (
     <div className={`form`}>
       <div className={styles.head}>
@@ -50,7 +65,7 @@ export const CreateWorker = () => {
                 name={name}
                 placeholder={placeholder}
                 type={type}
-                value={signUpData[name] || ""}
+                value={workerData[name] || ""}
                 onChange={onChange}
                 label={input.label}
               />

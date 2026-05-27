@@ -1,9 +1,8 @@
 "use client";
 
 import { LoadingFullScreen } from "@/components/layout/loading";
-import api from "@/lib/api";
 import { fetchWorkers } from "@/lib/utils/workers/api";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 export const WorkersPageComponent = ({ managerModelName }) => {

@@ -6,10 +6,7 @@ import { populateProductIngredients } from "@/lib/production/product/ingredients
 import { ProductionManager } from "@/models/user/managers/ProductionManager";
 import { createFacility } from "./facility";
 import { createProductStock } from "@/lib/production/stocks";
-import {
-  createWarehouseStockSeed,
-  seedWarehouses,
-} from "../storage/warehouse";
+import { createWarehouseStockSeed, seedWarehouses } from "../storage/warehouse";
 import { Warehouse } from "@/models/sectors/storage/Warehouse";
 
 export const createProducts = async () => {

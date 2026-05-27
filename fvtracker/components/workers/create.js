@@ -6,10 +6,11 @@ import { useState } from "react";
 
 export const CreateWorker = () => {
   const emptyWorkerData = {
-    name: "",
-    surname: "",
-    email: "",
-    password: "",
+    name: "worker",
+    surname: "test",
+    email: "wt@mail.com",
+    password: "1",
+    username: "wt",
   };
   const [workerData, setWorkerData] = useState(emptyWorkerData);
   const inputs = [

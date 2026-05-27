@@ -1,5 +1,6 @@
 import { AppUser } from "@/models/user/AppUser";
 import { CULTIVATION_MANAGER } from "../constants/users/managerTypes";
+import mongoose from "mongoose";
 
 export const createWorker = async ({ workerData, rootManager }) => {
   const { ...workerAppUserData } = workerData;

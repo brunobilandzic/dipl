@@ -1,25 +1,13 @@
 "use client";
 
 import { LoadingFullScreen } from "@/components/layout/loading";
-import api from "@/lib/api";
-import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
-export const WorkersPageComponent = ({ managerModelName }) => {
-  const [workers, setWorkers] = useState(null);
-  useEffect(() => {
-    const fetchWorkers = async () => {
-      try {
-        const res = await api.get("/workers", {
-          params: {
-            managerModelName,
-          },
-        });
-        setWorkers(res.data.workers);
-      } catch (error) {}
-    };
-  });
-
+export const WorkersList = ({ workers }) => {
+  const workersState = useSelector((state) => state.workers);
+  console.log("Workers state in component:", workersState);
+  const { items: workers, isLoading } = workersState;
   if (!workers) return <LoadingFullScreen />;
 
-  return <div>{workers.length}</div>;
+  return <div>csacas {workers.length}</div>;
 };

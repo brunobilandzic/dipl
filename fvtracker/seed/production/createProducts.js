@@ -8,7 +8,6 @@ import { createFacility } from "./facility";
 import { createProductStock } from "@/lib/production/stocks";
 import {
   createWarehouseStockSeed,
-  seedWarehouse,
   seedWarehouses,
 } from "../storage/warehouse";
 import { Warehouse } from "@/models/sectors/storage/Warehouse";

@@ -65,26 +65,13 @@ const cultivationSchema = new Schema({
       default: [],
     },
   ],
-  workHours: [
-    {
-      type: {
-        worker: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Worker",
-          required: true,
-        },
-        beginDateTime: { type: Date, required: true },
-        endDateTime: { type: Date, required: true },
-        // needs functionality to calculate total hours from begin and end date time
-        // and calculate payroll based on worker pay rate
-      },
-      default: [],
-    },
-  ],
-  status: {
-    type: String,
-    enum: ["u planiranju", "u toku", "završeno"],
-    default: "u planiranju",
+  plantageWorks: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "PlantageWork",
+  },
+  harvestWorks: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "HarvestWork",
   },
   createdAt: { type: Date, default: Date.now },
   startDate: { type: Date },

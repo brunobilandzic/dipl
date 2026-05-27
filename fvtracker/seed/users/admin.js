@@ -21,8 +21,6 @@ export const createAdmin = async () => {
   const adminAppUser = new AppUser({ ...adminData, isAdmin: true });
   await adminAppUser.save();
 
-  console.log("Created admin AppUser:", adminAppUser);
-
   const admin = new Admin({
     appUser: adminAppUser._id,
   });

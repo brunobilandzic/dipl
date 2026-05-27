@@ -22,6 +22,8 @@ import {
   CultivationWorker,
   PlantageWork,
 } from "@/models/user/workers/CultivationWork";
+import { Cultivation } from "@/models/sectors/cultivation/Cultivation";
+import cultivation from "@/lib/cultivation";
 
 // Seed crop main types, general types, types, and varieties
 
@@ -287,9 +289,12 @@ export const createNewPlantage = async ({
   });
 
   plantage.work = plantageWork._id;
-
+  cultivationWorker.plantageWorks.push(plantageWork._id);
+  await cultivationWorker.save();
   await plantageWork.save();
   await plantage.save();
+
+  const cultvation = await Cultivation.findById(cultivationId);
 
   return map;
 };

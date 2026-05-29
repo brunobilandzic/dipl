@@ -4,6 +4,8 @@ import { LoadingFullScreen } from "@/components/layout/loading";
 import { useSelector } from "react-redux";
 import { List, ListItem } from "../layout/preview/list";
 import { useRouter } from "next/navigation";
+import { showDate } from "@/lib/utils/display";
+import { workPay } from "@/lib/utils/workers/pay";
 
 export const WorkersPageComponent = ({ managerModelName }) => {
   const workersState = useSelector((state) => state.workers);
@@ -32,5 +34,26 @@ export const WorkersPageComponent = ({ managerModelName }) => {
 };
 
 const WorkerItem = ({ worker }) => {
-  return <ListItem title={``}></ListItem>;
+  return (
+    <ListItem title={``}>
+      <div>
+        <div>
+          <div>
+            {worker.appUser.name} {worker.appUser.surname}
+          </div>
+          <div className="text-sm text-gray-500">
+            {showDate(worker.createdAt)}
+          </div>
+          <div>{worker.hourlyRate} $/h</div>
+        </div>
+        <div>
+          {workPay({
+            hourlyRate: worker.hourlyRate,
+            works: worker.plantageWorks,
+          })}{" "}
+          $ ukupno
+        </div>
+      </div>
+    </ListItem>
+  );
 };

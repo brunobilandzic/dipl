@@ -15,6 +15,7 @@ export const seedWorkers = async () => {
         const cultivationWorker = new CultivationWorker({
           appUser: appUser._id,
           manager: cultivationManager.rootManager,
+          hourlyRate: workerData.hourlyRate,
         });
         await cultivationWorker.save();
         console.log(`Created CultivationWorker for ${appUser.username}`);

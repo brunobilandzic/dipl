@@ -65,6 +65,7 @@ export const CreateWorker = () => {
         type: "success",
       });
       console.log({ newWorker: res.data.worker });
+      dispatch(addWorker(res.data.worker));
     } catch (error) {
       console.error("Error creating worker:", error);
       handleError(

@@ -141,6 +141,12 @@ export const adminNavItems = [
   },
 ];
 
+export const workerNavItems = {
+  cultivation: {
+    label: "Kultivacija",
+    path: "/upravljanje-poljima/pregled",
+  },
+};
 export const guestNavItems = [
   {
     label: (

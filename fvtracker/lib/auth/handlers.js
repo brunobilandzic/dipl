@@ -73,6 +73,7 @@ export async function handleCredentials(credentials) {
     username: user.username,
     managerId: manager?._id.toString() || null,
     isAdmin: user.isAdmin || false,
+    workerType: user.workerType || null,
   };
 }
 
@@ -184,6 +185,11 @@ async function logInCredentials({ login, password }) {
       console.log("Incorrect password for user:", login);
       return null;
     }
+    if (appUser.worker) {
+      await appUser.populate({ path: "worker", select: "_id __t" });
+      const workerType = appUser.worker.__t;
+      return { ...appUser._doc, workerType };
+    }
     console.log("Found user in DB:", appUser);
     if (!appUser.rootManager) {
       console.log("User has no Root Manager:", login);
@@ -205,6 +211,7 @@ async function logInCredentials({ login, password }) {
     return {
       ...appUser._doc,
       roleStatus: appUser.rootManager?.roleRequest?.status || null,
+      worker: appUser.worker || null,
     };
   }
   return null;

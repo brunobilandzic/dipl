@@ -1,7 +1,7 @@
-export const workPay = ({ works }) => {
+export const workPay = ({ hourlyRate, works }) => {
   let totalPay = 0;
   for (const work of works) {
-    totalPay += work.hoursWorked * work.worker.hourlyRate;
+    totalPay += work.hoursWorked * hourlyRate;
   }
   return totalPay;
 };

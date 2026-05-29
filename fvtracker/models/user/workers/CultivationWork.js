@@ -25,25 +25,12 @@ const plantageWorkSchema = new Schema({
     ref: "Plantage",
     required: true,
   },
-  hoursWorked: {
-    type: Number,
-    required: true,
-  },
 });
 
 const harvestWorkSchema = new Schema({
   harvestingBatchItem: {
     type: Schema.Types.ObjectId,
     ref: "HarvestingBatchItem",
-    required: true,
-  },
-  hoursWorked: {
-    type: Number,
-    required: true,
-  },
-  worker: {
-    type: Schema.Types.ObjectId,
-    ref: "CultivationWorker",
     required: true,
   },
 });

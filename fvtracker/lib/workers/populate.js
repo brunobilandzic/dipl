@@ -9,7 +9,10 @@ export default [
     populate: [
       {
         path: "harvestingBatchItem",
-        populate: { path: "cropVariety", populate: populateConfigCropVariety },
+        populate: [
+          { path: "cropVariety", populate: populateConfigCropVariety },
+          { path: "harvestingBatch", select: "name" },
+        ],
       },
     ],
   },
@@ -22,6 +25,9 @@ export default [
         {
           path: "cultivation",
           select: "name",
+        },
+        {
+          path: "plantageItems",
         },
       ],
     },

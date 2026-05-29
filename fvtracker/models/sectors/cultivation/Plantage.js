@@ -9,21 +9,19 @@ const plantageSchema = new Schema(
       ref: "Cultivation",
       required: true,
     },
-    plantingPlan: {
-      type: Schema.Types.ObjectId,
-      ref: "PlantingPlan",
-      required: true,
-    },
-    plantageItems: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "PlantedCropVariety",
-      },
-    ],
     work: {
       type: Schema.Types.ObjectId,
       ref: "PlantageWork",
       default: null,
+    },
+    plantingPlanItem: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "PlantingPlanItem",
+    },
+    relativeCoords: {
+      type: [String],
+      default: [],
+      required: true,
     },
   },
   {
@@ -53,13 +51,13 @@ plantageSchema.methods.workerAppUser = async function () {
 };
 plantageSchema.pre("save", async function () {
   if (!this.isNew) return;
-  await this.populate("plantingPlan");
-  const plantingPlan = this.plantingPlan;
-  if (!plantingPlan) {
-    throw new Error("Associated planting plan not found");
+  await this.populate("plantingPlanItem");
+  const plantingPlanItem = this.plantingPlanPlanItem;
+  if (!plantingPlanItem) {
+    throw new Error("Associated planting plan item not found");
   }
-  plantingPlan.plantages.push(this._id);
-  await plantingPlan.save();
+  plantingPlanItem.plantages.push(this._id);
+  await plantingPlanItem.save();
   await this.populate("cultivation");
   const cultivation = this.cultivation;
   if (!cultivation) {

@@ -86,6 +86,32 @@ export const fetchAdmin = async () => {
   return { admin };
 };
 
+export async function fetchWorker({ workerType }) {
+  const appUser = await fetchSessionAppUser();
+  const worker = await mongoose.models.Worker.findOne({ appUser: appUser._id });
+  if (!worker) {
+    return { unauthorized: true };
+  }
+  return { worker };
+}
+
+export async function fetchManagerWorker({ managerNames = [], workerType }) {
+  const { specificManager, unauthorized } = await fetchManager({
+    managerNames,
+  });
+  if (!unauthorized && specificManager) {
+    return { specificManager };
+  }
+  const { worker, unauthorized: workerUnauthorized } = await fetchWorker({
+    workerType,
+  });
+  if (workerUnauthorized) {
+    return { unauthorized: true };
+  }
+
+  return { worker };
+}
+
 export async function fetchManager({ managerNames = [] }) {
   const response = {
     generalManager: null,

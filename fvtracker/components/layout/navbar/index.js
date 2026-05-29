@@ -147,6 +147,7 @@ function NavItems() {
   useEffect(() => {
     if (status === "authenticated" && session.user?.workerType) {
       console.log("User is a worker, setting worker nav items");
+      dispatch(login(session.user));
       setItems(roleitems[session.user.workerType] || []);
     }
   }, [status]);

@@ -11,6 +11,9 @@ const workersSlice = createSlice({
   name: "workers",
   initialState,
   reducers: {
+    addWorker: (state, action) => {
+      state.items.push(...action.payload);
+    },
     setWorkers: (state, action) => {
       state.items = action.payload;
     },
@@ -57,7 +60,12 @@ export const fetchWorkers = createAsyncThunk(
   },
 );
 
-export const { setWorkers, setFilteredWorkers, setLoading, setError } =
-  workersSlice.actions;
+export const {
+  addWorker,
+  setWorkers,
+  setFilteredWorkers,
+  setLoading,
+  setError,
+} = workersSlice.actions;
 
 export default workersSlice.reducer;

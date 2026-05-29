@@ -11,10 +11,10 @@ import { PlantageItem } from "@/models/sectors/cultivation/Plantage";
 const { Schema } = mongoose;
 
 const plantingPlanItemSchema = new Schema({
-  plantageItems: [
+  plantages: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "PlantageItem",
+      ref: "Plantage",
     },
   ],
   cropVariety: {

@@ -1,19 +1,37 @@
 import dbConnect from "@/lib/db/mongooseConnect";
 import cultivation from "@/lib/cultivation";
 import { ROLE_STATUSES } from "@/lib/constants/users";
-import { fetchManager } from "@/lib/auth/fetchSessionData";
+import { fetchManager, fetchManagerWorker } from "@/lib/auth/fetchSessionData";
 import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
 import { deleteFields } from "@/lib/cultivation/fields";
+import { managerMorkerMap } from "@/lib/constants/users/managerWorker";
+import { CultivationManager } from "@/models/user/managers/CultivationManager";
 
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
     const slug = searchParams.get("slug");
     await dbConnect();
-    const { specificManager: cultivationManager, redirect } =
-      await fetchManager({
+    let { specificManager: cultivationManager, worker: cultivationWorker } =
+      await fetchManagerWorker({
         managerNames: [CULTIVATION_MANAGER],
+        workerType: managerMorkerMap[CULTIVATION_MANAGER],
       });
+    if (cultivationWorker) {
+      await cultivationWorker.populate({
+        path: "manager",
+        select: "managerModelName",
+      });
+      if (cultivationWorker.manager?.managerModelName !== CULTIVATION_MANAGER) {
+        return Response.json(
+          { message: "Unauthorized: Worker is not a cultivation worker" },
+          { status: 403 },
+        );
+      }
+      cultivationManager = await CultivationManager.findOne({
+        rootManager: cultivationWorker.manager._id.toString(),
+      });
+    }
 
     if (!cultivationManager) {
       return Response.json(
@@ -22,8 +40,9 @@ export async function GET(request) {
       );
     }
     if (
-      cultivationManager?.rootManager?.roleRequest.status !=
-      ROLE_STATUSES.APPROVED
+      cultivationManager?.rootManager?.roleRequest?.status !=
+        ROLE_STATUSES.APPROVED &&
+      !cultivationWorker
     ) {
       return Response.json(
         { message: "Unauthorized: Role request not approved" },

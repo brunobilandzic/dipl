@@ -69,7 +69,7 @@ const appUsersJsonArray = [
 
 export const workersJson = [
   {
-    username: "cwm",
+    username: "cw",
     modelName: "CultivationWorker",
     name: "Cultivation",
     surname: "Worker",

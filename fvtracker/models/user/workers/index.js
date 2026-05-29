@@ -15,6 +15,10 @@ const workerSchema = new mongoose.Schema(
       ref: "RootManager",
       default: null,
     },
+    hourlyRate: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     timestamps: true,
@@ -31,6 +35,10 @@ const workSchema = new mongoose.Schema(
     hoursWorked: {
       type: Number,
       required: true,
+    },
+    isPayed: {
+      type: Boolean,
+      default: false,
     },
   },
   {

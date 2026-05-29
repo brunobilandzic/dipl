@@ -44,10 +44,16 @@ export default function SeedOptions() {
       type: SEED_TYPES.ADMIN,
     },
     {
+      label: "Radnici",
+      icon: <FaUserPlus />,
+      type: SEED_TYPES.SEED_WORKERS,
+    },
+    /* 
+    {
       label: "Korisnici",
       icon: <FaUserPlus />,
       type: SEED_TYPES.USERS,
-    } /* 
+    } 
         {
       label: "Kultivacije",
       icon: <MdFoodBank />,
@@ -57,8 +63,7 @@ export default function SeedOptions() {
       label: "Biljke",
       icon: <MdFoodBank />,
       type: SEED_TYPES.CROP_MAIN_TYPES,
-    },*/,
-    {
+    },*/ {
       label: "Polja",
       icon: <MdFoodBank />,
       type: SEED_TYPES.FIELDS,

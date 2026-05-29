@@ -38,6 +38,8 @@ async function handleAPIRequest(seedType) {
       return await crops.plantageHarvest({ cultivation });
     case SEED_TYPES.SEED_SALES:
       return await sales.seedSales();
+    case SEED_TYPES.SEED_WORKERS:
+      return await users.workers();
     default:
       throw new Error(`Unknown seed type: ${seedType}`);
   }

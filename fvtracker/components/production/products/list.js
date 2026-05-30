@@ -1,8 +1,6 @@
 "use client";
 
-import {
-  deleteProducts,
-} from "@/lib/utils/production/products";
+import { deleteProducts } from "@/lib/utils/production/products";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
@@ -22,7 +20,7 @@ import { ProductItemStocksInfo } from "./stock/Info";
 import CreateWarehouseStock from "./stock/CreateWarehouseStock";
 import { fetchWarehouses } from "@/store/warehouse";
 
-const ProductList = () => {
+const ProductList = ({ worker }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const products = useSelector(
@@ -51,7 +49,7 @@ const ProductList = () => {
   }, [products]); */
 
   if (!products) return <LoadingFullScreen />;
-
+  console.log({ worker });
   return (
     <div>
       <List
@@ -76,6 +74,7 @@ const ProductList = () => {
               product={product}
               harvestingBatches={harvestingBatches}
               dispatch={dispatch}
+              isWorker={!!worker}
             />
           </div>
         ))}
@@ -86,7 +85,14 @@ const ProductList = () => {
 
 export default ProductList;
 
-const ProductItem = ({ product, harvestingBatches, router, dispatch }) => {
+const ProductItem = ({
+  product,
+  harvestingBatches,
+  router,
+  dispatch,
+  isWorker,
+}) => {
+  console.log({ isWorker });
   const [addProductionStockModalOpen, setAddProductionStockModalOpen] =
     useState(false);
   const [addWarehouseStockModalOpen, setAddWarehouseStockModalOpen] =
@@ -97,13 +103,17 @@ const ProductItem = ({ product, harvestingBatches, router, dispatch }) => {
   }, [warehouses]);
 
   const actionOptions = [
-    {
-      label: "Uredi",
-      className: "",
-      onClick: () => {
-        router.push(`/proizvodi/uredi/${product.slug}`);
-      },
-    },
+    ...(!isWorker
+      ? [
+          {
+            label: "Uredi",
+            className: "",
+            onClick: () => {
+              router.push(`/proizvodi/uredi/${product.slug}`);
+            },
+          },
+        ]
+      : []),
     {
       label: "Izradi zalihe",
       className: "submitButton",
@@ -118,15 +128,23 @@ const ProductItem = ({ product, harvestingBatches, router, dispatch }) => {
         setAddWarehouseStockModalOpen(true);
       },
     },
-    {
-      label: "Obriši",
-      className: "cancelButton",
-      onClick: async (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        await deleteProducts({ productIds: [product._id], dispatch, router });
-      },
-    },
+    ...(!isWorker
+      ? [
+          {
+            label: "Obriši",
+            className: "cancelButton",
+            onClick: async (e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              await deleteProducts({
+                productIds: [product._id],
+                dispatch,
+                router,
+              });
+            },
+          },
+        ]
+      : []),
   ];
 
   const minPossibleBatchMap = findMinPossibleBatchMap({

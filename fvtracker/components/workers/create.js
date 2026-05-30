@@ -66,6 +66,7 @@ export const CreateWorker = () => {
       });
       console.log({ newWorker: res.data.worker });
       dispatch(addWorker(res.data.worker));
+      router.push("/radnici");
     } catch (error) {
       console.error("Error creating worker:", error);
       handleError(

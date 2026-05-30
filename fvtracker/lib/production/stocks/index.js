@@ -20,6 +20,7 @@ export const createProductStock = async ({
   harvestingBatchId,
   quantity,
   comment,
+  workerId
 }) => {
   console.log("creating product stock");
   const product = await getProductById(productId);
@@ -109,7 +110,7 @@ export const createProductStock = async ({
     stock.quantity += Number(quantity);
   }
 
-  const productionWorker = await ProductionWorker.findOne();
+  const productionWorker = await ProductionWorker.findById(workerId)
 
   const productionProcess = new ProductionProcess({
     productionsStock: stock._id,

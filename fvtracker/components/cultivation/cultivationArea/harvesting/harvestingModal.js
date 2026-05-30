@@ -36,6 +36,15 @@ export function HarvestingModal({
   const router = useRouter();
   const [allFieldPlans, setAllFieldPlans] = useState({});
   const [availablePlans, setAvailablePlans] = useState({});
+  const workerId = useSelector((state) => state.user.session.workerId);
+  useEffect(() => {
+    if (workerId) {
+      setNewHarvest((prev) => ({
+        ...prev,
+        workerId,
+      }));
+    }
+  }, [workerId]);
 
   const chooseWorker = (e) => {
     const { name, value } = e.target;
@@ -84,7 +93,7 @@ export function HarvestingModal({
     } else {
       setAvailablePlans({});
     }
-  }, [newHarvest?.cropVariety?._id]);
+  }, [newHarvest?.cropVariety?._id, allFieldPlans]);
 
   //use effects to monitor state changes
 
@@ -102,7 +111,7 @@ export function HarvestingModal({
 
     setNewHarvest(
       initialNewHarvest_WId
-        ? initialNewHarvest_WId({ cultivationId: cultivation?._id })
+        ? initialNewHarvest_WId({ cultivationId: cultivation?._id, workerId })
         : {},
     );
   }, [cultivation?._id]);
@@ -154,7 +163,7 @@ export function HarvestingModal({
   const reset = () => {
     setNewHarvest(
       initialNewHarvest_WId
-        ? initialNewHarvest_WId({ cultivationId: cultivation?._id })
+        ? initialNewHarvest_WId({ cultivationId: cultivation?._id, workerId })
         : {},
     );
     setChooseNewEnd(initialChooseNewEnd);
@@ -306,6 +315,7 @@ export function HarvestingModal({
           setNewHarvest={setNewHarvest}
           availablePlans={availablePlans}
           onChoosePlan={onChoosePlan}
+          workerId={workerId}
           chooseWorker={chooseWorker}
         />
       )}
@@ -320,12 +330,13 @@ const initialChooseNewEnd = {
   y: null,
 };
 
-const initialNewHarvest_WId = ({ cultivationId }) => {
+const initialNewHarvest_WId = ({ cultivationId, workerId }) => {
   // we are choosing variaty when clicking on it
   return {
     cultivationId: cultivationId || null,
     cropVariety: null,
     harvestingPlan: null,
+    workerId: workerId || null,
     toHarvestCells: [],
     harvestedAt: new Date("2026-03-10T00:00:00Z"),
     beginX: null,
@@ -340,4 +351,5 @@ const prepareHarvestBody = (newHarvest) => ({
   cropVarietyId: newHarvest.cropVariety._id,
   harvestingPlanId: newHarvest.harvestingPlan?._id,
   toHarvestCells: newHarvest.toHarvestCells,
+  workerId: newHarvest.workerId,
 });

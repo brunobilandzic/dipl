@@ -81,7 +81,6 @@ export const PlantCultivation = ({
 
   const chooseWorker = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setNewPlantage((prev) => ({
       ...prev,
       workerId: value,

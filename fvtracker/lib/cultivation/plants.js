@@ -7,6 +7,8 @@ import utils from "@/lib/utils";
 import { getCultivationById } from "./cultivation";
 import { getPlantingPlanById, getPlantingPlanItemRecord } from "./plans";
 import { Field } from "@/models/sectors/cultivation/Field";
+import { Worker } from "@/models/user/workers";
+import { PlantageWork } from "@/models/user/workers/CultivationWork";
 
 export async function cropsData() {
   const cropMainTypes = await CropMainType.find().populate({
@@ -104,6 +106,8 @@ export async function createPlantedCropVarietiesCells({
     throw new Error("Field not found with the provided ID.");
   }
 
+  console.log({ relativeCoords });
+
   if (plantingPlanId && cropVarietyId) {
     const plantingPlan = await getPlantingPlanById(plantingPlanId);
     await plantingPlan.populate({
@@ -150,13 +154,19 @@ export async function createPlantedCropVarietiesCells({
         populate: { path: "cropVariety", populate: { path: "cropType" } },
       });
     }
-    if(workerId) {
-      const worker = await Worker.findById(workerId);
-      if (!worker) {
-        throw new Error("Worker not found with the provided ID.");
-      }
-      
+    const worker = await Worker.findById(workerId);
+    if (!worker) {
+      throw new Error("Worker not found with the provided ID.");
     }
+    const plantageWork = new PlantageWork({
+      plantingPlanItem: plantingPlanItem._id,
+      cultivation: cultivationId,
+      plantedCoords: relativeCoords,
+      worker: workerId,
+      hoursWorked: relativeCoords.length,
+    });
+
+    await plantageWork.save();
     await plantingPlanItem.save();
     await cropVariety.save();
     plantedCropVarieties.push(...updatedPlcvs);

@@ -41,6 +41,7 @@ export const CreateProductionStock = ({
     batchName: Object.keys(minPossibleBatchMap).length
       ? Object.keys(minPossibleBatchMap)[0]
       : null,
+    workerId,
   });
   const [productionStock, setProductionStock] = useState(testFormData);
   const onChange = (e) => {

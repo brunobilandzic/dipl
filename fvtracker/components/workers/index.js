@@ -7,7 +7,10 @@ import { useRouter } from "next/navigation";
 import { showDate } from "@/lib/utils/display";
 import { workPay } from "@/lib/utils/workers/pay";
 import { worksCoordsSum } from "@/lib/utils/workers/cultivation";
-import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
+import {
+  CULTIVATION_MANAGER,
+  PRODUCTION_MANAGER,
+} from "@/lib/constants/users/managerTypes";
 
 export const WorkersPageComponent = ({ managerModelName }) => {
   const workersState = useSelector((state) => state.workers);
@@ -64,8 +67,9 @@ function WorkerContent({ worker, managerModelName }) {
   console.log({ managerModelName });
   switch (managerModelName) {
     case CULTIVATION_MANAGER:
-      console.log("render for cult manager....");
       return <CultivationWorker worker={worker} />;
+    case PRODUCTION_MANAGER:
+      return <ProductionWorker worker={worker} />;
     default:
       return null;
   }
@@ -91,4 +95,8 @@ const CultivationWorker = ({ worker }) => {
       <div>{worker.harvestWorks.length} berbi</div>
     </>
   );
+};
+
+const ProductionWorker = ({ worker }) => {
+  return <>pw</>;
 };

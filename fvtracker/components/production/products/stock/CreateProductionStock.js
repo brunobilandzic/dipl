@@ -11,6 +11,7 @@ import { setLoading } from "@/store/loading";
 import handleError from "@/lib/constants/errors/client/handleError";
 import fillProductionRedux from "@/lib/utils/production";
 import { getAvailableFacilities } from "@/lib/utils/production/facilities";
+import { ChooseWorker } from "@/components/workers/choose";
 
 export const CreateProductionStock = ({
   product,
@@ -18,12 +19,15 @@ export const CreateProductionStock = ({
   onCancel,
   minPossibleBatchMap,
 }) => {
+  const workerId = useSelector((state) => state.user.session.workerId);
+  const workers = useSelector((state) => state.workers.items);
   const blankFormData = {
     productId: product._id,
     quantity: 1,
     comment: "",
     productionFacilityId: null,
     batchName: null,
+    workerId,
   };
   const dispatch = useDispatch();
 
@@ -74,6 +78,16 @@ export const CreateProductionStock = ({
     );
   }, [productionStock.quantity]);
 
+  const chooseWorker = (e) => {
+    const { name, value } = e.target;
+    setNewPlantage((prev) => ({
+      ...prev,
+      workerId: value,
+    }));
+  };
+
+  console.log({ workerId });
+
   if (minPossibleBatchMap && Object.keys(minPossibleBatchMap).length === 0) {
     return (
       <Modal
@@ -101,6 +115,9 @@ export const CreateProductionStock = ({
       onSubmit={onSubmit}
     >
       <div>
+        {!workerId && (
+          <ChooseWorker workers={workers} onChoose={chooseWorker} />
+        )}
         <AppInput
           name="comment"
           label="Komentar"

@@ -36,6 +36,12 @@ const harvestingItemSchema = new Schema({
     ref: "HarvestingPlan",
     required: true,
   },
+  harvestWorks: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "HarvestWork",
+    },
+  ],
 });
 
 harvestingItemSchema.pre("deleteMany", async function () {

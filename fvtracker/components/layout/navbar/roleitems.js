@@ -138,6 +138,12 @@ export default {
       path: "/upravljanje-poljima/pregled",
     },
   ],
+  ProductionWorker: [
+    {
+      label: "Proizvodi",
+      path: "/proizvodi",
+    },
+  ],
 };
 
 export const adminNavItems = [

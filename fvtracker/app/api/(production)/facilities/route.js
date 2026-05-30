@@ -1,4 +1,4 @@
-import { fetchManager } from "@/lib/auth/fetchSessionData";
+import { fetchManager, fetchManagerWorker } from "@/lib/auth/fetchSessionData";
 import {
   PRODUCTION_MANAGER,
   WAREHOUSE_MANAGER,
@@ -9,18 +9,25 @@ import { createFacility } from "@/lib/production/facilities/create";
 import { updateFacility } from "@/lib/production/facilities/update";
 import { deleteFacilities } from "@/lib/production/facilities/delete";
 import { makeUrlFriendly } from "@/lib/utils/strings";
+import { managerMorkerMap } from "@/lib/constants/users/managerWorker";
 
 export const GET = async (req) => {
   try {
     await dbConnect();
-    const { unauthorized } = await fetchManager({
-      managerNames: [PRODUCTION_MANAGER, WAREHOUSE_MANAGER],
+    let {
+      specificManager,
+      worker: productionWorker,
+      unauthorized,
+    } = await fetchManagerWorker({
+      managerNames: [PRODUCTION_MANAGER],
+      workerType: managerMorkerMap[PRODUCTION_MANAGER],
     });
+
     if (unauthorized) {
       return Response.json({ unauthorized: true }, { status: 403 });
     }
     const facilities = await getFacilities({});
-    
+
     return Response.json({ facilities }, { status: 200 });
   } catch (error) {
     console.error("Greška pri dohvaćanju postrojenja:", error);

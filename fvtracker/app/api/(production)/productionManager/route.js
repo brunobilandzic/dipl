@@ -1,13 +1,20 @@
-import { fetchManager } from "@/lib/auth/fetchSessionData";
+import { fetchManager, fetchManagerWorker } from "@/lib/auth/fetchSessionData";
 import { PRODUCTION_MANAGER } from "@/lib/constants/users/managerTypes";
+import { managerMorkerMap } from "@/lib/constants/users/managerWorker";
 import { ProductionManager } from "@/models/user/managers/ProductionManager";
 
 // here is the place we fetch all production data
 
 export async function GET(request) {
-  const { generalManager, specificManager, unauthorized } = await fetchManager({
+  let {
+    specificManager,
+    worker: productionWorker,
+    unauthorized,
+  } = await fetchManagerWorker({
     managerNames: [PRODUCTION_MANAGER],
+    workerType: managerMorkerMap[PRODUCTION_MANAGER],
   });
+
   if (unauthorized) {
     return Response.json({ unauthorized: true }, { status: 403 });
   }

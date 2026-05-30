@@ -2,8 +2,8 @@ import { UnathorizedPage } from "@/components/auth/unAuthorized";
 import ProductList from "@/components/production/products/list";
 import { PRODUCTION_MANAGER } from "@/lib/constants/users/managerTypes";
 import React from "react";
-import { fetchManagerWorker } from "@/lib/utils/auth";
-import { managerMorkerMap } from "@/lib/constants/users/managerWorkerMap";
+import { fetchManagerWorker } from "@/lib/auth/fetchSessionData";
+import { managerMorkerMap } from "@/lib/constants/users/managerWorker";
 import { sanitize } from "@/lib/utils/objects";
 
 const ProductsPage = async () => {

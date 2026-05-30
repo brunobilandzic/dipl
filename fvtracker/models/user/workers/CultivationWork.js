@@ -20,11 +20,7 @@ const cultivationWorkerSchema = new Schema({
 });
 
 const plantageWorkSchema = new Schema({
-  plantage: {
-    type: Schema.Types.ObjectId,
-    ref: "Plantage",
-    required: true,
-  },
+
 });
 
 const harvestWorkSchema = new Schema({

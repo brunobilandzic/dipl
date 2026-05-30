@@ -7,7 +7,6 @@ import utils from "@/lib/utils";
 import { getCultivationById } from "./cultivation";
 import { getPlantingPlanById, getPlantingPlanItemRecord } from "./plans";
 import { Field } from "@/models/sectors/cultivation/Field";
-import { Plantage, PlantageItem } from "@/models/sectors/cultivation/Plantage";
 
 export async function cropsData() {
   const cropMainTypes = await CropMainType.find().populate({
@@ -66,7 +65,7 @@ export async function createPlantage({
   plantedAt,
   harvestedAt,
   plantingPlanId,
-  workerUsername,
+  workerId,
 }) {
   const cultivation = await getCultivationById(cultivationId);
   await cultivation.populate({
@@ -83,7 +82,7 @@ export async function createPlantage({
     planted: cultivation.cultivationArea.planted,
     plantingPlanId,
     fieldId: cultivation.cultivationArea.field,
-    workerUsername,
+    workerId,
   });
   return plantedCropVarieties;
 }
@@ -97,7 +96,7 @@ export async function createPlantedCropVarietiesCells({
   plantedAt,
   plantingPlanId,
   fieldId,
-  workerUsername,
+  workerId,
 }) {
   const plantedCropVarieties = [];
   const field = await Field.findById(fieldId);
@@ -106,13 +105,6 @@ export async function createPlantedCropVarietiesCells({
   }
 
   if (plantingPlanId && cropVarietyId) {
-    const plantage = new Plantage({
-      plantingPlan: plantingPlanId,
-      workerUsername,
-      cultivation: cultivationId,
-    });
-    await plantage.save();
-
     const plantingPlan = await getPlantingPlanById(plantingPlanId);
     await plantingPlan.populate({
       path: "items",
@@ -124,12 +116,6 @@ export async function createPlantedCropVarietiesCells({
     });
     const cropVariety = await getCropVarietyById(cropVarietyId);
     cropVariety.plantingPlanItems.push(plantingPlanItem._id);
-    const plantageItem = new PlantageItem({
-      plantage: plantage._id,
-      plantingPlanItem: plantingPlanItem._id,
-      relativeCoords,
-    });
-    await plantageItem.save();
 
     await PlantedCropVariety.updateMany(
       {
@@ -163,6 +149,13 @@ export async function createPlantedCropVarietiesCells({
         path: "plantingPlanItem",
         populate: { path: "cropVariety", populate: { path: "cropType" } },
       });
+    }
+    if(workerId) {
+      const worker = await Worker.findById(workerId);
+      if (!worker) {
+        throw new Error("Worker not found with the provided ID.");
+      }
+      
     }
     await plantingPlanItem.save();
     await cropVariety.save();

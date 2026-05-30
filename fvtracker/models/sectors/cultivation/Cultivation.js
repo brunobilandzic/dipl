@@ -44,12 +44,6 @@ const cultivationAreaSchema = new Schema({
 // also has start and end date, status so it maybe will be used for some planning and tracking... idk yet
 // harvest will probably be linked to cultivation
 const cultivationSchema = new Schema({
-  plantages: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Plantage",
-    },
-  ],
   cultivationArea: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "CultivationArea",

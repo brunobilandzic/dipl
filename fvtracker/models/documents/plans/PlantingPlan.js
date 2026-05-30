@@ -5,18 +5,10 @@ import {
   CropVariety,
   PlantedCropVariety,
 } from "@/models/sectors/cultivation/Crops";
-import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
-import { PlantageItem } from "@/models/sectors/cultivation/Plantage";
 
 const { Schema } = mongoose;
 
 const plantingPlanItemSchema = new Schema({
-  plantages: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Plantage",
-    },
-  ],
   cropVariety: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "CropVariety",
@@ -61,16 +53,9 @@ plantingPlanItemSchema.pre("deleteMany", async function () {
     { plantingPlanItems: { $in: ids } },
     { $pull: { plantingPlanItems: { $in: ids } } },
   );
-  await PlantageItem.deleteMany({ plantingPlanItem: { $in: ids } });
 });
 
 const plantingPlanSchema = new Schema({
-  plantages: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Plantage",
-    },
-  ],
   name: {
     type: String,
     required: true,

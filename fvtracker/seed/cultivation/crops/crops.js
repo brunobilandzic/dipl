@@ -7,7 +7,6 @@ import {
   PlantedCropVariety,
 } from "@/models/sectors/cultivation/Crops";
 import utils from "@/lib/utils";
-import { deleteCrops } from "@/lib/db/delete";
 import { PlantingPlan } from "@/models/documents/plans/PlantingPlan";
 import { HarvestingPlan } from "@/models/documents/plans/HarvestingPlan";
 import {
@@ -17,13 +16,10 @@ import {
 import { Field } from "@/models/sectors/cultivation/Field";
 import { createPlans } from "@/seed/documents/plans";
 import { getDimensionsFromPlanted } from "@/lib/utils/cultivation/fields/cultivationAreas";
-import { Plantage, PlantageItem } from "@/models/sectors/cultivation/Plantage";
 import {
   CultivationWorker,
   PlantageWork,
 } from "@/models/user/workers/CultivationWork";
-import { Cultivation } from "@/models/sectors/cultivation/Cultivation";
-import cultivation from "@/lib/cultivation";
 
 // Seed crop main types, general types, types, and varieties
 
@@ -185,7 +181,6 @@ export const createNewPlantage = async ({
   cultivationDimensions,
   cultivationId,
 }) => {
-  await Plantage.deleteMany();
   await PlantageWork.deleteMany();
   await PlantedCropVariety.updateMany(
     {},
@@ -196,7 +191,7 @@ export const createNewPlantage = async ({
   );
   const { width: cultWidth, length: cultLength } = cultivationDimensions;
   const varietiesNum = plantingPlan.items.length;
-  const plantingCoords = [];
+
   let cropCoords = [];
   const map = {};
 
@@ -236,14 +231,7 @@ export const createNewPlantage = async ({
   console.log("planted", Object.keys(map).join(", "));
   console.log("creating plantage");
   const cultivationWorker = await CultivationWorker.findOne();
-  const plantage = new Plantage({
-    plantingPlan: plantingPlan._id,
-    cultivation: cultivationId,
-  });
-  await plantage.save();
-  /*   const { width: cultWidth, length: cultLength } = getDimensionsFromPlanted();
-  const plantingCoords = plantingPlan.items.reduce((coords, item) => {}, []); */
-  // Example coordinates for planting
+
   let plantedLength = 0;
   for (const [key, value] of Object.entries(map)) {
     const plantingPlanItem = plantingPlan.items.find(
@@ -260,41 +248,16 @@ export const createNewPlantage = async ({
       { _id: { $in: docs } },
       { plantingPlanItem: plantingPlanItem._id },
     );
+
     plantingPlanItem.plantedCropVarieties.push(...docs.map((d) => d._id));
     plantingPlanItem.quantity -=
       docs.length * plantingPlanItem.cropVariety.quantityPerCell;
     if (plantingPlanItem.quantity < 0) {
       plantingPlanItem.quantity = 0; // Ensure quantity doesn't go negative
     }
-
-    const cropVariety = await CropVariety.findOne({
-      name: key,
-    });
-
-    const plantageItem = new PlantageItem({
-      plantingPlanItem: plantingPlanItem._id,
-      plantage: plantage._id,
-      cropVariety: cropVariety._id,
-      relativeCoords: value,
-    });
-    plantage.plantageItems.push(plantageItem._id);
     await plantingPlanItem.save();
-    await plantageItem.save();
+    await cultivationWorker.save();
   }
-
-  const plantageWork = new PlantageWork({
-    worker: cultivationWorker._id,
-    plantage: plantage._id,
-    hoursWorked: plantedLength,
-  });
-
-  plantage.work = plantageWork._id;
-  cultivationWorker.plantageWorks.push(plantageWork._id);
-  await cultivationWorker.save();
-  await plantageWork.save();
-  await plantage.save();
-
-  const cultvation = await Cultivation.findById(cultivationId);
 
   return map;
 };

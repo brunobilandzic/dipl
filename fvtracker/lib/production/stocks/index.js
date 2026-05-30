@@ -20,7 +20,7 @@ export const createProductStock = async ({
   harvestingBatchId,
   quantity,
   comment,
-  workerId
+  workerId,
 }) => {
   console.log("creating product stock");
   const product = await getProductById(productId);
@@ -110,7 +110,11 @@ export const createProductStock = async ({
     stock.quantity += Number(quantity);
   }
 
-  const productionWorker = await ProductionWorker.findById(workerId)
+  const productionWorker = await ProductionWorker.findById(workerId);
+  console.log("Found production worker:", productionWorker);
+  if (!productionWorker) {
+    throw new Error(`Production worker with id ${workerId} not found.`);
+  }
 
   const productionProcess = new ProductionProcess({
     productionsStock: stock._id,

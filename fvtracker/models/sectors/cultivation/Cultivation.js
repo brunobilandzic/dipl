@@ -65,10 +65,12 @@ const cultivationSchema = new Schema({
       ref: "PlantageWork",
     },
   ],
-  harvestWorks: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "HarvestWork",
-  },
+  harvestWorks: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "HarvestWork",
+    },
+  ],
   createdAt: { type: Date, default: Date.now },
   startDate: { type: Date },
   endDate: { type: Date, default: null },

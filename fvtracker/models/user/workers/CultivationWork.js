@@ -81,7 +81,9 @@ plantageWorkSchema.pre("save", async function () {
 });
 
 plantageWorkSchema.pre("deleteMany", async function () {
-  const ids = await PlantageWork.find(this.getFilter()).distinct("_id");
+  const docs = await PlantageWork.find(this.getFilter()).distinct("_id");
+  if (!docs.length) return;
+  const ids = docs.map((doc) => doc._id);
   await mongoose
     .model("PlantingPlanItem")
     .updateMany(
@@ -164,7 +166,9 @@ harvestWorkSchema.pre("save", async function () {
 });
 
 harvestWorkSchema.pre("deleteMany", async function () {
-  const ids = await HarvestWork.find(this.getFilter()).distinct("_id");
+  const docs = await HarvestWork.find(this.getFilter()).distinct("_id");
+  if (!docs.length) return;
+  const ids = docs.map((doc) => doc._id);
   await mongoose
     .model("HarvestingPlanItem")
     .updateMany(

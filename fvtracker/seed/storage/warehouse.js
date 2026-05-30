@@ -1,6 +1,9 @@
 import { getRandomString } from "@/lib/utils/strings";
 import { createWarehouse } from "@/lib/warehouses";
-import { Warehouse } from "@/models/sectors/storage/Warehouse";
+import {
+  Warehouse,
+  WarehouseAcceptanceProcess,
+} from "@/models/sectors/storage/Warehouse";
 import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
 import { acceptWarehouseStock } from "@/lib/warehouses/accept";
 
@@ -40,6 +43,7 @@ export const createWarehouseStockSeed = async ({
   productionStock,
   warehouseId,
 }) => {
+  await WarehouseAcceptanceProcess.deleteMany();
   const warehouseStock = await acceptWarehouseStock({
     product,
     quantity: 3,

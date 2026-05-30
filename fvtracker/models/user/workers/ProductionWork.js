@@ -1,7 +1,7 @@
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
 
-import { Worker } from "../Base";
+import { Worker } from ".";
 
 const productionWorkerSchema = new Schema({
   productionProcesses: [

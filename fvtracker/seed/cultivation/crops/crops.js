@@ -264,6 +264,7 @@ export const createNewPlantage = async ({
       plantingPlanItem: plantingPlanItem._id,
       hoursWorked: docs.length,
       worker: cultivationWorker._id,
+      plantedCoords: value,
     });
     console.log("created plantage work", plantageWork);
     await plantageWork.save();

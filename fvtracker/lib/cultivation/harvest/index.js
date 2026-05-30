@@ -1,15 +1,6 @@
-import { HarvestingPlan } from "@/models/documents/plans/HarvestingPlan";
-import { getCultivationById } from "../cultivation";
 import { PlantedCropVariety } from "@/models/sectors/cultivation/Crops";
-import {
-  CULTIVATION_MANAGER,
-  PRODUCTION_MANAGER,
-} from "../../constants/users/managerTypes";
-import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
-import { fetchSessionSpecificManager } from "../../auth/fetchSessionData";
 import { getHarvestingPlanById } from "./plan";
-
-
+import { HarvestWork } from "@/models/user/workers/CultivationWork";
 
 export async function harvestCells({
   cultivationId,

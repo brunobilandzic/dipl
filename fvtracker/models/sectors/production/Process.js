@@ -1,6 +1,7 @@
 import { Base } from "@/models/Base";
 import mongoose, { Schema } from "mongoose";
 import { Machine } from "./Machine";
+import { ProductionWorker } from "@/models/user/workers/ProductionWork";
 
 const productionProcessSchema = new Schema({
   comment: {
@@ -30,6 +31,17 @@ productionProcessSchema.statics.findOrCreate = async function ({ name }) {
   if (process) return process;
   return await this.create({ name });
 };
+
+productionProcessSchema.pre("save", async function () {
+  if (this.isNew) {
+    const worker = await ProductionWorker.findById(this.worker);
+    if (!worker) {
+      throw new Error(`Production worker with id ${this.worker} not found.`);
+    }
+    worker.productionProcesses.push(this._id);
+    await worker.save();
+  }
+});
 
 export const ProductionProcess =
   mongoose.models.ProductionProcess ||

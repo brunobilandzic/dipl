@@ -1,10 +1,12 @@
 "use client";
 
-import {  useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AppDatePicker, AppSelect } from "@/components/form/inputs";
 import Modals from "@/components/layout/modals";
 import "react-datepicker/dist/react-datepicker.css";
 import { ChoosePlan } from "@/components/cultivation/plans/planting/choosePlan";
+import { useSelector } from "react-redux";
+import { ChooseWorker } from "@/components/workers/choose";
 
 export const PlantCultivation = ({
   isOpen,
@@ -17,6 +19,16 @@ export const PlantCultivation = ({
   onChoosePlan,
   submitDisabled,
 }) => {
+  const workerId = useSelector((state) => state.user.session.workerId);
+  const workers = useSelector((state) => state.workers.items);
+  useEffect(() => {
+    if (workerId) {
+      setNewPlantage((prev) => ({
+        ...prev,
+        workerId,
+      }));
+    }
+  }, [workerId]);
   const onChange = (e) => {
     const { name, value, options, selectedIndex } = e.target;
 
@@ -136,6 +148,11 @@ export const PlantCultivation = ({
               onChange={onChange}
               placeholder="Izaberite datum"
             />
+          </div>
+          <div>
+            {!workerId && (
+              <ChooseWorker workers={workers} onChoose={chooseWorker} />
+            )}
           </div>
           <div>
             <ChoosePlan

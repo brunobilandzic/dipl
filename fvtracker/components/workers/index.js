@@ -52,7 +52,7 @@ const WorkerItem = ({ worker, children }) => {
         <div>
           {workPay({
             hourlyRate: worker.hourlyRate,
-            works: worker.plantageWorks,
+            works: [...worker.plantageWorks, ...worker.harvestWorks],
           })}{" "}
           $ ukupno
         </div>

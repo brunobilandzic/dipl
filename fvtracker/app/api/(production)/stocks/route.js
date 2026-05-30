@@ -95,14 +95,21 @@ export async function POST(req) {
 }
 
 async function createProductionStock({ stockData }) {
-  const { productId, quantity, batchName, comment, productionFacilityId } =
-    stockData;
+  const {
+    productId,
+    quantity,
+    batchName,
+    comment,
+    productionFacilityId,
+    workerId,
+  } = stockData;
   const productionStock = await createProductStock({
     productId,
     batchName,
     productionFacilityId,
     quantity,
     comment,
+    workerId,
   });
   return productionStock;
 }

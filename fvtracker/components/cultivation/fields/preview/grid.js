@@ -28,6 +28,7 @@ export function FieldGrid({
   handleCropVarietyClick,
   harvestMode = false,
   toHarvestCells = [],
+  workerMode = false,
 }) {
   if (small) {
     return (
@@ -85,6 +86,7 @@ export function FieldGrid({
           handleCropVarietyClick={handleCropVarietyClick}
           harvestMode={harvestMode}
           toHarvestCells={toHarvestCells}
+          workerMode={workerMode}
         />
       </div>
     </>
@@ -114,6 +116,7 @@ const FieldCells = ({
   handleCropVarietyClick,
   harvestMode,
   toHarvestCells,
+  workerMode,
 }) => {
   let cells = [];
 
@@ -166,7 +169,7 @@ const FieldCells = ({
           handleNotPlanted(x, y);
           return;
         }
-        if (!active && color === "") {
+        if (!active && color === "" && !workerMode) {
           handleEmptyClick(x, y);
           return;
         }

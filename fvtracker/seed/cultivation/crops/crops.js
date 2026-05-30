@@ -228,7 +228,7 @@ export const createNewPlantage = async ({
       }
     }
   }
-  console.log("planted", Object.keys(map).join(", "));
+  console.log("to plant", Object.keys(map).join(", "));
   console.log("creating plantage");
   const cultivationWorker = await CultivationWorker.findOne();
 

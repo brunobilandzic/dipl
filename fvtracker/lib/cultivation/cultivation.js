@@ -22,10 +22,6 @@ export async function createCultivation(cultivation) {
     relativeCoords,
     cropVarietyId,
     existingCulName,
-    workHours,
-    status,
-    startDate,
-    endDate,
   } = cultivation;
 
   const cuArea = await CultivationArea.findById(cultivationAreaId);

@@ -19,12 +19,6 @@ const workerSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
-    works: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Work",
-      },
-    ],
   },
   {
     timestamps: true,
@@ -51,17 +45,6 @@ const workSchema = new mongoose.Schema(
     timestamps: true,
   },
 );
-
-workSchema.pre("save", async function () {
-  if (this.isNew) {
-    const worker = await mongoose.model("Worker").findById(this.worker);
-    if (!worker) {
-      throw new Error("Worker not found with the provided ID.");
-    }
-    worker.works.push(this._id);
-    await worker.save();
-  }
-});
 
 workerSchema.pre("save", async function () {
   if (this.isNew) {

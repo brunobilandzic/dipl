@@ -328,7 +328,10 @@ export const createNewHarvest = async ({
 
     harvestingBatchItem.addHarvestWork({
       hoursWorked: docs.length,
-      workerId: cultivationWorker._id,
+      worker: cultivationWorker._id,
+      cultivation: cultivationId,
+      harvestingPlanItem: harvestingPlanItem._id,
+      harvestedCoords: harvestCoords,
     });
     await harvestingPlanItem.save();
   }

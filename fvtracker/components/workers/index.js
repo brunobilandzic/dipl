@@ -6,6 +6,7 @@ import { List, ListItem } from "../layout/preview/list";
 import { useRouter } from "next/navigation";
 import { showDate } from "@/lib/utils/display";
 import { workPay } from "@/lib/utils/workers/pay";
+import { worksCoordsSum } from "@/lib/utils/workers/cultivation";
 
 export const WorkersPageComponent = ({ managerModelName }) => {
   const workersState = useSelector((state) => state.workers);
@@ -25,7 +26,9 @@ export const WorkersPageComponent = ({ managerModelName }) => {
           onCreateItem={() => router.push("/radnici/izradi")}
         >
           {workers.map((worker) => (
-            <WorkerItem key={worker._id} worker={worker} />
+            <WorkerItem key={worker._id} worker={worker}>
+              <CultivationWork worker={worker} />
+            </WorkerItem>
           ))}
         </List>
       </div>
@@ -33,7 +36,7 @@ export const WorkersPageComponent = ({ managerModelName }) => {
   );
 };
 
-const WorkerItem = ({ worker }) => {
+const WorkerItem = ({ worker, children }) => {
   return (
     <ListItem title={``}>
       <div>
@@ -53,7 +56,21 @@ const WorkerItem = ({ worker }) => {
           })}{" "}
           $ ukupno
         </div>
+        {children}
       </div>
     </ListItem>
+  );
+};
+
+const CultivationWork = ({ worker }) => {
+  return (
+    <>
+      <div>
+        Zasađeno: {worksCoordsSum({ works: worker.plantageWorks, plant: true })}
+      </div>
+      <div>
+        Ubrano: {worksCoordsSum({ works: worker.harvestWorks, plant: false })}
+      </div>
+    </>
   );
 };

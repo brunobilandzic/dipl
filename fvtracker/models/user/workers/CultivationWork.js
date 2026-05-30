@@ -113,6 +113,10 @@ const harvestWorkSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "HarvestingPlanItem",
     },
+    harvestingBatchItem: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "HarvestingBatchItem",
+    },
     harvestedCoords: [
       {
         type: String,

@@ -30,17 +30,12 @@ const plantageWorkSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Cultivation",
     },
-    relativeCoords: {
-      type: String,
-      default: null,
-      validate: (coords) => {
-        if (coords && !utils.strings.testCoordinates(coords)) {
-          throw new Error(
-            "Invalid cell coordinates format. Expected format: 'x,y'",
-          );
-        }
+    plantedCoords: [
+      {
+        type: String,
+        default: null,
       },
-    },
+    ],
   },
   { timestamps: true },
 );
@@ -118,17 +113,12 @@ const harvestWorkSchema = new Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "HarvestingPlanItem",
     },
-    relativeCoords: {
-      type: String,
-      default: null,
-      validate: (coords) => {
-        if (coords && !utils.strings.testCoordinates(coords)) {
-          throw new Error(
-            "Invalid cell coordinates format. Expected format: 'x,y'",
-          );
-        }
+    harvestedCoords: [
+      {
+        type: String,
+        default: null,
       },
-    },
+    ],
   },
   { timestamps: true },
 );

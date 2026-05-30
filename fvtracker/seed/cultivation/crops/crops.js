@@ -18,6 +18,7 @@ import { createPlans } from "@/seed/documents/plans";
 import { getDimensionsFromPlanted } from "@/lib/utils/cultivation/fields/cultivationAreas";
 import {
   CultivationWorker,
+  HarvestWork,
   PlantageWork,
 } from "@/models/user/workers/CultivationWork";
 

@@ -43,6 +43,14 @@ productionProcessSchema.pre("save", async function () {
   }
 });
 
+productionProcessSchema.pre("deleteMany", async function () {
+  const docs = await ProductionProcess.find(this.getFilter()).distinct("_id");
+  await ProductionWorker.updateMany(
+    { productionProcesses: { $in: docs } },
+    { $pull: { productionProcesses: { $in: docs } } },
+  );
+});
+
 export const ProductionProcess =
   mongoose.models.ProductionProcess ||
   mongoose.model("ProductionProcess", productionProcessSchema);

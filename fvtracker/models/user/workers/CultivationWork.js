@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
-import { Worker } from ".";
+import { Work, Worker } from ".";
 
 const cultivationWorkerSchema = new Schema({
   plantageWorks: [
@@ -123,3 +123,9 @@ const harvestWorkSchema = new Schema(
 export const CultivationWorker =
   mongoose.models.CultivationWorker ||
   Worker.discriminator("CultivationWorker", cultivationWorkerSchema);
+export const PlantageWork =
+  mongoose.models.PlantageWork ||
+  Work.discriminator("PlantageWork", plantageWorkSchema);
+export const HarvestWork =
+  mongoose.models.HarvestWork ||
+  Work.discriminator("HarvestWork", harvestWorkSchema);

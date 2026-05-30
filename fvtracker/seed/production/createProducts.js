@@ -8,6 +8,7 @@ import { createFacility } from "./facility";
 import { createProductStock } from "@/lib/production/stocks";
 import { createWarehouseStockSeed, seedWarehouses } from "../storage/warehouse";
 import { Warehouse } from "@/models/sectors/storage/Warehouse";
+import { ProductionWorker } from "@/models/user/workers/ProductionWork";
 
 export const createProducts = async () => {
   await Product.deleteMany({}); // Clear existing products
@@ -75,11 +76,14 @@ export const createProductStockSeed = async ({
   if (!batchWithResources) {
     return { productionStock: null, stop: false };
   }
+  const productionWorker = await ProductionWorker.findOne();
   const productionStock = await createProductStock({
     productId: product._id,
     harvestingBatchId: batchWithResources._id,
     quantity: STOCK_QUANTITY,
     productionFacilityId,
+    workerId: productionWorker._id,
+    comment: "Initial stock from seed script",
   });
   return { productionStock, stop: productionStock.stop };
 };

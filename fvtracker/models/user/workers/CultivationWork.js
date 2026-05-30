@@ -93,6 +93,19 @@ plantageWorkSchema.pre("deleteMany", async function () {
       { plantageWorks: { $in: ids } },
       { $pull: { plantageWorks: { $in: ids } } },
     );
+  await mongoose
+    .model("Cultivation")
+    .updateMany(
+      { plantageWorks: { $in: ids } },
+      { $pull: { plantageWorks: { $in: ids } } },
+    );
+  await mongoose
+    .model("CultivationWorker")
+    .updateMany(
+      { plantageWorks: { $in: ids } },
+      { $pull: { plantageWorks: { $in: ids } } },
+    );
+  await mongoose.model("PlantageWork").deleteMany({ _id: { $in: ids } });
 });
 
 const harvestWorkSchema = new Schema(

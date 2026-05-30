@@ -100,7 +100,6 @@ plantageWorkSchema.pre("deleteMany", async function () {
       { plantageWorks: { $in: ids } },
       { $pull: { plantageWorks: { $in: ids } } },
     );
-  await mongoose.model("PlantageWork").deleteMany({ _id: { $in: ids } });
 });
 
 const harvestWorkSchema = new Schema(
@@ -184,7 +183,6 @@ harvestWorkSchema.pre("deleteMany", async function () {
       { harvestWorks: { $in: ids } },
       { $pull: { harvestWorks: { $in: ids } } },
     );
-  await mongoose.model("HarvestWork").deleteMany({ _id: { $in: ids } });
 });
 
 export const CultivationWorker =

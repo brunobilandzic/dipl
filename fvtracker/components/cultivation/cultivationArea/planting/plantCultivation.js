@@ -67,6 +67,15 @@ export const PlantCultivation = ({
     }
   }, [newPlantage?.type, crops?.varieties]);
 
+  const chooseWorker = (e) => {
+    const { name, value } = e.target;
+    console.log(name, value);
+    setNewPlantage((prev) => ({
+      ...prev,
+      workerId: value,
+    }));
+  };
+
   if (!isOpen) return null;
   return (
     <Modals.FormModal

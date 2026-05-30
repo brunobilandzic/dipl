@@ -19,6 +19,10 @@ const productionProcessSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  worker: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "ProductionWorker",
+  },
 });
 
 productionProcessSchema.statics.findOrCreate = async function ({ name }) {

@@ -83,6 +83,10 @@ const warehouseAcceptanceProcessSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  worker: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "ProductionWorker",
+  }
 });
 
 warehouseSchema.pre("deleteMany", async function () {

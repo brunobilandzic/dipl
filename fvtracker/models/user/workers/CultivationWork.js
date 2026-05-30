@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
-import { Work, Worker } from ".";
+import { Worker } from ".";
 
 const cultivationWorkerSchema = new Schema({
   plantageWorks: [
@@ -19,24 +19,6 @@ const cultivationWorkerSchema = new Schema({
   ],
 });
 
-const plantageWorkSchema = new Schema({
-
-});
-
-const harvestWorkSchema = new Schema({
-  harvestingBatchItem: {
-    type: Schema.Types.ObjectId,
-    ref: "HarvestingBatchItem",
-    required: true,
-  },
-});
-
 export const CultivationWorker =
   mongoose.models.CultivationWorker ||
   Worker.discriminator("CultivationWorker", cultivationWorkerSchema);
-export const PlantageWork =
-  mongoose.models.PlantageWork ||
-  Work.discriminator("PlantageWork", plantageWorkSchema);
-export const HarvestWork =
-  mongoose.models.HarvestWork ||
-  Work.discriminator("HarvestWork", harvestWorkSchema);

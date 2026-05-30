@@ -257,6 +257,15 @@ export const createNewPlantage = async ({
     }
     await plantingPlanItem.save();
     await cultivationWorker.save();
+
+    const plantageWork = new PlantageWork({
+      cultivation: cultivationId,
+      plantingPlanItem: plantingPlanItem._id,
+      hoursWorked: docs.length,
+      worker: cultivationWorker._id,
+    });
+    console.log("created plantage work", plantageWork);
+    await plantageWork.save();
   }
 
   return map;

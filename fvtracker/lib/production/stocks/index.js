@@ -11,6 +11,7 @@ import {
 import { populateProductIngredients } from "@/lib/production/product/ingredients";
 import { ProductionProcess } from "@/models/sectors/production/Process";
 import { HarvestingBatchItem } from "@/models/sectors/interface/HarvestingBatch";
+import { ProductionWorker } from "@/models/user/workers/ProductionWork";
 
 export const createProductStock = async ({
   productId,
@@ -108,10 +109,13 @@ export const createProductStock = async ({
     stock.quantity += Number(quantity);
   }
 
+  const productionWorker = await ProductionWorker.findOne();
+
   const productionProcess = new ProductionProcess({
     productionsStock: stock._id,
     quantity,
     comment,
+    worker: productionWorker._id,
   });
   await HarvestingBatchItem.updateMany(
     { harvestingBatch: harvestingBatch._id },

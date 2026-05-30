@@ -22,6 +22,12 @@ export const CreateWorker = () => {
   const [workerData, setWorkerData] = useState(emptyWorkerData);
   const inputs = [
     {
+      name: "hourlyRate",
+      placeholder: "Satna plaća",
+      type: "number",
+      label: "Satna plaća",
+    },
+    {
       name: "email",
       placeholder: "Email",
       type: "email",

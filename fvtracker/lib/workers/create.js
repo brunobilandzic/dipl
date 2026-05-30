@@ -2,8 +2,11 @@ import { AppUser } from "@/models/user/AppUser";
 import { CULTIVATION_MANAGER } from "../constants/users/managerTypes";
 import mongoose from "mongoose";
 
-export const createWorker = async ({ workerData, rootManager }) => {
-  const { ...workerAppUserData } = workerData;
+export const createWorker = async ({
+  workerData,
+  rootManager,
+}) => {
+  const { hourlyRate, ...workerAppUserData } = workerData;
   const appUser = new AppUser(workerAppUserData);
   await appUser.save();
 
@@ -15,6 +18,7 @@ export const createWorker = async ({ workerData, rootManager }) => {
       specificWorker = new CultivationWorker({
         appUser: appUser._id,
         manager: rootManager._id,
+        hourlyRate,
       });
       await specificWorker.save();
       break;

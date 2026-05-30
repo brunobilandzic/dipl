@@ -36,11 +36,12 @@ const plantingPlanItemSchema = new Schema({
       default: [],
     },
   ],
-  plantingPlan: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "PlantingPlan",
-    required: true,
-  },
+  plantageWorks: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "PlantageWork",
+    },
+  ],
 });
 
 plantingPlanItemSchema.pre("deleteMany", async function () {

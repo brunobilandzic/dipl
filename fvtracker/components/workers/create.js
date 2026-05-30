@@ -5,6 +5,7 @@ import { AppInput } from "@/components/form/inputs";
 import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { setLoading } from "@/store/loading";
+import { addWorker } from "@/store/workers";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useDispatch } from "react-redux";

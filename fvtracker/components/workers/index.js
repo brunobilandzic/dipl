@@ -56,6 +56,8 @@ const WorkerItem = ({ worker, children }) => {
           })}{" "}
           $ ukupno
         </div>
+        <div>{worker.plantageWorks.length} sadnji</div>
+        <div>{worker.harvestWorks.length} berbi</div>
         {children}
       </div>
     </ListItem>

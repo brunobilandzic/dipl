@@ -3,7 +3,7 @@ import { fetchSessionManagerModelName } from "@/lib/auth/fetchSessionData";
 import React from "react";
 
 async function WorkersPage() {
-  const managerModelName = await fetchSessionManagerModelName();
+  const { managerModelName } = await fetchSessionManagerModelName();
 
   return (
     <div>

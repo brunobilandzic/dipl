@@ -271,7 +271,11 @@ export const createNewPlantage = async ({
   return map;
 };
 
-export const createNewHarvest = async ({ harvestingPlan, plantedMap }) => {
+export const createNewHarvest = async ({
+  harvestingPlan,
+  plantedMap,
+  cultivationId,
+}) => {
   console.log("creating harvest...", { plantedMap });
   await HarvestingBatchItem.deleteMany();
   await HarvestWork.deleteMany();
@@ -343,7 +347,11 @@ export async function plantageHarvest({
     cultivationId: cultivation._id,
   });
 
-  await createNewHarvest({ harvestingPlan, cultivation, plantedMap });
+  await createNewHarvest({
+    harvestingPlan,
+    cultivationId: cultivation._id,
+    plantedMap,
+  });
 }
 
 const deletePlantageHarvest = async () => {

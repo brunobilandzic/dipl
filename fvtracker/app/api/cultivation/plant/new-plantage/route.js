@@ -1,11 +1,29 @@
-import { fetchSessionSpecificManager } from "@/lib/auth/fetchSessionData";
+import {
+  fetchManagerWorker,
+  fetchSessionSpecificManager,
+} from "@/lib/auth/fetchSessionData";
+import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
+import { managerMorkerMap } from "@/lib/constants/users/managerWorker";
 import cultivation from "@/lib/cultivation";
 import dbConnect from "@/lib/db/mongooseConnect";
 
 export async function POST(request) {
   try {
     await dbConnect();
-    await fetchSessionSpecificManager({ managerName: "CultivationManager" });
+    const {
+      specificManager: cultvationManager,
+      worker,
+      unauthorized,
+    } = await fetchManagerWorker({
+      managerNames: [CULTIVATION_MANAGER],
+      workerType: managerMorkerMap[CULTIVATION_MANAGER],
+    });
+    if (unauthorized) {
+      return Response.json(
+        { success: false, error: "Nemate pravo izrade novog zasada" },
+        { status: 403 },
+      );
+    }
     const body = await request.json();
     const newPlantage = await cultivation.plants.create(body);
     return Response.json(newPlantage, { status: 200 });

@@ -21,6 +21,7 @@ export const createWorker = async ({
         hourlyRate,
       });
       await specificWorker.save();
+      await specificWorker.populate("appUser");
       break;
     default:
       throw new Error(

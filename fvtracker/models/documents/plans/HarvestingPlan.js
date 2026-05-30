@@ -8,7 +8,7 @@ import { PlantedCropVariety } from "@/models/sectors/cultivation/Crops";
 
 const { Schema } = mongoose;
 
-const harvestingItemSchema = new Schema({
+const harvestingPlanItemSchema = new Schema({
   cropVariety: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "CropVariety",
@@ -44,7 +44,7 @@ const harvestingItemSchema = new Schema({
   ],
 });
 
-harvestingItemSchema.pre("deleteMany", async function () {
+harvestingPlanItemSchema.pre("deleteMany", async function () {
   const ids = await HarvestingPlanItem.find(this.getFilter()).distinct("_id");
   await PlantedCropVariety.updateMany(
     { harvestingPlanItem: { $in: ids } },
@@ -125,4 +125,4 @@ export const HarvestingPlan =
 
 export const HarvestingPlanItem =
   mongoose.models.HarvestingPlanItem ||
-  mongoose.model("HarvestingPlanItem", harvestingItemSchema);
+  mongoose.model("HarvestingPlanItem", harvestingPlanItemSchema);

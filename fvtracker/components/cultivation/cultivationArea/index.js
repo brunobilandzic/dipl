@@ -73,6 +73,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       width: "",
       length: "",
     },
+    workerId: workerId || null,
   };
 
   const [newCUDetails, setNewCUDetails] = useState(initialNewCUDetails);

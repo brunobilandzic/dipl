@@ -400,7 +400,7 @@ const preparePlantageBody = (newPlantage) => ({
   plantedAt: newPlantage.plantedAt,
   harvestedAt: newPlantage.harvestedAt,
   plantingPlanId: newPlantage.plantingPlan?._id,
-  workerUsername: "cwm",
+  workerId: newPlantage.workerId,
 });
 
 export const getPlantageDimensions = ({ beginX, beginY, endX, endY }) => {

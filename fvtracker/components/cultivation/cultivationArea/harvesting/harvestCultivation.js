@@ -1,5 +1,7 @@
 import { ChoosePlan } from "@/components/cultivation/plans/planting/choosePlan";
 import { FormModal } from "@/components/layout/modals/form";
+import { ChooseWorker } from "@/components/workers/choose";
+import { useSelector } from "react-redux";
 
 export const HarvestCultivation = ({
   isOpen,
@@ -8,6 +10,7 @@ export const HarvestCultivation = ({
   newHarvest,
   availablePlans,
   onChoosePlan,
+  workerId,
 }) => {
   if (
     !newHarvest ||
@@ -20,9 +23,10 @@ export const HarvestCultivation = ({
   const quantityToHarvest = newHarvest.toHarvestCells?.length || 0;
   const cropTypeName = newHarvest.cropVariety.cropType.name;
   const cropVarietyName = newHarvest.cropVariety.name;
-
   const quantityString =
     quantityToHarvest === 1 ? "1 ćelije" : `${quantityToHarvest} ćelija`;
+  const workers = useSelector((state) => state.workers.items);
+
   return (
     <FormModal
       isOpen={isOpen}
@@ -36,6 +40,9 @@ export const HarvestCultivation = ({
       <div className="flex flex-col gap-4">
         <div>
           Branje {quantityString} {cropTypeName} {cropVarietyName || "N/A"}
+        </div>
+        <div>
+          {!workerId && <ChooseWorker workers={workers} onChoose={onchange} />}
         </div>
         <ChoosePlan
           selectedPlan={newHarvest.harvestingPlan}

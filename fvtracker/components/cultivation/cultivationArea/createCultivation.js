@@ -13,9 +13,7 @@ export function CreateCultivation({
   setNewCUDetails,
   existingCultivations,
 }) {
-  const workers = useSelector((state) => state.workers.items);
-  const workerType = useSelector((state) => state.user.session.workerType);
-  
+
   const onFormChange = (field, value) => {
     setNewCUDetails({
       ...newCUDetails,
@@ -69,19 +67,6 @@ export function CreateCultivation({
                   value={newCUDetails.description}
                   onChange={(e) => onFormChange("description", e.target.value)}
                 />
-              </div>
-              <div>
-                {!workerType && (
-                  <AppSelect
-                    label="Radnik"
-                    onChange={(e) => onFormChange("workerId", e.target.value)}
-                    options={workers.map((worker) => ({
-                      label: `${worker.appUser.name} ${worker.appUser.surname}`,
-                      value: worker._id,
-                    }))}
-                    defaultValue={newCUDetails.workerId}
-                  />
-                )}
               </div>
               <div
                 className={`${styles.info} grid grid-cols-2 grid-rows-2 w-fit gap-2 mt-6`}

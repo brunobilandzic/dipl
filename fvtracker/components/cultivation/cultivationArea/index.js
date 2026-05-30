@@ -27,7 +27,6 @@ import { sanitize } from "@/lib/utils/objects";
 export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const dispatch = useDispatch();
   const router = useRouter();
-  const workerId = useSelector((state) => state.user.session?.workerId);
   const selectedField = useSelector((state) => state.cultivation.selectedField);
   const fields = useSelector((state) => state.cultivation.fields);
 
@@ -73,7 +72,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       width: "",
       length: "",
     },
-    workerId: workerId || null,
   };
 
   const [newCUDetails, setNewCUDetails] = useState(initialNewCUDetails);

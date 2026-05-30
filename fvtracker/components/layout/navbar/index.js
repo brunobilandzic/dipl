@@ -149,6 +149,10 @@ function NavItems() {
       console.log("User is a worker, setting worker nav items");
       dispatch(login(session.user));
       setItems(roleitems[session.user.workerType] || []);
+      if (session.user.workerType === "ProductionWorker") {
+        console.log("Production worker logged in, refreshing product data...");
+        fillProductionRedux({ dispatch, router });
+      }
     }
   }, [status]);
 

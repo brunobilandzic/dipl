@@ -274,6 +274,7 @@ export const createNewPlantage = async ({
 export const createNewHarvest = async ({ harvestingPlan, plantedMap }) => {
   console.log("creating harvest...", { plantedMap });
   await HarvestingBatchItem.deleteMany();
+  await HarvestWork.deleteMany();
   for (const [cvName, plantedCoords] of Object.entries(plantedMap)) {
     const harvestingPlanItem = harvestingPlan.items.find(
       (item) => item.cropVariety.name === cvName,

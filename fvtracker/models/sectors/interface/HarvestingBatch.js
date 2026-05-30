@@ -143,13 +143,20 @@ harvestingBatchItemSchema.pre("save", async function () {
 });
 
 harvestingBatchItemSchema.methods.addHarvestWork = async function ({
+  worker,
   hoursWorked,
-  workerId,
+  cultivation,
+  harvestingPlanItem,
+  harvestedCoords,
 }) {
   const harvestWork = new HarvestWork({
     harvestingBatchItem: this._id,
     hoursWorked,
-    worker: workerId,
+    worker,
+    cultivation,
+    harvestingPlanItem,
+    harvestedCoords,
+    harvestingBatchItem: this._id,
   });
   await harvestWork.populate("worker");
   const cultivationWorker = harvestWork.worker;
@@ -160,6 +167,7 @@ harvestingBatchItemSchema.methods.addHarvestWork = async function ({
 
   await this.save();
   await harvestWork.save();
+
   return harvestWork;
 };
 

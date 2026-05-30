@@ -37,6 +37,15 @@ export function HarvestingModal({
   const [allFieldPlans, setAllFieldPlans] = useState({});
   const [availablePlans, setAvailablePlans] = useState({});
 
+  const chooseWorker = (e) => {
+    const { name, value } = e.target;
+    console.log(name, value);
+    setNewHarvest((prev) => ({
+      ...prev,
+      workerId: value,
+    }));
+  };
+
   useEffect(() => {
     if (fields) return;
     refreshFields({ dispatch, router });
@@ -297,6 +306,7 @@ export function HarvestingModal({
           setNewHarvest={setNewHarvest}
           availablePlans={availablePlans}
           onChoosePlan={onChoosePlan}
+          chooseWorker={chooseWorker}
         />
       )}
     </>

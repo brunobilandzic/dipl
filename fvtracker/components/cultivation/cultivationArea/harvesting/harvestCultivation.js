@@ -11,6 +11,7 @@ export const HarvestCultivation = ({
   availablePlans,
   onChoosePlan,
   workerId,
+  chooseWorker
 }) => {
   if (
     !newHarvest ||
@@ -27,6 +28,7 @@ export const HarvestCultivation = ({
     quantityToHarvest === 1 ? "1 ćelije" : `${quantityToHarvest} ćelija`;
   const workers = useSelector((state) => state.workers.items);
 
+
   return (
     <FormModal
       isOpen={isOpen}
@@ -42,7 +44,9 @@ export const HarvestCultivation = ({
           Branje {quantityString} {cropTypeName} {cropVarietyName || "N/A"}
         </div>
         <div>
-          {!workerId && <ChooseWorker workers={workers} onChoose={onchange} />}
+          {!workerId && (
+            <ChooseWorker workers={workers} onChoose={chooseWorker} />
+          )}
         </div>
         <ChoosePlan
           selectedPlan={newHarvest.harvestingPlan}

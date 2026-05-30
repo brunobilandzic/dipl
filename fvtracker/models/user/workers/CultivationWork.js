@@ -133,6 +133,66 @@ const harvestWorkSchema = new Schema(
   { timestamps: true },
 );
 
+harvestWorkSchema.pre("save", async function () {
+  if (this.isNew) {
+    const harvestingPlanItem = await mongoose
+      .model("HarvestingPlanItem")
+      .findById(this.harvestingPlanItem);
+    if (harvestingPlanItem) {
+      harvestingPlanItem.harvestWorks.push(this._id);
+      await harvestingPlanItem.save();
+    } else
+      throw new Error(
+        "HarvestWork must be associated with a valid HarvestingPlanItem",
+      );
+    const cultivation = await mongoose
+      .model("Cultivation")
+      .findById(this.cultivation);
+    if (cultivation) {
+      cultivation.harvestWorks.push(this._id);
+      await cultivation.save();
+    } else {
+      throw new Error(
+        "HarvestWork must be associated with a valid Cultivation",
+      );
+    }
+    const cultivationWorker = await mongoose
+      .model("CultivationWorker")
+      .findById(this.worker);
+    if (cultivationWorker) {
+      cultivationWorker.harvestWorks.push(this._id);
+      await cultivationWorker.save();
+    } else {
+      throw new Error(
+        "HarvestWork must be associated with a valid CultivationWorker",
+      );
+    }
+  }
+});
+
+harvestWorkSchema.pre("deleteMany", async function () {
+  const ids = await HarvestWork.find(this.getFilter()).distinct("_id");
+  await mongoose
+    .model("HarvestingPlanItem")
+    .updateMany(
+      { harvestWorks: { $in: ids } },
+      { $pull: { harvestWorks: { $in: ids } } },
+    );
+  await mongoose
+    .model("Cultivation")
+    .updateMany(
+      { harvestWorks: { $in: ids } },
+      { $pull: { harvestWorks: { $in: ids } } },
+    );
+  await mongoose
+    .model("CultivationWorker")
+    .updateMany(
+      { harvestWorks: { $in: ids } },
+      { $pull: { harvestWorks: { $in: ids } } },
+    );
+  await mongoose.model("HarvestWork").deleteMany({ _id: { $in: ids } });
+});
+
 export const CultivationWorker =
   mongoose.models.CultivationWorker ||
   Worker.discriminator("CultivationWorker", cultivationWorkerSchema);

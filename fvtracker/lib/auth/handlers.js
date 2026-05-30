@@ -74,7 +74,7 @@ export async function handleCredentials(credentials) {
     managerId: manager?._id.toString() || null,
     isAdmin: user.isAdmin || false,
     workerType: user.workerType || null,
-    workerId: user.worker._id.toString() || null,
+    workerId: user.worker?._id.toString() || null,
   };
 }
 

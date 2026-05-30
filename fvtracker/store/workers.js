@@ -12,7 +12,7 @@ const workersSlice = createSlice({
   initialState,
   reducers: {
     addWorker: (state, action) => {
-      state.items.push(...action.payload);
+      state.items.push(action.payload);
     },
     setWorkers: (state, action) => {
       state.items = action.payload;

@@ -46,11 +46,19 @@ const shipmentItemSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  warehouseWorker: {
+  worker: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "WarehouseWorker",
     default: null,
   },
+});
+
+shipmentItemSchema.pre("save", async function () {
+  if (this.isNew) {
+    const warehouseWorker = await WarehouseWorker.findById(this.worker);
+    warehouseWorker.shipmentItems.push(this._id);
+    await warehouseWorker.save();
+  }
 });
 
 const shipmentSourceSchema = new Schema({

@@ -89,7 +89,7 @@ export async function POST(req) {
         productionStock,
         warehouseId: warehouseStockData.warehouseId,
         comment: warehouseStockData.comment,
-        workerId: body.workerId,
+        workerId: warehouseStockData.workerId,
       });
       return Response.json(
         { newWarehouseStock: stock },

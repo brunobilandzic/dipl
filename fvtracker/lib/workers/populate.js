@@ -54,9 +54,11 @@ export const warehousePopulate = [
     populate: [
       {
         path: "sources",
-        populate: [{
-          path: "product"
-        }]
+        populate: [
+          {
+            path: "product",
+          },
+        ],
       },
       {
         path: "shipment",

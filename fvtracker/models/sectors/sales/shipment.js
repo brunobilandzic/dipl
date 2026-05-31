@@ -46,6 +46,11 @@ const shipmentItemSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  warehouseWorker: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "WarehouseWorker",
+    default: null,
+  },
 });
 
 const shipmentSourceSchema = new Schema({

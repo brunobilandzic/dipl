@@ -23,7 +23,7 @@ export const createProducts = async () => {
   const productionFacility = await createFacility();
   const productionManager = await ProductionManager.findOne();
   const warehouses = await seedWarehouses(3);
-
+  await seedWorkers();
   let stopIteration = false;
   const products = [];
   for (const productData of productsData) {

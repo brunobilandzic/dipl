@@ -86,6 +86,16 @@ const warehouseAcceptanceProcessSchema = new Schema({
   worker: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "ProductionWorker",
+  },
+});
+
+warehouseAcceptanceProcessSchema.pre("save", async function () {
+  if (this.isNew) {
+    const productionWorker = this.worker;
+    if (productionWorker) {
+      productionWorker.warehouseAcceptanceProcesses.push(this._id);
+      await productionWorker.save();
+    }
   }
 });
 

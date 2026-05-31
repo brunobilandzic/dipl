@@ -203,7 +203,7 @@ const ShipmentStatus = ({ status, neededString, isFullfilled }) => {
   if (isFullfilled)
     return <div className="text-green-600 font-bold">Zahtjev je ispunjen</div>;
   switch (status) {
-    case SHIPMENT_PENDING:
+    case SHIPMENT_SHIPPED_PARTLY:
       return neededString;
     case SHIPMENT_SHIPPED_FULLY:
       return "Otpremljeno";

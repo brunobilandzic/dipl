@@ -2,6 +2,7 @@ import {
   SHIPMENT_STATUSES,
   SHIPMENT_PENDING,
 } from "@/lib/constants/warehouse/shipment";
+import { WarehouseWorker } from "@/models/user/workers/WarehouseWork";
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
 

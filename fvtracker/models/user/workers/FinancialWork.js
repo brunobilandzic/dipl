@@ -1,3 +1,6 @@
+import mongoose, { Schema } from "mongoose";
+import { Worker } from ".";
+
 const financialWorkerSchema = new Schema({
   warehouseRequests: [
     {

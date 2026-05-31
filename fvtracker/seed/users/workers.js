@@ -8,6 +8,8 @@ import dbConnect from "@/lib/db/mongooseConnect";
 import { Worker } from "@/models/user/workers";
 import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
 import { WarehouseWorker } from "@/models/user/workers/WarehouseWork";
+import { FinancialWorker } from "@/models/user/workers/FinancialWork";
+import { FinancialManager } from "@/models/user/managers/FinancialManager";
 
 export const seedWorkers = async () => {
   await dbConnect();
@@ -46,6 +48,16 @@ export const seedWorkers = async () => {
         });
         await warehouseWorker.save();
         console.log(`Created WarehouseWorker for ${appUser.username}`);
+        break;
+      case "FinancialWorker":
+        const financialManager = await FinancialManager.findOne();
+        const financialWorker = new FinancialWorker({
+          appUser: appUser._id,
+          manager: financialManager.rootManager,
+          hourlyRate: workerData.hourlyRate,
+        });
+        await financialWorker.save();
+        console.log(`Created FinancialWorker for ${appUser.username}`);
         break;
       default:
         console.warn(

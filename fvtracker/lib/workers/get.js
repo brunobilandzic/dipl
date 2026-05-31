@@ -1,6 +1,12 @@
-import { CULTIVATION_MANAGER } from "../constants/users/managerTypes.js";
+import {
+  CULTIVATION_MANAGER,
+  PRODUCTION_MANAGER,
+} from "../constants/users/managerTypes.js";
 import { Worker } from "@/models/user/workers";
-import populateCommon, { cultivationPopulate } from "./populate";
+import populateCommon, {
+  cultivationPopulate,
+  productionPopulate,
+} from "./populate";
 
 export const getWorkers = async ({ rootManagerId, managerModelName }) => {
   const workers = await Worker.find({
@@ -8,7 +14,7 @@ export const getWorkers = async ({ rootManagerId, managerModelName }) => {
   }).populate(populateCommon);
 
   console.log({ rootManagerId, managerModelName });
-  console.log("Fetched workers for rootManagerId:", rootManagerId, { workers });
+  console.log("Fetched workers for rootManagerId:", { workers });
 
   for (const worker of workers) {
     switch (managerModelName) {
@@ -18,6 +24,13 @@ export const getWorkers = async ({ rootManagerId, managerModelName }) => {
         for (const worker of workers) {
           await worker.populate(cultivationPopulate);
         }
+        break;
+      case PRODUCTION_MANAGER:
+        console.log("Populating production work for worker:", worker);
+        for (const worker of workers) {
+          await worker.populate(productionPopulate);
+        }
+        break;
       default:
         return workers;
     }

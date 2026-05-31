@@ -81,7 +81,7 @@ export const CreateProductionStock = ({
 
   const chooseWorker = (e) => {
     const { name, value } = e.target;
-    setNewPlantage((prev) => ({
+    setProductionStock((prev) => ({
       ...prev,
       workerId: value,
     }));

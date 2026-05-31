@@ -1,7 +1,7 @@
 import { warehouseRequestPopulateShipmentItems } from "@/lib/utils/storage/warehouse";
 import { fillWarehouseRequest } from "@/lib/warehouses/warehouseRequests";
 import { Warehouse } from "@/models/sectors/storage/Warehouse";
-import { WarehouseWorker } from "@/models/users/workers/WarehouseWork";
+import { WarehouseWorker } from "@/models/user/workers/WarehouseWork";
 
 export const createShipments = async ({ warehouseRequests }) => {
   const warehouseWorker = await WarehouseWorker.findOne();

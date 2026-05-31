@@ -15,6 +15,10 @@ import { ProductionProcess } from "@/models/sectors/production/Process";
 export const createProducts = async () => {
   await Product.deleteMany({}); // Clear existing products
   await Warehouse.deleteMany({});
+  await ProductionStock.deleteMany({});
+  await ProductionProcess.deleteMany({});
+  await ProductionWorker.deleteMany({});
+  await WarehouseAcceptanceProcess.deleteMany({});
   console.log("Creating products...");
   const productionFacility = await createFacility();
   const productionManager = await ProductionManager.findOne();

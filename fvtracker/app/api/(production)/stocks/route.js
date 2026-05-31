@@ -5,6 +5,9 @@ import { WAREHOUSE_STOCK } from "@/lib/constants/warehouse";
 import { acceptWarehouseStock } from "@/lib/warehouses/accept";
 import { Product } from "@/models/sectors/production/Product";
 import { ProductionStock } from "@/models/sectors/production/Facility";
+import { fetchManagerWorker } from "@/lib/auth/fetchSessionData";
+import { PRODUCTION_MANAGER } from "@/lib/constants/users/managerTypes";
+import { managerMorkerMap } from "@/lib/constants/users/managerWorker";
 
 export async function GET(request) {
   try {
@@ -36,6 +39,18 @@ export async function POST(req) {
   // route to add or create new stock
   try {
     await dbConnect();
+    let {
+      specificManager,
+      worker: productionWorker,
+      unauthorized,
+    } = await fetchManagerWorker({
+      managerNames: [PRODUCTION_MANAGER],
+      workerType: managerMorkerMap[PRODUCTION_MANAGER],
+    });
+
+    if (unauthorized) {
+      return Response.json({ unauthorized: true }, { status: 403 });
+    }
     const stockType = req.nextUrl.searchParams.get("stockType");
     let stock;
     const body = await req.json();

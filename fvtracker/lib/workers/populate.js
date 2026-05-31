@@ -36,3 +36,12 @@ export const cultivationPopulate = [
     },
   },
 ];
+
+export const productionPopulate = [
+  {
+    path: "productionProcesses",
+  },
+  {
+    path: "warehouseAcceptanceProcesses",
+  },
+];

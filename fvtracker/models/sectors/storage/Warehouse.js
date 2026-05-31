@@ -2,6 +2,7 @@ import { Base } from "@/models/Base";
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
 import { Product } from "../production/Product";
+import { ProductionWorker } from "@/models/user/workers/ProductionWork";
 
 const warehouseSchema = new Schema({
   warehouseManager: {
@@ -90,8 +91,9 @@ const warehouseAcceptanceProcessSchema = new Schema({
 });
 
 warehouseAcceptanceProcessSchema.pre("save", async function () {
+  console.log("worker id in pre save", this.worker);
   if (this.isNew) {
-    const productionWorker = this.worker;
+    const productionWorker = await ProductionWorker.findById(this.worker);
     if (productionWorker) {
       productionWorker.warehouseAcceptanceProcesses.push(this._id);
       await productionWorker.save();

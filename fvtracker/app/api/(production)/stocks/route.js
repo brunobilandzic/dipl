@@ -82,6 +82,7 @@ export async function POST(req) {
           },
         );
       }
+
       stock = await acceptWarehouseStock({
         product,
         quantity: warehouseStockData.quantity,

@@ -7,10 +7,14 @@ import { ProductionManager } from "@/models/user/managers/ProductionManager";
 import { createFacility } from "./facility";
 import { createProductStock } from "@/lib/production/stocks";
 import { createWarehouseStockSeed, seedWarehouses } from "../storage/warehouse";
-import { Warehouse } from "@/models/sectors/storage/Warehouse";
+import {
+  Warehouse,
+  WarehouseAcceptanceProcess,
+} from "@/models/sectors/storage/Warehouse";
 import { ProductionWorker } from "@/models/user/workers/ProductionWork";
 import { ProductionStock } from "@/models/sectors/production/Facility";
 import { ProductionProcess } from "@/models/sectors/production/Process";
+import { seedWorkers } from "@/seed/users/workers";
 
 export const createProducts = async () => {
   await Product.deleteMany({}); // Clear existing products
@@ -59,7 +63,7 @@ export const createProducts = async () => {
       await product.save();
     }
   }
-  console.log(`Stocked product in ${warehouses.length} warehouses.`);
+
   if (stopIteration) {
     console.warn(
       "Neki proizvodi nisu mogli biti proizvedeni zbog nedostatka resursa. Molimo provjerite logove za detalje.",
@@ -71,8 +75,6 @@ export const createProductStockSeed = async ({
   product,
   productionFacilityId,
 }) => {
-  await ProductionStock.deleteMany({});
-  await ProductionProcess.deleteMany({});
   await populateProductIngredients({ products: [product] });
   const harvestingBatches = await getHarvestingBatches();
   const STOCK_QUANTITY = 5;

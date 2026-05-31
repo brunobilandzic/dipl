@@ -1,4 +1,5 @@
 import { Worker } from ".";
+import mongoose from "mongoose";
 
 const warehouseWorkerSchema = new mongoose.Schema({
   shipmentItems: [

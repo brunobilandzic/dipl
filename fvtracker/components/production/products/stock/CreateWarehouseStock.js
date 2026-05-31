@@ -92,7 +92,13 @@ const CreateWarehouseStock = ({
       }),
     );
   }, [warehouseStock.quantity]);
-
+  const chooseWorker = (e) => {
+    const { name, value } = e.target;
+    setWarehouseStock((prev) => ({
+      ...prev,
+      workerId: value,
+    }));
+  };
   return (
     <FormModal
       title="Pošalji u skladište"
@@ -100,7 +106,7 @@ const CreateWarehouseStock = ({
       onCancel={onCancel}
       onSubmit={onSubmit}
     >
-      {!workerId && <ChooseWorker workers={workers} onChoose={onChange} />}
+      {!workerId && <ChooseWorker workers={workers} onChoose={chooseWorker} />}
       <AppSelect
         label="Izaberite skladište"
         name="warehouseId"

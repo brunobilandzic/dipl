@@ -1,8 +1,10 @@
 import { warehouseRequestPopulateShipmentItems } from "@/lib/utils/storage/warehouse";
 import { fillWarehouseRequest } from "@/lib/warehouses/warehouseRequests";
 import { Warehouse } from "@/models/sectors/storage/Warehouse";
+import { WarehouseWorker } from "@/models/users/workers/WarehouseWork";
 
 export const createShipments = async ({ warehouseRequests }) => {
+  const warehouseWorker = await WarehouseWorker.findOne();
   for (const warehouseRequest of warehouseRequests) {
     await warehouseRequest.populate(warehouseRequestPopulateShipmentItems);
     const orderItems = warehouseRequest.order.items;
@@ -12,6 +14,7 @@ export const createShipments = async ({ warehouseRequests }) => {
         orderItems,
         warehouseManagerId: warehouseRequest.warehouseManager,
       }),
+      workerId: warehouseWorker._id,
     });
   }
 };

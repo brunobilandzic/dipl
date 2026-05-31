@@ -1,5 +1,6 @@
 import { AppInput, AppSelect } from "@/components/form/inputs";
 import { FormModal } from "@/components/layout/modals/form";
+import { ChooseWorker } from "@/components/workers/choose";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { showDateTime } from "@/lib/utils/display";
 import fillProductionRedux from "@/lib/utils/production";
@@ -19,6 +20,9 @@ const CreateWarehouseStock = ({
   warehouses,
   clickedStock,
 }) => {
+  const workers = useSelector((state) => state.workers.items);
+  const workerId = useSelector((state) => state.user.session.workerId);
+
   const createInitialFormData = () => ({
     productId: product._id,
     quantity: 1,
@@ -28,6 +32,7 @@ const CreateWarehouseStock = ({
         ? productionStocks[0]._id
         : clickedStock?._id || null,
     warehouseId: warehouses?.length > 0 ? warehouses[0]._id : null,
+    workerId,
   });
   const dispatch = useDispatch();
   const [availableWarehouses, setAvailableWarehouses] = useState(warehouses);
@@ -95,6 +100,7 @@ const CreateWarehouseStock = ({
       onCancel={onCancel}
       onSubmit={onSubmit}
     >
+      {!workerId && <ChooseWorker workers={workers} onChoose={onChange} />}
       <AppSelect
         label="Izaberite skladište"
         name="warehouseId"

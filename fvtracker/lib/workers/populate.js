@@ -47,3 +47,20 @@ export const productionPopulate = [
     select: "quantity acceptedAt",
   },
 ];
+
+export const warehousePopulate = [
+  {
+    path: "shipmentItems",
+    populate: [
+      {
+        path: "sources",
+        populate: [{
+          path: "product"
+        }]
+      },
+      {
+        path: "shipment",
+      },
+    ],
+  },
+];

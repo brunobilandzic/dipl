@@ -6,6 +6,7 @@ import {
 } from "@/models/sectors/storage/Warehouse";
 import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
 import { acceptWarehouseStock } from "@/lib/warehouses/accept";
+import { ProductionWorker } from "@/models/user/workers/ProductionWork";
 
 export const seedWarehouse = async () => {
   const warehouseManager = await WarehouseManager.findOne();
@@ -43,12 +44,13 @@ export const createWarehouseStockSeed = async ({
   productionStock,
   warehouseId,
 }) => {
-  await WarehouseAcceptanceProcess.deleteMany();
+  const productionWorker = await ProductionWorker.findOne();
   const warehouseStock = await acceptWarehouseStock({
     product,
     quantity: 3,
     productionStock,
     warehouseId,
+    workerId: productionWorker._id,
     comment: "Initial stock from seeding",
   });
   return warehouseStock;

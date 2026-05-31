@@ -4,6 +4,9 @@ export default [
   {
     path: "appUser",
   },
+];
+
+export const cultivationPopulate = [
   {
     path: "harvestWorks",
     populate: [

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { List, ListItem } from "../layout/preview/list";
 import { useRouter } from "next/navigation";
 import { showDate } from "@/lib/utils/display";
-import { workPay } from "@/lib/utils/workers/pay";
+import { workPayCultivation, workPayProduction } from "@/lib/utils/workers/pay";
 import { worksCoordsSum } from "@/lib/utils/workers/cultivation";
 import {
   CULTIVATION_MANAGER,
@@ -79,7 +79,7 @@ const CultivationWorker = ({ worker }) => {
   return (
     <>
       <div>
-        {workPay({
+        {workPayCultivation({
           hourlyRate: worker.hourlyRate,
           works: [...worker.plantageWorks, ...worker.harvestWorks],
         })}{" "}
@@ -98,5 +98,33 @@ const CultivationWorker = ({ worker }) => {
 };
 
 const ProductionWorker = ({ worker }) => {
-  return <>pw</>;
+  return (
+    <>
+      <div>
+        Ukupno:{" "}
+        {workPayProduction({
+          hourlyRate: worker.hourlyRate,
+          processes: [
+            ...worker.productionProcesses,
+            ...worker.warehouseAcceptanceProcesses,
+          ],
+        })}
+        $
+      </div>
+      <div>
+        Proizvodnja: {worker.productionProcesses.length} procesa, količina:{" "}
+        {worker.productionProcesses.reduce(
+          (sum, process) => sum + process.quantity,
+          0,
+        )}
+      </div>
+      <div>
+        Prijem: {worker.warehouseAcceptanceProcesses.length} procesa, količina:{" "}
+        {worker.warehouseAcceptanceProcesses.reduce(
+          (sum, process) => sum + process.quantity,
+          0,
+        )}
+      </div>
+    </>
+  );
 };

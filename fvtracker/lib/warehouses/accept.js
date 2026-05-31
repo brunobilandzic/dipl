@@ -1,4 +1,3 @@
-import { ProductionStock } from "@/models/sectors/production/Facility";
 import {
   WarehouseAcceptanceProcess,
   WarehouseStock,
@@ -12,6 +11,7 @@ export const acceptWarehouseStock = async ({
   warehouseId,
   comment,
   productionStock,
+  workerId,
 }) => {
   if (!productionStock) {
     throw new Error(
@@ -47,12 +47,12 @@ export const acceptWarehouseStock = async ({
     );
   }
   warehouseStock.quantity += Number(quantity);
-
   const warehouseAcceptanceProcess = new WarehouseAcceptanceProcess({
     warehouseStock: warehouseStock._id,
     productionStock: productionStock._id,
     quantity: Number(quantity),
     comment,
+    worker: workerId,
   });
 
   productionStock.warehouseAcceptanceProcesses.push(

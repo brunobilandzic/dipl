@@ -6,6 +6,8 @@ import { ProductionWorker } from "@/models/user/workers/ProductionWork";
 import { ProductionManager } from "@/models/user/managers/ProductionManager";
 import dbConnect from "@/lib/db/mongooseConnect";
 import { Worker } from "@/models/user/workers";
+import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
+import { WarehouseWorker } from "@/models/user/workers/WarehouseWork";
 
 export const seedWorkers = async () => {
   await dbConnect();

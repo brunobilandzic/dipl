@@ -48,6 +48,7 @@ export const shipWarehouseRequest = async ({ warehouseRequestId }) => {
 export const fillWarehouseRequest = async ({
   warehouseRequestId,
   shipmentSources,
+  workerId,
 }) => {
   const warehouseRequest = await getWarehouseRequestById(warehouseRequestId);
   await warehouseRequest.populate(warehouseRequestPopulateShipmentItems);
@@ -90,6 +91,7 @@ export const fillWarehouseRequest = async ({
 
   const shipmentItem = new ShipmentItem({
     shipment: shipment._id,
+    worker: workerId,
   });
 
   shipment.shipmentItems.push(shipmentItem._id);

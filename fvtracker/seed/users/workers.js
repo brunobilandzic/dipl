@@ -35,6 +35,16 @@ export const seedWorkers = async () => {
         await productionWorker.save();
         console.log(`Created ProductionWorker for ${appUser.username}`);
         break;
+      case "WarehouseWorker":
+        const warehouseManager = await WarehouseManager.findOne();
+        const warehouseWorker = new WarehouseWorker({
+          appUser: appUser._id,
+          manager: warehouseManager.rootManager,
+          hourlyRate: workerData.hourlyRate,
+        });
+        await warehouseWorker.save();
+        console.log(`Created WarehouseWorker for ${appUser.username}`);
+        break;
       default:
         console.warn(
           `Unknown worker type ${workerData.modelName} for user ${appUser.username}`,

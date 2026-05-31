@@ -88,6 +88,16 @@ export const workersJson = [
     provider: "credentials",
     hourlyRate: 15,
   },
+  {
+    username: "ww",
+    modelName: "WarehouseWorker",
+    name: "Warehouse",
+    surname: "Worker",
+    email: "warehouse.worker@example.com",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
+    provider: "credentials",
+    hourlyRate: 12,
+  },
 ];
 
 export const customers = [

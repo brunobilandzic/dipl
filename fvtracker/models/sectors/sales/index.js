@@ -68,6 +68,11 @@ const receiptSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  financialWorker: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "FinancialWorker",
+    required: true,
+  },
 });
 
 export const Receipt =

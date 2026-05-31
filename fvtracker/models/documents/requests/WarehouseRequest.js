@@ -22,6 +22,16 @@ const warehouseRequestSchema = new mongoose.Schema({
     ref: "Shipment",
     default: null,
   },
+  financialWorker: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "FinancialWorker",
+    default: null,
+  },
+  warehouseWorker: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "WarehouseWorker",
+    default: null,
+  },
 });
 
 warehouseRequestSchema.pre("save", async function () {

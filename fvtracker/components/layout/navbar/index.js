@@ -113,7 +113,6 @@ function NavItems() {
         managerModelName === WAREHOUSE_MANAGER
       ) {
         console.log("shipments called from navbar");
-        dispatch(fetchShipments());
         fillOrdersRedux({ dispatch });
         fillWarehouseRequestsRedux({ dispatch });
       }

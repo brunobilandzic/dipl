@@ -11,6 +11,7 @@ export function extractDBObject(objToExtract) {
 }
 
 export function checkEmpty(obj, dontAlert = false) {
+  console.log({ obj });
   for (const key in obj) {
     if (obj[key] === "" || obj[key] === null || obj[key] === undefined) {
       if (!dontAlert) {
@@ -20,6 +21,12 @@ export function checkEmpty(obj, dontAlert = false) {
       return true;
     }
     if (obj[key] instanceof Array) {
+      if (obj[key].length === 0) {
+        if (!dontAlert) {
+          alert(`Polje ${key} je prazno: ${obj[key]}`);
+        }
+        return true;
+      }
       for (const item of obj[key]) {
         if (checkEmpty(item)) {
           if (!dontAlert) {

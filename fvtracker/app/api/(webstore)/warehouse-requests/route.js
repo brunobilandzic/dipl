@@ -61,10 +61,14 @@ export async function GET(request) {
 }
 export async function POST(request) {
   try {
-    const { unauthorized, specificManager: financialManager } =
-      await fetchManager({
-        managerNames: [FINANCIAL_MANAGER],
-      });
+    let {
+      specificManager: financialManager,
+      worker,
+      unauthorized,
+    } = await fetchManagerWorker({
+      managerNames: [FINANCIAL_MANAGER],
+      workerType: managerMorkerMap[FINANCIAL_MANAGER],
+    });
     if (unauthorized) {
       return Response.json(
         { message: "Nemate pravo pristupa" },

@@ -3,6 +3,7 @@ import handleError from "@/lib/constants/errors/client/handleError";
 import { WAREHOUSE_STOCK } from "@/lib/constants/warehouse";
 import { fetchWarehouses } from "@/store/warehouse";
 import { fillWarehouseRedux } from ".";
+import { setLoading } from "@/store/loading";
 
 export const totalWarehouseStockQuantity = ({ warehouseStocks }) => {
   return warehouseStocks.reduce((acc, stock) => {
@@ -148,9 +149,11 @@ export const isRequestFulfilled = ({ neededQuantities }) => {
 export const submitShipment = async ({ newShipmentData, dispatch }) => {
   console.log("submitting...", { newShipmentData });
   try {
+    dispatch(setLoading(true));
     await api.post("/warehouse-requests/fill", {
       shipmentSources: newShipmentData.sources,
       warehouseRequestId: newShipmentData.warehouseRequestId,
+      workerId: newShipmentData.workerId,
     });
     alert("Otpremnica uspješno kreirana!");
     fillWarehouseRedux({ dispatch });
@@ -160,6 +163,8 @@ export const submitShipment = async ({ newShipmentData, dispatch }) => {
       ...error,
       generalMessage: "Došlo je do greške prilikom kreiranja otpremnice.",
     });
+  } finally {
+    dispatch(setLoading(false));
   }
 };
 

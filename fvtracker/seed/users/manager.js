@@ -2,7 +2,7 @@ import { RootManager } from "@/models/user/managers/RootManager.js";
 import dbConnect from "@/lib/db/mongooseConnect";
 import mongoose from "mongoose";
 import { AppUser } from "@/models/user/AppUser";
-import { Procurment, ProcurmentItem } from "@/models/Procurment";
+import { Procurment, ProcurmentItem } from "@/models/documents/Procurment";
 import { procurments } from "../data/procurments";
 
 export const createManager = async (

@@ -88,6 +88,12 @@ export async function POST(request) {
     }
 
     const requestData = await request.json();
+    const { financialManagerId } = await extractManagerIds(
+      financialManager,
+      worker,
+    );
+    console.log({ financialManagerId });
+    requestData["financialManager"] = financialManagerId;
     const warehouseRequest = await createWarehouseRequest(requestData);
     return Response.json({ message: "Zahtjev uspješno poslan skladištu." });
   } catch (error) {

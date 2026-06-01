@@ -25,28 +25,10 @@ export async function GET(request) {
         { status: 403 },
       );
     }
-    let warehouseManagerId =
-      specificManager?.rootManager.managerModelName === WAREHOUSE_MANAGER
-        ? specificManager._id
-        : null;
-    let financialManagerId =
-      specificManager?.rootManager.managerModelName === FINANCIAL_MANAGER
-        ? specificManager._id
-        : null;
-        
-    if (worker && worker.manager) {
-      if (worker.manager.managerModelName === WAREHOUSE_MANAGER) {
-        const warehouseManager = await WarehouseManager.findOne({
-          rootManager: worker.manager._id,
-        }).select("_id");
-        warehouseManagerId = warehouseManager._id;
-      } else if (worker.manager.managerModelName === FINANCIAL_MANAGER) {
-        const financialManager = await FinancialManager.findOne({
-          rootManager: worker.manager._id,
-        }).select("_id");
-        financialManagerId = financialManager._id;
-      }
-    }
+    let { financialManagerId, warehouseManagerId } = await extractManagerIds(
+      specificManager,
+      worker,
+    );
 
     const warehouseRequests = await getWarehouseRequests({
       financialManagerId,
@@ -62,6 +44,31 @@ export async function GET(request) {
       { status: 500 },
     );
   }
+}
+async function extractManagerIds(specificManager, worker) {
+  let warehouseManagerId =
+    specificManager?.rootManager.managerModelName === WAREHOUSE_MANAGER
+      ? specificManager._id
+      : null;
+  let financialManagerId =
+    specificManager?.rootManager.managerModelName === FINANCIAL_MANAGER
+      ? specificManager._id
+      : null;
+
+  if (worker && worker.manager) {
+    if (worker.manager.managerModelName === WAREHOUSE_MANAGER) {
+      const warehouseManager = await WarehouseManager.findOne({
+        rootManager: worker.manager._id,
+      }).select("_id");
+      warehouseManagerId = warehouseManager._id;
+    } else if (worker.manager.managerModelName === FINANCIAL_MANAGER) {
+      const financialManager = await FinancialManager.findOne({
+        rootManager: worker.manager._id,
+      }).select("_id");
+      financialManagerId = financialManager._id;
+    }
+  }
+  return { financialManagerId, warehouseManagerId };
 }
 export async function POST(request) {
   try {

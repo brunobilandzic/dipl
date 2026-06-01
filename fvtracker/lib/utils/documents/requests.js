@@ -1,6 +1,7 @@
 import api from "@/lib/api";
 import { setLoading } from "@/store/loading";
 import { fetchWarehouseRequests } from "@/store/warehouse";
+import handleError from "@/lib/constants/errors/client/handleError";
 
 export const fillWarehouseRequestsRedux = ({ dispatch }) => {
   dispatch(fetchWarehouseRequests());

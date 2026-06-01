@@ -95,7 +95,7 @@ export function ListItem({
     <>
       <div
         onClick={href ? () => router.push(href) : () => {}}
-        className={`flex flex-col gap-2 border p-4 rounded-lg ${_className || ""}`}
+        className={`flex flex-col gap-2 border p-4 rounded-lg ${_className || ""} ${href ? "cursor-pointer hover:outline outline-blue-500" : ""}`}
       >
         {title && <h3 className="font-bold">{title}</h3>}
         {children}

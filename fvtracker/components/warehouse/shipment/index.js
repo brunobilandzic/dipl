@@ -11,6 +11,9 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { setLoading } from "@/store/loading";
+import { useState } from "react";
+import { FormModal } from "@/components/layout/modals/form";
+import { ChooseWorker } from "@/components/workers/choose";
 
 function ShipmentPageComponent({ shipment }) {
   if (!shipment) {
@@ -63,6 +66,9 @@ const ShipmentItemList = ({
   dispatch,
   router,
 }) => {
+  const workers = useSelector((state) => state.workers.items);
+  const workerId = useSelector((state) => state.user?.session?.workerId);
+  const workerType = useSelector((state) => state.user?.session?.workerType);
   const sortedShipmentItems = sortItems({
     items: shipmentItems,
     sortBy: "createdAt",
@@ -77,16 +83,28 @@ const ShipmentItemList = ({
           managerModelName={managerModelName}
           dispatch={dispatch}
           router={router}
+          workers={workers}
+          workerId={workerId}
+          workerType={workerType}
         />
       ))}
     </div>
   );
 };
 
-const ShipmentItem = ({ shipmentItem, managerModelName, dispatch, router }) => {
+const ShipmentItem = ({
+  shipmentItem,
+  managerModelName,
+  dispatch,
+  router,
+  workers,
+  workerId,
+  workerType,
+}) => {
   const { sources, receipt, createdAt, _id } = shipmentItem;
+  const [makeReceiptOpen, setMakeReceiptOpen] = useState(false);
 
-  const handleReceiptCreation = async () => {
+  const handleReceiptCreation = async (workerId) => {
     try {
       dispatch(setLoading(true));
       const res = await api.post("/receipt", {
@@ -108,13 +126,19 @@ const ShipmentItem = ({ shipmentItem, managerModelName, dispatch, router }) => {
   };
 
   const actionOptions = [
-    ...(managerModelName === FINANCIAL_MANAGER && !receipt
+    ...((managerModelName === FINANCIAL_MANAGER ||
+      workerType === "FinancialWorker") &&
+    !receipt
       ? [
           {
             label: "Izradi račun",
             onClick: (e) => {
               e.stopPropagation();
-              handleReceiptCreation();
+              if (!workerId) {
+                setMakeReceiptOpen(true);
+              } else {
+                handleReceiptCreation();
+              }
             },
             className: "submitButton",
           },
@@ -123,22 +147,33 @@ const ShipmentItem = ({ shipmentItem, managerModelName, dispatch, router }) => {
   ];
 
   return (
-    <ListItem
-      key={_id}
-      actionOptions={actionOptions}
-      title={`Pošiljka napravljena ${showDateTime(createdAt)}`}
-    >
-      <div>
-        <strong>Stavke:</strong>
-        <SourceList sources={sources} />
-        {receipt && (
-          <div className="pt-8 text-right">
-            <strong>Račun kreiran</strong> {receipt.number} (kreiran{" "}
-            {showDateTime(receipt.createdAt)})
-          </div>
-        )}
-      </div>
-    </ListItem>
+    <>
+      <ListItem
+        key={_id}
+        actionOptions={actionOptions}
+        title={`Pošiljka napravljena ${showDateTime(createdAt)}`}
+      >
+        <div>
+          <strong>Stavke:</strong>
+          <SourceList sources={sources} />
+          {receipt && (
+            <div className="pt-8 text-right">
+              <strong>Račun kreiran</strong> {receipt.number} (kreiran{" "}
+              {showDateTime(receipt.createdAt)})
+            </div>
+          )}
+        </div>
+      </ListItem>
+      {makeReceiptOpen && (
+        <FormModal
+          isOpen={makeReceiptOpen}
+          onClose={() => setMakeReceiptOpen(false)}
+          title="Izrada računa"
+        >
+          <ChooseWorker workers={workers} />
+        </FormModal>
+      )}
+    </>
   );
 };
 

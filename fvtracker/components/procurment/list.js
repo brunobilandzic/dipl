@@ -24,6 +24,9 @@ const ProcurmentListItem = ({ procurment }) => {
   return (
     <>
       <ListItem>
+        <div>{procurment.name}</div>
+        <div>{procurment.description}</div>
+        <div>{procurment.createdAt}</div>
         {procurment.items.map((item) => (
           <ProcurmentItem key={item._id} procurementItem={item} />
         ))}

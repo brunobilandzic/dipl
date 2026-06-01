@@ -88,7 +88,9 @@ export const fetchAdmin = async () => {
 
 export async function fetchWorker({ workerType }) {
   const appUser = await fetchSessionAppUser();
-  const worker = await mongoose.models.Worker.findOne({ appUser: appUser._id });
+  const worker = await mongoose.models.Worker.findOne({
+    appUser: appUser._id,
+  })?.populate("manager");
   if (!worker) {
     return { unauthorized: true };
   }

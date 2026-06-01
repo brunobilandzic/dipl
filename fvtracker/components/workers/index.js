@@ -135,7 +135,30 @@ const ProductionWorker = ({ worker }) => {
 const WarehouseWorker = ({ worker }) => {
   return (
     <>
-      <div></div>
+      <div>
+        Ukupno kreirano otpremnica: {worker.shipmentItems.length} otpremnica, ukupna
+        količina:{" "}
+        {worker.shipmentItems.reduce((sum, process) => {
+          return (
+            sum +
+            process.sources.reduce(
+              (sourceSum, source) => sourceSum + source.quantity,
+              0,
+            )
+          );
+        }, 0)}
+      </div>
+      <div>
+        Ukupna zarada:{" "}
+        {worker.shipmentItems.reduce((sum, process) => {
+          const processPay = process.sources.reduce(
+            (sourceSum, source) => sourceSum + source.quantity * worker.hourlyRate,
+            0,
+          );
+          return sum + processPay;
+        }, 0)}{" "}
+        $
+      </div>
     </>
   );
 };

@@ -8,6 +8,8 @@ import {
   createWarehouseRequest,
   getWarehouseRequests,
 } from "@/lib/warehouses/warehouseRequests";
+import { FinancialManager } from "@/models/user/managers/FinancialManager";
+import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
 
 export async function GET(request) {
   console.log("Received GET request for warehouse requests");
@@ -31,12 +33,18 @@ export async function GET(request) {
       specificManager?.rootManager.managerModelName === FINANCIAL_MANAGER
         ? specificManager._id
         : null;
-
+    console.log({ man: worker.manager });
     if (worker && worker.manager) {
       if (worker.manager.managerModelName === WAREHOUSE_MANAGER) {
-        warehouseManagerId = worker.manager._id;
+        const warehouseManager = await WarehouseManager.findOne({
+          rootManager: worker.manager._id,
+        }).select("_id");
+        warehouseManagerId = warehouseManager._id;
       } else if (worker.manager.managerModelName === FINANCIAL_MANAGER) {
-        financialManagerId = worker.manager._id;
+        const financialManager = await FinancialManager.findOne({
+          rootManager: worker.manager._id,
+        }).select("_id");
+        financialManagerId = financialManager._id;
       }
     }
     console.log({ worker, unauthorized });

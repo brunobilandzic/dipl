@@ -26,7 +26,7 @@ const procurmentItemSchema = new Schema({
     ref: "Procurment",
     required: true,
   },
-  item: {
+  name: {
     type: String,
     required: true,
   },
@@ -38,6 +38,26 @@ const procurmentItemSchema = new Schema({
     type: Number,
     required: true,
   },
+});
+
+procurmentSchema.pre("save", async function () {
+  if (this.isNew) {
+    const rootManager = await mongoose.models.RootManager.findById(
+      this.manager,
+    );
+    if (rootManager) {
+      rootManager.procurments.push(this._id);
+      await rootManager.save();
+    }
+    for (let item of this.items) {
+      const procurmentItem = new ProcurmentItem({
+        procurment: this._id,
+        ...item,
+      });
+      this.items.push(procurmentItem._id);
+      await procurmentItem.save();
+    }
+  }
 });
 
 export const Procurment =

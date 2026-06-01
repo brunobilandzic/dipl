@@ -3,6 +3,7 @@ import { FinancialManager } from "@/models/user/managers/FinancialManager";
 import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
 import { createShipments } from "./shipment";
 import { WAREHOUSE_REQUESTED } from "@/lib/constants/webstore/orders";
+import { FinancialWorker } from "@/models/user/workers/FinancialWork";
 
 export const createWarehouseRequests = async ({ orders }) => {
   const financialManager = await FinancialManager.findOne({}).select(
@@ -11,12 +12,14 @@ export const createWarehouseRequests = async ({ orders }) => {
   const warehouseManager = await WarehouseManager.findOne({}).select(
     "_id warehouseRequests ",
   );
+  const financialWorker = await FinancialWorker.findOne();
   const createdWarehouseRequests = [];
   for (const order of orders) {
     const warehouseRequest = new WarehouseRequest({
       order: order._id,
       financialManager: financialManager._id,
       warehouseManager: warehouseManager._id,
+      financialWorker: financialWorker._id,
     });
 
     warehouseManager.warehouseRequests.push(warehouseRequest._id);

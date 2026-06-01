@@ -4,6 +4,8 @@ import { sendWarehouseRequest } from "@/lib/utils/documents/requests";
 import { useEffect, useState } from "react";
 import { FormModal } from "../../layout/modals/form";
 import { AppInput, AppSelect } from "../../form/inputs";
+import { ChooseWorker } from "@/components/workers/choose";
+import { checkEmpty } from "@/lib/utils/objects";
 
 export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
   const initialWarehouseRequest = {
@@ -36,6 +38,15 @@ export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
     });
     onCancel();
     fillOrdersRedux({ dispatch });
+  };
+
+  const chooseWorker = (e) => {
+    const { name, value } = e.target;
+    console.log(name, value);
+    setWarehouseRequest((prev) => ({
+      ...prev,
+      workerId: value,
+    }));
   };
 
   useEffect(() => {

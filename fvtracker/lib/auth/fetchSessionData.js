@@ -92,9 +92,9 @@ export async function fetchWorker({ workerType }) {
     appUser: appUser._id,
   })?.populate("manager");
   if (!worker) {
-    return { unauthorized: true };
+    return { worker: null, unauthorized: true };
   }
-  return { worker };
+  return { worker, unauthorized: false };
 }
 
 export async function fetchManagerWorker({ managerNames = [], workerType }) {
@@ -111,7 +111,7 @@ export async function fetchManagerWorker({ managerNames = [], workerType }) {
     return { unauthorized: true };
   }
 
-  return { worker };
+  return { worker, specificManager, unauthorized: false };
 }
 
 export async function fetchManager({ managerNames = [] }) {

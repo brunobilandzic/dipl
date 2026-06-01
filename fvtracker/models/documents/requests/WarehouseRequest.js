@@ -22,6 +22,11 @@ const warehouseRequestSchema = new mongoose.Schema({
     ref: "Shipment",
     default: null,
   },
+  financialManager: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "FinancialManager",
+    required: true,
+  },
   financialWorker: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "FinancialWorker",

@@ -109,6 +109,7 @@ const ShipmentItem = ({
       dispatch(setLoading(true));
       const res = await api.post("/receipt", {
         shipmentItemId: _id,
+        workerId: worker,
       });
       shipmentItem.receipt = res.data.newReceipt; // Assuming the response contains the new receipt ID
       dispatch(setLoading(false));

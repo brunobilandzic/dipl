@@ -22,7 +22,6 @@ export const getWarehouseRequestById = async (id) => {
 };
 
 export const createWarehouseRequest = async (requestData) => {
-  console.log(requestData);
   const { ...modelData } = requestData;
   const warehouseRequest = new WarehouseRequest({
     ...modelData,
@@ -46,6 +45,7 @@ export const getWarehouseRequests = async ({
   }).populate(warehouseRequestPopulateShipmentItems);
   return requests;
 };
+ons;
 
 export const shipWarehouseRequest = async ({ warehouseRequestId }) => {
   const request = await getWarehouseRequestById(warehouseRequestId);

@@ -3,6 +3,7 @@
 import { List, ListItem } from "@/components/layout/preview/list";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
+import { showDateTime } from "@/lib/utils/display";
 
 export const ProcurmentList = () => {
   const procurments = useSelector((state) => state.procurments.filteredItems);
@@ -26,7 +27,7 @@ const ProcurmentListItem = ({ procurment }) => {
       <ListItem>
         <div>{procurment.name}</div>
         <div>{procurment.description}</div>
-        <div>{procurment.createdAt}</div>
+        <div>{showDateTime(procurment.createdAt)}</div>
         {procurment.items.map((item) => (
           <ProcurmentItem key={item._id} procurementItem={item} />
         ))}

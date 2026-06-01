@@ -34,10 +34,16 @@ export const createWarehouseRequest = async (requestData) => {
   await warehouseRequest.save();
 };
 
-export const getWarehouseRequests = async () => {
-  const requests = await WarehouseRequest.find().populate(
-    warehouseRequestPopulateShipmentItems,
-  );
+export const getWarehouseRequests = async ({
+  financialManagerId,
+  warehouseManagerId,
+}) => {
+  const requests = await WarehouseRequest.find({
+    $or: [
+      { financialManager: financialManagerId },
+      { warehouseManager: warehouseManagerId },
+    ],
+  }).populate(warehouseRequestPopulateShipmentItems);
   return requests;
 };
 

@@ -44,7 +44,7 @@ export const CreateProcurment = () => {
 
   return (
     <div>
-      <h1>Create Procurment</h1>
+      <h1 className="text-2xl font-bold">Nova nabavka</h1>
       <div className="form">
         <AppInput
           label="Naziv nabavke"
@@ -58,31 +58,41 @@ export const CreateProcurment = () => {
           onChange={handleChange}
           name="description"
         />
-        <h2>Stavke nabavke</h2>
-        {procurmentData.items?.map((item, index) => (
-          <div key={index} className="item">
-            <AppInput
-              label="Naziv stavke"
-              value={item.name}
-              onChange={(e) => handleItemChange(index, "name", e.target.value)}
-            />
-            <AppInput
-              label="Količina"
-              type="number"
-              value={item.quantity}
-              onChange={(e) =>
-                handleItemChange(index, "quantity", e.target.value)
-              }
-            />
-            <AppInput
-              label="Cijena"
-              type="number"
-              value={item.price}
-              onChange={(e) => handleItemChange(index, "price", e.target.value)}
-            />
+        <div className="flex items-center gap-4 mt-4">
+          <h2 className="text-xl font-semibold py-2">Stavke nabavke</h2>
+          <div onClick={addItem} className="btn btnSm">
+            Dodaj stavku
           </div>
-        ))}
-        <button onClick={addItem}>Dodaj stavku</button>
+        </div>
+        <div className="flex flex-col gap-4">
+          {procurmentData.items?.map((item, index) => (
+            <div key={index} className="item">
+              <AppInput
+                label="Naziv stavke"
+                value={item.name}
+                onChange={(e) =>
+                  handleItemChange(index, "name", e.target.value)
+                }
+              />
+              <AppInput
+                label="Količina"
+                type="number"
+                value={item.quantity}
+                onChange={(e) =>
+                  handleItemChange(index, "quantity", e.target.value)
+                }
+              />
+              <AppInput
+                label="Cijena"
+                type="number"
+                value={item.price}
+                onChange={(e) =>
+                  handleItemChange(index, "price", e.target.value)
+                }
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

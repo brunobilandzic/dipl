@@ -58,7 +58,9 @@ const WarehouseRequestListItem = ({ request, router }) => {
   const [createShipmentModalOpen, setCreateShipmentModalOpen] = useState(false);
 
   const actions = [
-    ...((managerModelName == WAREHOUSE_MANAGER || workerType == "WarehouseWorker") && !isFullyShipped
+    ...((managerModelName == WAREHOUSE_MANAGER ||
+      workerType == "WarehouseWorker") &&
+    !isFullyShipped
       ? [
           {
             label: "Obradi",

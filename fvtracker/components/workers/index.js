@@ -136,8 +136,8 @@ const WarehouseWorker = ({ worker }) => {
   return (
     <>
       <div>
-        Ukupno kreirano otpremnica: {worker.shipmentItems.length} otpremnica, ukupna
-        količina:{" "}
+        Ukupno kreirano otpremnica: {worker.shipmentItems.length} otpremnica,
+        ukupna količina:{" "}
         {worker.shipmentItems.reduce((sum, process) => {
           return (
             sum +
@@ -152,7 +152,8 @@ const WarehouseWorker = ({ worker }) => {
         Ukupna zarada:{" "}
         {worker.shipmentItems.reduce((sum, process) => {
           const processPay = process.sources.reduce(
-            (sourceSum, source) => sourceSum + source.quantity * worker.hourlyRate,
+            (sourceSum, source) =>
+              sourceSum + source.quantity * worker.hourlyRate,
             0,
           );
           return sum + processPay;

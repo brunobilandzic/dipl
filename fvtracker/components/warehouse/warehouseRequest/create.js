@@ -17,6 +17,9 @@ export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
   const warehouseManagers = useSelector(
     (state) => state.managers.warehouseManagers,
   );
+  const workers = useSelector((state) => state.workers.items);
+  const workerId = useSelector((state) => state.user.session.workerId);
+  
   const dispatch = useDispatch();
 
   const onChange = (e) => {

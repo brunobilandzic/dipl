@@ -24,8 +24,34 @@ const ProcurmentListItem = ({ procurment }) => {
   return (
     <>
       <ListItem>
-        <p>Nabavka: {procurment._id}</p>
+        {procurment.items.map((item) => (
+          <ProcurmentItem key={item._id} procurementItem={item} />
+        ))}
+        <ProcurmentStatus status={procurment.status} />
       </ListItem>
+    </>
+  );
+};
+
+const ProcurmentItem = ({ procurementItem }) => {
+  const { name, quantity, price } = procurementItem;
+
+  return (
+    <>
+      <div className="flex flex-row justify-between">
+        <p>{name}</p>
+        <p>
+          {quantity}kom x {price}€
+        </p>
+      </div>
+    </>
+  );
+};
+
+const ProcurmentStatus = ({ status }) => {
+  return (
+    <>
+      <p>Status: {status}</p>
     </>
   );
 };

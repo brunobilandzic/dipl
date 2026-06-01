@@ -49,6 +49,33 @@ export const CreateProcurment = () => {
       return { ...prev, items: newItems };
     });
   };
+  const prepareProcurnentBody = (data) => {
+    if (!data.name.trim()) {
+      return alert("Naziv nabavke je obavezan.");
+    }
+    if (data.items.length === 0) {
+      return alert("Nabavka mora imati barem jednu stavku.");
+    }
+    for (const item of data.items) {
+      if (!item.name.trim()) {
+        return alert("Naziv stavke je obavezan.");
+      }
+      if (item.quantity <= 0) {
+        return alert("Količina stavke mora biti veća od nule.");
+      }
+      if (item.price <= 0) {
+        return alert("Cijena stavke mora biti veća od nule.");
+      }
+    }
+    return {
+      ...data,
+      items: data.items.map((item) => ({
+        ...item,
+        quantity: Number(item.quantity),
+        price: Number(item.price),
+      })),
+    };
+  };
 
   return (
     <div>

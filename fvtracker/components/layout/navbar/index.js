@@ -163,6 +163,7 @@ function NavItems() {
         );
         fillOrdersRedux({ dispatch });
         fillWarehouseRequestsRedux({ dispatch });
+        dispatch(fillManagersSelection({ managersType: "warehouseManagers" }));
       }
     }
   }, [status]);

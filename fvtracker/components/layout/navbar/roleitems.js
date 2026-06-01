@@ -48,11 +48,7 @@ export default {
     },
     {
       label: "nabava",
-      submenu: [
-        { label: "lista", path: "/nabava/lista" },
-        { label: "zahtjevi", path: "/nabava/zahtjevi" },
-        { label: "novi dobavljač", path: "/nabava/novi" },
-      ],
+      path: "/nabava",
     },
   ],
   ProductionManager: [
@@ -74,11 +70,7 @@ export default {
     },
     {
       label: "nabava",
-      submenu: [
-        { label: "lista", path: "/nabava/lista" },
-        { label: "zahtjevi", path: "/nabava/zahtjevi" },
-        { label: "novi dobavljač", path: "/nabava/novi" },
-      ],
+      path: "/nabava",
     },
   ],
   WarehouseManager: [
@@ -95,11 +87,7 @@ export default {
     },
     {
       label: "nabava",
-      submenu: [
-        { label: "lista", path: "/nabava/lista" },
-        { label: "zahtjevi", path: "/nabava/zahtjevi" },
-        { label: "novi dobavljač", path: "/nabava/novi" },
-      ],
+      path: "/nabava",
     },
   ],
   FinancialManager: [
@@ -110,26 +98,21 @@ export default {
         { label: "otpremnice", path: "/otpremnice" },
       ],
     },
-    {
+    /* {
       label: "računi",
       path: "/racuni",
     },
     {
       label: "izvještaji",
       path: "/izvjestaji",
-    },
-    ,
+    }, */
     {
       label: "radnici",
       path: "/radnici",
     },
     {
       label: "nabava",
-      submenu: [
-        { label: "lista", path: "/nabava/lista" },
-        { label: "zahtjevi", path: "/nabava/zahtjevi" },
-        { label: "novi dobavljač", path: "/nabava/novi" },
-      ],
+      path: "/nabava",
     },
   ],
   CultivationWorker: [

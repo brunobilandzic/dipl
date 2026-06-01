@@ -9,7 +9,20 @@ const procurmentsSlice = createSlice({
   name: "procurments",
   initialState,
   reducers: {},
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchProcurments.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchProcurments.fulfilled, (state, action) => {
+      state.items = action.payload;
+      state.filteredItems = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(fetchProcurments.rejected, (state) => {
+      alert("Greška prilikom dohvaćanja nabavki.");
+      state.isLoading = false;
+    });
+  },
 });
 
 export const fetchProcurments = createAsyncThunk(

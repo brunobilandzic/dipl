@@ -22,11 +22,13 @@ export const CreateShipmentModal = ({
   oldShipment,
   order,
 }) => {
+  const workerId = useSelector((state) => state.user.session?.workerId);
   console.log({ message: "old shipment", oldShipment });
   const dispatch = useDispatch();
   const emptyShipment = {
     warehouseRequestId,
     sources: [],
+    workerId: workerId || null,
   };
   const [newShipmentData, setNewShipmentData] = useState(emptyShipment);
   const warehouses = useSelector((state) => state.warehouse.warehouses.items);
@@ -37,6 +39,14 @@ export const CreateShipmentModal = ({
   useEffect(() => {
     console.log({ newShipmentData });
   }, [newShipmentData]);
+  useEffect(() => {
+    if (workerId) {
+      setNewShipmentData((prev) => ({
+        ...prev,
+        workerId,
+      }));
+    }
+  }, [workerId]);
   return (
     <FormModal
       isOpen={isOpen}

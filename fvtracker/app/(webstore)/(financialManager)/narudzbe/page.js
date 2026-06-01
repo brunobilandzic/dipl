@@ -11,8 +11,7 @@ async function OrdersPage() {
     workerType: managerMorkerMap[FINANCIAL_MANAGER],
   });
   if (unauthorized) return <UnathorizedPage />;
-  if (generalManager) return <div>OrdersPage General Manager</div>;
-  if (financialManager)
+  if (specificManager || worker)
     return (
       <div>
         <OrdersList />

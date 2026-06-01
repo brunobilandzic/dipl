@@ -70,6 +70,7 @@ async function extractManagerIds(specificManager, worker) {
   }
   return { financialManagerId, warehouseManagerId };
 }
+
 export async function POST(request) {
   try {
     let {
@@ -92,7 +93,6 @@ export async function POST(request) {
       financialManager,
       worker,
     );
-    console.log({ financialManagerId });
     requestData["financialManager"] = financialManagerId;
     const warehouseRequest = await createWarehouseRequest(requestData);
     return Response.json({ message: "Zahtjev uspješno poslan skladištu." });

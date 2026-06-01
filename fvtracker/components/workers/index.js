@@ -10,6 +10,7 @@ import { worksCoordsSum } from "@/lib/utils/workers/cultivation";
 import {
   CULTIVATION_MANAGER,
   PRODUCTION_MANAGER,
+  WAREHOUSE_MANAGER,
 } from "@/lib/constants/users/managerTypes";
 
 export const WorkersPageComponent = ({ managerModelName }) => {
@@ -70,6 +71,8 @@ function WorkerContent({ worker, managerModelName }) {
       return <CultivationWorker worker={worker} />;
     case PRODUCTION_MANAGER:
       return <ProductionWorker worker={worker} />;
+    case WAREHOUSE_MANAGER:
+      return <WarehouseWorker worker={worker} />;
     default:
       return null;
   }
@@ -125,6 +128,14 @@ const ProductionWorker = ({ worker }) => {
           0,
         )}
       </div>
+    </>
+  );
+};
+
+const WarehouseWorker = ({ worker }) => {
+  return (
+    <>
+      <div></div>
     </>
   );
 };

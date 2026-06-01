@@ -36,14 +36,20 @@ function ShipmentPageComponent({ shipment }) {
       <div>
         <div>NARUDŽBA: {order?.number}</div>
         <div>STATUS: {shipment?.status}</div>
-        <div className="mt-4 pl-12">
-          <ShipmentItemList
-            managerModelName={managerModelName}
-            shipmentItems={shipmentItems}
-            dispatch={dispatch}
-            router={router}
-          />
-        </div>
+        {shipmentItems.length > 0 ? (
+          <div className="mt-4 pl-12">
+            <ShipmentItemList
+              managerModelName={managerModelName}
+              shipmentItems={shipmentItems}
+              dispatch={dispatch}
+              router={router}
+            />
+          </div>
+        ) : (
+          <div className="mt-4 pl-12">
+            Nema dostupnih stavki za ovu pošiljku.
+          </div>
+        )}
       </div>
     </div>
   );

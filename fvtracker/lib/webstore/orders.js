@@ -72,7 +72,6 @@ export const getOrders = async ({ customerId = null }) => {
       },
     },
   ]);
-
   return orders;
 };
 

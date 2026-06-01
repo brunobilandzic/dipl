@@ -1,7 +1,7 @@
 import { fetchManager, fetchManagerWorker } from "@/lib/auth/fetchSessionData";
 import { WAREHOUSE_MANAGER } from "@/lib/constants/users/managerTypes";
 import { fillWarehouseRequest } from "@/lib/warehouses/warehouseRequests";
-import { managerWorkerMap } from "@/lib/constants/users/managerWorker";
+import { managerMorkerMap } from "@/lib/constants/users/managerWorker";
 
 export async function POST(request) {
   try {
@@ -11,7 +11,7 @@ export async function POST(request) {
       unauthorized,
     } = await fetchManagerWorker({
       managerNames: [WAREHOUSE_MANAGER],
-      workerType: managerWorkerMap[WAREHOUSE_MANAGER],
+      workerType: managerMorkerMap[WAREHOUSE_MANAGER],
     });
 
     if (unauthorized) {

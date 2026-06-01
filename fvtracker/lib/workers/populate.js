@@ -66,3 +66,9 @@ export const warehousePopulate = [
     ],
   },
 ];
+
+export const financialPopulate = [
+  {
+    path: "warehouseRequests",
+  },
+];

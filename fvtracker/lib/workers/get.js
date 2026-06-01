@@ -2,12 +2,14 @@ import {
   CULTIVATION_MANAGER,
   PRODUCTION_MANAGER,
   WAREHOUSE_MANAGER,
+  FINANCIAL_MANAGER,
 } from "../constants/users/managerTypes.js";
 import { Worker } from "@/models/user/workers";
 import populateCommon, {
   cultivationPopulate,
   productionPopulate,
   warehousePopulate,
+  financialPopulate,
 } from "./populate";
 
 export const getWorkers = async ({ rootManagerId, managerModelName }) => {
@@ -39,10 +41,16 @@ export const getWorkers = async ({ rootManagerId, managerModelName }) => {
           await worker.populate(warehousePopulate);
         }
         break;
+      case FINANCIAL_MANAGER:
+        console.log("Populating financial work for worker:", worker);
+        for (const worker of workers) {
+          await worker.populate(financialPopulate);
+        }
+        break;
       default:
         return workers;
     }
   }
-  console.log({ workers });
+  
   return workers;
 };

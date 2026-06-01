@@ -47,9 +47,9 @@ const rootManagerSchema = new Schema({
       default: [],
     },
   ] */
-  orderings: [
+  procurments: [
     //people placing orders to buy products
-    { type: mongoose.Schema.Types.ObjectId, ref: "Ordering", default: [] },
+    { type: mongoose.Schema.Types.ObjectId, ref: "Procurment", default: [] },
   ],
 });
 

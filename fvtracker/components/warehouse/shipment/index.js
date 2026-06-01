@@ -104,7 +104,7 @@ const ShipmentItem = ({
   const { sources, receipt, createdAt, _id } = shipmentItem;
   const [makeReceiptOpen, setMakeReceiptOpen] = useState(false);
   const [worker, setWorker] = useState(workerId);
-  const handleReceiptCreation = async (workerId) => {
+  const handleReceiptCreation = async () => {
     try {
       dispatch(setLoading(true));
       const res = await api.post("/receipt", {
@@ -171,7 +171,7 @@ const ShipmentItem = ({
           onCancel={() => setMakeReceiptOpen(false)}
           title="Izrada računa"
           submitDisabled={!worker}
-          onSubmit={() => handleReceiptCreation(worker)}
+          onSubmit={() => handleReceiptCreation()}
         >
           <ChooseWorker
             workers={workers}

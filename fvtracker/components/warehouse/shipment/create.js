@@ -1,5 +1,6 @@
 import { AppInput } from "@/components/form/inputs";
 import { FormModal } from "@/components/layout/modals/form";
+import { ChooseWorker } from "@/components/workers/choose";
 import {
   SHIPMENT_PENDING,
   SHIPMENT_SHIPPED_FULLY,
@@ -13,6 +14,7 @@ import {
 } from "@/lib/utils/storage/warehouse";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { checkEmpty } from "@/lib/utils/objects";
 
 export const CreateShipmentModal = ({
   isOpen,
@@ -22,6 +24,7 @@ export const CreateShipmentModal = ({
   oldShipment,
   order,
 }) => {
+  const workers = useSelector((state) => state.workers.items);
   const workerId = useSelector((state) => state.user.session?.workerId);
   console.log({ message: "old shipment", oldShipment });
   const dispatch = useDispatch();
@@ -39,6 +42,7 @@ export const CreateShipmentModal = ({
   useEffect(() => {
     console.log({ newShipmentData });
   }, [newShipmentData]);
+
   useEffect(() => {
     if (workerId) {
       setNewShipmentData((prev) => ({
@@ -47,6 +51,15 @@ export const CreateShipmentModal = ({
       }));
     }
   }, [workerId]);
+
+  const chooseWorker = (e) => {
+    const { name, value } = e.target;
+    setNewShipmentData((prev) => ({
+      ...prev,
+      workerId: value,
+    }));
+  };
+
   return (
     <FormModal
       isOpen={isOpen}
@@ -58,6 +71,7 @@ export const CreateShipmentModal = ({
       title="Otpremnica"
       submitDisabled={checkEmpty(newShipmentData, true)}
     >
+      {!workerId && <ChooseWorker workers={workers} onChoose={chooseWorker} />}
       <ChooseWarehouseSources
         newShipmentData={newShipmentData}
         setNewShipmentData={setNewShipmentData}
@@ -129,9 +143,11 @@ const ChooseWarehouseSources = ({
     }
   };
 
-  const neededString = neededQuantities
-    .map((nq) => `${nq.productName}: ${nq.neededQuantity}`)
-    .join(", ");
+  const neededString =
+    "Tražene količine: " +
+    neededQuantities
+      .map((nq) => `${nq.productName}: ${nq.neededQuantity}`)
+      .join(", ");
 
   return (
     <div>
@@ -218,6 +234,8 @@ const ShipmentStatus = ({ status, neededString, isFullfilled }) => {
       return neededString;
     case SHIPMENT_SHIPPED_FULLY:
       return "Otpremljeno";
+    case SHIPMENT_PENDING:
+      return neededString;
     default:
       return `SHIPMENT STATUS ${status}`;
   }

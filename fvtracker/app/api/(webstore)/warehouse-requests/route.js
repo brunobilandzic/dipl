@@ -1,5 +1,9 @@
-import { fetchManager } from "@/lib/auth/fetchSessionData";
-import { FINANCIAL_MANAGER, WAREHOUSE_MANAGER } from "@/lib/constants/users/managerTypes";
+import { fetchManager, fetchManagerWorker } from "@/lib/auth/fetchSessionData";
+import {
+  FINANCIAL_MANAGER,
+  WAREHOUSE_MANAGER,
+} from "@/lib/constants/users/managerTypes";
+import { managerMorkerMap } from "@/lib/constants/users/managerWorker";
 import {
   createWarehouseRequest,
   getWarehouseRequests,
@@ -8,12 +12,18 @@ import {
 export async function GET(request) {
   console.log("Received GET request for warehouse requests");
   try {
-    const { unauthorized } = await fetchManager({
-      managerNames: [FINANCIAL_MANAGER, WAREHOUSE_MANAGER],
+    let {
+      specificManager,
+      worker: warehouseWorker,
+      unauthorized,
+    } = await fetchManagerWorker({
+      managerNames: [WAREHOUSE_MANAGER],
+      workerType: managerMorkerMap[WAREHOUSE_MANAGER],
     });
+
     if (unauthorized) {
       return Response.json(
-        { message: "Nemate pravo pristupa" },
+        { message: "Nemate pravo izrade otpremnica" },
         { status: 403 },
       );
     }

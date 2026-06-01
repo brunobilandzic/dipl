@@ -1,20 +1,25 @@
-import { fetchManager } from "@/lib/auth/fetchSessionData";
+import { fetchManager, fetchManagerWorker } from "@/lib/auth/fetchSessionData";
 import { FINANCIAL_MANAGER } from "@/lib/constants/users/managerTypes";
+import { managerMorkerMap } from "@/lib/constants/users/managerWorker";
 import { Receipt } from "@/models/sectors/sales";
 import { ShipmentItem } from "@/models/sectors/sales/Shipment";
 
 export async function POST(req) {
   try {
     console.log("Received request to create receipt");
-    const { specificManager: financialManager, unauthorized } =
-      await fetchManager({
-        managerNames: [FINANCIAL_MANAGER],
-      });
+    let { specificManager, worker, unauthorized } = await fetchManagerWorker({
+      managerNames: [FINANCIAL_MANAGER],
+      workerType: managerMorkerMap[FINANCIAL_MANAGER],
+    });
+
     if (unauthorized) {
-      return Response.json({ error: "Nema dozvole" }, { status: 403 });
+      return Response.json(
+        { message: "Nemate pravo izrade otpremnica" },
+        { status: 403 },
+      );
     }
 
-    const { shipmentItemId } = await req.json();
+    const { shipmentItemId, workerId } = await req.json();
 
     const shipmentItem = await ShipmentItem.findById(shipmentItemId).populate([
       {
@@ -40,6 +45,7 @@ export async function POST(req) {
 
     const newReceipt = new Receipt({
       shipmentItem: shipmentItem._id,
+      financialWorker: workerId,
     });
 
     shipmentItem.receipt = newReceipt._id;

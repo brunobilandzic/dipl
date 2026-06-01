@@ -151,6 +151,9 @@ export const CreateProcurment = () => {
           ))}
         </div>
       </div>
+      <div onClick={handleSubmit} className="btn submitButton mt-6">
+        Spremi nabavku
+      </div>
     </div>
   );
 };

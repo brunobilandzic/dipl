@@ -27,7 +27,27 @@ export async function GET(request) {
         { status: 403 },
       );
     }
-    const warehouseRequests = await getWarehouseRequests();
+    let warehouseManagerId =
+      specificManager?.managerModelName === WAREHOUSE_MANAGER
+        ? specificManager._id
+        : null;
+    let financialManagerId =
+      specificManager?.managerModelName === FINANCIAL_MANAGER
+        ? specificManager._id
+        : null;
+
+    if (worker && worker.manager) {
+      if (worker.manager.managerModelName === WAREHOUSE_MANAGER) {
+        warehouseManagerId = worker.manager._id;
+      } else if (worker.manager.managerModelName === FINANCIAL_MANAGER) {
+        financialManagerId = worker.manager._id;
+      }
+    }
+
+    const warehouseRequests = await getWarehouseRequests({
+      financialManagerId,
+      warehouseManagerId,
+    });
     return Response.json({ warehouseRequests });
   } catch (error) {
     console.error("Error fetching warehouse requests:", error);

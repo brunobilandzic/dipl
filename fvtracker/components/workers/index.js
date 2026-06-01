@@ -20,8 +20,6 @@ export const WorkersPageComponent = ({ managerModelName }) => {
 
   if (!workers) return <LoadingFullScreen />;
 
-  console.log("showing workers", { workers }, { managerModelName });
-
   return (
     <div>
       <div>
@@ -65,7 +63,6 @@ const WorkerItem = ({ worker, children }) => {
 };
 
 function WorkerContent({ worker, managerModelName }) {
-  console.log({ managerModelName });
   switch (managerModelName) {
     case CULTIVATION_MANAGER:
       return <CultivationWorker worker={worker} />;

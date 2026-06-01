@@ -30,6 +30,11 @@ export const CreateProcurment = () => {
     }));
   };
   const handleItemChange = (index, field, value) => {
+    if (field === "quantity" || field === "price") {
+      if (isNaN(value)) return;
+      if (value === "") value = 0;
+      if (value < 0) value = 0;
+    }
     setProcurmentData((prev) => {
       const newItems = [...prev.items];
       newItems[index][field] = value;

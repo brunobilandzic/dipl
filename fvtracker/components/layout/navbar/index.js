@@ -27,6 +27,7 @@ import { fillOrdersRedux } from "@/lib/utils/webstore/orders";
 import { fillWarehouseRequestsRedux } from "@/lib/utils/documents/requests";
 import { fillManagersSelection } from "@/store/managers";
 import { fetchWorkers } from "@/store/workers";
+import { fetchProcurments } from "@/store/procurments";
 
 export default {
   roleitems,
@@ -84,6 +85,7 @@ function NavItems() {
       const managerModelName = session.user.managerModelName;
       setManagerModelName(session.user?.managerModelName);
       dispatch(login(session.user));
+      dispatch(fetchProcurments());
       if (
         managerModelName === CULTIVATION_MANAGER &&
         !fieldsRedux &&

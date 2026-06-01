@@ -17,20 +17,14 @@ export const getWorkers = async ({ rootManagerId, managerModelName }) => {
     manager: rootManagerId,
   }).populate(populateCommon);
 
-  console.log({ rootManagerId, managerModelName });
-  console.log("Fetched workers for rootManagerId:", { workers });
-
   for (const worker of workers) {
     switch (managerModelName) {
       case CULTIVATION_MANAGER:
-        console.log("Populating cultivation work for worker:", worker);
-        // find cult worker and populate
         for (const worker of workers) {
           await worker.populate(cultivationPopulate);
         }
         break;
       case PRODUCTION_MANAGER:
-        console.log("Populating production work for worker:", worker);
         for (const worker of workers) {
           await worker.populate(productionPopulate);
         }
@@ -51,6 +45,6 @@ export const getWorkers = async ({ rootManagerId, managerModelName }) => {
         return workers;
     }
   }
-  
+
   return workers;
 };

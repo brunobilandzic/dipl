@@ -8,12 +8,16 @@ export const createShipments = async ({ warehouseRequests }) => {
   for (const warehouseRequest of warehouseRequests) {
     await warehouseRequest.populate(warehouseRequestPopulateShipmentItems);
     const orderItems = warehouseRequest.order.items;
+    const sources = await buildShipmentSources({
+      orderItems,
+      warehouseManagerId: warehouseRequest.warehouseManager,
+    });
+    if (sources.length === 0) {
+      continue;
+    }
     await fillWarehouseRequest({
       warehouseRequestId: warehouseRequest._id,
-      shipmentSources: await buildShipmentSources({
-        orderItems,
-        warehouseManagerId: warehouseRequest.warehouseManager,
-      }),
+      shipmentSources: sources,
       workerId: warehouseWorker._id,
     });
   }

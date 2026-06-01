@@ -11,7 +11,6 @@ export function extractDBObject(objToExtract) {
 }
 
 export function checkEmpty(obj, dontAlert = false) {
-  console.log({ obj });
   for (const key in obj) {
     if (obj[key] === "" || obj[key] === null || obj[key] === undefined) {
       if (!dontAlert) {

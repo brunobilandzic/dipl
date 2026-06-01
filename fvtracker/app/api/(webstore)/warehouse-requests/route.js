@@ -33,7 +33,7 @@ export async function GET(request) {
       specificManager?.rootManager.managerModelName === FINANCIAL_MANAGER
         ? specificManager._id
         : null;
-    console.log({ man: worker.manager });
+        
     if (worker && worker.manager) {
       if (worker.manager.managerModelName === WAREHOUSE_MANAGER) {
         const warehouseManager = await WarehouseManager.findOne({
@@ -47,13 +47,7 @@ export async function GET(request) {
         financialManagerId = financialManager._id;
       }
     }
-    console.log({ worker, unauthorized });
-    console.log({
-      specificManager,
-      warehouseManagerId,
-      financialManagerId,
-      route: true,
-    });
+
     const warehouseRequests = await getWarehouseRequests({
       financialManagerId,
       warehouseManagerId,

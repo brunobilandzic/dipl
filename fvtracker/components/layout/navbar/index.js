@@ -152,6 +152,11 @@ function NavItems() {
         console.log("Production worker logged in, refreshing product data...");
         fillProductionRedux({ dispatch, router });
       }
+      if (session.user.workerType === "WarehouseWorker") {
+        console.log("Warehouse worker logged in, refreshing warehouse data...");
+        fillWarehouseRedux({ dispatch, router });
+        fillWarehouseRequestsRedux({ dispatch });
+      }
     }
   }, [status]);
 

@@ -12,11 +12,7 @@ import {
 export async function GET(request) {
   console.log("Received GET request for warehouse requests");
   try {
-    let {
-      specificManager,
-      worker: warehouseWorker,
-      unauthorized,
-    } = await fetchManagerWorker({
+    let { specificManager, worker, unauthorized } = await fetchManagerWorker({
       managerNames: [WAREHOUSE_MANAGER, FINANCIAL_MANAGER],
       workerType: managerMorkerMap[WAREHOUSE_MANAGER],
     });
@@ -77,7 +73,6 @@ export async function POST(request) {
     }
 
     const requestData = await request.json();
-    requestData["financialManagerId"] = financialManager._id.toString();
     const warehouseRequest = await createWarehouseRequest(requestData);
     return Response.json({ message: "Zahtjev uspješno poslan skladištu." });
   } catch (error) {

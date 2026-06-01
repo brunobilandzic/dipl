@@ -4,6 +4,7 @@ import { Order } from "@/models/sectors/sales";
 import { Shipment } from "@/models/sectors/sales/Shipment";
 import { FinancialManager } from "@/models/user/managers/FinancialManager";
 import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
+import { FinancialWorker } from "@/models/user/workers/FinancialWork";
 import mongoose from "mongoose";
 
 const warehouseRequestSchema = new mongoose.Schema({
@@ -51,6 +52,13 @@ warehouseRequestSchema.pre("save", async function () {
     if (!order) throw new Error("Povezana narudžba nije pronađena");
     order.warehouseRequest = this._id;
     order.state = WAREHOUSE_REQUESTED;
+    const financialWorker = await FinancialWorker.findById(
+      this.financialWorker,
+    );
+    if (!financialWorker)
+      throw new Error("Povezani finansijski radnik nije pronađen");
+    financialWorker.warehouseRequests.push(this._id);
+    await financialWorker.save();
     await order.save();
   }
 });

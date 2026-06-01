@@ -157,6 +157,13 @@ function NavItems() {
         fillWarehouseRedux({ dispatch, router });
         fillWarehouseRequestsRedux({ dispatch });
       }
+      if (session.user.workerType === "FinancialWorker") {
+        console.log(
+          "Financial worker logged in, refreshing orders and requests data...",
+        );
+        fillOrdersRedux({ dispatch });
+        fillWarehouseRequestsRedux({ dispatch });
+      }
     }
   }, [status]);
 

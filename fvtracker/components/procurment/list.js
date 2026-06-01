@@ -1,5 +1,7 @@
-import { List, ListItem } from " @/components/layout/preview/list";
-import { ListItem } from "../layout/preview/list";
+"use client";
+
+import { List, ListItem } from "@/components/layout/preview/list";
+import { useSelector } from "react-redux";
 
 export const ProcurmentList = () => {
   const procurments = useSelector((state) => state.procurments.filteredItems);

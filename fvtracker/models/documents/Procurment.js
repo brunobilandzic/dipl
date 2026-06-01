@@ -15,19 +15,30 @@ const procurmentItemSchema = new Schema({
   },
 });
 
-const procurmentSchema = new Schema({
-  manager: {
-    type: Schema.Types.ObjectId,
-    ref: "rootManager",
-    required: true,
+const procurmentSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      default: "",
+    },
+    manager: {
+      type: Schema.Types.ObjectId,
+      ref: "rootManager",
+      required: true,
+    },
+    items: [procurmentItemSchema],
+    status: {
+      type: String,
+      enum: ["na čekanju", "odobrena", "odbijena"],
+      default: "na čekanju",
+    },
   },
-  items: [procurmentItemSchema],
-  status: {
-    type: String,
-    enum: ["na čekanju", "odobrena", "odbijena"],
-    default: "na čekanju",
-  },
-});
+  { timestamps: true },
+);
 
 procurmentSchema.pre("save", async function () {
   if (this.isNew) {

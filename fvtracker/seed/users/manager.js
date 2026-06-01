@@ -2,6 +2,8 @@ import { RootManager } from "@/models/user/managers/RootManager.js";
 import dbConnect from "@/lib/db/mongooseConnect";
 import mongoose from "mongoose";
 import { AppUser } from "@/models/user/AppUser";
+import { Procurment, ProcurmentItem } from "@/models/Procurment";
+import { procurments } from "../data/procurments";
 
 export const createManager = async (
   appUserId,
@@ -41,6 +43,13 @@ const createRootManager = async (
   const appUser = await AppUser.findById(appUserId);
   appUser.manager = rootManager._id;
 
+  const procurment = new Procurment({
+    manager: rootManager._id,
+    items: procurments[managerModelName],
+    status: Math.random() < 0.6 ? "na čekanju" : "odobrena",
+  });
+
+  await procurment.save();
   await appUser.save();
   await rootManager.save();
   return rootManager;

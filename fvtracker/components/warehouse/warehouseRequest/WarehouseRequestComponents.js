@@ -50,6 +50,7 @@ const WarehouseRequestListItem = ({ request, router }) => {
   const managerModelName = useSelector(
     (state) => state.user.session.managerModelName,
   );
+  const workerType = useSelector((state) => state.user.session.workerType);
   const order = useSelector((state) =>
     state.webstore.orders.items.find((o) => o._id === request.order._id),
   );
@@ -57,7 +58,7 @@ const WarehouseRequestListItem = ({ request, router }) => {
   const [createShipmentModalOpen, setCreateShipmentModalOpen] = useState(false);
 
   const actions = [
-    ...(managerModelName == WAREHOUSE_MANAGER && !isFullyShipped
+    ...((managerModelName == WAREHOUSE_MANAGER || workerType == "WarehouseWorker") && !isFullyShipped
       ? [
           {
             label: "Obradi",

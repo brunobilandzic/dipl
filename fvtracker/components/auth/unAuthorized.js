@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export function UnathorizedPage({ message, path = "/autorizacija" }) {
   <div className="flex flex-col items-center justify-center h-screen gap-4">
     <h1 className="text-2xl font-bold">Nedovoljno ovlasti</h1>

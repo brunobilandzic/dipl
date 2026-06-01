@@ -28,6 +28,7 @@ export const createWarehouseRequest = async (requestData) => {
     financialManager: requestData.financialManager,
     warehouseManager: requestData.warehouseManagerId,
     order: requestData.orderId,
+    financialWorker: requestData.workerId,
   });
 
   await warehouseRequest.save();

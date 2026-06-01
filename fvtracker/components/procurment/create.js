@@ -1,12 +1,24 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { AppInput } from "../form/inputs";
+import { useSelector } from "react-redux";
+import { procurments } from "@/seed/data/procurments";
 
 export const CreateProcurment = () => {
-  const [procurmentData, setProcurmentData] = useState({
+  const managerModelName = useSelector(
+    (state) => state.user?.session?.managerModelName,
+  );
+  const emptyItem = { name: "", quantity: 0, price: 0 };
+  const emptyProcurment = {
     name: "",
     description: "",
-    items: [],
-  });
-  const emptyItem = { name: "", quantity: 0, price: 0 };
+    items: [emptyItem],
+  };
+  const [procurmentData, setProcurmentData] = useState(
+    testProcurment(managerModelName),
+  );
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setProcurmentData((prev) => ({ ...prev, [name]: value }));
@@ -33,13 +45,46 @@ export const CreateProcurment = () => {
           label="Naziv nabavke"
           value={procurmentData.name}
           onChange={handleChange}
+          name="name"
         />
         <AppInput
           label="Opis nabavke"
           value={procurmentData.description}
           onChange={handleChange}
+          name="description"
         />
+        <h2>Stavke nabavke</h2>
+        {procurmentData.items?.map((item, index) => (
+          <div key={index} className="item">
+            <AppInput
+              label="Naziv stavke"
+              value={item.name}
+              onChange={(e) => handleItemChange(index, "name", e.target.value)}
+            />
+            <AppInput
+              label="Količina"
+              type="number"
+              value={item.quantity}
+              onChange={(e) =>
+                handleItemChange(index, "quantity", e.target.value)
+              }
+            />
+            <AppInput
+              label="Cijena"
+              type="number"
+              value={item.price}
+              onChange={(e) => handleItemChange(index, "price", e.target.value)}
+            />
+          </div>
+        ))}
+        <button onClick={addItem}>Dodaj stavku</button>
       </div>
     </div>
   );
 };
+
+const testProcurment = (managerModelName) => ({
+  name: `Nabavka for ${managerModelName}`,
+  description: `Opis nabavke za ${managerModelName}`,
+  items: procurments[managerModelName],
+});

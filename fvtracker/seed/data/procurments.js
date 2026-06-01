@@ -1,6 +1,6 @@
 import {
   CULTIVATION_MANAGER,
-  PROCESSING_MANAGER,
+  PRODUCTION_MANAGER,
   WAREHOUSE_MANAGER,
   FINANCIAL_MANAGER,
 } from "@/lib/constants/users/managerTypes";
@@ -8,44 +8,44 @@ import {
 export const procurments = {
   [CULTIVATION_MANAGER]: [
     {
-      item: "Lopata metalna",
+      name: "Lopata metalna",
       quantity: 10,
       price: 150,
     },
     {
-      item: "Gnojivo",
+      name: "Gnojivo",
       quantity: 20,
       price: 200,
     },
   ],
-  [PROCESSING_MANAGER]: [
+  [PRODUCTION_MANAGER]: [
     {
-      item: "Mlin za žito",
+      name: "Mlin za žito",
       quantity: 2,
       price: 5000,
     },
     {
-      item: "Transporter",
+      name: "Transporter",
       quantity: 1,
       price: 3000,
     },
   ],
   [WAREHOUSE_MANAGER]: [
     {
-      item: "Polica za skladištenje",
+      name: "Polica za skladištenje",
       quantity: 5,
       price: 800,
     },
     {
-      item: "Paleta",
+      name: "Paleta",
       quantity: 10,
       price: 500,
     },
   ],
   [FINANCIAL_MANAGER]: [
-    { item: "Računovodstveni softver", quantity: 1, price: 2000 },
+    { name: "Računovodstveni softver", quantity: 1, price: 2000 },
     {
-      item: "Knjigovodstvene usluge",
+      name: "Knjigovodstvene usluge",
       quantity: 1,
       price: 1500,
     },

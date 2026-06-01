@@ -155,6 +155,10 @@ export default {
       label: "Narudžbe",
       path: "/narudzbe",
     },
+    {
+      label: "Otpremnice",
+      path: "/otpremnice",
+    },
   ],
 };
 

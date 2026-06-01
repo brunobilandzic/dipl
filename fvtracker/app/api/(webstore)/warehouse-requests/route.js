@@ -24,11 +24,11 @@ export async function GET(request) {
       );
     }
     let warehouseManagerId =
-      specificManager?.managerModelName === WAREHOUSE_MANAGER
+      specificManager?.rootManager.managerModelName === WAREHOUSE_MANAGER
         ? specificManager._id
         : null;
     let financialManagerId =
-      specificManager?.managerModelName === FINANCIAL_MANAGER
+      specificManager?.rootManager.managerModelName === FINANCIAL_MANAGER
         ? specificManager._id
         : null;
 
@@ -39,7 +39,13 @@ export async function GET(request) {
         financialManagerId = worker.manager._id;
       }
     }
-
+    console.log({ worker, unauthorized });
+    console.log({
+      specificManager,
+      warehouseManagerId,
+      financialManagerId,
+      route: true,
+    });
     const warehouseRequests = await getWarehouseRequests({
       financialManagerId,
       warehouseManagerId,

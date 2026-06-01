@@ -44,6 +44,8 @@ const createRootManager = async (
   appUser.manager = rootManager._id;
 
   const procurment = new Procurment({
+    name: `Nabavka for ${managerModelName}`,
+    description: `Opis nabavke za ${managerModelName}`,
     manager: rootManager._id,
     items: procurments[managerModelName],
     status: Math.random() < 0.6 ? "na čekanju" : "odobrena",

@@ -11,11 +11,10 @@ export default function Providers({ children }) {
   return (
     <SessionProvider>
       <ReduxProvider store={store}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        
           <UserProviders>
             <CustomProviders>{children}</CustomProviders>
           </UserProviders>
-        </ThemeProvider>
       </ReduxProvider>
     </SessionProvider>
   );

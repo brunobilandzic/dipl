@@ -73,12 +73,6 @@ tbody {
   --important: #012010;
 }
 
-html.dark {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --important: #05df6e;
-}
-
 /* Tailwind theme tokens */
 @theme inline {
   --color-background: var(--background);

@@ -2,16 +2,19 @@
 
 import { useEffect, useState } from "react";
 import { AppInput } from "../form/inputs";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { procurments } from "@/seed/data/procurments";
 import { MdClose } from "react-icons/md";
 import handleError from "@/lib/constants/errors/client/handleError";
+import { setLoading } from "@/store/loading";
+import api from "@/lib/api";
 
 export const CreateProcurment = () => {
   const managerModelName = useSelector(
     (state) => state.user?.session?.managerModelName,
   );
-  const emptyItem = { name: "", quantity: 0, price: 0 };
+  const dispatch = useDispatch();
+  const emptyItem = { name: "", quantity: "", price: "" };
   const emptyProcurment = {
     name: "",
     description: "",
@@ -51,9 +54,12 @@ export const CreateProcurment = () => {
     });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     try {
-      const newProcurment = prepareProcurnentBody(procurmentData);
+      const newProcurmentData = prepareProcurnentBody(procurmentData);
+      dispatch(setLoading(true));
+      const res = await api.post("/procurments", { newProcurmentData });
+      console.log(res.data);
       // Call API to save newProcurment
     } catch (error) {
       console.error("Error creating procurment:", error);
@@ -62,6 +68,8 @@ export const CreateProcurment = () => {
         generalMessage:
           "Došlo je do greške prilikom kreiranja nabavke. Molimo pokušajte ponovo.",
       });
+    } finally {
+      dispatch(setLoading(false));
     }
   };
 

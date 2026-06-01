@@ -103,7 +103,7 @@ const ShipmentItem = ({
 }) => {
   const { sources, receipt, createdAt, _id } = shipmentItem;
   const [makeReceiptOpen, setMakeReceiptOpen] = useState(false);
-
+  const [worker, setWorker] = useState(workerId);
   const handleReceiptCreation = async (workerId) => {
     try {
       dispatch(setLoading(true));
@@ -167,10 +167,18 @@ const ShipmentItem = ({
       {makeReceiptOpen && (
         <FormModal
           isOpen={makeReceiptOpen}
-          onClose={() => setMakeReceiptOpen(false)}
+          onCancel={() => setMakeReceiptOpen(false)}
           title="Izrada računa"
+          submitDisabled={!worker}
+          onSubmit={() => handleReceiptCreation(worker)}
         >
-          <ChooseWorker workers={workers} />
+          <ChooseWorker
+            workers={workers}
+            onChoose={(e) => {
+              const { value } = e.target;
+              setWorker(value);
+            }}
+          />
         </FormModal>
       )}
     </>

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   items: [],
@@ -21,3 +21,4 @@ export const fetchProcurments = createAsyncThunk(
 );
 
 export const {} = procurmentsSlice.actions;
+export default procurmentsSlice.reducer;

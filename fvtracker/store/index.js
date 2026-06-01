@@ -10,6 +10,7 @@ import storeReducer from "./webstore";
 import salesReducer from "./sales";
 import managersReducer from "./managers";
 import workersReducer from "./workers";
+import procurmentsReducer from "./procurments";
 
 const store = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ const store = configureStore({
     sales: salesReducer,
     managers: managersReducer,
     workers: workersReducer,
+    procurments: procurmentsReducer,
   },
 });
 

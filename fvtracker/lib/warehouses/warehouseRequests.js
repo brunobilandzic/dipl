@@ -45,7 +45,6 @@ export const getWarehouseRequests = async ({
   }).populate(warehouseRequestPopulateShipmentItems);
   return requests;
 };
-ons;
 
 export const shipWarehouseRequest = async ({ warehouseRequestId }) => {
   const request = await getWarehouseRequestById(warehouseRequestId);

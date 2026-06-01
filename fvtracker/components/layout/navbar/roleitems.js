@@ -150,6 +150,12 @@ export default {
       path: "/skladiste-zahtjevi",
     },
   ],
+  FinancialWorker: [
+    {
+      label: "Narudžbe",
+      path: "/narudzbe",
+    },
+  ],
 };
 
 export const adminNavItems = [

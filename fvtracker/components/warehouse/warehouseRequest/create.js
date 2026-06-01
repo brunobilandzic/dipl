@@ -24,6 +24,15 @@ export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
 
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (workerId) {
+      setWarehouseRequest((prev) => ({
+        ...prev,
+        workerId: workerId,
+      }));
+    }
+  }, [workerId]);
+
   const onChange = (e) => {
     setWarehouseRequest((prev) => ({
       ...prev,

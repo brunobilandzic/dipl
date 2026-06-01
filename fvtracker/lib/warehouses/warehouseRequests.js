@@ -26,7 +26,7 @@ export const createWarehouseRequest = async (requestData) => {
   const { ...modelData } = requestData;
   const warehouseRequest = new WarehouseRequest({
     ...modelData,
-    financialManagerId: requestData.financialManagerId,
+    financialManager: requestData.financialManager,
     warehouseManager: requestData.warehouseManagerId,
     order: requestData.orderId,
   });

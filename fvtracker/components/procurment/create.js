@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AppInput } from "../form/inputs";
 import { useSelector } from "react-redux";
 import { procurments } from "@/seed/data/procurments";
+import { MdClose } from "react-icons/md";
 
 export const CreateProcurment = () => {
   const managerModelName = useSelector(
@@ -42,6 +43,13 @@ export const CreateProcurment = () => {
     });
   };
 
+  const onRemoveItem = (index) => {
+    setProcurmentData((prev) => {
+      const newItems = prev.items.filter((_, i) => i !== index);
+      return { ...prev, items: newItems };
+    });
+  };
+
   return (
     <div>
       <h1 className="text-2xl font-bold">Nova nabavka</h1>
@@ -58,15 +66,21 @@ export const CreateProcurment = () => {
           onChange={handleChange}
           name="description"
         />
-        <div className="flex items-center gap-4 mt-4">
-          <h2 className="text-xl font-semibold py-2">Stavke nabavke</h2>
+        <div className="flex items-center justify-between mt-4">
+          <h2 className="text-xl font-semibold py-2 mb-4">Stavke nabavke</h2>
           <div onClick={addItem} className="btn btnSm">
             Dodaj stavku
           </div>
         </div>
         <div className="flex flex-col gap-4">
           {procurmentData.items?.map((item, index) => (
-            <div key={index} className="item">
+            <div key={index} className="item p-4 rounded-lg border-4 relative">
+              <div
+                onClick={() => onRemoveItem(index)}
+                className="absolute top-2 right-2 cursor-pointer text-red-500"
+              >
+                <MdClose />
+              </div>
               <AppInput
                 label="Naziv stavke"
                 value={item.name}

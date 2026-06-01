@@ -11,7 +11,6 @@ export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
   const initialWarehouseRequest = {
     orderId: order._id,
     warehouseManagerId: null,
-    financialManagerId: null,
   };
   const [warehouseRequest, setWarehouseRequest] = useState(
     initialWarehouseRequest,
@@ -19,9 +18,10 @@ export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
   const warehouseManagers = useSelector(
     (state) => state.managers.warehouseManagers,
   );
+
   const workers = useSelector((state) => state.workers.items);
   const workerId = useSelector((state) => state.user.session.workerId);
-  
+
   const dispatch = useDispatch();
 
   const onChange = (e) => {
@@ -53,7 +53,13 @@ export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
     console.log(warehouseRequest);
   }, [warehouseRequest]);
   return (
-    <FormModal isOpen={isOpen} onCancel={onCancel} onSubmit={handleSubmit}>
+    <FormModal
+      isOpen={isOpen}
+      onCancel={onCancel}
+      onSubmit={handleSubmit}
+      submitDisabled={checkEmpty(warehouseRequest, true)}
+    >
+      {!workerId && <ChooseWorker workers={workers} onChoose={chooseWorker} />}
       <AppSelect
         name="warehouseManagerId"
         label="Skladištar"

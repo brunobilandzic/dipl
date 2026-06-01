@@ -144,6 +144,12 @@ export default {
       path: "/proizvodi",
     },
   ],
+  WarehouseWorker: [
+    {
+      label: "Otpremnice",
+      path: "/skladiste-zahtjevi",
+    },
+  ],
 };
 
 export const adminNavItems = [

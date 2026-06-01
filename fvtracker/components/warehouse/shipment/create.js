@@ -56,6 +56,7 @@ export const CreateShipmentModal = ({
       }}
       onSubmit={() => submitShipment({ newShipmentData, dispatch })}
       title="Otpremnica"
+      submitDisabled={checkEmpty(newShipmentData, true)}
     >
       <ChooseWarehouseSources
         newShipmentData={newShipmentData}

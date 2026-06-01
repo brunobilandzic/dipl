@@ -60,6 +60,8 @@ export const CreateProcurment = () => {
       dispatch(setLoading(true));
       const res = await api.post("/procurments", { newProcurmentData });
       console.log(res.data);
+      // addd proc to store
+      // clear formn
       // Call API to save newProcurment
     } catch (error) {
       console.error("Error creating procurment:", error);

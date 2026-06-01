@@ -5,6 +5,7 @@ import { AppInput } from "../form/inputs";
 import { useSelector } from "react-redux";
 import { procurments } from "@/seed/data/procurments";
 import { MdClose } from "react-icons/md";
+import handleError from "@/lib/constants/errors/client/handleError";
 
 export const CreateProcurment = () => {
   const managerModelName = useSelector(
@@ -49,6 +50,21 @@ export const CreateProcurment = () => {
       return { ...prev, items: newItems };
     });
   };
+
+  const handleSubmit = () => {
+    try {
+      const newProcurment = prepareProcurnentBody(procurmentData);
+      // Call API to save newProcurment
+    } catch (error) {
+      console.error("Error creating procurment:", error);
+      handleError({
+        ...error,
+        generalMessage:
+          "Došlo je do greške prilikom kreiranja nabavke. Molimo pokušajte ponovo.",
+      });
+    }
+  };
+
   const prepareProcurnentBody = (data) => {
     if (!data.name.trim()) {
       return alert("Naziv nabavke je obavezan.");

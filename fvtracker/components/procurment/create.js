@@ -8,12 +8,14 @@ import { MdClose } from "react-icons/md";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { setLoading } from "@/store/loading";
 import api from "@/lib/api";
+import { useRouter } from "next/navigation";
 
 export const CreateProcurment = () => {
   const managerModelName = useSelector(
     (state) => state.user?.session?.managerModelName,
   );
   const dispatch = useDispatch();
+  const router = useRouter();
   const emptyItem = { name: "", quantity: "", price: "" };
   const emptyProcurment = {
     name: "",
@@ -62,7 +64,7 @@ export const CreateProcurment = () => {
       console.log(res.data);
       // addd proc to store
       // clear formn
-      // Call API to save newProcurment
+      router.push("/nabava");
     } catch (error) {
       console.error("Error creating procurment:", error);
       handleError({

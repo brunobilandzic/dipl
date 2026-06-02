@@ -4,6 +4,9 @@ export default [
   {
     path: "appUser",
   },
+  {
+    path: "manager",
+  },
 ];
 
 export const cultivationPopulate = [

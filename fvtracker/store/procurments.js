@@ -28,6 +28,13 @@ const procurmentsSlice = createSlice({
         }
       }
     },
+    deleteProcurment: (state, action) => {
+      const procurmentId = action.payload;
+      state.items = state.items.filter((p) => p._id !== procurmentId);
+      state.filteredItems = state.filteredItems.filter(
+        (p) => p._id !== procurmentId,
+      );
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProcurments.pending, (state) => {
@@ -53,5 +60,6 @@ export const fetchProcurments = createAsyncThunk(
   },
 );
 
-export const { addProcurment, updateProcurmentStatus } = procurmentsSlice.actions;
+export const { addProcurment, updateProcurmentStatus, deleteProcurment } =
+  procurmentsSlice.actions;
 export default procurmentsSlice.reducer;

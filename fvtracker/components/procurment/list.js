@@ -98,9 +98,13 @@ const ProcurmentListItem = ({
     approveProcurmentAction = {
       label: "Odobri",
       className: "submitButton",
-      onClick: () => {
-        // Implement approval logic here
-        console.log("Odobri nabavku:", procurment._id);
+      onClick: async () => {
+        await changeStatus({
+          procurmentId: procurment._id,
+          newStatus: PROCURMENT_APPROVED,
+          dispatch,
+        });
+        alert("Nabavka odobrena.");
       },
     };
     rejectProcurmentAction = {

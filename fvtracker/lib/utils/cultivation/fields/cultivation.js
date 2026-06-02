@@ -76,10 +76,18 @@ export function getCUForCell(cultivations, cellCoords) {
   return null;
 }
 
-export function getCultivationNameForCell({ cultivationCells, cell }) {
-  const cultivationCell = cultivationCells.find(
-    (cc) => cc.fieldCoords === cell,
-  );
+export function getCultivationNameForCell({
+  cultivationCells,
+  cell,
+  fieldView = true,
+}) {
+  const cultivationCell = cultivationCells.find((cc) => {
+    if (fieldView) {
+      return cc.fieldCoords === cell;
+    } else {
+      return cc.relativeCoords === cell;
+    }
+  });
   return cultivationCell ? cultivationCell.cultivationName : null;
 }
 

@@ -16,7 +16,7 @@ export const ProcurmentList = () => {
     (state) => state.user?.session?.managerModelName,
   );
   const [showAll, setShowAll] = useState(false);
-
+  const allView = [FINANCIAL_MANAGER, GENERAL_MANAGER].includes(managerModelName)
   console.log({ procurments });
   const router = useRouter();
 

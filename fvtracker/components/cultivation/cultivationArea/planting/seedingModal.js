@@ -315,6 +315,7 @@ export const SeedingModal = ({
               seedMode={true}
               toPlantCells={newPlantage?.toPlantCells}
               handleNotPlanted={handleNotPlanted}
+              fieldView={false}
             />
           </div>
         </div>

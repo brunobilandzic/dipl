@@ -294,6 +294,7 @@ export function HarvestingModal({
               handleNotPlanted={handleNotPlanted}
               handleCropVarietyClick={handleCropVarietyClick}
               harvestMode={true}
+              fieldView={false}
             />
           </div>
         </div>

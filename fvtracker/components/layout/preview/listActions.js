@@ -26,7 +26,7 @@ export const ActionOptions = ({ options }) => {
           <div
             className={`btn btnSm ${option.className}`}
             onClick={option.onClick}
-            key={uuid()}
+            key={option.label}
           >
             {option.label}
           </div>

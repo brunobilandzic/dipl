@@ -20,6 +20,8 @@ import handleError from "@/lib/constants/errors/client/handleError";
 import { useRouter } from "next/navigation";
 import { getDimensionsCA } from "@/lib/utils/cultivation/fields/cultivationAreas";
 import { refreshFields } from "@/lib/utils/cultivation/fields/fields";
+import { fetchWorkers } from "@/store/workers";
+import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
 
 export const SeedingModal = ({
   isOpen,
@@ -241,6 +243,7 @@ export const SeedingModal = ({
           cropVarietyId: newPlantage.variety._id,
         }),
       );
+      dispatch(fetchWorkers(CULTIVATION_MANAGER));
       await refreshFields({ dispatch });
     } catch (error) {
       console.error("Error preparing plantage body:", error);

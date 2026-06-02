@@ -9,6 +9,11 @@ import {
   FINANCIAL_MANAGER,
   GENERAL_MANAGER,
 } from "@/lib/constants/users/managerTypes";
+import {
+  PROCURMENT_APPROVED,
+  PROCURMENT_PENDING,
+  PROCURMENT_REJECTED,
+} from "@/lib/constants/documents/procurments";
 
 export const ProcurmentList = () => {
   const procurments = useSelector((state) => state.procurments.filteredItems);

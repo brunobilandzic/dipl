@@ -27,7 +27,7 @@ const procurmentSchema = new Schema(
     },
     manager: {
       type: Schema.Types.ObjectId,
-      ref: "rootManager",
+      ref: "RootManager",
       required: true,
     },
     items: [procurmentItemSchema],

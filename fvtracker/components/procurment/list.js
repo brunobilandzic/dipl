@@ -16,6 +16,7 @@ import {
 } from "@/lib/constants/documents/procurments";
 
 export const ProcurmentList = () => {
+  const dispatch = useDispatch();
   const procurments = useSelector((state) => state.procurments.filteredItems);
   const managerModelName = useSelector(
     (state) => state.user?.session?.managerModelName,
@@ -68,7 +69,12 @@ export const ProcurmentList = () => {
   );
 };
 
-const ProcurmentListItem = ({ procurment, managerModelName, allView }) => {
+const ProcurmentListItem = ({
+  procurment,
+  managerModelName,
+  allView,
+  dispatch,
+}) => {
   let approveProcurmentAction, rejectProcurmentAction;
 
   let deleteProcurmentAction =

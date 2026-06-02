@@ -30,6 +30,7 @@ export function FieldGrid({
   toHarvestCells = [],
   workerMode = false,
   cultivationAreas = [],
+  fieldView = true,
 }) {
   if (small) {
     return (
@@ -90,6 +91,7 @@ export function FieldGrid({
           toHarvestCells={toHarvestCells}
           workerMode={workerMode}
           cultivationAreas={cultivationAreas}
+          fieldView={fieldView}
         />
       </div>
     </>
@@ -121,6 +123,7 @@ const FieldCells = ({
   toHarvestCells,
   workerMode,
   cultivationAreas,
+  fieldView,
 }) => {
   let cells = [];
 
@@ -153,6 +156,7 @@ const FieldCells = ({
           ? utils.cultivation.cultivations.getCultivationNameForCell({
               cultivationCells,
               cell: `${x},${y}`,
+              fieldView,
             })
           : null;
 

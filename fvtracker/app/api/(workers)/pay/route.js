@@ -1,11 +1,9 @@
 import { fetchManager } from "@/lib/auth/fetchSessionData";
 import { MANAGER_TYPES } from "@/lib/constants/users/managerTypes";
+import { Worker } from "@/models/user/workers";
 
 export async function POST(req) {
   try {
-    console.log(
-      `Received payment request for worker ${workerId} with amount ${amount}`,
-    );
     const { specificManager, gerneralManager, unauthorized } =
       await fetchManager({ managerNames: MANAGER_TYPES });
     const { workerId, amount } = await req.json();
@@ -16,11 +14,14 @@ export async function POST(req) {
         { status: 403 },
       );
     }
-    await Worker.findByIdAndUpdate(workerId, {
-      $inc: { payedAmount: amount },
-    });
+    const worker = await Worker.findByIdAndUpdate(
+      workerId,
+      { $inc: { payedAmount: amount } },
+      { new: true },
+    );
+
     return Response.json(
-      { message: `Radnik ${workerId} isplaćen za iznos ${amount}.` },
+      { message: `Radnik ${workerId} isplaćen za iznos ${amount}.`, worker },
       { status: 200 },
     );
   } catch (error) {

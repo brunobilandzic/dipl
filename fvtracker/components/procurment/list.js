@@ -18,8 +18,10 @@ import { setLoading } from "@/store/loading";
 import api from "@/lib/api";
 import { deleteProcurment, updateProcurmentStatus } from "@/store/procurments";
 import handleError from "@/lib/constants/errors/client/handleError";
+import { LoadingFullScreen } from "../layout/loading";
 
 export const ProcurmentList = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const procurments = useSelector((state) => state.procurments.filteredItems);
   const managerModelName = useSelector(
@@ -42,6 +44,8 @@ export const ProcurmentList = () => {
       </div>
     );
   };
+
+  if (isLoading) return <LoadingFullScreen />;
 
   return (
     <>
@@ -67,6 +71,7 @@ export const ProcurmentList = () => {
               managerModelName={managerModelName}
               allView={allView}
               dispatch={dispatch}
+              setIsLoading={setIsLoading}
             />
           ))}
       </List>
@@ -79,23 +84,23 @@ const ProcurmentListItem = ({
   managerModelName,
   allView,
   dispatch,
+  setIsLoading,
 }) => {
   let approveProcurmentAction, rejectProcurmentAction;
 
   let deleteProcurmentAction =
-    managerModelName == procurment.manager.managerModelName &&
+    (managerModelName == procurment.manager.managerModelName || allView) &&
     procurment.status == PROCURMENT_PENDING
       ? {
           label: "Obriši",
           className: "cancelButton",
           onClick: async () => {
-            if (!confirm("Jeste li sigurni da želite obrisati ovu nabavku?"))
-              return;
+            setIsLoading(true);
             await deleteProcurmentApi({
               procurmentId: procurment._id,
               dispatch,
             });
-            alert("Nabavka obrisana.");
+            setIsLoading(false);
           },
         }
       : null;
@@ -105,27 +110,26 @@ const ProcurmentListItem = ({
       label: "Odobri",
       className: "submitButton",
       onClick: async () => {
-        if (!confirm("Jeste li sigurni da želite odobriti ovu nabavku?"))
-          return;
+        setIsLoading(true);
         await changeStatus({
           procurmentId: procurment._id,
           newStatus: PROCURMENT_APPROVED,
           dispatch,
         });
-        alert("Nabavka odobrena.");
+        setIsLoading(false);
       },
     };
     rejectProcurmentAction = {
       label: "Odbij",
       className: "cancelButton",
       onClick: async () => {
-        if (!confirm("Jeste li sigurni da želite odbiti ovu nabavku?")) return;
+        setIsLoading(true);
         await changeStatus({
           procurmentId: procurment._id,
           newStatus: PROCURMENT_REJECTED,
           dispatch,
         });
-        alert("Nabavka odbijena.");
+        setIsLoading(false);
       },
     };
   }
@@ -191,7 +195,6 @@ const ProcurmentStatus = ({ status }) => {
 
 const changeStatus = async ({ procurmentId, newStatus, dispatch }) => {
   try {
-    dispatch(setLoading(true));
     const res = await api.put(`/procurments`, { procurmentId, newStatus });
     console.log("Status nabavke promijenjen:", res.data);
     dispatch(updateProcurmentStatus({ procurmentId, newStatus }));
@@ -202,13 +205,11 @@ const changeStatus = async ({ procurmentId, newStatus, dispatch }) => {
       generalMessage: "Došlo je do greške pri promjeni statusa nabavke.",
     });
   } finally {
-    dispatch(setLoading(false));
   }
 };
 
 const deleteProcurmentApi = async ({ procurmentId, dispatch }) => {
   try {
-    dispatch(setLoading(true));
     const res = await api.delete(`/procurments`, { data: { procurmentId } });
     console.log("Nabavka obrisana");
     dispatch(deleteProcurment(procurmentId));
@@ -219,6 +220,5 @@ const deleteProcurmentApi = async ({ procurmentId, dispatch }) => {
       generalMessage: "Došlo je do greške pri brisanju nabavke.",
     });
   } finally {
-    dispatch(setLoading(false));
   }
 };

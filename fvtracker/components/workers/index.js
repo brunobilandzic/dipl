@@ -12,6 +12,8 @@ import {
   PRODUCTION_MANAGER,
   WAREHOUSE_MANAGER,
 } from "@/lib/constants/users/managerTypes";
+import { useState } from "react";
+import { PayWorkerModal } from "./pay";
 
 export const WorkersPageComponent = ({ managerModelName }) => {
   const workersState = useSelector((state) => state.workers);
@@ -43,22 +45,41 @@ export const WorkersPageComponent = ({ managerModelName }) => {
 };
 
 const WorkerItem = ({ worker, children }) => {
+  const [showPayModal, setShowPayModal] = useState(false);
+
   return (
-    <ListItem title={``}>
-      <div>
+    <>
+      <ListItem
+        title={``}
+        actionOptions={[
+          {
+            label: "Isplati",
+            onClick: () => setShowPayModal(true),
+            className: "submitButton",
+          },
+        ]}
+      >
         <div>
           <div>
-            {worker.appUser.name} {worker.appUser.surname}
+            <div>
+              {worker.appUser.name} {worker.appUser.surname}
+            </div>
+            <div className="text-sm text-gray-500">
+              {showDate(worker.createdAt)}
+            </div>
+            <div>{worker.hourlyRate} $/h</div>
           </div>
-          <div className="text-sm text-gray-500">
-            {showDate(worker.createdAt)}
-          </div>
-          <div>{worker.hourlyRate} $/h</div>
-        </div>
 
-        {children}
-      </div>
-    </ListItem>
+          {children}
+        </div>
+      </ListItem>
+      {showPayModal && (
+        <PayWorkerModal
+          worker={worker}
+          onClose={() => setShowPayModal(false)}
+        />
+      )}
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 import { setLoading } from "@/store/loading";
 import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
+import { updateWorker } from "@/store/workers";
 
 export const workPayCultivation = ({ hourlyRate, works }) => {
   let totalPay = 0;
@@ -22,6 +23,7 @@ export const payWorker = async ({ workerId, amount, dispatch }) => {
   try {
     dispatch(setLoading(true));
     const res = await api.post("/pay", { workerId, amount });
+    dispatch(updateWorker(res.data.worker));
   } catch (error) {
     console.error("Error paying worker:", error);
     handleError({

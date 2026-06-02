@@ -103,6 +103,15 @@ const ProcurmentListItem = ({ procurment, managerModelName, allView }) => {
     };
   }
 
+  const procurmentActions = [
+    ...(allView
+      ? procurment.status == PROCURMENT_PENDING
+        ? [approveProcurmentAction, rejectProcurmentAction]
+        : []
+      : []),
+    ...(deleteProcurmentAction ? [deleteProcurmentAction] : []),
+  ];
+
   return (
     <>
       <ListItem>

@@ -235,6 +235,7 @@ function FieldEditCASPanel({
             field={field}
             cultivationCells={cultivationCells}
             cuCellsFieldCoords={true}
+            cultivationAreas={cultivationAreas}
           />
         </div>
         <div className=" ">

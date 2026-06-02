@@ -29,6 +29,7 @@ export function FieldGrid({
   harvestMode = false,
   toHarvestCells = [],
   workerMode = false,
+  cultivationAreas = [],
 }) {
   if (small) {
     return (
@@ -48,6 +49,7 @@ export function FieldGrid({
           cuCellsFieldCoords={cuCellsFieldCoords}
           cultivationCells={cultivationCells}
           invertColor={invertColor}
+          cultivationAreas={cultivationAreas}
         />
       </div>
     );
@@ -87,6 +89,7 @@ export function FieldGrid({
           harvestMode={harvestMode}
           toHarvestCells={toHarvestCells}
           workerMode={workerMode}
+          cultivationAreas={cultivationAreas}
         />
       </div>
     </>
@@ -117,6 +120,7 @@ const FieldCells = ({
   harvestMode,
   toHarvestCells,
   workerMode,
+  cultivationAreas,
 }) => {
   let cells = [];
 
@@ -151,6 +155,12 @@ const FieldCells = ({
               cell: `${x},${y}`,
             })
           : null;
+
+      const careaName =
+        utils.cultivation.cultivationAreas.findPlantedCellCAName({
+          cultivationAreas,
+          coords: `${x},${y}`,
+        });
 
       const handleClick = (e) => {
         e.stopPropagation();
@@ -206,6 +216,9 @@ const FieldCells = ({
         }
         if (cultivationName) {
           return `(${x}, ${y}) - ${cultivationName}`;
+        }
+        if (careaName) {
+          return `(${x}, ${y}) - ${careaName}`;
         }
         return `(${x}, ${y})`;
       };
@@ -267,7 +280,7 @@ const FieldCell = ({
     invertColor ? "border border-[var(--background)]" : "",
     bgClass,
     cultivationName === selectedCultivationName ? "ring-2 ring-blue-500" : "",
-    disabled ? "cursor-not-allowed opacity-50 bg-gray-500" : "cursor-pointer",
+    disabled ? "cursor-not-allowed opacity-50 bg-gray-50" : "cursor-pointer",
   );
 
   return (

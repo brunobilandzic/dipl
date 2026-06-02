@@ -267,3 +267,12 @@ export const getCANameFromPlantedCropVarietiesInCultivation = ({
 }) => {
   return plantedCropVariety.cultivation?.cultivationArea?.name;
 };
+
+export const findPlantedCellCAName = ({ cultivationAreas, coords }) => {
+  for (let ca of cultivationAreas) {
+    if (ca.planted.includes(coords)) {
+      return ca.name;
+    }
+  }
+  return null;
+};

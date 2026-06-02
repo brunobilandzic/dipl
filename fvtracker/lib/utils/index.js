@@ -26,6 +26,8 @@ import {
   adjacentCellsGap,
   extractPlantedCells,
   getMinValuesFromPlanted,
+  getCANameFromPlantedCropVarietiesInCultivation,
+  findPlantedCellCAName,
 } from "./cultivation/fields/cultivationAreas";
 import { numbersInRanges } from "./formValidation";
 import { extractCoords, refreshFields } from "./cultivation/fields/fields";
@@ -87,6 +89,8 @@ export default {
       adjacentCellsGap,
       getMinValuesFromPlanted,
       extractPlantedCells,
+      getCANameFromPlantedCropVarietiesInCultivation,
+      findPlantedCellCAName,
     },
     fields: {
       extractCoords,

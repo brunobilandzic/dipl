@@ -14,11 +14,16 @@ import {
 } from "@/lib/constants/users/managerTypes";
 import { useState } from "react";
 import { PayWorkerModal } from "./pay";
+import { SORT_INIT_VALUE } from "@/lib/constants/others";
+import { initFilters } from "@/lib/utils/list";
 
 export const WorkersPageComponent = ({ managerModelName }) => {
   const workersState = useSelector((state) => state.workers);
   const { items: workers, isLoading } = workersState;
   const router = useRouter();
+
+  const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
+  const [filters, setFilters] = useState(initFilters("workers"));
 
   if (!workers) return <LoadingFullScreen />;
 

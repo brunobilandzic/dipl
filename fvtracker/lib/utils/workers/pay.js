@@ -1,6 +1,6 @@
 import { setLoading } from "@/store/loading";
 import api from "@/lib/api";
-import { handleError } from "@/lib/constants/errors/client/handleError";
+import handleError from "@/lib/constants/errors/client/handleError";
 
 export const workPayCultivation = ({ hourlyRate, works }) => {
   let totalPay = 0;

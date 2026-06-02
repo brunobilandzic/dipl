@@ -67,6 +67,7 @@ const WorkerItem = ({ worker, children }) => {
             <div className="text-sm text-gray-500">
               {showDate(worker.createdAt)}
             </div>
+            <div>Isplaćeno: {worker.payedAmount} €</div>
             <div>{worker.hourlyRate} $/h</div>
           </div>
 
@@ -106,7 +107,6 @@ const CultivationWorker = ({ worker }) => {
         })}{" "}
         € ukupno
       </div>
-      <div>Isplaćeno: {worker.payedAmount} €</div>
       <div>
         Zasađeno: {worksCoordsSum({ works: worker.plantageWorks, plant: true })}
       </div>

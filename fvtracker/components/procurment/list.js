@@ -60,6 +60,7 @@ export const ProcurmentList = () => {
               key={procurment._id}
               procurment={procurment}
               managerModelName={managerModelName}
+              allView={allView}
             />
           ))}
       </List>

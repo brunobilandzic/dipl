@@ -13,6 +13,19 @@ const workersSlice = createSlice({
   reducers: {
     addWorker: (state, action) => {
       state.items.push(action.payload);
+      state.filteredItems.push(action.payload);
+    },
+    updateWorker: (state, action) => {
+      const index = state.items.findIndex((w) => w._id === action.payload._id);
+      if (index !== -1) {
+        state.items[index] = action.payload;
+      }
+      const filteredIndex = state.filteredItems.findIndex(
+        (w) => w._id === action.payload._id,
+      );
+      if (filteredIndex !== -1) {
+        state.filteredItems[filteredIndex] = action.payload;
+      }
     },
     setWorkers: (state, action) => {
       state.items = action.payload;
@@ -66,6 +79,7 @@ export const {
   setFilteredWorkers,
   setLoading,
   setError,
+  updateWorker,
 } = workersSlice.actions;
 
 export default workersSlice.reducer;

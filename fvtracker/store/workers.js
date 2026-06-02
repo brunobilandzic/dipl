@@ -1,4 +1,5 @@
 import api from "@/lib/api";
+import { filterItems, sortItems } from "@/lib/utils/list";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -30,8 +31,22 @@ const workersSlice = createSlice({
     setWorkers: (state, action) => {
       state.items = action.payload;
     },
-    setFilteredWorkers: (state, action) => {
-      state.filteredItems = action.payload;
+    sortWorkers: (state, action) => {
+      state.filteredItems = sortItems({
+        items: state.filteredItems,
+        sortBy: action.payload,
+      });
+    },
+    filterWorkers: (state, action) => {
+      const { sortBy, filters } = action.payload;
+      state.filteredItems = filterItems({
+        _items: state.items,
+        filters: filters,
+      });
+      state.filteredItems = sortItems({
+        items: state.filteredItems,
+        sortBy,
+      });
     },
     setLoading: (state, action) => {
       state.isLoading = action.payload;
@@ -76,7 +91,7 @@ export const fetchWorkers = createAsyncThunk(
 export const {
   addWorker,
   setWorkers,
-  setFilteredWorkers,
+  sortWorkers,
   setLoading,
   setError,
   updateWorker,

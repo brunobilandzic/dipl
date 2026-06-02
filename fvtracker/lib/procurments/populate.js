@@ -1,4 +1,4 @@
-export default populateConfigProcurments = [
+export default [
   {
     path: "manager",
   },

@@ -71,6 +71,19 @@ export const ProcurmentList = () => {
 const ProcurmentListItem = ({ procurment, managerModelName, allView }) => {
   let approveProcurmentAction, rejectProcurmentAction;
 
+  let deleteProcurmentAction =
+    managerModelName == procurment.manager.managerModelName &&
+    procurment.status == PROCURMENT_PENDING
+      ? {
+          label: "Obriši",
+          className: "cancelButton",
+          onClick: () => {
+            // Implement deletion logic here
+            console.log("Obriši nabavku:", procurment._id);
+          },
+        }
+      : null;
+
   if (allView) {
     approveProcurmentAction = {
       label: "Odobri",

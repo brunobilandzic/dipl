@@ -276,6 +276,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
             cultivationCells={cultivationCells}
             handleActiveClick={onCultivationClick}
             selectedCultivationName={selectedCultivation?.name}
+            fieldView={false}
           />
         </div>
         <div className="col-start-6 col-end-7  h-screen flex flex-col  items-center ">

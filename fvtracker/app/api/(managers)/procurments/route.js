@@ -10,53 +10,92 @@ import { Procurment } from "@/models/documents/Procurment";
 import { GeneralManager } from "@/models/user/managers/GeneralManager";
 
 export async function GET(req) {
-  const { specificManager, gerneralManager, unauthorized } = await fetchManager(
-    { managerNames: MANAGER_TYPES },
-  );
-  if (unauthorized || (!specificManager && !gerneralManager)) {
-    return Response.json({ message: "Unauthorized" }, { status: 401 });
-  }
-  let procurments;
-  if (
-    specificManager.rootManager?.managerModelName == FINANCIAL_MANAGER ||
-    GeneralManager
-  ) {
-    procurments = await getAllProcurments();
-    return Response.json({ procurments }, { status: 200 });
-  }
+  try {
+    const { specificManager, gerneralManager, unauthorized } =
+      await fetchManager({ managerNames: MANAGER_TYPES });
+    if (unauthorized || (!specificManager && !gerneralManager)) {
+      return Response.json({ message: "Unauthorized" }, { status: 401 });
+    }
+    let procurments;
+    if (
+      specificManager.rootManager?.managerModelName == FINANCIAL_MANAGER ||
+      GeneralManager
+    ) {
+      procurments = await getAllProcurments();
+      return Response.json({ procurments }, { status: 200 });
+    }
 
-  const rootManagerId = specificManager
-    ? specificManager.rootManager._id
-    : gerneralManager._id;
-  //if gen or fin man, fetch all, later
-  procurments = await getProcurments(rootManagerId);
-  return Response.json({ procurments }, { status: 200 });
+    const rootManagerId = specificManager
+      ? specificManager.rootManager._id
+      : gerneralManager._id;
+    //if gen or fin man, fetch all, later
+    procurments = await getProcurments(rootManagerId);
+    return Response.json({ procurments }, { status: 200 });
+  } catch (error) {
+    return Response.json(
+      { message: "Došlo je do greške pri dohvaćanju nabavki." },
+      { status: 500 },
+    );
+  }
 }
 
 export async function POST(req) {
-  const { specificManager, gerneralManager, unauthorized } = await fetchManager(
-    { managerNames: MANAGER_TYPES },
-  );
-  if (unauthorized || (!specificManager && !gerneralManager)) {
+  try {
+    const { specificManager, gerneralManager, unauthorized } =
+      await fetchManager({ managerNames: MANAGER_TYPES });
+    if (unauthorized || (!specificManager && !gerneralManager)) {
+      return Response.json(
+        { message: "Nije dozvoljena izrada nabavke." },
+        { status: 401 },
+      );
+    }
+    const { newProcurmentData } = await req.json();
+    console.log("Received new procurment data:", newProcurmentData);
+    const rootManagerId = specificManager
+      ? specificManager.rootManager._id
+      : gerneralManager._id;
+
+    const procurment = await createProcurment({
+      ...newProcurmentData,
+      manager: rootManagerId,
+    });
+    return Response.json({ procurment }, { status: 201 });
+  } catch (error) {
     return Response.json(
-      { message: "Nije dozvoljena izrada nabavke." },
-      { status: 401 },
+      { message: "Došlo je do greške pri izradi nove nabavke." },
+      { status: 500 },
     );
   }
-  const { newProcurmentData } = await req.json();
-  console.log("Received new procurment data:", newProcurmentData);
-  const rootManagerId = specificManager
-    ? specificManager.rootManager._id
-    : gerneralManager._id;
-
-  const procurment = await createProcurment({
-    ...newProcurmentData,
-    manager: rootManagerId,
-  });
-  return Response.json({ procurment }, { status: 201 });
 }
 
 export async function PUT(req) {
+  try {
+    const { specificManager, gerneralManager, unauthorized } =
+      await fetchManager({
+        managerNames: [FINANCIAL_MANAGER, GENERAL_MANAGER],
+      });
+    if (unauthorized || (!specificManager && !gerneralManager)) {
+      return Response.json(
+        { message: "Zabrana promjena statusa nabavke." },
+        { status: 403 },
+      );
+    }
+    const { procurmentId, newStatus } = await req.json();
+    console.log(
+      `Changing status of procurment ${procurmentId} to ${newStatus}`,
+    );
+    await Procurment.findByIdAndUpdate(procurmentId, { status: newStatus });
+    return Response.json(
+      { message: `Status nabavke ${procurmentId} promijenjen u ${newStatus}.` },
+      { status: 200 },
+    );
+  } catch (error) {
+    return Response.json(
+      { message: "Došlo je do greške pri promjeni statusa nabavke." },
+      { status: 500 },
+    );
+  }
+}
 
 export async function DELETE(req) {
   try {
@@ -69,7 +108,6 @@ export async function DELETE(req) {
       );
     }
     const { procurmentId } = await req.json();
-    console.log(`Deleting procurment ${procurmentId}`);
     await Procurment.findByIdAndDelete(procurmentId);
     return Response.json(
       { message: `Nabavka ${procurmentId} obrisana.` },

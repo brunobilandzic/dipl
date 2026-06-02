@@ -162,8 +162,7 @@ const ProcurmentStatus = ({ status }) => {
   );
 };
 
-
-const changeStatus = ({procurmentId, newStatus}) => {
+const changeStatus = ({ procurmentId, newStatus }) => {
   // Implement status change logic here, e.g., make an API call to update the procurment status
   console.log(`Changing status of procurment ${procurmentId} to ${newStatus}`);
-}
+};

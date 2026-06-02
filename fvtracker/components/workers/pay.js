@@ -14,7 +14,7 @@ export const PayWorkerModal = ({ worker, onClose }) => {
         title="Isplata radnika"
         onClose={onClose}
         onSubmit={async () => {
-          await payWorker({ workerId: worker.id, amount, dispatch });
+          await payWorker({ workerId: worker._id, amount, dispatch });
           onClose();
         }}
         isOpen={true}

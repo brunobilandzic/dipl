@@ -8,6 +8,7 @@ import { MdClose } from "react-icons/md";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { setLoading } from "@/store/loading";
 import api from "@/lib/api";
+import { addProcurment } from "@/store/procurments";
 import { useRouter } from "next/navigation";
 
 export const CreateProcurment = () => {
@@ -61,9 +62,8 @@ export const CreateProcurment = () => {
       const newProcurmentData = prepareProcurnentBody(procurmentData);
       dispatch(setLoading(true));
       const res = await api.post("/procurments", { newProcurmentData });
-      console.log(res.data);
-      // addd proc to store
-      // clear formn
+      dispatch(addProcurment(res.data.procurment));
+      alert("Nabavka je uspješno kreirana.");
       router.push("/nabava");
     } catch (error) {
       console.error("Error creating procurment:", error);

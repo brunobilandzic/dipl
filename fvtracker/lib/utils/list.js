@@ -56,6 +56,14 @@ export const initFilters = (listType) => {
           value: "",
         },
       ];
+    case "workers":
+      return [
+        {
+          type: "nameSearch",
+          placeholder: "Pretraži radnike...",
+          value: "",
+        },
+      ];
   }
 };
 

@@ -4,17 +4,46 @@ import { List, ListItem } from "@/components/layout/preview/list";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { showDateTime } from "@/lib/utils/display";
+import { useState } from "react";
+import {
+  FINANCIAL_MANAGER,
+  GENERAL_MANAGER,
+} from "@/lib/constants/users/managerTypes";
 
 export const ProcurmentList = () => {
   const procurments = useSelector((state) => state.procurments.filteredItems);
+  const managerModelName = useSelector(
+    (state) => state.user?.session?.managerModelName,
+  );
+  const [showAll, setShowAll] = useState(false);
+
   console.log({ procurments });
   const router = useRouter();
 
+  const showAllButton = () => {
+    if (![FINANCIAL_MANAGER, GENERAL_MANAGER].includes(managerModelName)) {
+      return null;
+    }
+    return (
+      <div className="btn btnSm" onClick={() => setShowAll((prev) => !prev)}>
+        {showAll ? "Prikaži samo aktivne" : "Prikaži sve"}
+      </div>
+    );
+  };
+
   return (
     <>
-      <List title="Nabavke" onCreateItem={() => router.push("/nabava/izradi")}>
+      <List
+        title="Nabavke"
+        onCreateItem={() => router.push("/nabava/izradi")}
+        customButtons={showAllButton()}
+      >
         {procurments.map((procurment) => (
-          <ProcurmentListItem key={procurment._id} procurment={procurment} />
+          <ProcurmentListItem
+            key={procurment._id}
+            procurment={procurment}
+            managerModelName={managerModelName}
+          />
         ))}
       </List>
     </>

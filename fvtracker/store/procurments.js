@@ -9,7 +9,13 @@ const initialState = {
 const procurmentsSlice = createSlice({
   name: "procurments",
   initialState,
-  reducers: {},
+  reducers: {
+    addProcurment: (state, action) => {
+      console.log("Adding new procurment to store:", action.payload);
+      state.items.push(action.payload);
+      state.filteredItems.push(action.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(fetchProcurments.pending, (state) => {
       state.isLoading = true;
@@ -34,5 +40,5 @@ export const fetchProcurments = createAsyncThunk(
   },
 );
 
-export const {} = procurmentsSlice.actions;
+export const { addProcurment } = procurmentsSlice.actions;
 export default procurmentsSlice.reducer;

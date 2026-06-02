@@ -192,3 +192,20 @@ const changeStatus = async ({ procurmentId, newStatus, dispatch }) => {
     dispatch(setLoading(false));
   }
 };
+
+const deleteProcurment = async ({ procurmentId, dispatch }) => {
+  try {
+    dispatch(setLoading(true));
+    const res = await api.delete(`/procurments/${procurmentId}`);
+    console.log("Nabavka obrisana");
+    // Implement deletion from store if needed
+  } catch (error) {
+    console.error("Greška pri brisanju nabavke:", error);
+    handleError({
+      ...error,
+      generalMessage: "Došlo je do greške pri brisanju nabavke.",
+    });
+  } finally {
+    dispatch(setLoading(false));
+  }
+};

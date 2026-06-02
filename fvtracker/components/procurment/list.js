@@ -114,14 +114,22 @@ const ProcurmentListItem = ({ procurment, managerModelName, allView }) => {
 
   return (
     <>
-      <ListItem>
-        <div>{procurment.name}</div>
-        <div>{procurment.description}</div>
-        <div>{showDateTime(procurment.createdAt)}</div>
-        {procurment.items.map((item) => (
-          <ProcurmentItem key={item._id} procurementItem={item} />
-        ))}
-        <ProcurmentStatus status={procurment.status} />
+      <ListItem
+        _className={`${procurment.status == PROCURMENT_APPROVED ? "border-green-500" : ""}`}
+        actionOptions={procurmentActions}
+      >
+        <div className="flex flex-col gap-2">
+          <div className="text-sm text-gray-500">
+            {showDateTime(procurment.createdAt)}
+          </div>
+          <div className="font-semibold">{procurment.name}</div>
+          <div>{procurment.description}</div>
+
+          {procurment.items.map((item) => (
+            <ProcurmentItem key={item._id} procurementItem={item} />
+          ))}
+          <ProcurmentStatus status={procurment.status} />
+        </div>
       </ListItem>
     </>
   );
@@ -145,7 +153,11 @@ const ProcurmentItem = ({ procurementItem }) => {
 const ProcurmentStatus = ({ status }) => {
   return (
     <>
-      <p>Status: {status}</p>
+      <p
+        className={`${status == PROCURMENT_APPROVED ? "text-green-700" : ""} ${status == PROCURMENT_REJECTED ? "text-red-700" : ""} font-semibold ${status == PROCURMENT_PENDING ? "text-yellow-700" : ""}`}
+      >
+        Status: {status}
+      </p>
     </>
   );
 };

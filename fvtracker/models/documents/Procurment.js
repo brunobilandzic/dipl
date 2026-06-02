@@ -1,4 +1,8 @@
 import mongoose, { Schema } from "mongoose";
+import {
+  PROCURMENT_PENDING,
+  PROCURMENT_STATUSES,
+} from "@/lib/constants/documents/procurments";
 
 const procurmentItemSchema = new Schema({
   name: {
@@ -33,8 +37,8 @@ const procurmentSchema = new Schema(
     items: [procurmentItemSchema],
     status: {
       type: String,
-      enum: ["na čekanju", "odobrena", "odbijena"],
-      default: "na čekanju",
+      enum: PROCURMENT_STATUSES,
+      default: PROCURMENT_PENDING,
     },
   },
   { timestamps: true },

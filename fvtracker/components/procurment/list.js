@@ -87,7 +87,7 @@ const ProcurmentListItem = ({ procurment, managerModelName, allView }) => {
   if (allView) {
     approveProcurmentAction = {
       label: "Odobri",
-      className: "btn btnSm buttonSubmit",
+      className: "submitButton",
       onClick: () => {
         // Implement approval logic here
         console.log("Odobri nabavku:", procurment._id);
@@ -95,7 +95,7 @@ const ProcurmentListItem = ({ procurment, managerModelName, allView }) => {
     };
     rejectProcurmentAction = {
       label: "Odbij",
-      className: "btn btnSm buttonCancel",
+      className: "cancelButton",
       onClick: () => {
         // Implement rejection logic here
         console.log("Odbij nabavku:", procurment._id);

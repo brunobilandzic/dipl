@@ -4,7 +4,7 @@ import { MANAGER_TYPES } from "@/lib/constants/users/managerTypes";
 export async function POST(req) {
   try {
     console.log(
-      `Received payment request for worker ${workerId} of type ${managerType} with amount ${amount}`,
+      `Received payment request for worker ${workerId} with amount ${amount}`,
     );
     const { specificManager, gerneralManager, unauthorized } =
       await fetchManager({ managerNames: MANAGER_TYPES });

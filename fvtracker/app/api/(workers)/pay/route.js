@@ -1,17 +1,19 @@
 import { fetchManager } from "@/lib/auth/fetchSessionData";
+import { MANAGER_TYPES } from "@/lib/constants/users/managerTypes";
 
 export async function POST(req) {
   try {
-    const { managerType, workerId, amount } = await req.json();
     console.log(
       `Received payment request for worker ${workerId} of type ${managerType} with amount ${amount}`,
     );
     const { specificManager, gerneralManager, unauthorized } =
-      await fetchManager({ managerNames: [managerType] });
+      await fetchManager({ managerNames: MANAGER_TYPES });
+    const { workerId, amount } = await req.json();
+
     if (unauthorized || (!specificManager && !gerneralManager)) {
       return Response.json(
         { message: "Nemate pravo isplatiti radnika" },
-        { status: 401 },
+        { status: 403 },
       );
     }
     await Worker.findByIdAndUpdate(workerId, {

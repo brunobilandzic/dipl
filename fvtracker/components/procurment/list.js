@@ -16,7 +16,9 @@ export const ProcurmentList = () => {
     (state) => state.user?.session?.managerModelName,
   );
   const [showAll, setShowAll] = useState(false);
-  const allView = [FINANCIAL_MANAGER, GENERAL_MANAGER].includes(managerModelName)
+  const allView = [FINANCIAL_MANAGER, GENERAL_MANAGER].includes(
+    managerModelName,
+  );
   console.log({ procurments });
   const router = useRouter();
 
@@ -26,7 +28,7 @@ export const ProcurmentList = () => {
     }
     return (
       <div className="btn btnSm" onClick={() => setShowAll((prev) => !prev)}>
-        {showAll ? "Prikaži samo aktivne" : "Prikaži sve"}
+        {showAll ? "Prikaži moje" : "Prikaži sve"}
       </div>
     );
   };
@@ -38,19 +40,50 @@ export const ProcurmentList = () => {
         onCreateItem={() => router.push("/nabava/izradi")}
         customButtons={showAllButton()}
       >
-        {procurments.map((procurment) => (
-          <ProcurmentListItem
-            key={procurment._id}
-            procurment={procurment}
-            managerModelName={managerModelName}
-          />
-        ))}
+        {procurments
+          .filter((proc) => {
+            if (showAll || !allView) return true;
+            if (
+              [FINANCIAL_MANAGER, GENERAL_MANAGER].includes(
+                proc.manager.managerModelName,
+              )
+            )
+              return true;
+          })
+          .map((procurment) => (
+            <ProcurmentListItem
+              key={procurment._id}
+              procurment={procurment}
+              managerModelName={managerModelName}
+            />
+          ))}
       </List>
     </>
   );
 };
 
-const ProcurmentListItem = ({ procurment }) => {
+const ProcurmentListItem = ({ procurment, managerModelName, allView }) => {
+  let approveProcurmentAction, rejectProcurmentAction;
+
+  if (allView) {
+    approveProcurmentAction = {
+      label: "Odobri",
+      className: "btn btnSm buttonSubmit",
+      onClick: () => {
+        // Implement approval logic here
+        console.log("Odobri nabavku:", procurment._id);
+      },
+    };
+    rejectProcurmentAction = {
+      label: "Odbij",
+      className: "btn btnSm buttonCancel",
+      onClick: () => {
+        // Implement rejection logic here
+        console.log("Odbij nabavku:", procurment._id);
+      },
+    };
+  }
+
   return (
     <>
       <ListItem>

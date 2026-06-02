@@ -16,7 +16,8 @@ import {
 } from "@/lib/constants/documents/procurments";
 import { setLoading } from "@/store/loading";
 import api from "@/lib/api";
-import { updateProcurmentStatus } from "@/store/procurments";
+import { deleteProcurment, updateProcurmentStatus } from "@/store/procurments";
+import handleError from "@/lib/constants/errors/client/handleError";
 
 export const ProcurmentList = () => {
   const dispatch = useDispatch();
@@ -87,9 +88,14 @@ const ProcurmentListItem = ({
       ? {
           label: "Obriši",
           className: "cancelButton",
-          onClick: () => {
-            // Implement deletion logic here
-            console.log("Obriši nabavku:", procurment._id);
+          onClick: async () => {
+            if (!confirm("Jeste li sigurni da želite obrisati ovu nabavku?"))
+              return;
+            await deleteProcurmentApi({
+              procurmentId: procurment._id,
+              dispatch,
+            });
+            alert("Nabavka obrisana.");
           },
         }
       : null;
@@ -99,6 +105,8 @@ const ProcurmentListItem = ({
       label: "Odobri",
       className: "submitButton",
       onClick: async () => {
+        if (!confirm("Jeste li sigurni da želite odobriti ovu nabavku?"))
+          return;
         await changeStatus({
           procurmentId: procurment._id,
           newStatus: PROCURMENT_APPROVED,
@@ -110,9 +118,14 @@ const ProcurmentListItem = ({
     rejectProcurmentAction = {
       label: "Odbij",
       className: "cancelButton",
-      onClick: () => {
-        // Implement rejection logic here
-        console.log("Odbij nabavku:", procurment._id);
+      onClick: async () => {
+        if (!confirm("Jeste li sigurni da želite odbiti ovu nabavku?")) return;
+        await changeStatus({
+          procurmentId: procurment._id,
+          newStatus: PROCURMENT_REJECTED,
+          dispatch,
+        });
+        alert("Nabavka odbijena.");
       },
     };
   }
@@ -193,12 +206,12 @@ const changeStatus = async ({ procurmentId, newStatus, dispatch }) => {
   }
 };
 
-const deleteProcurment = async ({ procurmentId, dispatch }) => {
+const deleteProcurmentApi = async ({ procurmentId, dispatch }) => {
   try {
     dispatch(setLoading(true));
-    const res = await api.delete(`/procurments/${procurmentId}`);
+    const res = await api.delete(`/procurments`, { data: { procurmentId } });
     console.log("Nabavka obrisana");
-    // Implement deletion from store if needed
+    dispatch(deleteProcurment(procurmentId));
   } catch (error) {
     console.error("Greška pri brisanju nabavke:", error);
     handleError({

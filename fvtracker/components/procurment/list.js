@@ -16,6 +16,7 @@ import {
 } from "@/lib/constants/documents/procurments";
 import { setLoading } from "@/store/loading";
 import api from "@/lib/api";
+import { updateProcurmentStatus } from "@/store/procurments";
 
 export const ProcurmentList = () => {
   const dispatch = useDispatch();
@@ -176,7 +177,7 @@ const changeStatus = async ({ procurmentId, newStatus, dispatch }) => {
     dispatch(setLoading(true));
     const res = await api.put(`/procurments`, { procurmentId, newStatus });
     console.log("Status nabavke promijenjen:", res.data);
-    // Optionally, you can dispatch an action to update the procurment in the Redux store
+    dispatch(updateProcurmentStatus({ procurmentId, newStatus }));
   } catch (error) {
     console.error("Greška pri promjeni statusa nabavke:", error);
     handleError({

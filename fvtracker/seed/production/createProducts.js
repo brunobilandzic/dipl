@@ -14,20 +14,21 @@ import {
 import { ProductionWorker } from "@/models/user/workers/ProductionWork";
 import { ProductionStock } from "@/models/sectors/production/Facility";
 import { ProductionProcess } from "@/models/sectors/production/Process";
-import { seedWorkers } from "@/seed/users/workers";
 
 export const createProducts = async () => {
   await Product.deleteMany({}); // Clear existing products
   await Warehouse.deleteMany({});
   await ProductionStock.deleteMany({});
   await ProductionProcess.deleteMany({});
-  await ProductionWorker.deleteMany({});
   await WarehouseAcceptanceProcess.deleteMany({});
+  await ProductionWorker.updateMany(
+    {},
+    { $set: { productionProcesses: [], warehouseAcceptanceProcesses: [] } },
+  );
   console.log("Creating products...");
   const productionFacility = await createFacility();
   const productionManager = await ProductionManager.findOne();
   const warehouses = await seedWarehouses(3);
-  await seedWorkers();
   let stopIteration = false;
   const products = [];
   for (const productData of productsData) {

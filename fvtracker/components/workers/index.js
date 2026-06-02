@@ -104,8 +104,9 @@ const CultivationWorker = ({ worker }) => {
           hourlyRate: worker.hourlyRate,
           works: [...worker.plantageWorks, ...worker.harvestWorks],
         })}{" "}
-        $ ukupno
+        € ukupno
       </div>
+      <div>Isplaćeno: {worker.payedAmount} €</div>
       <div>
         Zasađeno: {worksCoordsSum({ works: worker.plantageWorks, plant: true })}
       </div>

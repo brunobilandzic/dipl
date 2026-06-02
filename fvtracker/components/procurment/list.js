@@ -14,7 +14,6 @@ import {
   PROCURMENT_PENDING,
   PROCURMENT_REJECTED,
 } from "@/lib/constants/documents/procurments";
-import { setLoading } from "@/store/loading";
 import api from "@/lib/api";
 import { deleteProcurment, updateProcurmentStatus } from "@/store/procurments";
 import handleError from "@/lib/constants/errors/client/handleError";

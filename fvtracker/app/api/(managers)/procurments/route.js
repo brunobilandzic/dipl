@@ -2,9 +2,11 @@ import { fetchManager, fetchManagerWorker } from "@/lib/auth/fetchSessionData";
 import {
   FINANCIAL_MANAGER,
   MANAGER_TYPES,
+  GENERAL_MANAGER,
 } from "@/lib/constants/users/managerTypes";
 import { createProcurment } from "@/lib/procurments/create";
 import { getAllProcurments, getProcurments } from "@/lib/procurments/get";
+import { Procurment } from "@/models/documents/Procurment";
 import { GeneralManager } from "@/models/user/managers/GeneralManager";
 
 export async function GET(req) {
@@ -52,4 +54,23 @@ export async function POST(req) {
     manager: rootManagerId,
   });
   return Response.json({ procurment }, { status: 201 });
+}
+
+export async function PUT(req) {
+  const { specificManager, gerneralManager, unauthorized } = await fetchManager(
+    { managerNames: [FINANCIAL_MANAGER, GENERAL_MANAGER] },
+  );
+  if (unauthorized || (!specificManager && !gerneralManager)) {
+    return Response.json(
+      { message: "Zabrana promjena statusa nabavke." },
+      { status: 403 },
+    );
+  }
+  const { procurmentId, newStatus } = await req.json();
+  console.log(`Changing status of procurment ${procurmentId} to ${newStatus}`);
+  await Procurment.findByIdAndUpdate(procurmentId, { status: newStatus });
+  return Response.json(
+    { message: `Status nabavke ${procurmentId} promijenjen u ${newStatus}.` },
+    { status: 200 },
+  );
 }

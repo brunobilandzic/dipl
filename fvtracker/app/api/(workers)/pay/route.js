@@ -1,6 +1,18 @@
 import { fetchManager } from "@/lib/auth/fetchSessionData";
 import { MANAGER_TYPES } from "@/lib/constants/users/managerTypes";
 import { Worker } from "@/models/user/workers";
+import basePopulate, {
+  cultivationPopulate,
+  financialPopulate,
+  productionPopulate,
+  warehousePopulate,
+} from "@/lib/workers/populate";
+import {
+  CULTIVATION_MANAGER,
+  FINANCIAL_MANAGER,
+  PRODUCTION_MANAGER,
+  WAREHOUSE_MANAGER,
+} from "@/lib/constants/users/managerTypes";
 
 export async function POST(req) {
   try {
@@ -19,6 +31,28 @@ export async function POST(req) {
       { $inc: { payedAmount: amount } },
       { new: true },
     );
+    await worker.populate(basePopulate);
+    console.log("Worker after update:", worker);
+    let populate;
+    switch (worker.manager.managerModelName) {
+      case CULTIVATION_MANAGER:
+        populate = cultivationPopulate;
+        break;
+      case PRODUCTION_MANAGER:
+        populate = productionPopulate;
+        break;
+      case WAREHOUSE_MANAGER:
+        populate = warehousePopulate;
+        break;
+      case FINANCIAL_MANAGER:
+        populate = financialPopulate;
+        break;
+      default:
+        throw new Error(
+          `Unknown worker type: ${worker.manager.managerModelName}`,
+        );
+    }
+    await worker.populate(populate);
 
     return Response.json(
       { message: `Radnik ${workerId} isplaćen za iznos ${amount}.`, worker },

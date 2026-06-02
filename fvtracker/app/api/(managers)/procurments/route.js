@@ -57,20 +57,28 @@ export async function POST(req) {
 }
 
 export async function PUT(req) {
-  const { specificManager, gerneralManager, unauthorized } = await fetchManager(
-    { managerNames: [FINANCIAL_MANAGER, GENERAL_MANAGER] },
-  );
-  if (unauthorized || (!specificManager && !gerneralManager)) {
+
+export async function DELETE(req) {
+  try {
+    const { specificManager, gerneralManager, unauthorized } =
+      await fetchManager({ managerNames: MANAGER_TYPES });
+    if (unauthorized || (!specificManager && !gerneralManager)) {
+      return Response.json(
+        { message: "Zabrana brisanja nabavke." },
+        { status: 403 },
+      );
+    }
+    const { procurmentId } = await req.json();
+    console.log(`Deleting procurment ${procurmentId}`);
+    await Procurment.findByIdAndDelete(procurmentId);
     return Response.json(
-      { message: "Zabrana promjena statusa nabavke." },
-      { status: 403 },
+      { message: `Nabavka ${procurmentId} obrisana.` },
+      { status: 200 },
+    );
+  } catch (error) {
+    return Response.json(
+      { message: "Došlo je do greške pri brisanju nabavke." },
+      { status: 500 },
     );
   }
-  const { procurmentId, newStatus } = await req.json();
-  console.log(`Changing status of procurment ${procurmentId} to ${newStatus}`);
-  await Procurment.findByIdAndUpdate(procurmentId, { status: newStatus });
-  return Response.json(
-    { message: `Status nabavke ${procurmentId} promijenjen u ${newStatus}.` },
-    { status: 200 },
-  );
 }

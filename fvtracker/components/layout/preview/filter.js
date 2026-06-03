@@ -5,6 +5,12 @@ import {
   PROCURMENT_APPROVED,
   PROCURMENT_REJECTED,
 } from "@/lib/constants/documents/procurments";
+import {
+  CULTIVATION_MANAGER,
+  FINANCIAL_MANAGER,
+  PRODUCTION_MANAGER,
+  WAREHOUSE_MANAGER,
+} from "@/lib/constants/users/managerTypes";
 
 export const Filter = ({ filters, setFilters, onApply }) => {
   const onChange = (index, value) => {
@@ -81,6 +87,28 @@ export const Filter = ({ filters, setFilters, onApply }) => {
                     { value: "all", label: "Svi" },
                     { value: PROCURMENT_APPROVED, label: "Odobreni" },
                     { value: PROCURMENT_REJECTED, label: "Odbijeni" },
+                  ]}
+                />
+              );
+            case "workerType":
+              return (
+                <AppSelect
+                  key={index}
+                  placeholder={option.placeholder}
+                  value={option.value}
+                  onChange={(e) => {
+                    onChange(index, e.target.value);
+                  }}
+                  label="Sektor radnika"
+                  options={[
+                    { value: "all", label: "Svi" },
+                    { value: CULTIVATION_MANAGER, label: "Uzgoj" },
+                    {
+                      value: PRODUCTION_MANAGER,
+                      label: "Proizvodnja",
+                    },
+                    { value: WAREHOUSE_MANAGER, label: "Skladište" },
+                    { value: FINANCIAL_MANAGER, label: "Financije" },
                   ]}
                 />
               );

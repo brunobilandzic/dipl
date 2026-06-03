@@ -76,6 +76,7 @@ export const Filter = ({ filters, setFilters, onApply }) => {
                   onChange={(e) => {
                     onChange(index, e.target.value);
                   }}
+                  label="Status nabave"
                   options={[
                     { value: "all", label: "Svi" },
                     { value: PROCURMENT_APPROVED, label: "Odobreni" },

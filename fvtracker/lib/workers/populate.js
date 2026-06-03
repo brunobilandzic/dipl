@@ -73,6 +73,25 @@ export const warehousePopulate = [
 export const financialPopulate = [
   {
     path: "warehouseRequests",
+    select: "shipment",
+    populate: {
+      path: "shipment",
+      select: "shipmentItems",
+      populate: [
+        {
+          path: "shipmentItems",
+          select: "sources",
+          populate: [
+            {
+              path: "sources",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    path: "receipts",
   },
 ];
 

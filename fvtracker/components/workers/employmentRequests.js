@@ -40,3 +40,17 @@ export const EmploymentRequestsPageComponent = () => {
     </List>
   );
 };
+
+const EmploymentRequestsItem = ({ request }) => {
+  const { worker, status } = request;
+
+  return (
+    <>
+      <div>
+        <div>
+          {worker.appUser.username} {status}
+        </div>
+      </div>
+    </>
+  );
+};

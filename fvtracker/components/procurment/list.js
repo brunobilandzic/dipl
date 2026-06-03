@@ -18,6 +18,8 @@ import api from "@/lib/api";
 import { deleteProcurment, updateProcurmentStatus } from "@/store/procurments";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { LoadingFullScreen } from "../layout/loading";
+import { initFilters } from "@/lib/utils/list";
+import { SORT_INIT_VALUE } from "@/lib/constants/others";
 
 export const ProcurmentList = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -30,6 +32,9 @@ export const ProcurmentList = () => {
   const allView = [FINANCIAL_MANAGER, GENERAL_MANAGER].includes(
     managerModelName,
   );
+  const [filters, setFilters] = useState(initFilters("procurments"));
+  const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
+
   console.log({ procurments });
   const router = useRouter();
 
@@ -52,6 +57,11 @@ export const ProcurmentList = () => {
         title="Nabavke"
         onCreateItem={() => router.push("/nabava/izradi")}
         customButtons={showAllButton()}
+        filters={filters}
+        setFilters={setFilters}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+        initialFilters={initFilters("procurments")}
       >
         {procurments
           .filter((proc) => {

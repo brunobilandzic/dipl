@@ -5,6 +5,11 @@ import { AppUser } from "../AppUser";
 
 const workerSchema = new mongoose.Schema(
   {
+    employmentRequest: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "EmploymentRequest",
+      default: null,
+    },
     appUser: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "AppUser",
@@ -55,6 +60,7 @@ workerSchema.pre("save", async function () {
     const appUser = await getAppUser({ _id: this.appUser });
     appUser.worker = this._id;
     await appUser.save();
+    const employmentRequest = 
   }
 });
 

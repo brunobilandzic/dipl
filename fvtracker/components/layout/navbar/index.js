@@ -26,7 +26,7 @@ import { fillCartRedux } from "@/lib/utils/webstore/cart";
 import { fillOrdersRedux } from "@/lib/utils/webstore/orders";
 import { fillWarehouseRequestsRedux } from "@/lib/utils/documents/requests";
 import { fillManagersSelection } from "@/store/managers";
-import { fetchWorkers } from "@/store/workers";
+import { fetchEmploymentRequests, fetchWorkers } from "@/store/workers";
 import { fetchProcurments } from "@/store/procurments";
 
 export default {
@@ -86,6 +86,12 @@ function NavItems() {
       setManagerModelName(session.user?.managerModelName);
       dispatch(login(session.user));
       dispatch(fetchProcurments());
+      if (
+        managerModelName === GENERAL_MANAGER ||
+        managerModelName === FINANCIAL_MANAGER
+      ) {
+        dispatch(fetchEmploymentRequests());
+      }
       if (
         managerModelName === CULTIVATION_MANAGER &&
         !fieldsRedux &&

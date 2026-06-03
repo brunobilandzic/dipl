@@ -52,6 +52,17 @@ export const Filter = ({ filters, setFilters, onApply }) => {
                   }}
                 />
               );
+            case "workerNameSearch":
+              return (
+                <AppInput
+                  key={index}
+                  placeholder={option.placeholder}
+                  value={option.value}
+                  onChange={(e) => {
+                    onChange(index, e.target.value);
+                  }}
+                />
+              );
           }
         })}
 

@@ -59,7 +59,7 @@ export const initFilters = (listType) => {
     case "workers":
       return [
         {
-          type: "nameSearch",
+          type: "workerNameSearch",
           placeholder: "Pretraži radnike...",
           value: "",
         },
@@ -102,6 +102,9 @@ export const filterItems = ({ _items, itemModelName, filters }) => {
       case "nameSearch":
         items = nameSearch({ items, value: filter.value });
         break;
+      case "workerNameSearch":
+        items = appUserNameSearch({ items, value: filter.value });
+        break;
       case "cropVarietySearch":
         if (filter.value === "") break;
         items = cropVarietySearch({
@@ -140,5 +143,11 @@ const customerSearch = ({ items, value }) => {
       getName({ name: item.customer.name, surname: item.customer.surname }),
       value,
     ),
+  );
+};
+
+const appUserNameSearch = ({ items, value }) => {
+  return items.filter((item) =>
+    stringContains(`${item.appUser.name} ${item.appUser.surname}`, value),
   );
 };

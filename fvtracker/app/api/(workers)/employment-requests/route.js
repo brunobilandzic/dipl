@@ -15,7 +15,7 @@ export async function GET(request) {
 
   const employmentRequests = await EmploymentRequest.find().populate([
     {
-      path: "manager",
+      path: "worker",
       populate: [
         {
           path: "appUser",

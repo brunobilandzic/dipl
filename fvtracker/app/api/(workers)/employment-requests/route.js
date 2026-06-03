@@ -1,8 +1,11 @@
 import { fetchManager } from "@/lib/auth/fetchSessionData";
+import { FINANCIAL_MANAGER } from "@/lib/constants/users/managerTypes";
 import { EmploymentRequest } from "@/models/user/workers/EmploymentRequest";
 
 export async function GET(request) {
-  const { unauthorized } = await fetchManager();
+  const { unauthorized } = await fetchManager({
+    managerNames: [FINANCIAL_MANAGER],
+  });
   if (unauthorized) {
     return Response.json(
       { error: "Nemate pravo pristupa zahtjevima za zaposlenje" },

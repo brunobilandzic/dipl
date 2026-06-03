@@ -85,6 +85,10 @@ export const sortItems = ({ items, sortBy }) => {
       return [...items].sort((a, b) => a.name.localeCompare(b.name));
     case "fieldNameDesc":
       return [...items].sort((a, b) => b.name.localeCompare(a.name));
+    case "hourlyPayAsc":
+      return [...items].sort((a, b) => a.hourlyPay - b.hourlyPay);
+    case "hourlyPayDesc":
+      return [...items].sort((a, b) => b.hourlyPay - a.hourlyPay);
     default:
       return items;
   }

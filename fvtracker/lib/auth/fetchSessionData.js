@@ -150,11 +150,13 @@ export async function fetchManager({ managerNames = [] }) {
       // return first manager found
       // needs better logic, but for now we will only use one manager type per page so it will do for that
       response.specificManager = specificManager;
-      return response;
     }
   }
 
-  return { unauthorized: true };
+  if (!response.generalManager && !response.specificManager) {
+    return { unauthorized: true };
+  }
+  return response;
 
   console.log("did not throw error yet");
   throw new Error(

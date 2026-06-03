@@ -60,7 +60,9 @@ workerSchema.pre("save", async function () {
     const appUser = await getAppUser({ _id: this.appUser });
     appUser.worker = this._id;
     await appUser.save();
-    const employmentRequest = 
+    const employmentRequest = new EmploymentRequest({ worker: this._id });
+    await employmentRequest.save();
+    this.employmentRequest = employmentRequest._id;
   }
 });
 

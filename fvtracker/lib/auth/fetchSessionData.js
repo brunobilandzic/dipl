@@ -45,6 +45,13 @@ export async function fetchSessionSpecificManager({
   }
 
   if (managerName == GENERAL_MANAGER) {
+    await specificManager.populate({
+      path: "rootManager",
+      populate: {
+        path: "roleRequest",
+        select: "status",
+      },
+    });
     return specificManager;
   }
 

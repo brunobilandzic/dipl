@@ -144,8 +144,8 @@ export async function createFieldRecord(fieldObject) {
     },
   );
   await Promise.all(cultivationAreasPromises);
-  const cultivationCA = await CultivationArea.findOne({
-    field: fieldRecord._id,
+  const cultivationCA = await CultivationArea.findOne().sort({
+    "dimensions.width": -1,
   });
   const cultivation = await createCultivation({
     cultivationArea: cultivationCA,

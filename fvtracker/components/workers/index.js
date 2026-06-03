@@ -19,7 +19,11 @@ import { initFilters } from "@/lib/utils/list";
 
 export const WorkersPageComponent = ({ managerModelName }) => {
   const workersState = useSelector((state) => state.workers);
-  const { items: workers, isLoading } = workersState;
+  const {
+    items: workers,
+    filteredItems: displayedWorkers,
+    isLoading,
+  } = workersState;
   const router = useRouter();
 
   const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
@@ -35,7 +39,7 @@ export const WorkersPageComponent = ({ managerModelName }) => {
           addLabel="Dodaj radnika"
           onCreateItem={() => router.push("/radnici/izradi")}
         >
-          {workers.map((worker) => (
+          {displayedWorkers.map((worker) => (
             <WorkerItem key={worker._id} worker={worker}>
               <WorkerContent
                 worker={worker}

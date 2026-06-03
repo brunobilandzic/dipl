@@ -3,8 +3,8 @@ import { FaShoppingCart } from "react-icons/fa";
 export default {
   GeneralManager: [
     {
-      label: "pregled",
-      path: "/pregled",
+      label: "izvještaji",
+      path: "/izvjestaji",
     },
     {
       label: "menadzeri",
@@ -90,6 +90,10 @@ export default {
     },
   ],
   FinancialManager: [
+    {
+      label: "izvještaji",
+      path: "/izvjestaji",
+    },
     {
       label: "narudžbe",
       submenu: [

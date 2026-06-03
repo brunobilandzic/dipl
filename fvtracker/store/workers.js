@@ -82,6 +82,17 @@ const workersSlice = createSlice({
       })
       .addCase(fetchWorkers.rejected, (state, action) => {
         state.isLoading = false;
+      })
+      .addCase(fetchEmploymentRequests.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchEmploymentRequests.fulfilled, (state, action) => {
+        state.employmentRequests.items = action.payload;
+        state.employmentRequests.filteredItems = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(fetchEmploymentRequests.rejected, (state, action) => {
+        state.isLoading = false;
       });
   },
 });
@@ -100,6 +111,14 @@ export const fetchWorkers = createAsyncThunk(
     });
     console.log("Workers fetched:", response.data);
     return response.data.workers;
+  },
+);
+
+export const fetchEmploymentRequests = createAsyncThunk(
+  "workers/fetchEmploymentRequests",
+  async (_, { dispatch }) => {
+    const response = await api.get(`/workers/employment-requests`);
+    return response.data.requests;
   },
 );
 

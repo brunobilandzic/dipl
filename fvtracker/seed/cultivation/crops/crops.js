@@ -21,6 +21,7 @@ import {
   HarvestWork,
   PlantageWork,
 } from "@/models/user/workers/CultivationWork";
+import { getEmployedWorker } from "@/lib/workers/get";
 
 // Seed crop main types, general types, types, and varieties
 
@@ -231,7 +232,7 @@ export const createNewPlantage = async ({
   }
   console.log("to plant", Object.keys(map).join(", "));
   console.log("creating plantage");
-  const cultivationWorker = await CultivationWorker.findOne();
+  const cultivationWorker = await getEmployedWorker("CultivationWorker");
 
   let plantedLength = 0;
   for (const [key, value] of Object.entries(map)) {
@@ -326,7 +327,7 @@ export const createNewHarvest = async ({
       continue;
     }
 
-    const cultivationWorker = await CultivationWorker.findOne();
+    const cultivationWorker = await getEmployedWorker
 
     harvestingBatchItem.addHarvestWork({
       hoursWorked: docs.length,

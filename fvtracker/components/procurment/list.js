@@ -25,6 +25,7 @@ import { LoadingFullScreen } from "../layout/loading";
 import { initFilters } from "@/lib/utils/list";
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { procurmentSortOptions } from "../layout/preview/sort";
+import { procurmentValue } from "@/lib/utils/documents/procurments";
 
 export const ProcurmentList = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -179,6 +180,8 @@ const ProcurmentListItem = ({
           {procurment.items.map((item) => (
             <ProcurmentItem key={item._id} procurementItem={item} />
           ))}
+          <hr />
+          <div>Ukupno: {procurmentValue(procurment).toFixed(2)} €</div>
           <ProcurmentStatus status={procurment.status} />
         </div>
       </ListItem>

@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import utils from "@/lib/utils";
 import { Field } from "./Field";
 import { makeUrlFriendly } from "@/lib/utils/strings";
+import { PlantageWork } from "@/models/user/workers/CultivationWork";
 
 const { Schema } = mongoose;
 
@@ -106,22 +107,6 @@ cultivationSchema.pre("save", function (next) {
     this.slug = utils.strings.makeUrlFriendly(this.name);
   }
 });
-
-cultivationSchema.methods.addPlantageWork = async function ({
-  worker,
-  hoursWorked,
-}) {
-  const plantageWork = new PlantageWork({
-    worker: worker._id,
-    hoursWorked,
-  });
-  worker.plantageWorks.push(plantageWork._id);
-  await worker.save();
-  this.plantageWorks.push(plantageWork._id);
-  await this.save();
-  await plantageWork.save();
-  return plantageWork;
-};
 
 cultivationSchema.pre("deleteMany", async function () {
   await mongoose

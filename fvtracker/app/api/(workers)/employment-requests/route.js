@@ -23,3 +23,16 @@ export async function GET(request) {
   ]);
   return Response.json({ requests: employmentRequests });
 }
+
+export async function PUT(request) {
+  const { unauthorized } = await fetchManager();
+  if (unauthorized) {
+    return Response.json(
+      { error: "Nemate pravo pristupa zahtjevima za zaposlenje" },
+      { status: 403 },
+    );
+  }
+  const { requestId, status } = await request.json();
+  await EmploymentRequest.findByIdAndUpdate(requestId, { status });
+  return Response.json({ message: "Zahtjev uspješno ažuriran" });
+}

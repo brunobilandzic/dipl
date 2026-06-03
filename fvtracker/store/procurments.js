@@ -35,6 +35,17 @@ const procurmentsSlice = createSlice({
         (p) => p._id !== procurmentId,
       );
     },
+    filterProcurments: (state, action) => {
+      const { sortBy, filters } = action.payload;
+      state.filteredItems = filterItems({
+        _items: state.items,
+        filters: filters,
+      });
+      state.filteredItems = sortItems({
+        items: state.filteredItems,
+        sortBy,
+      });
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProcurments.pending, (state) => {
@@ -60,6 +71,10 @@ export const fetchProcurments = createAsyncThunk(
   },
 );
 
-export const { addProcurment, updateProcurmentStatus, deleteProcurment } =
-  procurmentsSlice.actions;
+export const {
+  addProcurment,
+  updateProcurmentStatus,
+  deleteProcurment,
+  filterProcurments,
+} = procurmentsSlice.actions;
 export default procurmentsSlice.reducer;

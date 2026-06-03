@@ -1,3 +1,5 @@
+"use client";
+
 import handleError from "@/lib/constants/errors/client/handleError";
 import { updateEmploymentRequest } from "@/store/workers";
 import { setLoading } from "@/store/loading";

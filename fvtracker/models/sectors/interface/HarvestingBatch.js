@@ -1,7 +1,10 @@
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
 import { CropVariety, PlantedCropVariety } from "../cultivation/Crops";
-import { HarvestWork } from "@/models/user/workers/CultivationWork";
+import {
+  CultivationWorker,
+  HarvestWork,
+} from "@/models/user/workers/CultivationWork";
 
 const harvestingBatchSchema = new Schema({
   name: {
@@ -159,10 +162,10 @@ harvestingBatchItemSchema.methods.addHarvestWork = async function ({
     harvestingBatchItem: this._id,
   });
   await harvestWork.populate("worker");
-  const cultivationWorker = harvestWork.worker;
-  cultivationWorker.harvestWorks.push(harvestWork._id);
+  await CultivationWorker.findByIdAndUpdate(worker, {
+    $push: { harvestWorks: harvestWork._id },
+  });
 
-  await cultivationWorker.save();
   this.harvestWorks.push(harvestWork._id);
 
   await this.save();

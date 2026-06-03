@@ -15,7 +15,10 @@ export default {
     },
     {
       label: "radnici",
-      path: "/radnici",
+      submenu: [
+        { label: "pregled", path: "/radnici" },
+        { label: "zapošljavanje", path: "/radnici/zaposljavanje" },
+      ],
     },
     {
       label: "nabava",
@@ -108,7 +111,10 @@ export default {
     }, */
     {
       label: "radnici",
-      path: "/radnici",
+      submenu: [
+        { label: "pregled", path: "/radnici" },
+        { label: "zapošljavanje", path: "/radnici/zaposljavanje" },
+      ],
     },
     {
       label: "nabava",

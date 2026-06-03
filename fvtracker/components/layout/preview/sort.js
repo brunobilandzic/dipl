@@ -54,8 +54,8 @@ export const workerSortOptions = [
 
 export const procurmentSortOptions = [
   ...defaultSortOptions,
-  { value: "statusAsc", label: "Status Rastući" },
-  { value: "statusDesc", label: "Status Padajući" },
+  { value: "procValAsc", label: "Vrijednost Rastuća" },
+  { value: "procValDesc", label: "Vrijednost Padajuća" },
 ];
 
 export const SortOpenButton = ({ isOpen, setOpen, clearSort }) => {

@@ -3,6 +3,7 @@ import {
   PROCURMENT_REJECTED,
 } from "../constants/documents/procurments";
 import { getName } from "./display";
+import { procurmentValue } from "./documents/procurments";
 import { productsWithCropVarieties } from "./production/products";
 import { orderAmount } from "./sales";
 import { stringContains } from "./strings";
@@ -119,6 +120,10 @@ export const sortItems = ({ items, sortBy }) => {
       return [...items].sort((a, b) => orderAmount(a) - orderAmount(b));
     case "orderPriceDesc":
       return [...items].sort((a, b) => orderAmount(b) - orderAmount(a));
+    case "procValAsc":
+      return [...items].sort((a, b) => procurmentValue(a) - procurmentValue(b));
+    case "procValDesc":
+      return [...items].sort((a, b) => procurmentValue(b) - procurmentValue(a));
     default:
       return items;
   }

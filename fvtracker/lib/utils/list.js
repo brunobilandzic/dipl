@@ -1,3 +1,4 @@
+import { PROCURMENT_APPROVED, PROCURMENT_REJECTED } from "../constants/documents/procurments";
 import { getName } from "./display";
 import { productsWithCropVarieties } from "./production/products";
 import { stringContains } from "./strings";
@@ -118,6 +119,12 @@ export const filterItems = ({ _items, itemModelName, filters }) => {
         });
       case "customerSearch":
         items = customerSearch({ items, value: filter.value });
+      case "rejectedProcurments":
+        items = items.filter((item) => item.status == PROCURMENT_REJECTED);
+        break;
+      case "approvedProcurments":
+        items = items.filter((item) => item.status == PROCURMENT_APPROVED);
+        break;
       default:
         break;
     }

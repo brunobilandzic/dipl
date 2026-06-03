@@ -35,9 +35,7 @@ export const ProcurmentList = () => {
     (state) => state.user?.session?.managerModelName,
   );
   const [showAll, setShowAll] = useState(false);
-  const allView = [FINANCIAL_MANAGER].includes(
-    managerModelName,
-  );
+  const allView = [FINANCIAL_MANAGER].includes(managerModelName);
   const [filters, setFilters] = useState(initFilters("procurments"));
   const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
 
@@ -125,8 +123,7 @@ const ProcurmentListItem = ({
           },
         }
       : null;
-
-  if (allView) {
+  if ([FINANCIAL_MANAGER, GENERAL_MANAGER].includes(managerModelName)) {
     approveProcurmentAction = {
       label: "Odobri",
       className: "submitButton",
@@ -156,7 +153,7 @@ const ProcurmentListItem = ({
   }
 
   const procurmentActions = [
-    ...(allView
+    ...([FINANCIAL_MANAGER, GENERAL_MANAGER].includes(managerModelName)
       ? procurment.status == PROCURMENT_PENDING
         ? [approveProcurmentAction, rejectProcurmentAction]
         : []

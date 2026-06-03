@@ -47,8 +47,8 @@ export const workerSortOptions = [
   { value: "oldest", label: "Najstariji" },
   { value: "payedAsc", label: "Isplaćeno rastuće" },
   { value: "payedDesc", label: "Isplaćeno padajuće" },
-  { value: "hourlyPayAsc", label: "Plaća po satu rastuće" },
-  { value: "hourlyPayDesc", label: "Plaća po satu padajuće" },
+  { value: "hourlyRateAsc", label: "Plaća po satu rastuće" },
+  { value: "hourlyRateDesc", label: "Plaća po satu padajuće" },
 ];
 
 export const SortOpenButton = ({ isOpen, setOpen, clearSort }) => {

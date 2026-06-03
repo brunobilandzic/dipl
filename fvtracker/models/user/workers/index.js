@@ -2,6 +2,7 @@
 import { getAppUser } from "@/lib/users/appUser";
 import mongoose from "mongoose";
 import { AppUser } from "../AppUser";
+import { EmploymentRequest } from "./EmploymentRequest";
 
 const workerSchema = new mongoose.Schema(
   {

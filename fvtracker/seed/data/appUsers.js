@@ -81,7 +81,7 @@ export const workersJson = [
     password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
     hourlyRate: 10,
-    employmentRequestStaus: EMPLOYMENT_STATUS_PENDING,
+    employmentRequestStatus: EMPLOYMENT_STATUS_PENDING,
   },
   {
     username: "cwe",
@@ -92,7 +92,7 @@ export const workersJson = [
     password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
     hourlyRate: 10,
-    employmentRequestStaus: EMPLOYMENT_STATUS_EMPLOYED,
+    employmentRequestStatus: EMPLOYMENT_STATUS_EMPLOYED,
   },
   {
     username: "pwp",
@@ -103,7 +103,7 @@ export const workersJson = [
     password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
     hourlyRate: 15,
-    employmentRequestStaus: EMPLOYMENT_STATUS_PENDING,
+    employmentRequestStatus: EMPLOYMENT_STATUS_PENDING,
   },
   {
     username: "pwe",
@@ -114,7 +114,7 @@ export const workersJson = [
     password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
     hourlyRate: 15,
-    employmentRequestStaus: EMPLOYMENT_STATUS_EMPLOYED,
+    employmentRequestStatus: EMPLOYMENT_STATUS_EMPLOYED,
   },
   {
     username: "ww",
@@ -125,7 +125,7 @@ export const workersJson = [
     password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
     hourlyRate: 12,
-    employmentRequestStaus: EMPLOYMENT_STATUS_PENDING,
+    employmentRequestStatus: EMPLOYMENT_STATUS_PENDING,
   },
   {
     username: "wwe",
@@ -136,7 +136,7 @@ export const workersJson = [
     password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
     hourlyRate: 12,
-    employmentRequestStaus: EMPLOYMENT_STATUS_EMPLOYED,
+    employmentRequestStatus: EMPLOYMENT_STATUS_EMPLOYED,
   },
   {
     username: "fw",
@@ -147,7 +147,7 @@ export const workersJson = [
     password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
     hourlyRate: 14,
-    employmentRequestStaus: EMPLOYMENT_STATUS_PENDING,
+    employmentRequestStatus: EMPLOYMENT_STATUS_PENDING,
   },
   {
     username: "fwe",
@@ -158,7 +158,7 @@ export const workersJson = [
     password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
     provider: "credentials",
     hourlyRate: 14,
-    employmentRequestStaus: EMPLOYMENT_STATUS_EMPLOYED,
+    employmentRequestStatus: EMPLOYMENT_STATUS_EMPLOYED,
   },
 ];
 

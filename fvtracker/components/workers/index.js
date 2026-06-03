@@ -9,6 +9,8 @@ import { workPayCultivation, workPayProduction } from "@/lib/utils/workers/pay";
 import { worksCoordsSum } from "@/lib/utils/workers/cultivation";
 import {
   CULTIVATION_MANAGER,
+  FINANCIAL_MANAGER,
+  GENERAL_MANAGER,
   PRODUCTION_MANAGER,
   WAREHOUSE_MANAGER,
 } from "@/lib/constants/users/managerTypes";
@@ -20,6 +22,9 @@ import { workerSortOptions } from "../layout/preview/sort";
 import { filterWorkers } from "@/store/workers";
 
 export const WorkersPageComponent = ({ managerModelName }) => {
+  const allWorkers = [GENERAL_MANAGER, FINANCIAL_MANAGER].includes(
+    managerModelName,
+  );
   const workersState = useSelector((state) => state.workers);
   const {
     items: workers,
@@ -29,7 +34,7 @@ export const WorkersPageComponent = ({ managerModelName }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
-  const [filters, setFilters] = useState(initFilters("workers"));
+  const [filters, setFilters] = useState(initFilters("workers", allWorkers));
 
   useEffect(() => {
     if (workers) {

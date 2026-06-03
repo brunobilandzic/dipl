@@ -22,11 +22,7 @@ export default {
     },
     {
       label: "nabava",
-      submenu: [
-        { label: "lista", path: "/nabava/lista" },
-        { label: "zahtjevi", path: "/nabava/zahtjevi" },
-        { label: "novi dobavljač", path: "/nabava/novi" },
-      ],
+      path: "/nabava",
     },
   ],
   CultivationManager: [

@@ -5,18 +5,23 @@ import { updateWorker } from "@/store/workers";
 
 export const workPayCultivation = ({ hourlyRate, works }) => {
   let totalPay = 0;
+  let totalHours = 0;
   for (const work of works) {
     totalPay += work.hoursWorked * hourlyRate;
+    totalHours += work.hoursWorked;
   }
-  return totalPay;
+  return { totalPay, totalHours };
 };
 
 export const workPayProduction = ({ hourlyRate, processes }) => {
   let totalPay = 0;
+  let totalHours = 0;
   for (const process of processes) {
     totalPay += process.quantity * hourlyRate;
+    totalHours += process.quantity;
   }
-  return totalPay;
+  return { totalPay, totalHours };
+};
 };
 
 export const payWorker = async ({ workerId, amount, dispatch }) => {

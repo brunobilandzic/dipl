@@ -133,6 +133,7 @@ export const filterItems = ({ _items, itemModelName, filters }) => {
         items = customerSearch({ items, value: filter.value });
         break;
       case "procurmentStatus":
+        if (filter.value === "all") break;
         items = items.filter((item) => item.status == filter.value);
         break;
       default:

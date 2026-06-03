@@ -117,7 +117,7 @@ export const fetchWorkers = createAsyncThunk(
 export const fetchEmploymentRequests = createAsyncThunk(
   "workers/fetchEmploymentRequests",
   async (_, { dispatch }) => {
-    const response = await api.get(`/workers/employment-requests`);
+    const response = await api.get(`/employment-requests`);
     return response.data.requests;
   },
 );

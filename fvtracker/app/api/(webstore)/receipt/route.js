@@ -21,6 +21,8 @@ export async function POST(req) {
 
     const { shipmentItemId, workerId } = await req.json();
 
+    const requestWorker = await Worker.findById(workerId);
+
     const shipmentItem = await ShipmentItem.findById(shipmentItemId).populate([
       {
         path: "shipment",
@@ -48,12 +50,13 @@ export async function POST(req) {
       financialWorker: workerId,
     });
 
-    shipmentItem.receipt = newReceipt._id;
+    requestWorker.receipts.push(newReceipt._id);
     shipmentItem.shipment.warehouseRequest.order.receipts.push(newReceipt._id);
 
     await newReceipt.save();
     await shipmentItem.shipment.warehouseRequest.order.save();
     await shipmentItem.save();
+    await requestWorker.save();
 
     return Response.json({ newReceipt, message: "Račun uspješno kreiran" });
   } catch (error) {

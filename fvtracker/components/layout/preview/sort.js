@@ -39,8 +39,8 @@ export const productSortOptions = [
 export const orderSortOptions = [
   { value: "newest", label: "Najnovije" },
   { value: "oldest", label: "Najstarije" },
-  { value: "priceAsc", label: "Cijena rastuće" },
-  { value: "priceDesc", label: "Cijena padajuće" },
+  { value: "orderPriceAsc", label: "Cijena rastuće" },
+  { value: "orderPriceDesc", label: "Cijena padajuće" },
 ];
 
 export const workerSortOptions = [

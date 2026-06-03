@@ -4,6 +4,7 @@ import {
 } from "../constants/documents/procurments";
 import { getName } from "./display";
 import { productsWithCropVarieties } from "./production/products";
+import { orderAmount } from "./sales";
 import { stringContains } from "./strings";
 
 export const initFilters = (listType, allWorkers = false) => {
@@ -114,6 +115,10 @@ export const sortItems = ({ items, sortBy }) => {
       return [...items].sort((a, b) => a.payedAmount - b.payedAmount);
     case "payedDesc":
       return [...items].sort((a, b) => b.payedAmount - a.payedAmount);
+    case "orderPriceAsc":
+      return [...items].sort((a, b) => orderAmount(a) - orderAmount(b));
+    case "orderPriceDesc":
+      return [...items].sort((a, b) => orderAmount(b) - orderAmount(a));
     default:
       return items;
   }

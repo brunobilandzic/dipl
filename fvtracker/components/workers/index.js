@@ -155,18 +155,18 @@ const CultivationWorker = ({ worker }) => {
 };
 
 const ProductionWorker = ({ worker }) => {
+  const { totalHours, totalPay } = workPayProduction({
+    hourlyRate: worker.hourlyRate,
+    processes: [
+      ...worker.productionProcesses,
+      ...worker.warehouseAcceptanceProcesses,
+    ],
+  });
   return (
     <>
       <div>
-        Ukupno:{" "}
-        {workPayProduction({
-          hourlyRate: worker.hourlyRate,
-          processes: [
-            ...worker.productionProcesses,
-            ...worker.warehouseAcceptanceProcesses,
-          ],
-        })}
-        $
+        Ukupno: {totalPay} €, ukupno sati: {totalHours} h, isplaćeno:{" "}
+        {worker.payedAmount} €
       </div>
       <div>
         Proizvodnja: {worker.productionProcesses.length} procesa, količina:{" "}

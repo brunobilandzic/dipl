@@ -120,6 +120,8 @@ function WorkerContent({ worker, managerModelName }) {
       return <ProductionWorker worker={worker} />;
     case WAREHOUSE_MANAGER:
       return <WarehouseWorker worker={worker} />;
+    case FINANCIAL_MANAGER:
+      return <FinancialWorker worker={worker} />;
     default:
       return null;
   }
@@ -207,6 +209,28 @@ const WarehouseWorker = ({ worker }) => {
         }, 0)}{" "}
         $
       </div>
+    </>
+  );
+};
+
+const FinancialWorker = ({ worker }) => {
+  const shipmentItems = worker.warehouseRequests.reduce((items, request) => {
+    console.log({ request });
+    items.push(...request.shipment.shipmentItems);
+    return items;
+  }, []);
+  const sources = shipmentItems.reduce((sources, item) => {
+    sources.push(...item.sources);
+    return sources;
+  }, []);
+  return (
+    <>
+      <div>
+        Ukupno poslanih zahtjeva: {worker.warehouseRequests.length} zahtjeva,
+        ukupna količina proizvoda:{" "}
+        {sources.reduce((itemSum, item) => itemSum + item.quantity, 0)}
+      </div>
+      <div>Ukupno kreirano računa: {worker.receipts.length} računa</div>
     </>
   );
 };

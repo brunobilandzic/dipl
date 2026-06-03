@@ -132,14 +132,15 @@ function WorkerContent({ worker, managerModelName }) {
 }
 
 const CultivationWorker = ({ worker }) => {
+  const { totalHours, totalPay } = workPayCultivation({
+    hourlyRate: worker.hourlyRate,
+    works: [...worker.plantageWorks, ...worker.harvestWorks],
+  });
   return (
     <>
       <div>
-        {workPayCultivation({
-          hourlyRate: worker.hourlyRate,
-          works: [...worker.plantageWorks, ...worker.harvestWorks],
-        })}{" "}
-        € ukupno
+        Zarađeno: {totalPay} €, ukupno sati: {totalHours} h, isplaćeno:{" "}
+        {worker.payedAmount} €
       </div>
       <div>
         Zasađeno: {worksCoordsSum({ works: worker.plantageWorks, plant: true })}

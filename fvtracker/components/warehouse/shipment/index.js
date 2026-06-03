@@ -174,7 +174,9 @@ const ShipmentItem = ({
           onSubmit={() => handleReceiptCreation()}
         >
           <ChooseWorker
-            workers={workers}
+            workers={workers.filter(
+              (w) => w.manager.managerModelName === FINANCIAL_MANAGER,
+            )}
             onChoose={(e) => {
               const { value } = e.target;
               setWorker(value);

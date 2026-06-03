@@ -22,6 +22,18 @@ export const workPayProduction = ({ hourlyRate, processes }) => {
   }
   return { totalPay, totalHours };
 };
+
+export const workPayWarehouse = ({ hourlyRate, shipmentItems }) => {
+  let totalPay = 0;
+  let totalHours = 0;
+  for (const item of shipmentItems) {
+    for (const source of item.sources) {
+      totalPay += source.quantity * hourlyRate;
+      totalHours += source.quantity;
+    }
+  }
+  return { totalPay, totalHours };
+};
 };
 
 export const payWorker = async ({ workerId, amount, dispatch }) => {

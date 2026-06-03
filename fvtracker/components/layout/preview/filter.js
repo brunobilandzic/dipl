@@ -68,6 +68,7 @@ export const Filter = ({ filters, setFilters, onApply }) => {
                   key={index}
                   placeholder={option.placeholder}
                   value={option.value}
+                  label="Pretraži radnike"
                   onChange={(e) => {
                     onChange(index, e.target.value);
                   }}

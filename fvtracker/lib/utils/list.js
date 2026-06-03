@@ -145,6 +145,12 @@ export const filterItems = ({ _items, itemModelName, filters }) => {
         if (filter.value === "all") break;
         items = items.filter((item) => item.status == filter.value);
         break;
+      case "workerType":
+        if (filter.value === "all") break;
+        items = items.filter(
+          (item) => item.manager.managerModelName === filter.value,
+        );
+        break;
       default:
         break;
     }

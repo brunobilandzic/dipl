@@ -50,7 +50,11 @@ export const WorkersPageComponent = ({ managerModelName }) => {
         <List
           title="Radnici"
           addLabel="Dodaj radnika"
-          onCreateItem={() => router.push("/radnici/izradi")}
+          onCreateItem={
+            managerModelName != GENERAL_MANAGER
+              ? () => router.push("/radnici/izradi")
+              : undefined
+          }
           sortBy={sortBy}
           setSortBy={setSortBy}
           filters={filters}

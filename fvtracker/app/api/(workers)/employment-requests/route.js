@@ -28,7 +28,9 @@ export async function GET(request) {
 }
 
 export async function PUT(request) {
-  const { unauthorized } = await fetchManager();
+  const { unauthorized } = await fetchManager({
+    managerNames: [FINANCIAL_MANAGER],
+  });
   if (unauthorized) {
     return Response.json(
       { error: "Nemate pravo pristupa zahtjevima za zaposlenje" },

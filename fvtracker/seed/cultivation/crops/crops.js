@@ -327,7 +327,7 @@ export const createNewHarvest = async ({
       continue;
     }
 
-    const cultivationWorker = await getEmployedWorker
+    const cultivationWorker = await getEmployedWorker("CultivationWorker");
 
     harvestingBatchItem.addHarvestWork({
       hoursWorked: docs.length,

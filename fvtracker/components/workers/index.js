@@ -62,7 +62,7 @@ export const WorkersPageComponent = ({ managerModelName }) => {
             <WorkerItem key={worker._id} worker={worker}>
               <WorkerContent
                 worker={worker}
-                managerModelName={managerModelName}
+                managerModelName={worker.manager.managerModelName}
               />
             </WorkerItem>
           ))}

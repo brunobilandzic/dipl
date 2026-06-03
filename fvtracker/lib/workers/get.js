@@ -27,31 +27,33 @@ export const getWorkers = async ({ rootManagerId, managerModelName }) => {
   for (const worker of workers) {
     switch (managerModelName) {
       case CULTIVATION_MANAGER:
+        console.log("Populating cultivation work for worker:", worker._id);
         for (const worker of workers) {
           await worker.populate(cultivationPopulate);
         }
         break;
       case PRODUCTION_MANAGER:
+        console.log("Populating production work for worker:", worker._id);
         for (const worker of workers) {
           await worker.populate(productionPopulate);
         }
         break;
       case WAREHOUSE_MANAGER:
-        console.log("Populating warehouse work for worker:", worker);
+        console.log("Populating warehouse work for worker:", worker._id);
         for (const worker of workers) {
           await worker.populate(warehousePopulate);
         }
         break;
       case FINANCIAL_MANAGER:
-        console.log("Populating financial work for worker:", worker);
         for (const worker of workers) {
           if (worker.manager.managerModelName === FINANCIAL_MANAGER) {
+            console.log("Populating financial work for worker:", worker._id);
             await worker.populate(financialPopulate);
+          } else {
           }
         }
-        break;
-      case GENERAL_MANAGER:
-        console.log("Populating general work for worker:", worker);
+      case GENERAL_MANAGER || FINANCIAL_MANAGER:
+        console.log("\nPopulating general work for worker:\n", worker._id);
         for (const worker of workers) {
           switch (worker.manager.managerModelName) {
             case CULTIVATION_MANAGER:

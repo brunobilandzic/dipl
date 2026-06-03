@@ -83,9 +83,20 @@ const EmploymentRequestsItem = ({ request, handleStatusChange }) => {
       : []),
   ];
 
+  const getClassName = () => {
+    switch (status) {
+      case EMPLOYMENT_STATUS_EMPLOYED:
+        return "ring-1 ring-green-300";
+      case EMPLOYMENT_STATUS_UNEMPLOYED:
+        return "ring-1 ring-red-300";
+      default:
+        return "";
+    }
+  };
+
   return (
     <>
-      <ListItem actionOptions={actionOptions}>
+      <ListItem actionOptions={actionOptions} _className={getClassName()}>
         <div>
           <div className="text-sm text-gray-500">
             {showDate(request.createdAt)}

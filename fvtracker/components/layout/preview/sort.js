@@ -1,5 +1,6 @@
 import { AppSelect } from "@/components/form/inputs";
 import { ListHeaderShowButton } from "./listActions";
+import { PROCURMENT_APPROVED } from "@/lib/constants/documents/procurments";
 
 export const Sort = ({
   sortBy,
@@ -49,6 +50,12 @@ export const workerSortOptions = [
   { value: "payedDesc", label: "Isplaćeno padajuće" },
   { value: "hourlyRateAsc", label: "Plaća po satu rastuće" },
   { value: "hourlyRateDesc", label: "Plaća po satu padajuće" },
+];
+
+export const procurmentSortOptions = [
+  ...defaultSortOptions,
+  { value: "statusAsc", label: "Status Rastući" },
+  { value: "statusDesc", label: "Status Padajući" },
 ];
 
 export const SortOpenButton = ({ isOpen, setOpen, clearSort }) => {

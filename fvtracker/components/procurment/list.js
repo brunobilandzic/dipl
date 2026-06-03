@@ -24,6 +24,7 @@ import handleError from "@/lib/constants/errors/client/handleError";
 import { LoadingFullScreen } from "../layout/loading";
 import { initFilters } from "@/lib/utils/list";
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
+import { procurmentSortOptions } from "../layout/preview/sort";
 
 export const ProcurmentList = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -71,6 +72,7 @@ export const ProcurmentList = () => {
         sortBy={sortBy}
         setSortBy={setSortBy}
         initialFilters={initFilters("procurments")}
+        sortOptions={procurmentSortOptions}
       >
         {procurments
           .filter((proc) => {

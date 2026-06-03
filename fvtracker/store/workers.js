@@ -6,6 +6,10 @@ const initialState = {
   items: [],
   filteredItems: [],
   isLoading: false,
+  employmentRequests: {
+    items: [],
+    filteredItems: [],
+  },
 };
 
 const workersSlice = createSlice({
@@ -45,6 +49,17 @@ const workersSlice = createSlice({
       });
       state.filteredItems = sortItems({
         items: state.filteredItems,
+        sortBy,
+      });
+    },
+    filterEmploymentRequests: (state, action) => {
+      const { sortBy, filters } = action.payload;
+      state.employmentRequests.filteredItems = filterItems({
+        _items: state.employmentRequests.items,
+        filters: filters,
+      });
+      state.employmentRequests.filteredItems = sortItems({
+        items: state.employmentRequests.filteredItems,
         sortBy,
       });
     },
@@ -96,6 +111,7 @@ export const {
   setLoading,
   setError,
   updateWorker,
+  filterEmploymentRequests,
 } = workersSlice.actions;
 
 export default workersSlice.reducer;

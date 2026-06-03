@@ -64,17 +64,18 @@ const workersSlice = createSlice({
       });
     },
     updateEmploymentRequest: (state, action) => {
+      const { requestId, status } = action.payload;
       const index = state.employmentRequests.items.findIndex(
-        (r) => r._id === action.payload._id,
+        (r) => r._id === requestId,
       );
       if (index !== -1) {
-        state.employmentRequests.items[index] = action.payload;
+        state.employmentRequests.items[index].status = status;
       }
       const filteredIndex = state.employmentRequests.filteredItems.findIndex(
-        (r) => r._id === action.payload._id,
+        (r) => r._id === requestId,
       );
       if (filteredIndex !== -1) {
-        state.employmentRequests.filteredItems[filteredIndex] = action.payload;
+        state.employmentRequests.filteredItems[filteredIndex].status = status;
       }
     },
     setLoading: (state, action) => {

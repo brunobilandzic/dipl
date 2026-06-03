@@ -1,7 +1,7 @@
 "use client";
 
 import { LoadingFullScreen } from "@/components/layout/loading";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { List, ListItem } from "../layout/preview/list";
 import { useRouter } from "next/navigation";
 import { showDate } from "@/lib/utils/display";
@@ -12,10 +12,12 @@ import {
   PRODUCTION_MANAGER,
   WAREHOUSE_MANAGER,
 } from "@/lib/constants/users/managerTypes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PayWorkerModal } from "./pay";
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { initFilters } from "@/lib/utils/list";
+import { workerSortOptions } from "../layout/preview/sort";
+import { filterWorkers } from "@/store/workers";
 
 export const WorkersPageComponent = ({ managerModelName }) => {
   const workersState = useSelector((state) => state.workers);
@@ -25,9 +27,15 @@ export const WorkersPageComponent = ({ managerModelName }) => {
     isLoading,
   } = workersState;
   const router = useRouter();
-
+  const dispatch = useDispatch();
   const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
   const [filters, setFilters] = useState(initFilters("workers"));
+
+  useEffect(() => {
+    if (workers) {
+      dispatch(filterWorkers({ filters, sortBy }));
+    }
+  }, [filters, sortBy]);
 
   if (!workers) return <LoadingFullScreen />;
 
@@ -38,6 +46,12 @@ export const WorkersPageComponent = ({ managerModelName }) => {
           title="Radnici"
           addLabel="Dodaj radnika"
           onCreateItem={() => router.push("/radnici/izradi")}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
+          filters={filters}
+          setFilters={setFilters}
+          initialFilters={initFilters("workers")}
+          sortOptions={workerSortOptions}
         >
           {displayedWorkers.map((worker) => (
             <WorkerItem key={worker._id} worker={worker}>

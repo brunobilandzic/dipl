@@ -92,6 +92,7 @@ export const {
   addWorker,
   setWorkers,
   sortWorkers,
+  filterWorkers,
   setLoading,
   setError,
   updateWorker,

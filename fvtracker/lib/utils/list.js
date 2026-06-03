@@ -6,7 +6,7 @@ import { getName } from "./display";
 import { productsWithCropVarieties } from "./production/products";
 import { stringContains } from "./strings";
 
-export const initFilters = (listType) => {
+export const initFilters = (listType, allWorkers = false) => {
   switch (listType) {
     case "fields":
       return [
@@ -67,6 +67,15 @@ export const initFilters = (listType) => {
           placeholder: "Pretraži radnike...",
           value: "",
         },
+        ...(allWorkers
+          ? [
+              {
+                type: "workerType",
+                placeholder: "Sektor radnika",
+                value: "all",
+              },
+            ]
+          : []),
       ];
     case "procurments":
       return [

@@ -63,6 +63,20 @@ const workersSlice = createSlice({
         sortBy,
       });
     },
+    updateEmploymentRequest: (state, action) => {
+      const index = state.employmentRequests.items.findIndex(
+        (r) => r._id === action.payload._id,
+      );
+      if (index !== -1) {
+        state.employmentRequests.items[index] = action.payload;
+      }
+      const filteredIndex = state.employmentRequests.filteredItems.findIndex(
+        (r) => r._id === action.payload._id,
+      );
+      if (filteredIndex !== -1) {
+        state.employmentRequests.filteredItems[filteredIndex] = action.payload;
+      }
+    },
     setLoading: (state, action) => {
       state.isLoading = action.payload;
     },
@@ -132,6 +146,7 @@ export const {
   setError,
   updateWorker,
   filterEmploymentRequests,
+  updateEmploymentRequest,
 } = workersSlice.actions;
 
 export default workersSlice.reducer;

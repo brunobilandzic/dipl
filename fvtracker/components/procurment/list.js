@@ -4,7 +4,7 @@ import { List, ListItem } from "@/components/layout/preview/list";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { showDateTime } from "@/lib/utils/display";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   FINANCIAL_MANAGER,
   GENERAL_MANAGER,
@@ -15,7 +15,11 @@ import {
   PROCURMENT_REJECTED,
 } from "@/lib/constants/documents/procurments";
 import api from "@/lib/api";
-import { deleteProcurment, updateProcurmentStatus } from "@/store/procurments";
+import {
+  deleteProcurment,
+  filterProcurments,
+  updateProcurmentStatus,
+} from "@/store/procurments";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { LoadingFullScreen } from "../layout/loading";
 import { initFilters } from "@/lib/utils/list";
@@ -34,6 +38,11 @@ export const ProcurmentList = () => {
   );
   const [filters, setFilters] = useState(initFilters("procurments"));
   const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
+
+  useEffect(() => {
+    if (!procurments) return;
+    dispatch(filterProcurments({ filters, sortBy }));
+  }, [filters, sortBy]);
 
   console.log({ procurments });
   const router = useRouter();

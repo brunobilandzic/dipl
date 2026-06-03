@@ -77,5 +77,7 @@ export const seedWorkers = async () => {
           `Unknown worker type ${workerData.modelName} for user ${appUser.username}`,
         );
     }
+    employmentRequest.status = workerData.employmentRequestStatus;
+    await employmentRequest.save();
   }
 };

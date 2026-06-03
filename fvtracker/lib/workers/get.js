@@ -3,6 +3,7 @@ import {
   PRODUCTION_MANAGER,
   WAREHOUSE_MANAGER,
   FINANCIAL_MANAGER,
+  GENERAL_MANAGER,
 } from "../constants/users/managerTypes.js";
 import { Worker } from "@/models/user/workers";
 import populateCommon, {
@@ -10,12 +11,18 @@ import populateCommon, {
   productionPopulate,
   warehousePopulate,
   financialPopulate,
+  generalPopulate,
 } from "./populate";
 
 export const getWorkers = async ({ rootManagerId, managerModelName }) => {
-  const workers = await Worker.find({
-    manager: rootManagerId,
-  }).populate(populateCommon);
+  let workers;
+  if ([GENERAL_MANAGER, FINANCIAL_MANAGER].includes(managerModelName)) {
+    workers = await Worker.find().populate(populateCommon);
+  } else {
+    workers = await Worker.find({
+      manager: rootManagerId,
+    }).populate(populateCommon);
+  }
 
   for (const worker of workers) {
     switch (managerModelName) {
@@ -38,7 +45,9 @@ export const getWorkers = async ({ rootManagerId, managerModelName }) => {
       case FINANCIAL_MANAGER:
         console.log("Populating financial work for worker:", worker);
         for (const worker of workers) {
-          await worker.populate(financialPopulate);
+          if (worker.manager.managerModelName === FINANCIAL_MANAGER) {
+            await worker.populate(financialPopulate);
+          }
         }
         break;
       case GENERAL_MANAGER:

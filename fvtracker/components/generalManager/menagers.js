@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Loading, LoadingFullScreen } from "../layout/loading";
 import { v4 as uuid } from "uuid";
-import { RoleRequestStatus } from "./requests";
+import { RoleRequestStatus } from "./managerRequests";
 
 export const ManagerList = () => {
   const generalManager = useSelector((state) => state.generalManager?.manager);

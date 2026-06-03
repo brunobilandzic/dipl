@@ -1,4 +1,4 @@
-import { RoleRequestList } from "@/components/generalManager/requests";
+import { RoleRequestList } from "@/components/generalManager/managerRequests";
 import auth from "@/lib/auth";
 import { GENERAL_MANAGER } from "@/lib/constants/users/managerTypes";
 import React from "react";

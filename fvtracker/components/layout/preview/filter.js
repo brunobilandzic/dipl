@@ -11,6 +11,11 @@ import {
   PRODUCTION_MANAGER,
   WAREHOUSE_MANAGER,
 } from "@/lib/constants/users/managerTypes";
+import {
+  EMPLOYMENT_STATUS_EMPLOYED,
+  EMPLOYMENT_STATUS_PENDING,
+  EMPLOYMENT_STATUS_UNEMPLOYED,
+} from "@/lib/constants/users/workers";
 
 export const Filter = ({ filters, setFilters, onApply }) => {
   const onChange = (index, value) => {
@@ -110,6 +115,24 @@ export const Filter = ({ filters, setFilters, onApply }) => {
                     },
                     { value: WAREHOUSE_MANAGER, label: "Skladište" },
                     { value: FINANCIAL_MANAGER, label: "Financije" },
+                  ]}
+                />
+              );
+            case "employmentStatus":
+              return (
+                <AppSelect
+                  key={index}
+                  placeholder={option.placeholder}
+                  value={option.value}
+                  onChange={(e) => {
+                    onChange(index, e.target.value);
+                  }}
+                  label="Status zaposlenja"
+                  options={[
+                    { value: "all", label: "Svi" },
+                    { value: EMPLOYMENT_STATUS_EMPLOYED, label: "Zaposleni" },
+                    { value: EMPLOYMENT_STATUS_PENDING, label: "Na čekanju" },
+                    { value: EMPLOYMENT_STATUS_UNEMPLOYED, label: "Odbijeni" },
                   ]}
                 />
               );

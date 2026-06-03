@@ -3,9 +3,15 @@ import { populateConfigCropVariety } from "../cultivation/populate";
 export default [
   {
     path: "appUser",
+    select: "username email name surname",
   },
   {
     path: "manager",
+    select: "managerModelName",
+  },
+  {
+    path: "employmentRequest",
+    select: "status updatedAt",
   },
 ];
 

@@ -35,7 +35,7 @@ export const ProcurmentList = () => {
     (state) => state.user?.session?.managerModelName,
   );
   const [showAll, setShowAll] = useState(false);
-  const allView = [FINANCIAL_MANAGER, GENERAL_MANAGER].includes(
+  const allView = [FINANCIAL_MANAGER].includes(
     managerModelName,
   );
   const [filters, setFilters] = useState(initFilters("procurments"));
@@ -50,7 +50,7 @@ export const ProcurmentList = () => {
   const router = useRouter();
 
   const showAllButton = () => {
-    if (![FINANCIAL_MANAGER, GENERAL_MANAGER].includes(managerModelName)) {
+    if (![FINANCIAL_MANAGER].includes(managerModelName)) {
       return null;
     }
     return (

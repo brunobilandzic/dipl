@@ -18,7 +18,7 @@ import { signIn, signOut } from "next-auth/react";
 export function LoginButton() {
   return (
     <button
-      className="btn p-4 cursor-pointer bg-blue-500 text-white rounded"
+      className="btn submitButton"
       onClick={() => {
         signIn();
       }}
@@ -31,7 +31,7 @@ export function LoginButton() {
 export function LogoutButton() {
   return (
     <button
-      className="btn p-4 cursor-pointer bg-red-500 text-white rounded"
+      className="btn cancelButton"
       onClick={() => {
         signOut();
       }}

@@ -75,3 +75,10 @@ export const financialPopulate = [
     path: "warehouseRequests",
   },
 ];
+
+export const generalPopulate = [
+  cultivationPopulate,
+  productionPopulate,
+  warehousePopulate,
+  financialPopulate,
+];

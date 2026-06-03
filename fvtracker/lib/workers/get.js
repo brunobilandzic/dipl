@@ -41,6 +41,11 @@ export const getWorkers = async ({ rootManagerId, managerModelName }) => {
           await worker.populate(financialPopulate);
         }
         break;
+      case GENERAL_MANAGER:
+        console.log("Populating general work for worker:", worker);
+        for (const worker of workers) {
+          await worker.populate(generalPopulate);
+        }
       default:
         return workers;
     }

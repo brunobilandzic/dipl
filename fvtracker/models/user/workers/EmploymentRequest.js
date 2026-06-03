@@ -2,7 +2,7 @@ import mongoose, { Schema } from "mongoose";
 import {
   EMPLOYMENT_STATUS_PENDING,
   EMPLOYMENT_STATUSES,
-} from "@lib/constants/users/workers";
+} from "@/lib/constants/users/workers";
 
 const employmentRequestSchema = new Schema(
   {

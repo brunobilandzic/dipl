@@ -105,11 +105,11 @@ export async function fetchWorker({ workerType }) {
 }
 
 export async function fetchManagerWorker({ managerNames = [], workerType }) {
-  const { specificManager, unauthorized } = await fetchManager({
+  const { specificManager, generalManager, unauthorized } = await fetchManager({
     managerNames,
   });
-  if (!unauthorized && specificManager) {
-    return { specificManager };
+  if (!unauthorized && (specificManager || generalManager)) {
+    return { specificManager, generalManager, unauthorized: false };
   }
   const { worker, unauthorized: workerUnauthorized } = await fetchWorker({
     workerType,

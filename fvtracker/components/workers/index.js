@@ -220,21 +220,16 @@ const WarehouseWorker = ({ worker }) => {
 };
 
 const FinancialWorker = ({ worker }) => {
-  const shipmentItems = worker.warehouseRequests.reduce((items, request) => {
-    console.log({ request });
-    items.push(...request.shipment.shipmentItems);
-    return items;
-  }, []);
-  const sources = shipmentItems.reduce((sources, item) => {
-    sources.push(...item.sources);
-    return sources;
-  }, []);
+  const { totalHours, totalPay } = workPayFinancial({
+    hourlyRate: worker.hourlyRate,
+    receipts: worker.receipts,
+    warehouseRequests: worker.warehouseRequests,
+  });
   return (
     <>
       <div>
         Ukupno poslanih zahtjeva: {worker.warehouseRequests.length} zahtjeva,
-        ukupna količina proizvoda:{" "}
-        {sources.reduce((itemSum, item) => itemSum + item.quantity, 0)}
+        odrađeno sati: {totalHours} h
       </div>
       <div>Ukupno kreirano računa: {worker.receipts.length} računa</div>
     </>

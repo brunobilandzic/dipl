@@ -13,6 +13,7 @@ import populateCommon, {
   financialPopulate,
   generalPopulate,
 } from "./populate";
+import mongoose from "mongoose";
 
 export const getWorkers = async ({ rootManagerId, managerModelName }) => {
   let workers;
@@ -78,4 +79,17 @@ export const getWorkers = async ({ rootManagerId, managerModelName }) => {
   }
 
   return workers;
+};
+
+export const getEmployedWorker = async (workerModelName) => {
+  const workers = await mongoose.models[workerModelName]
+    .find()
+    .populate({ path: "employmentRequest", select: "status" });
+  const employedWorker = workers.find(
+    (worker) => worker.employmentRequest?.status === "employed",
+  );
+  if (!employedWorker) {
+    throw new Error(`No employed worker found for model: ${workerModelName}`);
+  }
+  return employedWorker;
 };

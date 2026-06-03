@@ -1,7 +1,10 @@
 import { AppInput, AppSelect } from "@/components/form/inputs";
 import { v4 as uuid } from "uuid";
 import { ListHeaderShowButton } from "./listActions";
-import { PROCURMENT_APPROVED, PROCURMENT_REJECTED } from "@/lib/constants/documents/procurments";
+import {
+  PROCURMENT_APPROVED,
+  PROCURMENT_REJECTED,
+} from "@/lib/constants/documents/procurments";
 
 export const Filter = ({ filters, setFilters, onApply }) => {
   const onChange = (index, value) => {
@@ -64,22 +67,22 @@ export const Filter = ({ filters, setFilters, onApply }) => {
                   }}
                 />
               );
-              case "procurmentStatus":
-                return (
-                  <AppSelect
-                    key={index}
-                    placeholder={option.placeholder}
-                    value={option.value}
-                    onChange={(e) => {
-                      onChange(index, e.target.value);
-                    }}
-                    options={[
-                      { value: "all", label: "Svi" },
-                      { value: PROCURMENT_APPROVED, label: "Odobreni" },
-                      { value: PROCURMENT_REJECTED, label: "Odbijeni" },
-                    ]}
-                  />
-                );
+            case "procurmentStatus":
+              return (
+                <AppSelect
+                  key={index}
+                  placeholder={option.placeholder}
+                  value={option.value}
+                  onChange={(e) => {
+                    onChange(index, e.target.value);
+                  }}
+                  options={[
+                    { value: "all", label: "Svi" },
+                    { value: PROCURMENT_APPROVED, label: "Odobreni" },
+                    { value: PROCURMENT_REJECTED, label: "Odbijeni" },
+                  ]}
+                />
+              );
           }
         })}
 

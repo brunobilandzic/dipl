@@ -10,6 +10,7 @@ import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
 import { WarehouseWorker } from "@/models/user/workers/WarehouseWork";
 import { FinancialWorker } from "@/models/user/workers/FinancialWork";
 import { FinancialManager } from "@/models/user/managers/FinancialManager";
+import { EmploymentRequest } from "@/models/user/workers/EmploymentRequest";
 
 export const seedWorkers = async () => {
   await dbConnect();
@@ -17,7 +18,7 @@ export const seedWorkers = async () => {
   for (const workerData of workersJson) {
     const appUser = new AppUser(workerData);
     await appUser.save();
-
+    let employmentRequest;
     switch (workerData.modelName) {
       case "CultivationWorker":
         const cultivationManager = await CultivationManager.findOne();
@@ -27,6 +28,9 @@ export const seedWorkers = async () => {
           hourlyRate: workerData.hourlyRate,
         });
         await cultivationWorker.save();
+        employmentRequest = await EmploymentRequest.findOne({
+          worker: cultivationWorker._id,
+        });
         console.log(`Created CultivationWorker for ${appUser.username}`);
         break;
       case "ProductionWorker":
@@ -37,6 +41,9 @@ export const seedWorkers = async () => {
           hourlyRate: workerData.hourlyRate,
         });
         await productionWorker.save();
+        employmentRequest = await EmploymentRequest.findOne({
+          worker: productionWorker._id,
+        });
         console.log(`Created ProductionWorker for ${appUser.username}`);
         break;
       case "WarehouseWorker":
@@ -47,6 +54,9 @@ export const seedWorkers = async () => {
           hourlyRate: workerData.hourlyRate,
         });
         await warehouseWorker.save();
+        employmentRequest = await EmploymentRequest.findOne({
+          worker: warehouseWorker._id,
+        });
         console.log(`Created WarehouseWorker for ${appUser.username}`);
         break;
       case "FinancialWorker":
@@ -57,6 +67,9 @@ export const seedWorkers = async () => {
           hourlyRate: workerData.hourlyRate,
         });
         await financialWorker.save();
+        employmentRequest = await EmploymentRequest.findOne({
+          worker: financialWorker._id,
+        });
         console.log(`Created FinancialWorker for ${appUser.username}`);
         break;
       default:

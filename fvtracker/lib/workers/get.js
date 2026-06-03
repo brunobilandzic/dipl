@@ -14,6 +14,7 @@ import populateCommon, {
   generalPopulate,
 } from "./populate";
 import mongoose from "mongoose";
+import { EMPLOYMENT_STATUS_EMPLOYED } from "../constants/users/workers.js";
 
 export const getWorkers = async ({ rootManagerId, managerModelName }) => {
   let workers;
@@ -86,7 +87,7 @@ export const getEmployedWorker = async (workerModelName) => {
     .find()
     .populate({ path: "employmentRequest", select: "status" });
   const employedWorker = workers.find(
-    (worker) => worker.employmentRequest?.status === "employed",
+    (worker) => worker.employmentRequest?.status === EMPLOYMENT_STATUS_EMPLOYED,
   );
   if (!employedWorker) {
     throw new Error(`No employed worker found for model: ${workerModelName}`);

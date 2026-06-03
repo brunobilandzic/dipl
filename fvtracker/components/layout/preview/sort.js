@@ -45,8 +45,6 @@ export const orderSortOptions = [
 export const workerSortOptions = [
   { value: "newest", label: "Najnoviji" },
   { value: "oldest", label: "Najstariji" },
-  { value: "earnedAsc", label: "Zarađeno rastuće" },
-  { value: "earnedDesc", label: "Zarađeno padajuće" },
   { value: "payedAsc", label: "Isplaćeno rastuće" },
   { value: "payedDesc", label: "Isplaćeno padajuće" },
   { value: "hourlyPayAsc", label: "Plaća po satu rastuće" },

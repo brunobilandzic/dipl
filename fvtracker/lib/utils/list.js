@@ -68,6 +68,14 @@ export const initFilters = (listType) => {
           value: "",
         },
       ];
+    case "procurments":
+      return [
+        {
+          type: "procurmentStatus",
+          placeholder: "Status nabave",
+          value: "all",
+        },
+      ];
   }
 };
 
@@ -120,8 +128,10 @@ export const filterItems = ({ _items, itemModelName, filters }) => {
           items,
           value: filter.value,
         });
+        break;
       case "customerSearch":
         items = customerSearch({ items, value: filter.value });
+        break;
       case "procurmentStatus":
         items = items.filter((item) => item.status == filter.value);
         break;

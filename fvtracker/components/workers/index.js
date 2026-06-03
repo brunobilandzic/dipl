@@ -5,7 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { List, ListItem } from "../layout/preview/list";
 import { useRouter } from "next/navigation";
 import { showDate } from "@/lib/utils/display";
-import { workPayCultivation, workPayProduction } from "@/lib/utils/workers/pay";
+import {
+  workPayCultivation,
+  workPayProduction,
+  workPayWarehouse,
+  workPayFinancial,
+} from "@/lib/utils/workers/pay";
 import { worksCoordsSum } from "@/lib/utils/workers/cultivation";
 import {
   CULTIVATION_MANAGER,
@@ -187,6 +192,10 @@ const ProductionWorker = ({ worker }) => {
 };
 
 const WarehouseWorker = ({ worker }) => {
+  const { totalHours, totalPay } = workPayWarehouse({
+    hourlyRate: worker.hourlyRate,
+    shipmentItems: worker.shipmentItems,
+  });
   return (
     <>
       <div>
@@ -203,16 +212,8 @@ const WarehouseWorker = ({ worker }) => {
         }, 0)}
       </div>
       <div>
-        Ukupna zarada:{" "}
-        {worker.shipmentItems.reduce((sum, process) => {
-          const processPay = process.sources.reduce(
-            (sourceSum, source) =>
-              sourceSum + source.quantity * worker.hourlyRate,
-            0,
-          );
-          return sum + processPay;
-        }, 0)}{" "}
-        $
+        Ukupna zarada: {totalPay} €, ukupno sati: {totalHours} h, isplaćeno:{" "}
+        {worker.payedAmount} €
       </div>
     </>
   );

@@ -43,7 +43,7 @@ export const deleteOrderUtil = async ({ orderId, dispatch, router }) => {
 };
 
 export const getUniqueCustomers = (orders) => {
-  const customers = orders.flatMap((o) => o.customer);
+  const customers = orders.flatMap((o) => o.customer.email);
   return Array.from(new Set(customers));
 };
 

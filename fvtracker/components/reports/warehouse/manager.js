@@ -21,7 +21,7 @@ export const WarehouseReport = ({}) => {
     .flatMap((req) => req.order)
     .flatMap((order) => order.items)
     .reduce((total, item) => total + item.quantity, 0);
-  console.log({ warehouses });
+
   return (
     <ReportSector title="Skladište">
       <ReportSection title="Skladišta">

@@ -9,10 +9,17 @@ import {
 } from "@/store/production";
 import { fetchWarehouses } from "@/store/warehouse";
 
-export default async function fillProductionRedux({ dispatch, router }) {
+export default async function fillProductionRedux({ dispatch, router, all }) {
   try {
     dispatch(setLoading(true));
     const res = await api.get("/productionManager");
+    if (all && res.data.productionManagers) {
+      console.log({ productionManagers: res.data.productionManagers });
+      dispatch(
+        setProducts(res.data.productionManagers.flatMap((pm) => pm.products)),
+      );
+      return;
+    }
     const batchesRes = await api.get("/harvesting-batches");
     const productionManager = res.data.productionManager;
     const harvestingBatches = batchesRes.data.harvestingBatches;

@@ -9,10 +9,12 @@ export const ReportsDashboard = ({ children, managerModelName }) => {
   );
 };
 
-export const ReportSector = ({ title, children }) => {
+export const ReportSector = ({ workers, title, children }) => {
   return (
     <div className="w-full mb-8 mt-4">
-      <h2 className="text-2xl font-bold mb-4">Sektor: {title}</h2>
+      <h2 className="text-2xl font-bold mb-4">
+        {workers ? "Radnici" : "Sektor"}: {title}
+      </h2>
       {children}
     </div>
   );

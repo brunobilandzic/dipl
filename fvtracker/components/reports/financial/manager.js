@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { ReportSector } from "../dashboard";
 
 export const FinancialReport = ({}) => {
-  const orders = useSelector((state) => state.webstore.orders);
+  const orders = useSelector((state) => state.webstore.orders.items);
   if (!orders) return null;
   console.log({ orders });
 

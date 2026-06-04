@@ -23,6 +23,7 @@ export const ProductionManagerReports = ({}) => {
   );
   const facilities = useSelector((state) => state.production?.facilities.items);
   console.log({ facilities });
+  if (!products) return null;
   return (
     <ReportSector title="Proizvodnja">
       <ReportSection title="Proizvodi">

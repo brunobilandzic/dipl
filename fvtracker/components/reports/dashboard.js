@@ -3,7 +3,7 @@
 export const ReportsDashboard = ({ children, managerModelName }) => {
   return (
     <div>
-      <h1 className="text-3xl font-extrabold">Reports Dashboard</h1>
+      <h1 className="text-3xl font-extrabold">Izvještaji</h1>
       <div className="flex gap-8">{children}</div>
     </div>
   );

@@ -217,39 +217,3 @@ async function logInCredentials({ login, password }) {
   }
   return null;
 }
-
-export async function authorizeCredentials({ email, password, signUp }) {
-  console.log("authorizeCredentials called with email:", email);
-  // compare passwords, otherwise return null
-  await dbConnect();
-  const appUser = await AppUser.findOne({ email });
-  if (appUser && signUp) {
-    // User is trying to sign up but already exists
-    console.log("User already exists, cannot sign up:", email);
-    return null;
-  }
-
-  if (appUser) {
-    console.log("Found user in DB:", appUser);
-    const authorized = await bcrypt.compare(password, appUser.password);
-    if (authorized) {
-      return appUser;
-    } else {
-      return null;
-    }
-  }
-
-  if (signUp) {
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new AppUser({
-      email,
-      password: hashedPassword,
-      provider: "credentials",
-    });
-    await newUser.save();
-    console.log("New user created:", newUser);
-    return newUser;
-  }
-
-  return null;
-}

@@ -1,13 +1,13 @@
-import { useSelector } from "react-redux";
-import { ReportItem, ReportsDashboard } from "../dashboard";
+import { ReportItem, ReportsDashboard, ReportSection } from "../dashboard";
 
-export const FieldStats = ({}) => {
-  const fields = useSelector((state) => state.cultivation.fields);
-
+export const FieldStats = ({ fields }) => {
   return (
-    <ReportsDashboard>
-      <FieldCount title="Broj polja" count={fields.length} />
-    </ReportsDashboard>
+    <>
+      <div className="text-2xl font-bold mb-4">Statistika polja</div>
+      <ReportSection title="Polja">
+        <FieldCount title="Broj polja" count={fields.length} />
+      </ReportSection>
+    </>
   );
 };
 

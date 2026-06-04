@@ -4,6 +4,7 @@ import { CultivationReport } from "@/components/reports/cultivation/manager";
 import { ReportsDashboard } from "@/components/reports/dashboard";
 import { ProductionReport } from "@/components/reports/production/manager.";
 import { WarehouseReport } from "@/components/reports/warehouse/manager";
+import { WorkersReport } from "@/components/reports/worker";
 import { fetchManagerWorker } from "@/lib/auth/fetchSessionData";
 import {
   CULTIVATION_MANAGER,
@@ -26,16 +27,37 @@ async function ReportsPage() {
   }
   switch (specificManager?.rootManager?.managerModelName) {
     case CULTIVATION_MANAGER:
-      return <CultivationReport />;
+      return (
+        <ReportWithWorkers managerModelName={CULTIVATION_MANAGER}>
+          <CultivationReport />
+        </ReportWithWorkers>
+      );
     case PRODUCTION_MANAGER:
-      return <ProductionReport />;
+      return (
+        <ReportWithWorkers managerModelName={PRODUCTION_MANAGER}>
+          <ProductionReport />
+        </ReportWithWorkers>
+      );
     case WAREHOUSE_MANAGER:
-      return <WarehouseReport />;
+      return (
+        <ReportWithWorkers managerModelName={WAREHOUSE_MANAGER}>
+          <WarehouseReport />
+        </ReportWithWorkers>
+      );
     default:
       throw new Error(
         `Nepoznati menadžer: ${specificManager?.rootManager?.managerModelName}`,
       );
   }
 }
+
+const ReportWithWorkers = ({ children, managerModelName }) => {
+  return (
+    <>
+      {children}
+      <WorkersReport managerModelName={managerModelName} />
+    </>
+  );
+};
 
 export default ReportsPage;

@@ -72,6 +72,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       width: "",
       length: "",
     },
+    existingCulName: "",
   };
 
   const [newCUDetails, setNewCUDetails] = useState(initialNewCUDetails);

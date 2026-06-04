@@ -17,6 +17,10 @@ export const WarehouseReport = ({}) => {
     (req) => req.shipment.shipmentItems,
   );
   const shipmentSourcesCount = getshipmentSourcesCount(shipmentItems);
+  const orderedProductsCount = warehouseRequests
+    .flatMap((req) => req.order)
+    .flatMap((order) => order.items)
+    .reduce((total, item) => total + item.quantity, 0);
   console.log({ warehouses });
   return (
     <ReportSector title="Skladište">
@@ -48,6 +52,7 @@ export const WarehouseReport = ({}) => {
             pluralLetter: "i",
           })}
         />
+        <ReportItem count={orderedProductsCount} description="Naručeno" />
         <ReportItem count={shipmentSourcesCount} description="Isporučeno" />
       </ReportSection>
     </ReportSector>

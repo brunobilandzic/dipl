@@ -44,7 +44,7 @@ export const ProductionManagerReports = ({}) => {
         <ReportItem count={products?.length || 0} description="Proizvoda" />
         <ReportItem
           count={uniqueIngredients.size}
-          description="Sorti plodova"
+          description="Korištenih sorti"
         />
         <ReportItem count={shipmentSourcesCount} description="Isporučeno" />
       </ReportSection>

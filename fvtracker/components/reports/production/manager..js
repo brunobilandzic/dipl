@@ -26,6 +26,15 @@ export const ProductionManagerReports = ({}) => {
       product.ingredients.map((ingredient) => ingredient.cropVariety.name),
     ) || [],
   );
+  const shipmentSourcesCount = products?.reduce(
+    (total, product) =>
+      total +
+      product.shipmentSources.reduce(
+        (sourceTotal, source) => sourceTotal + source.quantity,
+        0,
+      ),
+    0,
+  );
   const facilities = useSelector((state) => state.production?.facilities.items);
   console.log({ facilities });
   if (!products) return null;
@@ -37,6 +46,7 @@ export const ProductionManagerReports = ({}) => {
           count={uniqueIngredients.size}
           description="Sorti plodova"
         />
+        <ReportItem count={shipmentSourcesCount} description="Isporučeno" />
       </ReportSection>
       <ReportSection title="Zalihe">
         <ReportItem

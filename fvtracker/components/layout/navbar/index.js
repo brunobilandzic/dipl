@@ -87,6 +87,7 @@ function NavItems() {
         managerModelName === FINANCIAL_MANAGER
       ) {
         dispatch(fetchEmploymentRequests());
+        refreshFields({ dispatch, router, generalManager: true });
       }
       if (
         managerModelName === CULTIVATION_MANAGER &&
@@ -125,7 +126,7 @@ function NavItems() {
         console.log(
           "financial manager logged in, refreshing warehouse requests data...",
         );
-        refreshFields({ dispatch, router, generalManager: true });
+
         dispatch(fillManagersSelection({ managersType: "warehouseManagers" }));
       }
     } else if (status === "unauthenticated") {

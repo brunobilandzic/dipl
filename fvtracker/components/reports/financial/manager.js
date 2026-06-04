@@ -6,6 +6,7 @@ import {
   getUniqueProducts,
 } from "@/lib/utils/webstore/orders";
 import { stringQuant } from "@/lib/utils/strings";
+import { ordersTotalAmount } from "@/lib/utils/sales";
 
 export const FinancialReport = ({}) => {
   const orders = useSelector((state) => state.webstore.orders.items);
@@ -15,7 +16,7 @@ export const FinancialReport = ({}) => {
   const uniqueCustomers = getUniqueCustomers(orders);
   const uniqueProducts = getUniqueProducts(orders);
   const totalItems = getOrdersTotalItems(orders);
-  console.log({ uniqueProducts, totalItems });
+  const totalRevenue = ordersTotalAmount(orders);
 
   return (
     <ReportSector title="Financije">
@@ -47,6 +48,10 @@ export const FinancialReport = ({}) => {
             quantity: totalItems,
             pluralLetter: "a",
           })}
+        />
+        <ReportItem
+          count={totalRevenue.toFixed(2)}
+          description={"Vrijednost (€)"}
         />
       </ReportSection>
     </ReportSector>

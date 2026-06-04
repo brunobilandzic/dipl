@@ -17,3 +17,7 @@ export const orderAmount = (order) => {
     return acc + item.product.price * item.quantity;
   }, 0);
 };
+
+export const ordersTotalAmount = (orders) => {
+  return orders.reduce((total, order) => total + orderAmount(order), 0);
+};

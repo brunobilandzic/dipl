@@ -53,12 +53,14 @@ export const ProductionManagerReports = ({}) => {
           count={productionStockQuantity + warehouseStockQuantity}
           description="Proizvedeno"
         />
-
-        <ReportItem count={warehouseStockQuantity} description="Skladišta" />
-      </ReportSection>
-      <ReportSection title="Postrojenja">
-        <ReportItem count={facilities?.length || 0} description="Postrojenja" />
-        <ReportItem count={productionStockQuantity} description="Proizvoda" />
+        <ReportItem
+          count={productionStockQuantity}
+          description="U postrojenjima"
+        />
+        <ReportItem
+          count={warehouseStockQuantity}
+          description="U skladištima"
+        />
       </ReportSection>
     </ReportSector>
   );

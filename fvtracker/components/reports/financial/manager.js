@@ -7,6 +7,10 @@ import {
 } from "@/lib/utils/webstore/orders";
 import { stringQuant } from "@/lib/utils/strings";
 import { ordersTotalAmount } from "@/lib/utils/sales";
+import {
+  EMPLOYMENT_STATUS_EMPLOYED,
+  EMPLOYMENT_STATUS_UNEMPLOYED,
+} from "@/lib/constants/users/workers";
 
 export const FinancialReport = ({}) => {
   const orders = useSelector((state) => state.webstore.orders.items);
@@ -25,6 +29,9 @@ export const FinancialReport = ({}) => {
   );
   const employedWorkers = workers.filter(
     (worker) => worker.employmentRequest.status == EMPLOYMENT_STATUS_EMPLOYED,
+  );
+  const unemployedWorkers = workers.filter(
+    (worker) => worker.employmentRequest.status == EMPLOYMENT_STATUS_UNEMPLOYED,
   );
 
   return (
@@ -71,6 +78,12 @@ export const FinancialReport = ({}) => {
         <ReportItem
           count={employedWorkers.length}
           description={"Zaposlen" + (employedWorkers.length > 1 ? "ih" : "")}
+        />
+        <ReportItem
+          count={unemployedWorkers.length}
+          description={
+            "Nezaposlen" + (unemployedWorkers.length > 1 ? "ih" : "")
+          }
         />
         <ReportItem
           count={totalHourlyRate.toFixed(2)}

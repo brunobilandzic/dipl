@@ -41,7 +41,7 @@ const productsSlice = createSlice({
         sortBy: SORT_INIT_VALUE,
       });
     },
-     addProduct: (state, action) => {
+    addProduct: (state, action) => {
       state.products.items.push(action.payload);
     },
     removeProduct: (state, action) => {

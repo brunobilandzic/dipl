@@ -54,6 +54,10 @@ export const ProductionManagerReports = ({}) => {
           description="Proizvedeno"
         />
         <ReportItem
+          count={facilities?.length || 0}
+          description={`Postrojenj${facilities?.length > 1 ? "a" : "e"}`}
+        />
+        <ReportItem
           count={productionStockQuantity}
           description="U postrojenjima"
         />

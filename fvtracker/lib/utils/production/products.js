@@ -4,7 +4,6 @@ import { setLoading } from "@/store/loading";
 import { setProducts, updateProduct } from "@/store/production";
 import { checkEmpty } from "../objects";
 import { stringContains } from "../strings";
-import fillProductionRedux from ".";
 
 export const refreshProducts = async ({ dispatch, router }) => {
   try {

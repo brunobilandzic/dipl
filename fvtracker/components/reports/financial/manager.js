@@ -71,10 +71,8 @@ export const FinancialReport = ({}) => {
         />
       </ReportSection>
       <ReportSection title="Radnici">
-        <ReportItem
-          count={workers.length}
-          description={"Radnik" + (workers.length > 1 ? "a" : "")}
-        />
+        <ReportItem count={workers.length} description={"Prijava"} />
+
         <ReportItem
           count={employedWorkers.length}
           description={"Zaposlen" + (employedWorkers.length > 1 ? "ih" : "")}

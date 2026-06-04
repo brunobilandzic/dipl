@@ -30,9 +30,9 @@ export const ReportSection = ({ title, children }) => {
 export const ReportItem = ({ children, count, description, title, stats }) => {
   console.log("report item");
   return (
-    <div className="bg-gray-100 rounded-lg shadow p-4 col-span-full">
-      <div className="text-xl font-bold">{title}</div>
-      <div className="text-xl font-bold">{count}</div>
+    <div className="bg-gray-100 rounded-lg shadow p-4 col-span-full hover:bg-gray-200">
+      <div className="text-xl font-extrabold">{title}</div>
+      <div className="text-xl font-extrabold">{count}</div>
       <div className="text-gray-500">{description}</div>
       {stats?.map((stat, index) => (
         <div key={index} className="text-sm text-gray-400">

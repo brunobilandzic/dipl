@@ -1,4 +1,4 @@
-export const getshipmentSourcesCount = (products) =>
+export const getshipmentSourcesCountProducts = (products) =>
   products?.reduce(
     (total, product) =>
       total +

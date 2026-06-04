@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { ReportSector } from "../dashboard";
 import { FieldStats } from "./field";
 

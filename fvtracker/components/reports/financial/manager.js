@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { ReportItem, ReportSection, ReportSector } from "../dashboard";
 import {
+  getOrdersTotalItems,
   getUniqueCustomers,
   getUniqueProducts,
 } from "@/lib/utils/webstore/orders";
@@ -13,7 +14,8 @@ export const FinancialReport = ({}) => {
 
   const uniqueCustomers = getUniqueCustomers(orders);
   const uniqueProducts = getUniqueProducts(orders);
-  console.log({ uniqueProducts });
+  const totalItems = getOrdersTotalItems(orders);
+  console.log({ uniqueProducts, totalItems });
 
   return (
     <ReportSector title="Financije">
@@ -35,6 +37,14 @@ export const FinancialReport = ({}) => {
           description={stringQuant({
             string: "Proizvod",
             quantity: uniqueProducts.length,
+            pluralLetter: "a",
+          })}
+        />
+        <ReportItem
+          count={totalItems}
+          description={stringQuant({
+            string: "Komad",
+            quantity: totalItems,
             pluralLetter: "a",
           })}
         />

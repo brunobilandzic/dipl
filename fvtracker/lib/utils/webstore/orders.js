@@ -52,3 +52,13 @@ export const getUniqueProducts = (orders) => {
   console.log({ oip: products });
   return Array.from(new Set(products));
 };
+
+export const getOrdersTotalItems = (orders) => {
+  return orders.reduce((total, order) => {
+    const orderItemsCount = order.items.reduce(
+      (count, item) => count + item.quantity,
+      0,
+    );
+    return total + orderItemsCount;
+  }, 0);
+};

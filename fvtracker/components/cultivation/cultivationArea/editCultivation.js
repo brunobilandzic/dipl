@@ -2,7 +2,8 @@ import { AppInput } from "@/components/form/inputs";
 import Modals from "@/components/layout/modals";
 import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
-import { updateCultivation } from "@/store/cultivation";
+import { deleteCultivation, updateCultivation } from "@/store/cultivation";
+import { setLoading } from "@/store/loading";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -25,8 +26,6 @@ export function EditCultivation({ isOpen, onCancel, cultivationData }) {
   };
 
   const onSubmit = async () => {
-    console.log("Submitting cultivation edit with data:", formData);
-
     try {
       const res = await api.put(`/cultivation`, formData);
       dispatch(updateCultivation(res.data.updatedCultivation));
@@ -41,19 +40,19 @@ export function EditCultivation({ isOpen, onCancel, cultivationData }) {
   };
 
   const onDelete = async () => {
-    console.log("Deleting cultivation area with id:", formData._id);
-    /*     if (!confirm("Are you sure you want to delete this cultivation area?")) {
+    if (!confirm("Are you sure you want to delete this cultivation area?")) {
       return;
     }
     try {
-      await axios.delete(`/api/cultivation/cultivation-area`, {
-        data: { id: formData.id },
-      });
-      dispatch(deleteCultivationArea(formData.id));
-      setCultivationAreaMenu(initialCAMenuState);
+      dispatch(setLoading(true));
+      await api.delete(`/cultivation?id=${formData._id}`);
+      dispatch(deleteCultivation(formData._id));
     } catch (error) {
-      handleError(error);
-    } */
+      handleError({ ...error, generalMessage: "Greška pri brisanju gredice" });
+    } finally {
+      dispatch(setLoading(false));
+      onCancel();
+    }
   };
 
   return (

@@ -13,7 +13,6 @@ export function CreateCultivation({
   setNewCUDetails,
   existingCultivations,
 }) {
-
   const onFormChange = (field, value) => {
     setNewCUDetails({
       ...newCUDetails,
@@ -45,6 +44,7 @@ export function CreateCultivation({
                   label: cul.name,
                   value: cul.name,
                 }))}
+                value={newCUDetails.existingCulName}
                 defaultValue={newCUDetails.existingCulName}
               ></AppSelect>
             ) : null}

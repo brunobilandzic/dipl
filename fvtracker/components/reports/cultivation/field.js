@@ -1,5 +1,5 @@
-import { ReportItem, ReportsDashboard, ReportSection } from "../dashboard";
-import { CultivationAreasStats } from "./cultivation";
+import { ReportItem, ReportSection } from "../dashboard";
+import { CultivationCount } from "./cultivation";
 
 export const FieldStats = ({ fields }) => {
   const cultivationAreas = fields?.flatMap((field) => field.cultivationAreas);
@@ -8,7 +8,7 @@ export const FieldStats = ({ fields }) => {
     <>
       <ReportSection title="Statistika Polja">
         <FieldCount description="Broj polja" count={fields?.length} />
-        <CultivationAreasStats cultivationAreas={cultivationAreas} />
+        <CultivationCount cultivationAreas={cultivationAreas} />
       </ReportSection>
     </>
   );

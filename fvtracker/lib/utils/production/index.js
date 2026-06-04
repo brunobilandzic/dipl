@@ -18,6 +18,9 @@ export default async function fillProductionRedux({ dispatch, router, all }) {
       dispatch(
         setProducts(res.data.productionManagers.flatMap((pm) => pm.products)),
       );
+      dispatch(refreshFacilities());
+      dispatch(fetchWarehouses());
+      dispatch(refreshProductsStocks());
       const batchesRes = await api.get("/harvesting-batches");
       const harvestingBatches = batchesRes.data.harvestingBatches;
       dispatch(refreshHarvestingBatches.fulfilled(harvestingBatches));

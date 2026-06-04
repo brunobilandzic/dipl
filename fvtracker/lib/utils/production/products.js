@@ -147,3 +147,14 @@ export const getUniqueIngredients = (products) =>
       product.ingredients.map((ingredient) => ingredient.cropVariety.name),
     ) || [],
   );
+
+export const getProductionStockQuantity = (products) =>
+  products?.reduce(
+    (total, product) =>
+      total +
+      product.productionStocks.reduce(
+        (stockTotal, stock) => stockTotal + stock.quantity,
+        0,
+      ),
+    0,
+  );

@@ -1,24 +1,20 @@
 import { useSelector } from "react-redux";
 import { ReportItem, ReportSection, ReportSector } from "../dashboard";
 import { getshipmentSourcesCount } from "@/lib/utils/webstore/shipments";
-import { getUniqueIngredients } from "@/lib/utils/production/products";
+import {
+  getProductionStockQuantity,
+  getUniqueIngredients,
+} from "@/lib/utils/production/products";
 import { getWarehouseStockQuantity } from "@/lib/utils/storage/warehouse";
 
 export const ProductionManagerReports = ({}) => {
   const products = useSelector((state) => state.production?.products.items);
-  const productionStockQuantity = products?.reduce(
-    (total, product) =>
-      total +
-      product.productionStocks.reduce(
-        (stockTotal, stock) => stockTotal + stock.quantity,
-        0,
-      ),
-    0,
-  );
+
+  const productionStockQuantity = getProductionStockQuantity(products);
   const warehouseStockQuantity = getWarehouseStockQuantity(products);
   const uniqueIngredients = getUniqueIngredients(products);
   const shipmentSourcesCount = getshipmentSourcesCount(products);
-  
+
   const facilities = useSelector((state) => state.production?.facilities.items);
   console.log({ products, facilities });
   if (!products) return null;

@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { ReportItem, ReportSection, ReportSector } from "../dashboard";
 import { getshipmentSourcesCount } from "@/lib/utils/webstore/shipments";
+import { getUniqueIngredients } from "@/lib/utils/production/products";
 
 export const ProductionManagerReports = ({}) => {
   const products = useSelector((state) => state.production?.products.items);
@@ -22,11 +23,7 @@ export const ProductionManagerReports = ({}) => {
       ),
     0,
   );
-  const uniqueIngredients = new Set(
-    products?.flatMap((product) =>
-      product.ingredients.map((ingredient) => ingredient.cropVariety.name),
-    ) || [],
-  );
+  const uniqueIngredients = getUniqueIngredients(products);
   const shipmentSourcesCount = getshipmentSourcesCount(products);
   const facilities = useSelector((state) => state.production?.facilities.items);
   console.log({ products, facilities });

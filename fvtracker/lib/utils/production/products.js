@@ -140,3 +140,10 @@ export const getIngredientsList = ({ ingredients }) => {
     .map((ing) => `${ing.cropVariety.name} (${ing.quantity})`)
     .join(", ");
 };
+
+export const getUniqueIngredients = (products) =>
+  new Set(
+    products?.flatMap((product) =>
+      product.ingredients.map((ingredient) => ingredient.cropVariety.name),
+    ) || [],
+  );

@@ -4,7 +4,7 @@ export const ReportsDashboard = ({ children, managerModelName }) => {
   return (
     <div className="w-full">
       <h1 className="text-3xl font-extrabold">Izvještaji</h1>
-      <div className="flex gap-8">{children}</div>
+      <div className="flex flex-col gap-8">{children}</div>
     </div>
   );
 };

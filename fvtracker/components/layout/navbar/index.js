@@ -71,10 +71,6 @@ function NavItems() {
   const fieldsRedux = useSelector((state) => state.cultivation.fields);
   const cartItems = useSelector((state) => state.webstore.cart.items);
 
-  const productsRedux = useSelector(
-    (state) => state.webstore.products.filteredItems,
-  );
-
   useEffect(() => {
     dispatch(refreshProductsThunk());
   }, [dispatch]);

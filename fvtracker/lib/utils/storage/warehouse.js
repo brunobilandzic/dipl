@@ -229,6 +229,12 @@ export const getWarehouseStockQuantity = (products) =>
     0,
   );
 
+export const getWarehouseOccupiedVolume = (warehouse) =>
+  warehouse.stocks.reduce((volume, stock) => volume + stock.quantity, 0);
+
+export const getWarehousesOccupiedVolume = (warehouses) =>
+  warehouses.reduce((volume, wh) => volume + getWarehouseOccupiedVolume(wh), 0);
+
 export const warehouseRequestPopulateShipmentItems = [
   {
     path: "order",

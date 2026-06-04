@@ -7,7 +7,7 @@ import {
 } from "@/lib/utils/production/products";
 import { getWarehouseStockQuantity } from "@/lib/utils/storage/warehouse";
 
-export const ProductionManagerReports = ({}) => {
+export const ProductionReport= ({}) => {
   const products = useSelector((state) => state.production?.products.items);
 
   const productionStockQuantity = getProductionStockQuantity(products);

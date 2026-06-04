@@ -31,7 +31,6 @@ export const seedWorkers = async () => {
         employmentRequest = await EmploymentRequest.findOne({
           worker: cultivationWorker._id,
         });
-        console.log(`Created CultivationWorker for ${appUser.username}`);
         break;
       case "ProductionWorker":
         const productionManager = await ProductionManager.findOne();
@@ -44,7 +43,6 @@ export const seedWorkers = async () => {
         employmentRequest = await EmploymentRequest.findOne({
           worker: productionWorker._id,
         });
-        console.log(`Created ProductionWorker for ${appUser.username}`);
         break;
       case "WarehouseWorker":
         const warehouseManager = await WarehouseManager.findOne();
@@ -57,7 +55,6 @@ export const seedWorkers = async () => {
         employmentRequest = await EmploymentRequest.findOne({
           worker: warehouseWorker._id,
         });
-        console.log(`Created WarehouseWorker for ${appUser.username}`);
         break;
       case "FinancialWorker":
         const financialManager = await FinancialManager.findOne();
@@ -70,7 +67,6 @@ export const seedWorkers = async () => {
         employmentRequest = await EmploymentRequest.findOne({
           worker: financialWorker._id,
         });
-        console.log(`Created FinancialWorker for ${appUser.username}`);
         break;
       default:
         console.warn(
@@ -78,6 +74,8 @@ export const seedWorkers = async () => {
         );
     }
     employmentRequest.status = workerData.employmentRequestStatus;
+
     await employmentRequest.save();
   }
+  console.log(`seeded ${workersJson.length} workers`);
 };

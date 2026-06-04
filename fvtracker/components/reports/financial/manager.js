@@ -9,6 +9,7 @@ import { stringQuant } from "@/lib/utils/strings";
 import { ordersTotalAmount } from "@/lib/utils/sales";
 import {
   EMPLOYMENT_STATUS_EMPLOYED,
+  EMPLOYMENT_STATUS_PENDING,
   EMPLOYMENT_STATUS_UNEMPLOYED,
 } from "@/lib/constants/users/workers";
 
@@ -32,6 +33,9 @@ export const FinancialReport = ({}) => {
   );
   const unemployedWorkers = workers.filter(
     (worker) => worker.employmentRequest.status == EMPLOYMENT_STATUS_UNEMPLOYED,
+  );
+  const pendingWorkers = workers.filter(
+    (worker) => worker.employmentRequest.status == EMPLOYMENT_STATUS_PENDING,
   );
 
   return (
@@ -83,6 +87,7 @@ export const FinancialReport = ({}) => {
             "Nezaposlen" + (unemployedWorkers.length > 1 ? "ih" : "")
           }
         />
+        <ReportItem count={pendingWorkers.length} description={"Na čekanju"} />
         <ReportItem
           count={totalHourlyRate.toFixed(2)}
           description={"Ukupna satnica (€)"}

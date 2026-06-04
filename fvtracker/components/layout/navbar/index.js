@@ -112,7 +112,7 @@ function NavItems() {
         console.log(
           "warehouse manager logged in, refreshing warehouse data...",
         );
-        fillWarehouseRedux({ dispatch });
+        fillWarehouseRedux({ dispatch, router });
       }
       if (
         managerModelName === FINANCIAL_MANAGER ||
@@ -120,7 +120,7 @@ function NavItems() {
         managerModelName === WAREHOUSE_MANAGER
       ) {
         console.log("shipments called from navbar");
-        fillOrdersRedux({ dispatch });
+        fillOrdersRedux({ dispatch, router });
         fillWarehouseRequestsRedux({ dispatch });
       }
       if (managerModelName === FINANCIAL_MANAGER) {
@@ -168,7 +168,7 @@ function NavItems() {
         console.log(
           "Financial worker logged in, refreshing orders and requests data...",
         );
-        fillOrdersRedux({ dispatch });
+        fillOrdersRedux({ dispatch, router });
         fillWarehouseRequestsRedux({ dispatch });
         dispatch(fillManagersSelection({ managersType: "warehouseManagers" }));
       }

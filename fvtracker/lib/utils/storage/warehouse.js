@@ -156,7 +156,7 @@ export const submitShipment = async ({ newShipmentData, dispatch }) => {
       workerId: newShipmentData.workerId,
     });
     alert("Otpremnica uspješno kreirana!");
-    fillWarehouseRedux({ dispatch });
+    fillWarehouseRedux({ dispatch, router });
   } catch (error) {
     console.error("Error submitting shipment:", error);
     handleError({

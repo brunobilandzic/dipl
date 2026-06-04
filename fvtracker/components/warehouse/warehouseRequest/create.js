@@ -46,7 +46,7 @@ export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
       dispatch,
     });
     onCancel();
-    fillOrdersRedux({ dispatch });
+    fillOrdersRedux({ dispatch, router });
   };
 
   const chooseWorker = (e) => {

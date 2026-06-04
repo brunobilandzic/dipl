@@ -13,7 +13,7 @@ export const sendOrder = async ({ customerData, cartItems }) => {
   }
 };
 
-export const fillOrdersRedux = async ({ dispatch }) => {
+export const fillOrdersRedux = async ({ dispatch, router }) => {
   try {
     const ordersRes = await api.get("/orders");
     dispatch(refreshOrdersThunk.fulfilled(ordersRes.data.orders));

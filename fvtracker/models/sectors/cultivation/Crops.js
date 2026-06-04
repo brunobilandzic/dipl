@@ -184,24 +184,6 @@ const plantedCropVarietySchema = new Schema({
   },
 });
 
-/* plantedCropVarietySchema.pre("save", async function () {
-  if (!this.cultivation) return;
-  await this.populate({
-    path: "cultivation",
-    select: "cultivationArea",
-    populate: {
-      path: "cultivationArea",
-      select: "field",
-      populate: {
-        path: "field",
-      },
-    },
-  });
-  const field = this.cultivation.cultivationArea.field;
-  console.log("updated field");
-  await field.save(); // to trigger field's updatedAt change
-}); */
-
 plantedCropVarietySchema.pre("deleteMany", async function () {
   const plantedCropVarieties = await this.model.find(this.getFilter());
   const cultivationIds = plantedCropVarieties.map((pcv) => pcv.cultivation);

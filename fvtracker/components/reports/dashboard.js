@@ -32,7 +32,7 @@ export const ReportItem = ({ children, count, description, title, stats }) => {
     <div className="bg-gray-100 rounded-lg shadow p-4  hover:bg-gray-200">
       <div className="text-xl font-extrabold">{title}</div>
       <div className="text-xl font-extrabold">{count}</div>
-      <div className="text-gray-500">{description}</div>
+      <div className="text-gray-600">{description}</div>
       {stats?.map((stat, index) => (
         <div key={index} className="text-sm text-gray-400">
           {stat}

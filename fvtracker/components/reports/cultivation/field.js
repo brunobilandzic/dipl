@@ -3,7 +3,7 @@ import { CultivationCount } from "./cultivation";
 
 export const FieldStats = ({ fields }) => {
   const cultivationAreas = fields?.flatMap((field) => field.cultivationAreas);
-  
+
   return (
     <>
       <ReportSection title="Statistika Polja">

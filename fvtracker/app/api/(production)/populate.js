@@ -32,5 +32,8 @@ export const populateProductsConfig = {
         },
       ],
     },
+    {
+      path: "shipmentSources",
+    },
   ],
 };

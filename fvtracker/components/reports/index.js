@@ -2,13 +2,13 @@
 
 import { CultivationManagerReports } from "./cultivation/manager";
 import { ReportsDashboard } from "./dashboard";
-import { ProductionReportsSector } from "./production/manager.";
+import { ProductionManagerReports } from "./production/manager.";
 
 export const AllReports = ({}) => {
   return (
     <ReportsDashboard>
       <CultivationManagerReports />
-      <ProductionReportsSector />
+      <ProductionManagerReports />
     </ReportsDashboard>
   );
 };

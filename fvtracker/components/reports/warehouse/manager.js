@@ -11,6 +11,7 @@ export const WarehouseReport = ({}) => {
   );
   if (!warehouses || !warehouseRequests) return null;
   const occupiedVolume = getWarehousesOccupiedVolume(warehouses);
+
   const productsCount = warehouses.flatMap((wh) => wh.stocks).length;
   const shipmentItems = warehouseRequests.flatMap(
     (req) => req.shipment.shipmentItems,
@@ -37,6 +38,17 @@ export const WarehouseReport = ({}) => {
           description="Proizvoda u skladištima"
           count={productsCount}
         />
+      </ReportSection>
+      <ReportSection title="Isporuke">
+        <ReportItem
+          count={warehouseRequests?.length || 0}
+          description={stringQuant({
+            string: "Zahtjev",
+            quantity: warehouseRequests?.length || 0,
+            pluralLetter: "i",
+          })}
+        />
+        <ReportItem count={shipmentSourcesCount} description="Isporučeno" />
       </ReportSection>
     </ReportSector>
   );

@@ -19,7 +19,10 @@ export const FinancialReport = ({}) => {
   const totalItems = getOrdersTotalItems(orders);
   const totalRevenue = ordersTotalAmount(orders);
 
-
+  const totalHourlyRate = workers.reduce(
+    (sum, worker) => sum + worker.hourlyRate,
+    0,
+  );
   const employedWorkers = workers.filter(
     (worker) => worker.employmentRequest.status == EMPLOYMENT_STATUS_EMPLOYED,
   );
@@ -67,9 +70,11 @@ export const FinancialReport = ({}) => {
         />
         <ReportItem
           count={employedWorkers.length}
-          description={
-            "Zaposlen" + (employedWorkers.length > 1 ? "ih" : "")
-          }
+          description={"Zaposlen" + (employedWorkers.length > 1 ? "ih" : "")}
+        />
+        <ReportItem
+          count={totalHourlyRate.toFixed(2)}
+          description={"Ukupna satnica (€)"}
         />
       </ReportSection>
     </ReportSector>

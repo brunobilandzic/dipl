@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { ReportItem, ReportSection, ReportSector } from "../dashboard";
+import { getshipmentSourcesCount } from "@/lib/utils/webstore/shipments";
 
 export const ProductionManagerReports = ({}) => {
   const products = useSelector((state) => state.production?.products.items);
@@ -26,15 +27,7 @@ export const ProductionManagerReports = ({}) => {
       product.ingredients.map((ingredient) => ingredient.cropVariety.name),
     ) || [],
   );
-  const shipmentSourcesCount = products?.reduce(
-    (total, product) =>
-      total +
-      product.shipmentSources.reduce(
-        (sourceTotal, source) => sourceTotal + source.quantity,
-        0,
-      ),
-    0,
-  );
+  const shipmentSourcesCount = getshipmentSourcesCount(products);
   const facilities = useSelector((state) => state.production?.facilities.items);
   console.log({ products, facilities });
   if (!products) return null;

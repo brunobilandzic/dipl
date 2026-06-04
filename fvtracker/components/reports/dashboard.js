@@ -28,7 +28,6 @@ export const ReportSection = ({ title, children }) => {
 };
 
 export const ReportItem = ({ children, count, description, title, stats }) => {
-  console.log("report item");
   return (
     <div className="bg-gray-100 rounded-lg shadow p-4  hover:bg-gray-200">
       <div className="text-xl font-extrabold">{title}</div>

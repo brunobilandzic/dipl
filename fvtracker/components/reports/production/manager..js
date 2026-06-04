@@ -21,6 +21,11 @@ export const ProductionManagerReports = ({}) => {
       ),
     0,
   );
+  const uniqueIngredients = new Set(
+    products?.flatMap((product) =>
+      product.ingredients.map((ingredient) => ingredient.cropVariety.name),
+    ) || [],
+  );
   const facilities = useSelector((state) => state.production?.facilities.items);
   console.log({ facilities });
   if (!products) return null;
@@ -28,6 +33,12 @@ export const ProductionManagerReports = ({}) => {
     <ReportSector title="Proizvodnja">
       <ReportSection title="Proizvodi">
         <ReportItem count={products?.length || 0} description="Proizvoda" />
+        <ReportItem
+          count={uniqueIngredients.size}
+          description="Sorti plodova"
+        />
+      </ReportSection>
+      <ReportSection title="Zalihe">
         <ReportItem
           count={productionStockQuantity + warehouseStockQuantity}
           description="Proizvedeno"

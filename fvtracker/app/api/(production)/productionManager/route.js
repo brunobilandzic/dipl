@@ -16,7 +16,7 @@ export async function GET(request) {
     generalManager,
     unauthorized,
   } = await fetchManagerWorker({
-    managerNames: [PRODUCTION_MANAGER],
+    managerNames: [PRODUCTION_MANAGER, FINANCIAL_MANAGER],
     workerType: managerMorkerMap[PRODUCTION_MANAGER],
   });
 

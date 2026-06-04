@@ -7,6 +7,8 @@ export const CropsReportSection = ({ fields }) => {
 
   const crops = useSelector((state) => state.cultivation.crops);
 
+  if(!crops) return null;
+
   const plantedCrops = cultivations?.flatMap((cultivation) =>
     cultivation.plantedCropVarieties.filter((plcv) => plcv.plantingPlanItem),
   );

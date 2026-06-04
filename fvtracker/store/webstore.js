@@ -99,12 +99,6 @@ const productsSlice = createSlice({
       })
       .addCase(refreshOrdersThunk.fulfilled, (state, action) => {
         state.orders.items = action.payload;
-        console.log(
-          sortItems({
-            items: action.payload,
-            sortBy: SORT_INIT_VALUE,
-          }),
-        );
         state.orders.filteredItems = sortItems({
           items: action.payload,
           sortBy: SORT_INIT_VALUE,
@@ -120,7 +114,6 @@ const productsSlice = createSlice({
 export const refreshProductsThunk = createAsyncThunk(
   "webstore/refreshProducts",
   async () => {
-    console.log("Fetching products...");
     const res = await api.get("/products");
     const data = res.data;
     return res.data.products;
@@ -130,10 +123,8 @@ export const refreshProductsThunk = createAsyncThunk(
 export const refreshOrdersThunk = createAsyncThunk(
   "webstore/refreshOrders",
   async () => {
-    console.log("Fetching orders...");
     const res = await api.get("/orders");
     const data = res.data;
-    console.log({ ordersData: data });
     return res.data.orders;
   },
 );

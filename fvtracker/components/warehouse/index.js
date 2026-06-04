@@ -34,8 +34,6 @@ function WarehousePageComponent({ slug }) {
     },
   ];
 
-  console.log({ stocksView });
-
   if (!warehouse) return <div>Warehouse not found</div>;
   if (stocksView) {
     return (
@@ -89,7 +87,6 @@ const WarehouseStocks = ({ stocks, onCancel, warehouseName }) => {
 };
 
 const WarehouseStockItem = ({ stock }) => {
-  console.log({ stock });
   return (
     <div>
       <ListItem>

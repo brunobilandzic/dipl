@@ -36,7 +36,6 @@ export const CartPageComponent = () => {
     }
     dispatch(changeQuantity({ productId: cartItem.product.id, quantity }));
   };
-  console.log({ cartItems });
   const cartActionButtons = [
     <div
       className="btn cancelButton btnSm"

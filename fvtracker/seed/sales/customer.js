@@ -7,7 +7,6 @@ export const createCustomers = async () => {
   for (const customer of customers) {
     const newCustomer = await Customer.create(customer);
     createdCustomers.push(newCustomer);
-    console.log(`Seeded customer: ${newCustomer.name} ${newCustomer.surname}`);
   }
   return createdCustomers;
 };

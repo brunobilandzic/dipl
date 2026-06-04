@@ -44,7 +44,6 @@ export const ProcurmentList = () => {
     dispatch(filterProcurments({ filters, sortBy }));
   }, [filters, sortBy]);
 
-  console.log({ procurments });
   const router = useRouter();
 
   const showAllButton = () => {
@@ -216,7 +215,6 @@ const ProcurmentStatus = ({ status }) => {
 const changeStatus = async ({ procurmentId, newStatus, dispatch }) => {
   try {
     const res = await api.put(`/procurments`, { procurmentId, newStatus });
-    console.log("Status nabavke promijenjen:", res.data);
     dispatch(updateProcurmentStatus({ procurmentId, newStatus }));
   } catch (error) {
     console.error("Greška pri promjeni statusa nabavke:", error);
@@ -231,7 +229,6 @@ const changeStatus = async ({ procurmentId, newStatus, dispatch }) => {
 const deleteProcurmentApi = async ({ procurmentId, dispatch }) => {
   try {
     const res = await api.delete(`/procurments`, { data: { procurmentId } });
-    console.log("Nabavka obrisana");
     dispatch(deleteProcurment(procurmentId));
   } catch (error) {
     console.error("Greška pri brisanju nabavke:", error);

@@ -18,7 +18,6 @@ export default function EditProductPageComponent({ product }) {
   const router = useRouter();
 
   const handleSubmit = async () => {
-    console.log("Submitting form with data:", productForm);
     await submitProductForm({
       productForm,
       dispatch,

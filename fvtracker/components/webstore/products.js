@@ -52,7 +52,6 @@ function ProductTile({ index, product }) {
     }) || "",
   );
   const addToCart = () => {
-    console.log("adding", { product: product.name, cartQuantity });
     dispatch(addToCartRedux({ product, quantity: cartQuantity }));
   };
   useEffect(() => {
@@ -63,8 +62,6 @@ function ProductTile({ index, product }) {
       }) || "",
     );
   }, [cartItems]);
-
-  console.log({ cartQuantity });
 
   const productActions = [
     {

@@ -42,9 +42,6 @@ export const acceptWarehouseStock = async ({
 
     await product.save();
     await warehouse.save();
-    console.log(
-      `Creating new warehouse stock for product ${product.name} in warehouse ${warehouse.name}`,
-    );
   }
   warehouseStock.quantity += Number(quantity);
   const warehouseAcceptanceProcess = new WarehouseAcceptanceProcess({

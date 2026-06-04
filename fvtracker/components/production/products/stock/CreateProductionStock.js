@@ -87,8 +87,6 @@ export const CreateProductionStock = ({
     }));
   };
 
-  console.log({ workerId });
-
   if (minPossibleBatchMap && Object.keys(minPossibleBatchMap).length === 0) {
     return (
       <Modal

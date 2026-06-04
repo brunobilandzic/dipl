@@ -31,7 +31,6 @@ const HarvestingPlanList = () => {
         <Loading />
       </div>
     );
-  console.log("fields:", fields);
   const fieldsPlans = utils.plans.getFieldsHarvestingPlans(fields);
   return (
     <>

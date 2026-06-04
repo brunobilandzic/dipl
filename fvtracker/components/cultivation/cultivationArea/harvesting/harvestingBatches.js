@@ -23,8 +23,6 @@ export default function HarvestingBatchesFields() {
 
   if (!harvestingBatches) return <LoadingFullScreen />;
 
-  console.log("harvestingBatches", harvestingBatches);
-
   return (
     <div className="flex flex-col gap-4">
       <h1 className="border-b-2 font-bold text-3xl">Žetve</h1>
@@ -76,7 +74,6 @@ const HarvestingBatches = ({ harvestingPlans }) => {
 };
 
 const HarvestingBatchItem = ({ batchItem }) => {
-  console.log("batchItem", batchItem);
   if (!batchItem) return null;
 
   const { quantity, cropVarietyString, plcvCount } = harvestingBatchItemData({

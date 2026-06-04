@@ -24,7 +24,6 @@ export default function SeedOptions() {
       const response = await axios.delete("/api/delete");
       const { success } = response.data;
       await signOut();
-      console.log("SUCCESS:", response.data);
       if (success) alert("Baza je uspješno obrisana");
     } catch (error) {
       console.error("Error deleting database:", error);
@@ -99,7 +98,6 @@ export default function SeedOptions() {
       }
       dispatch(setSeedLoading(true));
       const response = await axios.post("/api/seed", { seedType });
-      console.log(response.data);
       dispatch(setSeedLoading(false));
       alert(`${seedType} uspješno dovršeno\n${response.data.message}`);
     } catch (error) {

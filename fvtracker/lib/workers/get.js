@@ -55,7 +55,7 @@ export const getWorkers = async ({ rootManagerId, managerModelName }) => {
           }
         }
       case GENERAL_MANAGER || FINANCIAL_MANAGER:
-        console.log("\nPopulating general work for worker:\n", worker._id);
+        console.log("Populating general work for worker:\n", worker._id);
         for (const worker of workers) {
           switch (worker.manager.managerModelName) {
             case CULTIVATION_MANAGER:

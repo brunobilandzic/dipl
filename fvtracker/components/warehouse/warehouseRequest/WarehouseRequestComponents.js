@@ -31,7 +31,6 @@ export const WarehouseRequestList = () => {
 };
 
 const WarehouseRequestListItem = ({ request, router }) => {
-  console.log({ request });
   let isPartlyShipped = request.shipment?.status === SHIPMENT_SHIPPED_PARTLY;
   let isFullyShipped = request.shipment?.status === SHIPMENT_SHIPPED_FULLY;
   let isPending =

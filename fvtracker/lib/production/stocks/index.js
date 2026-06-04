@@ -111,7 +111,7 @@ export const createProductStock = async ({
   }
 
   const productionWorker = await ProductionWorker.findById(workerId);
-  console.log("Found production worker:", productionWorker);
+
   if (!productionWorker) {
     throw new Error(`Production worker with id ${workerId} not found.`);
   }
@@ -136,8 +136,6 @@ export const createProductStock = async ({
 };
 
 export const getStocks = async () => {
-  console.log("Fetching products stocks...");
-
   const productionStocks = await ProductionStock.find().populate([
     {
       path: "product",

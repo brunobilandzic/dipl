@@ -89,12 +89,6 @@ export const fillWarehouseRequest = async ({
     return [...acc, ...si.sources];
   }, []);
 
-  console.log({
-    msg: "Filling warehouse request",
-    shipmentSources,
-    oldSources,
-  });
-
   const shipmentItem = new ShipmentItem({
     shipment: shipment._id,
     worker: workerId,
@@ -179,16 +173,8 @@ export const fillWarehouseRequest = async ({
       orderItems: order.items,
     })
   ) {
-    console.log(
-      "Shipment is fully SHIPMENT_SHIPPED_FULLY ",
-      shipment.shipmentItems.length,
-      "shipment items.",
-    );
     shipment.status = SHIPMENT_SHIPPED_FULLY;
   } else if (newShipmentSources.length > 0) {
-    console.log(
-      "Shipment partially SHIPMENT_SHIPPED_FULLY , at least one source added.",
-    );
     shipment.status = SHIPMENT_SHIPPED_PARTLY;
   }
 

@@ -7,7 +7,6 @@ export const updateIngredients = async ({
   productId,
 }) => {
   const existingIngredientIds = ingredientsDb.map((ing) => ing._id.toString());
-  console.log("Existing ingredient IDs:", existingIngredientIds.length);
   const updatedIngredientIds = updatedIngredients
     .filter((ing) => ing._id)
     .map((ing) => ing._id);

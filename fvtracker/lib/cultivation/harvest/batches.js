@@ -47,11 +47,7 @@ async function cmBatches({ batchIds }) {
       },
     },
   });
-  console.log({ harvestingBatches });
   const harvestingBatches = await populateBatches({ harvestingBatches });
-  console.log({
-    harvestingBatches,
-  });
 }
 
 async function pmBatches({ batchIds }) {

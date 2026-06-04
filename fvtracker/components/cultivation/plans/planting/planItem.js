@@ -25,7 +25,6 @@ export const PlantingPlanListItem = ({ plan, plant = true, onDelete }) => {
 };
 
 export const PlantingPlanItems = ({ items, plant }) => {
-  console.log({ items });
   return (
     <div className="mt-2 flex flex-col gap-2">
       <div>Stavke plana:</div>

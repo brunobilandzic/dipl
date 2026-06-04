@@ -10,7 +10,6 @@ export const productionFacilitiyInfo = {
 
 export const getProductionProcessInfo = ({ productName }) => {
   const name = getProcessName({ productName });
-  console.log("creating process for product:", productName, "with name:", name);
 
   return {
     name,

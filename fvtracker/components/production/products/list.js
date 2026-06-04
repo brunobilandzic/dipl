@@ -49,7 +49,6 @@ const ProductList = ({ worker }) => {
   }, [products]); */
 
   if (!products) return <LoadingFullScreen />;
-  console.log({ worker });
   return (
     <div>
       <List
@@ -92,7 +91,6 @@ const ProductItem = ({
   dispatch,
   isWorker,
 }) => {
-  console.log({ isWorker });
   const [addProductionStockModalOpen, setAddProductionStockModalOpen] =
     useState(false);
   const [addWarehouseStockModalOpen, setAddWarehouseStockModalOpen] =

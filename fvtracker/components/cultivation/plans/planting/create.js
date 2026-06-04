@@ -60,13 +60,11 @@ export const SelectField = ({
   const router = useRouter();
 
   useEffect(() => {
-    console.log("fields in select field component", fields);
     if (fields) return;
     refreshFields({ dispatch, router });
   }, [fields]);
 
   if (!fields) {
-    console.log("Fields not loaded yet, showing loading state");
     return <Loading />;
   }
 
@@ -158,10 +156,6 @@ export const FillPlanInfo = ({
     );
   }, [selectedField?._id, crops]);
 
-  useEffect(() => {
-    console.log("Form data updated:", formData);
-  }, [formData]);
-
   const handleFormChange = (event) => {
     const { name, value } = event.target;
     setFormData((prev) => ({
@@ -193,11 +187,6 @@ export const FillPlanInfo = ({
         res.data[`new${plant ? "Planting" : "Harvesting"}Plan`];
 
       alert(`Plan ${plant ? "sadnje" : "berbe"} uspješno kreiran!`);
-
-      console.log(
-        `Result ${plant ? "planting" : "harvesting"} plan:`,
-        resultPlan,
-      );
       if (plant) {
         dispatch(createPlantingPlan(resultPlan));
       } else {
@@ -274,48 +263,6 @@ export const QuantityInput = ({ index, item, handleItemChange }) => (
     value={item.quantity}
   />
 );
-
-export const SelectProductionManager = ({
-  setFormData,
-  selectedProductionManager,
-}) => {
-  const productionManagers = useSelector((state) => state.products?.managers);
-  console.log("Production managers from store:", productionManagers);
-  const dispatch = useDispatch();
-  const router = useRouter();
-  useEffect(() => {
-    if (!productionManagers)
-      refreshManagers({
-        dispatch,
-        router,
-      });
-  }, [productionManagers]);
-
-  if (!productionManagers) return null;
-
-  return (
-    <div className="flex flex-col gap-2">
-      <label className="font-semibold">Odaberite voditelja proizvodnje:</label>
-      <AppSelect
-        options={productionManagers.map((pm) => ({
-          value: pm._id,
-          label:
-            pm.rootManager?.appUser?.name +
-            " " +
-            pm.rootManager?.appUser?.surname,
-        }))}
-        value={selectedProductionManager}
-        onChange={(e) =>
-          setFormData((prev) => ({
-            ...prev,
-            productionManager: e.target.value,
-          }))
-        }
-        placeholder="Odaberite voditelja proizvodnje"
-      />
-    </div>
-  );
-};
 
 const plantingManagerField = ({ plant, formDataInitial }) => {
   if (plant) {

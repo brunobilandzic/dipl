@@ -16,7 +16,6 @@ import { LoadingFullScreen } from "@/components/layout/loading";
 const StockList = () => {
   const dispatch = useDispatch();
   const stocks = useSelector((state) => state.production.productStocks.items);
-  console.log({ stocks });
   useEffect(() => {
     if (!stocks) {
       dispatch(refreshProductsStocks());
@@ -47,15 +46,10 @@ const StockItem = ({ stock }) => {
       label: "Dodaj zalihe",
       className: "submitButton",
       onClick: () => {
-        console.log("Dodaj zalihe", stock.product.name);
         setAddProductStockModalOpen(true);
       },
     },
   ];
-
-  useEffect(() => {
-    console.log("modal open state changed:", addProductStockModalOpen);
-  }, [addProductStockModalOpen]);
 
   if (!product || !harvestingBatches) return <LoadingFullScreen />;
 
@@ -66,7 +60,6 @@ const StockItem = ({ stock }) => {
     }),
   });
 
-  console.log({ stock });
   return (
     <>
       <ListItem key={uuid()} actionOptions={actionOptions}>

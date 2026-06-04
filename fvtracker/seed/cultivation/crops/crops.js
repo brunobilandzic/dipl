@@ -34,7 +34,6 @@ export async function seedCropMainTypes() {
     cropMainTypesPromises.push(createMainType(mainTypeData));
   }
   const mainTypes = await Promise.all(cropMainTypesPromises);
-  console.log(`Created ${mainTypes.length} main crop types.`);
   return mainTypes;
 }
 
@@ -230,7 +229,6 @@ export const createNewPlantage = async ({
       }
     }
   }
-  console.log("to plant", Object.keys(map).join(", "));
   console.log("creating plantage");
   const cultivationWorker = await getEmployedWorker("CultivationWorker");
 

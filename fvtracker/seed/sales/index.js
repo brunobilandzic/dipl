@@ -8,12 +8,12 @@ export default {
   seedSales: async () => {
     await deleteDB();
     const orders = await createOrders();
-    console.log({ seeorders: orders.length });
+    console.log("seeding orders completed");
     // create req for only one order
     const warehouseRequests = await createWarehouseRequests({
       orders: orders.slice(0, orders.length - 1),
     });
-    console.log({ seewarehouseRequests: warehouseRequests.length });
+    console.log(`seeded ${warehouseRequests.length} warehouse requests`);
   },
 };
 

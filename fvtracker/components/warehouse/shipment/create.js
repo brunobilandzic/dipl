@@ -26,7 +26,7 @@ export const CreateShipmentModal = ({
 }) => {
   const workers = useSelector((state) => state.workers.items);
   const workerId = useSelector((state) => state.user.session?.workerId);
-  console.log({ message: "old shipment", oldShipment });
+
   const dispatch = useDispatch();
   const emptyShipment = {
     warehouseRequestId,
@@ -104,8 +104,6 @@ const ChooseWarehouseSources = ({
     neededQuantities,
     newShipmentData,
   });
-
-  console.log({ neededQuantities, isFullfilled });
 
   const sourceQuantity = ({ wh, productName }) =>
     newShipmentData.sources.find(

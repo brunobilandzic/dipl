@@ -366,9 +366,7 @@ const initialNewPlantage_WId = ({ cultivationId, crops }) => {
   const defaultGeneralType = generalTypes?.find(
     (gt) => gt.name === "Jabučasto voće",
   )?._id;
-  console.log({ types });
   const defaultType = types.find((t) => t.name === "Jabuka")?._id || "";
-  console.log({ defaultType });
   const defaultVariety =
     cropVarieties.filter((v) => v.name === "Idared")[0]?._id || "";
 

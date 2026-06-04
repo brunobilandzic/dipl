@@ -12,7 +12,6 @@ const procurmentsSlice = createSlice({
   initialState,
   reducers: {
     addProcurment: (state, action) => {
-      console.log("Adding new procurment to store:", action.payload);
       state.items.push(action.payload);
       state.filteredItems.push(action.payload);
     },

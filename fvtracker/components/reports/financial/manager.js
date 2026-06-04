@@ -18,7 +18,6 @@ export const FinancialReport = ({}) => {
   const orders = useSelector((state) => state.webstore.orders.items);
   const workers = useSelector((state) => state.workers.items);
   if (!orders || !workers) return null;
-  console.log({ orders, workers });
 
   const uniqueCustomers = getUniqueCustomers(orders);
   const uniqueProducts = getUniqueProducts(orders);

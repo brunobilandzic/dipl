@@ -19,7 +19,6 @@ export const ProductionReport = ({}) => {
   const shipmentSourcesCount = getshipmentSourcesCountProducts(products);
 
   const facilities = useSelector((state) => state.production?.facilities.items);
-  console.log({ products, facilities });
   if (!products) return null;
   return (
     <ReportSector title="Proizvodnja">

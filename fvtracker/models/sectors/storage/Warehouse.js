@@ -91,7 +91,6 @@ const warehouseAcceptanceProcessSchema = new Schema({
 });
 
 warehouseAcceptanceProcessSchema.pre("save", async function () {
-  console.log("worker id in pre save", this.worker);
   if (this.isNew) {
     const productionWorker = await ProductionWorker.findById(this.worker);
     if (productionWorker) {

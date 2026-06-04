@@ -35,7 +35,6 @@ const productsSlice = createSlice({
   initialState,
   reducers: {
     setProducts: (state, action) => {
-      console.log("Setting products in Redux:", action.payload);
       state.products.items = action.payload;
       state.products.filteredItems = sortItems({
         items: action.payload,
@@ -144,7 +143,6 @@ const productsSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(refreshFacilities.fulfilled, (state, action) => {
-        console.log("Facilities fetched successfully:", action.payload);
         state.facilities.items = action.payload;
         state.facilities.filteredItems = sortItems({
           items: action.payload,
@@ -168,7 +166,6 @@ export const refreshHarvestingBatches = createAsyncThunk(
 export const refreshProductsStocks = createAsyncThunk(
   "production/refreshProductsStocks",
   async (_, { dispatch }) => {
-    console.log("Fetching product stocks...");
     const res = await api.get("/stocks");
     const data = res.data;
     return res.data.stocks;
@@ -178,10 +175,8 @@ export const refreshProductsStocks = createAsyncThunk(
 export const refreshFacilities = createAsyncThunk(
   "production/refreshFacilities",
   async (_, { dispatch }) => {
-    console.log("Fetching production facilities...");
     const res = await api.get("/facilities");
     const data = res.data;
-    console.log(data);
     return res.data.facilities;
   },
 );

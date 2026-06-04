@@ -4,7 +4,6 @@ import { showDateTime } from "@/lib/utils/display";
 import { ReturnButton } from "../layout/buttons/buttons";
 
 function WarehouseAcceptances({ acceptances, warehouseName, onCancel }) {
-  console.log({ acceptances });
   return (
     <div>
       <List
@@ -49,7 +48,6 @@ const ProductAcceptances = ({ product, warehouseAcceptanceProcesses }) => {
 };
 
 const WarehouseAcceptProcess = ({ acceptance }) => {
-  console.log({ acceptance });
   return (
     <ListItem>
       <div className="listitemDescription">

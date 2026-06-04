@@ -117,14 +117,11 @@ const workersSlice = createSlice({
 export const fetchWorkers = createAsyncThunk(
   "workers/fetchWorkers",
   async (managerModelName, { dispatch }) => {
-    // Simulate an API call
-    console.log("Fetching workers for managerModelName:", managerModelName);
     const response = await api.get(`/workers`, {
       params: {
         managerModelName,
       },
     });
-    console.log("Workers fetched:", response.data);
     return response.data.workers;
   },
 );
@@ -132,7 +129,6 @@ export const fetchWorkers = createAsyncThunk(
 export const fetchEmploymentRequests = createAsyncThunk(
   "workers/fetchEmploymentRequests",
   async (_, { dispatch }) => {
-    console.log("Fetching employment requests...");
     const response = await api.get(`/employment-requests`);
     return response.data.requests;
   },

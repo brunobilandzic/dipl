@@ -23,8 +23,6 @@ export const WarehouseList = () => {
   const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
   const [filters, setFilters] = useState(initFilters("warehouses"));
 
-  console.log({ warehouses });
-
   useEffect(() => {
     if (!warehouses) return;
     dispatch(sortWarehouses(sortBy));
@@ -35,7 +33,6 @@ export const WarehouseList = () => {
   }, [filters]);
 
   if (!warehouses) return <LoadingFullScreen />;
-  console.log({ warehouses });
   return (
     <>
       <List

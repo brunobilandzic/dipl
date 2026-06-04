@@ -30,9 +30,6 @@ export const createOrder = async ({ cartItems, customerData }) => {
   customer.orders.push(order._id);
 
   await order.save();
-  console.log(
-    `Created order ${order.number} with ${order.items.length} items. `,
-  );
   await customer.save();
 };
 

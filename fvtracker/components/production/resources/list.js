@@ -14,7 +14,6 @@ export const ProductionResources = ({}) => {
     (state) => state.production.harvestingBatches.items,
   );
   const { batchesResources } = cropVarietyBatchResources({ harvestingBatches });
-  console.log({ batchesResources });
   const dispatch = useDispatch();
   useEffect(() => {
     if (!harvestingBatches) {
@@ -36,7 +35,6 @@ export const ProductionResources = ({}) => {
 const ProductionResource = ({ batchResources }) => {
   const { batchName, resources } = batchResources;
   if (!resources || resources.length === 0) return null;
-  console.log({ batchResources });
   return (
     <ListItem title={batchName}>
       <AppTable

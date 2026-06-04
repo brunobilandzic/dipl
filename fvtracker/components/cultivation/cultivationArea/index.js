@@ -251,7 +251,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
 
   const onHarvest = () => {
     if (!selectedCultivation) return;
-    console.log("Selected cultivation for harvesting:", selectedCultivation);
     setHarvestCultivation({
       isOpen: true,
       cultivation: selectedCultivation,

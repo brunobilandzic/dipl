@@ -10,11 +10,9 @@ const loadingSlice = createSlice({
   initialState,
   reducers: {
     setLoading: (state, action) => {
-      console.log("Setting loading state to", action.payload);
       state.isLoading = action.payload;
     },
     setSeedLoading: (state, action) => {
-      console.log("Setting seed loading state to", action.payload);
       state.seedLoading = action.payload;
     },
 

@@ -51,16 +51,12 @@ export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
 
   const chooseWorker = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setWarehouseRequest((prev) => ({
       ...prev,
       workerId: value,
     }));
   };
-
-  useEffect(() => {
-    console.log(warehouseRequest);
-  }, [warehouseRequest]);
+  
   return (
     <FormModal
       isOpen={isOpen}

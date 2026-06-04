@@ -14,12 +14,6 @@ import { useRouter } from "next/navigation";
 export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  useEffect(() => {
-    console.log(
-      "selectedCultivationArea in editCA",
-      cultivationAreaMenu?.cultivationArea,
-    );
-  }, [cultivationAreaMenu]);
 
   const [formData, setFormData] = useState({});
 
@@ -52,7 +46,6 @@ export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
         `/api/cultivation/cultivation-area`,
         formData,
       );
-      console.log(res);
       alert("Područje kultivacije je uspješno ažurirano");
       setCultivationAreaMenu(initialCAMenuState);
       dispatch(updateCultivationArea(res.data.updatedCultivationArea));
@@ -103,10 +96,6 @@ export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
       className: "btn cancelButton w-full",
     },
   ];
-
-  useEffect(() => {
-    console.log("cultivationAreaMenu in EditCA", cultivationAreaMenu);
-  }, [cultivationAreaMenu]);
 
   return (
     <>

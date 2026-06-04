@@ -217,7 +217,6 @@ const cultivationSlice = createSlice({
     },
     createPlantage: (state, action) => {
       const { cultivationId, newPlantage, cropVarietyId } = action.payload;
-      console.log("Creating/updating plantage with data:", action.payload);
       if (!state.selectedField) return;
       for (const ca of state.selectedField.cultivationAreas) {
         const cultivation = ca.cultivations.find(
@@ -292,11 +291,9 @@ const cultivationSlice = createSlice({
         for (const harvested of harvestedCropVarieties) {
           for (const pcv of cultivation.plantedCropVarieties) {
             if (pcv._id === harvested._id) {
-              console.log("pcv founc:", pcv);
               pcv.plantingPlanItem = null;
               pcv.harvestedAt = harvested.harvestedAt;
               pcv.harvestingPlanItem = harvested.harvestingPlanItem;
-              console.log("Updated pcv after harvest:", pcv);
             }
           }
         }
@@ -304,7 +301,6 @@ const cultivationSlice = createSlice({
 
       //available plans come from fields not selected field
       const fieldName = state.selectedField.name;
-      console.log({ fields: current(state.fields), fieldName });
       const fid = state.fields.findIndex((f) => f.name === fieldName);
       const field = state.fields[fid];
 
@@ -323,7 +319,6 @@ const cultivationSlice = createSlice({
       // update batch items
       field.harvestingPlans.map((hp) => {
         const harvestingBatch = hp.harvestingBatch;
-        console.log({  harvestingBatch });
         const batchItemId = harvestingBatch.harvestingBatchItems.findIndex(
           (item) => item.cropVariety._id === cropVarietyId,
         );

@@ -29,7 +29,7 @@ export const createCultivation = async ({ cultivationArea, planted }) => {
     cultivationId: newCultivation._id.toString(),
     fieldId: cultivationArea.field._id.toString(),
   });
-  console.log(`created`);
+  console.log(`created empty planted crop varieties, e.g. created cultivation`);
   newCultivation.plantedCropVarieties = plantedCropVarieties.map((p) => p._id);
 
   cultivationArea.cultivations.push(newCultivation._id);

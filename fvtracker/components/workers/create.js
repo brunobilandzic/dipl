@@ -71,7 +71,6 @@ export const CreateWorker = () => {
       alert(`Radnik uspešno kreiran.`, {
         type: "success",
       });
-      console.log({ newWorker: res.data.worker });
       dispatch(addWorker(res.data.worker));
       router.push("/radnici");
     } catch (error) {

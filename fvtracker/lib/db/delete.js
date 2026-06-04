@@ -37,7 +37,7 @@ export async function deleteFieldsWithDocs() {
   await CultivationArea.deleteMany({});
   await CultivationManager.updateMany({}, { $set: { fields: [] } });
   console.log(
-    "Deleted existing fields, cultivation areas, and field grid cells.",
+    "Deleted existing fields, cultivation areas, and cultivations.",
   );
 }
 

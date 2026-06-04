@@ -50,7 +50,6 @@ export function HarvestingModal({
 
   const chooseWorker = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setNewHarvest((prev) => ({
       ...prev,
       workerId: value,
@@ -103,10 +102,6 @@ export function HarvestingModal({
     console.log("New harvest state updated:", newHarvest);
   }, [newHarvest]);
 
-  useEffect(() => {
-    console.log("all plans for field:", allFieldPlans);
-  }, [allFieldPlans]);
-
   // set harvest when cult id
   useEffect(() => {
     if (!cultivation?._id) return;
@@ -141,7 +136,6 @@ export function HarvestingModal({
   // END LOGIC
 
   const onEndHarvestingCoordinates = ({ x, y, isContinue }) => {
-    console.log(newHarvest);
     const rectCells = utils.harvest.getHarvestCellsRect({
       beginX: newHarvest.beginX,
       beginY: newHarvest.beginY,
@@ -262,7 +256,6 @@ export function HarvestingModal({
       );
       dispatch(fetchWorkers(CULTIVATION_MANAGER));
       dispatch(setLoading(false));
-      console.log("Harvest submission response:", res);
     } catch (error) {
       dispatch(setLoading(false));
       console.error("Error submitting harvest:", error);

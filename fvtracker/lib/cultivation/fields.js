@@ -94,8 +94,6 @@ export async function getFieldForCultivation({ cultivation }) {
     select: "field",
     populate: { path: "field", select: "name slug plantingPlans" },
   });
-
-  console.log("Cultivation with populated field:", cultivation);
 }
 
 export const deleteFields = async ({ filter }) => {

@@ -84,7 +84,6 @@ export const WorkersPageComponent = ({ managerModelName }) => {
 
 const WorkerItem = ({ worker, children }) => {
   const [showPayModal, setShowPayModal] = useState(false);
-  console.log({ worker });
   const employed =
     worker.employmentRequest.status === EMPLOYMENT_STATUS_EMPLOYED;
   return (

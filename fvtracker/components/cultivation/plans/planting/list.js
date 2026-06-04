@@ -60,7 +60,6 @@ export function FieldPlansItem({ fieldPlans, plant = true }) {
   }
 
   const getPlans = () => {
-    console.log("fieldPlans:", fieldPlans);
     if (plant) {
       if (!plantingPlans || plantingPlans.length === 0)
         return <div>Nema planova sadnje</div>;

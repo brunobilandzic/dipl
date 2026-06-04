@@ -14,6 +14,7 @@ import { setLoading } from "@/store/loading";
 import { useState } from "react";
 import { FormModal } from "@/components/layout/modals/form";
 import { ChooseWorker } from "@/components/workers/choose";
+import { SORT_INIT_VALUE } from "@/lib/constants/others";
 
 function ShipmentPageComponent({ shipment }) {
   if (!shipment) {
@@ -71,9 +72,8 @@ const ShipmentItemList = ({
   const workerType = useSelector((state) => state.user?.session?.workerType);
   const sortedShipmentItems = sortItems({
     items: shipmentItems,
-    sortBy: "createdAt",
+    sortBy: SORT_INIT_VALUE,
   });
-  console.log({ sortedShipmentItems });
   return (
     <div className="flex flex-col gap-8">
       {sortedShipmentItems?.map((si) => (
@@ -113,7 +113,6 @@ const ShipmentItem = ({
       });
       shipmentItem.receipt = res.data.newReceipt; // Assuming the response contains the new receipt ID
       dispatch(setLoading(false));
-      console.log("Receipt creation response:", res);
       // Handle success (e.g., show a message, refresh data)
     } catch (error) {
       console.error("Error creating receipt:", error);

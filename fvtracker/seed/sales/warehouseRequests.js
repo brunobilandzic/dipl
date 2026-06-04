@@ -34,6 +34,6 @@ export const createWarehouseRequests = async ({ orders }) => {
   }
 
   await createShipments({ warehouseRequests: createdWarehouseRequests });
-  console.log({ whrs: createdWarehouseRequests.length });
+  
   return createdWarehouseRequests;
 };

@@ -106,8 +106,6 @@ export async function createPlantedCropVarietiesCells({
     throw new Error("Field not found with the provided ID.");
   }
 
-  console.log({ relativeCoords });
-
   if (plantingPlanId && cropVarietyId) {
     const plantingPlan = await getPlantingPlanById(plantingPlanId);
     await plantingPlan.populate({

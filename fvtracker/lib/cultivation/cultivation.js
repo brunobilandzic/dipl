@@ -73,11 +73,6 @@ async function addEmptyPlCvs({
   relativeCoords,
   cropVarietyId,
 }) {
-  console.log({
-    existingCulName,
-    relativeCoords,
-    cropVarietyId,
-  });
   const existingCul = await getCultivationByProperty({
     cultivationArea: cuArea,
     property: "name",

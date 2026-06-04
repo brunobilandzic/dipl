@@ -276,3 +276,10 @@ export const findPlantedCellCAName = ({ cultivationAreas, coords }) => {
   }
   return null;
 };
+
+export const getCultivationAreasArea = (cultivationAreas) => {
+  return cultivationAreas.reduce((totalArea, ca) => {
+    const { width, length } = ca.dimensions;
+    return totalArea + width * length;
+  }, 0);
+};

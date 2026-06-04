@@ -120,3 +120,12 @@ export const getFieldCultivations = (field) => {
 export const fieldHasCultivations = (field) => {
   return field.cultivationAreas.some((ca) => ca.cultivations.length > 0);
 };
+
+export const getCultivationCount = (cultivationAreas) =>
+  cultivationAreas?.reduce((count, ca) => count + ca.cultivations?.length, 0);
+
+export const getCultivationsArea = (cultivations) =>
+  cultivations.reduce(
+    (totalArea, cul) => totalArea + cul.plantedCropVarieties.length,
+    0,
+  );

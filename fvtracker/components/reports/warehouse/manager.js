@@ -1,3 +1,5 @@
+"use client"
+
 import { useSelector } from "react-redux";
 import { ReportItem, ReportSection, ReportSector } from "../dashboard";
 import { getWarehousesOccupiedVolume } from "@/lib/utils/storage/warehouse";

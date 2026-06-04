@@ -1,7 +1,11 @@
 import { fetchManager, fetchManagerWorker } from "@/lib/auth/fetchSessionData";
-import { PRODUCTION_MANAGER } from "@/lib/constants/users/managerTypes";
+import {
+  FINANCIAL_MANAGER,
+  PRODUCTION_MANAGER,
+} from "@/lib/constants/users/managerTypes";
 import { managerMorkerMap } from "@/lib/constants/users/managerWorker";
 import { ProductionManager } from "@/models/user/managers/ProductionManager";
+import { populateProductsConfig } from "../populate";
 
 // here is the place we fetch all production data
 
@@ -9,6 +13,7 @@ export async function GET(request) {
   let {
     specificManager,
     worker: productionWorker,
+    generalManager,
     unauthorized,
   } = await fetchManagerWorker({
     managerNames: [PRODUCTION_MANAGER],
@@ -18,42 +23,19 @@ export async function GET(request) {
   if (unauthorized) {
     return Response.json({ unauthorized: true }, { status: 403 });
   }
+  if (
+    generalManager ||
+    specificManager?.rootManager.managerModelName === FINANCIAL_MANAGER
+  ) {
+    const productionManagers = await ProductionManager.find().populate(
+      populateProductsConfig,
+    );
+    return Response.json({ productionManagers }, { status: 200 });
+  }
   const productionManager = await ProductionManager.findOne().populate([
     {
       path: "products",
-      populate: [
-        {
-          path: "ingredients",
-          select: "cropVariety quantity",
-          populate: {
-            path: "cropVariety",
-            select: "name cropType",
-            populate: {
-              path: "cropType",
-              select: "name",
-            },
-          },
-        },
-        {
-          path: "productionStocks",
-          populate: [
-            {
-              path: "facility",
-            },
-          ],
-        },
-        {
-          path: "warehouseStocks",
-          populate: [
-            {
-              path: "warehouse",
-            },
-            {
-              path: "warehouseAcceptanceProcesses",
-            },
-          ],
-        },
-      ],
+      populate: populateProductsConfig,
     },
   ]);
 

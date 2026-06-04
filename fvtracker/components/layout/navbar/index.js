@@ -18,7 +18,6 @@ import {
   GENERAL_MANAGER,
 } from "@/lib/constants/users/managerTypes";
 import fillProductionRedux from "@/lib/utils/production";
-import { fetchShipments, fetchWarehouses } from "@/store/warehouse";
 import { fillWarehouseRedux } from "@/lib/utils/storage";
 import { refreshProducts } from "@/lib/utils/production/products";
 import { refreshProductsThunk } from "@/store/webstore";
@@ -119,7 +118,9 @@ function NavItems() {
         managerModelName === GENERAL_MANAGER ||
         managerModelName === WAREHOUSE_MANAGER
       ) {
-        console.log("shipments called from navbar");
+        console.log(
+          "refreshing orders and requests data for financial/general/warehouse manager...",
+        );
         fillOrdersRedux({ dispatch, router });
         fillWarehouseRequestsRedux({ dispatch });
       }

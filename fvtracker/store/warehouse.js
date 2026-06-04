@@ -35,7 +35,6 @@ const warehousesSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchWarehouses.fulfilled, (state, action) => {
-        console.log("Updating state with fetched warehouses:", action.payload);
         state.warehouses.items = action.payload;
         state.warehouses.filteredItems = action.payload;
         state.isLoading = false;
@@ -53,16 +52,6 @@ const warehousesSlice = createSlice({
       })
       .addCase(fetchWarehouseRequests.rejected, (state) => {
         state.isLoading = false;
-      })
-      .addCase(fetchShipments.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(fetchShipments.fulfilled, (state, action) => {
-        state.shipments = action.payload;
-        state.isLoading = false;
-      })
-      .addCase(fetchShipments.rejected, (state) => {
-        state.isLoading = false;
       });
   },
 });
@@ -70,28 +59,15 @@ const warehousesSlice = createSlice({
 export const fetchWarehouses = createAsyncThunk(
   "warehouses/fetchWarehouses",
   async (_, { dispatch }) => {
-    console.log("Fetching warehouses...");
     const res = await api.get("/warehouses");
-    console.log("Warehouses fetched successfully:", res.data);
     return res.data.warehouses;
   },
 );
 export const fetchWarehouseRequests = createAsyncThunk(
   "warehouses/fetchWarehouseRequests",
   async (_, { dispatch }) => {
-    console.log("Fetching warehouse requests...");
     const res = await api.get("/warehouse-requests");
-    console.log("Warehouse requests fetched:", res.data);
     return res.data.warehouseRequests;
-  },
-);
-export const fetchShipments = createAsyncThunk(
-  "warehouses/fetchShipments",
-  async (_, { dispatch }) => {
-    console.log("Fetching shipments...");
-    const res = await api.get("/shipments");
-    console.log("Shipments fetched:", res.data);
-    return res.data.shipments;
   },
 );
 

@@ -6,7 +6,10 @@ import { getshipmentSourcesCount } from "@/lib/utils/webstore/shipments";
 
 export const WarehouseReport = ({}) => {
   const warehouses = useSelector((state) => state.warehouse?.warehouses.items);
-  if (!warehouses) return null;
+  const warehouseRequests = useSelector(
+    (state) => state.warehouse?.warehouseRequests,
+  );
+  if (!warehouses || !warehouseRequests) return null;
   const occupiedVolume = getWarehousesOccupiedVolume(warehouses);
   const productsCount = warehouses.flatMap((wh) => wh.stocks).length;
   console.log({ warehouses });

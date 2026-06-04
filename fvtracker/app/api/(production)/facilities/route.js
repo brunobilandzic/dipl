@@ -1,7 +1,7 @@
 import { fetchManager, fetchManagerWorker } from "@/lib/auth/fetchSessionData";
 import {
+  FINANCIAL_MANAGER,
   PRODUCTION_MANAGER,
-  WAREHOUSE_MANAGER,
 } from "@/lib/constants/users/managerTypes";
 import dbConnect from "@/lib/db/mongooseConnect";
 import { getFacilities } from "@/lib/production/facilities/get";
@@ -19,7 +19,7 @@ export const GET = async (req) => {
       worker: productionWorker,
       unauthorized,
     } = await fetchManagerWorker({
-      managerNames: [PRODUCTION_MANAGER],
+      managerNames: [PRODUCTION_MANAGER, FINANCIAL_MANAGER],
       workerType: managerMorkerMap[PRODUCTION_MANAGER],
     });
 

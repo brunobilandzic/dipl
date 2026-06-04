@@ -125,7 +125,7 @@ function NavItems() {
         console.log(
           "financial manager logged in, refreshing warehouse requests data...",
         );
-
+        refreshFields({ dispatch, router, generalManager: true });
         dispatch(fillManagersSelection({ managersType: "warehouseManagers" }));
       }
     } else if (status === "unauthenticated") {

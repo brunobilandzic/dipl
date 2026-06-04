@@ -8,7 +8,7 @@ export const CultivationManagerReports = ({}) => {
   return (
     <ReportSector title="Kultivacija">
       <FieldStats fields={fields} />
-      <CropsReportSection />
+      <CropsReportSection fields={fields} />
     </ReportSector>
   );
 };

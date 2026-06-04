@@ -1,8 +1,21 @@
 import { useSelector } from "react-redux";
 import { ReportItem, ReportSection } from "../dashboard";
 
-export const CropsReportSection = ({}) => {
+export const CropsReportSection = ({ fields }) => {
+  const cultivationAreas = fields?.flatMap((field) => field.cultivationAreas);
+  const cultivations = cultivationAreas?.flatMap((area) => area.cultivations);
+  console.log("CropsReportSection - cultivations:", cultivations);
+
   const crops = useSelector((state) => state.cultivation.crops);
+
+  const plantedCrops = cultivations?.flatMap((cultivation) =>
+    cultivation.plantedCropVarieties.filter((plcv) => plcv.plantingPlanItem),
+  );
+  const harvestedCrops = cultivations?.flatMap((cultivation) =>
+    cultivation.plantedCropVarieties.filter((plcv) => plcv.harvestingPlanItem),
+  );
+  console.log("CropsReportSection - plantedCrops:", plantedCrops);
+  console.log("CropsReportSection - harvestedCrops:", harvestedCrops);
 
   return (
     <>
@@ -12,6 +25,8 @@ export const CropsReportSection = ({}) => {
           cropTypesLength={crops?.types?.length}
           cropVarietiesLength={crops?.varieties?.length}
         />
+        <PlantedCropsCount plantedCropsLength={plantedCrops?.length} />
+        <HarvestedCropsCount harvestedCropsLength={harvestedCrops?.length} />
       </ReportSection>
     </>
   );
@@ -27,6 +42,22 @@ const CropsCount = ({
       <ReportItem description={"Generalnih vrsta"} count={generalTypesLength} />
       <ReportItem description={"Vrsta plodova"} count={cropTypesLength} />
       <ReportItem description={"Sorta plodova"} count={cropVarietiesLength} />
+    </>
+  );
+};
+
+const PlantedCropsCount = ({ plantedCropsLength }) => {
+  return (
+    <>
+      <ReportItem description={"Zasađenih sorti"} count={plantedCropsLength} />
+    </>
+  );
+};
+
+const HarvestedCropsCount = ({ harvestedCropsLength }) => {
+  return (
+    <>
+      <ReportItem description={"Ubranih sorti "} count={harvestedCropsLength} />
     </>
   );
 };

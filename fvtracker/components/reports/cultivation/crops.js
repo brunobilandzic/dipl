@@ -4,7 +4,6 @@ import { ReportItem, ReportSection } from "../dashboard";
 export const CropsReportSection = ({ fields }) => {
   const cultivationAreas = fields?.flatMap((field) => field.cultivationAreas);
   const cultivations = cultivationAreas?.flatMap((area) => area.cultivations);
-  console.log("CropsReportSection - cultivations:", cultivations);
 
   const crops = useSelector((state) => state.cultivation.crops);
 
@@ -14,8 +13,6 @@ export const CropsReportSection = ({ fields }) => {
   const harvestedCrops = cultivations?.flatMap((cultivation) =>
     cultivation.plantedCropVarieties.filter((plcv) => plcv.harvestingPlanItem),
   );
-  console.log("CropsReportSection - plantedCrops:", plantedCrops);
-  console.log("CropsReportSection - harvestedCrops:", harvestedCrops);
 
   return (
     <>

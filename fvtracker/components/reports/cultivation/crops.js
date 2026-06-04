@@ -32,8 +32,14 @@ export const CropsReportSection = ({ fields }) => {
           cropTypesLength={crops?.types?.length}
           cropVarietiesLength={crops?.varieties?.length}
         />
-        <PlantedCropsCount plantedCropsLength={plantedCrops?.length} />
-        <HarvestedCropsCount harvestedCropsLength={harvestedCrops?.length} />
+        <PlantedCropsCount
+          plantedCropsLength={plantedCrops?.length}
+          cvQuantity={plCvQuantity}
+        />
+        <HarvestedCropsCount
+          harvestedCropsLength={harvestedCrops?.length}
+          cvQuantity={hvCvQuantity}
+        />
       </ReportSection>
     </>
   );
@@ -53,18 +59,22 @@ const CropsCount = ({
   );
 };
 
-const PlantedCropsCount = ({ plantedCropsLength }) => {
+const PlantedCropsCount = ({ plantedCropsLength, cvQuantity }) => {
   return (
     <>
-      <ReportItem description={"Zasađenih sorti"} count={plantedCropsLength} />
+      <ReportItem description={"Zasađenih ćelija"} count={plantedCropsLength}>
+        Količina {cvQuantity}
+      </ReportItem>
     </>
   );
 };
 
-const HarvestedCropsCount = ({ harvestedCropsLength }) => {
+const HarvestedCropsCount = ({ harvestedCropsLength, cvQuantity }) => {
   return (
     <>
-      <ReportItem description={"Ubranih sorti "} count={harvestedCropsLength} />
+      <ReportItem description={"Ubranih ćelija"} count={harvestedCropsLength}>
+        Količina {cvQuantity}
+      </ReportItem>
     </>
   );
 };

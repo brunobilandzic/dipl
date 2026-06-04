@@ -72,13 +72,6 @@ const logHbiItems = (items) => {
 
 // you get batches, ingredients
 export const getBatchesCVS = ({ harvestingBatches, product }) => {
-  const batchesWithResources = getBatchesWithResources({
-    harvestingBatches,
-    product,
-    quantity: 1,
-  });
-  const cvBatches = {};
-
   let batchesCVS = Object.fromEntries(
     harvestingBatches.map((batch) => [batch.name, null]),
   );

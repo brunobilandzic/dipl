@@ -2,11 +2,62 @@
 
 import managerSectors from "@/lib/constants/users/managerSectors";
 import { useSelector } from "react-redux";
-import { ReportSector } from "../dashboard";
+import {
+  EMPLOYMENT_STATUS_EMPLOYED,
+  EMPLOYMENT_STATUS_PENDING,
+  EMPLOYMENT_STATUS_UNEMPLOYED,
+} from "@/lib/constants/users/workers";
+import { ReportSector, ReportSection, ReportItem } from "../dashboard";
 
 export const WorkersReport = ({ managerModelName }) => {
   const workers = useSelector((state) => state.workers.items);
+
   if (!workers || workers.length === 0) return null;
   const sectorName = managerSectors[managerModelName] || "Sektor";
-  return <ReportSector workers={true}>{workers.length}</ReportSector>;
+  return (
+    <ReportSector workers={true}>
+      <GeneralWorkersReport workers={workers} title={sectorName} />
+    </ReportSector>
+  );
+};
+
+export const GeneralWorkersReport = ({ workers, title = "Radnici", children }) => {
+  const totalHourlyRate = workers.reduce(
+    (sum, worker) => sum + worker.hourlyRate,
+    0,
+  );
+  const employedWorkers = workers.filter(
+    (worker) => worker.employmentRequest.status == EMPLOYMENT_STATUS_EMPLOYED,
+  );
+  const unemployedWorkers = workers.filter(
+    (worker) => worker.employmentRequest.status == EMPLOYMENT_STATUS_UNEMPLOYED,
+  );
+  const pendingWorkers = workers.filter(
+    (worker) => worker.employmentRequest.status == EMPLOYMENT_STATUS_PENDING,
+  );
+
+  return (
+    <ReportSection title={title}>
+      <ReportItem count={workers.length} description={"Prijava"} />
+
+      <ReportItem
+        count={employedWorkers.length}
+        description={"Zaposlen" + (employedWorkers.length > 1 ? "ih" : "")}
+      />
+      <ReportItem
+        count={unemployedWorkers.length}
+        description={"Nezaposlen" + (unemployedWorkers.length > 1 ? "ih" : "")}
+      />
+      <ReportItem count={pendingWorkers.length} description={"Na čekanju"} />
+      <ReportItem
+        count={totalHourlyRate.toFixed(2)}
+        description={"Ukupna satnica (€)"}
+      />
+      <ReportItem
+        count={(totalHourlyRate * 160).toFixed(2)}
+        description={"Mesečni trošak (€)"}
+      />
+     {children}
+    </ReportSection>
+  );
 };

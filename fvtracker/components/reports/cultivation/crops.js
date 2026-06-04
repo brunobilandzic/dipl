@@ -14,6 +14,16 @@ export const CropsReportSection = ({ fields }) => {
     cultivation.plantedCropVarieties.filter((plcv) => plcv.harvestingPlanItem),
   );
 
+  const plCvQuantity = plantedCrops.reduce(
+    (sum, plcv) => plcv.plantingPlanItem.cropVariety.quantityPerCell + sum,
+    0,
+  );
+
+  const hvCvQuantity = harvestedCrops.reduce(
+    (sum, plcv) => plcv.harvestingPlanItem.cropVariety.quantityPerCell + sum,
+    0,
+  );
+
   return (
     <>
       <ReportSection title="Plodovi">

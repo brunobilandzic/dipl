@@ -32,12 +32,9 @@ export async function GET(request) {
     );
     return Response.json({ productionManagers }, { status: 200 });
   }
-  const productionManager = await ProductionManager.findOne().populate([
-    {
-      path: "products",
-      populate: populateProductsConfig,
-    },
-  ]);
+  const productionManager = await ProductionManager.findOne().populate(
+    populateProductsConfig,
+  );
 
   return Response.json({ productionManager }, { status: 200 });
 }

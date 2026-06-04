@@ -36,8 +36,9 @@ export async function DELETE(request) {
   try {
     await dbConnect();
     await fetchSessionSpecificManager({ managerName: CULTIVATION_MANAGER });
-    const body = await request.json();
-    const deleted = await cultivation.cultivations.delete(body.id);
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get("id");
+    const deleted = await cultivation.cultivations.delete(id);
     if (!deleted) {
       return Response.json({ error: "Not found" }, { status: 404 });
     }

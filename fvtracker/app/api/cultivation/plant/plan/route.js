@@ -13,7 +13,6 @@ export async function POST(request) {
       plantingPlanData: body,
     });
     await populatePlans({ plans: [newPlantingPlan] });
-    console.log("Created new planting plan:", newPlantingPlan);
     return Response.json({ newPlantingPlan }, { status: 201 });
   } catch (error) {
     console.error(error);

@@ -18,10 +18,6 @@ export const ChooseCropVarietyItems = ({
     varieties: cropVarieties = [],
   } = crops || {};
 
-  useEffect(() => {
-    console.log("cvi cropsData changed:", cropsData);
-  }, [cropsData]);
-
   const handleItemChange = (index, field, value) => {
     setCropsData((prev) => ({
       ...prev,
@@ -53,7 +49,6 @@ export const ChooseCropVarietyItems = ({
         };
       }),
     }));
-    console.log("handleItemChange:", { index, field, value });
   };
 
   const addItem = () => {

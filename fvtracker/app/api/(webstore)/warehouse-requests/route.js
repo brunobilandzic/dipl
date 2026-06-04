@@ -12,7 +12,6 @@ import { FinancialManager } from "@/models/user/managers/FinancialManager";
 import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
 
 export async function GET(request) {
-  console.log("Received GET request for warehouse requests");
   try {
     let { specificManager, worker, unauthorized } = await fetchManagerWorker({
       managerNames: [WAREHOUSE_MANAGER, FINANCIAL_MANAGER],

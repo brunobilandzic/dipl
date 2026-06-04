@@ -74,7 +74,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       return token;
     },
     async session({ session, token }) {
-      console.log("Session is called");
       if (token) {
         session.user.appUserId = token.appUserId;
         session.user.email = token.email;

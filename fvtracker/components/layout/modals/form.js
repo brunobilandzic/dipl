@@ -9,7 +9,7 @@ export function FormModal({
   children,
   invertColor,
   submitDisabled,
-  submitText = "Spremi",  
+  submitText = "Spremi",
 }) {
   return (
     <Modal

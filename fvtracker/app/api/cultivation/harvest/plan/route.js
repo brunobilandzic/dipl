@@ -46,7 +46,6 @@ export async function POST(request) {
         ],
       },
     ]);
-    console.log("Created new harvesting plan:", newHarvestingPlan);
     return Response.json({ newHarvestingPlan }, { status: 201 });
   } catch (error) {
     console.error(error);

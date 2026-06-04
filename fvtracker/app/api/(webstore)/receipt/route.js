@@ -7,7 +7,6 @@ import { Worker } from "@/models/user/workers";
 
 export async function POST(req) {
   try {
-    console.log("Received request to create receipt");
     let { specificManager, worker, unauthorized } = await fetchManagerWorker({
       managerNames: [FINANCIAL_MANAGER],
       workerType: managerMorkerMap[FINANCIAL_MANAGER],

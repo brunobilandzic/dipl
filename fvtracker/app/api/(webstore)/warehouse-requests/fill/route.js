@@ -28,8 +28,6 @@ export async function POST(request) {
       workerId,
     });
 
-    console.log(result);
-
     return Response.json(result);
   } catch (error) {
     console.error("Error filling warehouse request:", error);

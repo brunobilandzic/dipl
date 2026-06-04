@@ -17,12 +17,6 @@ import React from "react";
 async function ReportsPage() {
   const { specificManager, worker, generalManager, unauthorized } =
     await fetchManagerWorker({ managerNames: MANAGER_TYPES });
-  console.log({
-    specificManager,
-    worker,
-    generalManager,
-    unauthorized,
-  });
   if (unauthorized) return <UnathorizedPage />;
   if (
     generalManager ||

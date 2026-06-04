@@ -86,7 +86,6 @@ export async function POST(request) {
 }
 
 export async function DELETE(request) {
-  console.log("Received DELETE request for field");
   try {
     await dbConnect();
     const { generalManager, specificManager } = await fetchManager({

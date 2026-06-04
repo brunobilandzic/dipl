@@ -32,7 +32,6 @@ export async function POST(req) {
       { new: true },
     );
     await worker.populate(basePopulate);
-    console.log("Worker after update:", worker);
     let populate;
     switch (worker.manager.managerModelName) {
       case CULTIVATION_MANAGER:

@@ -23,7 +23,6 @@ export async function POST(req) {
     }
     const body = await req.json();
     const newHarvest = body;
-    console.log({ newHarvest });
     const harvestedCropVarieties = await harvestCells(newHarvest);
     return Response.json({ harvestedCropVarieties }, { status: 201 });
   } catch (error) {

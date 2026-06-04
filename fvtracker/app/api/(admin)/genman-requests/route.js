@@ -46,7 +46,6 @@ export async function POST(req) {
       return Response.json({ error: "Unauthorized" }, { status: 403 });
     }
     const body = await req.json();
-    console.log({ body });
     const { status } = body;
 
     const request = await GeneralManagerRequest.findOne();
@@ -61,7 +60,6 @@ export async function POST(req) {
       });
     }
     await request.save();
-    console.log({ request });
     return Response.json({ request, message: "Zahtjev odobren" });
   } catch (error) {
     console.error("Error approving general manager request:", error);

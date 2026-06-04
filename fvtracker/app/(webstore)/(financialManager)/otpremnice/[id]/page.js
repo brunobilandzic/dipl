@@ -8,7 +8,6 @@ async function ShipmentPage({ params }) {
   await dbConnect();
   const { id } = await params;
   const shipment = await getShipmentById({ id });
-  console.log();
   return (
     <div>
       <ShipmentPageComponent shipment={sanitize(shipment)} />

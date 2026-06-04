@@ -49,7 +49,6 @@ export async function POST(req) {
       rootManager,
       workerData,
     });
-    console.log("Worker created successfully:", specificWorker);
     return Response.json({ worker: specificWorker });
   } catch (error) {
     console.error("Worker creation error:", error);

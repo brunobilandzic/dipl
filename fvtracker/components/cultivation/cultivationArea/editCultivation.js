@@ -29,7 +29,6 @@ export function EditCultivation({ isOpen, onCancel, cultivationData }) {
 
     try {
       const res = await api.put(`/cultivation`, formData);
-      console.log("Cultivation updated successfully:", res.data);
       dispatch(updateCultivation(res.data.updatedCultivation));
       onCancel();
       alert(

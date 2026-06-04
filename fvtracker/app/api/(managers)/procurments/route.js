@@ -50,7 +50,6 @@ export async function POST(req) {
       );
     }
     const { newProcurmentData } = await req.json();
-    console.log("Received new procurment data:", newProcurmentData);
     const rootManagerId = specificManager
       ? specificManager.rootManager._id
       : gerneralManager._id;
@@ -81,9 +80,6 @@ export async function PUT(req) {
       );
     }
     const { procurmentId, newStatus } = await req.json();
-    console.log(
-      `Changing status of procurment ${procurmentId} to ${newStatus}`,
-    );
     await Procurment.findByIdAndUpdate(procurmentId, { status: newStatus });
     return Response.json(
       { message: `Status nabavke ${procurmentId} promijenjen u ${newStatus}.` },

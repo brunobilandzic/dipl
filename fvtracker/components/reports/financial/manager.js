@@ -14,6 +14,10 @@ export const FinancialReport = ({}) => {
     <ReportSector title="Financije">
       <ReportSection title="Narudžbe">
         <ReportItem
+          count={orders.length}
+          description={"Narudžb" + (orders.length > 1 ? "i" : "a")}
+        />
+        <ReportItem
           count={uniqueCustomers.length}
           description={stringQuant({
             string: "Kupac",

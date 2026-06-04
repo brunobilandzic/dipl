@@ -1,4 +1,7 @@
-import { ReportSector } from "./dashboard";
+"use client";
+
+import { CultivationManagerReports } from "./cultivation/manager";
+import { ReportsDashboard } from "./dashboard";
 
 export const AllReports = ({}) => {
   return (

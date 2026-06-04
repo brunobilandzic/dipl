@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useSelector } from "react-redux";
 import { ReportItem, ReportSection, ReportSector } from "../dashboard";
 import {
@@ -13,6 +13,7 @@ import {
   EMPLOYMENT_STATUS_PENDING,
   EMPLOYMENT_STATUS_UNEMPLOYED,
 } from "@/lib/constants/users/workers";
+import { GeneralWorkersReport } from "../worker";
 
 export const FinancialReport = ({}) => {
   const orders = useSelector((state) => state.webstore.orders.items);
@@ -74,28 +75,7 @@ export const FinancialReport = ({}) => {
           description={"Vrijednost (€)"}
         />
       </ReportSection>
-      <ReportSection title="Radnici">
-        <ReportItem count={workers.length} description={"Prijava"} />
-
-        <ReportItem
-          count={employedWorkers.length}
-          description={"Zaposlen" + (employedWorkers.length > 1 ? "ih" : "")}
-        />
-        <ReportItem
-          count={unemployedWorkers.length}
-          description={
-            "Nezaposlen" + (unemployedWorkers.length > 1 ? "ih" : "")
-          }
-        />
-        <ReportItem count={pendingWorkers.length} description={"Na čekanju"} />
-        <ReportItem
-          count={totalHourlyRate.toFixed(2)}
-          description={"Ukupna satnica (€)"}
-        />
-        <ReportItem
-          count={(totalHourlyRate * 160).toFixed(2)}
-          description={"Mesečni trošak (€)"}
-        />
+      <GeneralWorkersReport workers={workers} title="Radnici">
         <ReportItem
           count={((totalHourlyRate * 160) / employedWorkers.length).toFixed(2)}
           description={"Prosječni mesečni trošak (€)"}
@@ -104,7 +84,7 @@ export const FinancialReport = ({}) => {
           count={((totalHourlyRate * 160) / totalRevenue).toFixed(2)}
           description={"Trošak radnika (%)"}
         />
-      </ReportSection>
+      </GeneralWorkersReport>
     </ReportSector>
   );
 };

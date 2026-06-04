@@ -2,7 +2,8 @@ import { ReportItem, ReportsDashboard, ReportSection } from "../dashboard";
 import { CultivationAreasStats } from "./cultivation";
 
 export const FieldStats = ({ fields }) => {
-  const cultivationAreas = fields.flatMap((field) => field.cultivationAreas);
+  const cultivationAreas = fields?.flatMap((field) => field.cultivationAreas);
+  
   return (
     <>
       <ReportSection title="Statistika Polja">

@@ -12,6 +12,10 @@ export const WarehouseReport = ({}) => {
   if (!warehouses || !warehouseRequests) return null;
   const occupiedVolume = getWarehousesOccupiedVolume(warehouses);
   const productsCount = warehouses.flatMap((wh) => wh.stocks).length;
+  const shipmentItems = warehouseRequests.flatMap(
+    (req) => req.shipment.shipmentItems,
+  );
+  const shipmentSourcesCount = getshipmentSourcesCount(shipmentItems);
   console.log({ warehouses });
   return (
     <ReportSector title="Skladište">

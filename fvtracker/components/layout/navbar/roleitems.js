@@ -27,6 +27,10 @@ export default {
   ],
   CultivationManager: [
     {
+      label: "izvještaji",
+      path: "/izvjestaji",
+    },
+    {
       label: "upravljanje poljima",
       submenu: [
         { label: "pregled", path: "/upravljanje-poljima/pregled" },
@@ -52,6 +56,10 @@ export default {
   ],
   ProductionManager: [
     {
+      label: "izvještaji",
+      path: "/izvjestaji",
+    },
+    {
       label: "proizvodnja",
       submenu: [
         { label: "proizvodi", path: "/proizvodi" },
@@ -73,6 +81,10 @@ export default {
     },
   ],
   WarehouseManager: [
+    {
+      label: "izvještaji",
+      path: "/izvjestaji",
+    },
     {
       label: "skladište",
       submenu: [
@@ -123,11 +135,19 @@ export default {
   ],
   CultivationWorker: [
     {
+      label: "Radnički profil",
+      path: "/radnicki-profil",
+    },
+    {
       label: "Kultivacija",
       path: "/upravljanje-poljima/pregled",
     },
   ],
   ProductionWorker: [
+    {
+      label: "Radnički profil",
+      path: "/radnicki-profil",
+    },
     {
       label: "Proizvodi",
       path: "/proizvodi",
@@ -135,11 +155,19 @@ export default {
   ],
   WarehouseWorker: [
     {
+      label: "Radnički profil",
+      path: "/radnicki-profil",
+    },
+    {
       label: "Otpremnice",
       path: "/skladiste-zahtjevi",
     },
   ],
   FinancialWorker: [
+    {
+      label: "Radnički profil",
+      path: "/radnicki-profil",
+    },
     {
       label: "Narudžbe",
       path: "/narudzbe",

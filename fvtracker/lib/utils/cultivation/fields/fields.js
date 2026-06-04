@@ -8,11 +8,14 @@ export const extractCoords = (cell) => {
   return { width, length };
 };
 
-
-export const refreshFields = async ({ dispatch, router }) => {
+export const refreshFields = async ({ dispatch, router, generalManager }) => {
   try {
     dispatch(setLoading(true));
-    const res = await api.get("/cultivation/fields");
+    const res = await api.get(
+      generalManager
+        ? "/cultivation/fields/general-manager"
+        : "/cultivation/fields",
+    );
     if (res.data && res.data.fields && Array.isArray(res.data.fields)) {
       dispatch(setFields(res.data.fields));
     }

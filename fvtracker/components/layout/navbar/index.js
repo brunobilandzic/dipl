@@ -102,6 +102,7 @@ function NavItems() {
       }
       if (managerModelName === "GeneralManager" && !generalManagerRedux) {
         refreshGeneralManager({ dispatch });
+        refreshFields({ dispatch, router, generalManager: true });
       }
       if (managerModelName === PRODUCTION_MANAGER) {
         console.log(

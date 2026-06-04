@@ -62,3 +62,7 @@ export const cropVarietyFullName = (cropVariety) => {
   const generalTypeName = cropVariety.cropType?.generalType?.name || "";
   return `${generalTypeName}: ${cropTypeName} - ${varietyName}`;
 };
+
+export const stringQuant = ({ string, quantity, pluralLetter }) => {
+  return `${string}${quantity > 1 ? pluralLetter : ""}`;
+};

@@ -218,6 +218,17 @@ export const shipmentSourcesTotals = ({ shipmentSources }) => {
   }, {});
 };
 
+export const getWarehouseStockQuantity = (products) =>
+  products?.reduce(
+    (total, product) =>
+      total +
+      product.warehouseStocks.reduce(
+        (stockTotal, stock) => stockTotal + stock.quantity,
+        0,
+      ),
+    0,
+  );
+
 export const warehouseRequestPopulateShipmentItems = [
   {
     path: "order",

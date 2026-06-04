@@ -2,7 +2,7 @@ import { handleApiError } from "./api";
 
 export default function handleError(error, router) {
   console.error("Handling error:", error);
-  if (error.response?.status === 403) {
+  if (error.response?.status === 403 || error.response?.status === 401) {
     console.log("redirecting\n\n");
     router?.push("/uloga-nije-odobrena");
     return;

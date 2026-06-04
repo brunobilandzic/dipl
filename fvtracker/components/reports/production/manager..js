@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useSelector } from "react-redux";
 import { ReportItem, ReportSection, ReportSector } from "../dashboard";
 import { getshipmentSourcesCountProducts } from "@/lib/utils/webstore/shipments";
@@ -10,6 +10,8 @@ import { getWarehouseStockQuantity } from "@/lib/utils/storage/warehouse";
 
 export const ProductionReport = ({}) => {
   const products = useSelector((state) => state.production?.products.items);
+
+  if (!products) return null;
 
   const productionStockQuantity = getProductionStockQuantity(products);
   const warehouseStockQuantity = getWarehouseStockQuantity(products);

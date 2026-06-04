@@ -138,7 +138,7 @@ export const fillWarehouseRequest = async ({
 
     orderItem.shipmentSources.push(shipmentSource._id);
     shipmentItem.sources.push(shipmentSource._id);
-
+    product.shipmentSources.push(shipmentSource._id);
     newShipmentSources.push(shipmentSource);
 
     stock.quantity -= quantity;
@@ -152,6 +152,7 @@ export const fillWarehouseRequest = async ({
     await orderItem.save();
     await stock.save();
     await shipmentSource.save();
+    await product.save();
   }
 
   await shipmentItem.save();

@@ -44,10 +44,11 @@ export const deleteOrderUtil = async ({ orderId, dispatch, router }) => {
 
 export const getUniqueCustomers = (orders) => {
   const customers = orders.flatMap((o) => o.customer);
-  return new Array(new Set(customers));
+  return Array.from(new Set(customers));
 };
 
 export const getUniqueProducts = (orders) => {
-  const products = orders.flatMap((o) => o.items).map((i) => i.product);
-  return new Array(new Set(products));
+  const products = orders.flatMap((o) => o.items).map((i) => i.product.name);
+  console.log({ oip: products });
+  return Array.from(new Set(products));
 };

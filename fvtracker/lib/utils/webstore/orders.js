@@ -46,3 +46,8 @@ export const getUniqueCustomers = (orders) => {
   const customers = orders.flatMap((o) => o.customer);
   return new Array(new Set(customers));
 };
+
+export const getUniqueProducts = (orders) => {
+  const products = orders.flatMap((o) => o.items).map((i) => i.product);
+  return new Array(new Set(products));
+};

@@ -9,6 +9,7 @@ export const FinancialReport = ({}) => {
   console.log({ orders });
 
   const uniqueCustomers = getUniqueCustomers(orders);
+  const uniqueProducts = getUniqueProducts(orders);
 
   return (
     <ReportSector title="Financije">

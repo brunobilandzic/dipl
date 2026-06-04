@@ -38,7 +38,7 @@ export const ReportItem = ({ children, count, description, title, stats }) => {
           {stat}
         </div>
       ))}
-      {children}
+      <div className="text-gray-600">{children}</div>
     </div>
   );
 };

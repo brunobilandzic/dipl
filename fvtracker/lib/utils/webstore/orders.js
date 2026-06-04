@@ -4,7 +4,6 @@ import { refreshOrdersThunk } from "@/store/webstore";
 
 export const sendOrder = async ({ customerData, cartItems }) => {
   try {
-    console.log("Podaci narudžbe:", { customerData, cartItems });
     const response = await api.post("/orders", { customerData, cartItems });
     return response.data;
   } catch (error) {
@@ -49,7 +48,6 @@ export const getUniqueCustomers = (orders) => {
 
 export const getUniqueProducts = (orders) => {
   const products = orders.flatMap((o) => o.items).map((i) => i.product.name);
-  console.log({ oip: products });
   return Array.from(new Set(products));
 };
 

@@ -15,12 +15,10 @@ export const getCartFromLocalStorage = () => {
 };
 
 export const fillCartRedux = ({ dispatch, cartItems }) => {
-  console.log({ cartItems });
   if (cartItems.length > 0) {
     return;
   }
   const localCart = getCartFromLocalStorage();
-  console.log({ localCart });
   if (localCart && localCart.items) {
     dispatch(fillReduxCart(localCart.items));
   }

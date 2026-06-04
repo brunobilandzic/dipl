@@ -10,7 +10,6 @@ export const refreshProducts = async ({ dispatch, router }) => {
     dispatch(setLoading(true));
     const res = await api.get("/products");
     dispatch(setProducts(res.data.products));
-    console.log("Products refreshed successfully:");
     dispatch(setLoading(false));
   } catch (error) {
     console.error("Error fetching products:", error);
@@ -48,10 +47,6 @@ export const submitProductForm = async ({
       res = await api.post("/products", productForm);
     }
     const product = res.data.product;
-    console.log(
-      `Product ${isEdit ? "updated" : "created"} successfully:`,
-      product,
-    );
     dispatch(updateProduct(product));
     dispatch(setLoading(false));
     alert(`Proizvod ${isEdit ? "ažuriran" : "kreiran"} uspješno!`);

@@ -13,7 +13,6 @@ export const totalWarehouseStockQuantity = ({ warehouseStocks }) => {
 };
 
 export const submitWarehouseStock = async ({ warehouseStockData }) => {
-  console.log({ warehouseStockData });
   const res = await api.post(
     "/stocks",
     {
@@ -107,10 +106,7 @@ export const calculateNeededQuantities = ({
   newShipmentData,
   order,
 }) => {
-  console.log({ shipmentItems, newShipmentData, order });
-
   const neededQuantities = shipmentItems.map((shi) => {
-    console.log({ shipmentItem: shi });
     const existingQuantity =
       newShipmentData.sources.reduce((acc, source) => {
         if (source.productName === shi.product) {
@@ -119,10 +115,7 @@ export const calculateNeededQuantities = ({
         return acc;
       }, 0) || 0;
 
-    console.log({ existingQuantity });
-
     const shippedQuantity = order.items.reduce((acc, oi) => {
-      console.log({ oi });
       acc += oi.shipmentSources.reduce((sAcc, ss) => {
         if (ss.product.name === shi.product) {
           sAcc += Number(ss.quantity);
@@ -138,7 +131,6 @@ export const calculateNeededQuantities = ({
     };
   });
 
-  console.log({ neededQuantities });
   return neededQuantities;
 };
 
@@ -147,7 +139,6 @@ export const isRequestFulfilled = ({ neededQuantities }) => {
 };
 
 export const submitShipment = async ({ newShipmentData, dispatch }) => {
-  console.log("submitting...", { newShipmentData });
   try {
     dispatch(setLoading(true));
     await api.post("/warehouse-requests/fill", {
@@ -179,13 +170,11 @@ export const buildRequired = ({ orderItems }) => {
 
 export const calculateIsShipmentShipped = ({ shipmentItems, orderItems }) => {
   const required = buildRequired({ orderItems });
-  console.log({ required });
 
   const shipmentSources = shipmentItems.reduce((acc, si) => {
     if (!si.sources) return acc;
     return [...acc, ...si.sources];
   }, []);
-  console.log({ allSources: shipmentSources });
   if (shipmentSources.length === 0) return false;
   const totals = shipmentSourcesTotals({ shipmentSources });
   let shipmentShipped = true;
@@ -195,20 +184,10 @@ export const calculateIsShipmentShipped = ({ shipmentItems, orderItems }) => {
     }
   }
 
-  console.log({ shipmentSources: { ...totals } });
-  console.log({ shipmentShipped });
-
-  console.log({ shipmentSources: { ...totals } });
   return shipmentShipped;
 };
 
 export const shipmentSourcesTotals = ({ shipmentSources }) => {
-  console.log({
-    t: shipmentSources.map((s) => ({
-      product: s.product.name,
-      quantity: s.quantity,
-    })),
-  });
   return shipmentSources.reduce((acc, source) => {
     if (!acc[source.product.name]) {
       acc[source.product.name] = 0;

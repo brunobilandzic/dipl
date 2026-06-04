@@ -4,7 +4,6 @@ export const cropVarietyBatchResources = ({ harvestingBatches }) => {
   if (!harvestingBatches) return { resources: [] };
   const batchesResources = [];
   const resources = harvestingBatches.map((batch) => {
-    console.log({ batch });
     const batchName = batch.name;
     const batchResources = batch.harvestingBatchItems.forEach((item) => {
       const batchResource = {
@@ -59,15 +58,6 @@ export const getBatchesWithResources = ({
     }
   }
   return batches;
-};
-
-const logHbiItems = (items) => {
-  items.forEach((item) => {
-    console.log(
-      `Crop Variety: ${item.cropVariety.name}, Batch Quantity: ${item.batchQuantity}`,
-    );
-    console.log(`Planted Crop Varieties: ${item.plantedCropVarieties}`);
-  });
 };
 
 // you get batches, ingredients

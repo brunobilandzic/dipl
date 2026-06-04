@@ -71,7 +71,6 @@ export const prepareFacilityStocksInfo = ({ stocks }) => {
   const totalQuantity = stocks.reduce((acc, stock) => acc + stock.quantity, 0);
   const productCount = stocks.filter((stock) => stock.quantity > 0).length;
   const manufacturedCount = stocks.length;
-  console.log("prepareFacilityStocksInfo", { stocks });
   const totalVolumeUsed = facilityTotalVolumeUsed({ stocks });
   return { totalQuantity, productCount, manufacturedCount, totalVolumeUsed };
 };

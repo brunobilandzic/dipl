@@ -12,7 +12,6 @@ const dispatchPayloads = ({ orders, dispatch }) => {
 };
 
 export const orderAmount = (order) => {
-  console.log("Calculating order amount for order:", order.items);
   return order.items.reduce((acc, item) => {
     return acc + item.product.price * item.quantity;
   }, 0);

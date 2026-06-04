@@ -31,6 +31,5 @@ export const submitProductionStock = async ({ productionStock }) => {
       },
     },
   );
-  console.log({ res: res.data.newProductionStock });
   return res.data.newProductionStock;
 };

@@ -23,13 +23,10 @@ export const fieldPlantedStatistics = (field) => {
 
 export const fieldHasPlantedCropVarieties = (field) => {
   const has = field.cultivationAreas.some((ca) => {
-    console.log("ca:", ca);
     return ca.cultivations.some((cu) => {
-      console.log("cu:", cu);
       return cu.plantedCropVarieties?.length > 0;
     });
   });
-  console.log("fieldHasPlantedCropVarieties has:", has);
   return has;
 };
 

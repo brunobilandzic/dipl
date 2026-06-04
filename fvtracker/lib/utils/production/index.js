@@ -14,7 +14,6 @@ export default async function fillProductionRedux({ dispatch, router, all }) {
     dispatch(setLoading(true));
     const res = await api.get("/productionManager");
     if (all && res.data.productionManagers) {
-      console.log({ productionManagers: res.data.productionManagers });
       dispatch(
         setProducts(res.data.productionManagers.flatMap((pm) => pm.products)),
       );
@@ -47,7 +46,6 @@ export default async function fillProductionRedux({ dispatch, router, all }) {
 }
 
 const dispatchPayloads = ({ manager, dispatch, batches }) => {
-  console.log("Dispatching production manager data to Redux:", manager);
   dispatch(setProducts(manager.products));
   // dispatch(refreshProductsStocks.fulfilled(mapProductsStocks({ manager })));
   dispatch(refreshHarvestingBatches.fulfilled(batches));

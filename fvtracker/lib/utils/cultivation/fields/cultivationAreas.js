@@ -14,7 +14,6 @@ export function getCASCells(cultivationAreas) {
 }
 
 export const CAIncludesCell = (cultivationArea, x, y) => {
-  console.log("checking includes", cultivationArea?.name, x, y);
   const plantedCells = getCASCells([cultivationArea]);
   return plantedCells.includes(`${x},${y}`);
 };
@@ -38,14 +37,6 @@ export const getCellsInRect = ({
   toPlantCultivation,
 }) => {
   let plantedCells;
-  console.log("get cells in rect", {
-    beginX,
-    beginY,
-    endX,
-    endY,
-    toPlantCells,
-    toPlantCultivation,
-  });
   if (cultivationAreaDimensions) {
     plantedCells = getCASCells(cultivationAreas);
     const valid = checkRectValidDimensions({

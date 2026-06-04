@@ -23,7 +23,6 @@ export const _getFieldsPlans = (fields) => {
   const fieldsPlans = [];
   fields.forEach((field) => {
     if (!field.plantingPlans) return;
-    console.log("field planting plans:", field.plantingPlans);
     fieldsPlans.push({
       fieldName: field.name,
       plantingPlans: field.plantingPlans,

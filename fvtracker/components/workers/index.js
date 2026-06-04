@@ -25,6 +25,7 @@ import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { initFilters } from "@/lib/utils/list";
 import { workerSortOptions } from "../layout/preview/sort";
 import { filterWorkers } from "@/store/workers";
+import { EMPLOYMENT_STATUS_EMPLOYED } from "@/lib/constants/users/workers";
 
 export const WorkersPageComponent = ({ managerModelName }) => {
   const allWorkers = [GENERAL_MANAGER, FINANCIAL_MANAGER].includes(
@@ -83,17 +84,23 @@ export const WorkersPageComponent = ({ managerModelName }) => {
 
 const WorkerItem = ({ worker, children }) => {
   const [showPayModal, setShowPayModal] = useState(false);
-
+  console.log({ worker });
+  const employed =
+    worker.employmentRequest.status === EMPLOYMENT_STATUS_EMPLOYED;
   return (
     <>
       <ListItem
         title={``}
         actionOptions={[
-          {
-            label: "Isplati",
-            onClick: () => setShowPayModal(true),
-            className: "submitButton",
-          },
+          ...(employed
+            ? [
+                {
+                  label: "Isplati",
+                  onClick: () => setShowPayModal(true),
+                  className: "submitButton",
+                },
+              ]
+            : []),
         ]}
       >
         <div>
@@ -111,7 +118,7 @@ const WorkerItem = ({ worker, children }) => {
           {children}
         </div>
       </ListItem>
-      {showPayModal && (
+      {showPayModal && employed && (
         <PayWorkerModal
           worker={worker}
           onClose={() => setShowPayModal(false)}

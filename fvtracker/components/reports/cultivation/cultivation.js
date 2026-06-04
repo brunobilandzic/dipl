@@ -1,12 +1,32 @@
 import { ReportItem } from "../dashboard";
 
-export const CultivationAreasStats = ({ cultivationAreas }) => {
+export const CultivationCount = ({ cultivationAreas }) => {
+  console.log({ cultivationAreas });
+  const cultivationsCount = cultivationAreas?.reduce(
+    (count, ca) => count + ca.cultivations?.length,
+    0,
+  );
+  console.log({ cultivationsCount });
   return (
     <>
-      <ReportItem
-        description="Broj površina za gredice"
-        count={cultivationAreas?.length}
-      />
+      <CultivationAreasCount count={cultivationAreas?.length} />
+      <CultivationsCount count={cultivationsCount} />
+    </>
+  );
+};
+
+const CultivationAreasCount = ({ count }) => {
+  return (
+    <>
+      <ReportItem description="Površina za gredice" count={count} />
+    </>
+  );
+};
+
+const CultivationsCount = ({ count }) => {
+  return (
+    <>
+      <ReportItem description="Gredica" count={count} />
     </>
   );
 };

@@ -2,7 +2,7 @@
 
 import { CultivationManagerReports } from "./cultivation/manager";
 import { ReportsDashboard } from "./dashboard";
-import { ProductionReportsSector } from "./production";
+import { ProductionReportsSector } from "./production/manager.";
 
 export const AllReports = ({}) => {
   return (

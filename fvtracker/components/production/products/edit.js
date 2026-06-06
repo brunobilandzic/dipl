@@ -92,64 +92,11 @@ export const EditProductForm = ({
           emptyItem={emptyIngredient}
           additionalItemFields={[QuantityInput]}
         />
-
-        {/* <div className="ingredients">
-          <div className="flex items-center justify-between mb-2">
-            <h3>Sastojci</h3>
-            <div className="btn" type="button" onClick={addIngredient}>
-              Dodaj sastojak
-            </div>
-          </div>
-          {productForm.ingredients.map((ingredient, index) => (
-            <IngredientInput
-              key={index}
-              ingredient={ingredient}
-              onChange={onChangeIngredient}
-              index={index}
-              onDelete={onDeleteIngredient}
-            />
-          ))}
-        </div> */}
         <SubmitButton label={submitLabel} handleSubmit={handleSubmit} />
       </div>
     </div>
   );
 };
-
-/* const IngredientInput = ({ ingredient, onChange, index, onDelete }) => {
-  const crops = useSelector((state) => state.cultivation.crops);
-
-  return (
-    <div className="border p-2 mb-2 rounded flex flex-col gap-2">
-      <div className="flex items-center justify-between mt-1">
-        <div className="text-lg font-semibold">Sastojak {index + 1}</div>
-        <div
-          className="btn cancelButton bg-transparent outline outline-red-500"
-          type="button"
-          onClick={() => onDelete(index)}
-        >
-          Obriši sastojak
-        </div>
-      </div>
-      <ChooseCropVarietyItems crops={crops}>
-        <AppInput
-          label="Količina"
-          type="number"
-          value={ingredient.quantity}
-          onChange={(e) =>
-            onChange({
-              index,
-              updatedIngredient: {
-                ...ingredient,
-                quantity: e.target.value,
-              },
-            })
-          }
-        />
-      </ChooseCropVarietyItems>
-    </div>
-  );
-}; */
 
 export const initialData = ({ product } = {}) => {
   if (!product) throw new Error("Proizvod za uređivanje nije pronađen");

@@ -5,6 +5,10 @@ import { makeUrlFriendly } from "@/lib/utils/strings";
 import { Base } from "@/models/Base";
 import { ProductionManager } from "@/models/user/managers/ProductionManager";
 import { ProductionStock } from "./Facility";
+import {
+  STANDARD,
+  VARIETIES_QUALITIES,
+} from "@/lib/constants/cultivation/plants";
 
 const productSchema = new Schema({
   orderItems: [
@@ -69,6 +73,11 @@ const ingredientsSchema = new Schema({
   quantity: {
     type: Number,
     required: true,
+  },
+  quality: {
+    type: String,
+    enum: VARIETIES_QUALITIES,
+    default: STANDARD,
   },
 });
 

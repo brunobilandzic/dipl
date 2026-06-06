@@ -1,3 +1,9 @@
+export const EXTRA = "ekstra";
+export const PREMIUM = "premium";
+export const BASIC = "basic";
+
+export const VARIETIES_QUALITIES = [EXTRA, PREMIUM, BASIC];
+
 // POVRĆE – glavne vrste
 export const vegatablesGeneralCropTypes = [
   {

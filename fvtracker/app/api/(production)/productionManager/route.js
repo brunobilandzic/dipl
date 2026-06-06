@@ -7,6 +7,7 @@ import {
 import { managerMorkerMap } from "@/lib/constants/users/managerWorker";
 import { ProductionManager } from "@/models/user/managers/ProductionManager";
 import { populateProductsConfig } from "../populate";
+import { ShipmentSource } from "@/models/sectors/sales/Shipment";
 
 // here is the place we fetch all production data
 

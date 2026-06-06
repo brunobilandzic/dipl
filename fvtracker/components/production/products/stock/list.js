@@ -12,6 +12,7 @@ import {
   getBatchesCVS,
 } from "@/lib/utils/production/resources";
 import { LoadingFullScreen } from "@/components/layout/loading";
+import { IngredientsList } from "../list";
 
 const StockList = () => {
   const dispatch = useDispatch();
@@ -63,10 +64,11 @@ const StockItem = ({ stock }) => {
   return (
     <>
       <ListItem key={uuid()} actionOptions={actionOptions}>
-        <div>
-          <h3>{stock.product.name}</h3>
+        <div className="relative">
+          <h3 className="text-2xl">{stock.product.name}</h3>
           <p>{stock.product.description}</p>
-          <p>Quantity: {stock.quantity}</p>
+          <IngredientsList ingredients={stock.product.ingredients} />
+          <p className="stockQuantity">{stock.quantity}</p>
         </div>
       </ListItem>
       {addProductStockModalOpen && (

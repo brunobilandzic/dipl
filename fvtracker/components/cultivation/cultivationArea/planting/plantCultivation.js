@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ChoosePlan } from "@/components/cultivation/plans/planting/choosePlan";
 import { useSelector } from "react-redux";
 import { ChooseWorker } from "@/components/workers/choose";
+import { EMPLOYMENT_STATUS_EMPLOYED } from "@/lib/constants/users/workers";
 
 export const PlantCultivation = ({
   isOpen,
@@ -20,7 +21,10 @@ export const PlantCultivation = ({
   submitDisabled,
 }) => {
   const workerId = useSelector((state) => state.user.session.workerId);
-  const workers = useSelector((state) => state.workers.items);
+  const workersRedux = useSelector((state) => state.workers.items);
+  const workers = workersRedux.filter(
+    (worker) => worker.employmentRequest.status === EMPLOYMENT_STATUS_EMPLOYED,
+  );
   useEffect(() => {
     if (workerId) {
       setNewPlantage((prev) => ({

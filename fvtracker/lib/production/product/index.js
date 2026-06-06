@@ -15,7 +15,7 @@ export const getProductBySlug = async (slug) => {
   const product = await Product.findOne({ slug }).populate([
     {
       path: "ingredients",
-      select: "cropVariety quantity",
+      select: "cropVariety quantity quality",
       populate: {
         path: "cropVariety",
         select: "name cropType",

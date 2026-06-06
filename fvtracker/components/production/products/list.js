@@ -233,6 +233,7 @@ const IngredientItem = ({ ingredient }) => {
         {ingredient.cropVariety.cropType.name} {ingredient.cropVariety.name}
       </h3>
       <p>Količina: {ingredient.quantity}</p>
+      <p>Kvaliteta: {ingredient.quality}</p>
     </div>
   );
 };

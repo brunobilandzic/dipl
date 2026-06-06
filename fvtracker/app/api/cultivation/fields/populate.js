@@ -129,7 +129,7 @@ export default [
           {
             path: "harvestingBatchItems",
             select:
-              "cropVariety plantedCropVarieties batchQuantity productionProcesses",
+              "cropVariety plantedCropVarieties batchQuantity productionProcesses quality",
             populate: [
               {
                 path: "cropVariety",

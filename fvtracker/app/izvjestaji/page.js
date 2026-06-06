@@ -55,7 +55,7 @@ const ReportWithWorkers = ({ children, managerModelName }) => {
   return (
     <>
       {children}
-      <WorkersReport managerModelName={managerModelName} />
+      <WorkersReport showTitle={false} managerModelName={managerModelName} />
     </>
   );
 };

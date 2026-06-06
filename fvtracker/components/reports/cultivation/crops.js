@@ -1,17 +1,22 @@
 import { useSelector } from "react-redux";
 import { ReportItem, ReportSection } from "../dashboard";
 import { LoadingFullScreen } from "@/components/layout/loading";
-import { getFieldsHarvestingPlans } from "@/lib/utils/cultivation/plant/plans";
+import {
+  getFieldsHarvestingPlans,
+  getFieldsPlantingPlans,
+} from "@/lib/utils/cultivation/plant/plans";
 
 export const CropsReportSection = ({ fields }) => {
-  const cultivationAreas = fields?.flatMap((field) => field.cultivationAreas);
-  const cultivations = cultivationAreas?.flatMap((area) => area.cultivations);
-  const fieldsPlans = getFieldsHarvestingPlans(fields);
-  console.log({ fieldsPlans });
-  const harvestingPlanItems = fieldsPlans?.flatMap((fieldPlan) =>
+  const fieldsHarvestingPlans = getFieldsHarvestingPlans(fields);
+  const fieldsPlantingPlans = getFieldsPlantingPlans(fields);
+
+  const harvestingPlanItems = fieldsHarvestingPlans?.flatMap((fieldPlan) =>
     fieldPlan.harvestingPlans.flatMap((plan) => plan.items),
   );
-  console.log({ harvestingPlanItems });
+  const plantingPlanItems = fieldsPlantingPlans?.flatMap((fieldPlan) =>
+    fieldPlan.plantingPlans.flatMap((plan) => plan.items),
+  );
+
   const crops = useSelector((state) => state.cultivation.crops);
   const harvestingBatches = useSelector(
     (state) => state.production.harvestingBatches.items,
@@ -19,11 +24,13 @@ export const CropsReportSection = ({ fields }) => {
 
   if (!crops || !harvestingBatches) return <LoadingFullScreen />;
 
-  const plantedCrops = cultivations?.flatMap((cultivation) =>
-    cultivation.plantedCropVarieties.filter((plcv) => plcv.plantingPlanItem),
+  const plantedCropsLength = plantingPlanItems?.reduce(
+    (sum, hpi) => hpi.plantedCropVarieties.length + sum,
+    0,
   );
-  const harvestedCrops = cultivations?.flatMap((cultivation) =>
-    cultivation.plantedCropVarieties.filter((plcv) => plcv.harvestingPlanItem),
+  const harvestedCropsLength = harvestingPlanItems?.reduce(
+    (sum, hpi) => hpi.plantedCropVarieties.length + sum,
+    0,
   );
 
   const batchItems = harvestingBatches?.flatMap(
@@ -38,11 +45,10 @@ export const CropsReportSection = ({ fields }) => {
   });
   const uniqueVarietiesLength = uniqueVarietiesSet.size;
 
-  console.log({ uniqueVarieties: Array.from(uniqueVarietiesSet) });
-  console.log({ batchItems });
-
-  const plCvQuantity = plantedCrops.reduce(
-    (sum, plcv) => plcv.plantingPlanItem.cropVariety.quantityPerCell + sum,
+  const plCvQuantity = plantingPlanItems?.reduce(
+    (sum, hpi) =>
+      sum +
+      hpi.plantedCropVarieties.length * hpi.cropVariety.quantityPerCell,
     0,
   );
 
@@ -60,11 +66,11 @@ export const CropsReportSection = ({ fields }) => {
           cropVarietiesLength={crops?.varieties?.length}
         />
         <PlantedCropsCount
-          plantedCropsLength={plantedCrops?.length}
+          plantedCropsLength={plantedCropsLength}
           cvQuantity={plCvQuantity}
         />
         <HarvestedCropsCount
-          harvestedCropsLength={harvestedCrops?.length}
+          harvestedCropsLength={harvestedCropsLength}
           cvQuantity={hvCvQuantity}
           uniqueVarietiesLength={uniqueVarietiesLength}
         />

@@ -19,9 +19,21 @@ export const CropsReportSection = ({ fields }) => {
   const harvestedCrops = cultivations?.flatMap((cultivation) =>
     cultivation.plantedCropVarieties.filter((plcv) => plcv.harvestingPlanItem),
   );
+
   const batchItems = harvestingBatches?.flatMap(
     (batch) => batch.harvestingBatchItems,
   );
+
+  const uniqueVarietiesSet = new Set();
+  batchItems.forEach((item) => {
+    if (item.cropVariety) {
+      uniqueVarietiesSet.add(item.cropVariety.name);
+    }
+  });
+  const uniqueVarietiesLength = uniqueVarietiesSet.size;
+
+  console.log({ uniqueVarieties: Array.from(uniqueVarietiesSet) });
+  console.log({ batchItems });
 
   const plCvQuantity = plantedCrops.reduce(
     (sum, plcv) => plcv.plantingPlanItem.cropVariety.quantityPerCell + sum,
@@ -48,6 +60,7 @@ export const CropsReportSection = ({ fields }) => {
         <HarvestedCropsCount
           harvestedCropsLength={harvestedCrops?.length}
           cvQuantity={hvCvQuantity}
+          uniqueVarietiesLength={uniqueVarietiesLength}
         />
       </ReportSection>
     </>
@@ -78,9 +91,17 @@ const PlantedCropsCount = ({ plantedCropsLength, cvQuantity }) => {
   );
 };
 
-const HarvestedCropsCount = ({ harvestedCropsLength, cvQuantity }) => {
+const HarvestedCropsCount = ({
+  harvestedCropsLength,
+  cvQuantity,
+  uniqueVarietiesLength,
+}) => {
   return (
     <>
+      <ReportItem
+        description={"Različitih sorti ubranih"}
+        count={uniqueVarietiesLength}
+      />
       <ReportItem description={"Ubranih ćelija"} count={harvestedCropsLength}>
         Količina {cvQuantity}
       </ReportItem>

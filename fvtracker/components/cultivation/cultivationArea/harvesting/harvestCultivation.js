@@ -1,6 +1,8 @@
 import { ChoosePlan } from "@/components/cultivation/plans/planting/choosePlan";
+import { AppSelect } from "@/components/form/inputs";
 import { FormModal } from "@/components/layout/modals/form";
 import { ChooseWorker } from "@/components/workers/choose";
+import { VARIETIES_QUALITIES } from "@/lib/constants/cultivation/plants";
 import { useSelector } from "react-redux";
 
 export const HarvestCultivation = ({
@@ -11,7 +13,8 @@ export const HarvestCultivation = ({
   availablePlans,
   onChoosePlan,
   workerId,
-  chooseWorker
+  chooseWorker,
+  chooseQuality,
 }) => {
   if (
     !newHarvest ||
@@ -27,7 +30,6 @@ export const HarvestCultivation = ({
   const quantityString =
     quantityToHarvest === 1 ? "1 ćelije" : `${quantityToHarvest} ćelija`;
   const workers = useSelector((state) => state.workers.items);
-
 
   return (
     <FormModal
@@ -51,6 +53,17 @@ export const HarvestCultivation = ({
           {!workerId && (
             <ChooseWorker workers={workers} onChoose={chooseWorker} />
           )}
+          <AppSelect
+            label="Kvaliteta"
+            name="quality"
+            onChange={(e) => chooseQuality(e.target.value)}
+            value={newHarvest.quality}
+            defaultValue={newHarvest.quality}
+            options={VARIETIES_QUALITIES.map((quality) => ({
+              label: quality,
+              value: quality,
+            }))}
+          />
         </div>
         <ChoosePlan
           selectedPlan={newHarvest.harvestingPlan}

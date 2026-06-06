@@ -123,13 +123,18 @@ harvestingBatchSchema.methods.addPlantedCropVarieties = async function ({
 harvestingBatchSchema.methods.cropVarietyQuantity = async function ({
   cropVarietyName,
   cropVarietyId,
+  quality = STANDARD,
 } = {}) {
   const batch = await populatedBatch(this);
   const item = batch.find((hbi) => {
     if (cropVarietyId) {
-      return hbi.cropVariety._id.equals(cropVarietyId);
+      return (
+        hbi.cropVariety._id.equals(cropVarietyId) && hbi.quality === quality
+      );
     } else if (cropVarietyName) {
-      return hbi.cropVariety.name === cropVarietyName;
+      return (
+        hbi.cropVariety.name === cropVarietyName && hbi.quality === quality
+      );
     }
   });
 

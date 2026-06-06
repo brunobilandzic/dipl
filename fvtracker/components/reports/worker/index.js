@@ -9,7 +9,7 @@ import {
 } from "@/lib/constants/users/workers";
 import { ReportSector, ReportSection, ReportItem } from "../dashboard";
 
-export const WorkersReport = ({ managerModelName }) => {
+  showTitle = true,
   const workers = useSelector((state) => state.workers.items);
 
   if (!workers || workers.length === 0) return null;

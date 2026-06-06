@@ -1,3 +1,5 @@
+import { PREMIUM, STANDARD } from "@/lib/constants/cultivation/plants";
+
 export const productsData = [
   /* {
     name: "Cherry rajčica Paket 10 komada",
@@ -43,7 +45,8 @@ export const productsData = [
     ingredients: [
       {
         cropVarietyName: "Idared",
-        quantity: 20,
+        quantity: 10,
+        quality: STANDARD,
       },
     ],
     stockVolume: 4,
@@ -56,8 +59,22 @@ export const productsData = [
       {
         cropVarietyName: "Kristalka",
         quantity: 10,
+        quality: STANDARD,
       },
     ],
     stockVolume: 3,
+  },
+  {
+    name: "Premium Idared 1kg",
+    description: "1 kilogram premium jabuka sorte Idared",
+    price: 5,
+    ingredients: [
+      {
+        cropVarietyName: "Idared",
+        quantity: 10,
+        quality: PREMIUM,
+      },
+    ],
+    stockVolume: 2,
   },
 ];

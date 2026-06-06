@@ -36,7 +36,11 @@ export const HarvestCultivation = ({
       invertColor={true}
       title="Završavanje berbe"
       onSubmit={onSubmit}
-      submitDisabled={!newHarvest.harvestingPlan}
+      submitDisabled={
+        !newHarvest.harvestingPlan ||
+        !newHarvest.quality ||
+        !newHarvest.workerId
+      }
       submitText="Završi berbu"
     >
       <div className="flex flex-col gap-4">

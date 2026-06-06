@@ -6,6 +6,7 @@ import {
   PRODUCTION_MANAGER,
 } from "@/lib/constants/users/managerTypes";
 import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
+import { populateConfigCropVariety } from "../populate";
 
 export async function getHarvestingBatches({
   managerName = PRODUCTION_MANAGER,
@@ -44,6 +45,14 @@ async function cmBatches({ batchIds }) {
       populate: {
         path: "harvestingBatch",
         select: "harvestingBatchItems productions",
+        populate: {
+          path: "harvestingBatchItems",
+          select: "cropVariety plantedCropVarieties quality batchQuantity",
+          populate: {
+            path: "cropVariety",
+            populate: populateConfigCropVariety,
+          },
+        },
       },
     },
   });
@@ -61,13 +70,7 @@ async function pmBatches({ batchIds }) {
       populate: [
         {
           path: "cropVariety",
-          select: "name cropType plantedCropVarieties",
-          populate: [
-            {
-              path: "cropType",
-              select: "name",
-            },
-          ],
+          populate: populateConfigCropVariety,
         },
       ],
     },

@@ -80,7 +80,7 @@ export function populateBatches({ harvestingBatches }) {
     {
       path: "harvestingBatchItems",
       populate: {
-        select: "cropVariety plantedCropVarieties",
+        select: "cropVariety plantedCropVarieties quality batchQuantity",
         populate: [
           {
             path: "cropVariety",

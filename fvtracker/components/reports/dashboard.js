@@ -30,11 +30,14 @@ export const ReportSection = ({ title, children }) => {
 };
 
 export const ReportItem = ({ children, count, description, title, stats }) => {
+  const renderedDescription =
+    typeof description === "string" ? description.toLowerCase() : description;
+
   return (
     <div className="bg-gray-100 rounded-lg shadow p-4 min-h-22  hover:bg-gray-200">
       <div className="text-xl font-extrabold">{title}</div>
       <div className="text-xl font-extrabold">{count}</div>
-      <div className="text-gray-600">{description}</div>
+      <div className="text-gray-600">{renderedDescription}</div>
       {stats?.map((stat, index) => (
         <div key={index} className="text-sm text-gray-400">
           {stat}

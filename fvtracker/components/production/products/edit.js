@@ -16,7 +16,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function EditProductPageComponent({ product }) {
+export default function EditProductPageComponent({ product, isEdit = true }) {
   const [productForm, setProductForm] = useState(initialData({ product }));
   const dispatch = useDispatch();
   const router = useRouter();
@@ -26,7 +26,7 @@ export default function EditProductPageComponent({ product }) {
       productForm,
       dispatch,
       router,
-      isEdit: true,
+      isEdit,
     });
   };
   return (

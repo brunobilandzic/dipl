@@ -9,19 +9,31 @@ import {
 } from "@/lib/constants/users/workers";
 import { ReportSector, ReportSection, ReportItem } from "../dashboard";
 
+export const WorkersReport = ({
   showTitle = true,
+  managerModelName,
+  children,
+}) => {
   const workers = useSelector((state) => state.workers.items);
 
   if (!workers || workers.length === 0) return null;
   const sectorName = managerSectors[managerModelName] || "Sektor";
   return (
     <ReportSector workers={true}>
-      <GeneralWorkersReport workers={workers} title={sectorName} />
+      <GeneralWorkersReport
+        workers={workers}
+        title={showTitle ? sectorName : null}
+      />
+      {children}
     </ReportSector>
   );
 };
 
-export const GeneralWorkersReport = ({ workers, title = "Radnici", children }) => {
+export const GeneralWorkersReport = ({
+  workers,
+  title = "Radnici",
+  children,
+}) => {
   const totalHourlyRate = workers.reduce(
     (sum, worker) => sum + worker.hourlyRate,
     0,
@@ -57,7 +69,7 @@ export const GeneralWorkersReport = ({ workers, title = "Radnici", children }) =
         count={(totalHourlyRate * 160).toFixed(2)}
         description={"Mesečni trošak (€)"}
       />
-     {children}
+      {children}
     </ReportSection>
   );
 };

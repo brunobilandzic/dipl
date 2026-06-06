@@ -78,7 +78,11 @@ export const getBatchesCVS = ({ harvestingBatches, product }) => {
   for (const batch of harvestingBatches) {
     for (const ing of product.ingredients) {
       const cvName = ing.cropVariety.name;
-      const batchQuantity = getBatchQuantity({ batch, cvName });
+      const batchQuantity = getBatchQuantity({
+        batch,
+        cvName,
+        quality: ing.quality,
+      });
       if (!batchQuantity) {
         delete batchesCVS[batch.name];
         break;
@@ -99,9 +103,9 @@ export const getBatchesCVS = ({ harvestingBatches, product }) => {
   return batchesCVS;
 };
 
-const getBatchQuantity = ({ batch, cvName }) => {
+const getBatchQuantity = ({ batch, cvName, quality }) => {
   return batch.harvestingBatchItems.find(
-    (hbi) => hbi.cropVariety.name == cvName,
+    (hbi) => hbi.cropVariety.name == cvName && hbi.quality == quality,
   )?.batchQuantity;
 };
 

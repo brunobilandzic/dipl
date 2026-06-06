@@ -9,14 +9,27 @@ export const FieldStats = ({ fields }) => {
   const cultivationAreas = fields?.flatMap((field) => field.cultivationAreas);
   const cultivations = flatFieldsCultivations(fields);
 
+  const plantageHours = cultivations.reduce((sum, cul) => {
+    const plantageWorksHours = cul.plantageWorks.reduce(
+      (hoursSum, work) => hoursSum + work.hoursWorked,
+      0,
+    );
+    return sum + plantageWorksHours;
+  }, 0);
+
   return (
     <>
       <ReportSection title="Statistika Polja">
         <FieldCount description="Broj polja" count={fields?.length} />
         <CultivationCount cultivationAreas={cultivationAreas} />
+        <PlantageWorksCount count={plantageHours} />
       </ReportSection>
     </>
   );
+};
+
+const PlantageWorksCount = ({ count }) => {
+  return <ReportItem description="Sati radova na sadnji" count={count} />;
 };
 
 const FieldCount = ({ count, description }) => {

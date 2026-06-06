@@ -39,20 +39,28 @@ export const getBatchesWithResources = ({
 }) => {
   if (!harvestingBatches) return null;
   let batches = [];
-  const varietiesQuantities = extractVarietiesQuantities({ product, quantity });
+  const varietiesQuantitiesQualities = extractVarietiesQuantities({
+    product,
+    quantity,
+  });
   for (const harvestingBatch of harvestingBatches) {
     let hasResources = true;
-    for (const [cropVarietyName, requiredQuantity] of Object.entries(
-      varietiesQuantities,
-    )) {
+    for (const [
+      cropVarietyName,
+      { quantity: requiredQuantity, quality: requiredQuality },
+    ] of Object.entries(varietiesQuantitiesQualities)) {
       const item = harvestingBatch.harvestingBatchItems.find(
         (hbi) =>
           hbi.cropVariety.name === cropVarietyName &&
-          hbi.batchQuantity >= requiredQuantity,
+          hbi.batchQuantity >= requiredQuantity &&
+          hbi.quality === requiredQuality,
       );
+
       if (!item) {
         continue;
       }
+
+      console.log("found", item);
     }
     if (hasResources) {
       batches.push(harvestingBatch);

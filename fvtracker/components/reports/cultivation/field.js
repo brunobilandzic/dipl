@@ -17,12 +17,27 @@ export const FieldStats = ({ fields }) => {
     return sum + plantageWorksHours;
   }, 0);
 
+  const harvestingHours = cultivations.reduce((sum, cul) => {
+    const harvestingWorksHours = cul.harvestWorks.reduce(
+      (hoursSum, work) => hoursSum + work.hoursWorked,
+      0,
+    );
+    return sum + harvestingWorksHours;
+  }, 0);
+
   return (
     <>
       <ReportSection title="Statistika Polja">
         <FieldCount description="Broj polja" count={fields?.length} />
         <CultivationCount cultivationAreas={cultivationAreas} />
-        <PlantageWorksCount count={plantageHours} />
+        <WorhHoursCount
+          count={plantageHours}
+          description="Sati radova na sadnji"
+        />
+        <WorhHoursCount
+          count={harvestingHours}
+          description="Sati radova na berbi"
+        />
       </ReportSection>
     </>
   );

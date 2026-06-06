@@ -213,7 +213,7 @@ const ProductInfo = ({ createdAt, updatedAt, price }) => {
   );
 };
 
-const IngredientsList = ({ ingredients }) => {
+export const IngredientsList = ({ ingredients }) => {
   return (
     <>
       <h3 className="text-lg font-semibold">Sastojci:</h3>

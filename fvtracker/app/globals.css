@@ -75,6 +75,10 @@ tbody {
 }
 }
 
+.stockQuantity {
+  @apply absolute -right-6 -top-8 font-extrabold text-blue-900 text-2xl
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

@@ -75,13 +75,13 @@ const HarvestingBatches = ({ harvestingPlans }) => {
 const HarvestingBatchItem = ({ batchItem }) => {
   if (!batchItem) return null;
 
-  const { quantity, cropVarietyString, plcvCount } = harvestingBatchItemData({
+  const { quantity, batchItemString, plcvCount } = harvestingBatchItemData({
     batchItem,
   });
 
   return (
     <div className=" p-1 px-2" key={uuid()}>
-      <p>{cropVarietyString}</p>
+      <p>{batchItemString}</p>
       <p>Količina u žetvi: {quantity}</p>
 
       <p>Broj ubranih polja: {plcvCount}</p>

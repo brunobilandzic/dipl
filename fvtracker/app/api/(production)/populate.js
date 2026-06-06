@@ -3,7 +3,7 @@ export const populateProductsConfig = {
   populate: [
     {
       path: "ingredients",
-      select: "cropVariety quantity",
+      select: "cropVariety quantity quality",
       populate: {
         path: "cropVariety",
         select: "name cropType",

@@ -6,8 +6,11 @@ import {
 } from "@/components/cultivation/crops/choose";
 import { QuantityInput } from "@/components/cultivation/plans/planting/create";
 import SubmitButton from "@/components/form";
-import { AppInput } from "@/components/form/inputs";
-import { STANDARD } from "@/lib/constants/cultivation/plants";
+import { AppInput, AppSelect } from "@/components/form/inputs";
+import {
+  STANDARD,
+  VARIETIES_QUALITIES,
+} from "@/lib/constants/cultivation/plants";
 import { submitProductForm } from "@/lib/utils/production/products";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -90,13 +93,26 @@ export const EditProductForm = ({
           itemsName="ingredients"
           itemLabel="sastojak"
           emptyItem={emptyIngredient}
-          additionalItemFields={[QuantityInput]}
+          additionalItemFields={[QuantityInput, QualityInput]}
         />
         <SubmitButton label={submitLabel} handleSubmit={handleSubmit} />
       </div>
     </div>
   );
 };
+
+export const QualityInput = ({ index, item, handleItemChange }) => (
+  <AppSelect
+    label="Kvaliteta"
+    name="quality"
+    onChange={(e) => handleItemChange(index, "quality", e.target.value)}
+    value={item.quality}
+    options={VARIETIES_QUALITIES.map((quality) => ({
+      label: quality,
+      value: quality,
+    }))}
+  />
+);
 
 export const initialData = ({ product } = {}) => {
   if (!product) throw new Error("Proizvod za uređivanje nije pronađen");

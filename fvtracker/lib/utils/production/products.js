@@ -42,7 +42,7 @@ export const submitProductForm = async ({
       res = await api.put(`/products`, productForm, {
         params: { id: productForm.id },
       });
-      dispatch(updateProduct(product));
+      dispatch(updateProduct(res.data.product));
       router.push(`/proizvodi/uredi/${res.data.product.slug}`);
     } else {
       res = await api.post("/products", productForm);

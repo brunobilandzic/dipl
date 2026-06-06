@@ -9,6 +9,7 @@ export const cropVarietyBatchResources = ({ harvestingBatches }) => {
       const batchResource = {
         cropVariety: `${item.cropVariety.cropType.name} ${item.cropVariety.name}`,
         batchQuantity: item.batchQuantity,
+        quality: item.quality,
       };
 
       const existingBatchResource = batchesResources.find(

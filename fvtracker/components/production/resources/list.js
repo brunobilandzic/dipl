@@ -50,4 +50,5 @@ const ProductionResource = ({ batchResources }) => {
 const batchResourceHeaderItems = {
   cropVariety: "Sorta",
   batchQuantity: "Količina",
+  quality: "Kvaliteta",
 };

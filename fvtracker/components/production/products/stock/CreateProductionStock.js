@@ -128,7 +128,6 @@ export const CreateProductionStock = ({
           value={productionStock.comment}
           onChange={onChange}
         />
-        {productionStock.quantity}
         <StockQuantityInput
           name="quantity"
           label="Količina"
@@ -136,11 +135,6 @@ export const CreateProductionStock = ({
           value={productionStock.quantity}
           onChange={onChange}
         />
-        {productionStock.batchName && (
-          <div>
-            <strong>Odabrana žetva:</strong> {productionStock.batchName}
-          </div>
-        )}
         <CreateStockChooseBatch
           onChange={onChange}
           minPossibleBatchMap={minPossibleBatchMap}

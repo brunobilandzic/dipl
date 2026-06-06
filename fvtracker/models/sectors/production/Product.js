@@ -116,6 +116,7 @@ productSchema.methods.createIngredients = async function ({ ingredientsData }) {
       product: this._id,
       cropVariety: cropVariety._id,
       quantity: ingredientData.quantity,
+      quality: ingredientData.quality || STANDARD,
     });
     cropVariety.ingredients.push(newIngredient._id);
 

@@ -58,6 +58,6 @@ export const sanitize = (obj) => {
   return JSON.parse(JSON.stringify(obj));
 };
 
-export const randomElement = (arr) => {
+export const randomElementArray = (arr) => {
   return arr[Math.floor(Math.random() * arr.length)];
 };

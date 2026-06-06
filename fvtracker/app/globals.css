@@ -4,7 +4,7 @@
 
 @layer components {
   .btn {
-    @apply px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors duration-200 w-fit h-fit min-h-fit  min-w-40 text-center cursor-pointer hover:outline outline-2 outline-gray-300;
+    @apply px-4 py-2 rounded-lg hover:bg-gray-200 bg-gray-100 transition-colors duration-200 w-fit h-fit min-h-fit  min-w-40 text-center cursor-pointer hover:outline outline-2 outline-gray-300;
   }
 
   .submitButton {
@@ -12,7 +12,7 @@
   }
 
   .secondaryButton {
-    @apply bg-gray-800  hover:bg-gray-900 outline-gray-500;
+    @apply bg-gray-500  hover:bg-gray-600 outline-gray-500;
   }
 
   .cancelButton {

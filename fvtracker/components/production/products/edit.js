@@ -7,6 +7,7 @@ import {
 import { QuantityInput } from "@/components/cultivation/plans/planting/create";
 import SubmitButton from "@/components/form";
 import { AppInput } from "@/components/form/inputs";
+import { STANDARD } from "@/lib/constants/cultivation/plants";
 import { submitProductForm } from "@/lib/utils/production/products";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -163,6 +164,7 @@ export const initialData = ({ product } = {}) => {
       type: ing.cropVariety?.cropType?._id || "",
       cropVariety: ing.cropVariety?._id || "",
       quantity: ing.quantity,
+      quality: ing.quality || STANDARD,
     })),
   };
 };
@@ -171,7 +173,11 @@ export const testProduct = ({ crops }) => ({
   name: `Proizvod ${new Date().toLocaleString()}`,
   description: "Opis proizvoda 1",
   price: 10,
-  ingredients: testCropItemData({ crops }),
+  ingredients: testCropItemData({ crops }).map((item) => ({
+    ...item,
+    quantity: 1,
+    quality: STANDARD,
+  })),
   stockVolume: 1,
 });
 
@@ -180,4 +186,5 @@ const emptyIngredient = {
   type: "",
   cropVariety: "",
   quantity: "",
+  quality: STANDARD,
 };

@@ -88,6 +88,7 @@ function NavItems() {
         dispatch(fetchEmploymentRequests());
         refreshFields({ dispatch, router, generalManager: true });
         fillProductionRedux({ dispatch, router, all: true });
+        fillWarehouseRedux({ dispatch, router, all: true });
       }
       if (
         managerModelName === CULTIVATION_MANAGER &&

@@ -28,8 +28,8 @@ export const FieldStats = ({ fields }) => {
   );
 };
 
-const PlantageWorksCount = ({ count }) => {
-  return <ReportItem description="Sati radova na sadnji" count={count} />;
+const WorhHoursCount = ({ count, description }) => {
+  return <ReportItem description={description} count={count} />;
 };
 
 const FieldCount = ({ count, description }) => {

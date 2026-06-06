@@ -1,4 +1,6 @@
-import allCropTypes from "@/lib/constants/cultivation/plants";
+import allCropTypes, {
+  VARIETIES_QUALITIES,
+} from "@/lib/constants/cultivation/plants";
 import {
   CropGeneralType,
   CropMainType,
@@ -22,6 +24,7 @@ import {
   PlantageWork,
 } from "@/models/user/workers/CultivationWork";
 import { getEmployedWorker } from "@/lib/workers/get";
+import { randomElementArray } from "@/lib/utils/objects";
 
 // Seed crop main types, general types, types, and varieties
 
@@ -302,11 +305,23 @@ export const createNewHarvest = async ({
       { _id: { $in: docs } },
       { harvestingPlanItem: harvestingPlanItem._id, harvestedAt: new Date() },
     );
-    await harvestingPlan.harvestingBatch.addPlantedCropVarieties({
-      plantedCropVarietiesIds: plcvIds,
-      cropVarietyId,
-      quantityPerCell: harvestingPlanItem.cropVariety.quantityPerCell,
-    });
+    const quality = randomElementArray(VARIETIES_QUALITIES);
+
+    const plcvIdCopies = [...plcvIds];
+    const plcvLength = plcvIds.length;
+    for (const quality of VARIETIES_QUALITIES) {
+      const qualityPlcvIds = plcvIdCopies.splice(
+        0,
+        Math.floor(plcvLength / VARIETIES_QUALITIES.length),
+      );
+      await harvestingPlan.harvestingBatch.addPlantedCropVarieties({
+        plantedCropVarietiesIds: qualityPlcvIds,
+        cropVarietyId,
+        quantityPerCell: harvestingPlanItem.cropVariety.quantityPerCell,
+        quality,
+      });
+    }
+
     harvestingPlanItem.plantedCropVarieties.push(...plcvIds);
     harvestingPlanItem.quantity -=
       docs.length * harvestingPlanItem.cropVariety.quantityPerCell;
@@ -327,7 +342,7 @@ export const createNewHarvest = async ({
 
     const cultivationWorker = await getEmployedWorker("CultivationWorker");
 
-    harvestingBatchItem.addHarvestWork({
+    await harvestingBatchItem.addHarvestWork({
       hoursWorked: docs.length,
       worker: cultivationWorker._id,
       cultivation: cultivationId,

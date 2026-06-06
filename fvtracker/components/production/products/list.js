@@ -216,7 +216,6 @@ const ProductInfo = ({ createdAt, updatedAt, price }) => {
 export const IngredientsList = ({ ingredients }) => {
   return (
     <>
-      <h3 className="text-lg font-semibold">Sastojci:</h3>
       <div className="flex gap-2 mt-2">
         {ingredients.map((ingredient) => (
           <IngredientItem key={ingredient._id} ingredient={ingredient} />

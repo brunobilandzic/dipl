@@ -19,6 +19,9 @@ export const CropsReportSection = ({ fields }) => {
   const harvestedCrops = cultivations?.flatMap((cultivation) =>
     cultivation.plantedCropVarieties.filter((plcv) => plcv.harvestingPlanItem),
   );
+  const batchItems = harvestingBatches?.flatMap(
+    (batch) => batch.harvestingBatchItems,
+  );
 
   const plCvQuantity = plantedCrops.reduce(
     (sum, plcv) => plcv.plantingPlanItem.cropVariety.quantityPerCell + sum,

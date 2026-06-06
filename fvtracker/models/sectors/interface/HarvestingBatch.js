@@ -5,6 +5,11 @@ import {
   CultivationWorker,
   HarvestWork,
 } from "@/models/user/workers/CultivationWork";
+import {
+  BASIC,
+  STANDARD,
+  VARIETIES_QUALITIES,
+} from "@/lib/constants/cultivation/plants";
 
 const harvestingBatchSchema = new Schema({
   name: {
@@ -30,6 +35,11 @@ const harvestingBatchItemSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "HarvestingBatch",
     required: true,
+  },
+  quality: {
+    type: String,
+    enum: VARIETIES_QUALITIES,
+    default: STANDARD,
   },
   cropVariety: {
     type: Schema.Types.ObjectId,
@@ -70,15 +80,18 @@ harvestingBatchSchema.pre("deleteMany", async function () {
 
 harvestingBatchSchema.methods.findOrCreateItemForCropVariety = async function ({
   cropVarietyId,
+  quality,
 }) {
   let item = await HarvestingBatchItem.findOne({
     harvestingBatch: this._id,
     cropVariety: cropVarietyId,
+    quality,
   });
   if (!item) {
     item = new HarvestingBatchItem({
       harvestingBatch: this._id,
       cropVariety: cropVarietyId,
+      quality,
     });
     this.harvestingBatchItems.push(item._id);
   }
@@ -92,10 +105,12 @@ harvestingBatchSchema.methods.addPlantedCropVarieties = async function ({
   plantedCropVarietiesIds,
   cropVarietyId,
   quantityPerCell,
+  quality = STANDARD,
 }) {
   // Find or create the corresponding HarvestingBatchItem
   const item = await this.findOrCreateItemForCropVariety({
     cropVarietyId: cropVarietyId,
+    quality,
   });
   item.plantedCropVarieties.push(...plantedCropVarietiesIds);
   const addedQuantity = plantedCropVarietiesIds.length * quantityPerCell;

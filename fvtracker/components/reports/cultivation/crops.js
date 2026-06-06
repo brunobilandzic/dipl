@@ -1,11 +1,17 @@
 import { useSelector } from "react-redux";
 import { ReportItem, ReportSection } from "../dashboard";
 import { LoadingFullScreen } from "@/components/layout/loading";
+import { getFieldsHarvestingPlans } from "@/lib/utils/cultivation/plant/plans";
 
 export const CropsReportSection = ({ fields }) => {
   const cultivationAreas = fields?.flatMap((field) => field.cultivationAreas);
   const cultivations = cultivationAreas?.flatMap((area) => area.cultivations);
-
+  const fieldsPlans = getFieldsHarvestingPlans(fields);
+  console.log({ fieldsPlans });
+  const harvestingPlanItems = fieldsPlans?.flatMap((fieldPlan) =>
+    fieldPlan.harvestingPlans.flatMap((plan) => plan.items),
+  );
+  console.log({ harvestingPlanItems });
   const crops = useSelector((state) => state.cultivation.crops);
   const harvestingBatches = useSelector(
     (state) => state.production.harvestingBatches.items,

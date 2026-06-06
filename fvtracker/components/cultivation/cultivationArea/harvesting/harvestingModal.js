@@ -357,4 +357,5 @@ const prepareHarvestBody = (newHarvest) => ({
   harvestingPlanId: newHarvest.harvestingPlan?._id,
   toHarvestCells: newHarvest.toHarvestCells,
   workerId: newHarvest.workerId,
+  quality: newHarvest.quality,
 });

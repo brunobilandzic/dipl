@@ -2,6 +2,7 @@ import { AppInput, AppSelect } from "@/components/form/inputs";
 import { FormModal } from "@/components/layout/modals/form";
 import { ChooseWorker } from "@/components/workers/choose";
 import handleError from "@/lib/constants/errors/client/handleError";
+import { EMPLOYMENT_STATUS_EMPLOYED } from "@/lib/constants/users/workers";
 import { showDateTime } from "@/lib/utils/display";
 import fillProductionRedux from "@/lib/utils/production";
 import { getAvailableFacilities } from "@/lib/utils/production/facilities";
@@ -20,7 +21,10 @@ const CreateWarehouseStock = ({
   warehouses,
   clickedStock,
 }) => {
-  const workers = useSelector((state) => state.workers.items);
+  const workersRedux = useSelector((state) => state.workers.items);
+  const workers = workersRedux.filter(
+    (worker) => worker.employmentRequest.status === EMPLOYMENT_STATUS_EMPLOYED,
+  );
   const workerId = useSelector((state) => state.user.session.workerId);
 
   const createInitialFormData = () => ({

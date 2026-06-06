@@ -12,6 +12,7 @@ import handleError from "@/lib/constants/errors/client/handleError";
 import fillProductionRedux from "@/lib/utils/production";
 import { getAvailableFacilities } from "@/lib/utils/production/facilities";
 import { ChooseWorker } from "@/components/workers/choose";
+import { EMPLOYMENT_STATUS_EMPLOYED } from "@/lib/constants/users/workers";
 
 export const CreateProductionStock = ({
   product,
@@ -20,7 +21,10 @@ export const CreateProductionStock = ({
   minPossibleBatchMap,
 }) => {
   const workerId = useSelector((state) => state.user.session.workerId);
-  const workers = useSelector((state) => state.workers.items);
+  const workersRedux = useSelector((state) => state.workers.items);
+  const workers = workersRedux.filter(
+    (worker) => worker.employmentRequest.status === EMPLOYMENT_STATUS_EMPLOYED,
+  );
   const blankFormData = {
     productId: product._id,
     quantity: 1,

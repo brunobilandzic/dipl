@@ -38,12 +38,18 @@ export const getWarehouseRequests = async ({
   financialManagerId,
   warehouseManagerId,
 }) => {
-  const requests = await WarehouseRequest.find({
-    $or: [
-      { financialManager: financialManagerId },
-      { warehouseManager: warehouseManagerId },
-    ],
-  }).populate(warehouseRequestPopulateShipmentItems);
+  let filter = {};
+  if(!financialManagerId && !warehouseManagerId) {
+    filter = {};
+  } else if (financialManagerId || warehouseManagerId) {
+    filter = {
+      $or: [
+        { financialManager: financialManagerId },
+        { warehouseManager: warehouseManagerId },
+      ],
+    };
+  }
+  const requests = await WarehouseRequest.find(filter).populate(warehouseRequestPopulateShipmentItems);
   return requests;
 };
 

@@ -76,7 +76,7 @@ export const populateProductIngredients = async ({ products }) => {
 
 export const populateIngredientsConfig = {
   path: "ingredients",
-  select: "cropVariety quantity",
+  select: "cropVariety quantity quality",
   populate: {
     path: "cropVariety",
     select: "name cropType",

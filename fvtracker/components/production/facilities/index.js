@@ -50,6 +50,7 @@ const ProductStock = ({ stock }) => {
       onClick: () => {
         setAddWarehouseStockModalOpen(true);
       },
+      className: "submitButton",
     },
   ];
   if (!stock) return;
@@ -79,7 +80,7 @@ export default Facility;
 
 export function StockItem({ product, productionProcesses, quantity }) {
   return (
-    <div className={`flex justify-between items-center `}>
+    <div className={`flex justify-between items-center relative `}>
       <div>
         <div className="listitemheader">{product?.name}</div>
         <div className="listitemDescription">
@@ -98,7 +99,7 @@ export function StockItem({ product, productionProcesses, quantity }) {
           </p>
         </div>
       </div>
-      <div className="text-3xl font-bold">
+      <div className="stockQuantity">
         {quantity <= 0 ? (
           <>
             {" "}

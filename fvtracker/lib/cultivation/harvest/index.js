@@ -8,7 +8,7 @@ export async function harvestCells({
   toHarvestCells,
   harvestingPlanId,
   workerId,
-  quality
+  quality,
 }) {
   let plantedCropVarieties = await PlantedCropVariety.find({
     cultivation: cultivationId,

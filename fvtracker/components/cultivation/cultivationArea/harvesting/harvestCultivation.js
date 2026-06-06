@@ -3,6 +3,7 @@ import { AppSelect } from "@/components/form/inputs";
 import { FormModal } from "@/components/layout/modals/form";
 import { ChooseWorker } from "@/components/workers/choose";
 import { VARIETIES_QUALITIES } from "@/lib/constants/cultivation/plants";
+import { EMPLOYMENT_STATUS_EMPLOYED } from "@/lib/constants/users/workers";
 import { useSelector } from "react-redux";
 
 export const HarvestCultivation = ({
@@ -29,7 +30,10 @@ export const HarvestCultivation = ({
   const cropVarietyName = newHarvest.cropVariety.name;
   const quantityString =
     quantityToHarvest === 1 ? "1 ćelije" : `${quantityToHarvest} ćelija`;
-  const workers = useSelector((state) => state.workers.items);
+  const workersRedux = useSelector((state) => state.workers.items);
+  const workers = workersRedux.filter(
+    (worker) => worker.employmentRequest.status === EMPLOYMENT_STATUS_EMPLOYED,
+  );
 
   return (
     <FormModal

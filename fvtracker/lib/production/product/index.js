@@ -58,7 +58,7 @@ export const updateProduct = async ({ _updatedProduct, productId }) => {
   });
   product.ingredients = ingredientIds;
 
-  await product.populate(populateIngredientsConfig)
+  await product.populate(populateIngredientsConfig);
   const newSlug = makeUrlFriendly(updatedProduct.name);
   product.slug = newSlug;
 
@@ -79,6 +79,7 @@ export const createProduct = async ({ _newProductData }) => {
   await product.createIngredients({ ingredientsData: newIngredients });
   productionManager.products.push(product._id);
   await productionManager.save();
+  await product.populate(populateIngredientsConfig);
   return product;
 };
 

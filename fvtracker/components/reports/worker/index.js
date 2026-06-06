@@ -8,6 +8,7 @@ import {
   EMPLOYMENT_STATUS_UNEMPLOYED,
 } from "@/lib/constants/users/workers";
 import { ReportSector, ReportSection, ReportItem } from "../dashboard";
+import { LoadingFullScreen } from "@/components/layout/loading";
 
 export const WorkersReport = ({
   showTitle = true,
@@ -16,7 +17,7 @@ export const WorkersReport = ({
 }) => {
   const workers = useSelector((state) => state.workers.items);
 
-  if (!workers || workers.length === 0) return null;
+  if (!workers || workers.length === 0) return <LoadingFullScreen />;
   const sectorName = managerSectors[managerModelName] || "Sektor";
   return (
     <ReportSector workers={true}>

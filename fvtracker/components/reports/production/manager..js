@@ -7,11 +7,12 @@ import {
   getUniqueIngredients,
 } from "@/lib/utils/production/products";
 import { getWarehouseStockQuantity } from "@/lib/utils/storage/warehouse";
+import { LoadingFullScreen } from "@/components/layout/loading";
 
 export const ProductionReport = ({}) => {
   const products = useSelector((state) => state.production?.products.items);
 
-  if (!products) return null;
+  if (!products) return <LoadingFullScreen />;
 
   const productionStockQuantity = getProductionStockQuantity(products);
   const warehouseStockQuantity = getWarehouseStockQuantity(products);

@@ -1,13 +1,17 @@
 import { useSelector } from "react-redux";
 import { ReportItem, ReportSection } from "../dashboard";
+import { LoadingFullScreen } from "@/components/layout/loading";
 
 export const CropsReportSection = ({ fields }) => {
   const cultivationAreas = fields?.flatMap((field) => field.cultivationAreas);
   const cultivations = cultivationAreas?.flatMap((area) => area.cultivations);
 
   const crops = useSelector((state) => state.cultivation.crops);
+  const harvestingBatches = useSelector(
+    (state) => state.production.harvestingBatches.items,
+  );
 
-  if (!crops) return null;
+  if (!crops || !harvestingBatches) return <LoadingFullScreen />;
 
   const plantedCrops = cultivations?.flatMap((cultivation) =>
     cultivation.plantedCropVarieties.filter((plcv) => plcv.plantingPlanItem),

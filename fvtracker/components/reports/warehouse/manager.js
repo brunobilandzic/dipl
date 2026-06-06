@@ -1,17 +1,18 @@
-"use client"
+"use client";
 
 import { useSelector } from "react-redux";
 import { ReportItem, ReportSection, ReportSector } from "../dashboard";
 import { getWarehousesOccupiedVolume } from "@/lib/utils/storage/warehouse";
 import { stringQuant } from "@/lib/utils/strings";
 import { getshipmentSourcesCount } from "@/lib/utils/webstore/shipments";
+import { LoadingFullScreen } from "@/components/layout/loading";
 
 export const WarehouseReport = ({}) => {
   const warehouses = useSelector((state) => state.warehouse?.warehouses.items);
   const warehouseRequests = useSelector(
     (state) => state.warehouse?.warehouseRequests,
   );
-  if (!warehouses || !warehouseRequests) return null;
+  if (!warehouses || !warehouseRequests) return <LoadingFullScreen />;
   const occupiedVolume = getWarehousesOccupiedVolume(warehouses);
 
   const productsCount = warehouses.flatMap((wh) => wh.stocks).length;

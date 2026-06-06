@@ -14,11 +14,12 @@ import {
   EMPLOYMENT_STATUS_UNEMPLOYED,
 } from "@/lib/constants/users/workers";
 import { GeneralWorkersReport } from "../worker";
+import { LoadingFullScreen } from "@/components/layout/loading";
 
 export const FinancialReport = ({}) => {
   const orders = useSelector((state) => state.webstore.orders.items);
   const workers = useSelector((state) => state.workers.items);
-  if (!orders || !workers) return null;
+  if (!orders || !workers) return <LoadingFullScreen />;
 
   const uniqueCustomers = getUniqueCustomers(orders);
   const uniqueProducts = getUniqueProducts(orders);

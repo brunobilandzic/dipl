@@ -1,9 +1,10 @@
+import { LoadingFullScreen } from "@/components/layout/loading";
 import { ReportItem, ReportSection } from "../dashboard";
 import { CultivationCount } from "./cultivation";
 
 export const FieldStats = ({ fields }) => {
   const cultivationAreas = fields?.flatMap((field) => field.cultivationAreas);
-  if(!fields) return null;
+  if (!fields) return <LoadingFullScreen />;
   return (
     <>
       <ReportSection title="Statistika Polja">

@@ -8,6 +8,7 @@ export async function harvestCells({
   toHarvestCells,
   harvestingPlanId,
   workerId,
+  quality
 }) {
   let plantedCropVarieties = await PlantedCropVariety.find({
     cultivation: cultivationId,
@@ -61,6 +62,7 @@ export async function harvestCells({
     plantedCropVarietiesIds: plantedCropVarieties.map((pcv) => pcv._id),
     cropVarietyId,
     quantityPerCell: harvestingPlanItem.cropVariety.quantityPerCell,
+    quality,
   });
 
   const harvestWork = new HarvestWork({

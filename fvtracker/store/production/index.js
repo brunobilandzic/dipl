@@ -43,15 +43,27 @@ const productsSlice = createSlice({
     },
     addProduct: (state, action) => {
       state.products.items.push(action.payload);
+      state.products.filteredItems.push(action.payload);
+      state.products.filteredItems = sortItems({
+        items: state.products.filteredItems,
+        sortBy: SORT_INIT_VALUE,
+      });
     },
     removeProduct: (state, action) => {
       state.products.items = state.products.items.filter(
+        (product) => product.id !== action.payload,
+      );
+      state.products.filteredItems = state.products.filteredItems.filter(
         (product) => product.id !== action.payload,
       );
     },
     updateProduct: (state, action) => {
       state.products.items = state.products.items.map((product) =>
         product._id === action.payload._id ? action.payload : product,
+      );
+      state.products.filteredItems = state.products.filteredItems.map(
+        (product) =>
+          product._id === action.payload._id ? action.payload : product,
       );
     },
     setManagers: (state, action) => {

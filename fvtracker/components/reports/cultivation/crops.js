@@ -40,8 +40,8 @@ export const CropsReportSection = ({ fields }) => {
     0,
   );
 
-  const hvCvQuantity = harvestedCrops.reduce(
-    (sum, plcv) => plcv.harvestingPlanItem.cropVariety.quantityPerCell + sum,
+  const hvCvQuantity = batchItems.reduce(
+    (sum, item) => sum + item.batchQuantity,
     0,
   );
 

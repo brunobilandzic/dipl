@@ -180,7 +180,7 @@ const CreateStockChooseBatch = ({
     .map(([batchName, possibleStock]) => {
       return {
         value: batchName,
-        label: `${batchName} - moguća izrada ${possibleStock} proizvoda`,
+        label: `${batchName} - (${possibleStock})`,
       };
     });
 

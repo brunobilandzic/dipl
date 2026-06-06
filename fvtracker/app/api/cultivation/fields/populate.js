@@ -4,34 +4,38 @@ export default [
     populate: [
       {
         path: "cultivations",
-        populate: {
-          path: "plantedCropVarieties",
-          populate: [
-            {
-              path: "plantingPlanItem",
-              populate: {
-                path: "cropVariety",
-                populate: { path: "cropType" },
+        populate: [
+          {
+            path: "plantedCropVarieties",
+            populate: [
+              {
+                path: "plantingPlanItem",
+                populate: {
+                  path: "cropVariety",
+                  populate: { path: "cropType" },
+                },
               },
-            },
-            {
-              path: "harvestingPlanItem",
-              populate: {
-                path: "cropVariety",
-                populate: { path: "cropType" },
+              {
+                path: "harvestingPlanItem",
+                populate: {
+                  path: "cropVariety",
+                  populate: { path: "cropType" },
+                },
               },
-            },
-            {
-              path: "cultivation",
-              select: "name cultivationArea",
-              populate: {
-                path: "cultivationArea",
-                select: "name field",
-                populate: { path: "field", select: "name slug" },
+              {
+                path: "cultivation",
+                select: "name cultivationArea",
+                populate: {
+                  path: "cultivationArea",
+                  select: "name field",
+                  populate: { path: "field", select: "name slug" },
+                },
               },
-            },
-          ],
-        },
+            ],
+          },
+          { path: "harvestWorks" },
+          { path: "plantageWorks" },
+        ],
       },
       { path: "field", select: "slug" },
     ],

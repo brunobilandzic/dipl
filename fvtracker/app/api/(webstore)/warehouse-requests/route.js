@@ -1,4 +1,5 @@
 import { fetchManager, fetchManagerWorker } from "@/lib/auth/fetchSessionData";
+import dbConnect from "@/lib/db/mongooseConnect";
 import {
   FINANCIAL_MANAGER,
   WAREHOUSE_MANAGER,
@@ -13,6 +14,7 @@ import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
 
 export async function GET(request) {
   try {
+    await dbConnect();
     let { specificManager, worker, unauthorized } = await fetchManagerWorker({
       managerNames: [WAREHOUSE_MANAGER, FINANCIAL_MANAGER],
       workerType: managerMorkerMap[WAREHOUSE_MANAGER],
@@ -72,6 +74,7 @@ async function extractManagerIds(specificManager, worker) {
 
 export async function POST(request) {
   try {
+    await dbConnect();
     let {
       specificManager: financialManager,
       worker,

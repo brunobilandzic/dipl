@@ -1,9 +1,11 @@
 //route to delete db
 
 import { deleteDB } from "@/lib/db/delete";
+import dbConnect from "@/lib/db/mongooseConnect";
 
 export async function DELETE(req) {
   try {
+    await dbConnect();
     // Logic to delete the database goes here
     const success = await deleteDB();
     console.log("Database deleted successfully.");

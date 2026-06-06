@@ -1,4 +1,5 @@
 import { fetchManager } from "@/lib/auth/fetchSessionData";
+import dbConnect from "@/lib/db/mongooseConnect";
 import { MANAGER_TYPES } from "@/lib/constants/users/managerTypes";
 import { Worker } from "@/models/user/workers";
 import basePopulate, {
@@ -16,6 +17,7 @@ import {
 
 export async function POST(req) {
   try {
+    await dbConnect();
     const { specificManager, gerneralManager, unauthorized } =
       await fetchManager({ managerNames: MANAGER_TYPES });
     const { workerId, amount } = await req.json();

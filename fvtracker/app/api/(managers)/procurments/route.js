@@ -1,4 +1,5 @@
 import { fetchManager, fetchManagerWorker } from "@/lib/auth/fetchSessionData";
+import dbConnect from "@/lib/db/mongooseConnect";
 import {
   FINANCIAL_MANAGER,
   MANAGER_TYPES,
@@ -11,6 +12,7 @@ import { GeneralManager } from "@/models/user/managers/GeneralManager";
 
 export async function GET(req) {
   try {
+    await dbConnect();
     const { specificManager, generalManager, unauthorized } =
       await fetchManager({ managerNames: MANAGER_TYPES });
     if (unauthorized || (!specificManager && !generalManager)) {
@@ -41,6 +43,7 @@ export async function GET(req) {
 
 export async function POST(req) {
   try {
+    await dbConnect();
     const { specificManager, gerneralManager, unauthorized } =
       await fetchManager({ managerNames: MANAGER_TYPES });
     if (unauthorized || (!specificManager && !gerneralManager)) {
@@ -69,6 +72,7 @@ export async function POST(req) {
 
 export async function PUT(req) {
   try {
+    await dbConnect();
     const { specificManager, gerneralManager, unauthorized } =
       await fetchManager({
         managerNames: [FINANCIAL_MANAGER, GENERAL_MANAGER],
@@ -95,6 +99,7 @@ export async function PUT(req) {
 
 export async function DELETE(req) {
   try {
+    await dbConnect();
     const { specificManager, gerneralManager, unauthorized } =
       await fetchManager({ managerNames: MANAGER_TYPES });
     if (unauthorized || (!specificManager && !gerneralManager)) {

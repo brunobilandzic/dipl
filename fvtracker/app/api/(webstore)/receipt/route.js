@@ -1,12 +1,14 @@
 import { fetchManager, fetchManagerWorker } from "@/lib/auth/fetchSessionData";
 import { FINANCIAL_MANAGER } from "@/lib/constants/users/managerTypes";
 import { managerMorkerMap } from "@/lib/constants/users/managerWorker";
+import dbConnect from "@/lib/db/mongooseConnect";
 import { Receipt } from "@/models/sectors/sales";
 import { ShipmentItem } from "@/models/sectors/sales/Shipment";
 import { Worker } from "@/models/user/workers";
 
 export async function POST(req) {
   try {
+    await dbConnect();
     let { specificManager, worker, unauthorized } = await fetchManagerWorker({
       managerNames: [FINANCIAL_MANAGER],
       workerType: managerMorkerMap[FINANCIAL_MANAGER],

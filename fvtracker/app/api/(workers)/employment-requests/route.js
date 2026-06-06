@@ -1,8 +1,10 @@
 import { fetchManager } from "@/lib/auth/fetchSessionData";
+import dbConnect from "@/lib/db/mongooseConnect";
 import { FINANCIAL_MANAGER } from "@/lib/constants/users/managerTypes";
 import { EmploymentRequest } from "@/models/user/workers/EmploymentRequest";
 
 export async function GET(request) {
+  await dbConnect();
   const { unauthorized } = await fetchManager({
     managerNames: [FINANCIAL_MANAGER],
   });
@@ -28,6 +30,7 @@ export async function GET(request) {
 }
 
 export async function PUT(request) {
+  await dbConnect();
   const { unauthorized } = await fetchManager({
     managerNames: [FINANCIAL_MANAGER],
   });

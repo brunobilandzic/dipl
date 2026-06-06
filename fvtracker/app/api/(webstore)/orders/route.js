@@ -36,6 +36,7 @@ export async function GET(req) {
 
 export async function DELETE(req) {
   try {
+    await dbConnect();
     const { unathorized } = await fetchManager({
       managerNames: [FINANCIAL_MANAGER],
     });

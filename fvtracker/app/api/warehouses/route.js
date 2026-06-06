@@ -1,4 +1,5 @@
 import { fetchManager } from "@/lib/auth/fetchSessionData";
+import dbConnect from "@/lib/db/mongooseConnect";
 import { WAREHOUSE_MANAGER } from "@/lib/constants/users/managerTypes";
 import {
   createWarehouse,
@@ -9,6 +10,7 @@ import {
 import { getWarehouses, getWarehouse } from "@/lib/warehouses/get";
 
 export async function GET(request) {
+  await dbConnect();
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
   if (id) {
@@ -31,6 +33,7 @@ export async function GET(request) {
 
 export async function POST(request) {
   try {
+    await dbConnect();
     const { specificManager: warehouseManager, unauthorized } =
       await fetchManager({
         managerNames: [WAREHOUSE_MANAGER],
@@ -57,6 +60,7 @@ export async function POST(request) {
 
 export async function PUT(request) {
   try {
+    await dbConnect();
     const { searchParams } = new URL(request.url);
     const id = searchParams.get("id");
     const data = await request.json();
@@ -72,6 +76,7 @@ export async function PUT(request) {
 
 export async function DELETE(request) {
   try {
+    await dbConnect();
     const { searchParams } = new URL(request.url);
     let id = searchParams.get("id");
     if (!id) {

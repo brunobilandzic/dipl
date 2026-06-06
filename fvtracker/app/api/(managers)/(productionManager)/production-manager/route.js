@@ -1,4 +1,5 @@
 import { fetchManager } from "@/lib/auth/fetchSessionData";
+import dbConnect from "@/lib/db/mongooseConnect";
 import {
   CULTIVATION_MANAGER,
   PRODUCTION_MANAGER,
@@ -7,6 +8,7 @@ import { ProductionManager } from "@/models/user/managers/ProductionManager";
 
 export async function GET(request) {
   try {
+    await dbConnect();
     const { searchParams } = new URL(request.url);
     const queryAll = searchParams.get("all");
     const { generalManager, specificManager: productionManager } =

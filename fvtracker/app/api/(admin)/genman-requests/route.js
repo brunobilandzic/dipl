@@ -1,10 +1,12 @@
 import { fetchAdmin } from "@/lib/auth/fetchSessionData";
+import dbConnect from "@/lib/db/mongooseConnect";
 import { ROLE_STATUSES } from "@/lib/constants/users";
 import { GeneralManagerRequest } from "@/models/documents/requests/RoleRequest";
 import { GeneralManager } from "@/models/user/managers/GeneralManager";
 
 export async function GET(request) {
   try {
+    await dbConnect();
     const { unauthorized, admin } = await fetchAdmin({
       requireAdmin: true,
     });
@@ -39,6 +41,7 @@ export async function GET(request) {
 
 export async function POST(req) {
   try {
+    await dbConnect();
     const { unauthorized, admin } = await fetchAdmin({
       requireAdmin: true,
     });

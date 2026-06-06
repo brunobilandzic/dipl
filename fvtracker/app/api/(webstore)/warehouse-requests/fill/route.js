@@ -2,9 +2,11 @@ import { fetchManager, fetchManagerWorker } from "@/lib/auth/fetchSessionData";
 import { WAREHOUSE_MANAGER } from "@/lib/constants/users/managerTypes";
 import { fillWarehouseRequest } from "@/lib/warehouses/warehouseRequests";
 import { managerMorkerMap } from "@/lib/constants/users/managerWorker";
+import dbConnect from "@/lib/db/mongooseConnect";
 
 export async function POST(request) {
   try {
+    await dbConnect();
     let {
       specificManager,
       worker: warehouseWorker,

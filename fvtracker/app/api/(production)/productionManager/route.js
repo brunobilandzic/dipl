@@ -1,4 +1,5 @@
 import { fetchManager, fetchManagerWorker } from "@/lib/auth/fetchSessionData";
+import dbConnect from "@/lib/db/mongooseConnect";
 import {
   FINANCIAL_MANAGER,
   PRODUCTION_MANAGER,
@@ -10,6 +11,7 @@ import { populateProductsConfig } from "../populate";
 // here is the place we fetch all production data
 
 export async function GET(request) {
+  await dbConnect();
   let {
     specificManager,
     worker: productionWorker,

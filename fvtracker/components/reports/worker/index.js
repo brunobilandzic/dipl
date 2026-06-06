@@ -49,6 +49,11 @@ export const GeneralWorkersReport = ({
     (worker) => worker.employmentRequest.status == EMPLOYMENT_STATUS_PENDING,
   );
 
+  const payedAmount = workers.reduce(
+    (sum, worker) => sum + worker.payedAmount,
+    0,
+  );
+
   return (
     <ReportSection title={title}>
       <ReportItem count={workers.length} description={"Prijava"} />
@@ -69,6 +74,10 @@ export const GeneralWorkersReport = ({
       <ReportItem
         count={(totalHourlyRate * 160).toFixed(2)}
         description={"Mesečni trošak (€)"}
+      />
+      <ReportItem
+        count={payedAmount.toFixed(2)}
+        description={"Ukupno plaćeno (€)"}
       />
       {children}
     </ReportSection>

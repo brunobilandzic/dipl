@@ -145,7 +145,7 @@ export const getStocks = async () => {
       populate: [
         {
           path: "ingredients",
-          select: "cropVariety quantity",
+          select: "cropVariety quantity quality",
           populate: [
             {
               path: "cropVariety",

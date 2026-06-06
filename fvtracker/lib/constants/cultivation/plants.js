@@ -1,8 +1,8 @@
-export const EXTRA = "ekstra";
 export const PREMIUM = "premium";
-export const BASIC = "basic";
+export const STANDARD = "standardno";
+export const SATISFACTORY = "zadovoljivo";
 
-export const VARIETIES_QUALITIES = [EXTRA, PREMIUM, BASIC];
+export const VARIETIES_QUALITIES = [SATISFACTORY, PREMIUM, STANDARD];
 
 // POVRĆE – glavne vrste
 export const vegatablesGeneralCropTypes = [

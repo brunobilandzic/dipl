@@ -107,6 +107,7 @@ export const QualityInput = ({ index, item, handleItemChange }) => (
     name="quality"
     onChange={(e) => handleItemChange(index, "quality", e.target.value)}
     value={item.quality}
+    defaultValue={item.quality}
     options={VARIETIES_QUALITIES.map((quality) => ({
       label: quality,
       value: quality,

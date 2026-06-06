@@ -34,7 +34,7 @@ export const createProductStock = async ({
       harvestingBatch = await findBatchByName({ name: batchName });
       await harvestingBatch.populate({
         path: "harvestingBatchItems",
-        select: "cropVariety batchQuantity",
+        select: "cropVariety batchQuantity quality",
       });
     } else if (harvestingBatchId) {
       const res = await getHarvestingBatches({
@@ -54,8 +54,10 @@ export const createProductStock = async ({
     });
 
     for (const ingredient of product.ingredients) {
-      const batchItem = harvestingBatch.harvestingBatchItems.find((item) =>
-        item.cropVariety.equals(ingredient.cropVariety._id),
+      const batchItem = harvestingBatch.harvestingBatchItems.find(
+        (item) =>
+          item.cropVariety.equals(ingredient.cropVariety._id) &&
+          item.quality === ingredient.quality,
       );
       if (!batchItem) {
         throw new Error(

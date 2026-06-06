@@ -129,3 +129,17 @@ export const getCultivationsArea = (cultivations) =>
     (totalArea, cul) => totalArea + cul.plantedCropVarieties.length,
     0,
   );
+
+export const flatFieldsCultivations = (fields) => {
+  const cultivations = [];
+
+  fields.forEach((field) => {
+    field.cultivationAreas.forEach((ca) => {
+      ca.cultivations.forEach((cul) => {
+        cultivations.push(cul);
+      });
+    });
+  });
+
+  return cultivations;
+};

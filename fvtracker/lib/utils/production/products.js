@@ -1,7 +1,7 @@
 import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { setLoading } from "@/store/loading";
-import { setProducts, updateProduct } from "@/store/production";
+import { addProduct, setProducts, updateProduct } from "@/store/production";
 import { checkEmpty } from "../objects";
 import { stringContains } from "../strings";
 
@@ -42,12 +42,14 @@ export const submitProductForm = async ({
       res = await api.put(`/products`, productForm, {
         params: { id: productForm.id },
       });
+      dispatch(updateProduct(product));
       router.push(`/proizvodi/uredi/${res.data.product.slug}`);
     } else {
       res = await api.post("/products", productForm);
+      dispatch(addProduct(res.data.product));
     }
     const product = res.data.product;
-    dispatch(updateProduct(product));
+
     dispatch(setLoading(false));
     alert(`Proizvod ${isEdit ? "ažuriran" : "kreiran"} uspješno!`);
 

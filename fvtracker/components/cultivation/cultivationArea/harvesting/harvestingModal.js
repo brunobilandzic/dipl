@@ -268,6 +268,13 @@ export function HarvestingModal({
     }
   };
 
+  const chooseQuality = (quality) => {
+    setNewHarvest((prev) => ({
+      ...prev,
+      quality,
+    }));
+  };
+
   return (
     <>
       <Modal title="Berba" isOpen={isOpen} onCancel={onCancel}>
@@ -314,6 +321,7 @@ export function HarvestingModal({
           onChoosePlan={onChoosePlan}
           workerId={workerId}
           chooseWorker={chooseWorker}
+          chooseQuality={chooseQuality}
         />
       )}
     </>

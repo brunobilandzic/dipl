@@ -56,6 +56,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.workerType = user.workerType || null;
         token.workerId = user.workerId || null;
         token.generalManagerRequest = user.generalManagerRequest || null;
+        token.employed = user.employed ?? null;
       }
 
       if (account && account.provider === "google") {
@@ -89,6 +90,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.workerId = token.workerId || null;
         session.user.generalManagerRequest =
           token.generalManagerRequest || null;
+        session.user.employed = token.employed ?? null;
       }
       return session;
     },

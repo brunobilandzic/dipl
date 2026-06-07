@@ -13,6 +13,7 @@ import { ROLE_STATUSES } from "../constants/users";
 import mongoose from "mongoose";
 import { Admin } from "@/models/user/Admin";
 import { GeneralManagerRequest } from "@/models/documents/requests/RoleRequest";
+import { EMPLOYMENT_STATUS_EMPLOYED } from "../constants/users/workers";
 
 export async function handleOAuth({ email, given_name, family_name }) {
   await dbConnect();
@@ -63,7 +64,6 @@ export async function handleCredentials(credentials) {
         .model(getManagerModelName())
         .findOne({ rootManager: user.rootManager?._id })
     : null;
-
   return {
     appUserId: user._id.toString(),
     email: user.email,
@@ -76,6 +76,7 @@ export async function handleCredentials(credentials) {
     workerType: user.workerType || null,
     workerId: user.worker?._id.toString() || null,
     generalManagerRequest: user.generalManagerRequest || null,
+    employed: user.employed ?? null,
   };
 }
 
@@ -188,9 +189,19 @@ async function logInCredentials({ login, password }) {
       return null;
     }
     if (appUser.worker) {
-      await appUser.populate({ path: "worker", select: "_id __t" });
+      await appUser.populate({
+        path: "worker",
+        select: "_id __t employmentRequest",
+        populate: "employmentRequest",
+      });
       const workerType = appUser.worker.__t;
-      return { ...appUser._doc, workerType };
+      return {
+        ...appUser._doc,
+        workerType,
+        employed:
+          appUser.worker.employmentRequest.status ===
+          EMPLOYMENT_STATUS_EMPLOYED,
+      };
     }
     if (!appUser.rootManager) {
       console.log("User has no Root Manager:", login);

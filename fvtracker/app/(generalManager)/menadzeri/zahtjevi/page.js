@@ -1,5 +1,7 @@
+import { UnathorizedPage } from "@/components/auth/unAuthorized";
 import { RoleRequestList } from "@/components/generalManager/managerRequests";
 import auth from "@/lib/auth";
+import { checkGeneralManagerRequest } from "@/lib/auth/fetchSessionData";
 import { GENERAL_MANAGER } from "@/lib/constants/users/managerTypes";
 import React from "react";
 
@@ -9,10 +11,15 @@ const RoleRequestsPage = async () => {
     throwError: false,
   });
   if (!generalManager) {
-    return (
-      <UnathorizedPage message="Nemate pristup ovoj stranici. Prijavite se kao Generalni Manager." />
-    );
+    return <UnathorizedPage />;
   }
+
+  const { unauthorized } = await checkGeneralManagerRequest(generalManager);
+
+  if (unauthorized) {
+    return <UnathorizedPage message="Uloga nije odobrena." />;
+  }
+
   return (
     <div>
       <RoleRequestList />

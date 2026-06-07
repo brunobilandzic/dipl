@@ -97,6 +97,11 @@ export async function fetchSessionSpecificManager({
     }
     return null;
   }
+  if (
+    specificManager.rootManager.roleRequest.status !== ROLE_STATUSES.APPROVED
+  ) {
+    return null;
+  }
 
   return specificManager;
 }
@@ -125,6 +130,9 @@ export async function fetchManagerWorker({ managerNames = [], workerType }) {
   const { specificManager, generalManager, unauthorized } = await fetchManager({
     managerNames,
   });
+  if (unauthorized) {
+    return { unauthorized: true };
+  }
   if (!unauthorized && (specificManager || generalManager)) {
     return { specificManager, generalManager, unauthorized: false };
   }
@@ -149,6 +157,10 @@ export async function fetchManager({ managerNames = [] }) {
   });
 
   if (generalManager) {
+    const { unauthorized } = await checkGeneralManagerRequest(generalManager);
+    if (unauthorized) {
+      return { unauthorized: true };
+    }
     response.generalManager = generalManager;
   }
   if (managerNames.length === 0) {
@@ -164,8 +176,6 @@ export async function fetchManager({ managerNames = [] }) {
       throwError: false,
     });
     if (specificManager) {
-      // return first manager found
-      // needs better logic, but for now we will only use one manager type per page so it will do for that
       response.specificManager = specificManager;
     }
   }

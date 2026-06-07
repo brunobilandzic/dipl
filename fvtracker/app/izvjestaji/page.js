@@ -1,7 +1,6 @@
 import { UnathorizedPage } from "@/components/auth/unAuthorized";
 import { AllReports } from "@/components/reports";
 import { CultivationReport } from "@/components/reports/cultivation/manager";
-import { ReportsDashboard } from "@/components/reports/dashboard";
 import { ProductionReport } from "@/components/reports/production/manager.";
 import { WarehouseReport } from "@/components/reports/warehouse/manager";
 import { WorkersReport } from "@/components/reports/worker";

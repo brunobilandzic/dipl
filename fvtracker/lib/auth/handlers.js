@@ -75,6 +75,7 @@ export async function handleCredentials(credentials) {
     isAdmin: user.isAdmin || false,
     workerType: user.workerType || null,
     workerId: user.worker?._id.toString() || null,
+    generalManagerRequest: user.generalManagerRequest || null,
   };
 }
 
@@ -191,7 +192,6 @@ async function logInCredentials({ login, password }) {
       const workerType = appUser.worker.__t;
       return { ...appUser._doc, workerType };
     }
-    console.log("Found user in DB:", appUser);
     if (!appUser.rootManager) {
       console.log("User has no Root Manager:", login);
       return appUser;
@@ -203,6 +203,13 @@ async function logInCredentials({ login, password }) {
       console.log("User's Root Manager has no Role Request:", login);
       return null;
     }
+    let generalManagerRequest = null;
+    if (appUser.rootManager.managerModelName === GENERAL_MANAGER) {
+      const generalManager = await GeneralManager.findOne({
+        rootManager: appUser.rootManager._id,
+      }).populate("generalManagerRequest");
+      generalManagerRequest = generalManager.generalManagerRequest;
+    }
     await appUser.rootManager?.populate({
       path: "roleRequest",
       select: "status",
@@ -213,6 +220,7 @@ async function logInCredentials({ login, password }) {
       ...appUser._doc,
       roleStatus: appUser.rootManager?.roleRequest?.status || null,
       worker: appUser.worker || null,
+      generalManagerRequest: generalManagerRequest?.status || null,
     };
   }
   return null;

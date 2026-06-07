@@ -76,6 +76,18 @@ function NavItems() {
 
   useEffect(() => {
     if (status === "authenticated" && session.user?.managerModelName) {
+      if (
+        session.user.managerModelName === GENERAL_MANAGER &&
+        session.user.generalManagerRequest !== ROLE_STATUSES.APPROVED
+      ) {
+        return;
+      }
+      if (
+        session.user.roleStatus &&
+        session.user.roleStatus !== ROLE_STATUSES.APPROVED
+      ) {
+        return;
+      }
       dispatch(fetchWorkers(session.user.managerModelName));
       const managerModelName = session.user.managerModelName;
       setManagerModelName(session.user?.managerModelName);

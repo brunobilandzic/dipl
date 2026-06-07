@@ -3,6 +3,7 @@ import { AppUser } from "@/models/user/AppUser";
 import mongoose from "mongoose";
 import { GENERAL_MANAGER } from "../constants/users/managerTypes";
 import { ROLE_STATUSES } from "../constants/users";
+import "@/models/documents/requests/RoleRequest";
 
 export async function fetchSessionAppUser() {
   const email = await fetchSessionEmail();
@@ -28,10 +29,9 @@ async function fetchSessionEmail() {
 }
 
 export const checkGeneralManagerRequest = async (generalManager) => {
-  await generalManager.populate("generalManagerRequest");
   if (
     !generalManager.generalManagerRequest ||
-    !generalManager.generalManagerRequest.status != ROLE_STATUSES.APPROVED
+    generalManager.generalManagerRequest.status != ROLE_STATUSES.APPROVED
   ) {
     return { unauthorized: true };
   }
@@ -57,13 +57,18 @@ export async function fetchSessionSpecificManager({
   }
 
   if (managerName == GENERAL_MANAGER) {
-    await specificManager.populate({
-      path: "rootManager",
-      populate: {
-        path: "roleRequest",
-        select: "status",
+    await specificManager.populate([
+      {
+        path: "rootManager",
+        populate: {
+          path: "roleRequest",
+          select: "status",
+        },
       },
-    });
+      {
+        path: "generalManagerRequest",
+      },
+    ]);
     return specificManager;
   }
 

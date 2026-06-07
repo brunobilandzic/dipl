@@ -63,13 +63,6 @@ generalManagerSchema.method.approveRoleRequest = async function ({
   return roleRequest;
 };
 
-generalManagerSchema.method.getPendingRoleRequests = async function () {
-  const roleRequests = await this.getRoleRequests();
-  return roleRequests.filter(
-    (request) => request.status === ROLE_STATUSES.PENDING,
-  );
-};
-
 export const GeneralManager =
   mongoose.models.GeneralManager ||
   mongoose.model("GeneralManager", generalManagerSchema);

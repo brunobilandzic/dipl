@@ -15,6 +15,7 @@ import { useState } from "react";
 import { FormModal } from "@/components/layout/modals/form";
 import { ChooseWorker } from "@/components/workers/choose";
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
+import { translateShipmentStatus } from "@/lib/utils/strings";
 
 function ShipmentPageComponent({ shipment }) {
   if (!shipment) {
@@ -38,8 +39,10 @@ function ShipmentPageComponent({ shipment }) {
   return (
     <div>
       <div>
-        <div>NARUDŽBA: {order?.number}</div>
-        <div>STATUS: {shipment?.status}</div>
+        <div className="text-3xl font-bold mb-2">
+          Narudžba {order?.number} - Otpremnica
+        </div>
+        <div>{translateShipmentStatus(shipment?.status)}</div>
         {shipmentItems.length > 0 ? (
           <div className="mt-4 pl-12">
             <ShipmentItemList
@@ -75,19 +78,22 @@ const ShipmentItemList = ({
     sortBy: SORT_INIT_VALUE,
   });
   return (
-    <div className="flex flex-col gap-8">
-      {sortedShipmentItems?.map((si) => (
-        <ShipmentItem
-          key={si._id}
-          shipmentItem={si}
-          managerModelName={managerModelName}
-          dispatch={dispatch}
-          router={router}
-          workers={workers}
-          workerId={workerId}
-          workerType={workerType}
-        />
-      ))}
+    <div className="flex flex-col gap-2">
+      <div className="text-lg">Pošiljke:</div>
+      <div className="flex flex-col gap-8">
+        {sortedShipmentItems?.map((si) => (
+          <ShipmentItem
+            key={si._id}
+            shipmentItem={si}
+            managerModelName={managerModelName}
+            dispatch={dispatch}
+            router={router}
+            workers={workers}
+            workerId={workerId}
+            workerType={workerType}
+          />
+        ))}
+      </div>
     </div>
   );
 };
@@ -151,10 +157,9 @@ const ShipmentItem = ({
       <ListItem
         key={_id}
         actionOptions={actionOptions}
-        title={`Pošiljka napravljena ${showDateTime(createdAt)}`}
+        title={`${showDateTime(createdAt)}`}
       >
         <div>
-          <strong>Stavke:</strong>
           <SourceList sources={sources} />
           {receipt && (
             <div className="pt-8 text-right">

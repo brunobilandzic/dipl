@@ -1,3 +1,9 @@
+import {
+  SHIPMENT_PENDING,
+  SHIPMENT_SHIPPED_FULLY,
+  SHIPMENT_SHIPPED_PARTLY,
+} from "../constants/warehouse/shipment";
+
 export function makeUrlFriendly(str) {
   str = str
     .replace(/č/g, "c")
@@ -64,4 +70,17 @@ export const cropVarietyFullName = (cropVariety) => {
 
 export const stringQuant = ({ string, quantity, pluralLetter }) => {
   return `${string}${quantity > 1 ? pluralLetter : ""}`;
+};
+
+export const translateShipmentStatus = (status) => {
+  switch (status) {
+    case SHIPMENT_PENDING:
+      return "Na čekanju";
+    case SHIPMENT_SHIPPED_PARTLY:
+      return "Djelomično isporučeno";
+    case SHIPMENT_SHIPPED_FULLY:
+      return "Isporučeno";
+    default:
+      return status;
+  }
 };

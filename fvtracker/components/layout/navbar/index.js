@@ -167,6 +167,10 @@ function NavItems() {
     if (status === "authenticated" && session.user?.workerType) {
       console.log("User is a worker, setting worker nav items");
       dispatch(login(session.user));
+      if (!session.user.employed) {
+        console.log("User is not employed, skipping worker data refresh");
+        return;
+      }
       setItems(roleitems[session.user.workerType] || []);
       if (session.user.workerType === "ProductionWorker") {
         console.log("Production worker logged in, refreshing product data...");

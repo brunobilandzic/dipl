@@ -189,8 +189,11 @@ export const adminNavItems = [
 export const guestNavItems = [
   {
     label: (
-      <div className="text-2xl">
-        <FaShoppingCart />
+      <div className="flex items-center gap-2">
+        Košarica{" "}
+        <div className="-mt-0.5">
+          <FaShoppingCart />
+        </div>
       </div>
     ),
     path: "/kosarica",

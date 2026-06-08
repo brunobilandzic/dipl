@@ -135,7 +135,7 @@ export function extractVarietiesQuantities({ product, quantity }) {
 
 export const getIngredientsList = ({ ingredients }) => {
   return ingredients
-    .map((ing) => `${ing.cropVariety.name} (${ing.quantity})`)
+    .map((ing) => `${ing.cropVariety.name} (${ing.quality}) (${ing.quantity})`)
     .join(", ");
 };
 

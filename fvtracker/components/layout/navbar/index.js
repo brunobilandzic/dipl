@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import roleitems, { adminNavItems, guestNavItems } from "./roleitems";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "@/store/userSlice";
@@ -27,14 +27,19 @@ import { fillWarehouseRequestsRedux } from "@/lib/utils/documents/requests";
 import { fillManagersSelection } from "@/store/managers";
 import { fetchEmploymentRequests, fetchWorkers } from "@/store/workers";
 import { fetchProcurments } from "@/store/procurments";
+import { MdDataset, MdKey } from "react-icons/md";
+import { FaDatabase } from "react-icons/fa";
 
 export default {
   roleitems,
 };
 
 export function Navbar() {
+  const { data: session, status } = useSession();
+  const authenticated = status === "authenticated";
+  const isAdmin = authenticated && session.user?.isAdmin;
   return (
-    <div className=" relative h-16 bg-transparent flex items-center px-10 ">
+    <div className="navbar relative h-16 bg-[var(--navbar-bg)] flex items-center px-10 text-[var(--text-navbar)]">
       <div className="flex-1 flex justify-start items-center">
         {" "}
         <NavLogo />
@@ -42,9 +47,21 @@ export function Navbar() {
       <div className="absolute left-1/2 -translate-x-1/2 flex gap-8">
         <NavItems />
       </div>
-      <div className=" flex-1 flex justify-end gap-8 ">
-        <Link href="/seed">test podaci</Link>
-        <Link href="/autorizacija">aautorizacija</Link>
+      <div className=" flex-1 flex justify-end items-center gap-8 ">
+        {isAdmin && (
+          <Link href="/seed">
+            <FaDatabase />
+          </Link>
+        )}
+        {authenticated ? (
+          <div className="cursor-pointer" onClick={() => signOut()}>
+            Odjava
+          </div>
+        ) : (
+          <Link href="/autorizacija">
+            <MdKey className="text-xl -mt-0.5" />
+          </Link>
+        )}
       </div>
     </div>
   );
@@ -159,6 +176,7 @@ function NavItems() {
 
   useEffect(() => {
     if (status === "authenticated" && session.user?.isAdmin) {
+      dispatch(login(session.user));
       setItems(adminNavItems);
     }
   }, [status]);
@@ -210,7 +228,9 @@ function NavItem({ item }) {
         onMouseLeave={() => setSubmenuOpen(false)}
         className="relative group "
       >
-        <span className="cursor-pointer">{item.label}</span>
+        <span className="cursor-pointer hover:text-blue-900 transition-colors duration-200 hover:[-webkit-text-stroke:0.5px_black]">
+          {item.label}
+        </span>
         <div
           className={`absolute top-full left-0  w-48 bg-gray-800 text-white rounded shadow-lg ${subMenuOpen ? "block" : "hidden"}`}
         >
@@ -228,7 +248,10 @@ function NavItem({ item }) {
     );
   } else {
     return (
-      <Link href={item.path} className="hover:underline">
+      <Link
+        href={item.path}
+        className="hover:text-blue-900 transition-colors duration-200  hover:[-webkit-text-stroke:0.5px_black]"
+      >
         {item.label}
       </Link>
     );

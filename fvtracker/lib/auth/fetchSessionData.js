@@ -201,6 +201,11 @@ export const checkManager = async ({ managerNames = [] }) => {
 };
 
 export const fetchSessionRootManager = async () => {
+  const { admin } = await fetchAdmin();
+  if (admin) {
+    console.log("Admin user authenticated, granting access to root manager");
+    return { unauthorized: false, rootManager: null, isAdmin: true };
+  }
   const appUser = await fetchSessionAppUser();
   const rootManager = await mongoose.models.RootManager.findOne({
     appUser: appUser._id,
@@ -215,9 +220,13 @@ export const fetchSessionRootManager = async () => {
 };
 
 export const fetchSessionManagerModelName = async () => {
-  const { rootManager, unauthorized } = await fetchSessionRootManager();
+  const { rootManager, unauthorized, isAdmin } =
+    await fetchSessionRootManager();
   if (unauthorized) {
     return { unauthorized: true };
+  }
+  if (isAdmin) {
+    return { unauthorized: false, managerModelName: "Admin", isAdmin: true };
   }
   return { managerModelName: rootManager.managerModelName };
 };

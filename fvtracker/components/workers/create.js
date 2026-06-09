@@ -32,7 +32,7 @@ export const CreateWorker = () => {
       email: "",
       password: "",
       username: "",
-      sector: "",
+      managerModelName: "",
     };
     testWorkerData = {
       hourlyRate: 12,
@@ -41,7 +41,7 @@ export const CreateWorker = () => {
       email: "workertest@gmail.com",
       password: "1",
       username: "workertest",
-      sector: CULTIVATION_MANAGER,
+      managerModelName: CULTIVATION_MANAGER,
     };
   } else {
     emptyWorkerData = {
@@ -51,7 +51,7 @@ export const CreateWorker = () => {
       email: "wt@mail.com",
       password: "1",
       username: "wt",
-      sector: managerModelName,
+      managerModelName: managerModelName,
     };
     testWorkerData = {
       hourlyRate: 12,
@@ -60,7 +60,7 @@ export const CreateWorker = () => {
       email: "workertestmanager@gmail.com",
       password: "1",
       username: "workertest",
-      sector: managerModelName,
+      managerModelName: managerModelName,
     };
   }
   const [workerData, setWorkerData] = useState(testWorkerData);
@@ -155,12 +155,12 @@ export const CreateWorker = () => {
         {adminOrGeneralManager && (
           <div>
             <AppSelect
-              name="sector"
+              name="managerModelName"
               placeholder="Sektor"
-              value={workerData.sector || ""}
+              value={workerData.managerModelName || ""}
               onChange={onChange}
               label="Sektor"
-              defaultValue={workerData.sector || ""}
+              defaultValue={workerData.managerModelName || ""}
               options={Object.entries(managerSectors).map(([key, value]) => ({
                 value: key,
                 label: value,

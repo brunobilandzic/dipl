@@ -2,6 +2,7 @@ import { AppUser } from "@/models/user/AppUser";
 import {
   CULTIVATION_MANAGER,
   PRODUCTION_MANAGER,
+  WAREHOUSE_MANAGER,
 } from "../constants/users/managerTypes";
 import mongoose from "mongoose";
 
@@ -12,12 +13,12 @@ export const createWorker = async ({ workerData, rootManagerId }) => {
 
   let specificWorker;
 
-  switch (rootManager.managerModelName) {
+  switch (workerData.managerModelName) {
     case CULTIVATION_MANAGER:
       const CultivationWorker = mongoose.models["CultivationWorker"];
       specificWorker = new CultivationWorker({
         appUser: appUser._id,
-        manager: rootManager._id,
+        manager: rootManagerId,
         hourlyRate,
       });
       await specificWorker.save();
@@ -27,27 +28,27 @@ export const createWorker = async ({ workerData, rootManagerId }) => {
       const ProductionWorker = mongoose.models["ProductionWorker"];
       specificWorker = new ProductionWorker({
         appUser: appUser._id,
-        manager: rootManager?._id,
+        manager: rootManagerId,
         hourlyRate,
       });
       await specificWorker.save();
       await specificWorker.populate("appUser");
       break;
-    case managerSectors[WAREHOUSE_MANAGER]:
+    case WAREHOUSE_MANAGER:
       const WarehouseWorker = mongoose.models["WarehouseWorker"];
       specificWorker = new WarehouseWorker({
         appUser: appUser._id,
-        manager: rootManager?._id,
+        manager: rootManagerId,
         hourlyRate,
       });
       await specificWorker.save();
       await specificWorker.populate("appUser");
       break;
-    case managerSectors[FINANCIAL_MANAGER]:
+    case FINANCIAL_MANAGER:
       const FinancialWorker = mongoose.models["FinancialWorker"];
       specificWorker = new FinancialWorker({
         appUser: appUser._id,
-        manager: rootManager?._id,
+        manager: rootManagerId,
         hourlyRate,
       });
       await specificWorker.save();
@@ -55,7 +56,7 @@ export const createWorker = async ({ workerData, rootManagerId }) => {
       break;
     default:
       throw new Error(
-        `Nepoznat tip menadžera: ${rootManager.managerModelName}`,
+        `Nepoznat rootmanager root: ${rootManagerId} za sektor: ${workerData.managerModelName}`,
       );
   }
 

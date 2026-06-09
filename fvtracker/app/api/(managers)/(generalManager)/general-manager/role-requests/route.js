@@ -1,4 +1,7 @@
-import { fetchSessionSpecificManager } from "@/lib/auth/fetchSessionData";
+import {
+  fetchAdmin,
+  fetchSessionSpecificManager,
+} from "@/lib/auth/fetchSessionData";
 import { GENERAL_MANAGER } from "@/lib/constants/users/managerTypes";
 import dbConnect from "@/lib/db/mongooseConnect";
 import { RoleRequest } from "@/models/documents/requests/RoleRequest";
@@ -7,7 +10,10 @@ export async function PUT(req) {
   // do not mix req response with Next.js Response object
   try {
     await dbConnect();
-    await fetchSessionSpecificManager({ managerName: GENERAL_MANAGER });
+    const { admin } = await fetchAdmin();
+    if (!admin) {
+      await fetchSessionSpecificManager({ managerName: GENERAL_MANAGER });
+    }
     const { requestId, response } = await req.json();
     await RoleRequest.updateOne(
       { _id: requestId },

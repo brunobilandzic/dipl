@@ -9,7 +9,7 @@ export const getGeneralManager = async () => {
   let generalManagerDoc;
   const { admin } = await fetchAdmin();
   if (admin) {
-    generalManagerDoc = await GeneralManager.findOne()
+    generalManagerDoc = await GeneralManager.findOne();
   } else {
     generalManagerDoc = await fetchSessionSpecificManager({
       managerName: "GeneralManager",
@@ -34,7 +34,7 @@ export const getGeneralManager = async () => {
       populate: [
         {
           path: "appUser",
-          select: "name lastname username email",
+          select: "name surname username email",
         },
         {
           path: "roleRequest",

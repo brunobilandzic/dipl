@@ -229,15 +229,6 @@ export const FillPlanInfo = ({
               value={formData.name}
             />
           </div>
-          <div className="grid gap-4 md:grid-cols-2">
-            <AppDatePicker
-              label="Planirani datum berbe"
-              name="plannedHarvestingDate"
-              onChange={handleFormChange}
-              placeholder="Odaberite datum berbe"
-              value={formData.plannedHarvestingDate}
-            />
-          </div>
 
           <ChooseCropVarietyItems
             crops={crops}

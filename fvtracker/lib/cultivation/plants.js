@@ -119,6 +119,25 @@ export async function createPlantedCropVarietiesCells({
     const cropVariety = await getCropVarietyById(cropVarietyId);
     cropVariety.plantingPlanItems.push(plantingPlanItem._id);
 
+    const plcvObjects = [];
+    for (const relativeCoord of relativeCoords) {
+      const fieldCoords = utils.cultivation.cultivations.relativeToFieldCoords({
+        planted,
+        cellCoords: relativeCoord,
+      });
+      plcvObjects.push({
+        cultivation: cultivationId,
+        relativeCoords: relativeCoord,
+        fieldCoords,
+        plantedAt,
+        harvestedAt,
+        plantingPlanItem: plantingPlanItem._id,
+        cropVariety: cropVarietyId,
+      });
+    }
+
+    const updatedPlcvs = await PlantedCropVariety.insertMany(plcvObjects);
+    /* 
     await PlantedCropVariety.updateMany(
       {
         cultivation: cultivationId,
@@ -131,11 +150,17 @@ export async function createPlantedCropVarietiesCells({
         plantingPlanItem: plantingPlanItem._id,
       },
       { new: true },
-    );
+    ); 
     const updatedPlcvs = await PlantedCropVariety.find({
       cultivation: cultivationId,
       relativeCoords: { $in: relativeCoords },
-    });
+    })
+      .select("_id plantingPlanItem")
+      .populate({
+        path: "plantingPlanItem",
+        populate: { path: "cropVariety", populate: { path: "cropType" } },
+      });
+      */
     plantingPlanItem.plantedCropVarieties.push(
       ...updatedPlcvs.map((p) => p._id),
     );
@@ -146,12 +171,12 @@ export async function createPlantedCropVarietiesCells({
         "Nema dovoljno planiranih količina za ovu sadnju. Smanjite broj sadnih mjesta.",
       );
     }
-    for (const plc of updatedPlcvs) {
+    /*     for (const plc of updatedPlcvs) {
       await plc.populate({
         path: "plantingPlanItem",
         populate: { path: "cropVariety", populate: { path: "cropType" } },
       });
-    }
+    } */
     const worker = await Worker.findById(workerId);
     if (!worker) {
       throw new Error("Worker not found with the provided ID.");

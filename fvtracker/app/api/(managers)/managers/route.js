@@ -6,6 +6,16 @@ export async function GET(request) {
   await dbConnect();
   const { searchParams } = new URL(request.url);
   const managersType = searchParams.get("managersType");
+  const all = searchParams.get("all");
+  if (all) {
+    const rootManagers = await mongoose.models.RootManager.find({})
+      .select("appUser")
+      .populate({
+        path: "appUser",
+        select: "name surname",
+      });
+    return Response.json({ managers: rootManagers });
+  }
   const managers = await mongoose
     .model(findManagerName({ managersType: managersType }))
     .find()

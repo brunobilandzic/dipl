@@ -188,8 +188,15 @@ export const adminNavItems = [
     ],
   },
   {
-    label: "zahtjevi",
+    label: "generalni menadžer",
     path: "/zahtjevi/generalni-menadzer",
+  },
+  {
+    label: "radnici",
+    submenu: [
+      { label: "pregled", path: "/radnici" },
+      { label: "zapošljavanje", path: "/radnici/zaposljavanje" },
+    ],
   },
 ];
 

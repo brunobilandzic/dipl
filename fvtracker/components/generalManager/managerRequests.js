@@ -50,17 +50,14 @@ export const RoleRequestItem = ({ roleRequest }) => {
 
   return (
     <>
-      <div className="flex justify-between items-center mb-2 p-4 border rounded-md shadow-md">
-        <div className="flex flex-col gap-2 ">
+      <ListItem>
+        <div className="flex justify-between">
+          <h3 className="font-bold">{`${name} ${surname}`}</h3>
           <div>
-            {name} {surname}
+            <RoleRequestStatus roleRequest={roleRequest} />
           </div>
-          <div>Zahtjev za ulogu: {requestedRoleName}</div>
         </div>
-        <div>
-          <RoleRequestStatus roleRequest={roleRequest} />
-        </div>
-      </div>
+      </ListItem>
     </>
   );
 };

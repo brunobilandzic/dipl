@@ -185,6 +185,7 @@ function NavItems() {
       refreshGeneralManager({ dispatch });
       dispatch(login(session.user));
       setItems(adminNavItems);
+      dispatch(fetchWorkers());
     }
   }, [status]);
 

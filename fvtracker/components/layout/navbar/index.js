@@ -27,7 +27,7 @@ import { fillWarehouseRequestsRedux } from "@/lib/utils/documents/requests";
 import { fillManagersSelection } from "@/store/managers";
 import { fetchEmploymentRequests, fetchWorkers } from "@/store/workers";
 import { fetchProcurments } from "@/store/procurments";
-import { MdDataset, MdKey } from "react-icons/md";
+import { MdKey } from "react-icons/md";
 import { FaDatabase } from "react-icons/fa";
 
 export default {

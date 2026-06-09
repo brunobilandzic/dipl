@@ -8,12 +8,15 @@ import api from "@/lib/api";
 import { LoadingFullScreen } from "@/components/layout/loading";
 import { setLoading } from "@/store/loading";
 import { ErrorComponent } from "@/components/layout/error";
+import { refreshHarvestingBatches } from "@/store/production";
 
 export default function CustomProviders({ children }) {
   return (
-    <CropsProvider>
-      <ErrorProvider>{children}</ErrorProvider>
-    </CropsProvider>
+    <HarvestingBatchesProvider>
+      <CropsProvider>
+        <ErrorProvider>{children}</ErrorProvider>
+      </CropsProvider>
+    </HarvestingBatchesProvider>
   );
 }
 
@@ -42,6 +45,22 @@ const CropsProvider = ({ children }) => {
       fetchCrops();
     }
   }, [crops, user]);
+
+  return children;
+};
+
+const HarvestingBatchesProvider = ({ children }) => {
+  const dispatch = useDispatch();
+  const harvestingBatches = useSelector(
+    (state) => state.production.harvestingBatches.items,
+  );
+  const user = useSelector((state) => state.user.session);
+  useEffect(() => {
+    if (!user) return;
+    if (!harvestingBatches) {
+      dispatch(refreshHarvestingBatches());
+    }
+  }, [harvestingBatches, user]);
 
   return children;
 };

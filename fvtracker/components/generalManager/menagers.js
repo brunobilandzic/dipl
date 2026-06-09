@@ -27,15 +27,6 @@ export const ManagerList = () => {
     [allManagers, filters],
   );
 
-  useEffect(() => {
-    console.log("General Manager:", generalManager);
-    if (!generalManager && !isAdmin) {
-      console.warn(
-        "General Manager data is not available. This may indicate an issue with fetching the general manager data or that the user does not have the necessary permissions.",
-      );
-    }
-  }, [generalManager, isAdmin]);
-
   if (!generalManager && !isAdmin) {
     return <LoadingFullScreen />;
   }

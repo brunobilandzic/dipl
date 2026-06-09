@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Loading, LoadingFullScreen } from "../layout/loading";
 import { v4 as uuid } from "uuid";
 import { RoleRequestStatus } from "./managerRequests";
+import { List, ListItem } from "../layout/preview/list";
 
 export const ManagerList = () => {
   const generalManager = useSelector((state) => state.generalManager?.manager);
@@ -24,11 +25,11 @@ export const ManagerList = () => {
 
   return (
     <>
-      <div className="space-y-4 mt-4">
+      <List title="Menadžeri">
         {generalManager?.managers.map((manager) => (
           <ManagerListItem key={uuid()} manager={manager} />
         ))}
-      </div>
+      </List>
     </>
   );
 };
@@ -40,18 +41,17 @@ const ManagerListItem = ({ manager }) => {
 
   return (
     <>
-      <div className="border rounded-lg p-4 flex justify-between items-center">
-        <div>
+      <ListItem title={`${manager.appUser.name} ${manager.appUser.surname}`}>
+        <div className="flex justify-between">
           <div className="flex flex-col">
-            <h3 className="font-bold">
-              {manager.appUser.name} {manager.appUser.surname}
-            </h3>
             <p className="text-sm text-gray-500">{manager.appUser.email}</p>
             <p className="text-sm text-gray-500">{manager.managerModelName}</p>
           </div>
+          <div>
+            <RoleRequestStatus roleRequest={manager.roleRequest} />
+          </div>
         </div>
-        <RoleRequestStatus roleRequest={manager.roleRequest} />
-      </div>
+      </ListItem>
     </>
   );
 };

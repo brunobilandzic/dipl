@@ -20,6 +20,44 @@ export const CreateWorker = () => {
     (state) => state.user?.session?.managerModelName,
   );
   const adminOrGeneralManager = isAdmin || generalManager;
+
+  let emptyWorkerData, testWorkerData;
+
+  if (adminOrGeneralManager) {
+    emptyWorkerData = {
+      name: "worker",
+      surname: "test",
+      email: "",
+      password: "",
+      username: "",
+      sector: "",
+    };
+    testWorkerData = {
+      name: "worker",
+      surname: "test",
+      email: "workertest@gmail.com",
+      password: "1",
+      username: "workertest",
+      sector: "Kultivacija",
+    };
+  } else {
+    emptyWorkerData = {
+      name: "worker",
+      surname: "test",
+      email: "wt@mail.com",
+      password: "1",
+      username: "wt",
+      sector: managerSectors[managerModelName],
+    };
+    testWorkerData = {
+      name: "worker",
+      surname: "test manager",
+      email: "workertestmanager@gmail.com",
+      password: "1",
+      username: "workertest",
+      sector: managerSectors[managerModelName],
+    };
+  }
   const [workerData, setWorkerData] = useState(emptyWorkerData);
   const inputs = [
     {

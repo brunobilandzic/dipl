@@ -40,7 +40,7 @@ export function Navbar() {
   const isAdmin = authenticated && session.user?.isAdmin;
   const router = useRouter();
   return (
-    <div className="navbar relative h-16 bg-[var(--navbar-bg)] flex items-center px-10 text-[var(--text-navbar)]">
+    <div className="z-[200] navbar relative h-16 bg-[var(--navbar-bg)] flex items-center px-10 text-[var(--text-navbar)]">
       <div className="flex-1 flex justify-start items-center">
         {" "}
         <NavLogo />

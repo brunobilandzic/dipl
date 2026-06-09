@@ -47,7 +47,7 @@ export async function POST(req) {
       );
     }
     const { workerData } = await req.json();
-    if (!rootManager || rootManager.managerModelName === GENERAL_MANAGER) {
+    if (!rootManager || generalManager) {
       const specoficManager =
         await mongoose.models[workerData.managerModelName].findOne();
       rootManager = specoficManager.rootManager;

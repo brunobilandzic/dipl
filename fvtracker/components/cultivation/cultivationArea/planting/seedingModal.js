@@ -78,11 +78,16 @@ export const SeedingModal = ({
     const available = utils.plans.getPlansForCropVariety({
       allFieldPlans: plans,
       cropVariety,
-      plantageArea: getPlantageDimensions(newPlantage),
+      plantageArea: newPlantage.toPlantCells?.length || 1,
     });
 
     setAvailablePlans(available);
-  }, [newPlantage?.variety?._id, allFieldPlans]);
+  }, [
+    newPlantage?.variety?._id,
+    allFieldPlans,
+    fields,
+    newPlantage?.toPlantCells,
+  ]);
 
   useEffect(() => {
     if (fields) return;

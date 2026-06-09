@@ -27,10 +27,9 @@ import { workerSortOptions } from "../layout/preview/sort";
 import { filterWorkers } from "@/store/workers";
 import { EMPLOYMENT_STATUS_EMPLOYED } from "@/lib/constants/users/workers";
 
-export const WorkersPageComponent = ({ managerModelName }) => {
-  const allWorkers = [GENERAL_MANAGER, FINANCIAL_MANAGER].includes(
-    managerModelName,
-  );
+export const WorkersPageComponent = ({ managerModelName, isAdmin }) => {
+  const allWorkers =
+    [GENERAL_MANAGER, FINANCIAL_MANAGER].includes(managerModelName) || isAdmin;
   const workersState = useSelector((state) => state.workers);
   const {
     items: workers,

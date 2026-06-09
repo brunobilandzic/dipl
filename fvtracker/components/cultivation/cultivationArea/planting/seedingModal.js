@@ -262,23 +262,6 @@ export const SeedingModal = ({
     reset();
   };
 
-  useEffect(() => {
-    if (newPlantage?.variety?._id) {
-      const cropVariety = crops?.varieties?.find(
-        (v) => v._id.toString() === newPlantage.variety._id.toString(),
-      );
-      const availablePlans = utils.plans.getPlansForCropVariety({
-        allFieldPlans: allFieldPlans,
-        cropVariety,
-        plantageArea: getPlantageDimensions(newPlantage),
-      });
-      setAvailablePlans(availablePlans);
-    } else {
-      setAvailablePlans([]);
-    }
-  }, [newPlantage?.variety]);
-
-
   // PLAN SELECTION
 
   const onChoosePlan = (plan) => {

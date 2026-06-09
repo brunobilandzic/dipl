@@ -25,6 +25,7 @@ export const CreateWorker = () => {
 
   if (adminOrGeneralManager) {
     emptyWorkerData = {
+      hourlyRate: "",
       name: "worker",
       surname: "test",
       email: "",
@@ -33,6 +34,7 @@ export const CreateWorker = () => {
       sector: "",
     };
     testWorkerData = {
+      hourlyRate: 12,
       name: "worker",
       surname: "test",
       email: "workertest@gmail.com",
@@ -42,6 +44,7 @@ export const CreateWorker = () => {
     };
   } else {
     emptyWorkerData = {
+      hourlyRate: "",
       name: "worker",
       surname: "test",
       email: "wt@mail.com",
@@ -50,6 +53,7 @@ export const CreateWorker = () => {
       sector: managerSectors[managerModelName],
     };
     testWorkerData = {
+      hourlyRate: 12,
       name: "worker",
       surname: "test manager",
       email: "workertestmanager@gmail.com",
@@ -58,7 +62,7 @@ export const CreateWorker = () => {
       sector: managerSectors[managerModelName],
     };
   }
-  const [workerData, setWorkerData] = useState(emptyWorkerData);
+  const [workerData, setWorkerData] = useState(testWorkerData);
   const inputs = [
     {
       name: "hourlyRate",

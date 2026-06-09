@@ -113,7 +113,6 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
       newCUDetails.potentialCUCells.length === 0 ||
       managerModelName != CULTIVATION_MANAGER
     ) {
-      console.log(managerModelName);
       disabled.push(cultivation.names.CULTIVATE_CELLS);
     }
     if (!selectedCultivation) {

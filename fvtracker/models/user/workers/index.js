@@ -64,6 +64,17 @@ workerSchema.pre("save", async function () {
     const employmentRequest = new EmploymentRequest({ worker: this._id });
     await employmentRequest.save();
     this.employmentRequest = employmentRequest._id;
+    const rootManager = await mongoose
+      .model("RootManager")
+      .findById(this.manager);
+    if (rootManager) {
+      rootManager.workers.push(this._id);
+      await rootManager.save();
+    } else {
+      console.warn(
+        `No root manager found for model name ${this.managerModelName}`,
+      );
+    }
   }
 });
 

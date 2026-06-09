@@ -44,25 +44,6 @@ export const RoleRequestList = () => {
   );
 };
 
-const FilterDropdown = ({ filter, setFilter }) => {
-  const options = [
-    { value: "all", label: "Svi" },
-    { value: ROLE_STATUSES.PENDING, label: "Na čekanju" },
-    { value: ROLE_STATUSES.APPROVED, label: "Odobreni" },
-    { value: ROLE_STATUSES.REJECTED, label: "Odbijeni" },
-  ];
-
-  return (
-    <div className="relative filterSelect">
-      <AppSelect
-        options={options}
-        value={filter}
-        onChange={(e) => setFilter(e.target.value)}
-      />
-    </div>
-  );
-};
-
 export const RoleRequestItem = ({ roleRequest }) => {
   const { name, surname } = roleRequest.rootManager.appUser;
   const { managerModelName: requestedRoleName } = roleRequest.rootManager;

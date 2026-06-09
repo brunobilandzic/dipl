@@ -1,11 +1,21 @@
 import mongoose from "mongoose";
-import { fetchSessionSpecificManager } from "../auth/fetchSessionData";
+import {
+  fetchAdmin,
+  fetchSessionSpecificManager,
+} from "../auth/fetchSessionData";
+import { GeneralManager } from "@/models/user/managers/GeneralManager";
 
 export const getGeneralManager = async () => {
-  const generalManagerDoc = await fetchSessionSpecificManager({
-    managerName: "GeneralManager",
-    throwError: true,
-  });
+  let generalManagerDoc;
+  const { admin } = await fetchAdmin();
+  if (admin) {
+    generalManagerDoc = await GeneralManager.findOne()
+  } else {
+    generalManagerDoc = await fetchSessionSpecificManager({
+      managerName: "GeneralManager",
+      throwError: true,
+    });
+  }
   await generalManagerDoc.populate([
     {
       path: "roleRequests",
@@ -53,6 +63,6 @@ export const getGeneralManager = async () => {
     ...generalManagerDoc.toObject(),
     managers,
   };
-
+  console.log("Final General Manager data to be returned:", generalManager);
   return generalManager;
 };

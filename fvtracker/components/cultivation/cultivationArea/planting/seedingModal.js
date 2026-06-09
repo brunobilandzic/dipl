@@ -41,14 +41,11 @@ export const SeedingModal = ({
   const fields = useSelector((state) => state.cultivation.fields);
 
   const getPlans = (fields) => {
-    if (!fields || fields.length === 0) {
-      console.log("No fields available to get plans from.");
-      return {};
-    }
+    if (!fields || fields.length === 0) return {};
     const _field = fields.find((f) => f.name === field.name);
     const allPlans = utils.plans.getFieldPlans({ field: _field });
-
     setAllFieldPlans(allPlans);
+    return allPlans;
   };
 
   useEffect(() => {
@@ -64,23 +61,28 @@ export const SeedingModal = ({
   };
 
   useEffect(() => {
-    if (!checkPlans()) return;
-    if (newPlantage?.variety?._id) {
-      const cropVariety = crops?.varieties?.find(
-        (v) => v._id.toString() === newPlantage.variety._id.toString(),
-      );
-      const plantageArea = getPlantageDimensions(newPlantage);
-      const availablePlans = utils.plans.getPlansForCropVariety({
-        allFieldPlans,
-        cropVariety,
-        plantageArea,
-      });
-
-      setAvailablePlans(availablePlans);
-    } else {
+    if (!newPlantage?.variety?._id) {
       setAvailablePlans({});
+      return;
     }
-  }, [newPlantage?.variety, allFieldPlans]);
+
+    const plans =
+      allFieldPlans && Object.keys(allFieldPlans).length > 0
+        ? allFieldPlans
+        : getPlans(fields);
+
+    const cropVariety = crops?.varieties?.find(
+      (v) => v._id.toString() === newPlantage.variety._id.toString(),
+    );
+
+    const available = utils.plans.getPlansForCropVariety({
+      allFieldPlans: plans,
+      cropVariety,
+      plantageArea: getPlantageDimensions(newPlantage),
+    });
+
+    setAvailablePlans(available);
+  }, [newPlantage?.variety?._id, allFieldPlans]);
 
   useEffect(() => {
     if (fields) return;

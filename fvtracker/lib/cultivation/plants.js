@@ -148,7 +148,8 @@ export async function createPlantedCropVarietiesCells({
         plantingPlanItem: plantingPlanItem._id,
       },
       { new: true },
-    ); 
+    );
+
     const updatedPlcvs = await PlantedCropVariety.find({
       cultivation: cultivationId,
       relativeCoords: { $in: relativeCoords },
@@ -158,7 +159,7 @@ export async function createPlantedCropVarietiesCells({
         path: "plantingPlanItem",
         populate: { path: "cropVariety", populate: { path: "cropType" } },
       });
-      */
+
     plantingPlanItem.plantedCropVarieties.push(
       ...updatedPlcvs.map((p) => p._id),
     );
@@ -169,7 +170,7 @@ export async function createPlantedCropVarietiesCells({
         "Nema dovoljno planiranih količina za ovu sadnju. Smanjite broj sadnih mjesta.",
       );
     }
-    
+
     const worker = await Worker.findById(workerId);
     if (!worker) {
       throw new Error("Worker not found with the provided ID.");

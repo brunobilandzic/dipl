@@ -171,12 +171,12 @@ export async function createPlantedCropVarietiesCells({
         "Nema dovoljno planiranih količina za ovu sadnju. Smanjite broj sadnih mjesta.",
       );
     }
-    /*     for (const plc of updatedPlcvs) {
-      await plc.populate({
-        path: "plantingPlanItem",
-        populate: { path: "cropVariety", populate: { path: "cropType" } },
-      });
-    } */
+
+    await PlantedCropVariety.populate(updatedPlcvs, {
+      path: "plantingPlanItem",
+      populate: { path: "cropVariety", populate: { path: "cropType" } },
+    });
+    
     const worker = await Worker.findById(workerId);
     if (!worker) {
       throw new Error("Worker not found with the provided ID.");

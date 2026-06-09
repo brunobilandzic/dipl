@@ -62,17 +62,15 @@ export function HarvestingModal({
   }, [fields]);
 
   const getPlans = () => {
-    if (!fields || fields.length === 0) {
-      console.log("No fields available to get plans from.");
-      return {};
-    }
+    if (!fields || fields.length === 0) return {};
     const _field = fields.find((f) => f.name === field.name);
     const allPlans = utils.plans.getFieldPlans({ field: _field });
-
     setAllFieldPlans(allPlans);
+    return allPlans;
   };
 
   useEffect(() => {
+    if (!fields || fields.length === 0) return;
     getPlans();
   }, [fields]);
 
@@ -84,16 +82,23 @@ export function HarvestingModal({
   };
 
   useEffect(() => {
-    if (newHarvest?.cropVariety?._id && checkPlans()) {
-      const availablePlans = utils.plans.getPlansForCropVariety({
-        allFieldPlans,
-        plantageArea: getPlantageDimensions(newHarvest),
-        cropVariety: newHarvest.cropVariety,
-      });
-      setAvailablePlans(availablePlans);
-    } else {
+    if (!newHarvest?.cropVariety?._id) {
       setAvailablePlans({});
+      return;
     }
+    const plans =
+      allFieldPlans && Object.keys(allFieldPlans).length > 0
+        ? allFieldPlans
+        : getPlans();
+
+    if (!plans?.harvestingPlans?.length) return;
+
+    const available = utils.plans.getPlansForCropVariety({
+      allFieldPlans: plans,
+      plantageArea: getPlantageDimensions(newHarvest),
+      cropVariety: newHarvest.cropVariety,
+    });
+    setAvailablePlans(available);
   }, [newHarvest?.cropVariety?._id, allFieldPlans]);
 
 

@@ -5,7 +5,7 @@ import {
 } from "../constants/users/managerTypes";
 import mongoose from "mongoose";
 
-export const createWorker = async ({ workerData, rootManager }) => {
+export const createWorker = async ({ workerData, rootManagerId }) => {
   const { hourlyRate, ...workerAppUserData } = workerData;
   const appUser = new AppUser(workerAppUserData);
   await appUser.save();

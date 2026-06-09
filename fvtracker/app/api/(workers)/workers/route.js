@@ -46,7 +46,7 @@ export async function POST(req) {
       );
     }
     const { specificWorker } = await createWorker({
-      rootManager,
+      rootManagerId: rootManager._id,
       workerData,
     });
     return Response.json({ worker: specificWorker });

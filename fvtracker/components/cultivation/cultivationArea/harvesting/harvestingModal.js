@@ -96,11 +96,6 @@ export function HarvestingModal({
     }
   }, [newHarvest?.cropVariety?._id, allFieldPlans]);
 
-  //use effects to monitor state changes
-
-  useEffect(() => {
-    console.log("New harvest state updated:", newHarvest);
-  }, [newHarvest]);
 
   // set harvest when cult id
   useEffect(() => {

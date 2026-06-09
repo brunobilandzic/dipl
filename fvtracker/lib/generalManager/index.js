@@ -21,10 +21,11 @@ export const getGeneralManager = async () => {
       path: "roleRequests",
       populate: {
         path: "rootManager",
+        select: "appUser",
         populate: [
           {
             path: "appUser",
-            select: "name lastname username email",
+            select: "name surname username email",
           },
         ],
       },

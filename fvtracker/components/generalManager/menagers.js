@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useSelector } from "react-redux";
 import { Loading, LoadingFullScreen } from "../layout/loading";
 import { RoleRequestStatus } from "./managerRequests";
@@ -11,17 +11,20 @@ export const ManagerList = () => {
   const generalManager = useSelector((state) => state.generalManager?.manager);
   const isAdmin = useSelector((state) => state.user?.session?.isAdmin);
   const [filters, setFilters] = useState(initFilters("roleRequest"));
-  const allManagers = generalManager?.managers || [];
-  const [filteredManagers, setFilteredManagers] = useState(allManagers);
+  const EMPTY_ARRAY = [];
+  const allManagers = useMemo(
+    () => generalManager?.managers ?? EMPTY_ARRAY,
+    [generalManager?.managers],
+  );
 
-  useEffect(() => {
-    setFilteredManagers((prev) =>
+  const filteredManagers = useMemo(
+    () =>
       filterItems({
         _items: allManagers,
         filters,
       }),
-    );
-  }, [filters, allManagers]);
+    [allManagers, filters],
+  );
 
   useEffect(() => {
     console.log("General Manager:", generalManager);

@@ -81,10 +81,10 @@ export const initFilters = (listType, allWorkers = false) => {
           value: "all",
         },
       ];
-    case "roleRequests":
+    case "roleRequest":
       return [
         {
-          type: "roleStatus",
+          type: "roleRequest",
           placeholder: "Status zahtjeva",
           value: "all",
         },

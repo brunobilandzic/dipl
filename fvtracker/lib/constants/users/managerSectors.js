@@ -6,7 +6,7 @@ import {
 } from "./managerTypes";
 
 export default {
-  [CULTIVATION_MANAGER]: "Uzgoj i berba",
+  [CULTIVATION_MANAGER]: "Kultivacija",
   [PRODUCTION_MANAGER]: "Proizvodnja",
   [WAREHOUSE_MANAGER]: "Skladište",
   [FINANCIAL_MANAGER]: "Financije",

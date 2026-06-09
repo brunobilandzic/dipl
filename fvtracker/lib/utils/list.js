@@ -133,7 +133,6 @@ export const sortItems = ({ items, sortBy }) => {
 
 export const filterItems = ({ _items, itemModelName, filters }) => {
   let items = [..._items];
-
   for (const filter of filters) {
     switch (filter.type) {
       case "nameSearch":
@@ -169,9 +168,11 @@ export const filterItems = ({ _items, itemModelName, filters }) => {
           (item) => item.employmentRequest.status === filter.value,
         );
         break;
-      case "roleStatus":
+      case "roleRequest":
         if (filter.value === "all") break;
-        items = items.filter((item) => item.status === filter.value);
+        items = items.filter((item) => {
+          return item.status === filter.value;
+        });
         break;
       default:
         break;

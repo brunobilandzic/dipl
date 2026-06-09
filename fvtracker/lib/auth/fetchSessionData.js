@@ -131,7 +131,6 @@ export async function fetchManagerWorker({ managerNames = [], workerType }) {
     managerNames,
     worker: true,
   });
-  console.log({ unauthorized, specificManager, generalManager });
   if (unauthorized) {
     return { unauthorized: true };
   }

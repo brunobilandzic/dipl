@@ -5,6 +5,13 @@ import {
   WAREHOUSE_MANAGER,
 } from "../constants/users/managerTypes";
 import mongoose from "mongoose";
+import populateCommon, {
+  cultivationPopulate,
+  productionPopulate,
+  warehousePopulate,
+  financialPopulate,
+} from "./populate";
+import { EMPLOYMENT_STATUS_EMPLOYED } from "../constants/users/workers";
 
 export const createWorker = async ({ workerData, rootManagerId }) => {
   const { hourlyRate, ...workerAppUserData } = workerData;
@@ -24,7 +31,8 @@ export const createWorker = async ({ workerData, rootManagerId }) => {
         hourlyRate,
       });
       await specificWorker.save();
-      await specificWorker.populate("appUser");
+
+      await specificWorker.populate(cultivationPopulate);
       break;
     case PRODUCTION_MANAGER:
       const ProductionWorker = mongoose.models["ProductionWorker"];
@@ -34,7 +42,7 @@ export const createWorker = async ({ workerData, rootManagerId }) => {
         hourlyRate,
       });
       await specificWorker.save();
-      await specificWorker.populate("appUser");
+      await specificWorker.populate(productionPopulate);
       break;
     case WAREHOUSE_MANAGER:
       const WarehouseWorker = mongoose.models["WarehouseWorker"];
@@ -43,8 +51,9 @@ export const createWorker = async ({ workerData, rootManagerId }) => {
         manager: rootManagerId,
         hourlyRate,
       });
+
       await specificWorker.save();
-      await specificWorker.populate("appUser");
+      await specificWorker.populate(warehousePopulate);
       break;
     case FINANCIAL_MANAGER:
       const FinancialWorker = mongoose.models["FinancialWorker"];
@@ -53,14 +62,18 @@ export const createWorker = async ({ workerData, rootManagerId }) => {
         manager: rootManagerId,
         hourlyRate,
       });
+
       await specificWorker.save();
-      await specificWorker.populate("appUser");
+      await specificWorker.populate(financialPopulate);
       break;
     default:
       throw new Error(
         `Nepoznat rootmanager root: ${rootManagerId} za sektor: ${workerData.managerModelName}`,
       );
   }
+  }
+
+  await specificWorker.populate(populateCommon);
 
   return {
     specificWorker,

@@ -182,6 +182,7 @@ function NavItems() {
 
   useEffect(() => {
     if (status === "authenticated" && session.user?.isAdmin) {
+      refreshGeneralManager({ dispatch });
       dispatch(login(session.user));
       setItems(adminNavItems);
     }

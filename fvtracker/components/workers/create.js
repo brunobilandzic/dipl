@@ -1,14 +1,15 @@
 "use client";
 
 import styles from "@/components/form/form.module.css";
-import { AppInput } from "@/components/form/inputs";
+import { AppInput, AppSelect } from "@/components/form/inputs";
 import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
+import managerSectors from "@/lib/constants/users/managerSectors";
 import { setLoading } from "@/store/loading";
 import { addWorker } from "@/store/workers";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export const CreateWorker = () => {
   const dispatch = useDispatch();

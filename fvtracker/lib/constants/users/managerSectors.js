@@ -11,3 +11,10 @@ export default {
   [WAREHOUSE_MANAGER]: "Skladište",
   [FINANCIAL_MANAGER]: "Financije",
 };
+
+export const sectorManagerMap = {
+  Kultivacija: CULTIVATION_MANAGER,
+  Proizvodnja: PRODUCTION_MANAGER,
+  Skladište: WAREHOUSE_MANAGER,
+  Financije: FINANCIAL_MANAGER,
+};

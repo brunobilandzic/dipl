@@ -10,7 +10,9 @@ export const createWorker = async ({ workerData, rootManagerId }) => {
   const { hourlyRate, ...workerAppUserData } = workerData;
   const appUser = new AppUser(workerAppUserData);
   await appUser.save();
-
+  if (!rootManagerId) {
+    throw new Error("Nije pronađen root manager za kreiranje radnika");
+  }
   let specificWorker;
 
   switch (workerData.managerModelName) {

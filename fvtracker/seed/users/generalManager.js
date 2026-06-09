@@ -8,7 +8,7 @@ import { GENERAL_MANAGER } from "@/lib/constants/users/managerTypes";
 import { ROLE_STATUSES } from "@/lib/constants/users";
 import { GeneralManagerRequest } from "@/models/documents/requests/RoleRequest";
 
-export const createGeneralManager = async () => {
+export const createGeneralManager = async ({ approve =true }) => {
   await dbConnect();
 
   const generalManagerData = appUsersJsonArray.find(
@@ -23,7 +23,7 @@ export const createGeneralManager = async () => {
   });
   await generalManager.save();
   const request = await GeneralManagerRequest.findOne();
-  request.status = ROLE_STATUSES.APPROVED;
+  approve ? (request.status = ROLE_STATUSES.APPROVED) : null;
   await request.save();
 
   await generalManager.save();

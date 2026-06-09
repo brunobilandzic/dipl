@@ -10,7 +10,8 @@ import { filterItems, initFilters } from "@/lib/utils/list";
 export const ManagerList = () => {
   const generalManager = useSelector((state) => state.generalManager?.manager);
   const isAdmin = useSelector((state) => state.user?.session?.isAdmin);
-  const [filters, setFilters] = useState(initFilters("roleRequest"));
+  const initialRoleFilters = useMemo(() => initFilters("roleRequest"), []);
+  const [filters, setFilters] = useState(initialRoleFilters);
   const EMPTY_ARRAY = [];
   const allManagers = useMemo(
     () => generalManager?.managers ?? EMPTY_ARRAY,
@@ -45,7 +46,7 @@ export const ManagerList = () => {
         title="Menadžeri"
         filters={filters}
         setFilters={setFilters}
-        initialFilters={initFilters("roleRequest")}
+        initialFilters={initialRoleFilters}
       >
         {filteredManagers.map((manager) => (
           <ManagerListItem key={manager._id} manager={manager} />

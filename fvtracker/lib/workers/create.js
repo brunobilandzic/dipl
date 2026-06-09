@@ -27,7 +27,27 @@ export const createWorker = async ({ workerData, rootManager }) => {
       const ProductionWorker = mongoose.models["ProductionWorker"];
       specificWorker = new ProductionWorker({
         appUser: appUser._id,
-        manager: rootManager._id,
+        manager: rootManager?._id,
+        hourlyRate,
+      });
+      await specificWorker.save();
+      await specificWorker.populate("appUser");
+      break;
+    case managerSectors[WAREHOUSE_MANAGER]:
+      const WarehouseWorker = mongoose.models["WarehouseWorker"];
+      specificWorker = new WarehouseWorker({
+        appUser: appUser._id,
+        manager: rootManager?._id,
+        hourlyRate,
+      });
+      await specificWorker.save();
+      await specificWorker.populate("appUser");
+      break;
+    case managerSectors[FINANCIAL_MANAGER]:
+      const FinancialWorker = mongoose.models["FinancialWorker"];
+      specificWorker = new FinancialWorker({
+        appUser: appUser._id,
+        manager: rootManager?._id,
         hourlyRate,
       });
       await specificWorker.save();

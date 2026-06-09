@@ -5,10 +5,11 @@ import { AppInput, AppSelect } from "@/components/form/inputs";
 import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
 import managerSectors from "@/lib/constants/users/managerSectors";
+import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
 import { setLoading } from "@/store/loading";
 import { addWorker } from "@/store/workers";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export const CreateWorker = () => {
@@ -40,7 +41,7 @@ export const CreateWorker = () => {
       email: "workertest@gmail.com",
       password: "1",
       username: "workertest",
-      sector: "Kultivacija",
+      sector: CULTIVATION_MANAGER,
     };
   } else {
     emptyWorkerData = {
@@ -50,7 +51,7 @@ export const CreateWorker = () => {
       email: "wt@mail.com",
       password: "1",
       username: "wt",
-      sector: managerSectors[managerModelName],
+      sector: managerModelName,
     };
     testWorkerData = {
       hourlyRate: 12,
@@ -59,7 +60,7 @@ export const CreateWorker = () => {
       email: "workertestmanager@gmail.com",
       password: "1",
       username: "workertest",
-      sector: managerSectors[managerModelName],
+      sector: managerModelName,
     };
   }
   const [workerData, setWorkerData] = useState(testWorkerData);
@@ -113,6 +114,7 @@ export const CreateWorker = () => {
       alert(`Radnik uspešno kreiran.`, {
         type: "success",
       });
+      console.log("Worker created successfully:", res.data.worker);
       dispatch(addWorker(res.data.worker));
       router.push("/radnici");
     } catch (error) {
@@ -158,6 +160,7 @@ export const CreateWorker = () => {
               value={workerData.sector || ""}
               onChange={onChange}
               label="Sektor"
+              defaultValue={workerData.sector || ""}
               options={Object.entries(managerSectors).map(([key, value]) => ({
                 value: key,
                 label: value,

@@ -181,6 +181,10 @@ export default {
 
 export const adminNavItems = [
   {
+    label: "menadžeri",
+    path: "/menadzeri",
+  },
+  {
     label: "zahtjevi",
     path: "/zahtjevi/generalni-menadzer",
   },

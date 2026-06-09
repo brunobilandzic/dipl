@@ -171,11 +171,6 @@ export async function createPlantedCropVarietiesCells({
         "Nema dovoljno planiranih količina za ovu sadnju. Smanjite broj sadnih mjesta.",
       );
     }
-
-    await PlantedCropVariety.populate(updatedPlcvs, {
-      path: "plantingPlanItem",
-      populate: { path: "cropVariety", populate: { path: "cropType" } },
-    });
     
     const worker = await Worker.findById(workerId);
     if (!worker) {

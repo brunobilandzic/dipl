@@ -8,21 +8,24 @@ import { RoleRequestStatus } from "./managerRequests";
 
 export const ManagerList = () => {
   const generalManager = useSelector((state) => state.generalManager?.manager);
-
+  const isAdmin = useSelector((state) => state.user?.session?.isAdmin);
   useEffect(() => {
     console.log("General Manager:", generalManager);
-    if (!generalManager)
-      console.warn("General Manager data is not available in the Redux store.");
-  }, [generalManager]);
+    if (!generalManager && !isAdmin) {
+      console.warn(
+        "General Manager data is not available. This may indicate an issue with fetching the general manager data or that the user does not have the necessary permissions.",
+      );
+    }
+  }, [generalManager, isAdmin]);
 
-  if (!generalManager) {
+  if (!generalManager && !isAdmin) {
     return <LoadingFullScreen />;
   }
 
   return (
     <>
       <div className="space-y-4 mt-4">
-        {generalManager.managers.map((manager) => (
+        {generalManager?.managers.map((manager) => (
           <ManagerListItem key={uuid()} manager={manager} />
         ))}
       </div>

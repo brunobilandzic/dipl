@@ -1,6 +1,9 @@
 import React from "react";
 import { ManagerList } from "@/components/generalManager/menagers";
-import { checkGeneralManagerRequest } from "@/lib/auth/fetchSessionData";
+import {
+  checkGeneralManagerRequest,
+  fetchAdmin,
+} from "@/lib/auth/fetchSessionData";
 import { GENERAL_MANAGER } from "@/lib/constants/users/managerTypes";
 import { fetchSessionSpecificManager } from "@/lib/auth/fetchSessionData";
 import { UnathorizedPage } from "@/components/auth/unAuthorized";
@@ -10,14 +13,18 @@ const ManagerListPage = async () => {
     managerName: GENERAL_MANAGER,
     throwError: false,
   });
-  if (!generalManager) {
+  const { admin } = await fetchAdmin();
+
+  if (!admin && !generalManager) {
     return <UnathorizedPage />;
   }
 
-  const { unauthorized } = await checkGeneralManagerRequest(generalManager);
+  if (generalManager) {
+    const { unauthorized } = await checkGeneralManagerRequest(generalManager);
 
-  if (unauthorized) {
-    return <UnathorizedPage message="Uloga nije odobrena." />;
+    if (unauthorized) {
+      return <UnathorizedPage message="Uloga nije odobrena." />;
+    }
   }
 
   return (

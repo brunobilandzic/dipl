@@ -57,6 +57,12 @@ export async function POST(req) {
       workerData,
       isGeneralAdmin: generalManager || isAdmin,
     });
+    console.log(
+      "Worker created successfully:",
+      specificWorker.appUser.email,
+      specificWorker.manager.managerModelName,
+      specificWorker.employmentRequest.status,
+    );
     return Response.json({ worker: specificWorker });
   } catch (error) {
     console.error("Worker creation error:", error);

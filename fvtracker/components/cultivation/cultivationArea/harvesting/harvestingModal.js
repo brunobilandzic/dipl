@@ -188,7 +188,6 @@ export function HarvestingModal({
         isOpen: true,
       });
     } else {
-      console.log("Selected cell crop variety:", cropVariety);
       onBeginHarvestingCoordinates({ x, y, cropVariety });
     }
   };
@@ -237,10 +236,6 @@ export function HarvestingModal({
   };
 
   const submitHarvest = async () => {
-    console.log(
-      "Submitting harvest with data:",
-      prepareHarvestBody(newHarvest),
-    );
     dispatch(setLoading(true));
     try {
       const res = await api.post(

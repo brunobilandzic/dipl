@@ -95,7 +95,7 @@ export function HarvestingModal({
 
     const available = utils.plans.getPlansForCropVariety({
       allFieldPlans: plans,
-      plantageArea: getPlantageDimensions(newHarvest),
+      plantageArea: newHarvest.toHarvestCells?.length || 1,
       cropVariety: newHarvest.cropVariety,
     });
     setAvailablePlans(available);

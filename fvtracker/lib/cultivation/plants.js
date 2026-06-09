@@ -136,8 +136,6 @@ export async function createPlantedCropVarietiesCells({
       });
     }
 
-    const updatedPlcvs = await PlantedCropVariety.insertMany(plcvObjects);
-    /* 
     await PlantedCropVariety.updateMany(
       {
         cultivation: cultivationId,

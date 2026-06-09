@@ -46,25 +46,11 @@ const ManagerListItem = ({ manager }) => {
             <p className="text-sm text-gray-500">{manager.appUser.email}</p>
             <p className="text-sm text-gray-500">{manager.managerModelName}</p>
           </div>
-          <ManagerStatistics manager={manager} />
         </div>
         <RoleRequestStatus roleRequest={manager.roleRequest} />
       </div>
     </>
   );
-};
-
-const ManagerStatistics = ({ manager }) => {
-  switch (manager.managerModelName) {
-    case "CultivationManager":
-      return (
-        <CultivationManagerStatistics
-          cultivationManager={manager.specificManager}
-        />
-      );
-    default:
-      return null;
-  }
 };
 
 export const CultivationManagerStatistics = ({ cultivationManager }) => {

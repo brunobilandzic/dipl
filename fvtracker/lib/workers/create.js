@@ -76,6 +76,12 @@ export const createWorker = async ({
       );
   }
 
+  if (!specificWorker) {
+    throw new Error(
+      "Kreiranje radnika nije uspjelo, specificWorker nije definiran",
+    );
+  }
+
   if (isGeneralAdmin) {
     const employmentRequest = await mongoose.models.EmploymentRequest.findOne({
       worker: specificWorker._id,

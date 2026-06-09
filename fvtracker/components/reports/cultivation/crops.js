@@ -53,8 +53,7 @@ export const CropsReportSection = ({ fields }) => {
 
   const plCvQuantity = plantingPlanItems?.reduce(
     (sum, hpi) =>
-      sum +
-      hpi.plantedCropVarieties.length * hpi.cropVariety.quantityPerCell,
+      sum + hpi.plantedCropVarieties.length * hpi.cropVariety.quantityPerCell,
     0,
   );
 

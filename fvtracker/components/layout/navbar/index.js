@@ -58,8 +58,8 @@ export function Navbar() {
           <div
             className="cursor-pointer"
             onClick={() => {
-              signOut();
               router.push("/autorizacija");
+              signOut();
             }}
           >
             Odjava

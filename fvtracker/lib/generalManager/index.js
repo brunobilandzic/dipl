@@ -64,6 +64,6 @@ export const getGeneralManager = async () => {
     ...generalManagerDoc.toObject(),
     managers,
   };
-  console.log("Final General Manager data to be returned:", generalManager);
+  
   return generalManager;
 };

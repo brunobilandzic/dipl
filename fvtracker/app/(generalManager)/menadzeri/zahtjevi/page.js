@@ -1,23 +1,31 @@
 import { UnathorizedPage } from "@/components/auth/unAuthorized";
 import { RoleRequestList } from "@/components/generalManager/managerRequests";
 import auth from "@/lib/auth";
-import { checkGeneralManagerRequest } from "@/lib/auth/fetchSessionData";
+import {
+  checkGeneralManagerRequest,
+  fetchAdmin,
+  fetchSessionSpecificManager,
+} from "@/lib/auth/fetchSessionData";
 import { GENERAL_MANAGER } from "@/lib/constants/users/managerTypes";
 import React from "react";
 
 const RoleRequestsPage = async () => {
-  const generalManager = await auth.session.specificManager({
+  const generalManager = await fetchSessionSpecificManager({
     managerName: GENERAL_MANAGER,
     throwError: false,
   });
-  if (!generalManager) {
+  const { admin } = await fetchAdmin();
+
+  if (!admin && !generalManager) {
     return <UnathorizedPage />;
   }
 
-  const { unauthorized } = await checkGeneralManagerRequest(generalManager);
+  if (generalManager) {
+    const { unauthorized } = await checkGeneralManagerRequest(generalManager);
 
-  if (unauthorized) {
-    return <UnathorizedPage message="Uloga nije odobrena." />;
+    if (unauthorized) {
+      return <UnathorizedPage message="Uloga nije odobrena." />;
+    }
   }
 
   return (

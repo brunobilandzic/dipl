@@ -94,10 +94,6 @@ export const createWorker = async ({
     }
     employmentRequest.status = EMPLOYMENT_STATUS_EMPLOYED;
     await employmentRequest.save();
-    console.log(
-      "Automatski postavljen status zaposlenosti na 'zaposlen' za radnika:",
-      specificWorker._id,
-    );
   }
 
   await specificWorker.populate(populateCommon);

@@ -38,6 +38,7 @@ export function Navbar() {
   const { data: session, status } = useSession();
   const authenticated = status === "authenticated";
   const isAdmin = authenticated && session.user?.isAdmin;
+  const router = useRouter();
   return (
     <div className="navbar relative h-16 bg-[var(--navbar-bg)] flex items-center px-10 text-[var(--text-navbar)]">
       <div className="flex-1 flex justify-start items-center">
@@ -54,7 +55,13 @@ export function Navbar() {
           </Link>
         )}
         {authenticated ? (
-          <div className="cursor-pointer" onClick={() => signOut()}>
+          <div
+            className="cursor-pointer"
+            onClick={() => {
+              signOut();
+              router.push("/autorizacija");
+            }}
+          >
             Odjava
           </div>
         ) : (

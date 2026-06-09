@@ -16,6 +16,7 @@ import {
   EMPLOYMENT_STATUS_PENDING,
   EMPLOYMENT_STATUS_UNEMPLOYED,
 } from "@/lib/constants/users/workers";
+import { ROLE_STATUSES } from "@/lib/constants/users";
 
 export const Filter = ({ filters, setFilters, onApply }) => {
   const onChange = (index, value) => {
@@ -133,6 +134,24 @@ export const Filter = ({ filters, setFilters, onApply }) => {
                     { value: EMPLOYMENT_STATUS_EMPLOYED, label: "Zaposleni" },
                     { value: EMPLOYMENT_STATUS_PENDING, label: "Na čekanju" },
                     { value: EMPLOYMENT_STATUS_UNEMPLOYED, label: "Odbijeni" },
+                  ]}
+                />
+              );
+            case "roleRequest":
+              return (
+                <AppSelect
+                  key={index}
+                  placeholder={option.placeholder}
+                  value={option.value}
+                  onChange={(e) => {
+                    onChange(index, e.target.value);
+                  }}
+                  label="Status zahtjeva"
+                  options={[
+                    { value: "all", label: "Svi" },
+                    { value: ROLE_STATUSES.PENDING, label: "Na čekanju" },
+                    { value: ROLE_STATUSES.APPROVED, label: "Odobreni" },
+                    { value: ROLE_STATUSES.REJECTED, label: "Odbijeni" },
                   ]}
                 />
               );

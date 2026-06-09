@@ -8,41 +8,39 @@ import { setLoading } from "@/store/loading";
 import { AppSelect } from "../form/inputs";
 import { ROLE_STATUSES } from "@/lib/constants/users";
 import { requestResponseUpdate } from "@/store/generalManager";
+import { List, ListItem } from "../layout/preview/list";
+import { filterItems, initFilters } from "@/lib/utils/list";
 
 export const RoleRequestList = () => {
   const generalManager = useSelector((state) => state.generalManager.manager);
-  const [filter, setFilter] = useState("all");
+  const [filters, setFilters] = useState(initFilters("roleRequest"));
+
+  const allRoleRequests = generalManager?.roleRequests || [];
+  const [filteredRoleRequests, setFilteredRoleRequests] =
+    useState(allRoleRequests);
+
+  useEffect(() => {
+    setFilteredRoleRequests((prev) =>
+      filterItems({
+        _items: allRoleRequests,
+        filters,
+      }),
+    );
+  }, [filters, allRoleRequests]);
 
   return (
-    <div>
-      <div className="flex justify-between items-center border-b-2 pb-4 pt-2">
-        <div className="text-2xl font-bold">Zahtjevi za uloge</div>
-        <FilterDropdown filter={filter} setFilter={setFilter} />
-      </div>{" "}
-      <div className="flex flex-col gap-4">
-        {generalManager?.roleRequests.map((roleRequest) => {
-          if (filter !== "all" && roleRequest.status !== filter) {
-            return null;
-          }
-          if (filter === "all") {
-            return (
-              <div key={roleRequest._id}>
-                <RoleRequestItem roleRequest={roleRequest} />
-              </div>
-            );
-          }
-          if (roleRequest.status === filter) {
-            return (
-              <>
-                <div key={roleRequest._id}>
-                  <RoleRequestItem roleRequest={roleRequest} />
-                </div>
-              </>
-            );
-          }
-        })}
-      </div>
-    </div>
+    <>
+      <List
+        title="Zahtjevi za uloge"
+        filters={filters}
+        setFilters={setFilters}
+        initialFilters={initFilters("roleRequest")}
+      >
+        {filteredRoleRequests.map((roleRequest) => (
+          <RoleRequestItem key={roleRequest._id} roleRequest={roleRequest} />
+        ))}
+      </List>
+    </>
   );
 };
 

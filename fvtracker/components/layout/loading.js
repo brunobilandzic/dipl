@@ -12,7 +12,7 @@ export function Loading() {
 
 export const LoadingFullScreen = () => {
   return (
-    <div className="h-screen w-full z-50 flex items-center justify-center  text-gray-600">
+    <div className="h-screen w-full z-50 flex items-center justify-center  text-gray-600 bg-[var(--background)] opacity-70 fixed inset-0">
       <ClipLoader size={100} color="currentColor" />
     </div>
   );

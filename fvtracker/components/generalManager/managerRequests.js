@@ -46,7 +46,6 @@ export const RoleRequestList = () => {
 
 export const RoleRequestItem = ({ roleRequest }) => {
   const { name, surname } = roleRequest.rootManager.appUser;
-  const { managerModelName: requestedRoleName } = roleRequest.rootManager;
 
   return (
     <>
@@ -129,6 +128,12 @@ const RespondMenu = ({ roleRequest, setRespondMenuOpen }) => {
 
   return (
     <div className="flex gap-2">
+      <button
+        className="btn secondaryButton"
+        onClick={() => setRespondMenuOpen(false)}
+      >
+        Odustani
+      </button>
       <button
         className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
         onClick={() => onRespond(ROLE_STATUSES.APPROVED)}

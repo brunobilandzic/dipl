@@ -22,7 +22,13 @@ export const CropsReportSection = ({ fields }) => {
     (state) => state.production.harvestingBatches.items,
   );
 
-  if (!crops || !harvestingBatches) return <LoadingFullScreen />;
+  if (!crops || !harvestingBatches) {
+    console.log("crops or harvestingBatches not loaded yet", {
+      crops,
+      harvestingBatches,
+    });
+    return <LoadingFullScreen />;
+  }
 
   const plantedCropsLength = plantingPlanItems?.reduce(
     (sum, hpi) => hpi.plantedCropVarieties.length + sum,

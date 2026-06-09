@@ -147,6 +147,10 @@ export async function fetchManagerWorker({ managerNames = [], workerType }) {
 }
 
 export async function fetchManager({ managerNames = [] }) {
+  const { admin } = await fetchAdmin();
+  if (admin) {
+    return { unauthorized: false, isAdmin: true };
+  }
   const response = {
     generalManager: null,
     specificManager: null,

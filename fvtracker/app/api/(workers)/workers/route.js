@@ -20,7 +20,7 @@ export async function GET(req) {
       );
     }
     const workers = await getWorkers({
-      rootManagerId: specificManager.rootManager._id,
+      rootManagerId: specificManager?.rootManager._id,
       managerModelName: managerModelName,
     });
     return Response.json({ workers });

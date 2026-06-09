@@ -2,9 +2,11 @@ import {
   fetchManager,
   fetchSessionRootManager,
 } from "@/lib/auth/fetchSessionData";
+import { GENERAL_MANAGER } from "@/lib/constants/users/managerTypes";
 import dbConnect from "@/lib/db/mongooseConnect";
 import { createWorker } from "@/lib/workers/create";
 import { getWorkers } from "@/lib/workers/get";
+import mongoose from "mongoose";
 
 export async function GET(req) {
   try {
@@ -25,7 +27,7 @@ export async function GET(req) {
     });
     return Response.json({ workers });
   } catch (error) {
-    console.error("Database connection error:", error);
+    console.error("Error fetching workers:", error);
     return Response.json(
       { error: "Greška pri dohvaćanju radnika" },
       { status: 500 },
@@ -36,14 +38,19 @@ export async function GET(req) {
 export async function POST(req) {
   try {
     await dbConnect();
-    const { rootManager, unauthorized } = await fetchSessionRootManager();
-    const { workerData } = await req.json();
-
+    let { rootManager, unauthorized } =
+      await fetchSessionRootManager();
     if (unauthorized) {
       return Response.json(
         { error: "Nemate pravo pristupa radnicima" },
         { status: 403 },
       );
+    }
+    const { workerData } = await req.json();
+    if (!rootManager || rootManager.managerModelName === GENERAL_MANAGER) {
+      const specoficManager =
+        await mongoose.models[workerData.managerModelName].findOne();
+      rootManager = specoficManager.rootManager;
     }
     const { specificWorker } = await createWorker({
       rootManagerId: rootManager._id,

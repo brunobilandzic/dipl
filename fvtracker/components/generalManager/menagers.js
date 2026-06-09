@@ -3,13 +3,26 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Loading, LoadingFullScreen } from "../layout/loading";
-import { v4 as uuid } from "uuid";
 import { RoleRequestStatus } from "./managerRequests";
 import { List, ListItem } from "../layout/preview/list";
+import { filterItems, initFilters } from "@/lib/utils/list";
 
 export const ManagerList = () => {
   const generalManager = useSelector((state) => state.generalManager?.manager);
   const isAdmin = useSelector((state) => state.user?.session?.isAdmin);
+  const [filters, setFilters] = useState(initFilters("roleRequest"));
+  const allManagers = generalManager?.managers || [];
+  const [filteredManagers, setFilteredManagers] = useState(allManagers);
+
+  useEffect(() => {
+    setFilteredManagers((prev) =>
+      filterItems({
+        _items: allManagers,
+        filters,
+      }),
+    );
+  }, [filters, allManagers]);
+
   useEffect(() => {
     console.log("General Manager:", generalManager);
     if (!generalManager && !isAdmin) {
@@ -25,9 +38,14 @@ export const ManagerList = () => {
 
   return (
     <>
-      <List title="Menadžeri">
-        {generalManager?.managers.map((manager) => (
-          <ManagerListItem key={uuid()} manager={manager} />
+      <List
+        title="Menadžeri"
+        filters={filters}
+        setFilters={setFilters}
+        initialFilters={initFilters("roleRequest")}
+      >
+        {filteredManagers.map((manager) => (
+          <ManagerListItem key={manager._id} manager={manager} />
         ))}
       </List>
     </>

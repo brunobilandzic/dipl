@@ -1,6 +1,7 @@
 import { AppUser } from "@/models/user/AppUser";
 import {
   CULTIVATION_MANAGER,
+  FINANCIAL_MANAGER,
   PRODUCTION_MANAGER,
   WAREHOUSE_MANAGER,
 } from "../constants/users/managerTypes";

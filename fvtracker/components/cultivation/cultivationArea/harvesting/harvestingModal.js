@@ -99,8 +99,12 @@ export function HarvestingModal({
       cropVariety: newHarvest.cropVariety,
     });
     setAvailablePlans(available);
-  }, [newHarvest?.cropVariety?._id, allFieldPlans]);
-
+  }, [
+    newHarvest?.cropVariety?._id,
+    allFieldPlans,
+    fields,
+    newHarvest?.toHarvestCells,
+  ]);
 
   // set harvest when cult id
   useEffect(() => {

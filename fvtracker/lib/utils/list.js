@@ -170,6 +170,10 @@ export const filterItems = ({ _items, itemModelName, filters }) => {
         break;
       case "roleRequest":
         if (filter.value === "all") break;
+        if (items.some((item) => item.roleRequest))
+          return items.filter(
+            (item) => item.roleRequest.status === filter.value,
+          );
         items = items.filter((item) => {
           return item.status === filter.value;
         });

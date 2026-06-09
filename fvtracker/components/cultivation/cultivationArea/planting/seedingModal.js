@@ -278,13 +278,6 @@ export const SeedingModal = ({
     }
   }, [newPlantage?.variety]);
 
-  useEffect(() => {
-    console.log("New plantage state:", newPlantage);
-  }, [newPlantage]);
-
-  useEffect(() => {
-    console.log("Available planting plans updated:", availablePlans);
-  }, [availablePlans]);
 
   // PLAN SELECTION
 

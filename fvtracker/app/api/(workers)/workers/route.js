@@ -38,7 +38,7 @@ export async function GET(req) {
 export async function POST(req) {
   try {
     await dbConnect();
-    let { rootManager, unauthorized } =
+    let { rootManager, unauthorized, generalManager, isAdmin } =
       await fetchSessionRootManager();
     if (unauthorized) {
       return Response.json(
@@ -55,6 +55,7 @@ export async function POST(req) {
     const { specificWorker } = await createWorker({
       rootManagerId: rootManager._id,
       workerData,
+      isGeneralAdmin: generalManager || isAdmin,
     });
     return Response.json({ worker: specificWorker });
   } catch (error) {

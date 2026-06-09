@@ -13,7 +13,11 @@ import populateCommon, {
 } from "./populate";
 import { EMPLOYMENT_STATUS_EMPLOYED } from "../constants/users/workers";
 
-export const createWorker = async ({ workerData, rootManagerId }) => {
+export const createWorker = async ({
+  workerData,
+  rootManagerId,
+  isGeneralAdmin,
+}) => {
   const { hourlyRate, ...workerAppUserData } = workerData;
   const appUser = new AppUser(workerAppUserData);
   await appUser.save();
@@ -71,6 +75,22 @@ export const createWorker = async ({ workerData, rootManagerId }) => {
         `Nepoznat rootmanager root: ${rootManagerId} za sektor: ${workerData.managerModelName}`,
       );
   }
+
+  if (isGeneralAdmin) {
+    const employmentRequest = await mongoose.models.EmploymentRequest.findOne({
+      worker: specificWorker._id,
+    });
+    if (!employmentRequest) {
+      throw new Error(
+        `Nije pronađen zahtjev za zapošljavanje radnika ${specificWorker._id} nakon kreiranja radnika`,
+      );
+    }
+    employmentRequest.status = EMPLOYMENT_STATUS_EMPLOYED;
+    await employmentRequest.save();
+    console.log(
+      "Automatski postavljen status zaposlenosti na 'zaposlen' za radnika:",
+      specificWorker._id,
+    );
   }
 
   await specificWorker.populate(populateCommon);

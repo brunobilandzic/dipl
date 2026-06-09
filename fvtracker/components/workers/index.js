@@ -55,11 +55,7 @@ export const WorkersPageComponent = ({ managerModelName, isAdmin }) => {
         <List
           title="Radnici"
           addLabel="Dodaj radnika"
-          onCreateItem={
-            managerModelName != GENERAL_MANAGER
-              ? () => router.push("/radnici/izradi")
-              : undefined
-          }
+          onCreateItem={() => router.push("/radnici/izradi")}
           sortBy={sortBy}
           setSortBy={setSortBy}
           filters={filters}

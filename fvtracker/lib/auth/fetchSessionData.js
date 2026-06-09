@@ -129,7 +129,9 @@ export async function fetchWorker({ workerType }) {
 export async function fetchManagerWorker({ managerNames = [], workerType }) {
   const { specificManager, generalManager, unauthorized } = await fetchManager({
     managerNames,
+    worker: true,
   });
+  console.log({ unauthorized, specificManager, generalManager });
   if (unauthorized) {
     return { unauthorized: true };
   }
@@ -146,7 +148,7 @@ export async function fetchManagerWorker({ managerNames = [], workerType }) {
   return { worker, specificManager, unauthorized: false };
 }
 
-export async function fetchManager({ managerNames = [] }) {
+export async function fetchManager({ managerNames = [], worker = false }) {
   const { admin } = await fetchAdmin();
   if (admin) {
     return { unauthorized: false, isAdmin: true };
@@ -167,7 +169,7 @@ export async function fetchManager({ managerNames = [] }) {
     }
     response.generalManager = generalManager;
   }
-  if (managerNames.length === 0) {
+  if (managerNames.length === 0 && !worker) {
     // if no specific manager types provided, return general manager if exists or unauthorized
     console.log(
       "No specific manager types provided, returning general manager if exists",
@@ -184,7 +186,7 @@ export async function fetchManager({ managerNames = [] }) {
     }
   }
 
-  if (!response.generalManager && !response.specificManager) {
+  if (!response.generalManager && !response.specificManager && !worker) {
     return { unauthorized: true };
   }
   return response;
@@ -202,9 +204,17 @@ export const checkManager = async ({ managerNames = [] }) => {
 
 export const fetchSessionRootManager = async () => {
   const { admin } = await fetchAdmin();
-  if (admin) {
+  const { generalManager } = await fetchManager({
+    managerNames: [GENERAL_MANAGER],
+  });
+  if (admin || generalManager) {
     console.log("Admin user authenticated, granting access to root manager");
-    return { unauthorized: false, rootManager: null, isAdmin: true };
+    return {
+      unauthorized: false,
+      rootManager: null,
+      isAdmin: true,
+      generalManager,
+    };
   }
   const appUser = await fetchSessionAppUser();
   const rootManager = await mongoose.models.RootManager.findOne({

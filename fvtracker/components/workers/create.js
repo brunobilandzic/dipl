@@ -13,13 +13,12 @@ import { useDispatch } from "react-redux";
 export const CreateWorker = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const emptyWorkerData = {
-    name: "worker",
-    surname: "test",
-    email: "wt@mail.com",
-    password: "1",
-    username: "wt",
-  };
+  const isAdmin = useSelector((state) => state.user?.session?.isAdmin);
+  const generalManager = useSelector((state) => state.generalManager?.manager);
+  const managerModelName = useSelector(
+    (state) => state.user?.session?.managerModelName,
+  );
+  const adminOrGeneralManager = isAdmin || generalManager;
   const [workerData, setWorkerData] = useState(emptyWorkerData);
   const inputs = [
     {
@@ -108,6 +107,21 @@ export const CreateWorker = () => {
             </div>
           );
         })}
+        {adminOrGeneralManager && (
+          <div>
+            <AppSelect
+              name="sector"
+              placeholder="Sektor"
+              value={workerData.sector || ""}
+              onChange={onChange}
+              label="Sektor"
+              options={Object.entries(managerSectors).map(([key, value]) => ({
+                value: key,
+                label: value,
+              }))}
+            />
+          </div>
+        )}
       </div>
       <div className={`${styles.footer}       flex justify-center`}>
         <div className={`btn submitButton btnLg`} onClick={onSubmit}>

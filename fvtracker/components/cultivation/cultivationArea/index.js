@@ -23,6 +23,7 @@ import { HarvestingModal } from "@/components/cultivation/cultivationArea/harves
 import { refreshFields } from "@/lib/utils/cultivation/fields/fields";
 import { setLoading } from "@/store/loading";
 import { sanitize } from "@/lib/utils/objects";
+import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
 
 export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   const dispatch = useDispatch();
@@ -40,6 +41,9 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   );
   const [harvestCultivation, setHarvestCultivation] = useState(
     initialHarvestCultivation,
+  );
+  const managerModelName = useSelector(
+    (state) => state.user.session?.managerModelName,
   );
 
   const cultivationArea = useMemo(() => {
@@ -106,8 +110,10 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
     const disabled = [];
     if (
       !newCUDetails.potentialCUCells ||
-      newCUDetails.potentialCUCells.length === 0
+      newCUDetails.potentialCUCells.length === 0 ||
+      managerModelName != CULTIVATION_MANAGER
     ) {
+      console.log(managerModelName);
       disabled.push(cultivation.names.CULTIVATE_CELLS);
     }
     if (!selectedCultivation) {
@@ -120,6 +126,10 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
   }, [newCUDetails, selectedCultivation]);
 
   const handleEmptyClick = (x, y) => {
+    if (managerModelName != CULTIVATION_MANAGER) {
+      alert("Nemate ovlasti za uređivanje kultivacija");
+      return;
+    }
     if (!isBeginSelected) {
       onBeginCoordinates(x, y);
     } else {

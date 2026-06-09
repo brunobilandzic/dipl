@@ -9,6 +9,7 @@ import { orderAmount } from "./sales";
 import { stringContains } from "./strings";
 
 export const initFilters = (listType, allWorkers = false) => {
+  console.log("Initializing filters for list type:", listType);
   switch (listType) {
     case "fields":
       return [
@@ -16,25 +17,13 @@ export const initFilters = (listType, allWorkers = false) => {
           type: "nameSearch",
           placeholder: "Pretraži polja...",
           value: "",
-        } /* 
-        {
-          type: "cropVarietySearch",
-          placeholder: "Filtriraj po sorti...",
-          value: "",
-        }, 
-        // careas, cultivations, sizes.....
-        */,
+        },
       ];
     case "products":
       return [
         {
           type: "nameSearch",
           placeholder: "Pretraži proizvode...",
-          value: "",
-        },
-        {
-          type: "cropVarietySearch",
-          placeholder: "Pretraži po sorti...",
           value: "",
         },
       ];
@@ -89,6 +78,14 @@ export const initFilters = (listType, allWorkers = false) => {
         {
           type: "procurmentStatus",
           placeholder: "Status nabave",
+          value: "all",
+        },
+      ];
+    case "roleRequests":
+      return [
+        {
+          type: "roleStatus",
+          placeholder: "Status zahtjeva",
           value: "all",
         },
       ];
@@ -171,6 +168,10 @@ export const filterItems = ({ _items, itemModelName, filters }) => {
         items = items.filter(
           (item) => item.employmentRequest.status === filter.value,
         );
+        break;
+      case "roleStatus":
+        if (filter.value === "all") break;
+        items = items.filter((item) => item.status === filter.value);
         break;
       default:
         break;

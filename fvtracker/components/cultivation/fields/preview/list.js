@@ -27,7 +27,8 @@ export function FieldsList({}) {
   const dispatch = useDispatch();
   const router = useRouter();
   const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
-  const [filters, setFilters] = useState(initFilters("fields"));
+  const initialFilters = useMemo(() => initFilters("fields"), []);
+  const [filters, setFilters] = useState(initialFilters);
   const { data: session } = useSession();
 
   useEffect(() => {
@@ -67,7 +68,7 @@ export function FieldsList({}) {
         }}
         filters={filters}
         setFilters={setFilters}
-        initialFilters={initFilters("fields")}
+        initialFilters={initialFilters}
         sortBy={sortBy}
         setSortBy={setSortBy}
         sortOptions={fieldSortOptions}

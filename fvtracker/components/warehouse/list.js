@@ -13,6 +13,7 @@ import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { filterWarehouses, sortWarehouses } from "@/store/warehouse";
 import { initFilters } from "@/lib/utils/list";
 import { prepareFacilityStocksInfo } from "@/lib/utils/production/facilities";
+import { useMemo } from "react";
 
 export const WarehouseList = () => {
   const warehouses = useSelector(
@@ -21,7 +22,8 @@ export const WarehouseList = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
-  const [filters, setFilters] = useState(initFilters("warehouses"));
+  const initialFilters = useMemo(() => initFilters("warehouses"), []);
+  const [filters, setFilters] = useState(initialFilters);
 
   useEffect(() => {
     if (!warehouses) return;
@@ -49,7 +51,7 @@ export const WarehouseList = () => {
         setSortBy={setSortBy}
         filters={filters}
         setFilters={setFilters}
-        initialFilters={initFilters("warehouses")}
+        initialFilters={initialFilters}
       >
         {warehouses.map((wh) => (
           <WarehouseListItem

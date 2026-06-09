@@ -3,7 +3,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import api from "@/lib/api";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { setLoading } from "@/store/loading";
 import { AppSelect } from "../form/inputs";
 import { ROLE_STATUSES } from "@/lib/constants/users";
@@ -13,7 +13,8 @@ import { filterItems, initFilters } from "@/lib/utils/list";
 
 export const RoleRequestList = () => {
   const generalManager = useSelector((state) => state.generalManager.manager);
-  const [filters, setFilters] = useState(initFilters("roleRequest"));
+  const initialFilters = useMemo(() => initFilters("roleRequest"), []);
+  const [filters, setFilters] = useState(initialFilters);
 
   const allRoleRequests = generalManager?.roleRequests || [];
   const [filteredRoleRequests, setFilteredRoleRequests] =
@@ -34,7 +35,7 @@ export const RoleRequestList = () => {
         title="Zahtjevi za uloge"
         filters={filters}
         setFilters={setFilters}
-        initialFilters={initFilters("roleRequest")}
+        initialFilters={initialFilters}
       >
         {filteredRoleRequests.map((roleRequest) => (
           <RoleRequestItem key={roleRequest._id} roleRequest={roleRequest} />

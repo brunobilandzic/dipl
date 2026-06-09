@@ -19,6 +19,7 @@ import {
 import { ProductItemStocksInfo } from "./stock/Info";
 import CreateWarehouseStock from "./stock/CreateWarehouseStock";
 import { fetchWarehouses } from "@/store/warehouse";
+import { useMemo } from "react";
 
 const ProductList = ({ worker }) => {
   const dispatch = useDispatch();
@@ -30,7 +31,8 @@ const ProductList = ({ worker }) => {
     (state) => state.production.harvestingBatches.items,
   );
   const [sortBy, setSortBy] = useState("newest");
-  const [filters, setFilters] = useState(initFilters("products"));
+  const initialFilters = useMemo(() => initFilters("products"), []);
+  const [filters, setFilters] = useState(initialFilters);
 
   useEffect(() => {
     if (!products) return;
@@ -61,7 +63,7 @@ const ProductList = ({ worker }) => {
         setSortBy={setSortBy}
         filters={filters}
         setFilters={setFilters}
-        initialFilters={initFilters("products")}
+        initialFilters={initialFilters}
         sortOptions={productSortOptions}
         addLabel="Izradi proizvod"
         deleteLabel="Obriši proizvode"

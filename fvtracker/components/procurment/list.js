@@ -26,6 +26,7 @@ import { initFilters } from "@/lib/utils/list";
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { procurmentSortOptions } from "../layout/preview/sort";
 import { procurmentValue } from "@/lib/utils/documents/procurments";
+import { useMemo } from "react";
 
 export const ProcurmentList = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -36,7 +37,8 @@ export const ProcurmentList = () => {
   );
   const [showAll, setShowAll] = useState(false);
   const allView = [FINANCIAL_MANAGER].includes(managerModelName);
-  const [filters, setFilters] = useState(initFilters("procurments"));
+  const initialFilters = useMemo(() => initFilters("procurments"), []);
+  const [filters, setFilters] = useState(initialFilters);
   const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
 
   useEffect(() => {
@@ -69,7 +71,7 @@ export const ProcurmentList = () => {
         setFilters={setFilters}
         sortBy={sortBy}
         setSortBy={setSortBy}
-        initialFilters={initFilters("procurments")}
+        initialFilters={initialFilters}
         sortOptions={procurmentSortOptions}
       >
         {procurments

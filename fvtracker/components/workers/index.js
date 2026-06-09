@@ -19,7 +19,7 @@ import {
   PRODUCTION_MANAGER,
   WAREHOUSE_MANAGER,
 } from "@/lib/constants/users/managerTypes";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { PayWorkerModal } from "./pay";
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { initFilters } from "@/lib/utils/list";
@@ -39,7 +39,11 @@ export const WorkersPageComponent = ({ managerModelName, isAdmin }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
-  const [filters, setFilters] = useState(initFilters("workers", allWorkers));
+  const initialFilters = useMemo(
+    () => initFilters("workers", allWorkers),
+    [allWorkers],
+  );
+  const [filters, setFilters] = useState(initialFilters);
 
   useEffect(() => {
     if (workers) {
@@ -60,7 +64,7 @@ export const WorkersPageComponent = ({ managerModelName, isAdmin }) => {
           setSortBy={setSortBy}
           filters={filters}
           setFilters={setFilters}
-          initialFilters={initFilters("workers")}
+          initialFilters={initialFilters}
           sortOptions={workerSortOptions}
         >
           {displayedWorkers.map((worker) => (

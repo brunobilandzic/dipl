@@ -24,6 +24,7 @@ import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { initFilters } from "@/lib/utils/list";
 import { facilitySortOptions } from "@/components/layout/preview/sort";
 import { GiBattery100 } from "react-icons/gi";
+import { useMemo } from "react";
 
 const emptyForm = { name: "", description: "", volume: 0 };
 
@@ -36,7 +37,8 @@ const FacilitiesList = () => {
   const [createOpen, setCreateOpen] = useState(false);
   const [form, setForm] = useState(emptyForm);
   const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
-  const [filters, setFilters] = useState(initFilters("facilities"));
+  const initialFilters = useMemo(() => initFilters("facilities"), []);
+  const [filters, setFilters] = useState(initialFilters);
 
   useEffect(() => {
     dispatch(unselectFacility());
@@ -81,7 +83,7 @@ const FacilitiesList = () => {
         addLabel="Dodaj postrojenje"
         filters={filters}
         setFilters={setFilters}
-        initialFilters={initFilters("facilities")}
+        initialFilters={initialFilters}
         sortBy={sortBy}
         setSortBy={setSortBy}
         sortOptions={facilitySortOptions}

@@ -25,7 +25,8 @@ import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { initFilters } from "@/lib/utils/list";
 import { workerSortOptions } from "../layout/preview/sort";
 import { filterWorkers } from "@/store/workers";
-import { EMPLOYMENT_STATUS_EMPLOYED } from "@/lib/constants/users/workers";
+import { EMPLOYMENT_STATUS_EMPLOYED, EMPLOYMENT_STATUS_UNEMPLOYED } from "@/lib/constants/users/workers";
+import { handleStatusChange } from "@/lib/utils/workers/employment";
 
 export const WorkersPageComponent = ({ managerModelName, isAdmin }) => {
   const allWorkers =
@@ -96,6 +97,16 @@ const WorkerItem = ({ worker, children }) => {
                   label: "Isplati",
                   onClick: () => setShowPayModal(true),
                   className: "submitButton",
+                },
+                {
+                  label: "Otkaz",
+                  onClick: () => {
+                    handleStatusChange({
+                      requestId: worker.employmentRequest._id,
+                      status: EMPLOYMENT_STATUS_UNEMPLOYED,
+                    });
+                  },
+                  className: "cancelButton",
                 },
               ]
             : []),

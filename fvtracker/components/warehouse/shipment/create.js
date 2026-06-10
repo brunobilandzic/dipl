@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { checkEmpty } from "@/lib/utils/objects";
 import { WAREHOUSE_MANAGER } from "@/lib/constants/users/managerTypes";
+import { checkValue } from "@/lib/utils/formValidation";
 
 export const CreateShipmentModal = ({
   isOpen,
@@ -203,20 +204,19 @@ const ChooseWarehouseSources = ({
                             productName: pq.productName,
                           })}
                           onChange={(e) => {
-                            if (e.target.value === "") {
-                              setNewShipment({ w, pq, quantity: 0 });
+                            const { value, error } = checkValue(e.target.value);
+                            if (error) {
+                              alert(error);
+                              setNewShipment({ w, pq, quantity: value });
                               return;
                             }
-                            const quantity = parseInt(e.target.value);
+
+                            const quantity = parseInt(value);
                             if (quantity > availableStock) {
                               alert("Nema toliko na skladištu");
                               return;
                             }
-                            if(quantity < 0) {
-                              alert("Količina ne može biti negativna");
-                              return;
-                            }
-                            if(quantity > pq.neededQuantity) {
+                            if (quantity > pq.neededQuantity) {
                               alert("Ne treba toliko proizvoda");
                               return;
                             }

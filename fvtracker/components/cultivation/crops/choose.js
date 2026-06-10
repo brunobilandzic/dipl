@@ -1,3 +1,4 @@
+import { checkValue } from "@/lib/utils/formValidation";
 import { titleCaseLetter } from "@/lib/utils/strings";
 import { useEffect } from "react";
 
@@ -19,6 +20,25 @@ export const ChooseCropVarietyItems = ({
   } = crops || {};
 
   const handleItemChange = (index, field, value) => {
+    if (field === "quantity") {
+      if (value <= 0) {
+        alert("Količina ne može biti negativna.");
+        setCropsData((prev) => ({
+          ...prev,
+          [itemsName]: prev[itemsName].map((item, itemIndex) => {
+            if (itemIndex !== index) {
+              return item;
+            }
+            return {
+              ...item,
+              quantity: "",
+            };
+          }),
+        }));
+        return;
+      }
+    }
+
     setCropsData((prev) => ({
       ...prev,
       [itemsName]: prev[itemsName].map((item, itemIndex) => {
@@ -43,10 +63,12 @@ export const ChooseCropVarietyItems = ({
           };
         }
 
-        return {
-          ...item,
-          [field]: value,
-        };
+        if (field === "quantity") {
+          return {
+            ...item,
+            quantity: value,
+          };
+        }
       }),
     }));
   };

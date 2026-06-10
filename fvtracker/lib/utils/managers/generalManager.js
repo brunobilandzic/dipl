@@ -1,8 +1,4 @@
-import {
-  setGeneralManager,
-  setManagers,
-  setSpecificManagers,
-} from "@/store/generalManager";
+import { setGeneralManager } from "@/store/generalManager";
 import handleError from "../../constants/errors/client/handleError";
 import api from "../../api";
 
@@ -12,12 +8,6 @@ export const refreshGeneralManager = async ({ dispatch }) => {
     if (res.data && res.data.generalManager) {
       dispatch(setGeneralManager(res.data.generalManager));
     }
-    /*    
-    we will extract data from redux based on managerModelName
-    res = await api.get("/general-manager/specific-managers");
-    if (res.data && res.data.specificManagers) {
-      dispatch(setSpecificManagers(res.data.specificManagers));
-    } */
   } catch (error) {
     handleError({
       ...error,

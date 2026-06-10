@@ -80,7 +80,7 @@ function ProductTile({ index, product }) {
 
   return (
     <AppTile key={index} tile={product}>
-      <div className=" flex flex-col justify-between h-full">
+      <div className=" flex flex-col justify-between h-full min-w-[130px]">
         <div className="">
           <h3 className="listitemheader">{product.name}</h3>
           <p className="listitemDescription break-words line-clamp-20">

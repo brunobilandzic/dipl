@@ -5,7 +5,6 @@ import { orderAmount } from "./sales";
 import { stringContains } from "./strings";
 
 export const initFilters = (listType, allWorkers = false) => {
-  console.log("Initializing filters for list type:", listType);
   switch (listType) {
     case "fields":
       return [

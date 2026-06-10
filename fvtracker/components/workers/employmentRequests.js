@@ -13,6 +13,7 @@ import {
   EMPLOYMENT_STATUS_PENDING,
   EMPLOYMENT_STATUS_UNEMPLOYED,
 } from "@/lib/constants/users/workers";
+import { handleStatusChange } from "@/lib/utils/workers/employment";
 
 export const EmploymentRequestsPageComponent = () => {
   const employmentRequests = useSelector(
@@ -21,39 +22,16 @@ export const EmploymentRequestsPageComponent = () => {
   const isLoading = useSelector((state) => state.workers.isLoading);
   const dispatch = useDispatch();
 
-  const handleStatusChange = async ({ requestId, status }) => {
-    try {
-      dispatch(setLoading(true));
-      await api.put(`/employment-requests`, {
-        requestId,
-        status,
-      });
-      dispatch(updateEmploymentRequest({ requestId, status }));
-    } catch (error) {
-      console.error("Error updating employment request:", error);
-      handleError({
-        ...error,
-        generalMessage: "Greška prilikom ažuriranja zahtjeva za zaposlenje",
-      });
-    } finally {
-      dispatch(setLoading(false));
-    }
-  };
-
   return (
     <List title="Zahtjevi za zaposlenje">
       {employmentRequests.map((request) => (
-        <EmploymentRequestsItem
-          key={request._id}
-          request={request}
-          handleStatusChange={handleStatusChange}
-        />
+        <EmploymentRequestsItem key={request._id} request={request} />
       ))}
     </List>
   );
 };
 
-const EmploymentRequestsItem = ({ request, handleStatusChange }) => {
+const EmploymentRequestsItem = ({ request }) => {
   const { worker, status, _id } = request;
 
   const actionOptions = [

@@ -1,6 +1,9 @@
 import { fetchManager } from "@/lib/auth/fetchSessionData";
 import dbConnect from "@/lib/db/mongooseConnect";
-import { FINANCIAL_MANAGER } from "@/lib/constants/users/managerTypes";
+import {
+  FINANCIAL_MANAGER,
+  MANAGER_TYPES,
+} from "@/lib/constants/users/managerTypes";
 import { EmploymentRequest } from "@/models/user/workers/EmploymentRequest";
 
 export async function GET(request) {
@@ -32,7 +35,7 @@ export async function GET(request) {
 export async function PUT(request) {
   await dbConnect();
   const { unauthorized } = await fetchManager({
-    managerNames: [FINANCIAL_MANAGER],
+    managerNames: MANAGER_TYPES,
   });
   if (unauthorized) {
     return Response.json(

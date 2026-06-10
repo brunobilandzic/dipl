@@ -44,6 +44,7 @@ export const FinancialManagerListItem = ({ workers, allWorkers }) => {
   const procurments = useSelector((state) => state.procurments.items);
   if (!procurments) return <LoadingFullScreen />;
   console.log({ allWorkers });
+  console.log({ workers });
   return (
     <div className="listitemDescription">
       <div>
@@ -74,7 +75,10 @@ export const FinancialManagerListItem = ({ workers, allWorkers }) => {
       <ManagerWorkers
         workers={workers}
         paySum={workers.reduce(
-          (total, worker) => total + worker.receipts.length * worker.hourlyRate,
+          (total, worker) =>
+            total +
+            (worker.receipts.length + worker.warehouseRequests.length) *
+              worker.hourlyRate,
           0,
         )}
       />

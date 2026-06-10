@@ -9,6 +9,8 @@ import {
 } from "@/lib/constants/users/workers";
 import { handleStatusChange } from "@/lib/utils/workers/employment";
 import { useRouter } from "next/navigation";
+import { useMemo, useState } from "react";
+import { initFilters } from "@/lib/utils/list";
 
 export const EmploymentRequestsPageComponent = () => {
   const employmentRequests = useSelector(
@@ -18,8 +20,18 @@ export const EmploymentRequestsPageComponent = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const initialFilters = useMemo(
+    () => initFilters("employmentRequests"),
+    [employmentRequests],
+  );
+  const [filters, setFilters] = useState(initialFilters);
+
   return (
-    <List title="Zahtjevi za zaposlenje">
+    <List
+      title="Zahtjevi za zaposlenje"
+      filters={filters}
+      setFilters={setFilters}
+    >
       {employmentRequests.map((request) => (
         <EmploymentRequestsItem
           key={request._id}

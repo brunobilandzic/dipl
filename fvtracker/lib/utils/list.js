@@ -73,6 +73,19 @@ export const initFilters = (listType, allWorkers = false) => {
             ]
           : []),
       ];
+    case "employmentRequests":
+      return [
+        {
+          type: "employmentStatus",
+          placeholder: "Status zaposlenja",
+          value: "all",
+        },
+        {
+          type: "workerNameSearch",
+          placeholder: "Pretraži radnike...",
+          value: "",
+        },
+      ];
     case "procurments":
       return [
         {

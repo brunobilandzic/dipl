@@ -3,6 +3,7 @@
 import { deleteDB } from "@/lib/db/delete";
 import dbConnect from "@/lib/db/mongooseConnect";
 import { createAdmin } from "@/seed/users/admin";
+import { createGeneralManager } from "@/seed/users/generalManager";
 
 export async function DELETE(req) {
   try {
@@ -10,6 +11,7 @@ export async function DELETE(req) {
     // Logic to delete the database goes here
     const success = await deleteDB();
     await createAdmin();
+    await createGeneralManager({ approve: false });
     console.log("Database deleted successfully.");
     return Response.json(
       { message: "Database deleted successfully.", success: true },

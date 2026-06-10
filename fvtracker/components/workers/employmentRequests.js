@@ -1,11 +1,5 @@
 "use client";
-
-import handleError from "@/lib/constants/errors/client/handleError";
-import { updateEmploymentRequest } from "@/store/workers";
-import { setLoading } from "@/store/loading";
 import { useDispatch, useSelector } from "react-redux";
-import api from "@/lib/api";
-import { useEffect, useState } from "react";
 import { List, ListItem } from "../layout/preview/list";
 import { getName, showDate } from "@/lib/utils/display";
 import {

@@ -161,7 +161,7 @@ export const CreateProductionStock = ({
   );
 };
 
-const StockQuantityInput = ({ name, label, test, value, onChange }) => {
+const StockQuantityInput = ({  value, onChange }) => {
   return (
     <AppInput
       name="quantity"

@@ -43,11 +43,27 @@ export async function fetchSessionSpecificManager({
   throwError = true,
 }) {
   const appUser = await fetchSessionAppUser();
-  let specificManager = await mongoose.models[managerName].findOne({
-    rootManager: appUser.rootManager,
-  });
+  let specificManager = await mongoose.models[managerName]
+    .findOne({
+      rootManager: appUser.rootManager,
+    })
+    .populate({
+      path: "rootManager",
+      populate: {
+        path: "roleRequest",
+        select: "status",
+      },
+    });
 
-  if (!specificManager) {
+  console.log({ specificManager });
+
+  if (
+    !specificManager ||
+    !specificManager.rootManager ||
+    (managerName != GENERAL_MANAGER &&
+      specificManager.rootManager.roleRequest?.status !==
+        ROLE_STATUSES.APPROVED)
+  ) {
     if (throwError) {
       throw new Error(
         `No ${managerName} found for session user with email: ${appUser.email}`,

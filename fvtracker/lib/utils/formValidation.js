@@ -4,7 +4,7 @@ const numberInRange = (value, min, max) => {
     return false;
   }
   const valid = numberValue >= min && numberValue <= max;
-  
+
   return valid;
 };
 
@@ -19,4 +19,17 @@ export const numbersInRanges = (checks) => {
     }
   }
   return { valid: true };
+};
+
+export const checkValue = (value) => {
+  if (value === "" || value === null || value === undefined) {
+    return { value: "", error: null };
+  }
+  if (isNaN(value)) {
+    return { value: "", error: null };
+  }
+  if (Number(value) < 0) {
+    return { value: "", error: "Vrijednost ne može biti negativna." };
+  }
+  return { value: Number(value), error: null };
 };

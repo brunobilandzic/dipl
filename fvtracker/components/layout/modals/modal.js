@@ -1,4 +1,4 @@
-import { MdOutlineClose } from "react-icons/md";
+import { MdClose } from "@react-icons/all-files/md/MdClose";
 
 export default function Modal({
   isOpen,
@@ -40,7 +40,7 @@ function ModalHeader({ title, onCancel }) {
     <div className="flex justify-between items-center  p-4 border-gray-300">
       <div className="text-xl font-bold">{title}</div>
       <div onClick={onCancel} className="text-xl cursor-pointer">
-        <MdOutlineClose />
+        <MdClose />
       </div>
     </div>
   );

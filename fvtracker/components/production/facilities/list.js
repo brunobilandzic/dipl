@@ -23,7 +23,6 @@ import {
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { initFilters } from "@/lib/utils/list";
 import { facilitySortOptions } from "@/components/layout/preview/sort";
-import { GiBattery100 } from "react-icons/gi";
 import { useMemo } from "react";
 
 const emptyForm = { name: "", description: "", volume: 0 };

@@ -1,4 +1,4 @@
-import { FaPlus } from "react-icons/fa";
+import { FaPlus } from "@react-icons/all-files/fa/FaPlus";
 import utils from "@/lib/utils";
 import { useEffect, useState } from "react";
 import Modals from "@/components/layout/modals";

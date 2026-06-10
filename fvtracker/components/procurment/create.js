@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { AppInput } from "../form/inputs";
 import { useSelector, useDispatch } from "react-redux";
 import { procurments } from "@/seed/data/procurments";
-import { MdClose } from "react-icons/md";
+import { MdClose } from "@react-icons/all-files/md/MdClose";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { setLoading } from "@/store/loading";
 import api from "@/lib/api";

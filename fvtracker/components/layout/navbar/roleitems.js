@@ -1,4 +1,4 @@
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart } from "@react-icons/all-files/fa/FaShoppingCart";
 
 export default {
   GeneralManager: [

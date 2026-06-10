@@ -1,13 +1,11 @@
 "use client";
 
 import axios from "axios";
-import { FaUserPlus } from "react-icons/fa";
-import {
-  MdAllInclusive,
-  MdDeleteForever,
-  MdFactory,
-  MdFoodBank,
-} from "react-icons/md";
+import { FaUserPlus } from "@react-icons/all-files/fa";
+import { MdAllInclusive } from "@react-icons/all-files/md/MdAllInclusive";
+import { MdDeleteForever } from "@react-icons/all-files/md/MdDeleteForever";
+import { MdFactory } from "@react-icons/all-files/md/MdFactory";
+import { MdFoodBank } from "@react-icons/all-files/md/MdFoodBank";
 import SEED_TYPES from "@/seed/seedTypes";
 import { OptionButtons } from "../layout/buttons/options";
 import { useDispatch } from "react-redux";

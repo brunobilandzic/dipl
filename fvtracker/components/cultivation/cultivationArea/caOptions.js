@@ -1,15 +1,12 @@
 import buttons from "@/components/layout/buttons";
 import cultivation from "@/lib/constants/cultivation";
 const { OptionButtons } = buttons.options;
-import {
-  MdAdUnits,
-  MdArrowLeft,
-  MdDeleteOutline,
-  MdFoodBank,
-  MdInfoOutline,
-  MdOutlineDeleteForever,
-  MdOutlineViewColumn,
-} from "react-icons/md";
+import { MdAdUnits } from "@react-icons/all-files/md/MdAdUnits";
+import { MdArrowLeft } from "@react-icons/all-files/md/MdArrowLeft";
+import { MdFoodBank } from "@react-icons/all-files/md/MdFoodBank";
+import { MdInfoOutline } from "@react-icons/all-files/md/MdInfoOutline";
+import { MdOutlineDeleteForever } from "@react-icons/all-files/md/MdOutlineDeleteForever";
+import { MdOutlineViewColumn } from "@react-icons/all-files/md/MdOutlineViewColumn";
 
 export default function CAOptions({
   onBack,

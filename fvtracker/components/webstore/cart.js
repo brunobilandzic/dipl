@@ -2,11 +2,11 @@
 
 import { preventEvent } from "@/lib/utils/dev";
 import { useEffect, useState } from "react";
-import { FaShoppingCart } from "react-icons/fa";
+import { FaShoppingCart } from "@react-icons/all-files/fa/FaShoppingCart";
 import { List } from "../layout/preview/list";
 import { useSelector, useDispatch } from "react-redux";
 import { changeQuantity, emptyCart, removeFromCart } from "@/store/webstore";
-import { FaXmark } from "react-icons/fa6";
+import { FaXbox } from "@react-icons/all-files/fa/FaXbox";
 import { CustomerInfoForm } from "./checkout";
 import { sendOrder } from "@/lib/utils/webstore/orders";
 
@@ -102,7 +102,7 @@ const CartItem = ({ cartItem, onQuantityChange }) => {
       <div className="flex justify-between items-center">
         <div className="listitemheader flex items-center gap-4">
           <div>
-            <FaXmark
+            <FaXbox
               className="cursor-pointer hover:text-red-500"
               onClick={onRemove}
             />

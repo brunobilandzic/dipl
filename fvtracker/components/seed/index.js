@@ -1,5 +1,5 @@
 import React from "react";
-import { FaSeedling } from "react-icons/fa";
+import { FaSeedling } from "@react-icons/all-files/fa/FaSeedling";
 import SeedOptions from "./options";
 
 function SeedPageComponent() {

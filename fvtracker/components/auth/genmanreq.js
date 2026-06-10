@@ -6,7 +6,7 @@ import { ROLE_STATUSES } from "@/lib/constants/users";
 import { setLoading } from "@/store/loading";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { MdCheck } from "react-icons/md";
+import { MdCheck } from "@@react-icons/all-files/all-files/md/MdCheck";
 import { useDispatch } from "react-redux";
 
 export const GeneralManagerRequestComponent = ({}) => {

@@ -1,4 +1,4 @@
-import { PiEmpty } from "react-icons/pi";
+import { PiEmpty } from "@react-icons/all-files/pi/PiEmpty";
 
 export const AppTable = ({
   headerLabels,

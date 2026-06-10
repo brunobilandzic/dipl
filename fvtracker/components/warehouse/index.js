@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { FaCubesStacked } from "react-icons/fa6";
+import { FaCubes } from "@react-icons/all-files/fa/FaCubes";
 import { useSelector } from "react-redux";
 import { List, ListItem } from "../layout/preview/list";
 import { OptionButtons } from "../layout/buttons/options";
 import { ReturnButton } from "../layout/buttons/buttons";
 import WarehouseAcceptances from "./acceptences";
-import { IoEnterOutline } from "react-icons/io5";
+import { IoEnterOutline } from "@react-icons/all-files/io5/IoEnterOutline";
 import { buildAcceptances } from "@/lib/utils/storage/acceptances";
 
 function WarehousePageComponent({ slug }) {
@@ -20,7 +20,7 @@ function WarehousePageComponent({ slug }) {
   const options = [
     {
       label: "Proizvodi",
-      icon: <FaCubesStacked />,
+      icon: <FaCubes />,
       onClick: () => {
         setStocksView(true);
       },

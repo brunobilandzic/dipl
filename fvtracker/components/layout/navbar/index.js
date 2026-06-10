@@ -27,8 +27,8 @@ import { fillWarehouseRequestsRedux } from "@/lib/utils/documents/requests";
 import { fillManagersSelection } from "@/store/managers";
 import { fetchEmploymentRequests, fetchWorkers } from "@/store/workers";
 import { fetchProcurments } from "@/store/procurments";
-import { MdKey } from "react-icons/md";
-import { FaDatabase } from "react-icons/fa";
+import { MdVpnKey } from "@react-icons/all-files/md/MdVpnKey";
+import { FaDatabase } from "@react-icons/all-files/fa/FaDatabase";
 
 export default {
   roleitems,
@@ -65,7 +65,7 @@ export function Navbar() {
           </div>
         ) : (
           <Link href="/autorizacija">
-            <MdKey className="text-xl -mt-0.5" />
+            <MdVpnKey className="text-xl -mt-0.5" />
           </Link>
         )}
       </div>
@@ -188,6 +188,7 @@ function NavItems() {
       dispatch(fetchWorkers());
       fillOrdersRedux({ dispatch, router });
       fillWarehouseRequestsRedux({ dispatch });
+      fetchEmploymentRequests();
     }
   }, [status]);
 

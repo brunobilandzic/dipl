@@ -1,4 +1,4 @@
-import { MdArrowBack } from "react-icons/md";
+import { MdArrowBack } from "@react-icons/all-files/md/MdArrowBack";
 
 export const ReturnButton = ({ onClick, returnLabel = "Povratak" }) => {
   return (

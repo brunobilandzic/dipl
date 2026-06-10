@@ -10,12 +10,14 @@ import { useDispatch } from "react-redux";
 import { updateCultivationArea } from "@/store/cultivation";
 import { initialCAMenuState } from "../index";
 import { useRouter } from "next/navigation";
+import { checkEmpty } from "@/lib/utils/objects";
 
 export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
   const dispatch = useDispatch();
   const router = useRouter();
 
   const [formData, setFormData] = useState({});
+  const [submitDisabled, setSubmitDisabled] = useState(false);
 
   useEffect(() => {
     if (cultivationAreaMenu?.cultivationArea) {
@@ -30,6 +32,11 @@ export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
       });
     }
   }, [cultivationAreaMenu?.cultivationArea]);
+
+  useEffect(() => {
+    const { name, description } = formData;
+    setSubmitDisabled(checkEmpty({ name, description }, true));
+  }, [formData]);
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -115,6 +122,7 @@ export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
           onClose={() => setCultivationAreaMenu(initialCAMenuState)}
           onSubmit={onSubmit}
           onDelete={onDelete}
+          submitDisabled={submitDisabled}
         >
           <div className="form">
             <div className="">

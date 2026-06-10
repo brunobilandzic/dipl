@@ -8,6 +8,7 @@ import api from "@/lib/api";
 import { useDispatch } from "react-redux";
 import { createCultivationArea } from "@/store/cultivation/";
 import styles from "@/components/form/form.module.css";
+import { checkEmpty } from "@/lib/utils/objects";
 
 function CreateCA({
   getNewCOCoordinates,
@@ -100,6 +101,7 @@ function CreateCA({
         onCancel={onCancel}
         title="Napravi novo područje"
         onSubmit={onSubmit}
+        submitDisabled={checkEmpty(newCADetails, true)}
       >
         <div className={`form`}>
           <div className={``}>

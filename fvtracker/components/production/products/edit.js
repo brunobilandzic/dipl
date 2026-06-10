@@ -11,6 +11,7 @@ import {
   STANDARD,
   VARIETIES_QUALITIES,
 } from "@/lib/constants/cultivation/plants";
+import { checkValue } from "@/lib/utils/formValidation";
 import { submitProductForm } from "@/lib/utils/production/products";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -74,17 +75,27 @@ export const EditProductForm = ({
           label="Cijena"
           value={productForm.price}
           type="number"
-          onChange={(e) =>
-            setProductForm({ ...productForm, price: e.target.value })
-          }
+          onChange={(e) => {
+            const { value: val, error } = checkValue(e.target.value);
+            if (error) {
+              alert(error);
+              return;
+            }
+            setProductForm({ ...productForm, price: val });
+          }}
         />
         <AppInput
           label="Skladišni volumen"
           value={productForm.stockVolume}
           type="number"
-          onChange={(e) =>
-            setProductForm({ ...productForm, stockVolume: e.target.value })
-          }
+          onChange={(e) => {
+            const { value: val, error } = checkValue(e.target.value);
+            if (error) {
+              alert(error);
+              return;
+            }
+            setProductForm({ ...productForm, stockVolume: val });
+          }}
         />
         <ChooseCropVarietyItems
           crops={crops}

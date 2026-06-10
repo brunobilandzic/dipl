@@ -17,6 +17,9 @@ export const ManagerList = () => {
     () => generalManager?.managers ?? EMPTY_ARRAY,
     [generalManager?.managers],
   );
+  const specificManagers = useSelector(
+    (state) => state.generalManager?.specificManagers,
+  );
 
   const filteredManagers = useMemo(
     () =>
@@ -40,20 +43,24 @@ export const ManagerList = () => {
         initialFilters={initialRoleFilters}
       >
         {filteredManagers.map((manager) => (
-          <ManagerListItem key={manager._id} manager={manager} />
+          <ManagerListItem
+            key={manager._id}
+            manager={manager}
+            specificManagers={specificManagers}
+          />
         ))}
       </List>
     </>
   );
 };
 
-const ManagerListItem = ({ manager }) => {
+const ManagerListItem = ({ manager, specificManagers }) => {
   if (!manager || !manager.appUser) {
     return <Loading />;
   }
 
   console.log({
-    [manager?.managerModelName]: manager,
+    specificManagers,
   });
   return (
     <>
@@ -62,9 +69,6 @@ const ManagerListItem = ({ manager }) => {
           <div className="flex flex-col">
             <p className="text-sm text-gray-500">{manager.appUser.email}</p>
             <p className="text-sm text-gray-500">{manager.managerModelName}</p>
-          </div>
-          <div>
-            <RoleRequestStatus roleRequest={manager.roleRequest} />
           </div>
         </div>
       </ListItem>

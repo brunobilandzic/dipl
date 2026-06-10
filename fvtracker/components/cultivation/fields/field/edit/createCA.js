@@ -31,30 +31,6 @@ function CreateCA({
   const [isOpen, setIsOpen] = useState(false);
   const [newCADetails, setnewCADetails] = useState(initialnewCADetails);
 
-  const updateDimensions = (beginX, beginY, endX, endY) => {
-    const dimensions = utils.cultivation.cultivationAreas.getDimensionsCA(
-      beginX,
-      beginY,
-      endX,
-      endY,
-    );
-    setnewCADetails({
-      ...newCADetails,
-      dimensions,
-    });
-  };
-
-  /*  useEffect(() => {
-    if (newCACoordinates?.planted?.length > 0) {
-      updateDimensions(
-        newCACoordinates.begin.x,
-        newCACoordinates.begin.y,
-        newCACoordinates.end.x,
-        newCACoordinates.end.y,
-      );
-    }
-  }, [newCACoordinates]); */
-
   const onFormChange = (field, value) => {
     setnewCADetails({
       ...newCADetails,

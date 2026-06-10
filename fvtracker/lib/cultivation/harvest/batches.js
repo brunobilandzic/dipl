@@ -33,7 +33,7 @@ export async function findBatchByName({ name }) {
 async function pmBatches({ batchIds }) {
   const filter = batchIds ? { _id: { $in: batchIds } } : {};
   const batches = await HarvestingBatch.find(filter)
-    .select("harvestingBatchItems")
+    .select("harvestingBatchItems name productions")
     .populate([
       {
         path: "harvestingBatchItems",

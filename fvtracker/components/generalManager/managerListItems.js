@@ -21,6 +21,21 @@ export const CultivationManagerListItem = ({ workers }) => {
         }
       </div>
       <div>Zaposleno radnika: {workers.length}</div>
+      <div>
+        Zarađeno:{" "}
+        {workers.reduce(
+          (total, worker) =>
+            total +
+            (worker.plantageWorks.length + worker.harvestWorks.length) *
+              worker.hourlyRate,
+          0,
+        )}{" "}
+        €
+      </div>
+      <ManagerWorkers workers={workers} />
+    </div>
+  );
+};
       <ManagerWorkers workers={workers} />
     </div>
   );

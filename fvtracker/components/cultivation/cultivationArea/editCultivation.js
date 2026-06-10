@@ -5,7 +5,7 @@ import handleError from "@/lib/constants/errors/client/handleError";
 import { checkEmpty } from "@/lib/utils/objects";
 import { deleteCultivation, updateCultivation } from "@/store/cultivation";
 import { setLoading } from "@/store/loading";
-import { use, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 export function EditCultivation({ isOpen, onCancel, cultivationData }) {

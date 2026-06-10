@@ -25,14 +25,3 @@ export const refreshGeneralManager = async ({ dispatch }) => {
     });
   }
 };
-
-const getManagers = async (generalManager) => {
-  const managers = [];
-  for (const manager of generalManager.managers) {
-    const res = await api.get(`/managers/${manager._id}`);
-    if (res.data && res.data.manager) {
-      managers.push(res.data.manager);
-    }
-  }
-  return managers;
-};

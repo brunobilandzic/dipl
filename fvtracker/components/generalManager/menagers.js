@@ -52,6 +52,9 @@ const ManagerListItem = ({ manager }) => {
     return <Loading />;
   }
 
+  console.log({
+    [manager?.managerModelName]: manager,
+  });
   return (
     <>
       <ListItem title={`${manager.appUser.name} ${manager.appUser.surname}`}>

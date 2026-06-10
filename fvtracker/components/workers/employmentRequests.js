@@ -16,7 +16,6 @@ export const EmploymentRequestsPageComponent = () => {
   const employmentRequests = useSelector(
     (state) => state.workers.employmentRequests.filteredItems,
   );
-  const isLoading = useSelector((state) => state.workers.isLoading);
   const dispatch = useDispatch();
   const router = useRouter();
 

@@ -62,7 +62,17 @@ const FacilitiesList = () => {
   }, [facilities]);
 
   const handleChange = (e) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    if (name === "volume") {
+      const { value: val, error } = checkValue(value);
+      if (error) {
+        alert(error);
+        return;
+      }
+      setForm((prev) => ({ ...prev, [name]: val }));
+    } else {
+      setForm((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleCreate = async () => {

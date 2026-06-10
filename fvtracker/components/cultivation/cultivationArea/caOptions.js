@@ -21,12 +21,12 @@ export default function CAOptions({
     {
       label: "Natrag",
       onClick: onBack,
-      icon: <MdArrowLeft />,
+      icon: <MdChevronLeft />,
     },
     {
       label: cultivation.names.CULTIVATE_CELLS,
       onClick: onCultivate,
-      icon: <MdOutlineViewColumn />,
+      icon: <MdViewColumn />,
       disabled: disabled?.includes(cultivation.names.CULTIVATE_CELLS),
     },
     {
@@ -38,19 +38,19 @@ export default function CAOptions({
     {
       label: cultivation.names.MANAGE_SEEDING,
       onClick: onPlant,
-      icon: <MdAdUnits />,
+      icon: <MdWidgets />,
       disabled: disabled?.includes(cultivation.names.MANAGE_SEEDING),
     },
     {
       label: cultivation.names.HARVEST_CELLS,
       onClick: onHarvest,
-      icon: <MdFoodBank />,
+      icon: <MdRestaurant />,
       disabled: disabled?.includes(cultivation.names.HARVEST_CELLS),
     },
     {
       label: cultivation.names.DELETE_CULTIVATION,
       onClick: onDelete,
-      icon: <MdOutlineDeleteForever />,
+      icon: <MdDeleteForever />,
       disabled: disabled?.includes(cultivation.names.DELETE_CULTIVATION),
     },
   ];

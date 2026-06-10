@@ -255,3 +255,21 @@ export const fetchSessionManagerModelName = async () => {
   }
   return { managerModelName: rootManager.managerModelName };
 };
+
+export const isAuthorizedGeneralManager = cache(async () => {
+  const appUser = await fetchSessionAppUser(); // već cache-iran
+
+  const [admin, gm] = await Promise.all([
+    mongoose.models.Admin.exists({ appUser: appUser._id }),
+    mongoose.models.GeneralManager.findOne({
+      rootManager: appUser.rootManager,
+    })
+      .select("generalManagerRequest")
+      .populate({ path: "generalManagerRequest", select: "status" })
+      .lean(),
+  ]);
+
+  return Boolean(
+    admin || gm?.generalManagerRequest?.status === ROLE_STATUSES.APPROVED,
+  );
+});

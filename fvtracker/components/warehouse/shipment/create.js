@@ -196,7 +196,7 @@ const ChooseWarehouseSources = ({
                       </div>
                       <div className="warehouse-quantities">
                         <input
-                          className="inputRow p-1 w-12"
+                          className="inputRow inputText p-1 w-12"
                           type="number"
                           value={sourceQuantity({
                             wh: w,

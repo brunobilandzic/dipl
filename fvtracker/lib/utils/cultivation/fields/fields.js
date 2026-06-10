@@ -8,8 +8,9 @@ export const extractCoords = (cell) => {
   return { width, length };
 };
 
-export const refreshFields = async ({ dispatch, router, generalManager }) => {
+export const refreshFields = async ({ dispatch, router, generalManager, fieldsRedux = false }) => {
   try {
+    if(fieldsRedux) return
     dispatch(setLoading(true));
     const res = await api.get(
       generalManager

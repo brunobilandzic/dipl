@@ -4,6 +4,12 @@ import {
   fetchSessionSpecificManager,
 } from "../auth/fetchSessionData";
 import { GeneralManager } from "@/models/user/managers/GeneralManager";
+import {
+  CULTIVATION_MANAGER,
+  FINANCIAL_MANAGER,
+  PRODUCTION_MANAGER,
+  WAREHOUSE_MANAGER,
+} from "@/lib/constants/users/managerTypes";
 
 export const getGeneralManager = async () => {
   let generalManagerDoc;

@@ -1,17 +1,15 @@
-import {
-  CULTIVATION_MANAGER,
-  FINANCIAL_MANAGER,
-  PRODUCTION_MANAGER,
-  WAREHOUSE_MANAGER,
-} from "@/lib/constants/users/managerTypes";
+import { getSpecicManagers } from "@/lib/generalManager";
 
 export async function GET(request) {
-  const { searchParams } = new URL(request.url).searchParams;
-
-  const specificManagers = {
-    [CULTIVATION_MANAGER]: null,
-    [PRODUCTION_MANAGER]: null,
-    [FINANCIAL_MANAGER]: null,
-    [WAREHOUSE_MANAGER]: null,
-  };
+  try {
+    const { searchParams } = new URL(request.url).searchParams;
+    const specificManagers = await getSpecicManagers();
+    return Response.json({ specificManagers });
+  } catch (error) {
+    console.error("Error fetching specific managers:", error);
+    return new Response(
+      JSON.stringify({ error: "Greška pri dohvaćanju specifičnih menadžera" }),
+      { status: 500 },
+    );
+  }
 }

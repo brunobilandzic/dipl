@@ -32,18 +32,20 @@ export async function findBatchByName({ name }) {
 
 async function pmBatches({ batchIds }) {
   const filter = batchIds ? { _id: { $in: batchIds } } : {};
-  const batches = await HarvestingBatch.find(filter).populate([
-    {
-      path: "harvestingBatchItems",
-      select: "cropVariety plantedCropVarieties quality batchQuantity",
-      populate: [
-        {
-          path: "cropVariety",
-          populate: populateConfigCropVariety,
-        },
-      ],
-    },
-  ]);
+  const batches = await HarvestingBatch.find(filter)
+    .select("harvestingBatchItems")
+    .populate([
+      {
+        path: "harvestingBatchItems",
+        select: "cropVariety plantedCropVarieties quality batchQuantity",
+        populate: [
+          {
+            path: "cropVariety",
+            populate: populateConfigCropVariety,
+          },
+        ],
+      },
+    ]);
   return batches;
 }
 

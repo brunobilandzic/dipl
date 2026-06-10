@@ -1,11 +1,10 @@
 "use client";
 
 import axios from "axios";
-import { FaUserPlus } from "@react-icons/all-files/fa";
+import { FaUserPlus } from "@react-icons/all-files/fa/FaUserPlus";
 import { MdAllInclusive } from "@react-icons/all-files/md/MdAllInclusive";
 import { MdDeleteForever } from "@react-icons/all-files/md/MdDeleteForever";
-import { MdFactory } from "@react-icons/all-files/md/MdFactory";
-import { MdFoodBank } from "@react-icons/all-files/md/MdFoodBank";
+import { FaSeedling } from "@react-icons/all-files/fa/FaSeedling";
 import SEED_TYPES from "@/seed/seedTypes";
 import { OptionButtons } from "../layout/buttons/options";
 import { useDispatch } from "react-redux";
@@ -19,6 +18,7 @@ export default function SeedOptions() {
   const deleteDB = async () => {
     console.log("Deleting database...");
     try {
+      dispatch(setSeedLoading(true));
       const response = await axios.delete("/api/delete");
       const { success } = response.data;
       await signOut();
@@ -26,6 +26,8 @@ export default function SeedOptions() {
     } catch (error) {
       console.error("Error deleting database:", error);
       throw new Error(SEED_ERROR);
+    } finally {
+      dispatch(setSeedLoading(false));
     }
   };
 
@@ -53,31 +55,31 @@ export default function SeedOptions() {
     } 
         {
       label: "Kultivacije",
-      icon: <MdFoodBank />,
+      icon: <FaSeedling />,
       type: SEED_TYPES.CULTIVATIONS,
     }, 
     {
       label: "Biljke",
-      icon: <MdFoodBank />,
+      icon: <FaSeedling />,
       type: SEED_TYPES.CROP_MAIN_TYPES,
     },*/ {
       label: "Polja",
-      icon: <MdFoodBank />,
+      icon: <FaSeedling />,
       type: SEED_TYPES.FIELDS,
     },
     {
       label: "Sadnja i berba",
-      icon: <MdFoodBank />,
+      icon: <FaSeedling />,
       type: SEED_TYPES.PLANTAGE_HARVEST,
     },
     {
       label: "Proizvodnja",
-      icon: <MdFactory />,
+      icon: <FaSeedling />,
       type: SEED_TYPES.PRODUCTION,
     },
     {
       label: "Prodaja",
-      icon: <MdFactory />,
+      icon: <FaSeedling />,
       type: SEED_TYPES.SEED_SALES,
     },
     {

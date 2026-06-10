@@ -3,6 +3,7 @@
 import { fetchSessionSpecificManager } from "@/lib/auth/fetchSessionData";
 import {
   CULTIVATION_MANAGER,
+  GENERAL_MANAGER,
   PRODUCTION_MANAGER,
 } from "@/lib/constants/users/managerTypes";
 import { HarvestingBatch } from "@/models/sectors/interface/HarvestingBatch";
@@ -13,8 +14,6 @@ export async function getHarvestingBatches({
   batchIds,
 } = {}) {
   switch (managerName) {
-    case CULTIVATION_MANAGER:
-      return await cmBatches({ batchIds });
     case PRODUCTION_MANAGER:
       return await pmBatches({ batchIds });
   }
@@ -31,42 +30,12 @@ export async function findBatchByName({ name }) {
   return harvestingBatch;
 }
 
-async function cmBatches({ batchIds }) {
-  const cultivationManager = await fetchSessionSpecificManager({
-    managerName: "cultivationManager",
-  });
-
-  await cultivationManager.populate({
-    path: "fields",
-    select: "harvestingPlans",
-    populate: {
-      path: "harvestingPlans",
-      select: "harvestingBatch",
-      populate: {
-        path: "harvestingBatch",
-        select: "harvestingBatchItems productions",
-        populate: {
-          path: "harvestingBatchItems",
-          select: "cropVariety plantedCropVarieties quality batchQuantity",
-          populate: {
-            path: "cropVariety",
-            populate: populateConfigCropVariety,
-          },
-        },
-      },
-    },
-  });
-  const harvestingBatches = await populateBatches({ harvestingBatches });
-}
-
 async function pmBatches({ batchIds }) {
-  /*   await fetchSessionSpecificManager({
-    managerName: PRODUCTION_MANAGER,
-  }); */
   const filter = batchIds ? { _id: { $in: batchIds } } : {};
   const batches = await HarvestingBatch.find(filter).populate([
     {
       path: "harvestingBatchItems",
+      select: "cropVariety plantedCropVarieties quality batchQuantity",
       populate: [
         {
           path: "cropVariety",

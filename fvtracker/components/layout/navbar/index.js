@@ -186,6 +186,8 @@ function NavItems() {
       dispatch(login(session.user));
       setItems(adminNavItems);
       dispatch(fetchWorkers());
+      fillOrdersRedux({ dispatch, router });
+      fillWarehouseRequestsRedux({ dispatch });
     }
   }, [status]);
 

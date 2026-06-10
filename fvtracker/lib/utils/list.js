@@ -1,7 +1,3 @@
-import {
-  PROCURMENT_APPROVED,
-  PROCURMENT_REJECTED,
-} from "../constants/documents/procurments";
 import { getName } from "./display";
 import { procurmentValue } from "./documents/procurments";
 import { productsWithCropVarieties } from "./production/products";
@@ -81,7 +77,7 @@ export const initFilters = (listType, allWorkers = false) => {
           value: "all",
         },
         {
-          type: "workerNameSearch",
+          type: "emplReqWorkerNameSearch",
           placeholder: "Pretraži radnike...",
           value: "",
         },
@@ -155,8 +151,8 @@ export const filterItems = ({ _items, itemModelName, filters }) => {
         items = appUserNameSearch({ items, value: filter.value });
         break;
       case "emplReqWorkerNameSearch":
-        items = appUserNameSearch({
-          items: items.filter((item) => item.worker),
+        items = emplReqWorkerNameSearch({
+          items,
           value: filter.value,
         });
         break;
@@ -231,8 +227,14 @@ const customerSearch = ({ items, value }) => {
 
 const appUserNameSearch = ({ items, value }) => {
   return items.filter((item) =>
+    stringContains(`${item.appUser.name} ${item.appUser.surname}`, value),
+  );
+};
+
+const emplReqWorkerNameSearch = ({ items, value }) => {
+  return items.filter((item) =>
     stringContains(
-      `${item.appUser.name} ${item.appUser.surname}`,
+      `${item.worker.appUser.name} ${item.worker.appUser.surname}`,
       value,
     ),
   );

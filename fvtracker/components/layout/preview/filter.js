@@ -154,6 +154,18 @@ export const Filter = ({ filters, setFilters, onApply }) => {
                   ]}
                 />
               );
+            case "emplReqWorkerNameSearch":
+              return (
+                <AppInput
+                  key={index}
+                  placeholder={option.placeholder}
+                  value={option.value}
+                  label="Pretraži radnike"
+                  onChange={(e) => {
+                    onChange(index, e.target.value);
+                  }}
+                />
+              );
           }
         })}
 

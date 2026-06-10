@@ -47,7 +47,6 @@ export const EmploymentRequestsPageComponent = () => {
       setFilters={setFilters}
     >
       {filteredEmploymentRequests.map((request) => {
-        console.log({ request });
         return (
           <EmploymentRequestsItem
             key={request._id}

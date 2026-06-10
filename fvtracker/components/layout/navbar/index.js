@@ -121,7 +121,7 @@ function NavItems() {
         managerModelName === FINANCIAL_MANAGER
       ) {
         dispatch(fetchEmploymentRequests());
-        refreshFields({ dispatch, router, generalManager: true });
+        refreshFields({ dispatch, router, generalManager: true, fieldsRedux });
         fillProductionRedux({ dispatch, router, all: true });
       }
       if (
@@ -130,12 +130,17 @@ function NavItems() {
         session.user?.roleStatus === ROLE_STATUSES.APPROVED
       ) {
         console.log("refreshing fields for cultivation manager from navbar");
-        refreshFields({ dispatch, router });
+        refreshFields({ dispatch, router, fieldsRedux });
       }
       if (managerModelName === "GeneralManager" && !generalManagerRedux) {
         refreshGeneralManager({ dispatch });
         if (!fieldsRedux) {
-          refreshFields({ dispatch, router, generalManager: true });
+          refreshFields({
+            dispatch,
+            router,
+            generalManager: true,
+            fieldsRedux,
+          });
         }
       }
       if (managerModelName === PRODUCTION_MANAGER) {

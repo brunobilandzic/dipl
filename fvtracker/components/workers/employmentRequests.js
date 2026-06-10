@@ -57,7 +57,8 @@ const EmploymentRequestsItem = ({ request, handleStatusChange }) => {
   const { worker, status, _id } = request;
 
   const actionOptions = [
-    ...(status === EMPLOYMENT_STATUS_PENDING
+    ...(status === EMPLOYMENT_STATUS_PENDING ||
+    status === EMPLOYMENT_STATUS_UNEMPLOYED
       ? [
           {
             label: "Odobri",
@@ -80,7 +81,18 @@ const EmploymentRequestsItem = ({ request, handleStatusChange }) => {
             className: "cancelButton",
           },
         ]
-      : []),
+      : [
+          {
+            label: "Otkaz",
+            onClick: () => {
+              handleStatusChange({
+                requestId: _id,
+                status: EMPLOYMENT_STATUS_UNEMPLOYED,
+              });
+            },
+            className: "cancelButton",
+          },
+        ]),
   ];
 
   const getClassName = () => {

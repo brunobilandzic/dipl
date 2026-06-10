@@ -64,6 +64,22 @@ export const getGeneralManager = async () => {
     ...generalManagerDoc.toObject(),
     managers,
   };
-  
+
   return generalManager;
+};
+
+export const getSpecicManagers = async () => {
+  const specificManagers = {
+    [CULTIVATION_MANAGER]: null,
+    [PRODUCTION_MANAGER]: null,
+    [FINANCIAL_MANAGER]: null,
+    [WAREHOUSE_MANAGER]: null,
+  };
+
+  for (const managerName of Object.keys(specificManagers)) {
+    const manager = await mongoose.models[managerName].findOne();
+    specificManagers[managerName] = manager;
+  }
+
+  return specificManagers;
 };

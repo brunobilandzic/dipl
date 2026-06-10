@@ -25,7 +25,6 @@ import { initFilters } from "@/lib/utils/list";
 import { facilitySortOptions } from "@/components/layout/preview/sort";
 import { useMemo } from "react";
 import { checkValue } from "@/lib/utils/formValidation";
-import { set } from "lodash";
 import { checkEmpty } from "@/lib/utils/objects";
 
 const emptyForm = { name: "", description: "", volume: 0 };

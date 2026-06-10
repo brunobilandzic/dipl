@@ -38,7 +38,69 @@ export const checkGeneralManagerRequest = async (generalManager) => {
   return { unauthorized: false };
 };
 
+// ── Cached jezgra: prima primitivni argument (string = stabilan cache ključ),
+// nikad ne baca, vraća rezultat + razlog neuspjeha ──────────────────────────
+const fetchSpecificManagerCached = cache(async (managerName) => {
+  const appUser = await fetchSessionAppUser(); // također cache-irana
+
+  const specificManager = await mongoose.models[managerName]
+    .findOne({ rootManager: appUser.rootManager })
+    .populate([
+      {
+        path: "rootManager",
+        populate: { path: "roleRequest", select: "status" },
+      },
+      ...(managerName === GENERAL_MANAGER
+        ? [{ path: "generalManagerRequest" }]
+        : []),
+    ]);
+
+  if (!specificManager || !specificManager.rootManager) {
+    return { specificManager: null, failReason: "NOT_FOUND" };
+  }
+
+  if (managerName !== GENERAL_MANAGER) {
+    const roleRequest = specificManager.rootManager.roleRequest;
+    if (!roleRequest) {
+      return { specificManager: null, failReason: "NO_ROLE_REQUEST" };
+    }
+    if (roleRequest.status !== ROLE_STATUSES.APPROVED) {
+      return { specificManager: null, failReason: "NOT_APPROVED" };
+    }
+  }
+
+  return { specificManager, failReason: null };
+});
+
+// ── Javni API: isti potpis kao prije, throw logika izvan cachea ────────────
 export async function fetchSessionSpecificManager({
+  managerName,
+  throwError = true,
+}) {
+  const { specificManager, failReason } =
+    await fetchSpecificManagerCached(managerName);
+
+  if (specificManager) return specificManager;
+
+  // status postoji ali nije odobren → tiho null, nikad ne baca (staro ponašanje)
+  if (failReason === "NOT_APPROVED") return null;
+
+  if (throwError) {
+    const appUser = await fetchSessionAppUser(); // cache hit, ne košta ništa
+    if (failReason === "NO_ROLE_REQUEST") {
+      throw new Error(
+        `No Role Request associated with Root Manager for ${managerName} for session user with email: ${appUser.email}`,
+      );
+    }
+    throw new Error(
+      `No ${managerName} found for session user with email: ${appUser.email}`,
+    );
+  }
+
+  return null;
+}
+
+export async function fetchSessionSpecificManager_bup({
   managerName,
   throwError = true,
 }) {
@@ -54,8 +116,6 @@ export async function fetchSessionSpecificManager({
         select: "status",
       },
     });
-
-  console.log({ specificManager });
 
   if (
     !specificManager ||

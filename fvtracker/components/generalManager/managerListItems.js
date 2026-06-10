@@ -71,7 +71,13 @@ export const FinancialManagerListItem = ({ workers, allWorkers }) => {
           ).length
         }
       </div>
-      <ManagerWorkers workers={workers} />
+      <ManagerWorkers
+        workers={workers}
+        paySum={workers.reduce(
+          (total, worker) => total + worker.receipts.length * worker.hourlyRate,
+          0,
+        )}
+      />
     </div>
   );
 };

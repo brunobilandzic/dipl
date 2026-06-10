@@ -6,6 +6,7 @@ import { FormModal } from "../../layout/modals/form";
 import { AppInput, AppSelect } from "../../form/inputs";
 import { ChooseWorker } from "@/components/workers/choose";
 import { checkEmpty } from "@/lib/utils/objects";
+import { PRODUCTION_MANAGER } from "@/lib/constants/users/managerTypes";
 
 export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
   const initialWarehouseRequest = {
@@ -56,7 +57,7 @@ export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
       workerId: value,
     }));
   };
-  
+
   return (
     <FormModal
       isOpen={isOpen}
@@ -64,7 +65,13 @@ export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
       onSubmit={handleSubmit}
       submitDisabled={checkEmpty(warehouseRequest, true)}
     >
-      {!workerId && <ChooseWorker workers={workers} onChoose={chooseWorker} />}
+      {!workerId && (
+        <ChooseWorker
+          workers={workers}
+          onChoose={chooseWorker}
+          managerModelName={PRODUCTION_MANAGER}
+        />
+      )}
       <AppSelect
         name="warehouseManagerId"
         label="Skladištar"

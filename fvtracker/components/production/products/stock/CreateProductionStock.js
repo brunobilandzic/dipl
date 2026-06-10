@@ -13,6 +13,7 @@ import fillProductionRedux from "@/lib/utils/production";
 import { getAvailableFacilities } from "@/lib/utils/production/facilities";
 import { ChooseWorker } from "@/components/workers/choose";
 import { EMPLOYMENT_STATUS_EMPLOYED } from "@/lib/constants/users/workers";
+import { PRODUCTION_MANAGER } from "@/lib/constants/users/managerTypes";
 
 export const CreateProductionStock = ({
   product,
@@ -119,7 +120,11 @@ export const CreateProductionStock = ({
     >
       <div>
         {!workerId && (
-          <ChooseWorker workers={workers} onChoose={chooseWorker} />
+          <ChooseWorker
+            workers={workers}
+            onChoose={chooseWorker}
+            managerModelName={PRODUCTION_MANAGER}
+          />
         )}
         <AppInput
           name="comment"

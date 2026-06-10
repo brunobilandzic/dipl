@@ -15,6 +15,7 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { checkEmpty } from "@/lib/utils/objects";
+import { WAREHOUSE_MANAGER } from "@/lib/constants/users/managerTypes";
 
 export const CreateShipmentModal = ({
   isOpen,
@@ -71,7 +72,13 @@ export const CreateShipmentModal = ({
       title="Otpremnica"
       submitDisabled={checkEmpty(newShipmentData, true)}
     >
-      {!workerId && <ChooseWorker workers={workers} onChoose={chooseWorker} />}
+      {!workerId && (
+        <ChooseWorker
+          workers={workers}
+          onChoose={chooseWorker}
+          managerModelName={WAREHOUSE_MANAGER}
+        />
+      )}
       <ChooseWarehouseSources
         newShipmentData={newShipmentData}
         setNewShipmentData={setNewShipmentData}

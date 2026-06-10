@@ -1,10 +1,14 @@
 import { EMPLOYMENT_STATUS_EMPLOYED } from "@/lib/constants/users/workers";
 import { AppSelect } from "../form/inputs";
 
-export const ChooseWorker = ({ workers, onChoose }) => {
+export const ChooseWorker = ({ workers, onChoose, managerModelName }) => {
+  console.log({ workers });
   const workerOptions = workers.filter(
-    (w) => w.employmentRequest.status === EMPLOYMENT_STATUS_EMPLOYED,
+    (w) =>
+      w.employmentRequest.status === EMPLOYMENT_STATUS_EMPLOYED &&
+      w.manager.managerModelName === managerModelName,
   );
+  console.log({ workerOptions });
   return (
     <AppSelect
       label="Radnik"

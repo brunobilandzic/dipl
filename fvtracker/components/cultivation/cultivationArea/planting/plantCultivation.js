@@ -8,6 +8,7 @@ import { ChoosePlan } from "@/components/cultivation/plans/planting/choosePlan";
 import { useSelector } from "react-redux";
 import { ChooseWorker } from "@/components/workers/choose";
 import { EMPLOYMENT_STATUS_EMPLOYED } from "@/lib/constants/users/workers";
+import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
 
 export const PlantCultivation = ({
   isOpen,
@@ -154,7 +155,11 @@ export const PlantCultivation = ({
           </div>
           <div>
             {!workerId && (
-              <ChooseWorker workers={workers} onChoose={chooseWorker} />
+              <ChooseWorker
+                workers={workers}
+                onChoose={chooseWorker}
+                managerModelName={CULTIVATION_MANAGER}
+              />
             )}
           </div>
           <div>

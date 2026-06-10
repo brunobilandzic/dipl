@@ -2,6 +2,7 @@ import { AppInput, AppSelect } from "@/components/form/inputs";
 import { FormModal } from "@/components/layout/modals/form";
 import { ChooseWorker } from "@/components/workers/choose";
 import handleError from "@/lib/constants/errors/client/handleError";
+import { PRODUCTION_MANAGER } from "@/lib/constants/users/managerTypes";
 import { EMPLOYMENT_STATUS_EMPLOYED } from "@/lib/constants/users/workers";
 import { showDateTime } from "@/lib/utils/display";
 import fillProductionRedux from "@/lib/utils/production";
@@ -110,7 +111,13 @@ const CreateWarehouseStock = ({
       onCancel={onCancel}
       onSubmit={onSubmit}
     >
-      {!workerId && <ChooseWorker workers={workers} onChoose={chooseWorker} />}
+      {!workerId && (
+        <ChooseWorker
+          workers={workers}
+          onChoose={chooseWorker}
+          managerModelName={PRODUCTION_MANAGER}
+        />
+      )}
       <AppSelect
         label="Izaberite skladište"
         name="warehouseId"

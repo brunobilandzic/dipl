@@ -3,6 +3,7 @@ import { AppSelect } from "@/components/form/inputs";
 import { FormModal } from "@/components/layout/modals/form";
 import { ChooseWorker } from "@/components/workers/choose";
 import { VARIETIES_QUALITIES } from "@/lib/constants/cultivation/plants";
+import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
 import { EMPLOYMENT_STATUS_EMPLOYED } from "@/lib/constants/users/workers";
 import { useSelector } from "react-redux";
 
@@ -55,7 +56,11 @@ export const HarvestCultivation = ({
         </div>
         <div>
           {!workerId && (
-            <ChooseWorker workers={workers} onChoose={chooseWorker} />
+            <ChooseWorker
+              workers={workers}
+              onChoose={chooseWorker}
+              managerModelName={CULTIVATION_MANAGER}
+            />
           )}
           <AppSelect
             label="Kvaliteta"

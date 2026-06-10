@@ -185,6 +185,7 @@ const ShipmentItem = ({
               const { value } = e.target;
               setWorker(value);
             }}
+            managerModelName={FINANCIAL_MANAGER}
           />
         </FormModal>
       )}

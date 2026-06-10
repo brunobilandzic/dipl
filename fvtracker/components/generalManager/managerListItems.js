@@ -1,6 +1,11 @@
 import { useSelector } from "react-redux";
 import { LoadingFullScreen } from "../layout/loading";
 import { ManagerWorkers } from "./managerWorkers";
+import {
+  EMPLOYMENT_STATUS_EMPLOYED,
+  EMPLOYMENT_STATUS_PENDING,
+  EMPLOYMENT_STATUS_UNEMPLOYED,
+} from "@/lib/constants/users/workers";
 
 export const CultivationManagerListItem = ({ workers }) => {
   const fields = useSelector((state) => state.cultivation.fields);
@@ -36,6 +41,38 @@ export const CultivationManagerListItem = ({ workers }) => {
     </div>
   );
 };
+
+export const FinancialManagerListItem = ({ workers, allWorkers }) => {
+  const procurments = useSelector((state) => state.procurments.items);
+  if (!procurments) return <LoadingFullScreen />;
+  console.log({ allWorkers });
+  return (
+    <div className="listitemDescription">
+      <div>
+        {" "}
+        Zaposleno radnika ukupno:{" "}
+        {
+          allWorkers.filter(
+            (w) => w.employmentRequest?.status === EMPLOYMENT_STATUS_EMPLOYED,
+          ).length
+        }
+      </div>
+      <div>
+        Ukupno radnika na čekanju:{" "}
+        {
+          allWorkers.filter(
+            (w) => w.employmentRequest?.status === EMPLOYMENT_STATUS_PENDING,
+          ).length
+        }
+      </div>
+      <div>
+        Ukupno radnika otpušteno:{" "}
+        {
+          allWorkers.filter(
+            (w) => w.employmentRequest?.status === EMPLOYMENT_STATUS_UNEMPLOYED,
+          ).length
+        }
+      </div>
       <ManagerWorkers workers={workers} />
     </div>
   );

@@ -6,8 +6,14 @@ import { Loading, LoadingFullScreen } from "../layout/loading";
 import { RoleRequestStatus } from "./managerRequests";
 import { List, ListItem } from "../layout/preview/list";
 import { filterItems, initFilters } from "@/lib/utils/list";
-import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
-import { CultivationManagerListItem } from "./managerListItems";
+import {
+  CULTIVATION_MANAGER,
+  FINANCIAL_MANAGER,
+} from "@/lib/constants/users/managerTypes";
+import {
+  CultivationManagerListItem,
+  FinancialManagerListItem,
+} from "./managerListItems";
 
 export const ManagerList = () => {
   const generalManager = useSelector((state) => state.generalManager?.manager);
@@ -48,6 +54,7 @@ export const ManagerList = () => {
             key={manager._id}
             manager={manager}
             workers={workers.filter((w) => w.manager._id === manager._id)}
+            allWorkers={workers}
           />
         ))}
       </List>
@@ -55,7 +62,7 @@ export const ManagerList = () => {
   );
 };
 
-const ManagerListItem = ({ manager, workers }) => {
+const ManagerListItem = ({ manager, workers, allWorkers }) => {
   if (!manager || !manager.appUser) {
     return <Loading />;
   }
@@ -71,6 +78,9 @@ const ManagerListItem = ({ manager, workers }) => {
         </div>
         {manager.managerModelName === CULTIVATION_MANAGER && (
           <CultivationManagerListItem workers={workers} />
+        )}
+        {manager.managerModelName === FINANCIAL_MANAGER && (
+          <FinancialManagerListItem workers={workers} allWorkers={allWorkers} />
         )}
       </ListItem>
     </>

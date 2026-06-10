@@ -10,6 +10,7 @@ import { setLoading } from "@/store/loading";
 import api from "@/lib/api";
 import { addProcurment } from "@/store/procurments";
 import { useRouter } from "next/navigation";
+import { checkValue } from "@/lib/utils/formValidation";
 
 export const CreateProcurment = () => {
   const managerModelName = useSelector(
@@ -39,18 +40,24 @@ export const CreateProcurment = () => {
   };
   const handleItemChange = (index, field, value) => {
     if (field === "quantity" || field === "price") {
-      if (isNaN(value) || Number(value) < 0 || value === "") {
+      const { value: val, error } = checkValue(value);
+      if (error) {
         alert(
           `${field === "quantity" ? "Količina" : "Cijena"} mora biti broj veći od nule.`,
         );
-        value = "";
       }
+      setProcurmentData((prev) => {
+        const newItems = [...prev.items];
+        newItems[index][field] = val;
+        return { ...prev, items: newItems };
+      });
+    } else {
+      setProcurmentData((prev) => {
+        const newItems = [...prev.items];
+        newItems[index][field] = value;
+        return { ...prev, items: newItems };
+      });
     }
-    setProcurmentData((prev) => {
-      const newItems = [...prev.items];
-      newItems[index][field] = value;
-      return { ...prev, items: newItems };
-    });
   };
 
   const onRemoveItem = (index) => {

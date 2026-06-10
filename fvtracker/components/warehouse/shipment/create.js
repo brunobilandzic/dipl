@@ -212,6 +212,14 @@ const ChooseWarehouseSources = ({
                               alert("Nema toliko na skladištu");
                               return;
                             }
+                            if(quantity < 0) {
+                              alert("Količina ne može biti negativna");
+                              return;
+                            }
+                            if(quantity > pq.neededQuantity) {
+                              alert("Ne treba toliko proizvoda");
+                              return;
+                            }
 
                             setNewShipment({ w, pq, quantity });
                           }}

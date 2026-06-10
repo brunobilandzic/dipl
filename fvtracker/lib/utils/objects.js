@@ -27,7 +27,7 @@ export function checkEmpty(obj, dontAlert = false) {
         return true;
       }
       for (const item of obj[key]) {
-        if (checkEmpty(item)) {
+        if (checkEmpty(item, dontAlert)) {
           if (!dontAlert) {
             alert(
               `Polje ${key} sadrži prazan element: ${JSON.stringify(item)}`,

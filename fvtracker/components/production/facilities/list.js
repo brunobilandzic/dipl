@@ -24,6 +24,8 @@ import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { initFilters } from "@/lib/utils/list";
 import { facilitySortOptions } from "@/components/layout/preview/sort";
 import { useMemo } from "react";
+import { checkValue } from "@/lib/utils/formValidation";
+import { set } from "lodash";
 
 const emptyForm = { name: "", description: "", volume: 0 };
 
@@ -121,7 +123,18 @@ const FacilityItem = ({ facility }) => {
   });
 
   const handleChange = (e) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const { name, value } = e.target;
+    console.log("Handling change for", name, "with value:", value);
+    if (name === "volume") {
+      const { value: val, error } = checkValue(value);
+      if (error) {
+        alert(error);
+        return;
+      }
+      setForm((prev) => ({ ...prev, [name]: val }));
+    } else {
+      setForm((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleEdit = async () => {

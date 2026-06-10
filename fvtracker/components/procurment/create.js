@@ -39,9 +39,12 @@ export const CreateProcurment = () => {
   };
   const handleItemChange = (index, field, value) => {
     if (field === "quantity" || field === "price") {
-      if (isNaN(value)) return;
-      if (value === "") value = 0;
-      if (value < 0) value = 0;
+      if (isNaN(value) || Number(value) < 0 || value === "") {
+        alert(
+          `${field === "quantity" ? "Količina" : "Cijena"} mora biti broj veći od nule.`,
+        );
+        value = "";
+      }
     }
     setProcurmentData((prev) => {
       const newItems = [...prev.items];

@@ -90,11 +90,6 @@ export const fillWarehouseRequest = async ({
     },
   ]);
 
-  const oldSources = shipment.shipmentItems.reduce((acc, si) => {
-    if (!si.sources) return acc;
-    return [...acc, ...si.sources];
-  }, []);
-
   const shipmentItem = new ShipmentItem({
     shipment: shipment._id,
     worker: workerId,

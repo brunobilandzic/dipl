@@ -9,6 +9,7 @@ import { changeQuantity, emptyCart, removeFromCart } from "@/store/webstore";
 import { FaXbox } from "@react-icons/all-files/fa/FaXbox";
 import { CustomerInfoForm } from "./checkout";
 import { sendOrder } from "@/lib/utils/webstore/orders";
+import { checkValue } from "@/lib/utils/formValidation";
 
 export const CartPageComponent = () => {
   const initialCustomer = {
@@ -29,12 +30,12 @@ export const CartPageComponent = () => {
   };
 
   const onQuantityChange = (cartItem, quantity) => {
-    if (quantity == 0) {
+    if (quantity == "") {
       if (!confirm("Želite li ukloniti proizvod iz košarice?")) return;
-      dispatch(removeFromCart(cartItem.product.id));
+      dispatch(removeFromCart(cartItem.product._id));
       return;
     }
-    dispatch(changeQuantity({ productId: cartItem.product.id, quantity }));
+    dispatch(changeQuantity({ productId: cartItem.product._id, quantity }));
   };
   const cartActionButtons = [
     <div
@@ -95,7 +96,7 @@ const CartItem = ({ cartItem, onQuantityChange }) => {
     onQuantityChange(cartItem, newQuantity);
   };
   const onRemove = (e) => {
-    dispatch(removeFromCart(cartItem.product.id));
+    dispatch(removeFromCart(cartItem.product._id));
   };
   return (
     <>
@@ -129,8 +130,12 @@ const CartItemQuantity = ({ quantity, setQuantity, quantityEdit }) => {
           className="w-full text-center p-2 rounded-lg"
           type="number"
           onChange={(e) => {
-            setQuantity(e.target.value);
-            quantityEdit(e.target.value, e);
+            const { value, error } = checkValue(e.target.value);
+            if (error) {
+              alert(error);
+            }
+            setQuantity(value);
+            quantityEdit(value, e);
           }}
           value={quantity}
         />
@@ -148,12 +153,13 @@ export const AddToCartQuantity = ({
   const onChange = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    const value = parseInt(e.target.value);
-    if (isNaN(value)) {
-      setQuantity(null);
-    } else {
-      setQuantity(Number.parseInt(e.target.value));
+    const { value, error } = checkValue(e.target.value);
+    if (error) {
+      alert(error);
+      setQuantity(value);
     }
+
+    setQuantity(value);
   };
 
   const submitClick = (e) => {

@@ -14,6 +14,7 @@ import { getAvailableFacilities } from "@/lib/utils/production/facilities";
 import { ChooseWorker } from "@/components/workers/choose";
 import { EMPLOYMENT_STATUS_EMPLOYED } from "@/lib/constants/users/workers";
 import { PRODUCTION_MANAGER } from "@/lib/constants/users/managerTypes";
+import { checkValue } from "@/lib/utils/formValidation";
 
 export const CreateProductionStock = ({
   product,
@@ -50,10 +51,22 @@ export const CreateProductionStock = ({
   });
   const [productionStock, setProductionStock] = useState(testFormData);
   const onChange = (e) => {
-    setProductionStock((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+    if (e.target.name === "quantity") {
+      const { value: val, error } = checkValue(e.target.value);
+      if (error) {
+        alert(error);
+        return;
+      }
+      setProductionStock((prev) => ({
+        ...prev,
+        [e.target.name]: val,
+      }));
+    } else {
+      setProductionStock((prev) => ({
+        ...prev,
+        [e.target.name]: e.target.value,
+      }));
+    }
   };
   const onSubmit = async () => {
     try {
@@ -134,9 +147,6 @@ export const CreateProductionStock = ({
           onChange={onChange}
         />
         <StockQuantityInput
-          name="quantity"
-          label="Količina"
-          type="number"
           value={productionStock.quantity}
           onChange={onChange}
         />
@@ -161,7 +171,7 @@ export const CreateProductionStock = ({
   );
 };
 
-const StockQuantityInput = ({  value, onChange }) => {
+const StockQuantityInput = ({ value, onChange }) => {
   return (
     <AppInput
       name="quantity"

@@ -8,6 +8,7 @@ import {
   EMPLOYMENT_STATUS_UNEMPLOYED,
 } from "@/lib/constants/users/workers";
 import { handleStatusChange } from "@/lib/utils/workers/employment";
+import { useRouter } from "next/navigation";
 
 export const EmploymentRequestsPageComponent = () => {
   const employmentRequests = useSelector(
@@ -15,17 +16,23 @@ export const EmploymentRequestsPageComponent = () => {
   );
   const isLoading = useSelector((state) => state.workers.isLoading);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   return (
     <List title="Zahtjevi za zaposlenje">
       {employmentRequests.map((request) => (
-        <EmploymentRequestsItem key={request._id} request={request} />
+        <EmploymentRequestsItem
+          key={request._id}
+          request={request}
+          dispatch={dispatch}
+          router={router}
+        />
       ))}
     </List>
   );
 };
 
-const EmploymentRequestsItem = ({ request }) => {
+const EmploymentRequestsItem = ({ request, dispatch, router }) => {
   const { worker, status, _id } = request;
 
   const actionOptions = [
@@ -38,6 +45,8 @@ const EmploymentRequestsItem = ({ request }) => {
               handleStatusChange({
                 requestId: _id,
                 status: EMPLOYMENT_STATUS_EMPLOYED,
+                dispatch,
+                router,
               });
             },
             className: "submitButton",
@@ -48,6 +57,8 @@ const EmploymentRequestsItem = ({ request }) => {
               handleStatusChange({
                 requestId: _id,
                 status: EMPLOYMENT_STATUS_UNEMPLOYED,
+                dispatch,
+                router,
               });
             },
             className: "cancelButton",
@@ -60,6 +71,8 @@ const EmploymentRequestsItem = ({ request }) => {
               handleStatusChange({
                 requestId: _id,
                 status: EMPLOYMENT_STATUS_UNEMPLOYED,
+                dispatch,
+                router,
               });
             },
             className: "cancelButton",

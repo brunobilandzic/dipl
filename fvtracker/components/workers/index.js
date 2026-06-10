@@ -25,7 +25,10 @@ import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { initFilters } from "@/lib/utils/list";
 import { workerSortOptions } from "../layout/preview/sort";
 import { filterWorkers } from "@/store/workers";
-import { EMPLOYMENT_STATUS_EMPLOYED, EMPLOYMENT_STATUS_UNEMPLOYED } from "@/lib/constants/users/workers";
+import {
+  EMPLOYMENT_STATUS_EMPLOYED,
+  EMPLOYMENT_STATUS_UNEMPLOYED,
+} from "@/lib/constants/users/workers";
 import { handleStatusChange } from "@/lib/utils/workers/employment";
 
 export const WorkersPageComponent = ({ managerModelName, isAdmin }) => {
@@ -69,7 +72,12 @@ export const WorkersPageComponent = ({ managerModelName, isAdmin }) => {
           sortOptions={workerSortOptions}
         >
           {displayedWorkers.map((worker) => (
-            <WorkerItem key={worker._id} worker={worker}>
+            <WorkerItem
+              key={worker._id}
+              worker={worker}
+              dispatch={dispatch}
+              router={router}
+            >
               <WorkerContent
                 worker={worker}
                 managerModelName={worker.manager.managerModelName}
@@ -82,7 +90,7 @@ export const WorkersPageComponent = ({ managerModelName, isAdmin }) => {
   );
 };
 
-const WorkerItem = ({ worker, children }) => {
+const WorkerItem = ({ worker, children, dispatch, router }) => {
   const [showPayModal, setShowPayModal] = useState(false);
   const employed =
     worker.employmentRequest.status === EMPLOYMENT_STATUS_EMPLOYED;
@@ -104,6 +112,8 @@ const WorkerItem = ({ worker, children }) => {
                     handleStatusChange({
                       requestId: worker.employmentRequest._id,
                       status: EMPLOYMENT_STATUS_UNEMPLOYED,
+                      dispatch,
+                      router,
                     });
                   },
                   className: "cancelButton",

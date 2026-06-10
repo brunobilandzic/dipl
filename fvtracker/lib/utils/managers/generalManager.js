@@ -1,12 +1,20 @@
-import { setGeneralManager, setManagers } from "@/store/generalManager";
+import {
+  setGeneralManager,
+  setManagers,
+  setSpecificManagers,
+} from "@/store/generalManager";
 import handleError from "../../constants/errors/client/handleError";
 import api from "../../api";
 
 export const refreshGeneralManager = async ({ dispatch }) => {
   try {
-    const res = await api.get("/general-manager");
+    let res = await api.get("/general-manager");
     if (res.data && res.data.generalManager) {
       dispatch(setGeneralManager(res.data.generalManager));
+    }
+    res = await api.get("/general-manager/specific-managers");
+    if (res.data && res.data.specificManagers) {
+      dispatch(setSpecificManagers(res.data.specificManagers));
     }
   } catch (error) {
     handleError({

@@ -8,6 +8,7 @@ import {
 import {
   EMPLOYMENT_STATUS_EMPLOYED,
   EMPLOYMENT_STATUS_PENDING,
+  EMPLOYMENT_STATUS_UNEMPLOYED,
 } from "@/lib/constants/users/workers";
 
 const appUsersJsonArray = [
@@ -159,6 +160,50 @@ export const workersJson = [
     provider: "credentials",
     hourlyRate: 14,
     employmentRequestStatus: EMPLOYMENT_STATUS_EMPLOYED,
+  },
+  {
+    username: "cwu",
+    modelName: "CultivationWorker",
+    name: "Cultivation",
+    surname: "Worker Unemployed",
+    email: "cwunemployed@example.com",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
+    provider: "credentials",
+    hourlyRate: 10,
+    employmentRequestStatus: EMPLOYMENT_STATUS_UNEMPLOYED,
+  },
+  {
+    username: "pwu",
+    modelName: "ProductionWorker",
+    name: "Production",
+    surname: "Worker Unemployed",
+    email: "production.workerUnemployed@example.com",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
+    provider: "credentials",
+    hourlyRate: 15,
+    employmentRequestStatus: EMPLOYMENT_STATUS_UNEMPLOYED,
+  },
+  {
+    username: "wwu",
+    modelName: "WarehouseWorker",
+    name: "Warehouse",
+    surname: "Worker Unemployed",
+    email: "warehouse.workerUnemployed@example.com",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
+    provider: "credentials",
+    hourlyRate: 12,
+    employmentRequestStatus: EMPLOYMENT_STATUS_UNEMPLOYED,
+  },
+  {
+    username: "fwu",
+    modelName: "FinancialWorker",
+    name: "Financial",
+    surname: "Worker Unemployed",
+    email: "financial.workerUnemployed@example.com",
+    password: "$2b$10$bZhXazmzlsC6dlhBw1qunurJDu8eoZ4dmxquWu6Km4Wgm15plMYra",
+    provider: "credentials",
+    hourlyRate: 14,
+    employmentRequestStatus: EMPLOYMENT_STATUS_UNEMPLOYED,
   },
 ];
 

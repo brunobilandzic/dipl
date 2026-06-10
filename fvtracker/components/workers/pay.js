@@ -3,6 +3,8 @@ import { FormModal } from "../layout/modals/form";
 import { useDispatch } from "react-redux";
 import { payWorker } from "@/lib/utils/workers/pay";
 import { useState } from "react";
+import { preventEvent } from "@/lib/utils/dev";
+import { checkValue } from "@/lib/utils/formValidation";
 
 export const PayWorkerModal = ({ worker, onClose }) => {
   const [amount, setAmount] = useState("");
@@ -24,7 +26,14 @@ export const PayWorkerModal = ({ worker, onClose }) => {
             label="Iznos isplate"
             type="number"
             value={amount}
-            onChange={(e) => setAmount(e.target.value)}
+            onChange={(e) => {
+              preventEvent(e);
+              const { value, error } = checkValue(e.target.value);
+              if (error) {
+                alert(error);
+              }
+              setAmount(value);
+            }}
           />
         </div>
       </FormModal>

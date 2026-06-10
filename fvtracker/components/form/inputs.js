@@ -1,6 +1,5 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import styles from "./form.module.css";
 import { v4 as uuid } from "uuid";
 export const AppInput = ({
   label,
@@ -9,8 +8,6 @@ export const AppInput = ({
   value,
   onChange,
   placeholder,
-  wrapStyle = "",
-  inputStyle = "",
   min,
   max,
 }) => {

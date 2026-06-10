@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   manager: null,
-  managers: null,
+  specificManagers: null,
 };
 
 export const generalManagerSlice = createSlice({
@@ -34,12 +34,12 @@ export const generalManagerSlice = createSlice({
         });
       }
     },
-    setManagers: (state, action) => {
-      state.managers = action.payload;
+    setSpecificManagers: (state, action) => {
+      state.specificManagers = action.payload;
     },
   },
 });
 
-export const { setGeneralManager, setManagers, requestResponseUpdate } =
+export const { setGeneralManager, setSpecificManagers, requestResponseUpdate } =
   generalManagerSlice.actions;
 export default generalManagerSlice.reducer;

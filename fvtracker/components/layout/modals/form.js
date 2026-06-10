@@ -54,6 +54,7 @@ export function UpdateModal({
   onCancel,
   onSubmit,
   children,
+  submitDisabled
 }) {
   return (
     <FormModal
@@ -61,6 +62,7 @@ export function UpdateModal({
       onCancel={onCancel}
       title={title}
       onSubmit={onSubmit}
+      submitDisabled={submitDisabled}
     >
       <div className="flex items-center justify-end w-full pr-4 ">
         <div onClick={onDelete} className={`btn cancelButton btnSm `}>

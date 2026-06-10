@@ -154,6 +154,12 @@ export const filterItems = ({ _items, itemModelName, filters }) => {
       case "workerNameSearch":
         items = appUserNameSearch({ items, value: filter.value });
         break;
+      case "emplReqWorkerNameSearch":
+        items = appUserNameSearch({
+          items: items.filter((item) => item.worker),
+          value: filter.value,
+        });
+        break;
       case "cropVarietySearch":
         if (filter.value === "") break;
         items = cropVarietySearch({

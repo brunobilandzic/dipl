@@ -4,6 +4,7 @@ import styles from "@/components/form/form.module.css";
 import culConstants from "@/lib/constants/cultivation";
 import { use, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { checkEmpty } from "@/lib/utils/objects";
 
 export function CreateCultivation({
   isOpen,
@@ -24,6 +25,14 @@ export function CreateCultivation({
     console.log("newCUDetails:", newCUDetails);
   }, [newCUDetails]);
 
+  const isSubmitDisabled = () => {
+    if (!existingCultivations || existingCultivations.length === 0 || !newCUDetails.existingCulName) {
+      const { existingCulName, ...dataToCheck } = newCUDetails;
+      return checkEmpty(dataToCheck, true);
+    } else if (newCUDetails.existingCulName) {
+      return false;
+    }
+  };
   return (
     <>
       <Modals.FormModal
@@ -31,6 +40,7 @@ export function CreateCultivation({
         onCancel={onCancel}
         title="Napravi nove gredice"
         onSubmit={onSubmit}
+        submitDisabled={isSubmitDisabled()}
       >
         <div className={`form`}>
           <div className={``}>

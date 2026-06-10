@@ -1,6 +1,7 @@
-export const ManagerWorkers = ({ workers }) => {
+export const ManagerWorkers = ({ workers, paySum }) => {
   return (
     <>
+      <div>Zarađeno ukupno: {paySum || 0} €</div>
       <div>
         Plaće ukupno:{" "}
         {workers.reduce((total, worker) => total + worker.hourlyRate, 0)} €/h

@@ -225,6 +225,9 @@ const customerSearch = ({ items, value }) => {
 
 const appUserNameSearch = ({ items, value }) => {
   return items.filter((item) =>
-    stringContains(`${item.appUser.name} ${item.appUser.surname}`, value),
+    stringContains(
+      `${item.appUser.name} ${item.appUser.surname}`,
+      value,
+    ),
   );
 };

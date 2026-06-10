@@ -6,6 +6,8 @@ import { Loading, LoadingFullScreen } from "../layout/loading";
 import { RoleRequestStatus } from "./managerRequests";
 import { List, ListItem } from "../layout/preview/list";
 import { filterItems, initFilters } from "@/lib/utils/list";
+import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
+import { CultivationManagerListItem } from "./managerListItems";
 
 export const ManagerList = () => {
   const generalManager = useSelector((state) => state.generalManager?.manager);
@@ -17,9 +19,8 @@ export const ManagerList = () => {
     () => generalManager?.managers ?? EMPTY_ARRAY,
     [generalManager?.managers],
   );
-  const specificManagers = useSelector(
-    (state) => state.generalManager?.specificManagers,
-  );
+  const workers = useSelector((state) => state.workers?.items);
+  console.log({ workers });
 
   const filteredManagers = useMemo(
     () =>
@@ -30,7 +31,7 @@ export const ManagerList = () => {
     [allManagers, filters],
   );
 
-  if (!generalManager && !isAdmin) {
+  if ((!generalManager && !isAdmin) || !workers) {
     return <LoadingFullScreen />;
   }
 
@@ -46,7 +47,7 @@ export const ManagerList = () => {
           <ManagerListItem
             key={manager._id}
             manager={manager}
-            specificManagers={specificManagers}
+            workers={workers.filter((w) => w.manager._id === manager._id)}
           />
         ))}
       </List>
@@ -54,14 +55,11 @@ export const ManagerList = () => {
   );
 };
 
-const ManagerListItem = ({ manager, specificManagers }) => {
+const ManagerListItem = ({ manager, workers }) => {
   if (!manager || !manager.appUser) {
     return <Loading />;
   }
 
-  console.log({
-    specificManagers,
-  });
   return (
     <>
       <ListItem title={`${manager.appUser.name} ${manager.appUser.surname}`}>
@@ -71,6 +69,9 @@ const ManagerListItem = ({ manager, specificManagers }) => {
             <p className="text-sm text-gray-500">{manager.managerModelName}</p>
           </div>
         </div>
+        {manager.managerModelName === CULTIVATION_MANAGER && (
+          <CultivationManagerListItem workers={workers} />
+        )}
       </ListItem>
     </>
   );

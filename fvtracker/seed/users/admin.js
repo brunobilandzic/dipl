@@ -6,15 +6,15 @@ import { AppUser } from "@/models/user/AppUser";
 
 const check = async () => {
   await dbConnect();
-  const adminCount = await Admin.countDocuments();
-  if (adminCount > 0) {
-    await Admin.deleteMany();
-    console.log(`Deleted existing admin user`);
-  }
+  const admin = await Admin.findOne();
+  return admin;
 };
 
 export const createAdmin = async () => {
-  await check();
+  const existingAdmin = await check();
+  if (existingAdmin) {
+    return existingAdmin;
+  }
 
   console.log("Creating admin user...");
   const adminData = appUsersJsonArray.find((user) => user.username === "admin");

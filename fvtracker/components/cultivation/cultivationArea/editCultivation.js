@@ -2,14 +2,16 @@ import { AppInput } from "@/components/form/inputs";
 import Modals from "@/components/layout/modals";
 import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
+import { checkEmpty } from "@/lib/utils/objects";
 import { deleteCultivation, updateCultivation } from "@/store/cultivation";
 import { setLoading } from "@/store/loading";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 export function EditCultivation({ isOpen, onCancel, cultivationData }) {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({});
+  const [submitDisabled, setSubmitDisabled] = useState(false);
   useEffect(() => {
     if (cultivationData) {
       setFormData(cultivationData);
@@ -24,6 +26,11 @@ export function EditCultivation({ isOpen, onCancel, cultivationData }) {
       [name]: value,
     }));
   };
+
+  useEffect(() => {
+    const { name, description } = formData;
+    setSubmitDisabled(checkEmpty({ name, description }, true));
+  }, [formData]);
 
   const onSubmit = async () => {
     try {
@@ -62,6 +69,7 @@ export function EditCultivation({ isOpen, onCancel, cultivationData }) {
       title="Uredi kultivaciju"
       onSubmit={onSubmit}
       onDelete={onDelete}
+      submitDisabled={submitDisabled}
     >
       <div className="form">
         <div className="">

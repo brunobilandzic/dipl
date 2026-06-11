@@ -12,6 +12,12 @@ export function EditWarehouseModal({ warehouse, onCancel, isOpen }) {
     name: warehouse?.name || "",
     description: warehouse?.description ?? "",
   });
+  const [submitDisabled, setSubmitDisabled] = useState(true);
+
+  React.useEffect(() => {
+    const { name, description } = form;
+    setSubmitDisabled(name.trim() === "" || description.trim() === "");
+  }, [form]);
 
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -39,6 +45,7 @@ export function EditWarehouseModal({ warehouse, onCancel, isOpen }) {
       onSubmit={handleSubmit}
       title="Uredi skladište"
       onDelete={handleDelete}
+      submitDisabled={submitDisabled}
     >
       <AppInput
         label="Naziv"

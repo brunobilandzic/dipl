@@ -9,10 +9,13 @@ import { filterItems, initFilters } from "@/lib/utils/list";
 import {
   CULTIVATION_MANAGER,
   FINANCIAL_MANAGER,
+  PRODUCTION_MANAGER,
+  WAREHOUSE_MANAGER,
 } from "@/lib/constants/users/managerTypes";
 import {
   CultivationManagerListItem,
   FinancialManagerListItem,
+  WarehouseManagerListItem,
 } from "./managerListItems";
 import { sortManagers } from "@/lib/utils/managers/sort";
 
@@ -79,6 +82,10 @@ const ManagerListItem = ({ manager, workers, allWorkers }) => {
             <p className="text-sm text-gray-500">{manager.managerModelName}</p>
           </div>
         </div>
+
+        {manager.managerModelName === WAREHOUSE_MANAGER && (
+          <WarehouseManagerListItem workers={workers} />
+        )}
         {manager.managerModelName === CULTIVATION_MANAGER && (
           <CultivationManagerListItem workers={workers} />
         )}

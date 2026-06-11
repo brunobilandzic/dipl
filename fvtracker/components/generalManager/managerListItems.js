@@ -6,6 +6,7 @@ import {
   EMPLOYMENT_STATUS_PENDING,
   EMPLOYMENT_STATUS_UNEMPLOYED,
 } from "@/lib/constants/users/workers";
+import { workPayWarehouse } from "@/lib/utils/workers/pay";
 
 export const CultivationManagerListItem = ({ workers }) => {
   const fields = useSelector((state) => state.cultivation.fields);
@@ -83,5 +84,28 @@ export const FinancialManagerListItem = ({ workers, allWorkers }) => {
         )}
       />
     </div>
+  );
+};
+
+export const WarehouseManagerListItem = ({ workers }) => {
+  const warehouses = useSelector((state) => state.warehouse.warehouses.items);
+  if (!warehouses) return <LoadingFullScreen />;
+  console.log({ wh: workers });
+  return (
+    <>
+      <div className="listitemDescription">
+        <div>Kreirano otpremnica: {workers.reduce((count, w) => count + w.shipmentItems.length, 0)}</div>
+        <ManagerWorkers
+          workers={workers}
+          paySum={workers.reduce((total, worker) => {
+            const { totalPay } = workPayWarehouse({
+              hourlyRate: worker.hourlyRate,
+              shipmentItems: worker.shipmentItems,
+            });
+            return total + totalPay;
+          }, 0)}
+        />
+      </div>
+    </>
   );
 };

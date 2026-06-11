@@ -137,7 +137,19 @@ export const createProductStock = async ({
   await stock.populate({
     path: "product",
     select: "warehouseStocks productionStocks",
-    populate: "warehouseStocks productionStocks",
+    populate: [
+      {
+        path: "warehouseStocks",
+      },
+      {
+        path: "productionStocks",
+        select: "quantity facility",
+        populate: {
+          path: "facility",
+          select: "name",
+        },
+      },
+    ],
   });
   return stock;
 };

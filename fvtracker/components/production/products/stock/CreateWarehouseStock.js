@@ -5,6 +5,7 @@ import handleError from "@/lib/constants/errors/client/handleError";
 import { PRODUCTION_MANAGER } from "@/lib/constants/users/managerTypes";
 import { EMPLOYMENT_STATUS_EMPLOYED } from "@/lib/constants/users/workers";
 import { showDateTime } from "@/lib/utils/display";
+import { checkEmpty } from "@/lib/utils/objects";
 import fillProductionRedux from "@/lib/utils/production";
 import { getAvailableFacilities } from "@/lib/utils/production/facilities";
 import { submitWarehouseStock } from "@/lib/utils/storage/warehouse";
@@ -110,6 +111,7 @@ const CreateWarehouseStock = ({
       isOpen={isOpen}
       onCancel={onCancel}
       onSubmit={onSubmit}
+      submitDisabled={checkEmpty(warehouseStock, true)}
     >
       {!workerId && (
         <ChooseWorker

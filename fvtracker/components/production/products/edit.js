@@ -15,7 +15,7 @@ import { checkValue } from "@/lib/utils/formValidation";
 import { checkEmpty } from "@/lib/utils/objects";
 import { submitProductForm } from "@/lib/utils/production/products";
 import { useRouter } from "next/navigation";
-import {  useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function EditProductPageComponent({ product, isEdit = true }) {
@@ -55,8 +55,9 @@ export const EditProductForm = ({
   const submitLabel = isEdit ? "Spremi promjene" : "Izradi proizvod";
   return (
     <div>
-      <h2>Uredi proizvod</h2>
-      <pre>{JSON.stringify(productForm, null, 2)}</pre>
+      <h2 className="text-2xl font-bold">
+        {isEdit ? "Uredi proizvod" : "Izradi proizvod"}
+      </h2>
       <div className="form">
         <AppInput
           label="Naziv proizvoda"

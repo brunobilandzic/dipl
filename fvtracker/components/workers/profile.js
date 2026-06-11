@@ -7,7 +7,10 @@ import { LoadingFullScreen } from "../layout/loading";
 import { fetchWorkerById } from "@/store/workers";
 import { useSession } from "next-auth/react";
 import { WORKER_TRANSLATION } from "@/lib/constants/users/workers";
-import { shipmentItemsProductSum } from "@/lib/utils/workers/warehouse";
+import {
+  shipmentItemsProductSum,
+  shipmentItemsShipmentItemsProductQuantity,
+} from "@/lib/utils/workers/warehouse";
 import { workerTotalPay } from "@/lib/utils/workers/pay";
 
 export const WorkerProfile = () => {
@@ -82,10 +85,24 @@ const WorkerSectorInfo = ({ workerType, children }) => {
 };
 
 const WarehouseWorkerInfo = ({ shipmentItems }) => {
+  const shippedPrducts =
+    shipmentItemsShipmentItemsProductQuantity(shipmentItems);
+  console.log("WarehouseWorkerInfo shipmentItems:", shipmentItems);
+  console.log("WarehouseWorkerInfo shippedProducts:", shippedPrducts);
   return (
     <div>
       <div>Učinjeno otpremnica: {shipmentItems.length}</div>
       <div>Odaslano: {shipmentItemsProductSum(shipmentItems)} proizvoda</div>
+      <div>
+        <h4>Proizvodi:</h4>
+        <ul className="list-disc list-inside">
+          {shippedPrducts.map((product) => (
+            <li key={product._id}>
+              {product.name}: {product.quantity}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

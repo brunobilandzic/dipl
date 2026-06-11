@@ -212,12 +212,27 @@ const ChooseWarehouseSources = ({
                               return;
                             }
 
+                            const remainingNeeded =
+                              neededQuantities.find(
+                                (nq) => nq.productName === pq.productName,
+                              )?.neededQuantity ?? 0;
+
+                            const current =
+                              Number(
+                                sourceQuantity({
+                                  wh: w,
+                                  productName: pq.productName,
+                                }),
+                              ) || 0;
+                            const maxForThisInput = remainingNeeded + current;
+
                             const quantity = parseInt(value);
+
                             if (quantity > availableStock) {
                               alert("Nema toliko na skladištu");
                               return;
                             }
-                            if (quantity > pq.neededQuantity) {
+                            if (quantity > maxForThisInput) {
                               alert("Ne treba toliko proizvoda");
                               return;
                             }

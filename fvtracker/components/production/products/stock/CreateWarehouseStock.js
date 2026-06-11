@@ -7,7 +7,6 @@ import { EMPLOYMENT_STATUS_EMPLOYED } from "@/lib/constants/users/workers";
 import { showDateTime } from "@/lib/utils/display";
 import { checkValue } from "@/lib/utils/formValidation";
 import { checkEmpty } from "@/lib/utils/objects";
-import fillProductionRedux from "@/lib/utils/production";
 import { getAvailableFacilities } from "@/lib/utils/production/facilities";
 import { submitWarehouseStock } from "@/lib/utils/storage/warehouse";
 import { setLoading } from "@/store/loading";

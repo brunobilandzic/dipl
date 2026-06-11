@@ -2,7 +2,6 @@ import { EMPLOYMENT_STATUS_EMPLOYED } from "@/lib/constants/users/workers";
 import { AppSelect } from "../form/inputs";
 
 export const ChooseWorker = ({ workers, onChoose, managerModelName }) => {
-  console.log({ workers });
   const workerOptions = workers.filter(
     (w) =>
       w.employmentRequest.status === EMPLOYMENT_STATUS_EMPLOYED &&

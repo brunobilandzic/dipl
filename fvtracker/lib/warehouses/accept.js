@@ -12,6 +12,7 @@ export const acceptWarehouseStock = async ({
   comment,
   productionStock,
   workerId,
+  facility = false,
 }) => {
   if (!productionStock) {
     throw new Error(
@@ -64,11 +65,13 @@ export const acceptWarehouseStock = async ({
 
   await warehouseStock.save();
   await warehouseAcceptanceProcess.save();
-  await warehouseStock.populate({
-    path: "product",
-    select: "warehouseStocks productionStocks",
-    populate: "warehouseStocks productionStocks",
-  });
-  console.log({ warehouseStock });
+  if (!facility) {
+    await warehouseStock.populate({
+      path: "product",
+      select: "warehouseStocks productionStocks",
+      populate: "warehouseStocks productionStocks",
+    });
+    console.log({ warehouseStock });
+  }
   return warehouseStock;
 };

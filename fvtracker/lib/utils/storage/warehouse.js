@@ -12,11 +12,15 @@ export const totalWarehouseStockQuantity = ({ warehouseStocks }) => {
   }, 0);
 };
 
-export const submitWarehouseStock = async ({ warehouseStockData }) => {
+export const submitWarehouseStock = async ({
+  warehouseStockData,
+  facility,
+}) => {
   const res = await api.post(
     "/stocks",
     {
       warehouseStockData,
+      facility,
     },
     {
       params: {

@@ -39,14 +39,33 @@ export const WorkerProfile = () => {
   );
 };
 
-const WorkerCommonInfo = ({ name, surname, email, status }) => {
+const WorkerCommonInfo = ({
+  name,
+  surname,
+  email,
+  status,
+  hourlyRate,
+  payedAmount,
+  totalPay,
+  totalHours,
+}) => {
   return (
     <div>
-      <h2>
-        {name} {surname}
-      </h2>
-      <p>Email: {email}</p>
-      <p>Status: {status}</p>
+      <div className="text-2xl font-bold">Osobni podaci</div>
+      <div className="flex flex-col  my-4">
+        <h2>
+          {name} {surname}
+        </h2>
+        <p>Email: {email}</p>
+        <p>Status: {WORKER_TRANSLATION[status]}</p>
+        <p>Zarađeno: {totalPay} €</p>
+        <p>Ukupno sati: {totalHours}</p>
+        <p>Satnica: {hourlyRate} €/h</p>
+        <p>Isplaćemo: {payedAmount} €</p>
+      </div>
+    </div>
+  );
+};
     </div>
   );
 };

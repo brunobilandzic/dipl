@@ -1,11 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/navigation";
+import {  useSelector } from "react-redux";
+
 import { LoadingFullScreen } from "../layout/loading";
-import { fetchWorkerById } from "@/store/workers";
-import { useSession } from "next-auth/react";
 import { WORKER_TRANSLATION } from "@/lib/constants/users/workers";
 import {
   shipmentItemsProductSum,
@@ -14,17 +11,9 @@ import {
 import { workerTotalPay } from "@/lib/utils/workers/pay";
 
 export const WorkerProfile = () => {
-  const { data: session } = useSession();
-  const workerId = session?.user?.workerId;
-  const workerType = session?.user?.workerType;
-  console.log("WorkerProfile session:", session);
+  const workerType = useSelector((state) => state.user.session?.workerType);
   const worker = useSelector((state) => state.workers.worker);
-  const dispatch = useDispatch();
-  const router = useRouter();
-  useEffect(() => {
-    if (worker || !workerId) return;
-    dispatch(fetchWorkerById(workerId));
-  }, [worker, workerId]);
+
   if (!worker) return <LoadingFullScreen />;
   return (
     <>

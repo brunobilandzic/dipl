@@ -25,7 +25,11 @@ import { fillCartRedux } from "@/lib/utils/webstore/cart";
 import { fillOrdersRedux } from "@/lib/utils/webstore/orders";
 import { fillWarehouseRequestsRedux } from "@/lib/utils/documents/requests";
 import { fillManagersSelection } from "@/store/managers";
-import { fetchEmploymentRequests, fetchWorkers } from "@/store/workers";
+import {
+  fetchEmploymentRequests,
+  fetchWorkerById,
+  fetchWorkers,
+} from "@/store/workers";
 import { fetchProcurments } from "@/store/procurments";
 import { MdVpnKey } from "@react-icons/all-files/md/MdVpnKey";
 import { FaDatabase } from "@react-icons/all-files/fa/FaDatabase";
@@ -225,6 +229,7 @@ function NavItems() {
         fillWarehouseRequestsRedux({ dispatch });
         dispatch(fillManagersSelection({ managersType: "warehouseManagers" }));
       }
+      dispatch(fetchWorkerById(session.user?.workerId));
     }
   }, [status]);
 

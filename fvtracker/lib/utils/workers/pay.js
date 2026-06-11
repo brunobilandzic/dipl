@@ -64,3 +64,18 @@ export const payWorker = async ({ workerId, amount, dispatch }) => {
     dispatch(setLoading(false));
   }
 };
+
+export const workerTotalPay = (worker) => {
+  switch (worker.__t) {
+    case "CultivationWorker":
+      return workPayCultivation(worker);
+    case "ProductionWorker":
+      return workPayProduction(worker);
+    case "WarehouseWorker":
+      return workPayWarehouse(worker);
+    case "FinancialWorker":
+      return workPayFinancial(worker);
+    default:
+      return { totalPay: 0, totalHours: 0 };
+  }
+};

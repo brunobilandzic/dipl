@@ -73,6 +73,8 @@ const ManagerListItem = ({ manager, workers, allWorkers }) => {
     return <Loading />;
   }
 
+  if (manager.managerModelName === WAREHOUSE_MANAGER) console.log({manager})
+
   return (
     <>
       <ListItem title={`${manager.appUser.name} ${manager.appUser.surname}`}>

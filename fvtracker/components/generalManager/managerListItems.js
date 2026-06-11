@@ -11,6 +11,19 @@ import { workerTotalPay, workPayWarehouse } from "@/lib/utils/workers/pay";
 export const CultivationManagerListItem = ({ workers }) => {
   const fields = useSelector((state) => state.cultivation.fields);
   if (!fields) return <LoadingFullScreen />;
+  const cultivationAreas = fields.flatMap((field) => field.cultivationAreas);
+  const cultivations = cultivationAreas.flatMap((area) => area.cultivations);
+  const plantedCropVarieties = cultivations.flatMap(
+    (cultivation) => cultivation.plantedCropVarieties,
+  );
+  const plantageWorks = cultivations.flatMap(
+    (cultivation) => cultivation.plantageWorks,
+  );
+  const harvestWorks = cultivations.flatMap(
+    (cultivation) => cultivation.harvestWorks,
+  );
+
+  if (!fields) return <LoadingFullScreen />;
   return (
     <div className="listitemDescription">
       <div> Kreirano polja: {fields.length}</div>

@@ -97,7 +97,7 @@ const WarehouseWorkerInfo = ({ shipmentItems }) => {
         <h4>Proizvodi:</h4>
         <ul className="list-disc list-inside">
           {shippedPrducts.map((product) => (
-            <li key={product._id}>
+            <li key={`${product.name}-${product.quantity}`}>
               {product.name}: {product.quantity}
             </li>
           ))}

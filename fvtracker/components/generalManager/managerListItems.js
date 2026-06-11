@@ -43,8 +43,6 @@ export const CultivationManagerListItem = ({ workers }) => {
 export const FinancialManagerListItem = ({ workers, allWorkers }) => {
   const procurments = useSelector((state) => state.procurments.items);
   if (!procurments) return <LoadingFullScreen />;
-  console.log({ allWorkers });
-  console.log({ workers });
   return (
     <div className="listitemDescription">
       <div>

@@ -66,6 +66,19 @@ const productsSlice = createSlice({
           product._id === action.payload._id ? action.payload : product,
       );
     },
+    editProductStocks: (state, action) => {
+      const {warehouseStocks, productionStocks} = action.payload;
+      state.products.items = state.products.items.map((product) => {
+        if (product._id === action.payload.productId) {
+          return {
+            ...product,
+            warehouseStocks,
+            productionStocks,
+          };
+        }
+        return product;
+      });
+    },
     setManagers: (state, action) => {
       state.managers = action.payload;
     },
@@ -207,6 +220,7 @@ export const {
   filterFacilities,
   setSelectedFacility,
   unselectFacility,
+  editProductStocks
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

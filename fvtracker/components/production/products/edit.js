@@ -106,6 +106,8 @@ export const EditProductForm = ({
           itemLabel="sastojak"
           emptyItem={emptyIngredient}
           additionalItemFields={[QuantityInput, QualityInput]}
+          heading="Unesi sastojke"
+          addLabel="Dodaj sastojak"
         />
         <SubmitButton
           disabled={checkEmpty(productForm, true)}

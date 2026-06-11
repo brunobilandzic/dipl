@@ -12,6 +12,8 @@ export const ChooseCropVarietyItems = ({
   emptyItem = { generalType: "", type: "", cropVariety: "", quantity: "" },
   additionalItemFields,
   allowZero = false,
+  heading = "Unesi vrste",
+  addLabel = "Dodaj stavku",
 }) => {
   const {
     generalTypes = [],
@@ -95,9 +97,9 @@ export const ChooseCropVarietyItems = ({
   return (
     <>
       <div className="flex items-center justify-between gap-4">
-        <div className="text-base font-semibold">Unesi vrste</div>
+        <div className="text-base font-semibold">{heading}</div>
         <button className="btn" onClick={addItem} type="button">
-          Dodaj vrstu
+          {addLabel}
         </button>
       </div>
 

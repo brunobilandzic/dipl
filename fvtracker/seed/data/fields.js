@@ -23,7 +23,7 @@ export const planInfo = ({ fieldId, cropVarietyIds, productionManagerId }) => {
       description: "Plan sadnje za testiranje",
       items: cropVarietyIds.map((cropVarietyId) => ({
         cropVariety: cropVarietyId, // Postavit ćemo ovo kasnije
-        quantity: 10000,
+        quantity: 100000,
       })),
       productionManager: productionManagerId,
     },
@@ -33,21 +33,10 @@ export const planInfo = ({ fieldId, cropVarietyIds, productionManagerId }) => {
       description: "Plan berbe za testiranje",
       items: cropVarietyIds.map((cropVarietyId) => ({
         cropVariety: cropVarietyId, // Postavit ćemo ovo kasnije
-        quantity: 10000,
+        quantity: 100000,
       })),
       productionManager: productionManagerId,
     },
-  };
-};
-
-export const optimizedCultivation = ({ caId }) => {
-  return {
-    cultivationArea: caId,
-    name: "SEEDED CULTIVATION",
-    description: "Cultivation optimized for seeders testing",
-    startDate: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
-    endDate: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-    relativeCoords: ["0,0", "0,1", "1,0", "1,1"],
   };
 };
 

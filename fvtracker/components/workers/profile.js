@@ -19,5 +19,27 @@ export const WorkerProfile = () => {
     dispatch(fetchWorkerById(workerId));
   }, [worker, workerId]);
   if (!worker) return <LoadingFullScreen />;
-  return <>{JSON.stringify(worker)}</>;
+  return (
+    <>
+      <WorkerCommonInfo
+        name={worker.appUser.name}
+        surname={worker.appUser.surname}
+        email={worker.appUser.email}
+        status={worker.employmentRequest.status}
+      />
+      <>{JSON.stringify(worker)}</>
+    </>
+  );
+};
+
+const WorkerCommonInfo = ({ name, surname, email, status }) => {
+  return (
+    <div>
+      <h2>
+        {name} {surname}
+      </h2>
+      <p>Email: {email}</p>
+      <p>Status: {status}</p>
+    </div>
+  );
 };

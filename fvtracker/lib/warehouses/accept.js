@@ -64,6 +64,11 @@ export const acceptWarehouseStock = async ({
 
   await warehouseStock.save();
   await warehouseAcceptanceProcess.save();
-
+  await warehouseStock.populate({
+    path: "product",
+    select: "warehouseStocks productionStocks",
+    populate: "warehouseStocks productionStocks",
+  });
+  console.log({ warehouseStock });
   return warehouseStock;
 };

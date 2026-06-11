@@ -5,6 +5,7 @@ import handleError from "@/lib/constants/errors/client/handleError";
 import { PRODUCTION_MANAGER } from "@/lib/constants/users/managerTypes";
 import { EMPLOYMENT_STATUS_EMPLOYED } from "@/lib/constants/users/workers";
 import { showDateTime } from "@/lib/utils/display";
+import { checkValue } from "@/lib/utils/formValidation";
 import { checkEmpty } from "@/lib/utils/objects";
 import fillProductionRedux from "@/lib/utils/production";
 import { getAvailableFacilities } from "@/lib/utils/production/facilities";
@@ -54,7 +55,7 @@ const CreateWarehouseStock = ({
       );
       if (selectedProductionStock?.quantity < value) {
         alert(
-          `Unesena količina je veća od dostupne količine na proizvodnoj zalihi (${selectedProductionStock?.quantity}). Molimo unesite manju količinu.`,
+          `Unesena količina je veća od dostupne količine na proizvodnoj zalihi (${selectedProductionStock?.quantity}). Molimo unesite manju količinu ili odaberite drugu proizvodnu zalihu.`,
         );
         return;
       }
@@ -143,11 +144,19 @@ const CreateWarehouseStock = ({
         />
       )}
       <AppInput
+        type="number"
         placeholder="Količina"
         label="Količina"
         name="quantity"
         value={warehouseStock.quantity}
-        onChange={onChange}
+        onChange={(e) => {
+          const { value, error } = checkValue(e.target.value);
+          if (error) {
+            alert(error);
+            return;
+          }
+          onChange(e);
+        }}
       />
       <AppInput
         placeholder="Komentar"

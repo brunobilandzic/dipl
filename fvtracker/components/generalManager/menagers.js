@@ -14,6 +14,7 @@ import {
   CultivationManagerListItem,
   FinancialManagerListItem,
 } from "./managerListItems";
+import { sortManagers } from "@/lib/utils/managers/sort";
 
 export const ManagerList = () => {
   const generalManager = useSelector((state) => state.generalManager?.manager);
@@ -30,10 +31,12 @@ export const ManagerList = () => {
 
   const filteredManagers = useMemo(
     () =>
-      filterItems({
-        _items: allManagers,
-        filters,
-      }),
+      sortManagers(
+        filterItems({
+          _items: allManagers,
+          filters,
+        }),
+      ),
     [allManagers, filters],
   );
 

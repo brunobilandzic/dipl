@@ -58,6 +58,26 @@ export const CultivationManagerListItem = ({ workers }) => {
   );
 };
 
+export const ProductionManagerListItem = ({ workers }) => {
+  const productionProccesses = workers.flatMap((w) => w.productionProcesses);
+  console.log({ productionProccesses });
+
+  return (
+    <>
+      <div className="listitemDescription">
+        <div>Kreirano proizvodnih procesa: {productionProccesses.length}</div>
+      </div>
+      <ManagerWorkers
+        workers={workers}
+        paySum={workers.reduce(
+          (total, worker) => total + workerTotalPay(worker).totalPay,
+          0,
+        )}
+      />
+    </>
+  );
+};
+
 export const FinancialManagerListItem = ({ workers, allWorkers }) => {
   const procurments = useSelector((state) => state.procurments.items);
   if (!procurments) return <LoadingFullScreen />;
@@ -88,7 +108,14 @@ export const FinancialManagerListItem = ({ workers, allWorkers }) => {
           ).length
         }
       </div>
-      <div>Zarada ukupno: {allWorkers.reduce((total, worker) => total + workerTotalPay(worker).totalPay, 0)} €</div>
+      <div>
+        Zarada ukupno:{" "}
+        {allWorkers.reduce(
+          (total, worker) => total + workerTotalPay(worker).totalPay,
+          0,
+        )}{" "}
+        €
+      </div>
       <ManagerWorkers
         workers={workers}
         paySum={workers.reduce(

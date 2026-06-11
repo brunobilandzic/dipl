@@ -15,6 +15,7 @@ import {
 import {
   CultivationManagerListItem,
   FinancialManagerListItem,
+  ProductionManagerListItem,
   WarehouseManagerListItem,
 } from "./managerListItems";
 import { sortManagers } from "@/lib/utils/managers/sort";
@@ -73,7 +74,7 @@ const ManagerListItem = ({ manager, workers, allWorkers }) => {
     return <Loading />;
   }
 
-  if (manager.managerModelName === WAREHOUSE_MANAGER) console.log({manager})
+  if (manager.managerModelName === PRODUCTION_MANAGER) console.log({manager: manager.specificManager})
 
   return (
     <>
@@ -84,7 +85,9 @@ const ManagerListItem = ({ manager, workers, allWorkers }) => {
             <p className="text-sm text-gray-500">{manager.managerModelName}</p>
           </div>
         </div>
-
+        {manager.managerModelName === PRODUCTION_MANAGER && (
+          <ProductionManagerListItem workers={workers} />
+        )}
         {manager.managerModelName === WAREHOUSE_MANAGER && (
           <WarehouseManagerListItem workers={workers} warehouseRequests={manager.specificManager.warehouseRequests} />
         )}

@@ -11,7 +11,10 @@ export const ChoosePlan = ({
   if (!availablePlans) {
     return (
       <div className="p-4">
-        <p>Nema dostupnih planova sadnje za odabranu sortu.</p>
+        <p>
+          Nema dostupnih planova {plant ? "sadnje" : "berbe"} za odabranu sortu
+          ili količinu.
+        </p>
       </div>
     );
   }
@@ -26,7 +29,8 @@ export const ChoosePlan = ({
     return (
       <div className="p-4">
         <p>
-          Nema dostupnih planova {plant ? "sadnje" : "berbe"} za odabranu sortu.
+          Nema dostupnih planova {plant ? "sadnje" : "berbe"} za odabranu sortu
+          ili količinu.
         </p>
       </div>
     );

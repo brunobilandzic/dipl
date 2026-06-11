@@ -78,6 +78,13 @@ export const ChooseCropVarietyItems = ({
             quantity: value,
           };
         }
+
+        if (field === "quality") {
+          return {
+            ...item,
+            quality: value,
+          };
+        }
       }),
     }));
   };

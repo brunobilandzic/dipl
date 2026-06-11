@@ -12,9 +12,10 @@ import {
   VARIETIES_QUALITIES,
 } from "@/lib/constants/cultivation/plants";
 import { checkValue } from "@/lib/utils/formValidation";
+import { checkEmpty } from "@/lib/utils/objects";
 import { submitProductForm } from "@/lib/utils/production/products";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import {  useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function EditProductPageComponent({ product, isEdit = true }) {
@@ -106,7 +107,11 @@ export const EditProductForm = ({
           emptyItem={emptyIngredient}
           additionalItemFields={[QuantityInput, QualityInput]}
         />
-        <SubmitButton label={submitLabel} handleSubmit={handleSubmit} />
+        <SubmitButton
+          disabled={checkEmpty(productForm, true)}
+          label={submitLabel}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </div>
   );
@@ -141,6 +146,7 @@ export const initialData = ({ product } = {}) => {
       quantity: ing.quantity,
       quality: ing.quality || STANDARD,
     })),
+    stockVolume: product.stockVolume,
   };
 };
 

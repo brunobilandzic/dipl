@@ -22,6 +22,7 @@ const CreateWarehouseStock = ({
   productionStocks,
   warehouses,
   clickedStock,
+  facility = false,
 }) => {
   const workersRedux = useSelector((state) => state.workers.items);
   const workers = workersRedux.filter(

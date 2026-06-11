@@ -70,6 +70,7 @@ const ProductStock = ({ stock }) => {
           product={stock.product}
           clickedStock={stock}
           warehouses={warehouses}
+          facility={true}
         />
       )}
     </>

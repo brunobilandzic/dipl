@@ -86,7 +86,7 @@ const ManagerListItem = ({ manager, workers, allWorkers }) => {
         </div>
 
         {manager.managerModelName === WAREHOUSE_MANAGER && (
-          <WarehouseManagerListItem workers={workers} />
+          <WarehouseManagerListItem workers={workers} warehouseRequests={manager.specificManager.warehouseRequests} />
         )}
         {manager.managerModelName === CULTIVATION_MANAGER && (
           <CultivationManagerListItem workers={workers} />

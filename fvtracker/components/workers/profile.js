@@ -76,6 +76,12 @@ const WorkerSectorInfo = ({ workerType, children }) => {
     </div>
   );
 };
+
+const WarehouseWorkerInfo = ({ shipmentItems }) => {
+  return (
+    <div>
+      <div>Učinjeno otpremnica: {shipmentItems.length}</div>
+      <div>Odaslano: {shipmentItemsProductSum(shipmentItems)} proizvoda</div>
     </div>
   );
 };

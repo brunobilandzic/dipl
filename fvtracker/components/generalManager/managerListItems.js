@@ -27,25 +27,30 @@ export const CultivationManagerListItem = ({ workers }) => {
   return (
     <div className="listitemDescription">
       <div> Kreirano polja: {fields.length}</div>
+      <div>Kreirano polja za gredice: {cultivationAreas.length}</div>
+      <div>Kreirano gredica: {cultivations.length}</div>
       <div>
-        Kreirano polja za gredice:{" "}
-        {fields.flatMap((field) => field.cultivationAreas).length}
+        Ukupna povrsina za sanju:{" "}
+        {cultivations.reduce(
+          (total, c) => total + c.plantedCropVarieties.length,
+          0,
+        )}
       </div>
       <div>
-        Kreirano gredica:{" "}
-        {
-          fields
-            .flatMap((field) => field.cultivationAreas)
-            .flatMap((area) => area.cultivations).length
-        }
+        Ukupno zasađeno ćelija:{" "}
+        {plantedCropVarieties.filter((plcv) => plcv.plantingPlanItem).length}
+      </div>
+      <div>
+        Ukupno ubranih ćelija:{" "}
+        {harvestWorks.reduce(
+          (total, hw) => total + hw.harvestedCoords.length,
+          0,
+        )}
       </div>
       <ManagerWorkers
         workers={workers}
         paySum={workers.reduce(
-          (total, worker) =>
-            total +
-            (worker.plantageWorks.length + worker.harvestWorks.length) *
-              worker.hourlyRate,
+          (total, worker) => total + workerTotalPay(worker).totalPay,
           0,
         )}
       />

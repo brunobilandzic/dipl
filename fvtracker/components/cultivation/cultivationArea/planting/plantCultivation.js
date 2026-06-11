@@ -144,15 +144,6 @@ export const PlantCultivation = ({
               }))}
             />
           )}
-          <div className="">
-            <AppDatePicker
-              label="Datum sadnje"
-              name="plantedAt"
-              value={newPlantage.plantedAt}
-              onChange={onChange}
-              placeholder="Izaberite datum"
-            />
-          </div>
           <div>
             {!workerId && (
               <ChooseWorker

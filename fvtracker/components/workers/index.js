@@ -188,10 +188,8 @@ const CultivationWorker = ({ worker }) => {
 const ProductionWorker = ({ worker }) => {
   const { totalHours, totalPay } = workPayProduction({
     hourlyRate: worker.hourlyRate,
-    processes: [
-      ...worker.productionProcesses,
-      ...worker.warehouseAcceptanceProcesses,
-    ],
+    productionProcesses: worker.productionProcesses,
+    warehouseAcceptanceProcesses: worker.warehouseAcceptanceProcesses,
   });
   return (
     <>

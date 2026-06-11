@@ -3,20 +3,36 @@ import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { updateWorker } from "@/store/workers";
 
-export const workPayCultivation = ({ hourlyRate, works }) => {
+export const workPayCultivation = ({
+  hourlyRate,
+  plantageWorks,
+  harvestWorks,
+}) => {
   let totalPay = 0;
   let totalHours = 0;
-  for (const work of works) {
+  for (const work of plantageWorks) {
+    totalPay += work.hoursWorked * hourlyRate;
+    totalHours += work.hoursWorked;
+  }
+  for (const work of harvestWorks) {
     totalPay += work.hoursWorked * hourlyRate;
     totalHours += work.hoursWorked;
   }
   return { totalPay, totalHours };
 };
 
-export const workPayProduction = ({ hourlyRate, processes }) => {
+export const workPayProduction = ({
+  hourlyRate,
+  productionProcesses,
+  warehouseAcceptanceProcesses,
+}) => {
   let totalPay = 0;
   let totalHours = 0;
-  for (const process of processes) {
+  for (const process of productionProcesses) {
+    totalPay += process.quantity * hourlyRate;
+    totalHours += process.quantity;
+  }
+  for (const process of warehouseAcceptanceProcesses) {
     totalPay += process.quantity * hourlyRate;
     totalHours += process.quantity;
   }

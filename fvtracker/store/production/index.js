@@ -121,6 +121,23 @@ const productsSlice = createSlice({
         (f) => f.slug === action.payload,
       );
     },
+    editFacilityProductionStock: (state, action) => {
+      const { stockId, quantity } = action.payload;
+      state.facilities.items = state.facilities.items.map((facility) => {
+        return {
+          ...facility,
+          stocks: facility.stocks.map((stock) => {
+            if (stock._id === stockId) {
+              return {
+                ...stock,
+                quantity: stock.quantity - quantity,
+              };
+            }
+            return stock;
+          }),
+        };
+      });
+    },
     unselectFacility: (state) => {
       state.facilities.selected = null;
     },

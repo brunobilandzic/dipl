@@ -124,9 +124,23 @@ const productsSlice = createSlice({
     unselectFacility: (state) => {
       state.facilities.selected = null;
     },
-    addProductStock: (state, action) => {
-      state.productStocks.items.push(action.payload);
-      state.productStocks.filteredItems.push(action.payload);
+    editProductionStock: (state, action) => {
+      const { stockId, quantity } = action.payload;
+      console.log(
+        "Editing production stock with ID:",
+        stockId,
+        "to new quantity:",
+        quantity,
+      );
+      state.productStocks.items = state.productStocks.items.map((stock) => {
+        if (stock._id === stockId) {
+          return {
+            ...stock,
+            quantity,
+          };
+        }
+        return stock;
+      });
     },
   },
   extraReducers: (builder) => {
@@ -212,7 +226,7 @@ export const {
   filterFacilities,
   setSelectedFacility,
   unselectFacility,
-  addProductStock,
+  editProductionStock,
   editProductStocks,
 } = productsSlice.actions;
 

@@ -97,6 +97,14 @@ warehouseAcceptanceProcessSchema.pre("save", async function () {
       productionWorker.warehouseAcceptanceProcesses.push(this._id);
       await productionWorker.save();
     }
+    const productionStock = await mongoose
+      .model("ProductionStock")
+      .findById(this.productionStock);
+
+    if (productionStock) {
+      productionStock.warehouseAcceptanceProcesses.push(this._id);
+      await productionStock.save();
+    }
   }
 });
 

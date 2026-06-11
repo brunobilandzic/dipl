@@ -15,6 +15,7 @@ import { ChooseWorker } from "@/components/workers/choose";
 import { EMPLOYMENT_STATUS_EMPLOYED } from "@/lib/constants/users/workers";
 import { PRODUCTION_MANAGER } from "@/lib/constants/users/managerTypes";
 import { checkValue } from "@/lib/utils/formValidation";
+import { editProductStocks } from "@/store/production";
 
 export const CreateProductionStock = ({
   product,
@@ -24,9 +25,6 @@ export const CreateProductionStock = ({
 }) => {
   const workerId = useSelector((state) => state.user.session.workerId);
   const workersRedux = useSelector((state) => state.workers.items);
-  const workers = workersRedux.filter(
-    (worker) => worker.employmentRequest.status === EMPLOYMENT_STATUS_EMPLOYED,
-  );
   const blankFormData = {
     productId: product._id,
     quantity: 1,
@@ -77,7 +75,13 @@ export const CreateProductionStock = ({
       alert(
         `${newProductionStock.quantity} zaliha proizvoda ${product.name} uspješno dodana na zalihe.`,
       );
-      fillProductionRedux({ dispatch });
+      dispatch(
+        editProductStocks({
+          productId: product._id,
+          productionStocks: newProductionStock.product.productionStocks,
+          warehouseStocks: newProductionStock.product.warehouseStocks,
+        }),
+      );
       dispatch(setLoading(false));
     } catch (error) {
       dispatch(setLoading(false));
@@ -134,7 +138,7 @@ export const CreateProductionStock = ({
       <div>
         {!workerId && (
           <ChooseWorker
-            workers={workers}
+            workers={workersRedux}
             onChoose={chooseWorker}
             managerModelName={PRODUCTION_MANAGER}
           />

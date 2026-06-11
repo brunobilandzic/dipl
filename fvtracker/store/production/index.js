@@ -67,7 +67,7 @@ const productsSlice = createSlice({
       );
     },
     editProductStocks: (state, action) => {
-      const {warehouseStocks, productionStocks} = action.payload;
+      const { warehouseStocks, productionStocks } = action.payload;
       state.products.items = state.products.items.map((product) => {
         if (product._id === action.payload.productId) {
           return {
@@ -220,7 +220,7 @@ export const {
   filterFacilities,
   setSelectedFacility,
   unselectFacility,
-  editProductStocks
+  editProductStocks,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

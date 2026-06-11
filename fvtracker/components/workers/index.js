@@ -165,7 +165,8 @@ function WorkerContent({ worker, managerModelName }) {
 const CultivationWorker = ({ worker }) => {
   const { totalHours, totalPay } = workPayCultivation({
     hourlyRate: worker.hourlyRate,
-    works: [...worker.plantageWorks, ...worker.harvestWorks],
+    plantageWorks: worker.plantageWorks,
+    harvestWorks: worker.harvestWorks,
   });
   return (
     <>

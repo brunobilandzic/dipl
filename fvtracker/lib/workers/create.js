@@ -13,14 +13,19 @@ import populateCommon, {
   financialPopulate,
 } from "./populate";
 import { EMPLOYMENT_STATUS_EMPLOYED } from "../constants/users/workers";
+import bcrypt from "bcrypt";
 
 export const createWorker = async ({
   workerData,
   rootManagerId,
   isGeneralAdmin,
 }) => {
-  const { hourlyRate, ...workerAppUserData } = workerData;
-  const appUser = new AppUser(workerAppUserData);
+  const { hourlyRate, password, ...workerAppUserData } = workerData;
+  const appUser = new AppUser({
+    ...workerAppUserData,
+    provider: "credentials",
+    password: await bcrypt.hash(password, 10),
+  });
   await appUser.save();
   if (!rootManagerId) {
     throw new Error("Nije pronađen root manager za kreiranje radnika");

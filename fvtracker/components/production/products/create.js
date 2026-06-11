@@ -25,7 +25,6 @@ const CreateProductPageComponent = () => {
   };
   return (
     <div>
-      <div>Izradi proizvod</div>
       <div>
         <EditProductForm
           productForm={productForm}

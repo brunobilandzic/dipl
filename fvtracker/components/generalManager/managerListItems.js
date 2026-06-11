@@ -26,7 +26,6 @@ export const CultivationManagerListItem = ({ workers }) => {
             .flatMap((area) => area.cultivations).length
         }
       </div>
-      <div>Zaposleno radnika: {workers.length}</div>
       <ManagerWorkers
         workers={workers}
         paySum={workers.reduce(
@@ -87,14 +86,35 @@ export const FinancialManagerListItem = ({ workers, allWorkers }) => {
   );
 };
 
-export const WarehouseManagerListItem = ({ workers }) => {
+export const WarehouseManagerListItem = ({ workers, warehouseRequests }) => {
   const warehouses = useSelector((state) => state.warehouse.warehouses.items);
   if (!warehouses) return <LoadingFullScreen />;
-  console.log({ wh: workers });
+  console.log({ warehouseRequests });
   return (
     <>
       <div className="listitemDescription">
-        <div>Kreirano otpremnica: {workers.reduce((count, w) => count + w.shipmentItems.length, 0)}</div>
+        <div>
+          Izrašeno {warehouses.length} skladišta, ukupno:{" "}
+          {warehouses.reduce((count, wh) => count + wh.volume, 0)} m³
+        </div>
+        <div>Zaprimljeno {warehouseRequests.length} zahtjeva za isporuku</div>
+        <div>
+          Kreirano otpremnica:{" "}
+          {workers.reduce((count, w) => count + w.shipmentItems.length, 0)}
+        </div>
+        <div>
+          Poslano proizvoda:{" "}
+          {workers.reduce(
+            (count, w) =>
+              count +
+              w.shipmentItems.reduce(
+                (count, si) =>
+                  count + si.sources.reduce((c, s) => c + s.quantity, 0),
+                0,
+              ),
+            0,
+          )}
+        </div>
         <ManagerWorkers
           workers={workers}
           paySum={workers.reduce((total, worker) => {

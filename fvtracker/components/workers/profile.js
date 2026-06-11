@@ -6,6 +6,9 @@ import { useRouter } from "next/navigation";
 import { LoadingFullScreen } from "../layout/loading";
 import { fetchWorkerById } from "@/store/workers";
 import { useSession } from "next-auth/react";
+import { WORKER_TRANSLATION } from "@/lib/constants/users/workers";
+import { shipmentItemsProductSum } from "@/lib/utils/workers/warehouse";
+import { workerTotalPay } from "@/lib/utils/workers/pay";
 
 export const WorkerProfile = () => {
   const { data: session } = useSession();
@@ -26,6 +29,10 @@ export const WorkerProfile = () => {
         surname={worker.appUser.surname}
         email={worker.appUser.email}
         status={worker.employmentRequest.status}
+        hourlyRate={worker.hourlyRate}
+        payedAmount={worker.payedAmount}
+        totalPay={workerTotalPay(worker).totalPay}
+        totalHours={workerTotalPay(worker).totalHours}
       />
       <>{JSON.stringify(worker)}</>
     </>

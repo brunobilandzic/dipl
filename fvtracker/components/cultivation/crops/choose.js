@@ -65,6 +65,13 @@ export const ChooseCropVarietyItems = ({
           };
         }
 
+        if (field === "cropVariety") {
+          return {
+            ...item,
+            cropVariety: value,
+          };
+        }
+
         if (field === "quantity") {
           return {
             ...item,

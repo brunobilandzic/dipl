@@ -1,11 +1,11 @@
 import React from "react";
 
-export const SubmitButton = ({ handleSubmit, label = "Spremi promjene" }) => {
+export const SubmitButton = ({ handleSubmit, label = "Spremi promjene" , disabled}) => {
   return (
     <div>
-      <div onClick={handleSubmit} className="mt-4 btn submitButton">
+      <button onClick={handleSubmit} disabled={disabled} className="mt-4 btn submitButton disabled:opacity-50 disabled:cursor-not-allowed" >
         {label}
-      </div>
+      </button>
     </div>
   );
 };

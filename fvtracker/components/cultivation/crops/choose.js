@@ -181,7 +181,7 @@ export const ChooseCropVarietyItems = ({
 
 const getAvailableOptions = ({ generalTypes, types, cropVarieties, item }) => {
   const selectedGeneralType = generalTypes.find(
-    (generalType) => generalType._id === item.generalType,
+    (generalType) => generalType._id === item?.generalType,
   );
   const availableTypes = selectedGeneralType
     ? types.filter((type) => type.generalType === item.generalType)
@@ -208,7 +208,7 @@ function SelectGeneralType({ handleItemChange, index, item, generalTypes }) {
           handleItemChange(index, "generalType", event.target.value)
         }
         required
-        value={item.generalType}
+        value={item?.generalType}
       >
         <option value="">Odaberite glavnu vrstu</option>
         {generalTypes.map((generalType) => (
@@ -252,12 +252,12 @@ const SelectCropType = ({ handleItemChange, index, item, availableTypes }) => {
       <label className="label">Tip biljke</label>
       <select
         className="inputText"
-        disabled={!item.generalType}
+        disabled={!item?.generalType}
         onChange={(event) =>
           handleItemChange(index, "type", event.target.value)
         }
         required
-        value={item.type}
+        value={item?.type}
       >
         <option value="">Odaberite tip biljke</option>
         {availableTypes.map((type) => (
@@ -281,12 +281,12 @@ const SelectCropVariety = ({
       <label className="label">Varijanta</label>
       <select
         className="inputText"
-        disabled={!item.type}
+        disabled={!item?.type}
         onChange={(event) =>
           handleItemChange(index, "cropVariety", event.target.value)
         }
         required
-        value={item.cropVariety}
+        value={item?.cropVariety}
       >
         <option value="">Odaberite varijantu</option>
         {availableVarieties.map((cropVariety) => (

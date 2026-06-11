@@ -6,7 +6,7 @@ import {
   EMPLOYMENT_STATUS_PENDING,
   EMPLOYMENT_STATUS_UNEMPLOYED,
 } from "@/lib/constants/users/workers";
-import { workPayWarehouse } from "@/lib/utils/workers/pay";
+import { workerTotalPay, workPayWarehouse } from "@/lib/utils/workers/pay";
 
 export const CultivationManagerListItem = ({ workers }) => {
   const fields = useSelector((state) => state.cultivation.fields);
@@ -72,6 +72,7 @@ export const FinancialManagerListItem = ({ workers, allWorkers }) => {
           ).length
         }
       </div>
+      <div>Zarada ukupno: {allWorkers.reduce((total, worker) => total + workerTotalPay(worker).totalPay, 0)} €</div>
       <ManagerWorkers
         workers={workers}
         paySum={workers.reduce(

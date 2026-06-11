@@ -7,6 +7,14 @@ import {
   EMPLOYMENT_STATUS_UNEMPLOYED,
 } from "@/lib/constants/users/workers";
 import { workerTotalPay, workPayWarehouse } from "@/lib/utils/workers/pay";
+import { useEffect } from "react";
+import { setProducts } from "@/store/production";
+import {
+  getProductionStockQuantity,
+  getUniqueIngredients,
+} from "@/lib/utils/production/products";
+import { getWarehouseStockQuantity } from "@/lib/utils/storage/warehouse";
+import { getshipmentSourcesCountProducts } from "@/lib/utils/webstore/shipments";
 
 export const CultivationManagerListItem = ({ workers }) => {
   const fields = useSelector((state) => state.cultivation.fields);
@@ -59,12 +67,32 @@ export const CultivationManagerListItem = ({ workers }) => {
 };
 
 export const ProductionManagerListItem = ({ workers }) => {
+  const products = useSelector((state) => state.production.products.items);
+  useEffect(() => {
+    if (products) return console.log({ products });
+  }, [products]);
   const productionProccesses = workers.flatMap((w) => w.productionProcesses);
   console.log({ productionProccesses });
-
+  const productionStockQuantity = getProductionStockQuantity(products);
+  const warehouseStockQuantity = getWarehouseStockQuantity(products);
+  const uniqueIngredients = getUniqueIngredients(products);
+  console.log({ uniqueIngredients });
+  const shipmentSourcesCount = getshipmentSourcesCountProducts(products);
   return (
-    <>
+    <div className="listitemDescription">
       <div className="listitemDescription">
+        <div></div>
+        <div>Ukupno proizvoda: {products.length}</div>
+        <div>
+          Korištene sorte:{" "}
+          {Array.from(uniqueIngredients)
+            .map((ing) => ing)
+            .join(", ")}
+        </div>
+        <div>Ukupno isporučeno: {shipmentSourcesCount}</div>
+        <div>
+          Ukupno proizvedeno: {productionStockQuantity + warehouseStockQuantity}
+        </div>
         <div>Kreirano proizvodnih procesa: {productionProccesses.length}</div>
       </div>
       <ManagerWorkers
@@ -74,7 +102,7 @@ export const ProductionManagerListItem = ({ workers }) => {
           0,
         )}
       />
-    </>
+    </div>
   );
 };
 

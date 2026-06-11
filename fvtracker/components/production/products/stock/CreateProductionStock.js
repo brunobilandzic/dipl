@@ -13,7 +13,7 @@ import { getAvailableFacilities } from "@/lib/utils/production/facilities";
 import { ChooseWorker } from "@/components/workers/choose";
 import { PRODUCTION_MANAGER } from "@/lib/constants/users/managerTypes";
 import { checkValue } from "@/lib/utils/formValidation";
-import { editProductStocks } from "@/store/production";
+import { addProductStock, editProductStocks } from "@/store/production";
 
 export const CreateProductionStock = ({
   product,
@@ -80,6 +80,7 @@ export const CreateProductionStock = ({
           warehouseStocks: newProductionStock.product.warehouseStocks,
         }),
       );
+      dispatch(addProductStock(newProductionStock));
       dispatch(setLoading(false));
     } catch (error) {
       dispatch(setLoading(false));

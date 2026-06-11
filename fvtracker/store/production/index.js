@@ -1,6 +1,6 @@
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { filterItems, sortItems } from "@/lib/utils/list";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import api from "@/lib/api";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -15,10 +15,6 @@ const initialState = {
     filteredItems: null,
   },
   productStocks: {
-    items: null,
-    filteredItems: null,
-  },
-  machines: {
     items: null,
     filteredItems: null,
   },
@@ -100,13 +96,6 @@ const productsSlice = createSlice({
         sortBy,
       });
     },
-    setMachines: (state, action) => {
-      state.machines.items = action.payload;
-      state.machines.filteredItems = sortItems({
-        items: action.payload,
-        sortBy: SORT_INIT_VALUE,
-      });
-    },
     setFacilities: (state, action) => {
       state.facilities.items = action.payload;
       state.facilities.filteredItems = sortItems({
@@ -134,6 +123,10 @@ const productsSlice = createSlice({
     },
     unselectFacility: (state) => {
       state.facilities.selected = null;
+    },
+    addProductStock: (state, action) => {
+      state.productStocks.items.push(action.payload);
+      state.productStocks.filteredItems.push(action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -214,12 +207,12 @@ export const {
   setManagers,
   sortProducts,
   filterProducts,
-  setMachines,
   setFacilities,
   sortFacilities,
   filterFacilities,
   setSelectedFacility,
   unselectFacility,
+  addProductStock,
   editProductStocks,
 } = productsSlice.actions;
 

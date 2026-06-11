@@ -245,6 +245,7 @@ export const {
   unselectFacility,
   editProductionStock,
   editProductStocks,
+  editFacilityProductionStock,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

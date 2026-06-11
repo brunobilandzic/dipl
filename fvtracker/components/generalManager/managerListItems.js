@@ -88,7 +88,6 @@ export const FinancialManagerListItem = ({ workers, allWorkers }) => {
 export const WarehouseManagerListItem = ({ workers, warehouseRequests }) => {
   const warehouses = useSelector((state) => state.warehouse.warehouses.items);
   if (!warehouses) return <LoadingFullScreen />;
-  console.log({ warehouseRequests });
   return (
     <>
       <div className="listitemDescription">

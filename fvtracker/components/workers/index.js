@@ -125,7 +125,8 @@ const WorkerItem = ({ worker, children, dispatch, router }) => {
         <div>
           <div>
             <div>
-              {worker.appUser.name} {worker.appUser.surname}
+              {worker.appUser.name} {worker.appUser.surname} -{" "}
+              {worker.appUser.username}
             </div>
             <div className="text-sm text-gray-500">
               {showDate(worker.createdAt)}

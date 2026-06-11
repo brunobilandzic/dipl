@@ -7,7 +7,6 @@ export const ChooseWorker = ({ workers, onChoose, managerModelName }) => {
       w.employmentRequest.status === EMPLOYMENT_STATUS_EMPLOYED &&
       w.manager.managerModelName === managerModelName,
   );
-  console.log({ workerOptions });
   return (
     <AppSelect
       label="Radnik"

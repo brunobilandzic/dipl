@@ -25,8 +25,9 @@ export async function POST(request) {
       );
     }
     const body = await request.json();
-    const newPlantage = await cultivation.plants.create(body);
-    return Response.json(newPlantage, { status: 200 });
+    const { plantedCropVarieties: newPlantage, plantageWork } =
+      await cultivation.plants.create(body);
+    return Response.json({ newPlantage, plantageWork }, { status: 200 });
   } catch (error) {
     console.error("Error creating plantage:", error);
     return Response.json(

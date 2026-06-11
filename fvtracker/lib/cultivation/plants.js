@@ -75,18 +75,19 @@ export async function createPlantage({
     select: "planted field",
   });
 
-  const plantedCropVarieties = await createPlantedCropVarietiesCells({
-    cultivationId,
-    cropVarietyId,
-    relativeCoords,
-    harvestedAt,
-    plantedAt,
-    planted: cultivation.cultivationArea.planted,
-    plantingPlanId,
-    fieldId: cultivation.cultivationArea.field,
-    workerId,
-  });
-  return plantedCropVarieties;
+  const { plantedCropVarieties, plantageWork } =
+    await createPlantedCropVarietiesCells({
+      cultivationId,
+      cropVarietyId,
+      relativeCoords,
+      harvestedAt,
+      plantedAt,
+      planted: cultivation.cultivationArea.planted,
+      plantingPlanId,
+      fieldId: cultivation.cultivationArea.field,
+      workerId,
+    });
+  return { plantedCropVarieties, plantageWork };
 }
 
 export async function createPlantedCropVarietiesCells({
@@ -187,7 +188,8 @@ export async function createPlantedCropVarietiesCells({
     await plantingPlanItem.save();
     await cropVariety.save();
     plantedCropVarieties.push(...updatedPlcvs);
-    return plantedCropVarieties;
+    console.log({ plantedCropVarieties });
+    return { plantedCropVarieties, plantageWork };
   }
 
   // for speed

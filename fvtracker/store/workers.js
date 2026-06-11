@@ -1,6 +1,6 @@
 import api from "@/lib/api";
 import { filterItems, sortItems } from "@/lib/utils/list";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
   items: [],
@@ -85,6 +85,11 @@ const workersSlice = createSlice({
     setError: (state, action) => {
       state.error = action.payload;
     },
+    plantPayWorker: (state, action) => {
+      const { workerId, plantageWork } = action.payload;
+      console.log({ workerId, plantageWork });
+      state.worker.plantageWorks.push(plantageWork);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -168,6 +173,7 @@ export const {
   setError,
   updateWorker,
   filterEmploymentRequests,
+  plantPayWorker,
   updateEmploymentRequest,
 } = workersSlice.actions;
 

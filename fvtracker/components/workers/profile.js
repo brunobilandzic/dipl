@@ -1,6 +1,6 @@
 "use client";
 
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { LoadingFullScreen } from "../layout/loading";
 import { WORKER_TRANSLATION } from "@/lib/constants/users/workers";

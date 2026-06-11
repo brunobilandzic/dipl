@@ -20,8 +20,7 @@ import handleError from "@/lib/constants/errors/client/handleError";
 import { useRouter } from "next/navigation";
 import { getDimensionsCA } from "@/lib/utils/cultivation/fields/cultivationAreas";
 import { refreshFields } from "@/lib/utils/cultivation/fields/fields";
-import { fetchWorkers } from "@/store/workers";
-import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
+import {  plantPayWorker } from "@/store/workers";
 
 export const SeedingModal = ({
   isOpen,
@@ -242,7 +241,7 @@ export const SeedingModal = ({
       const body = preparePlantageBody(newPlantage);
       dispatch(setLoading(true));
       const res = await api.post("/cultivation/plant/new-plantage", body);
-      const newPlantageFromRes = res.data;
+      const { newPlantage: newPlantageFromRes, plantageWork } = res.data;
       dispatch(
         createPlantage({
           cultivationId: newPlantage.cultivationId,
@@ -250,7 +249,12 @@ export const SeedingModal = ({
           cropVarietyId: newPlantage.variety._id,
         }),
       );
-      console.log(newPlantageFromRes);
+      dispatch(
+        plantPayWorker({
+          workerId: newPlantage.workerId,
+          plantageWork,
+        }),
+      );
       /*
       dispatch(fetchWorkers(CULTIVATION_MANAGER));
      

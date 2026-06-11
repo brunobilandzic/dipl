@@ -10,6 +10,10 @@ import { checkEmpty } from "@/lib/utils/objects";
 import { getAvailableFacilities } from "@/lib/utils/production/facilities";
 import { submitWarehouseStock } from "@/lib/utils/storage/warehouse";
 import { setLoading } from "@/store/loading";
+import {
+  editFacilityProductionStock,
+  editProductStocks,
+} from "@/store/production";
 import { useEffect, useState } from "react";
 
 import React from "react";
@@ -78,8 +82,25 @@ const CreateWarehouseStock = ({
       dispatch(setLoading(true));
       const newWareHouseStock = await submitWarehouseStock({
         warehouseStockData: warehouseStock,
+        facility,
       });
-      fillProductionRedux({ dispatch });
+      if (facility) {
+        dispatch(
+          editFacilityProductionStock({
+            stockId: warehouseStock.productionStockId,
+            quantity: warehouseStock.quantity,
+          }),
+        );
+      } else {
+        dispatch(
+          editProductStocks({
+            productId: product._id,
+            productionStocks: newWareHouseStock.product.productionStocks,
+            warehouseStocks: newWareHouseStock.product.warehouseStocks,
+          }),
+        );
+      }
+
       dispatch(setLoading(false));
       alert(`Zalihe proizvoda uspješno izrađene.`);
     } catch (error) {

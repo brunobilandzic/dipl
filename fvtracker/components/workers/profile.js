@@ -13,6 +13,7 @@ import { workerTotalPay } from "@/lib/utils/workers/pay";
 export const WorkerProfile = () => {
   const { data: session } = useSession();
   const workerId = session?.user?.workerId;
+  const workerType = session?.user?.workerType;
   console.log("WorkerProfile session:", session);
   const worker = useSelector((state) => state.workers.worker);
   const dispatch = useDispatch();
@@ -63,6 +64,15 @@ const WorkerCommonInfo = ({
         <p>Satnica: {hourlyRate} €/h</p>
         <p>Isplaćemo: {payedAmount} €</p>
       </div>
+    </div>
+  );
+};
+
+const WorkerSectorInfo = ({ workerType, children }) => {
+  return (
+    <div>
+      <h3 className="text-lg">{WORKER_TRANSLATION[workerType]}</h3>
+      {children}
     </div>
   );
 };

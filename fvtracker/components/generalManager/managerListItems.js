@@ -68,15 +68,10 @@ export const CultivationManagerListItem = ({ workers }) => {
 
 export const ProductionManagerListItem = ({ workers }) => {
   const products = useSelector((state) => state.production.products.items);
-  useEffect(() => {
-    if (products) return console.log({ products });
-  }, [products]);
   const productionProccesses = workers.flatMap((w) => w.productionProcesses);
-  console.log({ productionProccesses });
   const productionStockQuantity = getProductionStockQuantity(products);
   const warehouseStockQuantity = getWarehouseStockQuantity(products);
   const uniqueIngredients = getUniqueIngredients(products);
-  console.log({ uniqueIngredients });
   const shipmentSourcesCount = getshipmentSourcesCountProducts(products);
   return (
     <div className="listitemDescription">

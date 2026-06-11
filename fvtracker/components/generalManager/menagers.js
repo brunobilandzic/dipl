@@ -74,7 +74,8 @@ const ManagerListItem = ({ manager, workers, allWorkers }) => {
     return <Loading />;
   }
 
-  if (manager.managerModelName === PRODUCTION_MANAGER) console.log({manager: manager.specificManager})
+  if (manager.managerModelName === PRODUCTION_MANAGER)
+    console.log({ manager: manager.specificManager });
 
   return (
     <>
@@ -86,10 +87,13 @@ const ManagerListItem = ({ manager, workers, allWorkers }) => {
           </div>
         </div>
         {manager.managerModelName === PRODUCTION_MANAGER && (
-          <ProductionManagerListItem workers={workers} />
+          <ProductionManagerListItem workers={workers} productsLength={manager.specificManager.products.length} ingredients={manager.specificManager.ingredients} />
         )}
         {manager.managerModelName === WAREHOUSE_MANAGER && (
-          <WarehouseManagerListItem workers={workers} warehouseRequests={manager.specificManager.warehouseRequests} />
+          <WarehouseManagerListItem
+            workers={workers}
+            warehouseRequests={manager.specificManager.warehouseRequests}
+          />
         )}
         {manager.managerModelName === CULTIVATION_MANAGER && (
           <CultivationManagerListItem workers={workers} />

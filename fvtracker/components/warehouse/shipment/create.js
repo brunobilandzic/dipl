@@ -25,6 +25,7 @@ export const CreateShipmentModal = ({
   shipmentItems,
   oldShipment,
   order,
+  router,
 }) => {
   const workers = useSelector((state) => state.workers.items);
   const workerId = useSelector((state) => state.user.session?.workerId);
@@ -69,7 +70,7 @@ export const CreateShipmentModal = ({
         setNewShipmentData(emptyShipment);
         onCancel();
       }}
-      onSubmit={() => submitShipment({ newShipmentData, dispatch })}
+      onSubmit={() => submitShipment({ newShipmentData, dispatch, router })}
       title="Otpremnica"
       submitDisabled={checkEmpty(newShipmentData, true)}
     >

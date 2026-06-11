@@ -100,6 +100,7 @@ const WarehouseRequestListItem = ({ request, router }) => {
           shipmentItems={warehouseRequestItems(request)}
           oldShipment={request.shipment}
           order={order}
+          router={router}
         />
       )}
     </>

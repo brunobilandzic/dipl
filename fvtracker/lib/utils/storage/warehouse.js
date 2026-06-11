@@ -138,7 +138,7 @@ export const isRequestFulfilled = ({ neededQuantities }) => {
   return neededQuantities.every((nq) => nq.neededQuantity <= 0);
 };
 
-export const submitShipment = async ({ newShipmentData, dispatch }) => {
+export const submitShipment = async ({ newShipmentData, dispatch, router }) => {
   try {
     dispatch(setLoading(true));
     await api.post("/warehouse-requests/fill", {

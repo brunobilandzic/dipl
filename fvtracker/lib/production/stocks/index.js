@@ -134,6 +134,10 @@ export const createProductStock = async ({
   await harvestingBatch.save();
   await productionProcess.save();
   await stock.save();
+  await stock.populate({
+    path: "product",
+    select: "warehouseStocks productionStocks",
+  });
   return stock;
 };
 

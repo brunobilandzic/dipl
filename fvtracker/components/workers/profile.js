@@ -35,7 +35,11 @@ export const WorkerProfile = () => {
         totalPay={workerTotalPay(worker).totalPay}
         totalHours={workerTotalPay(worker).totalHours}
       />
-      <>{JSON.stringify(worker)}</>
+      <WorkerSectorInfo workerType={workerType}>
+        {workerType === "WarehouseWorker" && (
+          <WarehouseWorkerInfo shipmentItems={worker.shipmentItems} />
+        )}
+      </WorkerSectorInfo>
     </>
   );
 };

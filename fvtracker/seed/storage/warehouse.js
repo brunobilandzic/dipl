@@ -7,6 +7,7 @@ import {
 import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
 import { acceptWarehouseStock } from "@/lib/warehouses/accept";
 import { ProductionWorker } from "@/models/user/workers/ProductionWork";
+import { getEmployedWorker } from "@/lib/workers/get";
 
 export const seedWarehouse = async () => {
   const warehouseManager = await WarehouseManager.findOne();
@@ -44,7 +45,7 @@ export const createWarehouseStockSeed = async ({
   productionStock,
   warehouseId,
 }) => {
-  const productionWorker = await ProductionWorker.findOne();
+  const productionWorker = await getEmployedWorker("ProductionWorker");
   const warehouseStock = await acceptWarehouseStock({
     product,
     quantity: 3,

@@ -14,6 +14,7 @@ import {
 import { ProductionWorker } from "@/models/user/workers/ProductionWork";
 import { ProductionStock } from "@/models/sectors/production/Facility";
 import { ProductionProcess } from "@/models/sectors/production/Process";
+import { getEmployedWorker } from "@/lib/workers/get";
 
 export const createProducts = async () => {
   await Product.deleteMany({}); // Clear existing products
@@ -87,7 +88,7 @@ export const createProductStockSeed = async ({
   if (!batchWithResources) {
     return { productionStock: null, stop: false };
   }
-  const productionWorker = await ProductionWorker.findOne();
+  const productionWorker = await getEmployedWorker("ProductionWorker");
   const productionStock = await createProductStock({
     productId: product._id,
     harvestingBatchId: batchWithResources._id,

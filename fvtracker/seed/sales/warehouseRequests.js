@@ -4,6 +4,7 @@ import { WarehouseManager } from "@/models/user/managers/WarehouseManager";
 import { createShipments } from "./shipment";
 import { WAREHOUSE_REQUESTED } from "@/lib/constants/webstore/orders";
 import { FinancialWorker } from "@/models/user/workers/FinancialWork";
+import { getEmployedWorker } from "@/lib/workers/get";
 
 export const createWarehouseRequests = async ({ orders }) => {
   const financialManager = await FinancialManager.findOne({}).select(
@@ -12,7 +13,7 @@ export const createWarehouseRequests = async ({ orders }) => {
   const warehouseManager = await WarehouseManager.findOne({}).select(
     "_id warehouseRequests ",
   );
-  const financialWorker = await FinancialWorker.findOne();
+  const financialWorker = await getEmployedWorker("FinancialWorker");
   const createdWarehouseRequests = [];
   for (const order of orders) {
     const warehouseRequest = new WarehouseRequest({

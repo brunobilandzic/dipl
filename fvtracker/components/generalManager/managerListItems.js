@@ -7,8 +7,6 @@ import {
   EMPLOYMENT_STATUS_UNEMPLOYED,
 } from "@/lib/constants/users/workers";
 import { workerTotalPay, workPayWarehouse } from "@/lib/utils/workers/pay";
-import { useEffect } from "react";
-import { setProducts } from "@/store/production";
 import {
   getProductionStockQuantity,
   getUniqueIngredients,

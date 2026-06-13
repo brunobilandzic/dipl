@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { LoadingFullScreen } from "../layout/loading";
+import { Loading } from "../layout/loading";
 import { ManagerWorkers } from "./managerWorkers";
 import {
   EMPLOYMENT_STATUS_EMPLOYED,
@@ -18,7 +18,7 @@ import { getshipmentSourcesCountProducts } from "@/lib/utils/webstore/shipments"
 
 export const CultivationManagerListItem = ({ workers }) => {
   const fields = useSelector((state) => state.cultivation.fields);
-  if (!fields) return <LoadingFullScreen />;
+  if (!fields) return <Loading />;
   const cultivationAreas = fields.flatMap((field) => field.cultivationAreas);
   const cultivations = cultivationAreas.flatMap((area) => area.cultivations);
   const plantedCropVarieties = cultivations.flatMap(
@@ -31,7 +31,7 @@ export const CultivationManagerListItem = ({ workers }) => {
     (cultivation) => cultivation.harvestWorks,
   );
 
-  if (!fields) return <LoadingFullScreen />;
+  if (!fields) return <Loading />;
   return (
     <div className="listitemDescription">
       <div> Kreirano polja: {fields.length}</div>
@@ -68,6 +68,7 @@ export const CultivationManagerListItem = ({ workers }) => {
 
 export const ProductionManagerListItem = ({ workers }) => {
   const products = useSelector((state) => state.production.products.items);
+  if (!products) return <Loading />;
   const productionProccesses = workers.flatMap((w) => w.productionProcesses);
   const productionStockQuantity = getProductionStockQuantity(products);
   const warehouseStockQuantity = getWarehouseStockQuantity(products);
@@ -103,7 +104,7 @@ export const ProductionManagerListItem = ({ workers }) => {
 
 export const FinancialManagerListItem = ({ workers, allWorkers }) => {
   const procurments = useSelector((state) => state.procurments.items);
-  if (!procurments) return <LoadingFullScreen />;
+  if (!procurments) return <Loading />;
   return (
     <div className="listitemDescription">
       <div>
@@ -155,7 +156,7 @@ export const FinancialManagerListItem = ({ workers, allWorkers }) => {
 
 export const WarehouseManagerListItem = ({ workers, warehouseRequests }) => {
   const warehouses = useSelector((state) => state.warehouse.warehouses.items);
-  if (!warehouses) return <LoadingFullScreen />;
+  if (!warehouses) return <Loading />;
   return (
     <>
       <div className="listitemDescription">

@@ -200,6 +200,8 @@ function NavItems() {
       fillOrdersRedux({ dispatch, router });
       fillWarehouseRequestsRedux({ dispatch });
       fetchEmploymentRequests();
+      refreshFields({ dispatch, router, generalManager: true, fieldsRedux });
+      fillProductionRedux({ dispatch, router, all: true });
     }
   }, [status]);
 

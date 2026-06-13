@@ -6,6 +6,13 @@ import { ROLE_STATUSES } from "../constants/users";
 import "@/models/documents/requests/RoleRequest";
 import { cache } from "react";
 export async function fetchSessionAppUser() {
+  async function fetchSessionEmail() {
+    const session = await auth();
+    if (!session) {
+      throw new Error("No session found: fetch email failed");
+    }
+    return session.user.email;
+  }
   const email = await fetchSessionEmail();
   if (!email) {
     throw new Error("No email found in session: cannot fetch app user");
@@ -20,14 +27,6 @@ export async function fetchSessionAppUser() {
   return appUser;
 }
 
-async function fetchSessionEmail() {
-  const session = await auth();
-  if (!session) {
-    throw new Error("No session found: fetch email failed");
-  }
-  return session.user.email;
-}
-
 export const checkGeneralManagerRequest = async (generalManager) => {
   if (
     !generalManager.generalManagerRequest ||
@@ -38,8 +37,6 @@ export const checkGeneralManagerRequest = async (generalManager) => {
   return { unauthorized: false };
 };
 
-// ── Cached jezgra: prima primitivni argument (string = stabilan cache ključ),
-// nikad ne baca, vraća rezultat + razlog neuspjeha ──────────────────────────
 const fetchSpecificManagerCached = cache(async (managerName) => {
   const appUser = await fetchSessionAppUser(); // također cache-irana
 
@@ -72,7 +69,6 @@ const fetchSpecificManagerCached = cache(async (managerName) => {
   return { specificManager, failReason: null };
 });
 
-// ── Javni API: isti potpis kao prije, throw logika izvan cachea ────────────
 export async function fetchSessionSpecificManager({
   managerName,
   throwError = true,

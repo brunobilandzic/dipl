@@ -7,9 +7,7 @@ export function LoginButton() {
   return (
     <button
       className="btn submitButton"
-      onClick={() => {
-        signIn();
-      }}
+      onClick={() => signIn(undefined, { callbackUrl: "/profil" })}
     >
       Prijava
     </button>

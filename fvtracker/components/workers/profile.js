@@ -18,10 +18,6 @@ export const WorkerProfile = () => {
   return (
     <>
       <WorkerCommonInfo
-        name={worker.appUser.name}
-        surname={worker.appUser.surname}
-        email={worker.appUser.email}
-        status={worker.employmentRequest.status}
         hourlyRate={worker.hourlyRate}
         payedAmount={worker.payedAmount}
         totalPay={workerTotalPay(worker).totalPay}
@@ -36,11 +32,7 @@ export const WorkerProfile = () => {
   );
 };
 
-const WorkerCommonInfo = ({
-  name,
-  surname,
-  email,
-  status,
+export const WorkerCommonInfo = ({
   hourlyRate,
   payedAmount,
   totalPay,
@@ -48,13 +40,7 @@ const WorkerCommonInfo = ({
 }) => {
   return (
     <div>
-      <div className="text-2xl font-bold">Osobni podaci</div>
       <div className="flex flex-col  my-4">
-        <h2>
-          {name} {surname}
-        </h2>
-        <p>Email: {email}</p>
-        <p>Status: {WORKER_TRANSLATION[status]}</p>
         <p>Zarađeno: {totalPay} €</p>
         <p>Ukupno sati: {totalHours}</p>
         <p>Satnica: {hourlyRate} €/h</p>

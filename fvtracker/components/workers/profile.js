@@ -51,18 +51,12 @@ export const WorkerCommonInfo = ({
 };
 
 export const WorkerSectorInfo = ({ workerType, children }) => {
-  return (
-    <div>
-      {children}
-    </div>
-  );
+  return <div>{children}</div>;
 };
 
 export const WarehouseWorkerInfo = ({ shipmentItems }) => {
   const shippedPrducts =
     shipmentItemsShipmentItemsProductQuantity(shipmentItems);
-  console.log("WarehouseWorkerInfo shipmentItems:", shipmentItems);
-  console.log("WarehouseWorkerInfo shippedProducts:", shippedPrducts);
   return (
     <div>
       <div>Učinjeno otpremnica: {shipmentItems.length}</div>
@@ -81,4 +75,16 @@ export const WarehouseWorkerInfo = ({ shipmentItems }) => {
   );
 };
 
+export const CultivationWorkerInfo = ({ plantageWorks, harvestWorks }) => {
+  console.log({
+    plantageWorks,
+    harvestWorks,
+  });
 
+  return (
+    <div>
+      <div>Obavljeno posla na plantaži: {plantageWorks.length}</div>
+      <div>Obavljeno posla na žetvi: {harvestWorks.length}</div>
+    </div>
+  );
+};

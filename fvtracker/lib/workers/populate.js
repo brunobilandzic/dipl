@@ -41,20 +41,7 @@ export const cultivationPopulate = [
           },
         ],
       },
-    ],
-    /* populate: {
-      path: "plantage",
-      select: "cultivation plantageItems",
-      populate: [
-        {
-          path: "cultivation",
-          select: "name",
-        },
-        {
-          path: "plantageItems",
-        },
-      ],
-    }, */
+    ]
   },
 ];
 

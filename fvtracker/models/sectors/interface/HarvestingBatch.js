@@ -181,10 +181,6 @@ harvestingBatchItemSchema.methods.addHarvestWork = async function ({
     harvestedCoords,
     harvestingBatchItem: this._id,
   });
-  await harvestWork.populate("worker");
-  await CultivationWorker.findByIdAndUpdate(worker, {
-    $push: { harvestWorks: harvestWork._id },
-  });
 
   this.harvestWorks.push(harvestWork._id);
 

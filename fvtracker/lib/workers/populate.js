@@ -30,7 +30,19 @@ export const cultivationPopulate = [
   },
   {
     path: "plantageWorks",
-    populate: {
+    populate: [
+      {
+        path: "plantingPlanItem",
+        select: "cropVariety",
+        populate: [
+          {
+            path: "cropVariety",
+            populate: populateConfigCropVariety,
+          },
+        ],
+      },
+    ],
+    /* populate: {
       path: "plantage",
       select: "cultivation plantageItems",
       populate: [
@@ -42,7 +54,7 @@ export const cultivationPopulate = [
           path: "plantageItems",
         },
       ],
-    },
+    }, */
   },
 ];
 

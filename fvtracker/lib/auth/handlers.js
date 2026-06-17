@@ -71,6 +71,8 @@ export async function handleCredentials(credentials) {
     name: user.name,
     roleStatus: user.roleStatus,
     username: user.username,
+    name: user.name,
+    surname: user.surname,
     managerId: manager?._id.toString() || null,
     isAdmin: user.isAdmin || false,
     workerType: user.workerType || null,

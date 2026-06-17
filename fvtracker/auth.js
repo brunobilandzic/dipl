@@ -47,6 +47,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.name = user.name;
         token.roleStatus = user.roleStatus;
         token.username = user.username;
+        token.displayName = `${user.name} ${user.surname}`;
         token.managerId = user.managerId;
         token.isAdmin = user.isAdmin || false;
         token.workerType = user.workerType || null;
@@ -87,6 +88,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.generalManagerRequest =
           token.generalManagerRequest || null;
         session.user.employed = token.employed ?? null;
+        session.user.name = token.displayName;
       }
       return session;
     },

@@ -1,6 +1,11 @@
 "use client";
 
 import { LoadingFullScreen } from "@/components/layout/loading";
+import {
+  WarehouseWorkerInfo,
+  WorkerCommonInfo,
+  WorkerSectorInfo,
+} from "@/components/workers/profile";
 import { ROLE_STATUSES } from "@/lib/constants/users";
 import { MANAGER_TRANSLATION } from "@/lib/constants/users/managerTypes";
 import { useSession } from "next-auth/react";

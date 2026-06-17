@@ -11,7 +11,7 @@ export const cultivatedVarieties = ({ works, plant = false }) => {
   works.forEach((work) => {
     const plantName = plant
       ? `${work.plantingPlanItem.cropVariety.cropType.name} - ${work.plantingPlanItem.cropVariety.name}`
-      : `${work.harvestingBatchItem.cropVariety.cropType.name} - ${work.harvestingBatchItem.cropVariety.name}`;
+      : `${work.harvestingBatchItem.cropVariety.cropType.name} - ${work.harvestingBatchItem.cropVariety.name} - ${work.harvestingBatchItem.quality}`;
     if (!varietiesMap.has(plantName)) {
       varietiesMap.set(plantName, 0);
     }

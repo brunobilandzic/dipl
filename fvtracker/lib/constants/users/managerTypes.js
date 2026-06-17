@@ -24,3 +24,11 @@ export const MANAGER_TYPES = [
   WAREHOUSE_MANAGER,
   WORKER,
 ];
+
+export const MANAGER_TRANSLATION = {
+  [GENERAL_MANAGER]: "Generalni menadžer",
+  [CULTIVATION_MANAGER]: "Menadžer kultivacije",
+  [FINANCIAL_MANAGER]: "Financijski menadžer",
+  [PRODUCTION_MANAGER]: "Menadžer proizvodnje",
+  [WAREHOUSE_MANAGER]: "Menadžer skladišta",
+};

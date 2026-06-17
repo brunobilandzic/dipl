@@ -15,7 +15,7 @@ import React, { useEffect } from "react";
 function ProfilePage() {
   const { data: session, status } = useSession();
   const router = useRouter();
-  console.log(session);
+  const worker = useSelector((state) => state.workers.worker);
 
   const { email, employed, workerType, maangerModelName, isAdmin, roleStatus } =
     session?.user || {};

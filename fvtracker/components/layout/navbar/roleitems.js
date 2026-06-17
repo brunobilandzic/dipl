@@ -135,19 +135,11 @@ export default {
   ],
   CultivationWorker: [
     {
-      label: "Radnički profil",
-      path: "/radnicki-profil",
-    },
-    {
       label: "Kultivacija",
       path: "/upravljanje-poljima/pregled",
     },
   ],
   ProductionWorker: [
-    {
-      label: "Radnički profil",
-      path: "/radnicki-profil",
-    },
     {
       label: "Proizvodi",
       path: "/proizvodi",
@@ -155,19 +147,11 @@ export default {
   ],
   WarehouseWorker: [
     {
-      label: "Radnički profil",
-      path: "/radnicki-profil",
-    },
-    {
       label: "Otpremnice",
       path: "/skladiste-zahtjevi",
     },
   ],
   FinancialWorker: [
-    {
-      label: "Radnički profil",
-      path: "/radnicki-profil",
-    },
     {
       label: "Narudžbe",
       path: "/narudzbe",

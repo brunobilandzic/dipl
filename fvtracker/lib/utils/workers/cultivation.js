@@ -10,14 +10,14 @@ export const cultivatedVarieties = ({ works, plant = false }) => {
   const varietiesMap = new Map();
   works.forEach((work) => {
     const plantName = plant
-      ? `${work.plantingPlantItem.cropVariety.cropType} - ${work.plantingPlantItem.cropVariety.name}`
-      : `${work.plantingPlantItem.cropVariety.name} - ${work.plantingPlantItem.cropVariety.name}`;
+      ? `${work.plantingPlanItem.cropVariety.cropType.name} - ${work.plantingPlanItem.cropVariety.name}`
+      : `${work.harvestingBatchItem.cropVariety.cropType.name} - ${work.harvestingBatchItem.cropVariety.name}`;
     if (!varietiesMap.has(plantName)) {
       varietiesMap.set(plantName, 0);
     }
     const quantityPerCell = plant
-      ? work.plantingPlantItem.cropVariety.quantityPerCell
-      : work.harvestingPlanItem.cropVariety.quantityPerCell;
+      ? work.plantingPlanItem.cropVariety.quantityPerCell
+      : work.harvestingBatchItem.cropVariety.quantityPerCell;
     const coordsCount = plant
       ? work.plantedCoords.length
       : work.harvestedCoords.length;

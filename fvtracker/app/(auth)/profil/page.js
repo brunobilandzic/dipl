@@ -2,6 +2,7 @@
 
 import { LoadingFullScreen } from "@/components/layout/loading";
 import {
+  CultivationWorkerInfo,
   WarehouseWorkerInfo,
   WorkerCommonInfo,
   WorkerSectorInfo,
@@ -49,7 +50,12 @@ function ProfilePage() {
             totalHours={workerTotalPay(worker).totalHours}
           />
           <WorkerSectorInfo workerType={workerType}>
-            {}
+            {workerType === "CultivationWorker" && (
+              <CultivationWorkerInfo
+                plantageWorks={worker.plantageWorks}
+                harvestWorks={worker.harvestWorks}
+              />
+            )}
             {workerType === "WarehouseWorker" && (
               <WarehouseWorkerInfo shipmentItems={worker.shipmentItems} />
             )}

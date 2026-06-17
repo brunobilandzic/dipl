@@ -37,6 +37,22 @@ function ProfilePage() {
   return (
     <div>
       <CommonProfilePage {...session.user} />
+      {workerType && worker && (
+        <>
+          <WorkerCommonInfo
+            hourlyRate={worker.hourlyRate}
+            payedAmount={worker.payedAmount}
+            totalPay={workerTotalPay(worker).totalPay}
+            totalHours={workerTotalPay(worker).totalHours}
+          />
+          <WorkerSectorInfo workerType={workerType}>
+            {}
+            {workerType === "WarehouseWorker" && (
+              <WarehouseWorkerInfo shipmentItems={worker.shipmentItems} />
+            )}
+          </WorkerSectorInfo>
+        </>
+      )}
     </div>
   );
 }

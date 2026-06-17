@@ -53,23 +53,13 @@ const CommonProfilePage = ({
   name,
   username,
 }) => {
-  console.log({
-    email,
-    employed,
-    workerType,
-    managerModelName,
-    isAdmin,
-    roleStatus,
-    name,
-    username,
-  });
   const profileRole = () => {
     if (isAdmin) {
       return "Administrator";
     } else if (workerType) {
       return (
         <>
-          <div>Radnik ({workerType})</div>
+          <div>{WORKER_TRANSLATION[workerType]}</div>
           <div>{employed ? "Zaposlen" : "Nezaposlen"}</div>
         </>
       );
@@ -84,13 +74,6 @@ const CommonProfilePage = ({
         </>
       );
     }
-    console.log("Nije prepoznata uloga korisnika, vraćam null");
-    console.log({
-      isAdmin,
-      workerType,
-      managerModelName,
-      roleStatus,
-    });
   };
   return (
     <div>

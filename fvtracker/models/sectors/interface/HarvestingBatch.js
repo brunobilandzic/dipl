@@ -102,6 +102,47 @@ harvestingBatchSchema.methods.findOrCreateItemForCropVariety = async function ({
 };
 
 harvestingBatchSchema.methods.addPlantedCropVarieties = async function ({
+  harvestingPlanItem,
+  plantedCropVarietiesIds,
+  cropVarietyId,
+  quantityPerCell,
+  quality = STANDARD,
+  workerId,
+  cultivationId,
+}) {
+  harvestingPlanItem.plantedCropVarieties.push(plantedCropVarietiesIds);
+  harvestingPlanItem.quantity -=
+    plantedCropVarietiesIds.length *
+    harvestingPlanItem.cropVariety.quantityPerCell;
+  if (harvestingPlanItem.quantity < 0) {
+    harvestingPlanItem.quantity = 0; // Ensure quantity doesn't go negative
+  }
+
+  await PlantedCropVariety.updateMany(
+    { _id: { $in: plantedCropVarietiesIds } },
+    { harvestingPlanItem: harvestingPlanItem._id, harvestedAt: new Date() },
+  );
+
+  const harvestingBatchItem = await this.findOrCreateItemForCropVariety({
+    cropVarietyId: cropVarietyId,
+    quality,
+  });
+  harvestingBatchItem.plantedCropVarieties.push(...plantedCropVarietiesIds);
+  const addedQuantity = plantedCropVarietiesIds.length * quantityPerCell;
+  harvestingBatchItem.batchQuantity += addedQuantity;
+
+  await harvestingBatchItem.addHarvestWork({
+    hoursWorked: docs.length,
+    worker: workerId,
+    cultivation: cultivationId,
+    harvestingPlanItem: harvestingPlanItem._id,
+    harvestedCoords: plantedCropVarietiesIds.map((plcv) => plcv.relativeCoords),
+  });
+
+  await harvestingPlanItem.save();
+};
+
+harvestingBatchSchema.methods.addPlantedCropVarieties_bup = async function ({
   plantedCropVarietiesIds,
   cropVarietyId,
   quantityPerCell,

@@ -8,9 +8,11 @@ import {
 } from "@/components/workers/profile";
 import { ROLE_STATUSES } from "@/lib/constants/users";
 import { MANAGER_TRANSLATION } from "@/lib/constants/users/managerTypes";
+import { WORKER_TRANSLATION } from "@/lib/constants/users/workers";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 function ProfilePage() {
   const { data: session, status } = useSession();

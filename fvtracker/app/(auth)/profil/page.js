@@ -27,9 +27,22 @@ function ProfilePage() {
     }
   }, [status, router]);
 
-  if (!session) router.push("/uloga-nije-odobrena");
-
   return <div>ProfilePage</div>;
 }
 
 export default ProfilePage;
+
+const CommonProfilePage = ({
+  email,
+  employed,
+  workerType,
+  maangerModelName,
+  isAdmin,
+  roleStatus,
+}) => {
+  return (
+    <div>
+      <div className="heading"></div>
+    </div>
+  );
+};

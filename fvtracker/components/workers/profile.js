@@ -64,16 +64,15 @@ const WorkerCommonInfo = ({
   );
 };
 
-const WorkerSectorInfo = ({ workerType, children }) => {
+export const WorkerSectorInfo = ({ workerType, children }) => {
   return (
     <div>
-      <h3 className="text-lg">{WORKER_TRANSLATION[workerType]}</h3>
       {children}
     </div>
   );
 };
 
-const WarehouseWorkerInfo = ({ shipmentItems }) => {
+export const WarehouseWorkerInfo = ({ shipmentItems }) => {
   const shippedPrducts =
     shipmentItemsShipmentItemsProductQuantity(shipmentItems);
   console.log("WarehouseWorkerInfo shipmentItems:", shipmentItems);
@@ -95,3 +94,5 @@ const WarehouseWorkerInfo = ({ shipmentItems }) => {
     </div>
   );
 };
+
+

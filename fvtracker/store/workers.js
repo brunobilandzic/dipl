@@ -1,6 +1,6 @@
 import api from "@/lib/api";
 import { filterItems, sortItems } from "@/lib/utils/list";
-import { createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   items: [],

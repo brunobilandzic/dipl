@@ -7,6 +7,7 @@ export const worksCoordsSum = ({ works, plant = false }) => {
 };
 
 export const cultivatedVarieties = ({ works, plant = false }) => {
+  console.log("calculation begin...", { works, plant });
   const varietiesMap = new Map();
   works.forEach((work) => {
     const plantName = plant
@@ -21,11 +22,13 @@ export const cultivatedVarieties = ({ works, plant = false }) => {
     const coordsCount = plant
       ? work.plantedCoords.length
       : work.harvestedCoords.length;
+    console.log({ plantName, quantityPerCell, coordsCount });
     varietiesMap.set(
       plantName,
       varietiesMap.get(plantName) + coordsCount * quantityPerCell,
     );
   });
+  console.log({ plant, varietiesMap });
   return Array.from(varietiesMap.entries()).map(([name, quantity]) => ({
     name,
     quantity,

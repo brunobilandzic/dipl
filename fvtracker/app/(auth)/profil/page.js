@@ -1,6 +1,8 @@
 "use client";
 
 import { LoadingFullScreen } from "@/components/layout/loading";
+import { ROLE_STATUSES } from "@/lib/constants/users";
+import { MANAGER_TRANSLATION } from "@/lib/constants/users/managerTypes";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
@@ -27,7 +29,11 @@ function ProfilePage() {
     }
   }, [status, router]);
 
-  return <div>ProfilePage</div>;
+  return (
+    <div>
+      <CommonProfilePage {...session.user} />
+    </div>
+  );
 }
 
 export default ProfilePage;
@@ -36,13 +42,57 @@ const CommonProfilePage = ({
   email,
   employed,
   workerType,
-  maangerModelName,
+  managerModelName,
   isAdmin,
   roleStatus,
+  name,
+  username,
 }) => {
+  console.log({
+    email,
+    employed,
+    workerType,
+    managerModelName,
+    isAdmin,
+    roleStatus,
+    name,
+    username,
+  });
+  const profileRole = () => {
+    if (isAdmin) {
+      return "Administrator";
+    } else if (workerType) {
+      return (
+        <>
+          <div>Radnik ({workerType})</div>
+          <div>{employed ? "Zaposlen" : "Nezaposlen"}</div>
+        </>
+      );
+    } else if (managerModelName) {
+      return (
+        <>
+          <div>{MANAGER_TRANSLATION[managerModelName]}</div>
+          <div>
+            Zahtjev za ulogu:{" "}
+            {roleStatus === ROLE_STATUSES.APPROVED ? "Odobren" : "Nije odobren"}
+          </div>
+        </>
+      );
+    }
+    console.log("Nije prepoznata uloga korisnika, vraćam null");
+    console.log({
+      isAdmin,
+      workerType,
+      managerModelName,
+      roleStatus,
+    });
+  };
   return (
     <div>
-      <div className="heading"></div>
+      <div className="text-2xl font-bold underline">{name}</div>
+      <div>{profileRole()}</div>
+      <div>Korisničko ime: {username}</div>
+      <div>Email: {email}</div>
     </div>
   );
 };

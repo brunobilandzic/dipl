@@ -9,7 +9,10 @@ import {
   shipmentItemsShipmentItemsProductQuantity,
 } from "@/lib/utils/workers/warehouse";
 import { workerTotalPay } from "@/lib/utils/workers/pay";
-import { worksCoordsSum } from "@/lib/utils/workers/cultivation";
+import {
+  cultivatedVarieties,
+  worksCoordsSum,
+} from "@/lib/utils/workers/cultivation";
 
 export const WorkerProfile = () => {
   const workerType = useSelector((state) => state.user.session?.workerType);
@@ -80,6 +83,20 @@ export const CultivationWorkerInfo = ({ plantageWorks, harvestWorks }) => {
   console.log({
     plantageWorks,
     harvestWorks,
+  });
+
+  const cultivatedVarietiesPlanted = cultivatedVarieties({
+    works: plantageWorks,
+    plant: true,
+  });
+  const cultivatedVarietiesHarvested = cultivatedVarieties({
+    works: harvestWorks,
+    plant: false,
+  });
+
+  console.log({
+    cultivatedVarietiesPlanted,
+    cultivatedVarietiesHarvested,
   });
 
   return (

@@ -179,7 +179,6 @@ harvestingBatchItemSchema.methods.addHarvestWork = async function ({
     cultivation,
     harvestingPlanItem,
     harvestedCoords,
-    harvestingBatchItem: this._id,
   });
 
   this.harvestWorks.push(harvestWork._id);

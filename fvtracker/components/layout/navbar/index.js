@@ -51,6 +51,7 @@ export function Navbar() {
       </div>
       <div className="absolute left-1/2 -translate-x-1/2 flex gap-8">
         <NavItems />
+        <Link href="/profil">profil</Link>
       </div>
       <div className=" flex-1 flex justify-end items-center gap-8 ">
         {isAdmin && (
@@ -59,18 +60,22 @@ export function Navbar() {
           </Link>
         )}
         {authenticated ? (
-          <div
-            className="cursor-pointer"
-            onClick={() => {
-              signOut({ callbackUrl: "/" });
-            }}
-          >
-            Odjava
-          </div>
+          <>
+            <div
+              className="cursor-pointer"
+              onClick={() => {
+                signOut({ callbackUrl: "/" });
+              }}
+            >
+              Odjava
+            </div>
+          </>
         ) : (
-          <Link href="/autorizacija">
-            <MdVpnKey className="text-xl -mt-0.5" />
-          </Link>
+          <>
+            <Link href="/autorizacija">
+              <MdVpnKey className="text-xl -mt-0.5" />
+            </Link>
+          </>
         )}
       </div>
     </div>

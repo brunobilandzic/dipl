@@ -9,6 +9,7 @@ import {
   shipmentItemsShipmentItemsProductQuantity,
 } from "@/lib/utils/workers/warehouse";
 import { workerTotalPay } from "@/lib/utils/workers/pay";
+import { worksCoordsSum } from "@/lib/utils/workers/cultivation";
 
 export const WorkerProfile = () => {
   const workerType = useSelector((state) => state.user.session?.workerType);
@@ -85,6 +86,13 @@ export const CultivationWorkerInfo = ({ plantageWorks, harvestWorks }) => {
     <div>
       <div>Obavljeno posla na plantaži: {plantageWorks.length}</div>
       <div>Obavljeno posla na žetvi: {harvestWorks.length}</div>
+      <div>
+        Ukupno posađeno ćelija:{" "}
+        {worksCoordsSum({ works: plantageWorks, plant: true })}
+      </div>
+      <div>
+        Ukupno požnjeveno ćelija: {worksCoordsSum({ works: harvestWorks })}
+      </div>
     </div>
   );
 };

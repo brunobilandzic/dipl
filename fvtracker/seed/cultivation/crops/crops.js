@@ -283,6 +283,61 @@ export const createNewHarvest = async ({
   console.log("creating harvest...", { plantedMap });
   await HarvestingBatchItem.deleteMany();
   await HarvestWork.deleteMany();
+
+  for (const [cvName, plantedCoords] of Object.entries(plantedMap)) {
+    const harvestingPlanItem = harvestingPlan.items.find(
+      (item) => item.cropVariety.name === cvName,
+    );
+    if (!harvestingPlanItem) {
+      continue;
+    }
+    const cropVarietyId = harvestingPlanItem.cropVariety._id;
+    const harvestCoords = plantedCoords.slice(
+      0,
+      Math.floor(plantedCoords.length / 2),
+    );
+
+    const docs = await PlantedCropVariety.find(
+      { relativeCoords: { $in: harvestCoords } },
+      { _id: 1 },
+    );
+    const plcvIds = docs.map((d) => d._id);
+    await PlantedCropVariety.updateMany(
+      { _id: { $in: docs } },
+      { harvestingPlanItem: harvestingPlanItem._id, harvestedAt: new Date() },
+    );
+    const quality = randomElementArray(VARIETIES_QUALITIES);
+
+    const plcvIdCopies = [...plcvIds];
+    const plcvLength = plcvIds.length;
+    const cultivationWorker = await getEmployedWorker("CultivationWorker");
+    for (const quality of VARIETIES_QUALITIES) {
+      const qualityPlcvIds = plcvIdCopies.splice(
+        0,
+        Math.floor(plcvLength / VARIETIES_QUALITIES.length),
+      );
+
+      await harvestingPlan.harvestingBatch.addPlantedCropVarieties({
+        harvestingPlanItem,
+        plantedCropVarietiesIds: qualityPlcvIds,
+        cropVarietyId,
+        quantityPerCell: harvestingPlanItem.cropVariety.quantityPerCell,
+        quality,
+        workerId: cultivationWorker._id,
+        cultivationId,
+      });
+    }
+  }
+};
+
+export const createNewHarvest_bup = async ({
+  harvestingPlan,
+  plantedMap,
+  cultivationId,
+}) => {
+  console.log("creating harvest...", { plantedMap });
+  await HarvestingBatchItem.deleteMany();
+  await HarvestWork.deleteMany();
   for (const [cvName, plantedCoords] of Object.entries(plantedMap)) {
     const harvestingPlanItem = harvestingPlan.items.find(
       (item) => item.cropVariety.name === cvName,

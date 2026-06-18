@@ -67,7 +67,7 @@ export function Navbar() {
             <div
               className="cursor-pointer"
               onClick={() => {
-                signOut({ callbackUrl: "/" });
+                signOut({ callbackUrl: "/autorizacija" });
               }}
             >
               <LogoutSolid />

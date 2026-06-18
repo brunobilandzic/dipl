@@ -10,6 +10,7 @@ import {
   STANDARD,
   VARIETIES_QUALITIES,
 } from "@/lib/constants/cultivation/plants";
+import { harvestWorkPopulate } from "@/lib/workers/works";
 
 const harvestingBatchSchema = new Schema({
   name: {
@@ -144,7 +145,6 @@ harvestingBatchSchema.methods.addPlantedCropVarieties = async function ({
 
   return { harvestWork };
 };
-
 
 harvestingBatchSchema.methods.cropVarietyQuantity = async function ({
   cropVarietyName,

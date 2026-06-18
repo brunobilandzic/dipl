@@ -47,5 +47,5 @@ export async function harvestCells({
     harvestedCoords: toHarvestCells,
   });
 
-  return plantedCropVarieties;
+  return { harvestWork, harvestedCropVarieties: plantedCropVarieties };
 }

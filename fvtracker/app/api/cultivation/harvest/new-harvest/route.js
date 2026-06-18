@@ -23,10 +23,12 @@ export async function POST(req) {
     }
     const body = await req.json();
     const newHarvest = body;
-    console.log({ receivedNewHarvestAPI: newHarvest });
-    const { harvestWork } = await harvestCells(newHarvest);
-    console.log({ harvestWork });
-    return Response.json({ harvestWork }, { status: 201 });
+    const { harvestWork, harvestedCropVarieties } =
+      await harvestCells(newHarvest);
+    return Response.json(
+      { harvestWork, harvestedCropVarieties },
+      { status: 201 },
+    );
   } catch (error) {
     console.error("Error creating new harvest:", error);
     return Response.json(

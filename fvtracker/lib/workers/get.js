@@ -17,22 +17,25 @@ import { EMPLOYMENT_STATUS_EMPLOYED } from "../constants/users/workers.js";
 import { fetchAdmin } from "../auth/fetchSessionData.js";
 
 export const getWorkers = async ({ rootManagerId, managerModelName }) => {
-  const admin = await fetchAdmin();
+  const { unauthorized: notAdmin } = await fetchAdmin();
   let workers;
-
   if (
-    admin ||
+    !notAdmin ||
     [GENERAL_MANAGER, FINANCIAL_MANAGER].includes(managerModelName)
   ) {
+    console.log("Admin or General/Financial Manager fetching all workers");
     workers = await Worker.find().populate(populateCommon);
   } else {
+    console.log(
+      `Fetching workers for rootManagerId: ${rootManagerId} and managerModelName: ${managerModelName}`,
+    );
     workers = await Worker.find({ manager: rootManagerId }).populate(
       populateCommon,
     );
   }
 
   if (
-    admin ||
+    !notAdmin ||
     [GENERAL_MANAGER, FINANCIAL_MANAGER].includes(managerModelName)
   ) {
     // Group workers by their manager type and populate in bulk

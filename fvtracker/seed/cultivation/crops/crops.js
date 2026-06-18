@@ -297,9 +297,9 @@ export const createNewHarvest = async ({
       Math.floor(plantedCoords.length / 2),
     );
 
-    const docs = await PlantedCropVariety.find(
+    const plcvs = await PlantedCropVariety.find(
       { relativeCoords: { $in: harvestCoords } },
-      { _id: 1 },
+      "relativeCoords _id",
     );
     const plcvIds = docs.map((d) => d._id);
     await PlantedCropVariety.updateMany(

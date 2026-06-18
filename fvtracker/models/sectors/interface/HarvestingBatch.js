@@ -132,13 +132,12 @@ harvestingBatchSchema.methods.addPlantedCropVarieties = async function ({
     plantedCropVarietiesIds.length *
     harvestingPlanItem.cropVariety.quantityPerCell;
   harvestingBatchItem.batchQuantity += addedQuantity;
-
   await harvestingBatchItem.addHarvestWork({
     hoursWorked: plantedCropVarietiesIds.length,
     worker: workerId,
     cultivation: cultivationId,
     harvestingPlanItem: harvestingPlanItem._id,
-    harvestedCoords: plantedCropVarietiesIds.map((plcv) => plcv.relativeCoords),
+    harvestedCoords,
   });
 
   await harvestingPlanItem.save();

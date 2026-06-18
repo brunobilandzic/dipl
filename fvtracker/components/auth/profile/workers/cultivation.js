@@ -2,6 +2,7 @@ import {
   cultivatedVarieties,
   worksCoordsSum,
 } from "@/lib/utils/workers/cultivation";
+import { WorkerSectorInfoTitle } from ".";
 
 export const CultivationWorkerInfo = ({ plantageWorks, harvestWorks }) => {
   console.log({
@@ -25,7 +26,7 @@ export const CultivationWorkerInfo = ({ plantageWorks, harvestWorks }) => {
 
   return (
     <div>
-      <div className="info-group-title">Podaci o radu</div>
+      <WorkerSectorInfoTitle title="Podaci o radu" />
       <div className="info-group">
         <div>Obavljeno sadnji: {plantageWorks.length}</div>
         <div>
@@ -48,9 +49,9 @@ export const CultivationWorkerInfo = ({ plantageWorks, harvestWorks }) => {
 const VarietiesList = ({ varietiesMap, plant = true }) => {
   return (
     <div className="list-wrap">
-      <div className="list-wrap-title">
-        {plant ? "Zasađeni plodovi" : "Ubrani plodovi"}
-      </div>
+      <WorkerSectorInfoTitle
+        title={plant ? "Posađene sorte" : "Požnjevene sorte"}
+      />
       <ul className="list-wrap-list list-disc list-inside">
         {varietiesMap.map((variety) => (
           <li key={`${variety.name}-${variety.quantity}`}>

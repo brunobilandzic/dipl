@@ -61,9 +61,6 @@ export function Navbar() {
         )}
         {authenticated ? (
           <>
-            <Link href="/profil">
-              <UserSolid />
-            </Link>
             <div
               className="cursor-pointer"
               onClick={() => {

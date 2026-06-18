@@ -26,7 +26,7 @@ export async function harvestCells({
     }
   ]); 
   const harvestingPlanItem = harvestingPlan.items.find(
-    (item) => item.cropVariety._id === cropVarietyId,
+    (item) => item.cropVariety._id.toString() === cropVarietyId,
   );
   if (!harvestingPlanItem) {
     throw new Error("Stavka plana nije pronađena.");

@@ -132,7 +132,7 @@ harvestingBatchSchema.methods.addPlantedCropVarieties = async function ({
     plantedCropVarietiesIds.length *
     harvestingPlanItem.cropVariety.quantityPerCell;
   harvestingBatchItem.batchQuantity += addedQuantity;
-  await harvestingBatchItem.addHarvestWork({
+  const harvestWork = await harvestingBatchItem.addHarvestWork({
     hoursWorked: plantedCropVarietiesIds.length,
     worker: workerId,
     cultivation: cultivationId,

@@ -317,7 +317,7 @@ export const createNewHarvest = async ({
 
       await harvestingPlan.harvestingBatch.addPlantedCropVarieties({
         harvestingPlanItem,
-        plantedCropVarietiesIds: qualityPlcvIds,
+        plantedCropVarietiesIds: qualityPlcvs.map((plcv) => plcv._id),
         cropVarietyId,
         quantityPerCell: harvestingPlanItem.cropVariety.quantityPerCell,
         quality,

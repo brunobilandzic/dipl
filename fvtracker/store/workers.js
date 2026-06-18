@@ -88,7 +88,19 @@ const workersSlice = createSlice({
     plantPayWorker: (state, action) => {
       const { workerId, plantageWork } = action.payload;
       console.log({ workerId, plantageWork });
-      state.worker.plantageWorks.push(plantageWork);
+      if (state.worker && state.worker._id === workerId) {
+        state.worker.plantageWorks.push(plantageWork);
+      } else {
+        state.items = state.items.map((worker) => {
+          if (worker._id === workerId) {
+            return {
+              ...worker,
+              plantageWorks: [...worker.plantageWorks, plantageWork],
+            };
+          }
+          return worker;
+        });
+      }
     },
   },
   extraReducers: (builder) => {

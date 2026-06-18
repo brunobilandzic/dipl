@@ -212,6 +212,8 @@ harvestingBatchItemSchema.methods.addHarvestWork = async function ({
   await this.save();
   await harvestWork.save();
 
+  await harvestWork.populate(harvestWorkPopulate);
+
   return harvestWork;
 };
 

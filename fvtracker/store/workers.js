@@ -118,15 +118,19 @@ const workersSlice = createSlice({
       }
     },
     warehousePayWorker: (state, action) => {
-      const { workerId, shipmentItems } = action.payload;
+      const { workerId, shipmentItem } = action.payload;
       if (state.worker && state.worker._id === workerId) {
-        state.worker.shipmentItems.push(...shipmentItems);
+        console.log(
+          "Adding shipmentItem to state.worker.shipmentItems:",
+          shipmentItem,
+        );
+        state.worker.shipmentItems.push(shipmentItem);
       } else {
         state.items = state.items.map((worker) => {
           if (worker._id === workerId) {
             return {
               ...worker,
-              shipmentItems: [...worker.shipmentItems, ...shipmentItems],
+              shipmentItems: [...worker.shipmentItems, ...shipmentItem],
             };
           }
           return worker;

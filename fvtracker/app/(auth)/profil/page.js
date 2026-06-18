@@ -1,8 +1,8 @@
 "use client";
 
 import { LoadingFullScreen } from "@/components/layout/loading";
+import { CultivationWorkerInfo } from "@/components/workers/cultivation";
 import {
-  CultivationWorkerInfo,
   WarehouseWorkerInfo,
   WorkerCommonInfo,
   WorkerSectorInfo,

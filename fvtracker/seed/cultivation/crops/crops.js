@@ -306,8 +306,8 @@ export const createNewHarvest = async ({
       { harvestingPlanItem: harvestingPlanItem._id, harvestedAt: new Date() },
     );
 
-    const plcvIdCopies = [...plcvIds];
-    const plcvLength = plcvIds.length;
+    const plcvCopies = [...plcvs];
+    const plcvLength = plcvs.length;
     const cultivationWorker = await getEmployedWorker("CultivationWorker");
     for (const quality of VARIETIES_QUALITIES) {
       const qualityPlcvIds = plcvIdCopies.splice(

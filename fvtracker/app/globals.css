@@ -75,6 +75,8 @@ tbody {
 }
 }
 
+
+
 .stockQuantity {
   @apply absolute -right-6 -top-8 font-extrabold text-blue-900 text-2xl
 }
@@ -116,4 +118,13 @@ body {
 
 .header-icon {
   @apply mx-auto text-3xl rounded-full flex items-center justify-center mb-2;
+}
+
+
+.list-wrap {
+  @apply mb-4 mt-1;
+}
+
+.list-wrap-title {
+  @apply font-semibold mb-2;
 }

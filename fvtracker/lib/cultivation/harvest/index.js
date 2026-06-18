@@ -21,7 +21,10 @@ export async function harvestCells({
       select: "cropVariety quantity plantedCropVarieties",
       populate: { path: "cropVariety", populate: populateConfigCropVariety },
     },
-  ]);
+    {
+      path: "harvestingBatch",
+    }
+  ]); 
   const harvestingPlanItem = harvestingPlan.items.find(
     (item) => item.cropVariety._id === cropVarietyId,
   );

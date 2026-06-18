@@ -1,4 +1,5 @@
 import { populateConfigCropVariety } from "../cultivation/populate";
+import { harvestWorkPopulate } from "./works";
 
 export default [
   {
@@ -18,15 +19,7 @@ export default [
 export const cultivationPopulate = [
   {
     path: "harvestWorks",
-    populate: [
-      {
-        path: "harvestingBatchItem",
-        populate: [
-          { path: "cropVariety", populate: populateConfigCropVariety },
-          { path: "harvestingBatch", select: "name" },
-        ],
-      },
-    ],
+    populate: harvestWorkPopulate,
   },
   {
     path: "plantageWorks",
@@ -41,7 +34,7 @@ export const cultivationPopulate = [
           },
         ],
       },
-    ]
+    ],
   },
 ];
 

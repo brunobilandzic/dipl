@@ -34,10 +34,25 @@ export const CultivationWorkerInfo = ({ plantageWorks, harvestWorks }) => {
       <div>
         Ukupno požnjeveno ćelija: {worksCoordsSum({ works: harvestWorks })}
       </div>
+      <VarietiesList varietiesMap={plantedVarieties} plant={true} />
+      <VarietiesList varietiesMap={harvestedVarieties} plant={false} />
     </div>
   );
 };
 
-const VarietiesList = ({ cultivation }) => {
-  return <div className="list"></div>;
+const VarietiesList = ({ varietiesMap, plant = true }) => {
+  return (
+    <div className="list-wrap">
+      <div className="list-wrap-title">
+        {plant ? "Zasađeni plodovi" : "Ubrani plodovi"}
+      </div>
+      <ul className="list-wrap-list list-disc list-inside">
+        {varietiesMap.map((variety) => (
+          <li key={`${variety.name}-${variety.quantity}`}>
+            {variety.name}: {variety.quantity}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 };

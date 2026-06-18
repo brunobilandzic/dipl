@@ -41,7 +41,7 @@ export default {
 export function Navbar() {
   const { data: session, status } = useSession();
   const authenticated = status === "authenticated";
-  const isAdmin = authenticated && session.user?.isAdmin;
+  const isAdmin = authenticated && session.user?.isAdmin; // for db icon
   const router = useRouter();
   return (
     <div className="z-[200] navbar relative h-16 bg-[var(--navbar-bg)] flex items-center px-10 text-[var(--text-navbar)]">

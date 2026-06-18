@@ -143,24 +143,6 @@ harvestingBatchSchema.methods.addPlantedCropVarieties = async function ({
   await harvestingPlanItem.save();
 };
 
-harvestingBatchSchema.methods.addPlantedCropVarieties_bup = async function ({
-  plantedCropVarietiesIds,
-  cropVarietyId,
-  quantityPerCell,
-  quality = STANDARD,
-}) {
-  // Find or create the corresponding HarvestingBatchItem
-  const item = await this.findOrCreateItemForCropVariety({
-    cropVarietyId: cropVarietyId,
-    quality,
-  });
-  item.plantedCropVarieties.push(...plantedCropVarietiesIds);
-  const addedQuantity = plantedCropVarietiesIds.length * quantityPerCell;
-  item.batchQuantity += addedQuantity;
-  await item.save();
-
-  return item;
-};
 
 harvestingBatchSchema.methods.cropVarietyQuantity = async function ({
   cropVarietyName,

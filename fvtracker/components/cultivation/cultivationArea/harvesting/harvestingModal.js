@@ -260,7 +260,6 @@ export function HarvestingModal({
       }
       dispatch(setLoading(false));
     } catch (error) {
-      dispatch(setLoading(false));
       console.error("Error submitting harvest:", error);
       handleError({
         ...error,

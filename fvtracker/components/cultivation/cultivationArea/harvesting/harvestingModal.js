@@ -186,6 +186,10 @@ export function HarvestingModal({
 
   const handleCropVarietyClick = ({ cropVariety, x, y }) => {
     if (isBeginSelected() && newHarvest.toHarvestCells?.length > 0) {
+      if (cropVariety._id !== newHarvest.cropVariety._id) {
+        alert("Ne možete žeti različite sorte u istoj berbi");
+        return;
+      }
       setChooseNewEnd({
         x,
         y,

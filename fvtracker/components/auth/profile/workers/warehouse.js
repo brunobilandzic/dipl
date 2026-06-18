@@ -1,4 +1,4 @@
-import { shipmentItemsShipmentItemsProductQuantity } from "@/lib/utils/workers/warehouse";
+import { shipmentItemsProductSum, shipmentItemsShipmentItemsProductQuantity } from "@/lib/utils/workers/warehouse";
 
 export const WarehouseWorkerInfo = ({ shipmentItems }) => {
   const shippedPrducts =

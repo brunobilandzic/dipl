@@ -7,9 +7,9 @@ export const WarehouseWorkerInfo = ({ shipmentItems }) => {
     <div>
       <div>Učinjeno otpremnica: {shipmentItems.length}</div>
       <div>Odaslano: {shipmentItemsProductSum(shipmentItems)} proizvoda</div>
-      <div>
-        <h4>Proizvodi:</h4>
-        <ul className="list-disc list-inside">
+      <div className="list-wrap">
+        <div className="list-wrap-title">Odaslani proizvodi:</div>
+        <ul className="list-wrap-list list-disc list-inside">
           {shippedPrducts.map((product) => (
             <li key={`${product.name}-${product.quantity}`}>
               {product.name}: {product.quantity}

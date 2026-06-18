@@ -252,11 +252,11 @@ export function HarvestingModal({
         "/cultivation/harvest/new-harvest",
         prepareHarvestBody(newHarvest),
       );
-      const { harvestWork } = res.data;
+      const { harvestWork, harvestedCropVarieties } = res.data;
       dispatch(
         harvestCells({
           cultivationId: newHarvest.cultivationId,
-          harvestedCropVarieties: res.data.harvestedCropVarieties,
+          harvestedCropVarieties,
           cropVarietyId: newHarvest.cropVariety._id,
         }),
       );

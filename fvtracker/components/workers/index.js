@@ -175,14 +175,21 @@ const CultivationWorker = ({ worker }) => {
         Zarađeno: {totalPay} €, ukupno sati: {totalHours} h, isplaćeno:{" "}
         {worker.payedAmount} €
       </div>
-      <div>
-        Zasađeno: {worksCoordsSum({ works: worker.plantageWorks, plant: true })}
+      <div className="info-group">
+        <div>{worker.plantageWorks.length} radova na sadnji</div>
+        <div>
+          {" "}
+          Ukupno posađeno ćelija:{" "}
+          {worksCoordsSum({ works: worker.plantageWorks, plant: true })}
+        </div>
       </div>
-      <div>
-        Ubrano: {worksCoordsSum({ works: worker.harvestWorks, plant: false })}
+      <div className="info-group">
+        <div>{worker.harvestWorks.length} radova na berbi</div>
+        <div>
+          Ukupno požnjeveno ćelija:{" "}
+          {worksCoordsSum({ works: worker.harvestWorks })}
+        </div>
       </div>
-      <div>{worker.plantageWorks.length} sadnji</div>
-      <div>{worker.harvestWorks.length} berbi</div>
     </>
   );
 };

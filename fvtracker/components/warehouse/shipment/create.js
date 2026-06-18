@@ -28,13 +28,13 @@ export const CreateShipmentModal = ({
   router,
 }) => {
   const workers = useSelector((state) => state.workers.items);
-  const workerId = useSelector((state) => state.user.session?.workerId);
+  const worker = useSelector((state) => state.workers.worker);
 
   const dispatch = useDispatch();
   const emptyShipment = {
     warehouseRequestId,
     sources: [],
-    workerId: workerId || null,
+    workerId: worker?._id || null,
   };
   const [newShipmentData, setNewShipmentData] = useState(emptyShipment);
   const warehouses = useSelector((state) => state.warehouse.warehouses.items);
@@ -47,13 +47,13 @@ export const CreateShipmentModal = ({
   }, [newShipmentData]);
 
   useEffect(() => {
-    if (workerId) {
+    if (worker) {
       setNewShipmentData((prev) => ({
         ...prev,
-        workerId,
+        workerId: worker._id,
       }));
     }
-  }, [workerId]);
+  }, [worker]);
 
   const chooseWorker = (e) => {
     const { name, value } = e.target;
@@ -70,11 +70,13 @@ export const CreateShipmentModal = ({
         setNewShipmentData(emptyShipment);
         onCancel();
       }}
-      onSubmit={() => submitShipment({ newShipmentData, dispatch, router })}
+      onSubmit={() =>
+        submitShipment({ newShipmentData, worker, dispatch, router })
+      }
       title="Otpremnica"
       submitDisabled={checkEmpty(newShipmentData, true)}
     >
-      {!workerId && (
+      {!worker && (
         <ChooseWorker
           workers={workers}
           onChoose={chooseWorker}

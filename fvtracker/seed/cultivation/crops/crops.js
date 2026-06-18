@@ -334,7 +334,7 @@ export const createNewHarvest_bup = async ({
   plantedMap,
   cultivationId,
 }) => {
-  console.log("creating harvest...", { plantedMap });
+  console.log("creating harvest...");
   await HarvestingBatchItem.deleteMany();
   await HarvestWork.deleteMany();
   for (const [cvName, plantedCoords] of Object.entries(plantedMap)) {

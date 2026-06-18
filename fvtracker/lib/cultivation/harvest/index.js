@@ -37,15 +37,16 @@ export async function harvestCells({
     "relativeCoords _id",
   );
 
-  await harvestingPlan.harvestingBatch.addPlantedCropVarieties({
-    harvestingPlanItem,
-    plantedCropVarietiesIds: plantedCropVarieties.map((pcv) => pcv._id),
-    cropVarietyId,
-    quality,
-    workerId,
-    cultivationId,
-    harvestedCoords: toHarvestCells,
-  });
+  const { harvestWork } =
+    await harvestingPlan.harvestingBatch.addPlantedCropVarieties({
+      harvestingPlanItem,
+      plantedCropVarietiesIds: plantedCropVarieties.map((pcv) => pcv._id),
+      cropVarietyId,
+      quality,
+      workerId,
+      cultivationId,
+      harvestedCoords: toHarvestCells,
+    });
 
   return { harvestWork, harvestedCropVarieties: plantedCropVarieties };
 }

@@ -141,6 +141,8 @@ harvestingBatchSchema.methods.addPlantedCropVarieties = async function ({
   });
 
   await harvestingPlanItem.save();
+
+  return { harvestWork };
 };
 
 

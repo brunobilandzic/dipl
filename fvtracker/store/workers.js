@@ -87,7 +87,6 @@ const workersSlice = createSlice({
     },
     plantPayWorker: (state, action) => {
       const { workerId, plantageWork } = action.payload;
-      console.log({ workerId, plantageWork });
       if (state.worker && state.worker._id === workerId) {
         state.worker.plantageWorks.push(plantageWork);
       } else {
@@ -96,6 +95,22 @@ const workersSlice = createSlice({
             return {
               ...worker,
               plantageWorks: [...worker.plantageWorks, plantageWork],
+            };
+          }
+          return worker;
+        });
+      }
+    },
+    harvestPayWorker: (state, action) => {
+      const { workerId, harvestWork } = action.payload;
+      if (state.worker && state.worker._id === workerId) {
+        state.worker.harvestWorks.push(harvestWork);
+      } else {
+        state.items = state.items.map((worker) => {
+          if (worker._id === workerId) {
+            return {
+              ...worker,
+              harvestWorks: [...worker.harvestWorks, harvestWork],
             };
           }
           return worker;
@@ -186,6 +201,7 @@ export const {
   updateWorker,
   filterEmploymentRequests,
   plantPayWorker,
+  harvestPayWorker,
   updateEmploymentRequest,
 } = workersSlice.actions;
 

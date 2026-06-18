@@ -23,8 +23,8 @@ export async function harvestCells({
     },
     {
       path: "harvestingBatch",
-    }
-  ]); 
+    },
+  ]);
   const harvestingPlanItem = harvestingPlan.items.find(
     (item) => item.cropVariety._id.toString() === cropVarietyId,
   );

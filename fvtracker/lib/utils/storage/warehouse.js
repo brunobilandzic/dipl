@@ -4,6 +4,7 @@ import { WAREHOUSE_STOCK } from "@/lib/constants/warehouse";
 import { fetchWarehouses } from "@/store/warehouse";
 import { fillWarehouseRedux } from ".";
 import { setLoading } from "@/store/loading";
+import { warehousePayWorker } from "@/store/workers";
 
 export const totalWarehouseStockQuantity = ({ warehouseStocks }) => {
   return warehouseStocks.reduce((acc, stock) => {
@@ -145,13 +146,20 @@ export const isRequestFulfilled = ({ neededQuantities }) => {
 export const submitShipment = async ({ newShipmentData, dispatch, router }) => {
   try {
     dispatch(setLoading(true));
-    await api.post("/warehouse-requests/fill", {
+    const res = await api.post("/warehouse-requests/fill", {
       shipmentSources: newShipmentData.sources,
       warehouseRequestId: newShipmentData.warehouseRequestId,
       workerId: newShipmentData.workerId,
     });
+    console.log({ res });
+    const { shipmentItem } = res.data;
     alert("Otpremnica uspješno kreirana!");
     fillWarehouseRedux({ dispatch, router });
+    dispatch(
+      warehousePayWorker({
+        shipmentItem,
+      }),
+    );
   } catch (error) {
     console.error("Error submitting shipment:", error);
     handleError({

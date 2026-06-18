@@ -9,6 +9,7 @@ import { getPlantingPlanById, getPlantingPlanItemRecord } from "./plans";
 import { Field } from "@/models/sectors/cultivation/Field";
 import { Worker } from "@/models/user/workers";
 import { PlantageWork } from "@/models/user/workers/CultivationWork";
+import { plantageWorkPopulate } from "../workers/works";
 
 export async function cropsData() {
   const cropMainTypes = await CropMainType.find().populate({
@@ -188,7 +189,7 @@ export async function createPlantedCropVarietiesCells({
     await plantingPlanItem.save();
     await cropVariety.save();
     plantedCropVarieties.push(...updatedPlcvs);
-    console.log({ plantedCropVarieties });
+    await plantageWork.populate(plantageWorkPopulate);
     return { plantedCropVarieties, plantageWork };
   }
 

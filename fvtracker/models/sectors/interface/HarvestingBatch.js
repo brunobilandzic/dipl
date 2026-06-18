@@ -105,10 +105,10 @@ harvestingBatchSchema.methods.addPlantedCropVarieties = async function ({
   harvestingPlanItem,
   plantedCropVarietiesIds,
   cropVarietyId,
-  quantityPerCell,
   quality = STANDARD,
   workerId,
   cultivationId,
+  harvestedCoords,
 }) {
   harvestingPlanItem.plantedCropVarieties.push(plantedCropVarietiesIds);
   harvestingPlanItem.quantity -=

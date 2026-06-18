@@ -6,6 +6,7 @@ import {
   shipmentItemsShipmentItemsProductQuantity,
 } from "@/lib/utils/workers/warehouse";
 import { workerTotalPay } from "@/lib/utils/workers/pay";
+import { CultivationWorkerInfo } from "@/components/workers/cultivation";
 
 export const WorkerProfile = ({ worker, workerType }) => {
   if (!worker) return <LoadingFullScreen />;

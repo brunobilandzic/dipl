@@ -79,5 +79,6 @@ export const getEmployedWorker = async (workerModelName) => {
   if (!employedWorker) {
     throw new Error(`No employed worker found for model: ${workerModelName}`);
   }
+  console.log(`Found employed worker for ${workerModelName}:`, employedWorker);
   return employedWorker;
 };

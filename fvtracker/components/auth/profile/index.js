@@ -8,9 +8,9 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { WorkerProfile } from "./worker";
+import { WorkerProfile } from "./workers";
 
-const ProfileComponent= () => {
+const ProfileComponent = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
   const worker = useSelector((state) => state.workers.worker);

@@ -15,8 +15,7 @@ const ProfileComponent = () => {
   const router = useRouter();
   const worker = useSelector((state) => state.workers.worker);
 
-  const { email, employed, workerType, managerModelName, isAdmin, roleStatus } =
-    session?.user || {};
+  const { workerType } = session?.user || {};
 
   if (status === "loading") {
     return (
@@ -79,8 +78,8 @@ const CommonProfilePage = ({
     }
   };
   return (
-    <div>
-      <div className="text-2xl font-bold underline">{name}</div>
+    <div className="mb-2">
+      <div className="text-2xl font-bold underline mb-2">{name}</div>
       <div>{profileRole()}</div>
       <div>Korisničko ime: {username}</div>
       <div>Email: {email}</div>

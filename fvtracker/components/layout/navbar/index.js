@@ -51,7 +51,7 @@ export function Navbar() {
       </div>
       <div className="absolute left-1/2 -translate-x-1/2 flex gap-8">
         <NavItems />
-        <Link href="/profil">profil</Link>
+        <Link href="/profil">Profil</Link>
       </div>
       <div className=" flex-1 flex justify-end items-center gap-8 ">
         {true && (

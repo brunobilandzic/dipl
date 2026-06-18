@@ -34,48 +34,6 @@ export const WorkerProfile = ({ worker, workerType }) => {
   );
 };
 
-const CommonProfilePage = ({
-  email,
-  employed,
-  workerType,
-  managerModelName,
-  isAdmin,
-  roleStatus,
-  name,
-  username,
-}) => {
-  const profileRole = () => {
-    if (isAdmin) {
-      return "Administrator";
-    } else if (workerType) {
-      return (
-        <>
-          <div>{WORKER_TRANSLATION[workerType]}</div>
-          <div>{employed ? "Zaposlen" : "Nezaposlen"}</div>
-        </>
-      );
-    } else if (managerModelName) {
-      return (
-        <>
-          <div>{MANAGER_TRANSLATION[managerModelName]}</div>
-          <div>
-            Zahtjev za ulogu:{" "}
-            {roleStatus === ROLE_STATUSES.APPROVED ? "Odobren" : "Nije odobren"}
-          </div>
-        </>
-      );
-    }
-  };
-  return (
-    <div>
-      <div className="text-2xl font-bold underline">{name}</div>
-      <div>{profileRole()}</div>
-      <div>Korisničko ime: {username}</div>
-      <div>Email: {email}</div>
-    </div>
-  );
-};
-
 export const WorkerCommonInfo = ({
   hourlyRate,
   payedAmount,

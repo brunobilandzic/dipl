@@ -25,14 +25,18 @@ export const CultivationWorkerInfo = ({ plantageWorks, harvestWorks }) => {
 
   return (
     <div>
-      <div>Obavljeno sadnji: {plantageWorks.length}</div>
-      <div>Obavljeno žetvi: {harvestWorks.length}</div>
-      <div>
-        Ukupno posađeno ćelija:{" "}
-        {worksCoordsSum({ works: plantageWorks, plant: true })}
+      <div className="info-group">
+        <div>Obavljeno sadnji: {plantageWorks.length}</div>
+        <div>
+          Ukupno posađeno ćelija:{" "}
+          {worksCoordsSum({ works: plantageWorks, plant: true })}
+        </div>
       </div>
-      <div>
-        Ukupno požnjeveno ćelija: {worksCoordsSum({ works: harvestWorks })}
+      <div className="info-group">
+        <div>Obavljeno žetvi: {harvestWorks.length}</div>
+        <div>
+          Ukupno požnjeveno ćelija: {worksCoordsSum({ works: harvestWorks })}
+        </div>
       </div>
       <VarietiesList varietiesMap={plantedVarieties} plant={true} />
       <VarietiesList varietiesMap={harvestedVarieties} plant={false} />

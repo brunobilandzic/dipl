@@ -323,6 +323,7 @@ export const createNewHarvest = async ({
         quality,
         workerId: cultivationWorker._id,
         cultivationId,
+        harvestedCoords: qualityPlcvs.map((plcv) => plcv.relativeCoords),
       });
     }
   }

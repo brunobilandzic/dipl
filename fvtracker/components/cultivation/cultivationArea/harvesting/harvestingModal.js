@@ -16,11 +16,8 @@ import { setLoading } from "@/store/loading";
 import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { harvestCells } from "@/store/cultivation";
-import { getPlantageDimensions } from "../planting/seedingModal";
-import {
-  harvestPayWorker,
-} from "@/store/workers";
-import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
+import { harvestPayWorker } from "@/store/workers";
+
 
 export function HarvestingModal({
   isOpen,

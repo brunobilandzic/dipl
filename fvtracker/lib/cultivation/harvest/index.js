@@ -34,7 +34,7 @@ export async function harvestCells({
 
   const plantedCropVarieties = await PlantedCropVariety.find(
     { relativeCoords: { $in: toHarvestCells } },
-    "relativeCoods _id",
+    "relativeCoords _id",
   );
 
   await harvestingPlan.harvestingBatch.addPlantedCropVarieties({

@@ -17,7 +17,7 @@ import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { harvestCells } from "@/store/cultivation";
 import { getPlantageDimensions } from "../planting/seedingModal";
-import { fetchWorkers } from "@/store/workers";
+import { fetchWorkerById, fetchWorkers } from "@/store/workers";
 import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
 
 export function HarvestingModal({
@@ -253,7 +253,11 @@ export function HarvestingModal({
           cropVarietyId: newHarvest.cropVariety._id,
         }),
       );
-      dispatch(fetchWorkers(CULTIVATION_MANAGER));
+      if (workerId) {
+        dispatch(fetchWorkerById(workerId));
+      } else {
+        dispatch(fetchWorkers(CULTIVATION_MANAGER));
+      }
       dispatch(setLoading(false));
     } catch (error) {
       dispatch(setLoading(false));

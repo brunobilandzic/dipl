@@ -9,3 +9,16 @@ export const harvestWorkPopulate = [
     ],
   },
 ];
+
+export const plantageWorkPopulate = [
+  {
+    path: "plantingPlanItem",
+    select: "cropVariety",
+    populate: [
+      {
+        path: "cropVariety",
+        populate: populateConfigCropVariety,
+      },
+    ],
+  },
+];

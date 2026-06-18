@@ -101,8 +101,8 @@ export const CultivationWorkerInfo = ({ plantageWorks, harvestWorks }) => {
 
   return (
     <div>
-      <div>Obavljeno posla na plantaži: {plantageWorks.length}</div>
-      <div>Obavljeno posla na žetvi: {harvestWorks.length}</div>
+      <div>Obavljeno sadnji: {plantageWorks.length}</div>
+      <div>Obavljeno žetvi: {harvestWorks.length}</div>
       <div>
         Ukupno posađeno ćelija:{" "}
         {worksCoordsSum({ works: plantageWorks, plant: true })}

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^3.11.1",
+    "@mynaui/icons-react": "^0.4.3",
     "@react-icons/all-files": "^4.1.0",
     "@reduxjs/toolkit": "^2.11.2",
     "axios": "^1.13.2",

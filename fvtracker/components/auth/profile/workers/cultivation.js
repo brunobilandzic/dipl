@@ -9,18 +9,18 @@ export const CultivationWorkerInfo = ({ plantageWorks, harvestWorks }) => {
     harvestWorks,
   });
 
-  const cultivatedVarietiesPlanted = cultivatedVarieties({
+  const plantedVarieties = cultivatedVarieties({
     works: plantageWorks,
     plant: true,
   });
-  const cultivatedVarietiesHarvested = cultivatedVarieties({
+  const harvestedVarieties = cultivatedVarieties({
     works: harvestWorks,
     plant: false,
   });
 
   console.log({
-    cultivatedVarietiesPlanted,
-    cultivatedVarietiesHarvested,
+    plantedVarieties,
+    harvestedVarieties,
   });
 
   return (
@@ -36,4 +36,8 @@ export const CultivationWorkerInfo = ({ plantageWorks, harvestWorks }) => {
       </div>
     </div>
   );
+};
+
+const VarietiesList = ({ cultivation }) => {
+  return <div className="list"></div>;
 };

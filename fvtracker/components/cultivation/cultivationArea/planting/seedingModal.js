@@ -20,7 +20,7 @@ import handleError from "@/lib/constants/errors/client/handleError";
 import { useRouter } from "next/navigation";
 import { getDimensionsCA } from "@/lib/utils/cultivation/fields/cultivationAreas";
 import { refreshFields } from "@/lib/utils/cultivation/fields/fields";
-import {  plantPayWorker } from "@/store/workers";
+import { plantPayWorker } from "@/store/workers";
 
 export const SeedingModal = ({
   isOpen,
@@ -239,7 +239,6 @@ export const SeedingModal = ({
     dispatch(setLoading(true));
     try {
       const body = preparePlantageBody(newPlantage);
-      dispatch(setLoading(true));
       const res = await api.post("/cultivation/plant/new-plantage", body);
       const { newPlantage: newPlantageFromRes, plantageWork } = res.data;
       dispatch(
@@ -382,6 +381,7 @@ const initialNewPlantage_WId = ({ cultivationId, crops }) => {
     beginY: null,
     endX: null,
     endY: null,
+    workerId: null,
   };
 };
 

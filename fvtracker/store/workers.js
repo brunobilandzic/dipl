@@ -117,6 +117,22 @@ const workersSlice = createSlice({
         });
       }
     },
+    warehousePayWorker: (state, action) => {
+      const { workerId, shipmentItems } = action.payload;
+      if (state.worker && state.worker._id === workerId) {
+        state.worker.shipmentItems.push(...shipmentItems);
+      } else {
+        state.items = state.items.map((worker) => {
+          if (worker._id === workerId) {
+            return {
+              ...worker,
+              shipmentItems: [...worker.shipmentItems, ...shipmentItems],
+            };
+          }
+          return worker;
+        });
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -203,6 +219,7 @@ export const {
   plantPayWorker,
   harvestPayWorker,
   updateEmploymentRequest,
+  warehousePayWorker,
 } = workersSlice.actions;
 
 export default workersSlice.reducer;

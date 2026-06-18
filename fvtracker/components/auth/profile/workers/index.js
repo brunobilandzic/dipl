@@ -42,7 +42,8 @@ export const WorkerCommonInfo = ({
 }) => {
   return (
     <div>
-      <div className="flex flex-col  my-4">
+      <div className="info-group-title">Sati i zarada</div>
+      <div className="info-group">
         <p>Zarađeno: {totalPay} €</p>
         <p>Ukupno sati: {totalHours}</p>
         <p>Satnica: {hourlyRate} €/h</p>

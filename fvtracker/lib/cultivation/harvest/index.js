@@ -72,7 +72,7 @@ export async function harvestCells_bup({
   await harvestingPlan.populate([
     {
       path: "items",
-      select: "cropVariety quantity plantedCropVarieties",
+      select: "cropVariety quantity plantedCropVarieties harvestingBatch",
       populate: { path: "cropVariety", select: "quantityPerCell" },
     },
     { path: "harvestingBatch" },

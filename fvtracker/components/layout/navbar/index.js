@@ -33,6 +33,7 @@ import {
 import { fetchProcurments } from "@/store/procurments";
 import { MdVpnKey } from "@react-icons/all-files/md/MdVpnKey";
 import { FaDatabase } from "@react-icons/all-files/fa/FaDatabase";
+import {  } from "@mynaui/icons-react";
 
 export default {
   roleitems,
@@ -60,14 +61,16 @@ export function Navbar() {
         )}
         {authenticated ? (
           <>
-            <Link href="/profil">Profil</Link>
+            <Link href="/profil">
+              <UserSolid />
+            </Link>
             <div
               className="cursor-pointer"
               onClick={() => {
                 signOut({ callbackUrl: "/" });
               }}
             >
-              Odjava
+              <LogoutSolid />
             </div>
           </>
         ) : (

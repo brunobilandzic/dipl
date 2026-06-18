@@ -33,7 +33,7 @@ import {
 import { fetchProcurments } from "@/store/procurments";
 import { MdVpnKey } from "@react-icons/all-files/md/MdVpnKey";
 import { FaDatabase } from "@react-icons/all-files/fa/FaDatabase";
-import {  } from "@mynaui/icons-react";
+import { LogoutSolid, UserSolid } from "@mynaui/icons-react";
 
 export default {
   roleitems,

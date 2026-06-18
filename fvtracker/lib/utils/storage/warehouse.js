@@ -157,6 +157,7 @@ export const submitShipment = async ({ newShipmentData, dispatch, router }) => {
     fillWarehouseRedux({ dispatch, router });
     dispatch(
       warehousePayWorker({
+        workerId: newShipmentData.workerId,
         shipmentItem,
       }),
     );

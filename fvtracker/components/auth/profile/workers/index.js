@@ -42,8 +42,8 @@ export const WorkerCommonInfo = ({
 }) => {
   return (
     <div>
-      <WorkerSectorInfoTitle title="Podaci o isplati" />
-      <div className="info-group">
+      <WorkerSectorInfoTitle title="Zarada" />
+      <div className="">
         <p>Zarađeno: {totalPay} €</p>
         <p>Ukupno sati: {totalHours}</p>
         <p>Satnica: {hourlyRate} €/h</p>
@@ -54,7 +54,7 @@ export const WorkerCommonInfo = ({
 };
 
 export const WorkerSectorInfo = ({ workerType, children }) => {
-  return <div>{children}</div>;
+  return <div className="worker-sector-info">{children}</div>;
 };
 
 export const WorkerSectorInfoTitle = ({ title }) => {

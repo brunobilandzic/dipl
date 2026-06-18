@@ -130,7 +130,7 @@ const workersSlice = createSlice({
           if (worker._id === workerId) {
             return {
               ...worker,
-              shipmentItems: [...worker.shipmentItems, ...shipmentItem],
+              shipmentItems: [...worker.shipmentItems, shipmentItem],
             };
           }
           return worker;

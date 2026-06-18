@@ -39,7 +39,7 @@ export const getWarehouseRequests = async ({
   warehouseManagerId,
 }) => {
   let filter = {};
-  if(!financialManagerId && !warehouseManagerId) {
+  if (!financialManagerId && !warehouseManagerId) {
     filter = {};
   } else if (financialManagerId || warehouseManagerId) {
     filter = {
@@ -49,7 +49,9 @@ export const getWarehouseRequests = async ({
       ],
     };
   }
-  const requests = await WarehouseRequest.find(filter).populate(warehouseRequestPopulateShipmentItems);
+  const requests = await WarehouseRequest.find(filter).populate(
+    warehouseRequestPopulateShipmentItems,
+  );
   return requests;
 };
 
@@ -185,8 +187,6 @@ export const fillWarehouseRequest = async ({
   await shipment.save();
 
   return {
-    message: "Zahtev je uspešno popunjen i poslat na isporuku.",
-    shipment: warehouseRequest.shipment,
-    warehouseRequest,
+    shipmentItem,
   };
 };

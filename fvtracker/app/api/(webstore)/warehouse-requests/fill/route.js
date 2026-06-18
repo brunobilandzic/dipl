@@ -29,8 +29,7 @@ export async function POST(request) {
       shipmentSources,
       workerId,
     });
-
-    return Response.json(result);
+    return Response.json({ ...result });
   } catch (error) {
     console.error("Error filling warehouse request:", error);
     return Response.json(

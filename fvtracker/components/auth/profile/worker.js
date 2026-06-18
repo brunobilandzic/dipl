@@ -1,17 +1,13 @@
 "use client";
 
-import { useSelector } from "react-redux";
-import { LoadingFullScreen } from "../layout/loading";
+import { LoadingFullScreen } from "@/components/layout/loading";
 import {
   shipmentItemsProductSum,
   shipmentItemsShipmentItemsProductQuantity,
 } from "@/lib/utils/workers/warehouse";
 import { workerTotalPay } from "@/lib/utils/workers/pay";
 
-export const WorkerProfile = () => {
-  const workerType = useSelector((state) => state.user.session?.workerType);
-  const worker = useSelector((state) => state.workers.worker);
-
+export const WorkerProfile = ({ worker, workerType }) => {
   if (!worker) return <LoadingFullScreen />;
   return (
     <>
@@ -22,6 +18,12 @@ export const WorkerProfile = () => {
         totalHours={workerTotalPay(worker).totalHours}
       />
       <WorkerSectorInfo workerType={workerType}>
+        {workerType === "CultivationWorker" && (
+          <CultivationWorkerInfo
+            plantageWorks={worker.plantageWorks}
+            harvestWorks={worker.harvestWorks}
+          />
+        )}
         {workerType === "WarehouseWorker" && (
           <WarehouseWorkerInfo shipmentItems={worker.shipmentItems} />
         )}

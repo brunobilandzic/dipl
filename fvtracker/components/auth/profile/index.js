@@ -1,27 +1,21 @@
 "use client";
 
 import { LoadingFullScreen } from "@/components/layout/loading";
-import { CultivationWorkerInfo } from "@/components/workers/cultivation";
-import {
-  WarehouseWorkerInfo,
-  WorkerCommonInfo,
-  WorkerSectorInfo,
-} from "@/components/workers/profile";
 import { ROLE_STATUSES } from "@/lib/constants/users";
 import { MANAGER_TRANSLATION } from "@/lib/constants/users/managerTypes";
 import { WORKER_TRANSLATION } from "@/lib/constants/users/workers";
-import { workerTotalPay } from "@/lib/utils/workers/pay";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
+import { WorkerProfile } from "./worker";
 
-const ProfilePage = () => {
+const ProfileComponent= () => {
   const { data: session, status } = useSession();
   const router = useRouter();
   const worker = useSelector((state) => state.workers.worker);
 
-  const { email, employed, workerType, maangerModelName, isAdmin, roleStatus } =
+  const { email, employed, workerType, managerModelName, isAdmin, roleStatus } =
     session?.user || {};
 
   if (status === "loading") {
@@ -43,30 +37,14 @@ const ProfilePage = () => {
       <CommonProfilePage {...session.user} />
       {workerType && worker && (
         <>
-          <WorkerCommonInfo
-            hourlyRate={worker.hourlyRate}
-            payedAmount={worker.payedAmount}
-            totalPay={workerTotalPay(worker).totalPay}
-            totalHours={workerTotalPay(worker).totalHours}
-          />
-          <WorkerSectorInfo workerType={workerType}>
-            {workerType === "CultivationWorker" && (
-              <CultivationWorkerInfo
-                plantageWorks={worker.plantageWorks}
-                harvestWorks={worker.harvestWorks}
-              />
-            )}
-            {workerType === "WarehouseWorker" && (
-              <WarehouseWorkerInfo shipmentItems={worker.shipmentItems} />
-            )}
-          </WorkerSectorInfo>
+          <WorkerProfile worker={worker} workerType={workerType} />
         </>
       )}
     </div>
   );
-}
+};
 
-export default ProfilePage;
+export default ProfileComponent;
 
 const CommonProfilePage = ({
   email,

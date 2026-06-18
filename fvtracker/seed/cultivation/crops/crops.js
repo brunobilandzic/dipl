@@ -309,8 +309,9 @@ export const createNewHarvest = async ({
     const plcvCopies = [...plcvs];
     const plcvLength = plcvs.length;
     const cultivationWorker = await getEmployedWorker("CultivationWorker");
+
     for (const quality of VARIETIES_QUALITIES) {
-      const qualityPlcvIds = plcvIdCopies.splice(
+      const qualityPlcvs = plcvCopies.splice(
         0,
         Math.floor(plcvLength / VARIETIES_QUALITIES.length),
       );
@@ -319,7 +320,6 @@ export const createNewHarvest = async ({
         harvestingPlanItem,
         plantedCropVarietiesIds: qualityPlcvs.map((plcv) => plcv._id),
         cropVarietyId,
-        quantityPerCell: harvestingPlanItem.cropVariety.quantityPerCell,
         quality,
         workerId: cultivationWorker._id,
         cultivationId,

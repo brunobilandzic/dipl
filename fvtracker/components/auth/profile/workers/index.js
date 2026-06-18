@@ -7,6 +7,7 @@ import {
 } from "@/lib/utils/workers/warehouse";
 import { workerTotalPay } from "@/lib/utils/workers/pay";
 import { CultivationWorkerInfo } from "@/components/auth/profile/workers/cultivation";
+import { WarehouseWorkerInfo } from "./warehouse";
 
 export const WorkerProfile = ({ worker, workerType }) => {
   if (!worker) return <LoadingFullScreen />;
@@ -95,25 +96,4 @@ export const WorkerCommonInfo = ({
 
 export const WorkerSectorInfo = ({ workerType, children }) => {
   return <div>{children}</div>;
-};
-
-export const WarehouseWorkerInfo = ({ shipmentItems }) => {
-  const shippedPrducts =
-    shipmentItemsShipmentItemsProductQuantity(shipmentItems);
-  return (
-    <div>
-      <div>Učinjeno otpremnica: {shipmentItems.length}</div>
-      <div>Odaslano: {shipmentItemsProductSum(shipmentItems)} proizvoda</div>
-      <div>
-        <h4>Proizvodi:</h4>
-        <ul className="list-disc list-inside">
-          {shippedPrducts.map((product) => (
-            <li key={`${product.name}-${product.quantity}`}>
-              {product.name}: {product.quantity}
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
 };

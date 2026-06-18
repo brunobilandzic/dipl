@@ -136,3 +136,7 @@ body {
 .info-group {
   @apply my-2;
 }
+
+.worker-sector-info {
+  @apply my-4 p-4 border rounded-md bg-slate-100;
+}

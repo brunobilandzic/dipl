@@ -301,12 +301,10 @@ export const createNewHarvest = async ({
       { relativeCoords: { $in: harvestCoords } },
       "relativeCoords _id",
     );
-    const plcvIds = docs.map((d) => d._id);
     await PlantedCropVariety.updateMany(
-      { _id: { $in: docs } },
+      { _id: { $in: plcvs.map((plcv) => plcv._id) } },
       { harvestingPlanItem: harvestingPlanItem._id, harvestedAt: new Date() },
     );
-    const quality = randomElementArray(VARIETIES_QUALITIES);
 
     const plcvIdCopies = [...plcvIds];
     const plcvLength = plcvIds.length;

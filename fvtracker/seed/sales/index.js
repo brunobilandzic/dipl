@@ -18,9 +18,31 @@ export default {
 };
 
 const deleteDB = async () => {
+  console.log("[deleteDB] 1 start");
+
+  console.log("[deleteDB] 2 deleting orders");
+  await Order.deleteMany({});
+
+  console.log("[deleteDB] 3 deleting warehouse requests");
+  await WarehouseRequest.deleteMany({});
+
+  console.log("[deleteDB] 4 deleting customers");
+  await Customer.deleteMany({});
+
+  console.log("[deleteDB] 5 deleting receipts");
+  await Receipt.deleteMany({});
+
+  console.log("[deleteDB] 6 done");
+};
+
+const deleteDB_bup = async () => {
+  console.log(
+    "Clearing existing orders, warehouse requests, customers, and receipts...",
+  );
   await Promise.all([
     Order.deleteMany({}),
     WarehouseRequest.deleteMany({}),
     Customer.deleteMany({}),
+    Receipt.deleteMany({}),
   ]);
 };

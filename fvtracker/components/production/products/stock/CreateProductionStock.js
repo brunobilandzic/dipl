@@ -14,6 +14,7 @@ import { ChooseWorker } from "@/components/workers/choose";
 import { PRODUCTION_MANAGER } from "@/lib/constants/users/managerTypes";
 import { checkValue } from "@/lib/utils/formValidation";
 import { editProductStocks } from "@/store/production";
+import { productionPayWorker } from "@/store/workers";
 
 export const CreateProductionStock = ({
   product,
@@ -79,6 +80,12 @@ export const CreateProductionStock = ({
           productId: product._id,
           productionStocks: newProductionStock.product.productionStocks,
           warehouseStocks: newProductionStock.product.warehouseStocks,
+        }),
+      );
+      dispatch(
+        productionPayWorker({
+          workerId: productionStock.workerId,
+          productionProcess,
         }),
       );
       dispatch(setLoading(false));

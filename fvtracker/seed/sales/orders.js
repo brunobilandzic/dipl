@@ -1,7 +1,7 @@
 import { getCustomer } from "./customer";
 import { Product } from "@/models/sectors/production/Product";
 import { ordersSeedData } from "../data/sales/orders";
-import { Order, OrderItem } from "@/models/sectors/sales";
+import { Order, OrderItem, Receipt } from "@/models/sectors/sales";
 import { FinancialManager } from "@/models/user/managers/FinancialManager";
 
 export const createOrders = async () => {

@@ -30,12 +30,12 @@ export const ProductionWorkerInfo = ({
           Obavljeno slanja u skladište: {warehouseAcceptanceProcesses.length}
         </div>
         <div>
-          Ukupno poslana količina:{" "}
+          Ukupno poslano proizvoda:{" "}
           {processesQuantitySum({ processes: warehouseAcceptanceProcesses })}
         </div>
       </div>
       <div className="list-wrap">
-        <WorkerSectorInfoTitle title="Proizvedeni proizvodi" />
+        <WorkerSectorInfoTitle title="Proizvedeni" />
         <ul className="list-wrap-lis     list-disc list-inside">
           {producedProducts.map((product) => (
             <li key={`${product.name}-${product.quantity}`}>
@@ -45,7 +45,7 @@ export const ProductionWorkerInfo = ({
         </ul>
       </div>
       <div className="list-wrap">
-        <WorkerSectorInfoTitle title="Poslani u skladište proizvodi" />
+        <WorkerSectorInfoTitle title="Poslani u skladište" />
         <ul className="list-wrap-list list-disc list-inside">
           {warehouseAcceptedProducts.map((product) => (
             <li key={`${product.name}-${product.quantity}`}>

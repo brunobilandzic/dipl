@@ -108,6 +108,7 @@ export const createProductStock = async ({
     product.productionStocks.push(stock._id);
     await product.save();
     await facility.save();
+    await stock.save();
   } else {
     stock.quantity += Number(quantity);
   }

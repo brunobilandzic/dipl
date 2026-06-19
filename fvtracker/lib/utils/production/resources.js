@@ -59,8 +59,6 @@ export const getBatchesWithResources = ({
       if (!item) {
         continue;
       }
-
-      console.log("found", item);
     }
     if (hasResources) {
       batches.push(harvestingBatch);

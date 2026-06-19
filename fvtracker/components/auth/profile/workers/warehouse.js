@@ -9,7 +9,6 @@ export const WarehouseWorkerInfo = ({ shipmentItems }) => {
     shipmentItemsShipmentItemsProductQuantity(shipmentItems);
   return (
     <div>
-      <WorkerSectorInfoTitle title="Podaci o radu" />
       <div>Učinjeno otpremnica: {shipmentItems.length}</div>
       <div>Odaslano: {shipmentItemsProductSum(shipmentItems)} proizvoda</div>
       <div className="list-wrap">

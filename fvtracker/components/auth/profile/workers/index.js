@@ -16,6 +16,7 @@ export const WorkerProfile = ({ worker, workerType }) => {
         totalHours={workerTotalPay(worker).totalHours}
       />
       <WorkerSectorInfo workerType={workerType}>
+        <WorkerSectorInfoTitle title="Podaci o radu" />
         {workerType === "CultivationWorker" && (
           <CultivationWorkerInfo
             plantageWorks={worker.plantageWorks}

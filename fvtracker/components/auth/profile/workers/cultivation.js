@@ -26,7 +26,6 @@ export const CultivationWorkerInfo = ({ plantageWorks, harvestWorks }) => {
 
   return (
     <div>
-      <WorkerSectorInfoTitle title="Podaci o radu" />
       <div className="info-group">
         <div>Obavljeno sadnji: {plantageWorks.length}</div>
         <div>

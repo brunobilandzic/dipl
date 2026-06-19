@@ -153,7 +153,7 @@ export const createProductStock = async ({
       },
     ],
   });
-  return stock;
+  return { productionStock: stock, productionProcess, stop: false };
 };
 
 export const getStocks = async () => {

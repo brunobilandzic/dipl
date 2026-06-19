@@ -55,12 +55,13 @@ export async function POST(req) {
     let stock;
     const body = await req.json();
     if (stockType == PRODUCTION_STOCK) {
-      stock = await createProductionStock({
-        stockData: body.productionStockData,
-      });
+      const { productionStock, productionProcess } =
+        await createProductionStock({
+          stockData: body.productionStockData,
+        });
 
       return Response.json(
-        { newProductionStock: stock },
+        { newProductionStock: productionStock, productionProcess },
         {
           headers: { "Content-Type": "application/json" },
         },
@@ -120,7 +121,7 @@ async function createProductionStock({ stockData }) {
     productionFacilityId,
     workerId,
   } = stockData;
-  const productionStock = await createProductStock({
+  const { productionStock, productionProcess } = await createProductStock({
     productId,
     batchName,
     productionFacilityId,
@@ -128,5 +129,5 @@ async function createProductionStock({ stockData }) {
     comment,
     workerId,
   });
-  return productionStock;
+  return { productionStock, productionProcess };
 }

@@ -47,10 +47,11 @@ export const createProducts = async () => {
   }
   for (const warehouse of warehouses) {
     for (const product of products) {
-      const { productionStock, stop } = await createProductStockSeed({
-        product,
-        productionFacilityId: productionFacility._id,
-      });
+      const { productionStock, productionProcess, stop } =
+        await createProductStockSeed({
+          product,
+          productionFacilityId: productionFacility._id,
+        });
       if (stop) {
         stopIteration = true;
         continue;
@@ -89,13 +90,15 @@ export const createProductStockSeed = async ({
     return { productionStock: null, stop: false };
   }
   const productionWorker = await getEmployedWorker("ProductionWorker");
-  const productionStock = await createProductStock({
-    productId: product._id,
-    harvestingBatchId: batchWithResources._id,
-    quantity: STOCK_QUANTITY,
-    productionFacilityId,
-    workerId: productionWorker._id,
-    comment: "Initial stock from seed script",
-  });
-  return { productionStock, stop: productionStock.stop };
+  const { productionStock, productionProcess, stop } = await createProductStock(
+    {
+      productId: product._id,
+      harvestingBatchId: batchWithResources._id,
+      quantity: STOCK_QUANTITY,
+      productionFacilityId,
+      workerId: productionWorker._id,
+      comment: "Initial stock from seed script",
+    },
+  );
+  return { productionStock, productionProcess, stop };
 };

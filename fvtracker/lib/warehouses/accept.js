@@ -80,7 +80,6 @@ export const acceptWarehouseStock = async ({
       select: "warehouseStocks productionStocks",
       populate: "warehouseStocks productionStocks",
     });
-    console.log({ warehouseStock });
   }
   return {
     warehouseStock,

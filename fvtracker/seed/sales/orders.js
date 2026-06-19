@@ -5,7 +5,6 @@ import { Order, OrderItem } from "@/models/sectors/sales";
 import { FinancialManager } from "@/models/user/managers/FinancialManager";
 
 export const createOrders = async () => {
-  await Order.deleteMany({}); // Clear existing orders
   console.log("Creating orders...");
 
   const createdOrders = [];

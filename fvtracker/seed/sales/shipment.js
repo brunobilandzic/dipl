@@ -21,6 +21,18 @@ export const createShipments = async ({ warehouseRequests }) => {
       shipmentSources: sources,
       workerId: warehouseWorker._id,
     });
+
+    if (Math.random() < 0.5) {
+      const financialWorker = await getEmployedWorker("FinancialWorker");
+      const receipt = new Receipt({
+        shipmentItem: shipmentItem._id,
+        financialWorker: financialWorker._id,
+      });
+      shipmentItem.receipt = receipt._id;
+
+      await shipmentItem.save();
+      await receipt.save();
+    }
   }
 };
 

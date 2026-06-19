@@ -207,7 +207,8 @@ const ProductionWorker = ({ worker }) => {
         {worker.payedAmount} €
       </div>
       <div>
-        Proizvodnja: {worker.productionProcesses.length} procesa, količina:{" "}
+        Slanje na skladište: {worker.productionProcesses.length} procesa,
+        količina:{" "}
         {worker.productionProcesses.reduce(
           (sum, process) => sum + process.quantity,
           0,

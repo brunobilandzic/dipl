@@ -73,6 +73,11 @@ warehouseRequestSchema.pre("deleteMany", async function () {
     { warehouseRequests: { $in: requestIds } },
     { $pull: { warehouseRequests: { $in: requestIds } } },
   );
+  await FinancialWorker.updateMany(
+    { warehouseRequests: { $in: requestIds } },
+    { $pull: { warehouseRequests: { $in: requestIds } } },
+  );
+  await Shipment.deleteMany({ warehouseRequest: { $in: requestIds } });
 });
 
 export const WarehouseRequest =

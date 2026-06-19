@@ -117,6 +117,25 @@ const workersSlice = createSlice({
         });
       }
     },
+    productionPayWorker: (state, action) => {
+      const { workerId, productionProcess } = action.payload;
+      if (state.worker && state.worker._id === workerId) {
+        state.worker.productionProcesses.push(productionProcess);
+      } else {
+        state.items = state.items.map((worker) => {
+          if (worker._id === workerId) {
+            return {
+              ...worker,
+              productionProcesses: [
+                ...worker.productionProcesses,
+                productionProcess,
+              ],
+            };
+          }
+          return worker;
+        });
+      }
+    },
     warehousePayWorker: (state, action) => {
       const { workerId, shipmentItem } = action.payload;
       if (state.worker && state.worker._id === workerId) {
@@ -221,6 +240,7 @@ export const {
   updateWorker,
   filterEmploymentRequests,
   plantPayWorker,
+  productionPayWorker,
   harvestPayWorker,
   updateEmploymentRequest,
   warehousePayWorker,

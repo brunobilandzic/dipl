@@ -30,7 +30,6 @@ export const cultivationPopulate = [
 export const productionPopulate = [
   {
     path: "productionProcesses",
-    select: "quantity processedAt",
   },
   {
     path: "warehouseAcceptanceProcesses",

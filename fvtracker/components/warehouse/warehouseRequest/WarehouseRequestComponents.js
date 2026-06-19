@@ -90,6 +90,12 @@ const WarehouseRequestListItem = ({ request, router }) => {
             />
           </div>
         </div>
+        <div>
+          Poslano {request.shipment.shipmentItems?.length || 0} otpremnica
+        </div>
+        <div>
+          Izrađeno {request.shipment?.shipmentItems?.filter(si => si.receipt).length || 0} računa
+        </div>
       </ListItem>
       {createShipmentModalOpen && (
         <CreateShipmentModal

@@ -1,8 +1,8 @@
 import { warehouseRequestPopulateShipmentItems } from "@/lib/utils/storage/warehouse";
 import { fillWarehouseRequest } from "@/lib/warehouses/warehouseRequests";
 import { getEmployedWorker } from "@/lib/workers/get";
+import { Receipt } from "@/models/sectors/sales";
 import { Warehouse } from "@/models/sectors/storage/Warehouse";
-import { WarehouseWorker } from "@/models/user/workers/WarehouseWork";
 
 export const createShipments = async ({ warehouseRequests }) => {
   const warehouseWorker = await getEmployedWorker("WarehouseWorker");
@@ -29,7 +29,9 @@ export const createShipments = async ({ warehouseRequests }) => {
         financialWorker: financialWorker._id,
       });
       shipmentItem.receipt = receipt._id;
+      financialWorker.receipts.push(receipt._id);
 
+      await financialWorker.save();
       await shipmentItem.save();
       await receipt.save();
     }

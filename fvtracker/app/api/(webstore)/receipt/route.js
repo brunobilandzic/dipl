@@ -54,6 +54,7 @@ export async function POST(req) {
 
     requestWorker.receipts.push(newReceipt._id);
     shipmentItem.shipment.warehouseRequest.order.receipts.push(newReceipt._id);
+    shipmentItem.receipt = newReceipt._id;
 
     await newReceipt.save();
     await shipmentItem.shipment.warehouseRequest.order.save();

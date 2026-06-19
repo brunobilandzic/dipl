@@ -83,7 +83,6 @@ const WarehouseRequestListItem = ({ request, router }) => {
       >
         {" "}
         <div key={request._id}>
-          <p>Narudžba: {request.order.number}</p>
           <div>
             <ItemList
               items={warehouseRequestItems(request)}

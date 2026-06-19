@@ -1,10 +1,6 @@
 "use client";
 
 import { LoadingFullScreen } from "@/components/layout/loading";
-import {
-  shipmentItemsProductSum,
-  shipmentItemsShipmentItemsProductQuantity,
-} from "@/lib/utils/workers/warehouse";
 import { workerTotalPay } from "@/lib/utils/workers/pay";
 import { CultivationWorkerInfo } from "@/components/auth/profile/workers/cultivation";
 import { WarehouseWorkerInfo } from "./warehouse";

@@ -11,6 +11,7 @@ const productionProcessSchema = new Schema({
   productionStock: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "ProductStock",
+    required: true,
   },
   quantity: {
     type: Number,
@@ -40,6 +41,17 @@ productionProcessSchema.pre("save", async function () {
     }
     worker.productionProcesses.push(this._id);
     await worker.save();
+
+    const productionStock = await mongoose
+      .model("ProductStock")
+      .findById(this.productionStock);
+    if (!productionStock) {
+      throw new Error(
+        `Production stock with id ${this.productionStock} not found.`,
+      );
+    }
+    productionStock.productionProcesses.push(this._id);
+    await productionStock.save();
   }
 });
 

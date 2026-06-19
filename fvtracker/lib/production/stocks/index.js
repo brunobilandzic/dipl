@@ -123,6 +123,7 @@ export const createProductStock = async ({
     quantity,
     comment,
     worker: productionWorker._id,
+    productionStock: stock._id,
   });
   await HarvestingBatchItem.updateMany(
     { harvestingBatch: harvestingBatch._id },

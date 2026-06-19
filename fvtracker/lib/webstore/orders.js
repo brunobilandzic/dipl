@@ -1,4 +1,4 @@
-import { Order, OrderItem, Receipt } from "@/models/sectors/sales";
+import { Order, OrderItem } from "@/models/sectors/sales";
 import { getCustomer } from "./customer";
 import { Product } from "@/models/sectors/production/Product";
 

@@ -65,6 +65,15 @@ export const acceptWarehouseStock = async ({
 
   await warehouseStock.save();
   await warehouseAcceptanceProcess.save();
+
+  await warehouseAcceptanceProcess.populate({
+    path: "warehouseStock",
+    select: "product",
+    populate: {
+      path: "product",
+      select: "name",
+    },
+  });
   if (!facility) {
     await warehouseStock.populate({
       path: "product",
@@ -73,5 +82,14 @@ export const acceptWarehouseStock = async ({
     });
     console.log({ warehouseStock });
   }
-  return warehouseStock;
+  return {
+    warehouseStock,
+    warehouseAcceptanceProcess: {
+      _id: warehouseAcceptanceProcess._id,
+      quantity: warehouseAcceptanceProcess.quantity,
+      comment: warehouseAcceptanceProcess.comment,
+      acceptedAt: warehouseAcceptanceProcess.acceptedAt,
+      warehouseStock: warehouseAcceptanceProcess.warehouseStock, 
+    },
+  };
 };

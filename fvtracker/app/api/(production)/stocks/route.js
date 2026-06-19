@@ -84,16 +84,17 @@ export async function POST(req) {
         );
       }
 
-      stock = await acceptWarehouseStock({
-        product,
-        quantity: warehouseStockData.quantity,
-        productionStock,
-        warehouseId: warehouseStockData.warehouseId,
-        comment: warehouseStockData.comment,
-        workerId: warehouseStockData.workerId,
-      });
+      const { warehouseStock, warehouseAcceptanceProcess } =
+        await acceptWarehouseStock({
+          product,
+          quantity: warehouseStockData.quantity,
+          productionStock,
+          warehouseId: warehouseStockData.warehouseId,
+          comment: warehouseStockData.comment,
+          workerId: warehouseStockData.workerId,
+        });
       return Response.json(
-        { newWarehouseStock: stock },
+        { newWarehouseStock: warehouseStock, warehouseAcceptanceProcess },
         {
           headers: { "Content-Type": "application/json" },
         },

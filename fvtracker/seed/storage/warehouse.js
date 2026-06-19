@@ -46,7 +46,7 @@ export const createWarehouseStockSeed = async ({
   warehouseId,
 }) => {
   const productionWorker = await getEmployedWorker("ProductionWorker");
-  const warehouseStock = await acceptWarehouseStock({
+  const { warehouseStock } = await acceptWarehouseStock({
     product,
     quantity: 3,
     productionStock,

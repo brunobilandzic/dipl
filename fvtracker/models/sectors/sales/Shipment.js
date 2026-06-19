@@ -24,7 +24,15 @@ const shipmentSchema = new Schema({
     enum: SHIPMENT_STATUSES,
     default: SHIPMENT_PENDING,
   },
-};
+});
+
+shipmentSchema.pre("deleteMany", async function () {
+  const shipments = await this.model.find(this.getFilter());
+  const shipmentIds = shipments.map((s) => s._id);
+  await mongoose
+    .model("ShipmentItem")
+    .deleteMany({ shipment: { $in: shipmentIds } });
+});
 
 const shipmentItemSchema = new Schema({
   shipment: {

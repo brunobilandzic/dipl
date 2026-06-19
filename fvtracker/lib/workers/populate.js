@@ -30,6 +30,15 @@ export const cultivationPopulate = [
 export const productionPopulate = [
   {
     path: "productionProcesses",
+    select: "quantity processedAt productionStock",
+    populate: {
+      path: "productionStock",
+      select: "product",
+      populate: {
+        path: "product",
+        select: "name",
+      },
+    },
   },
   {
     path: "warehouseAcceptanceProcesses",

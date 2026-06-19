@@ -42,7 +42,17 @@ export const productionPopulate = [
   },
   {
     path: "warehouseAcceptanceProcesses",
-    select: "quantity acceptedAt",
+    select: "quantity acceptedAt warehouseStock",
+    populate: [
+      {
+        path: "warehouseStock",
+        select: "product",
+        populate: {
+          path: "product",
+          select: "name",
+        },
+      },
+    ],
   },
 ];
 

@@ -29,7 +29,7 @@ export const submitWarehouseStock = async ({
       },
     },
   );
-  return res.data.newWarehouseStock;
+  return res.data;
 };
 
 export const submitWarehouseForm = async ({

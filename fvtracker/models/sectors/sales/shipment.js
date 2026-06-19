@@ -6,7 +6,7 @@ import { WarehouseWorker } from "@/models/user/workers/WarehouseWork";
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
 
-const shipmentSchema = {
+const shipmentSchema = new Schema({
   warehouseRequest: {
     type: Schema.Types.ObjectId,
     ref: "WarehouseRequest",
@@ -24,7 +24,19 @@ const shipmentSchema = {
     enum: SHIPMENT_STATUSES,
     default: SHIPMENT_PENDING,
   },
-};
+});
+
+shipmentSchema.pre("deleteMany", async function () {
+  const shipments = await this.model.find(this.getFilter());
+  const shipmentIds = shipments.map((s) => s._id);
+  await mongoose
+    .model("ShipmentItem")
+    .deleteMany({ shipment: { $in: shipmentIds } });
+  await WarehouseWorker.updateMany(
+    { shipmentItems: { $in: shipmentIds } },
+    { $pull: { shipmentItems: { $in: shipmentIds } } },
+  );
+});
 
 const shipmentItemSchema = new Schema({
   shipment: {

@@ -67,9 +67,10 @@ export const CreateProductionStock = ({
   const onSubmit = async () => {
     try {
       dispatch(setLoading(true));
-      const newProductionStock = await submitProductionStock({
-        productionStock,
-      });
+      const { newProductionStock, productionProcess } =
+        await submitProductionStock({
+          productionStock,
+        });
       alert(
         `${newProductionStock.quantity} zaliha proizvoda ${product.name} uspješno dodana na zalihe.`,
       );
@@ -81,6 +82,7 @@ export const CreateProductionStock = ({
         }),
       );
       dispatch(setLoading(false));
+      console.log({ newProductionStock });
     } catch (error) {
       dispatch(setLoading(false));
       handleError({

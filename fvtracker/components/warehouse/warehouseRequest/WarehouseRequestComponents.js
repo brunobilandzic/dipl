@@ -36,6 +36,8 @@ const WarehouseRequestListItem = ({ request, router }) => {
   let isPending =
     !request.shipment || request.shipment?.status === SHIPMENT_PENDING;
 
+  console.log({ request });
+
   let outlineClassName;
 
   if (isPartlyShipped) {

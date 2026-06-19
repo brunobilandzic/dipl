@@ -75,6 +75,19 @@ const receiptSchema = new Schema({
   },
 });
 
+receiptSchema.pre("deleteMany", async function () {
+  const receipts = await this.model.find(this.getFilter());
+  const receiptIds = receipts.map((r) => r._id);
+  await mongoose
+    .model("ShipmentItem")
+    .updateMany({ receipt: { $in: receiptIds } }, { $set: { receipt: null } });
+  await mongoose
+    .model("FinancialWorker")
+    .updateMany(
+      { receipts: { $in: receiptIds } },
+      { $pull: { receipts: { $in: receiptIds } } },
+    );
+});
 export const Receipt =
   mongoose.models.Receipt || mongoose.model("Receipt", receiptSchema);
 export const Order =

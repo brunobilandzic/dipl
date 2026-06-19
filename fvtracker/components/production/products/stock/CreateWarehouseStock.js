@@ -97,8 +97,8 @@ const CreateWarehouseStock = ({
         dispatch(
           editProductStocks({
             productId: product._id,
-            productionStocks: newWareHouseStock.product.productionStocks,
-            warehouseStocks: newWareHouseStock.product.warehouseStocks,
+            productionStocks: newWarehouseStock.product.productionStocks,
+            warehouseStocks: newWarehouseStock.product.warehouseStocks,
           }),
         );
       }

@@ -268,7 +268,6 @@ export const createNewPlantage = async ({
       worker: cultivationWorker._id,
       plantedCoords: value,
     });
-    console.log("created plantage work", plantageWork);
     await plantageWork.save();
   }
 
@@ -280,7 +279,7 @@ export const createNewHarvest = async ({
   plantedMap,
   cultivationId,
 }) => {
-  console.log("creating harvest...", { plantedMap });
+  console.log("creating harvest...");
   await HarvestingBatchItem.deleteMany();
   await HarvestWork.deleteMany();
 

@@ -8,6 +8,7 @@ import populateCommon, {
 import { Worker } from "@/models/user/workers";
 
 export async function GET(request) {
+  console.log("worker route called..")
   try {
     const { searchParams } = new URL(request.url);
     const workerId = searchParams.get("workerId");

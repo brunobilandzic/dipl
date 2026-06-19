@@ -32,10 +32,6 @@ shipmentSchema.pre("deleteMany", async function () {
   await mongoose
     .model("ShipmentItem")
     .deleteMany({ shipment: { $in: shipmentIds } });
-  await WarehouseWorker.updateMany(
-    { shipmentItems: { $in: shipmentIds } },
-    { $pull: { shipmentItems: { $in: shipmentIds } } },
-  );
 });
 
 const shipmentItemSchema = new Schema({

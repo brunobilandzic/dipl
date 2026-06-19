@@ -38,6 +38,17 @@ const orderSchema = new Schema({
   },
 });
 
+orderSchema.pre("deleteMany", async function () {
+  const orders = await this.model.find(this.getFilter());
+  const orderIds = orders.map((o) => o._id);
+  await mongoose.model("OrderItem").deleteMany({ order: { $in: orderIds } });
+  console.log("Deleted order items for orders:", orderIds);
+  await mongoose
+    .model("WarehouseRequest")
+    .deleteMany({ order: { $in: orderIds } });
+  console.log("Deleted warehouse requests for orders:", orderIds);
+});
+
 const orderItemSchema = new Schema({
   product: {
     type: mongoose.Schema.Types.ObjectId,

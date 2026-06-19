@@ -80,7 +80,6 @@ export const CreateProductionStock = ({
           warehouseStocks: newProductionStock.product.warehouseStocks,
         }),
       );
-      dispatch(addProductStock(newProductionStock));
       dispatch(setLoading(false));
     } catch (error) {
       dispatch(setLoading(false));

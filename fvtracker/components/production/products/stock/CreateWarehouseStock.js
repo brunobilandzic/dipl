@@ -80,9 +80,11 @@ const CreateWarehouseStock = ({
   const onSubmit = async () => {
     try {
       dispatch(setLoading(true));
-      const newWareHouseStock = await submitWarehouseStock({
-        warehouseStockData: warehouseStock,
-        facility,
+      const { newWarehouseStock, warehouseAcceptanceProcess } =
+        await submitWarehouseStock({
+          warehouseStockData: warehouseStock,
+          facility,
+        });
       });
       if (facility) {
         dispatch(

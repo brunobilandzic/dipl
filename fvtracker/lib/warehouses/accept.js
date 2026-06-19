@@ -24,6 +24,7 @@ export const acceptWarehouseStock = async ({
       `Not enough quantity in production stock. Required: ${quantity}, Available: ${productionStock.quantity}`,
     );
   }
+  console.log("acceptiong to warehouse", product.name, "- quantity:", quantity);
   productionStock.quantity -= Number(quantity);
 
   let warehouseStock = await WarehouseStock.findOne({
@@ -88,7 +89,7 @@ export const acceptWarehouseStock = async ({
       quantity: warehouseAcceptanceProcess.quantity,
       comment: warehouseAcceptanceProcess.comment,
       acceptedAt: warehouseAcceptanceProcess.acceptedAt,
-      warehouseStock: warehouseAcceptanceProcess.warehouseStock, 
+      warehouseStock: warehouseAcceptanceProcess.warehouseStock,
     },
   };
 };

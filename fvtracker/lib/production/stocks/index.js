@@ -22,8 +22,8 @@ export const createProductStock = async ({
   comment,
   workerId,
 }) => {
-  console.log("creating product stock");
   const product = await getProductById(productId);
+  console.log("creating product stock", product.name, "- quantity:", quantity);
   const deductResources = async () => {
     // to create product, we have tto use harvesterd
     // find harvesting batch for create product

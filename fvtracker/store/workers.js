@@ -118,22 +118,45 @@ const workersSlice = createSlice({
       }
     },
     productionPayWorker: (state, action) => {
-      const { workerId, productionProcess } = action.payload;
-      if (state.worker && state.worker._id === workerId) {
-        state.worker.productionProcesses.push(productionProcess);
-      } else {
-        state.items = state.items.map((worker) => {
-          if (worker._id === workerId) {
-            return {
-              ...worker,
-              productionProcesses: [
-                ...worker.productionProcesses,
-                productionProcess,
-              ],
-            };
-          }
-          return worker;
-        });
+      const { workerId, productionProcess, warehouseAcceptanceProcess } =
+        action.payload;
+
+      if (productionProcess) {
+        if (state.worker && state.worker._id === workerId) {
+          state.worker.productionProcesses.push(productionProcess);
+        } else {
+          state.items = state.items.map((worker) => {
+            if (worker._id === workerId) {
+              return {
+                ...worker,
+                productionProcesses: [
+                  ...worker.productionProcesses,
+                  productionProcess,
+                ],
+              };
+            }
+            return worker;
+          });
+        }
+      } else if (warehouseAcceptanceProcess) {
+        if (state.worker && state.worker._id === workerId) {
+          state.worker.warehouseAcceptanceProcesses.push(
+            warehouseAcceptanceProcess,
+          );
+        } else {
+          state.items = state.items.map((worker) => {
+            if (worker._id === workerId) {
+              return {
+                ...worker,
+                warehouseAcceptanceProcesses: [
+                  ...worker.warehouseAcceptanceProcesses,
+                  warehouseAcceptanceProcess,
+                ],
+              };
+            }
+            return worker;
+          });
+        }
       }
     },
     warehousePayWorker: (state, action) => {

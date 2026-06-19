@@ -16,7 +16,7 @@ export const createShipments = async ({ warehouseRequests }) => {
     if (sources.length === 0) {
       continue;
     }
-    await fillWarehouseRequest({
+    const { shipmentItem } = await fillWarehouseRequest({
       warehouseRequestId: warehouseRequest._id,
       shipmentSources: sources,
       workerId: warehouseWorker._id,

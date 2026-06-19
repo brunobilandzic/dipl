@@ -43,7 +43,7 @@ productionProcessSchema.pre("save", async function () {
     await worker.save();
 
     const productionStock = await mongoose
-      .model("ProductStock")
+      .model("ProductionStock")
       .findById(this.productionStock);
     if (!productionStock) {
       throw new Error(

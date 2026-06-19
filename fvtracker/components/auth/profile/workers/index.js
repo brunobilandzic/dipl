@@ -4,6 +4,7 @@ import { LoadingFullScreen } from "@/components/layout/loading";
 import { workerTotalPay } from "@/lib/utils/workers/pay";
 import { CultivationWorkerInfo } from "@/components/auth/profile/workers/cultivation";
 import { WarehouseWorkerInfo } from "./warehouse";
+import { ProductionWorkerInfo } from "./production";
 
 export const WorkerProfile = ({ worker, workerType }) => {
   if (!worker) return <LoadingFullScreen />;
@@ -25,6 +26,12 @@ export const WorkerProfile = ({ worker, workerType }) => {
         )}
         {workerType === "WarehouseWorker" && (
           <WarehouseWorkerInfo shipmentItems={worker.shipmentItems} />
+        )}
+        {workerType === "ProductionWorker" && (
+          <ProductionWorkerInfo
+            productionProcesses={worker.productionProcesses}
+            warehouseAcceptanceProcesses={worker.warehouseAcceptanceProcesses}
+          />
         )}
       </WorkerSectorInfo>
     </>

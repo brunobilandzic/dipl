@@ -120,7 +120,6 @@ const workersSlice = createSlice({
     productionPayWorker: (state, action) => {
       const { workerId, productionProcess, warehouseAcceptanceProcess } =
         action.payload;
-
       if (productionProcess) {
         if (state.worker && state.worker._id === workerId) {
           state.worker.productionProcesses.push(productionProcess);

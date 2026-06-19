@@ -14,6 +14,7 @@ import {
   editFacilityProductionStock,
   editProductStocks,
 } from "@/store/production";
+import { productionPayWorker } from "@/store/workers";
 import { useEffect, useState } from "react";
 
 import React from "react";
@@ -85,7 +86,6 @@ const CreateWarehouseStock = ({
           warehouseStockData: warehouseStock,
           facility,
         });
-      });
       if (facility) {
         dispatch(
           editFacilityProductionStock({
@@ -102,6 +102,12 @@ const CreateWarehouseStock = ({
           }),
         );
       }
+      dispatch(
+        productionPayWorker({
+          workerId: warehouseStock.workerId,
+          warehouseAcceptanceProcess,
+        }),
+      );
 
       dispatch(setLoading(false));
       alert(`Zalihe proizvoda uspješno izrađene.`);

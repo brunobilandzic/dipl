@@ -9,7 +9,7 @@ import { checkEmpty } from "@/lib/utils/objects";
 import { FINANCIAL_MANAGER } from "@/lib/constants/users/managerTypes";
 import { useRouter } from "next/navigation";
 
-export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
+export const WarehouseRequestModal = ({ isOpen, onCancel, order, warehouses }) => {
   const initialWarehouseRequest = {
     orderId: order._id,
     warehouseId: null,
@@ -18,11 +18,11 @@ export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
   const [warehouseRequest, setWarehouseRequest] = useState(
     initialWarehouseRequest,
   );
-  const warehouses = useSelector((state) => state.warehouse.warehouses?.items);
 
   const workers = useSelector((state) => state.workers.items);
   const workerId = useSelector((state) => state.user.session.workerId);
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     if (workerId) {

@@ -14,11 +14,16 @@ import { WarehouseRequestModal } from "@/components/warehouse/warehouseRequest/c
 import { orderAmount } from "@/lib/utils/sales";
 import { priceEuroString } from "@/lib/utils/strings";
 import { PENDING } from "@/lib/constants/documents/requests";
+import { fetchWarehouses } from "@/store/warehouse";
 
 export const OrdersList = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const orders = useSelector((state) => state.webstore.orders.filteredItems);
+  const warehouses = useSelector((state) => state.warehouse.warehouses?.items);
+  const managerModelName = useSelector(
+    (state) => state.user.session?.managerModelName,
+  );
   const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
   const initialFilters = useMemo(() => initFilters("orders"), []);
   const [filters, setFilters] = useState(initialFilters);
@@ -30,6 +35,11 @@ export const OrdersList = () => {
     if (!orders) return;
     dispatch(filterOrders({ filters, sortBy }));
   }, [filters]);
+  useEffect(() => {
+    if (!managerModelName && (!warehouses || warehouses.length === 0)) {
+      dispatch(fetchWarehouses());
+    }
+  }, [managerModelName, warehouses, dispatch]);
 
   return (
     <List
@@ -47,13 +57,14 @@ export const OrdersList = () => {
           order={order}
           dispatch={dispatch}
           router={router}
+          warehouses={warehouses}
         />
       ))}
     </List>
   );
 };
 
-const OrderListItem = ({ order, dispatch, router }) => {
+const OrderListItem = ({ order, dispatch, router, warehouses }) => {
   const [warehouseRequestOpen, setWarehouseRequestOpen] = useState(false);
   const orderActions = [
     ...(order.state == PENDING
@@ -89,6 +100,7 @@ const OrderListItem = ({ order, dispatch, router }) => {
           isOpen={warehouseRequestOpen}
           onCancel={() => setWarehouseRequestOpen(false)}
           order={order}
+          warehouses={warehouses}
         />
       )}
     </>

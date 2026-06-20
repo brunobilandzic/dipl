@@ -14,6 +14,7 @@ import {
   SHIPMENT_SHIPPED_PARTLY,
 } from "../constants/warehouse/shipment";
 import { Order } from "@/models/sectors/sales";
+import { Warehouse } from "@/models/sectors/storage/Warehouse";
 
 export const getWarehouseRequestById = async (id) => {
   const request = await WarehouseRequest.findById(id);
@@ -24,13 +25,14 @@ export const getWarehouseRequestById = async (id) => {
 export const createWarehouseRequest = async (requestData) => {
   const { ...modelData } = requestData;
   const { warehouseId } = requestData;
-  const warehouse = await mongoose.models("Warehouse").findById(warehouseId);
+  const warehouse = await Warehouse.findById(warehouseId);
   if (!warehouse) {
     throw new Error("Skladište nije pronađeno");
   }
+  console.log({ requestData });
   const warehouseRequest = new WarehouseRequest({
     ...modelData,
-    financialManager: requestData.financialManager,
+    financialManager: requestData.financialManager.toString(),
     warehouseManager: warehouse.warehouseManager,
     order: requestData.orderId,
     financialWorker: requestData.workerId,

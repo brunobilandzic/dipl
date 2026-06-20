@@ -37,8 +37,6 @@ const WarehouseRequestListItem = ({ request, router }) => {
   let isPending =
     !request.shipment || request.shipment?.status === SHIPMENT_PENDING;
 
-  console.log({ request });
-
   let outlineClassName;
 
   if (isPartlyShipped) {
@@ -75,6 +73,7 @@ const WarehouseRequestListItem = ({ request, router }) => {
         ]
       : []),
   ];
+
   return (
     <>
       <ListItem
@@ -93,11 +92,39 @@ const WarehouseRequestListItem = ({ request, router }) => {
             />
           </div>
         </div>
+        <AppTable
+          headerLabels={[
+            "Broj otpremnica",
+            "Broj proizvoda na otpremnicama",
+            "Broj računa",
+          ]}
+          rows={[
+            {
+              shipmentItemsCount: request.shipment?.shipmentItems?.length || 0,
+              shipmentProductsCount: request.shipment?.shipmentItems?.reduce(
+                (acc, si) => {
+                  acc += si.sources.reduce((sAcc, ss) => {
+                    sAcc += Number(ss.quantity);
+                    return sAcc;
+                  }, 0);
+                  return acc;
+                },
+                0,
+              ),
+              receiptCount:
+                request.shipment?.shipmentItems?.filter((si) => si.receipt)
+                  .length || 0,
+            },
+          ]}
+        />
         <div>
           Poslano {request.shipment.shipmentItems?.length || 0} otpremnica
         </div>
         <div>
-          Izrađeno {request.shipment?.shipmentItems?.filter(si => si.receipt).length || 0} računa
+          Izrađeno{" "}
+          {request.shipment?.shipmentItems?.filter((si) => si.receipt).length ||
+            0}{" "}
+          računa
         </div>
       </ListItem>
       {createShipmentModalOpen && (

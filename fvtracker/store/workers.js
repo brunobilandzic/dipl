@@ -179,12 +179,12 @@ const workersSlice = createSlice({
       }
     },
     financialPayWorker: (state, action) => {
-      const { workerId, receipt, warehouseReqeust } = action.payload;
+      const { workerId, receipt, warehouseRequest } = action.payload;
       if (state.worker && state.worker._id === workerId) {
         if (receipt) {
           state.worker.receipts.push(receipt);
-        } else if (warehouseReqeust) {
-          state.worker.warehouseRequests.push(warehouseReqeust);
+        } else if (warehouseRequest) {
+          state.worker.warehouseRequests.push(warehouseRequest);
         }
       } else {
         state.items = state.items.map((worker) => {
@@ -194,8 +194,8 @@ const workersSlice = createSlice({
               receipts: receipt
                 ? [...worker.receipts, receipt]
                 : worker.receipts,
-              warehouseRequests: warehouseReqeust
-                ? [...worker.warehouseRequests, warehouseReqeust]
+              warehouseRequests: warehouseRequest
+                ? [...worker.warehouseRequests, warehouseRequest]
                 : worker.warehouseRequests,
             };
           }
@@ -291,6 +291,7 @@ export const {
   harvestPayWorker,
   updateEmploymentRequest,
   warehousePayWorker,
+  financialPayWorker,
 } = workersSlice.actions;
 
 export default workersSlice.reducer;

@@ -13,14 +13,12 @@ import {
 export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
   const initialWarehouseRequest = {
     orderId: order._id,
-    warehouseManagerId: null,
+    warehouseId: null,
   };
   const [warehouseRequest, setWarehouseRequest] = useState(
     initialWarehouseRequest,
   );
-  const warehouseManagers = useSelector(
-    (state) => state.managers.warehouseManagers,
-  );
+  const warehouses = useSelector((state) => state.warehouse.warehouses?.items);
 
   const workers = useSelector((state) => state.workers.items);
   const workerId = useSelector((state) => state.user.session.workerId);
@@ -75,13 +73,12 @@ export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
         />
       )}
       <AppSelect
-        name="warehouseManagerId"
-        label="Skladištar"
+        name="warehouseId"
+        label="Skladište"
         onChange={onChange}
-        options={warehouseManagers?.map((wm) => ({
-          value: wm._id,
-          label:
-            wm.rootManager.appUser.name + " " + wm.rootManager.appUser.surname,
+        options={warehouses?.map((w) => ({
+          value: w._id,
+          label: w.name,
         }))}
       />
     </FormModal>

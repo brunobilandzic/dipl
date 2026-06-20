@@ -55,7 +55,6 @@ export const OrdersList = () => {
 
 const OrderListItem = ({ order, dispatch, router }) => {
   const [warehouseRequestOpen, setWarehouseRequestOpen] = useState(false);
-  console.log({ order });
   const orderActions = [
     ...(order.state == PENDING
       ? [

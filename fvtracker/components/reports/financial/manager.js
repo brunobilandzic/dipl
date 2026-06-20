@@ -29,7 +29,6 @@ export const FinancialReport = ({}) => {
   const warehouseRequests = useSelector(
     (state) => state.warehouse.warehouseRequests,
   );
-  console.log({ component: { warehouseRequests } });
   const {
     totalPrice: invoicedPrice,
     totalItems: totalReceiptItems,

@@ -227,6 +227,22 @@ export const getWarehouseOccupiedVolume = (warehouse) =>
 export const getWarehousesOccupiedVolume = (warehouses) =>
   warehouses.reduce((volume, wh) => volume + getWarehouseOccupiedVolume(wh), 0);
 
+export const shipmentPopulate = {
+  path: "shipment",
+  populate: {
+    path: "shipmentItems",
+    select: "-shipment",
+    populate: {
+      path: "sources",
+      select: "-shipmentItem -warehouseStock",
+      populate: {
+        path: "product",
+        select: "name price",
+      },
+    },
+  },
+};
+
 export const warehouseRequestPopulateShipmentItems = [
   {
     path: "order",

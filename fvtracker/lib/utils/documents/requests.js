@@ -16,7 +16,12 @@ export const sendWarehouseRequest = async ({
   try {
     dispatch(setLoading(true));
     const res = await api.post("/warehouse-requests", requestData);
-    dispatch(financialPayWorker)
+    dispatch(
+      financialPayWorker({
+        workerId: requestData.workerId,
+        warehouseRequest: res.data.warehouseRequest,
+      }),
+    );
     dispatch(setLoading(false));
     return res.data;
   } catch (error) {

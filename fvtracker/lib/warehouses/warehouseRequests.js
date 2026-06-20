@@ -39,6 +39,8 @@ export const createWarehouseRequest = async (requestData) => {
   });
 
   await warehouseRequest.save();
+
+  return warehouseRequest;
 };
 
 export const getWarehouseRequests = async ({

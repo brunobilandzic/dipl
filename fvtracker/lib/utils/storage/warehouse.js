@@ -241,11 +241,13 @@ export const warehouseRequestPopulateShipmentItems = [
     path: "shipment",
     populate: {
       path: "shipmentItems",
+      select: "-shipment",
       populate: {
         path: "sources",
+        select: "-shipmentItem -warehouseStock",
         populate: {
           path: "product",
-          select: "name",
+          select: "name price",
         },
       },
     },

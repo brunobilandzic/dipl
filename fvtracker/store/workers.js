@@ -178,6 +178,31 @@ const workersSlice = createSlice({
         });
       }
     },
+    financialPayWorker: (state, action) => {
+      const { workerId, receipt, warehouseReqeust } = action.payload;
+      if (state.worker && state.worker._id === workerId) {
+        if (receipt) {
+          state.worker.receipts.push(receipt);
+        } else if (warehouseReqeust) {
+          state.worker.warehouseRequests.push(warehouseReqeust);
+        }
+      } else {
+        state.items = state.items.map((worker) => {
+          if (worker._id === workerId) {
+            return {
+              ...worker,
+              receipts: receipt
+                ? [...worker.receipts, receipt]
+                : worker.receipts,
+              warehouseRequests: warehouseReqeust
+                ? [...worker.warehouseRequests, warehouseReqeust]
+                : worker.warehouseRequests,
+            };
+          }
+          return worker;
+        });
+      }
+    },
   },
   extraReducers: (builder) => {
     builder

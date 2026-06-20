@@ -16,6 +16,7 @@ import { FormModal } from "@/components/layout/modals/form";
 import { ChooseWorker } from "@/components/workers/choose";
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { translateShipmentStatus } from "@/lib/utils/strings";
+import { financialPayWorker } from "@/store/workers";
 
 function ShipmentPageComponent({ shipment }) {
   if (!shipment) {
@@ -118,6 +119,8 @@ const ShipmentItem = ({
         workerId: worker,
       });
       shipmentItem.receipt = res.data.newReceipt; // Assuming the response contains the new receipt ID
+      console.log("Receipt created successfully:", res.data.newReceipt);
+      dispatch(financialPayWorker({ workerId: worker, receiptId: res.data.newReceipt }));
       dispatch(setLoading(false));
       // Handle success (e.g., show a message, refresh data)
     } catch (error) {

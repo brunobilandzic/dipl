@@ -2,6 +2,7 @@ import api from "@/lib/api";
 import { setLoading } from "@/store/loading";
 import { fetchWarehouseRequests } from "@/store/warehouse";
 import handleError from "@/lib/constants/errors/client/handleError";
+import { financialPayWorker } from "@/store/workers";
 
 export const fillWarehouseRequestsRedux = ({ dispatch }) => {
   dispatch(fetchWarehouseRequests());
@@ -15,6 +16,7 @@ export const sendWarehouseRequest = async ({
   try {
     dispatch(setLoading(true));
     const res = await api.post("/warehouse-requests", requestData);
+    dispatch(financialPayWorker)
     dispatch(setLoading(false));
     return res.data;
   } catch (error) {

@@ -98,7 +98,10 @@ export async function POST(request) {
     );
     requestData["financialManager"] = financialManagerId;
     const warehouseRequest = await createWarehouseRequest(requestData);
-    return Response.json({ message: "Zahtjev uspješno poslan skladištu." });
+    return Response.json({
+      warehouseRequest,
+      message: "Zahtjev uspješno poslan skladištu.",
+    });
   } catch (error) {
     console.error("Error creating warehouse request:", error);
     return Response.json(

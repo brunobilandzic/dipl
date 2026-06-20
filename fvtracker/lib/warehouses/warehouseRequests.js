@@ -23,10 +23,15 @@ export const getWarehouseRequestById = async (id) => {
 
 export const createWarehouseRequest = async (requestData) => {
   const { ...modelData } = requestData;
+  const { warehouseId } = requestData;
+  const warehouse = await mongoose.models("Warehouse").findById(warehouseId);
+  if (!warehouse) {
+    throw new Error("Skladište nije pronađeno");
+  }
   const warehouseRequest = new WarehouseRequest({
     ...modelData,
     financialManager: requestData.financialManager,
-    warehouseManager: requestData.warehouseManagerId,
+    warehouseManager: warehouse.warehouseManager,
     order: requestData.orderId,
     financialWorker: requestData.workerId,
   });

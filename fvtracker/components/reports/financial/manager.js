@@ -68,20 +68,19 @@ export const FinancialReport = ({}) => {
         />
         <ReportItem
           count={uniqueProducts.length}
+          description={`Različitih proizvoda`}
+        />
+        <ReportItem
+          count={receiptCount}
           description={stringQuant({
-            string: "Proizvod",
-            quantity: uniqueProducts.length,
+            string: "Račun",
+            quantity: receiptCount,
             pluralLetter: "a",
           })}
         />
-        <ReportItem count={totalItems} description="naručeno proizvoda" />
         <ReportItem
           count={totalReceiptItems}
-          description={stringQuant({
-            string: "Komad",
-            quantity: totalReceiptItems,
-            pluralLetter: "a",
-          })}
+          description="Proizvoda na računima"
         />
         <ReportItem
           count={totalRevenue.toFixed(2)}
@@ -89,7 +88,7 @@ export const FinancialReport = ({}) => {
         />
         <ReportItem
           count={invoicedPrice.toFixed(2)}
-          description={"Računi (€)"}
+          description={"Vrijednost računa (€)"}
         />
       </ReportSection>
       <GeneralWorkersReport workers={workers} title="Radnici">

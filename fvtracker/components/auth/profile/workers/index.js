@@ -5,6 +5,7 @@ import { workerTotalPay } from "@/lib/utils/workers/pay";
 import { CultivationWorkerInfo } from "@/components/auth/profile/workers/cultivation";
 import { WarehouseWorkerInfo } from "./warehouse";
 import { ProductionWorkerInfo } from "./production";
+import { FinancialWorkerInfo } from "./financial";
 
 export const WorkerProfile = ({ worker, workerType }) => {
   if (!worker) return <LoadingFullScreen />;
@@ -31,6 +32,12 @@ export const WorkerProfile = ({ worker, workerType }) => {
           <ProductionWorkerInfo
             productionProcesses={worker.productionProcesses}
             warehouseAcceptanceProcesses={worker.warehouseAcceptanceProcesses}
+          />
+        )}
+        {workerType === "FinancialWorker" && (
+          <FinancialWorkerInfo
+            receipts={worker.receipts}
+            warehouseRequests={worker.warehouseRequests}
           />
         )}
       </WorkerSectorInfo>

@@ -55,7 +55,6 @@ export async function POST(req) {
     requestWorker.receipts.push(newReceipt._id);
     shipmentItem.shipment.warehouseRequest.order.receipts.push(newReceipt._id);
     shipmentItem.receipt = newReceipt._id;
-    return Response.json({ newReceipt, message: "Račun uspješno kreiran" });
     await newReceipt.save();
     await shipmentItem.shipment.warehouseRequest.order.save();
     await shipmentItem.save();

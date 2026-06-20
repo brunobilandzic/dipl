@@ -6,7 +6,9 @@ import { FormModal } from "../../layout/modals/form";
 import { AppInput, AppSelect } from "../../form/inputs";
 import { ChooseWorker } from "@/components/workers/choose";
 import { checkEmpty } from "@/lib/utils/objects";
-import { PRODUCTION_MANAGER } from "@/lib/constants/users/managerTypes";
+import {
+  FINANCIAL_MANAGER,
+} from "@/lib/constants/users/managerTypes";
 
 export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
   const initialWarehouseRequest = {
@@ -69,7 +71,7 @@ export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
         <ChooseWorker
           workers={workers}
           onChoose={chooseWorker}
-          managerModelName={PRODUCTION_MANAGER}
+          managerModelName={FINANCIAL_MANAGER}
         />
       )}
       <AppSelect

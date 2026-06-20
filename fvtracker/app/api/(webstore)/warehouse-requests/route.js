@@ -26,6 +26,7 @@ export async function GET(request) {
         { status: 403 },
       );
     }
+
     let { financialManagerId, warehouseManagerId } = await extractManagerIds(
       specificManager,
       worker,

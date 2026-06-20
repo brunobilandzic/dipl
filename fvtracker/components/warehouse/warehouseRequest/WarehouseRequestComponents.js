@@ -134,17 +134,6 @@ const ItemList = ({ items, orderItems }) => {
       />
     </>
   );
-  return (
-    <ul className="list-disc list-inside">
-      {items.map((item, index) => (
-        <li key={index}>
-          {item.product} x {item.quantity},{" "}
-          {getShippedQuantity({ productName: item.product, orderItems })} od{" "}
-          {item.quantity} isporučeno
-        </li>
-      ))}
-    </ul>
-  );
 };
 
 const getShippedQuantity = ({ productName, orderItems }) => {

@@ -2,10 +2,6 @@
 import { List, ListItem } from "@/components/layout/preview/list";
 import { orderSortOptions } from "@/components/layout/preview/sort";
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
-import {
-  DELIVERED,
-  WAREHOUSE_REQUESTED,
-} from "@/lib/constants/webstore/orders";
 import { getName, showDateTime } from "@/lib/utils/display";
 import { initFilters } from "@/lib/utils/list";
 import { deleteOrderUtil } from "@/lib/utils/webstore/orders";

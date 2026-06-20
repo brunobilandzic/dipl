@@ -15,6 +15,7 @@ import {
 } from "@/lib/constants/users/workers";
 import { GeneralWorkersReport } from "../worker";
 import { LoadingFullScreen } from "@/components/layout/loading";
+import { receiptsData } from "@/lib/utils/webstore/receipts";
 
 export const FinancialReport = ({}) => {
   const orders = useSelector((state) => state.webstore.orders.items);
@@ -25,6 +26,17 @@ export const FinancialReport = ({}) => {
   const uniqueProducts = getUniqueProducts(orders);
   const totalItems = getOrdersTotalItems(orders);
   const totalRevenue = ordersTotalAmount(orders);
+  const warehouseRequests = useSelector(
+    (state) => state.warehouse.warehouseRequests,
+  );
+  console.log({ component: { warehouseRequests } });
+  const {
+    totalPrice: invoicedPrice,
+    totalItems: totalReceiptItems,
+    receiptCount,
+  } = receiptsData({
+    warehouseRequests,
+  });
 
   const totalHourlyRate = workers.reduce(
     (sum, worker) => sum + worker.hourlyRate,
@@ -63,17 +75,22 @@ export const FinancialReport = ({}) => {
             pluralLetter: "a",
           })}
         />
+        <ReportItem count={totalItems} description="naručeno proizvoda" />
         <ReportItem
-          count={totalItems}
+          count={totalReceiptItems}
           description={stringQuant({
             string: "Komad",
-            quantity: totalItems,
+            quantity: totalReceiptItems,
             pluralLetter: "a",
           })}
         />
         <ReportItem
           count={totalRevenue.toFixed(2)}
           description={"Vrijednost (€)"}
+        />
+        <ReportItem
+          count={invoicedPrice.toFixed(2)}
+          description={"Računi (€)"}
         />
       </ReportSection>
       <GeneralWorkersReport workers={workers} title="Radnici">

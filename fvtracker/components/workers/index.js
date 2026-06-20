@@ -233,6 +233,10 @@ const WarehouseWorker = ({ worker }) => {
   return (
     <>
       <div>
+        <div>
+          Zarađeno: {totalPay} €, ukupno sati: {totalHours} h, isplaćeno:{" "}
+          {worker.payedAmount} €
+        </div>
         Ukupno kreirano otpremnica: {worker.shipmentItems.length} otpremnica,
         ukupna količina:{" "}
         {worker.shipmentItems.reduce((sum, process) => {
@@ -244,10 +248,6 @@ const WarehouseWorker = ({ worker }) => {
             )
           );
         }, 0)}
-      </div>
-      <div>
-        Ukupna zarada: {totalPay} €, ukupno sati: {totalHours} h, isplaćeno:{" "}
-        {worker.payedAmount} €
       </div>
     </>
   );
@@ -262,8 +262,11 @@ const FinancialWorker = ({ worker }) => {
   return (
     <>
       <div>
-        Ukupno poslanih zahtjeva: {worker.warehouseRequests.length} zahtjeva,
-        odrađeno sati: {totalHours} h
+        Zarađeno: {totalPay} €, ukupno sati: {totalHours} h, isplaćeno:{" "}
+        {worker.payedAmount} €
+      </div>
+      <div>
+        Ukupno poslanih zahtjeva: {worker.warehouseRequests.length} zahtjeva
       </div>
       <div>Ukupno kreirano računa: {worker.receipts.length} računa</div>
     </>

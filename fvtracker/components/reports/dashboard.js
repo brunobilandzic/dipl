@@ -24,7 +24,7 @@ export const ReportSection = ({ title, children }) => {
   return (
     <div className="mb-8">
       <h2 className="text-xl mb-4">{title}</h2>
-      <div className="grid grid-cols-5 gap-4">{children}</div>
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4">{children}</div>
     </div>
   );
 };

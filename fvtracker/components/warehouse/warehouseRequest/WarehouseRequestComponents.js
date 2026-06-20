@@ -12,6 +12,7 @@ import {
   SHIPMENT_PENDING,
 } from "@/lib/constants/warehouse/shipment";
 import { useRouter } from "next/navigation";
+import { AppTable } from "@/components/layout/preview/table";
 
 export const WarehouseRequestList = () => {
   const warehouseRequests = useSelector(
@@ -115,6 +116,24 @@ const WarehouseRequestListItem = ({ request, router }) => {
 };
 
 const ItemList = ({ items, orderItems }) => {
+  return (
+    <>
+      <AppTable
+        headerLabels={["proizvod", "količina", "naručeno", "isporučeno"]}
+        rows={items.map((item) => ({
+          product: item.product,
+          quantity: item.quantity,
+          ordered: orderItems.find((oi) => oi.product.name === item.product)
+            ?.quantity,
+          shipped: getShippedQuantity({
+            productName: item.product,
+            orderItems,
+          }),
+        }))}
+        emptyRowsLabel="Nema proizvoda"
+      />
+    </>
+  );
   return (
     <ul className="list-disc list-inside">
       {items.map((item, index) => (

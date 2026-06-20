@@ -103,10 +103,11 @@ const WarehouseRequestListItem = ({ request, router }) => {
               shipmentItemsCount: request.shipment?.shipmentItems?.length || 0,
               shipmentProductsCount: request.shipment?.shipmentItems?.reduce(
                 (acc, si) => {
-                  acc += si.sources.reduce((sAcc, ss) => {
-                    sAcc += Number(ss.quantity);
-                    return sAcc;
-                  }, 0);
+                  acc +=
+                    si.sources?.reduce((sAcc, ss) => {
+                      sAcc += Number(ss.quantity);
+                      return sAcc;
+                    }, 0) ?? 0;
                   return acc;
                 },
                 0,
@@ -118,7 +119,7 @@ const WarehouseRequestListItem = ({ request, router }) => {
           ]}
         />
         <div>
-          Poslano {request.shipment.shipmentItems?.length || 0} otpremnica
+          Poslano {request.shipment?.shipmentItems?.length || 0} otpremnica
         </div>
         <div>
           Izrađeno{" "}
@@ -165,12 +166,13 @@ const ItemList = ({ items, orderItems }) => {
 
 const getShippedQuantity = ({ productName, orderItems }) => {
   const a = orderItems
-    .filter((oi) => oi.product.name === productName)
+    .filter((oi) => oi.product?.name === productName)
     .reduce((acc, oi) => {
-      acc += oi.shipmentSources.reduce((sAcc, ss) => {
-        sAcc += Number(ss.quantity);
-        return sAcc;
-      }, 0);
+      acc +=
+        oi.shipmentSources?.reduce((sAcc, ss) => {
+          sAcc += Number(ss.quantity);
+          return sAcc;
+        }, 0) ?? 0;
       return acc;
     }, 0);
 

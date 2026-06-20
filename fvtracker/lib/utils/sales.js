@@ -12,11 +12,13 @@ const dispatchPayloads = ({ orders, dispatch }) => {
 };
 
 export const orderAmount = (order) => {
-  return order.items.reduce((acc, item) => {
-    return acc + item.product.price * item.quantity;
-  }, 0);
+  return (
+    order.items?.reduce((acc, item) => {
+      return acc + (item.product?.price || 0) * item.quantity;
+    }, 0) ?? 0
+  );
 };
 
 export const ordersTotalAmount = (orders) => {
-  return orders.reduce((total, order) => total + orderAmount(order), 0);
+  return orders?.reduce((total, order) => total + orderAmount(order), 0) ?? 0;
 };

@@ -114,8 +114,8 @@ const OrderItem = ({ order }) => {
         <div className="listitemheader">Narudžba #{order.number} </div>
         <div>
           {getName({
-            name: order.customer.name,
-            surname: order.customer.surname,
+            name: order.customer?.name,
+            surname: order.customer?.surname,
           })}
         </div>
         <div>
@@ -138,13 +138,13 @@ const OrderItems = ({ items }) => {
   return (
     <div className="mt-2">
       <ul>
-        {items.map((item) => (
+        {items?.map((item) => (
           <li key={item._id}>
-            {item.product.name} Poslano:{" "}
-            {item.shipmentSources.reduce(
+            {item.product?.name} Poslano:{" "}
+            {item.shipmentSources?.reduce(
               (total, source) => total + source.quantity,
               0,
-            )}{" "}
+            ) ?? 0}{" "}
             / {item.quantity}
           </li>
         ))}

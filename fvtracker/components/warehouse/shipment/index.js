@@ -120,7 +120,9 @@ const ShipmentItem = ({
       });
       shipmentItem.receipt = res.data.newReceipt; // Assuming the response contains the new receipt ID
       console.log("Receipt created successfully:", res.data.newReceipt);
-      dispatch(financialPayWorker({ workerId: worker, receiptId: res.data.newReceipt }));
+      dispatch(
+        financialPayWorker({ workerId: worker, receipt: res.data.newReceipt }),
+      );
       dispatch(setLoading(false));
       // Handle success (e.g., show a message, refresh data)
     } catch (error) {

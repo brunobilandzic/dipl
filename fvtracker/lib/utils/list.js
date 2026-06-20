@@ -1,3 +1,4 @@
+import { FINANCIAL_MANAGER } from "../constants/users/managerTypes";
 import { getName } from "./display";
 import { procurmentValue } from "./documents/procurments";
 import { productsWithCropVarieties } from "./production/products";
@@ -63,7 +64,7 @@ export const initFilters = (listType, allWorkers = false) => {
               {
                 type: "workerType",
                 placeholder: "Sektor radnika",
-                value: "all",
+                value: FINANCIAL_MANAGER,
               },
             ]
           : []),

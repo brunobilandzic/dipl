@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { sendWarehouseRequest } from "@/lib/utils/documents/requests";
 import { useEffect, useState } from "react";
 import { FormModal } from "../../layout/modals/form";
-import { AppInput, AppSelect } from "../../form/inputs";
+import { AppSelect } from "../../form/inputs";
 import { ChooseWorker } from "@/components/workers/choose";
 import { checkEmpty } from "@/lib/utils/objects";
 import { FINANCIAL_MANAGER } from "@/lib/constants/users/managerTypes";
@@ -22,7 +22,6 @@ export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
 
   const workers = useSelector((state) => state.workers.items);
   const workerId = useSelector((state) => state.user.session.workerId);
-
   const dispatch = useDispatch();
 
   useEffect(() => {

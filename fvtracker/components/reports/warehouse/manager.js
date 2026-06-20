@@ -55,7 +55,10 @@ export const WarehouseReport = ({}) => {
             pluralLetter: "i",
           })}
         />
-        <ReportItem count={orderedProductsCount} description="Naručeno" />
+        <ReportItem
+          count={orderedProductsCount}
+          description="Naručeno proizvoda"
+        />
         <ReportItem count={shipmentSourcesCount} description="Isporučeno" />
       </ReportSection>
     </ReportSector>

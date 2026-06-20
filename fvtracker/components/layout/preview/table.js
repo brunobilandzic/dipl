@@ -5,7 +5,6 @@ export const AppTable = ({
   rows,
   emptyRowsLabel = "Nema podataka",
 }) => {
-  const numCols = headerLabels ? headerLabels.length : 0;
   return (
     <>
       {rows?.length > 0 ? (

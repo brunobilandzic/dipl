@@ -6,15 +6,15 @@ import { FormModal } from "../../layout/modals/form";
 import { AppInput, AppSelect } from "../../form/inputs";
 import { ChooseWorker } from "@/components/workers/choose";
 import { checkEmpty } from "@/lib/utils/objects";
-import {
-  FINANCIAL_MANAGER,
-} from "@/lib/constants/users/managerTypes";
+import { FINANCIAL_MANAGER } from "@/lib/constants/users/managerTypes";
+import { useRouter } from "next/navigation";
 
 export const WarehouseRequestModal = ({ isOpen, onCancel, order }) => {
   const initialWarehouseRequest = {
     orderId: order._id,
     warehouseId: null,
   };
+  const router = useRouter();
   const [warehouseRequest, setWarehouseRequest] = useState(
     initialWarehouseRequest,
   );

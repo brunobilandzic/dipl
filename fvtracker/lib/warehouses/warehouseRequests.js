@@ -7,6 +7,7 @@ import {
 import { getWarehouse } from "./get";
 import {
   calculateIsShipmentShipped,
+  shipmentPopulate,
   warehouseRequestPopulateShipmentItems,
 } from "../utils/storage/warehouse";
 import {
@@ -40,7 +41,12 @@ export const createWarehouseRequest = async (requestData) => {
 
   await warehouseRequest.save();
 
-  return warehouseRequest;
+  await warehouseRequest.populate(shipmentPopulate);
+
+  const { __t, _id, shipment, ...rest } =
+    warehouseRequest.toObject();
+
+  return { __t, _id, shipment };
 };
 
 export const getWarehouseRequests = async ({

@@ -111,13 +111,18 @@ async function signUpCredentials({
         return null;
       }
       const generalManager = await new GeneralManager();
+      const generalManagerRequest = await new GeneralManagerRequest({
+        generalManager: generalManager._id,
+      });
       const generalManagerRootManager = await new RootManager({
         appUser: newUser._id,
         managerModelName: GENERAL_MANAGER,
         generalManager: generalManager._id,
       });
+      generalManager.generalManagerRequest = generalManagerRequest._id;
       generalManager.rootManager = generalManagerRootManager._id;
       await generalManager.save();
+      await generalManagerRequest.save();
       await generalManagerRootManager.save();
       newUser.rootManager = generalManagerRootManager._id;
       await newUser.populate("rootManager");

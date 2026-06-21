@@ -97,8 +97,14 @@ async function signUpCredentials({
   });
   if (requestedRole) {
     if (requestedRole === GENERAL_MANAGER) {
-      const existingGeneralManager = await GeneralManager.findOne();
-      if (existingGeneralManager) {
+      const existingGeneralManager = await GeneralManager.findOne().populate(
+        "generalManagerRequest",
+      );
+      if (
+        existingGeneralManager &&
+        existingGeneralManager.generalManagerRequest.status ===
+          ROLE_STATUSES.APPROVED
+      ) {
         console.log(
           "General Manager already exists, cannot create another one",
         );

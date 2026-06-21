@@ -31,16 +31,20 @@ const ProfileComponent = () => {
     }
   }, [status, router]);
 
-  return (
-    <div>
-      <CommonProfilePage {...session.user} />
-      {workerType && worker && (
-        <>
-          <WorkerProfile worker={worker} workerType={workerType} />
-        </>
-      )}
-    </div>
-  );
+  if (session.user.generalManagerRequest)
+    return (
+      <div>
+        <CommonProfilePage
+          {...session.user}
+          generalManagerRequest={session.user.generalManagerRequest}
+        />
+        {workerType && worker && (
+          <>
+            <WorkerProfile worker={worker} workerType={workerType} />
+          </>
+        )}
+      </div>
+    );
 };
 
 export default ProfileComponent;
@@ -54,6 +58,7 @@ const CommonProfilePage = ({
   roleStatus,
   name,
   username,
+  generalManagerRequest,
 }) => {
   const profileRole = () => {
     if (isAdmin) {
@@ -71,7 +76,10 @@ const CommonProfilePage = ({
           <div>{MANAGER_TRANSLATION[managerModelName]}</div>
           <div>
             Zahtjev za ulogu:{" "}
-            {roleStatus === ROLE_STATUSES.APPROVED ? "Odobren" : "Nije odobren"}
+            {roleStatus === ROLE_STATUSES.APPROVED ||
+            generalManagerRequest === ROLE_STATUSES.APPROVED
+              ? "Odobren"
+              : "Nije odobren"}
           </div>
         </>
       );

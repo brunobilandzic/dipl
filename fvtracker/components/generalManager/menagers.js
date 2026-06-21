@@ -31,7 +31,6 @@ export const ManagerList = () => {
     [generalManager?.managers],
   );
   const workers = useSelector((state) => state.workers?.items);
-  console.log({ workers });
 
   const filteredManagers = useMemo(
     () =>

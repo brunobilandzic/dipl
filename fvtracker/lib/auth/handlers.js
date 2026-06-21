@@ -135,6 +135,25 @@ async function signUpCredentials({
       throw new Error("Invalid manager type requested: " + requestedRole);
     }
     console.log({ requestedRole });
+    const existingManagers = await mongoose
+      .model(requestedRole)
+      .find()
+      .populate({
+        path: "rootManager",
+        select: "roleRequest",
+        populate: { path: "roleRequest", select: "status" },
+      });
+    const hasApprovedManager = existingManagers.some((manager) => {
+      return (
+        manager.rootManager?.roleRequest?.status === ROLE_STATUSES.APPROVED
+      );
+    });
+    if (hasApprovedManager) {
+      console.log(
+        `An approved ${requestedRole} already exists. Cannot create another one.`,
+      );
+      return null;
+    }
     const generalManager = await GeneralManager.findOne();
     const rootManager = await new RootManager({
       appUser: newUser._id,

@@ -71,10 +71,7 @@ const CommonProfilePage = ({
           <div>{MANAGER_TRANSLATION[managerModelName]}</div>
           <div>
             Zahtjev za ulogu:{" "}
-            {roleStatus === ROLE_STATUSES.APPROVED ||
-            generalManagerRequest === ROLE_STATUSES.APPROVED
-              ? "Odobren"
-              : "Nije odobren"}
+            {roleStatus?.toLowerCase() || generalManagerRequest?.toLowerCase()}
           </div>
         </>
       );

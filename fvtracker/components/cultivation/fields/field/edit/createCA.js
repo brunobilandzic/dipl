@@ -129,18 +129,15 @@ function CreateCA({
           </div>
         </div>
       </Modals.FormModal>
-      {newCACoordinates?.planted?.length > 1 &&
-      newCACoordinates?.planted?.length !== undefined ? (
-        <div
-          onClick={onAdd}
-          className="flex flex-col justify-center items-center gap-4 cursor-pointer"
-        >
-          <div>
-            <FaPlus className="text-4xl" />
-          </div>
-          <div className="text-sm">Dodaj područje kultivacije</div>
+      <div
+        onClick={onAdd}
+        className={`${newCACoordinates?.planted?.length > 1 ? "flex" : "hidden"} flex flex-col justify-center items-center gap-4 cursor-pointer`}
+      >
+        <div>
+          <FaPlus className="text-4xl" />
         </div>
-      ) : null}
+        <div className="text-sm">Dodaj područje kultivacije</div>
+      </div>
     </>
   );
 }

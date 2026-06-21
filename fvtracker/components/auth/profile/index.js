@@ -30,21 +30,16 @@ const ProfileComponent = () => {
       router.push("/uloga-nije-odobrena");
     }
   }, [status, router]);
-
-  if (session.user.generalManagerRequest)
-    return (
-      <div>
-        <CommonProfilePage
-          {...session.user}
-          generalManagerRequest={session.user.generalManagerRequest}
-        />
-        {workerType && worker && (
-          <>
-            <WorkerProfile worker={worker} workerType={workerType} />
-          </>
-        )}
-      </div>
-    );
+  return (
+    <div>
+      <CommonProfilePage {...session.user} />
+      {workerType && worker && (
+        <>
+          <WorkerProfile worker={worker} workerType={workerType} />
+        </>
+      )}
+    </div>
+  );
 };
 
 export default ProfileComponent;

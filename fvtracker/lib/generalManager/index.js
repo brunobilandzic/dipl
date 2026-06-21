@@ -21,6 +21,8 @@ export const getGeneralManager = async () => {
         throwError: true,
       });
 
+  if (!generalManagerDoc) return null;
+
   await generalManagerDoc.populate([
     {
       path: "roleRequests",

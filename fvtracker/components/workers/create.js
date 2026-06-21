@@ -131,6 +131,9 @@ export const CreateWorker = () => {
     }
   };
 
+  const submitDisabled = () =>
+    Object.values(workerData).some((value) => value === "");
+
   return (
     <div className={`form`}>
       <div className={styles.head}>
@@ -170,7 +173,10 @@ export const CreateWorker = () => {
         )}
       </div>
       <div className={`${styles.footer}       flex justify-center`}>
-        <div className={`btn submitButton btnLg`} onClick={onSubmit}>
+        <div
+          className={`btn submitButton btnLg ${submitDisabled() ? "disabled" : ""}`}
+          onClick={submitDisabled() ? undefined : onSubmit}
+        >
           Kreiraj radnika
         </div>
       </div>

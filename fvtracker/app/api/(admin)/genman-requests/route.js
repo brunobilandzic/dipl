@@ -23,7 +23,7 @@ export async function GET(request) {
           path: "rootManager",
           populate: {
             path: "appUser",
-            select: "email name surname",
+            select: "email name surname username",
           },
         },
       },

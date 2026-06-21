@@ -171,7 +171,10 @@ async function signUpCredentials({
 
   await newUser.save();
   console.log("New user created:", newUser);
-  return { ...newUser._doc, roleStatus: ROLE_STATUSES.PENDING };
+  return {
+    ...newUser._doc,
+    roleStatus: ROLE_STATUSES.PENDING,
+  };
 }
 
 async function logInCredentials({ login, password }) {

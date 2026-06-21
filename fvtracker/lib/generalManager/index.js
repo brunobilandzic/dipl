@@ -12,7 +12,7 @@ import {
 } from "@/lib/constants/users/managerTypes";
 
 export const getGeneralManager = async () => {
-  const { admin } = await fetchAdmin();
+  const { admin, unauthorized } = await fetchAdmin();
 
   const generalManagerDoc = admin
     ? await GeneralManager.findOne()
@@ -28,14 +28,20 @@ export const getGeneralManager = async () => {
       path: "roleRequests",
       populate: {
         path: "rootManager",
-        select: "appUser",
-        populate: { path: "appUser", select: "name surname username email" },
+        select: "appUser managerModelName",
+        populate: {
+          path: "appUser",
+          select: "name surname username email username",
+        },
       },
     },
     {
       path: "managers",
       populate: [
-        { path: "appUser", select: "name surname username email" },
+        {
+          path: "appUser",
+          select: "name surname username email username ",
+        },
         { path: "roleRequest", select: "status" },
       ],
     },

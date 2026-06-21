@@ -130,7 +130,7 @@ async function signUpCredentials({
       managerModelName: requestedRole,
       generalManager: generalManager._id,
     });
-
+    generalManager.managers.push(rootManager._id);
     const specificManager = await models.user[requestedRole].create({
       rootManager: rootManager._id,
     });
@@ -141,6 +141,7 @@ async function signUpCredentials({
 
     await specificManager.save();
     await rootManager.save();
+    await generalManager.save();
     newUser.rootManager = rootManager._id;
     await newUser.populate("rootManager");
   }

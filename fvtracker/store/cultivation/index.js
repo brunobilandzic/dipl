@@ -109,6 +109,24 @@ const cultivationSlice = createSlice({
     setCrops: (state, action) => {
       state.crops = action.payload;
     },
+    addMainType: (state, action) => {
+      if (!state.crops) return;
+      state.crops.mainTypes.push(action.payload.mainType);
+    },
+    addGeneralType: (state, action) => {
+      if (!state.crops) return;
+      state.crops.generalTypes.push(action.payload.generalType);
+    },
+    addCropType: (state, action) => {
+      const { type, varieties } = action.payload;
+      if (!state.crops) return;
+      state.crops.types.push(type);
+      state.crops.varieties.push(...varieties);
+    },
+    addCropVariety: (state, action) => {
+      if (!state.crops) return;
+      state.crops.varieties.push(action.payload.variety);
+    },
     selectCultivationArea: (state, action) => {
       state.selectedCultivationArea = action.payload;
     },
@@ -342,6 +360,10 @@ export const {
   createCultivationArea,
   deleteCultivationArea,
   setCrops,
+  addMainType,
+  addGeneralType,
+  addCropType,
+  addCropVariety,
   selectCultivationArea,
   updateCultivationArea,
   createCultivation,

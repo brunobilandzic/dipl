@@ -122,7 +122,7 @@ async function signUpCredentials({
       newUser.rootManager = generalManagerRootManager._id;
       await newUser.populate("rootManager");
       await newUser.save();
-      return newUser;
+      return { ...newUser._doc, generalManagerRequest: ROLE_STATUSES.PENDING };
     }
     if (!MANAGER_TYPES.includes(requestedRole)) {
       throw new Error("Invalid manager type requested: " + requestedRole);

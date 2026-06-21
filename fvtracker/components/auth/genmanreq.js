@@ -52,12 +52,10 @@ export const GeneralManagerRequestComponent = ({}) => {
               >
                 Odobri
               </div>
-              <div
-                className="btn cancelButton"
-                onClick={() => respond(ROLE_STATUSES.REJECTED)}
-              >
-                Odbaci
-              </div>
+              <RoleRequestStatus
+                roleRequest={{ status: request.status, _id: request._id }}
+                generalManager={true}
+              />
             </div>
           )}
         </div>

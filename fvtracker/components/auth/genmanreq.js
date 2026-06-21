@@ -37,7 +37,8 @@ export const GeneralManagerRequestComponent = ({}) => {
               key={i}
               className="flex justify-between items-center p-6 border"
             >
-              <div>
+              <div className="flex gap-2 items-center">
+                <div>{request.generalManager.rootManager.appUser.username}</div>
                 {request.generalManager.rootManager.appUser
                   ? `${request.generalManager.rootManager.appUser.name} ${request.generalManager.rootManager.appUser.surname} (${request.generalManager.rootManager.appUser.email})`
                   : null}

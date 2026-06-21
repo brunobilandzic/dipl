@@ -4,7 +4,7 @@ import { LoadingFullScreen } from "@/components/layout/loading";
 import { useDispatch, useSelector } from "react-redux";
 import { List, ListItem } from "../layout/preview/list";
 import { useRouter } from "next/navigation";
-import { showDate } from "@/lib/utils/display";
+import { showDate, showDateTime } from "@/lib/utils/display";
 import {
   workPayCultivation,
   workPayProduction,
@@ -131,7 +131,13 @@ const WorkerItem = ({ worker, children, dispatch, router }) => {
             <div className="text-sm text-gray-500">
               {showDate(worker.createdAt)}
             </div>
-            <div>Isplaćeno: {worker.payedAmount} €</div>
+
+            <div className="info-group">
+              <div>{employed ? "Zaposlen" : "Nezaposlen"} </div>
+              <div>Zarađeno: {worker.earnedAmount || 0} €</div>
+              <div>Ukupno sati: {worker.totalHours || 0} h</div>
+            </div>
+            <div>Isplaćeno: {worker.payedAmount || 0} €</div>
             <div>{worker.hourlyRate} $/h</div>
           </div>
 

@@ -10,6 +10,7 @@ import { ROLE_STATUSES } from "@/lib/constants/users";
 import { requestResponseUpdate } from "@/store/generalManager";
 import { List, ListItem } from "../layout/preview/list";
 import { filterItems, initFilters } from "@/lib/utils/list";
+import handleError from "@/lib/constants/errors/client/handleError";
 
 export const RoleRequestList = () => {
   const generalManager = useSelector((state) => state.generalManager.manager);
@@ -123,6 +124,10 @@ const RespondMenu = ({ roleRequest, setRespondMenuOpen }) => {
       dispatch(setLoading(false));
     } catch (error) {
       console.error("Error responding to role request:", error);
+      handleError({
+        ...error,
+        generalMessage: "Greška prilikom odgovaranja na zahtev za ulogu",
+      });
       dispatch(setLoading(false));
     }
   };

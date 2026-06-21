@@ -54,14 +54,6 @@ export async function POST(req) {
     const request = await GeneralManagerRequest.findOne();
     request.status = status;
 
-    if (status == ROLE_STATUSES.REJECTED) {
-      await GeneralManagerRequest.deleteMany();
-      await GeneralManager.deleteMany();
-
-      return Response.json({
-        message: "Sve izbrisano, čekamo novi signup gneralnog menadzera.",
-      });
-    }
     await request.save();
     return Response.json({ request, message: "Zahtjev odobren" });
   } catch (error) {

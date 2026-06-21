@@ -133,6 +133,14 @@ function CreateCrop() {
     label: `${t.name} (${t.generalTypeName})`,
   }));
 
+  const submitDisabled = () => {
+    if (!form.name) return true;
+    if (level === "generalType" && !form.mainCropType) return true;
+    if (level === "cropType" && !form.generalType) return true;
+    if (level === "cropVariety" && !form.cropType) return true;
+    return false;
+  };
+
   return (
     <div>
       <AppSelect
@@ -273,7 +281,11 @@ function CreateCrop() {
         </div>
       )}
 
-      <SubmitButton label="Izradi" handleSubmit={handleSubmit} />
+      <SubmitButton
+        disabled={submitDisabled()}
+        label="Izradi"
+        handleSubmit={handleSubmit}
+      />
     </div>
   );
 }

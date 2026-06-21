@@ -39,6 +39,13 @@ export default {
       ],
     },
     {
+      label: "kulture",
+      submenu: [
+        { label: "pregled", path: "/kulture" },
+        { label: "dodavanje", path: "/kulture/dodavanje" },
+      ],
+    },
+    {
       label: "planiranje",
       submenu: [
         { label: "plan sadnje", path: "/plan-sadnje" },

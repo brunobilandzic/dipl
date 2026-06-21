@@ -269,7 +269,7 @@ export function CreateFieldPageComponent() {
         ))}
         <div className={`${styles.footer}`}>
           <div onClick={onSubmit} className="btn submitButton">
-            Kreiraj parcelu
+            Kreiraj polje
           </div>
         </div>
       </div>

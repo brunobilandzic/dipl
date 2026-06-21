@@ -11,7 +11,6 @@ export async function DELETE(req) {
     // Logic to delete the database goes here
     const success = await deleteDB();
     await createAdmin();
-    await createGeneralManager({ approve: false });
     console.log("Database deleted successfully.");
     return Response.json(
       { message: "Database deleted successfully.", success: true },

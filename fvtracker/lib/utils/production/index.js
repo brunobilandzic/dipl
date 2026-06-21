@@ -46,9 +46,9 @@ export default async function fillProductionRedux({ dispatch, router, all }) {
 }
 
 const dispatchPayloads = ({ manager, dispatch, batches }) => {
-  dispatch(setProducts(manager.products));
+  manager?.products && dispatch(setProducts(manager?.products));
   // dispatch(refreshProductsStocks.fulfilled(mapProductsStocks({ manager })));
-  dispatch(refreshHarvestingBatches.fulfilled(batches));
+  batches && dispatch(refreshHarvestingBatches.fulfilled(batches));
   dispatch(refreshFacilities());
   dispatch(fetchWarehouses());
   dispatch(refreshProductsStocks());

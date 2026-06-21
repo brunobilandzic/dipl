@@ -36,7 +36,7 @@ export default async () => {
   /*   await check(); */
 
   // Create admin and general manager first
-const admin = await createAdmin();
+  const admin = await createAdmin();
   const generalManager = await createGeneralManager({ approve: true });
 
   // Now create other app users

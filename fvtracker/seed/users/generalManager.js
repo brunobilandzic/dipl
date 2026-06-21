@@ -9,6 +9,7 @@ import { ROLE_STATUSES } from "@/lib/constants/users";
 import { GeneralManagerRequest } from "@/models/documents/requests/RoleRequest";
 
 export const createGeneralManager = async ({ approve = true }) => {
+  console.log("Creating general manager...");
   await dbConnect();
   let generalManager = await GeneralManager.findOne()
     .select("generalManagerRequest")

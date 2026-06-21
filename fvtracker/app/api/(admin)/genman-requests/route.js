@@ -49,9 +49,20 @@ export async function POST(req) {
       return Response.json({ error: "Unauthorized" }, { status: 403 });
     }
     const body = await req.json();
-    const { status } = body;
+    const { _id, status } = body;
 
-    const request = await GeneralManagerRequest.findOne();
+    const requests = await GeneralManagerRequest.find();
+    if (
+      status === ROLE_STATUSES.APPROVED &&
+      requests?.some((request) => request.status === ROLE_STATUSES.APPROVED)
+    ) {
+      return Response.json(
+        { error: "Već postoji odobren zahtev za generalnog menadžera" },
+        { status: 400 },
+      );
+    }
+
+    const request = await GeneralManagerRequest.findById(_id);
     request.status = status;
 
     await request.save();

@@ -11,6 +11,7 @@ import { requestResponseUpdate } from "@/store/generalManager";
 import { List, ListItem } from "../layout/preview/list";
 import { filterItems, initFilters } from "@/lib/utils/list";
 import handleError from "@/lib/constants/errors/client/handleError";
+import { MANAGER_TRANSLATION } from "@/lib/constants/users/managerTypes";
 
 export const RoleRequestList = () => {
   const generalManager = useSelector((state) => state.generalManager.manager);
@@ -52,8 +53,13 @@ export const RoleRequestItem = ({ roleRequest }) => {
   return (
     <>
       <ListItem>
-        <div className="flex justify-between">
-          <h3 className="font-bold">{`${name} ${surname}`}</h3>
+        <div className="flex justify-between items-center">
+          <div className="flex flex-col gap-1">
+            <h3 className="font-bold">{`${name} ${surname}`}</h3>
+            <div>
+              {MANAGER_TRANSLATION[roleRequest.rootManager.managerModelName]}
+            </div>
+          </div>
           <div>
             <RoleRequestStatus roleRequest={roleRequest} />
           </div>

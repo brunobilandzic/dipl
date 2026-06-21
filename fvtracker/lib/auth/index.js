@@ -1,4 +1,4 @@
-import { handleCredentials, handleOAuth } from "./handlers";
+import { handleCredentials } from "./handlers";
 import {
   fetchManager,
   fetchSessionAppUser,
@@ -7,7 +7,6 @@ import {
 
 export default {
   authorizationHandlers: {
-    handleOAuth,
     handleCredentials,
   },
   session: {

@@ -15,25 +15,6 @@ import { Admin } from "@/models/user/Admin";
 import { GeneralManagerRequest } from "@/models/documents/requests/RoleRequest";
 import { EMPLOYMENT_STATUS_EMPLOYED } from "../constants/users/workers";
 
-export async function handleOAuth({ email, given_name, family_name }) {
-  await dbConnect();
-  const appUser = await models.user.AppUser.findOne({ email });
-  if (appUser) {
-    return true;
-  } else {
-    const newUser = new models.user.AppUser({
-      email,
-      name: given_name,
-      surname: family_name,
-      provider: "google",
-      username: email.split("@")[0],
-    });
-
-    await newUser.save();
-    return true;
-  }
-}
-
 export async function handleCredentials(credentials) {
   await dbConnect();
   let user;
@@ -142,6 +123,7 @@ async function signUpCredentials({
     if (!MANAGER_TYPES.includes(requestedRole)) {
       throw new Error("Invalid manager type requested: " + requestedRole);
     }
+    console.log({ requestedRole });
     const generalManager = await GeneralManager.findOne();
     const rootManager = await new RootManager({
       appUser: newUser._id,

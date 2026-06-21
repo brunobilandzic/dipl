@@ -14,7 +14,7 @@ export async function GET(request) {
       return Response.json({ error: "Unauthorized" }, { status: 403 });
     }
 
-    const generalManagerRequest = await GeneralManagerRequest.findOne(
+    const generalManagerRequests = await GeneralManagerRequest.find(
       {},
     ).populate([
       {
@@ -29,7 +29,7 @@ export async function GET(request) {
       },
     ]);
 
-    return Response.json({ generalManagerRequest });
+    return Response.json({ generalManagerRequests });
   } catch (error) {
     console.error("Error fetching general manager requests:", error);
     return Response.json(

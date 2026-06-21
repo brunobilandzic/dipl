@@ -124,8 +124,6 @@ async function signUpCredentials({
       await newUser.save();
       return newUser;
     }
-    // right now, app is built for only one gen manager
-    if (!requestedRole) return newUser;
     if (!MANAGER_TYPES.includes(requestedRole)) {
       throw new Error("Invalid manager type requested: " + requestedRole);
     }

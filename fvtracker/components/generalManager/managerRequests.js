@@ -63,7 +63,7 @@ export const RoleRequestItem = ({ roleRequest }) => {
   );
 };
 
-export const RoleRequestStatus = ({ roleRequest }) => {
+export const RoleRequestStatus = ({ roleRequest, generalManager = false }) => {
   const { status } = roleRequest;
   const [respondMenuOpen, setRespondMenuOpen] = useState(false);
 
@@ -98,6 +98,7 @@ export const RoleRequestStatus = ({ roleRequest }) => {
           <RespondMenu
             roleRequest={roleRequest}
             setRespondMenuOpen={setRespondMenuOpen}
+            generalManager={generalManager}
           />
         </div>
       )}
@@ -105,15 +106,21 @@ export const RoleRequestStatus = ({ roleRequest }) => {
   );
 };
 
-const RespondMenu = ({ roleRequest, setRespondMenuOpen }) => {
+const RespondMenu = ({ roleRequest, setRespondMenuOpen, generalManager }) => {
   const dispatch = useDispatch();
   const onRespond = async (response) => {
     try {
       dispatch(setLoading(true));
-      await api.put(`/general-manager/role-requests`, {
-        requestId: roleRequest._id,
-        response,
-      });
+      console.log({ roleRequest, response });
+      generalManager
+        ? await api.post("/genman-requests", {
+            status: response,
+            _id: roleRequest._id,
+          })
+        : await api.put(`/general-manager/role-requests`, {
+            requestId: roleRequest._id,
+            response,
+          });
       dispatch(
         requestResponseUpdate({
           roleRequestId: roleRequest._id,

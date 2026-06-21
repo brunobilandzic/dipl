@@ -7,16 +7,13 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 export const GeneralManagerRequestComponent = ({}) => {
-  const [request, setRequest] = useState(null);
-  const appUser = request?.generalManager?.rootManager?.appUser;
-  const dispatch = useDispatch();
-  const router = useRouter();
+  const [requests, setRequests] = useState([]);
 
   useEffect(() => {
     const fetchRequest = async () => {
       try {
         const response = await api.get("/genman-requests");
-        setRequest(response.data.generalManagerRequest);
+        setRequests(response.data.generalManagerRequests);
       } catch (error) {
         handleError({
           ...error,
@@ -28,18 +25,6 @@ export const GeneralManagerRequestComponent = ({}) => {
 
     fetchRequest();
   }, []);
-
-  const respond = async (status) => {
-    try {
-      dispatch(setLoading(true));
-      const response = await api.post("/genman-requests", { status });
-      router.refresh();
-    } catch (error) {
-      console.error("Error approving general manager request:", error);
-    } finally {
-      dispatch(setLoading(false));
-    }
-  };
 
   return (
     <div>

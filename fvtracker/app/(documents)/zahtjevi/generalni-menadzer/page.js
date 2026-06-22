@@ -2,7 +2,7 @@ import React from "react";
 import dbConnect from "@/lib/db/mongooseConnect";
 import { fetchAdmin } from "@/lib/auth/fetchSessionData";
 import { GeneralManagerRequest } from "@/models/documents/requests/RoleRequest";
-import { GeneralManagerRequestComponent } from "@/components/auth/genmanreq";
+import { GeneralManagerRequestsComponent } from "@/components/auth/genmanreq";
 
 async function GeneralManagerRequestsPage() {
   await dbConnect();
@@ -26,7 +26,7 @@ async function GeneralManagerRequestsPage() {
 
   return (
     <div>
-      <GeneralManagerRequestComponent />
+      <GeneralManagerRequestsComponent />
     </div>
   );
 }

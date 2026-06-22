@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { RoleRequestStatus } from "../generalManager/managerRequests";
 import { List, ListItem } from "../layout/preview/list";
 
-export const GeneralManagerRequestComponent = ({}) => {
+export const GeneralManagerRequestsComponent = ({}) => {
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {

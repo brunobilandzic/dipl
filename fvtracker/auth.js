@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { CredentialsSignin } from "next-auth";
 import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
@@ -24,7 +24,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
       async authorize(credentials, req) {
         console.log("Authorizing with credentials:", credentials);
-        return await handleCredentials(credentials);
+        try {
+          return await handleCredentials(credentials);
+        } catch (error) {
+          // proslijedi poruku bačene greške do klijenta preko `code`
+          const signinError = new CredentialsSignin(error.message);
+          signinError.code = error.message;
+          throw signinError;
+        }
       },
     }),
   ],

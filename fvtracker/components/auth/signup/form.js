@@ -104,7 +104,7 @@ function SignUpForm() {
           defaultValue={signUpData.requestedRole || ""}
         />
       </div>
-      <div className={`${styles.footer}     gap-2  flex justify-center`}>
+      <div className={`     gap-2  flex justify-center`}>
         <div className={`btn submitButton `} onClick={onSubmit}>
           Registracija
         </div>

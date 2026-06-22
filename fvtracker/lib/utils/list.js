@@ -98,6 +98,14 @@ export const initFilters = (listType, allWorkers = false) => {
           value: "all",
         },
       ];
+    case "cropTypes":
+      return [
+        {
+          type: "nameSearch",
+          placeholder: "Pretraži kulture...",
+          value: "",
+        },
+      ];
   }
 };
 

@@ -21,10 +21,6 @@ export function CreateFieldPageComponent() {
       width: 50,
       length: 50,
     },
-    location: {
-      longitude: 16.70472,
-      latitude: 43.67028,
-    },
     cultivationAreaDimensions: {
       min_ca_dim: 1,
       max_ca_dim: 10000,
@@ -61,7 +57,6 @@ export function CreateFieldPageComponent() {
     const { name, value } = e.target;
     if (
       objectName === "dimensions" ||
-      objectName === "location" ||
       objectName === "cultivationAreaDimensions"
     ) {
       const valid = utils.formValidation.numbersInRanges([
@@ -156,18 +151,6 @@ export function CreateFieldPageComponent() {
       min: cultivationConstants.field.cultivationAreaDimensions.MIN_GAP,
       max: cultivationConstants.field.cultivationAreaDimensions.MAX_GAP,
     },
-    {
-      name: "Geografska širina",
-      value: fieldData.location.latitude,
-      min: cultivationConstants.field.locationRanges.LATITUDE.min,
-      max: cultivationConstants.field.locationRanges.LATITUDE.max,
-    },
-    {
-      name: "Geografska dužina",
-      value: fieldData.location.longitude,
-      min: cultivationConstants.field.locationRanges.LONGITUDE.min,
-      max: cultivationConstants.field.locationRanges.LONGITUDE.max,
-    },
   ];
 
   const onSubmit = async () => {
@@ -231,22 +214,6 @@ export function CreateFieldPageComponent() {
               type={input.type}
               placeholder={input.placeholder}
               onChange={onObjectChange("dimensions")}
-              min={input.min}
-              max={input.max}
-            />
-          ),
-        )}
-
-        {Object.entries(cultivationConstants.field?.locationInputs).map(
-          ([key, input]) => (
-            <AppInput
-              value={fieldData.location[key]}
-              key={input.name}
-              label={input.label}
-              name={input.name}
-              type={input.type}
-              placeholder={input.placeholder}
-              onChange={onObjectChange("location")}
               min={input.min}
               max={input.max}
             />

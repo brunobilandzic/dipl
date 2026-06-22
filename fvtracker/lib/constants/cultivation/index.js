@@ -2,11 +2,9 @@ import colors from "./colors";
 import {
   fieldDimensions,
   formInputs,
-  locationInputs,
   cultivationAreaDimensionsInputs,
   dimensionsInputs,
   cultivationAreaDimensions,
-  locationRanges,
 } from "./field";
 
 export default {
@@ -16,11 +14,9 @@ export default {
   field: {
     fieldDimensions,
     formInputs,
-    locationInputs,
     cultivationAreaDimensionsInputs,
     dimensionsInputs,
     cultivationAreaDimensions,
-    locationRanges,
   },
   names: {
     NEW_CULTIVATION: "Napravi novu kultivaciju",

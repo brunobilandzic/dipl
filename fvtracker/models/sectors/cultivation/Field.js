@@ -34,16 +34,6 @@ const fieldSchema = new mongoose.Schema({
       default: [],
     },
   ],
-  location: {
-    // defines cells beginning location in the field
-    // cells are expanding in the first quadrant from this point
-    // it is used for mapping field on real world map
-    type: {
-      latitude: { type: Number, required: true },
-      longitude: { type: Number, required: true },
-    },
-    required: true,
-  },
   plantingPlans: [
     {
       type: mongoose.Schema.Types.ObjectId,

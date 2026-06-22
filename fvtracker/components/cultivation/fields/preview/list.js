@@ -55,10 +55,6 @@ export function FieldsList({}) {
       </div>
     );
 
-  if (dbFields.length === 0) {
-    return <NoFields />;
-  }
-
   return (
     <>
       <List
@@ -123,7 +119,6 @@ function FieldItem({ field }) {
     name,
     description,
     dimensions: { width, length },
-    location: { latitude, longitude },
     cultivationAreas,
     cultivationAreaDimensions: {
       min_ca_dim,

@@ -54,7 +54,6 @@ export default function FieldPageComponent({ slug }) {
     name,
     description,
     dimensions: { width, length },
-    location: { latitude, longitude },
     cultivationAreas,
     cultivations,
     cultivationAreaDimensions,

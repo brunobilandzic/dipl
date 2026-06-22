@@ -8,16 +8,7 @@ export const cultivationAreaDimensions = {
   MAX_CA_DIMENSION: 1000,
 };
 
-export const locationRanges = {
-  LATITUDE: {
-    min: -90,
-    max: 90,
-  },
-  LONGITUDE: {
-    min: -180,
-    max: 180,
-  },
-};
+
 
 export const formInputs = [
   {
@@ -48,23 +39,6 @@ export const dimensionsInputs = {
     type: "number",
     min: fieldDimensions.MIN_FIELD_DIMENSION,
     max: fieldDimensions.MAX_FIELD_DIMENSION,
-  },
-};
-
-export const locationInputs = {
-  longitude: {
-    label: "Geografska dužina",
-    name: "longitude",
-    type: "number",
-    min: locationRanges.LONGITUDE.min,
-    max: locationRanges.LONGITUDE.max,
-  },
-  latitude: {
-    label: "Geografska širina",
-    name: "latitude",
-    type: "number",
-    min: locationRanges.LATITUDE.min,
-    max: locationRanges.LATITUDE.max,
   },
 };
 

@@ -20,7 +20,7 @@ await dbConnect();
 
 async function createFieldObject(fieldParams, msWindow = createFieldTimeMs) {
   const msStart = Date.now();
-  const { name, description, location, ...fieldDAO } = fieldParams;
+  const { name, description, ...fieldDAO } = fieldParams;
   const _cultivationAreaNamesConstant = [...cultivationAreaNamesConstant];
 
   function fillField(field) {
@@ -73,7 +73,6 @@ async function createFieldObject(fieldParams, msWindow = createFieldTimeMs) {
     description,
     dimensions,
     cultivationAreaDimensions,
-    location,
     cultivationAreas: fieldDao.cultivationAreas,
   };
 }

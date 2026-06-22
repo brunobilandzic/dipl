@@ -9,10 +9,6 @@ export const optimizedParams = {
   max_ca_dim: 100,
   gap: 1,
   cultivationAreas: [],
-  location: {
-    latitude: 43.67028,
-    longitude: 16.70472,
-  },
 };
 
 export const planInfo = ({ fieldId, cropVarietyIds, productionManagerId }) => {

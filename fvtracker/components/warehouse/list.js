@@ -88,7 +88,7 @@ const WarehouseListItem = ({ warehouse, dispatch, router }) => {
 
   return (
     <div>
-      <ListItem actionOptions={actionOptions} subtitle={warehouse.location}>
+      <ListItem actionOptions={actionOptions}>
         <Link href={`/skladisne-jedinice/${warehouse.slug}`}>
           <div className="flex justify-between">
             <div>

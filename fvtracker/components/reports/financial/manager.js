@@ -20,6 +20,8 @@ import { receiptsData } from "@/lib/utils/webstore/receipts";
 export const FinancialReport = ({}) => {
   const orders = useSelector((state) => state.webstore.orders.items);
   const workers = useSelector((state) => state.workers.items);
+  const procurments = useSelector((state) => state.procurments.items);
+  console.log({ procurments });
   if (!orders || !workers) return <LoadingFullScreen />;
 
   const uniqueCustomers = getUniqueCustomers(orders);
@@ -43,12 +45,6 @@ export const FinancialReport = ({}) => {
   );
   const employedWorkers = workers.filter(
     (worker) => worker.employmentRequest.status == EMPLOYMENT_STATUS_EMPLOYED,
-  );
-  const unemployedWorkers = workers.filter(
-    (worker) => worker.employmentRequest.status == EMPLOYMENT_STATUS_UNEMPLOYED,
-  );
-  const pendingWorkers = workers.filter(
-    (worker) => worker.employmentRequest.status == EMPLOYMENT_STATUS_PENDING,
   );
 
   if (orders.length === 0 && workers.length === 0)

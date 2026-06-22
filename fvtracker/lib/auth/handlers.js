@@ -148,6 +148,12 @@ async function signUpCredentials({
       return null;
     }
     const generalManager = await GeneralManager.findOne();
+    if (!generalManager) {
+      console.log(
+        "No General Manager found. Cannot create manager without a General Manager.",
+      );
+      return null;
+    }
     const rootManager = await new RootManager({
       appUser: newUser._id,
       managerModelName: requestedRole,

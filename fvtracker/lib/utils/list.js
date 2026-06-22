@@ -163,7 +163,7 @@ export const sortItems = ({ items, sortBy }) => {
   }
 };
 
-export const filterItems = ({ _items, itemModelName, filters }) => {
+export const filterItems = ({ _items, filters }) => {
   let items = [..._items];
   for (const filter of filters) {
     switch (filter.type) {
@@ -175,14 +175,6 @@ export const filterItems = ({ _items, itemModelName, filters }) => {
         break;
       case "emplReqWorkerNameSearch":
         items = emplReqWorkerNameSearch({
-          items,
-          value: filter.value,
-        });
-        break;
-      case "cropVarietySearch":
-        if (filter.value === "") break;
-        items = cropVarietySearch({
-          itemModelName,
           items,
           value: filter.value,
         });

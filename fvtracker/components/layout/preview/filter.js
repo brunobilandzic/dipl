@@ -70,6 +70,18 @@ export const Filter = ({ filters, setFilters, cropOptions }) => {
                   }}
                 />
               );
+            case "whreqNameSearch":
+              return (
+                <AppInput
+                  key={index}
+                  placeholder={option.placeholder}
+                  value={option.value}
+                  label="Pretraži zahtjeve"
+                  onChange={(e) => {
+                    onChange(index, e.target.value);
+                  }}
+                />
+              );
             case "procurmentStatus":
               return (
                 <AppSelect

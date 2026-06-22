@@ -373,6 +373,9 @@ const initialNewPlantage_WId = ({ cultivationId, crops }) => {
     variety: {
       _id: defaultVariety,
       name: cropVarieties.find((v) => v._id === defaultVariety)?.name || "N/A",
+      quantityPerCell:
+        cropVarieties.find((v) => v._id === defaultVariety)?.quantityPerCell ||
+        0,
     },
     plantingPlan: null,
     toPlantCells: [],

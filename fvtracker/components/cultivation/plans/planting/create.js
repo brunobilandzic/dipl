@@ -236,7 +236,7 @@ export const FillPlanInfo = ({
             setCropsData={setFormData}
             additionalItemFields={[QuantityInput]}
           />
-          <div className="btn self-start" onClick={handleSubmit}>
+          <div className="btn self-start submitButton" onClick={handleSubmit}>
             Spremi plan {plant ? "sadnje" : "berbe"}
           </div>
         </div>

@@ -2,7 +2,6 @@ import dbConnect from "@/lib/db/mongooseConnect";
 import models from "@/models";
 import { AppUser } from "@/models/user/AppUser";
 import bcrypt from "bcrypt";
-import { GENERAL_MANAGER_USERNAME } from "../constants/users/managersUsernameModel";
 import {
   GENERAL_MANAGER,
   MANAGER_TYPES,
@@ -11,8 +10,6 @@ import { GeneralManager } from "@/models/user/managers/GeneralManager";
 import { RootManager } from "@/models/user/managers/RootManager";
 import { ROLE_STATUSES } from "../constants/users";
 import mongoose from "mongoose";
-import { Admin } from "@/models/user/Admin";
-import { GeneralManagerRequest } from "@/models/documents/requests/RoleRequest";
 import { EMPLOYMENT_STATUS_EMPLOYED } from "../constants/users/workers";
 
 export async function handleCredentials(credentials) {

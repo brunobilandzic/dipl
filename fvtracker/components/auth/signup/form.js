@@ -61,7 +61,8 @@ function SignUpForm() {
       return;
     }
 
-    router.replace("/");
+    // hard navigacija da SessionProvider pročita novi cookie (inače ostaje "unauthenticated")
+    window.location.href = "/";
   };
 
   return (

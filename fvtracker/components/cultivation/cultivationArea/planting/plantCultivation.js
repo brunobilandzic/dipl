@@ -40,20 +40,32 @@ export const PlantCultivation = ({
     if (options) {
       const label = options[selectedIndex].text;
 
-      setNewPlantage((prev) => ({
-        ...prev,
-        [name]: {
-          name: label,
-          _id: value,
-        },
-      }));
-    } else {
-      setNewPlantage((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
+      if(name === "variety") {
+        const quantityPerCell = crops.varieties.find(v => v._id === value)?.quantityPerCell || 0;
+        setNewPlantage((prev) => ({
+          ...prev,
+          [name]: {
+            name: label,
+            _id: value,
+            quantityPerCell,
+          },
+        }));
+      } else {
+        setNewPlantage((prev) => ({
+          ...prev,
+          [name]: {
+            name: label,
+            _id: value,
+          },
+        }));
+      }
+      } else {
+        setNewPlantage((prev) => ({
+          ...prev,
+          [name]: value,
+        }));
+      }
     }
-  };
 
   const [availableTypes, setAvailableTypes] = useState([]);
   const [availableVarieties, setAvailableVarieties] = useState([]);

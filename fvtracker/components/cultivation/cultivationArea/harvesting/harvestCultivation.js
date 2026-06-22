@@ -52,8 +52,19 @@ export const HarvestCultivation = ({
       submitText="Završi berbu"
     >
       <div className="flex flex-col gap-4">
-        <AppTable headerLabels={["Broj ćelija", "Količina po ćeliji", "Ukupna količina"]}
-          rows={[[quantityToHarvest, newHarvest.cropVariety.quantityPerCell, quantityToHarvest * newHarvest.cropVariety.quantityPerCell]]}
+        <AppTable
+          headerLabels={[
+            "Broj ćelija",
+            "Količina po ćeliji",
+            "Ukupna količina",
+          ]}
+          rows={[
+            [
+              quantityToHarvest,
+              newHarvest.cropVariety.quantityPerCell,
+              quantityToHarvest * newHarvest.cropVariety.quantityPerCell,
+            ],
+          ]}
         />
         <div>
           {!workerId && (

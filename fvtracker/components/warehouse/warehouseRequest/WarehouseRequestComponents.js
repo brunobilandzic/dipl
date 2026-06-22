@@ -2,10 +2,10 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { warehouseRequestItems } from "@/lib/utils/documents/requests";
-import { ListItem } from "../../layout/preview/list";
+import { List, ListItem } from "../../layout/preview/list";
 import { WAREHOUSE_MANAGER } from "@/lib/constants/users/managerTypes";
 import { CreateShipmentModal } from "../shipment/create";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   SHIPMENT_SHIPPED_FULLY,
   SHIPMENT_SHIPPED_PARTLY,
@@ -13,20 +13,35 @@ import {
 } from "@/lib/constants/warehouse/shipment";
 import { useRouter } from "next/navigation";
 import { AppTable } from "@/components/layout/preview/table";
+import { filterItems, initFilters } from "@/lib/utils/list";
 
 export const WarehouseRequestList = () => {
   const warehouseRequests = useSelector(
     (state) => state.warehouse.warehouseRequests,
   );
+  const [filters, setFilters] = useState(initFilters("warehouseRequests"));
+
+  const displayedWarehouseRequests = useMemo(() => {
+    const filtered = filterItems({
+      _items: warehouseRequests || [],
+      filters,
+    });
+    return filtered;
+  }, [warehouseRequests, filters]);
+
   const router = useRouter();
   return (
     <>
-      <div className="text-2xl font-bold mb-4">Zahtjevi skladištu</div>
-      <div className="flex flex-col gap-4 mb-6">
-        {warehouseRequests?.map((wr) => (
+      <List
+        title="Zahtjevi za isporuku"
+        filters={filters}
+        setFilters={setFilters}
+        initialFilters={initFilters("warehouseRequests")}
+      >
+        {displayedWarehouseRequests?.map((wr) => (
           <WarehouseRequestListItem key={wr._id} request={wr} router={router} />
         ))}
-      </div>
+      </List>
     </>
   );
 };

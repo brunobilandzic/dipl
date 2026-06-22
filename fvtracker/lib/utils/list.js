@@ -1,7 +1,6 @@
 import { FINANCIAL_MANAGER } from "../constants/users/managerTypes";
 import { getName } from "./display";
 import { procurmentValue } from "./documents/procurments";
-import { productsWithCropVarieties } from "./production/products";
 import { orderAmount } from "./sales";
 import { stringContains } from "./strings";
 
@@ -42,7 +41,7 @@ export const initFilters = (listType, allWorkers = false) => {
     case "warehouseRequests":
       return [
         {
-          type: "nameSearch",
+          type: "whreqNameSearch",
           placeholder: "Pretraži zahtjeve...",
           value: "",
         },
@@ -181,6 +180,9 @@ export const filterItems = ({ _items, filters }) => {
       case "workerNameSearch":
         items = appUserNameSearch({ items, value: filter.value });
         break;
+      case "whreqNameSearch":
+        items = whreqNameSearch({ items, value: filter.value });
+        break;
       case "emplReqWorkerNameSearch":
         items = emplReqWorkerNameSearch({
           items,
@@ -236,19 +238,13 @@ export const filterItems = ({ _items, filters }) => {
   return items;
 };
 
-const cropVarietySearch = ({ itemModelName, items, value }) => {
-  switch (itemModelName) {
-    case "Field":
-      return null;
-    case "Product":
-      return productsWithCropVarieties(items, value);
-    default:
-      return () => true;
-  }
-};
-
 const nameSearch = ({ items, value }) => {
   return items.filter((item) => stringContains(item.name, value));
+};
+
+const whreqNameSearch = ({ items, value }) => {
+  console.log({ items, value });
+  return items.filter((item) => stringContains(item.order.number, value));
 };
 
 const customerSearch = ({ items, value }) => {

@@ -12,7 +12,7 @@ async function GeneralManagerRequestsPage() {
     return Response.json({ error: "Unauthorized" }, { status: 403 });
   }
 
-  const count = await GeneralManagerRequest.countDocuments();
+/*   const count = await GeneralManagerRequest.countDocuments();
   if (count === 0) {
     return (
       <div className="p-4">
@@ -22,7 +22,7 @@ async function GeneralManagerRequestsPage() {
         <p className="">Trenutno nema zahteva za generalnog menadžera.</p>
       </div>
     );
-  }
+  } */
 
   return (
     <div>

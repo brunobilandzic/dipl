@@ -58,6 +58,8 @@ export const procurmentSortOptions = [
   { value: "procValDesc", label: "Vrijednost Padajuća" },
 ];
 
+export const cropTypeSortOptions = [...defaultSortOptions];
+
 export const SortOpenButton = ({ isOpen, setOpen, clearSort }) => {
   return (
     <ListHeaderShowButton

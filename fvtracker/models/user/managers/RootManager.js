@@ -59,7 +59,7 @@ rootManagerSchema.pre("save", async function () {
       generalManager: this.generalManager,
       rootManager: this._id,
       // for skipping guardrails auth
-      //status: ROLE_STATUSES.APPROVED,
+      status: ROLE_STATUSES.APPROVED,
     });
     this.roleRequest = roleRequest._id;
     await roleRequest.save();

@@ -250,6 +250,7 @@ const FieldCells = ({
           selectedCultivationName={selectedCultivationName}
           invertColor={invertColor}
           seedMode={seedMode}
+          harvestMode={harvestMode}
           handleNotPlanted={handleNotPlanted}
           title={getTitle()}
           handleClick={handleClick}
@@ -274,6 +275,8 @@ const FieldCell = ({
   title,
   handleClick,
   disabled,
+  seedMode,
+  harvestMode,
 }) => {
   const bgClass = selected
     ? "bg-green-500"
@@ -281,7 +284,7 @@ const FieldCell = ({
   const cellClass = classNames(
     small ? "w-1 h-1" : enlarged ? "w-6 h-6" : "w-3 h-3",
     "border ",
-    invertColor ? "border border-[var(--background)]" : "border-green-700",
+    invertColor ? "border-[var(--background)]" : "border-green-700",
     bgClass,
     cultivationName === selectedCultivationName ? "ring-2 ring-blue-500" : "",
     disabled ? "cursor-not-allowed opacity-50 bg-gray-50" : "cursor-pointer",

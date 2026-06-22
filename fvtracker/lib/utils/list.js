@@ -216,6 +216,18 @@ export const filterItems = ({ _items, itemModelName, filters }) => {
           return item.status === filter.value;
         });
         break;
+      case "mainType":
+        if (filter.value === "all") break;
+        items = items.filter((item) => item.mainTypeName === filter.value);
+        break;
+      case "generalType":
+        if (filter.value === "all") break;
+        items = items.filter((item) => item.generalTypeName === filter.value);
+        break;
+      case "cropType":
+        if (filter.value === "all") break;
+        items = items.filter((item) => item.cropTypeName === filter.value);
+        break;
       default:
         break;
     }

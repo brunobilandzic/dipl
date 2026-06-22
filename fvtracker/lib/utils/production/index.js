@@ -20,19 +20,13 @@ export default async function fillProductionRedux({ dispatch, router, all }) {
       dispatch(refreshFacilities());
       dispatch(fetchWarehouses());
       dispatch(refreshProductsStocks());
-      const batchesRes = await api.get("/harvesting-batches");
-      const harvestingBatches = batchesRes.data.harvestingBatches;
-      dispatch(refreshHarvestingBatches.fulfilled(harvestingBatches));
       return;
     }
-    const batchesRes = await api.get("/harvesting-batches");
     const productionManager = res.data.productionManager;
-    const harvestingBatches = batchesRes.data.harvestingBatches;
 
     dispatchPayloads({
       manager: productionManager,
       dispatch,
-      batches: harvestingBatches,
     });
     dispatch(setLoading(false));
     return productionManager;
@@ -47,8 +41,6 @@ export default async function fillProductionRedux({ dispatch, router, all }) {
 
 const dispatchPayloads = ({ manager, dispatch, batches }) => {
   manager?.products && dispatch(setProducts(manager?.products));
-  // dispatch(refreshProductsStocks.fulfilled(mapProductsStocks({ manager })));
-  batches && dispatch(refreshHarvestingBatches.fulfilled(batches));
   dispatch(refreshFacilities());
   dispatch(fetchWarehouses());
   dispatch(refreshProductsStocks());

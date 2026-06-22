@@ -28,6 +28,7 @@ function SignUpForm() {
   };
 
   const [signUpData, setSignUpData] = useState(testSignUpData);
+  const [error, setError] = useState("");
 
   const router = useRouter();
   useEffect(() => {
@@ -45,13 +46,22 @@ function SignUpForm() {
     setSignUpData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
-    signIn("credentials", {
+    const res = await signIn("credentials", {
       ...signUpData,
       isSignUp: true,
+      redirect: false,
     });
+
+    if (res?.error) {
+      setError(res.code || "Registracija nije uspjela.");
+      return;
+    }
+
+    router.replace("/");
   };
 
   return (
@@ -60,6 +70,11 @@ function SignUpForm() {
         <h2 className={styles.heading}>Registracija</h2>
       </div>
       <div className={styles.body}>
+        {error && (
+          <div className="mb-2 rounded bg-red-100 p-2 text-sm text-red-700">
+            {error}
+          </div>
+        )}
         {inputs.map((input, i) => {
           const { name, placeholder, type } = input;
           return (

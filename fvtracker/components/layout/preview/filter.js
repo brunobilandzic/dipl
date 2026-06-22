@@ -198,19 +198,6 @@ export const Filter = ({ filters, setFilters, cropOptions }) => {
                   options={generalTypeOptions}
                 />
               );
-            case "cropType":
-              return (
-                <AppSelect
-                  key={index}
-                  placeholder={option.placeholder}
-                  value={option.value}
-                  onChange={(e) => {
-                    onChange(index, e.target.value);
-                  }}
-                  label="Vrsta kulture"
-                  options={cropTypeOptions}
-                />
-              );
           }
         })}
 

@@ -17,6 +17,7 @@ import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { harvestCells } from "@/store/cultivation";
 import { harvestPayWorker } from "@/store/workers";
+import { refreshHarvestingBatches } from "@/store/production";
 
 
 export function HarvestingModal({
@@ -263,6 +264,7 @@ export function HarvestingModal({
           harvestWork,
         }),
       );
+      dispatch(refreshHarvestingBatches());
       dispatch(setLoading(false));
     } catch (error) {
       console.error("Error submitting harvest:", error);

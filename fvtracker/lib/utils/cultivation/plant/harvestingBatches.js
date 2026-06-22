@@ -15,18 +15,3 @@ export const harvestingBatchItemData = ({ batchItem }) => {
   };
 };
 
-export const refreshResourceBatches = async ({ dispatch, router }) => {
-  try {
-    const res = await api.get("/harvest/batches");
-    return res.data.harvestingBatches;
-  } catch (error) {
-    console.error(error);
-    handleError(
-      {
-        ...error,
-        generalMessage: "Greška prilikom osvježavanja žetvenih serija",
-      },
-      router,
-    );
-  }
-};

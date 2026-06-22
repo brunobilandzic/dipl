@@ -156,9 +156,6 @@ function FieldItem({ field }) {
                   Dimenzije: {width}m x {length}m
                 </div>
                 <div>
-                  Lokacija: {latitude.toFixed(4)}, {longitude.toFixed(4)}
-                </div>
-                <div>
                   Dimenzije PK: {min_ca_dim}m - {max_ca_dim}m, Razmak:{" "}
                   {cultivationAreasGap}m
                 </div>

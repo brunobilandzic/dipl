@@ -3,6 +3,7 @@ import { createOrders } from "./orders";
 import { createWarehouseRequests } from "./warehouseRequests";
 import { WarehouseRequest } from "@/models/documents/requests/WarehouseRequest";
 import { Customer } from "@/models/user/Customer";
+import { arrayRandomSlice } from "@/lib/utils/objects";
 
 export default {
   seedSales: async () => {
@@ -12,7 +13,7 @@ export default {
     console.log("seeding orders completed");
     // create req for only one order
     const warehouseRequests = await createWarehouseRequests({
-      orders: orders.slice(0, orders.length - 1),
+      orders: arrayRandomSlice(orders, 5),
     });
     console.log(`seeded ${warehouseRequests.length} warehouse requests`);
   },

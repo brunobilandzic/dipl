@@ -124,6 +124,20 @@ export const FinancialReport = ({}) => {
           Nema podataka o radnicima.
         </p>
       )}
+      {procurments.length > 0 ? (
+        <ReportSection title="Nabavke">
+          <>
+            <ReportItem
+              count={procurments.length}
+              description={"Nabavk" + (procurments.length > 1 ? "e" : "a")}
+            />
+          </>
+        </ReportSection>
+      ) : (
+        <p className="text-center text-gray-500 w-full mt-2">
+          Nema podataka o nabavkama.
+        </p>
+      )}
     </ReportSector>
   );
 };

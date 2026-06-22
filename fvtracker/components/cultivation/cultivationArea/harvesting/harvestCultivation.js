@@ -1,6 +1,7 @@
 import { ChoosePlan } from "@/components/cultivation/plans/planting/choosePlan";
 import { AppSelect } from "@/components/form/inputs";
 import { FormModal } from "@/components/layout/modals/form";
+import { AppTable } from "@/components/layout/preview/table";
 import { ChooseWorker } from "@/components/workers/choose";
 import { VARIETIES_QUALITIES } from "@/lib/constants/cultivation/plants";
 import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
@@ -51,9 +52,9 @@ export const HarvestCultivation = ({
       submitText="Završi berbu"
     >
       <div className="flex flex-col gap-4">
-        <div>
-          Branje {quantityString} {cropTypeName} {cropVarietyName || "N/A"}
-        </div>
+        <AppTable headerLabels={["Broj ćelija", "Količina po ćeliji", "Ukupna količina"]}
+          rows={[[quantityToHarvest, newHarvest.cropVariety.quantityPerCell, quantityToHarvest * newHarvest.cropVariety.quantityPerCell]]}
+        />
         <div>
           {!workerId && (
             <ChooseWorker

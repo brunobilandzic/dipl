@@ -39,12 +39,13 @@ export const FinancialReport = ({}) => {
     warehouseRequests,
   });
 
-  const totalHourlyRate = workers.reduce(
-    (sum, worker) => sum + worker.hourlyRate,
-    0,
-  );
   const employedWorkers = workers.filter(
     (worker) => worker.employmentRequest.status == EMPLOYMENT_STATUS_EMPLOYED,
+  );
+
+  const totalHourlyRate = employedWorkers.reduce(
+    (sum, worker) => sum + worker.hourlyRate,
+    0,
   );
 
   if (orders.length === 0 && workers.length === 0)
@@ -105,7 +106,7 @@ export const FinancialReport = ({}) => {
         </p>
       )}
       {workers.length ? (
-        <GeneralWorkersReport workers={workers} title="Radnici">
+        <GeneralWorkersReport workers={employedWorkers} title="Radnici">
           <>
             <ReportItem
               count={((totalHourlyRate * 160) / employedWorkers.length).toFixed(
@@ -130,6 +131,20 @@ export const FinancialReport = ({}) => {
             <ReportItem
               count={procurments.length}
               description={"Nabavk" + (procurments.length > 1 ? "e" : "a")}
+            />
+            <ReportItem
+              count={procurments.flatMap((p) => p.items).length}
+              description="Ukupno proizvoda u nabavkama"
+            />
+            <ReportItem
+              count={procurments
+                .reduce(
+                  (sum, p) =>
+                    sum + p.items.reduce((s, i) => s + i.quantity * i.price, 0),
+                  0,
+                )
+                .toFixed(2)}
+              description={"Ukupna vrijednost nabavki (€)"}
             />
           </>
         </ReportSection>

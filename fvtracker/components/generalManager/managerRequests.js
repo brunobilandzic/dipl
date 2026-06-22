@@ -18,11 +18,15 @@ export const RoleRequestList = () => {
   const initialFilters = useMemo(() => initFilters("roleRequest"), []);
   const [filters, setFilters] = useState(initialFilters);
 
-  const allRoleRequests = generalManager?.roleRequests || [];
+  const allRoleRequests = useMemo(
+    () => generalManager?.roleRequests || [],
+    [generalManager],
+  );
   const [filteredRoleRequests, setFilteredRoleRequests] =
     useState(allRoleRequests);
 
   useEffect(() => {
+    if (!generalManager) return;
     setFilteredRoleRequests((prev) =>
       filterItems({
         _items: allRoleRequests,

@@ -4,6 +4,7 @@ import { AppUser } from "@/models/user/AppUser";
 import bcrypt from "bcrypt";
 import {
   GENERAL_MANAGER,
+  MANAGER_TRANSLATION,
   MANAGER_TYPES,
 } from "../constants/users/managerTypes";
 import { GeneralManager } from "@/models/user/managers/GeneralManager";
@@ -102,10 +103,9 @@ async function signUpCredentials({
         existingGeneralManager.generalManagerRequest.status ===
           ROLE_STATUSES.APPROVED
       ) {
-        console.log(
-          "General Manager already exists, cannot create another one",
+        throw new Error(
+          "Generalni menadžer s odobrenom ulogom već postoji. Ne možete kreirati drugog generalnog menadžera.",
         );
-        return null;
       }
       const generalManager = await new GeneralManager();
       const generalManagerRootManager = await new RootManager({
@@ -122,7 +122,7 @@ async function signUpCredentials({
       return { ...newUser._doc, generalManagerRequest: ROLE_STATUSES.PENDING };
     }
     if (!MANAGER_TYPES.includes(requestedRole)) {
-      throw new Error("Invalid manager type requested: " + requestedRole);
+      throw new Error(`Zatraženi tip menadžera nije validan: ${requestedRole}`); // Log the invalid role
     }
     console.log({ requestedRole });
     const existingManagers = await mongoose
@@ -139,17 +139,15 @@ async function signUpCredentials({
       );
     });
     if (hasApprovedManager) {
-      console.log(
-        `An approved ${requestedRole} already exists. Cannot create another one.`,
+      throw new Error(
+        `Menadžer ${MANAGER_TRANSLATION[requestedRole]} već postoji. Ne možete kreirati drugog ${MANAGER_TRANSLATION[requestedRole]}.`,
       );
-      return null;
     }
     const generalManager = await GeneralManager.findOne();
     if (!generalManager) {
-      console.log(
-        "No General Manager found. Cannot create manager without a General Manager.",
+      throw new Error(
+        "Ne postoji generalni menadžer nužan prije kreiranja drugih menadžera.",
       );
-      return null;
     }
     const rootManager = await new RootManager({
       appUser: newUser._id,

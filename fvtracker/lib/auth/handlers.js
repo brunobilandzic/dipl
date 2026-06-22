@@ -191,14 +191,12 @@ async function logInCredentials({ login, password }) {
   }
 
   if (!appUser) {
-    throw new Error(
-      `Korisnik s emailom ili korisničkim imenom "${login}" nije pronađen.`,
-    );
+    throw new Error("Neispravno korisničko ime ili lozinka.");
   }
   if (appUser) {
     const authorized = await bcrypt.compare(password, appUser.password);
     if (!authorized) {
-      throw new Error("Neispravna lozinka.");
+      throw new Error("Neispravno korisničko ime ili lozinka.");
     }
     if (appUser.worker) {
       await appUser.populate({
@@ -216,17 +214,13 @@ async function logInCredentials({ login, password }) {
       };
     }
     if (!appUser.rootManager) {
-      throw new Error(
-        `Korisnik s emailom ili korisničkim imenom "${login}" nema dodijeljenog root menadžera.`,
-      );
+      throw new Error("Korisnik nema ulogu.");
     }
     if (
       !appUser.rootManager.roleRequest &&
       appUser.rootManager.managerModelName !== GENERAL_MANAGER
     ) {
-      throw new Error(
-        `Korisnik s emailom ili korisničkim imenom "${login}" nema zahtjev za ulogu.`,
-      );
+      throw new Error("Korisnike nama ulogu.");
     }
     let generalManagerRequest = null;
     if (appUser.rootManager.managerModelName === GENERAL_MANAGER) {

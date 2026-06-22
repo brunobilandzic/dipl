@@ -23,6 +23,7 @@ export function List({
   addLabel,
   deleteLabel,
   customButtons,
+  cropOptions = {},
 }) {
   const [sortOpen, setSortOpen] = useState(false);
   const [filterOpen, setFilterOpen] = useState(false);
@@ -74,7 +75,11 @@ export function List({
           />
         )}
         {filters && filterOpen && (
-          <Filter filters={filters} setFilters={setFilters} />
+          <Filter
+            filters={filters}
+            setFilters={setFilters}
+            cropOptions={cropOptions}
+          />
         )}
 
         {children}

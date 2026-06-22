@@ -17,7 +17,7 @@ import {
 } from "@/lib/constants/users/workers";
 import { ROLE_STATUSES } from "@/lib/constants/users";
 
-export const Filter = ({ filters, setFilters, cropOptions = {} }) => {
+export const Filter = ({ filters, setFilters, cropOptions }) => {
   const onChange = (index, value) => {
     setFilters((prev) => {
       return prev.map((o, i) => {
@@ -33,7 +33,6 @@ export const Filter = ({ filters, setFilters, cropOptions = {} }) => {
     mainTypeOptions,
     generalTypeOptions,
     cropTypeOptions,
-    cropVarietyOptions,
   } = cropOptions;
 
   return (

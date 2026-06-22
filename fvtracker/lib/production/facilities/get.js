@@ -10,7 +10,7 @@ export const getFacilities = async () => {
           select: "name ingredients stockVolume",
           populate: {
             path: "ingredients",
-            select: "cropVariety quantity",
+            select: "cropVariety quantity quality",
             populate: {
               path: "cropVariety",
               select: "name cropType",

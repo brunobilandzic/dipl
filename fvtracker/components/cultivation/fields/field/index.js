@@ -9,7 +9,6 @@ import axios from "axios";
 import { Loading } from "@/components/layout/loading";
 import { selectField } from "@/store/cultivation";
 import { FieldEditDashboard } from "./edit/dashboard";
-import { useRouter } from "next/navigation";
 
 export default function FieldPageComponent({ slug }) {
   const selectedField = useSelector((state) => state.cultivation.selectedField);
@@ -186,7 +185,6 @@ function FieldEditCASPanel({
       x,
       y,
     );
-    /*     router.push(`/upravljanje-poljima/${field.slug}/ca/${ca.slug}`); */
 
     setCultivationAreaMenu({
       isOpen: true,

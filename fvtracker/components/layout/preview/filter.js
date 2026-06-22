@@ -17,7 +17,7 @@ import {
 } from "@/lib/constants/users/workers";
 import { ROLE_STATUSES } from "@/lib/constants/users";
 
-export const Filter = ({ filters, setFilters, onApply }) => {
+export const Filter = ({ filters, setFilters, cropOptions = {} }) => {
   const onChange = (index, value) => {
     setFilters((prev) => {
       return prev.map((o, i) => {
@@ -28,6 +28,13 @@ export const Filter = ({ filters, setFilters, onApply }) => {
       });
     });
   };
+
+  const {
+    mainTypeOptions,
+    generalTypeOptions,
+    cropTypeOptions,
+    cropVarietyOptions,
+  } = cropOptions;
 
   return (
     <>
@@ -164,6 +171,45 @@ export const Filter = ({ filters, setFilters, onApply }) => {
                   onChange={(e) => {
                     onChange(index, e.target.value);
                   }}
+                />
+              );
+            case "mainType":
+              return (
+                <AppSelect
+                  key={index}
+                  placeholder={option.placeholder}
+                  value={option.value}
+                  onChange={(e) => {
+                    onChange(index, e.target.value);
+                  }}
+                  label="Glavna vrsta"
+                  options={mainTypeOptions}
+                />
+              );
+            case "generalType":
+              return (
+                <AppSelect
+                  key={index}
+                  placeholder={option.placeholder}
+                  value={option.value}
+                  onChange={(e) => {
+                    onChange(index, e.target.value);
+                  }}
+                  label="Opća vrsta"
+                  options={generalTypeOptions}
+                />
+              );
+            case "cropType":
+              return (
+                <AppSelect
+                  key={index}
+                  placeholder={option.placeholder}
+                  value={option.value}
+                  onChange={(e) => {
+                    onChange(index, e.target.value);
+                  }}
+                  label="Vrsta kulture"
+                  options={cropTypeOptions}
                 />
               );
           }

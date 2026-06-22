@@ -43,11 +43,6 @@ export const RoleRequestList = () => {
         setFilters={setFilters}
         initialFilters={initialFilters}
       >
-        {filteredRoleRequests.length === 0 && (
-          <div className="text-center text-gray-500 py-4">
-            Nema zahtjeva za menadžere.
-          </div>
-        )}
         {filteredRoleRequests.map((roleRequest) => (
           <RoleRequestItem key={roleRequest._id} roleRequest={roleRequest} />
         ))}

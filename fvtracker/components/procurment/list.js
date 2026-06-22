@@ -76,12 +76,6 @@ export const ProcurmentList = () => {
         initialFilters={initialFilters}
         sortOptions={procurmentSortOptions}
       >
-        {" "}
-        {procurments.length === 0 && (
-          <p className="text-center text-gray-500 p-4">
-            Nema podataka o nabavkama.
-          </p>
-        )}
         {procurments
           .filter((proc) => {
             if (showAll || !allView) return true;

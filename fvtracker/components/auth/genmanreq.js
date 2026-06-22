@@ -36,12 +36,6 @@ export const GeneralManagerRequestsComponent = ({}) => {
   return (
     <div>
       <List title="Zahtjevi za generalnog menadžera">
-        <></>
-        {requests?.length === 0 && (
-          <div className="p-4 text-center text-gray-500">
-            Trenutno nema zahteva za generalnog menadžera.
-          </div>
-        )}
         {requests?.map((request, i) => (
           <ListItem key={i}>
             <div className="flex gap-2 items-center justify-between">

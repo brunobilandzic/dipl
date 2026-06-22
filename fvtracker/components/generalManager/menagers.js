@@ -55,9 +55,6 @@ export const ManagerList = () => {
         setFilters={setFilters}
         initialFilters={initialRoleFilters}
       >
-        {filteredManagers.length === 0 && (
-          <div className="text-center text-gray-500 py-4">Nema menadžera.</div>
-        )}
         {filteredManagers.map((manager) => (
           <ManagerListItem
             key={manager._id}

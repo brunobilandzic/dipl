@@ -29,7 +29,7 @@ export function FieldsList({}) {
   const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
   const initialFilters = useMemo(() => initFilters("fields"), []);
   const [filters, setFilters] = useState(initialFilters);
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     if (!fields) return;
@@ -43,9 +43,10 @@ export function FieldsList({}) {
 
   useEffect(() => {
     if (fields) return;
-    if (!session) redirect(UNAUTHORIZED_PAGE);
+    if (status === "loading") return; // pričekaj da se sesija učita
+    if (status === "unauthenticated") redirect(UNAUTHORIZED_PAGE);
     refreshFields({ dispatch, router });
-  }, [fields]);
+  }, [fields, status]);
 
   if (!fields)
     return (

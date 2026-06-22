@@ -105,6 +105,21 @@ export const initFilters = (listType, allWorkers = false) => {
           placeholder: "Pretraži kulture...",
           value: "",
         },
+        {
+          type: "mainType",
+          placeholder: "Glavna vrsta",
+          value: "all",
+        },
+        {
+          type: "generalType",
+          placeholder: "Opća vrsta",
+          value: "all",
+        },
+        {
+          type: "cropType",
+          placeholder: "Vrsta kulture",
+          value: "all",
+        },
       ];
   }
 };

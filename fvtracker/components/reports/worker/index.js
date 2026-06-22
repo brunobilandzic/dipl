@@ -17,7 +17,15 @@ export const WorkersReport = ({
 }) => {
   const workers = useSelector((state) => state.workers.items);
 
-  if (!workers || workers.length === 0) return <LoadingFullScreen />;
+  if (!workers) return <LoadingFullScreen />;
+  if (workers.length === 0)
+    return (
+      <ReportSector title="Radnici">
+        <p className="text-center text-gray-500 w-full mt-2">
+          Nema podataka o radnicima.
+        </p>
+      </ReportSector>
+    );
   const sectorName = managerSectors[managerModelName] || "Sektor";
   return (
     <ReportSector workers={true}>

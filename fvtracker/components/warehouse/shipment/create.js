@@ -43,9 +43,6 @@ export const CreateShipmentModal = ({
     productName: i.product,
     neededQuantity: i.quantity,
   }));
-  useEffect(() => {
-    console.log({ newShipmentData });
-  }, [newShipmentData]);
 
   useEffect(() => {
     if (worker) {
@@ -161,7 +158,6 @@ const ChooseWarehouseSources = ({
 
   return (
     <div>
-      <div>Odarite skladišne izvore</div>
       <div>
         <ShipmentStatus
           status={shipmentStatus}
@@ -274,7 +270,6 @@ const ShipmentStatus = ({ status, neededQuantities, isFullfilled }) => {
 };
 
 const NeededTable = ({ neededQuantities }) => {
-  console.log({ neededQuantities });
   return (
     <AppTable
       headerLabels={["Proizvod", "Količina naručena", "Količina potrebna"]}

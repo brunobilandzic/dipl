@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { filterItems, initFilters, sortItems } from "@/lib/utils/list";
 import { SORT_INIT_VALUE } from "@/lib/constants/others";
 import { cropTypeSortOptions } from "@/components/layout/preview/sort";
+import { getCropOptions } from "@/lib/utils/cultivation/plant/crops";
 
 function CropTypesList() {
   const crops = useSelector((state) => state.cultivation.crops);
@@ -26,6 +27,10 @@ function CropTypesList() {
       .then((res) => dispatch(setCrops(res.data)))
       .catch((error) => handleError(error));
   }, [crops, dispatch]);
+
+  console.log("crops", crops);
+
+  console.log("filters", filters);
 
   const displayedTypes = useMemo(() => {
     const filtered = filterItems({
@@ -46,6 +51,7 @@ function CropTypesList() {
       filters={filters}
       setFilters={setFilters}
       initialFilters={initialFilters}
+      cropOptions={getCropOptions({ crops, existingFilters: filters })}
     >
       {displayedTypes.map((type) => (
         <ListItem key={type._id}>

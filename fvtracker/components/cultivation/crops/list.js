@@ -5,13 +5,19 @@ import api from "@/lib/api";
 import handleError from "@/lib/constants/errors/client/handleError";
 import { setCrops } from "@/store/cultivation";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { filterItems, initFilters, sortItems } from "@/lib/utils/list";
+import { SORT_INIT_VALUE } from "@/lib/constants/others";
+import { cropTypeSortOptions } from "@/components/layout/preview/sort";
 
 function CropTypesList() {
   const crops = useSelector((state) => state.cultivation.crops);
   const dispatch = useDispatch();
   const router = useRouter();
+  const [sortBy, setSortBy] = useState(SORT_INIT_VALUE);
+  const initialFilters = useMemo(() => initFilters("cropTypes"), []);
+  const [filters, setFilters] = useState(initialFilters);
 
   useEffect(() => {
     if (crops) return;
@@ -21,12 +27,27 @@ function CropTypesList() {
       .catch((error) => handleError(error));
   }, [crops, dispatch]);
 
+  const displayedTypes = useMemo(() => {
+    const filtered = filterItems({
+      _items: crops?.types || [],
+      itemModelName: "CropType",
+      filters,
+    });
+    return sortItems({ items: filtered, sortBy });
+  }, [crops, filters, sortBy]);
+
   return (
     <List
       title="Kulture"
       onCreateItem={() => router.push("/kulture/dodavanje")}
+      sortBy={sortBy}
+      setSortBy={setSortBy}
+      sortOptions={cropTypeSortOptions}
+      filters={filters}
+      setFilters={setFilters}
+      initialFilters={initialFilters}
     >
-      {crops?.types?.map((type) => (
+      {displayedTypes.map((type) => (
         <ListItem key={type._id}>
           <div className="flex justify-between">
             <div className="font-bold">{type.name}</div>

@@ -16,8 +16,12 @@ export default function Home() {
   return (
     <>
       <div>
-        <div className="w-full text-center mb-6 font-bold text-xl">
-          Ddajte proizvode u košaricu
+        <div className="text-2xl font-bold mb-4">
+          Dobrodošli u web trgovinu za proizvode od voća i povrća!
+        </div>
+        <div className="text-lg">
+          Izaberite proizvod i dodajte ga u košaricu. Nakon toga, kliknite na
+          košaricu i slijedite upute za dovršetak narudžbe.
         </div>
         <UnathorizedHomepage />
       </div>

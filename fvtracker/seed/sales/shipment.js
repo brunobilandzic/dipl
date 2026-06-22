@@ -45,9 +45,10 @@ const buildShipmentSources = async ({ orderItems, warehouseManagerId }) => {
     if (Math.random() < 0.5) {
       continue;
     }
+    const quantity = Math.floor(Math.random() * oi.quantity) + 1;
     const shipmentSource = {
       productName: oi.product.name,
-      quantity: oi.quantity,
+      quantity,
     };
     const warehouseId = await findWarehouseForSource({
       shipmentSource,
@@ -60,7 +61,7 @@ const buildShipmentSources = async ({ orderItems, warehouseManagerId }) => {
 
     sources.push({
       productName: oi.product.name,
-      quantity: oi.quantity,
+      quantity,
       warehouseId,
     });
   }
@@ -72,6 +73,9 @@ const findWarehouseForSource = async ({
   shipmentSource,
   warehouseManagerId,
 }) => {
+  console.log(
+    `Finding warehouse for shipment source: ${shipmentSource.productName} (quantity: ${shipmentSource.quantity})`,
+  );
   const warehouses = await Warehouse.find({
     warehouseManager: warehouseManagerId,
   }).populate({

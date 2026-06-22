@@ -300,8 +300,13 @@ const cultivationSlice = createSlice({
     },
     harvestCells: (state, action) => {
       // reverce createPlantage logic
-      const { cultivationId, harvestedCropVarieties, cropVarietyId } =
-        action.payload;
+      const {
+        cultivationId,
+        harvestedCropVarieties,
+        cropVarietyId,
+        quality,
+        quantity,
+      } = action.payload;
       if (!state.selectedField) return;
 
       for (const ca of state.selectedField.cultivationAreas) {
@@ -348,12 +353,15 @@ const cultivationSlice = createSlice({
       field.harvestingPlans.map((hp) => {
         const harvestingBatch = hp.harvestingBatch;
         const batchItemId = harvestingBatch.harvestingBatchItems.findIndex(
-          (item) => item.cropVariety._id === cropVarietyId,
+          (item) =>
+            item.cropVariety._id === cropVarietyId && item.quality === quality,
         );
         if (batchItemId !== -1 && batchItemId !== undefined) {
           harvestingBatch.harvestingBatchItems[
             batchItemId
           ].plantedCropVarieties.push(...harvestedCropVarieties);
+          harvestingBatch.harvestingBatchItems[batchItemId].batchQuantity +=
+            quantity;
         }
       });
     },

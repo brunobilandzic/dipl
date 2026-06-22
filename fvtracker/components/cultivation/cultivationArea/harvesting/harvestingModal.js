@@ -19,7 +19,6 @@ import { harvestCells } from "@/store/cultivation";
 import { harvestPayWorker } from "@/store/workers";
 import { refreshHarvestingBatches } from "@/store/production";
 
-
 export function HarvestingModal({
   isOpen,
   onCancel,
@@ -256,6 +255,10 @@ export function HarvestingModal({
           cultivationId: newHarvest.cultivationId,
           harvestedCropVarieties,
           cropVarietyId: newHarvest.cropVariety._id,
+          quality: newHarvest.quality,
+          quantity:
+            harvestedCropVarieties.length *
+            newHarvest.cropVariety.quantityPerCell,
         }),
       );
       dispatch(

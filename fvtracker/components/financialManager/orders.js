@@ -15,6 +15,7 @@ import { orderAmount } from "@/lib/utils/sales";
 import { priceEuroString } from "@/lib/utils/strings";
 import { PENDING } from "@/lib/constants/documents/requests";
 import { fetchWarehouses } from "@/store/warehouse";
+import { AppTable } from "../layout/preview/table";
 
 export const OrdersList = () => {
   const dispatch = useDispatch();
@@ -137,18 +138,17 @@ const OrderItem = ({ order }) => {
 const OrderItems = ({ items }) => {
   return (
     <div className="mt-2">
-      <ul>
-        {items?.map((item) => (
-          <li key={item._id}>
-            {item.product?.name} Poslano:{" "}
-            {item.shipmentSources?.reduce(
-              (total, source) => total + source.quantity,
-              0,
-            ) ?? 0}{" "}
-            / {item.quantity}
-          </li>
-        ))}
-      </ul>
+      <AppTable
+        headerLabels={["Proizvod", "Naručeno", "Isporučeno"]}
+        rows={items?.map((item) => [
+          item.product?.name,
+          item.quantity,
+          item.shipmentSources?.reduce(
+            (total, source) => total + source.quantity,
+            0,
+          ) ?? 0,
+        ])}
+      />
     </div>
   );
 };

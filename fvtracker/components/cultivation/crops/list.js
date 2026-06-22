@@ -28,10 +28,6 @@ function CropTypesList() {
       .catch((error) => handleError(error));
   }, [crops, dispatch]);
 
-  console.log("crops", crops);
-
-  console.log("filters", filters);
-
   const displayedTypes = useMemo(() => {
     const filtered = filterItems({
       _items: crops?.types || [],

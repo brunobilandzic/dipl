@@ -2,6 +2,7 @@ import React from "react";
 import { List, ListItem } from "../layout/preview/list";
 import { showDateTime } from "@/lib/utils/display";
 import { ReturnButton } from "../layout/buttons/buttons";
+import { AppTable } from "../layout/preview/table";
 
 function WarehouseAcceptances({ acceptances, warehouseName, onCancel }) {
   return (
@@ -53,15 +54,17 @@ const WarehouseAcceptProcess = ({ acceptance }) => {
       <div className="listitemDescription">
         <div> {showDateTime(acceptance.acceptedAt)}</div>
       </div>
-      <div>
-        Proizvodni pogon: {acceptance.productionStock?.facility?.name || "N/A"}
-      </div>
-      <div>Stavka: {acceptance.comment}</div>
-      <div>
-        {" "}
-        Primljeno: {acceptance.quantity} komad
-        {acceptance.quantity !== 1 ? "a" : ""}
-      </div>
+      <AppTable
+        headerLabels={["Proizvodni pogon", "Komenatar", "Količina", "Radnik"]}
+        rows={[
+          [
+            acceptance.productionStock?.facility?.name || "N/A",
+            acceptance.comment,
+            acceptance.quantity,
+            `${acceptance.worker?.appUser?.name || ""} ${acceptance.worker?.appUser?.surname || ""}`,
+          ]
+        ]}
+      />
     </ListItem>
   );
 };

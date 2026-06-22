@@ -22,6 +22,10 @@ export default function HarvestingBatchesFields() {
   };
 
   if (!harvestingBatches) return <LoadingFullScreen />;
+  if (Object.keys(harvestingBatches).length === 0)
+    return (
+      <div className="p-4 text-center text-gray-500">Nema žetvi za prikaz</div>
+    );
   return (
     <div className="flex flex-col gap-4">
       <h1 className="border-b-2 font-bold text-3xl">Žetve</h1>
@@ -49,7 +53,11 @@ export default function HarvestingBatchesFields() {
 
 const HarvestingBatches = ({ harvestingPlans }) => {
   if (Object.keys(harvestingPlans).length === 0)
-    return <div>Nema žetvi za ovo polje</div>;
+    return (
+      <div className="p-4 text-center text-gray-500">
+        Nema žetvi za ovo polje
+      </div>
+    );
   return (
     <>
       <div className="flex flex-col gap-4 mt-4">

@@ -32,6 +32,8 @@ const HarvestingPlanList = () => {
       </div>
     );
   const fieldsPlans = utils.plans.getFieldsHarvestingPlans(fields);
+  if (fieldsPlans.length === 0)
+    return <div className="text-center mt-4">Nema planova berbe za prikaz</div>;
   return (
     <>
       <div>

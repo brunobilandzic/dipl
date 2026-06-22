@@ -234,7 +234,8 @@ const cultivationSlice = createSlice({
       }));
     },
     createPlantage: (state, action) => {
-      const { cultivationId, newPlantage, cropVarietyId } = action.payload;
+      const { cultivationId, newPlantage, cropVarietyId, plantageWork } =
+        action.payload;
       if (!state.selectedField) return;
       for (const ca of state.selectedField.cultivationAreas) {
         const cultivation = ca.cultivations.find(
@@ -277,6 +278,18 @@ const cultivationSlice = createSlice({
             plantingPlan.items[pItemId].plantedCropVarieties = [];
           }
           plantingPlan.items[pItemId].plantedCropVarieties.push(...newPlantage);
+        }
+      }
+
+      // sati radova na sadnji (report čita radove iz state.fields kultivacija)
+      if (plantageWork) {
+        for (const ca of state.fields[fid].cultivationAreas || []) {
+          const cult = ca.cultivations?.find((c) => c._id === cultivationId);
+          if (cult) {
+            if (!cult.plantageWorks) cult.plantageWorks = [];
+            cult.plantageWorks.push(plantageWork);
+            break;
+          }
         }
       }
     },

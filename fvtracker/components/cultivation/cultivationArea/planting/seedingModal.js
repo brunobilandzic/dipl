@@ -246,6 +246,7 @@ export const SeedingModal = ({
           cultivationId: newPlantage.cultivationId,
           newPlantage: newPlantageFromRes,
           cropVarietyId: newPlantage.variety._id,
+          plantageWork,
         }),
       );
       dispatch(

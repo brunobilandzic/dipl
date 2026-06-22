@@ -213,6 +213,12 @@ async function logInCredentials({ login, password }) {
           EMPLOYMENT_STATUS_EMPLOYED,
       };
     }
+    if (appUser.isAdmin) {
+      return {
+        ...appUser._doc,
+        isAdmin: true,
+      };
+    }
     if (!appUser.rootManager) {
       throw new Error("Korisnik nema ulogu.");
     }

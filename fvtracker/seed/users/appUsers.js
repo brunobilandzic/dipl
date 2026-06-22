@@ -88,7 +88,7 @@ export const createAppUser = async (appUserData, generalManagerId) => {
   if (
     username in usersConstants.usernameToModel &&
     username !== GENERAL_MANAGER_USERNAME &&
-    username !== "admin.admin"
+    username !== "admin"
   ) {
     // now we have to crate a root manager and specific manager
     const managerModelName = usersConstants.usernameToModel[username];

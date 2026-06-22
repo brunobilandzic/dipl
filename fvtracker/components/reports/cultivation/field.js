@@ -52,10 +52,13 @@ export const FieldStats = ({ fields }) => {
           description="Sati radova na berbi"
         />
         <ReportItem description="Planovi sadnje" count={plantingPlans.length} />
-        <ReportItem description="Planovi berbe" count={harvestingPlans.length} />
         <ReportItem
           description="Stavke planova sadnje"
           count={plantingPlanItems}
+        />
+        <ReportItem
+          description="Planovi berbe"
+          count={harvestingPlans.length}
         />
         <ReportItem
           description="Stavke planova berbe"

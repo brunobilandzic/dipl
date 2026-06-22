@@ -29,11 +29,7 @@ export const Filter = ({ filters, setFilters, cropOptions }) => {
     });
   };
 
-  const {
-    mainTypeOptions,
-    generalTypeOptions,
-    cropTypeOptions,
-  } = cropOptions;
+  const { mainTypeOptions, generalTypeOptions, cropTypeOptions } = cropOptions;
 
   return (
     <>
@@ -111,6 +107,7 @@ export const Filter = ({ filters, setFilters, cropOptions }) => {
                   onChange={(e) => {
                     onChange(index, e.target.value);
                   }}
+                  defaultValue={option.value}
                   label="Sektor radnika"
                   options={[
                     { value: "all", label: "Svi" },

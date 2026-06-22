@@ -50,6 +50,14 @@ const requestSchema = new Schema({
     type: Date,
     default: null,
   },
+  updatedAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
+
+requestSchema.pre("save", function () {
+  this.updatedAt = new Date();
 });
 
 export const Base = mongoose.models.Base || mongoose.model("Base", baseSchema);

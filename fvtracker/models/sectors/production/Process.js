@@ -1,6 +1,4 @@
-import { Base } from "@/models/Base";
 import mongoose, { Schema } from "mongoose";
-import { Machine } from "./Machine";
 import { ProductionWorker } from "@/models/user/workers/ProductionWork";
 
 const productionProcessSchema = new Schema({

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Children } from "react";
 import { Filter, FiltersOpenButton } from "./filter";
 import { Sort, SortOpenButton } from "./sort";
 import {
@@ -78,6 +78,11 @@ export function List({
         )}
 
         {children}
+        {Children.count(children) === 0 && (
+          <p className="p-4 text-center text-gray-500">
+            Nema stavki za prikaz.
+          </p>
+        )}
       </div>
     </>
   );

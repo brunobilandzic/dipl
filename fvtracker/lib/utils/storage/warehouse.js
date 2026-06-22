@@ -133,6 +133,7 @@ export const calculateNeededQuantities = ({
     return {
       productName: shi.product,
       neededQuantity: shi.quantity - shippedQuantity - existingQuantity,
+      orderedQuantity: shi.quantity,
     };
   });
 

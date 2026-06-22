@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { checkEmpty } from "@/lib/utils/objects";
 import { WAREHOUSE_MANAGER } from "@/lib/constants/users/managerTypes";
 import { checkValue } from "@/lib/utils/formValidation";
+import { AppTable } from "@/components/layout/preview/table";
 
 export const CreateShipmentModal = ({
   isOpen,
@@ -163,10 +164,10 @@ const ChooseWarehouseSources = ({
       <div>Odarite skladišne izvore</div>
       <div>
         <ShipmentStatus
-          neededString={neededString}
           status={shipmentStatus}
           shipmentItems={shipmentItems}
           isFullfilled={isFullfilled}
+          neededQuantities={neededQuantities}
         />
       </div>
       <div className="pt-4">
@@ -255,23 +256,33 @@ const ChooseWarehouseSources = ({
   );
 };
 
-const ShipmentStatus = ({ status, neededString, isFullfilled }) => {
+const ShipmentStatus = ({ status, neededQuantities, isFullfilled }) => {
   if (status === SHIPMENT_SHIPPED_FULLY) return "Otpremljeno";
 
   if (isFullfilled)
     return <div className="text-green-600 font-bold">Zahtjev je ispunjen</div>;
   switch (status) {
     case SHIPMENT_SHIPPED_PARTLY:
-      return neededString;
+      return <NeededTable neededQuantities={neededQuantities} />;
     case SHIPMENT_SHIPPED_FULLY:
       return "Otpremljeno";
     case SHIPMENT_PENDING:
-      return neededString;
+      return <NeededTable neededQuantities={neededQuantities} />;
     default:
       return `SHIPMENT STATUS ${status}`;
   }
 };
 
-const ShipmentPending = ({ shipmentItems, neededString }) => {
-  return <div>Na čekanju</div>;
+const NeededTable = ({ neededQuantities }) => {
+  console.log({ neededQuantities });
+  return (
+    <AppTable
+      headerLabels={["Proizvod", "Količina naručena", "Količina potrebna"]}
+      rows={neededQuantities.map((nq) => ({
+        Proizvod: nq.productName,
+        "Količina naručena": nq.orderedQuantity,
+        "Količina potrebna": nq.neededQuantity,
+      }))}
+    />
+  );
 };

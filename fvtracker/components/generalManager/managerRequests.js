@@ -57,14 +57,14 @@ export const RoleRequestList = () => {
 };
 
 export const RoleRequestItem = ({ roleRequest }) => {
-  const { name, surname } = roleRequest.rootManager.appUser;
+  const { name, surname, username } = roleRequest.rootManager.appUser;
 
   return (
     <>
       <ListItem>
         <div className="flex justify-between items-center">
           <div className="flex flex-col gap-1">
-            <h3 className="font-bold">{`${name} ${surname}`}</h3>
+            <h3 className="font-bold">{`${name} ${surname} (${username})`}</h3>
             <div>
               {MANAGER_TRANSLATION[roleRequest.rootManager.managerModelName]}
             </div>

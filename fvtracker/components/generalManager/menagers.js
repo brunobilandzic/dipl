@@ -76,12 +76,11 @@ const ManagerListItem = ({ manager, workers, allWorkers }) => {
     return <Loading />;
   }
 
-  if (manager.managerModelName === PRODUCTION_MANAGER)
-    console.log({ manager: manager.specificManager });
-
   return (
     <>
-      <ListItem title={`${manager.appUser.name} ${manager.appUser.surname}`}>
+      <ListItem
+        title={`${manager.appUser.name} ${manager.appUser.surname} - ${manager.appUser.username}`}
+      >
         <div className="flex justify-between">
           <div className="flex flex-col">
             <p className="text-sm text-gray-500">{manager.appUser.email}</p>

@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { ChooseWorker } from "@/components/workers/choose";
 import { EMPLOYMENT_STATUS_EMPLOYED } from "@/lib/constants/users/workers";
 import { CULTIVATION_MANAGER } from "@/lib/constants/users/managerTypes";
+import { AppTable } from "@/components/layout/preview/table";
 
 export const PlantCultivation = ({
   isOpen,
@@ -115,6 +116,17 @@ export const PlantCultivation = ({
       submitText="Završi sadnju"
       submitDisabled={submitDisabled}
     >
+      <AppTable
+        headerLabels={["Broj ćelija", "Količina po ćeliji", "Ukupna količina"]}
+        rows={[
+          [
+            newPlantage?.toPlantCells?.length || 0,
+            newPlantage?.variety?.quantityPerCell || 0,
+            (newPlantage?.toPlantCells?.length || 0) *
+              (newPlantage?.variety?.quantityPerCell || 0),
+          ],
+        ]}
+      />
       <div className={`form`}>
         <div className={``}>
           <AppSelect

@@ -39,16 +39,18 @@ export const GeneralManagerRequestsComponent = ({}) => {
         )}
         {requests?.map((request, i) => (
           <ListItem key={i}>
-            <div className="flex gap-2 items-center">
-              <div>{request.generalManager.rootManager.appUser.username}</div>
-              {request.generalManager.rootManager.appUser
-                ? `${request.generalManager.rootManager.appUser.name} ${request.generalManager.rootManager.appUser.surname} (${request.generalManager.rootManager.appUser.email})`
-                : null}
+            <div className="flex gap-2 items-center justify-between">
+              <div className="flex gap-2 items-center">
+                <div>{request.generalManager.rootManager.appUser.username}</div>
+                {request.generalManager.rootManager.appUser
+                  ? `${request.generalManager.rootManager.appUser.name} ${request.generalManager.rootManager.appUser.surname} (${request.generalManager.rootManager.appUser.email})`
+                  : null}
+              </div>
+              <RoleRequestStatus
+                roleRequest={{ status: request.status, _id: request._id }}
+                generalManager={true}
+              />
             </div>
-            <RoleRequestStatus
-              roleRequest={{ status: request.status, _id: request._id }}
-              generalManager={true}
-            />
           </ListItem>
         ))}
       </List>

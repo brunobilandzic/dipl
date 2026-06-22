@@ -61,3 +61,11 @@ export const sanitize = (obj) => {
 export const randomElementArray = (arr) => {
   return arr[Math.floor(Math.random() * arr.length)];
 };
+
+export const arrayRandomSlice = (arr, sliceLength) => {
+  if (sliceLength > arr.length) {
+    throw new Error("Slice length cannot be greater than array length");
+  }
+  const shuffled = [...arr].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, sliceLength);
+};

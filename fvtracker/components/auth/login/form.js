@@ -43,7 +43,7 @@ function LoginForm() {
       return;
     }
 
-    router.replace("/");
+    window.location.href = "/";
   };
 
   return (

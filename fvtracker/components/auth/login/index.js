@@ -17,7 +17,7 @@ export default LoginPageComponent;
 
 export function LoginButton() {
   return (
-    <Link href="/login">
+    <Link href="/prijava">
       <div className="btn submitButton">Prijava</div>
     </Link>
   );

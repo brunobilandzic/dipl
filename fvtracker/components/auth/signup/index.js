@@ -17,7 +17,7 @@ import Link from "next/link";
 
 export function SignUpButton() {
   return (
-    <Link href="/signup">
+    <Link href="/registracija">
       <div className="btn">Registracija</div>
     </Link>
   );

@@ -43,13 +43,16 @@ export const GeneralWorkersReport = ({
   title = "Radnici",
   children,
 }) => {
-  const totalHourlyRate = workers.reduce(
-    (sum, worker) => sum + worker.hourlyRate,
-    0,
-  );
+  if (!workers) return null;
+
   const employedWorkers = workers.filter(
     (worker) => worker.employmentRequest.status == EMPLOYMENT_STATUS_EMPLOYED,
   );
+  const totalHourlyRate = employedWorkers.reduce(
+    (sum, worker) => sum + worker.hourlyRate,
+    0,
+  );
+
   const unemployedWorkers = workers.filter(
     (worker) => worker.employmentRequest.status == EMPLOYMENT_STATUS_UNEMPLOYED,
   );

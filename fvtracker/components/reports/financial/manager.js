@@ -106,7 +106,7 @@ export const FinancialReport = ({}) => {
         </p>
       )}
       {workers.length ? (
-        <GeneralWorkersReport workers={employedWorkers} title="Radnici">
+        <GeneralWorkersReport workers={workers} title="Radnici">
           <>
             <ReportItem
               count={((totalHourlyRate * 160) / employedWorkers.length).toFixed(

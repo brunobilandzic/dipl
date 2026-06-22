@@ -243,7 +243,6 @@ const nameSearch = ({ items, value }) => {
 };
 
 const whreqNameSearch = ({ items, value }) => {
-  console.log({ items, value });
   return items.filter((item) => stringContains(item.order.number, value));
 };
 

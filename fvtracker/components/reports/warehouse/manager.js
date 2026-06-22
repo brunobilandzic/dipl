@@ -25,6 +25,16 @@ export const WarehouseReport = ({}) => {
     .flatMap((order) => order.items)
     .reduce((total, item) => total + item.quantity, 0);
 
+  if (warehouses.length === 0) {
+    return (
+      <ReportSector title="Skladište">
+        <p className="text-center text-gray-500">
+          Nema podataka o skladištima.
+        </p>
+      </ReportSector>
+    );
+  }
+
   return (
     <ReportSector title="Skladište">
       <ReportSection title="Skladišta">
@@ -46,20 +56,29 @@ export const WarehouseReport = ({}) => {
           count={productsCount}
         />
       </ReportSection>
+
       <ReportSection title="Isporuke">
-        <ReportItem
-          count={warehouseRequests?.length || 0}
-          description={stringQuant({
-            string: "Zahtjev",
-            quantity: warehouseRequests?.length || 0,
-            pluralLetter: "i",
-          })}
-        />
-        <ReportItem
-          count={orderedProductsCount}
-          description="Naručeno komada"
-        />
-        <ReportItem count={shipmentSourcesCount} description="Isporučeno" />
+        {warehouseRequests.length > 0 ? (
+          <>
+            <ReportItem
+              count={warehouseRequests?.length || 0}
+              description={stringQuant({
+                string: "Zahtjev",
+                quantity: warehouseRequests?.length || 0,
+                pluralLetter: "i",
+              })}
+            />
+            <ReportItem
+              count={orderedProductsCount}
+              description="Naručeno komada"
+            />
+            <ReportItem count={shipmentSourcesCount} description="Isporučeno" />
+          </>
+        ) : (
+          <p className="text-center text-gray-500">
+            Nema podataka o isporukama.
+          </p>
+        )}
       </ReportSection>
     </ReportSector>
   );

@@ -11,7 +11,7 @@ export const ReportsDashboard = ({ children, managerModelName }) => {
 
 export const ReportSector = ({ workers, title, children }) => {
   return (
-    <div className="w-full mb-8 mt-4">
+    <div className="w-full mb-8 mt-4 ">
       <h2 className="text-2xl font-bold mb-4">
         {workers ? "Radnici" : "Sektor"}: {title}
       </h2>
@@ -22,7 +22,7 @@ export const ReportSector = ({ workers, title, children }) => {
 
 export const ReportSection = ({ title, children }) => {
   return (
-    <div className="mb-8">
+    <div className="mb-8 w-full ">
       <h2 className="text-xl mb-4">{title}</h2>
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">{children}</div>
     </div>

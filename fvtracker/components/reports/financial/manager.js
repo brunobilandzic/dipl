@@ -51,56 +51,83 @@ export const FinancialReport = ({}) => {
     (worker) => worker.employmentRequest.status == EMPLOYMENT_STATUS_PENDING,
   );
 
+  if (orders.length === 0 && workers.length === 0)
+    return (
+      <ReportSector title="Financije">
+        <p className="text-center text-gray-500 w-full mt-2">
+          Nema podataka o financijama.
+        </p>
+      </ReportSector>
+    );
+
   return (
     <ReportSector title="Financije">
-      <ReportSection title="Narudžbe">
-        <ReportItem
-          count={orders.length}
-          description={"Narudžb" + (orders.length > 1 ? "i" : "a")}
-        />
-        <ReportItem
-          count={uniqueCustomers.length}
-          description={stringQuant({
-            string: "Kupac",
-            quantity: uniqueCustomers.length,
-            pluralLetter: "a",
-          })}
-        />
-        <ReportItem
-          count={uniqueProducts.length}
-          description={`Različitih proizvoda`}
-        />
-        <ReportItem
-          count={receiptCount}
-          description={stringQuant({
-            string: "Račun",
-            quantity: receiptCount,
-            pluralLetter: "a",
-          })}
-        />
-        <ReportItem
-          count={totalReceiptItems}
-          description="Proizvoda na računima"
-        />
-        <ReportItem
-          count={totalRevenue.toFixed(2)}
-          description={"Vrijednost (€)"}
-        />
-        <ReportItem
-          count={invoicedPrice.toFixed(2)}
-          description={"Vrijednost računa (€)"}
-        />
-      </ReportSection>
-      <GeneralWorkersReport workers={workers} title="Radnici">
-        <ReportItem
-          count={((totalHourlyRate * 160) / employedWorkers.length).toFixed(2)}
-          description={"Prosječni mesečni trošak (€)"}
-        />
-        <ReportItem
-          count={((totalHourlyRate * 160) / totalRevenue).toFixed(2)}
-          description={"Trošak radnika (%)"}
-        />
-      </GeneralWorkersReport>
+      {orders.length > 0 ? (
+        <ReportSection title="Narudžbe">
+          <>
+            <ReportItem
+              count={orders.length}
+              description={"Narudžb" + (orders.length > 1 ? "i" : "a")}
+            />
+            <ReportItem
+              count={uniqueCustomers.length}
+              description={stringQuant({
+                string: "Kupac",
+                quantity: uniqueCustomers.length,
+                pluralLetter: "a",
+              })}
+            />
+            <ReportItem
+              count={uniqueProducts.length}
+              description={`Različitih proizvoda`}
+            />
+            <ReportItem
+              count={receiptCount}
+              description={stringQuant({
+                string: "Račun",
+                quantity: receiptCount,
+                pluralLetter: "a",
+              })}
+            />
+            <ReportItem
+              count={totalReceiptItems}
+              description="Proizvoda na računima"
+            />
+            <ReportItem
+              count={totalRevenue.toFixed(2)}
+              description={"Vrijednost (€)"}
+            />
+            <ReportItem
+              count={invoicedPrice.toFixed(2)}
+              description={"Vrijednost računa (€)"}
+            />
+          </>
+        </ReportSection>
+      ) : (
+        <p className="text-center text-gray-500 w-full">
+          Nema podataka o narudžbama.
+        </p>
+      )}
+      {workers.length ? (
+        <GeneralWorkersReport workers={workers} title="Radnici">
+          <>
+            <ReportItem
+              count={((totalHourlyRate * 160) / employedWorkers.length).toFixed(
+                2,
+              )}
+              description={"Prosječni mesečni trošak (€)"}
+            />
+            <ReportItem
+              count={((totalHourlyRate * 160) / totalRevenue).toFixed(2)}
+              description={"Trošak radnika (%)"}
+            />
+          </>
+        </GeneralWorkersReport>
+      ) : (
+        <p className="text-center text-gray-500 w-full mt-2">
+          Nema podataka o radnicima.
+        </p>
+      )}
     </ReportSector>
   );
 };

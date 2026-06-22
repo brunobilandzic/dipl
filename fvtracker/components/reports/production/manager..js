@@ -21,6 +21,15 @@ export const ProductionReport = ({}) => {
 
   const facilities = useSelector((state) => state.production?.facilities.items);
   if (!products) return null;
+
+  if (products.length === 0)
+    return (
+      <ReportSector title="Proizvodnja">
+        <p className="text-center text-gray-500">
+          Nema podataka o proizvodnji.
+        </p>
+      </ReportSector>
+    );
   return (
     <ReportSector title="Proizvodnja">
       <ReportSection title="Proizvodi">

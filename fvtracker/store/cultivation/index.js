@@ -306,6 +306,7 @@ const cultivationSlice = createSlice({
         cropVarietyId,
         quality,
         quantity,
+        harvestWork,
       } = action.payload;
       if (!state.selectedField) return;
 
@@ -330,6 +331,17 @@ const cultivationSlice = createSlice({
       const fieldName = state.selectedField.name;
       const fid = state.fields.findIndex((f) => f.name === fieldName);
       const field = state.fields[fid];
+
+      if (harvestWork) {
+        for (const ca of field.cultivationAreas || []) {
+          const cult = ca.cultivations?.find((c) => c._id === cultivationId);
+          if (cult) {
+            if (!cult.harvestWorks) cult.harvestWorks = [];
+            cult.harvestWorks.push(harvestWork);
+            break;
+          }
+        }
+      }
 
       for (const harvestingPlan of field.harvestingPlans) {
         const pItemId = harvestingPlan.items.findIndex(

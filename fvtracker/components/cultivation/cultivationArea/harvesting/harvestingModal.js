@@ -259,6 +259,7 @@ export function HarvestingModal({
           quantity:
             harvestedCropVarieties.length *
             newHarvest.cropVariety.quantityPerCell,
+          harvestWork,
         }),
       );
       dispatch(

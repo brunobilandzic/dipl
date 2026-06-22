@@ -38,12 +38,15 @@ export async function cropsData() {
         cropData.types.push({
           ...cropTypeData,
           generalTypeName: generalType.name,
+          mainTypeName: mainType.name,
         });
 
         cropVarieties.forEach((variety) => {
           cropData.varieties.push({
             ...variety._doc,
             cropTypeName: cropType.name,
+            generalTypeName: generalType.name,
+            mainTypeName: mainType.name,
           });
         });
       });

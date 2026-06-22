@@ -273,6 +273,10 @@ const cultivationSlice = createSlice({
           plantingPlan.items[pItemId].quantity -=
             newPlantage.length *
             plantingPlan.items[pItemId].cropVariety.quantityPerCell;
+          if (!plantingPlan.items[pItemId].plantedCropVarieties) {
+            plantingPlan.items[pItemId].plantedCropVarieties = [];
+          }
+          plantingPlan.items[pItemId].plantedCropVarieties.push(...newPlantage);
         }
       }
     },

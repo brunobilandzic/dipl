@@ -31,7 +31,6 @@ function CropTypesList() {
   const displayedTypes = useMemo(() => {
     const filtered = filterItems({
       _items: crops?.types || [],
-      itemModelName: "CropType",
       filters,
     });
     return sortItems({ items: filtered, sortBy });

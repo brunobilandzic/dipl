@@ -14,6 +14,7 @@ import {
 import { useRouter } from "next/navigation";
 import { AppTable } from "@/components/layout/preview/table";
 import { filterItems, initFilters } from "@/lib/utils/list";
+import { showDateTime } from "@/lib/utils/display";
 
 export const WarehouseRequestList = () => {
   const warehouseRequests = useSelector(
@@ -104,6 +105,7 @@ const WarehouseRequestListItem = ({ request, router }) => {
             <ItemList
               items={warehouseRequestItems(request)}
               orderItems={order?.items || []}
+              request={request}
             />
           </div>
         </div>
@@ -158,9 +160,14 @@ const WarehouseRequestListItem = ({ request, router }) => {
   );
 };
 
-const ItemList = ({ items, orderItems }) => {
+const ItemList = ({ items, orderItems, request }) => {
+  const { createdAt, updatedAt } = request;
   return (
     <>
+      <div className="text-gray-500 text-sm"> 
+        <div>Datum kreiranja: {showDateTime(createdAt)}</div>
+        <div>Datum zadnje izmjene: {showDateTime(updatedAt)}</div>
+      </div>
       <AppTable
         headerLabels={["proizvod", "količina", "naručeno", "isporučeno"]}
         rows={items.map((item) => ({

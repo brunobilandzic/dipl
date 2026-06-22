@@ -1,5 +1,5 @@
 export default {
   cultivation: {
-    defaultPlCvColor: "bg-orange-600",
+    defaultPlCvColor: "bg-orange-900",
   },
 };

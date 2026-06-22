@@ -7,9 +7,10 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { RoleRequestStatus } from "../generalManager/managerRequests";
 import { List, ListItem } from "../layout/preview/list";
+import { LoadingFullScreen } from "../layout/loading";
 
 export const GeneralManagerRequestsComponent = ({}) => {
-  const [requests, setRequests] = useState([]);
+  const [requests, setRequests] = useState(null);
 
   useEffect(() => {
     const fetchRequest = async () => {
@@ -27,6 +28,10 @@ export const GeneralManagerRequestsComponent = ({}) => {
 
     fetchRequest();
   }, []);
+
+  if (!requests) {
+    return <LoadingFullScreen />;
+  }
 
   return (
     <div>

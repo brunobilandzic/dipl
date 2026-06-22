@@ -74,8 +74,14 @@ function LoginForm() {
         })}
       </div>
       <div className={`${styles.footer} flex justify-center`}>
-        <div className={`btn submitButton btnLg`} onClick={onSubmit}>
+        <div className={`btn submitButton`} onClick={onSubmit}>
           Prijava
+        </div>
+        <div
+          className={`btn btnSecondary`}
+          onClick={() => router.push("/signup")}
+        >
+          Registracija
         </div>
       </div>
     </div>

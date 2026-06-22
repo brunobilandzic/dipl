@@ -104,9 +104,15 @@ function SignUpForm() {
           defaultValue={signUpData.requestedRole || ""}
         />
       </div>
-      <div className={`${styles.footer}       flex justify-center`}>
-        <div className={`btn submitButton btnLg`} onClick={onSubmit}>
+      <div className={`${styles.footer}     gap-2  flex justify-center`}>
+        <div className={`btn submitButton `} onClick={onSubmit}>
           Registracija
+        </div>
+        <div
+          className={`btn btnSecondary `}
+          onClick={() => router.push("/prijava")}
+        >
+          Prijava
         </div>
       </div>
     </div>

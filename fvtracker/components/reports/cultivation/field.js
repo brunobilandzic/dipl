@@ -25,6 +25,19 @@ export const FieldStats = ({ fields }) => {
     return sum + harvestingWorksHours;
   }, 0);
 
+  const plantingPlans = fields.flatMap((field) => field.plantingPlans || []);
+  const harvestingPlans = fields.flatMap(
+    (field) => field.harvestingPlans || [],
+  );
+  const plantingPlanItems = plantingPlans.reduce(
+    (sum, plan) => sum + (plan.items?.length || 0),
+    0,
+  );
+  const harvestingPlanItems = harvestingPlans.reduce(
+    (sum, plan) => sum + (plan.items?.length || 0),
+    0,
+  );
+
   return (
     <>
       <ReportSection title="Statistika Polja">
@@ -37,6 +50,16 @@ export const FieldStats = ({ fields }) => {
         <WorhHoursCount
           count={harvestingHours}
           description="Sati radova na berbi"
+        />
+        <ReportItem description="Planovi sadnje" count={plantingPlans.length} />
+        <ReportItem description="Planovi berbe" count={harvestingPlans.length} />
+        <ReportItem
+          description="Stavke planova sadnje"
+          count={plantingPlanItems}
+        />
+        <ReportItem
+          description="Stavke planova berbe"
+          count={harvestingPlanItems}
         />
       </ReportSection>
     </>

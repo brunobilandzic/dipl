@@ -39,6 +39,14 @@ export const initFilters = (listType, allWorkers = false) => {
           value: "",
         },
       ];
+    case "warehouseRequests":
+      return [
+        {
+          type: "nameSearch",
+          placeholder: "Pretraži zahtjeve...",
+          value: "",
+        },
+      ];
     case "orders":
       return [
         {

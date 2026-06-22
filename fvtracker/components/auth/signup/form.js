@@ -8,12 +8,11 @@ import {
   CULTIVATION_MANAGER,
   FINANCIAL_MANAGER,
   GENERAL_MANAGER,
-  MANAGER_TYPES,
   PRODUCTION_MANAGER,
   WAREHOUSE_MANAGER,
 } from "@/lib/constants/users/managerTypes";
 import { useRouter } from "next/navigation";
-import { Loading } from "@/components/layout/loading";
+import { Loading, LoadingFullScreen } from "@/components/layout/loading";
 
 function SignUpForm() {
   const { session, status } = useSession();
@@ -38,7 +37,7 @@ function SignUpForm() {
   }, [status, router]);
 
   if (status === "loading") {
-    return <Loading />;
+    return <LoadingFullScreen />;
   }
 
   const onChange = (e) => {

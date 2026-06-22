@@ -111,11 +111,11 @@ export const FinancialReport = ({}) => {
               count={((totalHourlyRate * 160) / employedWorkers.length).toFixed(
                 2,
               )}
-              description={"Prosječni mesečni trošak (€)"}
+              description={"Prosječni mesečni trošak svih radnika (€)"}
             />
             <ReportItem
               count={((totalHourlyRate * 160) / totalRevenue).toFixed(2)}
-              description={"Trošak radnika (%)"}
+              description={"Trošak svih radnika u odnosu na prihod (%)"}
             />
           </>
         </GeneralWorkersReport>

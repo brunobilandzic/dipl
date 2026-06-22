@@ -71,6 +71,10 @@ export const WorkersPageComponent = ({ managerModelName, isAdmin }) => {
           initialFilters={initialFilters}
           sortOptions={workerSortOptions}
         >
+          {" "}
+          {displayedWorkers.length === 0 && (
+            <div className="p-4 text-center text-gray-500">Nema radnika</div>
+          )}
           {displayedWorkers.map((worker) => (
             <WorkerItem
               key={worker._id}

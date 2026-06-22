@@ -46,6 +46,11 @@ export const EmploymentRequestsPageComponent = () => {
       filters={filters}
       setFilters={setFilters}
     >
+      {filteredEmploymentRequests.length === 0 && (
+        <div className="p-4 text-center text-gray-500">
+          Nema zahtjeva za zaposlenje
+        </div>
+      )}
       {filteredEmploymentRequests.map((request) => {
         return (
           <EmploymentRequestsItem

@@ -9,12 +9,13 @@ import { deleteCultivationArea } from "@/store/cultivation";
 import { useDispatch } from "react-redux";
 import { updateCultivationArea } from "@/store/cultivation";
 import { initialCAMenuState } from "../index";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { checkEmpty } from "@/lib/utils/objects";
 
 export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const { slug: fieldSlug } = useParams();
 
   const [formData, setFormData] = useState({});
   const [submitDisabled, setSubmitDisabled] = useState(false);
@@ -91,10 +92,11 @@ export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
     },
     {
       label: "Kultiviraj",
-      onClick: () =>
+      onClick: () => {
         router.push(
-          `/upravljanje-poljima/${cultivationAreaMenu?.cultivationArea?.field?.slug}/ca/${cultivationAreaMenu?.cultivationArea?.slug}`,
-        ),
+          `/upravljanje-poljima/${fieldSlug}/ca/${cultivationAreaMenu?.cultivationArea?.slug}`,
+        );
+      },
       className: "btn w-full bg-green-500 hover:bg-green-600 text-white",
     },
     {

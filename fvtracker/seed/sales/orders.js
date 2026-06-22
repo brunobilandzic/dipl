@@ -3,13 +3,15 @@ import { Product } from "@/models/sectors/production/Product";
 import { ordersSeedData } from "../data/sales/orders";
 import { Order, OrderItem, Receipt } from "@/models/sectors/sales";
 import { FinancialManager } from "@/models/user/managers/FinancialManager";
+import { arrayRandomSlice } from "@/lib/utils/objects";
 
 export const createOrders = async () => {
   console.log("Creating orders...");
 
   const createdOrders = [];
   const customer = await getCustomer();
-  const items = await buildOrderItems();
+  const products = await Product.find({});
+  const items = await buildOrderItems({ products });
 
   const financialManager = await FinancialManager.findOne({}).select(
     "_id orders ",
@@ -46,9 +48,12 @@ export const createOrders = async () => {
   return createdOrders;
 };
 
-const buildOrderItems = async () => {
-  const products = await Product.find({});
-  return products.map((product) => ({
+const buildOrderItems = async ({ products }) => {
+  const productsSample = arrayRandomSlice(
+    products,
+    Math.floor(Math.random() * products.length) + 1,
+  );
+  return productsSample.map((product) => ({
     product: product._id,
     quantity: 2,
   }));

@@ -335,6 +335,12 @@ const cultivationSlice = createSlice({
           harvestingPlan.items[pItemId].quantity -=
             harvestedCropVarieties.length *
             harvestingPlan.items[pItemId].cropVariety.quantityPerCell;
+          if (!harvestingPlan.items[pItemId].plantedCropVarieties) {
+            harvestingPlan.items[pItemId].plantedCropVarieties = [];
+          }
+          harvestingPlan.items[pItemId].plantedCropVarieties.push(
+            ...harvestedCropVarieties,
+          );
         }
       }
 

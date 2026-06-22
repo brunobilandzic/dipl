@@ -47,17 +47,6 @@ export const Filter = ({ filters, setFilters, cropOptions }) => {
                   }}
                 />
               );
-            case "cropVarietySearch":
-              return (
-                <AppInput
-                  key={index}
-                  placeholder={option.placeholder}
-                  value={option.value}
-                  onChange={(e) => {
-                    onChange(index, e.target.value);
-                  }}
-                />
-              );
             case "customerSearch":
               return (
                 <AppInput

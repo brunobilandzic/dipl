@@ -29,7 +29,7 @@ const rootManagerSchema = new Schema({
   roleRequest: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "RoleRequest",
-    deault: null,
+    default: null,
   },
   generalManager: {
     type: mongoose.Schema.Types.ObjectId,
@@ -39,14 +39,6 @@ const rootManagerSchema = new Schema({
   workers: [
     { type: mongoose.Schema.Types.ObjectId, ref: "Worker", default: [] },
   ],
-  /* employmentRequests: [
-    // people applying for jobs
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "EmploymentRequest",
-      default: [],
-    },
-  ] */
   procurments: [
     //people placing orders to buy products
     { type: mongoose.Schema.Types.ObjectId, ref: "Procurment", default: [] },
@@ -58,8 +50,7 @@ rootManagerSchema.pre("save", async function () {
     const roleRequest = new RoleRequest({
       generalManager: this.generalManager,
       rootManager: this._id,
-      // for skipping guardrails auth
-      status: ROLE_STATUSES.APPROVED,
+      status: ROLE_STATUSES.PENDING,
     });
     this.roleRequest = roleRequest._id;
     await roleRequest.save();

@@ -13,6 +13,7 @@ import {
 } from "@/lib/constants/users/managerTypes";
 import { useRouter } from "next/navigation";
 import { Loading, LoadingFullScreen } from "@/components/layout/loading";
+import { checkEmpty } from "@/lib/utils/objects";
 
 function SignUpForm() {
   const { session, status } = useSession();
@@ -105,7 +106,7 @@ function SignUpForm() {
         />
       </div>
       <div className={`     gap-2  flex justify-center`}>
-        <div className={`btn submitButton `} onClick={onSubmit}>
+        <div className={`btn submitButton ${checkEmpty(signUpData, true) ? "disabled" : ""}`} onClick={onSubmit}>
           Registracija
         </div>
         <div

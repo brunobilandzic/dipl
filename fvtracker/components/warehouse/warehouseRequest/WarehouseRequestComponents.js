@@ -160,12 +160,10 @@ const ItemList = ({ items, orderItems, request }) => {
         <div>Datum zadnje izmjene: {showDateTime(updatedAt)}</div>
       </div>
       <AppTable
-        headerLabels={["proizvod", "količina", "naručeno", "isporučeno"]}
+        headerLabels={["proizvod",  "naručeno", "isporučeno"]}
         rows={items.map((item) => ({
           product: item.product,
           quantity: item.quantity,
-          ordered: orderItems.find((oi) => oi.product.name === item.product)
-            ?.quantity,
           shipped: getShippedQuantity({
             productName: item.product,
             orderItems,

@@ -146,7 +146,7 @@ async function signUpCredentials({
     });
     if (hasApprovedManager) {
       throw new Error(
-        `Menadžer ${MANAGER_TRANSLATION[requestedRole]} već postoji. Ne možete kreirati drugog ${MANAGER_TRANSLATION[requestedRole]}.`,
+        `Menadžer ${MANAGER_TRANSLATION[requestedRole]} s odobrenom ulogom već postoji. Ne možete kreirati drugog ${MANAGER_TRANSLATION[requestedRole]}.`,
       );
     }
     const generalManager = await GeneralManager.findOne();

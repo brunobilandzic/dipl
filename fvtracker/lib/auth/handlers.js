@@ -70,10 +70,16 @@ async function signUpCredentials({
   passwordConfirm,
   requestedRole,
 }) {
-  const existingUser = await AppUser.findOne({ email });
+  const existingUserEmail = await AppUser.findOne({ email });
 
-  if (existingUser) {
-    return null;
+  if (existingUserEmail) {
+    throw new Error("Korisnik sa ovom email adresom već postoji.");
+  }
+
+  const existingUserUsername = await AppUser.findOne({ username });
+
+  if (existingUserUsername) {
+    throw new Error("Korisnik sa ovim korisničkim imenom već postoji.");
   }
   if (password !== passwordConfirm) {
     console.log(

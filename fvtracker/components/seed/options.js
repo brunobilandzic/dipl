@@ -37,6 +37,7 @@ export default function SeedOptions() {
       icon: <MdAllInclusive />,
       type: SEED_TYPES.ALL,
     },
+    /* 
     {
       label: "Admin",
       icon: <FaUserPlus />,
@@ -47,7 +48,7 @@ export default function SeedOptions() {
       icon: <FaUserPlus />,
       type: SEED_TYPES.SEED_WORKERS,
     },
-    /* 
+    
     {
       label: "Korisnici",
       icon: <FaUserPlus />,
@@ -62,7 +63,7 @@ export default function SeedOptions() {
       label: "Biljke",
       icon: <FaSeedling />,
       type: SEED_TYPES.CROP_MAIN_TYPES,
-    },*/ {
+    },{
       label: "Polja",
       icon: <FaSeedling />,
       type: SEED_TYPES.FIELDS,
@@ -82,6 +83,7 @@ export default function SeedOptions() {
       icon: <FaSeedling />,
       type: SEED_TYPES.SEED_SALES,
     },
+    */
     {
       label: "Obriši bazu",
       icon: <MdDeleteForever />,

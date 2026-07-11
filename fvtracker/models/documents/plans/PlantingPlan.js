@@ -74,10 +74,6 @@ const plantingPlanSchema = new Schema({
       default: [],
     },
   ],
-  plannedPlantingDate: {
-    type: Date,
-    default: null,
-  },
   plannedHarvestingDate: {
     type: Date,
     default: null,

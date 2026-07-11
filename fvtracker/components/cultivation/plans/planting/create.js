@@ -139,7 +139,6 @@ export const FillPlanInfo = ({
         new Date().setMonth(new Date().getMonth() + 2),
       ),
     };
-    plantingManagerField({ plant, formDataInitial });
     return formDataInitial;
   };
 
@@ -266,12 +265,3 @@ export const QuantityInput = ({ index, item, handleItemChange }) => (
     value={item.quantity}
   />
 );
-
-const plantingManagerField = ({ plant, formDataInitial }) => {
-  if (plant) {
-    delete formDataInitial.productionManager;
-    delete formDataInitial.plannedHarvestingDate;
-  } else {
-    delete formDataInitial.plannedPlantingDate;
-  }
-};

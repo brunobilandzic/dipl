@@ -265,3 +265,14 @@ export const QuantityInput = ({ index, item, handleItemChange }) => (
     value={item.quantity}
   />
 );
+
+export const HarvestDateInput = ({ index, item, handleItemChange }) => (
+  <AppDatePicker
+    label="Planirani datum berbe"
+    name="plannedHarvestingDate"
+    onChange={(e) =>
+      handleItemChange(index, "plannedHarvestingDate", e.target.value)
+    }
+    value={item.plannedHarvestingDate}
+  />
+);

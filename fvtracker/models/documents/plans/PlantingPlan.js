@@ -77,7 +77,7 @@ const plantingPlanSchema = new Schema(
     ],
     plannedHarvestingDate: {
       type: Date,
-      default: null,
+      default: () => new Date(new Date().setMonth(new Date().getMonth() + 2)),
     },
     slug: { type: String, unique: true, index: true },
   },

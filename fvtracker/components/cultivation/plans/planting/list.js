@@ -81,7 +81,7 @@ export function FieldPlansItem({ fieldPlans, plant = true }) {
 
   return (
     <div>
-      <div className=" mb-4">
+      <div className="text-2xl font-bold text-green-900 mb-4">
         Planovi za polje:{" "}
         <span className="font-bolder text-lg underline">{fieldName}</span>
       </div>

@@ -130,7 +130,12 @@ export const FillPlanInfo = ({
   const crops = useSelector((state) => state.cultivation.crops);
   const dispatch = useDispatch();
   const createInitialFormData = ({ field = selectedField?._id } = {}) => {
-    const defaultCropData = testCropItemData({ crops });
+    const defaultCropData = testCropItemData({ crops }).map((item) => ({
+      ...item,
+      plannedHarvestingDate: new Date(
+        new Date().setMonth(new Date().getMonth() + 2),
+      ),
+    }));
     const formDataInitial = {
       name: `Plan ${plant ? "sadnje" : "berbe"} - ${new Date().toLocaleString("hr-HR")}`,
       field,

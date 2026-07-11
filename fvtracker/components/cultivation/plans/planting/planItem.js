@@ -11,11 +11,21 @@ export const PlantingPlanListItem = ({ plan, plant = true, onDelete }) => {
       className: "btn cancelButton btnSm",
     },
   ];
+  console.log({plan})
   return (
     <>
       <ListItem actionOptions={actionOptions}>
         <div className="flex justify-between items-center">
           <div className="text-lg font-bold ">{plan.name}</div>
+          <div className="text-sm text-gray-500">
+            {new Date(plan.createdAt).toLocaleDateString("hr-HR", {
+              year: "numeric",
+              month: "2-digit",
+              day: "2-digit",
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </div>
         </div>
 
         <PlantingPlanItems items={plan.items} plant={plant} />

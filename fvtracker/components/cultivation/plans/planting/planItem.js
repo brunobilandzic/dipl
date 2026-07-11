@@ -22,10 +22,6 @@ export const PlantingPlanListItem = ({ plan, plant = true, onDelete }) => {
               <div>kreirano:</div>{" "}
               {new Date(plan.createdAt).toLocaleDateString("hr-HR")}
             </div>
-            <div className="flex gap-1">
-              <div>berba:</div>
-              {new Date(plan.plannedHarvestingDate).toLocaleDateString("hr-HR")}
-            </div>
           </div>
         </div>
 
@@ -62,6 +58,12 @@ const PlantingPlanItem = ({ item, plant }) => {
         <span className="font-semibold">Količina: </span>
         {item.quantity}
       </div>
+      {plant && item.plannedHarvestingDate ? (
+        <div>
+          <span className="font-semibold">Berba: </span>
+          {new Date(item.plannedHarvestingDate).toLocaleDateString("hr-HR")}
+        </div>
+      ) : null}
       <div>
         <span className="font-semibold">Planted Crop Varieties: </span>
         <PlantedCropVarietiesPlan

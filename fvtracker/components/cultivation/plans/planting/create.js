@@ -132,7 +132,7 @@ export const FillPlanInfo = ({
   const createInitialFormData = ({ field = selectedField?._id } = {}) => {
     const defaultCropData = testCropItemData({ crops });
     const formDataInitial = {
-      name: `Plan ${plant ? "sadnje" : "berbe"} - ${new Date().toLocaleString()}`,
+      name: `Plan ${plant ? "sadnje" : "berbe"} - ${new Date().toLocaleString("hr-HR")}`,
       field,
       [itemsName]: defaultCropData,
       plannedPlantingDate: new Date().toISOString().split("T")[0],

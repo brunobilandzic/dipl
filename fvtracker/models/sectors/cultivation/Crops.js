@@ -103,10 +103,10 @@ const cropVarietySchema = new Schema({
       default: [],
     },
   ],
-  harvestBatchItems: [
+  harvestingBatchItem: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "HarvestBatchItem",
+      ref: "HarvestingBatchItem",
       default: [],
     },
   ],

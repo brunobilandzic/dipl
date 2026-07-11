@@ -140,9 +140,6 @@ export const FillPlanInfo = ({
       name: `Plan ${plant ? "sadnje" : "berbe"} - ${new Date().toLocaleString("hr-HR")}`,
       field,
       [itemsName]: defaultCropData,
-      plannedHarvestingDate: new Date(
-        new Date().setMonth(new Date().getMonth() + 2),
-      ),
     };
     return formDataInitial;
   };

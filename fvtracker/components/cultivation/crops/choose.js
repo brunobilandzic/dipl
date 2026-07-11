@@ -173,6 +173,7 @@ export const ChooseCropVarietyItems = ({
                           item={item}
                           handleItemChange={handleItemChange}
                           index={index}
+                          items={cropsData[itemsName]}
                         />
                       }
                     </div>

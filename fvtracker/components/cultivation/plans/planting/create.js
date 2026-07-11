@@ -135,8 +135,9 @@ export const FillPlanInfo = ({
       name: `Plan ${plant ? "sadnje" : "berbe"} - ${new Date().toLocaleString("hr-HR")}`,
       field,
       [itemsName]: defaultCropData,
-      plannedPlantingDate: new Date().toISOString().split("T")[0],
-      plannedHarvestingDate: new Date().toISOString().split("T")[0],
+      plannedHarvestingDate: new Date(
+        new Date().setMonth(new Date().getMonth() + 2),
+      ),
     };
     plantingManagerField({ plant, formDataInitial });
     return formDataInitial;

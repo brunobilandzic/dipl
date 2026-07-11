@@ -1,6 +1,9 @@
-import DatePicker from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { hr } from "date-fns/locale";
 import { v4 as uuid } from "uuid";
+
+registerLocale("hr", hr);
 export const AppInput = ({
   label,
   name,
@@ -92,6 +95,8 @@ export const AppDatePicker = ({
       <label className="label">{label}</label>
       <DatePicker
         className={`inputText`}
+        locale="hr"
+        dateFormat="dd.MM.yyyy"
         selected={value}
         onChange={(date) => onChange({ target: { name, value: date } })}
         placeholderText={placeholder}

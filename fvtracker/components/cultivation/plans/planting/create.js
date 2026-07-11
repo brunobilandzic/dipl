@@ -259,13 +259,27 @@ export const QuantityInput = ({ index, item, handleItemChange }) => (
   />
 );
 
-export const HarvestDateInput = ({ index, item, handleItemChange }) => (
-  <AppDatePicker
-    label="Planirani datum berbe"
-    name="plannedHarvestingDate"
-    onChange={(e) =>
-      handleItemChange(index, "plannedHarvestingDate", e.target.value)
-    }
-    value={item.plannedHarvestingDate}
-  />
-);
+export const HarvestDateInput = ({ index, item, handleItemChange, items }) => {
+  // datum berbe se veže uz sortu: prikazuje se samo na prvoj stavci te sorte
+  const varietyAlreadyAbove = items?.some(
+    (it, i) =>
+      i < index && it.cropVariety && it.cropVariety === item.cropVariety,
+  );
+  if (varietyAlreadyAbove) {
+    return (
+      <div className="text-sm text-gray-500">
+        Datum berbe preuzet od ranije stavke iste sorte.
+      </div>
+    );
+  }
+  return (
+    <AppDatePicker
+      label="Planirani datum berbe"
+      name="plannedHarvestingDate"
+      onChange={(e) =>
+        handleItemChange(index, "plannedHarvestingDate", e.target.value)
+      }
+      value={item.plannedHarvestingDate}
+    />
+  );
+};

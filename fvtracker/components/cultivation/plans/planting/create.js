@@ -230,17 +230,6 @@ export const FillPlanInfo = ({
             />
           </div>
 
-          {plant ? (
-            <div>
-              <AppDatePicker
-                label="Planirani datum berbe"
-                name="plannedHarvestingDate"
-                onChange={handleFormChange}
-                value={formData.plannedHarvestingDate}
-              />
-            </div>
-          ) : null}
-
           <ChooseCropVarietyItems
             crops={crops}
             cropsData={formData}

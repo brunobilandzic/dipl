@@ -54,7 +54,7 @@ export function Navbar() {
         <NavItems />
       </div>
       <div className=" flex-1 flex justify-end items-center gap-8 ">
-        {isAdmin && (
+        {true && (
           <Link href="/seed">
             <FaDatabase />
           </Link>

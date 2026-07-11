@@ -15,7 +15,7 @@ export const PlantingPlanListItem = ({ plan, plant = true, onDelete }) => {
   return (
     <>
       <ListItem actionOptions={actionOptions}>
-        <div className="flex justify-between items-start">
+        <div className="flex flex-col md:flex-row justify-between items-start">
           <div className="text-lg font-bold ">{plan.name}</div>
           <div className="text-sm text-gray-500 flex flex-col gap-1">
             <div className="flex gap-1">

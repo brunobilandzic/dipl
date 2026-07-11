@@ -8,41 +8,44 @@ import {
 
 const { Schema } = mongoose;
 
-const plantingPlanItemSchema = new Schema({
-  cropVariety: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "CropVariety",
-    required: true,
-  },
-  quantity: {
-    type: Number,
-    validate: {
-      validator: function (v) {
-        return v >= 0;
+const plantingPlanItemSchema = new Schema(
+  {
+    cropVariety: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "CropVariety",
+      required: true,
+    },
+    quantity: {
+      type: Number,
+      validate: {
+        validator: function (v) {
+          return v >= 0;
+        },
+        message: "Količina ne smije biti manja ili jednaka nuli",
       },
-      message: "Količina ne smije biti manja ili jednaka nuli",
+      required: true,
     },
-    required: true,
-  },
-  plantingPlan: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "PlantingPlan",
-    required: true,
-  },
-  plantedCropVarieties: [
-    {
+    plantingPlan: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "PlantedCropVariety",
-      default: [],
+      ref: "PlantingPlan",
+      required: true,
     },
-  ],
-  plantageWorks: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "PlantageWork",
-    },
-  ],
-});
+    plantedCropVarieties: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "PlantedCropVariety",
+        default: [],
+      },
+    ],
+    plantageWorks: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "PlantageWork",
+      },
+    ],
+  },
+  { timestamps: true },
+);
 
 plantingPlanItemSchema.pre("deleteMany", async function () {
   const ids = await PlantingPlanItem.find(this.getFilter()).distinct("_id");

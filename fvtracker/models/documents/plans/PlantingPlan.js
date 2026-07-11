@@ -8,44 +8,41 @@ import {
 
 const { Schema } = mongoose;
 
-const plantingPlanItemSchema = new Schema(
-  {
-    cropVariety: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "CropVariety",
-      required: true,
-    },
-    quantity: {
-      type: Number,
-      validate: {
-        validator: function (v) {
-          return v >= 0;
-        },
-        message: "Količina ne smije biti manja ili jednaka nuli",
-      },
-      required: true,
-    },
-    plantingPlan: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "PlantingPlan",
-      required: true,
-    },
-    plantedCropVarieties: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "PlantedCropVariety",
-        default: [],
-      },
-    ],
-    plantageWorks: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "PlantageWork",
-      },
-    ],
+const plantingPlanItemSchema = new Schema({
+  cropVariety: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "CropVariety",
+    required: true,
   },
-  { timestamps: true },
-);
+  quantity: {
+    type: Number,
+    validate: {
+      validator: function (v) {
+        return v >= 0;
+      },
+      message: "Količina ne smije biti manja ili jednaka nuli",
+    },
+    required: true,
+  },
+  plantingPlan: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "PlantingPlan",
+    required: true,
+  },
+  plantedCropVarieties: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "PlantedCropVariety",
+      default: [],
+    },
+  ],
+  plantageWorks: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "PlantageWork",
+    },
+  ],
+});
 
 plantingPlanItemSchema.pre("deleteMany", async function () {
   const ids = await PlantingPlanItem.find(this.getFilter()).distinct("_id");
@@ -59,30 +56,33 @@ plantingPlanItemSchema.pre("deleteMany", async function () {
   );
 });
 
-const plantingPlanSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  field: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Field",
-    required: true,
-  },
-  items: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "PlantingPlanItem",
-      default: [],
+const plantingPlanSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      unique: true,
     },
-  ],
-  plannedHarvestingDate: {
-    type: Date,
-    default: null,
+    field: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Field",
+      required: true,
+    },
+    items: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "PlantingPlanItem",
+        default: [],
+      },
+    ],
+    plannedHarvestingDate: {
+      type: Date,
+      default: null,
+    },
+    slug: { type: String, unique: true, index: true },
   },
-  slug: { type: String, unique: true, index: true },
-});
+  { timestamps: true },
+);
 
 plantingPlanSchema.pre("save", async function () {
   if (this.isModified("name")) {

@@ -27,8 +27,8 @@ export const PlantingPlanListItem = ({ plan, plant = true, onDelete }) => {
 export const PlantingPlanItems = ({ items, plant }) => {
   return (
     <div className="mt-2 flex flex-col gap-2">
-      <div>Stavke plana:</div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="font-bold text-green-900">Stavke plana:</div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4">
         {items.map((item) => (
           <div key={uuid()} className="">
             <PlantingPlanItem item={item} plant={plant} />

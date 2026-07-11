@@ -85,6 +85,13 @@ export const ChooseCropVarietyItems = ({
             quality: value,
           };
         }
+
+        if (field === "plannedHarvestingDate") {
+          return {
+            ...item,
+            plannedHarvestingDate: value,
+          };
+        }
       }),
     }));
   };

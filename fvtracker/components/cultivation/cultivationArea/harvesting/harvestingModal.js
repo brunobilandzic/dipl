@@ -243,6 +243,30 @@ export function HarvestingModal({
   };
 
   const submitHarvest = async () => {
+    // upozorenje ako se bere prije planiranog datuma berbe iz plana sadnje
+    const plantingPlan = allFieldPlans?.plantingPlans?.find((plan) =>
+      plan.items?.some(
+        (item) =>
+          item.cropVariety?._id?.toString() ===
+          newHarvest.cropVariety._id?.toString(),
+      ),
+    );
+    if (
+      plantingPlan?.plannedHarvestingDate &&
+      new Date() < new Date(plantingPlan.plannedHarvestingDate)
+    ) {
+      const planHarvestDate = new Date(
+        plantingPlan.plannedHarvestingDate,
+      ).toLocaleDateString("hr-HR");
+      if (
+        !confirm(
+          `Berba se izvodi prije planiranog datuma berbe (${planHarvestDate}). Želite li ipak nastaviti?`,
+        )
+      ) {
+        return;
+      }
+    }
+
     dispatch(setLoading(true));
     try {
       const res = await api.post(

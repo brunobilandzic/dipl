@@ -24,6 +24,10 @@ const plantingPlanItemSchema = new Schema({
     },
     required: true,
   },
+  plannedHarvestingDate: {
+    type: Date,
+    default: () => new Date(new Date().setMonth(new Date().getMonth() + 2)),
+  },
   plantingPlan: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "PlantingPlan",
@@ -75,10 +79,6 @@ const plantingPlanSchema = new Schema(
         default: [],
       },
     ],
-    plannedHarvestingDate: {
-      type: Date,
-      default: () => new Date(new Date().setMonth(new Date().getMonth() + 2)),
-    },
     slug: { type: String, unique: true, index: true },
   },
   { timestamps: true },

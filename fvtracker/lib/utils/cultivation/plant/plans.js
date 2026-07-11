@@ -39,7 +39,9 @@ export const prepareSubmitPlan = (plan) => {
     if (mergedItems[key]) {
       mergedItems[key].quantity += item.quantity;
     } else {
-      mergedItems[key] = { cropVariety: key, quantity: item.quantity };
+        quantity: Number(item.quantity),
+        plannedHarvestingDate: item.plannedHarvestingDate,
+      };
     }
   });
   plan.items = Object.values(mergedItems);

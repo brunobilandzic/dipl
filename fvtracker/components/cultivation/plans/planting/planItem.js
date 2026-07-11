@@ -11,20 +11,21 @@ export const PlantingPlanListItem = ({ plan, plant = true, onDelete }) => {
       className: "btn cancelButton btnSm",
     },
   ];
-  console.log({plan})
+  console.log({ plan });
   return (
     <>
       <ListItem actionOptions={actionOptions}>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-start">
           <div className="text-lg font-bold ">{plan.name}</div>
-          <div className="text-sm text-gray-500">
-            {new Date(plan.createdAt).toLocaleDateString("hr-HR", {
-              year: "numeric",
-              month: "2-digit",
-              day: "2-digit",
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
+          <div className="text-sm text-gray-500 flex flex-col gap-1">
+            <div className="flex gap-1">
+              <div>kreirano:</div>{" "}
+              {new Date(plan.createdAt).toLocaleDateString("hr-HR")}
+            </div>
+            <div className="flex gap-1">
+              <div>berba:</div>
+              {new Date(plan.plannedHarvestingDate).toLocaleDateString("hr-HR")}
+            </div>
           </div>
         </div>
 

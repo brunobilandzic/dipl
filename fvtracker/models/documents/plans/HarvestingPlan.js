@@ -56,39 +56,34 @@ harvestingPlanItemSchema.pre("deleteMany", async function () {
   );
 });
 
-const harvestingPlanSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  field: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Field",
-    required: true,
-  },
-  items: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "HarvestingPlanItem",
-      default: [],
+const harvestingPlanSchema = new Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      unique: true,
     },
-  ],
-  plannedharvestingDate: {
-    type: Date,
-    default: null,
+    field: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Field",
+      required: true,
+    },
+    items: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "HarvestingPlanItem",
+        default: [],
+      },
+    ],
+    harvestingBatch: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "HarvestingBatch",
+      default: null,
+    },
+    slug: { type: String, unique: true, index: true },
   },
-  plannedHarvestingDate: {
-    type: Date,
-    default: null,
-  },
-  harvestingBatch: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "HarvestingBatch",
-    default: null,
-  },
-  slug: { type: String, unique: true, index: true },
-}, { timestamps: true });
+  { timestamps: true },
+);
 
 harvestingPlanSchema.pre("save", async function () {
   if (this.isModified("name")) {

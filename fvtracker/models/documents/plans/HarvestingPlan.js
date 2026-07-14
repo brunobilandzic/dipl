@@ -88,7 +88,7 @@ const harvestingPlanSchema = new Schema({
     default: null,
   },
   slug: { type: String, unique: true, index: true },
-});
+}, { timestamps: true });
 
 harvestingPlanSchema.pre("save", async function () {
   if (this.isModified("name")) {

@@ -18,10 +18,13 @@ export const PlantingPlanListItem = ({ plan, plant = true, onDelete }) => {
         <div className="flex flex-col md:flex-row justify-between items-start">
           <div className="text-lg font-bold ">{plan.name}</div>
           <div className="text-sm text-gray-500 flex flex-col gap-1">
-            <div className="flex gap-1">
-              <div>kreirano:</div>{" "}
-              {new Date(plan.createdAt).toLocaleDateString("hr-HR")}
-            </div>
+            {plan.createdAt &&
+            !Number.isNaN(new Date(plan.createdAt).getTime()) ? (
+              <div className="flex gap-1">
+                <div>kreirano:</div>{" "}
+                {new Date(plan.createdAt).toLocaleDateString("hr-HR")}
+              </div>
+            ) : null}
           </div>
         </div>
 

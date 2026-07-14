@@ -1,4 +1,5 @@
 import { checkPlansEmpty } from "@/lib/utils/cultivation/plant/plans";
+import { showDate } from "@/lib/utils/display";
 
 export const ChoosePlan = ({
   availablePlans,
@@ -58,6 +59,7 @@ export const ChoosePlan = ({
             </p>
             <p>Varijanta: {plantingPlanItem?.cropVariety?.name}</p>
             <p>Planirana količina: {plantingPlanItem?.quantity}</p>
+            <p>Planirana berbe: {showDate(plantingPlanItem?.plannedHarvestingDate)}</p>
           </div>
         );
       })}

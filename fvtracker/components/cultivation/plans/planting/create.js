@@ -203,7 +203,7 @@ export const FillPlanInfo = ({
       );
       handleError({
         ...error,
-        generalMessage: `Greška prilikom ${isEdit ? "ažuriranja" : "kreiranja"} plana ${plant ? "sadnje" : "berbe"}`,
+        generalMessage: `Greška prilikom kreiranjaplana ${plant ? "sadnje" : "berbe"}`,
       });
     }
   };

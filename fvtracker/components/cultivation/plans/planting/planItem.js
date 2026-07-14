@@ -65,7 +65,7 @@ const PlantingPlanItem = ({ item, plant }) => {
         </div>
       ) : null}
       <div>
-        <span className="font-semibold">Planted Crop Varieties: </span>
+        <span className="font-semibold">{plant ? "Zasađene" : "Ubrane"} vrste: </span>
         <PlantedCropVarietiesPlan
           plantedCropVarieties={item.plantedCropVarieties}
           plant={plant}

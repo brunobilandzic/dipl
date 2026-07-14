@@ -261,20 +261,12 @@ export function HarvestingModal({
   const submitHarvest = async () => {
     // upozorenje ako se bere prije planiranog datuma berbe te sorte iz plana sadnje
     let planItem;
-    for (const plan of allFieldPlans?.plantingPlans || []) {
-      planItem = plan.items?.find(
-        (item) =>
-          item.cropVariety?._id?.toString() ===
-          newHarvest.cropVariety._id?.toString(),
-      );
-      if (planItem) break;
-    }
     if (
-      planItem?.plannedHarvestingDate &&
-      new Date() < new Date(planItem.plannedHarvestingDate)
+      chosenPlantingPlanItem?.plannedHarvestingDate &&
+      new Date() < new Date(chosenPlantingPlanItem.plannedHarvestingDate)
     ) {
       const planHarvestDate = new Date(
-        planItem.plannedHarvestingDate,
+        chosenPlantingPlanItem.plannedHarvestingDate,
       ).toLocaleDateString("hr-HR");
       if (
         !confirm(

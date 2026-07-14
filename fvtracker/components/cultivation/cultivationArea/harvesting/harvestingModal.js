@@ -38,6 +38,7 @@ export function HarvestingModal({
   const [allFieldPlans, setAllFieldPlans] = useState({});
   const [availablePlans, setAvailablePlans] = useState({});
   const workerId = useSelector((state) => state.user.session.workerId);
+  const [chosenPlantingPlanItem, setChosenPlantingPlanItem] = useState(null);
   useEffect(() => {
     if (workerId) {
       setNewHarvest((prev) => ({
@@ -185,6 +186,21 @@ export function HarvestingModal({
 
   const handleCropVarietyClick = ({ cropVariety, x, y }) => {
     if (isBeginSelected() && newHarvest.toHarvestCells?.length > 0) {
+      const plantingPlanItem = cultivationCells.find(
+        (c) => c.relativeCoords === `${x},${y}`,
+      )?.plantingPlanItem;
+
+      if (
+        chosenPlantingPlanItem &&
+        plantingPlanItem &&
+        plantingPlanItem.plannedHarvestingDate >
+          chosenPlantingPlanItem?.plannedHarvestingDate
+      ) {
+        setChosenPlantingPlanItem(plantingPlanItem);
+      }
+
+      setChosenPlantingPlanItem(plantingPlanItem);
+
       if (cropVariety._id !== newHarvest.cropVariety._id) {
         alert("Ne možete žeti različite sorte u istoj berbi");
         return;

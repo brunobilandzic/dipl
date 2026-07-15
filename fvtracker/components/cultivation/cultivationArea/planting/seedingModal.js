@@ -283,6 +283,14 @@ export const SeedingModal = ({
     }));
   };
 
+  useEffect(() => {
+    console.log("New plantage updated:", newPlantage);
+  }, [newPlantage]);
+
+  useEffect(() => {
+    console.log("New plantage updated:", newPlantage);
+  }, [newPlantage]);
+
   // RENDER
   return (
     <>
@@ -332,7 +340,12 @@ export const SeedingModal = ({
           allFieldPlans={allFieldPlans}
           availablePlans={availablePlans}
           onChoosePlan={onChoosePlan}
-          submitDisabled={utils.objects.checkEmpty(newPlantage, true)}
+          submitDisabled={
+            utils.objects.checkEmpty(newPlantage, true) ||
+            newPlantage.generalType._id == "" ||
+            newPlantage.type._id == "" ||
+            newPlantage.variety._id == ""
+          }
         />
       )}
     </>

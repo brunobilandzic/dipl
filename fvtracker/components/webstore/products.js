@@ -90,11 +90,13 @@ function ProductTile({ index, product }) {
 
         <div>
           {" "}
-          <div className="text-sm my-1">
+          <div className="text-sm text-gray-500 my-1">
             Sastojci: {getIngredientsList({ ingredients: product.ingredients })}
           </div>
           <div className="flex justify-between items-center h-fit">
-            <p className="text-xl">{priceEuroString(product.price)}</p>
+            <p className="text-xl font-bold text-green-700">
+              {priceEuroString(product.price)}
+            </p>
             <div>
               <ProductActions actions={productActions} />
             </div>

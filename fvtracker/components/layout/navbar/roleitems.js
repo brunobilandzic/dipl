@@ -193,12 +193,13 @@ export const adminNavItems = [
 
 export const guestNavItems = [
   {
+    label: "Proizvodi",
+    path: "/trgovina",
+  },
+  {
     label: (
       <div className="flex items-center gap-2">
-        Košarica{" "}
-        <div className="-mt-0.5">
-          <FaShoppingCart />
-        </div>
+        Košarica
       </div>
     ),
     path: "/kosarica",

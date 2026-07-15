@@ -55,6 +55,14 @@ const fetchSpecificManagerCached = cache(async (managerName) => {
     if (roleRequest.status !== ROLE_STATUSES.APPROVED) {
       return { specificManager: null, failReason: "NOT_APPROVED" };
     }
+  } else {
+    const generalManagerRequest = specificManager.generalManagerRequest;
+    if (!generalManagerRequest) {
+      return { specificManager: null, failReason: "NO_ROLE_REQUEST" };
+    }
+    if (generalManagerRequest.status !== ROLE_STATUSES.APPROVED) {
+      return { specificManager: null, failReason: "NOT_APPROVED" };
+    }
   }
 
   return { specificManager, failReason: null };

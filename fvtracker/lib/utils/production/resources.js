@@ -43,6 +43,7 @@ export const getBatchesWithResources = ({
     product,
     quantity,
   });
+  // varijabla varietiesQuantitiesQualities je objekat koji sadrži cropVarietyName kao ključ, a vrednost je objekat sa quantity i quality
   for (const harvestingBatch of harvestingBatches) {
     let hasResources = true;
     for (const [
@@ -57,6 +58,7 @@ export const getBatchesWithResources = ({
       );
 
       if (!item) {
+        // ukoliko ne postoji odgovarajuća stavka u žetvi, žetva se ne može koristiti za proizvodnju
         continue;
       }
     }

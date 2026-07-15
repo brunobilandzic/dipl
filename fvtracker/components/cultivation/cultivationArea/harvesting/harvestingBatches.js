@@ -2,6 +2,7 @@
 import { LoadingFullScreen } from "@/components/layout/loading";
 import { harvestingBatchesFields } from "@/lib/utils/cultivation/plant/harvest";
 import { harvestingBatchItemData } from "@/lib/utils/cultivation/plant/harvestingBatches";
+import { AppTable } from "@/components/layout/preview/table";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
@@ -59,40 +60,33 @@ const HarvestingBatches = ({ harvestingPlans }) => {
       </div>
     );
   return (
-    <>
-      <div className="flex flex-col gap-4 mt-4">
-        {Object.keys(harvestingPlans).map((planName) => (
-          <div className="border p-4" key={uuid()}>
-            <p>Plan berbe: {planName}</p>
-            <p>Žetva: {harvestingPlans[planName]?.name}</p>
-            <p className="mt-2">Stavke žetve:</p>
-            <div className="flex flex-col gap-2 mt-2">
-              {harvestingPlans[planName]?.harvestingBatchItems?.map(
-                (batchItem) => (
-                  <HarvestingBatchItem key={uuid()} batchItem={batchItem} />
-                ),
-              )}
-            </div>
+    <div className="flex flex-col gap-4 mt-4">
+      {Object.keys(harvestingPlans).map((planName) => {
+        const items = harvestingPlans[planName]?.harvestingBatchItems || [];
+        const rows = items.map((batchItem) => {
+          const { name, quality, quantity, plcvCount } =
+            harvestingBatchItemData({ batchItem });
+          return { name, quality, quantity, plcvCount };
+        });
+        return (
+          <div
+            className="border border-gray-200 p-4 rounded-lg bg-white"
+            key={uuid()}
+          >
+            <p className="font-semibold mb-2">Žetva: {harvestingPlans[planName]?.name}</p>
+            <AppTable
+              headerLabels={[
+                "Naziv",
+                "Kvaliteta",
+                "Količina",
+                "Broj ubranih polja",
+              ]}
+              rows={rows}
+              emptyRowsLabel="Nema stavki žetve"
+            />
           </div>
-        ))}
-      </div>
-    </>
-  );
-};
-
-const HarvestingBatchItem = ({ batchItem }) => {
-  if (!batchItem) return null;
-
-  const { quantity, batchItemString, plcvCount } = harvestingBatchItemData({
-    batchItem,
-  });
-
-  return (
-    <div className=" p-1 px-2" key={uuid()}>
-      <p>{batchItemString}</p>
-      <p>Količina u žetvi: {quantity}</p>
-
-      <p>Broj ubranih polja: {plcvCount}</p>
+        );
+      })}
     </div>
   );
 };

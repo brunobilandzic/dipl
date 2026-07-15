@@ -1,5 +1,3 @@
-import api from "../../../api";
-import handleError from "../../../constants/errors/client/handleError";
 import { cropVarietyFullName } from "../../strings";
 
 export const harvestingBatchItemData = ({ batchItem }) => {
@@ -10,6 +8,8 @@ export const harvestingBatchItemData = ({ batchItem }) => {
 
   return {
     quantity,
+    name: cropVarietyString,
+    quality,
     batchItemString: `${cropVarietyString} (${quality})`,
     plcvCount,
   };

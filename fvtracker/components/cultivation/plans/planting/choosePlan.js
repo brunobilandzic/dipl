@@ -59,7 +59,7 @@ export const ChoosePlan = ({
             </p>
             <p>Varijanta: {plantingPlanItem?.cropVariety?.name}</p>
             <p>Planirana količina: {plantingPlanItem?.quantity}</p>
-            <p>Planirana berbe: {showDate(plantingPlanItem?.plannedHarvestingDate)}</p>
+            {plant && <p>Berba: {showDate(plantingPlanItem?.plannedHarvestingDate)}</p>}
           </div>
         );
       })}

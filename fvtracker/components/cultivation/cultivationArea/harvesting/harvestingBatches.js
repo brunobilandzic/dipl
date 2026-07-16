@@ -64,7 +64,7 @@ export default function HarvestingBatchesFields() {
           <div key={uuid()}>
             <div
               onClick={() => togglePlansOpen(fieldName)}
-              className="flex flex-col justify-between border p-4 rounded-lg gap-4 cursor-pointer"
+              className="card flex flex-col justify-between gap-4 cursor-pointer"
             >
               <h2 className="font-semibold text-xl">Polje: {fieldName}</h2>
 

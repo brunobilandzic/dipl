@@ -24,7 +24,7 @@ export default function CreatePlantingPlanPageComonent() {
   const [selectedField, setSelectedField] = useState(null);
   return (
     <>
-      <div className="border p-4 rounded-lg">
+      <div className="card">
         <SelectField
           selectedField={selectedField}
           setSelectedField={setSelectedField}
@@ -32,7 +32,7 @@ export default function CreatePlantingPlanPageComonent() {
       </div>
 
       {selectedField ? (
-        <div className="mt-4 rounded-lg border p-4">
+        <div className="card mt-4">
           <FillPlanInfo selectedField={selectedField} itemsName="items" />
         </div>
       ) : null}

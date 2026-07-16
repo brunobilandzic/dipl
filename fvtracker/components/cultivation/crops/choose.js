@@ -134,7 +134,10 @@ export const ChooseCropVarietyItems = ({
           });
 
           return (
-            <div className="rounded-lg border p-4" key={`item-${index}`}>
+            <div
+              className="rounded-lg border border-gray-200 bg-gray-50 p-4"
+              key={`item-${index}`}
+            >
               <ItemHeader
                 index={index}
                 cropsData={cropsData}

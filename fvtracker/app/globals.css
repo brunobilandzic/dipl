@@ -111,6 +111,10 @@ body {
 
 /* page elements */
 
+.card {
+  @apply bg-white border border-gray-200 rounded-lg p-4 shadow-sm;
+}
+
 .title {
   @apply text-5xl font-bold mb-8;
 }

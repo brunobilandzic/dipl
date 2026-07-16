@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
       >
         <Providers>
           <Navbar />
-          <div className="w-2/3 mx-auto py-10">
+          <div className="w-full max-w-6xl mx-auto px-4 py-10">
             <LoadingProvider>{children}</LoadingProvider>{" "}
           </div>
         </Providers>

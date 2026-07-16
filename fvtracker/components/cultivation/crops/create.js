@@ -234,7 +234,10 @@ function CreateCrop() {
 
           <div className="flex flex-col gap-4">
             {form.varieties.map((variety, index) => (
-              <div key={index} className="rounded-lg border p-4">
+              <div
+                key={index}
+                className="rounded-lg border border-gray-200 bg-gray-50 p-4"
+              >
                 <div className="mb-4 flex items-center justify-between gap-4">
                   <div className="font-medium">Sorta {index + 1}</div>
                   <button

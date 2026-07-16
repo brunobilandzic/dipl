@@ -20,7 +20,7 @@ export default function CreateHarvestingPlanPageComponent() {
         />
       </div>
       {selectedField ? (
-        <div className="mt-4 rounded-lg border p-4">
+        <div className="card mt-4">
           <FillPlanInfo selectedField={selectedField} plant={false} />
         </div>
       ) : null}

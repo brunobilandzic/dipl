@@ -3,6 +3,7 @@ import { LoadingFullScreen } from "@/components/layout/loading";
 import { harvestingBatchesFields } from "@/lib/utils/cultivation/plant/harvest";
 import { harvestingBatchItemData } from "@/lib/utils/cultivation/plant/harvestingBatches";
 import { AppTable } from "@/components/layout/preview/table";
+import { VARIETIES_QUALITIES } from "@/lib/constants/cultivation/plants";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { v4 as uuid } from "uuid";
@@ -11,6 +12,8 @@ export default function HarvestingBatchesFields() {
   const fields = useSelector((state) => state.cultivation.fields);
   const [harvestingBatches, setHarvestingBatches] = useState(null);
   const [plansOpen, setPlansOpen] = useState(false);
+  const [search, setSearch] = useState("");
+  const [qualityFilter, setQualityFilter] = useState("all");
 
   // set batches based on fields data
   useEffect(() => {
@@ -30,6 +33,32 @@ export default function HarvestingBatchesFields() {
   return (
     <div className="flex flex-col gap-4">
       <h1 className="border-b-2 font-bold text-3xl">Žetve</h1>
+      <div className="flex flex-wrap gap-3 items-end">
+        <div className="inputRow mb-0">
+          <label className="label">Pretraži sortu</label>
+          <input
+            className="inputText"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Naziv sorte..."
+          />
+        </div>
+        <div className="inputRow mb-0">
+          <label className="label">Kvaliteta</label>
+          <select
+            className="inputText"
+            value={qualityFilter}
+            onChange={(e) => setQualityFilter(e.target.value)}
+          >
+            <option value="all">Sve</option>
+            {VARIETIES_QUALITIES.map((q) => (
+              <option key={q} value={q}>
+                {q}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
       <div className="flex flex-col gap-4">
         {Object.keys(harvestingBatches).map((fieldName) => (
           <div key={uuid()}>
@@ -42,6 +71,8 @@ export default function HarvestingBatchesFields() {
               {plansOpen === fieldName && (
                 <HarvestingBatches
                   harvestingPlans={harvestingBatches[fieldName]}
+                  search={search}
+                  qualityFilter={qualityFilter}
                 />
               )}
             </div>
@@ -52,7 +83,7 @@ export default function HarvestingBatchesFields() {
   );
 }
 
-const HarvestingBatches = ({ harvestingPlans }) => {
+const HarvestingBatches = ({ harvestingPlans, search, qualityFilter }) => {
   if (Object.keys(harvestingPlans).length === 0)
     return (
       <div className="p-4 text-center text-gray-500">
@@ -68,6 +99,11 @@ const HarvestingBatches = ({ harvestingPlans }) => {
             harvestingBatchItemData({ batchItem });
           return { name, quality, quantity, plcvCount };
         });
+        const filteredRows = rows.filter(
+          (row) =>
+            (qualityFilter === "all" || row.quality === qualityFilter) &&
+            row.name.toLowerCase().includes((search || "").toLowerCase()),
+        );
         return (
           <div
             className="border border-gray-200 p-4 rounded-lg bg-white"
@@ -81,7 +117,7 @@ const HarvestingBatches = ({ harvestingPlans }) => {
                 "Količina",
                 "Broj ubranih polja",
               ]}
-              rows={rows}
+              rows={filteredRows}
               emptyRowsLabel="Nema stavki žetve"
             />
           </div>

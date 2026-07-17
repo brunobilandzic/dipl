@@ -295,9 +295,6 @@ export const SeedingModal = ({
   return (
     <>
       <Modal title="Sadnja" isOpen={isOpen} onCancel={onCancel}>
-        {JSON.stringify({
-          plantingPlans: allFieldPlans?.plantingPlans?.length,
-        })}
         <div className="flex flex-col gap-2">
           <div className="font-bold text-xl">{cultivation?.name || "N/A"}</div>
           <div>{cultivation?.description}</div>

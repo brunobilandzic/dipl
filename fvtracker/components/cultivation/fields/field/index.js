@@ -9,6 +9,7 @@ import axios from "axios";
 import { Loading } from "@/components/layout/loading";
 import { selectField } from "@/store/cultivation";
 import { FieldEditDashboard } from "./edit/dashboard";
+import { FieldStatistics } from "../general";
 
 export default function FieldPageComponent({ slug }) {
   const selectedField = useSelector((state) => state.cultivation.selectedField);
@@ -56,6 +57,8 @@ export default function FieldPageComponent({ slug }) {
     cultivationAreas,
     cultivations,
     cultivationAreaDimensions,
+    createdAt,
+    updatedAt,
   } = field;
 
   const fieldId = field._id.toString();
@@ -65,6 +68,15 @@ export default function FieldPageComponent({ slug }) {
       <div className="w-full grid grid-cols-1 gap-4">
         <div className="text-3xl font-bold">{name}</div>
         <div className="italic">{description}</div>
+        <FieldDetails
+          field={field}
+          width={width}
+          length={length}
+          cultivationAreas={cultivationAreas}
+          cultivationAreaDimensions={cultivationAreaDimensions}
+          createdAt={createdAt}
+          updatedAt={updatedAt}
+        />
         <FieldEditCASPanel
           fieldId={fieldId}
           field={field}
@@ -77,6 +89,43 @@ export default function FieldPageComponent({ slug }) {
         <div></div>
       </div>
     </>
+  );
+}
+
+function FieldDetails({
+  field,
+  width,
+  length,
+  cultivationAreas,
+  cultivationAreaDimensions,
+  createdAt,
+  updatedAt,
+}) {
+  const { min_ca_dim, max_ca_dim, gap } = cultivationAreaDimensions;
+  const cultivationsCount = cultivationAreas.reduce(
+    (cus, ca) => cus.concat(ca.cultivations),
+    [],
+  ).length;
+
+  return (
+    <div className="card text-sm flex flex-col gap-1">
+      <div>
+        Dimenzije polja: {width}m x {length}m
+      </div>
+      <div>
+        Dimenzije područja kultivacije: {min_ca_dim}m - {max_ca_dim}m, razmak:{" "}
+        {gap}m
+      </div>
+      <div>
+        {cultivationAreas.length} područja kultivacije, {cultivationsCount}{" "}
+        kultivacija
+      </div>
+      <FieldStatistics field={field} />
+      <div className="text-gray-500">
+        Kreirano: {new Date(createdAt).toLocaleString("hr-HR")} — Ažurirano:{" "}
+        {new Date(updatedAt).toLocaleString("hr-HR")}
+      </div>
+    </div>
   );
 }
 

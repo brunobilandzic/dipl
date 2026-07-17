@@ -95,7 +95,7 @@ export function CultivationAreaPageComponent({ fieldSlug, caSlug }) {
         } catch (error) {
           handleError({
             ...error,
-            generalMessage: "Neuspjelo učitavanje područja kultivacije",
+            generalMessage: "Neuspjelo učitavanje područja za sadnju",
           });
         }
       }

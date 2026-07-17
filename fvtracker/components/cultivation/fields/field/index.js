@@ -113,11 +113,11 @@ function FieldDetails({
         Dimenzije polja: {width}m x {length}m
       </div>
       <div>
-        Dimenzije područja kultivacije: {min_ca_dim}m - {max_ca_dim}m, razmak:{" "}
+        Dimenzije područja za sadnju: {min_ca_dim}m - {max_ca_dim}m, razmak:{" "}
         {gap}m
       </div>
       <div>
-        {cultivationAreas.length} područja kultivacije, {cultivationsCount}{" "}
+        {cultivationAreas.length} područja za sadnju, {cultivationsCount}{" "}
         kultivacija
       </div>
       <FieldStatistics field={field} />

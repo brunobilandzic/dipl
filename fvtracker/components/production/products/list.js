@@ -174,6 +174,7 @@ const ProductItem = ({
               createdAt={product.createdAt}
               updatedAt={product.updatedAt}
               price={product.price}
+              stockVolume={product.stockVolume}
             />
 
             <div className="mt-4">
@@ -205,12 +206,13 @@ const ProductItem = ({
   );
 };
 
-const ProductInfo = ({ createdAt, updatedAt, price }) => {
+const ProductInfo = ({ createdAt, updatedAt, price, stockVolume }) => {
   return (
     <div className="text-sm text-gray-500">
       <p>Datum kreiranja: {new Date(createdAt).toLocaleDateString()}</p>
       <p>Datum zadnje izmjene: {new Date(updatedAt).toLocaleDateString()}</p>
       <p>Cijena: {priceEuroString(price)}</p>
+      <p>Potrebni volumen: {stockVolume} </p>
     </div>
   );
 };

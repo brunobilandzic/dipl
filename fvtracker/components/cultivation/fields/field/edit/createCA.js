@@ -136,7 +136,7 @@ function CreateCA({
         <div>
           <FaPlus className="text-4xl" />
         </div>
-        <div className="text-sm">Dodaj područje kultivacije</div>
+        <div className="text-sm">Dodaj polje za sadnju</div>
       </div>
     </>
   );

@@ -111,7 +111,7 @@ export const EditCA = ({ cultivationAreaMenu, setCultivationAreaMenu }) => {
       {cultivationAreaMenu?.isOpen ? (
         <Modals.MenuModal
           options={menuOptions}
-          title="Izbornik područja kultivacije"
+          title="Izbornik područja za sadnj"
           onCancel={() => setCultivationAreaMenu(initialCAMenuState)}
           isOpen={cultivationAreaMenu?.isOpen}
         />

@@ -8,7 +8,6 @@ import { FieldGrid } from "@/components/cultivation/fields/preview/grid";
 import { useDispatch, useSelector } from "react-redux";
 import { Loading } from "@/components/layout/loading";
 import { redirect, useRouter } from "next/navigation";
-import { FieldStatistics } from "../general";
 import {
   handleDeleteField,
   refreshFields,
@@ -116,18 +115,10 @@ function FieldItem({ field }) {
   const dispatch = useDispatch();
   if (!field) return null;
   const {
-    name,
     description,
     dimensions: { width, length },
     cultivationAreas,
-    cultivationAreaDimensions: {
-      min_ca_dim,
-      max_ca_dim,
-      gap: cultivationAreasGap,
-    },
     slug,
-    createdAt,
-    updatedAt,
   } = field;
 
   const cultivationCells = useMemo(() => {
@@ -150,29 +141,20 @@ function FieldItem({ field }) {
         <Link href={`/upravljanje-poljima/${slug}`}>
           <div className="flex justify-between">
             <div>
-              <div className="text-sm">
+              <div className="text-sm flex flex-col gap-1">
                 <div>{description}</div>
-                <div>
+                <div className="text-gray-500">
                   Dimenzije: {width}m x {length}m
                 </div>
-                <div>
-                  Dimenzije PK: {min_ca_dim}m - {max_ca_dim}m, Razmak:{" "}
-                  {cultivationAreasGap}m
-                </div>
-                <div>
-                  {cultivationAreas.length} područja kultivacije,{" "}
+                <div className="text-gray-500">
+                  {cultivationAreas.length} područja za sadnju{" "}
                   {
                     cultivationAreas.reduce(
                       (cus, ca) => cus.concat(ca.cultivations),
                       [],
                     ).length
                   }{" "}
-                  kultivacija
-                </div>
-                <FieldStatistics field={field} />
-                <div>
-                  Kreirano: {new Date(createdAt).toLocaleString()} - Ažurirano:{" "}
-                  {new Date(updatedAt).toLocaleString()}
+                  gredica
                 </div>
               </div>
             </div>

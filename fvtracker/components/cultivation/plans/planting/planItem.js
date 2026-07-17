@@ -50,7 +50,11 @@ export const PlantingPlanItems = ({ items, plant }) => {
 };
 
 const PlantingPlanItem = ({ item, plant }) => {
-  const plcvs = 0;
+  const done =
+    (item.plantedCropVarieties?.length || 0) *
+    (item.cropVariety?.quantityPerCell || 0);
+  const remaining = item.quantity || 0;
+  const requested = remaining + done;
   return (
     <div className="border h-full p-4 rounded w-full">
       <div>
@@ -58,8 +62,12 @@ const PlantingPlanItem = ({ item, plant }) => {
         {item.cropVariety?.name}
       </div>
       <div>
-        <span className="font-semibold">Količina: </span>
-        {item.quantity}
+        <span className="font-semibold">{plant ? "Zasađeno" : "Ubrano"}: </span>
+        {done} / {requested}
+      </div>
+      <div>
+        <span className="font-semibold">Preostalo: </span>
+        {remaining}
       </div>
       {plant && item.plannedHarvestingDate ? (
         <div>

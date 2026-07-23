@@ -33,7 +33,7 @@ export async function harvestCells({
   }
 
   const plantedCropVarieties = await PlantedCropVariety.find(
-    { relativeCoords: { $in: toHarvestCells } },
+    { cultivation: cultivationId, relativeCoords: { $in: toHarvestCells } },
     "relativeCoords _id",
   );
 

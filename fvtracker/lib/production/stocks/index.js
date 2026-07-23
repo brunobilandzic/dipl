@@ -72,9 +72,6 @@ export const createProductStock = async ({
           stop: true,
           message: `Not enough quantity in harvesting batch for ingredient with crop variety ${ingredient.cropVariety.name}. Required: ${ingredient.quantity * quantity}, Available: ${batchItem.batchQuantity}`,
         };
-        throw new Error(
-          `Not enough quantity in harvesting batch for ingredient with crop variety ${ingredient.cropVariety.name}. Required: ${ingredient.quantity * quantity}, Available: ${batchItem.batchQuantity}`,
-        );
       }
       batchItem.batchQuantity -= ingredient.quantity * quantity;
 

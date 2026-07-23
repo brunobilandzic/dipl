@@ -45,14 +45,16 @@ export const createProducts = async () => {
     products.push(product);
     productionManager.products.push(product._id);
   }
+  // spremi vezu proizvoda s menadžerom odmah, neovisno o tome dobiju li zalihe
+  await productionManager.save();
   for (const warehouse of warehouses) {
     for (const product of products) {
-      const { productionStock, productionProcess, stop } =
+      const { productionStock, stop } =
         await createProductStockSeed({
           product,
           productionFacilityId: productionFacility._id,
         });
-      if (stop) {
+      if (stop || !productionStock) {
         stopIteration = true;
         continue;
       }

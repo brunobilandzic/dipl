@@ -248,7 +248,9 @@ export function adjacentCellsGap({ x, y, gap, plantedCells }) {
 export function getPlCvsSeededCells(plCvs) {
   return (
     plCvs
-      ?.filter((plCv) => plCv.plantingPlanItem?.cropVariety)
+      ?.filter(
+        (plCv) => plCv.plantingPlanItem?.cropVariety && !plCv.harvestedAt,
+      )
       ?.map((plCv) => plCv.relativeCoords) || []
   );
 }

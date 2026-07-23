@@ -205,9 +205,17 @@ function createCultivationArea(x, y, dim_x, dim_y, { name, description }) {
 }
 
 function randomCultivationAreaName(cultivationAreaNames) {
+  // kad se potroše imena, generira se rezervno da polje može imati više područja
+  if (cultivationAreaNames.length === 0) {
+    return {
+      name: `Područje ${Math.floor(Math.random() * 1000000)}`,
+      description: "",
+    };
+  }
   const datapoint = cultivationAreaNames.splice(
     Math.floor(Math.random() * cultivationAreaNames.length),
     1,
   )[0];
   return datapoint;
 }
+

@@ -26,6 +26,7 @@ import { facilitySortOptions } from "@/components/layout/preview/sort";
 import { useMemo } from "react";
 import { checkValue } from "@/lib/utils/formValidation";
 import { checkEmpty } from "@/lib/utils/objects";
+import { FaToolbox, FaVolumeHigh, FaWarehouse } from "react-icons/fa6";
 
 const emptyForm = { name: "", description: "", volume: 0 };
 
@@ -123,6 +124,7 @@ const FacilitiesList = () => {
 export default FacilitiesList;
 
 const FacilityItem = ({ facility }) => {
+  console.log({ facility });
   const dispatch = useDispatch();
   const router = useRouter();
   const [editOpen, setEditOpen] = useState(false);
@@ -131,7 +133,10 @@ const FacilityItem = ({ facility }) => {
     description: facility.description ?? "",
     volume: facility.volume ?? 0,
   });
-
+  const totalProcesses = (facility.stocks || []).reduce(
+    (acc, stock) => acc + (stock.productionProcesses?.length || 0),
+    0,
+  );
   const handleChange = (e) => {
     const { name, value } = e.target;
     console.log("Handling change for", name, "with value:", value);
@@ -183,6 +188,7 @@ const FacilityItem = ({ facility }) => {
             <FacilityStats
               stocks={facility.stocks}
               facilityVolume={facility.volume}
+              totalProcesses={totalProcesses}
             />
           </div>
         </Link>
@@ -215,15 +221,24 @@ const FacilityDetails = ({ facility }) => (
   </div>
 );
 
-export const FacilityStats = ({ stocks, facilityVolume }) => {
+export const FacilityStats = ({ stocks, facilityVolume, totalProcesses }) => {
   const { productCount, totalQuantity, totalVolumeUsed, manufacturedCount } =
     prepareFacilityStocksInfo({ stocks });
 
   return (
-    <div className="text-sm text-gray-500 text-right">
-      <p className="flex items-center gap-1">
-        Zauzeto: {totalVolumeUsed} od {facilityVolume}
-      </p>
+    <div className="text-sm flex gap-2 text-gray-500 text-right">
+      <div className="flex flex-col items-center gap-1">
+        <div>
+          <FaWarehouse />
+        </div>{" "}
+        {totalVolumeUsed} od {facilityVolume}
+      </div>
+      <div className="flex flex-col items-center gap-1  justify-start">
+        <div>
+          <FaToolbox />
+        </div>{" "}
+        {totalProcesses}
+      </div>
     </div>
   );
 };

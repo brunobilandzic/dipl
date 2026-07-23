@@ -54,6 +54,8 @@ const ProductStock = ({ stock }) => {
     },
   ];
   if (!stock) return;
+
+  const totalProcesses = stock.productionProcesses?.length || 0;
   return (
     <>
       <ListItem actionOptions={actionOptions}>
@@ -61,6 +63,7 @@ const ProductStock = ({ stock }) => {
           product={stock.product}
           productionProcesses={stock.productionProcesses}
           quantity={stock.quantity}
+          totalProcesses={totalProcesses}
         />
       </ListItem>
       {addWarehouseStockModalOpen && (
@@ -79,7 +82,12 @@ const ProductStock = ({ stock }) => {
 
 export default Facility;
 
-export function StockItem({ product, productionProcesses, quantity }) {
+export function StockItem({
+  product,
+  productionProcesses,
+  quantity,
+  totalProcesses,
+}) {
   return (
     <div className={`flex justify-between items-center relative `}>
       <div>
@@ -92,12 +100,13 @@ export function StockItem({ product, productionProcesses, quantity }) {
             })}
           </p>
           <p>
-            Proizvdeno ukupno u postrojenju:{" "}
+            Proizvdeno:{" "}
             {productionProcesses?.reduce(
               (acc, curr) => acc + curr.quantity,
               0,
             ) || 0}
           </p>
+          <p>Procesi: {totalProcesses}</p>
         </div>
       </div>
       <div className="stockQuantity">

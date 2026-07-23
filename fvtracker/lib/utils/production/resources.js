@@ -59,7 +59,8 @@ export const getBatchesWithResources = ({
 
       if (!item) {
         // ukoliko ne postoji odgovarajuća stavka u žetvi, žetva se ne može koristiti za proizvodnju
-        continue;
+        hasResources = false;
+        break;
       }
     }
     if (hasResources) {

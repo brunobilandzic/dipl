@@ -205,9 +205,8 @@ const SourceList = ({ sources }) => {
         return (
           <ListItem key={source._id}>
             <div className=" p-4 rounded-xl w-1/6 min-w-fit" key={source._id}>
-              <div>PROIZVOD: {source.product.name}</div>
-              <div>KOLIČINA: {source.quantity}</div>
-              <div>SKLADIŠTE: {source.warehouseStock.warehouse.name}</div>
+              <div className="font-bold">{source.product.name} {source.quantity}</div>
+              <div>{source.warehouseStock.warehouse.name}</div>
             </div>
           </ListItem>
         );

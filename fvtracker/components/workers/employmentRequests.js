@@ -131,7 +131,11 @@ const EmploymentRequestsItem = ({ request, dispatch, router }) => {
             <span className="font-semibold">{getName(worker.appUser)}</span> -{" "}
             {worker.appUser.username}
           </div>
-          <div className="text-sm text-gray-500"> {status}</div>
+          <div className="text-sm text-gray-500 flex flex-col mt-2">
+            {" "}
+            <div>{worker.hourlyRate} €/h</div>
+            <div>{status}</div>
+          </div>
         </div>
       </ListItem>
     </>

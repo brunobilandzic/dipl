@@ -36,9 +36,6 @@ async function createFieldObject(fieldParams, msWindow = createFieldTimeMs) {
 
       const loopTime = Date.now();
       const elapsed = loopTime - msStart;
-      if (elapsed % 1000 === 0) {
-        // 1 sec passed
-      }
       if (elapsed > msWindow && field.cultivationAreas.length > 0) {
         return field;
       }

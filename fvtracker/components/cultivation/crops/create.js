@@ -214,7 +214,7 @@ function CreateCrop() {
         </>
       )}
 
-      {level !== "mainType" && (
+{/*       {level !== "mainType" && (
         <AppTextArea
           label="Opis"
           name="description"
@@ -222,7 +222,7 @@ function CreateCrop() {
           onChange={handleChange}
         />
       )}
-
+ */}
       {level === "cropType" && (
         <div className="mt-4">
           <div className="flex items-center justify-between gap-4">

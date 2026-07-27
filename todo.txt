@@ -1,4 +1,0 @@
-workers lib
-
-ubrane sorte correct num
-plcv count not fields but multiply quantity per cell

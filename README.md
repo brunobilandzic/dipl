@@ -19,7 +19,7 @@ web application for trackin processes in a frui&veg production
 
 **credentials**
 
-_usernames (passwords is "1"):_
+_usernames (password is "1"):_
 
 - admin - admin
 - general manager - gm

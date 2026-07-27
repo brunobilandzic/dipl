@@ -1,0 +1,6 @@
+MONGODB_URI = your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret_key
+AUTH_SECRET=your_auth_secret_key
+BYCRYPT_SALT_ROUNDS=10
+BYCRYPT_SEED = your_bcrypt_seed
+NEXTAUTH_URL=your_nextauth_url // Replace with your NextAuth URL, e.g., http://localhost:3000 or your production URL

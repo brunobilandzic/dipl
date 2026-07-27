@@ -1,2 +1,0 @@
-Kako bih omogućio verziranje teksta diplomskog rada, koristio bih .md format standardan za GitHub.
-Zbog uvjeta o formatiranju dokumante naknadno planiram dokument konvertirati u .docx te ga tamo urediti. Za sada trebam koristiti .md ako hoću pratiti verzije dokumenta.

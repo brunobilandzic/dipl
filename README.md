@@ -1,18 +1,19 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+ERP system web application
+made for my university masters degree
 
 # FVTRACKER
 
-web application for trackin processes in a frui&veg production
+web application for tracking processes in a frui&veg production
 
-- generale management
+- general management
 - seeding plants
 - harvesting
 - products creation
-- storaging
+- storing
 - selling
 
 * clone repo
-* install packadges npm i
+* install packages npm i
 * fill .env file according to example
 * run dev server npm run dev
 * seed database (nav icon -> seed all)

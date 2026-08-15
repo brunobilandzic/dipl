@@ -16,6 +16,7 @@ import {
 import { GeneralWorkersReport } from "../worker";
 import { LoadingFullScreen } from "@/components/layout/loading";
 import { receiptsData } from "@/lib/utils/webstore/receipts";
+import { paidProcurmentsValue } from "@/lib/utils/documents/procurments";
 
 export const FinancialReport = ({}) => {
   const orders = useSelector((state) => state.webstore.orders.items);
@@ -145,6 +146,10 @@ export const FinancialReport = ({}) => {
                 )
                 .toFixed(2)}
               description={"Ukupna vrijednost nabavki (€)"}
+            />
+            <ReportItem
+              count={paidProcurmentsValue(procurments).toFixed(2)}
+              description={"Ukupna vrijednost plaćenih nabavki (€)"}
             />
           </>
         </ReportSection>

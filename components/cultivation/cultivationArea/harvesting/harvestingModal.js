@@ -283,6 +283,7 @@ export function HarvestingModal({
         "/cultivation/harvest/new-harvest",
         prepareHarvestBody(newHarvest),
       );
+      console.log("Harvest submitted successfully:", res.data);
       const { harvestWork, harvestedCropVarieties } = res.data;
       dispatch(
         harvestCells({
@@ -302,8 +303,11 @@ export function HarvestingModal({
           harvestWork,
         }),
       );
+
       dispatch(refreshHarvestingBatches());
       dispatch(setLoading(false));
+      setHarvestCultivationOpen(false);
+      reset();
     } catch (error) {
       console.error("Error submitting harvest:", error);
       handleError({
